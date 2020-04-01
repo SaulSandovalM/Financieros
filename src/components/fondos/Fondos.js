@@ -1,146 +1,118 @@
 import React, { Component } from 'react';
+import ReactDOM from 'react-dom';
+import firebase from '../../Firebase';
+import { Link } from 'react-router-dom';
 import './Fondos.css';
-import firebaseConf from '../../Firebase';
 
-class Fondos extends Component {
-  constructor(props) {
-    super(props);
+class Create extends Component {
+  constructor() {
+    super();
+    this.ref = firebase.firestore().collection('fondos');
     this.state = {
-      form: [],
-      alert: false,
-      alertData: {},
-      isHidden: true
+      fondo: '',
+      fecha: '',
+      tipo_doc: '',
+      oficio_aut: '',
+      no_oficio: '',
+      no_aut: '',
+      no_lici: '',
+      importe: '',
+      desc: '',
+      importe_l: '',
+      beneficiario: '',
+      realizo: '',
+      numero: '',
+      num_conver: ''
     };
   }
-
-  showAlert(type, message) {
-    this.setState({
-      alert: true,
-      alertData: {type, message}
-    });
-    setTimeout(() => {
-      this.setState({alert: false});
-    }, 6000);
+  onChange = (e) => {
+    const state = this.state
+    state[e.target.name] = e.target.value;
+    this.setState(state);
   }
 
-  resetForm() {
-    this.refs.contactForm.reset();
-  }
-
-  cancelCourse() {
-    document.getElementById("create-course-form").reset();
-  }
-
-  componentWillMount() {
-    let formRef = firebaseConf
-      .database()
-      .ref('fondos/')
-      .orderByKey()
-      .limitToLast(6);
-    formRef.on('child_added', snapshot => {
-      const {fondo, fecha, tipo_doc, oficio_aut, no_oficio, no_aut, no_lici, importe, desc, importe_l, beneficiario, realizo, numero, num_conver} = snapshot.val();
-      const data = {fondo, fecha, tipo_doc, oficio_aut, no_oficio, no_aut, no_lici, importe, desc, importe_l, beneficiario, realizo, numero, num_conver};
-      this.setState({form: [data].concat(this.state.form)});
-    });
-  }
-
-  sendMessage(e) {
+  onSubmit = (e) => {
     e.preventDefault();
-    const params = {
-      fondo: this.inputFondo.value,
-      fecha: this.inputFecha.value,
-      tipo_doc: this.inputTipodoc.value,
-      oficio_aut: this.inputOficioaut.value,
-      no_oficio: this.inputNooficio.value,
-      no_aut: this.inputNoaut.value,
-      no_lici: this.inputNolici.value,
-      importe: this.inputImporte.value,
-      desc: this.inputDesc.value,
-      importe_l: this.inputImportei.value,
-      beneficiario: this.inputBeneficiario.value,
-      realizo: this.inputRealizo.value,
-      numero: this.inputNumero.value,
-      num_conver: this.inputNumconver.value
-    };
-    if (params.fondo && params.fecha && params.tipo_doc && params.oficio_aut && params.no_oficio && params.no_aut && params.no_lici &&
-        params.importe && params.desc && params.importe_l && params.beneficiario && params.realizo && params.numero && params.num_conver) {
-      firebaseConf.database().ref('fondos/').push(params).then(() => {
-        this.showAlert('success', 'Tu solicitud fue enviada, no olvides realizar tu pago antes de ir a tu cita.');
-      }).catch(() => {
-        this.showAlert('danger', 'Tu solicitud no puede ser enviada');
+
+    const { fondo, fecha, tipo_doc, oficio_aut, no_oficio, no_aut, no_lici, importe, desc, importe_l, beneficiario, realizo, numero, num_conver } = this.state;
+
+    this.ref.add({
+      fondo,
+      fecha,
+      tipo_doc,
+      oficio_aut,
+      no_oficio,
+      no_aut,
+      no_lici,
+      importe,
+      desc,
+      importe_l,
+      beneficiario,
+      realizo,
+      numero,
+      num_conver
+    }).then((docRef) => {
+      this.setState({
+        fondo: '',
+        fecha: '',
+        tipo_doc: '',
+        oficio_aut: '',
+        no_oficio: '',
+        no_aut: '',
+        no_lici: '',
+        importe: '',
+        desc: '',
+        importe_l: '',
+        beneficiario: '',
+        realizo: '',
+        numero: '',
+        num_conver: ''
       });
-      this.resetForm();
-    } else {
-      this.showAlert('warning', 'Por favor llene el formulario');
-    };
+      this.props.history.push("/")
+    })
+    .catch((error) => {
+      console.error("Error adding document: ", error);
+    });
   }
 
   render() {
+    const { fondo, fecha, tipo_doc, oficio_aut, no_oficio, no_aut, no_lici, importe, desc, importe_l, beneficiario, realizo, numero, num_conver } = this.state;
     return (
       <div>
         <h2 className="title">Registro de fondos 2020</h2>
-        <form className="fondos-back" onSubmit={this.sendMessage.bind(this)} ref='contactForm' id="create-course-form">
+        <form className="fondos-back" onSubmit={this.onSubmit}>
           <div className="fondos-container">
             <div className="form-container">
               <div className="form-content">
-                <p>Fondos</p>
-                <input
-                  id='fondo'
-                  required
-                  ref={fondo => this.inputFondo = fondo}
-                />
+                <label for="fondo">Fondo:</label>
+                <input name="fondo" value={fondo} onChange={this.onChange} />
               </div>
               <div className="form-content">
-                <p>Fecha</p>
-                <input
-                  type="date"
-                  id='fecha'
-                  required
-                  ref={fecha => this.inputFecha = fecha}
-                />
+                <label for="fecha">Fecha:</label>
+                <input name="fecha" value={fecha} onChange={this.onChange} />
               </div>
               <div className="form-content">
-                <p>Tipo de Documento</p>
-                <input
-                  id='tipo_doc'
-                  required
-                  ref={tipo_doc => this.inputTipodoc = tipo_doc}
-                />
+                <label for="tipo_doc">Tipo de documento:</label>
+                <input name="tipo_doc" value={tipo_doc} onChange={this.onChange} />
               </div>
               <div className="form-content">
-                <p>Oficio de Autorización</p>
-                <input
-                  id='oficio_aut'
-                  required
-                  ref={oficio_aut => this.inputOficioaut = oficio_aut}
-                />
+                <label for="oficio_aut">Oficio de Autorizacion:</label>
+                <input name="oficio_aut" value={oficio_aut} onChange={this.onChange} />
               </div>
             </div>
             {/*seccion 2*/}
             <div className="form-container">
               <div className="form-content">
-                <p>No. de Oficio</p>
-                <input
-                  id='no_oficio'
-                  required
-                  ref={no_oficio => this.inputNooficio = no_oficio}
-                />
+                <label for="no_oficio">No. de Oficio:</label>
+                <input name="no_oficio" value={no_oficio} onChange={this.onChange} />
               </div>
               <div className="form-content">
-                <p>No. de Autorización</p>
-                <input
-                  id='no_aut'
-                  required
-                  ref={no_aut => this.inputNoaut = no_aut}
-                />
+                <label for="no_aut">No. de Autorizacion:</label>
+                <input name="no_aut" value={no_aut} onChange={this.onChange} />
               </div>
               <div className="form-content">
-                <p>No. de Licitación</p>
-                <input
-                  id='no_lici'
-                  required
-                  ref={no_lici => this.inputNolici = no_lici}
-                />
+                <label for="no_lici">No. de Licitacion:</label>
+                <input name="no_lici" value={no_lici} onChange={this.onChange} />
               </div>
               <div className="form-content hide">
                 <p>Fondos</p>
@@ -150,67 +122,43 @@ class Fondos extends Component {
             {/*seccion 3*/}
             <div className="form-container">
               <div className="form-content-100">
-                <p>Importe</p>
-                <input
-                  id='importe'
-                  required
-                  ref={importe => this.inputImporte = importe}
-                />
+                <label for="importe">Importe:</label>
+                <input name="importe" value={importe} onChange={this.onChange} />
               </div>
             </div>
             {/*seccion 4*/}
             <div className="form-container">
               <div className="form-content-50">
-                <p>Descripción</p>
-                <textarea
-                  id='desc'
-                  required
-                  ref={desc => this.inputDesc = desc}
-                />
+                <label for="desc">Descripcion:</label>
+                <input name="desc" value={desc} onChange={this.onChange} />
               </div>
             </div>
             {/*seccion 5*/}
             <div className="form-container">
               <div className="form-content-100">
-                <p>Importe Letra</p>
-                <input
-                  id='importe_l'
-                  required
-                  ref={importe_l => this.inputImportei = importe_l}
-                />
+                <label for="importe_l">Importe letra:</label>
+                <input name="importe_l" value={importe_l} onChange={this.onChange} />
               </div>
             </div>
             {/*seccion 6*/}
             <div className="form-container">
               <div className="form-content-100">
-                <p>Beneficiario</p>
-                <input
-                  id='beneficiario'
-                  required
-                  ref={beneficiario => this.inputBeneficiario = beneficiario}
-                />
+                <label for="beneficiario">Beneficiario:</label>
+                <input name="beneficiario" value={beneficiario} onChange={this.onChange} />
               </div>
             </div>
             {/*seccion 7*/}
             <div className="form-container">
               <div className="form-content-50">
-                <p>Realizo</p>
-                <input
-                  id='realizo'
-                  required
-                  ref={realizo => this.inputRealizo = realizo}
-                />
+                <label for="realizo">Realizo:</label>
+                <input name="realizo" value={realizo} onChange={this.onChange} />
               </div>
             </div>
             {/*Seccion 8 numero*/}
             <div className="form-container">
               <div className="form-content-100">
-                <p>Número:</p>
-                <input
-                  id='numero'
-                  required
-                  ref={numero => this.inputNumero = numero}
-                />
+                <label for="numero">Numero:</label>
+                <input name="numero" value={numero} onChange={this.onChange} />
               </div>
             </div>
             {/*Seccion 9*/}
@@ -218,12 +166,8 @@ class Fondos extends Component {
               <div className="form-content-100">
                 <h3>Convertidor de números a letras</h3>
                 <div className="conver">
-                  <p>número</p>
-                  <input
-                    id='num_conver'
-                    required
-                    ref={num_conver => this.inputNumconver = num_conver}
-                  />
+                  <label for="num_conver">Converteir:</label>
+                  <input name="num_conver" value={num_conver} onChange={this.onChange} />
                 </div>
               </div>
             </div>
@@ -232,7 +176,7 @@ class Fondos extends Component {
               <div className="botones">
                 <button style={{height: '30px', marginRight: '10px'}} type='submit'>+</button>
                 <button style={{height: '30px', marginRight: '10px'}} type='submit'>Guadar</button>
-                <button style={{height: '30px', marginRight: '10px'}} onClick={this.cancelCourse}>Cancelar</button>
+                <button style={{height: '30px', marginRight: '10px'}}>Cancelar</button>
               </div>
             </div>
           </div>
@@ -242,4 +186,4 @@ class Fondos extends Component {
   }
 }
 
-export default Fondos;
+export default Create;
