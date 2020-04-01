@@ -1,0 +1,59 @@
+.fondos-back {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+.fondos-container {
+  width: 80%;
+  height: 100%;
+}
+.form-container {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+}
+.form-content {
+  width: 25%;
+  height: 100px;
+  display: flex;
+  flex-direction: column;
+  padding: 5px 50px 0px 50px;
+}
+.hide {
+  visibility: hidden;
+}
+.form-content-100 {
+  width: 100%;
+  height: 100px;
+  display: flex;
+  flex-direction: column;
+  padding: 5px 50px 0px 50px;
+}
+.form-content-50 {
+  width: 25%;
+  height: 100px;
+  display: flex;
+  flex-direction: column;
+  padding: 5px 50px 0px 50px;
+}
+.fondo-n {
+  width: 100%;
+  height: 100px;
+  padding: 5px 50px 0px 50px;
+}
+.conver {
+  display: flex;
+  flex-direction: row;
+  height: 40px;
+}
+.botones {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  height: 100px;
+  width: 100%;
+  margin-top: 100px;
+}
+.title {
+  margin-left: 50px;
+}
