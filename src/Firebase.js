@@ -1,5 +1,4 @@
 import * as firebase from 'firebase';
-import firestore from 'firebase/firestore'
 
 const settings = {timestampsInSnapshots: true};
 
@@ -14,7 +13,5 @@ const config = {
   measurementId: "G-S9335SB3LS"
 };
 firebase.initializeApp(config);
-
 firebase.firestore().settings(settings);
-
 export default firebase;
