@@ -47,36 +47,38 @@ componentDidMount() {
 
   render() {
     return (
-      <div className="App" style={{height: '100vh'}}>
-        <h1>Comprometidos</h1>
-        {/*<Link to='/Search' style={{textDecoration: 'none'}}>
-          <p>Buscar por Folio</p>
-        </Link>*/}
-        <div className="products-al">
-          <div className="a-row-t">Fondos</div>
-          <div className="a-row-t">Fecha</div>
-          <div className="a-row-t">Nombre Realizo</div>
-          <div className="a-row-t">Tipo de documento</div>
-          <div className="a-row-t">Importe</div>
-          <div className="a-row-t">Comprometido</div>
-          <div className="a-row-t">Imprimir</div>
-        </div>
-        <div>
-          {this.state.fondos.map(fondos =>
-            <div>
-              <div className="products-al">
-                <div className="a-row">{fondos.fondo}</div>
-                <div className="a-row">{fondos.fecha}</div>
-                <div className="a-row">{fondos.realizo}</div>
-                <div className="a-row">{fondos.tipo_doc}</div>
-                <div className="a-row">{fondos.importe}</div>
-                <div className="a-row">
-                  <Link to={`/show/${fondos.key}`}>Editar</Link>
+      <div className="space-nav">
+        <div className="App" style={{height: '100vh'}}>
+          <h1>Analitico</h1>
+          {/*<Link to='/Search' style={{textDecoration: 'none'}}>
+            <p>Buscar por Folio</p>
+          </Link>*/}
+          <div className="products-al">
+            <div className="a-row-t">Fondos</div>
+            <div className="a-row-t">Fecha</div>
+            <div className="a-row-t">Nombre Realizo</div>
+            <div className="a-row-t">Tipo de documento</div>
+            <div className="a-row-t">Importe</div>
+            <div className="a-row-t">Comprometido</div>
+            <div className="a-row-t">Imprimir</div>
+          </div>
+          <div>
+            {this.state.fondos.map(fondos =>
+              <div>
+                <div className="products-al">
+                  <div className="a-row">{fondos.fondo}</div>
+                  <div className="a-row">{fondos.fecha}</div>
+                  <div className="a-row">{fondos.realizo}</div>
+                  <div className="a-row">{fondos.tipo_doc}</div>
+                  <div className="a-row">{fondos.importe}</div>
+                  <div className="a-row">
+                    <Link to={`/show/${fondos.key}`}>Editar</Link>
+                  </div>
+                  <div className="a-row"><button>Imprimir</button></div>
                 </div>
-                <div className="a-row"><button>Imprimir</button></div>
               </div>
-            </div>
-          )}
+            )}
+          </div>
         </div>
       </div>
     );

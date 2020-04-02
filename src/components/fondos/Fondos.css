@@ -4,7 +4,7 @@
   justify-content: center;
 }
 .fondos-container {
-  width: 80%;
+  width: 100%;
   height: 100%;
 }
 .form-container {
@@ -12,9 +12,22 @@
   flex-direction: row;
   width: 100%;
 }
+.form-container-last {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  justify-content: right;
+}
 .form-content {
   width: 25%;
-  height: 100px;
+  height: 80px;
+  display: flex;
+  flex-direction: column;
+  padding: 5px 50px 0px 50px;
+}
+.form-content-5 {
+  width: 50%;
+  height: 80px;
   display: flex;
   flex-direction: column;
   padding: 5px 50px 0px 50px;
@@ -24,14 +37,21 @@
 }
 .form-content-100 {
   width: 100%;
-  height: 100px;
+  height: 80px;
   display: flex;
   flex-direction: column;
   padding: 5px 50px 0px 50px;
 }
 .form-content-50 {
   width: 25%;
-  height: 100px;
+  height: 80px;
+  display: flex;
+  flex-direction: column;
+  padding: 5px 50px 0px 50px;
+}
+.form-content-desc {
+  width: 44%;
+  height: 80px;
   display: flex;
   flex-direction: column;
   padding: 5px 50px 0px 50px;
@@ -50,10 +70,51 @@
   display: flex;
   flex-direction: row;
   justify-content: flex-end;
-  height: 100px;
   width: 100%;
-  margin-top: 100px;
+  padding: 25px 50px 0px 50px;
 }
 .title {
   margin-left: 50px;
+}
+.space-nav {
+  margin-left: 15%;
+}
+.bt-s1 {
+  height: 30px;
+  margin-right: 15px;
+  background: #FFF;
+  font-weight: bold;
+  font-weight: bold;
+  font-size: 15px;
+  color: #000;
+}
+.bt-s2 {
+  height: 30px;
+  margin-right: 15px;
+  background: #398439;
+  font-weight: bold;
+  font-size: 15px;
+  color: #FFF;
+}
+.bt-s3 {
+  height: 30px;
+  margin-right: 15px;
+  background: #337ab7;
+  font-weight: bold;
+  font-weight: bold;
+  font-size: 15px;
+  color: #FFF;
+}
+.itc {
+  font-weight: bold;
+}
+.input-b {
+  border: 0px;
+  background-color: #FFF;
+}
+.border-m {
+  border: 0px;
+  border-bottom: 1px solid;
+  height: 20px;
+  margin-top: 5px;
 }

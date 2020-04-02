@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import {Routes} from './Routes';
 import Nav from './components/nav/Nav';
-import Footer from './components/footer/Footer';
 import SideDrawer from './components/sidedrawer/SideDrawer';
 import Backdrop from './components/backdrop/Backdrop';
 
@@ -37,7 +36,6 @@ class App extends Component {
         <SideDrawer show={this.state.sideDrawerOpen}/>
         {backdrop}
         <Routes />
-        <Footer />
       </div>
     );
   }
