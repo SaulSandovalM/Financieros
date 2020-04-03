@@ -26,7 +26,7 @@ const Nav = props => (
         </div>
         <div className='navbar-left'>
           <Link to="/" className="deco">
-            <h3 className="nav-t">Login</h3>
+            <h3 className="nav-t">Cerrar Sesion</h3>
           </Link>
         </div>
       </div>

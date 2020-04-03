@@ -106,63 +106,106 @@ class Edit extends Component {
 
   render() {
     return (
-      <div class="container">
+      <div class="container-edit">
         <div className="edit-container">
-          <form onSubmit={this.onSubmit}>
           <div className="edit-com">
-            <div>
-              Comprometidos 2020
+            <div className="App-edit">
+              <h1>Comprometidos</h1>
             </div>
             <div className="edit-row">
-              <label for="fondo">Fondos:</label>
-              <input name="fondo" value={this.state.fondo} onChange={this.onChange}/>
+              <label for="fondo" className="tipo-tw">Fondos:</label>
+              <input name="fondo" value={this.state.fondo} onChange={this.onChange} className="height-ct" disabled/>
             </div>
             <div className="edit-row">
-              <label for="fecha">Fecha:</label>
-              <input name="fecha" value={this.state.fecha} onChange={this.onChange}/>
+              <label for="fecha" className="tipo-tw">Fecha:</label>
+              <input name="fecha" value={this.state.fecha} onChange={this.onChange} className="height-ct" disabled/>
             </div>
             <div className="edit-row">
-              <label for="realizo">Nombre Realizo:</label>
-              <input name="realizo" value={this.state.realizo} onChange={this.onChange}/>
+              <label for="realizo" className="tipo-tw">Nombre Realizo:</label>
+              <input name="realizo" value={this.state.realizo} onChange={this.onChange} className="height-ct" disabled/>
             </div>
             <div className="edit-row">
-              <label for="tipo_doc">Tipo de Documento:</label>
-              <input name="tipo_doc" value={this.state.tipo_doc} onChange={this.onChange}/>
+              <label for="tipo_doc" className="tipo-tw">Tipo de Documento:</label>
+              <input name="tipo_doc" value={this.state.tipo_doc} onChange={this.onChange} className="height-ct" disabled/>
             </div>
             <div className="edit-row">
-              <label for="importe">Importe:</label>
-              <input name="importe" value={this.state.importe} onChange={this.onChange}/>
+              <label for="importe" className="tipo-tw">Importe:</label>
+              <input name="importe" value={this.state.importe} onChange={this.onChange} className="height-ct" disabled/>
             </div>
           </div>
 
-          <div className="edit-tab-row">
-            <div className="tabla-edit"> {/*select*/}
-              Partida
-            </div>
-            <div className="tabla-edit"> {/*select*/}
-              Unidad Presupuestal
-            </div>
-            <div className="tabla-edit"> {/*select*/}
-              No. de Proyecto
-            </div>
-            <div className="tabla-edit">
-              Importe
-            </div>
-            <div className="tabla-edit">
-              ISR
-            </div>
-            <div className="tabla-edit">
-              Total
-            </div>
-            <div className="tabla-edit">
-              Fecha
-            </div>
-            <div className="tabla-edit">
-              Aplicación
-            </div>
+
+          <div className="table-ed-2">
+            <form onSubmit={this.onSubmit} style={{width: '90%'}}>
+              <div className="edit-tab-row">
+                <div className="tabla-edit"> {/*select*/}
+                  Partida
+                </div>
+                <div className="tabla-edit"> {/*select*/}
+                  Unidad Presupuestal
+                </div>
+                <div className="tabla-edit"> {/*select*/}
+                  No. de Proyecto
+                </div>
+                <div className="tabla-edit">
+                  Importe
+                </div>
+                <div className="tabla-edit">
+                  ISR
+                </div>
+                <div className="tabla-edit">
+                  Total
+                </div>
+                <div className="tabla-edit">
+                  Fecha
+                </div>
+              </div>
+              <div className="edit-tab-row-2">
+                <div className="tabla-edit"> {/*select*/}
+                  <input className="input-edi"/>
+                </div>
+                <div className="tabla-edit"> {/*select*/}
+                  <input className="input-edi" />
+                </div>
+                <div className="tabla-edit"> {/*select*/}
+                  <input className="input-edi" />
+                </div>
+                <div className="tabla-edit">
+                  <input className="input-edi" />
+                </div>
+                <div className="tabla-edit">
+                  <input className="input-edi" />
+                </div>
+                <div className="tabla-edit">
+                  <input className="input-edi" />
+                </div>
+                <div className="tabla-edit">
+                  <input className="input-edi" />
+                </div>
+              </div>
+              <div className="edit-tab-row-2">
+                <div className="tabla-edit-b"> {/*select*/}
+                  Total
+                </div>
+                <div className="tabla-edit-b"> {/*select*/}
+                </div>
+                <div className="tabla-edit-b"> {/*select*/}
+                </div>
+                <div className="tabla-edit-b">
+                  <input name="importe" value={this.state.importe} onChange={this.onChange} className="height-ct-tt" disabled/>
+                </div>
+                <div className="tabla-edit-b">
+                  0
+                </div>
+                <div className="tabla-edit-b">
+                  <input name="importe" value={this.state.importe} onChange={this.onChange} className="height-ct-tt" disabled/>
+                </div>
+                <div className="tabla-edit-b">
+                </div>
+              </div>
+              <button type="submit" class="btn btn-success">Submit</button>
+            </form>
           </div>
-          <button type="submit" class="btn btn-success">Submit</button>
-          </form>
         </div>
 
       </div>

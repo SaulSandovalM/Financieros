@@ -30,6 +30,9 @@
 .App {
   padding: 60px;
 }
+.App-edit {
+  padding: 0px 60px 15px 60px;
+}
 .products-al {
   display: flex;
   flex-direction: row;
@@ -52,7 +55,7 @@
 .edit-row {
   display: flex;
   flex-direction: row;
-  height: 30px;
+  height: 40px;
 }
 .edit-tab-row {
   width: 100%;
@@ -60,14 +63,55 @@
   flex-direction: row;
   padding: 20px;
 }
+.edit-tab-row-2 {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  padding: 20px;
+  margin-top: -40px;
+}
 .tabla-edit {
-  width: 12%;
+  width: 14.2%;
   text-align: center;
+  border-top: 1px solid;
+  border-left: 1px solid;
+  border-right: 1px solid;
+}
+.tabla-edit-b {
+  width: 14.2%;
+  text-align: center;
+  border: 1px solid;
 }
 .container {
   margin-top: 100px;
   min-height: 100vh;
+  margin-left: 15%;
+}
+.container-edit {
+  min-height: 100vh;
+  margin-left: 15%;
 }
 .space-nav {
   margin-left: 15%;
+}
+.tipo-tw {
+  width: 180px;
+}
+.height-c {
+  height: 80px;
+}
+.height-ct {
+  height: 20px;
+}
+.height-ct-tt {
+  width: 99%;
+}
+.input-edi {
+  width: 100%;
+  border: 0px;
+}
+.table-ed-2 {
+  width: 100%;
+  display: flex;
+  justify-content: center;
 }
