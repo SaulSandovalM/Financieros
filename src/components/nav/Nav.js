@@ -10,7 +10,7 @@ const Nav = props => (
           <img className='logo' src={'http://cdn.hidalgo.gob.mx/logo_gobhidalgo.svg'} alt=''/>
         </div>
         <div className='navbar-left'>
-          <Link to="/" className="deco">
+          <Link to="/Fondos" className="deco">
             <h3 className="nav-t">Fondos</h3>
           </Link>
         </div>
