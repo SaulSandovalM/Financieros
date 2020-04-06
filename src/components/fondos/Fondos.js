@@ -17,7 +17,7 @@ class Fondos extends Component {
       importe: '',
       desc: '',
       importe_l: '',
-      beneficiario: 'Mtro. León Maximiliano Hernández Valdez',
+      beneficiario: '',
       realizo: '',
     };
   }
@@ -605,7 +605,6 @@ class Fondos extends Component {
                   <option name="beneficiario">Juan Hernández Olvera</option>
                   <option name="beneficiario">Juan Iv Rodríguez Sánchez</option>
                   <option name="beneficiario">Juan Leticia Elizalde Zendejas</option>
-                  <option name="beneficiario">Juan Manuel García Guzmán</option>
                   <option name="beneficiario">Juan Manuel García Guzmán</option>
                 </select>
               </div>

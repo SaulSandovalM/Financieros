@@ -10,12 +10,12 @@
 .form-container {
   display: flex;
   flex-direction: row;
-  width: 60%;
+  width: 80%;
 }
 .form-container-last {
   display: flex;
   flex-direction: row;
-  width: 60%;
+  width: 80%;
   justify-content: center;
 }
 .form-content {

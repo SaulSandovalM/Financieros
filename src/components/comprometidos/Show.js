@@ -26,15 +26,6 @@ class Show extends Component {
     });
   }
 
-  delete(id){
-    firebase.firestore().collection('fondos').doc(id).delete().then(() => {
-      console.log("Document successfully deleted!");
-      this.props.history.push("/")
-    }).catch((error) => {
-      console.error("Error removing document: ", error);
-    });
-  }
-
   render() {
     return (
       <div class="container">
