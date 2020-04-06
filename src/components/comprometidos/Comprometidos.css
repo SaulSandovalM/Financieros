@@ -20,11 +20,8 @@
   width: 100%;
   margin: 15px;
   font-family: arial;
-
-
 }
 .a-row-t {
-
   width: 14.2%;
   height: 50px;
   font-size: 18px;
@@ -33,10 +30,6 @@
   font-weight: 900;
   color: #E86374;
   border-right: 1px solid;
-
-
-
-
 }
 .a-row {
   margin-top: 5px;
@@ -47,10 +40,7 @@
   color: black;
   font-family: sans-serif;
   border-right: 1px solid;
-
 }
-
-
 .App {
   padding: 60px;
 }
@@ -63,10 +53,6 @@
   border-left: 2px solid;
   border-right: 2px solid;
   border-bottom: .5px solid;
-
-
-
-
 }
 /*EditarComprometidos*/
 .edit-container {
