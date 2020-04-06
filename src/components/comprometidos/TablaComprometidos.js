@@ -61,9 +61,8 @@ componentDidMount() {
             <div className="a-row-t">Fecha</div>
             <div className="a-row-t">Nombre Realizo</div>
             <div className="a-row-t">Tipo de documento</div>
-            <div className="a-row-t">Importe</div>
-            <div className="a-row-t">Comprometido</div>
-            <div className="a-row-t">Imprimir</div>
+            <div className="a-row-t">Importe</div><div className="a-row-t"></div>
+
           </div>
           <div>
             {this.state.fondos.map(fondos =>
@@ -74,10 +73,13 @@ componentDidMount() {
                   <div className="a-row">{fondos.realizo}</div>
                   <div className="a-row">{fondos.tipo_doc}</div>
                   <div className="a-row">{fondos.importe}</div>
-                  <div className="a-row">
-                    <Link to={`/show/${fondos.key}`}>Editar</Link>
+                  <div className="a-row  vista" >
+
+                    <Link to={`/show/${fondos.key}`}>Ver</Link>
                   </div>
-                  <div className="a-row"><button>Imprimir</button></div>
+
+
+
                 </div>
               </div>
             )}
