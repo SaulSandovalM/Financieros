@@ -2,20 +2,21 @@
   width: 100%;
   display: flex;
   justify-content: center;
+  flex-direction: row;
 }
 .fondos-container {
-  width: 100%;
+  width: 80%;
   height: 100%;
+  justify-content: center;
 }
 .form-container {
   display: flex;
   flex-direction: row;
-  width: 80%;
 }
 .form-container-last {
   display: flex;
   flex-direction: row;
-  width: 80%;
+  width: 100%;
   justify-content: center;
 }
 .form-content {
@@ -117,4 +118,9 @@
   border-bottom: 1px solid;
   height: 20px;
   margin-top: 5px;
+}
+.center-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
 }

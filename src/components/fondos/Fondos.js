@@ -19,6 +19,7 @@ class Fondos extends Component {
       importe_l: '',
       beneficiario: '',
       realizo: '',
+      fondos: []
     };
   }
 
@@ -73,7 +74,7 @@ class Fondos extends Component {
         beneficiario: '',
         realizo: ''
       });
-      this.props.history.push("/")
+      this.props.history.push("/Comprometidos")
     })
     .catch((error) => {
       console.error("Error adding document: ", error);
@@ -92,10 +93,10 @@ class Fondos extends Component {
       mm = '0' + mm
     }
     today = yyyy + '-' + mm + '-' + dd;
-    console.log(today);
     const { fondo, fecha, tipo_doc, oficio_aut, no_oficio, no_lici, importe, desc, importe_l, beneficiario, realizo } = this.state;
     return (
       <div className="space-nav">
+        <div>
         <h2 className="title">Registro de fondos</h2>
         <form className="fondos-back" onSubmit={this.onSubmit}>
           <div className="fondos-container">
@@ -162,6 +163,7 @@ class Fondos extends Component {
               <div className="form-content-5">
                 <label for="beneficiario" className="itc">Beneficiario:</label>
                 <select className="border-m" name="beneficiario" value={beneficiario} onChange={this.onChange} required ref="beneficiario">
+                  <option name="beneficiario"></option>
                   <option name="beneficiario">Mtro.León Maximiliano Hernández Valdés</option>
                   <option name="beneficiario">Operadora Omx Sa De C.V.</option>
                   <option name="beneficiario">AASI INNOVACIONES SA DE CV</option>
@@ -1017,6 +1019,7 @@ class Fondos extends Component {
             </div>
           </div>
         </form>
+        </div>
       </div>
     );
   }

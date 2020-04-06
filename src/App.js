@@ -1,44 +1,51 @@
-import React, { Component } from 'react';
-import {Routes} from './Routes';
-import Nav from './components/nav/Nav';
-import SideDrawer from './components/sidedrawer/SideDrawer';
-import Backdrop from './components/backdrop/Backdrop';
+import React from "react";
+import { Route, Switch } from "react-router-dom";
+import { connect } from "react-redux";
+import ProtectedRoute from "./ProtectedRoute";
+import Login from "./components/login/Login";
+import Fondos from './components/fondos/Fondos';
+import Analitico from './components/analitico/Analitico';
+import TablaComprometidos from './components/comprometidos/TablaComprometidos';
+import Edit from './components/comprometidos/Edit';
+import Show from './components/comprometidos/Show';
 
-class App extends Component {
-  state = {
-    sideDrawerOpen: false
-  };
-
-  componentDidUpdate () {
-    window.scroll(0, 0)
-  }
-
-  drawerToggleClickHandler = () => {
-    this.setState((prevState) => {
-      return {sideDrawerOpen: !this.state.sideDrawerOpen}
-    });
-  };
-
-  backdropClickHandler = () => {
-    this.setState({sideDrawerOpen: false});
-  };
-
-  render() {
-    let backdrop;
-
-    if (this.state.sideDrawerOpen) {
-      backdrop = <Backdrop click={this.backdropClickHandler} />;
-    }
-
-    return (
-      <div className="nav-height-app">
-        <Nav drawerClickHandler={this.drawerToggleClickHandler}/>
-        <SideDrawer show={this.state.sideDrawerOpen}/>
-        {backdrop}
-        <Routes />
-      </div>
-    );
-  }
+function App(props) {
+  const { isAuthenticated, isVerifying } = props;
+  return (
+    <Switch>
+      <ProtectedRoute
+        exact
+        path="/"
+        component={Fondos}
+        isAuthenticated={isAuthenticated}
+        isVerifying={isVerifying}
+      />
+      <ProtectedRoute
+        exact
+        path="/Comprometidos"
+        component={TablaComprometidos}
+        isAuthenticated={isAuthenticated}
+        isVerifying={isVerifying}
+      />
+      <ProtectedRoute
+        exact
+        path="/Analitico"
+        component={Analitico}
+        isAuthenticated={isAuthenticated}
+        isVerifying={isVerifying}
+      />
+      <Route path="/Login" component={Login} />
+      <Route path='/show/:id' component={Show} />
+      <Route path='/edit/:id' component={Edit} />
+    </Switch>
+  );
 }
 
-export default App;
+function mapStateToProps(state) {
+  return {
+    isAuthenticated: state.auth.isAuthenticated,
+    isVerifying: state.auth.isVerifying
+  };
+}
+
+export default connect(mapStateToProps)(App);

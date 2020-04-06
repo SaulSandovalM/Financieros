@@ -1,11 +1,11 @@
 .navbar {
-	position: fixed;
+	position: absolute;
 	top: 0;
 	left: 0;
 	width: 15%;
 	background: #092432;
 	height: 100vh;
-	z-index: 4;
+	z-index: 1;
 }
 .navbar-navigation {
 	height: 100%;

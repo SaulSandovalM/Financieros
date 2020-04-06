@@ -1,9 +1,9 @@
 .back-login {
   width: 100%;
-  height: rgba(255, 0, 0, 0.5);
+  height: 100vh;
   background-position: center;
   background-size: cover;
-  background-color: #e5e5e5;
+  background-color: #FFF;
 }
 .login{
   width: 70%;
