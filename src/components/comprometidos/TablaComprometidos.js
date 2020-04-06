@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import './Comprometidos.css';
 import ReactToPrint from "react-to-print";
 
+
 class TablaComprometidos extends Component {
   constructor(props) {
   super(props);
