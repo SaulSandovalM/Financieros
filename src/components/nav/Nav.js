@@ -20,22 +20,22 @@ class Nav extends Component {
             </div>
             <div className='navbar-left'>
               <Link to="/" className="deco">
-                <h3 className="nav-t">Fondos</h3>
+                <h3 className="nav-t" style={{fontFamily: 'Arial'}}>Fondos</h3>
               </Link>
             </div>
             <div className='navbar-left'>
               <Link to="/Comprometidos" className="deco">
-                <h3 className="nav-t">Comprometidos</h3>
+                <h3 className="nav-t" style={{fontFamily: 'Arial'}}>Comprometidos</h3>
               </Link>
             </div>
             <div className='navbar-left'>
               <Link to="/Analitico" className="deco">
-                <h3 className="nav-t">Analitico</h3>
+                <h3 className="nav-t" style={{fontFamily: 'Arial'}}>Analitico</h3>
               </Link>
             </div>
             <div className='navbar-left'>
               <div className="deco">
-              <button onClick={this.handleLogout} className="nav-t" style={{background: '#092432', border: 'none'}}><h3 className="nav-t">Cerrar Sesion</h3></button>
+              <button onClick={this.handleLogout} className="nav-t" style={{background: '#092432', border: 'none'}}><h3 className="nav-t" style={{fontFamily: 'Arial'}}>Cerrar Sesion</h3></button>
                 {isLoggingOut && <p>Cerrando Sesion....</p>}
                 {logoutError && <p>Error al Cerrar Sesion</p>}
               </div>

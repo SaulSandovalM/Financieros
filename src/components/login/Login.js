@@ -39,7 +39,7 @@ class Login extends Component {
             <div style={containerStyle}>
               <div style={{display: 'flex', justifyContent: 'center', width: '40%'}}>
                 <div className="login">
-                  <h2>Inicia Sesión</h2>
+                  <h2 style={{fontFamily: 'Arial'}}>Inicia Sesión</h2>
                   <div style={{display: 'flex', flexDirection: 'column'}} className="border-form-login">
                     <input
                       margin="normal"

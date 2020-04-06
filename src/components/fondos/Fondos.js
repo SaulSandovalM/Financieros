@@ -97,24 +97,24 @@ class Fondos extends Component {
     return (
       <div className="space-nav">
         <div>
-        <h2 className="title">Registro de fondos</h2>
+        <h2 className="title" style={{fontFamily: 'Arial'}}>Registro de fondos</h2>
         <form className="fondos-back" onSubmit={this.onSubmit}>
           <div className="fondos-container">
           {/*seccion 1*/}
             <div className="form-container">
               <div className="form-content">
-                <label for="fondo" className="itc">Fondo:</label>
+                <label for="fondo" className="itc" style={{fontFamily: 'Arial'}}>Fondo:</label>
                 <input type="number" className="border-m" name="fondo" value={fondo} onChange={this.onChange} ref="fondo" required/>
               </div>
               <div className="form-content">
-                <label for="fecha" className="itc">Fecha:</label>
+                <label for="fecha" className="itc" style={{fontFamily: 'Arial'}}>Fecha:</label>
                 <input type="date" className="border-m" min={today} max={today} name="fecha" value={fecha} onChange={this.onChange} ref="fecha" required/>
               </div>
             </div>
             {/*seccion 2*/}
             <div className="form-container">
               <div className="form-content">
-                <label for="tipo_doc" className="itc">Tipo de documento:</label>
+                <label for="tipo_doc" className="itc" style={{fontFamily: 'Arial'}}>Tipo de documento:</label>
                 <select name="tipo_doc" className="border-m" value={tipo_doc} onChange={this.onChange} ref="tipo_doc" required>
                   <option name="tipo_doc"></option>
                   <option name="tipo_doc">Pago Directo</option>
@@ -125,7 +125,7 @@ class Fondos extends Component {
                 </select>
               </div>
               <div className="form-content">
-                <label for="oficio_aut" className="itc">Oficio de Autorizacion:</label>
+                <label for="oficio_aut" className="itc" style={{fontFamily: 'Arial'}}>Oficio de Autorizacion:</label>
                 <select name="oficio_aut" className="border-m" value={oficio_aut} onChange={this.onChange} ref="oficio_aut" required>
                   <option name="oficio_aut"></option>
                   <option name="oficio_aut">SFP-CPF-01-0020/2020</option>
@@ -139,29 +139,29 @@ class Fondos extends Component {
             {/*seccion 3*/}
             <div className="form-container">
               <div className="form-content">
-                <label for="no_oficio" className="itc">No. de Oficio:</label>
+                <label for="no_oficio" className="itc" style={{fontFamily: 'Arial'}}>No. de Oficio:</label>
                 <input type="number" className="border-m" name="no_oficio" value={no_oficio} onChange={this.onChange} ref="no_oficio" required/>
               </div>
               <div className="form-content">
-                <label for="no_lici" className="itc">No. de Licitacion:</label>
+                <label for="no_lici" className="itc" style={{fontFamily: 'Arial'}}>No. de Licitacion:</label>
                 <input type="number" className="border-m" name="no_lici" value={no_lici} onChange={this.onChange} ref="no_lici" required/>
               </div>
             </div>
             {/*seccion 4*/}
             <div className="form-container">
               <div className="form-content-5">
-                <label for="importe" className="itc">Importe:</label>
+                <label for="importe" className="itc" style={{fontFamily: 'Arial'}}>Importe:</label>
                 <CurrencyFormat thousandSeparator={true} prefix={'$'} className="border-m" name="importe" value={importe} onChange={this.onChange} ref="importe" required />
               </div>
               <div className="form-content-5">
-                <label for="importe_l" className="itc">Importe letra:</label>
+                <label for="importe_l" className="itc" style={{fontFamily: 'Arial'}}>Importe letra:</label>
                 <input className="input-b" name="importe_l" value={importe_l} onChange={this.onChange} required ref="importe_l"/>
               </div>
             </div>
             {/*seccion 5*/}
             <div className="form-container">
               <div className="form-content-5">
-                <label for="beneficiario" className="itc">Beneficiario:</label>
+                <label for="beneficiario" className="itc" style={{fontFamily: 'Arial'}}>Beneficiario:</label>
                 <select className="border-m" name="beneficiario" value={beneficiario} onChange={this.onChange} required ref="beneficiario">
                   <option name="beneficiario"></option>
                   <option name="beneficiario">Mtro.León Maximiliano Hernández Valdés</option>
@@ -993,7 +993,7 @@ class Fondos extends Component {
                 </select>
               </div>
               <div className="form-content-5">
-                <label for="realizo" className="itc">Realizo:</label>
+                <label for="realizo" className="itc" style={{fontFamily: 'Arial'}}>Realizo:</label>
                 <select className="border-m" name="realizo" value={realizo} onChange={this.onChange} required ref="realizo">
                   <option name="realizo"></option>
                   <option name="realizo">ELOY</option>
@@ -1007,13 +1007,13 @@ class Fondos extends Component {
             {/*seccion 6*/}
             <div className="form-container">
               <div className="form-content-desc">
-                <label for="desc" className="itc">Descripcion:</label>
+                <label for="desc" className="itc" style={{fontFamily: 'Arial'}}>Descripcion:</label>
                 <textarea type="text" className="border-m" name="desc" value={desc} onChange={this.onChange} required ref="desc"/>
               </div>
             </div>
             <div className="form-container-last">
               <div className="botones">
-                <button className="bt-s2" type='submit'>Guadar</button>
+                <button className="bt-s2" type='submit' style={{fontFamily: 'Arial'}}>Guadar</button>
                 <button className="bt-s3" onClick={this.cancelCourse.bind(this)}>Cancelar</button>
               </div>
             </div>
