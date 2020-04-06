@@ -1,7 +1,6 @@
 import React from "react";
 import { Provider } from "react-redux";
 import { BrowserRouter as Router } from "react-router-dom";
-import { connect } from "react-redux";
 import App from "./App";
 import configureStore from "./store/configureStore";
 import Nav from './components/nav/Nav';
