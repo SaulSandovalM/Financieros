@@ -19,7 +19,7 @@ class Fondos extends Component {
       importe_l: '',
       beneficiario: '',
       realizo: '',
-      fondos: []
+      fondos: [],
     };
   }
 

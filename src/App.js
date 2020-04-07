@@ -6,8 +6,10 @@ import Login from "./components/login/Login";
 import Fondos from './components/fondos/Fondos';
 import Analitico from './components/analitico/Analitico';
 import TablaComprometidos from './components/comprometidos/TablaComprometidos';
+import Consulta from './components/consulta/Consulta';
 import Edit from './components/comprometidos/Edit';
 import Show from './components/comprometidos/Show';
+import Registro from './components/login/Registro';
 
 function App(props) {
   const { isAuthenticated, isVerifying } = props;
@@ -34,7 +36,15 @@ function App(props) {
         isAuthenticated={isAuthenticated}
         isVerifying={isVerifying}
       />
+      <ProtectedRoute
+        exact
+        path="/Consulta"
+        component={Consulta}
+        isAuthenticated={isAuthenticated}
+        isVerifying={isVerifying}
+      />
       <Route path="/Login" component={Login} />
+      <Route path="/Registro" component={Registro} />
       <Route path='/show/:id' component={Show} />
       <Route path='/edit/:id' component={Edit} />
     </Switch>

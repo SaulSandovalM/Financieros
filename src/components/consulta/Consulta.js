@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './Comprometidos.css';
+import './Consulta.css';
 import firebase from '../../Firebase';
 import { Link } from 'react-router-dom';
 
@@ -48,7 +48,7 @@ componentDidMount() {
   render() {
     return (
       <div className="space-nav">
-        <div className="App" style={{height: '100vh'}}>
+        <div className="App" style={{height: '100%'}}>
           <h1>Comprometidos</h1>
           {/*<Link to='/Search' style={{textDecoration: 'none'}}>
             <p>Buscar por Folio</p>

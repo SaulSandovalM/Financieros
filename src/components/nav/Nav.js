@@ -9,6 +9,7 @@ class Nav extends Component {
     const { dispatch } = this.props;
     dispatch(logoutUser());
   };
+
   render() {
     const { isLoggingOut, logoutError } = this.props;
     return (
@@ -31,6 +32,11 @@ class Nav extends Component {
             <div className='navbar-left'>
               <Link to="/Analitico" className="deco">
                 <h3 className="nav-t" style={{fontFamily: 'Arial'}}>Analitico</h3>
+              </Link>
+            </div>
+            <div className='navbar-left'>
+              <Link to="/Consulta" className="deco">
+                <h3 className="nav-t" style={{fontFamily: 'Arial'}}>Consulta</h3>
               </Link>
             </div>
             <div className='navbar-left'>
