@@ -1031,13 +1031,6 @@ class Fondos extends Component {
                 <textarea type="text" className="border-m" name="desc" value={desc} onChange={this.onChange} required ref="desc"/>
               </div>
             </div>
-            <CreatableSelect
-              isClearable
-              onChange={this.handleChange}
-              onInputChange={this.handleInputChange}
-              options={options}
-              className="border-m"
-            />
             <div className="form-container-last">
               <div className="botones">
                 <button className="bt-s2" type='submit' style={{fontFamily: 'Arial'}}>Guadar</button>
