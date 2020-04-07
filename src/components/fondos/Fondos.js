@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import firebase from '../../Firebase';
 import CurrencyFormat from 'react-currency-format';
 import './Fondos.css';
+import CreatableSelect from 'react-select/creatable';
 
 class Fondos extends Component {
   constructor() {
@@ -19,7 +20,7 @@ class Fondos extends Component {
       importe_l: '',
       beneficiario: '',
       realizo: '',
-      fondos: []
+      fondos: [],
     };
   }
 
@@ -81,6 +82,20 @@ class Fondos extends Component {
     });
   }
 
+  handleChange = (newValue: any, actionMeta: any) => {
+    console.group('Value Changed');
+    console.log(newValue);
+    console.log(`action: ${actionMeta.action}`);
+    console.groupEnd();
+  };
+
+  handleInputChange = (inputValue: any, actionMeta: any) => {
+    console.group('Input Changed');
+    console.log(inputValue);
+    console.log(`action: ${actionMeta.action}`);
+    console.groupEnd();
+  };
+
   render() {
     var today = new Date();
     var dd = today.getDate();
@@ -94,6 +109,11 @@ class Fondos extends Component {
     }
     today = yyyy + '-' + mm + '-' + dd;
     const { fondo, fecha, tipo_doc, oficio_aut, no_oficio, no_lici, importe, desc, importe_l, beneficiario, realizo } = this.state;
+    const options = [
+      { value: 'chocolate', label: 'Chocolate' },
+      { value: 'strawberry', label: 'Strawberry' },
+      { value: 'vanilla', label: 'Vanilla' }
+    ]
     return (
       <div className="space-nav">
         <div>
@@ -104,7 +124,7 @@ class Fondos extends Component {
             <div className="form-container">
               <div className="form-content">
                 <label for="fondo" className="itc" style={{fontFamily: 'Arial'}}>Fondo:</label>
-                <input type="number" className="border-m" name="fondo" value={fondo} onChange={this.onChange} ref="fondo" required/>
+                <input type="number" className="border-m" name="fondo" value={fondo} onChange={this.onChange} ref="fondo" required disabled />
               </div>
               <div className="form-content">
                 <label for="fecha" className="itc" style={{fontFamily: 'Arial'}}>Fecha:</label>
@@ -1011,6 +1031,13 @@ class Fondos extends Component {
                 <textarea type="text" className="border-m" name="desc" value={desc} onChange={this.onChange} required ref="desc"/>
               </div>
             </div>
+            <CreatableSelect
+              isClearable
+              onChange={this.handleChange}
+              onInputChange={this.handleInputChange}
+              options={options}
+              className="border-m"
+            />
             <div className="form-container-last">
               <div className="botones">
                 <button className="bt-s2" type='submit' style={{fontFamily: 'Arial'}}>Guadar</button>
