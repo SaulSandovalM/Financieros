@@ -2,8 +2,10 @@ import React, { Component } from 'react';
 import firebase from '../../Firebase';
 import CurrencyFormat from 'react-currency-format';
 import './Fondos.css';
+import { ComboBox } from '@progress/kendo-react-dropdowns';
 
 class Fondos extends Component {
+  nombres = ["Saul", "Almendra", "Fernanda", "Mao"];
   constructor() {
     super();
     this.ref = firebase.firestore().collection('fondos');
@@ -20,6 +22,7 @@ class Fondos extends Component {
       beneficiario: '',
       realizo: '',
       fondos: [],
+      allowCustom: true
     };
   }
 
@@ -108,6 +111,9 @@ class Fondos extends Component {
     }
     today = yyyy + '-' + mm + '-' + dd;
     const { fondo, fecha, tipo_doc, oficio_aut, no_oficio, no_lici, importe, desc, importe_l, beneficiario, realizo } = this.state;
+
+    const allowCustom = this.state.allowCustom;
+
     return (
       <div className="space-nav">
         <div>
@@ -118,7 +124,7 @@ class Fondos extends Component {
             <div className="form-container">
               <div className="form-content">
                 <label for="fondo" className="itc" style={{fontFamily: 'Arial'}}>Fondo:</label>
-                <input type="number" className="border-m" name="fondo" value={fondo} onChange={this.onChange} ref="fondo" required disabled />
+                <input type="number" className="border-m" name="fondo" value={fondo} onChange={this.onChange} ref="fondo" required  />
               </div>
               <div className="form-content">
                 <label for="fecha" className="itc" style={{fontFamily: 'Arial'}}>Fecha:</label>
@@ -1008,14 +1014,7 @@ class Fondos extends Component {
               </div>
               <div className="form-content-5">
                 <label for="realizo" className="itc" style={{fontFamily: 'Arial'}}>Realizo:</label>
-                <select className="border-m" name="realizo" value={realizo} onChange={this.onChange} required ref="realizo">
-                  <option name="realizo"></option>
-                  <option name="realizo">ELOY</option>
-                  <option name="realizo">HECTOR</option>
-                  <option name="realizo">LILIANA</option>
-                  <option name="realizo">MIGUEL</option>
-                  <option name="realizo">TERISITA</option>
-                </select>
+                <ComboBox data={this.nombres} allowCustom={allowCustom} name="realizo" value={realizo} onChange={this.onChange} required ref="realizo" className="border-m"/>
               </div>
             </div>
             {/*seccion 6*/}
@@ -1031,6 +1030,19 @@ class Fondos extends Component {
                 <button className="bt-s3" onClick={this.cancelCourse.bind(this)}>Cancelar</button>
               </div>
             </div>
+
+            <div className="example-wrapper">
+            <div className="example-config">
+            </div>
+            <div>
+                <div>Favorite sport:</div>
+                <ComboBox
+                placeholder="e.g. Denmark"
+                      itemRender={this.itemRender}
+                 data={this.nombres} allowCustom={allowCustom} name="realizo" value={realizo} onChange={this.onChange} required ref="realizo"/>
+            </div>
+            </div>
+
           </div>
         </form>
         </div>

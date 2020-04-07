@@ -250,3 +250,29 @@ h1 {
   text-align:center;
   color:#ccc;
 }
+input {
+  border: 0px;
+  width: 100%;
+}
+span {
+  width: auto;
+}
+.k-dropdown-wrap {
+}
+.k-state-default {
+
+}
+.k-icon {
+  background-color: red;
+}
+
+.k-clear-value {
+  background-color: red;
+}
+
+.k-i-close {
+  background-color: red;
+}
+.k-select {
+  background-color: red;
+}
