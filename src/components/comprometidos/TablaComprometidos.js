@@ -60,7 +60,6 @@ componentDidMount() {
             <div className="a-row-t">Nombre Realizo</div>
             <div className="a-row-t">Tipo de documento</div>
             <div className="a-row-t">Importe</div><div className="a-row-t"></div>
-
           </div>
           <div>
             {this.state.fondos.map(fondos =>
@@ -72,12 +71,8 @@ componentDidMount() {
                   <div className="a-row">{fondos.tipo_doc}</div>
                   <div className="a-row">{fondos.importe}</div>
                   <div className="a-row  vista" >
-
                     <Link to={`/show/${fondos.key}`}>Ver</Link>
                   </div>
-
-
-
                 </div>
               </div>
             )}

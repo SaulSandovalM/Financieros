@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import firebase from '../../Firebase';
 import CurrencyFormat from 'react-currency-format';
 import './Fondos.css';
-import CreatableSelect from 'react-select/creatable';
 
 class Fondos extends Component {
   constructor() {
@@ -109,11 +108,6 @@ class Fondos extends Component {
     }
     today = yyyy + '-' + mm + '-' + dd;
     const { fondo, fecha, tipo_doc, oficio_aut, no_oficio, no_lici, importe, desc, importe_l, beneficiario, realizo } = this.state;
-    const options = [
-      { value: 'chocolate', label: 'Chocolate' },
-      { value: 'strawberry', label: 'Strawberry' },
-      { value: 'vanilla', label: 'Vanilla' }
-    ]
     return (
       <div className="space-nav">
         <div>
@@ -160,11 +154,11 @@ class Fondos extends Component {
             <div className="form-container">
               <div className="form-content">
                 <label for="no_oficio" className="itc" style={{fontFamily: 'Arial'}}>No. de Oficio:</label>
-                <input type="number" className="border-m" name="no_oficio" value={no_oficio} onChange={this.onChange} ref="no_oficio" required/>
+                <input type="number" min='1' step='1' className="border-m" name="no_oficio" value={no_oficio} onChange={this.onChange} ref="no_oficio" required/>
               </div>
               <div className="form-content">
                 <label for="no_lici" className="itc" style={{fontFamily: 'Arial'}}>No. de Licitacion:</label>
-                <input type="number" className="border-m" name="no_lici" value={no_lici} onChange={this.onChange} ref="no_lici" required/>
+                <input type="number" min='1' step='1' className="border-m" name="no_lici" value={no_lici} onChange={this.onChange} ref="no_lici" required/>
               </div>
             </div>
             {/*seccion 4*/}
