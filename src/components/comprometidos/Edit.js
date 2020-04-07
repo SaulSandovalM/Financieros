@@ -19,13 +19,12 @@ class Edit extends Component {
       importe_l: '',
       beneficiario: '',
       realizo: '',
-      numero: '',
-      num_conver: '',
     };
   }
 
   componentDidMount() {
     const ref = firebase.firestore().collection('fondos').doc(this.props.match.params.id);
+    console.log(ref)
     ref.get().then((doc) => {
       if (doc.exists) {
         const fondos = doc.data();
@@ -42,9 +41,7 @@ class Edit extends Component {
           desc: fondos.desc,
           importe_l: fondos.importe_l,
           beneficiario: fondos.beneficiario,
-          realizo: fondos.realizo,
-          numero: fondos.numero,
-          num_conver: fondos.num_conver,
+          realizo: fondos.realizo
         });
       } else {
         console.log("No such document!");
@@ -61,7 +58,7 @@ class Edit extends Component {
   onSubmit = (e) => {
     e.preventDefault();
 
-    const { fondo, fecha, tipo_doc, oficio_aut, no_oficio, no_aut, no_lici, importe, desc, importe_l, beneficiario, realizo, numero, num_conver } = this.state;
+    const { fondo, fecha, tipo_doc, oficio_aut, no_oficio, no_aut, no_lici, importe, desc, importe_l, beneficiario, realizo } = this.state;
 
     const updateRef = firebase.firestore().collection('fondos').doc(this.state.key);
     updateRef.set({
@@ -76,9 +73,7 @@ class Edit extends Component {
       desc,
       importe_l,
       beneficiario,
-      realizo,
-      numero,
-      num_conver
+      realizo
     }).then((docRef) => {
       this.setState({
         key: '',
@@ -93,9 +88,7 @@ class Edit extends Component {
         desc: '',
         importe_l: '',
         beneficiario: '',
-        realizo: '',
-        numero: '',
-        num_conver: '',
+        realizo: ''
       });
       this.props.history.push("/")
     })

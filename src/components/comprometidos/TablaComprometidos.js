@@ -70,13 +70,9 @@ componentDidMount() {
                   <div className="a-row">{fondos.realizo}</div>
                   <div className="a-row">{fondos.tipo_doc}</div>
                   <div className="a-row">{fondos.importe}</div>
-                  <div className="a-row  vista" >
-
+                  <div className="a-row vista">
                     <Link to={`/show/${fondos.key}`}>Ver</Link>
                   </div>
-
-
-
                 </div>
               </div>
             )}
