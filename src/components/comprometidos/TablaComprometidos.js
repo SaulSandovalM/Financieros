@@ -49,10 +49,7 @@ componentDidMount() {
     return (
       <div className="space-nav">
         <div className="App" style={{height: '100vh'}}>
-          <h1>Comprometidos</h1>
-          {/*<Link to='/Search' style={{textDecoration: 'none'}}>
-            <p>Buscar por Folio</p>
-          </Link>*/}
+          <h2 className="title" style={{fontFamily: 'Arial'}}>Comprometidos</h2>
           <div className="products-al">
             <div className="a-row-t">Fondos</div>
             <div className="a-row-t">Fecha</div>
