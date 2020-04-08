@@ -8,7 +8,7 @@ import '@progress/kendo-theme-default/dist/all.css';
 class Fondos extends Component {
 
   nombres = ["ELOY", "HECTOR", "LILIANA", "MIGUEL", "TERESITA"];
-  beneficiario = ["Mtro.León Maximiliano Hernández Valdés"];
+  beneficiario = ["Mtro.León Maximiliano Hernández Valdés", ""];
   oficio_aut = ["SFP-CPF-01-0020/2020", "SFP-CPF-01-0010/2020", "SFP-CPF-01-0724/2020", "SFP-CPF-01-0681/2020", "SFP-CPF-01-DFDP-0949/2020"];
   tipo_doc = ["Pago Directo", "Fondo Revolvente", "Gasto a Comprobar", "Reembolso de Gastos", "Cancelado"];
 
@@ -152,7 +152,7 @@ class Fondos extends Component {
                 <ComboBox style={{width: '100%'}} data={this.tipo_doc} allowCustom={allowCustom} name="tipo_doc" value={tipo_doc} onChange={this.onChange} required ref="tipo_doc" />
               </div>
               <div className="form-content">
-                <label for="oficio_aut" className="itc" style={{fontFamily: 'Arial'}}>Oficio de Autorizacion:</label>
+                <label for="oficio_aut" className="itc" style={{fontFamily: 'Arial'}}>Ofi. de Autorizacion:</label>
                 <ComboBox style={{width: '100%'}} data={this.oficio_aut} allowCustom={allowCustom} name="oficio_aut" value={oficio_aut} onChange={this.onChange} required ref="oficio_aut" />
               </div>
             </div>

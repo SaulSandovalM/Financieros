@@ -2,8 +2,20 @@ import React, { Component } from 'react';
 import firebase from '../../Firebase';
 import CurrencyFormat from 'react-currency-format';
 import './Analitico.css';
+import { ComboBox } from '@progress/kendo-react-dropdowns';
+import '@progress/kendo-theme-default/dist/all.css';
 
 class Analitico extends Component {
+
+      partida = ["SFP-CPF-01-0020/2020", "SFP-CPF-01-0010/2020", "SFP-CPF-01-0724/2020", "SFP-CPF-01-0681/2020", "SFP-CPF-01-DFDP-0949/2020"];
+      proveedor = ["Pago Directo", "Fondo Revolvente", "Gasto a Comprobar", "Reembolso de Gastos", "Cancelado"];
+      municipios =["Pachuca de Soto","Acatlán","Acaxochitlán", "Actopan", "Agua Blanca", "Ajacuba", "Alfajayucan", "Almoloya", "Apan", "Atitalaquia", "Atlapexco", "Atotonilco de Tula", "Atotonilco el Grande", "Calnali", "Cardonal", "Chapantongo", "Chapulhuacán", "Chilcuautla", "Cuautepec de Hinojosa", "El Arenal", "Eloxochitlan", "Emiliano Zapata", "Epazoyucan", "Francisco I. Madero", "Huasca de Ocampo", "Huautla", "Huazalingo", "Huehuetla", "Huejutla de Reyes", "Huichapan", "Ixmiquilpan",
+       "Jacala de Ledezma", "Jaltocán", "Juárez Hidalgo", "La Misión", "Lolotla", "Metepec", "Metztitlán", "Mineral de la Reforma", "Mineral del Chico", "Mineral del Monte", "Mixquiahuala de Juárez", "Molango", "Nicolás Flores", "Nopala de Villagrán", "Omitlán de Juárez", "Pacula", "Pisaflores", "Progreso de Obregón", "San Agustín Metzquititlán", "San Agustín Tlaxiaca", "San Bartolo Tutotepec", "San Felipe Orizatlán", "San Salvador", "Santiago de Anaya", "Santiago Tulantepec de Lugo Guerrero"];
+      area = ["Procuraduría General de Justicia", "Subprocuraduría de Procedimientos Penales Región Oriente", "Fiscalía Especializada para la atención de Delitos cometidos contra la Libertad de Expresión, Periodistas y Personas defensoras de los Derechos Humanos", "Dirección General para la Atención de los Asuntos del Sistema Tradicional", "Fiscalia de Delitos Electorales", "Subprocuraduría de Derechos Humanos y Servicios a la Comunidad", "Centro de Justicia Restaurativa Penal Poniente", "Fiscalía para la Atención de Delitos de Género", "Visitaduría General", "Dirección General de Servicios Periciales", "Centro de Operación Estratégica", "Unidad Especializada en el Combate al Secuestro", "Dirección General de Administración y Finanzas", "Fiscalía Especializada para la atención de los Delitos de Trata de Personas", "Subprocuraduría de Procedimientos Penales Región Poniente", "Centro de Atención Temprana Poniente", "Dirección General de Investigación y Litigación Poniente", "Centro de Atenció Temprana Oriente", "Centro de Justicia Restaurativa Penal Oriente", "Dirección General de Investigación y Litigación Oriente", "Dirección General de Recursos Materiales y Servicios", "Fiscalía Especializada en Delitos de Corrupción", "Fiscalía Especializada en Materia de Desaparición Forzada de Personas", "Dirección General de la Policía Investigadora"];
+
+
+
+
   constructor() {
     super();
     this.ref = firebase.firestore().collection('Analitico');
@@ -121,36 +133,24 @@ class Analitico extends Component {
             <div className="form-container">
               <div className="form-content">
                 <label for="nfactura" className="itc" style={{fontFamily: 'Arial'}}>N. de Factura:</label>
-                <input type="text" className="border-m" name="nfactura" value={nfactura} onChange={this.onChange} ref="nfactura" required/>
+                <ComboBox style={{width: '100%'}}  type="text" className="border-m" name="nfactura" value={nfactura} onChange={this.onChange} ref="nfactura" required/>
               </div>
               <div className="form-content">
                 <label for="fecha" className="itc" style={{fontFamily: 'Arial'}}>Fecha:</label>
                 <input type="date" className="border-m" name="fecha" value={fecha} onChange={this.onChange} ref="fecha" required/>
               </div>
             </div>
-            {/*seccion 2*/}
+            {/*seccion   2 proveedor*/}
             <div className="form-container">
               <div className="form-content">
                 <label for="proveedor" className="itc" style={{fontFamily: 'Arial'}}>Proveedor:</label>
-                <select name="proveedor" className="border-m" value={proveedor} onChange={this.onChange} ref="proveedor" required>
-                  <option name="tipo_doc"></option>
-                  <option name="tipo_doc">Pago Directo</option>
-                  <option name="tipo_doc">Fondo Revolvente</option>
-                  <option name="tipo_doc">Gasto a Comprobar</option>
-                  <option name="tipo_doc">Reembolso de Gastos</option>
-                  <option name="tipo_doc">Cancelado</option>
-                </select>
+                <ComboBox style={{width: '100%'}} data={this.proveedor}    name="proveedor" className="border-m" value={proveedor} onChange={this.onChange} required ref="proveedor"/>
               </div>
+
+                {/*seccion   partida*/}
               <div className="form-content">
-                <label for="partida" className="itc" style={{fontFamily: 'Arial'}}>Partida:</label>
-                <select name="partida" className="border-m" value={partida} onChange={this.onChange} ref="partida" required>
-                  <option name="partida"></option>
-                  <option name="partida">SFP-CPF-01-0020/2020</option>
-                  <option name="partida">SFP-CPF-01-0010/2020</option>
-                  <option name="partida">SFP-CPF-01-0724/2020</option>
-                  <option name="partida">SFP-CPF-01-0681/2020</option>
-                  <option name="partida">SFP-CPF-01-DFDP-0949/2020</option>
-                </select>
+              <label for="partida" className="itc" style={{fontFamily: 'Arial'}}>Partida:</label>
+              <ComboBox  style={{width: '100%'}} data={this.partida} name="partida" className="border-m" value={partida} onChange={this.onChange} required ref="partida"/>
               </div>
             </div>
             {/*seccion 3*/}
@@ -179,17 +179,12 @@ class Analitico extends Component {
             <div className="form-container">
               <div className="form-content-5">
                 <label for="municipio" className="itc" style={{fontFamily: 'Arial'}}>Municipio:</label>
-                <select className="border-m" name="municipio" value={municipio} onChange={this.onChange} required ref="municipio">
-                  <option name="municipio"></option>
-                  <option name="municipio">Pachuca</option>
-                </select>
+                <ComboBox style={{width: '100%'}}  data={this.municipios} className="border-m" name="municipio" value={municipio} onChange={this.onChange} required ref="municipio"/>
               </div>
               <div className="form-content-5">
                 <label for="area" className="itc" style={{fontFamily: 'Arial'}}>Area:</label>
-                <select className="border-m" name="area" value={area} onChange={this.onChange} required ref="area">
-                  <option name="area"></option>
-                  <option name="area">Area 1</option>
-                </select>
+                <ComboBox style={{width: '100%'}}  data={this.area} name="area" value={area} onChange={this.onChange} required ref="area"/>
+
               </div>
             </div>
             <div className="form-container-last">
