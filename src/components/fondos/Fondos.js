@@ -4,6 +4,7 @@ import './Fondos.css';
 import { AutoComplete } from '@progress/kendo-react-dropdowns';
 import { NumericTextBox, Input } from '@progress/kendo-react-inputs';
 import '@progress/kendo-theme-material/dist/all.css';
+import { NumberAsString } from './NumerosLetras.js';
 
 class Fondos extends Component {
 
@@ -59,7 +60,6 @@ class Fondos extends Component {
     e.preventDefault();
 
     const { fondo, fecha, tipo_doc, oficio_aut, no_oficio, no_lici, importe, desc, importe_l, beneficiario, realizo } = this.state;
-
     this.ref.add({
       fondo,
       fecha,
@@ -69,7 +69,7 @@ class Fondos extends Component {
       no_lici,
       importe,
       desc,
-      importe_l,
+      importe_l ,
       beneficiario,
       realizo
     }).then((docRef) => {
@@ -179,7 +179,7 @@ class Fondos extends Component {
               </div>
               <div className="form-content-5">
                 <label for="importe_l" className="itc" style={{fontFamily: 'Arial'}}>Importe letra:</label>
-                <input className="border-m" style={{borderColor: 'rgba(0,0,0,0.42)'}} name="importe_l" value={importe_l} onChange={this.onChange} required ref="importe_l"/>
+                <input className="border-m" style={{borderColor: 'rgba(0,0,0,0.42)'}} name="importe_l" value={(NumberAsString(importe))} onChange={this.onChange} required ref="importe_l"/>
               </div>
             </div>
             {/*seccion 5*/}
