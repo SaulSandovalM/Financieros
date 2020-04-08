@@ -85,7 +85,7 @@ const Centenas = num => {
     case 3:
       return 'TRESCIENTOS ' + Decenas(decenas);
     case 4:
-      return 'CUATROCIENTOS ' + Decenas(decenas);
+      return 'CUATROCIENTOS' + Decenas(decenas);
     case 5:
       return 'QUINIENTOS ' + Decenas(decenas);
     case 6:
@@ -151,8 +151,8 @@ export const NumberAsString = (num, centavos = false, currency) => {
     letrasCentavos: '',
     letrasMonedaPlural: currency.plural || 'PESOS 00/100 M.N.',
     letrasMonedaSingular: currency.singular || 'PESO 00/100 M.N.',
-    letrasMonedaCentavoPlural: currency.centPlural || 'CENTAVOS',
-    letrasMonedaCentavoSingular: currency.centSingular || 'CENTAVO'
+    letrasMonedaCentavoPlural: currency.centPlural || 'CENTAVOS/100 M.N.',
+    letrasMonedaCentavoSingular: currency.centSingular || 'CENTAVO/100 M. N.'
   };
 
   if (data.centavos > 0) {
@@ -161,7 +161,7 @@ export const NumberAsString = (num, centavos = false, currency) => {
   }
 
   if (data.enteros == 0) {
-    return 'CERO ' + data.letrasMonedaPlural + ' ' + data.letrasCentavos;
+    return ' ' ;
   }
   if (data.enteros == 1) {
     return Millones(data.enteros) + ' ' + data.letrasMonedaSingular + ' ' + data.letrasCentavos;

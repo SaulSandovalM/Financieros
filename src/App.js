@@ -9,6 +9,7 @@ import TablaComprometidos from './components/comprometidos/TablaComprometidos';
 import Consulta from './components/consulta/Consulta';
 import Edit from './components/comprometidos/Edit';
 import Show from './components/comprometidos/Show';
+import Pdf from './components/consulta/pdf';
 
 function App(props) {
   const { isAuthenticated, isVerifying } = props;
@@ -45,6 +46,7 @@ function App(props) {
       <Route path="/Login" component={Login} />
       <Route path='/show/:id' component={Show} />
       <Route path='/edit/:id' component={Edit} />
+      <Route path="/Pdf" component={Pdf} />
     </Switch>
   );
 }

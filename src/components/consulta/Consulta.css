@@ -115,3 +115,54 @@
 .space-nav {
   margin-left: 15%;
 }
+/* stilos de pdf*/
+.dad{
+    height: 100%;
+    width: 100%;
+ }
+.subdad{
+      padding-left: 15%;
+      width: 70%;
+}
+
+.bueno{
+  width: 100%;
+  display:flex;
+  justify-content: flex-end;
+  flex-direction: row;
+}
+.recibi{
+  padding-top: 20px;
+}
+.monto{
+  display:flex;
+  justify-content: space-between;
+  flex-direction:row;
+  width: 10%;
+}
+.concepto{
+
+}
+.fecha{
+      display:flex;
+      justify-content:flex-end;
+      flex-direction: row;
+}
+.refe{
+        display: flex;
+        justify-content:center;
+        flex-direction:row;
+}
+.firma-dad{
+          width: 100%;
+          display:flex;
+          justify-content:center;
+          flex-direction:row;
+          padding-top: 100px;
+
+
+}
+.firma-raya{
+      border-top: 1px solid black;
+      width: 30%;
+}
