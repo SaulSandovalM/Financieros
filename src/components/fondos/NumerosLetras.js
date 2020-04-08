@@ -122,7 +122,7 @@ const Miles = num => {
   let resto = num - (cientos * divisor)
   let strMiles = Seccion(num, divisor, 'UN MIL', 'MIL');
   let strCentenas = Centenas(resto);
-  return strMiles == '' || cientos === 0 ? strCentenas : strMiles + ' ' + strCentenas ;
+  return strMiles === '' || cientos === 0 ? strCentenas : strMiles + ' ' + strCentenas ;
 };
 
 const Millones = num => {
@@ -131,12 +131,12 @@ const Millones = num => {
   let resto = num - (cientos * divisor)
   let strMillones = Seccion(num, divisor, millon(num, true), millon(num, false));
   let strMiles = Miles(resto);
-  return strMillones == '' || cientos === 0 ? strMiles : strMillones + ' ' + strMiles ;
+  return strMillones === '' || cientos === 0 ? strMiles : strMillones + ' ' + strMiles ;
 };
 
 const millon = (num, singular) => {
   let letraMillon = singular ? 'UN MILLON' : 'MILLONES';
-  if (num % 1000000 == 0) {
+  if (num % 1000000 === 0) {
     letraMillon = letraMillon + ' DE'
   }
   return letraMillon;
@@ -156,14 +156,16 @@ export const NumberAsString = (num, centavos = false, currency) => {
   };
 
   if (data.centavos > 0) {
-    let centavos = data.centavos == 1 ? Millones(data.centavos) + ' ' + data.letrasMonedaCentavoSingular : Millones(data.centavos) + ' ' + data.letrasMonedaCentavoPlural ;
+    let centavos = data.centavos === 1 ? Millones(data.centavos) + ' ' + data.letrasMonedaCentavoSingular : Millones(data.centavos) + ' ' + data.letrasMonedaCentavoPlural ;
     data.letrasCentavos = 'CON ' + centavos;
   }
 
+
   if (data.enteros == 0) {
     return ' ' ;
+
   }
-  if (data.enteros == 1) {
+  if (data.enteros === 1) {
     return Millones(data.enteros) + ' ' + data.letrasMonedaSingular + ' ' + data.letrasCentavos;
   } else {
     return Millones(data.enteros) + ' ' + data.letrasMonedaPlural + ' ' + data.letrasCentavos;

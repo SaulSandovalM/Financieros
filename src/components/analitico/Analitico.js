@@ -3,7 +3,6 @@ import firebase from '../../Firebase';
 import { AutoComplete } from '@progress/kendo-react-dropdowns';
 import CurrencyFormat from 'react-currency-format';
 import './Analitico.css';
-import { ComboBox } from '@progress/kendo-react-dropdowns';
 import '@progress/kendo-theme-material/dist/all.css';
 
 class Analitico extends Component {
@@ -13,9 +12,6 @@ class Analitico extends Component {
       municipios =["Pachuca de Soto","Acatlán","Acaxochitlán", "Actopan", "Agua Blanca", "Ajacuba", "Alfajayucan", "Almoloya", "Apan", "Atitalaquia", "Atlapexco", "Atotonilco de Tula", "Atotonilco el Grande", "Calnali", "Cardonal", "Chapantongo", "Chapulhuacán", "Chilcuautla", "Cuautepec de Hinojosa", "El Arenal", "Eloxochitlan", "Emiliano Zapata", "Epazoyucan", "Francisco I. Madero", "Huasca de Ocampo", "Huautla", "Huazalingo", "Huehuetla", "Huejutla de Reyes", "Huichapan", "Ixmiquilpan",
        "Jacala de Ledezma", "Jaltocán", "Juárez Hidalgo", "La Misión", "Lolotla", "Metepec", "Metztitlán", "Mineral de la Reforma", "Mineral del Chico", "Mineral del Monte", "Mixquiahuala de Juárez", "Molango", "Nicolás Flores", "Nopala de Villagrán", "Omitlán de Juárez", "Pacula", "Pisaflores", "Progreso de Obregón", "San Agustín Metzquititlán", "San Agustín Tlaxiaca", "San Bartolo Tutotepec", "San Felipe Orizatlán", "San Salvador", "Santiago de Anaya", "Santiago Tulantepec de Lugo Guerrero"];
       area = ["Procuraduría General de Justicia", "Subprocuraduría de Procedimientos Penales Región Oriente", "Fiscalía Especializada para la atención de Delitos cometidos contra la Libertad de Expresión, Periodistas y Personas defensoras de los Derechos Humanos", "Dirección General para la Atención de los Asuntos del Sistema Tradicional", "Fiscalia de Delitos Electorales", "Subprocuraduría de Derechos Humanos y Servicios a la Comunidad", "Centro de Justicia Restaurativa Penal Poniente", "Fiscalía para la Atención de Delitos de Género", "Visitaduría General", "Dirección General de Servicios Periciales", "Centro de Operación Estratégica", "Unidad Especializada en el Combate al Secuestro", "Dirección General de Administración y Finanzas", "Fiscalía Especializada para la atención de los Delitos de Trata de Personas", "Subprocuraduría de Procedimientos Penales Región Poniente", "Centro de Atención Temprana Poniente", "Dirección General de Investigación y Litigación Poniente", "Centro de Atenció Temprana Oriente", "Centro de Justicia Restaurativa Penal Oriente", "Dirección General de Investigación y Litigación Oriente", "Dirección General de Recursos Materiales y Servicios", "Fiscalía Especializada en Delitos de Corrupción", "Fiscalía Especializada en Materia de Desaparición Forzada de Personas", "Dirección General de la Policía Investigadora"];
-
-
-
 
   constructor() {
     super();
@@ -145,7 +141,7 @@ class Analitico extends Component {
             <div className="form-container">
               <div className="form-content">
                 <label for="proveedor" className="itc" style={{fontFamily: 'Arial'}}>Proveedor:</label>
-                <AutoComplete style style={{width: '100%', borderColor: 'rgba(0,0,0,0.42)'}} data={this.proveedor}    name="proveedor" value={proveedor} onChange={this.onChange} required ref="proveedor"/>
+                <AutoComplete style={{width: '100%', borderColor: 'rgba(0,0,0,0.42)'}} data={this.proveedor} name="proveedor" value={proveedor} onChange={this.onChange} required ref="proveedor"/>
               </div>
 
                 {/*seccion   partida*/}
