@@ -12,6 +12,7 @@ class Fondos extends Component {
   max = new Date();
 
   nombres = ["ELOY", "HECTOR", "LILIANA", "MIGUEL", "TERESITA"];
+
   beneficiario = ["Mtro.León Maximiliano Hernández Valdés", "Operadora Omx Sa De C.V.", "Aasi Innovaciones S.A De C.V.", "Abigail Santillán Moreno", "Abraham Andrade Ortiz", "Abraham Peña Pérez", "Acabados Decorativos De La Huasteca S.A. De C.V.",];
   oficio_aut = ["SFP-CPF-01-0020/2020", "SFP-CPF-01-0010/2020", "SFP-CPF-01-0724/2020", "SFP-CPF-01-0681/2020", "SFP-CPF-01-DFDP-0949/2020"];
   tipo_doc = ["Pago Directo", "Fondo Revolvente", "Gasto a Comprobar", "Reembolso de Gastos", "Cancelado"];
@@ -156,6 +157,7 @@ class Fondos extends Component {
                 <AutoComplete style={{width: '100%', borderColor: 'rgba(0,0,0,0.42)'}} data={this.tipo_doc} allowCustom={allowCustom} name="tipo_doc" value={tipo_doc} onChange={this.onChange} required ref="tipo_doc" />
               </div>
               <div className="form-content">
+
                 <label for="oficio_aut" className="itc" style={{fontFamily: 'Arial'}}>Oficio de Autorizacion:</label>
                 <AutoComplete style={{width: '100%', borderColor: 'rgba(0,0,0,0.42)'}} data={this.oficio_aut} allowCustom={allowCustom} name="oficio_aut" value={oficio_aut} onChange={this.onChange} required ref="oficio_aut" />
               </div>
