@@ -6,6 +6,7 @@ import Login from "./components/login/Login";
 import Fondos from './components/fondos/Fondos';
 import Analitico from './components/analitico/Analitico';
 import TablaComprometidos from './components/comprometidos/TablaComprometidos';
+import Consulta from './components/consulta/Consulta';
 import Edit from './components/comprometidos/Edit';
 import Show from './components/comprometidos/Show';
 
@@ -31,6 +32,13 @@ function App(props) {
         exact
         path="/Analitico"
         component={Analitico}
+        isAuthenticated={isAuthenticated}
+        isVerifying={isVerifying}
+      />
+      <ProtectedRoute
+        exact
+        path="/Consulta"
+        component={Consulta}
         isAuthenticated={isAuthenticated}
         isVerifying={isVerifying}
       />

@@ -221,39 +221,26 @@ h1 {
   max-height:245px;
   font-size:inherit;
 }
-
 .ris .ris-options .ris-option {
   padding: 5px;
   cursor: pointer;
   border-bottom: 1px solid #efefef;
 }
-
 .ris .ris-options .ris-option:last-child {
   border-bottom: 0;
 }
-
 .ris .ris-options .ris-option:hover {
   background: #bbdefb;
 }
-
 .ris .ris-options .ris-option.current {
   background:#bbdefb;
 }
-
 .ris .ris-options .ris-option.selected {
   background:#1e88e5;
   color: #fff;
 }
-
 .ris .ris-options.ris-no-options {
   padding:5px;
   text-align:center;
   color:#ccc;
-}
-input {
-  border: 0px;
-  width: 100%;
-}
-span {
-  width: auto;
 }

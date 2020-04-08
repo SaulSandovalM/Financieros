@@ -22,10 +22,15 @@
   font-family: arial;
 }
 .a-row-t {
+
+
+
+
   width: 20%;
   height: 30px;
   font-size: 17px;
   text-align: center;
+
   font-weight: normal;
   color: white;
   border-right: 2px solid;
@@ -33,6 +38,11 @@
   background: #092432;
   border-top: 4px solid #dc5f70;
   border-bottom: 1px solid #dc5f70;
+
+
+
+
+
 }
 .a-row {
   margin-top: 5px;
@@ -44,11 +54,16 @@
   font-family: sans-serif;
   background:#FFFFF0;
   padding-left: 15px;
+
+
 }
+
 .vista{
+
   display:flex;
   justify-content:center ;
   flex-direction:row;
+
 }
 .App {
   padding: 30px;
@@ -58,14 +73,16 @@
   flex-direction: row;
   width: 100%;
   color: grey;
+
   border-left: 2px solid;
   border-right: 2px solid;
   border-bottom: 1px solid;
+
+
+
+
 }
 /*EditarComprometidos*/
-.container-edit {
-  padding-left: 15%;
-}
 .edit-container {
   width: 100%;
   min-height: 100vh;

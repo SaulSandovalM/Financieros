@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './Comprometidos.css';
+import './Consulta.css';
 import firebase from '../../Firebase';
 import { Link } from 'react-router-dom';
 
@@ -48,17 +48,14 @@ componentDidMount() {
   render() {
     return (
       <div className="space-nav">
-        <div className="App" style={{height: '100vh'}}>
-          <h1>Comprometidos</h1>
-          {/*<Link to='/Search' style={{textDecoration: 'none'}}>
-            <p>Buscar por Folio</p>
-          </Link>*/}
+        <div className="App" style={{height: '100%'}}>
+          <h1 style={{fontFamily: 'Arial'}}>Consulta</h1>
           <div className="products-al">
-            <div className="a-row-t">Fondos</div>
-            <div className="a-row-t">Fecha</div>
-            <div className="a-row-t">Nombre Realizo</div>
-            <div className="a-row-t">Tipo de documento</div>
-            <div className="a-row-t">Importe</div><div className="a-row-t"></div>
+            <div className="a-row-t" style={{fontFamily: 'Arial'}}>Fondos</div>
+            <div className="a-row-t" style={{fontFamily: 'Arial'}}>Fecha</div>
+            <div className="a-row-t" style={{fontFamily: 'Arial'}}>Nombre Realizo</div>
+            <div className="a-row-t" style={{fontFamily: 'Arial'}}>Tipo de documento</div>
+            <div className="a-row-t" style={{fontFamily: 'Arial'}}>Importe</div><div className="a-row-t"></div>
           </div>
           <div>
             {this.state.fondos.map(fondos =>
@@ -70,7 +67,7 @@ componentDidMount() {
                   <div className="a-row">{fondos.tipo_doc}</div>
                   <div className="a-row">{fondos.importe}</div>
                   <div className="a-row vista">
-                    <Link to={`/show/${fondos.key}`}>Ver</Link>
+                    <Link to={`/show/${fondos.key}`}>Imprimir</Link>
                   </div>
                 </div>
               </div>

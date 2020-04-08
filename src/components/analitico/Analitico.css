@@ -22,3 +22,17 @@
   height: 200px;
   background: #c3c3c3;
 }
+.tipo-tw {
+  width: 180px;
+}
+.height-ct {
+  height: 20px;
+}
+.edit-row-a {
+  display: flex;
+  flex-direction: row;
+  height: 35px;
+}
+.p-top {
+  margin-top: 50px;
+}
