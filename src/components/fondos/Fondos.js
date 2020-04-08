@@ -8,11 +8,7 @@ import { NumberAsString } from './NumerosLetras.js';
 
 class Fondos extends Component {
 
-  min = new Date();
-  max = new Date();
-
   nombres = ["ELOY", "HECTOR", "LILIANA", "MIGUEL", "TERESITA"];
-
   beneficiario = ["Mtro.León Maximiliano Hernández Valdés", "Operadora Omx Sa De C.V.", "Aasi Innovaciones S.A De C.V.", "Abigail Santillán Moreno", "Abraham Andrade Ortiz", "Abraham Peña Pérez", "Acabados Decorativos De La Huasteca S.A. De C.V.",];
   oficio_aut = ["SFP-CPF-01-0020/2020", "SFP-CPF-01-0010/2020", "SFP-CPF-01-0724/2020", "SFP-CPF-01-0681/2020", "SFP-CPF-01-DFDP-0949/2020"];
   tipo_doc = ["Pago Directo", "Fondo Revolvente", "Gasto a Comprobar", "Reembolso de Gastos", "Cancelado"];
@@ -94,25 +90,8 @@ class Fondos extends Component {
     });
   }
 
-  handleChange = (newValue: any, actionMeta: any) => {
-    console.group('Value Changed');
-    console.log(newValue);
-    console.log(`action: ${actionMeta.action}`);
-    console.groupEnd();
-  };
-
-  handleInputChange = (inputValue: any, actionMeta: any) => {
-    console.group('Input Changed');
-    console.log(inputValue);
-    console.log(`action: ${actionMeta.action}`);
-    console.groupEnd();
-  };
-
-
-  itemRender = (li, itemProps) => {
-    const index = itemProps.index;
-    const itemChildren = <span style={{ color: "#00F" }}>{li.props.children} {index}</span>;
-    return React.cloneElement(li, li.props, itemChildren);
+  pasar() {
+    document.getElementById("nombre2").value = document.getElementById("nombre1").value;
   }
 
   render() {
