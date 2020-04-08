@@ -3,7 +3,7 @@ const Unidades = num => {
     case 1:
       return 'UN';
     case 2:
-      return 'DOS';
+      return 'DOS ';
     case 3:
       return 'TRES';
     case 4:
@@ -149,8 +149,8 @@ export const NumberAsString = (num, centavos = false, currency) => {
     enteros: Math.floor(num),
     centavos: centavos ? (((Math.round(num * 100)) - (Math.floor(num) * 100))) : 0,
     letrasCentavos: '',
-    letrasMonedaPlural: currency.plural || 'PESOS',
-    letrasMonedaSingular: currency.singular || 'PESO',
+    letrasMonedaPlural: currency.plural || 'PESOS 00/100 M.N.',
+    letrasMonedaSingular: currency.singular || 'PESO 00/100 M.N.',
     letrasMonedaCentavoPlural: currency.centPlural || 'CENTAVOS',
     letrasMonedaCentavoSingular: currency.centSingular || 'CENTAVO'
   };
