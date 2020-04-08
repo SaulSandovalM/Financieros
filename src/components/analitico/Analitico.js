@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import firebase from '../../Firebase';
+import { AutoComplete } from '@progress/kendo-react-dropdowns';
 import CurrencyFormat from 'react-currency-format';
 import './Analitico.css';
 import { ComboBox } from '@progress/kendo-react-dropdowns';
-import '@progress/kendo-theme-default/dist/all.css';
+import '@progress/kendo-theme-material/dist/all.css';
 
 class Analitico extends Component {
 
@@ -133,24 +134,24 @@ class Analitico extends Component {
             <div className="form-container">
               <div className="form-content">
                 <label for="nfactura" className="itc" style={{fontFamily: 'Arial'}}>N. de Factura:</label>
-                <ComboBox style={{width: '100%'}}  type="text" className="border-m" name="nfactura" value={nfactura} onChange={this.onChange} ref="nfactura" required/>
+                <input style={{width: '100%', borderColor: 'rgba(0,0,0,0.42)'}}  type="text" className="border-m" name="nfactura" value={nfactura} onChange={this.onChange} ref="nfactura" required/>
               </div>
               <div className="form-content">
                 <label for="fecha" className="itc" style={{fontFamily: 'Arial'}}>Fecha:</label>
-                <input type="date" className="border-m" name="fecha" value={fecha} onChange={this.onChange} ref="fecha" required/>
+                <input type="date" className="border-m"  name="fecha" value={fecha} onChange={this.onChange} ref="fecha" required/>
               </div>
             </div>
             {/*seccion   2 proveedor*/}
             <div className="form-container">
               <div className="form-content">
                 <label for="proveedor" className="itc" style={{fontFamily: 'Arial'}}>Proveedor:</label>
-                <ComboBox style={{width: '100%'}} data={this.proveedor}    name="proveedor" className="border-m" value={proveedor} onChange={this.onChange} required ref="proveedor"/>
+                <AutoComplete style style={{width: '100%', borderColor: 'rgba(0,0,0,0.42)'}} data={this.proveedor}    name="proveedor" value={proveedor} onChange={this.onChange} required ref="proveedor"/>
               </div>
 
                 {/*seccion   partida*/}
               <div className="form-content">
               <label for="partida" className="itc" style={{fontFamily: 'Arial'}}>Partida:</label>
-              <ComboBox  style={{width: '100%'}} data={this.partida} name="partida" className="border-m" value={partida} onChange={this.onChange} required ref="partida"/>
+              <AutoComplete style={{width: '100%', borderColor: 'rgba(0,0,0,0.42)'}} data={this.partida} name="partida"  value={partida} onChange={this.onChange} required ref="partida"/>
               </div>
             </div>
             {/*seccion 3*/}
@@ -179,11 +180,11 @@ class Analitico extends Component {
             <div className="form-container">
               <div className="form-content-5">
                 <label for="municipio" className="itc" style={{fontFamily: 'Arial'}}>Municipio:</label>
-                <ComboBox style={{width: '100%'}}  data={this.municipios} className="border-m" name="municipio" value={municipio} onChange={this.onChange} required ref="municipio"/>
+                <AutoComplete style={{width: '100%', borderColor: 'rgba(0,0,0,0.42)' }}  data={this.municipios} name="municipio" value={municipio} onChange={this.onChange} required ref="municipio"/>
               </div>
               <div className="form-content-5">
                 <label for="area" className="itc" style={{fontFamily: 'Arial'}}>Area:</label>
-                <ComboBox style={{width: '100%'}}  data={this.area} name="area" value={area} onChange={this.onChange} required ref="area"/>
+                <AutoComplete style={{width: '100%', borderColor: 'rgba(0,0,0,0.42)'}} data={this.area} name="area" value={area} onChange={this.onChange} required ref="area"/>
 
               </div>
             </div>

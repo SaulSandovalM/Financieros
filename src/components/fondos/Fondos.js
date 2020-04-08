@@ -1,14 +1,18 @@
 import React, { Component } from 'react';
 import firebase from '../../Firebase';
-import CurrencyFormat from 'react-currency-format';
 import './Fondos.css';
-import { ComboBox } from '@progress/kendo-react-dropdowns';
-import '@progress/kendo-theme-default/dist/all.css';
+import { AutoComplete } from '@progress/kendo-react-dropdowns';
+import { NumericTextBox, Input } from '@progress/kendo-react-inputs';
+import '@progress/kendo-theme-material/dist/all.css';
 
 class Fondos extends Component {
 
+  min = new Date();
+  max = new Date();
+
   nombres = ["ELOY", "HECTOR", "LILIANA", "MIGUEL", "TERESITA"];
-  beneficiario = ["Mtro.León Maximiliano Hernández Valdés", ""];
+
+  beneficiario = ["Mtro.León Maximiliano Hernández Valdés", "Operadora Omx Sa De C.V.", "Aasi Innovaciones S.A De C.V.", "Abigail Santillán Moreno", "Abraham Andrade Ortiz", "Abraham Peña Pérez", "Acabados Decorativos De La Huasteca S.A. De C.V.",];
   oficio_aut = ["SFP-CPF-01-0020/2020", "SFP-CPF-01-0010/2020", "SFP-CPF-01-0724/2020", "SFP-CPF-01-0681/2020", "SFP-CPF-01-DFDP-0949/2020"];
   tipo_doc = ["Pago Directo", "Fondo Revolvente", "Gasto a Comprobar", "Reembolso de Gastos", "Cancelado"];
 
@@ -106,13 +110,13 @@ class Fondos extends Component {
 
 
   itemRender = (li, itemProps) => {
-       const index = itemProps.index;
-       const itemChildren = <span style={{ color: "#00F" }}>{li.props.children} {index}</span>;
-
-       return React.cloneElement(li, li.props, itemChildren);
-   }
+    const index = itemProps.index;
+    const itemChildren = <span style={{ color: "#00F" }}>{li.props.children} {index}</span>;
+    return React.cloneElement(li, li.props, itemChildren);
+  }
 
   render() {
+
     var today = new Date();
     var dd = today.getDate();
     var mm = today.getMonth()+1;
@@ -124,6 +128,7 @@ class Fondos extends Component {
       mm = '0' + mm
     }
     today = yyyy + '-' + mm + '-' + dd;
+
     const { fondo, fecha, tipo_doc, oficio_aut, no_oficio, no_lici, importe, desc, importe_l, beneficiario, realizo } = this.state;
 
     const allowCustom = this.state.allowCustom;
@@ -138,7 +143,7 @@ class Fondos extends Component {
             <div className="form-container">
               <div className="form-content">
                 <label for="fondo" className="itc" style={{fontFamily: 'Arial'}}>Fondo:</label>
-                <input type="number" className="border-m" name="fondo" value={fondo} onChange={this.onChange} ref="fondo" required  />
+                <Input style={{width: '100%', borderColor: 'rgba(0,0,0,0.42)'}} type="number" name="fondo" value={fondo} onChange={this.onChange} ref="fondo" required  />
               </div>
               <div className="form-content">
                 <label for="fecha" className="itc" style={{fontFamily: 'Arial'}}>Fecha:</label>
@@ -149,51 +154,52 @@ class Fondos extends Component {
             <div className="form-container">
               <div className="form-content">
                 <label for="tipo_doc" className="itc" style={{fontFamily: 'Arial'}}>Tipo de documento:</label>
-                <ComboBox style={{width: '100%'}} data={this.tipo_doc} allowCustom={allowCustom} name="tipo_doc" value={tipo_doc} onChange={this.onChange} required ref="tipo_doc" />
+                <AutoComplete style={{width: '100%', borderColor: 'rgba(0,0,0,0.42)'}} data={this.tipo_doc} allowCustom={allowCustom} name="tipo_doc" value={tipo_doc} onChange={this.onChange} required ref="tipo_doc" />
               </div>
               <div className="form-content">
-                <label for="oficio_aut" className="itc" style={{fontFamily: 'Arial'}}>Ofi. de Autorizacion:</label>
-                <ComboBox style={{width: '100%'}} data={this.oficio_aut} allowCustom={allowCustom} name="oficio_aut" value={oficio_aut} onChange={this.onChange} required ref="oficio_aut" />
+
+                <label for="oficio_aut" className="itc" style={{fontFamily: 'Arial'}}>Oficio de Autorizacion:</label>
+                <AutoComplete style={{width: '100%', borderColor: 'rgba(0,0,0,0.42)'}} data={this.oficio_aut} allowCustom={allowCustom} name="oficio_aut" value={oficio_aut} onChange={this.onChange} required ref="oficio_aut" />
               </div>
             </div>
             {/*seccion 3*/}
             <div className="form-container">
               <div className="form-content">
                 <label for="no_oficio" className="itc" style={{fontFamily: 'Arial'}}>No. de Oficio:</label>
-                <ComboBox style={{width: '100%'}} data={this.no_oficio} allowCustom={allowCustom} name="no_oficio" value={no_oficio} onChange={this.onChange} required ref="no_oficio"/>
+                <Input style={{width: '100%', borderColor: 'rgba(0,0,0,0.42)'}} type="number" data={this.no_oficio} allowCustom={allowCustom} name="no_oficio" value={no_oficio} onChange={this.onChange} required ref="no_oficio"/>
               </div>
               <div className="form-content">
                 <label for="no_lici" className="itc" style={{fontFamily: 'Arial'}}>No. de Licitacion:</label>
-                <ComboBox style={{width: '100%'}} allowCustom={allowCustom} name="no_lici" value={no_lici} onChange={this.onChange} required ref="no_lici"/>
+                <Input style={{width: '100%', borderColor: 'rgba(0,0,0,0.42)'}} type="number" allowCustom={allowCustom} name="no_lici" value={no_lici} onChange={this.onChange} required ref="no_lici"/>
               </div>
             </div>
             {/*seccion 4*/}
             <div className="form-container">
               <div className="form-content-5">
                 <label for="importe" className="itc" style={{fontFamily: 'Arial'}}>Importe:</label>
-                <CurrencyFormat thousandSeparator={true} prefix={'$'} className="border-m" name="importe" value={importe} onChange={this.onChange} ref="importe" required />
+                <NumericTextBox format="c2" min={0} width="100%" borderColor="rgba(0,0,0,0.42)" name="importe" value={importe} onChange={this.onChange} ref="importe" required/>
               </div>
               <div className="form-content-5">
                 <label for="importe_l" className="itc" style={{fontFamily: 'Arial'}}>Importe letra:</label>
-                <input className="input-b" name="importe_l" value={importe_l} onChange={this.onChange} required ref="importe_l"/>
+                <input className="border-m" style={{borderColor: 'rgba(0,0,0,0.42)'}} name="importe_l" value={importe_l} onChange={this.onChange} required ref="importe_l"/>
               </div>
             </div>
             {/*seccion 5*/}
             <div className="form-container">
               <div className="form-content-5">
                 <label for="beneficiario" className="itc" style={{fontFamily: 'Arial'}}>Beneficiario:</label>
-                <ComboBox style={{width: '100%'}} data={this.beneficiario} allowCustom={allowCustom} name="beneficiario" value={beneficiario} onChange={this.onChange} required ref="beneficiario"/>
+                <AutoComplete style={{width: '100%', borderColor: 'rgba(0,0,0,0.42)'}} data={this.beneficiario} allowCustom={allowCustom} name="beneficiario" value={beneficiario} onChange={this.onChange} required ref="beneficiario"/>
               </div>
               <div className="form-content-5">
                 <label for="realizo" className="itc" style={{fontFamily: 'Arial'}}>Realizo:</label>
-                <ComboBox style={{width: '100%'}} data={this.nombres} allowCustom={allowCustom} name="realizo" value={realizo} onChange={this.onChange} required ref="realizo"/>
+                <AutoComplete style={{width: '100%', borderColor: 'rgba(0,0,0,0.42)'}} data={this.nombres} allowCustom={allowCustom} name="realizo" value={realizo} onChange={this.onChange} required ref="realizo"/>
               </div>
             </div>
             {/*seccion 6*/}
             <div className="form-container">
               <div className="form-content-desc">
                 <label for="desc" className="itc" style={{fontFamily: 'Arial'}}>Descripcion:</label>
-                <textarea type="text" className="border-m" name="desc" value={desc} onChange={this.onChange} required ref="desc"/>
+                <Input style={{width: '100%', borderColor: 'rgba(0,0,0,0.42)'}} className="border-m" type="text" name="desc" value={desc} onChange={this.onChange} required ref="desc"/>
               </div>
             </div>
             <div className="form-container-last">
