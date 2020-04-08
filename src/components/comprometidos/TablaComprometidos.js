@@ -16,7 +16,7 @@ class TablaComprometidos extends Component {
 onCollectionUpdate = (querySnapshot) => {
   const fondos = [];
   querySnapshot.forEach((doc) => {
-    const { fondo, fecha, tipo_doc, oficio_aut, no_oficio, no_aut, no_lici, importe, desc, importe_l, beneficiario, realizo, numero, num_conver } = doc.data();
+    const { fondo, fecha, tipo_doc, oficio_aut, no_oficio, no_aut, no_lici, importe, desc, importe_l, beneficiario, realizo} = doc.data();
     fondos.push({
       key: doc.id,
       doc, // DocumentSnapshot
@@ -32,8 +32,6 @@ onCollectionUpdate = (querySnapshot) => {
       importe_l,
       beneficiario,
       realizo,
-      numero,
-      num_conver
     });
   });
   this.setState({

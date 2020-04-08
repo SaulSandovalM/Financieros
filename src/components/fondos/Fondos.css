@@ -118,6 +118,8 @@
   border-bottom: 1px solid;
   height: 20px;
   margin-top: 5px;
+  padding: 5px;
+  font-size: 15px;
 }
 .center-container {
   display: flex;
@@ -243,4 +245,10 @@ h1 {
   padding:5px;
   text-align:center;
   color:#ccc;
+}
+.k-widget {
+
+}
+.k-numerictextbox2 {
+  width: 100%;
 }
