@@ -37,7 +37,7 @@ class Login extends Component {
         <div style={{zIndex: '5', position: 'absolute', width: '100%', top: 0, left: 0}}>
           <div className="back-login">
             <div style={containerStyle}>
-              <div style={{display: 'flex', justifyContent: 'center', width: '40%'}}>
+              <div style={{display: 'flex', justifyContent: 'center', width: '50%'}}>
                 <div className="login">
                   <h2 style={{fontFamily: 'Arial'}}>Inicia Sesión</h2>
                   <div style={{display: 'flex', flexDirection: 'column'}} className="border-form-login">

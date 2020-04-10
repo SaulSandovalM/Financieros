@@ -1,5 +1,4 @@
 import React, { Component} from 'react';
-import ReactToPrintd from 'react-to-print';
 import './Consulta.css';
 
 class Pdf extends Component{

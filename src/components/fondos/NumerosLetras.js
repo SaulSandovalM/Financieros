@@ -67,6 +67,7 @@ const Decenas = num => {
       return DecenasY('NOVENTA', unidad);
     case 0:
       return Unidades(unidad);
+    default:
   }
 };
 
@@ -161,7 +162,7 @@ export const NumberAsString = (num, centavos = false, currency) => {
   }
 
 
-  if (data.enteros == 0) {
+  if (data.enteros === 0) {
     return ' ' ;
 
   }

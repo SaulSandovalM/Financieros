@@ -29,7 +29,9 @@ class Fondos extends Component {
       beneficiario: '',
       realizo: '',
       fondos: [],
-      allowCustom: true
+      allowCustom: true,
+      value: '',
+      suggest: ''
     };
   }
 
@@ -90,8 +92,11 @@ class Fondos extends Component {
     });
   }
 
-  pasar() {
-    document.getElementById("nombre2").value = document.getElementById("nombre1").value;
+  handleChange = (event) => {
+    this.setState({
+      value: event.target.value,
+      suggest: event.suggestion ? event.suggestion.value : ''
+    });
   }
 
   render() {
@@ -133,12 +138,12 @@ class Fondos extends Component {
             <div className="form-container">
               <div className="form-content">
                 <label for="tipo_doc" className="itc" style={{fontFamily: 'Arial'}}>Tipo de documento:</label>
-                <AutoComplete style={{width: '100%', borderColor: 'rgba(0,0,0,0.42)'}} data={this.tipo_doc} allowCustom={allowCustom} name="tipo_doc" value={tipo_doc} onChange={this.onChange} required ref="tipo_doc" />
+                <AutoComplete suggest={true} style={{width: '100%', borderColor: 'rgba(0,0,0,0.42)'}} data={this.tipo_doc} allowCustom={allowCustom} name="tipo_doc" value={tipo_doc} onChange={this.onChange} required ref="tipo_doc" />
               </div>
               <div className="form-content">
 
                 <label for="oficio_aut" className="itc" style={{fontFamily: 'Arial'}}>Oficio de Autorizacion:</label>
-                <AutoComplete style={{width: '100%', borderColor: 'rgba(0,0,0,0.42)'}} data={this.oficio_aut} allowCustom={allowCustom} name="oficio_aut" value={oficio_aut} onChange={this.onChange} required ref="oficio_aut" />
+                <AutoComplete suggest={true} style={{width: '100%', borderColor: 'rgba(0,0,0,0.42)'}} data={this.oficio_aut} allowCustom={allowCustom} name="oficio_aut" value={oficio_aut} onChange={this.onChange} required ref="oficio_aut" />
               </div>
             </div>
             {/*seccion 3*/}
