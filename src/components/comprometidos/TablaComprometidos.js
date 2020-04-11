@@ -4,8 +4,8 @@ import firebase from '../../Firebase';
 import { Link } from 'react-router-dom';
 
 class TablaComprometidos extends Component {
-  constructor(props) {
-  super(props);
+  constructor() {
+  super();
   this.ref = firebase.firestore().collection('fondos');
   this.unsubscribe = null;
   this.state = {
@@ -65,7 +65,7 @@ componentDidMount() {
                   <div className="a-row">{fondos.tipo_doc}</div>
                   <div className="a-row">{fondos.importe}</div>
                   <div className="a-row vista">
-                    <Link to={`/show/${fondos.key}`}>Ver</Link>
+                    <Link to={`/edit/${fondos.key}`}>Ver</Link>
                   </div>
                 </div>
               </div>

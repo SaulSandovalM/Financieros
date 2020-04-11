@@ -13,9 +13,10 @@ class Fondos extends Component {
   oficio_aut = ["SFP-CPF-01-0020/2020", "SFP-CPF-01-0010/2020", "SFP-CPF-01-0724/2020", "SFP-CPF-01-0681/2020", "SFP-CPF-01-DFDP-0949/2020"];
   tipo_doc = ["Pago Directo", "Fondo Revolvente", "Gasto a Comprobar", "Reembolso de Gastos", "Cancelado"];
 
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.ref = firebase.firestore().collection('fondos');
+    this.unsubscribe = null;
     this.state = {
       fondo: '',
       fecha: '',
@@ -31,7 +32,8 @@ class Fondos extends Component {
       fondos: [],
       allowCustom: true,
       value: '',
-      suggest: ''
+      suggest: '',
+      key: ''
     };
   }
 
@@ -59,6 +61,7 @@ class Fondos extends Component {
     e.preventDefault();
 
     const { fondo, fecha, tipo_doc, oficio_aut, no_oficio, no_lici, importe, desc, importe_l, beneficiario, realizo } = this.state;
+
     this.ref.add({
       fondo,
       fecha,
@@ -83,9 +86,9 @@ class Fondos extends Component {
         desc: '',
         importe_l: '',
         beneficiario: '',
-        realizo: ''
+        realizo: '',
       });
-      this.props.history.push("/Comprometidos")
+      this.props.history.push(`/edit/${this.state.fondos.key}`)
     })
     .catch((error) => {
       console.error("Error adding document: ", error);
@@ -188,7 +191,7 @@ class Fondos extends Component {
             </div>
             <div className="form-container-last">
               <div className="botones">
-                <button className="bt-s2" type='submit' style={{fontFamily: 'Arial'}}>Guadar</button>
+                <button className="bt-s2" type='submit'onClick={this.props.nextPath}  style={{fontFamily: 'Arial'}}>Guadar</button>
                 <button className="bt-s3" onClick={this.cancelCourse.bind(this)}>Cancelar</button>
               </div>
             </div>
