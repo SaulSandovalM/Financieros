@@ -7,7 +7,8 @@ import Fondos from './components/fondos/Fondos';
 import Analitico from './components/analitico/Analitico';
 import TablaComprometidos from './components/comprometidos/TablaComprometidos';
 import Consulta from './components/consulta/Consulta';
-import Comprometido from './components/comprometidos/Comprometido';
+import Edit from './components/comprometidos/Edit';
+import Show from './components/comprometidos/Show';
 import Pdf from './components/consulta/pdf';
 
 function App(props) {
@@ -43,7 +44,8 @@ function App(props) {
         isVerifying={isVerifying}
       />
       <Route path="/Login" component={Login} />
-      <Route path='/edit/:id' component={Comprometido} />
+      <Route path='/show/:id' component={Show} />
+      <Route path='/edit/:id' component={Edit} />
       <Route path="/Pdf" component={Pdf} />
     </Switch>
   );

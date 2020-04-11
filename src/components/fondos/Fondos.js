@@ -26,7 +26,6 @@ class Fondos extends Component {
       no_lici: '',
       importe: '',
       desc: '',
-      importe_l: '',
       beneficiario: '',
       realizo: '',
       fondos: [],
@@ -46,7 +45,6 @@ class Fondos extends Component {
     this.refs.no_lici.value="";
     this.refs.importe.value="";
     this.refs.desc.value="";
-    this.refs.importe_l.value="";
     this.refs.beneficiario.value="";
     this.refs.realizo.value="";
   }
@@ -60,7 +58,7 @@ class Fondos extends Component {
   onSubmit = (e) => {
     e.preventDefault();
 
-    const { fondo, fecha, tipo_doc, oficio_aut, no_oficio, no_lici, importe, desc, importe_l, beneficiario, realizo } = this.state;
+    const { fondo, fecha, tipo_doc, oficio_aut, no_oficio, no_lici, importe, desc, beneficiario, realizo } = this.state;
 
     this.ref.add({
       fondo,
@@ -71,7 +69,6 @@ class Fondos extends Component {
       no_lici,
       importe,
       desc,
-      importe_l ,
       beneficiario,
       realizo
     }).then((docRef) => {
@@ -84,7 +81,6 @@ class Fondos extends Component {
         no_lici: '',
         importe: '',
         desc: '',
-        importe_l: '',
         beneficiario: '',
         realizo: '',
       });
@@ -116,7 +112,7 @@ class Fondos extends Component {
     }
     today = yyyy + '-' + mm + '-' + dd;
 
-    const { fondo, fecha, tipo_doc, oficio_aut, no_oficio, no_lici, importe, desc, importe_l, beneficiario, realizo } = this.state;
+    const { fondo, fecha, tipo_doc, oficio_aut, no_oficio, no_lici, importe, desc, beneficiario, realizo } = this.state;
 
     const allowCustom = this.state.allowCustom;
 

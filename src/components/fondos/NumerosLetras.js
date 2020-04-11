@@ -143,22 +143,23 @@ const millon = (num, singular) => {
   return letraMillon;
 };
 
-export const NumberAsString = (num, centavos = false, currency) => {
+export const NumberAsString = (num, centavos = true, currency) => {
   currency = currency || {};
   let data = {
     numero: num,
     enteros: Math.floor(num),
     centavos: centavos ? (((Math.round(num * 100)) - (Math.floor(num) * 100))) : 0,
     letrasCentavos: '',
-    letrasMonedaPlural: currency.plural || 'PESOS 00/100 M.N.',
-    letrasMonedaSingular: currency.singular || 'PESO 00/100 M.N.',
-    letrasMonedaCentavoPlural: currency.centPlural || 'CENTAVOS/100 M.N.',
-    letrasMonedaCentavoSingular: currency.centSingular || 'CENTAVO/100 M. N.'
+    letrasMonedaPlural: currency.plural || 'PESOS ',
+    letrasMonedaSingular: currency.singular || 'PESO ',
+    letrasMonedaCentavoPlural: currency.centPlural || '/100 M.N.',
+    letrasMonedaCentavoSingular: currency.centSingular || '/100 M.N.'
   };
 
-  if (data.centavos > 0) {
+  if (data.centavos >= 0) {
+    console.log(data.centavos);
     let centavos = data.centavos === 1 ? Millones(data.centavos) + ' ' + data.letrasMonedaCentavoSingular : Millones(data.centavos) + ' ' + data.letrasMonedaCentavoPlural ;
-    data.letrasCentavos = 'CON ' + centavos;
+    data.letrasCentavos = '' + data.centavos + '/100 M.N.';
   }
 
 
