@@ -100,6 +100,22 @@ class Fondos extends Component {
 
   render() {
 
+    var cityRef = firebase.firestore().collection('fondos').doc('SF');
+
+  var transaction = firebase.firestore().runTransaction(t => {
+    return t.get(cityRef)
+        .then(doc => {
+          // Add one person to the city population
+          var newPopulation = doc.data().population + 1;
+          t.update(cityRef, { population: newPopulation });
+        });
+  }).then(result => {
+    console.log('Transaction success!');
+  }).catch(err => {
+    console.log('Transaction failure:', err);
+  });
+
+
     var today = new Date();
     var dd = today.getDate();
     var mm = today.getMonth()+1;
