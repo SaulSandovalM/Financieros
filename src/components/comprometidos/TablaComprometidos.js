@@ -5,43 +5,43 @@ import { Link } from 'react-router-dom';
 
 class TablaComprometidos extends Component {
   constructor() {
-  super();
-  this.ref = firebase.firestore().collection('fondos');
-  this.unsubscribe = null;
-  this.state = {
-    fondos: []
-  };
-}
+    super();
+    this.ref = firebase.firestore().collection('fondos');
+    this.unsubscribe = null;
+    this.state = {
+      fondos: []
+    };
+  }
 
-onCollectionUpdate = (querySnapshot) => {
-  const fondos = [];
-  querySnapshot.forEach((doc) => {
-    const { fondo, fecha, tipo_doc, oficio_aut, no_oficio, no_aut, no_lici, importe, desc, importe_l, beneficiario, realizo} = doc.data();
-    fondos.push({
-      key: doc.id,
-      doc, // DocumentSnapshot
-      fondo,
-      fecha,
-      tipo_doc,
-      oficio_aut,
-      no_oficio,
-      no_aut,
-      no_lici,
-      importe,
-      desc,
-      importe_l,
-      beneficiario,
-      realizo,
+  onCollectionUpdate = (querySnapshot) => {
+    const fondos = [];
+    querySnapshot.forEach((doc) => {
+      const { fondo, fecha, tipo_doc, oficio_aut, no_oficio, no_aut, no_lici, importe, desc, importe_l, beneficiario, realizo} = doc.data();
+      fondos.push({
+        key: doc.id,
+        doc, // DocumentSnapshot
+        fondo,
+        fecha,
+        tipo_doc,
+        oficio_aut,
+        no_oficio,
+        no_aut,
+        no_lici,
+        importe,
+        desc,
+        importe_l,
+        beneficiario,
+        realizo,
+      });
     });
-  });
-  this.setState({
-    fondos
- });
-}
+    this.setState({
+      fondos
+   });
+  }
 
-componentDidMount() {
-  this.unsubscribe = this.ref.onSnapshot(this.onCollectionUpdate);
-}
+  componentDidMount() {
+    this.unsubscribe = this.ref.onSnapshot(this.onCollectionUpdate);
+  }
 
   render() {
     return (
