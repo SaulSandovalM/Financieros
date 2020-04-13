@@ -17,7 +17,7 @@ render(){
                         <p>Monto</p><p>Letra</p>
     </div>
 <div class='concepto'>
-                        <p>Por concepto de Reposición de Fondo Revolvente.</p>
+                        <p>Por concepto de Reposición de Fbondo Revolvente.</p>
   </div>
 <div class='fecha'>
                     <p>Pachuca, Hgo., a</p>

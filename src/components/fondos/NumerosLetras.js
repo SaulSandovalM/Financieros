@@ -82,21 +82,21 @@ const Centenas = num => {
         return 'CIENTO ' + Decenas(decenas);
       return 'CIEN';
     case 2:
-      return 'DOSCIENTOS ' + Decenas(decenas);
+      return 'DOSCIENTOS' + Decenas(decenas);
     case 3:
-      return 'TRESCIENTOS ' + Decenas(decenas);
+      return 'TRESCIENTOS' + Decenas(decenas);
     case 4:
       return 'CUATROCIENTOS' + Decenas(decenas);
     case 5:
-      return 'QUINIENTOS ' + Decenas(decenas);
+      return 'QUINIENTOS' + Decenas(decenas);
     case 6:
-      return 'SEISCIENTOS ' + Decenas(decenas);
+      return 'SEISCIENTOS' + Decenas(decenas);
     case 7:
-      return 'SETECIENTOS ' + Decenas(decenas);
+      return 'SETECIENTOS' + Decenas(decenas);
     case 8:
-      return 'OCHOCIENTOS ' + Decenas(decenas);
+      return 'OCHOCIENTOS' + Decenas(decenas);
     case 9:
-      return 'NOVECIENTOS ' + Decenas(decenas);
+      return 'NOVECIENTOS' + Decenas(decenas);
     default:
       return Decenas(decenas);
   }
@@ -138,7 +138,7 @@ const Millones = num => {
 const millon = (num, singular) => {
   let letraMillon = singular ? 'UN MILLON' : 'MILLONES';
   if (num % 1000000 === 0) {
-    letraMillon = letraMillon + ' DE'
+    letraMillon = letraMillon + ' '
   }
   return letraMillon;
 };
@@ -150,8 +150,8 @@ export const NumberAsString = (num, centavos = true, currency) => {
     enteros: Math.floor(num),
     centavos: centavos ? (((Math.round(num * 100)) - (Math.floor(num) * 100))) : 0,
     letrasCentavos: '',
-    letrasMonedaPlural: currency.plural || 'PESOS ',
-    letrasMonedaSingular: currency.singular || 'PESO ',
+    letrasMonedaPlural: currency.plural || 'PESOS',
+    letrasMonedaSingular: currency.singular || 'PESO',
     letrasMonedaCentavoPlural: currency.centPlural || '/100 M.N.',
     letrasMonedaCentavoSingular: currency.centSingular || '/100 M.N.'
   };
