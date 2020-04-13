@@ -19,7 +19,6 @@ class Analitico extends Component {
 
   constructor() {
     super();
-    this.ref = firebase.firestore().collection('Analitico');
     this.state = {
       nfactura: '',
       fecha: '',

@@ -5,26 +5,53 @@ import './Comprometidos.css';
 class Comprometido extends Component {
   constructor(props) {
     super(props);
+    this.unsubscribe = null;
     this.state = {
       key: '',
       fondo: '',
       fecha: '',
-      tipo_doc: '',
-      oficio_aut: '',
-      no_oficio: '',
-      no_lici: '',
-      importe: '',
-      desc: '',
-      importe_l: '',
-      beneficiario: '',
       realizo: '',
-      prueba: ''
+      tipo_doc: '',
+      importe: '',
+
+      partida: '',
+      no_oficio: '',
+      no_proyecto: '',
+      importe_comp: '',
+      importe_l: '',
+      isr: '',
+      total: '',
+      fecha_comp: '',
+
+      comprometidos: []
     };
+  }
+
+  onCollectionUpdate = (querySnapshot) => {
+    const comprometidos = [];
+    querySnapshot.forEach((doc) => {
+      const { partida, presupuestal, no_proyecto, importe_comp, isr, total, fecha_comp } = doc.data();
+      comprometidos.push({
+        key: doc.id,
+        doc, // DocumentSnapshot
+        partida,
+        presupuestal,
+        no_proyecto,
+        importe_comp,
+        isr,
+        total,
+        fecha_comp
+      });
+    });
+    this.setState({
+      comprometidos
+   });
   }
 
   componentDidMount() {
     const ref = firebase.firestore().collection('fondos').doc(this.props.match.params.id);
-    console.log(ref)
+    const updateRef = firebase.firestore().collection('fondos').doc(this.props.match.params.id).collection('comprometidos');
+    this.unsubscribe = updateRef.onSnapshot(this.onCollectionUpdate);
     ref.get().then((doc) => {
       if (doc.exists) {
         const fondos = doc.data();
@@ -32,19 +59,20 @@ class Comprometido extends Component {
           key: doc.id,
           fondo: fondos.fondo,
           fecha: fondos.fecha,
-          tipo_doc: fondos.tipo_doc,
-          oficio_aut: fondos.oficio_aut,
-          no_oficio: fondos.no_oficio,
-          no_lici: fondos.no_lici,
-          importe: fondos.importe,
-          desc: fondos.desc,
-          importe_l: fondos.importe_l,
-          beneficiario: fondos.beneficiario,
           realizo: fondos.realizo,
-          prueba: fondos.prueba
+          tipo_doc: fondos.tipo_doc,
+          importe: fondos.importe,
+
+          partida: fondos.partida,
+          presupuestal: fondos.presupuestal,
+          no_proyecto: fondos.no_proyecto,
+          importe_comp: fondos.importe_comp,
+          isr: fondos.isr,
+          total: fondos.total,
+          fecha_comp: fondos.fecha_comp
         });
       } else {
-        console.log("No such document!");
+        console.log("No se encuentra documento");
       }
     });
   }
@@ -58,39 +86,28 @@ class Comprometido extends Component {
   onSubmit = (e) => {
     e.preventDefault();
 
-    const { fondo, fecha, tipo_doc, oficio_aut, no_oficio, no_lici, importe, desc, importe_l, beneficiario, realizo, prueba } = this.state;
+    const { partida, presupuestal, no_proyecto, importe_comp, isr, total, fecha_comp } = this.state;
 
-    const updateRef = firebase.firestore().collection('fondos').doc(this.state.key).collection('comproemtidos').doc();
+    const updateRef = firebase.firestore().collection('fondos').doc(this.props.match.params.id).collection('comprometidos').doc();
     updateRef.set({
-      fondo,
-      fecha,
-      tipo_doc,
-      oficio_aut,
-      no_oficio,
-      no_lici,
-      importe,
-      desc,
-      importe_l,
-      beneficiario,
-      realizo,
-      prueba
+      partida,
+      presupuestal,
+      no_proyecto,
+      importe_comp,
+      isr,
+      total,
+      fecha_comp
     }).then((docRef) => {
       this.setState({
-        key: '',
-        fondo: '',
-        fecha: '',
-        tipo_doc: '',
-        oficio_aut: '',
-        no_oficio: '',
-        no_lici: '',
-        importe: '',
-        desc: '',
+        partida: '',
+        presupuestal: '',
+        no_proyecto: '',
+        importe_comp: '',
         importe_l: '',
-        beneficiario: '',
-        realizo: '',
-        prueba: ''
+        isr: '',
+        total: '',
+        fecha_comp: ''
       });
-      this.props.history.push("/")
     })
     .catch((error) => {
       console.error("Error adding document: ", error);
@@ -130,59 +147,74 @@ class Comprometido extends Component {
 
           <div className="table-ed-2">
             <form onSubmit={this.onSubmit} style={{width: '90%'}}>
-              <div className="edit-tab-row">
-                <div className="tabla-edit-c" style={{fontFamily: 'Arial'}}> {/*select*/}
+              <div className="edit-tab-row-t">
+                <div className="tabla-edit-c" style={{fontFamily: 'Arial', color: '#FFF'}}> {/*select*/}
                   Partida
                 </div>
-                <div className="tabla-edit-c" style={{fontFamily: 'Arial'}}> {/*select*/}
+                <div className="tabla-edit-c" style={{fontFamily: 'Arial', color: '#FFF'}}> {/*select*/}
                   U. Presupuestal
                 </div>
-                <div className="tabla-edit-c" style={{fontFamily: 'Arial'}}> {/*select*/}
+                <div className="tabla-edit-c" style={{fontFamily: 'Arial', color: '#FFF'}}> {/*select*/}
                   No. de Proyecto
                 </div>
-                <div className="tabla-edit-c" style={{fontFamily: 'Arial'}}>
+                <div className="tabla-edit-c" style={{fontFamily: 'Arial', color: '#FFF'}}>
                   Importe
                 </div>
-                <div className="tabla-edit-c" style={{fontFamily: 'Arial'}}>
+                <div className="tabla-edit-c" style={{fontFamily: 'Arial', color: '#FFF'}}>
                   ISR
                 </div>
-                <div className="tabla-edit-c" style={{fontFamily: 'Arial'}}>
+                <div className="tabla-edit-c" style={{fontFamily: 'Arial', color: '#FFF'}}>
                   Total
                 </div>
-                <div className="tabla-edit-c" style={{fontFamily: 'Arial'}}>
+                <div className="tabla-edit-c" style={{fontFamily: 'Arial', color: '#FFF'}}>
                   Fecha
                 </div>
               </div>
-              <div className="edit-tab-row-2">
-                <div className="tabla-edit-c"> {/*select*/}
-                  <input name="prueba" value={this.state.prueba} onChange={this.onChange} ref="prueba" className="input-edi"/>
-                </div>
-                <div className="tabla-edit-c"> {/*select*/}
-                  <input className="input-edi" />
-                </div>
-                <div className="tabla-edit-c"> {/*select*/}
-                  <input className="input-edi" />
-                </div>
-                <div className="tabla-edit-c">
-                  <input className="input-edi" />
-                </div>
-                <div className="tabla-edit-c">
-                  <input className="input-edi" />
-                </div>
-                <div className="tabla-edit-c">
-                  <input className="input-edi" />
-                </div>
-                <div className="tabla-edit-c">
-                  <input className="input-edi" />
-                </div>
+              <div>
+                {this.state.comprometidos.map(comprometidos =>
+                  <div>
+                    <div className="products-al">
+                      <div className="tabla-edit-c">{comprometidos.partida}</div>
+                      <div className="tabla-edit-c">{comprometidos.presupuestal}</div>
+                      <div className="tabla-edit-c">{comprometidos.no_proyecto}</div>
+                      <div className="tabla-edit-c">{comprometidos.importe_comp}</div>
+                      <div className="tabla-edit-c">{comprometidos.isr}</div>
+                      <div className="tabla-edit-c">{comprometidos.total}</div>
+                      <div className="tabla-edit-c">{comprometidos.fecha_comp}</div>
+                    </div>
+                  </div>
+                )}
               </div>
               <div className="edit-tab-row-2">
                 <div className="tabla-edit-c"> {/*select*/}
+                  <input name="partida" onChange={this.onChange} ref="partida" className="input-edi"/>
+                </div>
+                <div className="tabla-edit-c"> {/*select*/}
+                  <input name="presupuestal" onChange={this.onChange} ref="presupuestal" className="input-edi"/>
+                </div>
+                <div className="tabla-edit-c"> {/*select*/}
+                  <input name="no_proyecto" onChange={this.onChange} ref="no_proyecto" className="input-edi"/>
+                </div>
+                <div className="tabla-edit-c">
+                  <input name="importe_comp" onChange={this.onChange} ref="importe_comp" className="input-edi"/>
+                </div>
+                <div className="tabla-edit-c">
+                  <input name="isr" onChange={this.onChange} ref="isr" className="input-edi"/>
+                </div>
+                <div className="tabla-edit-c">
+                  <input name="total" onChange={this.onChange} ref="total" className="input-edi"/>
+                </div>
+                <div className="tabla-edit-c">
+                  <input name="fecha_comp" onChange={this.onChange} ref="fecha_comp" className="input-edi"/>
+                </div>
+              </div>
+              <div className="edit-tab-row-2">
+                <div className="tabla-edit-c">
                   Total
                 </div>
-                <div className="tabla-edit-c"> {/*select*/}
+                <div className="tabla-edit-c">
                 </div>
-                <div className="tabla-edit-c"> {/*select*/}
+                <div className="tabla-edit-c">
                 </div>
                 <div className="tabla-edit-c">
                   <input name="importe" value={this.state.importe} onChange={this.onChange} className="input-edi" disabled/>
