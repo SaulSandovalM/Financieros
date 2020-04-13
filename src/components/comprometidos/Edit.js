@@ -13,7 +13,6 @@ class Comprometido extends Component {
       realizo: '',
       tipo_doc: '',
       importe: '',
-
       partida: '',
       no_oficio: '',
       no_proyecto: '',
@@ -22,7 +21,6 @@ class Comprometido extends Component {
       isr: '',
       total: '',
       fecha_comp: '',
-
       comprometidos: []
     };
   }
@@ -62,7 +60,6 @@ class Comprometido extends Component {
           realizo: fondos.realizo,
           tipo_doc: fondos.tipo_doc,
           importe: fondos.importe,
-
           partida: fondos.partida,
           presupuestal: fondos.presupuestal,
           no_proyecto: fondos.no_proyecto,
@@ -143,8 +140,6 @@ class Comprometido extends Component {
               <input name="importe" value={this.state.importe} onChange={this.onChange} className="height-ct" disabled/>
             </div>
           </div>
-
-
           <div className="table-ed-2">
             <form onSubmit={this.onSubmit} style={{width: '90%'}}>
               <div className="edit-tab-row-t">
@@ -234,7 +229,6 @@ class Comprometido extends Component {
             </form>
           </div>
         </div>
-
       </div>
     );
   }

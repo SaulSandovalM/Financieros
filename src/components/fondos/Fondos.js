@@ -190,9 +190,15 @@ class Fondos extends Component {
                   <label for="importe" className="itc" style={{fontFamily: 'Arial'}}>Importe:</label>
                   <NumericTextBox format="c2" min={0} width="100%" borderColor="rgba(0,0,0,0.42)" name="importe" value={importe} onChange={this.onChange} ref="importe" required/>
                 </div>
-                <div className="form-content-5">
-                  <label for="importe_l" className="itc" style={{fontFamily: 'Arial'}}>Importe letra:</label>
-                  <input className="border-m" style={{borderColor: 'rgba(0,0,0,0.42)'}} name="importe_l" value={(NumberAsString(importe))} onChange={this.onChange} required ref="importe_l"/>
+                <div className="form-content-5 hide">
+                  <label for="importe" className="itc" style={{fontFamily: 'Arial'}}>Importe:</label>
+                  <NumericTextBox format="c2" min={0} width="100%" borderColor="rgba(0,0,0,0.42)" name="importe" value={importe} onChange={this.onChange} ref="importe" required/>
+                </div>
+              </div>
+              <div className="form-container">
+                <div className="form-content-desc-100">
+                <label for="importe_l" className="itc" style={{fontFamily: 'Arial'}}>Importe letra:</label>
+                <input className="border-m" style={{borderColor: 'rgba(0,0,0,0.42)'}} name="importe_l" value={(NumberAsString(importe))} onChange={this.onChange} required ref="importe_l"/>
                 </div>
               </div>
               {/*seccion 5*/}
