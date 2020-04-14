@@ -87,6 +87,7 @@ class Analitico extends Component {
   }
 
   render() {
+
     var today = new Date();
     var dd = today.getDate();
     var mm = today.getMonth()+1;
@@ -99,6 +100,7 @@ class Analitico extends Component {
     }
     today = yyyy + '-' + mm + '-' + dd;
     const { nfactura, fecha, proveedor, partida, importe, isr, iva, total, municipio, area } = this.state;
+
     return (
       <div className="space-nav">
         <div>
@@ -124,6 +126,85 @@ class Analitico extends Component {
           <input name="importe" value={this.state.importe} onChange={this.onChange} className="height-ct" disabled/>
         </div>
 
+        <div className="tab-ana">
+          <div className="prin">
+            No Factura
+          </div>
+          <div className="same">
+            Fecha
+          </div>
+          <div className="prin">
+            Proveedor
+          </div>
+          <div className="same">
+            Partida
+          </div>
+          <div className="same">
+            Importe
+          </div>
+          <div className="same">
+            Isr
+          </div>
+          <div className="same">
+            Iva
+          </div>
+          <div className="same">
+            Total
+          </div>
+          <div className="same">
+            Municipio
+          </div>
+          <div className="prin">
+            Area
+          </div>
+        </div>
+
+        <div className="tab-ana2">
+          <div className="prin">
+            <input className="inp-ana" name="nfactura" value={nfactura} onChange={this.onChange} ref="nfactura" required/>
+          </div>
+          <div className="same">
+            <input className="inp-ana" type="date" name="fecha" value={fecha} onChange={this.onChange} ref="fecha" required/>
+          </div>
+          <div className="prin">
+            <input className="inp-ana"/>
+          </div>
+          <div className="same">
+            <input className="inp-ana"/>
+          </div>
+          <div className="same">
+            <input className="inp-ana"/>
+          </div>
+          <div className="same">
+            <input className="inp-ana"/>
+          </div>
+          <div className="same">
+            <input className="inp-ana"/>
+          </div>
+          <div className="same">
+            <input className="inp-ana"/>
+          </div>
+          <div className="same">
+            <input className="inp-ana"/>
+          </div>
+          <div className="prin">
+            <input className="inp-ana"/>
+          </div>
+        </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         <form className="fondos-back p-top" onSubmit={this.onSubmit}>
           <div className="fondos-container">
           {/*seccion 1*/}
@@ -134,7 +215,7 @@ class Analitico extends Component {
               </div>
               <div className="form-content">
                 <label for="fecha" className="itc" style={{fontFamily: 'Arial'}}>Fecha:</label>
-                <input type="date" className="border-m"  name="fecha" value={fecha} onChange={this.onChange} ref="fecha" required/>
+                <input type="date" className="border-m" name="fecha" value={fecha} onChange={this.onChange} ref="fecha" required/>
               </div>
             </div>
             {/*seccion   2 proveedor*/}

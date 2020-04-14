@@ -112,6 +112,7 @@ class Comprometido extends Component {
   }
 
   render() {
+
     return (
       <div class="container-edit">
         <div className="comp-container">
@@ -137,7 +138,7 @@ class Comprometido extends Component {
             </div>
             <div className="edit-row">
               <label for="importe" className="tipo-tw" style={{fontFamily: 'Arial'}}>Importe:</label>
-              <input name="importe" value={this.state.importe} onChange={this.onChange} className="height-ct" disabled/>
+              <input name="importe" value={'$'+this.state.importe} onChange={this.onChange} className="height-ct" disabled/>
             </div>
           </div>
           <div className="table-ed-2">
@@ -194,7 +195,7 @@ class Comprometido extends Component {
                   <input name="importe_comp" onChange={this.onChange} ref="importe_comp" className="input-edi"/>
                 </div>
                 <div className="tabla-edit-c">
-                  <input name="isr" onChange={this.onChange} ref="isr" className="input-edi"/>
+                  <input name="isr" ref="isr" className="input-edi" id="spTotal"/>
                 </div>
                 <div className="tabla-edit-c">
                   <input name="total" onChange={this.onChange} ref="total" className="input-edi"/>
