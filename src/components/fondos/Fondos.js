@@ -55,15 +55,14 @@ class Fondos extends Component {
     this.setState(state);
   }
 
-  componentDidMount() {
-    return firebase.firestore().collection('contador').get().then(snapshot => {
-      let total_count = 0;
-      snapshot.forEach(doc => {
-          total_count += doc.data().storyCount;
-      });
-      console.log(total_count);
-    });
-  }
+  // componentDidMount() {
+  //   return firebase.firestore().collection('contador').get().then(snapshot => {
+  //     let total_count = 0;
+  //     snapshot.forEach(doc => {
+  //       total_count += doc.data().storyCount;
+  //     });
+  //   });
+  // }
 
   onSubmit = (e) => {
     e.preventDefault();
@@ -94,17 +93,17 @@ class Fondos extends Component {
         beneficiario: '',
         realizo: '',
       });
-      const statsRef = firebase.firestore().collection('contador').doc('--stats--');
+      // const statsRef = firebase.firestore().collection('contador').doc('--stats--');
+      //
+      // const increment = firebase.firestore.FieldValue.increment(1);
+      //
+      // const batch = firebase.firestore().batch();
+      // const storyRef = firebase.firestore().collection('contador').doc(`${Math.random()}`);
+      // batch.set(storyRef, { title: 'Nuevo Fondo!' });
+      // batch.set(statsRef, { storyCount: increment }, { merge: true });
+      // batch.commit();
 
-      const increment = firebase.firestore.FieldValue.increment(1);
-
-      const batch = firebase.firestore().batch();
-      const storyRef = firebase.firestore().collection('contador').doc(`${Math.random()}`);
-      batch.set(storyRef, { title: 'Nuevo Fondo!' });
-      batch.set(statsRef, { storyCount: increment }, { merge: true });
-      batch.commit();
-
-      this.props.history.push('Comprometidos')
+      this.props.history.push(`/edit/${this.state.fondos.key}`)
     })
     .catch((error) => {
       console.error("Error adding document: ", error);

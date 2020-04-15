@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
 import firebase from '../../Firebase';
-import { AutoComplete } from '@progress/kendo-react-dropdowns';
-import CurrencyFormat from 'react-currency-format';
 import './Analitico.css';
-import '@progress/kendo-theme-material/dist/all.css';
 import { Link } from 'react-router-dom';
 
 class Analitico extends Component {

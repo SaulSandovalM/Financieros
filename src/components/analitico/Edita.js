@@ -1,7 +1,6 @@
  import React, { Component } from 'react';
 import firebase from '../../Firebase';
 import { AutoComplete } from '@progress/kendo-react-dropdowns';
-import CurrencyFormat from 'react-currency-format';
 import './Analitico.css';
 import '@progress/kendo-theme-material/dist/all.css';
 
@@ -24,12 +23,11 @@ class Edita extends Component {
       realizo: '',
       tipo_doc: '',
       importe: '',
-
       nfactura: '',
-      fecha: '',
+      fechaa: '',
       proveedor: '',
       partida: '',
-      importe: '',
+      importea: '',
       isr: '',
       iva: '',
       total: '',
@@ -42,15 +40,15 @@ class Edita extends Component {
   onCollectionUpdate = (querySnapshot) => {
     const analitico = [];
     querySnapshot.forEach((doc) => {
-      const { nfactura, fecha, proveedor, partida, importe, isr, iva, total, municipio, area } = doc.data();
+      const { nfactura, fechaa, proveedor, partida, importea, isr, iva, total, municipio, area } = doc.data();
       analitico.push({
         key: doc.id,
         doc, // DocumentSnapshot
         nfactura,
-        fecha,
+        fechaa,
         proveedor,
         partida,
-        importe,
+        importea,
         isr,
         iva,
         total,
@@ -77,12 +75,11 @@ class Edita extends Component {
           realizo: fondos.realizo,
           tipo_doc: fondos.tipo_doc,
           importe: fondos.importe,
-
           nfactura: fondos.nfactura,
-          fecha: fondos.fecha,
+          fechaa: fondos.fechaa,
           proveedor: fondos.proveedor,
           partida: fondos.partida,
-          importe: fondos.importe,
+          importea: fondos.importea,
           isr: fondos.isr,
           iva: fondos.iva,
           total: fondos.total,
@@ -104,15 +101,15 @@ class Edita extends Component {
   onSubmit = (e) => {
     e.preventDefault();
 
-    const { nfactura, fecha, proveedor, partida, importe, isr, iva, total, municipio, area } = this.state;
+    const { nfactura, fechaa, proveedor, partida, importea, isr, iva, total, municipio, area } = this.state;
 
     const updateRef = firebase.firestore().collection('fondos').doc(this.props.match.params.id).collection('analitico').doc();
     updateRef.set({
       nfactura,
-      fecha,
+      fechaa,
       proveedor,
       partida,
-      importe,
+      importea,
       isr,
       iva,
       total,
@@ -121,10 +118,10 @@ class Edita extends Component {
     }).then((docRef) => {
       this.setState({
         nfactura: '',
-        fecha: '',
+        fechaa: '',
         proveedor: '',
         partida: '',
-        importe: '',
+        importea: '',
         isr: '',
         iva: '',
         total: '',
@@ -150,7 +147,7 @@ class Edita extends Component {
       mm = '0' + mm
     }
     today = yyyy + '-' + mm + '-' + dd;
-    const { nfactura, fecha, proveedor, partida, importe, isr, iva, total, municipio, area } = this.state;
+    const { nfactura, fecha, proveedor, partida, importea, isr, iva, total, municipio, area } = this.state;
 
     return (
       <div className="space-nav">
@@ -215,10 +212,10 @@ class Edita extends Component {
             <div>
               <div className="tab-ana-con">
                 <div className="prin-2">{analitico.nfactura}</div>
-                <div className="same-2">{analitico.fecha}</div>
+                <div className="same-2">{analitico.fechaa}</div>
                 <div className="prin-2">{analitico.proveedor}</div>
                 <div className="same-2">{analitico.partida}</div>
-                <div className="same-2">{analitico.importe}</div>
+                <div className="same-2">{analitico.importea}</div>
                 <div className="same-2">{analitico.isr}</div>
                 <div className="same-2">{analitico.iva}</div>
                 <div className="same-2">{analitico.total}</div>
@@ -229,36 +226,69 @@ class Edita extends Component {
           )}
         </div>
 
-        <form onSubmit={this.onSubmit}>
+        <div className="tab-ana2">
+          <div className="prin-2">
+            <input className="inp-ana" value="Total" disabled/>
+          </div>
+          <div className="same-2">
+            <input className="inp-ana" value="contador" disabled/>
+          </div>
+          <div className="prin-2">
+            <input className="inp-ana" disabled/>
+          </div>
+          <div className="same-2">
+            <input className="inp-ana" disabled ref="partida"/>
+          </div>
+          <div className="same-2">
+            <input className="inp-ana" name="importe" value={importea} onChange={this.onChange} ref="importe" disabled/>
+          </div>
+          <div className="same-2">
+            <input className="inp-ana" name="isr" value={isr} onChange={this.onChange} ref="isr" disabled/>
+          </div>
+          <div className="same-2">
+            <input className="inp-ana" value="sumar" disabled/>
+          </div>
+          <div className="same-2">
+            <input className="inp-ana" name="total" value={importea} onChange={this.onChange} disabled ref="total"/>
+          </div>
+          <div className="same-2">
+            <input className="inp-ana" name="municipio" value={municipio} onChange={this.onChange} disabled ref="municipio"/>
+          </div>
+          <div className="prin-2">
+            <input className="inp-ana" name="area" value={area} onChange={this.onChange} disabled ref="area"/>
+          </div>
+        </div>
+
+        <form onSubmit={this.onSubmit} className="add-tab-a">
           <div className="tab-ana2">
-            <div className="prin">
+            <div className="prin-2">
               <input className="inp-ana" name="nfactura" value={nfactura} onChange={this.onChange} ref="nfactura" required/>
             </div>
-            <div className="same">
+            <div className="same-2">
               <input className="inp-ana" type="date" name="fecha" value={fecha} onChange={this.onChange} ref="fecha" required/>
             </div>
-            <div className="prin">
+            <div className="prin-2">
               <input className="inp-ana" name="proveedor" value={proveedor} onChange={this.onChange} required ref="proveedor"/>
             </div>
-            <div className="same">
+            <div className="same-2">
               <input className="inp-ana" name="partida" value={partida} onChange={this.onChange} required ref="partida"/>
             </div>
-            <div className="same">
-              <input className="inp-ana" name="importe" value={importe} onChange={this.onChange} ref="importe" required/>
+            <div className="same-2">
+              <input className="inp-ana" name="importe" value={importea} onChange={this.onChange} ref="importe" required disabled/>
             </div>
-            <div className="same">
+            <div className="same-2">
               <input className="inp-ana" name="isr" value={isr} onChange={this.onChange} ref="isr" required/>
             </div>
-            <div className="same">
+            <div className="same-2">
               <input className="inp-ana" name="iva" value={iva} onChange={this.onChange} ref="iva" required/>
             </div>
-            <div className="same">
+            <div className="same-2">
               <input className="inp-ana" name="total" value={total} onChange={this.onChange} required ref="total"/>
             </div>
-            <div className="same">
+            <div className="same-2">
               <input className="inp-ana" name="municipio" value={municipio} onChange={this.onChange} required ref="municipio"/>
             </div>
-            <div className="prin">
+            <div className="prin-2">
               <input className="inp-ana" name="area" value={area} onChange={this.onChange} required ref="area"/>
             </div>
           </div>
