@@ -8,6 +8,7 @@ import Analitico from './components/analitico/Analitico';
 import TablaComprometidos from './components/comprometidos/TablaComprometidos';
 import Consulta from './components/consulta/Consulta';
 import Edit from './components/comprometidos/Edit';
+import Edita from './components/analitico/Edita';
 import Show from './components/comprometidos/Show';
 import Pdf from './components/consulta/pdf';
 
@@ -46,6 +47,7 @@ function App(props) {
       <Route path="/Login" component={Login} />
       <Route path='/show/:id' component={Show} />
       <Route path='/edit/:id' component={Edit} />
+      <Route path='/edita/:id' component={Edita} />
       <Route path="/Pdf" component={Pdf} />
     </Switch>
   );
