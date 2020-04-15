@@ -55,19 +55,10 @@ class Fondos extends Component {
     this.setState(state);
   }
 
-  // componentDidMount() {
-  //   return firebase.firestore().collection('contador').get().then(snapshot => {
-  //     let total_count = 0;
-  //     snapshot.forEach(doc => {
-  //       total_count += doc.data().storyCount;
-  //     });
-  //   });
-  // }
-
   onSubmit = (e) => {
     e.preventDefault();
 
-    const { fondo, fecha, tipo_doc, oficio_aut, no_oficio, no_lici, importe, desc, beneficiario, realizo } = this.state;
+    const { fondo, fecha, tipo_doc, oficio_aut, no_oficio, no_lici, importe, importe_l, desc, beneficiario, realizo } = this.state;
 
     this.ref.add({
       fondo,
@@ -77,6 +68,7 @@ class Fondos extends Component {
       no_oficio,
       no_lici,
       importe,
+
       desc,
       beneficiario,
       realizo,
@@ -89,6 +81,7 @@ class Fondos extends Component {
         no_oficio: '',
         no_lici: '',
         importe: '',
+
         desc: '',
         beneficiario: '',
         realizo: '',
