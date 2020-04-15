@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import firebase from '../../Firebase';
 import { Link } from 'react-router-dom';
+import { NumberAsString } from '../fondos/NumerosLetras.js';
 
 class Show extends Component {
   constructor(props) {

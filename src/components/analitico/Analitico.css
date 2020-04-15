@@ -39,3 +39,56 @@
 .itc {
   font-weight: bold;
 }
+.tab-ana {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  border: 1px solid #000;
+  margin-top: 40px;
+}
+.tab-ana-con {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  border: 1px solid #000;
+}
+.tab-ana2 {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  border: 1px solid #000;
+}
+.prin {
+  width: 20%;
+  height: 50px;
+  background-color: #092432;
+  color: white;
+  text-align: center;
+  border-top: 1px solid #000;
+}
+.same {
+  width: 6.6%;
+  height: 50px;
+  background-color: #092432;
+  color: white;
+  text-align: center;
+  border-top: 1px solid #000;
+}
+.prin-2 {
+  width: 20%;
+  height: 25px;
+  color: black;
+  text-align: center;
+  border-top: 1px solid #000;
+}
+.same-2 {
+  width: 6.6%;
+  height: 25px;
+  color: black;
+  text-align: center;
+  border-top: 1px solid #000;
+}
+.inp-ana {
+  width: 100%;
+  height: 20px;
+}
