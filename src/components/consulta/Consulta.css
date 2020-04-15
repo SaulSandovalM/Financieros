@@ -116,53 +116,147 @@
   margin-left: 15%;
 }
 /* stilos de pdf*/
+p{
+  font-size: 15px;
+  font-family: sans-serif;
+
+}
 .dad{
     height: 100%;
     width: 100%;
+
  }
 .subdad{
       padding-left: 15%;
-      width: 70%;
+      width: 80%;
 }
 
 .bueno{
-  width: 100%;
+
   display:flex;
   justify-content: flex-end;
   flex-direction: row;
+  padding-top: 100px;
 }
 .recibi{
-  padding-top: 20px;
+  padding-top: 150px;
+
+
 }
+/*
 .monto{
   display:flex;
   justify-content: space-between;
   flex-direction:row;
-  width: 10%;
+  width: 100%;
+  padding-top: .5PX;
 }
+*/
 .concepto{
-
+          padding-top: 50px;
 }
 .fecha{
       display:flex;
       justify-content:flex-end;
       flex-direction: row;
+
+
 }
 .refe{
         display: flex;
         justify-content:center;
         flex-direction:row;
+        text-align:center;
+        padding-top: 100px;
 }
 .firma-dad{
           width: 100%;
           display:flex;
           justify-content:center;
           flex-direction:row;
-          padding-top: 100px;
+          padding-top: 70px;
+
+
 
 
 }
 .firma-raya{
       border-top: 1px solid black;
-      width: 30%;
+      width: 70%;
+        text-align:center;
 }
+@media print {
+  .print-source {
+    display: block;
+    background-color: white;
+  }
+}
+.print-source {
+  display: none;
+  background-color:#fff;
+
+}
+body > .print-source {
+  display: block;
+  font-family: sans-serif;
+
+}
+/*boton*/
+.bont_imprimir{
+  height: 30px;
+  margin-right:15px;
+  background: #092432;
+  font-weight: bold;
+  font-weight: bold;
+  font-size: 20px;
+  color: #FFF;
+}
+/*pppdf*/
+.pppdf-dad{
+            height: 100%;
+            width: 100%;
+}
+.pppdf-subdad{
+            padding-left: 15%;
+            width: 80%;
+
+}
+.direccion{
+          padding-left:0px;
+
+
+}
+.no-oficio{
+  display:flex;
+  justify-content: flex-end;
+  flex-direction: row;
+  padding-top: 50px;
+
+}
+.prensente{
+          padding-top: 45px;
+          padding-left:0px;
+}
+.añadido{
+  display:flex;
+  justify-content: flex-end;
+  flex-direction: row;
+  padding-top:10px;
+
+
+}
+.texto-ofi{
+    text-align: justify;
+    padding-top: 20px;
+
+
+}
+.ccp .text{
+  padding-top:150px;
+  font-size: 8px;
+
+}
+.atte{
+      padding-top: 20px;
+      text-align: center;
+    }
