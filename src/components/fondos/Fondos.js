@@ -58,7 +58,7 @@ class Fondos extends Component {
   onSubmit = (e) => {
     e.preventDefault();
 
-    const { fondo, fecha, tipo_doc, oficio_aut, no_oficio, no_lici, importe, importe_l, desc, beneficiario, realizo } = this.state;
+    const { fondo, fecha, tipo_doc, oficio_aut, no_oficio, no_lici, importe, desc, beneficiario, realizo } = this.state;
 
     this.ref.add({
       fondo,
@@ -164,7 +164,7 @@ class Fondos extends Component {
                 </div>
                 <div className="form-content">
                   <label for="no_lici" className="itc" style={{fontFamily: 'Arial'}}>No. de Licitacion:</label>
-                  <Input style={{width: '100%', borderColor: 'rgba(0,0,0,0.42)'}} type="number" allowCustom={allowCustom} name="no_lici" value={no_lici} onChange={this.onChange} required ref="no_lici"/>
+                  <Input style={{width: '100%', borderColor: 'rgba(0,0,0,0.42)'}} type="text" allowCustom={allowCustom} name="no_lici" value={no_lici} onChange={this.onChange} ref="no_lici"/>
                 </div>
               </div>
               {/*seccion 4*/}
