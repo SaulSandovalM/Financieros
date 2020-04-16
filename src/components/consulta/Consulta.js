@@ -47,8 +47,8 @@ componentDidMount() {
 
   render() {
     return (
-      <div className="space-nav">
-        <div className="App" style={{height: '100%'}}>
+      <div className="cent-consul">
+        <div className="App">
           <h2 className="title" style={{fontFamily: 'Arial'}}>Consulta</h2>
           <div className="products-al">
             <div className="a-row-t" style={{fontFamily: 'Arial'}}>Fondos</div>

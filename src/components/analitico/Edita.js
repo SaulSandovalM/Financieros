@@ -148,8 +148,8 @@ class Edita extends Component {
     const { nfactura, fecha, proveedor, partida, importea, isr, iva, total, municipio, area } = this.state;
 
     return (
-      <div className="space-nav">
-        <div>
+      <div className="cent-ana-e">
+        <div style={{width: '90%'}}>
         <h2 className="title" style={{fontFamily: 'Arial'}}>Analitico de Fondos</h2>
         <div className="edit-row-a title p-top">
           <label for="fondo" className="tipo-tw" style={{fontFamily: 'Arial'}}>Fondos:</label>

@@ -129,8 +129,8 @@ class Fondos extends Component {
     const allowCustom = this.state.allowCustom;
 
     return (
-      <div className="space-nav">
-        <div>
+      <div className="cen-cont">
+        <div style={{width: '80%'}}>
         <h2 className="title" style={{fontFamily: 'Arial'}}>Registro de fondos</h2>
           <form className="fondos-back" onSubmit={this.onSubmit}>
             <div className="fondos-container">

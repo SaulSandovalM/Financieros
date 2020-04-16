@@ -10,6 +10,10 @@
   justify-content:space-between;
   width: 100%;
 }
+.cent-consul {
+  display: flex;
+  justify-content: center;
+}
 .col-a {
   display: flex;
   margin: 50px;
@@ -64,9 +68,6 @@
   justify-content:center ;
   flex-direction:row;
 
-}
-.App {
-  padding: 30px;
 }
 .products-al {
   display: flex;

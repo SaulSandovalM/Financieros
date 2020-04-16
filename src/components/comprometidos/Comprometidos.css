@@ -50,8 +50,13 @@
   justify-content:center ;
   flex-direction:row;
 }
+.cent-compro {
+  display: flex;
+  justify-content: center;
+}
 .App {
   padding: 30px;
+  width: 85%;
 }
 .products-al {
   display: flex;
@@ -64,10 +69,12 @@
 }
 /*EditarComprometidos*/
 .container-edit {
-  padding-left: 15%;
+  display: flex;
+  justify-content: center;
+  width: 100%;
 }
 .comp-container {
-  width: 100%;
+  width: 90%;
 }
 .edit-com-comp {
   display: flex;
@@ -104,6 +111,7 @@
   display: flex;
   flex-direction: row;
   justify-content: center;
+  width: 100%;
 }
 .edit-tab-row-2 {
   width: 100%;

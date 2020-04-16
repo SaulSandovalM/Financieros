@@ -142,7 +142,7 @@ class Comprometido extends Component {
             </div>
           </div>
           <div className="table-ed-2">
-            <form onSubmit={this.onSubmit} style={{width: '90%'}}>
+            <form onSubmit={this.onSubmit} style={{width: '100%'}}>
               <div className="edit-tab-row-t">
                 <div className="tabla-edit-c" style={{fontFamily: 'Arial', color: '#FFF'}}> {/*select*/}
                   Partida

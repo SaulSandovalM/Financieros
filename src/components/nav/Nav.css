@@ -4,7 +4,6 @@
 	left: 0;
 	width: 15%;
 	background: #092432;
-	min-height: 100vh;
 	z-index: 1;
 }
 .navbar-navigation {
@@ -16,7 +15,6 @@
 }
 .navbar-left {
 	height: 100%;
-	padding: 0 1rem;
 	display: flex;
 	flex-direction: row;
 	justify-content: left;
@@ -28,6 +26,7 @@
 .nav-col {
 	display: flex;
 	flex-direction: column;
+	margin-top: 50px;
 }
 .nav-t {
 	color: #FFF;

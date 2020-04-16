@@ -84,8 +84,10 @@
 .title {
   margin-left: 50px;
 }
-.space-nav {
-  margin-left: 15%;
+.cen-cont {
+  width: 100%;
+  justify-content: center;
+  display: flex;
 }
 .bt-s1 {
   height: 30px;
