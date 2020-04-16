@@ -12,6 +12,7 @@ import Edita from './components/analitico/Edita';
 import Show from './components/comprometidos/Show';
 import Pdf from './components/consulta/pdf';
 import Pppdf from './components/consulta/pppdf'
+import Frpdf from './components/consulta/frpdf';
 
 function App(props) {
   const { isAuthenticated, isVerifying } = props;
@@ -52,6 +53,7 @@ function App(props) {
       <Route path="/Pdf" component={Pdf} />
       <Route path="/Pdf/:id" component={Pdf} />
     <Route path="/Pppdf" component={Pppdf} />
+    <Route path="/Frpdf" component={Frpdf}/>
     </Switch>
 
 
