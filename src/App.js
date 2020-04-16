@@ -50,7 +50,6 @@ function App(props) {
       <Route path='/show/:id' component={Show} />
       <Route path='/edit/:id' component={Edit} />
       <Route path='/edita/:id' component={Edita} />
-      <Route path="/Pdf" component={Pdf} />
       <Route path="/Pdf/:id" component={Pdf} />
     <Route path="/Pppdf" component={Pppdf} />
     <Route path="/Frpdf" component={Frpdf}/>
