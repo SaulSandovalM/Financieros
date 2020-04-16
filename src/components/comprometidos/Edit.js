@@ -182,29 +182,6 @@ class Comprometido extends Component {
                 )}
               </div>
               <div className="edit-tab-row-2">
-                <div className="tabla-edit-c"> {/*select*/}
-                  <input name="partida" onChange={this.onChange} ref="partida" className="input-edi"/>
-                </div>
-                <div className="tabla-edit-c"> {/*select*/}
-                  <input name="presupuestal" onChange={this.onChange} ref="presupuestal" className="input-edi"/>
-                </div>
-                <div className="tabla-edit-c"> {/*select*/}
-                  <input name="no_proyecto" onChange={this.onChange} ref="no_proyecto" className="input-edi"/>
-                </div>
-                <div className="tabla-edit-c">
-                  <input name="importe_comp" onChange={this.onChange} ref="importe_comp" className="input-edi"/>
-                </div>
-                <div className="tabla-edit-c">
-                  <input name="isr" ref="isr" className="input-edi" id="spTotal"/>
-                </div>
-                <div className="tabla-edit-c">
-                  <input name="total" onChange={this.onChange} ref="total" className="input-edi"/>
-                </div>
-                <div className="tabla-edit-c">
-                  <input name="fecha_comp" onChange={this.onChange} ref="fecha_comp" className="input-edi"/>
-                </div>
-              </div>
-              <div className="edit-tab-row-2">
                 <div className="tabla-edit-c">
                   Total
                 </div>
@@ -222,6 +199,68 @@ class Comprometido extends Component {
                   <input name="importe" value={this.state.importe} onChange={this.onChange} className="input-edi" disabled/>
                 </div>
                 <div className="tabla-edit-c">
+                </div>
+              </div>
+              <div className="edit-tab-row-2">
+                <div className="tabla-edit-c"> {/*select*/}
+                  <select name="partida" onChange={this.onChange} ref="partida" className="input-edi">
+                    <option name="partida"></option>
+                  </select>
+                </div>
+                <div className="tabla-edit-c"> {/*select*/}
+                  <select name="presupuestal" onChange={this.onChange} ref="presupuestal" className="input-edi">
+                    <option name="presupuestal"></option>
+                    <option name="presupuestal">2</option>
+                    <option name="presupuestal">3</option>
+                    <option name="presupuestal">4</option>
+                    <option name="presupuestal">5</option>
+                    <option name="presupuestal">6</option>
+                    <option name="presupuestal">7</option>
+                    <option name="presupuestal">8</option>
+                    <option name="presupuestal">9</option>
+                    <option name="presupuestal">10</option>
+                    <option name="presupuestal">11</option>
+                    <option name="presupuestal">12</option>
+                    <option name="presupuestal">13</option>
+                    <option name="presupuestal">14</option>
+                    <option name="presupuestal">15</option>
+                    <option name="presupuestal">16</option>
+                    <option name="presupuestal">17</option>
+                    <option name="presupuestal">18</option>
+                    <option name="presupuestal">20</option>
+                    <option name="presupuestal">21</option>
+                    <option name="presupuestal">22</option>
+                    <option name="presupuestal">23</option>
+                    <option name="presupuestal">24</option>
+                  </select>
+                </div>
+                <div className="tabla-edit-c"> {/*select*/}
+                  <select name="no_proyecto" onChange={this.onChange} ref="no_proyecto" className="input-edi">
+                    <option name="no_proyecto"></option>
+                    <option name="no_proyecto">U027 425</option>
+                    <option name="no_proyecto">U029 425</option>
+                    <option name="no_proyecto">U027 1208</option>
+                    <option name="no_proyecto">U029 1208</option>
+                    <option name="no_proyecto">U027 1860</option>
+                    <option name="no_proyecto">U029 1860</option>
+                    <option name="no_proyecto">centralizada</option>
+                    <option name="no_proyecto">U024 2686</option>
+                    <option name="no_proyecto">U027 2686</option>
+                    <option name="no_proyecto">U029 2686</option>
+                    <option name="no_proyecto">U038 2514</option>
+                  </select>
+                </div>
+                <div className="tabla-edit-c">
+                  <input name="importe_comp" onChange={this.onChange} ref="importe_comp" className="input-edi"/>
+                </div>
+                <div className="tabla-edit-c">
+                  <input name="isr" onChange={this.onChange} ref="isr" className="input-edi"/>
+                </div>
+                <div className="tabla-edit-c">
+                  <input name="total" onChange={this.onChange} ref="total" className="input-edi" disabled/>
+                </div>
+                <div className="tabla-edit-c">
+                  <input type="date" min="2020-01-01" max="2020-12-31" name="fecha_comp" onChange={this.onChange} ref="fecha_comp" className="input-edi"/>
                 </div>
               </div>
               <div style={{display: 'flex', flexDirection: 'row', width: '100%', justifyContent: 'flex-end', marginTop: '20px'}}>

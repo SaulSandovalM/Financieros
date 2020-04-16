@@ -1,12 +1,5 @@
 import styled from 'styled-components';
 
-const theme = {
-  primaryDark: '#000000',
-  primaryLight: '#000000',
-  primaryHover: '#343078',
-  mobile: '576px',
-}
-
 export const StyledBurger = styled.button`
   position: absolute;
   top: 2%;
