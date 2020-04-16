@@ -5,12 +5,30 @@ import { connect } from "react-redux";
 import './Nav.css';
 
 class Nav extends Component {
+  constructor(props){
+    super(props);
+    this.state={
+      menuOpen: false,
+    }
+  }
+
+  handleMenuClick() {
+    this.setState({menuOpen:!this.state.menuOpen});
+  }
+
+  handleLinkClick() {
+    this.setState({menuOpen: false});
+  }
+
   handleLogout = () => {
     const { dispatch } = this.props;
     dispatch(logoutUser());
   };
 
   render() {
+
+    const menu = ['Fondos','Comprometidos','Analitico','Consulta','Cerra Sesion']
+
     const { isLoggingOut, logoutError } = this.props;
     return (
       <div>

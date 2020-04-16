@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 import './Consulta.css';
 import firebase from '../../Firebase';
 import { Link } from 'react-router-dom';
-import Pdf from './pdf';
-import ReactToPrint from 'react-to-print';
 
 class TablaComprometidos extends Component {
   constructor(props) {

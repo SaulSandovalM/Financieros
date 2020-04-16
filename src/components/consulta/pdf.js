@@ -27,14 +27,14 @@ class Pdf extends Component{
       }
     });
   }
-  
+
 render(){
   return(
 
     <div className='fecha'>
 
 
-    <div class='subdad' ref={el => (this.holi= el) }>
+    <div class='subdad' ref={el => (this.holi= el)}>
 
             <div className='bueno'>
 
