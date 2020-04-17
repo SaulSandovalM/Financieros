@@ -5,21 +5,6 @@ import { connect } from "react-redux";
 import './Nav.css';
 
 class Nav extends Component {
-  constructor(props){
-    super(props);
-    this.state={
-      menuOpen: false,
-    }
-  }
-
-  handleMenuClick() {
-    this.setState({menuOpen:!this.state.menuOpen});
-  }
-
-  handleLinkClick() {
-    this.setState({menuOpen: false});
-  }
-
   handleLogout = () => {
     const { dispatch } = this.props;
     dispatch(logoutUser());
@@ -27,43 +12,38 @@ class Nav extends Component {
 
   render() {
 
-    const menu = ['Fondos','Comprometidos','Analitico','Consulta','Cerra Sesion']
-
     const { isLoggingOut, logoutError } = this.props;
+
     return (
-      <div>
-        <div className='navbar'>
-          <div className="nav-col">
-            <div className='navbar-navigation'>
-              <img className='logo' src={'http://cdn.hidalgo.gob.mx/logo_gobhidalgo.svg'} alt=''/>
-            </div>
-            <div className='navbar-left'>
-              <Link to="/" className="deco">
-                <h3 className="nav-t" style={{fontFamily: 'Arial'}}>Fondos</h3>
-              </Link>
-            </div>
-            <div className='navbar-left'>
-              <Link to="/Comprometidos" className="deco">
-                <h3 className="nav-t" style={{fontFamily: 'Arial'}}>Comprometidos</h3>
-              </Link>
-            </div>
-            <div className='navbar-left'>
-              <Link to="/Analitico" className="deco">
-                <h3 className="nav-t" style={{fontFamily: 'Arial'}}>Analitico</h3>
-              </Link>
-            </div>
-            <div className='navbar-left'>
-              <Link to="/Consulta" className="deco">
-                <h3 className="nav-t" style={{fontFamily: 'Arial'}}>Consulta</h3>
-              </Link>
-            </div>
-            <div className='navbar-left'>
-              <div className="deco">
-              <button onClick={this.handleLogout} className="nav-t" style={{background: '#092432', border: 'none'}}><h3 className="nav-t" style={{fontFamily: 'Arial'}}>Cerrar Sesion</h3></button>
-                {isLoggingOut && <p>Cerrando Sesion....</p>}
-                {logoutError && <p>Error al Cerrar Sesion</p>}
-              </div>
-            </div>
+      <div className="nav-col">
+        <div className='navbar-navigation'>
+          <img className='logo' src={'http://cdn.hidalgo.gob.mx/logo_gobhidalgo.svg'} alt=''/>
+        </div>
+        <div className='navbar-left'>
+          <Link to="/" className="deco">
+            <h3 className="nav-t" style={{fontFamily: 'Arial'}}>Fondos</h3>
+          </Link>
+        </div>
+        <div className='navbar-left'>
+          <Link to="/Comprometidos" className="deco">
+            <h3 className="nav-t" style={{fontFamily: 'Arial'}}>Comprometidos</h3>
+          </Link>
+        </div>
+        <div className='navbar-left'>
+          <Link to="/Analitico" className="deco">
+            <h3 className="nav-t" style={{fontFamily: 'Arial'}}>Analitico</h3>
+          </Link>
+        </div>
+        <div className='navbar-left'>
+          <Link to="/Consulta" className="deco">
+            <h3 className="nav-t" style={{fontFamily: 'Arial'}}>Consulta</h3>
+          </Link>
+        </div>
+        <div className='navbar-left'>
+          <div className="deco">
+          <button onClick={this.handleLogout} className="nav-t" style={{background: '#092432', border: 'none'}}><h3 className="nav-t" style={{fontFamily: 'Arial'}}>Cerrar Sesion</h3></button>
+            {isLoggingOut && <p>Cerrando Sesion....</p>}
+            {logoutError && <p>Error al Cerrar Sesion</p>}
           </div>
         </div>
       </div>

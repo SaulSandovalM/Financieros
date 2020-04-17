@@ -1,5 +1,10 @@
-.a-container {
-  min-height: 100vh;
+.cent-compro {
+  display: flex;
+  justify-content: center;
+}
+.App {
+  padding: 30px;
+  width: 85%;
 }
 .title {
   margin-left: 50px;
@@ -50,9 +55,6 @@
   justify-content:center ;
   flex-direction:row;
 }
-.App {
-  padding: 30px;
-}
 .products-al {
   display: flex;
   flex-direction: row;
@@ -64,10 +66,12 @@
 }
 /*EditarComprometidos*/
 .container-edit {
-  padding-left: 15%;
+  display: flex;
+  justify-content: center;
+  width: 100%;
 }
 .comp-container {
-  width: 100%;
+  width: 90%;
 }
 .edit-com-comp {
   display: flex;
@@ -88,7 +92,12 @@
   border-top: 4px solid #dc5f70;
 }
 .tabla-edit-c {
-  width: 14%;
+  width: 14.5%;
+  text-align: left;
+  color: #000;
+}
+.tabla-edit-l {
+  width: 14.5%;
   text-align: center;
   color: #000;
 }
@@ -97,20 +106,18 @@
   padding-left: 15%;
   min-height: 100vh;
 }
-.space-nav {
-  margin-left: 15%;
-}
 .table-ed-2 {
   display: flex;
   flex-direction: row;
   justify-content: center;
+  width: 100%;
 }
 .edit-tab-row-2 {
   width: 100%;
   display: flex;
   flex-direction: row;
-  padding: 5px 20px 0px 20px;
+  padding: 5px 0px 0px 0px;
 }
 .input-edi {
-  width: 95%;
+  width: 99%;
 }

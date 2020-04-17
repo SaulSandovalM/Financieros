@@ -145,11 +145,11 @@ class Edita extends Component {
       mm = '0' + mm
     }
     today = yyyy + '-' + mm + '-' + dd;
-    const { nfactura, fecha, proveedor, partida, importea, isr, iva, total, municipio, area } = this.state;
+    const { nfactura, fechaa, proveedor, partida, importea, isr, iva, total, municipio, area } = this.state;
 
     return (
-      <div className="space-nav">
-        <div>
+      <div className="cent-ana-e">
+        <div style={{width: '90%'}}>
         <h2 className="title" style={{fontFamily: 'Arial'}}>Analitico de Fondos</h2>
         <div className="edit-row-a title p-top">
           <label for="fondo" className="tipo-tw" style={{fontFamily: 'Arial'}}>Fondos:</label>
@@ -224,7 +224,7 @@ class Edita extends Component {
           )}
         </div>
 
-        <div className="tab-ana2">
+        {/*<div className="tab-ana2">
           <div className="prin-2">
             <input className="inp-ana" value="Total" disabled/>
           </div>
@@ -255,7 +255,7 @@ class Edita extends Component {
           <div className="prin-2">
             <input className="inp-ana" name="area" value={area} onChange={this.onChange} disabled ref="area"/>
           </div>
-        </div>
+        </div>*/}
 
         <form onSubmit={this.onSubmit} className="add-tab-a">
           <div className="tab-ana2">
@@ -263,7 +263,7 @@ class Edita extends Component {
               <input className="inp-ana" name="nfactura" value={nfactura} onChange={this.onChange} ref="nfactura" required/>
             </div>
             <div className="same-2">
-              <input className="inp-ana" type="date" name="fecha" value={fecha} onChange={this.onChange} ref="fecha" required/>
+              <input className="inp-ana" type="date" name="fechaa" value={fechaa} onChange={this.onChange} ref="fechaa" required/>
             </div>
             <div className="prin-2">
               <input className="inp-ana" name="proveedor" value={proveedor} onChange={this.onChange} required ref="proveedor"/>
@@ -272,7 +272,7 @@ class Edita extends Component {
               <input className="inp-ana" name="partida" value={partida} onChange={this.onChange} required ref="partida"/>
             </div>
             <div className="same-2">
-              <input className="inp-ana" name="importe" value={importea} onChange={this.onChange} ref="importe" required disabled/>
+              <input className="inp-ana" name="importea" value={importea} onChange={this.onChange} ref="importea" required/>
             </div>
             <div className="same-2">
               <input className="inp-ana" name="isr" value={isr} onChange={this.onChange} ref="isr" required/>

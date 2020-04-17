@@ -10,6 +10,10 @@
   justify-content:space-between;
   width: 100%;
 }
+.cent-consul {
+  display: flex;
+  justify-content: center;
+}
 .col-a {
   display: flex;
   margin: 50px;
@@ -22,15 +26,10 @@
   font-family: arial;
 }
 .a-row-t {
-
-
-
-
   width: 20%;
   height: 30px;
   font-size: 17px;
   text-align: center;
-
   font-weight: normal;
   color: white;
   border-right: 2px solid;
@@ -38,11 +37,6 @@
   background: #092432;
   border-top: 4px solid #dc5f70;
   border-bottom: 1px solid #dc5f70;
-
-
-
-
-
 }
 .a-row {
   margin-top: 5px;
@@ -54,33 +48,20 @@
   font-family: sans-serif;
   background:#FFFFF0;
   padding-left: 15px;
-
-
 }
-
 .vista{
-
   display:flex;
   justify-content:center ;
   flex-direction:row;
-
-}
-.App {
-  padding: 30px;
 }
 .products-al {
   display: flex;
   flex-direction: row;
   width: 100%;
   color: grey;
-
   border-left: 2px solid;
   border-right: 2px solid;
   border-bottom: 1px solid;
-
-
-
-
 }
 /*EditarComprometidos*/
 .edit-container {
@@ -116,32 +97,26 @@
   margin-left: 15%;
 }
 /* stilos de pdf*/
-p{
+p {
   font-size: 15px;
   font-family: sans-serif;
-
 }
-.dad{
-    height: 100%;
-    width: 100%;
-
+.dad {
+  height: 100%;
+  width: 100%;
  }
-.subdad{
-      padding-left: 15%;
-      width: 80%;
+.subdad {
+  padding-left: 15%;
+  width: 80%;
 }
-
-.bueno{
-
+.bueno {
   display:flex;
   justify-content: flex-end;
   flex-direction: row;
   padding-top: 100px;
 }
-.recibi{
+.recibi {
   padding-top: 150px;
-
-
 }
 /*
 .monto{
@@ -152,38 +127,32 @@ p{
   padding-top: .5PX;
 }
 */
-.concepto{
-          padding-top: 50px;
+.concepto {
+  padding-top: 50px;
 }
-.fecha{
-      display:flex;
-      justify-content:flex-end;
-      flex-direction: row;
-
-
+.fecha {
+  display:flex;
+  justify-content:flex-end;
+  flex-direction: row;
 }
-.refe{
-        display: flex;
-        justify-content:center;
-        flex-direction:row;
-        text-align:center;
-        padding-top: 100px;
+.refe {
+  display: flex;
+  justify-content:center;
+  flex-direction:row;
+  text-align:center;
+  padding-top: 100px;
 }
-.firma-dad{
-          width: 100%;
-          display:flex;
-          justify-content:center;
-          flex-direction:row;
-          padding-top: 70px;
-
-
-
-
+.firma-dad {
+  width: 100%;
+  display:flex;
+  justify-content:center;
+  flex-direction:row;
+  padding-top: 70px;
 }
-.firma-raya{
-      border-top: 1px solid black;
-      width: 70%;
-        text-align:center;
+.firma-raya {
+  border-top: 1px solid black;
+  width: 70%;
+  text-align:center;
 }
 @media print {
   .print-source {
@@ -194,7 +163,6 @@ p{
 .print-source {
   display: none;
   background-color:#fff;
-
 }
 body > .print-source {
   display: block;
@@ -211,50 +179,42 @@ body > .print-source {
   font-size: 20px;
   color: #FFF;
 }
-/*pppdf y Frpdf*/
-.pppdf-dad{
-            height: 100%;
-            width: 100%;
+/*pppdf*/
+.pppdf-dad {
+  height: 100%;
+  width: 100%;
 }
-.pppdf-subdad{
-            padding-left: 15%;
-            width: 80%;
-
+.pppdf-subdad {
+  padding-left: 15%;
+  width: 80%;
 }
-.direccion{
-          padding-left:0px;
-
-
+.direccion {
+  padding-left:0px;
 }
-.no-oficio{
+.no-oficio {
   display:flex;
   justify-content: flex-end;
   flex-direction: row;
   padding-top: 50px;
-
+  text-align: right;
 }
-.prensente{
-          padding-top: 45px;
-          padding-left:0px;
+.prensente {
+  padding-top: 45px;
+  padding-left:0px;
 }
-.añadido{
+.añadido {
   display:flex;
   justify-content: flex-end;
   flex-direction: row;
   padding-top:10px;
-
-
 }
 .texto-ofi{
-    text-align: justify;
-    padding-top: 20px;
-
-
+  text-align: justify;
+  padding-top: 20px;
 }
-.ccp .text{
+.ccp .text {
   padding-top:150px;
   font-size: 8px;
-
 }
 .atte{
       padding-top: 20px;
@@ -431,7 +391,7 @@ font-size: 9px;
           border:1px solid;
           width: 49%;
           padding: 0px 10px 0px;
-          
+
 
 
 

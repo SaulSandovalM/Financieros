@@ -66,6 +66,11 @@
   text-align: center;
   border-top: 1px solid #000;
 }
+.cent-ana {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
 .same {
   width: 6.6%;
   height: 50px;
@@ -78,14 +83,14 @@
   width: 20%;
   height: 25px;
   color: black;
-  text-align: center;
+  text-align: left;
   border-top: 1px solid #000;
 }
 .same-2 {
   width: 6.6%;
   height: 25px;
   color: black;
-  text-align: center;
+  text-align: left;
   border-top: 1px solid #000;
 }
 .inp-ana {
@@ -94,4 +99,12 @@
 }
 .add-tab-a {
   margin-top: 10px;
+}
+.cent-ana-e {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+.exe {
+  width: 100px;
 }

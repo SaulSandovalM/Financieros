@@ -45,8 +45,8 @@ class Analitico extends Component {
 
   render() {
     return (
-      <div className="space-nav">
-        <div className="App" style={{height: '100vh'}}>
+      <div className="cent-ana">
+        <div className="App">
           <h2 className="title" style={{fontFamily: 'Arial'}}>Analitico</h2>
           <div className="products-al">
             <div className="a-row-t">Fondos</div>
