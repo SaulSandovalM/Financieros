@@ -196,6 +196,7 @@ body > .print-source {
   justify-content: flex-end;
   flex-direction: row;
   padding-top: 50px;
+  text-align: right;
 }
 .prensente {
   padding-top: 45px;
