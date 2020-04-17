@@ -5,6 +5,7 @@ import { AutoComplete } from '@progress/kendo-react-dropdowns';
 import { NumericTextBox, Input } from '@progress/kendo-react-inputs';
 import '@progress/kendo-theme-material/dist/all.css';
 import { NumberAsString } from './NumerosLetras.js';
+import { DropDownList } from '@progress/kendo-react-dropdowns'
 
 class Fondos extends Component {
 
@@ -149,11 +150,11 @@ class Fondos extends Component {
               <div className="form-container">
                 <div className="form-content">
                   <label for="tipo_doc" className="itc" style={{fontFamily: 'Arial'}}>Tipo de documento:</label>
-                  <AutoComplete suggest={true} style={{width: '100%', borderColor: 'rgba(0,0,0,0.42)'}} data={this.tipo_doc} allowCustom={allowCustom} name="tipo_doc" value={tipo_doc} onChange={this.onChange} required ref="tipo_doc" />
+                  <DropDownList suggest={true} style={{width: '100%', borderColor: 'rgba(0,0,0,0.42)'}} data={this.tipo_doc} allowCustom={allowCustom} name="tipo_doc" value={tipo_doc} onChange={this.onChange} required ref="tipo_doc" />
                 </div>
                 <div className="form-content">
                   <label for="oficio_aut" className="itc" style={{fontFamily: 'Arial'}}>Oficio de Autorizacion:</label>
-                  <AutoComplete suggest={true} style={{width: '100%', borderColor: 'rgba(0,0,0,0.42)'}} data={this.oficio_aut} allowCustom={allowCustom} name="oficio_aut" value={oficio_aut} onChange={this.onChange} required ref="oficio_aut" />
+                  <DropDownList suggest={true} style={{width: '100%', borderColor: 'rgba(0,0,0,0.42)'}} data={this.oficio_aut} allowCustom={allowCustom} name="oficio_aut" value={oficio_aut} onChange={this.onChange} required ref="oficio_aut" />
                 </div>
               </div>
               {/*seccion 3*/}
@@ -188,11 +189,11 @@ class Fondos extends Component {
               <div className="form-container">
                 <div className="form-content-5">
                   <label for="beneficiario" className="itc" style={{fontFamily: 'Arial'}}>Beneficiario:</label>
-                  <AutoComplete style={{width: '100%', borderColor: 'rgba(0,0,0,0.42)'}} data={this.beneficiario} allowCustom={allowCustom} name="beneficiario" value={beneficiario} onChange={this.onChange} required ref="beneficiario"/>
+                  <DropDownList style={{width: '100%', borderColor: 'rgba(0,0,0,0.42)'}} data={this.beneficiario} allowCustom={allowCustom} name="beneficiario" value={beneficiario} onChange={this.onChange} required ref="beneficiario"/>
                 </div>
                 <div className="form-content-5">
                   <label for="realizo" className="itc" style={{fontFamily: 'Arial'}}>Realizo:</label>
-                  <AutoComplete style={{width: '100%', borderColor: 'rgba(0,0,0,0.42)'}} data={this.nombres} allowCustom={allowCustom} name="realizo" value={realizo} onChange={this.onChange} required ref="realizo"/>
+                  <DropDownList style={{width: '100%', borderColor: 'rgba(0,0,0,0.42)'}} data={this.nombres} allowCustom={allowCustom} name="realizo" value={realizo} onChange={this.onChange} required ref="realizo"/>
                 </div>
               </div>
               {/*seccion 6*/}

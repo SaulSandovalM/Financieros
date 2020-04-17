@@ -2,78 +2,84 @@ import React, { Component } from 'react';
 import firebase from '../../Firebase';
 import './Analitico.css';
 import { Link } from 'react-router-dom';
+import ReactDataSheet from 'react-datasheet';
+import Select from 'react-select'
+import 'react-datasheet/lib/react-datasheet.css';
+import _ from 'lodash'
 
 class Analitico extends Component {
-  constructor() {
-    super();
-    this.ref = firebase.firestore().collection('fondos');
-    this.unsubscribe = null;
+  constructor (props) {
+    super(props)
+    this.options = [
+      { label: 'Bread', value: 2.35 },
+      { label: 'Berries', value: 3.05 },
+      { label: 'Milk', value: 3.99 },
+      { label: 'Apples', value: 4.35 },
+      { label: 'Chicken', value: 9.95 },
+      { label: 'Yoghurt', value: 4.65 },
+      { label: 'Onions', value: 3.45 },
+      { label: 'Salad', value: 1.55 }
+    ]
     this.state = {
-      fondos: []
-    };
+      grocery: {},
+      items: 3
+    }
   }
 
-  onCollectionUpdate = (querySnapshot) => {
-    const fondos = [];
-    querySnapshot.forEach((doc) => {
-      const { fondo, fecha, tipo_doc, oficio_aut, no_oficio, no_aut, no_lici, importe, desc, importe_l, beneficiario, realizo} = doc.data();
-      fondos.push({
-        key: doc.id,
-        doc, // DocumentSnapshot
-        fondo,
-        fecha,
-        tipo_doc,
-        oficio_aut,
-        no_oficio,
-        no_aut,
-        no_lici,
-        importe,
-        desc,
-        importe_l,
-        beneficiario,
-        realizo,
-      });
-    });
-    this.setState({
-      fondos
-   });
+  generateGrid () {
+    const groceryValue = (id) => {
+      if (this.state.grocery[id]) {
+        const {label, value} = this.state.grocery[id]
+        return `${label} (${value})`
+      } else {
+        return ''
+      }
+    }
+    const component = (id) => {
+      return (
+        <Select
+          autofocus
+          openOnFocus
+          value={this.state && this.state.grocery[id]}
+          onChange={(opt) => this.setState({grocery: _.assign(this.state.grocery, {[id]: opt})})}
+          options={this.options}
+        />
+      )
+    }
+    const total = _.reduce(_.values(this.state.grocery), (res, val, key) => {
+      res += (val && val.value) || 0
+      return res
+    }, 0)
+    let rows = [
+      [{readOnly: true, colSpan: 2, value: 'Lista'}],
+      [
+        {readOnly: true, value: ''},
+        {
+          value: 'Grocery Item',
+          component: (
+            <div className={'add-grocery'}> lista
+              <div className={'add-button'} onClick={() => { console.log('add'); this.setState({items: this.state.items + 1}) }}>Agregar item</div>
+            </div>
+          ),
+          forceComponent: true
+        }]
+    ]
+    rows = rows.concat(_.range(1, this.state.items + 1).map(id => [{readOnly: true, value: `Item ${id}`}, {value: groceryValue(id), component: component(id)}]))
+
+    rows = rows.concat([[{readOnly: true, value: 'Total'}, {readOnly: true, value: `${total.toFixed(2)} $`}]])
+    console.log(rows)
+    return rows
   }
 
-  componentDidMount() {
-    this.unsubscribe = this.ref.onSnapshot(this.onCollectionUpdate);
-  }
-
-  render() {
+  render () {
     return (
-      <div className="cent-ana">
-        <div className="App">
-          <h2 className="title" style={{fontFamily: 'Arial'}}>Analitico</h2>
-          <div className="products-al">
-            <div className="a-row-t">Fondos</div>
-            <div className="a-row-t">Fecha</div>
-            <div className="a-row-t">Nombre Realizo</div>
-            <div className="a-row-t">Tipo de documento</div>
-            <div className="a-row-t">Importe</div><div className="a-row-t"></div>
-          </div>
-          <div>
-            {this.state.fondos.map(fondos =>
-              <div>
-                <div className="products-al">
-                  <div className="a-row">{fondos.fondo}</div>
-                  <div className="a-row">{fondos.fecha}</div>
-                  <div className="a-row">{fondos.realizo}</div>
-                  <div className="a-row">{fondos.tipo_doc}</div>
-                  <div className="a-row">{fondos.importe}</div>
-                  <div className="a-row vista">
-                    <Link to={`/edita/${fondos.key}`}>Ver</Link>
-                  </div>
-                </div>
-              </div>
-            )}
-          </div>
-        </div>
-      </div>
-    );
+      <ReactDataSheet
+        className="exe"
+        data={this.generateGrid()}
+        valueRenderer={(cell) => cell.value}
+        onChange={() => {}}
+      />
+    )
   }
 }
 

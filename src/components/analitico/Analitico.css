@@ -106,5 +106,6 @@
   width: 100%;
 }
 .exe {
-  width: 100px;
+  width: 300px;
+  margin-left: 100px;
 }
