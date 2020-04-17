@@ -1,3 +1,12 @@
+.cen-cont {
+  width: 100%;
+  justify-content: center;
+  display: flex;
+  margin-top: 50px;
+}
+.title {
+  margin-left: 50px;
+}
 .fondos-back {
   width: 100%;
   display: flex;
@@ -33,46 +42,16 @@
   flex-direction: column;
   padding: 5px 50px 0px 50px;
 }
-.hide {
-  visibility: hidden;
+.itc {
+  font-weight: bold;
 }
-.form-content-100 {
-  width: 100%;
-  height: 80px;
-  display: flex;
-  flex-direction: column;
-  padding: 5px 50px 0px 50px;
-}
-.form-content-50 {
-  width: 25%;
-  height: 80px;
-  display: flex;
-  flex-direction: column;
-  padding: 5px 50px 0px 50px;
-}
-.form-content-desc {
-  width: 100%;
-  height: 80px;
-  display: flex;
-  flex-direction: column;
-  padding: 5px 50px 0px 50px;
-}
-.form-content-desc-100 {
-  width: 100%;
-  height: 80px;
-  display: flex;
-  flex-direction: column;
-  padding: 5px 50px 0px 50px;
-}
-.fondo-n {
-  width: 100%;
-  height: 100px;
-  padding: 5px 50px 0px 50px;
-}
-.conver {
-  display: flex;
-  flex-direction: row;
-  height: 40px;
+.border-m {
+  border: 0px;
+  border-bottom: 1px solid;
+  height: 20px;
+  margin-top: 5px;
+  padding: 5px;
+  font-size: 15px;
 }
 .botones {
   display: flex;
@@ -80,23 +59,6 @@
   justify-content: center;
   width: 100%;
   padding: 25px 50px 0px 50px;
-}
-.title {
-  margin-left: 50px;
-}
-.cen-cont {
-  width: 100%;
-  justify-content: center;
-  display: flex;
-}
-.bt-s1 {
-  height: 30px;
-  margin-right: 15px;
-  background: #FFF;
-  font-weight: bold;
-  font-weight: bold;
-  font-size: 15px;
-  color: #000;
 }
 .bt-s2 {
   height: 30px;
@@ -115,145 +77,20 @@
   font-size: 15px;
   color: #FFF;
 }
-.itc {
-  font-weight: bold;
+.hide {
+  visibility: hidden;
 }
-.input-b {
-  border: 0px;
-  background-color: #FFF;
-}
-.border-m {
-  border: 0px;
-  border-bottom: 1px solid;
-  height: 20px;
-  margin-top: 5px;
-  padding: 5px;
-  font-size: 15px;
-}
-.center-container {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-}
-#demo {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.demo-inner {
-  max-width: 500px;
-}
-
-
-.selection {
-  font-size: 13px;
-  text-align: center;
-  margin-top: 3px;
-  padding: 7px;
-  background: #eee;
-  border-radius: 5px;
-}
-
-.options {
-  margin-top: 15px;
-  text-align: center;
-  font-size: 12px;
-}
-
-.options label {
-  padding: 0 5px;
-  cursor: pointer;
-  display: inline-block;
-  margin: 5px 0;
-}
-.ris {
-  display: block;
-  position: relative;
-  box-sizing: border-box;
-  font-size:12px;
-}
-
-.ris * {
-  box-sizing: border-box;
-}
-
-.ris.ris-is-clearable .ris-clearable {
-  position: absolute;
-  top: 50%;
-  right: 5px;
-  font-size:1.1em;
-  margin-top:-1px;
-  transform: translate(0, -50%);
-  padding:5px;
-  color: #555;
-  cursor:pointer;
-}
-
-.ris.ris-is-creatable .ris-input {
-  padding-right:15px;
-}
-
-.ris .ris-input {
-  display: block;
-  resize: none;
+.form-content-desc {
   width: 100%;
-  padding: 5px;
-  border: 5px solid #eee;
-  border-radius: 5px;
-  font-size:inherit;
+  height: 80px;
+  display: flex;
+  flex-direction: column;
+  padding: 5px 50px 0px 50px;
 }
-
-.ris .ris-input:active, .ris .ris-input:focus {
-  outline: 0;
-  border: 5px solid #1e88e5;
-}
-
-.ris.ris-open-up .ris-options {
-  top:0;
-  transform:translate(-50%,-100%);
-}
-
-.ris .ris-options {
-  position: absolute;
-  top: 100%;
-  left: 50%;
-  margin:0;
-  width: calc(100% - 10px);
-  background: #fff;
-  transform:translate(-50%, 0);
-  border: 1px solid #eee;
-  overflow: auto;
-  box-shadow: 0 2px 3px 1px #eee;
-  max-height:245px;
-  font-size:inherit;
-}
-.ris .ris-options .ris-option {
-  padding: 5px;
-  cursor: pointer;
-  border-bottom: 1px solid #efefef;
-}
-.ris .ris-options .ris-option:last-child {
-  border-bottom: 0;
-}
-.ris .ris-options .ris-option:hover {
-  background: #bbdefb;
-}
-.ris .ris-options .ris-option.current {
-  background:#bbdefb;
-}
-.ris .ris-options .ris-option.selected {
-  background:#1e88e5;
-  color: #fff;
-}
-.ris .ris-options.ris-no-options {
-  padding:5px;
-  text-align:center;
-  color:#ccc;
-}
-.k-widget {
-
-}
-.k-numerictextbox2 {
+.form-content-desc-100 {
   width: 100%;
+  height: 80px;
+  display: flex;
+  flex-direction: column;
+  padding: 5px 50px 0px 50px;
 }

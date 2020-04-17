@@ -17,7 +17,6 @@ class Comprometido extends Component {
       no_oficio: '',
       no_proyecto: '',
       importe_comp: '',
-      importe_l: '',
       isr: '',
       total: '',
       fecha_comp: '',
@@ -100,7 +99,6 @@ class Comprometido extends Component {
         presupuestal: '',
         no_proyecto: '',
         importe_comp: '',
-        importe_l: '',
         isr: '',
         total: '',
         fecha_comp: ''
@@ -112,9 +110,8 @@ class Comprometido extends Component {
   }
 
   render() {
-
     return (
-      <div class="container-edit">
+      <div class="container-edit" style={{marginTop: '50px'}}>
         <div className="comp-container">
           <div className="edit-com-comp">
             <div className="App-edit">
@@ -144,25 +141,25 @@ class Comprometido extends Component {
           <div className="table-ed-2">
             <form onSubmit={this.onSubmit} style={{width: '100%'}}>
               <div className="edit-tab-row-t">
-                <div className="tabla-edit-c" style={{fontFamily: 'Arial', color: '#FFF'}}> {/*select*/}
+                <div className="tabla-edit-l" style={{fontFamily: 'Arial', color: '#FFF'}}> {/*select*/}
                   Partida
                 </div>
-                <div className="tabla-edit-c" style={{fontFamily: 'Arial', color: '#FFF'}}> {/*select*/}
+                <div className="tabla-edit-l" style={{fontFamily: 'Arial', color: '#FFF'}}> {/*select*/}
                   U. Presupuestal
                 </div>
-                <div className="tabla-edit-c" style={{fontFamily: 'Arial', color: '#FFF'}}> {/*select*/}
+                <div className="tabla-edit-l" style={{fontFamily: 'Arial', color: '#FFF'}}> {/*select*/}
                   No. de Proyecto
                 </div>
-                <div className="tabla-edit-c" style={{fontFamily: 'Arial', color: '#FFF'}}>
+                <div className="tabla-edit-l" style={{fontFamily: 'Arial', color: '#FFF'}}>
                   Importe
                 </div>
-                <div className="tabla-edit-c" style={{fontFamily: 'Arial', color: '#FFF'}}>
+                <div className="tabla-edit-l" style={{fontFamily: 'Arial', color: '#FFF'}}>
                   ISR
                 </div>
-                <div className="tabla-edit-c" style={{fontFamily: 'Arial', color: '#FFF'}}>
+                <div className="tabla-edit-l" style={{fontFamily: 'Arial', color: '#FFF'}}>
                   Total
                 </div>
-                <div className="tabla-edit-c" style={{fontFamily: 'Arial', color: '#FFF'}}>
+                <div className="tabla-edit-l" style={{fontFamily: 'Arial', color: '#FFF'}}>
                   Fecha
                 </div>
               </div>
@@ -181,7 +178,7 @@ class Comprometido extends Component {
                   </div>
                 )}
               </div>
-              <div className="edit-tab-row-2">
+              {/*<div className="edit-tab-row-2">
                 <div className="tabla-edit-c">
                   Total
                 </div>
@@ -200,11 +197,12 @@ class Comprometido extends Component {
                 </div>
                 <div className="tabla-edit-c">
                 </div>
-              </div>
+              </div>*/}
               <div className="edit-tab-row-2">
                 <div className="tabla-edit-c"> {/*select*/}
                   <select name="partida" onChange={this.onChange} ref="partida" className="input-edi">
                     <option name="partida"></option>
+                    <option name="partida">147</option>
                   </select>
                 </div>
                 <div className="tabla-edit-c"> {/*select*/}
@@ -257,14 +255,16 @@ class Comprometido extends Component {
                   <input name="isr" onChange={this.onChange} ref="isr" className="input-edi"/>
                 </div>
                 <div className="tabla-edit-c">
-                  <input name="total" onChange={this.onChange} ref="total" className="input-edi" disabled/>
+                  <input name="total" onChange={this.onChange} ref="total" className="input-edi"/>
                 </div>
                 <div className="tabla-edit-c">
                   <input type="date" min="2020-01-01" max="2020-12-31" name="fecha_comp" onChange={this.onChange} ref="fecha_comp" className="input-edi"/>
                 </div>
               </div>
-              <div style={{display: 'flex', flexDirection: 'row', width: '100%', justifyContent: 'flex-end', marginTop: '20px'}}>
-                <button type="submit" class="btn btn-success">Guardar</button>
+              <div className="form-container-last">
+                <div className="botones">
+                  <button className="bt-s2" type='submit' style={{fontFamily: 'Arial'}}>Guadar</button>
+                </div>
               </div>
             </form>
           </div>
