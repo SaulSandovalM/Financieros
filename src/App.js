@@ -12,6 +12,10 @@ import Edita from './components/analitico/Edita';
 import Show from './components/comprometidos/Show';
 import Pdf from './components/consulta/pdf';
 import Pppdf from './components/consulta/pppdf';
+import Frpdf from './components/consulta/frpdf';
+import Cpdf from './components/consulta/Cpdf';
+
+
 
 function App(props) {
   const { isAuthenticated, isVerifying } = props;
@@ -50,7 +54,9 @@ function App(props) {
       <Route path='/edit/:id' component={Edit} />
       <Route path='/edita/:id' component={Edita} />
       <Route path="/Pdf/:id" component={Pdf} />
-      <Route path="/Pppdf/:id" component={Pppdf} />
+      <Route path="/Pppdf" component={Pppdf} />
+      <Route path="/Frpdf" component={Frpdf}/>
+      <Route path="/Cpdf" component={Cpdf}/>
     </Switch>
   );
 }
