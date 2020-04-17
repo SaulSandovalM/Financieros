@@ -5,6 +5,7 @@
 	width: 15%;
 	background: #092432;
 	z-index: 1;
+
 }
 .navbar-navigation {
 	height: 100%;
@@ -27,6 +28,7 @@
 	display: flex;
 	flex-direction: column;
 	margin-top: 50px;
+	
 }
 .nav-t {
 	color: #FFF;

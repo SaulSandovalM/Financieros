@@ -77,7 +77,7 @@ class TablaComprometidos extends Component {
                     <Link to={`/Pdf/${fondos.key}`}>Ver</Link>
                   }
                   { fondos.tipo_doc == 'Reembolso de Gastos' &&
-                    <Link to={`/Pdf/${fondos.key}`}>Ver</Link>
+                    <Link to={`/Cpdf/${fondos.key}`}>Ver</Link>
                   }
                   { fondos.tipo_doc == 'Cancelado' &&
                     <Link to={`/Pdf/${fondos.key}`}>Ver</Link>
