@@ -13,6 +13,8 @@ import Show from './components/comprometidos/Show';
 import Pdf from './components/consulta/pdf';
 import Pppdf from './components/consulta/pppdf';
 import Cpdf from './components/consulta/Cpdf';
+import ControlP from './components/controlp/ControlP';
+import Add from './components/controlp/Add';
 
 function App(props) {
   const { isAuthenticated, isVerifying } = props;
@@ -46,6 +48,13 @@ function App(props) {
         isAuthenticated={isAuthenticated}
         isVerifying={isVerifying}
       />
+      <ProtectedRoute
+        exact
+        path="/ControlP"
+        component={ControlP}
+        isAuthenticated={isAuthenticated}
+        isVerifying={isVerifying}
+      />
       <Route path="/Login" component={Login} />
       <Route path='/show/:id' component={Show} />
       <Route path='/edit/:id' component={Edit} />
@@ -53,6 +62,7 @@ function App(props) {
       <Route path="/Pdf/:id" component={Pdf} />
       <Route path="/Pppdf/:id" component={Pppdf} />
       <Route path="/Cpdf/:id" component={Cpdf} />
+      <Route path="/add/:id" component={Add} />
     </Switch>
   );
 }

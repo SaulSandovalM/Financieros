@@ -29,10 +29,13 @@ class Login extends Component {
   };
 
   render() {
+
     const { loginError, isAuthenticated } = this.props;
+
     if (isAuthenticated) {
       return <Redirect to="/" />;
     } else {
+
       return (
         <div style={{zIndex: '5', position: 'absolute', width: '100%', top: 0, left: 0}}>
           <div className="back-login">
@@ -73,7 +76,7 @@ class Login extends Component {
                         onClick={this.handleSubmit}
                       >
                         Ingresar
-                      </button >
+                      </button>
                     </div>
                   </div>
                 </div>

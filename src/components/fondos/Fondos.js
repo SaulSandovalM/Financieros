@@ -4,7 +4,7 @@ import './Fondos.css';
 import { NumericTextBox, Input } from '@progress/kendo-react-inputs';
 import '@progress/kendo-theme-material/dist/all.css';
 import { NumberAsString } from './NumerosLetras.js';
-import { DropDownList } from '@progress/kendo-react-dropdowns'
+import { DropDownList } from '@progress/kendo-react-dropdowns';
 
 class Fondos extends Component {
 
@@ -94,8 +94,8 @@ class Fondos extends Component {
       // batch.set(statsRef, { storyCount: increment }, { merge: true });
       // batch.commit();
 
-      this.props.history.push(`/edit/${this.state.fondos.key}`);
-      //this.props.history.push('Comprometidos')
+      //this.props.history.push(`/edit/${this.state.fondos.key}`);
+      this.props.history.push('Comprometidos')
     })
     .catch((error) => {
       console.error("Error adding document: ", error);
@@ -173,7 +173,7 @@ class Fondos extends Component {
                   <NumericTextBox format="c2" min={0} width="100%" borderColor="rgba(0,0,0,0.42)" name="importe" value={importe} onChange={this.onChange} ref="importe" required/>
                 </div>
                 <div className="form-content-5 hide">
-                  <label for="importe" className="itc" style={{fontFamily: 'Arial'}}>Importe:</label>
+                  <label for="importe" className="itc" style={{fontFamily: 'Arial'}}>Numero de facturas:</label>
                   <NumericTextBox format="c2" min={0} width="100%" borderColor="rgba(0,0,0,0.42)" name="importe" value={importe} onChange={this.onChange} ref="importe" required/>
                 </div>
               </div>
