@@ -54,9 +54,9 @@ function App(props) {
       <Route path='/edit/:id' component={Edit} />
       <Route path='/edita/:id' component={Edita} />
       <Route path="/Pdf/:id" component={Pdf} />
-      <Route path="/Pppdf" component={Pppdf} />
-      <Route path="/Frpdf" component={Frpdf}/>
-      <Route path="/Cpdf" component={Cpdf}/>
+      <Route path="/Pppdf/id" component={Pppdf} />
+      <Route path="/Frpdf/id" component={Frpdf}/>
+      <Route path="/Cpdf/id" component={Cpdf}/>
     </Switch>
   );
 }
