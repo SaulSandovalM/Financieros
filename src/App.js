@@ -15,6 +15,7 @@ import Pppdf from './components/consulta/pppdf';
 import Cpdf from './components/consulta/Cpdf';
 import ControlP from './components/controlp/ControlP';
 import Add from './components/controlp/Add';
+import Complemento from './components/complemento/Complemento';
 
 function App(props) {
   const { isAuthenticated, isVerifying } = props;
@@ -52,6 +53,13 @@ function App(props) {
         exact
         path="/ControlP"
         component={ControlP}
+        isAuthenticated={isAuthenticated}
+        isVerifying={isVerifying}
+      />
+      <ProtectedRoute
+        exact
+        path="/Complemento"
+        component={Complemento}
         isAuthenticated={isAuthenticated}
         isVerifying={isVerifying}
       />
