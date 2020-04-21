@@ -111,6 +111,23 @@ class Fondos extends Component {
 
   render() {
 
+    var user = firebase.auth().currentUser;
+    var email;
+
+    if (user != null) {
+      email = user.email;
+    }
+    console.log(email);
+
+    let admin;
+    if (email == 'administrador@procu.com') {
+      admin = 'Admin';
+    }
+    else {
+      admin = 'Julian';
+    }
+    console.log(admin)
+
     var today = new Date();
     var dd = today.getDate();
     var mm = today.getMonth()+1;
@@ -191,7 +208,7 @@ class Fondos extends Component {
                 </div>
                 <div className="form-content-5">
                   <label for="realizo" className="itc" style={{fontFamily: 'Arial'}}>Realizo:</label>
-                  <DropDownList style={{width: '100%', borderColor: 'rgba(0,0,0,0.42)'}} data={this.nombres} allowCustom={allowCustom} name="realizo" value={realizo} onChange={this.onChange} required ref="realizo"/>
+                  <Input type="text" style={{width: '100%', borderColor: 'rgba(0,0,0,0.42)'}} name="realizo" value={admin} onChange={this.onChange} required ref="realizo"/>
                 </div>
               </div>
               {/*seccion 6*/}
