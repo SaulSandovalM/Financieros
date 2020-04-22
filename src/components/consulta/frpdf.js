@@ -60,14 +60,14 @@ class Frpdf extends Component{
           </div>
           <div class='añadido'>
             <p><b>AT'N: L.C.P. Karina Barrios Velázquez
-            <br/>Directora General de Contbilidad
+            <br/>Directora General de Contabilidad
             <br/>Gubernamental</b></p>
           </div>
           <div class="texto-ofi_ppp">
             <p> Por medio de presente me permito enviar a Usted documentación amparada con número de
             comprobantes "No.____", por un total de $ {this.state.fondo.importe} ({(NumberAsString(this.state.fondo.importe))}),
             para el trámite de Reembolso de Fondo Revolvente, con cargo al proyecto {/*{this.state.comprometido.no_proyecto} y {this.state.fondo.no_proyec}*/},
-            otorgado en el oficio de autorización número de oficio {this.state.fondo.oficio_aut} a la   a la Procuraduria General de Justicia del Estado de Hidalgo.</p>
+            otorgado en el oficio de autorización número de oficio {this.state.fondo.oficio_aut} a la Procuraduría General de Justicia del Estado de Hidalgo.</p>
 
 
             <p>Sin otro particular por el momento, reciba un cordial saludo</p>

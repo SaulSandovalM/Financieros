@@ -110,6 +110,12 @@ class Comprometido extends Component {
   }
 
   render() {
+
+    const { importe_comp, isr } = this.state;
+    var impo = parseInt(importe_comp);
+    var isri = parseInt(isr);
+    var tot = impo + isri;
+
     return (
       <div class="container-edit" style={{marginTop: '50px'}}>
         <div className="comp-container">
@@ -170,15 +176,15 @@ class Comprometido extends Component {
                       <div className="tabla-edit-c">{comprometidos.partida}</div>
                       <div className="tabla-edit-c">{comprometidos.presupuestal}</div>
                       <div className="tabla-edit-c">{comprometidos.no_proyecto}</div>
-                      <div className="tabla-edit-c">{comprometidos.importe_comp}</div>
-                      <div className="tabla-edit-c">{comprometidos.isr}</div>
-                      <div className="tabla-edit-c">{comprometidos.total}</div>
+                      <div className="tabla-edit-c">{'$'+comprometidos.importe_comp}</div>
+                      <div className="tabla-edit-c">{'$'+comprometidos.isr}</div>
+                      <div className="tabla-edit-c">{'$'+comprometidos.total}</div>
                       <div className="tabla-edit-c">{comprometidos.fecha_comp}</div>
                     </div>
                   </div>
                 )}
               </div>
-              {/*<div className="edit-tab-row-2">
+            {/*<div className="edit-tab-row-2">
                 <div className="tabla-edit-c">
                   Total
                 </div>
@@ -249,13 +255,13 @@ class Comprometido extends Component {
                   </select>
                 </div>
                 <div className="tabla-edit-c">
-                  <input name="importe_comp" onChange={this.onChange} ref="importe_comp" className="input-edi"/>
+                  <input type="number" name="importe_comp" onChange={this.onChange} ref="importe_comp" className="input-edi" />
                 </div>
                 <div className="tabla-edit-c">
-                  <input name="isr" onChange={this.onChange} ref="isr" className="input-edi"/>
+                  <input type="number" name="isr" onChange={this.onChange} ref="isr" className="input-edi"/>
                 </div>
                 <div className="tabla-edit-c">
-                  <input name="total" onChange={this.onChange} ref="total" className="input-edi"/>
+                  <input name="total" onChange={this.onChange} value={tot} ref="total" className="input-edi"/>
                 </div>
                 <div className="tabla-edit-c">
                   <input type="date" min="2020-01-01" max="2020-12-31" name="fecha_comp" onChange={this.onChange} ref="fecha_comp" className="input-edi"/>
@@ -263,7 +269,13 @@ class Comprometido extends Component {
               </div>
               <div className="form-container-last">
                 <div className="botones">
-                  <button className="bt-s2" type='submit' style={{fontFamily: 'Arial'}}>Guadar</button>
+                  <button
+                    className="bt-s2"
+                    type='submit'
+                    style={{fontFamily: 'Arial'}}
+                    onClick={() => this.setState({ total: this.state.total = tot })}>
+                      Guadar
+                  </button>
                 </div>
               </div>
             </form>

@@ -43,12 +43,12 @@ render(){
 
 
 <div className='cpdf-dad'>
-        <div className='cpdf-subdad'> {/*ref={el => (this.holi= el) }*/}
+        <div className='cpdf-subdad' ref={el => (this.holi= el)} >
 
 
 
                     <div class='fondo-procus'>
-                    <img class="im" src={programa}/>
+                    <img class="ims" src={programa}/>
                       <img class="im" src={logo2}/>
 
 
@@ -58,7 +58,7 @@ render(){
                     Fondo: PROCURADURÍA GENERAL DE JUSTICIA DEL ESTADO <br/>
                     Sub: Fondo: N/A<br/>
                     Unidad Administrativa: DIRECCIÓN GENERAL DE ADMINISTRACIÓN Y FINANZAS<br/>
-                    Area Generadora: DIRECCION DE RECURSOS FINANCIEROS
+                    Area Generadora: DIRECCIÓN DE RECURSOS FINANCIEROS
                     </p>
                     </div>
                     <div class="acomodar">
@@ -74,7 +74,7 @@ render(){
 
                               <div class='asunto-iz'>
                                 <p  class="text-2">
-                                Asunto: Publicaciones e impresoras Institucionales procuraduria General de Justicia
+                                Asunto: Publicaciones e Impresoras Institucionales Procuraduría General de Justicia
                                 <br/>y/o Pagos Directos
                                 </p>
                               </div>
@@ -85,7 +85,7 @@ render(){
 
                                 <div class="texto-ofi">
                                             <p  class="text">
-                                            Fecha de apertura:{/*{this.state.}*/}
+                                            Fecha de Apertura:{/*{this.state.}*/}
                                             </p>
                                             <p  class="text">
                                             Fecha de Cierre:{/*{this.state.}*/}
@@ -93,9 +93,9 @@ render(){
 
                                 </div>
                                 <div class="num-exp">
-                                            <p class="text-2">Numero de Expediente:{/*{this.state.}*/}
+                                            <p class="text-2">Número de Expediente:{/*{this.state.}*/}
                                             <br/>PGJH-09.1*5C.3/  Fondo 2020
-                                            <br/>Numero de hojas:{/*{this.state.}*/}</p>
+                                            <br/>Número de hojas:{/*{this.state.}*/}</p>
                               </div>
                         </div>
                         <div class="fundamento">
@@ -107,11 +107,11 @@ render(){
 
                                               <p class="cons">
                                               <b class="negritas">Fundamento legal </b>
-                                               Costitucion Politica de los Estados Unidos Mexicanos, articulo 6 fraccion I y II, 8°Costitucions politica de los
-                                              esatdos de Hidalgo; articulo 4 bis 17, 18, 19, 20, 21 89, 90 y 91. Ley Organica de Ministerio Publico del  Estado de Hidalgo, articulo  74 fracciones I, II, V, VI, IX, XIV,  Y XXX.
-                                              Ley de transpariencia y Acceso a la  Informacion  Publica Gubernamental para el Estado de Hidalgo articulo 5 fraccion X, 6, 19, 20, 21, 22 fraccion XIV, XVI, XVII Y XX.
-                                              Ley de Responsabilidades de los Servidores Publicos para el Estado de Hidalgo, articulos 42 y 47 fraccion II y III. Codigo Fiscal  de la Federacion de articulos 30, 67.
-                                              Ley de los Archivos del Estado de Hidalgo articulos 2, 3, 4 fraccion X, 9 y 31. Reglamento de la Ley de los Archivos del Estado de Hidalgo articulo 2 fraccion I.
+                                               Costitución Politíca de los Estados Unidos Mexicanos, artículo 6 fracción I y II, 8° Costitución politica del
+                                              Estados de Hidalgo, artículo 4 ter 89, 90 y 91. Ley Organica de Ministerio Público del Estado de Hidalgo, artículo 17 y 27 fracciones I, 36.
+                                              Ley de transpariencia y Acceso a la  Información  Publica Gubernamental para el Estado de Hidalgo artículo 5 fracción X, 6, 22 fracciones XVIII y XIX.
+                                              36 fracción I, Ley de Responsabilidades de los Servidores Públicos del Estado de Hidalgo, artículos 47. Ley de Archivos del Estado de Hidalgo artículos 2, 3, 4, fracción X, 9 y 31.
+                                              Reglamento de la Ley de los Archivos del Estado de Hidalgo artículo 2 fracción I.
                                               </p>
 
                         </div>
@@ -120,7 +120,7 @@ render(){
 
         <div class="cajas">
                   <div class="cajas-valor1">
-                              <p class="t-cajass">Valor documento primario</p>
+                              <p class="t-cajass">Valor Documento Primario</p>
                               <p class="t-cajas">Administrativo<img className='svg'src={boton2} alt=''/></p>
                               <p class="t-cajas">Fiscal <img className='svg' src={boton} alt=''/></p>
                               <p class="t-cajas">Legal<img className='svg' src={boton} alt=''/></p>
@@ -128,15 +128,15 @@ render(){
                     </div>
 
                   <div class="cajas-valor2">
-                              <p class="t-cajass">Valor Documental secundario</p>
+                              <p class="t-cajass">Valor Documental Secundario</p>
                               <p class="t-cajas">Informativo <img className='svg' src={boton2} alt=''/></p>
                               <p class="t-cajas">Evidencial<img className='svg' src={boton} alt=''/></p>
                               <p class="t-cajas">Testimonial<img className='svg' src={boton} alt=''/></p>
                       </div>
 
                       <div class="cajas-valor3">
-                              <p class="t-cajass">Clasificacion de la informacion</p>
-                              <p class="t-cajas">Publica<img className='svg' src={boton2} alt=''/></p>
+                              <p class="t-cajass">Clasificación de la Información</p>
+                              <p class="t-cajas">Pública<img className='svg' src={boton2} alt=''/></p>
                               <p class="t-cajas">Reservada<img className='svg' src={boton} alt=''/></p>
                               <p class="t-cajas">Cofindencial<img className='svg' src={boton} alt=''/></p>
                       </div>
@@ -149,12 +149,12 @@ render(){
                                 <p class="vig-t">Vigencia Documental</p>
                           <div class="vigencia2">
                                 <p class="vig-t">En Tramite 1 Años</p>
-                                <p class="vig-t">concentracion 4 años           </p>
+                                <p class="vig-t">Concentracion 4 años           </p>
                                 <p class="vig-t">Total de Años</p>
                                 </div>
                     </div>
                     <div class="ubi">
-                          <p class="ubi-t">Ubicacion Fisica del Expediente<br/>Archivo tramite de la procuraduria General de Justicia, Archivo Inv. N 00167758</p>
+                          <p class="ubi-t">Ubicacion Fisica del Expediente<br/>Archivo tramite de la Procuraduria General de Justicia, Archivo Inv. N 00167758</p>
                     </div>
       </div>
 
@@ -195,9 +195,15 @@ render(){
 
 
 
-</div>
 
 </div>
+<ReactToPrint
+  trigger={() => <buttom class="bont_imprimir">imprimir</buttom>}
+  content={()=> this.holi}
+/>
+
+</div>
+
 )
 }
 }

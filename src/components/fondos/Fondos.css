@@ -2,7 +2,6 @@
   width: 100%;
   justify-content: center;
   display: flex;
-  margin-top: 50px;
 }
 .title {
   margin-left: 50px;
@@ -27,6 +26,7 @@
   flex-direction: row;
   width: 100%;
   justify-content: center;
+  margin-bottom: 100px;
 }
 .form-content {
   width: 50%;

@@ -114,6 +114,7 @@ p {
 .texto-de-pdf{
   font-size:17px;  /* modificaciones  18 y 16 */
 
+
 }
 .bueno {
   display:flex;
@@ -241,15 +242,22 @@ justify-content: center;
 }
 
 .cpdf-subdad{
-              padding-left:15%;
+              padding-top: 50px;
+              padding-left:10%;
             width:80%;
 
 
 }
+.ims
+{
+  width: 68px;
+  height: 60px;
+  margin-bottom: 5px;}
+
 .im
 {
-  width: 70px;
-  height: 70px;
+  width: 68px;
+  height: 68px;
   margin-bottom: 5px;
 
 }
@@ -278,6 +286,7 @@ justify-content: center;
 
 }
 .acomodar{
+  padding-top: 10px;
   display:flex;
   justify-content: space-between;
   flex-direction: row;
@@ -505,7 +514,7 @@ font-size: 12px;
         font-size: 11px;
 }
 .footer{
-  margin-top: 10px;
+  margin-top: 30px;
   width: 100%;
 
 }

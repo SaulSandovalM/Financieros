@@ -43,7 +43,7 @@ class Pdf extends Component{
             <p class="texto-de-pdf">Bueno por: {this.state.fondo.importe}</p>
           </div>
           <div class="recibi">
-            <p class="texto-de-pdf">Recibí   de la  Secretaría  de  Finanzas Públicas  del  Gobierno  del  Estado de Hidalgo la cantidad de:
+            <p class="texto-de-pdf">Recibí de la Secretaría de Finanzas Públicas  del  Gobierno  del  Estado de Hidalgo la cantidad de:
              $ {this.state.fondo.importe} ({(NumberAsString(this.state.fondo.importe))})</p>
           </div>
           <div class="concepto">
@@ -57,12 +57,12 @@ class Pdf extends Component{
           </div>
           <div class='firma-dad-r'>
             <div class='firma-raya-r'>
-              <p class="texto-de-pdf">MTRO. LEÓN MAXIMILIANO HERNÁNDEZ VALDÉS<br/>R.F.C.: HEVL-750104</p>
+              <p class="texto-de-pdf" style={{textAlign:"center"}}>MTRO. LEÓN MAXIMILIANO HERNÁNDEZ VALDÉS<br/>R.F.C.: HEVL-750104</p>
             </div>
           </div>
         </div>
         <ReactToPrint
-          trigger={() => <buttom class="bont_imprimir">imprimir</buttom>}
+          trigger={() => <buttom class="bont_imprimir">Imprimir</buttom>}
           content={()=> this.holi}
         />
       </div>
