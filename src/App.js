@@ -12,6 +12,7 @@ import Edita from './components/analitico/Edita';
 import Show from './components/comprometidos/Show';
 import Pdf from './components/consulta/pdf';
 import Pppdf from './components/consulta/pppdf';
+import Frpdf from './components/consulta/frpdf';
 import Cpdf from './components/consulta/Cpdf';
 import ControlP from './components/controlp/ControlP';
 import Add from './components/controlp/Add';
@@ -70,6 +71,7 @@ function App(props) {
       <Route path='/edita/:id' component={Edita} />
       <Route path="/Pdf/:id" component={Pdf} />
       <Route path="/Pppdf/:id" component={Pppdf} />
+      <Route path="/Frpdf/:id" component={Frpdf} />
       <Route path="/Cpdf/:id" component={Cpdf} />
       <Route path="/add/:id" component={Add} />
       <Route path="/addcomple/:id" component={Addcomple} />

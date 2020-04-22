@@ -107,7 +107,7 @@ class TablaComprometidos extends Component {
                       <Link to={`/Pppdf/${fondos.key}`}>Ver</Link>
                     }
                     { fondos.tipo_doc === 'Fondo Revolvente' &&
-                      <Link to={`/Pdf/${fondos.key}`}>Ver</Link>
+                      <Link to={`/Frpdf/${fondos.key}`}>Ver</Link>
                     }
                     { fondos.tipo_doc === 'Gasto a Comprobar' &&
                       <Link to={`/Pdf/${fondos.key}`}>Ver</Link>
