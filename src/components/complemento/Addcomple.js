@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import firebase from '../../Firebase';
-import './Control.css';
+import './Complemento.css';
 
-class Add extends Component {
+class Addcomple extends Component {
   constructor(props) {
     super(props);
     this.unsubscribe = null;
@@ -13,36 +13,41 @@ class Add extends Component {
       realizo: '',
       tipo_doc: '',
       importe: '',
-      beneficiario: '',
+      fecha_actual: '',
+      folio_ing: '',
+      contrarecibo: '',
       fecha_contra: '',
-      no_contra: '',
+      poliza: '',
       fecha_deposito: '',
       mes_pago: '',
-      control: []
+      complemento: []
     };
   }
 
   onCollectionUpdate = (querySnapshot) => {
-    const control = [];
+    const complemento = [];
     querySnapshot.forEach((doc) => {
-      const { fecha_contra, no_contra, fecha_deposito, mes_pago } = doc.data();
-      control.push({
+      const { fecha_actual, folio_ing, contrarecibo, fecha_contra, poliza, fecha_deposito, mes_pago } = doc.data();
+      complemento.push({
         key: doc.id,
         doc, // DocumentSnapshot
+        fecha_actual,
+        folio_ing,
+        contrarecibo,
         fecha_contra,
-        no_contra,
+        poliza,
         fecha_deposito,
-        mes_pago,
+        mes_pago
       });
     });
     this.setState({
-      control
+      complemento
    });
   }
 
   componentDidMount() {
     const ref = firebase.firestore().collection('fondos').doc(this.props.match.params.id);
-    const updateRef = firebase.firestore().collection('fondos').doc(this.props.match.params.id).collection('control');
+    const updateRef = firebase.firestore().collection('fondos').doc(this.props.match.params.id).collection('complemento');
     this.unsubscribe = updateRef.onSnapshot(this.onCollectionUpdate);
     ref.get().then((doc) => {
       if (doc.exists) {
@@ -54,11 +59,13 @@ class Add extends Component {
           realizo: fondos.realizo,
           tipo_doc: fondos.tipo_doc,
           importe: fondos.importe,
-          beneficiario: fondos.beneficiario,
+          fecha_actual: fondos.fecha_actual,
+          folio_ing: fondos.folio_ing,
+          contrarecibo: fondos.contrarecibo,
           fecha_contra: fondos.fecha_contra,
-          no_contra: fondos.no_contra,
+          poliza: fondos.poliza,
           fecha_deposito: fondos.fecha_deposito,
-          mes_pago: fondos.mes_pago,
+          mes_pago: fondos.mes_pago
         });
       } else {
         console.log("No se encuentra documento");
@@ -75,37 +82,58 @@ class Add extends Component {
   onSubmit = (e) => {
     e.preventDefault();
 
-    const { fecha_contra, no_contra, fecha_deposito, mes_pago } = this.state;
+    const { fecha_actual, folio_ing, contrarecibo, fecha_contra, poliza, fecha_deposito, mes_pago } = this.state;
 
-    const updateRef = firebase.firestore().collection('fondos').doc(this.props.match.params.id).collection('control').doc();
+    const updateRef = firebase.firestore().collection('fondos').doc(this.props.match.params.id).collection('complemento').doc();
     updateRef.set({
+      fecha_actual,
+      folio_ing,
+      contrarecibo,
       fecha_contra,
-      no_contra,
+      poliza,
       fecha_deposito,
-      mes_pago,
+      mes_pago
     }).then((docRef) => {
       this.setState({
+        fecha_actual: '',
+        folio_ing: '',
+        contrarecibo: '',
         fecha_contra: '',
-        no_contra: '',
+        poliza: '',
         fecha_deposito: '',
-        mes_pago: '',
+        mes_pago: ''
       });
     })
     .catch((error) => {
-      console.error("Error Agregando el documento: ", error);
+      console.error("Error adding document: ", error);
     });
   }
 
   render() {
+
+    var today = new Date();
+    var dd = today.getDate();
+    var mm = today.getMonth()+1;
+    var yyyy = today.getFullYear();
+    if ( dd < 10 ){
+      dd = '0' + dd
+    }
+    if ( mm < 10 ){
+      mm = '0' + mm
+    }
+    today = yyyy + '-' + mm + '-' + dd;
+
+    const { fecha_actual, folio_ing, contrarecibo, fecha_contra, poliza, fecha_deposito, mes_pago } = this.state;
+
     return (
       <div class="container-edit" style={{marginTop: '50px'}}>
         <div className="comp-container">
           <div className="edit-com-comp">
             <div className="App-edit">
-              <h1 style={{fontFamily: 'Arial'}}>Agregar Control Presupuestal</h1>
+              <h1 style={{fontFamily: 'Arial'}}>Complemento de Pago</h1>
             </div>
             <div className="edit-row">
-              <label for="fondo" className="tipo-tw" style={{fontFamily: 'Arial'}}>Fondos:</label>
+              <label for="fondo" className="tipo-tw" style={{fontFamily: 'Arial'}}>Fondo:</label>
               <input name="fondo" value={this.state.fondo} onChange={this.onChange} className="height-ct" disabled/>
             </div>
             <div className="edit-row">
@@ -124,40 +152,48 @@ class Add extends Component {
               <label for="importe" className="tipo-tw" style={{fontFamily: 'Arial'}}>Importe:</label>
               <input name="importe" value={'$'+this.state.importe} onChange={this.onChange} className="height-ct" disabled/>
             </div>
-            <div className="edit-row">
-              <label for="importe" className="tipo-tw" style={{fontFamily: 'Arial'}}>Beneficiario:</label>
-              <input name="importe" value={this.state.beneficiario} onChange={this.onChange} className="height-ct" disabled/>
-            </div>
           </div>
           <div className="table-ed-2">
-            <form onSubmit={this.onSubmit} style={{width: '60%'}}>
-              <div className="edit-tab-row-c">
-                <div className="tabla-edit-c" style={{fontFamily: 'Arial', color: '#FFF'}}>
-                  Fecha Contrarecibo
+            <form onSubmit={this.onSubmit} style={{width: '100%'}}>
+              <div className="edit-tab-row-t">
+                <div className="tabla-edit-l" style={{fontFamily: 'Arial', color: '#FFF'}}> {/*select*/}
+                  Fecha Actual
                 </div>
-                <div className="tabla-edit-c" style={{fontFamily: 'Arial', color: '#FFF'}}>
-                  No de Contrarecibo
+                <div className="tabla-edit-l" style={{fontFamily: 'Arial', color: '#FFF'}}> {/*select*/}
+                  Folio de ing contra
                 </div>
-                <div className="tabla-edit-c" style={{fontFamily: 'Arial', color: '#FFF'}}>
-                  Fecha Deposito
+                <div className="tabla-edit-l" style={{fontFamily: 'Arial', color: '#FFF'}}> {/*select*/}
+                  Contra-Recibo
                 </div>
-                <div className="tabla-edit-c" style={{fontFamily: 'Arial', color: '#FFF'}}>
+                <div className="tabla-edit-l" style={{fontFamily: 'Arial', color: '#FFF'}}>
+                  Fecha de Contrarecibo
+                </div>
+                <div className="tabla-edit-l" style={{fontFamily: 'Arial', color: '#FFF'}}>
+                  Numero de Poliza
+                </div>
+                <div className="tabla-edit-l" style={{fontFamily: 'Arial', color: '#FFF'}}>
+                  Fecha de Deposito
+                </div>
+                <div className="tabla-edit-l" style={{fontFamily: 'Arial', color: '#FFF'}}>
                   Mes de Pago
                 </div>
               </div>
               <div>
-                {this.state.control.map(control =>
+                {this.state.complemento.map(complemento =>
                   <div>
                     <div className="products-al">
-                      <div className="tabla-edit-c">{control.fecha_contra}</div>
-                      <div className="tabla-edit-c">{control.no_contra}</div>
-                      <div className="tabla-edit-c">{control.fecha_deposito}</div>
-                      <div className="tabla-edit-c">{control.mes_pago}</div>
+                      <div className="tabla-edit-c">{complemento.fecha_actual}</div>
+                      <div className="tabla-edit-c">{complemento.folio_ing}</div>
+                      <div className="tabla-edit-c">{complemento.contrarecibo}</div>
+                      <div className="tabla-edit-c">{complemento.fecha_contra}</div>
+                      <div className="tabla-edit-c">{complemento.poliza}</div>
+                      <div className="tabla-edit-c">{complemento.fecha_deposito}</div>
+                      <div className="tabla-edit-c">{complemento.mes_pago}</div>
                     </div>
                   </div>
                 )}
               </div>
-              {/*<div className="edit-tab-row-2">
+            {/*<div className="edit-tab-row-2">
                 <div className="tabla-edit-c">
                   Total
                 </div>
@@ -177,17 +213,26 @@ class Add extends Component {
                 <div className="tabla-edit-c">
                 </div>
               </div>*/}
-              <div className="edit-tab-rowc">
-                <div className="tabla-edit-control">
-                  <input type="date" name="fecha_contra" onChange={this.onChange} ref="fecha_contra" className="input-edi"/>
+              <div className="edit-tab-row-2">
+                <div className="tabla-edit-c">
+                  <input type="date" className="input-edi" min={today} max={today} name="fecha_actual" value={fecha_actual} onChange={this.onChange} ref="fecha_actual" required/>
                 </div>
-                <div className="tabla-edit-control">
-                  <input name="no_contra" onChange={this.onChange} ref="no_contra" className="input-edi"/>
+                <div className="tabla-edit-c">
+                  <input className="input-edi" name="folio_ing" value={folio_ing} onChange={this.onChange} ref="folio_ing" required/>
                 </div>
-                <div className="tabla-edit-control">
-                  <input type="date" min="2020-01-01" max="2020-12-31" name="fecha_deposito" onChange={this.onChange} ref="fecha_deposito" className="input-edi"/>
+                <div className="tabla-edit-c">
+                  <input className="input-edi" name="contrarecibo" value={contrarecibo} onChange={this.onChange} ref="contrarecibo" required/>
                 </div>
-                <div className="tabla-edit-control">
+                <div className="tabla-edit-c">
+                  <input type="date" className="input-edi" min={today} max={today} name="fecha_contra" value={fecha_contra} onChange={this.onChange} ref="fecha_contra" required/>
+                </div>
+                <div className="tabla-edit-c">
+                  <input type="number" name="poliza" onChange={this.onChange} ref="poliza" className="input-edi"/>
+                </div>
+                <div className="tabla-edit-c">
+                  <input type="date" className="input-edi" min={today} max={today} name="fecha_deposito" value={fecha_deposito} onChange={this.onChange} ref="fecha_deposito" required/>
+                </div>
+                <div className="tabla-edit-c">
                   <select name="mes_pago" onChange={this.onChange} ref="mes_pago" className="input-edi">
                     <option name="mes_pago"></option>
                     <option name="mes_pago">Enero</option>
@@ -207,7 +252,13 @@ class Add extends Component {
               </div>
               <div className="form-container-last">
                 <div className="botones">
-                  <button className="bt-s2" type='submit' style={{fontFamily: 'Arial'}}>Guadar</button>
+                  <button
+                    className="bt-s2"
+                    type='submit'
+                    style={{fontFamily: 'Arial'}}
+                    >
+                      Guadar
+                  </button>
                 </div>
               </div>
             </form>
@@ -218,4 +269,4 @@ class Add extends Component {
   }
 }
 
-export default Add;
+export default Addcomple;

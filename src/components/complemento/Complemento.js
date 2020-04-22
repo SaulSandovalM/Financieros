@@ -65,7 +65,7 @@ class Complemento extends Component {
                   <div className="a-row">{fondos.tipo_doc}</div>
                   <div className="a-row">{fondos.importe}</div>
                   <div className="a-row vista">
-                    <Link to={`/edit/${fondos.key}`}>Ver</Link>
+                    <Link to={`/Addcomple/${fondos.key}`}>Ver</Link>
                   </div>
                 </div>
               </div>

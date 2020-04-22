@@ -16,6 +16,7 @@ import Cpdf from './components/consulta/Cpdf';
 import ControlP from './components/controlp/ControlP';
 import Add from './components/controlp/Add';
 import Complemento from './components/complemento/Complemento';
+import Addcomple from './components/complemento/Addcomple';
 
 function App(props) {
   const { isAuthenticated, isVerifying } = props;
@@ -71,6 +72,7 @@ function App(props) {
       <Route path="/Pppdf/:id" component={Pppdf} />
       <Route path="/Cpdf/:id" component={Cpdf} />
       <Route path="/add/:id" component={Add} />
+      <Route path="/addcomple/:id" component={Addcomple} />
     </Switch>
   );
 }
