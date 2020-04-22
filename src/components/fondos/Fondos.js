@@ -85,14 +85,15 @@ class Fondos extends Component {
         realizo: '',
       });
       // const statsRef = firebase.firestore().collection('contador').doc('--stats--');
-      //
+      // //
       // const increment = firebase.firestore.FieldValue.increment(1);
-      //
-      // const batch = firebase.firestore().batch();
-      // const storyRef = firebase.firestore().collection('contador').doc(`${Math.random()}`);
-      // batch.set(storyRef, { title: 'Nuevo Fondo!' });
-      // batch.set(statsRef, { storyCount: increment }, { merge: true });
-      // batch.commit();
+      // //
+      //  const batch = firebase.firestore().batch();
+      //  const storyRef = firebase.firestore().collection('contador').doc(`${Math.random()}`);
+      //  batch.set(storyRef, { title: 'Nuevo Fondo!' });
+      //  batch.set(statsRef, { storyCount: increment }, { merge: true });
+      //  batch.commit();
+      //  console.log(statsRef, { storyCount: increment });
 
       //this.props.history.push(`/edit/${this.state.fondos.key}`);
       this.props.history.push('Comprometidos')
@@ -102,14 +103,19 @@ class Fondos extends Component {
     });
   }
 
-  handleChange = (event) => {
-    this.setState({
-      value: event.target.value,
-      suggest: event.suggestion ? event.suggestion.value : ''
-    });
-  }
-
   render() {
+
+    // var docRef = firebase.firestore().collection("contador").doc("--stats--");
+    // docRef.get().then(function(doc) {
+    // if (doc.exists) {
+    //     console.log(doc.data());
+    // } else {
+    //     // doc.data() will be undefined in this case
+    //     console.log("No such document!");
+    // }
+    // }).catch(function(error) {
+    //     console.log("Error getting document:", error);
+    // });
 
     var user = firebase.auth().currentUser;
     var email;
@@ -121,10 +127,27 @@ class Fondos extends Component {
 
     let admin;
     if (email == 'administrador@procu.com') {
-      admin = 'Admin';
-    }
-    else {
-      admin = 'Julian';
+      admin = 'ADMIN';
+    } else if (email == 'hector@procu.com') {
+      admin = 'HECTOR';
+    } else if (email == 'maguel@procu.com') {
+      admin = 'MIGUEL';
+    } else if (email == 'liliana@procu.com') {
+      admin = 'LILIANA';
+    } else if (email == 'liliana@procu.com') {
+      admin = 'LILIANA';
+    } else if (email == 'liliana@procu.com') {
+      admin = 'LILIANA';
+    } else if (email == 'liliana@procu.com') {
+      admin = 'LILIANA';
+    } else if (email == 'liliana@procu.com') {
+      admin = 'LILIANA';
+    } else if (email == 'liliana@procu.com') {
+      admin = 'LILIANA';
+    } else if (email == 'liliana@procu.com') {
+      admin = 'LILIANA';
+    } else if (email == 'liliana@procu.com') {
+      admin = 'LILIANA';
     }
     console.log(admin)
 
@@ -143,6 +166,8 @@ class Fondos extends Component {
     const { fondo, fecha, tipo_doc, oficio_aut, no_oficio, no_lici, importe, desc, beneficiario, realizo } = this.state;
 
     const allowCustom = this.state.allowCustom;
+
+    const reali = admin;
 
     return (
       <div className="cen-cont">
@@ -202,13 +227,9 @@ class Fondos extends Component {
               </div>
               {/*seccion 5*/}
               <div className="form-container">
-                <div className="form-content-5">
+                <div className="form-content-desc">
                   <label for="beneficiario" className="itc" style={{fontFamily: 'Arial'}}>Beneficiario:</label>
                   <DropDownList style={{width: '100%', borderColor: 'rgba(0,0,0,0.42)'}} data={this.beneficiario} allowCustom={allowCustom} name="beneficiario" value={beneficiario} onChange={this.onChange} required ref="beneficiario"/>
-                </div>
-                <div className="form-content-5">
-                  <label for="realizo" className="itc" style={{fontFamily: 'Arial'}}>Realizo:</label>
-                  <Input type="text" style={{width: '100%', borderColor: 'rgba(0,0,0,0.42)'}} name="realizo" value={admin} onChange={this.onChange} required ref="realizo"/>
                 </div>
               </div>
               {/*seccion 6*/}
@@ -218,9 +239,13 @@ class Fondos extends Component {
                   <Input style={{width: '100%', borderColor: 'rgba(0,0,0,0.42)'}} className="border-m" type="text" name="desc" value={desc} onChange={this.onChange} required ref="desc"/>
                 </div>
               </div>
-              <div className="form-container-last">
+              <div className="form-content-5 hide">
+                <label for="realizo" className="itc" style={{fontFamily: 'Arial'}}>Realizo:</label>
+                <input className="border-m" name="realizo" value={realizo} onChange={this.onChange} required ref="realizo"/>
+              </div>
+              <div className="form-container-last" style={{marginTop: '-100px'}}>
                 <div className="botones">
-                  <button className="bt-s2" type='submit'onClick={this.props.nextPath}  style={{fontFamily: 'Arial'}}>Guadar</button>
+                  <button className="bt-s2" type='submit' onClick={() => this.setState({ realizo: this.state.realizo = admin })} style={{fontFamily: 'Arial'}}>Guadar</button>
                   <button className="bt-s3" onClick={this.cancelCourse.bind(this)}>Cancelar</button>
                 </div>
               </div>

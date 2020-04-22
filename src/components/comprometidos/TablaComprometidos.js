@@ -52,15 +52,32 @@ class TablaComprometidos extends Component {
       email = user.email;
     }
     console.log(email);
-    const correo = email;
 
-    let admin, julian;
-    if (email = 'administrador@gmail.com') {
-      admin = 'Admin';
+    let admin;
+    if (email == 'administrador@procu.com') {
+      admin = 'ADMIN';
+    } else if (email == 'hector@procu.com') {
+      admin = 'HECTOR';
+    } else if (email == 'maguel@procu.com') {
+      admin = 'MIGUEL';
+    } else if (email == 'liliana@procu.com') {
+      admin = 'LILIANA';
+    } else if (email == 'liliana@procu.com') {
+      admin = 'LILIANA';
+    } else if (email == 'liliana@procu.com') {
+      admin = 'LILIANA';
+    } else if (email == 'liliana@procu.com') {
+      admin = 'LILIANA';
+    } else if (email == 'liliana@procu.com') {
+      admin = 'LILIANA';
+    } else if (email == 'liliana@procu.com') {
+      admin = 'LILIANA';
+    } else if (email == 'liliana@procu.com') {
+      admin = 'LILIANA';
+    } else if (email == 'liliana@procu.com') {
+      admin = 'LILIANA';
     }
-    if (email = 'julian@gmail.com') {
-      julian = 'ELOY';
-    }
+    console.log(admin)
 
     return (
       <div className="cent-compro">
@@ -76,7 +93,7 @@ class TablaComprometidos extends Component {
           <div>
             {this.state.fondos.map(fondos =>
               <div>
-                {fondos.realizo == julian &&
+                {fondos.realizo === admin &&
                 <div className="products-al">
                   <div className="a-row">{fondos.fondo}</div>
                   <div className="a-row">{fondos.fecha}</div>

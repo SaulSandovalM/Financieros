@@ -130,7 +130,7 @@ class Add extends Component {
             </div>
           </div>
           <div className="table-ed-2">
-            <form onSubmit={this.onSubmit} style={{width: '50%'}}>
+            <form onSubmit={this.onSubmit} style={{width: '60%'}}>
               <div className="edit-tab-row-c">
                 <div className="tabla-edit-c" style={{fontFamily: 'Arial', color: '#FFF'}}>
                   Fecha Contrarecibo
@@ -179,16 +179,16 @@ class Add extends Component {
               </div>*/}
               <div className="edit-tab-rowc">
                 <div className="tabla-edit-control">
-                  <input name="fecha_contra" onChange={this.onChange} ref="fecha_contra" className="input-edi"/>
+                  <input type="date" name="fecha_contra" onChange={this.onChange} ref="fecha_contra" className="input-edi"/>
                 </div>
                 <div className="tabla-edit-control">
                   <input name="no_contra" onChange={this.onChange} ref="no_contra" className="input-edi"/>
                 </div>
                 <div className="tabla-edit-control">
-                  <input type="date" min="2020-01-01" max="2020-12-31" name="mes_pago" onChange={this.onChange} ref="mes_pago" className="input-edi"/>
+                  <input type="date" min="2020-01-01" max="2020-12-31" name="fecha_deposito" onChange={this.onChange} ref="fecha_deposito" className="input-edi"/>
                 </div>
                 <div className="tabla-edit-control">
-                  <input name="fecha_deposito" onChange={this.onChange} ref="fecha_deposito " className="input-edi"/>
+                  <input name="mes_pago" onChange={this.onChange} ref="mes_pago" className="input-edi"/>
                 </div>
               </div>
               <div className="form-container-last">

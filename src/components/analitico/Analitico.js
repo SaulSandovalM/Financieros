@@ -44,6 +44,41 @@ class Analitico extends Component {
   }
 
   render() {
+
+    var user = firebase.auth().currentUser;
+    var email;
+
+    if (user != null) {
+      email = user.email;
+    }
+    console.log(email);
+
+    let admin;
+    if (email == 'administrador@procu.com') {
+      admin = 'ADMIN';
+    } else if (email == 'hector@procu.com') {
+      admin = 'HECTOR';
+    } else if (email == 'maguel@procu.com') {
+      admin = 'MIGUEL';
+    } else if (email == 'liliana@procu.com') {
+      admin = 'LILIANA';
+    } else if (email == 'liliana@procu.com') {
+      admin = 'LILIANA';
+    } else if (email == 'liliana@procu.com') {
+      admin = 'LILIANA';
+    } else if (email == 'liliana@procu.com') {
+      admin = 'LILIANA';
+    } else if (email == 'liliana@procu.com') {
+      admin = 'LILIANA';
+    } else if (email == 'liliana@procu.com') {
+      admin = 'LILIANA';
+    } else if (email == 'liliana@procu.com') {
+      admin = 'LILIANA';
+    } else if (email == 'liliana@procu.com') {
+      admin = 'LILIANA';
+    }
+    console.log(admin)
+
     return (
       <div className="cent-ana">
         <div className="App">
@@ -58,16 +93,18 @@ class Analitico extends Component {
           <div>
             {this.state.fondos.map(fondos =>
               <div>
-                <div className="products-al">
-                  <div className="a-row">{fondos.fondo}</div>
-                  <div className="a-row">{fondos.fecha}</div>
-                  <div className="a-row">{fondos.realizo}</div>
-                  <div className="a-row">{fondos.tipo_doc}</div>
-                  <div className="a-row">{fondos.importe}</div>
-                  <div className="a-row vista">
-                    <Link to={`/edita/${fondos.key}`}>Ver</Link>
+                {fondos.realizo === admin &&
+                  <div className="products-al">
+                    <div className="a-row">{fondos.fondo}</div>
+                    <div className="a-row">{fondos.fecha}</div>
+                    <div className="a-row">{fondos.realizo}</div>
+                    <div className="a-row">{fondos.tipo_doc}</div>
+                    <div className="a-row">{fondos.importe}</div>
+                    <div className="a-row vista">
+                      <Link to={`/edita/${fondos.key}`}>Ver</Link>
+                    </div>
                   </div>
-                </div>
+                }
               </div>
             )}
           </div>
