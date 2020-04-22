@@ -97,6 +97,7 @@
   margin-left: 15%;
 }
 /* stilos de pdf*/
+
 p {
   font-size: 15px;
   font-family: sans-serif;
@@ -106,29 +107,28 @@ p {
   width: 100%;
  }
 .subdad {
-  padding-left: 15%;
+  padding-left: 10%;
   width: 80%;
+}
+
+.texto-de-pdf{
+  font-size:17px;  /* modificaciones  18 y 16 */
+
+
 }
 .bueno {
   display:flex;
   justify-content: flex-end;
   flex-direction: row;
   padding-top: 100px;
+
 }
 .recibi {
   padding-top: 150px;
 }
-/*
-.monto{
-  display:flex;
-  justify-content: space-between;
-  flex-direction:row;
-  width: 100%;
-  padding-top: .5PX;
-}
-*/
+
 .concepto {
-  padding-top: 50px;
+  padding-top:0px;
 }
 .fecha {
   display:flex;
@@ -145,14 +145,14 @@ p {
 .firma-dad {
   width: 100%;
   display:flex;
-  justify-content:center;
+  justify-content: flex-start;
   flex-direction:row;
-  padding-top: 70px;
+  padding-top: 80px;
 }
 .firma-raya {
   border-top: 1px solid black;
-  width: 70%;
-  text-align:center;
+  width: 58;
+  text-align:left;
 }
 @media print {
   .print-source {
@@ -169,6 +169,7 @@ body > .print-source {
   font-family: sans-serif;
 
 }
+
 /*boton*/
 .bont_imprimir{
   height: 30px;
@@ -179,13 +180,25 @@ body > .print-source {
   font-size: 20px;
   color: #FFF;
 }
+.firma-dad-r{
+  width: 100%;
+display: flex;
+justify-content: center;
+}
+.firma-raya-r{
+  margin-top: 80px;
+  border-top: 1px solid;
+
+
+
+}
 /*pppdf*/
 .pppdf-dad {
   height: 100%;
   width: 100%;
 }
 .pppdf-subdad {
-  padding-left: 15%;
+  padding-left: 10%;
   width: 80%;
 }
 .direccion {
@@ -199,26 +212,26 @@ body > .print-source {
   text-align: right;
 }
 .prensente {
-  padding-top: 45px;
+  padding-top: 48px;
   padding-left:0px;
 }
 .añadido {
   display:flex;
   justify-content: flex-end;
   flex-direction: row;
-  padding-top:10px;
+  padding-top:15px;
 }
-.texto-ofi{
+.texto-ofi_ppp{
   text-align: justify;
-  padding-top: 20px;
+  padding-top: 32px;
 }
 .ccp .text {
-  padding-top:150px;
-  font-size: 8px;
+  padding-top:120px;
+  font-size: 9px;
 }
 .atte{
-      padding-top: 20px;
-      text-align: center;
+      padding-top: 30px;
+      text-align: left;
     }
 
 /*Caratula*/
@@ -229,39 +242,100 @@ body > .print-source {
 }
 
 .cpdf-subdad{
-              padding-left:15%;
+              padding-top: 50px;
+              padding-left:10%;
             width:80%;
+
+
+}
+.ims
+{
+  width: 68px;
+  height: 60px;
+  margin-bottom: 5px;}
+
+.im
+{
+  width: 68px;
+  height: 68px;
+  margin-bottom: 5px;
 
 }
 .ime{
-  width: 250px;
-  height: 80px;
+  width: 70px;
+  height: 70px;
+  justify-content: space-between;
+  margin-bottom: 5px;
+
+}
+
+.seccion-de{
+            border: 1px solid;
+
+}
+.text{
+      font-size: 12px;
+        padding-left: 10px;
+
+}
+.text-2{
+  font-size: 12px;
+    padding-left: 10px;
+    text-align: center;
+
 
 }
 .acomodar{
+  padding-top: 10px;
   display:flex;
   justify-content: space-between;
   flex-direction: row;
+  width: 100%;
 }
 .fondo-procu{
 padding-top: 0px;
-}
+display: flex;
+justify-content: flex-end;
 
+}
+.fondo-procus{
+padding-top: 0px;
+display: flex;
+justify-content:space-between;
+
+}
 .no-oficio{
           padding-top: 0px;
 }
 .seccion-de{
             padding-top: 0px;
+            margin-bottom: 5px;
+            width: 49%;
+
+}
+.asunto-iz{
+            border: 1px solid;
+            margin-bottom: 5px;
+            width: 49%;
+
 }
 .acomodar-2{
           display: flex;
           justify-content: space-between;
+          width: 100%;
 }
-.text-ofi{
+.texto-ofi{
+          border:1px solid;
           padding-top: 0px;
+          margin-bottom: 5px;
+          width: 49%;
 }
-.num.exp{
+.num-exp{
           padding-top: 0px;
+          border: 1px solid;
+          width: 49%;
+          margin-bottom: 5px;
+
 
 }
 .pru{
@@ -290,6 +364,9 @@ padding-top: 0px;
 text-align:justify;
 font-size: 9px;
 }
+.negritas{
+          font-size: 13px
+        }
 
 .cajas{
       display:flex;
@@ -316,14 +393,23 @@ font-size: 9px;
     height: 120px;
     padding: 0px 10px 0px;
     margin-bottom: 5px;
+
+
+
 }
 
+.t-cajass{
+  text-align:center;
+font-size: 12px;
 
+
+}
 .t-cajas{
         display: flex;
         justify-content:space-between;
         font-size: 12px;
         margin-bottom: 5px;
+
 }
 .svg{
         width: 15px;
@@ -349,12 +435,23 @@ font-size: 9px;
         width: 100%;
         height: 80px;
         margin-bottom: 5px;
+}
+
+.ubi-t{
+  font-size:11px;
+}
+.ubi-t2{
+
+  font-size:11px;
+
+
 
 }
 .vigencia{
             text-align:center;
             border:1px solid;
             width: 100%;
+            height: 80px;
             margin-bottom: 5px;
             display: flex;
             justify-content: space-between;
@@ -362,23 +459,28 @@ font-size: 9px;
 }
 .vigencia2{
           display: flex;
-          justify-content: space-between;
+          justify-content:space-around;
+
 
 }
 .vig-t{
           height: 5px;
+          font-size: 11px;
 
 }
 .cuadro{
             text-align:center;
             border:1px solid;
-            width: 30%;
-            height: 156px;
+            width: 33%;
+            height: 167px;
             display: flex;
             justify-content: center;
-            flex-direction: column;
+            flex-direction: row;
+            margin-bottom: 5px;
+
 
 }
+
 .final{
   width: 100%;
   display: flex;
@@ -395,6 +497,7 @@ font-size: 9px;
 
 
 
+
         }
 .fe-consulta{
               border:1px solid;
@@ -406,4 +509,15 @@ font-size: 9px;
 }
 .fe-consulta{
   text-align: center;
+}
+.t-caja{
+        font-size: 11px;
+}
+.footer{
+  margin-top: 30px;
+  width: 100%;
+
+}
+.mtro{
+
 }

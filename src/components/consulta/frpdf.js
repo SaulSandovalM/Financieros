@@ -3,6 +3,8 @@ import './Consulta.css';
 import ReactToPrint from 'react-to-print';
 import firebase from '../../Firebase';
 import { NumberAsString } from '../fondos/NumerosLetras.js';
+import programa from '../../img/logo_hgo.png';
+import logo2 from  '../../img/logo.jpg';
 
 class Frpdf extends Component{
   constructor(props) {
@@ -39,42 +41,48 @@ class Frpdf extends Component{
     return(
       <div className='pppdf-dad'>
         <div className='pppdf-subdad' ref={el => (this.holi= el)}>
-          <div class='direccion'>
-            <p> Direccion General de Administración y Finanzas </p>
-          </div>
+        <div class='fondo-procu'>
+          <img class="ime" src={logo2}/>
+
+
+        </div>
           <div class="no-oficio">
-            <p>Oficio No: PGI/DGAyF/ {this.state.fondo.no_oficio} /2020<br/> Pachuca de Soto, Hgo a {today}</p>
+            <p><b>Oficio No:</b> PGI/DGAyF/ {this.state.fondo.no_oficio}
+            <br/> Pachuca de Soto, Hidalgo a {today}
+            <br/><b>Asunto:</b>Reembolso de Fondo Revolvente</p>
+
           </div>
           <div class='prensente'>
-            <p>L.A.E. CESAR  ALBERTO GONALEZ LOPEZ
-            <br/>SUBSECRETARIO DE EGRESOS DE LA
-            <br/>SECRETARIA DE FINANZAS
-            <br/> P  R  E  S  E  N  T E</p>
+            <p><b>Lic.César Alberto González López
+            <br/>Subsecretario de Egresos de la
+           <br/> Secretaría de Finanzas Públicas
+            <br/>Presente</b></p>
           </div>
           <div class='añadido'>
-            <p>AT'N.: L.C.P. KARINA BARRIOS  VELZAZQUEZ
-            <br/>DIRECTORA  GENERAL DE CONTABILIDAD
-            <br/>GUBERNAMEENTAL</p>
+            <p><b>AT'N: L.C.P. Karina Barrios Velázquez
+            <br/>Directora General de Contabilidad
+            <br/>Gubernamental</b></p>
           </div>
-          <div class="texto-ofi">
-            <p>Por este conducto remito a usted, documentación original para su comprobación, por la cantidad de $ {this.state.fondo.importe} ({(NumberAsString(this.state.fondo.importe))}),
-            a nombre de "{this.state.fondo.beneficiario}" por concepto de Fondo Revolvente, correspondiente a Gasto de Operación según oficio de autorización {this.state.fondo.oficio_aut} del Ejercicio 2020</p>
-            <p>Sin otro particular, le envío un cordial y afectuoso saludo</p>
+          <div class="texto-ofi_ppp">
+            <p> Por medio de presente me permito enviar a Usted documentación amparada con número de
+            comprobantes "No.____", por un total de $ {this.state.fondo.importe} ({(NumberAsString(this.state.fondo.importe))}),
+            para el trámite de Reembolso de Fondo Revolvente, con cargo al proyecto {/*{this.state.comprometido.no_proyecto} y {this.state.fondo.no_proyec}*/},
+            otorgado en el oficio de autorización número de oficio {this.state.fondo.oficio_aut} a la Procuraduría General de Justicia del Estado de Hidalgo.</p>
+
+
+            <p>Sin otro particular por el momento, reciba un cordial saludo</p>
            </div>
-          <div class="atte">
-            <p> A T E N T A M E N T E
-            <br/>EL DIRECTOR GENERAL</p>
-          </div>
+           <div class="atte">
+              <p> Atentamente
+              <br/>Director General</p>
+           </div>
           <div class='firma-dad'>
             <div class='firma-raya'>
-              <p>MTRO. LEÓN MAXIMILIANO HERNÁNDEZ VALDÉS</p>
+              <p class="mtro">MTRO. LEÓN MAXIMILIANO HERNÁNDEZ VALDÉS</p>
             </div>
           </div>
           <div class="ccp">
-            <p class="text">
-            C.C.P...- Expedien
-            <br/>Minutario
-            <br/>LMHV/NRL/macht</p>
+            <p class="text">C.C.P...- Expedien<br/>Minutario<br/>LMHV/NRL/macht</p>
           </div>
         </div>
         <ReactToPrint

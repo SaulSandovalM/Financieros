@@ -40,29 +40,29 @@ class Pdf extends Component{
       <div className='fecha'>
         <div class='subdad' ref={el => (this.holi= el)}>
           <div className='bueno'>
-            <p>Bueno por: {this.state.fondo.importe}</p>
+            <p class="texto-de-pdf">Bueno por: {this.state.fondo.importe}</p>
           </div>
           <div class="recibi">
-            <p>Recibí   de la  Secretaría  de  Finanzas Públicas  del  Gobierno  del  Estado de Hidalgo la cantidad de:
+            <p class="texto-de-pdf">Recibí de la Secretaría de Finanzas Públicas  del  Gobierno  del  Estado de Hidalgo la cantidad de:
              $ {this.state.fondo.importe} ({(NumberAsString(this.state.fondo.importe))})</p>
           </div>
           <div class="concepto">
-            <p>Por {this.state.fondo.tipo_doc}</p>
+            <p class="texto-de-pdf">Por {this.state.fondo.tipo_doc}</p>
           </div>
           <div class='fecha'>
-            <p>Pachuca de Soto, Hgo a {today}</p>
+            <p class="texto-de-pdf">Pachuca de Soto, Hgo a {today}</p>
           </div>
           <div class='refe'>
-            <p>DIRECTOR GENERAL DE<br/>ADMINISTRACIÓN Y FINANZAS</p>
+            <p class="texto-de-pdf">DIRECTOR GENERAL DE<br/>ADMINISTRACIÓN Y FINANZAS</p>
           </div>
-          <div class='firma-dad'>
-            <div class='firma-raya'>
-              <p>MTRO. LEÓN MAXIMILIANO HERNÁNDEZ VALDÉS<br/>R.F.C.: HEVL-750104</p>
+          <div class='firma-dad-r'>
+            <div class='firma-raya-r'>
+              <p class="texto-de-pdf" style={{textAlign:"center"}}>MTRO. LEÓN MAXIMILIANO HERNÁNDEZ VALDÉS<br/>R.F.C.: HEVL-750104</p>
             </div>
           </div>
         </div>
         <ReactToPrint
-          trigger={() => <buttom class="bont_imprimir">imprimir</buttom>}
+          trigger={() => <buttom class="bont_imprimir">Imprimir</buttom>}
           content={()=> this.holi}
         />
       </div>
