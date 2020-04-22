@@ -62,6 +62,7 @@ class Edita extends Component {
   componentDidMount() {
     const ref = firebase.firestore().collection('fondos').doc(this.props.match.params.id);
     const updateRef = firebase.firestore().collection('fondos').doc(this.props.match.params.id).collection('analitico');
+    
     this.unsubscribe = updateRef.onSnapshot(this.onCollectionUpdate);
     ref.get().then((doc) => {
       if (doc.exists) {
