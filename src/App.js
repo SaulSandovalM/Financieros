@@ -18,6 +18,7 @@ import ControlP from './components/controlp/ControlP';
 import Add from './components/controlp/Add';
 import Complemento from './components/complemento/Complemento';
 import Addcomple from './components/complemento/Addcomple';
+import Caratula from './components/caratula/Caratula';
 
 function App(props) {
   const { isAuthenticated, isVerifying } = props;
@@ -62,6 +63,13 @@ function App(props) {
         exact
         path="/Complemento"
         component={Complemento}
+        isAuthenticated={isAuthenticated}
+        isVerifying={isVerifying}
+      />
+      <ProtectedRoute
+        exact
+        path="/Caratula"
+        component={Caratula}
         isAuthenticated={isAuthenticated}
         isVerifying={isVerifying}
       />

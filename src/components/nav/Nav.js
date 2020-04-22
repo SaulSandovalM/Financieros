@@ -50,6 +50,11 @@ class Nav extends Component {
           </Link>
         </div>
         <div className='navbar-left'>
+          <Link to="/Caratula" className="deco">
+            <h3 className="nav-t" style={{fontFamily: 'Arial'}}>Caratula</h3>
+          </Link>
+        </div>
+        <div className='navbar-left'>
           <div className="deco">
           <button onClick={this.handleLogout} className="nav-t" style={{background: '#092432', border: 'none'}}><h3 className="nav-t" style={{fontFamily: 'Arial'}}>Cerrar Sesion</h3></button>
             {isLoggingOut && <p>Cerrando Sesion....</p>}

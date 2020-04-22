@@ -1,5 +1,5 @@
 import React, { Component} from 'react';
-import './Consulta.css';
+import './Caratula.css';
 import ReactToPrint from 'react-to-print';
 import firebase from '../../Firebase';
 import { NumberAsString } from '../fondos/NumerosLetras.js';
@@ -8,30 +8,29 @@ import programa from '../../img/programalogo.png';
 import boton from '../../img/boton.svg';
 import boton2 from '../../img/circle-vol-1circle (1).svg';
 
-
 class Cpdf extends Component{
-  constructor(props) {
-    super(props);
-    this.state = {
-      fondo: {},
-      key: ''
-    };
-  }
-
-  componentDidMount() {
-    const ref = firebase.firestore().collection('fondos').doc(this.props.match.params.id);
-    ref.get().then((doc) => {
-      if (doc.exists) {
-        this.setState({
-          fondo: doc.data(),
-          key: doc.id,
-          isLoading: false
-        });
-      } else {
-        console.log("No such document!");
-      }
-    });
-  }
+  // constructor(props) {
+  //   super(props);
+  //   this.state = {
+  //     fondo: {},
+  //     key: ''
+  //   };
+  // }
+  //
+  // componentDidMount() {
+  //   const ref = firebase.firestore().collection('fondos').doc(this.props.match.params.id);
+  //   ref.get().then((doc) => {
+  //     if (doc.exists) {
+  //       this.setState({
+  //         fondo: doc.data(),
+  //         key: doc.id,
+  //         isLoading: false
+  //       });
+  //     } else {
+  //       console.log("No such document!");
+  //     }
+  //   });
+  // }
 
 render(){
   return(

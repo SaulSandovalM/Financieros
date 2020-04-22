@@ -104,20 +104,12 @@ class TablaComprometidos extends Component {
                     <div className="a-row">{fondos.importe}</div>
                     <div className="a-row vista">
                     { fondos.tipo_doc === 'Pago Directo' &&
-                      <Link to={`/Pppdf/${fondos.key}`}>Ver</Link>
+                      <Link to={`/Pdf/${fondos.key}`}>Ver</Link>
                     }
                     { fondos.tipo_doc === 'Fondo Revolvente' &&
                       <Link to={`/Frpdf/${fondos.key}`}>Ver</Link>
                     }
-                    { fondos.tipo_doc === 'Gasto a Comprobar' &&
-                      <Link to={`/Pdf/${fondos.key}`}>Ver</Link>
-                    }
-                    { fondos.tipo_doc === 'Reembolso de Gastos' &&
-                      <Link to={`/Cpdf/${fondos.key}`}>Ver</Link>
-                    }
-                    { fondos.tipo_doc === 'Cancelado' &&
-                      <Link to={`/Pdf/${fondos.key}`}>Ver</Link>
-                    }
+                    
                     </div>
                 </div>
                 }
