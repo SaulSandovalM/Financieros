@@ -40,10 +40,10 @@ class Pdf extends Component{
       <div className='fecha'>
         <div class='subdad' ref={el => (this.holi= el)}>
           <div className='bueno'>
-            <p class="texto-de-pdf">Bueno por: {this.state.fondo.importe}</p>
+            <p class="texto-de-pdf" >Bueno por: {this.state.fondo.importe}</p>
           </div>
           <div class="recibi">
-            <p class="texto-de-pdf">Recibí de la Secretaría de Finanzas Públicas  del  Gobierno  del  Estado de Hidalgo la cantidad de:
+            <p class="texto-de-pdf" style={{textAlign:"justify"}}>Recibí de la Secretaría de Finanzas Públicas  del  Gobierno  del  Estado de Hidalgo la cantidad de:
              $ {this.state.fondo.importe} ({(NumberAsString(this.state.fondo.importe))})</p>
           </div>
           <div class="concepto">

@@ -53,7 +53,7 @@ class Frpdf extends Component{
 
           </div>
           <div class='prensente'>
-            <p><b>Lic.César Alberto González López
+            <p><b>Lic. César Alberto González López
             <br/>Subsecretario de Egresos de la
            <br/> Secretaría de Finanzas Públicas
             <br/>Presente</b></p>
