@@ -12,28 +12,28 @@ import footer from '../../img/footer.png';
 
 
 class Cpdf extends Component{
-  // constructor(props) {
-  //   super(props);
-  //   this.state = {
-  //     fondo: {},
-  //     key: ''
-  //   };
-  // }
-  //
-  // componentDidMount() {
-  //   const ref = firebase.firestore().collection('fondos').doc(this.props.match.params.id);
-  //   ref.get().then((doc) => {
-  //     if (doc.exists) {
-  //       this.setState({
-  //         fondo: doc.data(),
-  //         key: doc.id,
-  //         isLoading: false
-  //       });
-  //     } else {
-  //       console.log("No such document!");
-  //     }
-  //   });
-  // }
+  constructor(props) {
+    super(props);
+    this.state = {
+      fondo: {},
+      key: ''
+    };
+  }
+
+  componentDidMount() {
+    const ref = firebase.firestore().collection('fondos').doc(this.props.match.params.id);
+    ref.get().then((doc) => {
+      if (doc.exists) {
+        this.setState({
+          fondo: doc.data(),
+          key: doc.id,
+          isLoading: false
+        });
+      } else {
+        console.log("No such document!");
+      }
+    });
+  }
 
 render(){
   return(
