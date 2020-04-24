@@ -35,6 +35,7 @@ class Fondos extends Component {
       value: '',
       suggest: '',
       key: '',
+      contador: {},
     };
   }
 
@@ -56,6 +57,7 @@ class Fondos extends Component {
     state[e.target.name] = e.target.value;
     this.setState(state);
   }
+
 
   onSubmit = (e) => {
     e.preventDefault();
@@ -86,38 +88,41 @@ class Fondos extends Component {
         beneficiario: '',
         realizo: '',
       });
-      // const statsRef = firebase.firestore().collection('contador').doc('--stats--');
-      // //
-      // const increment = firebase.firestore.FieldValue.increment(1);
-      // //
-      //  const batch = firebase.firestore().batch();
-      //  const storyRef = firebase.firestore().collection('contador').doc(`${Math.random()}`);
-      //  batch.set(storyRef, { title: 'Nuevo Fondo!' });
-      //  batch.set(statsRef, { storyCount: increment }, { merge: true });
-      //  batch.commit();
-      //  console.log(statsRef, { storyCount: increment });
 
-      //this.props.history.push(`/edit/${this.state.fondos.key}`);
-      this.props.history.push('Comprometidos')
+      const statsRef = firebase.firestore().collection('contador').doc('--stats--');
+
+      const increment = firebase.firestore.FieldValue.increment(1);
+
+       const batch = firebase.firestore().batch();
+       const storyRef = firebase.firestore().collection('contador').doc(`${Math.random()}`);
+       batch.set(storyRef, { title: 'Nuevo Fondo!' });
+       batch.set(statsRef, { storyCount: increment }, { merge: true });
+       batch.commit();
+       console.log(statsRef, { storyCount: increment });
+
+       this.props.history.push('/Comprometidos')
     })
     .catch((error) => {
       console.error("Error adding document: ", error);
     });
   }
 
-  render() {
+  componentDidMount() {
+    const ref = firebase.firestore().collection('contador').doc('--stats--');
+    ref.get().then((doc) => {
+      if (doc.exists) {
+        this.setState({
+          contador: doc.data(),
+          key: doc.id,
+          isLoading: false
+        });
+      } else {
+        console.log("No such document!");
+      }
+    });
+  }
 
-    // var docRef = firebase.firestore().collection("contador").doc("--stats--");
-    // docRef.get().then(function(doc) {
-    // if (doc.exists) {
-    //     console.log(doc.data());
-    // } else {
-    //     // doc.data() will be undefined in this case
-    //     console.log("No such document!");
-    // }
-    // }).catch(function(error) {
-    //     console.log("Error getting document:", error);
-    // });
+  render() {
 
     var user = firebase.auth().currentUser;
     var email;
@@ -125,7 +130,6 @@ class Fondos extends Component {
     if (user != null) {
       email = user.email;
     }
-    console.log(email);
 
     let admin;
     if (email == 'administrador@procu.com') {
@@ -153,7 +157,6 @@ class Fondos extends Component {
     } else if (email == 'hector@procu.com') {
       admin = 'HECTOR';
     }
-    console.log(admin)
 
     var today = new Date();
     var dd = today.getDate();
@@ -171,7 +174,7 @@ class Fondos extends Component {
 
     const allowCustom = this.state.allowCustom;
 
-    const reali = admin;
+    const fond = this.state.contador.storyCount;
 
     return (
       <div className="cen-cont">
@@ -183,7 +186,7 @@ class Fondos extends Component {
               <div className="form-container">
                 <div className="form-content">
                   <label for="fondo" className="itc" style={{fontFamily: 'Arial'}}>Fondo:</label>
-                  <Input style={{width: '100%', borderColor: 'rgba(0,0,0,0.42)'}} type="number" name="fondo" value={fondo} onChange={this.onChange} ref="fondo" required  />
+                  <Input style={{width: '100%', borderColor: 'rgba(0,0,0,0.42)'}} type="number" name="fondo" value={this.state.contador.storyCount} onChange={this.onChange} ref="fondo" disabled/>
                 </div>
                 <div className="form-content">
                   <label for="fecha" className="itc" style={{fontFamily: 'Arial'}}>Fecha:</label>
@@ -260,7 +263,7 @@ class Fondos extends Component {
               </div>
               <div className="form-container-last" style={{marginTop: '-100px'}}>
                 <div className="botones">
-                  <button className="bt-s2" type='submit' onClick={() => this.setState({ realizo: this.state.realizo = admin })} style={{fontFamily: 'Arial'}}>Guadar</button>
+                  <button className="bt-s2" type='submit' onClick={() => this.setState({ realizo: this.state.realizo = admin, fondo: this.state.fondo = this.state.contador.storyCount })} style={{fontFamily: 'Arial'}}>Guadar</button>
                   <button className="bt-s3" onClick={this.cancelCourse.bind(this)}>Cancelar</button>
                 </div>
               </div>

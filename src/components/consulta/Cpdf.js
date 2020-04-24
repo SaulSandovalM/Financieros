@@ -10,7 +10,6 @@ import programa from '../../img/logo_hgo.png';
 import logo2 from  '../../img/logo.jpg';
 import footer from '../../img/footer.png';
 
-
 class Cpdf extends Component{
   constructor(props) {
     super(props);
