@@ -109,6 +109,7 @@ class Fondos extends Component {
 
   componentDidMount() {
     const ref = firebase.firestore().collection('contador').doc('--stats--');
+    
     ref.get().then((doc) => {
       if (doc.exists) {
         this.setState({
@@ -157,6 +158,9 @@ class Fondos extends Component {
     } else if (email == 'hector@procu.com') {
       admin = 'HECTOR';
     }
+    else if (email == 'fer@procu.com') {
+     admin = 'FERNANDA';
+   }
 
     var today = new Date();
     var dd = today.getDate();
@@ -209,6 +213,7 @@ class Fondos extends Component {
                   {admin == 'LILIA' && <DropDownList suggest={true} style={{width: '100%', borderColor: 'rgba(0,0,0,0.42)'}} data={this.tipo_doc3} allowCustom={allowCustom} name="tipo_doc" value={tipo_doc} onChange={this.onChange} required ref="tipo_doc" />}
                   {admin == 'CENELY' && <DropDownList suggest={true} style={{width: '100%', borderColor: 'rgba(0,0,0,0.42)'}} data={this.tipo_doc3} allowCustom={allowCustom} name="tipo_doc" value={tipo_doc} onChange={this.onChange} required ref="tipo_doc" />}
                   {admin == 'HECTOR' && <DropDownList suggest={true} style={{width: '100%', borderColor: 'rgba(0,0,0,0.42)'}} data={this.tipo_doc3} allowCustom={allowCustom} name="tipo_doc" value={tipo_doc} onChange={this.onChange} required ref="tipo_doc" />}
+                  {admin == 'FERNANDA' && <DropDownList suggest={true} style={{width: '100%', borderColor: 'rgba(0,0,0,0.42)'}} data={this.tipo_doc3} allowCustom={allowCustom} name="tipo_doc" value={tipo_doc} onChange={this.onChange} required ref="tipo_doc" />}
                 </div>
                 <div className="form-content">
                   <label for="oficio_aut" className="itc" style={{fontFamily: 'Arial'}}>Oficio de Autorizacion:</label>
