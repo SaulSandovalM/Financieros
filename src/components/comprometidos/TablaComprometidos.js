@@ -77,6 +77,8 @@ class TablaComprometidos extends Component {
       admin = 'CENELY';
     } else if (email == 'hector@procu.com') {
       admin = 'HECTOR';
+    } else if (email == 'omar@procu.com') {
+      admin = 'OMAR';
     }
 
     return (

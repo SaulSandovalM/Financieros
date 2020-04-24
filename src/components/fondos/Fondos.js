@@ -18,7 +18,6 @@ class Fondos extends Component {
   constructor(props) {
     super(props);
     this.ref = firebase.firestore().collection('fondos');
-    this.unsubscribe = null;
     this.state = {
       fondo: '',
       fecha: '',
@@ -57,7 +56,6 @@ class Fondos extends Component {
     state[e.target.name] = e.target.value;
     this.setState(state);
   }
-
 
   onSubmit = (e) => {
     e.preventDefault();
@@ -108,6 +106,11 @@ class Fondos extends Component {
   }
 
   componentDidMount() {
+    this.consumo();
+    setInterval(this.consumo, 1000);
+  }
+
+  consumo = () => {
     const ref = firebase.firestore().collection('contador').doc('--stats--');
     ref.get().then((doc) => {
       if (doc.exists) {
@@ -119,7 +122,7 @@ class Fondos extends Component {
       } else {
         console.log("No such document!");
       }
-    });
+    })
   }
 
   render() {
@@ -156,7 +159,10 @@ class Fondos extends Component {
       admin = 'CENELY';
     } else if (email == 'hector@procu.com') {
       admin = 'HECTOR';
+    } else if (email == 'omar@procu.com') {
+      admin = 'OMAR';
     }
+    console.log(email)
 
     var today = new Date();
     var dd = today.getDate();
@@ -209,6 +215,7 @@ class Fondos extends Component {
                   {admin == 'LILIA' && <DropDownList suggest={true} style={{width: '100%', borderColor: 'rgba(0,0,0,0.42)'}} data={this.tipo_doc3} allowCustom={allowCustom} name="tipo_doc" value={tipo_doc} onChange={this.onChange} required ref="tipo_doc" />}
                   {admin == 'CENELY' && <DropDownList suggest={true} style={{width: '100%', borderColor: 'rgba(0,0,0,0.42)'}} data={this.tipo_doc3} allowCustom={allowCustom} name="tipo_doc" value={tipo_doc} onChange={this.onChange} required ref="tipo_doc" />}
                   {admin == 'HECTOR' && <DropDownList suggest={true} style={{width: '100%', borderColor: 'rgba(0,0,0,0.42)'}} data={this.tipo_doc3} allowCustom={allowCustom} name="tipo_doc" value={tipo_doc} onChange={this.onChange} required ref="tipo_doc" />}
+                  {admin == 'OMAR' && <DropDownList suggest={true} style={{width: '100%', borderColor: 'rgba(0,0,0,0.42)'}} data={this.tipo_doc3} allowCustom={allowCustom} name="tipo_doc" value={tipo_doc} onChange={this.onChange} required ref="tipo_doc" />}
                 </div>
                 <div className="form-content">
                   <label for="oficio_aut" className="itc" style={{fontFamily: 'Arial'}}>Oficio de Autorizacion:</label>
