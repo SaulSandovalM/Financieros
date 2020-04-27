@@ -80,8 +80,9 @@ class TablaComprometidos extends Component {
       admin = 'CENELY';
     } else if (email == 'hector@procu.com') {
       admin = 'HECTOR';
+    } else if (email == 'miau@procu.com') {
+      admin = 'MAO';
     }
-    console.log(admin)
 
     return (
       <div className="cent-consul">

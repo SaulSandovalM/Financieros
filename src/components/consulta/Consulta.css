@@ -151,7 +151,7 @@ p {
 }
 .firma-raya {
   border-top: 1px solid black;
-  width: 58;
+  width: 58%;
   text-align:left;
 }
 @media print {
@@ -186,7 +186,7 @@ display: flex;
 justify-content: center;
 }
 .firma-raya-r{
-  margin-top: 80px;
+  margin-top: 85px;
   border-top: 1px solid;
 
 
@@ -519,5 +519,7 @@ font-size: 12px;
 
 }
 .mtro{
+
+
 
 }
