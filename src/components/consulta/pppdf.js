@@ -50,7 +50,7 @@ class Pppdf extends Component{
           <div class="no-oficio">
             <p><b>Oficio No:</b> PGI/DGAyF/ {this.state.fondo.no_oficio}
             <br/> Pachuca de Soto, Hidalgo a {today}
-            <br/><b>Asunto:</b> Pago a Proveedor</p>
+            <br/><b>Asunto</b>Reembolso Fondo Revolvente</p>
 
           </div>
           <div class='prensente'>
@@ -73,18 +73,34 @@ class Pppdf extends Component{
 
             <p>Sin otro particular por el momento, reciba un cordial saludo</p>
            </div>
-           <div class="atte">
-              <p> Atentamente
-              <br/>Director General</p>
-           </div>
-          <div class='firma-dad'>
-            <div class='firma-raya'>
-              <p class="mtro">MTRO. LEÓN MAXIMILIANO HERNÁNDEZ VALDÉS</p>
-            </div>
+
+
+           <div>
+                    <div class="atte">
+                        <p> Atentamente
+                        <br/>Director General</p>
+                        </div>
+                        <div class='firma-dad'>
+                        <div class='firma-raya'>
+                        <p class="mtro">MTRO. LEÓN MAXIMILIANO HERNÁNDEZ VALDÉS</p>
+                        </div>
+                        </div>
+        </div>
+
+
+
+          <div class="pie">
+                  <div class="ccp">
+                        <p class="text">C.C.P...- Expedien<br/>Minutario<br/>LMHV/NRL/macht</p>
+
+                  </div>
+
+                  <div>
+<p align="right"> {this.state.fondo.fondo}</p>
+                </div>
           </div>
-          <div class="ccp">
-            <p class="text">C.C.P...- Expedien<br/>Minutario<br/>LMHV/NRL/macht</p>
-          </div>
+
+
         </div>
         <ReactToPrint
           trigger={() => <buttom class="bont_imprimir">imprimir</buttom>}

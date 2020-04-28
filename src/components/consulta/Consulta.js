@@ -80,6 +80,8 @@ class TablaComprometidos extends Component {
       admin = 'CENELY';
     } else if (email == 'hector@procu.com') {
       admin = 'HECTOR';
+    } else if (email == 'miau@procu.com') {
+      admin = 'MAO';
     }
     else if (email == 'omar@procu.com') {
       admin = 'OMAR';
@@ -115,7 +117,11 @@ class TablaComprometidos extends Component {
                       <Link to={`/Pdf/${fondos.key}`}>Ver</Link>
                     }
                     { fondos.tipo_doc === 'Fondo Revolvente' &&
-                      <Link to={`/Pppdf/${fondos.key}`}>Ver</Link>
+                    <div >
+                      <Link class="archivos" to={`/Pppdf/${fondos.key}`}>Pago Proveedor  </Link>
+                      <br/>
+                      <Link class="archivos"  to={`/Pdf/${fondos.key}`}>Recibo</Link>
+                      </div>
                     }
                     </div>
                 </div>

@@ -36,7 +36,7 @@ class Nav extends Component {
         </div>
         <div className='navbar-left'>
           <Link to="/Consulta" className="deco">
-            <h3 className="nav-t" style={{fontFamily: 'Arial'}}>Consulta</h3>
+            <h3 className="nav-t" style={{fontFamily: 'Arial'}}>Imprimir</h3>
           </Link>
         </div>
         <div className='navbar-left'>

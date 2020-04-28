@@ -49,7 +49,7 @@ class Frpdf extends Component{
           <div class="no-oficio">
             <p><b>Oficio No:</b> PGI/DGAyF/ {this.state.fondo.no_oficio}
             <br/> Pachuca de Soto, Hidalgo a {today}
-            <br/><b>Asunto:</b>Reembolso de Fondo Revolvente</p>
+            <br/><b>Asunto </b>  Reembolso de Fondo Revolvente</p>
 
           </div>
           <div class='prensente'>
