@@ -227,7 +227,7 @@ class Addcomple extends Component {
                   <input type="date" className="input-edi" min={today} max={today} name="fecha_contra" value={fecha_contra} onChange={this.onChange} ref="fecha_contra" required/>
                 </div>
                 <div className="tabla-edit-c">
-                  <input type="number" name="poliza" onChange={this.onChange} ref="poliza" className="input-edi"/>
+                  <input type="number" name="poliza" onChange={this.onChange} value={poliza} ref="poliza" className="input-edi"/>
                 </div>
                 <div className="tabla-edit-c">
                   <input type="date" className="input-edi" min={today} max={today} name="fecha_deposito" value={fecha_deposito} onChange={this.onChange} ref="fecha_deposito" required/>

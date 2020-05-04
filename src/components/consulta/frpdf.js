@@ -3,7 +3,6 @@ import './Consulta.css';
 import ReactToPrint from 'react-to-print';
 import firebase from '../../Firebase';
 import { NumberAsString } from '../fondos/NumerosLetras.js';
-import programa from '../../img/logo_hgo.png';
 import logo2 from  '../../img/logo.jpg';
 
 class Frpdf extends Component{
@@ -33,29 +32,26 @@ class Frpdf extends Component{
   render(){
 
     var today = new Date();
-    var meses = new Array ("Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre");
-    var diasSemana = new Array("Domingo","Lunes","Martes","Miércoles","Jueves","Viernes","Sábado");
+    var meses =  [ "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre" ];
+    var diasSemana = [ "Domingo","Lunes","Martes","Miércoles","Jueves","Viernes","Sábado"];
     var f = new Date();
     today = diasSemana[f.getDay()] + ", " + f.getDate() + " de " + meses[f.getMonth()] + " de " + f.getFullYear();
 
     return(
       <div className='pppdf-dad'>
         <div className='pppdf-subdad' ref={el => (this.holi= el)}>
-        <div class='fondo-procu'>
-          <img class="ime" src={logo2}/>
-
-
-        </div>
+          <div class='fondo-procu'>
+            <img class="ime" src={logo2} alt=""/>
+          </div>
           <div class="no-oficio">
             <p><b>Oficio No:</b> PGI/DGAyF/ {this.state.fondo.no_oficio}
             <br/> Pachuca de Soto, Hidalgo a {today}
             <br/><b>Asunto </b>  Reembolso de Fondo Revolvente</p>
-
           </div>
           <div class='prensente'>
             <p><b>Lic. César Alberto González López
             <br/>Subsecretario de Egresos de la
-           <br/> Secretaría de Finanzas Públicas
+            <br/> Secretaría de Finanzas Públicas
             <br/>Presente</b></p>
           </div>
           <div class='añadido'>
@@ -68,14 +64,12 @@ class Frpdf extends Component{
             comprobantes "No.____", por un total de $ {this.state.fondo.importe} ({(NumberAsString(this.state.fondo.importe))}),
             para el trámite de Reembolso de Fondo Revolvente, con cargo al proyecto {/*{this.state.comprometido.no_proyecto} y {this.state.fondo.no_proyec}*/},
             otorgado en el oficio de autorización número de oficio {this.state.fondo.oficio_aut} a la Procuraduría General de Justicia del Estado de Hidalgo.</p>
-
-
             <p>Sin otro particular por el momento, reciba un cordial saludo</p>
-           </div>
-           <div class="atte">
-              <p> Atentamente
-              <br/>Director General</p>
-           </div>
+          </div>
+          <div class="atte">
+            <p> Atentamente
+            <br/>Director General</p>
+          </div>
           <div class='firma-dad'>
             <div class='firma-raya'>
               <p class="mtro">MTRO. LEÓN MAXIMILIANO HERNÁNDEZ VALDÉS</p>

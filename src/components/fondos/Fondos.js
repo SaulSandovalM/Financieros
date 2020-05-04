@@ -136,39 +136,37 @@ class Fondos extends Component {
     }
 
     let admin;
-    if (email == 'administrador@procu.com') {
+    if (email === 'administrador@procu.com') {
       admin = 'ADMIN';
-    } else if (email == 'nayra@procu.com') {
+    } else if (email === 'nayra@procu.com') {
       admin = 'NAYRA';
-    } else if (email == 'laura@procu.com') {
+    } else if (email === 'laura@procu.com') {
       admin = 'LAURA';
-    } else if (email == 'miguel@procu.com') {
+    } else if (email === 'miguel@procu.com') {
       admin = 'MIGUEL';
-    } else if (email == 'teresa@procu.com') {
+    } else if (email === 'teresa@procu.com') {
       admin = 'TERESA';
-    } else if (email == 'marcos@procu.com') {
+    } else if (email === 'marcos@procu.com') {
       admin = 'MARCOS';
-    } else if (email == 'eloy@procu.com') {
+    } else if (email === 'eloy@procu.com') {
       admin = 'ELOY';
-    } else if (email == 'karina@procu.com') {
+    } else if (email === 'karina@procu.com') {
       admin = 'KARINA';
-    } else if (email == 'martha@procu.com') {
+    } else if (email === 'martha@procu.com') {
       admin = 'MARTHA';
-    } else if (email == 'lilia@procu.com') {
+    } else if (email === 'lilia@procu.com') {
       admin = 'LILIA';
-    } else if (email == 'cenely@procu.com') {
+    } else if (email === 'cenely@procu.com') {
       admin = 'CENELY';
-    } else if (email == 'hector@procu.com') {
+    } else if (email === 'hector@procu.com') {
       admin = 'HECTOR';
-    } else if (email == 'omar@procu.com') {
+    } else if (email === 'omar@procu.com') {
       admin = 'OMAR';
-    }
-    else if (email == 'fer@procu.com') {
+    } else if (email === 'fer@procu.com') {
      admin = 'FERNANDA';
-   }
-   else if (email == 'miau@procu.com') {
-    admin = 'MAURICIO';
-  }
+    } else if (email === 'miau@procu.com') {
+      admin = 'MAURICIO';
+    }
 
     var today = new Date();
     var dd = today.getDate();
@@ -185,8 +183,6 @@ class Fondos extends Component {
     const { fondo, fecha, tipo_doc, oficio_aut, no_oficio, no_lici, importe, desc, beneficiario, realizo } = this.state;
 
     const allowCustom = this.state.allowCustom;
-
-    const fond = this.state.contador.storyCount;
 
     return (
       <div className="cen-cont">
@@ -209,21 +205,21 @@ class Fondos extends Component {
               <div className="form-container">
                 <div className="form-content">
                   <label for="tipo_doc" className="itc" style={{fontFamily: 'Arial'}}>Tipo de documento:</label>
-                  {admin == 'ADMIN' && <DropDownList suggest={true} style={{width: '100%', borderColor: 'rgba(0,0,0,0.42)'}} data={this.tipo_doc} allowCustom={allowCustom} name="tipo_doc" value={tipo_doc} onChange={this.onChange} required ref="tipo_doc" />}
-                  {admin == 'NAYRA' && <DropDownList suggest={true} style={{width: '100%', borderColor: 'rgba(0,0,0,0.42)'}} data={this.tipo_doc} allowCustom={allowCustom} name="tipo_doc" value={tipo_doc} onChange={this.onChange} required ref="tipo_doc" />}
-                  {admin == 'LAURA' && <DropDownList suggest={true} style={{width: '100%', borderColor: 'rgba(0,0,0,0.42)'}} data={this.tipo_doc} allowCustom={allowCustom} name="tipo_doc" value={tipo_doc} onChange={this.onChange} required ref="tipo_doc" />}
-                  {admin == 'MIGUEL' && <DropDownList suggest={true} style={{width: '100%', borderColor: 'rgba(0,0,0,0.42)'}} data={this.tipo_doc2} allowCustom={allowCustom} name="tipo_doc" value={tipo_doc} onChange={this.onChange} required ref="tipo_doc" />}
-                  {admin == 'TERESA' && <DropDownList suggest={true} style={{width: '100%', borderColor: 'rgba(0,0,0,0.42)'}} data={this.tipo_doc2} allowCustom={allowCustom} name="tipo_doc" value={tipo_doc} onChange={this.onChange} required ref="tipo_doc" />}
-                  {admin == 'MARCOS' && <DropDownList suggest={true} style={{width: '100%', borderColor: 'rgba(0,0,0,0.42)'}} data={this.tipo_doc2} allowCustom={allowCustom} name="tipo_doc" value={tipo_doc} onChange={this.onChange} required ref="tipo_doc" />}
-                  {admin == 'ELOY' && <DropDownList suggest={true} style={{width: '100%', borderColor: 'rgba(0,0,0,0.42)'}} data={this.tipo_doc2} allowCustom={allowCustom} name="tipo_doc" value={tipo_doc} onChange={this.onChange} required ref="tipo_doc" />}
-                  {admin == 'KARINA' && <DropDownList suggest={true} style={{width: '100%', borderColor: 'rgba(0,0,0,0.42)'}} data={this.tipo_doc2} allowCustom={allowCustom} name="tipo_doc" value={tipo_doc} onChange={this.onChange} required ref="tipo_doc" />}
-                  {admin == 'MARTHA' && <DropDownList suggest={true} style={{width: '100%', borderColor: 'rgba(0,0,0,0.42)'}} data={this.tipo_doc2} allowCustom={allowCustom} name="tipo_doc" value={tipo_doc} onChange={this.onChange} required ref="tipo_doc" />}
-                  {admin == 'LILIA' && <DropDownList suggest={true} style={{width: '100%', borderColor: 'rgba(0,0,0,0.42)'}} data={this.tipo_doc3} allowCustom={allowCustom} name="tipo_doc" value={tipo_doc} onChange={this.onChange} required ref="tipo_doc" />}
-                  {admin == 'CENELY' && <DropDownList suggest={true} style={{width: '100%', borderColor: 'rgba(0,0,0,0.42)'}} data={this.tipo_doc3} allowCustom={allowCustom} name="tipo_doc" value={tipo_doc} onChange={this.onChange} required ref="tipo_doc" />}
-                  {admin == 'HECTOR' && <DropDownList suggest={true} style={{width: '100%', borderColor: 'rgba(0,0,0,0.42)'}} data={this.tipo_doc3} allowCustom={allowCustom} name="tipo_doc" value={tipo_doc} onChange={this.onChange} required ref="tipo_doc" />}
-                  {admin == 'FERNANDA' && <DropDownList suggest={true} style={{width: '100%', borderColor: 'rgba(0,0,0,0.42)'}} data={this.tipo_doc3} allowCustom={allowCustom} name="tipo_doc" value={tipo_doc} onChange={this.onChange} required ref="tipo_doc" />}
-                  {admin == 'OMAR' && <DropDownList suggest={true} style={{width: '100%', borderColor: 'rgba(0,0,0,0.42)'}} data={this.tipo_doc3} allowCustom={allowCustom} name="tipo_doc" value={tipo_doc} onChange={this.onChange} required ref="tipo_doc" />}
-                  {admin == 'MAURICIO' && <DropDownList suggest={true} style={{width: '100%', borderColor: 'rgba(0,0,0,0.42)'}} data={this.tipo_doc3} allowCustom={allowCustom} name="tipo_doc" value={tipo_doc} onChange={this.onChange} required ref="tipo_doc" />}
+                  {admin === 'ADMIN' && <DropDownList suggest={true} style={{width: '100%', borderColor: 'rgba(0,0,0,0.42)'}} data={this.tipo_doc} allowCustom={allowCustom} name="tipo_doc" value={tipo_doc} onChange={this.onChange} required ref="tipo_doc" />}
+                  {admin === 'NAYRA' && <DropDownList suggest={true} style={{width: '100%', borderColor: 'rgba(0,0,0,0.42)'}} data={this.tipo_doc} allowCustom={allowCustom} name="tipo_doc" value={tipo_doc} onChange={this.onChange} required ref="tipo_doc" />}
+                  {admin === 'LAURA' && <DropDownList suggest={true} style={{width: '100%', borderColor: 'rgba(0,0,0,0.42)'}} data={this.tipo_doc} allowCustom={allowCustom} name="tipo_doc" value={tipo_doc} onChange={this.onChange} required ref="tipo_doc" />}
+                  {admin === 'MIGUEL' && <DropDownList suggest={true} style={{width: '100%', borderColor: 'rgba(0,0,0,0.42)'}} data={this.tipo_doc2} allowCustom={allowCustom} name="tipo_doc" value={tipo_doc} onChange={this.onChange} required ref="tipo_doc" />}
+                  {admin === 'TERESA' && <DropDownList suggest={true} style={{width: '100%', borderColor: 'rgba(0,0,0,0.42)'}} data={this.tipo_doc2} allowCustom={allowCustom} name="tipo_doc" value={tipo_doc} onChange={this.onChange} required ref="tipo_doc" />}
+                  {admin === 'MARCOS' && <DropDownList suggest={true} style={{width: '100%', borderColor: 'rgba(0,0,0,0.42)'}} data={this.tipo_doc2} allowCustom={allowCustom} name="tipo_doc" value={tipo_doc} onChange={this.onChange} required ref="tipo_doc" />}
+                  {admin === 'ELOY' && <DropDownList suggest={true} style={{width: '100%', borderColor: 'rgba(0,0,0,0.42)'}} data={this.tipo_doc2} allowCustom={allowCustom} name="tipo_doc" value={tipo_doc} onChange={this.onChange} required ref="tipo_doc" />}
+                  {admin === 'KARINA' && <DropDownList suggest={true} style={{width: '100%', borderColor: 'rgba(0,0,0,0.42)'}} data={this.tipo_doc2} allowCustom={allowCustom} name="tipo_doc" value={tipo_doc} onChange={this.onChange} required ref="tipo_doc" />}
+                  {admin === 'MARTHA' && <DropDownList suggest={true} style={{width: '100%', borderColor: 'rgba(0,0,0,0.42)'}} data={this.tipo_doc2} allowCustom={allowCustom} name="tipo_doc" value={tipo_doc} onChange={this.onChange} required ref="tipo_doc" />}
+                  {admin === 'LILIA' && <DropDownList suggest={true} style={{width: '100%', borderColor: 'rgba(0,0,0,0.42)'}} data={this.tipo_doc3} allowCustom={allowCustom} name="tipo_doc" value={tipo_doc} onChange={this.onChange} required ref="tipo_doc" />}
+                  {admin === 'CENELY' && <DropDownList suggest={true} style={{width: '100%', borderColor: 'rgba(0,0,0,0.42)'}} data={this.tipo_doc3} allowCustom={allowCustom} name="tipo_doc" value={tipo_doc} onChange={this.onChange} required ref="tipo_doc" />}
+                  {admin === 'HECTOR' && <DropDownList suggest={true} style={{width: '100%', borderColor: 'rgba(0,0,0,0.42)'}} data={this.tipo_doc3} allowCustom={allowCustom} name="tipo_doc" value={tipo_doc} onChange={this.onChange} required ref="tipo_doc" />}
+                  {admin === 'FERNANDA' && <DropDownList suggest={true} style={{width: '100%', borderColor: 'rgba(0,0,0,0.42)'}} data={this.tipo_doc3} allowCustom={allowCustom} name="tipo_doc" value={tipo_doc} onChange={this.onChange} required ref="tipo_doc" />}
+                  {admin === 'OMAR' && <DropDownList suggest={true} style={{width: '100%', borderColor: 'rgba(0,0,0,0.42)'}} data={this.tipo_doc3} allowCustom={allowCustom} name="tipo_doc" value={tipo_doc} onChange={this.onChange} required ref="tipo_doc" />}
+                  {admin === 'MAURICIO' && <DropDownList suggest={true} style={{width: '100%', borderColor: 'rgba(0,0,0,0.42)'}} data={this.tipo_doc3} allowCustom={allowCustom} name="tipo_doc" value={tipo_doc} onChange={this.onChange} required ref="tipo_doc" />}
                 </div>
                 <div className="form-content">
                   <label for="oficio_aut" className="itc" style={{fontFamily: 'Arial'}}>Oficio de Autorizacion:</label>

@@ -1,9 +1,9 @@
 import React, { Component} from 'react';
 import './Caratula.css';
 import ReactToPrint from 'react-to-print';
-import firebase from '../../Firebase';
-import { NumberAsString } from '../fondos/NumerosLetras.js';
-import clausula from '../../img/clausula.png';
+// import firebase from '../../Firebase';
+// import { NumberAsString } from '../fondos/NumerosLetras.js';
+// import clausula from '../../img/clausula.png';
 import boton from '../../img/cua.png';
 import boton2 from '../../img/cua2.png';
 import programa from '../../img/logo_hgo.png';
@@ -39,8 +39,8 @@ class Cpdf extends Component{
       <div className='cpdf-dad'>
         <div className='cpdf-subdad' ref={el => (this.holi= el)} >
           <div class='fondo-procus'>
-            <img class="ims" src={programa}/>
-            <img class="im" src={logo2}/>
+            <img class="ims" src={programa} alt=''/>
+            <img class="im" src={logo2} alt=''/>
           </div>
           <div class="procu">
             <p class="text">
