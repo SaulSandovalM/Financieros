@@ -51,33 +51,41 @@ class Analitico extends Component {
     if (user != null) {
       email = user.email;
     }
-    console.log(email);
 
     let admin;
     if (email == 'administrador@procu.com') {
       admin = 'ADMIN';
+    } else if (email == 'nayra@procu.com') {
+      admin = 'NAYRA';
+    } else if (email == 'laura@procu.com') {
+      admin = 'LAURA';
+    } else if (email == 'miguel@procu.com') {
+      admin = 'MIGUEL';
+    } else if (email == 'teresa@procu.com') {
+      admin = 'TERESA';
+    } else if (email == 'marcos@procu.com') {
+      admin = 'MARCOS';
+    } else if (email == 'eloy@procu.com') {
+      admin = 'ELOY';
+    } else if (email == 'karina@procu.com') {
+      admin = 'KARINA';
+    } else if (email == 'martha@procu.com') {
+      admin = 'MARTHA';
+    } else if (email == 'lilia@procu.com') {
+      admin = 'LILIA';
+    } else if (email == 'cenely@procu.com') {
+      admin = 'CENELY';
     } else if (email == 'hector@procu.com') {
       admin = 'HECTOR';
-    } else if (email == 'maguel@procu.com') {
-      admin = 'MIGUEL';
-    } else if (email == 'liliana@procu.com') {
-      admin = 'LILIANA';
-    } else if (email == 'liliana@procu.com') {
-      admin = 'LILIANA';
-    } else if (email == 'liliana@procu.com') {
-      admin = 'LILIANA';
-    } else if (email == 'liliana@procu.com') {
-      admin = 'LILIANA';
-    } else if (email == 'liliana@procu.com') {
-      admin = 'LILIANA';
-    } else if (email == 'liliana@procu.com') {
-      admin = 'LILIANA';
-    } else if (email == 'liliana@procu.com') {
-      admin = 'LILIANA';
-    } else if (email == 'liliana@procu.com') {
-      admin = 'LILIANA';
+    } else if (email == 'omar@procu.com') {
+      admin = 'OMAR';
+    } else if (email == 'omar@procu.com') {
+      admin = 'OMAR';
+    } else if (email == 'fer@procu.com') {
+      admin = 'FERNANDA';
+    } else if (email == 'miau@procu.com') {
+      admin = 'MAURICIO';
     }
-    console.log(admin)
 
     return (
       <div className="cent-ana">
