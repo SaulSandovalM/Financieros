@@ -19,6 +19,9 @@ import Add from './components/controlp/Add';
 import Complemento from './components/complemento/Complemento';
 import Addcomple from './components/complemento/Addcomple';
 import Caratula from './components/caratula/Caratula';
+import Presupuesto from './components/presupuesto/Presupuesto';
+import Registro from './components/registrofondos/Registro';
+import Comproceci from './components/comprometidos/Comproceci';
 
 function App(props) {
   const { isAuthenticated, isVerifying } = props;
@@ -70,6 +73,27 @@ function App(props) {
         exact
         path="/Caratula"
         component={Caratula}
+        isAuthenticated={isAuthenticated}
+        isVerifying={isVerifying}
+      />
+      <ProtectedRoute
+        exact
+        path="/Presupuesto"
+        component={Presupuesto}
+        isAuthenticated={isAuthenticated}
+        isVerifying={isVerifying}
+      />
+      <ProtectedRoute
+        exact
+        path="/Registro"
+        component={Registro}
+        isAuthenticated={isAuthenticated}
+        isVerifying={isVerifying}
+      />
+      <ProtectedRoute
+        exact
+        path="/Comprometido"
+        component={Comproceci}
         isAuthenticated={isAuthenticated}
         isVerifying={isVerifying}
       />

@@ -91,14 +91,14 @@ class Fondos extends Component {
 
       const increment = firebase.firestore.FieldValue.increment(1);
 
-       const batch = firebase.firestore().batch();
-       const storyRef = firebase.firestore().collection('contador').doc(`${Math.random()}`);
-       batch.set(storyRef, { title: 'Nuevo Fondo!' });
-       batch.set(statsRef, { storyCount: increment }, { merge: true });
-       batch.commit();
-       console.log(statsRef, { storyCount: increment });
+      const batch = firebase.firestore().batch();
+      const storyRef = firebase.firestore().collection('contador').doc(`${Math.random()}`);
+      batch.set(storyRef, { title: 'Nuevo Fondo!' });
+      batch.set(statsRef, { storyCount: increment }, { merge: true });
+      batch.commit();
+      console.log(statsRef, { storyCount: increment });
 
-       this.props.history.push('/Comprometidos')
+      this.props.history.push('/Comprometidos')
     })
     .catch((error) => {
       console.error("Error adding document: ", error);
