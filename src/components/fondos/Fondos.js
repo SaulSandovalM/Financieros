@@ -130,6 +130,7 @@ class Fondos extends Component {
 
     var user = firebase.auth().currentUser;
     var email;
+    console.log(user)
 
     if (user != null) {
       email = user.email;
@@ -167,6 +168,7 @@ class Fondos extends Component {
     } else if (email === 'miau@procu.com') {
       admin = 'MAURICIO';
     }
+    console.log(email)
 
     var today = new Date();
     var dd = today.getDate();

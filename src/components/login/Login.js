@@ -35,7 +35,6 @@ class Login extends Component {
     if (isAuthenticated) {
       return <Redirect to="/" />;
     } else {
-
       return (
         <div style={{zIndex: '5', position: 'absolute', width: '100%', top: 0, left: 0}}>
           <div className="back-login">
