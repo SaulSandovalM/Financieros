@@ -24,6 +24,7 @@ import Registro from './components/registrofondos/Registro';
 import Comproceci from './components/comprometidos/Comproceci';
 import Carga from './components/presupuesto/Carga';
 import Creacionfondo from './components/presupuesto/Creacionfondo';
+import FileUpload from './components/presupuesto/FileUpload';
 
 function App(props) {
   const { isAuthenticated, isVerifying } = props;
@@ -123,8 +124,8 @@ function App(props) {
       <Route path="/Cpdf/:id" component={Cpdf} />
       <Route path="/add/:id" component={Add} />
       <Route path="/addcomple/:id" component={Addcomple} />
-      <Route path="/Carga/" component={Addcomple} />
-
+      <Route path="/Carga" component={Addcomple} />
+      <Route path='/FileUpload' component={FileUpload} />
     </Switch>
   );
 }

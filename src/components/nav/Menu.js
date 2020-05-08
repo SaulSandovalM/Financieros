@@ -17,6 +17,8 @@ const Menu = ({ open, ...props }) => {
   let admin;
   if (email === 'administrador@procu.com') {
     admin = 'ADMIN';
+  } else if (email === 'cecilia@procu.com') {
+    admin = 'CECILIA'
   } else if (email === 'nayra@procu.com') {
     admin = 'NAYRA';
   } else if (email === 'laura@procu.com') {
