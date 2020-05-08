@@ -22,6 +22,8 @@ import Caratula from './components/caratula/Caratula';
 import Presupuesto from './components/presupuesto/Presupuesto';
 import Registro from './components/registrofondos/Registro';
 import Comproceci from './components/comprometidos/Comproceci';
+import Carga from './components/presupuesto/Carga';
+import Creacionfondo from './components/presupuesto/Creacionfondo';
 
 function App(props) {
   const { isAuthenticated, isVerifying } = props;
@@ -85,6 +87,20 @@ function App(props) {
       />
       <ProtectedRoute
         exact
+        path="/Carga"
+        component={Carga}
+        isAuthenticated={isAuthenticated}
+        isVerifying={isVerifying}
+      />
+      <ProtectedRoute
+        exact
+        path="/Creacionfondo"
+        component={Creacionfondo}
+        isAuthenticated={isAuthenticated}
+        isVerifying={isVerifying}
+      />
+      <ProtectedRoute
+        exact
         path="/Registro"
         component={Registro}
         isAuthenticated={isAuthenticated}
@@ -107,10 +123,11 @@ function App(props) {
       <Route path="/Cpdf/:id" component={Cpdf} />
       <Route path="/add/:id" component={Add} />
       <Route path="/addcomple/:id" component={Addcomple} />
+      <Route path="/Carga/" component={Addcomple} />
+
     </Switch>
   );
 }
-
 function mapStateToProps(state) {
   return {
     isAuthenticated: state.auth.isAuthenticated,
