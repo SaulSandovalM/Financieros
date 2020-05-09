@@ -1,12 +1,11 @@
 import React, { Component } from 'react'
-import ReactDOM from 'react-dom'
 import firebase from '../../Firebase';
 
 export default class FileUpload extends Component {
   constructor () {
     super()
     this.state = {
-      uploadValue: 0
+      uploadValue: 0,
     }
   }
 
@@ -38,7 +37,6 @@ export default class FileUpload extends Component {
         <br />
         <input type='file' onChange={this.handleOnChange.bind(this)}/>
         <br />
-        <img width='90' src={this.state.picture} />
       </div>
     )
   }

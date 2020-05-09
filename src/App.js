@@ -25,6 +25,7 @@ import Comproceci from './components/comprometidos/Comproceci';
 import Carga from './components/presupuesto/Carga';
 import Creacionfondo from './components/presupuesto/Creacionfondo';
 import FileUpload from './components/presupuesto/FileUpload';
+import Excel from './components/presupuesto/Excel';
 
 function App(props) {
   const { isAuthenticated, isVerifying } = props;
@@ -126,6 +127,7 @@ function App(props) {
       <Route path="/addcomple/:id" component={Addcomple} />
       <Route path="/Carga" component={Addcomple} />
       <Route path='/FileUpload' component={FileUpload} />
+      <Route path='/Excel' component={Excel} />
     </Switch>
   );
 }
