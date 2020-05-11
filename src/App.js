@@ -26,6 +26,10 @@ import Carga from './components/presupuesto/Carga';
 import Creacionfondo from './components/presupuesto/Creacionfondo';
 import FileUpload from './components/presupuesto/FileUpload';
 import Excel from './components/presupuesto/Excel';
+import Altas from './components/cecilia/fondorevolvente/Altas';
+import Caja from './components/cecilia/fondorevolvente/Caja';
+import Banco from './components/cecilia/fondorevolvente/Banco';
+import Fondo from './components/cecilia/fondorevolvente/Fondo';
 
 function App(props) {
   const { isAuthenticated, isVerifying } = props;
@@ -128,6 +132,8 @@ function App(props) {
       <Route path="/Carga" component={Addcomple} />
       <Route path='/FileUpload' component={FileUpload} />
       <Route path='/Excel' component={Excel} />
+      <Route path='/Altas' component={Altas} />
+      <Route path='/Caja' component={Caja} />
     </Switch>
   );
 }

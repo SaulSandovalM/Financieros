@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Dropzone from 'react-dropzone';
 import csv from 'csv';
 import firebase from '../../Firebase';
+import './Presupuesto.css';
 
 export default class Excel extends Component {
   constructor () {
@@ -14,7 +15,7 @@ export default class Excel extends Component {
 
   handleOnChange (event) {
     const file = event.target.files[0]
-    const storageRef = firebase.storage().ref(`pdfs/${file.name}`)
+    const storageRef = firebase.storage().ref(`Presupuesto/${file.name}`)
     const task = storageRef.put(file)
     task.on('state_changed', (snapshot) => {
       let percentage = (snapshot.bytesTransferred / snapshot.totalBytes) * 100

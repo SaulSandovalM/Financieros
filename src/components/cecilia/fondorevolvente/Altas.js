@@ -1,20 +1,20 @@
 import React, { Component } from 'react';
 import Dropzone from 'react-dropzone';
 import csv from 'csv';
-import firebase from '../../Firebase';
+import firebase from '../../../Firebase';
+import './Altas.css';
 
-export default class Excel extends Component {
+export default class Altas extends Component {
   constructor () {
     super()
     this.state = {
-      pdf: 0,
-      csv: 0
+      pdf: 0
     }
   }
 
   handleOnChange (event) {
     const file = event.target.files[0]
-    const storageRef = firebase.storage().ref(`pdfs/${file.name}`)
+    const storageRef = firebase.storage().ref(`Altas/${file.name}`)
     const task = storageRef.put(file)
     task.on('state_changed', (snapshot) => {
       let percentage = (snapshot.bytesTransferred / snapshot.totalBytes) * 100
@@ -62,10 +62,10 @@ export default class Excel extends Component {
         <div class='presupuesto-container'>
           <div class='presupuesto-content'>
             <div class='presupuesto-card'>
-              <h1 class='presupuesto-h1'>Aqui puedes subir<br/>tu presupuesto anual </h1>
-              <p class='presupuesto-p'>Traspasa tu información de Excel para poder usar el sistema</p>
+              <h1 class='presupuesto-h1'>Aqui puedes subir<br/>tus oficios de alta</h1>
+              <p class='presupuesto-p'>Por favor agrege los oficio de autorización correspondientes</p>
               <div>
-                <p>Archivo:</p>
+                <p>Oficio Solicitud:</p>
                 <Dropzone
                   style={{
                     position: 'relative',
@@ -75,14 +75,14 @@ export default class Excel extends Component {
                     borderColor: 'rgb(102, 102, 102)',
                     borderStyle: 'solid',
                     borderRadius: '5px'}}
-                    accept=".csv" onDropAccepted={this.onDrop.bind(this)}>
+                    accept=".pdf" onChange={this.handleOnChange.bind(this)}>
                 </Dropzone>
                 {/*<progress class='progress' value={this.state.pdf} max='100'>
-                  {this.state.csv} %
+                  {this.state.pdf} %
                 </progress>*/}
               </div>
               <div>
-                <p>Presupuesto:</p>
+                <p>Oficio Autorización:</p>
                 <Dropzone
                   style={{
                     position: 'relative',
