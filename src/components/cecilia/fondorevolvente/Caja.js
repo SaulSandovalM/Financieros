@@ -18,8 +18,13 @@ export default class Caja extends Component {
       form: [],
       alert: false,
       alertData: {},
-      nombre: '',
       numero: '',
+      monto: '',
+      fechaC: '',
+      fechaE: '',
+      estatus: '',
+      usuario: '',
+      banco: '',
       contador: {},
     };
   }
@@ -29,8 +34,13 @@ export default class Caja extends Component {
       var lista = [];
       snap.forEach((child) => {
         lista.push({
-          nombre: child.val().nombre,
           numero: child.val().numero,
+          monto: child.val().monto,
+          fechaC: child.val().fechaC,
+          fechaE: child.val().fechaE,
+          estatus: child.val().estatus,
+          usuario: child.val().usuario,
+          banco: child.val().banco,
           done: child.val().done,
           id: child.key
         });
@@ -66,23 +76,33 @@ export default class Caja extends Component {
   componentWillMount() {
     let formRef = firebase.database().ref('Caja').orderByKey().limitToLast(6);
     formRef.on('child_added', snapshot => {
-      const { nombre, numero } = snapshot.val();
-      const data = { nombre, numero };
+      const { numero, monto, fechaC, fechaE, estatus, usuario, banco } = snapshot.val();
+      const data = { numero, monto, fechaC, fechaE, estatus, usuario, banco };
       this.setState({ form: [data].concat(this.state.form) });
     });
   }
 
- sendMessage(e) {
-   e.preventDefault();
-   const params = {
-     nombre: this.inputNombre.value,
-     numero: this.inputNumero.value
+  sendMessage(e) {
+    e.preventDefault();
+    const params = {
+      numero: this.inputNumero.value,
+      monto: this.inputMonto.value,
+      fechaC: this.inputFechaC.value,
+      fechaE: this.inputFechaE.value,
+      estatus: this.inputEstatus.value,
+      usuario: this.inputUsuario.value,
+      banco: this.inputBanco.value
    };
    this.setState({
-     nombre: this.inputNombre.value,
-     numero: this.inputNumero.value
+     numero: this.inputNumero.value,
+     monto: this.inputMonto.value,
+     fechaC: this.inputFechaC.value,
+     fechaE: this.inputFechaE.value,
+     estatus: this.inputEstatus.value,
+     usuario: this.inputUsuario.value,
+     banco: this.inputBanco.value
    })
-   if ( params.nombre && params.numero) {
+   if ( params.numero && params.monto && params.fechaC && params.fechaE && params.estatus && params.usuario && params.banco) {
      firebase.database().ref('Caja').push(params).then(() => {
        this.showAlert('success', 'Tu solicitud fue enviada.');
      }).catch(() => {
@@ -126,34 +146,45 @@ export default class Caja extends Component {
           <div class='caja-inputs'>
             <div class='caja-inputs-c'>
               <div class='input-row'>
-                <p class='p-caja'><b>Nombre</b></p>
+                <p class='p-caja'><b>No.</b></p>
                 <input
                   class='input-sc'
                   id='numero'
-                  placeholder='Nombre(s)'
                   required
+                  disabled
                   ref={numero => this.inputNumero = numero}
                   value={this.state.contador.storyCount}
                 />
               </div>
               <div class='input-row'>
-                <p class='p-caja'><b>Nombre</b></p>
+                <p class='p-caja'><b>Monto</b></p>
                 <input
                   class='input-sc'
-                  placeholder='Nombre'
-                  id='nombre'
-                  placeholder='Nombre(s)'
+                  placeholder='6,205.00'
+                  id='monto'
                   required
-                  ref={nombre => this.inputNombre = nombre}
+                  ref={monto => this.inputMonto = monto}
                 />
               </div>
               <div class='input-row'>
-                <p class='p-caja'><b>Nombre</b></p>
-                <input class='input-sc' placeholder='Nombre'/>
+                <p class='p-caja'><b>Fecha Creación</b></p>
+                <input
+                  class='input-sc'
+                  placeholder='dd/mm/aaaa'
+                  id='fechaC'
+                  required
+                  ref={fechaC => this.inputFechaC = fechaC}
+                />
               </div>
               <div class='input-row'>
-                <p class='p-caja'><b>Nombre</b></p>
-                <input class='input-sc' placeholder='Nombre'/>
+                <p class='p-caja'><b>Fecha Edición</b></p>
+                <input
+                  class='input-sc'
+                  placeholder='dd/mm/aaaa'
+                  id='fechaE'
+                  required
+                  ref={fechaE => this.inputFechaE = fechaE}
+                />
               </div>
             </div>
             <div class='disponible'>
@@ -167,14 +198,34 @@ export default class Caja extends Component {
           <div class='caja-inputs' style={{marginTop: '40px', marginBottom: '40px'}}>
             <div class='caja-inputs-c'>
               <div class='input-row'>
-                <p class='p-caja'><b>Nombre</b></p>
-                <input class='input-sc' placeholder='Nombre'/>
+                <p class='p-caja'><b>Estatus</b></p>
+                <input
+                  class='input-sc'
+                  placeholder='Estatus'
+                  id='estatus'
+                  required
+                  ref={estatus => this.inputEstatus = estatus}
+                />
               </div>
               <div class='input-row'>
-                <p class='p-caja'><b>Nombre</b></p>
-                <input class='input-sc' placeholder='Nombre'/>
+                <p class='p-caja'><b>Usuario</b></p>
+                <input
+                  class='input-sc'
+                  placeholder='Saul'
+                  id='usuario'
+                  required
+                  ref={usuario => this.inputUsuario = usuario}
+                />
               </div>
               <div class='input-row'>
+                <p class='p-caja'><b>Banco</b></p>
+                <input
+                  class='input-sc'
+                  placeholder='Bancomer'
+                  id='banco'
+                  required
+                  ref={banco => this.inputBanco = banco}
+                />
               </div>
               <div class='input-row'>
               </div>

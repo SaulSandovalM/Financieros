@@ -19,22 +19,22 @@ export default class RowComponent extends Component {
           <p>{this.props.item.numero}</p>
         </div>
         <div class='tabla-p1'>
-          <p>{this.props.item.nombre}</p>
+          <p>{this.props.item.monto}</p>
         </div>
         <div class='tabla-p2'>
-          <p></p>
+          <p>{this.props.item.fechaC}</p>
         </div>
         <div class='tabla-p3'>
-          <p></p>
+          <p>{this.props.item.fechaE}</p>
         </div>
         <div class='tabla-p4'>
-          <p></p>
+          <p>{this.props.item.estatus}</p>
         </div>
         <div class='tabla-p5'>
-          <p></p>
+          <p>{this.props.item.usuario}</p>
         </div>
         <div class='tabla-p6'>
-          <p></p>
+          <p>{this.props.item.banco}</p>
         </div>
         <div class='tabla-pp2'>
         </div>

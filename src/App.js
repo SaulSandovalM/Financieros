@@ -30,6 +30,7 @@ import Altas from './components/cecilia/fondorevolvente/Altas';
 import Caja from './components/cecilia/fondorevolvente/Caja';
 import Banco from './components/cecilia/fondorevolvente/Banco';
 import Fondo from './components/cecilia/fondorevolvente/Fondo';
+import Seleccion from './components/cecilia/fondorevolvente/Seleccion';
 
 function App(props) {
   const { isAuthenticated, isVerifying } = props;
@@ -134,6 +135,7 @@ function App(props) {
       <Route path='/Excel' component={Excel} />
       <Route path='/Altas' component={Altas} />
       <Route path='/Caja' component={Caja} />
+      <Route path='/Seleccion' component={Seleccion} />
     </Switch>
   );
 }

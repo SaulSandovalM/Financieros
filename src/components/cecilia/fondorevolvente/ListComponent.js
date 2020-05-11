@@ -29,22 +29,22 @@ export default class ListComponent extends Component {
             <b>#</b>
           </div>
           <div class='tabla-p1'>
-            <b>PRODUCTO/SERVICIO</b>
-          </div>
-          <div class='tabla-p2'>
-            <b>CLAVE</b>
-          </div>
-          <div class='tabla-p3'>
-            <b>DESCRIPCIÓN</b>
-          </div>
-          <div class='tabla-p4'>
             <b>MONTO</b>
           </div>
+          <div class='tabla-p2'>
+            <b>FECHA CREACIÓN</b>
+          </div>
+          <div class='tabla-p3'>
+            <b>FECHA EDICIÓN</b>
+          </div>
+          <div class='tabla-p4'>
+            <b>ESTATUS</b>
+          </div>
           <div class='tabla-p5'>
-            <b>IMPUESTO</b>
+            <b>USUARIO</b>
           </div>
           <div class='tabla-p6'>
-            <b>CLASE</b>
+            <b>BANCO</b>
           </div>
           <div class='tabla-pp2'>
           </div>
