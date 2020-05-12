@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import firebase from '../../../Firebase';
 import './Banco.css';
+import ListComponent from './ListComponent';
 
 export default class Banco extends Component {
   constructor(props) {
@@ -104,21 +105,13 @@ export default class Banco extends Component {
             </div>
           </div>
 
-          <div class='caja-inputs' style={{marginBottom: '40px'}}>
-            <div class='caja-inputs-c'>
-              <div class='input-row'>
-              </div>
-              <div class='input-row'>
-              </div>
-              <div class='input-row'>
-              </div>
-              <div class='input-row'>
-              </div>
-            </div>
-          </div>
+        
 
           <div class='caja-w'>
             <div class='caja-col'>
+              <ListComponent
+                lista={this.state.lista}
+              />
             </div>
           </div>
 
