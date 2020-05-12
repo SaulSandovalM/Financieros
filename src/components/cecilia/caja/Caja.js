@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import firebase from '../../../Firebase';
-import './Altas.css';
+import './Caja.css';
 import ListComponent from './ListComponent';
 
 export default class Caja extends Component {

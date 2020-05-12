@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import firebase from '../../../Firebase';
 import './Altas.css';
-import ListComponent from './ListComponent';
 
 export default class Seleccion extends Component {
   constructor () {

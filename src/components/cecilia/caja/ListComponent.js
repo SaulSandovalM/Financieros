@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './Altas.css';
+import './Caja.css';
 import RowComponent from './RowComponent';
 import firebase from '../../../Firebase';
 

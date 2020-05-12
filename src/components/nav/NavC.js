@@ -25,13 +25,18 @@ class Nav extends Component {
           </Link>
         </div>
         <div className='navbar-left'>
-          <Link to="/Comprometido" className="deco">
-            <h3 className="nav-t" style={{fontFamily: 'Arial'}}>Comprometido</h3>
+          <Link to="/Seleccion" className="deco">
+            <h3 className="nav-t" style={{fontFamily: 'Arial'}}>Selección</h3>
           </Link>
         </div>
         <div className='navbar-left'>
-          <Link to="/Registro" className="deco">
-            <h3 className="nav-t" style={{fontFamily: 'Arial'}}>Registro</h3>
+          <Link to="/Caja" className="deco">
+            <h3 className="nav-t" style={{fontFamily: 'Arial'}}>Caja</h3>
+          </Link>
+        </div>
+        <div className='navbar-left'>
+          <Link to="/Banco" className="deco">
+            <h3 className="nav-t" style={{fontFamily: 'Arial'}}>Banco</h3>
           </Link>
         </div>
         <div className='navbar-left'>

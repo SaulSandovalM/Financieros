@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './Altas.css';
+import './Caja.css';
 
 export default class RowComponent extends Component {
   constructor(props){
