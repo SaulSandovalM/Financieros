@@ -5,6 +5,7 @@ import firebase from '../../../Firebase';
 import './Altas.css';
 import ListComponent from './ListComponent';
 import ListComponent2 from './ListComponent2';
+import '../banco/Banco.css';
 
 
 
@@ -95,6 +96,7 @@ export default class Seleccion extends Component {
 
         <div class="cat-partida">
               <p class="text-p-partida" style={{fontFamily: 'Arial'}}><b>Partida </b> </p>
+
               <div className="tabla-edit-c"> {/*select*/}
                 <select name="presupuestal" onChange={this.onChange} ref="presupuestal" className="input-edi">
                   <option name="presupuestal"></option>
@@ -122,7 +124,32 @@ export default class Seleccion extends Component {
                   <option name="presupuestal">24</option>
                 </select>
               </div>
+              <div class="boton-partida">
+              <button class="boton-partida">Buscar</button>
+                    </div>
+
+
         </div>
+        <div class='caja-container'>
+          <div class='caja-inputs'>
+            <div class='caja-inputs-c'>
+              <div class='input-row'>
+              </div>
+              <div class='input-row'>
+              </div>
+              <div class='input-row'>
+              </div>
+              <div class='input-row'>
+              </div>
+            </div>
+            <div class='disponible'>
+              <div>
+                <p class='p-caja-dis'><b>SALDO DISPONIBLE</b></p>
+                <p class='cantidad-caja'>MXN $1,000,000.00</p>
+              </div>
+            </div>
+          </div>
+          </div>
 
 
         <div class='caja-w'>
@@ -132,6 +159,10 @@ export default class Seleccion extends Component {
                   />
            </div>
         </div>
+        <div>
+        <button class="boton-partida">Agregar</button>
+        </div>
+
 
 
         <div class='caja-w'>
@@ -140,6 +171,9 @@ export default class Seleccion extends Component {
                 lista={this.state.lista}
                 />
           </div>
+            </div>
+            <div>
+            <button class="boton-partida">Guardar</button>
             </div>
 
 
@@ -151,6 +185,8 @@ export default class Seleccion extends Component {
                   />
            </div>
       </div>
+
+      <button class="boton-partida">Enviar </button>
 
         </div>
 
