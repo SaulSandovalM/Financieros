@@ -136,6 +136,7 @@ function App(props) {
       <Route path='/Altas' component={Altas} />
       <Route path='/Caja' component={Caja} />
       <Route path='/Seleccion' component={Seleccion} />
+      <Route path='/Banco' component={Banco} />
     </Switch>
   );
 }

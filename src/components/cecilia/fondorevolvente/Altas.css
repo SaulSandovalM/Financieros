@@ -257,3 +257,23 @@ body {
   color: white;
   border: 0px;
 }
+
+/* Seleccion */
+
+.pdf-section {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+}
+.pdf-s-content {
+  width: 50%;
+  height: 200px;
+  margin: 10px;
+}
+.pdf-s-content2 {
+  width: 50%;
+  height: 200px;
+  margin: 10px;
+  
+}
