@@ -1,21 +1,20 @@
 import React, { Component } from 'react';
-import './Altas.css';
-import RowComponent from './RowComponet';
+import './Seleccion.css';
+import RowComponent from './RowComponent';
 import firebase from '../../../Firebase';
-
 
 export default class ListComponent extends Component {
   constructor (props) {
    super(props);
    this.state = {
-     caja: [],
+     banco: [],
    };
  }
 
   componentWillMount () {
-    firebase.database().ref('Caja/').on('child_added', snapshot => {
+    firebase.database().ref('banco/').on('child_added', snapshot => {
       this.setState({
-        caja: this.state.caja.concat(snapshot.val())
+        banco: this.state.banco.concat(snapshot.val())
       });
     });
   }
@@ -27,16 +26,16 @@ export default class ListComponent extends Component {
           <div class='tabla-pp'>
           </div>
           <div class='tabla-p'>
-            <b>#</b>
-          </div>
-          <div class='tabla-p1-banco'>
             <b>UP</b>
           </div>
-          <div class='tabla-p2-banco'>
+          <div class='tabla-p1-banco'>
+            <b>PARTIDA</b>
+          </div>
+          <div class='tabla-p2-select'>
             <b>PROYECTO</b>
           </div>
-          <div class='tabla-p3-banco'>
-            <b>DESCRIPCIÓN</b>
+          <div class='tabla-p3-select'>
+            <b>NOMBRE DEL PROYECTO</b>
           </div>
           <div class='tabla-p4'>
             <b>MONTO</b>
@@ -45,7 +44,6 @@ export default class ListComponent extends Component {
             <b>PORCENTAJE</b>
           </div>
           <div class='tabla-pp2'>
-
           </div>
         </div>
         {
@@ -56,7 +54,7 @@ export default class ListComponent extends Component {
             />
           )
         }
-        </div>
+      </div>
     );
   }
 }

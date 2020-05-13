@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './Altas.css';
+import './Seleccion.css';
 
 export default class RowComponent extends Component {
   constructor(props){
@@ -16,22 +16,22 @@ export default class RowComponent extends Component {
         <div class='tabla-pp'>
         </div>
         <div class='tabla-p'>
-          <p>{this.props.item.numero}</p>
+          <p>{this.props.item.up}</p>
         </div>
         <div class='tabla-p1-banco'>
-          <p>{this.props.item.monto}</p>
+          <p>{this.props.item.partida}</p>
         </div>
-        <div class='tabla-p2-banco'>
-          <p>{this.props.item.fechaC}</p>
+        <div class='tabla-p2-select'>
+          <p>{this.props.item.proyecto}</p>
         </div>
-        <div class='tabla-p3-banco'>
-          <p>{this.props.item.fechaE}</p>
+        <div class='tabla-p3-select'>
+          <p>{this.props.item.np}</p>
         </div>
         <div class='tabla-p4'>
-          <p>{this.props.item.estatus}</p>
+          <p>{this.props.item.monto}</p>
         </div>
         <div class='tabla-p5'>
-          <p>{this.props.item.usuario}</p>
+          <p>{this.props.item.porcentaje}</p>
         </div>
         <div class='tabla-pp2'>
         </div>

@@ -1,18 +1,13 @@
 import React, { Component } from 'react';
-import Dropzone from 'react-dropzone';
-import csv from 'csv';
 import firebase from '../../../Firebase';
-import './Altas.css';
+import './Seleccion.css';
 import ListComponent from './ListComponent';
-import ListComponent2 from './ListComponent2';
-import '../banco/Banco.css';
-
-
 
 export default class Seleccion extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      nuevo: '',
       lista: [
         {
           id: 1,
@@ -21,14 +16,14 @@ export default class Seleccion extends Component {
         },
       ],
       form: [],
-      numero: '',
+      alert: false,
+      alertData: {},
+      partida: '',
+      up: '',
+      proyecto: '',
+      np: '',
       monto: '',
-      fechaC: '',
-      fechaE: '',
-      estatus: '',
-      usuario: '',
-      banco: '',
-      contador: {},
+      porcentaje: ''
     };
   }
 
@@ -37,13 +32,12 @@ export default class Seleccion extends Component {
       var lista = [];
       snap.forEach((child) => {
         lista.push({
-          numero: child.val().numero,
+          partida: child.val().partida,
+          up: child.val().up,
+          proyecto: child.val().proyecto,
+          np: child.val().np,
           monto: child.val().monto,
-          fechaC: child.val().fechaC,
-          fechaE: child.val().fechaE,
-          estatus: child.val().estatus,
-          usuario: child.val().usuario,
-          banco: child.val().banco,
+          porcentaje: child.val().porcentaje,
           done: child.val().done,
           id: child.key
         });
@@ -55,36 +49,62 @@ export default class Seleccion extends Component {
   }
 
   componentDidMount() {
-    const itemsRef = firebase.database().ref('Caja/');
+    const itemsRef = firebase.database().ref('banco/').limitToLast(1);
     this.listenForItems(itemsRef);
-    this.consumo();
-    setInterval(this.consumo, 500);
+  }
+
+  showAlert(type, message) {
+    this.setState({
+      alert: true,
+      alertData: {type, message}
+    });
+    setTimeout(() => {
+      this.setState({alert: false});
+    }, 6000);
+  }
+
+  resetForm() {
+    this.refs.contactForm.reset();
   }
 
   componentWillMount() {
-    let formRef = firebase.database().ref('Caja').orderByKey().limitToLast(6);
+    let formRef = firebase.database().ref('banco').orderByKey().limitToLast(1);
     formRef.on('child_added', snapshot => {
-      const { numero, monto, fechaC, fechaE, estatus, usuario, banco } = snapshot.val();
-      const data = { numero, monto, fechaC, fechaE, estatus, usuario, banco };
+      const { partida, up, proyecto, np, monto, porcentaje } = snapshot.val();
+      const data = { partida, up, proyecto, np, monto, porcentaje };
       this.setState({ form: [data].concat(this.state.form) });
     });
   }
 
-  consumo = () => {
-    const ref = firebase.firestore().collection('Caja').doc('--stats--');
-    ref.get().then((doc) => {
-      if (doc.exists) {
-        this.setState({
-          contador: doc.data(),
-          key: doc.id,
-          isLoading: false
-        });
-      } else {
-        console.log("No such document!");
-      }
-    })
+  sendMessage(e) {
+    e.preventDefault();
+    const params = {
+      partida: this.inputPartida.value,
+      up: this.inputUp.value,
+      proyecto: this.inputProyecto.value,
+      np: this.inputNp.value,
+      monto: this.inputMonto.value,
+      porcentaje: this.inputPorcentaje.value
+   };
+   this.setState({
+     partida: this.inputPartida.value,
+     up: this.inputUp.value,
+     proyecto: this.inputProyecto.value,
+     np: this.inputNp.value,
+     monto: this.inputMonto.value,
+     porcentaje: this.inputPorcentaje.value
+   })
+   if ( params.partida && params.up && params.proyecto && params.np && params.monto && params.porcentaje ) {
+     firebase.database().ref('banco').push(params).then(() => {
+       this.showAlert('success', 'Tu solicitud fue enviada.');
+     }).catch(() => {
+       this.showAlert('danger', 'Tu solicitud no puede ser enviada');
+     });
+     this.resetForm();
+   } else {
+     this.showAlert('warning', 'Por favor llene el formulario');
+   };
   }
-
 
   render() {
     return (
@@ -92,50 +112,73 @@ export default class Seleccion extends Component {
         <div class='site'>
           <p class='site-s'><b>Selección</b></p>
         </div>
-
-
-        <div class="cat-partida">
-              <p class="text-p-partida" style={{fontFamily: 'Arial'}}><b>Partida </b> </p>
-
-              <div className="tabla-edit-c"> {/*select*/}
-                <select name="presupuestal" onChange={this.onChange} ref="presupuestal" className="input-edi">
-                  <option name="presupuestal"></option>
-                  <option name="presupuestal">2</option>
-                  <option name="presupuestal">3</option>
-                  <option name="presupuestal">4</option>
-                  <option name="presupuestal">5</option>
-                  <option name="presupuestal">6</option>
-                  <option name="presupuestal">7</option>
-                  <option name="presupuestal">8</option>
-                  <option name="presupuestal">9</option>
-                  <option name="presupuestal">10</option>
-                  <option name="presupuestal">11</option>
-                  <option name="presupuestal">12</option>
-                  <option name="presupuestal">13</option>
-                  <option name="presupuestal">14</option>
-                  <option name="presupuestal">15</option>
-                  <option name="presupuestal">16</option>
-                  <option name="presupuestal">17</option>
-                  <option name="presupuestal">18</option>
-                  <option name="presupuestal">20</option>
-                  <option name="presupuestal">21</option>
-                  <option name="presupuestal">22</option>
-                  <option name="presupuestal">23</option>
-                  <option name="presupuestal">24</option>
-                </select>
-              </div>
-              <div class="boton-partida">
-              <button class="boton-partida">Buscar</button>
-                    </div>
-
-
-        </div>
-        <div class='caja-container'>
+        <form class='caja-container' onSubmit={this.sendMessage.bind(this)} ref='contactForm'>
           <div class='caja-inputs'>
             <div class='caja-inputs-c'>
               <div class='input-row'>
+                <p class='p-caja'><b>UP</b></p>
+                <input
+                  class='input-sc'
+                  id='partida'
+                  required
+                  ref={partida => this.inputPartida = partida}
+                />
               </div>
               <div class='input-row'>
+                <p class='p-caja'><b>Partida</b></p>
+                <input
+                  class='input-sc'
+                  id='up'
+                  required
+                  ref={up => this.inputUp = up}
+                />
+              </div>
+              <div class='input-row'>
+                <p class='p-caja'><b>Proyecto</b></p>
+                <input
+                  class='input-sc'
+                  id='proyecto'
+                  required
+                  ref={proyecto => this.inputProyecto = proyecto}
+                />
+              </div>
+              <div class='input-row'>
+                <p class='p-caja'><b>Nombre del Proyecto</b></p>
+                <input
+                  class='input-sc'
+                  id='np'
+                  required
+                  ref={np => this.inputNp = np}
+                />
+              </div>
+            </div>
+            <div class='disponible'>
+              <div>
+                <p class='p-caja-dis'><b>SALDO SELECCIONADO</b></p>
+                <p class='cantidad-caja'>MXN $0.00</p>
+              </div>
+            </div>
+          </div>
+
+          <div class='caja-inputs' style={{marginTop: '40px', marginBottom: '40px'}}>
+            <div class='caja-inputs-c'>
+              <div class='input-row'>
+                <p class='p-caja'><b>Monto</b></p>
+                <input
+                  class='input-sc'
+                  id='monto'
+                  required
+                  ref={monto => this.inputMonto = monto}
+                />
+              </div>
+              <div class='input-row'>
+                <p class='p-caja'><b>Porcentaje</b></p>
+                <input
+                  class='input-sc'
+                  id='porcentaje'
+                  required
+                  ref={porcentaje => this.inputPorcentaje = porcentaje}
+                />
               </div>
               <div class='input-row'>
               </div>
@@ -144,54 +187,48 @@ export default class Seleccion extends Component {
             </div>
             <div class='disponible'>
               <div>
-                <p class='p-caja-dis'><b>SALDO DISPONIBLE</b></p>
-                <p class='cantidad-caja'>MXN $1,000,000.00</p>
+                <div class='input-row-2'>
+                  <p style={{marginTop: '4px'}}></p>
+                  <button type='submit' class='input-sc boton-g'>Guardar</button>
+                </div>
               </div>
             </div>
           </div>
-          </div>
 
-
-        <div class='caja-w'>
+          <div class='caja-w'>
             <div class='caja-col'>
-                  <ListComponent
-                  lista={this.state.lista}
-                  />
-           </div>
-        </div>
-        <div>
-        <button class="boton-partida">Agregar</button>
-        </div>
-
-
-
-        <div class='caja-w'>
-          <div class='caja-col'>
-                <ListComponent2
+              <ListComponent
                 lista={this.state.lista}
-                />
+              />
+            </div>
           </div>
+
+          {/*<div class=''>
+            <div class='caja-inputs'>
+              <div class='tabla-pp'>
+              </div>
+              <div class='tabla-p'>
+                <b>UP</b>
+              </div>
+              <div class='tabla-p1-banco'>
+                <b>PROYECTO</b>
+              </div>
+              <div class='tabla-p2-select'>
+                <b>NOMPRE DEL PROYECTO</b>
+              </div>
+              <div class='tabla-p4'>
+                <b>MONTO</b>
+              </div>
+              <div class='tabla-p5'>
+                <b>PORCENTAJE</b>
+              </div>
+              <div class='tabla-pp2'>
+              </div>
             </div>
-            <div>
-            <button class="boton-partida">Guardar</button>
-            </div>
+          </div>*/}
 
-
-
-        <div class='caja-w'>
-            <div class='caja-col'>
-                  <ListComponent2
-                  lista={this.state.lista}
-                  />
-           </div>
+        </form>
       </div>
-
-      <button class="boton-partida">Enviar </button>
-
-        </div>
-
-
-
     )
   }
 }

@@ -107,7 +107,7 @@ class Fondos extends Component {
 
   componentDidMount() {
     this.consumo();
-    setInterval(this.consumo, 500);
+    setInterval(this.consumo, 5000);
   }
 
   consumo = () => {

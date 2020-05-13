@@ -26,10 +26,9 @@ import Carga from './components/presupuesto/Carga';
 import Creacionfondo from './components/presupuesto/Creacionfondo';
 import FileUpload from './components/presupuesto/FileUpload';
 import Excel from './components/presupuesto/Excel';
-import Altas from './components/cecilia/fondorevolvente/Altas';
+import Altas from './components/cecilia/altas/Altas';
 import Caja from './components/cecilia/caja/Caja';
 import Banco from './components/cecilia/banco/Banco';
-import Fondo from './components/cecilia/fondorevolvente/Fondo';
 import Seleccion from './components/cecilia/fondorevolvente/Seleccion';
 
 function App(props) {

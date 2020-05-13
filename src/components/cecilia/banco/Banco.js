@@ -15,14 +15,12 @@ export default class Banco extends Component {
         },
       ],
       form: [],
-      numero: '',
+      partida: '',
+      up: '',
+      proyecto: '',
+      np: '',
       monto: '',
-      fechaC: '',
-      fechaE: '',
-      estatus: '',
-      usuario: '',
-      banco: '',
-      contador: {},
+      porcentaje: ''
     };
   }
 
@@ -31,13 +29,12 @@ export default class Banco extends Component {
       var lista = [];
       snap.forEach((child) => {
         lista.push({
-          numero: child.val().numero,
+          partida: child.val().partida,
+          up: child.val().up,
+          proyecto: child.val().proyecto,
+          np: child.val().np,
           monto: child.val().monto,
-          fechaC: child.val().fechaC,
-          fechaE: child.val().fechaE,
-          estatus: child.val().estatus,
-          usuario: child.val().usuario,
-          banco: child.val().banco,
+          porcentaje: child.val().porcentaje,
           done: child.val().done,
           id: child.key
         });
@@ -49,35 +46,26 @@ export default class Banco extends Component {
   }
 
   componentDidMount() {
-    const itemsRef = firebase.database().ref('Caja/');
+    const itemsRef = firebase.database().ref('banco/');
     this.listenForItems(itemsRef);
-    this.consumo();
-    setInterval(this.consumo, 500);
   }
 
   componentWillMount() {
-    let formRef = firebase.database().ref('Caja').orderByKey().limitToLast(6);
+    let formRef = firebase.database().ref('banco').orderByKey().limitToLast(6);
     formRef.on('child_added', snapshot => {
-      const { numero, monto, fechaC, fechaE, estatus, usuario, banco } = snapshot.val();
-      const data = { numero, monto, fechaC, fechaE, estatus, usuario, banco };
+      const { partida, up, proyecto, np, monto, porcentaje } = snapshot.val();
+      const data = { partida, up, proyecto, np, monto, porcentaje };
       this.setState({ form: [data].concat(this.state.form) });
     });
   }
 
-  consumo = () => {
-    const ref = firebase.firestore().collection('Caja').doc('--stats--');
-    ref.get().then((doc) => {
-      if (doc.exists) {
-        this.setState({
-          contador: doc.data(),
-          key: doc.id,
-          isLoading: false
-        });
-      } else {
-        console.log("No such document!");
-      }
-    })
-  }
+  calcula(){
+    var numero = document.getElementById('numero').value;
+    var numerodecimal = parseFloat(numero);
+    var subtotal = 0;
+    subtotal += numerodecimal + numerodecimal ;
+    document.getElementById('total').value = subtotal;
+    }
 
   render() {
     return (
@@ -100,14 +88,12 @@ export default class Banco extends Component {
             <div class='disponible'>
               <div>
                 <p class='p-caja-dis'><b>SALDO DISPONIBLE</b></p>
-                <p class='cantidad-caja'>MXN $1,000,000.00</p>
+                <p class='cantidad-caja' id='total'>MXN $1,000,000.00</p>
               </div>
             </div>
           </div>
 
-        
-
-          <div class='caja-w'>
+          <div class='caja-w' style={{marginTop: '40px', marginBottom: '40px'}}>
             <div class='caja-col'>
               <ListComponent
                 lista={this.state.lista}
