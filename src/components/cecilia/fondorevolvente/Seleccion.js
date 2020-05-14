@@ -23,7 +23,8 @@ export default class Seleccion extends Component {
       proyecto: '',
       np: '',
       monto: '',
-      porcentaje: ''
+      porcentaje: '',
+      contador: {},
     };
   }
 
@@ -49,8 +50,25 @@ export default class Seleccion extends Component {
   }
 
   componentDidMount() {
-    const itemsRef = firebase.database().ref('banco/').limitToLast(1);
+    const itemsRef = firebase.database().ref('banco/');
     this.listenForItems(itemsRef);
+    this.consumo();
+    setInterval(this.consumo, 5000);
+  }
+
+  consumo = () => {
+    const ref = firebase.firestore().collection('banco').doc('--stats--');
+    ref.get().then((doc) => {
+      if (doc.exists) {
+        this.setState({
+          contador: doc.data(),
+          key: doc.id,
+          isLoading: false
+        });
+      } else {
+        console.log("No such document!");
+      }
+    })
   }
 
   showAlert(type, message) {
@@ -78,6 +96,7 @@ export default class Seleccion extends Component {
 
   sendMessage(e) {
     e.preventDefault();
+
     const params = {
       partida: this.inputPartida.value,
       up: this.inputUp.value,
@@ -94,7 +113,21 @@ export default class Seleccion extends Component {
      monto: this.inputMonto.value,
      porcentaje: this.inputPorcentaje.value
    })
+
    if ( params.partida && params.up && params.proyecto && params.np && params.monto && params.porcentaje ) {
+     var f = parseInt(params.monto);
+     console.log(f);
+
+     const statsRef = firebase.firestore().collection('banco').doc('--stats--');
+
+     const increment = firebase.firestore.FieldValue.increment(f);
+
+     const batch = firebase.firestore().batch();
+     const storyRef = firebase.firestore().collection('banco').doc(`${Math.random()}`);
+     batch.set(storyRef, { title: 'Nuevo Fondo!' });
+     batch.set(statsRef, { storyCount: increment }, { merge: true });
+     batch.commit();
+
      firebase.database().ref('banco').push(params).then(() => {
        this.showAlert('success', 'Tu solicitud fue enviada.');
      }).catch(() => {
@@ -107,6 +140,9 @@ export default class Seleccion extends Component {
   }
 
   render() {
+
+    const { partida, up, proyecto, np, monto, porcentaje } = this.state;
+
     return (
       <div class='container-back'>
         <div class='site'>

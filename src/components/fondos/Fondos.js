@@ -87,9 +87,11 @@ class Fondos extends Component {
         realizo: '',
       });
 
+      var f = parseInt(no_oficio);
+
       const statsRef = firebase.firestore().collection('contador').doc('--stats--');
 
-      const increment = firebase.firestore.FieldValue.increment(1);
+      const increment = firebase.firestore.FieldValue.increment(f);
 
       const batch = firebase.firestore().batch();
       const storyRef = firebase.firestore().collection('contador').doc(`${Math.random()}`);

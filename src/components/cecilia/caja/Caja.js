@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import firebase from '../../../Firebase';
 import './Caja.css';
 import ListComponent from './ListComponent';
+import CurrencyFormat from 'react-currency-format';
 
 export default class Caja extends Component {
   constructor(props) {
@@ -87,38 +88,23 @@ export default class Caja extends Component {
         </div>
         <div class='caja-container'>
           <div class='caja-inputs'>
-            <div class='caja-inputs-c'>
-              <div class='input-row'>
-              </div>
-              <div class='input-row'>
-              </div>
-              <div class='input-row'>
-              </div>
-              <div class='input-row'>
-              </div>
-            </div>
-            <div class='disponible'>
-              <div>
-                <p class='p-caja-dis'><b>SALDO DISPONIBLE</b></p>
-                <p class='cantidad-caja'>MXN $0.00</p>
-              </div>
+          <div class='disponible-banco'>
+            <div>
+              <p class='cantidad-banco'>
+                MXN
+                <CurrencyFormat
+                  value={this.state.contador.storyCount}
+                  displayType={'text'}
+                  thousandSeparator={true}
+                  prefix={' $'}
+                  decimalSeparator={'.'} />
+                .00
+              </p>
             </div>
           </div>
-
-          <div class='caja-inputs' style={{marginBottom: '40px'}}>
-            <div class='caja-inputs-c'>
-              <div class='input-row'>
-              </div>
-              <div class='input-row'>
-              </div>
-              <div class='input-row'>
-              </div>
-              <div class='input-row'>
-              </div>
-            </div>
           </div>
 
-          <div class='caja-w'>
+          <div class='caja-w' style={{marginTop: '40px', marginBottom: '40px'}}>
             <div class='caja-col'>
               <ListComponent
                 lista={this.state.lista}

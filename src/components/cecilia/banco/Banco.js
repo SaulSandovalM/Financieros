@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import firebase from '../../../Firebase';
 import './Banco.css';
 import ListComponent from './ListComponent';
+import CurrencyFormat from 'react-currency-format';
 
 export default class Banco extends Component {
   constructor(props) {
@@ -20,7 +21,8 @@ export default class Banco extends Component {
       proyecto: '',
       np: '',
       monto: '',
-      porcentaje: ''
+      porcentaje: '',
+      contador: {},
     };
   }
 
@@ -48,6 +50,23 @@ export default class Banco extends Component {
   componentDidMount() {
     const itemsRef = firebase.database().ref('banco/');
     this.listenForItems(itemsRef);
+    this.consumo();
+    setInterval(this.consumo, 5000);
+  }
+
+  consumo = () => {
+    const ref = firebase.firestore().collection('banco').doc('--stats--');
+    ref.get().then((doc) => {
+      if (doc.exists) {
+        this.setState({
+          contador: doc.data(),
+          key: doc.id,
+          isLoading: false
+        });
+      } else {
+        console.log("No such document!");
+      }
+    })
   }
 
   componentWillMount() {
@@ -59,14 +78,6 @@ export default class Banco extends Component {
     });
   }
 
-  calcula(){
-    var numero = document.getElementById('numero').value;
-    var numerodecimal = parseFloat(numero);
-    var subtotal = 0;
-    subtotal += numerodecimal + numerodecimal ;
-    document.getElementById('total').value = subtotal;
-    }
-
   render() {
     return (
       <div class='container-back'>
@@ -75,20 +86,18 @@ export default class Banco extends Component {
         </div>
         <div class='caja-container'>
           <div class='caja-inputs'>
-            <div class='caja-inputs-c'>
-              <div class='input-row'>
-              </div>
-              <div class='input-row'>
-              </div>
-              <div class='input-row'>
-              </div>
-              <div class='input-row'>
-              </div>
-            </div>
-            <div class='disponible'>
+            <div class='disponible-banco'>
               <div>
-                <p class='p-caja-dis'><b>SALDO DISPONIBLE</b></p>
-                <p class='cantidad-caja' id='total'>MXN $1,000,000.00</p>
+                <p class='cantidad-banco'>
+                  MXN
+                  <CurrencyFormat
+                    value={this.state.contador.storyCount}
+                    displayType={'text'}
+                    thousandSeparator={true}
+                    prefix={' $'}
+                    decimalSeparator={'.'} />
+                  .00
+                </p>
               </div>
             </div>
           </div>
