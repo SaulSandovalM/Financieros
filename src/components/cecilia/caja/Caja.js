@@ -7,6 +7,8 @@ import CurrencyFormat from 'react-currency-format';
 export default class Caja extends Component {
   constructor(props) {
     super(props);
+    this.handleChange = this.handleChange.bind(this);
+    this.handleChange1 = this.handleChange1.bind(this);
     this.state = {
       lista: [
         {
@@ -16,13 +18,14 @@ export default class Caja extends Component {
         },
       ],
       form: [],
-      numero: '',
+      alert: false,
+      alertData: {},
+      partida: '',
+      up: '',
+      proyecto: '',
+      np: '',
       monto: '',
-      fechaC: '',
-      fechaE: '',
-      estatus: '',
-      usuario: '',
-      banco: '',
+      porcentaje: '',
       contador: {},
     };
   }
@@ -32,13 +35,12 @@ export default class Caja extends Component {
       var lista = [];
       snap.forEach((child) => {
         lista.push({
-          numero: child.val().numero,
+          partida: child.val().partida,
+          up: child.val().up,
+          proyecto: child.val().proyecto,
+          np: child.val().np,
           monto: child.val().monto,
-          fechaC: child.val().fechaC,
-          fechaE: child.val().fechaE,
-          estatus: child.val().estatus,
-          usuario: child.val().usuario,
-          banco: child.val().banco,
+          porcentaje: child.val().porcentaje,
           done: child.val().done,
           id: child.key
         });
@@ -50,23 +52,14 @@ export default class Caja extends Component {
   }
 
   componentDidMount() {
-    const itemsRef = firebase.database().ref('Caja/');
+    const itemsRef = firebase.database().ref('caja/');
     this.listenForItems(itemsRef);
     this.consumo();
     setInterval(this.consumo, 500);
   }
 
-  componentWillMount() {
-    let formRef = firebase.database().ref('Caja').orderByKey().limitToLast(6);
-    formRef.on('child_added', snapshot => {
-      const { numero, monto, fechaC, fechaE, estatus, usuario, banco } = snapshot.val();
-      const data = { numero, monto, fechaC, fechaE, estatus, usuario, banco };
-      this.setState({ form: [data].concat(this.state.form) });
-    });
-  }
-
   consumo = () => {
-    const ref = firebase.firestore().collection('Caja').doc('--stats--');
+    const ref = firebase.firestore().collection('caja').doc('--stats--');
     ref.get().then((doc) => {
       if (doc.exists) {
         this.setState({
@@ -80,7 +73,96 @@ export default class Caja extends Component {
     })
   }
 
+  showAlert(type, message) {
+    this.setState({
+      alert: true,
+      alertData: {type, message}
+    });
+    setTimeout(() => {
+      this.setState({alert: false});
+    }, 6000);
+  }
+
+  resetForm() {
+    this.refs.contactForm.reset();
+  }
+
+  componentWillMount() {
+    let formRef = firebase.database().ref('banco').orderByKey().limitToLast(1);
+    formRef.on('child_added', snapshot => {
+      const { partida, up, proyecto, np, monto, porcentaje } = snapshot.val();
+      const data = { partida, up, proyecto, np, monto, porcentaje };
+      this.setState({ form: [data].concat(this.state.form) });
+    });
+  }
+
+  sendMessage(e) {
+    e.preventDefault();
+
+    const params = {
+      partida: this.inputPartida.value,
+      up: this.inputUp.value,
+      proyecto: this.inputProyecto.value,
+      np: this.inputNp.value,
+      monto: this.inputMonto.value,
+      porcentaje: this.inputPorcentaje.value
+   };
+   this.setState({
+     partida: this.inputPartida.value,
+     up: this.inputUp.value,
+     proyecto: this.inputProyecto.value,
+     np: this.inputNp.value,
+     monto: this.inputMonto.value,
+     porcentaje: this.inputPorcentaje.value
+   })
+
+   if ( params.partida && params.up && params.proyecto && params.np && params.monto && params.porcentaje ) {
+     var f = parseInt(params.monto);
+     console.log(f);
+
+     const statsRef = firebase.firestore().collection('banco').doc('--stats--');
+
+     const increment = firebase.firestore.FieldValue.increment(-f);
+
+     const batch = firebase.firestore().batch();
+     const storyRef = firebase.firestore().collection('banco').doc(`${Math.random()}`);
+     batch.set(storyRef, { title: 'Nuevo Fondo!' });
+     batch.set(statsRef, { storyCount: increment }, { merge: true });
+     batch.commit();
+
+     const statsRefT = firebase.firestore().collection('caja').doc('--stats--');
+
+     const increments = firebase.firestore.FieldValue.increment(f);
+
+     const batchs = firebase.firestore().batch();
+     const storyRefs = firebase.firestore().collection('caja').doc(`${Math.random()}`);
+     batchs.set(storyRefs, { title: 'Nuevo Fondo!' });
+     batchs.set(statsRefT, { storyCount: increments }, { merge: true });
+     batchs.commit();
+
+     firebase.database().ref('banco').push(params).then(() => {
+       this.showAlert('success', 'Tu solicitud fue enviada.');
+     }).catch(() => {
+       this.showAlert('danger', 'Tu solicitud no puede ser enviada');
+     });
+     this.resetForm();
+   } else {
+     this.showAlert('warning', 'Por favor llene el formulario');
+   };
+  }
+
+  handleChange(e) {
+      this.setState({monto: e.target.value});
+    }
+
+    handleChange1(e) {
+        this.setState({porcentaje: e.target.value});
+      }
+
   render() {
+
+        const { partida, up, proyecto, np, monto, porcentaje } = this.state;
+
     return (
       <div class='container-back'>
         <div class='site'>
@@ -103,6 +185,94 @@ export default class Caja extends Component {
             </div>
           </div>
           </div>
+
+          <form class='caja-container' onSubmit={this.sendMessage.bind(this)} ref='contactForm'>
+            <div class='caja-inputs'>
+              <div class='caja-inputs-c'>
+                <div class='input-row'>
+                  <p class='p-caja'><b>UP</b></p>
+                  <input
+                    class='input-sc'
+                    id='partida'
+                    required
+                    ref={partida => this.inputPartida = partida}
+                  />
+                </div>
+                <div class='input-row'>
+                  <p class='p-caja'><b>Partida</b></p>
+                  <input
+                    class='input-sc'
+                    id='up'
+                    required
+                    ref={up => this.inputUp = up}
+                  />
+                </div>
+                <div class='input-row'>
+                  <p class='p-caja'><b>Proyecto</b></p>
+                  <input
+                    class='input-sc'
+                    id='proyecto'
+                    required
+                    ref={proyecto => this.inputProyecto = proyecto}
+                  />
+                </div>
+                <div class='input-row'>
+                  <p class='p-caja'><b>Nombre del Proyecto</b></p>
+                  <input
+                    class='input-sc'
+                    id='np'
+                    required
+                    ref={np => this.inputNp = np}
+                  />
+                </div>
+              </div>
+              <div class='disponible'>
+                {/*<div>
+                  <p class='p-caja-dis'><b>PORCENTAJE A AGREGAR</b></p>
+                  <p class='cantidad-caja'>MXN ${(monto * porcentaje)/100}</p>
+                </div>*/}
+              </div>
+            </div>
+
+            <div class='caja-inputs' style={{marginTop: '40px', marginBottom: '40px'}}>
+              <div class='caja-inputs-c'>
+                <div class='input-row'>
+                  <p class='p-caja'><b>Monto</b></p>
+                  <input
+                    class='input-sc'
+                    id='monto'
+                    value={monto}
+                    required
+                    onChange={this.handleChange}
+                    ref={monto => this.inputMonto = monto}
+                  />
+                </div>
+                <div class='input-row'>
+                  <p class='p-caja'><b>Porcentaje a asignar</b></p>
+                  <input
+                    class='input-sc'
+                    id='porcentaje'
+                    value={porcentaje}
+                    onChange={this.handleChange1}
+                    required
+                    ref={porcentaje => this.inputPorcentaje = porcentaje}
+                  />
+                </div>
+                <div class='input-row'>
+                </div>
+                <div class='input-row'>
+                </div>
+              </div>
+              <div class='disponible'>
+                <div>
+                  <div class='input-row-2'>
+                    <p style={{marginTop: '4px'}}></p>
+                    <button type='submit' class='input-sc boton-g'>Guardar</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </form>
 
           <div class='caja-w' style={{marginTop: '40px', marginBottom: '40px'}}>
             <div class='caja-col'>

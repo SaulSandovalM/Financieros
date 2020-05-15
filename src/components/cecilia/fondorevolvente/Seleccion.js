@@ -6,6 +6,8 @@ import ListComponent from './ListComponent';
 export default class Seleccion extends Component {
   constructor(props) {
     super(props);
+     this.handleChange = this.handleChange.bind(this);
+     this.handleChange1 = this.handleChange1.bind(this);
     this.state = {
       nuevo: '',
       lista: [
@@ -139,6 +141,14 @@ export default class Seleccion extends Component {
    };
   }
 
+  handleChange(e) {
+      this.setState({monto: e.target.value});
+    }
+
+    handleChange1(e) {
+        this.setState({porcentaje: e.target.value});
+      }
+
   render() {
 
     const { partida, up, proyecto, np, monto, porcentaje } = this.state;
@@ -190,8 +200,8 @@ export default class Seleccion extends Component {
             </div>
             <div class='disponible'>
               <div>
-                <p class='p-caja-dis'><b>SALDO SELECCIONADO</b></p>
-                <p class='cantidad-caja'>MXN $0.00</p>
+                <p class='p-caja-dis'><b>PORCENTAJE A AGREGAR</b></p>
+                <p class='cantidad-caja'>MXN ${(monto * porcentaje)/100}</p>
               </div>
             </div>
           </div>
@@ -203,15 +213,19 @@ export default class Seleccion extends Component {
                 <input
                   class='input-sc'
                   id='monto'
+                  value={monto}
                   required
+                  onChange={this.handleChange}
                   ref={monto => this.inputMonto = monto}
                 />
               </div>
               <div class='input-row'>
-                <p class='p-caja'><b>Porcentaje</b></p>
+                <p class='p-caja'><b>Porcentaje a asignar</b></p>
                 <input
                   class='input-sc'
                   id='porcentaje'
+                  value={porcentaje}
+                  onChange={this.handleChange1}
                   required
                   ref={porcentaje => this.inputPorcentaje = porcentaje}
                 />
@@ -238,30 +252,6 @@ export default class Seleccion extends Component {
               />
             </div>
           </div>
-
-          {/*<div class=''>
-            <div class='caja-inputs'>
-              <div class='tabla-pp'>
-              </div>
-              <div class='tabla-p'>
-                <b>UP</b>
-              </div>
-              <div class='tabla-p1-banco'>
-                <b>PROYECTO</b>
-              </div>
-              <div class='tabla-p2-select'>
-                <b>NOMPRE DEL PROYECTO</b>
-              </div>
-              <div class='tabla-p4'>
-                <b>MONTO</b>
-              </div>
-              <div class='tabla-p5'>
-                <b>PORCENTAJE</b>
-              </div>
-              <div class='tabla-pp2'>
-              </div>
-            </div>
-          </div>*/}
 
         </form>
       </div>
