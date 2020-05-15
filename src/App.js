@@ -32,6 +32,7 @@ import Banco from './components/cecilia/banco/Banco';
 import Seleccion from './components/cecilia/fondorevolvente/Seleccion';
 import Cheques from './components/elizabeth/cheques/Cheques';
 import Vales from './components/elizabeth/vales/Vales';
+import Comprobacion from './components/elizabeth/comprobacion/Comprobacion';
 
 function App(props) {
   const { isAuthenticated, isVerifying } = props;
@@ -135,6 +136,13 @@ function App(props) {
         isAuthenticated={isAuthenticated}
         isVerifying={isVerifying}
       />
+      <ProtectedRoute
+        exact
+        path="/Comprobacion"
+        component={Comprobacion}
+        isAuthenticated={isAuthenticated}
+        isVerifying={isVerifying}
+      />
 
       <Route path="/Login" component={Login} />
       <Route path='/show/:id' component={Show} />
@@ -155,6 +163,7 @@ function App(props) {
       <Route path='/Banco' component={Banco} />
       <Route path='/Cheques' component={Cheques} />
       <Route path='/Vales' componen={Vales}/>
+      <Route path='/Comprobacion' componen={Vales}/>
 
     </Switch>
   );
