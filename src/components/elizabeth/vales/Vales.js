@@ -6,8 +6,8 @@ class Vales extends Component {
   render() {
     return (
 
-      <div>
-            <div>
+      <div class='container-back'>
+            <div class='site'>
                   <h1> Vales</h1>
             </div>
 
@@ -58,7 +58,7 @@ class Vales extends Component {
                   <div>
                   <button> Guardar</button>
                   </div>
-                  
+
 
 
 
