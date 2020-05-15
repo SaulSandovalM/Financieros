@@ -52,7 +52,7 @@ export default class Seleccion extends Component {
   componentDidMount() {
     const itemsRef = firebase.database().ref('banco/');
     this.listenForItems(itemsRef);
-    this.consumo();
+    this.consumo();// omitir
     setInterval(this.consumo, 5000);
   }
 
@@ -69,7 +69,7 @@ export default class Seleccion extends Component {
         console.log("No such document!");
       }
     })
-  }
+  }//aqui
 
   showAlert(type, message) {
     this.setState({
@@ -239,29 +239,7 @@ export default class Seleccion extends Component {
             </div>
           </div>
 
-          {/*<div class=''>
-            <div class='caja-inputs'>
-              <div class='tabla-pp'>
-              </div>
-              <div class='tabla-p'>
-                <b>UP</b>
-              </div>
-              <div class='tabla-p1-banco'>
-                <b>PROYECTO</b>
-              </div>
-              <div class='tabla-p2-select'>
-                <b>NOMPRE DEL PROYECTO</b>
-              </div>
-              <div class='tabla-p4'>
-                <b>MONTO</b>
-              </div>
-              <div class='tabla-p5'>
-                <b>PORCENTAJE</b>
-              </div>
-              <div class='tabla-pp2'>
-              </div>
-            </div>
-          </div>*/}
+          55
 
         </form>
       </div>

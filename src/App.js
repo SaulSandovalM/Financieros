@@ -162,8 +162,8 @@ function App(props) {
       <Route path='/Seleccion' component={Seleccion} />
       <Route path='/Banco' component={Banco} />
       <Route path='/Cheques' component={Cheques} />
-      <Route path='/Vales' componen={Vales}/>
-      <Route path='/Comprobacion' componen={Vales}/>
+      <Route path='/Vales' component={Vales}/>
+      <Route path='/Comprobacion' component={Comprobacion}/>
 
     </Switch>
   );
