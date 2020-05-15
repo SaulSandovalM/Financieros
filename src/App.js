@@ -30,6 +30,8 @@ import Altas from './components/cecilia/altas/Altas';
 import Caja from './components/cecilia/caja/Caja';
 import Banco from './components/cecilia/banco/Banco';
 import Seleccion from './components/cecilia/fondorevolvente/Seleccion';
+import Cheques from './components/elizabeth/cheques/Cheques';
+import Vales from './components/elizabeth/vales/Vales';
 
 function App(props) {
   const { isAuthenticated, isVerifying } = props;
@@ -119,6 +121,21 @@ function App(props) {
         isAuthenticated={isAuthenticated}
         isVerifying={isVerifying}
       />
+      <ProtectedRoute
+        exact
+        path="/Cheques"
+        component={Cheques}
+        isAuthenticated={isAuthenticated}
+        isVerifying={isVerifying}
+      />
+      <ProtectedRoute
+        exact
+        path="/Vales"
+        component={Vales}
+        isAuthenticated={isAuthenticated}
+        isVerifying={isVerifying}
+      />
+
       <Route path="/Login" component={Login} />
       <Route path='/show/:id' component={Show} />
       <Route path='/edit/:id' component={Edit} />
@@ -136,6 +153,9 @@ function App(props) {
       <Route path='/Caja' component={Caja} />
       <Route path='/Seleccion' component={Seleccion} />
       <Route path='/Banco' component={Banco} />
+      <Route path='/Cheques' component={Cheques} />
+      <Route path='/Vales' componen={Vales}/>
+
     </Switch>
   );
 }
