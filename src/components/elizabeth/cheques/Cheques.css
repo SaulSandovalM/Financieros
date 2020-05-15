@@ -1,3 +1,53 @@
-body{
-  background-color:red;
+.container-back {
+  padding: 0px 20px 0px 20px;
+  background-color: #f4f4f4;
+  min-height: 100vh;
+}
+.text-1{
+      padding-left: 350px;
+}
+.caja-inputs {
+  padding-top: 10px;
+  padding-left: 350px;
+  display: flex;
+  justify-content: space-between;
+
+  width: 100%;
+}
+.caja-inputs-c2{
+
+  width: 20%;
+}
+
+.input-row {
+  display: flex;
+  flex-direction: column;
+  width: 23%;
+}
+.input-row1{
+
+
+
+}
+
+.input-row-2-2 {
+  display: flex;
+  flex-direction:row;
+  justify-content: flex-end;
+  width: 50%;
+}
+
+.p-caja1{ margin: 0px;
+}
+
+.carga-cheque{
+  padding-top: 20px;
+  padding-left: 350px;
+}
+.boton-g {
+
+  background-color: green;
+  height: 30px;
+  color: white;
+  border: 0px;
 }
