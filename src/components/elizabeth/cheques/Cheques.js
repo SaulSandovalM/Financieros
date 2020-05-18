@@ -122,19 +122,19 @@ export default class Cheques extends Component {
   render (){
     return (
 
-      <div class='container-back'>
+      <div class='container-back123'>
       <form>
-                    <div class='site'>
-                            <p class='site-s'>Cheques</p>
+                    <div class='titulo'>
+                            <h2>Cheques</h2>
                     </div>
-                    <div class="text-1">
+                    <div class="text-12">
                     <p><b>Ingreso datos del Cheque</b></p>
                     </div>
 
-                          <div class='caja-inputs'>
-                          <div class='caja-inputs-c'>
+                          <div class='caja-cheque'>
+                          <div class='inputs-caja'>
 
-                          <div class='input-row'>
+                          <div class='cajas-cheques'>
                                                 <p class='p-caja'># Cheque</p>
                                                 <input
                                                   id='nocheques'
@@ -143,7 +143,7 @@ export default class Cheques extends Component {
 
                           </div>
 
-                          <div class='input-row'>
+                          <div class='cajas-cheques'>
                                               <label class='p-caja'>Importe</label>
                                               <input
                                                 id='importe'
@@ -151,7 +151,7 @@ export default class Cheques extends Component {
                                                 ref={importe => this.inputImporte = importe} />
                           </div>
 
-                          <div class='input-row'>
+                          <div class='cajas-cheques'>
                                               <label class='p-caja'>Fecha de Emisión</label>
                                               <input
                                                 id='fechae'
@@ -159,7 +159,7 @@ export default class Cheques extends Component {
                                                 ref={fechae => this.inputFechae = fechae} />
                           </div>
 
-                          <div class='input-row'>
+                          <div class='cajas-cheques'>
                                             <label class='p-caja'>Fecha de Cobro</label>
                                             <input
                                               id='fechac'
@@ -181,11 +181,11 @@ export default class Cheques extends Component {
         <p><b>Ingrese Comprobantes</b></p>
         </div>
 
-        <div class='caja-inputs'>
+        <div class='caja-inputs123'>
         <div class='caja-inputs-c'>
 
-            <div class='input-row'>
-                      <label class='p-caja1'>Selecciona Archivo</label>
+            <div class='cajas-cheques'>
+                      <label class='p-caja'>Selecciona Archivo</label>
 
                           <input></input>
 

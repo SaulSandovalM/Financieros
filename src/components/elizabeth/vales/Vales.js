@@ -3,6 +3,21 @@ import firebase from '../../../Firebase';
 import './Vales.css';
 
 class Vales extends Component {
+contructor( props)  {
+                    super(props);
+                    this.state = {
+                      nuevo: '',
+                      lista:[
+                        {
+
+                        }
+                      ]
+
+                    }
+
+
+}
+
   render() {
     return (
 
