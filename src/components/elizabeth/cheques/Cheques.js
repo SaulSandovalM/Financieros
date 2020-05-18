@@ -122,18 +122,18 @@ export default class Cheques extends Component {
   render (){
     return (
 
-      <div class='container-back123'>
+      <div>
       <form>
                     <div class='titulo'>
                             <h2>Cheques</h2>
                     </div>
+                    
                     <div class="text-12">
                     <p><b>Ingreso datos del Cheque</b></p>
                     </div>
 
                           <div class='caja-cheque'>
                           <div class='inputs-caja'>
-
                           <div class='cajas-cheques'>
                                                 <p class='p-caja'># Cheque</p>
                                                 <input
