@@ -30,6 +30,7 @@ import Altas from './components/cecilia/altas/Altas';
 import Caja from './components/cecilia/caja/Caja';
 import Banco from './components/cecilia/banco/Banco';
 import Seleccion from './components/cecilia/fondorevolvente/Seleccion';
+import Common from './Common';
 
 function App(props) {
   const { isAuthenticated, isVerifying } = props;
@@ -136,6 +137,7 @@ function App(props) {
       <Route path='/Caja' component={Caja} />
       <Route path='/Seleccion' component={Seleccion} />
       <Route path='/Banco' component={Banco} />
+      <Route path='/Common' component={Common} />
     </Switch>
   );
 }

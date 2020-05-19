@@ -33,7 +33,7 @@ class Login extends Component {
     const { loginError, isAuthenticated } = this.props;
 
     if (isAuthenticated) {
-      return <Redirect to="/" />;
+      return <Redirect to="/Common" />;
     } else {
       return (
         <div style={{zIndex: '5', position: 'absolute', width: '100%', top: 0, left: 0}}>

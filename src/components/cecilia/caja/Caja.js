@@ -140,7 +140,7 @@ export default class Caja extends Component {
      batchs.set(statsRefT, { storyCount: increments }, { merge: true });
      batchs.commit();
 
-     firebase.database().ref('banco').push(params).then(() => {
+     firebase.database().ref('caja').push(params).then(() => {
        this.showAlert('success', 'Tu solicitud fue enviada.');
      }).catch(() => {
        this.showAlert('danger', 'Tu solicitud no puede ser enviada');
