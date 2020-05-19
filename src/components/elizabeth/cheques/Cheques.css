@@ -36,8 +36,6 @@
               width:20%;
 }
 .caja-inputs {
-  padding-top: 10px;
-  padding-left: 350px;
   display: flex;
   justify-content: space-between;
   width: 100%;

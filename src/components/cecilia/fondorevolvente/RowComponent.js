@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import CurrencyFormat from 'react-currency-format';
 import './Seleccion.css';
 
 export default class RowComponent extends Component {
@@ -28,10 +29,15 @@ export default class RowComponent extends Component {
           <p>{this.props.item.np}</p>
         </div>
         <div class='tabla-p4'>
-          <p>{this.props.item.monto}</p>
+          <CurrencyFormat
+            value={this.props.item.monto}
+            displayType={'text'}
+            thousandSeparator={true}
+            prefix={' $'}
+            decimalSeparator={'.'} />
         </div>
         <div class='tabla-p5'>
-          <p>{this.props.item.porcentaje}</p>
+          <p>{this.props.item.porcentaje} %</p>
         </div>
         <div class='tabla-pp2'>
         </div>
