@@ -202,8 +202,180 @@ export default class Vales extends Component {
   render() {
     return (
 
+      <div class='container-back'>
+        <div class='site'>
+          <p class='site-s'><b>Vales</b></p>
+        </div>
+        <div>
+          <form class='caja-container' onSubmit={this.sendMessage.bind(this)} ref='contactForm'>
+            <div class='caja-inputs'>
+              <div class='caja-inputs-c'>
+                <div class='input-row'>
+                  <p class='p-caja'><b>Numero de Vale </b></p>
+                  <input class='input-sc'
+                          id='novale'
+                          required
+                          ref={novale => this.inputNovale  =novale}
+                          />
+                </div>
+                &nbsp;
+                <div class='input-row'>
+                  <p class='p-caja'><b>Numero de Cheque</b></p>
+                  <input id='nocheque'
+                            class='input-sc'
+                            required
+                            ref={nocheque => this.inputNocheque  = nocheque}/>
+                </div>
+                  &nbsp;
+                <div class='input-row'>
+                  <p class='p-caja'><b>Cantidad</b></p>
+                  <input class='input-sc'
+                            id='Cantidad'
+                            required
+                            ref={cantidad => this.inputCantidad  = cantidad}/>
+                </div>
+                  &nbsp;
+                <div class='input-row'>
+                  <p class='p-caja'><b>Concepto</b></p>
+                  <input class='input-sc'
+                            id='concepto'
+                            required
+                            ref={concepto => this.inputConcepto = concepto}/>
+                </div>
+                  &nbsp;
+                <div class='input-row'>
+                  <p class='p-caja'><b>Oficio de solicitud</b></p>
+                  <input class='input-sc'
+                            id='ofsolicitud'
+                            required
+                            ref={ofsolicitud => this.inputOfsolicitud  = ofsolicitud}/>
+                </div>
+                  &nbsp;
+                <div class='input-row'>
+                  <p class='p-caja'><b>Turno</b></p>
+                  <input class='input-sc'
+                            id='turno'
+                            required
+                            ref={turno => this.inputTurno  = turno}/>
+                </div>
+                  &nbsp;
+                <div class='input-row'>
+                  <p class='p-caja'><b>Recibo</b></p>
+                  <input class='input-sc'
+                            id='recibo'
+                            required
+                            ref={recibo => this.inputRecibo  = recibo}/>
+                </div>
+                <div class='input-row'>
+                  <p class='p-caja'><b>Fecha Creacion</b></p>
+                  <input class='input-sc'
+                            id='fechacreacion'
+                            required
+                            ref={fechacreacion => this.inputFechacreacion  = fechacreacion}/>
+                </div>
+                <div class='input-row'>
+                  <p class='p-caja'><b>Comprobante</b></p>
+                  <input class='input-sc'
+                            id='comprobante'
+                            required
+                            ref={comprobante => this.inputComprobante = comprobante}/>
+                </div>
+                <div class='input-row'>
+                  <p class='p-caja'><b>Estatus</b></p>
+                  <input class='input-sc'
+                            id='estatus'
+                            required
+                            ref={estatus => this.inputEstatus  = estatus}/>
+                </div>
+                <div class='input-row'>
+                  <p class='p-caja'><b>Factura</b></p>
+                  <input class='input-sc'
+                            id='factura'
+                            required
+                            ref={factura => this.inputFactura  = factura}/>
+                </div>
+                <div class='input-row'>
+                  <p class='p-caja'><b>Direccion</b></p>
+                  <input class='input-sc'
+                            id='direccion'
+                            required
+                            ref={direccion => this.inputDireccion  = direccion}/>
+                </div>
+                <div class='input-row'>
+                  <p class='p-caja'><b>Movimiento</b></p>
+                  <input class='input-sc'
+                            id='movimiento'
+                            required
+                            ref={movimiento => this.inputMovimiento  = movimiento}/>
+                </div>
+                <div class='input-row'>
+                  <p class='p-caja'><b>Validacion</b></p>
+                  <input class='input-sc'
+                            id='validacion'
+                            required
+                            ref={validacion => this.inpuValidaciont  = validacion}/>
+                </div>
+                <div class='input-row'>
+                  <p class='p-caja'><b>Recibe</b></p>
+                  <input class='input-sc'
+                            id='precibe'
+                            required
+                            ref={precibe => this.inputPrecibe  = precibe}/>
+                </div>
+                <div class='input-row'>
+                  <p class='p-caja'><b>Proveedor</b></p>
+                  <input class='input-sc'
+                            id='proveedor'
+                            required
+                            ref={proveedor => this.inputProveedor  = proveedor}/>
+                </div>
+                <div class='input-row'>
+                  <p class='p-caja'><b>Estatus del vale</b></p>
+                  <input class='input-sc'
+                            id='estatusv'
+                            required
+                            ref={estatusv => this.inputEstatusv  =estatusv}/>
+                </div>
+                <div class='input-row'>
+                  <p class='p-caja'><b>Usuario</b></p>
+                  <input class='input-sc'
+                            id='usuario'
+                            required
+                            ref={usuario => this.inputUsuario  =usuario}/>
+                </div>
+                <div class='input-row'>
+                  <p class='p-caja'><b>Autoriza</b></p>
+                  <input class='input-sc'
+                            id='autoriza'
+                            required
+                            ref={autoriza => this.inputAutoriza  =autoriza}/>
+                </div>
+                <div class='input-row'>
+                </div>
+                <div class='input-row'>
+                </div>
+                <div class='input-row'>
+                </div>
+              </div>
+              <div class='disponible'>
+                <div>
+                <div class='input-row-2'>
+              <p style={{paddingLeft:"100px"}}></p>
+              <button type='submit' class='boton-g' >Cargar</button>
+              </div>
 
-      <div>
+            </div>
+          </div>
+              </div>
+
+          </form>
+
+        </div>
+      </div>
+
+
+
+    /*  <div>
       <form>
             <div class='titulo'>
                   <h1> Vales</h1>
@@ -344,7 +516,7 @@ export default class Vales extends Component {
                             required
                             ref={autoriza => this.inputAutoriza  =autoriza}/>
                             </div>
-                            
+
                             </div>
                             </div>
 
@@ -354,7 +526,7 @@ export default class Vales extends Component {
               </div>
 
       </form>
-      </div>
+      </div>*/
     );
   }
 }
