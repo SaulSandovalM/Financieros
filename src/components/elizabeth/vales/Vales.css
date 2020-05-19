@@ -1,0 +1,14 @@
+.container-back123 {
+  padding: 0px 20px 0px 20px;
+  background-color: #f4f4f4;
+  min-height: 100vh;
+}
+.titulo{
+        padding: 30px 0px 50px 300px;
+
+}
+.inputs-caja{
+          display: flex;
+          justify-content:space-between;
+          padding-left: 50px;
+}

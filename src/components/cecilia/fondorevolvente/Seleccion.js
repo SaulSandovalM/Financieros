@@ -54,7 +54,7 @@ export default class Seleccion extends Component {
   componentDidMount() {
     const itemsRef = firebase.database().ref('banco/');
     this.listenForItems(itemsRef);
-    this.consumo();
+    this.consumo();// omitir
     setInterval(this.consumo, 5000);
   }
 
@@ -71,7 +71,7 @@ export default class Seleccion extends Component {
         console.log("No such document!");
       }
     })
-  }
+  }//aqui
 
   showAlert(type, message) {
     this.setState({
