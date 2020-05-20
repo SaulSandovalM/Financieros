@@ -82,10 +82,11 @@
   display: flex;
   flex-direction: column;
 }
-.caja-w {
+.caja-w-selec {
   background-color: #FFFFFF;
   margin-left: -20px;
   margin-right: -20px;
+  margin-top: 40px;
   display: flex;
   flex-direction: row;
   justify-content: center;

@@ -146,50 +146,11 @@ export default class Caja extends Component {
           <p class='site-s'><b>Caja</b></p>
         </div>
         <div>
-          <form class='caja-container' onSubmit={this.sendMessage.bind(this)} ref='contactForm'>
+          <div class='caja-container'>
             <div class='caja-inputs'>
-              <div class='caja-inputs-c'>
-                <div class='input-row'>
-                  <p class='p-caja'><b>UP</b></p>
-                  <input
-                    class='input-sc'
-                    id='partida'
-                    required
-                    ref={partida => this.inputPartida = partida}
-                  />
-                </div>
-                <div class='input-row'>
-                  <p class='p-caja'><b>Partida</b></p>
-                  <input
-                    class='input-sc'
-                    id='up'
-                    required
-                    ref={up => this.inputUp = up}
-                  />
-                </div>
-                <div class='input-row'>
-                  <p class='p-caja'><b>Proyecto</b></p>
-                  <input
-                    class='input-sc'
-                    id='proyecto'
-                    required
-                    ref={proyecto => this.inputProyecto = proyecto}
-                  />
-                </div>
-                <div class='input-row'>
-                  <p class='p-caja'><b>Nombre del Proyecto</b></p>
-                  <input
-                    class='input-sc'
-                    id='np'
-                    required
-                    ref={np => this.inputNp = np}
-                  />
-                </div>
-              </div>
-              <div class='disponible'>
+              <div class='disponible-banco'>
                 <div>
-                  <p class='p-caja-dis'><b>DINERO EN CAJA</b></p>
-                  <p class='cantidad-caja'>
+                  <p class='cantidad-banco'>
                     MXN
                     <CurrencyFormat
                       value={this.state.contador.storyCount}
@@ -197,41 +158,12 @@ export default class Caja extends Component {
                       thousandSeparator={true}
                       prefix={' $'}
                       decimalSeparator={'.'} />
-                    .00<
-                  /p>
+                    .00
+                  </p>
                 </div>
               </div>
             </div>
-
-            <div class='caja-inputs' style={{marginTop: '40px', marginBottom: '40px'}}>
-              <div class='caja-inputs-c'>
-                <div class='input-row'>
-                  <p class='p-caja'><b>Monto</b></p>
-                  <input
-                    class='input-sc'
-                    id='monto'
-                    required
-                    ref={monto => this.inputMonto = monto}
-                  />
-                </div>
-                <div class='input-row'>
-                </div>
-                <div class='input-row'>
-                </div>
-                <div class='input-row'>
-                </div>
-              </div>
-              <div class='disponible'>
-                <div>
-                  <div class='input-row-2'>
-                    <p style={{marginTop: '4px'}}></p>
-                    <button type='submit' class='input-sc boton-g'>Guardar</button>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </form>
-
+          </div>
           <div class='caja-w' style={{marginTop: '40px', marginBottom: '40px'}}>
             <div class='caja-col'>
               <ListComponent

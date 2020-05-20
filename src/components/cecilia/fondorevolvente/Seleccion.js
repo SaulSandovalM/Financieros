@@ -5,12 +5,10 @@ import ListComponent from './ListComponent';
 import CurrencyFormat from 'react-currency-format';
 
 export default class Seleccion extends Component {
-  constructor(props) {
-    super(props);
-    this.handleChange = this.handleChange.bind(this);
-    this.handleChange1 = this.handleChange1.bind(this);
+  constructor () {
+    super();
     this.state = {
-      nuevo: '',
+      buscador: [],
       lista: [
         {
           id: 1,
@@ -18,16 +16,6 @@ export default class Seleccion extends Component {
           done: false
         },
       ],
-      form: [],
-      alert: false,
-      alertData: {},
-      partida: '',
-      up: '',
-      proyecto: '',
-      np: '',
-      monto: '',
-      porcentaje: '',
-      porcentajeB: '',
       contador: {},
     };
   }
@@ -54,6 +42,14 @@ export default class Seleccion extends Component {
     });
   }
 
+  componentWillMount () {
+    firebase.database().ref('presupuesto').on('child_added', snapshot => {
+      this.setState({
+        buscador: this.state.buscador.concat(snapshot.val())
+      });
+    });
+  }
+
   componentDidMount() {
     const itemsRef = firebase.database().ref('banco/');
     this.listenForItems(itemsRef);
@@ -75,137 +71,44 @@ export default class Seleccion extends Component {
     })
   }
 
-  showAlert(type, message) {
-    this.setState({
-      alert: true,
-      alertData: {type, message}
-    });
-    setTimeout(() => {
-      this.setState({alert: false});
-    }, 6000);
-  }
-
-  resetForm() {
-    this.refs.contactForm.reset();
-  }
-
-  componentWillMount() {
-    let formRef = firebase.database().ref('banco').orderByKey().limitToLast(1);
-    formRef.on('child_added', snapshot => {
-      const { partida, up, proyecto, np, monto, porcentaje, porcentajeB } = snapshot.val();
-      const data = { partida, up, proyecto, np, monto, porcentaje, porcentajeB };
-      this.setState({ form: [data].concat(this.state.form) });
-    });
-  }
-
-  sendMessage(e) {
-    e.preventDefault();
-    const params = {
-      partida: this.inputPartida.value,
-      up: this.inputUp.value,
-      proyecto: this.inputProyecto.value,
-      np: this.inputNp.value,
-      monto: this.inputMonto.value,
-      porcentaje: this.inputPorcentaje.value,
-      porcentajeB: this.inputPorcentajeb.value
-    };
-    this.setState({
-      partida: this.inputPartida.value,
-      up: this.inputUp.value,
-      proyecto: this.inputProyecto.value,
-      np: this.inputNp.value,
-      monto: this.inputMonto.value,
-      porcentaje: this.inputPorcentaje.value,
-      porcentajeB: this.inputPorcentajeb.value
-    })
-    if ( params.partida && params.up && params.proyecto && params.np && params.monto && params.porcentaje && params.porcentajeB ) {
-      var f = parseInt(params.porcentajeB);
-      const statsRef = firebase.firestore().collection('banco').doc('--stats--');
-      const increment = firebase.firestore.FieldValue.increment(f);
-      const batch = firebase.firestore().batch();
-      const storyRef = firebase.firestore().collection('banco').doc(`${Math.random()}`);
-      batch.set(storyRef, { title: 'Nuevo Fondo!' });
-      batch.set(statsRef, { storyCount: increment }, { merge: true });
-      batch.commit();
-      firebase.database().ref('banco').push(params).then(() => {
-        this.showAlert('success', 'Tu solicitud fue enviada.');
-      }).catch(() => {
-        this.showAlert('danger', 'Tu solicitud no puede ser enviada');
-      });
-      this.resetForm();
-    } else {
-      this.showAlert('warning', 'Por favor llene el formulario');
-    };
-  }
-
-  handleChange(e) {
-    this.setState({monto: e.target.value});
-  }
-
-  handleChange1(e) {
-    this.setState({porcentaje: e.target.value});
+  updateSearch(event) {
+    this.setState({search: event.target.value.substr(0,20)});
   }
 
   render() {
 
-    const { partida, up, proyecto, np, monto, porcentaje, porcentajeB } = this.state;
+    let filterData = this.state.buscador.filter(
+      (buscador) => {
+        return buscador.par.indexOf(this.state.search) !== -1;
+      }
+    );
 
     return (
       <div class='container-back'>
         <div class='site'>
           <p class='site-s'><b>Selección</b></p>
         </div>
-        <form class='caja-container' onSubmit={this.sendMessage.bind(this)} ref='contactForm'>
+        <div class='caja-container'>
           <div class='caja-inputs'>
             <div class='caja-inputs-c'>
-              { this.state.contador.storyCount == !1000000 &&
-                <div class='input-row'>
-                  <p class='p-caja'><b>UP</b></p>
-                    <input
-                      class='input-sc'
-                      id='partida'
-                      required
-                      ref={partida => this.inputPartida = partida}
-                    />
-                </div>
-              }
-              { this.state.contador.storyCount == !1000000 &&
-                <div class='input-row'>
-                  <p class='p-caja'><b>Partida</b></p>
+              <div class='input-row'>
+                <p class='p-caja'><b>PARTIDA</b></p>
                   <input
                     class='input-sc'
-                    id='up'
-                    required
-                    ref={up => this.inputUp = up}
+                    value={this.state.search}
+                    onChange={this.updateSearch.bind(this)}
                   />
-                </div>
-              }
-              { this.state.contador.storyCount == !1000000 &&
-                <div class='input-row'>
-                  <p class='p-caja'><b>Proyecto</b></p>
-                  <input
-                    class='input-sc'
-                    id='proyecto'
-                    required
-                    ref={proyecto => this.inputProyecto = proyecto}
-                  />
-                </div>
-              }
-              { this.state.contador.storyCount == !1000000 &&
-                <div class='input-row'>
-                  <p class='p-caja'><b>Nombre del Proyecto</b></p>
-                  <input
-                    class='input-sc'
-                    id='np'
-                    required
-                    ref={np => this.inputNp = np}
-                  />
-                </div>
-              }
+              </div>
+              <div class='input-row'>
+              </div>
+              <div class='input-row'>
+              </div>
+              <div class='input-row'>
+              </div>
             </div>
             <div class='disponible'>
               <div>
-                <p class='p-caja-dis'><b>PORCENTAJE A AGREGAR</b></p>
+                <p class='p-caja-dis'><b>PORCENTAJE AGREGADO</b></p>
                 <p class='cantidad-caja'>
                   MXN
                   <CurrencyFormat
@@ -219,70 +122,65 @@ export default class Seleccion extends Component {
               </div>
             </div>
           </div>
-          <div class='caja-inputs' style={{marginTop: '40px', marginBottom: '40px'}}>
-            <div class='caja-inputs-c'>
-              { this.state.contador.storyCount == !1000000 &&
-                <div class='input-row'>
-                  <p class='p-caja'><b>Monto</b></p>
-                  <input
-                    class='input-sc'
-                    id='monto'
-                    value={monto}
-                    required
-                    onChange={this.handleChange}
-                    ref={monto => this.inputMonto = monto}
-                  />
-                </div>
-              }
-              { this.state.contador.storyCount == !1000000 &&
-                <div class='input-row'>
-                  <p class='p-caja'><b>Porcentaje a asignar</b></p>
-                  <input
-                    class='input-sc'
-                    id='porcentaje'
-                    value={porcentaje}
-                    onChange={this.handleChange1}
-                    required
-                    ref={porcentaje => this.inputPorcentaje = porcentaje}
-                  />
-                </div>
-              }
-              { this.state.contador.storyCount == !1000000 &&
-                <div class='input-row'>
-                  <p class='p-caja'><b>Porcentaje a asignar</b></p>
-                  <input
-                    class='input-sc'
-                    id='porcentajeB'
-                    value={(monto * porcentaje)/100}
-                    required
-                    ref={porcentajeB => this.inputPorcentajeb = porcentajeB}
-                  />
-                </div>
-              }
-              <div class='input-row'>
-              </div>
-            </div>
-            { this.state.contador.storyCount == !1000000 &&
-              <div class='disponible'>
-                <div>
-                  <div class='input-row-2'>
-                    <p style={{marginTop: '4px'}}></p>
-                    <button type='submit' class='input-sc boton-g'>Guardar</button>
-                  </div>
-                </div>
-              </div>
-            }
-          </div>
-
-          <div class='caja-w'>
+          <div class='caja-w-selec'>
             <div class='caja-col'>
-              <ListComponent
-                lista={this.state.lista}
-              />
+            <div>
+              <div class='caja-inputs'>
+                <div class='tabla-pp'>
+                </div>
+                <div class='tabla-p'>
+                  <b>UP</b>
+                </div>
+                <div class='tabla-p1-banco'>
+                  <b>PARTIDA</b>
+                </div>
+                <div class='tabla-p2-select'>
+                  <b>PROYECTO</b>
+                </div>
+                <div class='tabla-p3-select'>
+                  <b>NOMBRE DEL PROYECTO</b>
+                </div>
+                <div class='tabla-p4'>
+                  <b>MONTO</b>
+                </div>
+                <div class='tabla-p5'>
+                  <b>PORCENTAJE</b>
+                </div>
+                <div class='tabla-pp2'>
+                </div>
+              </div>
+              {
+                filterData.map(buscador => (
+                  <div class='caja-inputs'>
+                    <div class='tabla-pp'>
+                    </div>
+                    <div class='tabla-p'>
+                      <p>{buscador.up}</p>
+                    </div>
+                    <div class='tabla-p1-banco'>
+                      <p>{buscador.par}</p>
+                    </div>
+                    <div class='tabla-p2-select'>
+                      <p>{buscador.proy}</p>
+                    </div>
+                    <div class='tabla-p3-select'>
+                      <p>{buscador.np}</p>
+                    </div>
+                    <div class='tabla-p4'>
+                      <p>{buscador.dic}</p>
+                    </div>
+                    <div class='tabla-p5'>
+                      <b></b>
+                    </div>
+                    <div class='tabla-pp2'>
+                    </div>
+                  </div>
+                )).reverse()
+              }
+            </div>
             </div>
           </div>
-
-        </form>
+        </div>
       </div>
     )
   }
