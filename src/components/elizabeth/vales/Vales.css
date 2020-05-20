@@ -3,6 +3,19 @@
   background-color: #f4f4f4;
   min-height: 100vh;
 }
+.container-back {
+  padding: 0px 20px 0px 20px;
+  background-color: #f4f4f4;
+  min-height: 100vh;
+}
+.site {
+  padding-left: 80px;
+  padding-top: 20px;
+}
+.site-s {
+  margin: 0px;
+  font-size: 20px;
+}
 .titulo{
   padding: 30px 0px 50px 300px;
 }
@@ -29,4 +42,57 @@
   width: 18%;
   display: flex;
   flex-direction: column;
+}
+.caja-container {
+  width: 100%;
+  padding-top: 50px;
+}
+.caja-inputs {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+}
+.caja-inputs-c {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 60%;
+}
+.caja-inputs-c2 {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 29.5%;
+}
+.input-row {
+  display: flex;
+  flex-direction: column;
+  width: 23%;
+}
+.input-row2 {
+  display: flex;
+  flex-direction: column;
+  width: 45%;
+}
+.input-sc {
+  height: 25px;
+}
+.p-caja {
+  margin: 0px;
+}
+.boton-g {
+  background-color: green;
+  height: 30px;
+  color: white;
+  border: 0px;
+}
+.input-row-2 {
+  display: flex;
+  flex-direction: column;
+}
+.disponible {
+  width: 40%;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
 }

@@ -311,7 +311,7 @@ export default class Vales extends Component {
             />
           </div>
         </div>
-        
+
       </div>
     )
   }
