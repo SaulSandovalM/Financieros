@@ -16,6 +16,7 @@ export default class Seleccion extends Component {
           done: false
         },
       ],
+      partida: '',
       contador: {},
     };
   }
@@ -75,6 +76,40 @@ export default class Seleccion extends Component {
     this.setState({search: event.target.value.substr(0,20)});
   }
 
+  showAlert(type, message) {
+    this.setState({
+      alert: true,
+      alertData: {type, message}
+    });
+    setTimeout(() => {
+      this.setState({alert: false});
+    }, 6000);
+  }
+
+  resetForm() {
+    this.refs.contactForm.reset();
+  }
+
+  sendMessage(e) {
+    e.preventDefault();
+    const params = {
+      partida: this.inputPartida.value
+    };
+    this.setState({
+      partida: this.inputPartida.value
+    })
+    if ( params.partida ) {
+      firebase.database().ref('banco').push(params).then(() => {
+        this.showAlert('success', 'Tu solicitud fue enviada.');
+      }).catch(() => {
+        this.showAlert('danger', 'Tu solicitud no puede ser enviada');
+      });
+      this.resetForm();
+    } else {
+      this.showAlert('warning', 'Por favor llene el formulario');
+    };
+  }
+
   render() {
 
     let filterData = this.state.buscador.filter(
@@ -83,11 +118,14 @@ export default class Seleccion extends Component {
       }
     );
 
+    const { partida } = this.state;
+
     return (
       <div class='container-back'>
         <div class='site'>
           <p class='site-s'><b>Selección</b></p>
         </div>
+        <form onSubmit={this.sendMessage.bind(this)} ref='contactForm'>
         <div class='caja-container'>
           <div class='caja-inputs'>
             <div class='caja-inputs-c'>
@@ -170,7 +208,6 @@ export default class Seleccion extends Component {
                       <p>{buscador.dic}</p>
                     </div>
                     <div class='tabla-p5'>
-                      <b></b>
                     </div>
                     <div class='tabla-pp2'>
                     </div>
@@ -181,6 +218,14 @@ export default class Seleccion extends Component {
             </div>
           </div>
         </div>
+        <div style={{display: 'flex', fleDirection: 'row'}}>
+          <input
+            id='partida'
+            ref={partida => this.inputPartida = partida}
+          />
+          <button type='submit'>Guardar</button>
+        </div>
+        </form>
       </div>
     )
   }
