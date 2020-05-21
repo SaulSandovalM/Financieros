@@ -167,7 +167,7 @@ function App(props) {
       <Route path='/Vales' component={Vales}/>
       <Route path='/Comprobacion' component={Comprobacion}/>
       <Route path='/Common' component={Common}/>
-      //<Route path='/Validacion' component={Validacion}/>
+      {/*<Route path='/Validacion' component={Validacion}/>*/}
       <Route path='/Prueba' component={Prueba}/>
     </Switch>
   );
