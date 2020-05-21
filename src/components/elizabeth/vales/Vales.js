@@ -17,11 +17,16 @@ export default class Vales extends Component {
       form: [],
       alert: false,
       alertData: {},
-      partida: '',
-      up: '',
-      proyecto: '',
-      np: '',
-      monto: '',
+      vale: '',
+      cheque: '',
+      cantidad: '',
+      concepto: '',
+      oficioS: '',
+      turno: '',
+      reintegroT: '',
+      estatus: '',
+      personaR: '',
+      proveedor: '',
       contador: {},
     };
   }
@@ -31,11 +36,16 @@ export default class Vales extends Component {
       var lista = [];
       snap.forEach((child) => {
         lista.push({
-          partida: child.val().partida,
-          up: child.val().up,
-          proyecto: child.val().proyecto,
-          np: child.val().np,
-          monto: child.val().monto,
+          vale: child.val().vale,
+          cheque: child.val().cheque,
+          cantidad: child.val().cantidad,
+          concepto: child.val().concepto,
+          oficioS: child.val().oficioS,
+          turno: child.val().turno,
+          reintegroT: child.val().reintegroT,
+          estatus: child.val().estatus,
+          personaR: child.val().personaR,
+          proveedor: child.val().proveedor,
           done: child.val().done,
           id: child.key
         });
@@ -47,7 +57,7 @@ export default class Vales extends Component {
   }
 
   componentDidMount() {
-    const itemsRef = firebase.database().ref('caja/');
+    const itemsRef = firebase.database().ref('vales/');
     this.listenForItems(itemsRef);
   }
 
@@ -66,34 +76,57 @@ export default class Vales extends Component {
   }
 
   componentWillMount() {
-    let formRef = firebase.database().ref('banco').orderByKey().limitToLast(1);
+    let formRef = firebase.database().ref('vales').orderByKey().limitToLast(1);
     formRef.on('child_added', snapshot => {
-      const { partida, up, proyecto, np, monto } = snapshot.val();
-      const data = { partida, up, proyecto, np, monto };
+      const { vale, cheque, cantidad, concepto, oficioS, turno, reintegroT, estatus, personaR, proveedor } = snapshot.val();
+      const data = { vale, cheque, cantidad, concepto, oficioS, turno, reintegroT, estatus, personaR, proveedor };
       this.setState({ form: [data].concat(this.state.form) });
     });
   }
 
   sendMessage(e) {
     e.preventDefault();
-
     const params = {
-      partida: this.inputPartida.value,
-      up: this.inputUp.value,
-      proyecto: this.inputProyecto.value,
-      np: this.inputNp.value,
-      monto: this.inputMonto.value
+      vale: this.inputVale.value,
+      cheque: this.inputCheque.value,
+      cantidad: this.inputCantidad.value,
+      concepto: this.inputConcepto.value,
+      oficioS: this.inputOficio.value,
+      turno: this.inputTurno.value,
+      reintegroT: this.inputReintegro.value,
+      estatus: this.inputEstatus.value,
+      personaR: this.inputPersona.value,
+      proveedor: this.inputProveedor.value
     };
     this.setState({
-     partida: this.inputPartida.value,
-     up: this.inputUp.value,
-     proyecto: this.inputProyecto.value,
-     np: this.inputNp.value,
-     monto: this.inputMonto.value
+      vale: this.inputVale.value,
+      cheque: this.inputCheque.value,
+      cantidad: this.inputCantidad.value,
+      concepto: this.inputConcepto.value,
+      oficioS: this.inputOficio.value,
+      turno: this.inputTurno.value,
+      reintegroT: this.inputReintegro.value,
+      estatus: this.inputEstatus.value,
+      personaR: this.inputPersona.value,
+      proveedor: this.inputProveedor.value
     })
-
-    if ( params.partida && params.up && params.proyecto && params.np && params.monto ) {
-      firebase.database().ref('caja').push(params).then(() => {
+    if ( params.vale && params.cheque && params.cantidad && params.concepto && params.oficioS && params.turno && params.reintegroT && params.estatus && params.personaR && params.proveedor ) {
+      var f = parseInt(params.cantidad);
+      const statsRef = firebase.firestore().collection('caja').doc('--stats--');
+      const increment = firebase.firestore.FieldValue.increment(-f);
+      const batch = firebase.firestore().batch();
+      const storyRef = firebase.firestore().collection('caja').doc(`${Math.random()}`);
+      batch.set(storyRef, { title: 'Se genero un vale' });
+      batch.set(statsRef, { storyCount: increment }, { merge: true });
+      batch.commit();
+      const statsRefs = firebase.firestore().collection('vales').doc('--stats--');
+      const increments = firebase.firestore.FieldValue.increment(1);
+      const batchs = firebase.firestore().batch();
+      const storyRefs = firebase.firestore().collection('vales').doc(`${Math.random()}`);
+      batchs.set(storyRefs, { title: 'Se genero un vale' });
+      batchs.set(statsRefs, { storyCount: increments }, { merge: true });
+      batchs.commit();
+      firebase.database().ref('vales').push(params).then(() => {
         this.showAlert('success', 'Tu solicitud fue enviada.');
       }).catch(() => {
         this.showAlert('danger', 'Tu solicitud no puede ser enviada');
@@ -106,58 +139,58 @@ export default class Vales extends Component {
 
   render() {
 
-    const { partida, up, proyecto, np, monto, porcentaje } = this.state;
+    const { vale, cheque, cantidad, concepto, oficioS, turno, reintegroT, estatus, personaR, proveedor } = this.state;
 
     return (
       <div class='container-back'>
         <div class='site'>
           <p class='site-s'><b>Vales</b></p>
         </div>
-        <form>
+        <form onSubmit={this.sendMessage.bind(this)} ref='contactForm'>
           <div className='form-container'>
             <div className='vale-content'>
               <p class='p-caja'><b># Vale</b></p>
               <input
                 class='input-sc'
-                id='partida'
+                id='vale'
                 required
-                ref={partida => this.inputPartida = partida}
+                ref={vale => this.inputVale = vale}
               />
             </div>
             <div className='vale-content'>
               <p class='p-caja'><b># Cheque</b></p>
               <input
                 class='input-sc'
-                id='partida'
+                id='cheque'
                 required
-                ref={partida => this.inputPartida = partida}
+                ref={cheque => this.inputCheque = cheque}
               />
             </div>
             <div className='vale-content'>
               <p class='p-caja'><b>Cantidad</b></p>
               <input
                 class='input-sc'
-                id='partida'
+                id='cantidad'
                 required
-                ref={partida => this.inputPartida = partida}
+                ref={cantidad => this.inputCantidad = cantidad}
               />
             </div>
             <div className='vale-content'>
               <p class='p-caja'><b>Concepto</b></p>
               <input
                 class='input-sc'
-                id='partida'
+                id='concepto'
                 required
-                ref={partida => this.inputPartida = partida}
+                ref={concepto => this.inputConcepto = concepto}
               />
             </div>
             <div className='vale-content'>
               <p class='p-caja'><b>Oficio de Solicitud</b></p>
               <input
                 class='input-sc'
-                id='partida'
+                id='oficioS'
                 required
-                ref={partida => this.inputPartida = partida}
+                ref={oficioS => this.inputOficio = oficioS}
               />
             </div>
           </div>
@@ -166,141 +199,50 @@ export default class Vales extends Component {
               <p class='p-caja'><b>Turno</b></p>
               <input
                 class='input-sc'
-                id='partida'
+                id='turno'
                 required
-                ref={partida => this.inputPartida = partida}
-              />
-            </div>
-            <div className='vale-content'>
-              <p class='p-caja'><b>Recibo Simple</b></p>
-              <input
-                class='input-sc'
-                id='partida'
-                required
-                ref={partida => this.inputPartida = partida}
+                ref={turno => this.inputTurno = turno}
               />
             </div>
             <div className='vale-content'>
               <p class='p-caja'><b>Reintegro Total</b></p>
               <input
                 class='input-sc'
-                id='partida'
+                id='reintegroT'
                 required
-                ref={partida => this.inputPartida = partida}
-              />
-            </div>
-            <div className='vale-content'>
-              <p class='p-caja'><b>Fecha Creación</b></p>
-              <input
-                class='input-sc'
-                id='partida'
-                required
-                ref={partida => this.inputPartida = partida}
-              />
-            </div>
-            <div className='vale-content'>
-              <p class='p-caja'><b>Fecha Edición</b></p>
-              <input
-                class='input-sc'
-                id='partida'
-                required
-                ref={partida => this.inputPartida = partida}
-              />
-            </div>
-          </div>
-          <div className='form-container-2'>
-            <div className='vale-content'>
-              <p class='p-caja'><b>Comprobado</b></p>
-              <input
-                class='input-sc'
-                id='partida'
-                required
-                ref={partida => this.inputPartida = partida}
+                ref={reintegroT => this.inputReintegro = reintegroT}
               />
             </div>
             <div className='vale-content'>
               <p class='p-caja'><b>Estatus</b></p>
               <input
                 class='input-sc'
-                id='partida'
+                id='estatus'
                 required
-                ref={partida => this.inputPartida = partida}
+                ref={estatus => this.inputEstatus = estatus}
               />
             </div>
             <div className='vale-content'>
-              <p class='p-caja'><b>Factura</b></p>
+              <p class='p-caja'><b>Persona que recibe</b></p>
               <input
                 class='input-sc'
-                id='partida'
+                id='personaR'
                 required
-                ref={partida => this.inputPartida = partida}
-              />
-            </div>
-            <div className='vale-content'>
-              <p class='p-caja'><b>Dirección</b></p>
-              <input
-                class='input-sc'
-                id='partida'
-                required
-                ref={partida => this.inputPartida = partida}
-              />
-            </div>
-            <div className='vale-content'>
-              <p class='p-caja'><b>Movimientos</b></p>
-              <input
-                class='input-sc'
-                id='partida'
-                required
-                ref={partida => this.inputPartida = partida}
-              />
-            </div>
-          </div>
-          <div className='form-container-2'>
-            <div className='vale-content'>
-              <p class='p-caja'><b>Valida</b></p>
-              <input
-                class='input-sc'
-                id='partida'
-                required
-                ref={partida => this.inputPartida = partida}
-              />
-            </div>
-            <div className='vale-content'>
-              <p class='p-caja'><b>Persona que Recibe</b></p>
-              <input
-                class='input-sc'
-                id='partida'
-                required
-                ref={partida => this.inputPartida = partida}
+                ref={personaR => this.inputPersona = personaR}
               />
             </div>
             <div className='vale-content'>
               <p class='p-caja'><b>Proveedor</b></p>
               <input
                 class='input-sc'
-                id='partida'
+                id='proveedor'
                 required
-                ref={partida => this.inputPartida = partida}
+                ref={proveedor => this.inputProveedor = proveedor}
               />
             </div>
-            <div className='vale-content'>
-              <p class='p-caja'><b>Usuario</b></p>
-              <input
-                class='input-sc'
-                id='partida'
-                required
-                ref={partida => this.inputPartida = partida}
-              />
-            </div>
-            <div className='vale-content'>
-              <p class='p-caja'><b>Autoriza</b></p>
-              <input
-                class='input-sc'
-                id='partida'
-                required
-                ref={partida => this.inputPartida = partida}
-              />
-            </div>
+          </div>
+          <div className='boton-v'>
+            <button type='submit' className='input-sc boton-g'>Guardar</button>
           </div>
         </form>
 
