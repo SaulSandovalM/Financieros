@@ -11,3 +11,27 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+.common {
+  background-color: #f4f4f4;
+  width: 100%;
+  min-height: 100vh;
+}
+.common-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100vh;
+  width: 100%;
+}
+.common-content {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+.common-p {
+  margin: 0px;
+  font-size: 50px;
+}
+.common-s {
+  font-size: 25px;
+}

@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
+import firebase from '../../../Firebase';
 import Dropzone from 'react-dropzone';
 import csv from 'csv';
-import firebase from '../../../Firebase';
+import './Presupuesto.css';
 
 export default class Excel extends Component {
   constructor () {
@@ -50,41 +51,46 @@ export default class Excel extends Component {
           const obj = data[i][13];
           const proy = data[i][14];
           const est = data[i][15];
-          const ben = data[i][16];
-          const eg = data[i][17];
-          const mi = data[i][18];
-          const pr = data[i][19];
-          const pb = data[i][20];
-          const dp = data[i][21];
-          const indi = data[i][22];
-          const la = data[i][23];
-          const ods = data[i][24];
-          const et = data[i][25];
-          const ff = data[i][26];
-          const of = data[i][27];
-          const np = data[i][28];
-          const cpa = data[i][29];
-          const ene = data[i][30];
-          const feb = data[i][31];
-          const mar = data[i][32];
-          const abr = data[i][33];
-          const may = data[i][34];
-          const jun = data[i][35];
-          const jul = data[i][36];
-          const ago = data[i][37];
-          const sep = data[i][38];
-          const oct = data[i][39];
-          const nov = data[i][40];
-          const dic = data[i][41];
-          const total = data[i][42];
+          const obra = data[i][16];
+          const ben = data[i][17];
+          const eg = data[i][18];
+          const mi = data[i][19];
+          const pr = data[i][20];
+          const pb = data[i][21];
+          const dp = data[i][22];
+          const indi = data[i][23];
+          const meta = data[i][24];
+          const la = data[i][25];
+          const ods = data[i][26];
+          const et = data[i][27];
+          const ff = data[i][28];
+          const of = data[i][29];
+          const np = data[i][30];
+          const cpa = data[i][31];
+          const dig = data[i][32];
+          const par = data[i][33];
+          const ene = data[i][34];
+          const feb = data[i][35];
+          const mar = data[i][36];
+          const abr = data[i][37];
+          const may = data[i][38];
+          const jun = data[i][39];
+          const jul = data[i][40];
+          const ago = data[i][41];
+          const sep = data[i][42];
+          const oct = data[i][43];
+          const nov = data[i][44];
+          const dic = data[i][45];
+          const total = data[i][46];
           const presupuesto = {
             "rm": rm, "os": os, "up": up, "rubro": rubro, "tg": tg, "ogasto": ogasto,
             "f": f, "fu": fu, "sf": sf, "eje": eje, "s": s, "prog": prog, "sp": sp,
-            "obj": obj, "proy": proy, "est": est, "ben": ben, "eg": eg, "mi": mi,
-            "pr": pr, "pb": pb, "dp": dp, "indi": indi, "la": la, "ods": ods, "et": et,
-            "ff": ff, "of": of, "np": np, "cpa": cpa, "ene": ene, "feb": feb, "mar": mar,
-            "abr": abr, "may": may, "jun": jun, "jul": jul, "ago": ago, "sep": sep,
-            "oct": oct, "nov": nov, "dic": dic, "total": total
+            "obj": obj, "proy": proy, "est": est, "obra": obra, "ben": ben, "eg": eg,
+            "mi": mi, "pr": pr, "pb": pb, "dp": dp, "indi": indi, "meta": meta,
+            "la": la, "ods": ods, "et": et, "ff": ff, "of": of, "np": np, "cpa": cpa,
+            "dig": dig, "par": par, "ene": ene, "feb": feb, "mar": mar, "abr": abr,
+            "may": may, "jun": jun, "jul": jul, "ago": ago, "sep": sep, "oct": oct,
+            "nov": nov, "dic": dic, "total": total
           };
           userList.push(presupuesto);
           fetch('https://financieros-78cb0.firebaseio.com/presupuesto.json', {
@@ -102,15 +108,16 @@ export default class Excel extends Component {
   }
 
   render() {
+
     const fontSize = 5;
 
     return (
       <div>
-        <div class='presupuesto-container'>
-          <div class='presupuesto-content'>
-            <div class='presupuesto-card'>
-              <h1 class='presupuesto-h1'>Aqui puedes subir<br/>tu presupuesto anual </h1>
-              <p class='presupuesto-p'>Traspasa tu información de Excel para poder usar el sistema</p>
+        <div className='presupuesto-container'>
+          <div className='presupuesto-content'>
+            <div className='presupuesto-card'>
+              <h1 className='presupuesto-h1'>Aqui puedes subir<br/>tu presupuesto anual </h1>
+              <p className='presupuesto-p'>Traspasa tu información de Excel para poder usar el sistema</p>
               <div>
                 <p>Archivo:</p>
                 <Dropzone
@@ -124,9 +131,6 @@ export default class Excel extends Component {
                     borderRadius: '5px'}}
                     accept=".csv" onDropAccepted={this.onDrop.bind(this)}>
                 </Dropzone>
-                {/*<progress class='progress' value={this.state.pdf} max='100'>
-                  {this.state.csv} %
-                </progress>*/}
               </div>
               <div>
                 <p>Presupuesto:</p>
@@ -141,10 +145,10 @@ export default class Excel extends Component {
                     borderRadius: '5px'}}
                     accept=".pdf" onChange={this.handleOnChange.bind(this)}>
                 </Dropzone>
-                {/*<progress class='progress' value={this.state.pdf} max='100'>
-                  {this.state.pdf} %
-                </progress>*/}
               </div>
+              {/*<div className='button-pre'>
+                <p className='button-p' onChange={this.handleOnChange.bind(this)}><b>Subir</b></p>
+              </div>*/}
             </div>
           </div>
         </div>

@@ -48,10 +48,9 @@ export default class Banco extends Component {
   }
 
   componentDidMount() {
-    const itemsRef = firebase.database().ref('banco/');
+    const itemsRef = firebase.database().ref('caja/');
     this.listenForItems(itemsRef);
     this.consumo();
-    setInterval(this.consumo, 5000);
   }
 
   consumo = () => {
@@ -64,13 +63,13 @@ export default class Banco extends Component {
           isLoading: false
         });
       } else {
-        console.log("No such document!");
+        console.log("No hay nada!");
       }
     })
   }
 
   componentWillMount() {
-    let formRef = firebase.database().ref('banco').orderByKey().limitToLast(6);
+    let formRef = firebase.database().ref('caja').orderByKey().limitToLast(6);
     formRef.on('child_added', snapshot => {
       const { partida, up, proyecto, np, monto, porcentaje } = snapshot.val();
       const data = { partida, up, proyecto, np, monto, porcentaje };
@@ -79,6 +78,7 @@ export default class Banco extends Component {
   }
 
   render() {
+
     return (
       <div class='container-back'>
         <div class='site'>

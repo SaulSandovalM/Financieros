@@ -33,6 +33,7 @@ import Seleccion from './components/cecilia/fondorevolvente/Seleccion';
 import Cheques from './components/elizabeth/cheques/Cheques';
 import Vales from './components/elizabeth/vales/Vales';
 import Comprobacion from './components/elizabeth/comprobacion/Comprobacion';
+import Common from './Common';
 
 function App(props) {
   const { isAuthenticated, isVerifying } = props;
@@ -164,7 +165,7 @@ function App(props) {
       <Route path='/Cheques' component={Cheques} />
       <Route path='/Vales' component={Vales}/>
       <Route path='/Comprobacion' component={Comprobacion}/>
-
+      <Route path='/Common' component={Common}/>
     </Switch>
   );
 }

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './Banco.css';
+import './Cheques.css';
 import RowComponent from './RowComponent';
 import firebase from '../../../Firebase';
 
@@ -12,7 +12,7 @@ export default class ListComponent extends Component {
  }
 
   componentWillMount () {
-    firebase.database().ref('caja/').on('child_added', snapshot => {
+    firebase.database().ref('Caja/').on('child_added', snapshot => {
       this.setState({
         caja: this.state.caja.concat(snapshot.val())
       });
@@ -26,22 +26,25 @@ export default class ListComponent extends Component {
           <div class='tabla-pp'>
           </div>
           <div class='tabla-p'>
-            <b>UP</b>
+            <b>#</b>
           </div>
-          <div class='tabla-p1-banco'>
-            <b>PARTIDA</b>
-          </div>
-          <div class='tabla-p2-select'>
-            <b>PROYECTO</b>
-          </div>
-          <div class='tabla-p3-select'>
-            <b>NOMBRE DEL PROYECTO</b>
-          </div>
-          <div class='tabla-p4'>
+          <div class='tabla-p1'>
             <b>MONTO</b>
           </div>
+          <div class='tabla-p2'>
+            <b>FECHA CREACIÓN</b>
+          </div>
+          <div class='tabla-p3'>
+            <b>FECHA EDICIÓN</b>
+          </div>
+          <div class='tabla-p4'>
+            <b>ESTATUS</b>
+          </div>
           <div class='tabla-p5'>
-            <b>PORCENTAJE</b>
+            <b>USUARIO</b>
+          </div>
+          <div class='tabla-p6'>
+            <b>BANCO</b>
           </div>
           <div class='tabla-pp2'>
           </div>
