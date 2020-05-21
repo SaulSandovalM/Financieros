@@ -34,7 +34,7 @@ import Cheques from './components/elizabeth/cheques/Cheques';
 import Vales from './components/elizabeth/vales/Vales';
 import Comprobacion from './components/elizabeth/comprobacion/Comprobacion';
 import Common from './Common';
-import Validacion from './components/elizabeth/validacion/Validacion';
+//import Validacion from './components/elizabeth/validacion/Validacion';
 import Prueba from './components/cecilia/prueba/Prueba';
 
 function App(props) {
@@ -167,7 +167,7 @@ function App(props) {
       <Route path='/Vales' component={Vales}/>
       <Route path='/Comprobacion' component={Comprobacion}/>
       <Route path='/Common' component={Common}/>
-      <Route path='/Validacion' component={Validacion}/>
+      //<Route path='/Validacion' component={Validacion}/>
       <Route path='/Prueba' component={Prueba}/>
     </Switch>
   );
