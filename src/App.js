@@ -34,6 +34,7 @@ import Cheques from './components/elizabeth/cheques/Cheques';
 import Vales from './components/elizabeth/vales/Vales';
 import Comprobacion from './components/elizabeth/comprobacion/Comprobacion';
 import Common from './Common';
+import Validacion from './components/elizabeth/validacion/Validacion';
 
 function App(props) {
   const { isAuthenticated, isVerifying } = props;
@@ -144,7 +145,6 @@ function App(props) {
         isAuthenticated={isAuthenticated}
         isVerifying={isVerifying}
       />
-
       <Route path="/Login" component={Login} />
       <Route path='/show/:id' component={Show} />
       <Route path='/edit/:id' component={Edit} />
@@ -166,6 +166,7 @@ function App(props) {
       <Route path='/Vales' component={Vales}/>
       <Route path='/Comprobacion' component={Comprobacion}/>
       <Route path='/Common' component={Common}/>
+      <Route path='/Validacion' component={Validacion}/>
     </Switch>
   );
 }
