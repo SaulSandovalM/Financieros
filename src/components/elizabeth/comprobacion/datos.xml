@@ -1,0 +1,6 @@
+<?xml version = "1.0" encoding = "UTF-8"?>
+<cliente>
+    <nombre>Jaime</nombre>
+    <edad>20</edad>
+    <salario>Luis</salario>
+</cliente>

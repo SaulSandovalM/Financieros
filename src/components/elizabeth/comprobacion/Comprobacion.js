@@ -104,6 +104,36 @@ export default class Excel extends Component {
     };
     reader.readAsBinaryString(file);
   }*/
+/*ejecutarAjax()
+{
+  var resultado = document.getElementById("info");
+  var arr = [];
+
+  if(window.XMLHttpRequest) {
+    const xhr = new XMLHttpRequest();
+  }
+  else {
+    const xhr = new ActiveXObject("Microsoft.XMLHTTP");
+  }
+
+  xhr.onreadystatechange = function(){
+    if(xhr.readyState === 4 && xmlhttp.status === 200){
+      if(xhr.responseXML !== null)
+      {
+        arr[0] = xhr.responseXML.getElementsByTagName("nombre").item(0);
+        arr[1] = xhr.responseXML.getElementsByTagName("apellido").item(0);
+        arr[2] = xhr.responseXML.getElementsByTagName("edad").item(0);
+        arr[3] = xhr.responseXML.getElementsByTagName("salario").item(0);
+
+        resultado.innerHTML = arr[0].firstChild.nodeValue + ""+
+                              arr[1].firstChild.nodeValue;
+
+      }
+    }
+  }
+  xhr.open("GET", "datos.xml", true);
+  xhr.send();
+}*/
 
   render() {
     const fontSize = 5;
@@ -115,6 +145,8 @@ export default class Excel extends Component {
             <div class='presupuesto-card'>
               <h1 class='presupuesto-h1'>Comprobaciones</h1>
               <p class='presupuesto-p'>Selecciona la carga de evidencias de tus comprobaciones</p>
+              <button onclick = "ejecutarAjax()">Mostrar información</button><br/><br/>
+              <div id="info"></div>
               <div>
                 <p>Facturas:</p>
                 <Dropzone
