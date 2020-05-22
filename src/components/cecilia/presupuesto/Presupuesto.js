@@ -132,6 +132,11 @@ export default class Excel extends Component {
                     accept=".csv" onDropAccepted={this.onDrop.bind(this)}>
                 </Dropzone>
               </div>
+              <progress class='progress' value={this.state.csv} max='100'>
+                {this.state.csv} %
+              </progress>
+              <div class="dz-default dz-message" value={this.state.csv} max='100'>
+                Carga {this.state.csv} %</div>
               <div>
                 <p>Presupuesto:</p>
                 <Dropzone
@@ -146,9 +151,11 @@ export default class Excel extends Component {
                     accept=".pdf" onChange={this.handleOnChange.bind(this)}>
                 </Dropzone>
               </div>
-              {/*<div className='button-pre'>
-                <p className='button-p' onChange={this.handleOnChange.bind(this)}><b>Subir</b></p>
-              </div>*/}
+              <progress class='progress' value={this.state.pdf} max='100'>
+                {this.state.pdf} %
+              </progress>
+              <div class="dz-default dz-message" value={this.state.pdf} max='100'>
+                Carga {this.state.pdf} %</div>
             </div>
           </div>
         </div>
