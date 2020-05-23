@@ -13,7 +13,7 @@ export default class Excel extends Component {
     }
   }
 
-  handleOnChange (event) {
+  handleUpload (event) {
     const file = event.target.files[0]
     const storageRef = firebase.storage().ref(`pdfs/${file.name}`)
     const task = storageRef.put(file)
@@ -143,7 +143,7 @@ export default class Excel extends Component {
                     borderColor: 'rgb(102, 102, 102)',
                     borderStyle: 'solid',
                     borderRadius: '5px'}}
-                    accept=".pdf" onChange={this.handleOnChange.bind(this)}>
+                    accept=".pdf" onChange={this.handleUpload.bind(this)}>
                 </Dropzone>
               </div>
               {/*<div className='button-pre'>
