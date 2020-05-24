@@ -25,17 +25,13 @@ import Comproceci from './components/comprometidos/Comproceci';
 import Carga from './components/presupuesto/Carga';
 import Creacionfondo from './components/presupuesto/Creacionfondo';
 import FileUpload from './components/presupuesto/FileUpload';
-import Excel from './components/presupuesto/Excel';
 import Altas from './components/cecilia/altas/Altas';
 import Caja from './components/cecilia/caja/Caja';
 import Banco from './components/cecilia/banco/Banco';
-import Seleccion from './components/cecilia/fondorevolvente/Seleccion';
 import Cheques from './components/elizabeth/cheques/Cheques';
 import Vales from './components/elizabeth/vales/Vales';
 import Comprobacion from './components/elizabeth/comprobacion/Comprobacion';
 import Common from './Common';
-//import Validacion from './components/elizabeth/validacion/Validacion';
-import Prueba from './components/cecilia/prueba/Prueba';
 
 function App(props) {
   const { isAuthenticated, isVerifying } = props;
@@ -158,17 +154,13 @@ function App(props) {
       <Route path="/addcomple/:id" component={Addcomple} />
       <Route path="/Carga" component={Addcomple} />
       <Route path='/FileUpload' component={FileUpload} />
-      <Route path='/Excel' component={Excel} />
       <Route path='/Altas' component={Altas} />
       <Route path='/Caja' component={Caja} />
-      <Route path='/Seleccion' component={Seleccion} />
       <Route path='/Banco' component={Banco} />
       <Route path='/Cheques' component={Cheques} />
       <Route path='/Vales' component={Vales}/>
       <Route path='/Comprobacion' component={Comprobacion}/>
       <Route path='/Common' component={Common}/>
-      {/*<Route path='/Validacion' component={Validacion}/>*/}
-      <Route path='/Prueba' component={Prueba}/>
     </Switch>
   );
 }

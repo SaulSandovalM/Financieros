@@ -78,14 +78,13 @@ export default class Banco extends Component {
   }
 
   render() {
-
     return (
-      <div class='container-back'>
-        <div class='site'>
-          <p class='site-s'><b>Banco</b></p>
+      <div class='banco-back'>
+        <div class='site-banco'>
+          <p class='site-banco-s'><b>Banco</b></p>
         </div>
-        <div class='caja-container'>
-          <div class='caja-inputs'>
+        <div class='banco-container'>
+          <div class='banco-inputs'>
             <div class='disponible-banco'>
               <div>
                 <p class='cantidad-banco'>
@@ -101,15 +100,13 @@ export default class Banco extends Component {
               </div>
             </div>
           </div>
-
-          <div class='caja-w' style={{marginTop: '40px', marginBottom: '40px'}}>
-            <div class='caja-col'>
+          <div class='banco-w'>
+            <div class='banco-col'>
               <ListComponent
                 lista={this.state.lista}
               />
             </div>
           </div>
-
         </div>
       </div>
     )
