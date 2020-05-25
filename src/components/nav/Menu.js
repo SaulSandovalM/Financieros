@@ -2,6 +2,7 @@ import React from 'react';
 import { bool } from 'prop-types';
 import Nav from './Nav';
 import NavC from './NavC';
+import NavE from './NavE';
 import { StyledMenu } from './Menu.styled';
 import firebase from '../../Firebase';
 
@@ -45,16 +46,16 @@ const Menu = ({ open, ...props }) => {
     admin = 'OMAR';
   } else if (email === 'fer@procu.com') {
    admin = 'FERNANDA';
-  } else if (email === 'miau@procu.com') {
-    admin = 'MAURICIO';
+ } else if (email === 'eli@prueba.com') {
+    admin = 'ELI';
   }
 
   const isHidden = open ? true : false;
 
   return (
     <StyledMenu open={open} aria-hidden={!isHidden} {...props}>
-      {admin === 'CECILIA' && <Nav /> }
-      {admin === 'ADMIN' && <NavC /> }
+      {admin === 'CECILIA' && <NavC /> }
+      {admin === 'ELI' && <NavE /> }
     </StyledMenu>
   )
 }

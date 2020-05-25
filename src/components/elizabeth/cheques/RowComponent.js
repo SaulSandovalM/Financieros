@@ -12,31 +12,22 @@ export default class RowComponent extends Component {
 
   render() {
     return (
-      <div class='caja-inputs'>
-        <div class='tabla-pp'>
+      <div class='cheques-inputs'>
+        <div class='table-left'>
         </div>
-        <div class='tabla-p'>
-          <p>{this.props.item.numero}</p>
+        <div class='table-c-num'>
+          <b>{this.props.item.numCheque}</b>
         </div>
-        <div class='tabla-p1'>
-          <p>{this.props.item.monto}</p>
+        <div class='table-c-importe'>
+          <b>{this.props.item.importe}</b>
         </div>
-        <div class='tabla-p2'>
-          <p>{this.props.item.fechaC}</p>
+        <div class='table-c-fechae'>
+          <b>{this.props.item.fechaE}</b>
         </div>
-        <div class='tabla-p3'>
-          <p>{this.props.item.fechaE}</p>
+        <div class='table-c-fechae'>
+          <b>{this.props.item.fechaC}</b>
         </div>
-        <div class='tabla-p4'>
-          <p>{this.props.item.estatus}</p>
-        </div>
-        <div class='tabla-p5'>
-          <p>{this.props.item.usuario}</p>
-        </div>
-        <div class='tabla-p6'>
-          <p>{this.props.item.banco}</p>
-        </div>
-        <div class='tabla-pp2'>
+        <div class='table-right'>
         </div>
       </div>
     );
