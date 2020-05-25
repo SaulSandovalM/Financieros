@@ -4,6 +4,7 @@ import './Cheques.css';
 import ListComponent from './ListComponent';
 import CurrencyFormat from 'react-currency-format';
 
+
 export default class Cheques extends Component {
   constructor(props) {
     super(props);
@@ -145,6 +146,7 @@ export default class Cheques extends Component {
             <div class='caja-inputs'>
               <div class='caja-inputs-c'>
                 <div class='input-row'>
+                
                   <p class='p-caja'><b># Cheque</b></p>
                   <input
                     class='input-sc'

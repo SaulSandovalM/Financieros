@@ -32,10 +32,16 @@ import Banco from './components/cecilia/banco/Banco';
 import Seleccion from './components/cecilia/fondorevolvente/Seleccion';
 import Cheques from './components/elizabeth/cheques/Cheques';
 import Vales from './components/elizabeth/vales/Vales';
+import Nuvale from './components/elizabeth/cheques/Nuvale';
+import Pdf1 from './components/elizabeth/cheques/pdf/Pdf1';
+import Pdf3 from './components/elizabeth/cheques/pdf/Pdf3';
+import Fond from './components/elizabeth/cheques/pdf/Fond';
 import Comprobacion from './components/elizabeth/comprobacion/Comprobacion';
 import Common from './Common';
 import Validacion from './components/elizabeth/validacion/Validacion';
 import Prueba from './components/cecilia/prueba/Prueba';
+
+
 
 function App(props) {
   const { isAuthenticated, isVerifying } = props;
@@ -141,11 +147,42 @@ function App(props) {
       />
       <ProtectedRoute
         exact
+        path="/Nuvale"
+        component={Nuvale}
+        isAuthenticated={isAuthenticated}
+        isVerifying={isVerifying}
+      />
+      <ProtectedRoute
+        exact
+        path="/Pdf1"
+        component={Pdf1}
+        isAuthenticated={isAuthenticated}
+        isVerifying={isVerifying}
+      />
+      <ProtectedRoute
+        exact
+        path="/Fond"
+        component={Fond}
+        isAuthenticated={isAuthenticated}
+        isVerifying={isVerifying}
+      />
+      <ProtectedRoute
+        exact
+        path="/Pdf3"
+        component={Pdf3}
+        isAuthenticated={isAuthenticated}
+        isVerifying={isVerifying}
+      />
+
+      <ProtectedRoute
+        exact
         path="/Comprobacion"
         component={Comprobacion}
         isAuthenticated={isAuthenticated}
         isVerifying={isVerifying}
       />
+
+
       <Route path="/Login" component={Login} />
       <Route path='/show/:id' component={Show} />
       <Route path='/edit/:id' component={Edit} />
@@ -169,6 +206,11 @@ function App(props) {
       <Route path='/Common' component={Common}/>
       <Route path='/Validacion' component={Validacion}/>
       <Route path='/Prueba' component={Prueba}/>
+      <Route path='/Nuvale' component={Nuvale}/>
+      <Route path='/Pdf1' component={Pdf1}/>
+      <Route path='/Fond' component={Fond}/>
+      <Route path='/Pdf3' component={Pdf3}/>
+
     </Switch>
   );
 }
