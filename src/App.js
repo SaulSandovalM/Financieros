@@ -37,8 +37,6 @@ import Pdf3 from './components/elizabeth/cheques/pdf/Pdf3';
 import Fond from './components/elizabeth/cheques/pdf/Fond';
 import Comprobacion from './components/elizabeth/comprobacion/Comprobacion';
 
-
-
 function App(props) {
   const { isAuthenticated, isVerifying } = props;
   return (
@@ -191,8 +189,6 @@ function App(props) {
         isAuthenticated={isAuthenticated}
         isVerifying={isVerifying}
       />
-
-
       <Route path="/Login" component={Login} />
       <Route path='/show/:id' component={Show} />
       <Route path='/edit/:id' component={Edit} />
