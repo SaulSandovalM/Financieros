@@ -54,7 +54,7 @@ const Menu = ({ open, ...props }) => {
 
   return (
     <StyledMenu open={open} aria-hidden={!isHidden} {...props}>
-      {admin === 'CECILIA' && <NavC /> }
+      {admin === 'ADMIN' && <NavE /> }
       {admin === 'ELI' && <NavE /> }
     </StyledMenu>
   )

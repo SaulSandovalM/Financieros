@@ -199,20 +199,11 @@ export default class Cheques extends Component {
           <p class='site-s-cheques'><b>Cheques</b></p>
         </div>
         <div>
-<<<<<<< HEAD
-          <form class='caja-container' onSubmit={this.sendMessage.bind(this)} ref='contactForm'>
-            <div class='caja-inputs'>
-              <div class='caja-inputs-c'>
-                <div class='input-row'>
-                
-                  <p class='p-caja'><b># Cheque</b></p>
-=======
           <form class='cheques-container' onSubmit={this.sendMessage.bind(this)} ref='contactForm'>
             <div class='cheques-inputs'>
               <div class='cheques-inputs-c'>
                 <div class='input-row-cheque'>
                   <p class='p-cheque'><b># Cheque</b></p>
->>>>>>> 20777f4518e7dedad1961f14a8b13343a986927e
                   <input
                     class='input-sc-cheque'
                     id='numCheque'

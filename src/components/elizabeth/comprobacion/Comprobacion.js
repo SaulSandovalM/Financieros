@@ -2,6 +2,11 @@ import React, { Component } from 'react';
 import Dropzone from 'react-dropzone';
 import csv from 'csv';
 import firebase from '../../../Firebase';
+import xhr from 'ajax';
+import ActiveXObject from 'ajax';
+import xmlhttp from 'ajax';
+import open from 'jquery';
+import xml from './datos.xml';
 
 export default class Excel extends Component {
   constructor () {
@@ -104,39 +109,41 @@ export default class Excel extends Component {
     };
     reader.readAsBinaryString(file);
   }*/
-/*ejecutarAjax()
-{
-  var resultado = document.getElementById("info");
-  var arr = [];
 
-  if(window.XMLHttpRequest) {
-    const xhr = new XMLHttpRequest();
-  }
-  else {
-    const xhr = new ActiveXObject("Microsoft.XMLHTTP");
-  }
-
-  xhr.onreadystatechange = function(){
-    if(xhr.readyState === 4 && xmlhttp.status === 200){
-      if(xhr.responseXML !== null)
-      {
-        arr[0] = xhr.responseXML.getElementsByTagName("nombre").item(0);
-        arr[1] = xhr.responseXML.getElementsByTagName("apellido").item(0);
-        arr[2] = xhr.responseXML.getElementsByTagName("edad").item(0);
-        arr[3] = xhr.responseXML.getElementsByTagName("salario").item(0);
-
-        resultado.innerHTML = arr[0].firstChild.nodeValue + ""+
-                              arr[1].firstChild.nodeValue;
-
-      }
-    }
-  }
-  xhr.open("GET", "datos.xml", true);
-  xhr.send();
-}*/
 
   render() {
     const fontSize = 5;
+
+    function ejecutarAjax()
+    {
+      var resultado = document.getElementById("info");
+      var arr = [];
+
+      if(window.XMLHttpRequest) {
+        const xhr = new XMLHttpRequest();
+      }
+      else {
+        const xhr = new ActiveXObject("Microsoft.XMLHTTP");
+      }
+
+      xhr.onreadystatechange = function(){
+        if(xhr.readyState === 4 && xmlhttp.status === 200){
+          if(xhr.responseXML !== null)
+          {
+            arr[0] = xhr.responseXML.getElementsByTagName("nombre").item(0);
+            arr[1] = xhr.responseXML.getElementsByTagName("apellido").item(0);
+            arr[2] = xhr.responseXML.getElementsByTagName("edad").item(0);
+            arr[3] = xhr.responseXML.getElementsByTagName("salario").item(0);
+
+            resultado.innerHTML = arr[0].firstChild.nodeValue + ""+
+                                  arr[1].firstChild.nodeValue;
+
+          }
+        }
+      }
+      xhr.open("GET", "datos.xml", true);
+      xhr.send();
+    }
 
     return (
       <div>
@@ -145,7 +152,7 @@ export default class Excel extends Component {
             <div class='presupuesto-card'>
               <h1 class='presupuesto-h1'>Comprobaciones</h1>
               <p class='presupuesto-p'>Selecciona la carga de evidencias de tus comprobaciones</p>
-              <button onclick = "ejecutarAjax()">Mostrar información</button><br/><br/>
+              <button onClick = {ejecutarAjax}>Mostrar información</button><br/><br/>
               <div id="info"></div>
               <div>
                 <p>Facturas:</p>
@@ -157,7 +164,8 @@ export default class Excel extends Component {
                     borderWidth: '2px',
                     borderColor: 'rgb(102, 102, 102)',
                     borderStyle: 'solid',
-                    borderRadius: '5px'}}
+                    borderRadius: '5px',
+                    maxFiles: 5}}
                     accept=".pdf" onChange={this.handleOnChange.bind(this)}>
                 </Dropzone>
                 <progress class='progress' value={this.state.pdf1} max='100'>
@@ -178,7 +186,8 @@ export default class Excel extends Component {
                     borderWidth: '2px',
                     borderColor: 'rgb(102, 102, 102)',
                     borderStyle: 'solid',
-                    borderRadius: '5px'}}
+                    borderRadius: '5px',
+                    maxFiles: 5}}
                     accept=".pdf" onChange={this.handleOnChange.bind(this)}>
                 </Dropzone>
                 <progress class='progress' value={this.state.pdf2} max='100'>
@@ -197,7 +206,8 @@ export default class Excel extends Component {
                     borderWidth: '2px',
                     borderColor: 'rgb(102, 102, 102)',
                     borderStyle: 'solid',
-                    borderRadius: '5px'}}
+                    borderRadius: '5px',
+                    maxFiles: 5}}
                     accept=".pdf" onChange={this.handleOnChange.bind(this)}>
                 </Dropzone>
                 <progress class='progress' value={this.state.pdf3} max='100'>
