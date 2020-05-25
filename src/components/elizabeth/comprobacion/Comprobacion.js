@@ -19,15 +19,41 @@ export default class Excel extends Component {
     }
   }
 
-  handleOnChange (event) {
+  handleOnChange1 (event) {
     const file = event.target.files[0]
     const storageRef = firebase.storage().ref(`pdfs/${file.name}`)
     const task = storageRef.put(file)
     task.on('state_changed', (snapshot) => {
       let percentage = (snapshot.bytesTransferred / snapshot.totalBytes) * 100
       this.setState({
-        pdf1: percentage,
-        pdf2: percentage,
+        pdf1: percentage
+      })
+    }, (error) => {
+      console.error(error.message)
+    })
+  }
+
+  handleOnChange2 (event) {
+    const file = event.target.files[0]
+    const storageRef = firebase.storage().ref(`pdfs/${file.name}`)
+    const task = storageRef.put(file)
+    task.on('state_changed', (snapshot) => {
+      let percentage = (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+      this.setState({
+        pdf2: percentage
+      })
+    }, (error) => {
+      console.error(error.message)
+    })
+  }
+
+  handleOnChange3 (event) {
+    const file = event.target.files[0]
+    const storageRef = firebase.storage().ref(`pdfs/${file.name}`)
+    const task = storageRef.put(file)
+    task.on('state_changed', (snapshot) => {
+      let percentage = (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+      this.setState({
         pdf3: percentage
       })
     }, (error) => {
@@ -166,7 +192,7 @@ export default class Excel extends Component {
                     borderStyle: 'solid',
                     borderRadius: '5px',
                     maxFiles: 5}}
-                    accept=".pdf" onChange={this.handleOnChange.bind(this)}>
+                    accept=".pdf" onChange={this.handleOnChange1.bind(this)}>
                 </Dropzone>
                 <progress class='progress' value={this.state.pdf1} max='100'>
                   {this.state.pdf1} %
@@ -177,7 +203,7 @@ export default class Excel extends Component {
               </div>
 
               <div>
-                <p>Recibo:</p>
+                <p>XML:</p>
                 <Dropzone
                   style={{
                     position: 'relative',
@@ -188,7 +214,7 @@ export default class Excel extends Component {
                     borderStyle: 'solid',
                     borderRadius: '5px',
                     maxFiles: 5}}
-                    accept=".pdf" onChange={this.handleOnChange.bind(this)}>
+                    accept=".pdf" onChange={this.handleOnChange2.bind(this)}>
                 </Dropzone>
                 <progress class='progress' value={this.state.pdf2} max='100'>
                   {this.state.pdf2} %
@@ -197,7 +223,7 @@ export default class Excel extends Component {
                   Carga {this.state.pdf2} %</div>
               </div>
               <div>
-                <p>Reintegro:</p>
+                <p>Recibo Simple:</p>
                 <Dropzone
                   style={{
                     position: 'relative',
@@ -208,7 +234,7 @@ export default class Excel extends Component {
                     borderStyle: 'solid',
                     borderRadius: '5px',
                     maxFiles: 5}}
-                    accept=".pdf" onChange={this.handleOnChange.bind(this)}>
+                    accept=".pdf" onChange={this.handleOnChange3.bind(this)}>
                 </Dropzone>
                 <progress class='progress' value={this.state.pdf3} max='100'>
                   {this.state.pdf3} %
