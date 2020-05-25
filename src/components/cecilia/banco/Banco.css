@@ -1,26 +1,141 @@
-.container-back {
+.banco-back {
   padding: 0px 20px 0px 20px;
   background-color: #f4f4f4;
   min-height: 100vh;
 }
-.site {
+.site-banco {
   padding-left: 80px;
   padding-top: 20px;
 }
-.site-s {
+.site-banco-s {
   margin: 0px;
   font-size: 20px;
 }
-.caja-container {
+.banco-container {
   width: 100%;
   padding-top: 50px;
 }
-.caja-inputs {
+.banco-inputs {
   display: flex;
   flex-direction: row;
   justify-content: center;
   width: 100%;
 }
+.disponible-banco {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+.cantidad-banco {
+  font-size: 60px;
+  margin: 10px 0px 0px 0px;
+}
+.banco-w {
+  background-color: #FFFFFF;
+  margin-left: -20px;
+  margin-right: -20px;
+  margin-top: 40px;
+  margin-bottom: 40px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+.banco-col {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin: 20px 20px 20px 20px;
+}
+.banco-inputs-list {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+}
+.table-banco-up {
+  width: 3%;
+  border-bottom: 1px solid #d0d0d0;
+  border-right: 1px solid #d0d0d0;
+  padding-left: 5px;
+  height: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.table-banco-partida {
+  width: 10%;
+  border-bottom: 1px solid #d0d0d0;
+  border-right: 1px solid #d0d0d0;
+  padding-left: 5px;
+  height: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.table-banco-proyecto {
+  width: 30%;
+  border-bottom: 1px solid #d0d0d0;
+  border-right: 1px solid #d0d0d0;
+  padding-left: 5px;
+  height: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.table-banco-nombre {
+  width: 31%;
+  border-bottom: 1px solid #d0d0d0;
+  border-right: 1px solid #d0d0d0;
+  padding-left: 5px;
+  height: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.table-banco-monto {
+  width: 11%;
+  border-bottom: 1px solid #d0d0d0;
+  border-right: 1px solid #d0d0d0;
+  padding-left: 5px;
+  height: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.table-banco-porcentaje {
+  width: 11%;
+  border-bottom: 1px solid #d0d0d0;
+  border-right: 1px solid #d0d0d0;
+  padding-left: 5px;
+  height: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 .caja-inputs-c {
   display: flex;
   flex-direction: row;
@@ -49,22 +164,14 @@
 .input-sc {
   height: 25px;
 }
-.disponible-banco {
-  width: 100%;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-}
+
 .p-caja-dis {
   margin: 0px;
   color: grey;
   font-size: 12px;
   text-align: right;
 }
-.cantidad-banco {
-  font-size: 60px;
-  margin: 10px 0px 0px 0px;
-}
+
 .caja-inputs-2 {
   margin-top: 30px;
   display: flex;
@@ -82,54 +189,18 @@
   display: flex;
   flex-direction: column;
 }
-.caja-w {
-  background-color: #FFFFFF;
-  margin-left: -20px;
-  margin-right: -20px;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-}
-.caja-col {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  margin: 20px 20px 20px 20px;
-}
+
 .input-row-w {
   display: flex;
   flex-direction: column;
   margin-right: 40px;
 }
-.tabla-pp {
-  width: 2%;
-  border-right: 1px solid #d0d0d0;
-  border-bottom: 1px solid #d0d0d0;
-}
+
 .tabla-pp2 {
   width: 2%;
   border-bottom: 1px solid #d0d0d0;
 }
-.tabla-p {
-  width: 3%;
-  border-bottom: 1px solid #d0d0d0;
-  border-right: 1px solid #d0d0d0;
-  padding-left: 5px;
-  height: 30px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-.tabla-p1-banco {
-  width: 10%;
-  border-bottom: 1px solid #d0d0d0;
-  border-right: 1px solid #d0d0d0;
-  padding-left: 5px;
-  height: 30px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
+
 .tabla-p2-banco {
   width: 30%;
   border-bottom: 1px solid #d0d0d0;
@@ -150,26 +221,8 @@
   flex-direction: column;
   justify-content: center;
 }
-.tabla-p4 {
-  width: 11%;
-  border-bottom: 1px solid #d0d0d0;
-  border-right: 1px solid #d0d0d0;
-  padding-left: 5px;
-  height: 30px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-.tabla-p5 {
-  width: 11%;
-  border-bottom: 1px solid #d0d0d0;
-  border-right: 1px solid #d0d0d0;
-  padding-left: 5px;
-  height: 30px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
+
+
 .tabla-p6 {
   width: 15%;
   border-bottom: 1px solid #d0d0d0;

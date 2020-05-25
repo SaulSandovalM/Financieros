@@ -1,21 +1,34 @@
 import React, { Component } from 'react';
-import firebase from '../../../Firebase';
-import Dropzone from 'react-dropzone';
-import csv from 'csv';
 import './Presupuesto.css';
+import firebase from '../../../Firebase';
+import ListComponent from './ListComponent';
+import CurrencyFormat from 'react-currency-format';
+import csv from 'csv';
+import Dropzone from 'react-dropzone';
 
-export default class Excel extends Component {
+export default class Presupuesto extends Component {
   constructor () {
     super()
     this.state = {
       pdf: 0,
-      csv: 0
+      lista: [
+        {
+          id: 1,
+          name: 'preuba',
+          done: false
+        },
+      ],
+      ingresos: '',
+      importe: '',
+      proyecto: '',
+      clave: '',
+      contador: {}
     }
   }
 
-  handleOnChange (event) {
+  handleUpload (event) {
     const file = event.target.files[0]
-    const storageRef = firebase.storage().ref(`pdfs/${file.name}`)
+    const storageRef = firebase.storage().ref(`presupuesto-fr/${file.name}`)
     const task = storageRef.put(file)
     task.on('state_changed', (snapshot) => {
       let percentage = (snapshot.bytesTransferred / snapshot.totalBytes) * 100
@@ -107,50 +120,232 @@ export default class Excel extends Component {
     reader.readAsBinaryString(file);
   }
 
+  listenForItems = (itemsRef) => {
+    itemsRef.on('value', (snap) => {
+      var lista = [];
+      snap.forEach((child) => {
+        lista.push({
+          ingresos: child.val().ingresos,
+          importe: child.val().importe,
+          proyecto: child.val().proyecto,
+          clave: child.val().clave,
+          done: child.val().done,
+          id: child.key
+        });
+      });
+      this.setState({
+        lista: lista
+      });
+    });
+  }
+
+  componentDidMount() {
+    const itemsRef = firebase.database().ref('banco/');
+    this.listenForItems(itemsRef);
+    this.consumo();
+  }
+
+  consumo = () => {
+    const ref = firebase.firestore().collection('banco').doc('--stats--');
+    ref.get().then((doc) => {
+      if (doc.exists) {
+        this.setState({
+          contador: doc.data(),
+          key: doc.id,
+          isLoading: false
+        });
+      } else {
+        console.log("No hay documento!");
+      }
+    })
+  }
+
+  showAlert(type, message) {
+    this.setState({
+      alert: true,
+      alertData: {type, message}
+    });
+    setTimeout(() => {
+      this.setState({alert: false});
+    }, 6000);
+  }
+
+  resetForm() {
+    this.refs.contactForm.reset();
+  }
+
+  sendMessage(e) {
+    e.preventDefault();
+    const params = {
+      ingresos: this.inputIngresos.value,
+      importe: this.inputImporte.value,
+      proyecto: this.inputProyecto.value,
+      clave: this.inputClave.value,
+    };
+    this.setState({
+      ingresos: this.inputIngresos.value,
+      importe: this.inputImporte.value,
+      proyecto: this.inputProyecto.value,
+      clave: this.inputClave.value,
+    })
+    if ( params.ingresos && params.importe && params.proyecto && params.clave) {
+      var f = parseInt(params.importe);
+      const statsRef = firebase.firestore().collection('banco').doc('--stats--');
+      const increment = firebase.firestore.FieldValue.increment(f);
+      const batch = firebase.firestore().batch();
+      const storyRef = firebase.firestore().collection('banco').doc(`${Math.random()}`);
+      batch.set(storyRef, { title: 'Se agredo un fondo' });
+      batch.set(statsRef, { storyCount: increment }, { merge: true });
+      batch.commit();
+      firebase.database().ref('banco').push(params).then(() => {
+        this.showAlert('success', 'Tu solicitud fue enviada.');
+      }).catch(() => {
+        this.showAlert('danger', 'Tu solicitud no puede ser enviada');
+      });
+      this.resetForm();
+    } else {
+      this.showAlert('warning', 'Por favor llene el formulario');
+    };
+  }
+
   render() {
-
-    const fontSize = 5;
-
     return (
-      <div>
-        <div className='presupuesto-container'>
-          <div className='presupuesto-content'>
-            <div className='presupuesto-card'>
-              <h1 className='presupuesto-h1'>Aqui puedes subir<br/>tu presupuesto anual </h1>
-              <p className='presupuesto-p'>Traspasa tu información de Excel para poder usar el sistema</p>
-              <div>
-                <p>Archivo:</p>
-                <Dropzone
-                  style={{
-                    position: 'relative',
-                    width: '100%',
-                    height: '30px',
-                    borderWidth: '2px',
-                    borderColor: 'rgb(102, 102, 102)',
-                    borderStyle: 'solid',
-                    borderRadius: '5px'}}
-                    accept=".csv" onDropAccepted={this.onDrop.bind(this)}>
-                </Dropzone>
-              </div>
-              <div>
-                <p>Presupuesto:</p>
-                <Dropzone
-                  style={{
-                    position: 'relative',
-                    width: '100%',
-                    height: '30px',
-                    borderWidth: '2px',
-                    borderColor: 'rgb(102, 102, 102)',
-                    borderStyle: 'solid',
-                    borderRadius: '5px'}}
-                    accept=".pdf" onChange={this.handleOnChange.bind(this)}>
-                </Dropzone>
-              </div>
-              {/*<div className='button-pre'>
-                <p className='button-p' onChange={this.handleOnChange.bind(this)}><b>Subir</b></p>
-              </div>*/}
+      <div className='pf-container'>
+        <div className='site-pf'>
+          <p className='site-pf-s'><b>Presupuesto y Fondo Revolvente</b></p>
+        </div>
+        <div className='p-container'>
+          <div className='p-margin'>
+            <p className='p-title-size'>- Aqui puedes subir tu presupuesto anual</p>
+          </div>
+          <div className='p-row'>
+            <div className='p-container-i' style={{marginRight: '20px'}}>
+              <p className='p-title-margin'>Archivo Pdf</p>
+              <Dropzone
+                style={{
+                  position: 'ab',
+                  width: '100%',
+                  height: '29px',
+                  borderWidth: '1px',
+                  borderColor: '#a9a9a9',
+                  borderStyle: 'solid',
+                  background: 'white',
+                }}
+                accept=".pdf" onChange={this.handleUpload.bind(this)}>
+              </Dropzone>
+            </div>
+            <div className='p-container-i'>
+              <p className='p-title-margin'>Archivo Cvs</p>
+              <Dropzone
+                style={{
+                  position: 'ab',
+                  width: '100%',
+                  height: '29px',
+                  borderWidth: '1px',
+                  borderColor: '#a9a9a9',
+                  borderStyle: 'solid',
+                  background: 'white'
+                }}
+                accept=".csv" onDropAccepted={this.onDrop.bind(this)}>
+              </Dropzone>
             </div>
           </div>
+        </div>
+        <div className='p-container-fr'>
+          <div className='p-margin-row'>
+            <p className='p-title-size'>
+              - Agrega el documento de autorización de fondo revolvente
+            </p>
+            <div>
+              <p class='p-banco'><b>PORCENTAJE AGREGADO</b></p>
+              <p class='cantidad-add-banco'>
+                MXN
+                <CurrencyFormat
+                  value={this.state.contador.storyCount}
+                  displayType={'text'}
+                  thousandSeparator={true}
+                  prefix={' $'} />
+                .00
+              </p>
+            </div>
+          </div>
+          <div className='p-row'>
+            <div className='p-container-i' style={{marginRight: '20px'}}>
+              <p className='p-title-margin'>Archivo Pdf</p>
+              <Dropzone
+                style={{
+                  position: 'ab',
+                  width: '100%',
+                  height: '29px',
+                  borderWidth: '1px',
+                  borderColor: '#a9a9a9',
+                  borderStyle: 'solid',
+                  background: 'white',
+                }}
+                accept=".pdf" onChange={this.handleUpload.bind(this)}>
+              </Dropzone>
+            </div>
+          </div>
+        </div>
+        <form onSubmit={this.sendMessage.bind(this)} ref='contactForm'>
+          <div className='p-container'>
+            <div className='p-margin-f'>
+              <p className='p-title-size'>
+                - Ingresa los datos que correspondan con el documento de autorización del fondo revolvente
+              </p>
+            </div>
+            <div className='p-row2'>
+              <div className='p-container-i2' style={{marginRight: '20px'}}>
+                <p className='p-title-margin2'>R. de Ingresos</p>
+                <input
+                  className='input-h'
+                  id='ingresos'
+                  ref={ingresos => this.inputIngresos = ingresos}
+                  placeholder='Aprovechamientos por Cooperaciones'
+                  required
+                />
+              </div>
+              <div className='p-container-i2' >
+                <p className='p-title-margin2'>Importe</p>
+                <input
+                  className='input-h'
+                  id='importe'
+                  ref={importe => this.inputImporte = importe}
+                  placeholder='$ 704,874.00'
+                  required
+                />
+              </div>
+            </div>
+            <div className='p-col'>
+              <div className='p-container-i3' >
+                <p className='p-title-margin2'>Proyecto</p>
+                <input
+                  className='input-h'
+                  id='proyecto'
+                  ref={proyecto => this.inputProyecto = proyecto}
+                  placeholder='ACCIONES DE INVESTIGACION EJECUTIVAS'
+                  required
+                />
+              </div>
+              <div className='p-container-i3' >
+                <p className='p-title-margin2'>Clave</p>
+                <input
+                  className='input-h'
+                  id='clave'
+                  ref={clave => this.inputClave = clave}
+                  placeholder='26-30-01-6201010-01-253001-1-02-02-404-00-E0018-01-002-AU001-001-B07-85000-00-00-D5-C5-0194-00-01-PF-01-01'
+                />
+              </div>
+            </div>
+          </div>
+          <div className='button-row-s'>
+            <button type='submit' class='input-sc boton-g'>Agregar</button>
+          </div>
+        </form>
+        <div className='space-table'>
+          <ListComponent
+            lista={this.state.lista}
+          />
         </div>
       </div>
     )

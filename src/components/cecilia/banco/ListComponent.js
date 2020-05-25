@@ -22,28 +22,28 @@ export default class ListComponent extends Component {
   render() {
     return (
       <div>
-        <div class='caja-inputs'>
-          <div class='tabla-pp'>
+        <div className='banco-inputs-list'>
+          <div className='table-left'>
           </div>
-          <div class='tabla-p'>
+          <div className='table-banco-up'>
             <b>UP</b>
           </div>
-          <div class='tabla-p1-banco'>
+          <div className='table-banco-partida'>
             <b>PARTIDA</b>
           </div>
-          <div class='tabla-p2-select'>
+          <div className='table-banco-proyecto'>
             <b>PROYECTO</b>
           </div>
-          <div class='tabla-p3-select'>
+          <div className='table-banco-nombre'>
             <b>NOMBRE DEL PROYECTO</b>
           </div>
-          <div class='tabla-p4'>
+          <div className='table-banco-monto'>
             <b>MONTO</b>
           </div>
-          <div class='tabla-p5'>
+          <div className='table-banco-porcentaje'>
             <b>PORCENTAJE</b>
           </div>
-          <div class='tabla-pp2'>
+          <div className='table-right'>
           </div>
         </div>
         {

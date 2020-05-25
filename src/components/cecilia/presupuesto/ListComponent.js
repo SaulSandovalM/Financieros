@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './Seleccion.css';
+import './Presupuesto.css';
 import RowComponent from './RowComponent';
 import firebase from '../../../Firebase';
 
@@ -22,28 +22,16 @@ export default class ListComponent extends Component {
   render() {
     return (
       <div>
-        <div class='caja-inputs'>
-          <div class='tabla-pp'>
+        <div class='table-container-p'>
+          <div class='table-left'>
           </div>
-          <div class='tabla-p'>
-            <b>UP</b>
+          <div class='table-clave-p'>
+            <b>CLAVE</b>
           </div>
-          <div class='tabla-p1-banco'>
-            <b>PARTIDA</b>
+          <div class='table-importe-p'>
+            <b>IMPORTE</b>
           </div>
-          <div class='tabla-p2-select'>
-            <b>PROYECTO</b>
-          </div>
-          <div class='tabla-p3-select'>
-            <b>NOMBRE DEL PROYECTO</b>
-          </div>
-          <div class='tabla-p4'>
-            <b>MONTO</b>
-          </div>
-          <div class='tabla-p5'>
-            <b>PORCENTAJE</b>
-          </div>
-          <div class='tabla-pp2'>
+          <div class='table-right'>
           </div>
         </div>
         {

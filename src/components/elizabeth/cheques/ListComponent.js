@@ -7,14 +7,14 @@ export default class ListComponent extends Component {
   constructor (props) {
    super(props);
    this.state = {
-     caja: [],
+     cheques: [],
    };
  }
 
   componentWillMount () {
-    firebase.database().ref('Caja/').on('child_added', snapshot => {
+    firebase.database().ref('cheques/').on('child_added', snapshot => {
       this.setState({
-        caja: this.state.caja.concat(snapshot.val())
+        cheques: this.state.cheques.concat(snapshot.val())
       });
     });
   }
@@ -22,31 +22,22 @@ export default class ListComponent extends Component {
   render() {
     return (
       <div>
-        <div class='caja-inputs'>
-          <div class='tabla-pp'>
+        <div class='cheques-inputs'>
+          <div class='table-left'>
           </div>
-          <div class='tabla-p'>
+          <div class='table-c-num'>
             <b>#</b>
           </div>
-          <div class='tabla-p1'>
-            <b>MONTO</b>
+          <div class='table-c-importe'>
+            <b>IMPORTE</b>
           </div>
-          <div class='tabla-p2'>
-            <b>FECHA CREACIÓN</b>
+          <div class='table-c-fechae'>
+            <b>FECHA DE EMISION</b>
           </div>
-          <div class='tabla-p3'>
-            <b>FECHA EDICIÓN</b>
+          <div class='table-c-fechae'>
+            <b>FECHA DE COBRO</b>
           </div>
-          <div class='tabla-p4'>
-            <b>ESTATUS</b>
-          </div>
-          <div class='tabla-p5'>
-            <b>USUARIO</b>
-          </div>
-          <div class='tabla-p6'>
-            <b>BANCO</b>
-          </div>
-          <div class='tabla-pp2'>
+          <div class='table-right'>
           </div>
         </div>
         {
