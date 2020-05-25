@@ -24,9 +24,7 @@ export default class Cheques extends Component {
       fechaE: '',
       fechaC: '',
       contador: {},
-      contadorCheques: {},
-      user: null,
-      displayName: 'Financieros'
+      contadorCheques: {}
     };
   }
 

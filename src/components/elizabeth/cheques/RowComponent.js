@@ -16,16 +16,16 @@ export default class RowComponent extends Component {
         <div class='table-left'>
         </div>
         <div class='table-c-num'>
-          <b>{this.props.item.numCheque}</b>
+          <p>{this.props.item.numCheque}</p>
         </div>
         <div class='table-c-importe'>
-          <b>{this.props.item.importe}</b>
+          <p>{this.props.item.importe}</p>
         </div>
         <div class='table-c-fechae'>
-          <b>{this.props.item.fechaE}</b>
+          <p>{this.props.item.fechaE}</p>
         </div>
         <div class='table-c-fechae'>
-          <b>{this.props.item.fechaC}</b>
+          <p>{this.props.item.fechaC}</p>
         </div>
         <div class='table-right'>
         </div>

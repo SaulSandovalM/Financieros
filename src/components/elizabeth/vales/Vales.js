@@ -19,9 +19,11 @@ export default class Vales extends Component {
       alertData: {},
       vale: '',
       cheque: '',
+      movimiento: '',
       cantidad: '',
       concepto: '',
       oficioS: '',
+      area: '',
       turno: '',
       reintegroT: '',
       estatus: '',
@@ -38,9 +40,11 @@ export default class Vales extends Component {
         lista.push({
           vale: child.val().vale,
           cheque: child.val().cheque,
+          movimiento: child.val().movimiento,
           cantidad: child.val().cantidad,
           concepto: child.val().concepto,
           oficioS: child.val().oficioS,
+          area: child.val().area,
           turno: child.val().turno,
           reintegroT: child.val().reintegroT,
           estatus: child.val().estatus,
@@ -59,6 +63,22 @@ export default class Vales extends Component {
   componentDidMount() {
     const itemsRef = firebase.database().ref('vales/');
     this.listenForItems(itemsRef);
+    this.consumo();
+  }
+
+  consumo = () => {
+    const ref = firebase.firestore().collection('vales').doc('--stats--');
+    ref.get().then((doc) => {
+      if (doc.exists) {
+        this.setState({
+          contador: doc.data(),
+          key: doc.id,
+          isLoading: false
+        });
+      } else {
+        console.log("No such document!");
+      }
+    })
   }
 
   showAlert(type, message) {
@@ -78,8 +98,8 @@ export default class Vales extends Component {
   componentWillMount() {
     let formRef = firebase.database().ref('vales').orderByKey().limitToLast(1);
     formRef.on('child_added', snapshot => {
-      const { vale, cheque, cantidad, concepto, oficioS, turno, reintegroT, estatus, personaR, proveedor } = snapshot.val();
-      const data = { vale, cheque, cantidad, concepto, oficioS, turno, reintegroT, estatus, personaR, proveedor };
+      const { vale, cheque, movimiento, cantidad, concepto, oficioS, area, turno, reintegroT, estatus, personaR, proveedor } = snapshot.val();
+      const data = { vale, cheque, movimiento, cantidad, concepto, oficioS, area, turno, reintegroT, estatus, personaR, proveedor };
       this.setState({ form: [data].concat(this.state.form) });
     });
   }
@@ -89,9 +109,11 @@ export default class Vales extends Component {
     const params = {
       vale: this.inputVale.value,
       cheque: this.inputCheque.value,
+      movimiento: this.inputMovimiento.value,
       cantidad: this.inputCantidad.value,
       concepto: this.inputConcepto.value,
       oficioS: this.inputOficio.value,
+      area: this.inputArea.value,
       turno: this.inputTurno.value,
       reintegroT: this.inputReintegro.value,
       estatus: this.inputEstatus.value,
@@ -101,16 +123,18 @@ export default class Vales extends Component {
     this.setState({
       vale: this.inputVale.value,
       cheque: this.inputCheque.value,
+      movimiento: this.inputMovimiento.value,
       cantidad: this.inputCantidad.value,
       concepto: this.inputConcepto.value,
       oficioS: this.inputOficio.value,
+      area: this.inputArea.value,
       turno: this.inputTurno.value,
       reintegroT: this.inputReintegro.value,
       estatus: this.inputEstatus.value,
       personaR: this.inputPersona.value,
       proveedor: this.inputProveedor.value
     })
-    if ( params.vale && params.cheque && params.cantidad && params.concepto && params.oficioS && params.turno && params.reintegroT && params.estatus && params.personaR && params.proveedor ) {
+    if ( params.vale && params.cheque && params.movimiento && params.cantidad && params.concepto && params.oficioS && params.area && params.turno && params.reintegroT && params.estatus && params.personaR && params.proveedor ) {
       var f = parseInt(params.cantidad);
       const statsRef = firebase.firestore().collection('caja').doc('--stats--');
       const increment = firebase.firestore.FieldValue.increment(-f);
@@ -138,9 +162,6 @@ export default class Vales extends Component {
     }
 
   render() {
-
-    const { vale, cheque, cantidad, concepto, oficioS, turno, reintegroT, estatus, personaR, proveedor } = this.state;
-
     return (
       <div class='container-back'>
         <div class='site'>
@@ -155,6 +176,7 @@ export default class Vales extends Component {
                 id='vale'
                 required
                 ref={vale => this.inputVale = vale}
+                value={this.state.contador.storyCount}
               />
             </div>
             <div className='vale-content'>
@@ -164,6 +186,15 @@ export default class Vales extends Component {
                 id='cheque'
                 required
                 ref={cheque => this.inputCheque = cheque}
+              />
+            </div>
+            <div className='vale-content'>
+              <p class='p-caja'><b>Movimiento</b></p>
+              <input
+                class='input-sc'
+                id='movimiento'
+                required
+                ref={movimiento => this.inputMovimiento = movimiento}
               />
             </div>
             <div className='vale-content'>
@@ -184,8 +215,10 @@ export default class Vales extends Component {
                 ref={concepto => this.inputConcepto = concepto}
               />
             </div>
+          </div>
+          <div className='form-container-2'>
             <div className='vale-content'>
-              <p class='p-caja'><b>Oficio de Solicitud</b></p>
+              <p class='p-caja'><b>Oficio Solicitud</b></p>
               <input
                 class='input-sc'
                 id='oficioS'
@@ -193,8 +226,15 @@ export default class Vales extends Component {
                 ref={oficioS => this.inputOficio = oficioS}
               />
             </div>
-          </div>
-          <div className='form-container-2'>
+            <div className='vale-content'>
+              <p class='p-caja'><b>Area</b></p>
+              <input
+                class='input-sc'
+                id='area'
+                required
+                ref={area => this.inputArea = area}
+              />
+            </div>
             <div className='vale-content'>
               <p class='p-caja'><b>Turno</b></p>
               <input
@@ -202,24 +242,6 @@ export default class Vales extends Component {
                 id='turno'
                 required
                 ref={turno => this.inputTurno = turno}
-              />
-            </div>
-            <div className='vale-content'>
-              <p class='p-caja'><b>Reintegro Total</b></p>
-              <input
-                class='input-sc'
-                id='reintegroT'
-                required
-                ref={reintegroT => this.inputReintegro = reintegroT}
-              />
-            </div>
-            <div className='vale-content'>
-              <p class='p-caja'><b>Estatus</b></p>
-              <input
-                class='input-sc'
-                id='estatus'
-                required
-                ref={estatus => this.inputEstatus = estatus}
               />
             </div>
             <div className='vale-content'>
