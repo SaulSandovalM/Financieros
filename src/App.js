@@ -9,7 +9,6 @@ import Caja from './components/cecilia/caja/Caja';
 import Cheques from './components/elizabeth/cheques/Cheques';
 import Vales from './components/elizabeth/vales/Vales';
 import Login from './components/login/Login';
-
 import Fondos from './components/fondos/Fondos';
 import Analitico from './components/analitico/Analitico';
 import TablaComprometidos from './components/comprometidos/TablaComprometidos';
@@ -29,7 +28,6 @@ import Registro from './components/registrofondos/Registro';
 import Comproceci from './components/comprometidos/Comproceci';
 import Carga from './components/presupuesto/Carga';
 import Creacionfondo from './components/presupuesto/Creacionfondo';
-<<<<<<< HEAD
 import FileUpload from './components/presupuesto/FileUpload';
 import Excel from './components/presupuesto/Excel';
 import Altas from './components/cecilia/altas/Altas';
@@ -42,8 +40,6 @@ import Nuvale from './components/elizabeth/cheques/Nuvale';
 import Pdf1 from './components/elizabeth/cheques/pdf/Pdf1';
 import Pdf3 from './components/elizabeth/cheques/pdf/Pdf3';
 import Fond from './components/elizabeth/cheques/pdf/Fond';
-=======
->>>>>>> 20777f4518e7dedad1961f14a8b13343a986927e
 import Comprobacion from './components/elizabeth/comprobacion/Comprobacion';
 
 
@@ -166,7 +162,6 @@ function App(props) {
       />
       <ProtectedRoute
         exact
-<<<<<<< HEAD
         path="/Nuvale"
         component={Nuvale}
         isAuthenticated={isAuthenticated}
@@ -197,20 +192,13 @@ function App(props) {
       <ProtectedRoute
         exact
         path="/Comprobacion"
-=======
-        path='/Comprobacion'
->>>>>>> 20777f4518e7dedad1961f14a8b13343a986927e
         component={Comprobacion}
         isAuthenticated={isAuthenticated}
         isVerifying={isVerifying}
       />
-<<<<<<< HEAD
 
 
       <Route path="/Login" component={Login} />
-=======
-      <Route path='/Login' component={Login} />
->>>>>>> 20777f4518e7dedad1961f14a8b13343a986927e
       <Route path='/show/:id' component={Show} />
       <Route path='/edit/:id' component={Edit} />
       <Route path='/edita/:id' component={Edita} />
@@ -220,7 +208,6 @@ function App(props) {
       <Route path='/Cpdf/:id' component={Cpdf} />
       <Route path='/add/:id' component={Add} />
       <Route path='/Comprobacion' component={Comprobacion}/>
-<<<<<<< HEAD
       <Route path='/Common' component={Common}/>
       <Route path='/Validacion' component={Validacion}/>
       <Route path='/Prueba' component={Prueba}/>
@@ -228,9 +215,7 @@ function App(props) {
       <Route path='/Pdf1' component={Pdf1}/>
       <Route path='/Fond' component={Fond}/>
       <Route path='/Pdf3' component={Pdf3}/>
-
-=======
->>>>>>> 20777f4518e7dedad1961f14a8b13343a986927e
+      <Route path='/Caja' component={Caja}/>
     </Switch>
   );
 }
