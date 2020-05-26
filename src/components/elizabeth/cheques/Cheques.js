@@ -5,7 +5,6 @@ import ListComponent from './ListComponent';
 import CurrencyFormat from 'react-currency-format';
 import Dropzone from 'react-dropzone';
 
-
 export default class Cheques extends Component {
   constructor(props) {
     super(props);
@@ -142,14 +141,14 @@ export default class Cheques extends Component {
       const increment = firebase.firestore.FieldValue.increment(-f);
       const batch = firebase.firestore().batch();
       const storyRef = firebase.firestore().collection('banco').doc(`${Math.random()}`);
-      batch.set(storyRef, { title: 'Genero cheque' });
+      batch.set(storyRef, { title: 'Se Genero Cheque', cantidad: '-'+f });
       batch.set(statsRef, { storyCount: increment }, { merge: true });
       batch.commit();
       const statsRefT = firebase.firestore().collection('caja').doc('--stats--');
       const increments = firebase.firestore.FieldValue.increment(f);
       const batchs = firebase.firestore().batch();
       const storyRefs = firebase.firestore().collection('caja').doc(`${Math.random()}`);
-      batchs.set(storyRefs, { title: 'Aumento Caja!' });
+      batchs.set(storyRefs, { title: 'Aumento Caja!', cantidad: '+'+f });
       batchs.set(statsRefT, { storyCount: increments }, { merge: true });
       batchs.commit();
       const statsRefc = firebase.firestore().collection('cheques').doc('--stats--');
@@ -157,7 +156,7 @@ export default class Cheques extends Component {
       const batchc = firebase.firestore().batch();
       const storyRefc = firebase.firestore().collection('cheques').doc(`${Math.random()}`);
       batchc.set(storyRefc, { title: 'Caja + y Banco -' });
-      batchc.set(statsRefc, { storyCount: increments }, { merge: true });
+      batchc.set(statsRefc, { storyCount: incrementc }, { merge: true });
       batchc.commit();
       firebase.database().ref('cheques').push(params).then(() => {
         this.showAlert('success', 'Tu solicitud fue enviada.');
@@ -168,28 +167,6 @@ export default class Cheques extends Component {
     } else {
       this.showAlert('warning', 'Por favor llene el formulario');
     };
-  }
-
-  renderLoginButton () {
-    if (!this.state.user) {
-      return (
-        <button onClick={this.handleAuth} className="App-btn">
-          Iniciar sesión con Google
-        </button>
-      );
-    } else  {
-      return (
-        <div className="App-intro">
-          <p className="App-intro">¡Hola, { this.state.user.displayName }!</p>
-
-          <button onClick={this.handleLogout} className="App-btn">
-            Salir
-          </button>
-
-        </div>
-
-      );
-    }
   }
 
   render() {
@@ -251,8 +228,8 @@ export default class Cheques extends Component {
                       thousandSeparator={true}
                       prefix={' $'}
                       decimalSeparator={'.'} />
-                    .00<
-                  /p>
+                    .00
+                  </p>
                 </div>
               </div>
             </div>

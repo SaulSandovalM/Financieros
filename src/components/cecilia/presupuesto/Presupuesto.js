@@ -188,13 +188,13 @@ export default class Presupuesto extends Component {
       proyecto: this.inputProyecto.value,
       clave: this.inputClave.value,
     })
-    if ( params.ingresos && params.importe && params.proyecto && params.clave) {
+    if ( params.ingresos && params.importe && params.proyecto && params.clave ) {
       var f = parseInt(params.importe);
       const statsRef = firebase.firestore().collection('banco').doc('--stats--');
       const increment = firebase.firestore.FieldValue.increment(f);
       const batch = firebase.firestore().batch();
       const storyRef = firebase.firestore().collection('banco').doc(`${Math.random()}`);
-      batch.set(storyRef, { title: 'Se agredo un fondo' });
+      batch.set(storyRef, { title: 'Se Creo Fondo Revolvente', cantidad: f });
       batch.set(statsRef, { storyCount: increment }, { merge: true });
       batch.commit();
       firebase.database().ref('banco').push(params).then(() => {

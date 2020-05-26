@@ -29,13 +29,13 @@ export default class ListComponent extends Component {
             <b>#</b>
           </div>
           <div class='table-c-importe'>
-            <b>IMPORTE</b>
-          </div>
-          <div class='table-c-fechae'>
             <b>FECHA DE EMISION</b>
           </div>
           <div class='table-c-fechae'>
             <b>FECHA DE COBRO</b>
+          </div>
+          <div class='table-c-fechae'>
+            <b>IMPORTE</b>
           </div>
           <div class='table-right'>
           </div>

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './Vales.css';
+import CurrencyFormat from 'react-currency-format';
 
 export default class RowComponent extends Component {
   constructor(props){
@@ -12,28 +13,30 @@ export default class RowComponent extends Component {
 
   render() {
     return (
-      <div class='caja-inputs'>
-        <div class='tabla-pp'>
+      <div class='cheques-inputs'>
+        <div class='table-left'>
         </div>
-        <div class='tabla-p'>
-          <p>{this.props.item.up}</p>
+        <div class='table-c-num'>
+          <p>{this.props.item.vale}</p>
         </div>
-        <div class='tabla-p1-banco'>
-          <p>{this.props.item.partida}</p>
+        <div class='table-c-importe'>
+          <p>{this.props.item.movimiento}</p>
         </div>
-        <div class='tabla-p2-select'>
-          <p>{this.props.item.proyecto}</p>
+        <div class='table-c-fechae'>
+          <p>{this.props.item.concepto}</p>
         </div>
-        <div class='tabla-p3-select'>
-          <p>{this.props.item.np}</p>
+        <div class='table-c-fechae'>
+          <div>
+            <CurrencyFormat
+              value={this.props.item.cantidad}
+              displayType={'text'}
+              thousandSeparator={true}
+              prefix={'$ '}
+              decimalSeparator={'.'} />
+            .00
+          </div>
         </div>
-        <div class='tabla-p4'>
-          <p>{this.props.item.monto}</p>
-        </div>
-        <div class='tabla-p5' id='numero' onblur="calcula()">
-          <p>{this.props.item.porcentaje}</p>
-        </div>
-        <div class='tabla-pp2'>
+        <div class='table-right'>
         </div>
       </div>
     );

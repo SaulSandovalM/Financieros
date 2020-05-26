@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import firebase from '../../../Firebase';
-import './Banco.css';
+import './Caja.css';
 import ListComponent from './ListComponent';
 import CurrencyFormat from 'react-currency-format';
 
-export default class Banco extends Component {
+export default class Caja extends Component {
   constructor(props) {
     super(props);
-    this.ref = firebase.firestore().collection('banco');
+    this.ref = firebase.firestore().collection('caja');
     this.unsubscribe = null;
     this.state = {
       contador: {},
@@ -39,7 +39,7 @@ export default class Banco extends Component {
   }
 
   consumo = () => {
-    const ref = firebase.firestore().collection('banco').doc('--stats--');
+    const ref = firebase.firestore().collection('caja').doc('--stats--');
     ref.get().then((doc) => {
       if (doc.exists) {
         this.setState({
@@ -55,24 +55,26 @@ export default class Banco extends Component {
 
   render() {
     return (
-      <div class='banco-back'>
-        <div class='site-banco'>
-          <p class='site-banco-s'><b>Banco</b></p>
+      <div class='container-back'>
+        <div class='site'>
+          <p class='site-s'><b>Caja</b></p>
         </div>
-        <div class='banco-container'>
-          <div class='banco-inputs'>
-            <div class='disponible-banco'>
-              <div>
-                <p class='cantidad-banco'>
-                  MXN
-                  <CurrencyFormat
-                    value={this.state.contador.storyCount}
-                    displayType={'text'}
-                    thousandSeparator={true}
-                    prefix={' $'}
-                   />
-                  .00
-                </p>
+        <div>
+          <div class='caja-container'>
+            <div class='caja-inputs'>
+              <div class='disponible-banco'>
+                <div>
+                  <p class='cantidad-banco'>
+                    MXN
+                    <CurrencyFormat
+                      value={this.state.contador.storyCount}
+                      displayType={'text'}
+                      thousandSeparator={true}
+                      prefix={' $'}
+                      decimalSeparator={'.'} />
+                    .00
+                  </p>
+                </div>
               </div>
             </div>
           </div>

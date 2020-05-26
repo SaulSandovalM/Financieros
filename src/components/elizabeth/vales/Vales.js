@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import firebase from '../../../Firebase';
 import ListComponent from './ListComponent';
 import './Vales.css';
+import ReactToPrint from 'react-to-print';
 
 export default class Vales extends Component {
   constructor(props) {
@@ -25,8 +26,6 @@ export default class Vales extends Component {
       oficioS: '',
       area: '',
       turno: '',
-      reintegroT: '',
-      estatus: '',
       personaR: '',
       proveedor: '',
       contador: {},
@@ -46,8 +45,6 @@ export default class Vales extends Component {
           oficioS: child.val().oficioS,
           area: child.val().area,
           turno: child.val().turno,
-          reintegroT: child.val().reintegroT,
-          estatus: child.val().estatus,
           personaR: child.val().personaR,
           proveedor: child.val().proveedor,
           done: child.val().done,
@@ -98,8 +95,8 @@ export default class Vales extends Component {
   componentWillMount() {
     let formRef = firebase.database().ref('vales').orderByKey().limitToLast(1);
     formRef.on('child_added', snapshot => {
-      const { vale, cheque, movimiento, cantidad, concepto, oficioS, area, turno, reintegroT, estatus, personaR, proveedor } = snapshot.val();
-      const data = { vale, cheque, movimiento, cantidad, concepto, oficioS, area, turno, reintegroT, estatus, personaR, proveedor };
+      const { vale, cheque, movimiento, cantidad, concepto, oficioS, area, turno, personaR, proveedor } = snapshot.val();
+      const data = { vale, cheque, movimiento, cantidad, concepto, oficioS, area, turno, personaR, proveedor };
       this.setState({ form: [data].concat(this.state.form) });
     });
   }
@@ -115,8 +112,6 @@ export default class Vales extends Component {
       oficioS: this.inputOficio.value,
       area: this.inputArea.value,
       turno: this.inputTurno.value,
-      reintegroT: this.inputReintegro.value,
-      estatus: this.inputEstatus.value,
       personaR: this.inputPersona.value,
       proveedor: this.inputProveedor.value
     };
@@ -129,18 +124,16 @@ export default class Vales extends Component {
       oficioS: this.inputOficio.value,
       area: this.inputArea.value,
       turno: this.inputTurno.value,
-      reintegroT: this.inputReintegro.value,
-      estatus: this.inputEstatus.value,
       personaR: this.inputPersona.value,
       proveedor: this.inputProveedor.value
     })
-    if ( params.vale && params.cheque && params.movimiento && params.cantidad && params.concepto && params.oficioS && params.area && params.turno && params.reintegroT && params.estatus && params.personaR && params.proveedor ) {
+    if ( params.vale && params.cheque && params.movimiento && params.cantidad && params.concepto && params.oficioS && params.area && params.turno && params.personaR && params.proveedor ) {
       var f = parseInt(params.cantidad);
       const statsRef = firebase.firestore().collection('caja').doc('--stats--');
       const increment = firebase.firestore.FieldValue.increment(-f);
       const batch = firebase.firestore().batch();
       const storyRef = firebase.firestore().collection('caja').doc(`${Math.random()}`);
-      batch.set(storyRef, { title: 'Se genero un vale' });
+      batch.set(storyRef, { title: 'Se Genero Un Vale', cantidad: '-'+f });
       batch.set(statsRef, { storyCount: increment }, { merge: true });
       batch.commit();
       const statsRefs = firebase.firestore().collection('vales').doc('--stats--');
@@ -258,7 +251,7 @@ export default class Vales extends Component {
               <input
                 class='input-sc'
                 id='proveedor'
-                required
+                type="checkbox"
                 ref={proveedor => this.inputProveedor = proveedor}
               />
             </div>
@@ -267,7 +260,6 @@ export default class Vales extends Component {
             <button type='submit' className='input-sc boton-g'>Guardar</button>
           </div>
         </form>
-
         <div class='caja-w' style={{marginTop: '40px', marginBottom: '40px'}}>
           <div class='caja-col'>
             <ListComponent
@@ -275,7 +267,6 @@ export default class Vales extends Component {
             />
           </div>
         </div>
-
       </div>
     )
   }

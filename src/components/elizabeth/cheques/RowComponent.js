@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './Cheques.css';
+import CurrencyFormat from 'react-currency-format';
 
 export default class RowComponent extends Component {
   constructor(props){
@@ -19,13 +20,21 @@ export default class RowComponent extends Component {
           <p>{this.props.item.numCheque}</p>
         </div>
         <div class='table-c-importe'>
-          <p>{this.props.item.importe}</p>
-        </div>
-        <div class='table-c-fechae'>
           <p>{this.props.item.fechaE}</p>
         </div>
         <div class='table-c-fechae'>
           <p>{this.props.item.fechaC}</p>
+        </div>
+        <div class='table-c-fechae'>
+          <div>
+            <CurrencyFormat
+              value={this.props.item.importe}
+              displayType={'text'}
+              thousandSeparator={true}
+              prefix={'$ '}
+              decimalSeparator={'.'} />
+            .00
+          </div>
         </div>
         <div class='table-right'>
         </div>

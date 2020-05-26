@@ -5,7 +5,7 @@ import ProtectedRoute from './ProtectedRoute';
 import Common from './Common';
 import Presupuesto from './components/cecilia/presupuesto/Presupuesto';
 import Banco from './components/cecilia/banco/Banco';
-import Caja from './components/cecilia/caja/Caja';
+import Caja from './components/elizabeth/caja/Caja';
 import Cheques from './components/elizabeth/cheques/Cheques';
 import Vales from './components/elizabeth/vales/Vales';
 import Login from './components/login/Login';
@@ -28,9 +28,6 @@ import Registro from './components/registrofondos/Registro';
 import Comproceci from './components/comprometidos/Comproceci';
 import Carga from './components/presupuesto/Carga';
 import Creacionfondo from './components/presupuesto/Creacionfondo';
-import FileUpload from './components/presupuesto/FileUpload';
-import Excel from './components/presupuesto/Excel';
-import Altas from './components/cecilia/altas/Altas';
 import Nuvale from './components/elizabeth/cheques/Nuvale';
 import Pdf1 from './components/elizabeth/cheques/pdf/Pdf1';
 import Pdf3 from './components/elizabeth/cheques/pdf/Pdf3';
@@ -181,7 +178,6 @@ function App(props) {
         isAuthenticated={isAuthenticated}
         isVerifying={isVerifying}
       />
-
       <ProtectedRoute
         exact
         path="/Comprobacion"
@@ -204,7 +200,6 @@ function App(props) {
       <Route path='/Pdf1' component={Pdf1}/>
       <Route path='/Fond' component={Fond}/>
       <Route path='/Pdf3' component={Pdf3}/>
-      <Route path='/Caja' component={Caja}/>
     </Switch>
   );
 }
