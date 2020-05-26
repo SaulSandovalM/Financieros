@@ -20,8 +20,55 @@ export default class Excel extends Component {
   }
 
   handleOnChange1 (event) {
-    const file = event.target.files[0]
-    const storageRef = firebase.storage().ref(`pdfs/${file.name}`)
+    console.log(event.target.files);
+    const totalArchivos = event.target.files;
+    //alert(totalArchivos);
+    //const numbers = props.numbers;
+    //const listArchivos = totalArchivos.map((archivo) => archivo.name);
+    var arr = [];
+    for (var i = 0; i < totalArchivos.length; i++) {
+      const archivo = totalArchivos[i];
+      console.log(archivo);
+
+      var file = archivo;
+      var reader  = new FileReader();
+      reader.onloadend = function () {
+        console.log("Enseguida sigue el archivo");
+        console.log(reader.result);
+
+        var XMLParser = require('react-xml-parser');
+        var xml = new XMLParser().parseFromString(reader.result);
+        console.log(xml);
+        console.log('');
+        console.log(xml.children[0]);
+        console.log('');
+        console.log(xml.children[0].attributes['Rfc']);
+        /*
+        Methods that are currently supported:
+parseFromString(string): Returns an XML object as described in the example output that represents the input text.
+toString(XML object): Returns text representation of an input XML.
+getElementsByTagName(string): Returns all tags with the same name as the method's input string (case-insensitive). for all possible tags, use '*' as input.
+        */
+      }
+      //reader.readAsDataURL(file);
+      reader.readAsText(file);
+
+      /*if(archivo.type == 'application/pdf'){
+        alert('Archivo enviado');
+      }
+      else if(archivo.type == 'text/xml'){
+        var XMLParser = require('react-xml-parser');
+        var xml = new XMLParser().getElementsByTagName;    // Assume xmlText contains the example XML
+        console.log(xml);
+        console.log(xml.getElementsByTagName('Name'));
+      }
+      console.log(archivo.name);*/
+    };
+    //const listItem = numbers.map( (number) => <li key={number.toString()}>{number}</li> );
+    //alert(nombreArchivos);
+    // const file = event.target.files[0];
+
+    /*const storageRef = firebase.storage().ref(`pdfs/${file.name}`)
     const task = storageRef.put(file)
     task.on('state_changed', (snapshot) => {
       let percentage = (snapshot.bytesTransferred / snapshot.totalBytes) * 100
@@ -30,7 +77,7 @@ export default class Excel extends Component {
       })
     }, (error) => {
       console.error(error.message)
-    })
+    })*/
   }
 
   handleOnChange2 (event) {
@@ -192,7 +239,7 @@ export default class Excel extends Component {
                     borderStyle: 'solid',
                     borderRadius: '5px',
                     maxFiles: 5}}
-                    accept=".pdf" onChange={this.handleOnChange1.bind(this)}>
+                    accept=".xml" onChange={this.handleOnChange1.bind(this)}>
                 </Dropzone>
                 <progress class='progress' value={this.state.pdf1} max='100'>
                   {this.state.pdf1} %
