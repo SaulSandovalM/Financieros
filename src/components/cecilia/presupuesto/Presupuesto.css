@@ -88,6 +88,9 @@
 .input-h {
   height: 25px;
 }
+.input-h-s {
+  height: 33px;
+}
 .button-row-s {
   display: flex;
   justify-content: flex-end;

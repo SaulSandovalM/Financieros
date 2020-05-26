@@ -7,6 +7,7 @@ import ActiveXObject from 'ajax';
 import xmlhttp from 'ajax';
 import open from 'jquery';
 import xml from './datos.xml';
+import XMLParser from 'react-xml-parser';
 
 export default class Excel extends Component {
   constructor () {
@@ -20,64 +21,25 @@ export default class Excel extends Component {
   }
 
   handleOnChange1 (event) {
-    console.log(event.target.files);
-    const totalArchivos = event.target.files;
-    //alert(totalArchivos);
-    //const numbers = props.numbers;
-    //const listArchivos = totalArchivos.map((archivo) => archivo.name);
-    var arr = [];
-    for (var i = 0; i < totalArchivos.length; i++) {
-      const archivo = totalArchivos[i];
-      console.log(archivo);
-
-      var file = archivo;
-      var reader  = new FileReader();
-      reader.onloadend = function () {
-        console.log("Enseguida sigue el archivo");
-        console.log(reader.result);
-
-        var XMLParser = require('react-xml-parser');
-        var xml = new XMLParser().parseFromString(reader.result);
-        console.log(xml);
-        console.log('');
-        console.log(xml.children[0]);
-        console.log('');
-        console.log(xml.children[0].attributes['Rfc']);
-        /*
-        Methods that are currently supported:
-parseFromString(string): Returns an XML object as described in the example output that represents the input text.
-toString(XML object): Returns text representation of an input XML.
-getElementsByTagName(string): Returns all tags with the same name as the method's input string (case-insensitive). for all possible tags, use '*' as input.
-        */
-      }
-      //reader.readAsDataURL(file);
-      reader.readAsText(file);
-
-      /*if(archivo.type == 'application/pdf'){
-        alert('Archivo enviado');
-      }
-      else if(archivo.type == 'text/xml'){
-        var XMLParser = require('react-xml-parser');
-        var xml = new XMLParser().getElementsByTagName;    // Assume xmlText contains the example XML
-        console.log(xml);
-        console.log(xml.getElementsByTagName('Name'));
-      }
-      console.log(archivo.name);*/
-    };
-    //const listItem = numbers.map( (number) => <li key={number.toString()}>{number}</li> );
-    //alert(nombreArchivos);
-    // const file = event.target.files[0];
-
-    /*const storageRef = firebase.storage().ref(`pdfs/${file.name}`)
-    const task = storageRef.put(file)
-    task.on('state_changed', (snapshot) => {
-      let percentage = (snapshot.bytesTransferred / snapshot.totalBytes) * 100
-      this.setState({
-        pdf1: percentage
-      })
-    }, (error) => {
-      console.error(error.message)
-    })*/
+    const file = event.target.files[0]
+    const reader = new FileReader();
+    reader.readAsText(file);
+    reader.onloadend = evt => {
+      const readerData = evt.target.result;
+      const parser = new DOMParser();
+      const xml = parser.parseFromString(readerData, "text/xml");
+      console.log(
+        "data",
+        new XMLSerializer().serializeToString(xml.documentElement)
+      );
+      var XMLParser = require("react-xml-parser");
+      var NewXml = new XMLParser().parseFromString(
+        new XMLSerializer().serializeToString(xml.documentElement)
+      );
+      console.log("newxml", NewXml);
+      this.setState({ xml });
+      firebase.database().ref('xml').push(NewXml)
+    }
   }
 
   handleOnChange2 (event) {
@@ -108,12 +70,12 @@ getElementsByTagName(string): Returns all tags with the same name as the method'
     })
   }
 
-/*  onDrop(files) {
+  /*onDrop(files) {
     this.setState({ files });
     var file = files[0];
     const reader = new FileReader();
     reader.onload = () => {
-      csv.parse(reader.result, (err, data) => {
+      XMLParser.parseFromString(reader.result, (err, data) => {
         var userList = [];
         for (var i = 0; i < data.length; i++) {
           const rm = data[i][0];
@@ -159,7 +121,7 @@ getElementsByTagName(string): Returns all tags with the same name as the method'
           const nov = data[i][40];
           const dic = data[i][41];
           const total = data[i][42];
-          const presupuesto = {
+          const filexml = {
             "rm": rm, "os": os, "up": up, "rubro": rubro, "tg": tg, "ogasto": ogasto,
             "f": f, "fu": fu, "sf": sf, "eje": eje, "s": s, "prog": prog, "sp": sp,
             "obj": obj, "proy": proy, "est": est, "ben": ben, "eg": eg, "mi": mi,
@@ -168,14 +130,14 @@ getElementsByTagName(string): Returns all tags with the same name as the method'
             "abr": abr, "may": may, "jun": jun, "jul": jul, "ago": ago, "sep": sep,
             "oct": oct, "nov": nov, "dic": dic, "total": total
           };
-          userList.push(presupuesto);
-          fetch('https://financieros-78cb0.firebaseio.com/presupuesto.json', {
+          userList.push(filexml);
+          fetch('https://financieros-78cb0.firebaseio.com/filexml.json', {
             method: 'POST',
             headers: {
               'Accept': 'application/json',
               'Content-Type': 'application/json',
             },
-            body: JSON.stringify(presupuesto)
+            body: JSON.stringify(filexml)
           })
         };
       });
@@ -185,47 +147,14 @@ getElementsByTagName(string): Returns all tags with the same name as the method'
 
 
   render() {
-    const fontSize = 5;
-
-    function ejecutarAjax()
-    {
-      var resultado = document.getElementById("info");
-      var arr = [];
-
-      if(window.XMLHttpRequest) {
-        const xhr = new XMLHttpRequest();
-      }
-      else {
-        const xhr = new ActiveXObject("Microsoft.XMLHTTP");
-      }
-
-      xhr.onreadystatechange = function(){
-        if(xhr.readyState === 4 && xmlhttp.status === 200){
-          if(xhr.responseXML !== null)
-          {
-            arr[0] = xhr.responseXML.getElementsByTagName("nombre").item(0);
-            arr[1] = xhr.responseXML.getElementsByTagName("apellido").item(0);
-            arr[2] = xhr.responseXML.getElementsByTagName("edad").item(0);
-            arr[3] = xhr.responseXML.getElementsByTagName("salario").item(0);
-
-            resultado.innerHTML = arr[0].firstChild.nodeValue + ""+
-                                  arr[1].firstChild.nodeValue;
-
-          }
-        }
-      }
-      xhr.open("GET", "datos.xml", true);
-      xhr.send();
-    }
-
     return (
       <div>
-        <div class='presupuesto-container'>
-          <div class='presupuesto-content'>
-            <div class='presupuesto-card'>
-              <h1 class='presupuesto-h1'>Comprobaciones</h1>
-              <p class='presupuesto-p'>Selecciona la carga de evidencias de tus comprobaciones</p>
-              <button onClick = {ejecutarAjax}>Mostrar información</button><br/><br/>
+        <div className='presupuesto-container'>
+          <div className='presupuesto-content'>
+            <div className='presupuesto-card'>
+              <h1 className='presupuesto-h1'>Comprobaciones</h1>
+              <p className='presupuesto-p'>Selecciona la carga de evidencias de tus comprobaciones</p>
+              <button>Mostrar información</button><br/><br/>
               <div id="info"></div>
               <div>
                 <p>Facturas:</p>
@@ -241,14 +170,12 @@ getElementsByTagName(string): Returns all tags with the same name as the method'
                     maxFiles: 5}}
                     accept=".xml" onChange={this.handleOnChange1.bind(this)}>
                 </Dropzone>
-                <progress class='progress' value={this.state.pdf1} max='100'>
+                <progress className='progress' value={this.state.pdf1} max='100'>
                   {this.state.pdf1} %
                 </progress>
-                <div class="dz-default dz-message" value={this.state.pdf1} max='100'>
+                <div className="dz-default dz-message" value={this.state.pdf1} max='100'>
                   Carga {this.state.pdf1} %</div>
-
               </div>
-
               <div>
                 <p>XML:</p>
                 <Dropzone
@@ -263,10 +190,10 @@ getElementsByTagName(string): Returns all tags with the same name as the method'
                     maxFiles: 5}}
                     accept=".pdf" onChange={this.handleOnChange2.bind(this)}>
                 </Dropzone>
-                <progress class='progress' value={this.state.pdf2} max='100'>
+                <progress className='progress' value={this.state.pdf2} max='100'>
                   {this.state.pdf2} %
                 </progress>
-                <div class="dz-default dz-message" value={this.state.pdf2} max='100'>
+                <div className="dz-default dz-message" value={this.state.pdf2} max='100'>
                   Carga {this.state.pdf2} %</div>
               </div>
               <div>
@@ -283,10 +210,10 @@ getElementsByTagName(string): Returns all tags with the same name as the method'
                     maxFiles: 5}}
                     accept=".pdf" onChange={this.handleOnChange3.bind(this)}>
                 </Dropzone>
-                <progress class='progress' value={this.state.pdf3} max='100'>
+                <progress className='progress' value={this.state.pdf3} max='100'>
                   {this.state.pdf3} %
                 </progress>
-                <div class="dz-default dz-message" value={this.state.pdf3} max='100'>
+                <div className="dz-default dz-message" value={this.state.pdf3} max='100'>
                   Carga {this.state.pdf3} %</div>
               </div>
             </div>

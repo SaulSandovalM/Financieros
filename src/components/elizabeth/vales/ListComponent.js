@@ -25,17 +25,20 @@ export default class ListComponent extends Component {
         <div class='caja-inputs'>
           <div class='table-left'>
           </div>
-          <div class='table-c-num'>
+          <div class='table-v-num'>
             <b>#</b>
           </div>
-          <div class='table-c-importe'>
+          <div class='table-v-importe'>
             <b>MOVIMIENTO</b>
           </div>
-          <div class='table-c-fechae'>
+          <div class='table-v-fechae'>
             <b>CONCEPTO</b>
           </div>
-          <div class='table-c-fechae'>
+          <div class='table-v-cantidad'>
             <b>CANTIDAD</b>
+          </div>
+          <div class='table-v-cantidad'>
+            <b>COMPROBACION</b>
           </div>
           <div class='table-right'>
           </div>
