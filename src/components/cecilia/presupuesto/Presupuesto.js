@@ -125,10 +125,54 @@ export default class Presupuesto extends Component {
       var lista = [];
       snap.forEach((child) => {
         lista.push({
-          ingresos: child.val().ingresos,
-          importe: child.val().importe,
-          proyecto: child.val().proyecto,
-          clave: child.val().clave,
+          rm: child.val().rm,
+          os: child.val().os,
+          up: child.val().up,
+          rubro: child.val().rubro,
+          tg: child.val().tg,
+          ogasto: child.val().ogasto,
+          f: child.val().f,
+          fu: child.val().fu,
+          sf: child.val().sf,
+          eje: child.val().eje,
+          s: child.val().s,
+          prog: child.val().prog,
+          sp: child.val().sp,
+          obj: child.val().obj,
+          proy: child.val().proy,
+          est: child.val().est,
+          obra: child.val().obra,
+          ben: child.val().ben,
+          eg: child.val().eg,
+          mi: child.val().mi,
+          pr: child.val().pr,
+          pb: child.val().pb,
+          dp: child.val().dp,
+          indi: child.val().indi,
+          meta: child.val().meta,
+          la: child.val().la,
+          ods: child.val().ods,
+          et: child.val().et,
+          ff: child.val().ff,
+          of: child.val().of,
+          np: child.val().np,
+          cpa: child.val().cpa,
+          dig: child.val().dig,
+          par: child.val().par,
+          ene: child.val().ene,
+          feb: child.val().feb,
+          mar: child.val().mar,
+          abr: child.val().abr,
+          may: child.val().may,
+          jun: child.val().jun,
+          jul: child.val().jul,
+          ago: child.val().ago,
+          sep: child.val().sep,
+          oct: child.val().oct,
+          nov: child.val().nov,
+          dic: child.val().dic,
+          total: child.val().total,
+          cpa: child.val().cpa,
           done: child.val().done,
           id: child.key
         });
@@ -140,7 +184,7 @@ export default class Presupuesto extends Component {
   }
 
   componentDidMount() {
-    const itemsRef = firebase.database().ref('banco/');
+    const itemsRef = firebase.database().ref('presupuesto/');
     this.listenForItems(itemsRef);
     this.consumo();
   }
@@ -206,6 +250,60 @@ export default class Presupuesto extends Component {
     } else {
       this.showAlert('warning', 'Por favor llene el formulario');
     };
+  }
+
+  update = (item) => {
+    let updates = {};
+    updates['presupuesto/' + item.id] = {
+      rm: item.rm,
+      os: item.os,
+      up: item.up,
+      rubro: item.rubro,
+      tg: item.tg,
+      ogasto: item.ogasto,
+      f: item.f,
+      fu: item.fu,
+      sf: item.sf,
+      eje: item.eje,
+      s: item.s,
+      prog: item.prog,
+      sp: item.sp,
+      obj: item.obj,
+      proy: item.proy,
+      est: item.est,
+      obra: item.obra,
+      ben: item.ben,
+      eg: item.eg,
+      mi: item.mi,
+      pr: item.pr,
+      pb: item.pb,
+      dp: item.dp,
+      indi: item.indi,
+      meta: item.meta,
+      la: item.la,
+      ods: item.ods,
+      et: item.et,
+      ff: item.ff,
+      of: item.of,
+      np: item.np,
+      cpa: item.cpa,
+      dig: item.dig,
+      par: item.par,
+      ene: item.ene,
+      feb: item.feb,
+      mar: item.mar,
+      abr: item.abr,
+      may: item.may,
+      jun: item.jun,
+      jul: item.jul,
+      ago: item.ago,
+      sep: item.sep,
+      oct: item.oct,
+      nov: item.nov,
+      dic: this.inputImporte.value,
+      total: item.total,
+    };
+    firebase.database().ref().update(updates);
   }
 
   render() {
@@ -287,7 +385,7 @@ export default class Presupuesto extends Component {
             </div>
           </div>
         </div>
-        <form onSubmit={this.sendMessage.bind(this)} ref='contactForm'>
+        <form /*onSubmit={this.sendMessage.bind(this)}*/ ref='contactForm'>
           <div className='p-container'>
             <div className='p-margin-f'>
               <p className='p-title-size'>
@@ -613,6 +711,7 @@ export default class Presupuesto extends Component {
         <div className='space-table'>
           <ListComponent
             lista={this.state.lista}
+            update={this.update}
           />
         </div>
       </div>
