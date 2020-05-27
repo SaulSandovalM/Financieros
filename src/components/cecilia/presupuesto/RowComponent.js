@@ -32,7 +32,7 @@ export default class RowComponent extends Component {
               thousandSeparator={true}
               prefix={' $'} />
             .00
-            <button onClick={this.update}>Agregar</button>
+            {/*<button onClick={this.update}>Agregar</button>*/}
           </div>
         </div>
         <div className='table-right'>
