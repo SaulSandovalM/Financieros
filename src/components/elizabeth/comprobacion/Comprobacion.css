@@ -1,4 +1,4 @@
-body {
+/*body {
   margin: 0px;
   font-family: Arial;
 }
@@ -85,7 +85,7 @@ body {
 }
 
 
-/*Presupuesto*/
+/*Presupuesto
 .tabla-1{
   display:flex;
         justify-content: space-between;
@@ -96,7 +96,7 @@ body {
         justify-content: space-between;
 
 }
-/*Creacionfondo*/
+/*Creacionfondo
 .content{
   display:flex;
   justify-content:
@@ -106,3 +106,4 @@ body {
   width: 100px;
   border-top: 1px solid;
 }
+*/
