@@ -43,13 +43,11 @@ export default class RowComponent extends Component {
          <div class = 'table-v-cantidad'>
           <Popup trigger = {<button>Comprobación</button>} modal>
           <div>
-            <div className='presupuesto-container'>
-              <div className='presupuesto-content'>
-                <div className='presupuesto-card'>
-                  <h1 className='presupuesto-h1'>Comprobaciones</h1>
-                  <p className='presupuesto-p'>Selecciona la carga de evidencias de tus comprobaciones</p>
-                  <button>Mostrar información</button><br/><br/>
-                  <div id="info"></div>
+            <div className='comprobacion-container'>
+              <div className='comprobacion-content'>
+                <div className='comprobacion-card'>
+                  <h1 className='comprobacion-h1'>Comprobaciones</h1>
+                  <p className='comprobacion-p'>Selecciona la carga de evidencias de tus comprobaciones</p>
                   <div>
                     <p>Facturas:</p>
                     <Dropzone
