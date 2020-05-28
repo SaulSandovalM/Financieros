@@ -4,6 +4,8 @@ import CurrencyFormat from 'react-currency-format';
 import { Link } from 'react-router-dom';
 import Popup from "reactjs-popup";
 import Dropzone from 'react-dropzone';
+import csv from 'csv';
+import firebase from '../../../Firebase';
 
 
 export default class RowComponent extends Component {
@@ -12,7 +14,60 @@ export default class RowComponent extends Component {
     this.state = {
       done: false,
       item: 'Atendido',
+      pdf1: 0,
+      pdf2: 0,
+      pdf3: 0
     };
+  }
+
+  handleOnChange1 (event) {
+    const file = event.target.files[0]
+    const reader = new FileReader();
+    reader.readAsText(file);
+    reader.onloadend = evt => {
+      const readerData = evt.target.result;
+      const parser = new DOMParser();
+      const xml = parser.parseFromString(readerData, "text/xml");
+      console.log(
+        "data",
+        new XMLSerializer().serializeToString(xml.documentElement)
+      );
+      var XMLParser = require("react-xml-parser");
+      var NewXml = new XMLParser().parseFromString(
+        new XMLSerializer().serializeToString(xml.documentElement)
+      );
+      console.log("newxml", NewXml);
+      this.setState({ xml });
+      firebase.database().ref('xml').push(NewXml)
+    }
+  }
+
+  handleOnChange2 (event) {
+    const file = event.target.files[0]
+    const storageRef = firebase.storage().ref(`pdfs/${file.name}`)
+    const task = storageRef.put(file)
+    task.on('state_changed', (snapshot) => {
+      let percentage = (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+      this.setState({
+        pdf2: percentage
+      })
+    }, (error) => {
+      console.error(error.message)
+    })
+  }
+
+  handleOnChange3 (event) {
+    const file = event.target.files[0]
+    const storageRef = firebase.storage().ref(`pdfs/${file.name}`)
+    const task = storageRef.put(file)
+    task.on('state_changed', (snapshot) => {
+      let percentage = (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+      this.setState({
+        pdf3: percentage
+      })
+    }, (error) => {
+      console.error(error.message)
+    })
   }
 
   render() {
@@ -60,15 +115,15 @@ export default class RowComponent extends Component {
                         borderStyle: 'solid',
                         borderRadius: '5px',
                         maxFiles: 5}}
-                        //accept=".xml" onChange={this.handleOnChange1.bind(this)}
+                        accept=".xml" onChange={this.handleOnChange1.bind(this)}
                         >
                     </Dropzone>
-                    //<progress className='progress' value={this.state.pdf1} max='100'>
-                      //{this.state.pdf1} %
-                    //</progress>
-                    //<div className="dz-default dz-message" value={this.state.pdf1} max='100'>
-                      //Carga {this.state.pdf1} %</div>
-                  //</div>
+                    <progress className='progress' value={this.state.pdf1} max='100'>
+                      {this.state.pdf1} %
+                    </progress>
+                    <div className="dz-default dz-message" value={this.state.pdf1} max='100'>
+                      Carga {this.state.pdf1} %</div>
+                  </div>
                   <div>
                     <p>XML:</p>
                     <Dropzone
@@ -81,15 +136,15 @@ export default class RowComponent extends Component {
                         borderStyle: 'solid',
                         borderRadius: '5px',
                         maxFiles: 5}}
-                        //accept=".pdf" onChange={this.handleOnChange2.bind(this)}
+                        accept=".pdf" onChange={this.handleOnChange2.bind(this)}
                         >
                     </Dropzone>
-                    //<progress className='progress' value={this.state.pdf2} max='100'>
-                      //{this.state.pdf2} %
-                    //</progress>
-                    //<div className="dz-default dz-message" value={this.state.pdf2} max='100'>
-                      //Carga {this.state.pdf2} %</div>
-                  //</div>
+                    <progress className='progress' value={this.state.pdf2} max='100'>
+                      {this.state.pdf2} %
+                    </progress>
+                    <div className="dz-default dz-message" value={this.state.pdf2} max='100'>
+                      Carga {this.state.pdf2} %</div>
+                  </div>
                   <div>
                     <p>Recibo Simple:</p>
                     <Dropzone
@@ -102,14 +157,14 @@ export default class RowComponent extends Component {
                         borderStyle: 'solid',
                         borderRadius: '5px',
                         maxFiles: 5}}
-                        //accept=".pdf" onChange={this.handleOnChange3.bind(this)}
+                        accept=".pdf" onChange={this.handleOnChange3.bind(this)}
                         >
                     </Dropzone>
-                    //<progress className='progress' value={this.state.pdf3} max='100'>
-                      //{this.state.pdf3} %
-                    //</progress>
-                    //<div className="dz-default dz-message" value={this.state.pdf3} max='100'>
-                      //Carga {this.state.pdf3} %</div>
+                    <progress className='progress' value={this.state.pdf3} max='100'>
+                      {this.state.pdf3} %
+                    </progress>
+                    <div className="dz-default dz-message" value={this.state.pdf3} max='100'>
+                      Carga {this.state.pdf3} %</div>
                   </div>
                 </div>
               </div>

@@ -150,9 +150,10 @@ body {
   font-family: Arial;
 }
 .comprobacion-container {
-  height: 90vh;
+  height: 75vh;
   width: 100%;
   display: flex;
+  flex: 1;
   flex-direction: row-reverse;
   justify-content: center;
   background-color: #f4f4f4;
