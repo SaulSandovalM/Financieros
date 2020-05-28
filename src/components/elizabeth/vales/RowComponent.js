@@ -104,7 +104,7 @@ export default class RowComponent extends Component {
                   <h1 className='comprobacion-h1'>Comprobaciones</h1>
                   <p className='comprobacion-p'>Selecciona la carga de evidencias de tus comprobaciones</p>
                   <div>
-                    <p>Facturas:</p>
+                    <p>XML:</p>
                     <Dropzone
                       style={{
                         position: 'relative',
@@ -125,7 +125,7 @@ export default class RowComponent extends Component {
                       Carga {this.state.pdf1} %</div>
                   </div>
                   <div>
-                    <p>XML:</p>
+                    <p>FACTURA:</p>
                     <Dropzone
                       style={{
                         position: 'relative',
@@ -146,7 +146,7 @@ export default class RowComponent extends Component {
                       Carga {this.state.pdf2} %</div>
                   </div>
                   <div>
-                    <p>Recibo Simple:</p>
+                    <p>RECIBO SIMPLE:</p>
                     <Dropzone
                       style={{
                         position: 'relative',
