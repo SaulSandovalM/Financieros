@@ -31,11 +31,6 @@ import Creacionfondo from './components/presupuesto/Creacionfondo';
 import FileUpload from './components/presupuesto/FileUpload';
 import Excel from './components/presupuesto/Excel';
 import Altas from './components/cecilia/altas/Altas';
-import Caja from './components/cecilia/caja/Caja';
-import Banco from './components/cecilia/banco/Banco';
-import Seleccion from './components/cecilia/fondorevolvente/Seleccion';
-import Cheques from './components/elizabeth/cheques/Cheques';
-import Vales from './components/elizabeth/vales/Vales';
 import Nuvale from './components/elizabeth/cheques/Nuvale';
 import Pdf1 from './components/elizabeth/cheques/pdf/Pdf1';
 import Pdf3 from './components/elizabeth/cheques/pdf/Pdf3';
@@ -209,8 +204,6 @@ function App(props) {
       <Route path='/add/:id' component={Add} />
       <Route path='/Comprobacion' component={Comprobacion}/>
       <Route path='/Common' component={Common}/>
-      <Route path='/Validacion' component={Validacion}/>
-      <Route path='/Prueba' component={Prueba}/>
       <Route path='/Nuvale' component={Nuvale}/>
       <Route path='/Pdf1' component={Pdf1}/>
       <Route path='/Fond' component={Fond}/>

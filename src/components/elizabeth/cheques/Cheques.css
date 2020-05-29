@@ -137,26 +137,6 @@
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 .container-back123 {
   padding: 0px 20px 0px 20px;
   background-color: #f4f4f4;
@@ -246,11 +226,7 @@
 
 }
 
-.inicio{
 
-
-
-}
 .titulos{
   padding-top: 10px;
   display: flex;
@@ -265,13 +241,35 @@
 
 }
 .no-texto{
-        padding-top: 0px;
-        text-align: right;
-        padding-right:90px;
+        display:flex;
+        justify-content: flex-end;
         border-left:black 1px solid;
         border-right: black 1px solid;
-        border-bottom: black .5px solid;
+        padding-right: 10px;
       }
+      .pp{ margin: 0;
+          padding-right:5px;
+        }
+.no-texto2{
+  margin-top: 2px;
+  display:flex;
+  justify-content: flex-end;
+  text-align: right;
+  border-left:black 1px solid;
+  border-right: black 1px solid;
+  padding-right: 10px;
+
+}
+.input-c1he{
+  border:0;
+  height:15px;
+  width: 100px;
+  padding-right: 10px;
+  padding-left: 20px;
+  outline: none;
+  background-color: #f2f3f4;
+
+}
 
 .vale{
       text-align: center;
@@ -284,26 +282,38 @@
       border-right: black 1px solid;
       border-bottom: black .5px solid;
       padding-bottom: 10px;
+      width: 100%;
+
+}
+.tabla1{
+      width: 100px;
+
 }
 .tabla-a{
       height: 32px;
-
-
-}
-.tab-c{
-        width: 850px;
-        text-align: center;
-
+        height: 21px;
 }
 
-.input{
-    height: 32px;
+.concepto-1{
+  width: 100;
+  height: 48px;
+
+}
+
+.input-0{
+    width: 80px;
+    height: 20px;
     outline: none;
     background-color: #f2f3f4;
     border: 0;
 }
+.tab-c{
+  width: 400px;
+  height: 48px;
+
+}
 .input-c{
-    width: 800px;
+    width: 400px;
     height: 48px;
     outline: none;
     background-color: #f2f3f4;
@@ -311,14 +321,14 @@
   }
 .combo{
         display: flex;
-        padding-left: 23px;
+
 }
 .tab-d{
-        width: 267px;
+        width: 240px;
 
 }
 .input-d{
-  width: 263px;
+  width: 230px;
   height: 25px;
   outline: none;
   background-color: #f2f3f4;
@@ -355,6 +365,7 @@
 .firmas-t{
           text-align: center;
           border-top: 1px solid;
+
 }
 .comprometo-1{
               padding-top: 30px;
