@@ -5,16 +5,16 @@ import firebase from '../../../Firebase';
 
 export default class ListComponent extends Component {
   constructor (props) {
-   super(props);
-   this.state = {
-     caja: [],
-   };
- }
+    super(props);
+    this.state = {
+      vales: [],
+    };
+  }
 
   componentWillMount () {
-    firebase.database().ref('caja/').on('child_added', snapshot => {
+    firebase.database().ref('vales/').on('child_added', snapshot => {
       this.setState({
-        caja: this.state.caja.concat(snapshot.val())
+        vales: this.state.vales.concat(snapshot.val())
       });
     });
   }
@@ -23,27 +23,24 @@ export default class ListComponent extends Component {
     return (
       <div>
         <div class='caja-inputs'>
-          <div class='tabla-pp'>
+          <div class='table-left'>
           </div>
-          <div class='tabla-p'>
-            <b>UP</b>
+          <div class='table-v-num'>
+            <b>#</b>
           </div>
-          <div class='tabla-p1-banco'>
-            <b>PARTIDA</b>
+          <div class='table-v-importe'>
+            <b>MOVIMIENTO</b>
           </div>
-          <div class='tabla-p2-select'>
-            <b>PROYECTO</b>
+          <div class='table-v-fechae'>
+            <b>CONCEPTO</b>
           </div>
-          <div class='tabla-p3-select'>
-            <b>NOMBRE DEL PROYECTO</b>
+          <div class='table-v-cantidad'>
+            <b>CANTIDAD</b>
           </div>
-          <div class='tabla-p4'>
-            <b>MONTO</b>
+          <div class='table-v-cantidad'>
+            <b>COMPROBACION</b>
           </div>
-          <div class='tabla-p5'>
-            <b>PORCENTAJE</b>
-          </div>
-          <div class='tabla-pp2'>
+          <div class='table-right'>
           </div>
         </div>
         {

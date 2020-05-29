@@ -88,6 +88,9 @@
 .input-h {
   height: 25px;
 }
+.input-h-s {
+  height: 33px;
+}
 .button-row-s {
   display: flex;
   justify-content: flex-end;
@@ -133,6 +136,36 @@
   width: 2%;
   border-bottom: 1px solid #d0d0d0;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

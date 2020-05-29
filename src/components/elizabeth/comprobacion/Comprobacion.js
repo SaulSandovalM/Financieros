@@ -2,6 +2,12 @@ import React, { Component } from 'react';
 import Dropzone from 'react-dropzone';
 import csv from 'csv';
 import firebase from '../../../Firebase';
+import xhr from 'ajax';
+import ActiveXObject from 'ajax';
+import xmlhttp from 'ajax';
+import open from 'jquery';
+import xml from './datos.xml';
+import XMLParser from 'react-xml-parser';
 
 export default class Excel extends Component {
   constructor () {
@@ -14,15 +20,49 @@ export default class Excel extends Component {
     }
   }
 
-  handleOnChange (event) {
+  handleOnChange1 (event) {
+    const file = event.target.files[0]
+    const reader = new FileReader();
+    reader.readAsText(file);
+    reader.onloadend = evt => {
+      const readerData = evt.target.result;
+      const parser = new DOMParser();
+      const xml = parser.parseFromString(readerData, "text/xml");
+      console.log(
+        "data",
+        new XMLSerializer().serializeToString(xml.documentElement)
+      );
+      var XMLParser = require("react-xml-parser");
+      var NewXml = new XMLParser().parseFromString(
+        new XMLSerializer().serializeToString(xml.documentElement)
+      );
+      console.log("newxml", NewXml);
+      this.setState({ xml });
+      firebase.database().ref('xml').push(NewXml)
+    }
+  }
+
+  handleOnChange2 (event) {
     const file = event.target.files[0]
     const storageRef = firebase.storage().ref(`pdfs/${file.name}`)
     const task = storageRef.put(file)
     task.on('state_changed', (snapshot) => {
       let percentage = (snapshot.bytesTransferred / snapshot.totalBytes) * 100
       this.setState({
-        pdf1: percentage,
-        pdf2: percentage,
+        pdf2: percentage
+      })
+    }, (error) => {
+      console.error(error.message)
+    })
+  }
+
+  handleOnChange3 (event) {
+    const file = event.target.files[0]
+    const storageRef = firebase.storage().ref(`pdfs/${file.name}`)
+    const task = storageRef.put(file)
+    task.on('state_changed', (snapshot) => {
+      let percentage = (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+      this.setState({
         pdf3: percentage
       })
     }, (error) => {
@@ -30,12 +70,12 @@ export default class Excel extends Component {
     })
   }
 
-/*  onDrop(files) {
+  /*onDrop(files) {
     this.setState({ files });
     var file = files[0];
     const reader = new FileReader();
     reader.onload = () => {
-      csv.parse(reader.result, (err, data) => {
+      XMLParser.parseFromString(reader.result, (err, data) => {
         var userList = [];
         for (var i = 0; i < data.length; i++) {
           const rm = data[i][0];
@@ -81,7 +121,7 @@ export default class Excel extends Component {
           const nov = data[i][40];
           const dic = data[i][41];
           const total = data[i][42];
-          const presupuesto = {
+          const filexml = {
             "rm": rm, "os": os, "up": up, "rubro": rubro, "tg": tg, "ogasto": ogasto,
             "f": f, "fu": fu, "sf": sf, "eje": eje, "s": s, "prog": prog, "sp": sp,
             "obj": obj, "proy": proy, "est": est, "ben": ben, "eg": eg, "mi": mi,
@@ -90,53 +130,61 @@ export default class Excel extends Component {
             "abr": abr, "may": may, "jun": jun, "jul": jul, "ago": ago, "sep": sep,
             "oct": oct, "nov": nov, "dic": dic, "total": total
           };
-          userList.push(presupuesto);
-          fetch('https://financieros-78cb0.firebaseio.com/presupuesto.json', {
+          userList.push(filexml);
+          fetch('https://financieros-78cb0.firebaseio.com/filexml.json', {
             method: 'POST',
             headers: {
               'Accept': 'application/json',
               'Content-Type': 'application/json',
             },
-            body: JSON.stringify(presupuesto)
+            body: JSON.stringify(filexml)
           })
         };
       });
     };
     reader.readAsBinaryString(file);
   }*/
-/*ejecutarAjax()
-{
-  var resultado = document.getElementById("info");
-  var arr = [];
 
-  if(window.XMLHttpRequest) {
-    const xhr = new XMLHttpRequest();
-  }
-  else {
-    const xhr = new ActiveXObject("Microsoft.XMLHTTP");
-  }
-
-  xhr.onreadystatechange = function(){
-    if(xhr.readyState === 4 && xmlhttp.status === 200){
-      if(xhr.responseXML !== null)
-      {
-        arr[0] = xhr.responseXML.getElementsByTagName("nombre").item(0);
-        arr[1] = xhr.responseXML.getElementsByTagName("apellido").item(0);
-        arr[2] = xhr.responseXML.getElementsByTagName("edad").item(0);
-        arr[3] = xhr.responseXML.getElementsByTagName("salario").item(0);
-
-        resultado.innerHTML = arr[0].firstChild.nodeValue + ""+
-                              arr[1].firstChild.nodeValue;
-
-      }
-    }
-  }
-  xhr.open("GET", "datos.xml", true);
-  xhr.send();
-}*/
 
   render() {
-    const fontSize = 5;
+
+    function xmlToJson(xml) {
+
+	// Create the return object
+	var obj = {};
+
+	if (xml.nodeType == 1) { // element
+		// do attributes
+		if (xml.attributes.length > 0) {
+		obj["@attributes"] = {};
+			for (var j = 0; j < xml.attributes.length; j++) {
+				var attribute = xml.attributes.item(j);
+				obj["@attributes"][attribute.nodeName] = attribute.nodeValue;
+			}
+		}
+	} else if (xml.nodeType == 3) { // text
+		obj = xml.nodeValue;
+	}
+
+	// do children
+	if (xml.hasChildNodes()) {
+		for(var i = 0; i < xml.childNodes.length; i++) {
+			var item = xml.childNodes.item(i);
+			var nodeName = item.nodeName;
+			if (typeof(obj[nodeName]) == "undefined") {
+				obj[nodeName] = xmlToJson(item);
+			} else {
+				if (typeof(obj[nodeName].push) == "undefined") {
+					var old = obj[nodeName];
+					obj[nodeName] = [];
+					obj[nodeName].push(old);
+				}
+				obj[nodeName].push(xmlToJson(item));
+			}
+		}
+	}
+	return obj;
+};
 
     return (
       <div>
@@ -145,7 +193,7 @@ export default class Excel extends Component {
             <div class='presupuesto-card'>
               <h1 class='presupuesto-h1'>Comprobaciones</h1>
               <p class='presupuesto-p'>Selecciona la carga de evidencias de tus comprobaciones</p>
-              <button onclick = "ejecutarAjax()">Mostrar información</button><br/><br/>
+              <button onClick = {xmlToJson}>Mostrar información</button><br/><br/>
               <div id="info"></div>
               <div>
                 <p>Facturas:</p>
@@ -157,19 +205,18 @@ export default class Excel extends Component {
                     borderWidth: '2px',
                     borderColor: 'rgb(102, 102, 102)',
                     borderStyle: 'solid',
-                    borderRadius: '5px'}}
-                    accept=".pdf" onChange={this.handleOnChange.bind(this)}>
+                    borderRadius: '5px',
+                    maxFiles: 5}}
+                    accept=".xml" onChange={this.handleOnChange1.bind(this)}>
                 </Dropzone>
-                <progress class='progress' value={this.state.pdf1} max='100'>
+                <progress className='progress' value={this.state.pdf1} max='100'>
                   {this.state.pdf1} %
                 </progress>
-                <div class="dz-default dz-message" value={this.state.pdf1} max='100'>
+                <div className="dz-default dz-message" value={this.state.pdf1} max='100'>
                   Carga {this.state.pdf1} %</div>
-
               </div>
-
               <div>
-                <p>Recibo:</p>
+                <p>XML:</p>
                 <Dropzone
                   style={{
                     position: 'relative',
@@ -178,17 +225,18 @@ export default class Excel extends Component {
                     borderWidth: '2px',
                     borderColor: 'rgb(102, 102, 102)',
                     borderStyle: 'solid',
-                    borderRadius: '5px'}}
-                    accept=".pdf" onChange={this.handleOnChange.bind(this)}>
+                    borderRadius: '5px',
+                    maxFiles: 5}}
+                    accept=".pdf" onChange={this.handleOnChange2.bind(this)}>
                 </Dropzone>
-                <progress class='progress' value={this.state.pdf2} max='100'>
+                <progress className='progress' value={this.state.pdf2} max='100'>
                   {this.state.pdf2} %
                 </progress>
-                <div class="dz-default dz-message" value={this.state.pdf2} max='100'>
+                <div className="dz-default dz-message" value={this.state.pdf2} max='100'>
                   Carga {this.state.pdf2} %</div>
               </div>
               <div>
-                <p>Reintegro:</p>
+                <p>Recibo Simple:</p>
                 <Dropzone
                   style={{
                     position: 'relative',
@@ -197,13 +245,14 @@ export default class Excel extends Component {
                     borderWidth: '2px',
                     borderColor: 'rgb(102, 102, 102)',
                     borderStyle: 'solid',
-                    borderRadius: '5px'}}
-                    accept=".pdf" onChange={this.handleOnChange.bind(this)}>
+                    borderRadius: '5px',
+                    maxFiles: 5}}
+                    accept=".pdf" onChange={this.handleOnChange3.bind(this)}>
                 </Dropzone>
-                <progress class='progress' value={this.state.pdf3} max='100'>
+                <progress className='progress' value={this.state.pdf3} max='100'>
                   {this.state.pdf3} %
                 </progress>
-                <div class="dz-default dz-message" value={this.state.pdf3} max='100'>
+                <div className="dz-default dz-message" value={this.state.pdf3} max='100'>
                   Carga {this.state.pdf3} %</div>
               </div>
             </div>

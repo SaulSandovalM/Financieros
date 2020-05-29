@@ -5,21 +5,32 @@ import firebase from '../../../Firebase';
 
 export default class ListComponent extends Component {
   constructor (props) {
-   super(props);
-   this.state = {
-     banco: [],
-   };
- }
+    super(props);
+    this.state = {
+      presupuesto: []
+    };
+  }
 
   componentWillMount () {
-    firebase.database().ref('banco/').on('child_added', snapshot => {
+    firebase.database().ref('presupuesto/').on('child_added', snapshot => {
       this.setState({
-        banco: this.state.banco.concat(snapshot.val())
+        presupuesto: this.state.presupuesto.concat(snapshot.val())
       });
     });
   }
 
+  updateSearch(event) {
+    this.setState({search: event.target.value.substr(0,20)});
+  }
+
   render() {
+
+    let filterData = this.state.presupuesto.filter(
+      (presupuesto) => {
+        return presupuesto.cpa.indexOf(this.state.search) !== -1;
+      }
+    );
+
     return (
       <div>
         <div class='table-container-p'>
@@ -39,6 +50,7 @@ export default class ListComponent extends Component {
             <RowComponent
               key={item.id}
               item={item}
+              update={this.props.update}
             />
           )
         }

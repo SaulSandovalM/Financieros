@@ -46,7 +46,7 @@ const Menu = ({ open, ...props }) => {
     admin = 'OMAR';
   } else if (email === 'fer@procu.com') {
    admin = 'FERNANDA';
- } else if (email === 'eli@prueba.com') {
+  } else if (email === 'eli@prueba.com') {
     admin = 'ELI';
   }
 
@@ -54,7 +54,7 @@ const Menu = ({ open, ...props }) => {
 
   return (
     <StyledMenu open={open} aria-hidden={!isHidden} {...props}>
-      {admin === 'CECILIA' && <NavC /> }
+      {admin === 'ADMIN' && <NavE /> }
       {admin === 'ELI' && <NavE /> }
     </StyledMenu>
   )

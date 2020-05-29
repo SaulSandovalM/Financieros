@@ -1,40 +1,180 @@
 import React, { Component } from 'react';
 import './Vales.css';
+import CurrencyFormat from 'react-currency-format';
+import { Link } from 'react-router-dom';
+import Popup from "reactjs-popup";
+import Dropzone from 'react-dropzone';
+import csv from 'csv';
+import firebase from '../../../Firebase';
+
 
 export default class RowComponent extends Component {
   constructor(props){
-     super(props);
-     this.state = {
-       done: false,
-       item: 'Atendido',
-     };
-   }
+    super(props);
+    this.state = {
+      done: false,
+      item: 'Atendido',
+      pdf1: 0,
+      pdf2: 0,
+      pdf3: 0
+    };
+  }
+
+  handleOnChange1 (event) {
+    const file = event.target.files[0]
+    const reader = new FileReader();
+    reader.readAsText(file);
+    reader.onloadend = evt => {
+      const readerData = evt.target.result;
+      const parser = new DOMParser();
+      const xml = parser.parseFromString(readerData, "text/xml");
+      console.log(
+        "data",
+        new XMLSerializer().serializeToString(xml.documentElement)
+      );
+      var XMLParser = require("react-xml-parser");
+      var NewXml = new XMLParser().parseFromString(
+        new XMLSerializer().serializeToString(xml.documentElement)
+      );
+      console.log("newxml", NewXml);
+      this.setState({ xml });
+      firebase.database().ref('xml').push(NewXml)
+    }
+  }
+
+  handleOnChange2 (event) {
+    const file = event.target.files[0]
+    const storageRef = firebase.storage().ref(`pdfs/${file.name}`)
+    const task = storageRef.put(file)
+    task.on('state_changed', (snapshot) => {
+      let percentage = (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+      this.setState({
+        pdf2: percentage
+      })
+    }, (error) => {
+      console.error(error.message)
+    })
+  }
+
+  handleOnChange3 (event) {
+    const file = event.target.files[0]
+    const storageRef = firebase.storage().ref(`pdfs/${file.name}`)
+    const task = storageRef.put(file)
+    task.on('state_changed', (snapshot) => {
+      let percentage = (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+      this.setState({
+        pdf3: percentage
+      })
+    }, (error) => {
+      console.error(error.message)
+    })
+  }
 
   render() {
     return (
       <div class='caja-inputs'>
-        <div class='tabla-pp'>
+        <div class='table-left'>
         </div>
-        <div class='tabla-p'>
-          <p>{this.props.item.up}</p>
+        <div class='table-v-num'>
+          <b>{this.props.item.vale}</b>
         </div>
-        <div class='tabla-p1-banco'>
-          <p>{this.props.item.partida}</p>
+        <div class='table-v-importe'>
+          <b>{this.props.item.movimiento}</b>
         </div>
-        <div class='tabla-p2-select'>
-          <p>{this.props.item.proyecto}</p>
+        <div class='table-v-fechae'>
+          <b>{this.props.item.concepto}</b>
         </div>
-        <div class='tabla-p3-select'>
-          <p>{this.props.item.np}</p>
+        <div class='table-v-cantidad'>
+          <div>
+            <CurrencyFormat
+              value={this.props.item.cantidad}
+              displayType={'text'}
+              thousandSeparator={true}
+              prefix={'$ '}
+              decimalSeparator={'.'} />
+            .00
+          </div>
         </div>
-        <div class='tabla-p4'>
-          <p>{this.props.item.monto}</p>
+         <div class = 'table-v-cantidad'>
+          <Popup trigger = {<button>Comprobación</button>} modal>
+          <div>
+            <div className='comprobacion-container'>
+              <div className='comprobacion-content'>
+                <div className='comprobacion-card'>
+                  <h1 className='comprobacion-h1'>Comprobaciones</h1>
+                  <p className='comprobacion-p'>Selecciona la carga de evidencias de tus comprobaciones</p>
+                  <div>
+                    <p>XML:</p>
+                    <Dropzone
+                      style={{
+                        position: 'relative',
+                        width: '100%',
+                        height: '30px',
+                        borderWidth: '2px',
+                        borderColor: 'rgb(102, 102, 102)',
+                        borderStyle: 'solid',
+                        borderRadius: '5px',
+                        maxFiles: 5}}
+                        accept=".xml" onChange={this.handleOnChange1.bind(this)}
+                        >
+                    </Dropzone>
+                    <progress className='progress' value={this.state.pdf1} max='100'>
+                      {this.state.pdf1} %
+                    </progress>
+                    <div className="dz-default dz-message" value={this.state.pdf1} max='100'>
+                      Carga {this.state.pdf1} %</div>
+                  </div>
+                  <div>
+                    <p>FACTURA:</p>
+                    <Dropzone
+                      style={{
+                        position: 'relative',
+                        width: '100%',
+                        height: '30px',
+                        borderWidth: '2px',
+                        borderColor: 'rgb(102, 102, 102)',
+                        borderStyle: 'solid',
+                        borderRadius: '5px',
+                        maxFiles: 5}}
+                        accept=".pdf" onChange={this.handleOnChange2.bind(this)}
+                        >
+                    </Dropzone>
+                    <progress className='progress' value={this.state.pdf2} max='100'>
+                      {this.state.pdf2} %
+                    </progress>
+                    <div className="dz-default dz-message" value={this.state.pdf2} max='100'>
+                      Carga {this.state.pdf2} %</div>
+                  </div>
+                  <div>
+                    <p>RECIBO SIMPLE:</p>
+                    <Dropzone
+                      style={{
+                        position: 'relative',
+                        width: '100%',
+                        height: '30px',
+                        borderWidth: '2px',
+                        borderColor: 'rgb(102, 102, 102)',
+                        borderStyle: 'solid',
+                        borderRadius: '5px',
+                        maxFiles: 5}}
+                        accept=".pdf" onChange={this.handleOnChange3.bind(this)}
+                        >
+                    </Dropzone>
+                    <progress className='progress' value={this.state.pdf3} max='100'>
+                      {this.state.pdf3} %
+                    </progress>
+                    <div className="dz-default dz-message" value={this.state.pdf3} max='100'>
+                      Carga {this.state.pdf3} %</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          </Popup>
+         </div>
+        <div class='table-right'>
         </div>
-        <div class='tabla-p5' id='numero' onblur="calcula()">
-          <p>{this.props.item.porcentaje}</p>
-        </div>
-        <div class='tabla-pp2'>
-        </div>
+
       </div>
     );
   }
