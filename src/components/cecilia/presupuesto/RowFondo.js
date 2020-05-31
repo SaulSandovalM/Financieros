@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import CurrencyFormat from 'react-currency-format';
 import './Presupuesto.css';
+import CurrencyFormat from 'react-currency-format';
 
 export default class RowComponent extends Component {
   constructor(props){
@@ -13,23 +13,30 @@ export default class RowComponent extends Component {
 
   render() {
     return (
-      <div className='table-container-p'>
-        <div className='table-left'>
+      <div class='cheques-inputs'>
+        <div class='table-left'>
         </div>
-        <div className='table-clave-p'>
-          <p>{this.props.item.cpa}</p>
+        <div class='table-c-num'>
+          <p>{this.props.item.up}</p>
         </div>
-        <div className='table-importe-p'>
+        <div class='table-c-importe'>
+          <p>{this.props.item.ogasto}</p>
+        </div>
+        <div class='table-c-fechae'>
+          <p>{this.props.item.np}</p>
+        </div>
+        <div class='table-c-fechae'>
           <div>
             <CurrencyFormat
               value={this.props.item.dic}
               displayType={'text'}
               thousandSeparator={true}
-              prefix={' $'} />
+              prefix={' $'}
+            />
             .00
           </div>
         </div>
-        <div className='table-right'>
+        <div class='table-right'>
         </div>
       </div>
     );

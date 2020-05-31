@@ -26,8 +26,6 @@ import Complemento from './components/complemento/Complemento';
 import Caratula from './components/caratula/Caratula';
 import Registro from './components/registrofondos/Registro';
 import Comproceci from './components/comprometidos/Comproceci';
-import Carga from './components/presupuesto/Carga';
-import Creacionfondo from './components/presupuesto/Creacionfondo';
 import Nuvale from './components/elizabeth/cheques/Nuvale';
 import Pdf1 from './components/elizabeth/cheques/pdf/Pdf1';
 import Pdf3 from './components/elizabeth/cheques/pdf/Pdf3';
@@ -126,13 +124,6 @@ function App(props) {
         exact
         path='/Caratula'
         component={Caratula}
-        isAuthenticated={isAuthenticated}
-        isVerifying={isVerifying}
-      />
-      <ProtectedRoute
-        exact
-        path='/Creacionfondo'
-        component={Creacionfondo}
         isAuthenticated={isAuthenticated}
         isVerifying={isVerifying}
       />

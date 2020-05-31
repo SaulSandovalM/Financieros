@@ -5,6 +5,7 @@ import ListComponent from './ListComponent';
 import CurrencyFormat from 'react-currency-format';
 import csv from 'csv';
 import Dropzone from 'react-dropzone';
+import ListFondo from './ListFondo';
 
 export default class Presupuesto extends Component {
   constructor () {
@@ -18,11 +19,20 @@ export default class Presupuesto extends Component {
           done: false
         },
       ],
+      listafondo: [
+        {
+          id: 1,
+          name: 'preuba',
+          done: false
+        },
+      ],
       ingresos: '',
       importe: '',
       proyecto: '',
       clave: '',
-      contador: {}
+      contador: {},
+      dic: '',
+      cpa: ''
     }
   }
 
@@ -125,10 +135,49 @@ export default class Presupuesto extends Component {
       var lista = [];
       snap.forEach((child) => {
         lista.push({
-          ingresos: child.val().ingresos,
-          importe: child.val().importe,
-          proyecto: child.val().proyecto,
-          clave: child.val().clave,
+          rm: child.val().rm,
+          os: child.val().os,
+          up: child.val().up,
+          rubro: child.val().rubro,
+          tg: child.val().tg,
+          ogasto: child.val().ogasto,
+          f: child.val().f,
+          fu: child.val().fu,
+          sf: child.val().sf,
+          eje: child.val().eje,
+          s: child.val().s,
+          prog: child.val().prog,
+          sp: child.val().sp,
+          obj: child.val().obj,
+          proy: child.val().proy,
+          est: child.val().est,
+          ben: child.val().ben,
+          eg: child.val().eg,
+          mi: child.val().mi,
+          pr: child.val().pr,
+          pb: child.val().pb,
+          dp: child.val().dp,
+          indi: child.val().indi,
+          la: child.val().la,
+          ods: child.val().ods,
+          et: child.val().et,
+          ff: child.val().ff,
+          of: child.val().of,
+          np: child.val().np,
+          cpa: child.val().cpa,
+          ene: child.val().ene,
+          feb: child.val().feb,
+          mar: child.val().mar,
+          abr: child.val().abr,
+          may: child.val().may,
+          jun: child.val().jun,
+          jul: child.val().jul,
+          ago: child.val().ago,
+          sep: child.val().sep,
+          oct: child.val().oct,
+          nov: child.val().nov,
+          dic: child.val().dic,
+          total: child.val().total,
           done: child.val().done,
           id: child.key
         });
@@ -139,9 +188,32 @@ export default class Presupuesto extends Component {
     });
   }
 
+  listenForItemsFondo = (itemsRefFondo) => {
+    itemsRefFondo.on('value', (snap) => {
+      var listafondo = [];
+      snap.forEach((child) => {
+        listafondo.push({
+          up: child.val().up,
+          ogasto: child.val().ogasto,
+          prog: child.val().prog,
+          proy: child.val().proy,
+          np: child.val().np,
+          dic: child.val().dic,
+          done: child.val().done,
+          id: child.key
+        });
+      });
+      this.setState({
+        listafondo: listafondo
+      });
+    });
+  }
+
   componentDidMount() {
-    const itemsRef = firebase.database().ref('banco/');
+    const itemsRef = firebase.database().ref('presupuesto/');
     this.listenForItems(itemsRef);
+    const itemsRefFondo = firebase.database().ref('banco/');
+    this.listenForItems(itemsRefFondo);
     this.consumo();
   }
 
@@ -206,6 +278,56 @@ export default class Presupuesto extends Component {
     } else {
       this.showAlert('warning', 'Por favor llene el formulario');
     };
+  }
+
+  update = (item) => {
+    let updates = {};
+    updates['presupuesto/' + item.id] = {
+      rm: item.rm,
+      os: item.os,
+      up: item.up,
+      rubro: item.rubro,
+      tg: item.tg,
+      ogasto: item.ogasto,
+      f: item.f,
+      fu: item.fu,
+      sf: item.sf,
+      eje: item.eje,
+      s: item.s,
+      prog: item.prog,
+      sp: item.sp,
+      obj: item.obj,
+      proy: item.proy,
+      est: item.est,
+      ben: item.ben,
+      eg: item.eg,
+      mi: item.mi,
+      pr: item.pr,
+      pb: item.pb,
+      dp: item.dp,
+      indi: item.indi,
+      la: item.la,
+      ods: item.ods,
+      et: item.et,
+      ff: item.ff,
+      of: item.of,
+      np: item.np,
+      cpa: item.cpa,
+      ene: item.ene,
+      feb: item.feb,
+      mar: item.mar,
+      abr: item.abr,
+      may: item.may,
+      jun: item.jun,
+      jul: item.jul,
+      ago: item.ago,
+      sep: item.sep,
+      oct: item.oct,
+      nov: item.nov,
+      dic: item.dic,
+      total: item.total
+    };
+    firebase.database().ref().update(updates);
   }
 
   render() {
@@ -287,13 +409,19 @@ export default class Presupuesto extends Component {
             </div>
           </div>
         </div>
+        <div className='space-table'>
+          <div className='p-margin-f'>
+            <p className='p-title-size'>
+              - Busca las partidas para crear tu fondo revolvente
+            </p>
+          </div>
+          <ListComponent
+            lista={this.state.lista}
+            update={this.update}
+          />
+        </div>
         <form onSubmit={this.sendMessage.bind(this)} ref='contactForm'>
           <div className='p-container'>
-            <div className='p-margin-f'>
-              <p className='p-title-size'>
-                - Ingresa los datos que correspondan con el documento de autorización del fondo revolvente
-              </p>
-            </div>
             <div className='p-row2'>
               <div className='p-container-i2' style={{marginRight: '20px'}}>
                 <p className='p-title-margin2'>R. de Ingresos</p>
@@ -308,6 +436,9 @@ export default class Presupuesto extends Component {
               <div className='p-container-i2' >
                 <p className='p-title-margin2'>Importe</p>
                 <input
+                  type='number'
+                  min='1'
+                  max='1000000'
                   className='input-h'
                   id='importe'
                   ref={importe => this.inputImporte = importe}
@@ -343,8 +474,9 @@ export default class Presupuesto extends Component {
           </div>
         </form>
         <div className='space-table'>
-          <ListComponent
-            lista={this.state.lista}
+          <p className='p-title-size'>- Fondo Revolvente</p>
+          <ListFondo
+            listafondo={this.state.listafondo}
           />
         </div>
       </div>
