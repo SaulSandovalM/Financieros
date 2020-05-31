@@ -8,8 +8,8 @@ import Dropzone from 'react-dropzone';
 import ListFondo from './ListFondo';
 
 export default class Presupuesto extends Component {
-  constructor () {
-    super()
+  constructor (props) {
+    super(props)
     this.state = {
       pdf: 0,
       lista: [
@@ -151,6 +151,7 @@ export default class Presupuesto extends Component {
           obj: child.val().obj,
           proy: child.val().proy,
           est: child.val().est,
+          obra: child.val().obra,
           ben: child.val().ben,
           eg: child.val().eg,
           mi: child.val().mi,
@@ -158,6 +159,7 @@ export default class Presupuesto extends Component {
           pb: child.val().pb,
           dp: child.val().dp,
           indi: child.val().indi,
+          meta: child.val().meta,
           la: child.val().la,
           ods: child.val().ods,
           et: child.val().et,
@@ -165,6 +167,8 @@ export default class Presupuesto extends Component {
           of: child.val().of,
           np: child.val().np,
           cpa: child.val().cpa,
+          dig: child.val().dig,
+          par: child.val().par,
           ene: child.val().ene,
           feb: child.val().feb,
           mar: child.val().mar,
@@ -299,6 +303,7 @@ export default class Presupuesto extends Component {
       obj: item.obj,
       proy: item.proy,
       est: item.est,
+      obra: item.obra,
       ben: item.ben,
       eg: item.eg,
       mi: item.mi,
@@ -306,6 +311,7 @@ export default class Presupuesto extends Component {
       pb: item.pb,
       dp: item.dp,
       indi: item.indi,
+      meta: item.meta,
       la: item.la,
       ods: item.ods,
       et: item.et,
@@ -313,6 +319,8 @@ export default class Presupuesto extends Component {
       of: item.of,
       np: item.np,
       cpa: item.cpa,
+      dig: item.dig,
+      par: item.par,
       ene: item.ene,
       feb: item.feb,
       mar: item.mar,
@@ -325,7 +333,7 @@ export default class Presupuesto extends Component {
       oct: item.oct,
       nov: item.nov,
       dic: item.dic,
-      total: item.total
+      total: item.total,
     };
     firebase.database().ref().update(updates);
   }
@@ -420,7 +428,7 @@ export default class Presupuesto extends Component {
             update={this.update}
           />
         </div>
-        <form onSubmit={this.sendMessage.bind(this)} ref='contactForm'>
+        <form /*onSubmit={this.sendMessage.bind(this)}*/ ref='contactForm'>
           <div className='p-container'>
             <div className='p-row2'>
               <div className='p-container-i2' style={{marginRight: '20px'}}>
@@ -431,40 +439,6 @@ export default class Presupuesto extends Component {
                   ref={ingresos => this.inputIngresos = ingresos}
                   placeholder='Aprovechamientos por Cooperaciones'
                   required
-                />
-              </div>
-              <div className='p-container-i2' >
-                <p className='p-title-margin2'>Importe</p>
-                <input
-                  type='number'
-                  min='1'
-                  max='1000000'
-                  className='input-h'
-                  id='importe'
-                  ref={importe => this.inputImporte = importe}
-                  placeholder='$ 704,874.00'
-                  required
-                />
-              </div>
-            </div>
-            <div className='p-col'>
-              <div className='p-container-i3' >
-                <p className='p-title-margin2'>Proyecto</p>
-                <input
-                  className='input-h'
-                  id='proyecto'
-                  ref={proyecto => this.inputProyecto = proyecto}
-                  placeholder='ACCIONES DE INVESTIGACION EJECUTIVAS'
-                  required
-                />
-              </div>
-              <div className='p-container-i3' >
-                <p className='p-title-margin2'>Clave</p>
-                <input
-                  className='input-h'
-                  id='clave'
-                  ref={clave => this.inputClave = clave}
-                  placeholder='26-30-01-6201010-01-253001-1-02-02-404-00-E0018-01-002-AU001-001-B07-85000-00-00-D5-C5-0194-00-01-PF-01-01'
                 />
               </div>
             </div>

@@ -12,7 +12,7 @@ export default class ListComponent extends Component {
  }
 
   componentWillMount () {
-    firebase.database().ref('presupuesto/').limitToLast(1).on('child_added', snapshot => {
+    firebase.database().ref('presupuesto/').on('child_added', snapshot => {
       this.setState({
         presupuesto: this.state.presupuesto.concat(snapshot.val())
       });
@@ -27,13 +27,19 @@ export default class ListComponent extends Component {
 
     let filterData = this.state.presupuesto.filter(
       (presupuesto) => {
-        return presupuesto.cpa.indexOf(this.state.search) !== -1;
+        return presupuesto.dic.indexOf(this.state.search) !== -1;
       }
     );
 
     return (
       <div>
-        <p className='p-title-size'><input type="text" value={this.state.search} onChange={this.updateSearch.bind(this)}/></p>
+        <p className='p-title-size'>
+          <input
+            className='input-h'
+            value={this.state.search}
+            onChange={this.updateSearch.bind(this)}
+          />
+        </p>
         <div class='table-container-p'>
           <div class='table-left'>
           </div>
@@ -51,6 +57,7 @@ export default class ListComponent extends Component {
             <RowComponent
               key={presupuesto.id}
               item={presupuesto}
+              update={this.props.update}
             />
           )
         }

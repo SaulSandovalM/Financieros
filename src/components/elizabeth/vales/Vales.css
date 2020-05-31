@@ -103,3 +103,154 @@
   flex-direction: row;
   justify-content: flex-end;
 }
+.table-v-num {
+  width: 3%;
+  border-bottom: 1px solid #d0d0d0;
+  border-right: 1px solid #d0d0d0;
+  padding-left: 5px;
+  height: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.table-v-importe {
+  width: 31%;
+  border-bottom: 1px solid #d0d0d0;
+  border-right: 1px solid #d0d0d0;
+  padding-left: 5px;
+  height: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.table-v-fechae {
+  width: 31%;
+  border-bottom: 1px solid #d0d0d0;
+  border-right: 1px solid #d0d0d0;
+  padding-left: 5px;
+  height: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.table-v-cantidad {
+  width: 15%;
+  border-bottom: 1px solid #d0d0d0;
+  border-right: 1px solid #d0d0d0;
+  padding-left: 5px;
+  height: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/*-------MODAL-----------*/
+body {
+  margin: 0px;
+  font-family: Arial;
+}
+.comprobacion-container {
+  height: 75vh;
+  width: 100%;
+  display: flex;
+  flex: 1;
+  flex-direction: row-reverse;
+  justify-content: center;
+  background-color: #f4f4f4;
+}
+.comprobacion-container-title {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  background-color: #f4f4f4;
+}
+.comprobacion-content {
+  width: 45%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.comprobacion-card {
+  width: 150%;
+  height: 100%;
+  background-color: #FFFFFF;
+  padding: 10px;
+  border-radius: 5px;
+  box-shadow: 0px 3px 5px 0px rgba(176,167,176,1);
+}
+.comprobacion-h1 {
+  margin: 0px;
+}
+.comprobacion-p {
+  margin: 0px;
+  color: grey;
+}
+.progress {
+  width: 100%;
+}
+.pcontainer {
+  width: 100%;
+  height: 2000vh;
+}
+.p-t {
+  padding-left: 80px;
+}
+.pcontent {
+  display: flex;
+  flex-direction: row;
+}
+.pcontent-d {
+  display: flex;
+  flex-direction: row;
+}
+.padding-t {
+  height: 0px;
+  width: 40px;
+  border-top: 1px solid;
+  display: flex;
+}
+.padding-t2 {
+  height: 0px;
+  width: 80px;
+  border-top: 1px solid;
+}
+.padding-t3 {
+  height: 0px;
+  width: 900px;
+  border-top: 1px solid;
+}
+.padding-t4 {
+  height: 0px;
+  width: 120px;
+  border-top: 1px solid;
+}
+.padding-t5 {
+  height: 0px;
+  width: 200px;
+  border-top: 1px solid;
+}
+
+
+/*Presupuesto*/
+.tabla-1{
+  display:flex;
+        justify-content: space-between;
+
+}
+.tabla-2{
+  display:flex;
+        justify-content: space-between;
+
+}
+/*Creacionfondo*/
+.content{
+  display:flex;
+  justify-content:
+}
+.need{
+  height: 0px;
+  width: 100px;
+  border-top: 1px solid;
+}

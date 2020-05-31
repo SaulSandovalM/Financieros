@@ -4,6 +4,7 @@ import './Cheques.css';
 import ReactToPrint from 'react-to-print';
 import ListComponent from './ListComponent';
 import CurrencyFormat from 'react-currency-format';
+import Dropzone from 'react-dropzone';
 
 import lpgjh from '../../../img/logo-PGJH.jpg';
 import programa from '../../../img/logo.jpg';
@@ -27,12 +28,19 @@ export default class Nuvale extends Component {
       form: [],
       alert: false,
       alertData: {},
-      numCheque: '',
-      importe: '',
-      fechaE: '',
-      fechaC: '',
+      vale: '',
+      cheque: '',
+      movimiento: '',
+      cantidad: '',
+      concepto: '',
+      oficioS: '',
+      area: '',
+      turno: '',
+      reintegroT: '',
+      estatus: '',
+      personaR: '',
+      proveedor: '',
       contador: {},
-      
     };
   }
 
@@ -41,10 +49,18 @@ export default class Nuvale extends Component {
       var lista = [];
       snap.forEach((child) => {
         lista.push({
-          numCheque: child.val().numCheque,
-          importe: child.val().importe,
-          fechaE: child.val().fechaE,
-          fechaC: child.val().fechaC,
+          vale: child.val().vale,
+          cheque: child.val().cheque,
+          movimiento: child.val().movimiento,
+          cantidad: child.val().cantidad,
+          concepto: child.val().concepto,
+          oficioS: child.val().oficioS,
+          area: child.val().area,
+          turno: child.val().turno,
+          reintegroT: child.val().reintegroT,
+          estatus: child.val().estatus,
+          personaR: child.val().personaR,
+          proveedor: child.val().proveedor,
           done: child.val().done,
           id: child.key
         });
@@ -56,13 +72,13 @@ export default class Nuvale extends Component {
   }
 
   componentDidMount() {
-    const itemsRef = firebase.database().ref('cheques/');
+    const itemsRef = firebase.database().ref('vales/');
     this.listenForItems(itemsRef);
     this.consumo();
   }
 
   consumo = () => {
-    const ref = firebase.firestore().collection('banco').doc('--stats--');
+    const ref = firebase.firestore().collection('vales').doc('--stats--');
     ref.get().then((doc) => {
       if (doc.exists) {
         this.setState({
@@ -91,10 +107,10 @@ export default class Nuvale extends Component {
   }
 
   componentWillMount() {
-    let formRef = firebase.database().ref('cheques').orderByKey().limitToLast(1);
+    let formRef = firebase.database().ref('vales').orderByKey().limitToLast(1);
     formRef.on('child_added', snapshot => {
-      const { numCheque, importe, fechaE, fechaC } = snapshot.val();
-      const data = { numCheque, importe, fechaE, fechaC };
+      const { vale, cheque, movimiento, cantidad, concepto, oficioS, area, turno, reintegroT, estatus, personaR, proveedor } = snapshot.val();
+      const data = { vale, cheque, movimiento, cantidad, concepto, oficioS, area, turno, reintegroT, estatus, personaR, proveedor };
       this.setState({ form: [data].concat(this.state.form) });
     });
   }
@@ -102,44 +118,59 @@ export default class Nuvale extends Component {
   sendMessage(e) {
     e.preventDefault();
     const params = {
-      numCheque: this.inputCheque.value,
-      importe: this.inputImporte.value,
-      fechaE: this.inputFechaE.value,
-      fechaC: this.inputFechaC.value
+      vale: this.inputVale.value,
+      cheque: this.inputCheque.value,
+      movimiento: this.inputMovimiento.value,
+      cantidad: this.inputCantidad.value,
+      concepto: this.inputConcepto.value,
+      oficioS: this.inputOficio.value,
+      area: this.inputArea.value,
+      turno: this.inputTurno.value,
+      reintegroT: this.inputReintegro.value,
+      estatus: this.inputEstatus.value,
+      personaR: this.inputPersona.value,
+      proveedor: this.inputProveedor.value
     };
     this.setState({
-      numCheque: this.inputCheque.value,
-      importe: this.inputImporte.value,
-      fechaE: this.inputFechaE.value,
-      fechaC: this.inputFechaC.value
+      vale: this.inputVale.value,
+      cheque: this.inputCheque.value,
+      movimiento: this.inputMovimiento.value,
+      cantidad: this.inputCantidad.value,
+      concepto: this.inputConcepto.value,
+      oficioS: this.inputOficio.value,
+      area: this.inputArea.value,
+      turno: this.inputTurno.value,
+      reintegroT: this.inputReintegro.value,
+      estatus: this.inputEstatus.value,
+      personaR: this.inputPersona.value,
+      proveedor: this.inputProveedor.value
     })
-
-    if ( params.numCheque && params.importe && params.fechaE && params.fechaC ) {
-      var f = parseInt(params.importe);
-      const statsRef = firebase.firestore().collection('banco').doc('--stats--');
+    if ( params.vale && params.cheque && params.movimiento && params.cantidad && params.concepto && params.oficioS && params.area && params.turno && params.reintegroT && params.estatus && params.personaR && params.proveedor ) {
+      var f = parseInt(params.cantidad);
+      const statsRef = firebase.firestore().collection('caja').doc('--stats--');
       const increment = firebase.firestore.FieldValue.increment(-f);
       const batch = firebase.firestore().batch();
-      const storyRef = firebase.firestore().collection('banco').doc(`${Math.random()}`);
-      batch.set(storyRef, { title: 'Retiro Caja' });
+      const storyRef = firebase.firestore().collection('caja').doc(`${Math.random()}`);
+      batch.set(storyRef, { title: 'Se genero un vale' });
       batch.set(statsRef, { storyCount: increment }, { merge: true });
       batch.commit();
-      const statsRefT = firebase.firestore().collection('caja').doc('--stats--');
-      const increments = firebase.firestore.FieldValue.increment(f);
+      const statsRefs = firebase.firestore().collection('vales').doc('--stats--');
+      const increments = firebase.firestore.FieldValue.increment(1);
       const batchs = firebase.firestore().batch();
-      const storyRefs = firebase.firestore().collection('caja').doc(`${Math.random()}`);
-      batchs.set(storyRefs, { title: 'Aumento Caja!' });
-      batchs.set(statsRefT, { storyCount: increments }, { merge: true });
+      const storyRefs = firebase.firestore().collection('vales').doc(`${Math.random()}`);
+      batchs.set(storyRefs, { title: 'Se genero un vale' });
+      batchs.set(statsRefs, { storyCount: increments }, { merge: true });
       batchs.commit();
-      firebase.database().ref('cheques').push(params).then(() => {
+      firebase.database().ref('vales').push(params).then(() => {
         this.showAlert('success', 'Tu solicitud fue enviada.');
       }).catch(() => {
         this.showAlert('danger', 'Tu solicitud no puede ser enviada');
       });
-      this.resetForm();
-    } else {
-      this.showAlert('warning', 'Por favor llene el formulario');
-    };
-  }
+        this.resetForm();
+      } else {
+        this.showAlert('warning', 'Por favor llene el formulario');
+      };
+    }
 
   render(){
       return(
@@ -155,10 +186,29 @@ export default class Nuvale extends Component {
                       DIRECCION GENERAL DE ADMINISTRACION Y FINANZAS</p>
                       <img class="ims" src={programa} alt=''/>
                       </div>
+
+                      <div >
                       <div class='no-texto'>
-                      <p>No. Oficio</p>
-                      <p>No. Vale</p>
+                              <p class='pp'>No. Cheque:</p>
+
+                              <input
+                              class='input-c1he'
+                              id='cheque'
+                              required
+                              ref={cheque => this.inputCheque = cheque} />
+                              </div>
+
+                      <div class='no-texto2'>
+                        <p class='pp'>No. Vale</p>
+                      <input
+                        class='input-c1he'
+                        id='concepto'
+                        required
+                        ref={concepto => this.inputConcepto = concepto}
+                      />
                       </div>
+
+                  </div>
                   </div>
 
 
@@ -170,46 +220,76 @@ export default class Nuvale extends Component {
                   </div>
 
                   <div class='tabla'>
-                          <table>
+                          <table class='tabla1'>
                               <tr><th>MOVIMIENTO</th></tr>
                               <tr><td  class='tabla-a'>Autorizado</td></tr>
                               <tr><td  class='tabla-a'>Comprobacion</td></tr>
                               <tr><td  class='tabla-a'>Reintrego/Rembolso</td></tr>
                           </table>
-                          <table>
+                          <table class='tabla1'>
                               <tr><th>CANTIDAD</th></tr>
-                              <tr><td><input class='input' /></td></tr>
-                              <tr><td><input class='input' /></td></tr>
-                              <tr><td><input class='input' /></td></tr>
+                              <tr><td><input class='input-0'
+                                            id='movimiento'
+                                            required
+                                            ref={movimiento => this.inputMovimiento = movimiento}
+                              /></td></tr>
+                              <tr><td><input class='input-0'
+                                              id='movimiento'
+                                              required
+                                              ref={movimiento => this.inputMovimiento = movimiento}
+                               /></td></tr>
+                              <tr><td><input class='input-0'
+                                              id='movimiento'
+                                              required
+                                              ref={movimiento => this.inputMovimiento = movimiento}
+                               /></td></tr>
                           </table>
+
+
                           <div class='concepto-1'>
-                              <div>
+
                           <table class='tab-c'>
                               <tr><th>CONCEPTO</th></tr>
-                              <tr><td><input class='input-c' /></td></tr>
+                              <tr><td><input class='input-c'
+                                            id='concepto'
+                                            required
+                                            ref={concepto => this.inputConcepto = concepto}/></td></tr>
                           </table>
-                            </div>
 
 
+</div>
+<div>
 
 
                       <div class="combo">
 
                         <table class='tab-d'>
                             <tr><th>Oficio Solicitud</th></tr>
-                            <tr><td><input class='input-d' /></td></tr>
+                            <tr><td><input class='input-d'
+                            id='oficioS'
+                            required
+                            ref={oficioS => this.inputOficio = oficioS}
+                            /></td></tr>
                         </table>
 
 
                       <table class='tab-d'>
                           <tr><th>Area</th></tr>
-                          <tr><td><input class='input-d' /></td></tr>
+                          <tr><td><input class='input-d'
+                          id='area'
+                          required
+                          ref={area => this.inputArea = area}
+                          /></td></tr>
                       </table>
 
 
                     <table class='tab-d'>
                         <tr><th>Turno</th></tr>
-                        <tr><td><input class='input-d' /></td></tr>
+                        <tr><td><input class='input-d'
+                        id='turno'
+                        required
+                        ref={turno => this.inputTurno = turno}
+                        /></td></tr>
                     </table>
 
                       </div>
@@ -244,7 +324,7 @@ export default class Nuvale extends Component {
               <div>
                 <table>
                   <input class='input-e' />
-                  <tr><th>S/C</th></tr>
+                  <tr><th>Fecha</th></tr>
                 </table>
                 </div>
 
@@ -253,11 +333,15 @@ export default class Nuvale extends Component {
                   <p class="firmas-t">Autorizo</p>
                 </div>
                 <div>
-                  <p>OK<br/></p>
+                  <p align="center">OK<br/></p>
                   <p class="firmas-t">Validado (NRL)</p>
                 </div>
                 <div>
-                  <p>xxxx xxxx xxxx xxxx<br/></p>
+                  <input
+                  id='personaR'
+                  required
+                  ref={personaR => this.inputPersona = personaR}
+                  />
                   <p class="firmas-t">Recibio</p>
                 </div>
               </div>
@@ -267,11 +351,29 @@ export default class Nuvale extends Component {
               <p class='comprometo'>Me comprometo a entregar la comprobación que ampara el presente vale en un plazo no mayor  a 5 dias habiles posteriores a la fecha de recibido, de lo contrario reintegraré </p>
               </div>
 
+              <div>
               <ReactToPrint
                 trigger={() => <buttom class="bont_imprimir">Imprimir</buttom>}
                 content={()=> this.holi}
               />
               </div>
+
+                <form onSubmit={this.sendMessage.bind(this)} ref='contactForm'>
+                    <div className='boton-v'>
+                            <button type='submit' className='input-sc boton-g'>Guardar</button>
+                    </div>
+                </form>
+
+                <div class='caja-w' style={{marginTop: '40px', marginBottom: '40px'}}>
+                              <div class='caja-col'>
+                              <ListComponent
+                              lista={this.state.lista}
+                              />
+                              </div>
+                </div>
+
+              </div>
+
       )
   }
 

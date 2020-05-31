@@ -25,6 +25,7 @@
     "react-dom": "^16.13.1",
     "react-dropzone": "^4.2.13",
     "react-focus-lock": "^2.2.1",
+    "react-native-responsive-screen": "^1.4.1",
     "react-redux": "^7.2.0",
     "react-router-dom": "^5.1.2",
     "react-scripts": "3.4.1",
@@ -32,6 +33,7 @@
     "react-select-input": "^1.0.5",
     "react-to-print": "^2.6.3",
     "react-xml-parser": "^1.1.6",
+    "reactjs-popup": "^1.5.0",
     "redux": "^4.0.5",
     "redux-thunk": "^2.3.0",
     "styled-components": "^5.1.0"

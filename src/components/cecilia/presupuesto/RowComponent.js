@@ -1,15 +1,20 @@
 import React, { Component } from 'react';
 import CurrencyFormat from 'react-currency-format';
 import './Presupuesto.css';
+import firebase from '../../../Firebase';
 
 export default class RowComponent extends Component {
   constructor(props){
-     super(props);
-     this.state = {
-       done: false,
-       item: 'Atendido',
-     };
-   }
+    super(props);
+    this.state = {
+      done: false,
+      item: 'Atendido'
+    };
+  }
+
+  update = () => {
+    this.props.update(this.props.item);
+  }
 
   render() {
     return (
@@ -26,7 +31,7 @@ export default class RowComponent extends Component {
               displayType={'text'}
               thousandSeparator={true}
               prefix={' $'} />
-            .00
+            {/*<button onClick={this.update}>Agregar</button>*/}
           </div>
         </div>
         <div className='table-right'>
