@@ -3,6 +3,8 @@ import firebase from '../../../Firebase';
 import ListComponent from './ListComponent';
 import './Vales.css';
 import ReactToPrint from 'react-to-print';
+import logovale from '../../../img/logovale.png';
+import logoh from '../../../img/logoh.png';
 
 export default class Vales extends Component {
   constructor(props) {
@@ -29,7 +31,15 @@ export default class Vales extends Component {
       personaR: '',
       proveedor: '',
       contador: {},
+      input1: '',
+      input2: ''
     };
+  }
+
+
+  handleChange(event) {
+    this.setState({input1: event.target.value})
+    this.setState({input2: event.target.value})
   }
 
   listenForItems = (itemsRef) => {
@@ -160,6 +170,128 @@ export default class Vales extends Component {
         <div class='site'>
           <p class='site-s'><b>Vales</b></p>
         </div>
+
+        <div className='margin-vale' ref={el => (this.vale= el)}>
+          <div className='vale-title-container'>
+            <div className='vale-logo-container'>
+              <img className='logovale' src={logovale} alt='' />
+            </div>
+            <div className='vale-title-content'>
+              <p className='p-vale'>PROCURADURIA GENERAL DE JUSTICIA</p>
+              <p className='p-vale'>DIRECCION GENERAL DE ADMINISTRACION Y FINANZAS</p>
+            </div>
+            <div className='vale-num-container'>
+              <img className='logovale' src={logoh} alt='' />
+            </div>
+          </div>
+
+          <div className='no-cv'>
+            <div className='cv'>
+              <p className='p-cv'>No. Cheque</p>
+              <p className='p-cv'>No. Vale {this.state.contador.storyCount}</p>
+            </div>
+          </div>
+
+          <div className='vale-pro-content'>
+            <p className='p-vp'>VALE PROVICIONAL DE CAJA</p>
+          </div>
+
+          <div className='space-v'/>
+
+          <div className='mcc-content'>
+            <div className='v-m'>
+              <p className='pmcc'>MOVIMIENTO</p>
+              <p className='p-bv'>Autorizado</p>
+              <p className='p-bv'>Comprobado</p>
+              <p className='p-bv'>Reintegro/Reembolso</p>
+            </div>
+            <div className='v-c'>
+              <p className='pmcc'>CANTIDAD</p>
+              <input className='input-b' name='input1' onChange={this.handleChange.bind(this)} value={this.state.input1} />
+              <input className='input-b' name='input2' onChange={this.handleChange.bind(this)} value={this.state.input2}/>
+              <input className='input-b'/>
+            </div>
+            <div className='v-con'>
+              <p className='pmcc'>CONCEPTO</p>
+              <input className='input-b'/>
+              <input className='input-b'/>
+              <div className='oat-content'>
+                <div className='o-w'>
+                  <p className='p-oat'>Oficio Solicitud</p>
+                  <input className='input-w'/>
+                </div>
+                <div className='a-w'>
+                  <p className='p-oat'>Área</p>
+                  <input className='input-w' />
+                </div>
+                <div className='t-w'>
+                  <p className='p-oat'>Turno</p>
+                  <input className='input-w' />
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className='frsr-end'>
+            <div className='frsr-w'>
+              <div className='div-4'>
+                <div className='frsr-w-b'>
+                  <p className='p-oat'>Facturas</p>
+                  <input className='input-w' />
+                </div>
+                <div className='frsr-w-b' style={{borderLeft: '0px'}}>
+                  <p className='p-oat'>Recibos</p>
+                  <input className='input-w' />
+                </div>
+              </div>
+              <div className='div-4'>
+                <div className='frsr-w-b'>
+                  <p className='p-oat'>S/C</p>
+                  <input className='input-w' />
+                </div>
+                <div className='frsr-w-b' style={{borderLeft: '0px', borderRight: '0px'}}>
+                  <p className='p-oat'>Reintegro Total</p>
+                  <input className='input-w' />
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className='firma-content'>
+            <div className='f-fecha'>
+              <p className='b-fecha'>18/jul/2019</p>
+              <b className='font-size-f'>Fecha</b>
+            </div>
+            <div className='f-fecha'>
+              <p className='b-fecha'>L.C Nayra Ruiz Laguna</p>
+              <b className='font-size-f'>Autorizó</b>
+            </div>
+            <div className='f-fecha'>
+              <p className='b-fecha'>ok</p>
+              <b className='font-size-f'>Validado (NRL)</b>
+            </div>
+            <div className='f-fecha'>
+              <p className='b-fecha'>xxxx xxxx xxxx</p>
+              <b className='font-size-f'>Recibió</b>
+            </div>
+          </div>
+
+          <div className='last'>
+            Me comprometo a entregar la comprobación que ampara el presente vale en un plazo no mayor  a 5 dias habiles posteriores a la fecha de recibido, de lo contrario reintegraré el recurso por la cantidad sin comprobar.
+          </div>
+
+        </div>
+
+        <div className='boton-v'>
+          <ReactToPrint
+            trigger={() => <buttom className='boton-vale' onClick={(e) => this.handleClick(e)}>Imprimir</buttom>}
+            content={()=> this.vale}
+          />
+        </div>
+
+
+
+
         <form onSubmit={this.sendMessage.bind(this)} ref='contactForm'>
           <div className='form-container'>
             <div className='vale-content'>

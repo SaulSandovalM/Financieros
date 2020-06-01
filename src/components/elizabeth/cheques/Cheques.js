@@ -202,6 +202,7 @@ export default class Cheques extends Component {
                   <p class='p-cheque'><b>Fecha de Emisión</b></p>
                   <input
                     class='input-sc-cheque'
+                    type='date'
                     id='fechaE'
                     required
                     ref={fechaE => this.inputFechaE = fechaE}
@@ -211,6 +212,7 @@ export default class Cheques extends Component {
                   <p class='p-cheque'><b>Fecha de Cobro</b></p>
                   <input
                     class='input-sc-cheque'
+                    type='date'
                     id='fechaC'
                     required
                     ref={fechaC => this.inputFechaC = fechaC}

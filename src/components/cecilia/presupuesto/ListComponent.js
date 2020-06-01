@@ -27,7 +27,7 @@ export default class ListComponent extends Component {
 
     let filterData = this.state.presupuesto.filter(
       (presupuesto) => {
-        return presupuesto.dic.indexOf(this.state.search) !== -1;
+        return presupuesto.cpa.indexOf(this.state.search) !== -1;
       }
     );
 
