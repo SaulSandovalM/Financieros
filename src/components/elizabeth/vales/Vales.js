@@ -32,14 +32,15 @@ export default class Vales extends Component {
       proveedor: '',
       contador: {},
       input1: '',
-      input2: ''
+      input2: '',
+      input3: '',
+      input4: '',
+      input5: ''
     };
   }
 
-
   handleChange(event) {
-    this.setState({input1: event.target.value})
-    this.setState({input2: event.target.value})
+    this.setState({[event.target.name]: event.target.value})
   }
 
   listenForItems = (itemsRef) => {
@@ -209,12 +210,12 @@ export default class Vales extends Component {
               <p className='pmcc'>CANTIDAD</p>
               <input className='input-b' name='input1' onChange={this.handleChange.bind(this)} value={this.state.input1} />
               <input className='input-b' name='input2' onChange={this.handleChange.bind(this)} value={this.state.input2}/>
-              <input className='input-b'/>
+              <input className='input-b' name='input3' onChange={this.handleChange.bind(this)} value={this.state.input3}/>
             </div>
             <div className='v-con'>
               <p className='pmcc'>CONCEPTO</p>
-              <input className='input-b'/>
-              <input className='input-b'/>
+              <input className='input-b' name='input4' onChange={this.handleChange.bind(this)} value={this.state.input4}/>
+              <input className='input-b' name='input5' onChange={this.handleChange.bind(this)} value={this.state.input5}/>
               <div className='oat-content'>
                 <div className='o-w'>
                   <p className='p-oat'>Oficio Solicitud</p>
@@ -284,15 +285,13 @@ export default class Vales extends Component {
 
         <div className='boton-v'>
           <ReactToPrint
-            trigger={() => <buttom className='boton-vale' onClick={(e) => this.handleClick(e)}>Imprimir</buttom>}
+            trigger={() => <buttom className='boton-vale'>Imprimir y guardar</buttom>}
             content={()=> this.vale}
+            onAfterPrint={this.sendMessage.bind(this)}
           />
         </div>
 
-
-
-
-        <form onSubmit={this.sendMessage.bind(this)} ref='contactForm'>
+        {/*<form onSubmit={this.sendMessage.bind(this)} ref='contactForm'>
           <div className='form-container'>
             <div className='vale-content'>
               <p class='p-caja'><b># Vale</b></p>
@@ -391,7 +390,8 @@ export default class Vales extends Component {
           <div className='boton-v'>
             <button type='submit' className='input-sc boton-g'>Guardar</button>
           </div>
-        </form>
+        </form>*/}
+
         <div class='caja-w' style={{marginTop: '40px', marginBottom: '40px'}}>
           <div class='caja-col'>
             <ListComponent
