@@ -165,6 +165,7 @@ export default class Vales extends Component {
           <p class='site-s'><b>Vales</b></p>
         </div>
 
+        <form onSubmit={this.sendMessage.bind(this)} ref='contactForm'>
         <div className='margin-vale' ref={el => (this.vale= el)}>
           <div className='vale-title-container'>
             <div className='vale-logo-container'>
@@ -190,7 +191,16 @@ export default class Vales extends Component {
                   ref={cheque => this.inputCheque = cheque}
                 />
               </p>
-              <p className='p-cv'>No. Vale {this.state.contador.storyCount}</p>
+              <p className='p-cv'>
+                No. Vale
+                <input
+                  className='input-che'
+                  id='vale'
+                  required
+                  ref={vale => this.inputVale = vale}
+                  value={this.state.contador.storyCount}
+                />
+              </p>
             </div>
           </div>
 
@@ -203,9 +213,42 @@ export default class Vales extends Component {
           <div className='mcc-content'>
             <div className='v-m'>
               <p className='pmcc'>MOVIMIENTO</p>
-              <p className='p-bv'>Autorizado</p>
-              <p className='p-bv'>Comprobado</p>
-              <p className='p-bv'>Reintegro/Reembolso</p>
+              <p className='p-bv'>
+                Autorizado
+                <input
+                  type='checkbox'
+                  name='movimiento'
+                  id='movimiento'
+                  required
+                  ref={movimiento => this.inputMovimiento = movimiento}
+                  onChange={this.handleChange.bind(this)}
+                  value={this.state.movimiento}
+                />
+              </p>
+              <p className='p-bv'>
+                Comprobado
+                <input
+                  type='checkbox'
+                  name='movimiento'
+                  id='movimiento'
+                  required
+                  ref={movimiento => this.inputMovimiento = movimiento}
+                  onChange={this.handleChange.bind(this)}
+                  value={this.state.movimiento}
+                />
+              </p>
+              <p className='p-bv'>
+                Reintegro/Reembolso
+                <input
+                  type='checkbox'
+                  name='movimiento'
+                  id='movimiento'
+                  required
+                  ref={movimiento => this.inputMovimiento = movimiento}
+                  onChange={this.handleChange.bind(this)}
+                  value={this.state.movimiento}
+                />
+              </p>
             </div>
             <div className='v-c'>
               <p className='pmcc'>CANTIDAD</p>
@@ -214,30 +257,77 @@ export default class Vales extends Component {
                 name='cantidad'
                 onChange={this.handleChange.bind(this)}
                 value={this.state.cantidad}
-                id='vale'
+                id='cantidad'
                 required
-                ref={vale => this.inputCheque = vale}
+                ref={cantidad => this.inputCantidad = cantidad}
               />
               <input
-                className='input-b' name='cantidadc' onChange={this.handleChange.bind(this)} value={this.state.cantidadc}/>
-              <input className='input-b' name='cantidadr' onChange={this.handleChange.bind(this)} value={this.state.cantidadr}/>
+                className='input-b'
+                name='cantidad'
+                onChange={this.handleChange.bind(this)}
+                value={this.state.cantidad}
+                id='cantidad'
+                required
+                ref={cantidad => this.inputCantidad = cantidad}
+              />
+              <input
+                className='input-b'
+                name='cantidad'
+                onChange={this.handleChange.bind(this)}
+                value={this.state.cantidad}
+                id='cantidad'
+                required
+                ref={cantidad => this.inputCantidad = cantidad}
+              />
             </div>
             <div className='v-con'>
               <p className='pmcc'>CONCEPTO</p>
-              <input className='input-b' name='concepto' onChange={this.handleChange.bind(this)} value={this.state.concepto}/>
+              <input
+                className='input-b'
+                name='concepto'
+                onChange={this.handleChange.bind(this)}
+                value={this.state.concepto}
+                id='concepto'
+                required
+                ref={concepto => this.inputConcepto = concepto}
+              />
               <input className='input-b'/>
               <div className='oat-content'>
                 <div className='o-w'>
                   <p className='p-oat'>Oficio Solicitud</p>
-                  <input className='input-w' name='oficioS' onChange={this.handleChange.bind(this)} value={this.state.oficioS}/>
+                  <input
+                    className='input-w'
+                    name='oficioS'
+                    onChange={this.handleChange.bind(this)}
+                    value={this.state.oficioS}
+                    id='oficioS'
+                    required
+                    ref={oficioS => this.inputOficio = oficioS}
+                  />
                 </div>
                 <div className='a-w'>
                   <p className='p-oat'>Área</p>
-                  <input className='input-w' name='area' onChange={this.handleChange.bind(this)} value={this.state.area}/>
+                  <input
+                    className='input-w'
+                    name='area'
+                    onChange={this.handleChange.bind(this)}
+                    value={this.state.area}
+                    id='area'
+                    required
+                    ref={area => this.inputArea = area}
+                  />
                 </div>
                 <div className='t-w'>
                   <p className='p-oat'>Turno</p>
-                  <input className='input-w' name='turno' onChange={this.handleChange.bind(this)} value={this.state.turno}/>
+                  <input
+                    className='input-w'
+                    name='turno'
+                    onChange={this.handleChange.bind(this)}
+                    value={this.state.turno}
+                    id='turno'
+                    required
+                    ref={turno => this.inputTurno = turno}
+                  />
                 </div>
               </div>
             </div>
@@ -282,7 +372,15 @@ export default class Vales extends Component {
               <b className='font-size-f'>Validado (NRL)</b>
             </div>
             <div className='f-fecha'>
-              <input className='b-fecha-i' name='personaR' onChange={this.handleChange.bind(this)} value={this.state.personaR}/>
+              <input
+                className='b-fecha-i'
+                name='personaR'
+                onChange={this.handleChange.bind(this)}
+                value={this.state.personaR}
+                id='personaR'
+                required
+                ref={personaR => this.inputPersona = personaR}
+              />
               <b className='font-size-f'>Recibió</b>
             </div>
           </div>
@@ -292,10 +390,11 @@ export default class Vales extends Component {
           </div>
 
         </div>
+        </form>
 
         <div className='boton-v'>
           <ReactToPrint
-            trigger={() => <buttom className='boton-vale'>Imprimir y guardar</buttom>}
+            trigger={() => <buttom type='submit' className='boton-vale'>Imprimir y guardar</buttom>}
             content={()=> this.vale}
             onAfterPrint={this.sendMessage.bind(this)}
           />
