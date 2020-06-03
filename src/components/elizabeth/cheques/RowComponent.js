@@ -23,7 +23,7 @@ export default class RowComponent extends Component {
           <p>{this.props.item.fechaE}</p>
         </div>
         <div class='table-c-fechae'>
-          <p>{this.props.item.fechaC}</p>
+          <input style={{borderWidth: '0px'}}/>
         </div>
         <div class='table-c-fechae'>
           <div>

@@ -22,6 +22,7 @@ export default class Cheques extends Component {
       numCheque: '',
       importe: '',
       fechaE: '',
+      dirigido: '',
       fechaC: '',
       contador: {},
       contadorCheques: {}
@@ -36,6 +37,7 @@ export default class Cheques extends Component {
           numCheque: child.val().numCheque,
           importe: child.val().importe,
           fechaE: child.val().fechaE,
+          dirigido: child.val().dirigido,
           fechaC: child.val().fechaC,
           done: child.val().done,
           id: child.key
@@ -101,8 +103,8 @@ export default class Cheques extends Component {
   componentWillMount() {
     let formRef = firebase.database().ref('cheques').orderByKey().limitToLast(1);
     formRef.on('child_added', snapshot => {
-      const { numCheque, importe, fechaE, fechaC } = snapshot.val();
-      const data = { numCheque, importe, fechaE, fechaC };
+      const { numCheque, importe, fechaE, dirigido, fechaC } = snapshot.val();
+      const data = { numCheque, importe, fechaE, dirigido, fechaC };
       this.setState({ form: [data].concat(this.state.form) });
     });
   }
@@ -127,15 +129,17 @@ export default class Cheques extends Component {
       numCheque: this.inputCheque.value,
       importe: this.inputImporte.value,
       fechaE: this.inputFechaE.value,
+      dirigido: this.inputDirigido.value,
       fechaC: this.inputFechaC.value
     };
     this.setState({
       numCheque: this.inputCheque.value,
       importe: this.inputImporte.value,
       fechaE: this.inputFechaE.value,
+      dirigido: this.inputDirigido.value,
       fechaC: this.inputFechaC.value
     })
-    if ( params.numCheque && params.importe && params.fechaE && params.fechaC ) {
+    if ( params.numCheque && params.importe && params.fechaE && params.dirigido ) {
       var f = parseInt(params.importe);
       const statsRef = firebase.firestore().collection('banco').doc('--stats--');
       const increment = firebase.firestore.FieldValue.increment(-f);
@@ -212,13 +216,13 @@ export default class Cheques extends Component {
                   />
                 </div>
                 <div class='input-row-cheque'>
-                  <p class='p-cheque'><b>Fecha de Cobro</b></p>
+                  <p class='p-cheque'><b>Dirigido a</b></p>
                   <input
                     class='input-sc-cheque'
-                    type='date'
-                    id='fechaC'
+                    type='text'
+                    id='dirigido'
                     required
-                    ref={fechaC => this.inputFechaC = fechaC}
+                    ref={dirigido => this.inputDirigido = dirigido}
                   />
                 </div>
               </div>
@@ -241,6 +245,16 @@ export default class Cheques extends Component {
             <div class='cheque-inputs'>
               <div class='cheques-inputs-c'>
                 <div class='input-row-cheque'>
+                  <p class='p-cheque'><b>Fecha de Cobro</b></p>
+                  <input
+                  class='input-sc-cheque'
+                  type='text'
+                  id='fechaC'
+                  required
+                  ref={fechaC => this.inputFechaC = fechaC}
+                  />
+                </div>
+                <div class='input-row-cheque'>
                   <p class='p-cheque'><b>Archivo</b></p>
                   <Dropzone
                     style={{
@@ -254,8 +268,6 @@ export default class Cheques extends Component {
                     }}
                     accept=".pdf" onChange={this.handleUpload.bind(this)}>
                   </Dropzone>
-                </div>
-                <div class='input-row-cheque'>
                 </div>
                 <div class='input-row-cheque'>
                 </div>

@@ -34,6 +34,9 @@ export default class RowComponent extends Component {
             {/*<button onClick={this.update}>Agregar</button>*/}
           </div>
         </div>
+        <div class='table-importe-b'>
+          <button onClick={this.update}>FR</button>
+        </div>
         <div className='table-right'>
         </div>
       </div>

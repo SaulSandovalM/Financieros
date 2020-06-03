@@ -7,7 +7,6 @@ import Dropzone from 'react-dropzone';
 import csv from 'csv';
 import firebase from '../../../Firebase';
 
-
 export default class RowComponent extends Component {
   constructor(props){
     super(props);

@@ -5,21 +5,13 @@ import ListComponent from './ListComponent';
 import CurrencyFormat from 'react-currency-format';
 import csv from 'csv';
 import Dropzone from 'react-dropzone';
-import ListFondo from './ListFondo';
 
 export default class Presupuesto extends Component {
-  constructor (props) {
-    super(props)
+  constructor () {
+    super()
     this.state = {
       pdf: 0,
       lista: [
-        {
-          id: 1,
-          name: 'preuba',
-          done: false
-        },
-      ],
-      listafondo: [
         {
           id: 1,
           name: 'preuba',
@@ -30,9 +22,7 @@ export default class Presupuesto extends Component {
       importe: '',
       proyecto: '',
       clave: '',
-      contador: {},
-      dic: '',
-      cpa: ''
+      contador: {}
     }
   }
 
@@ -135,53 +125,10 @@ export default class Presupuesto extends Component {
       var lista = [];
       snap.forEach((child) => {
         lista.push({
-          rm: child.val().rm,
-          os: child.val().os,
-          up: child.val().up,
-          rubro: child.val().rubro,
-          tg: child.val().tg,
-          ogasto: child.val().ogasto,
-          f: child.val().f,
-          fu: child.val().fu,
-          sf: child.val().sf,
-          eje: child.val().eje,
-          s: child.val().s,
-          prog: child.val().prog,
-          sp: child.val().sp,
-          obj: child.val().obj,
-          proy: child.val().proy,
-          est: child.val().est,
-          obra: child.val().obra,
-          ben: child.val().ben,
-          eg: child.val().eg,
-          mi: child.val().mi,
-          pr: child.val().pr,
-          pb: child.val().pb,
-          dp: child.val().dp,
-          indi: child.val().indi,
-          meta: child.val().meta,
-          la: child.val().la,
-          ods: child.val().ods,
-          et: child.val().et,
-          ff: child.val().ff,
-          of: child.val().of,
-          np: child.val().np,
-          cpa: child.val().cpa,
-          dig: child.val().dig,
-          par: child.val().par,
-          ene: child.val().ene,
-          feb: child.val().feb,
-          mar: child.val().mar,
-          abr: child.val().abr,
-          may: child.val().may,
-          jun: child.val().jun,
-          jul: child.val().jul,
-          ago: child.val().ago,
-          sep: child.val().sep,
-          oct: child.val().oct,
-          nov: child.val().nov,
-          dic: child.val().dic,
-          total: child.val().total,
+          ingresos: child.val().ingresos,
+          importe: child.val().importe,
+          proyecto: child.val().proyecto,
+          clave: child.val().clave,
           done: child.val().done,
           id: child.key
         });
@@ -192,32 +139,9 @@ export default class Presupuesto extends Component {
     });
   }
 
-  listenForItemsFondo = (itemsRefFondo) => {
-    itemsRefFondo.on('value', (snap) => {
-      var listafondo = [];
-      snap.forEach((child) => {
-        listafondo.push({
-          up: child.val().up,
-          ogasto: child.val().ogasto,
-          prog: child.val().prog,
-          proy: child.val().proy,
-          np: child.val().np,
-          dic: child.val().dic,
-          done: child.val().done,
-          id: child.key
-        });
-      });
-      this.setState({
-        listafondo: listafondo
-      });
-    });
-  }
-
   componentDidMount() {
-    const itemsRef = firebase.database().ref('presupuesto/');
+    const itemsRef = firebase.database().ref('banco/');
     this.listenForItems(itemsRef);
-    const itemsRefFondo = firebase.database().ref('banco/');
-    this.listenForItems(itemsRefFondo);
     this.consumo();
   }
 
@@ -264,13 +188,13 @@ export default class Presupuesto extends Component {
       proyecto: this.inputProyecto.value,
       clave: this.inputClave.value,
     })
-    if ( params.ingresos && params.importe && params.proyecto && params.clave ) {
+    if ( params.ingresos && params.importe && params.proyecto && params.clave) {
       var f = parseInt(params.importe);
       const statsRef = firebase.firestore().collection('banco').doc('--stats--');
       const increment = firebase.firestore.FieldValue.increment(f);
       const batch = firebase.firestore().batch();
       const storyRef = firebase.firestore().collection('banco').doc(`${Math.random()}`);
-      batch.set(storyRef, { title: 'Se Creo Fondo Revolvente', cantidad: f });
+      batch.set(storyRef, { title: 'Se agredo un fondo' });
       batch.set(statsRef, { storyCount: increment }, { merge: true });
       batch.commit();
       firebase.database().ref('banco').push(params).then(() => {
@@ -282,60 +206,6 @@ export default class Presupuesto extends Component {
     } else {
       this.showAlert('warning', 'Por favor llene el formulario');
     };
-  }
-
-  update = (item) => {
-    let updates = {};
-    updates['presupuesto/' + item.id] = {
-      rm: item.rm,
-      os: item.os,
-      up: item.up,
-      rubro: item.rubro,
-      tg: item.tg,
-      ogasto: item.ogasto,
-      f: item.f,
-      fu: item.fu,
-      sf: item.sf,
-      eje: item.eje,
-      s: item.s,
-      prog: item.prog,
-      sp: item.sp,
-      obj: item.obj,
-      proy: item.proy,
-      est: item.est,
-      obra: item.obra,
-      ben: item.ben,
-      eg: item.eg,
-      mi: item.mi,
-      pr: item.pr,
-      pb: item.pb,
-      dp: item.dp,
-      indi: item.indi,
-      meta: item.meta,
-      la: item.la,
-      ods: item.ods,
-      et: item.et,
-      ff: item.ff,
-      of: item.of,
-      np: item.np,
-      cpa: item.cpa,
-      dig: item.dig,
-      par: item.par,
-      ene: item.ene,
-      feb: item.feb,
-      mar: item.mar,
-      abr: item.abr,
-      may: item.may,
-      jun: item.jun,
-      jul: item.jul,
-      ago: item.ago,
-      sep: item.sep,
-      oct: item.oct,
-      nov: item.nov,
-      dic: item.dic,
-      total: item.total,
-    };
-    firebase.database().ref().update(updates);
   }
 
   render() {
@@ -417,19 +287,13 @@ export default class Presupuesto extends Component {
             </div>
           </div>
         </div>
-        <div className='space-table'>
-          <div className='p-margin-f'>
-            <p className='p-title-size'>
-              - Busca las partidas para crear tu fondo revolvente
-            </p>
-          </div>
-          <ListComponent
-            lista={this.state.lista}
-            update={this.update}
-          />
-        </div>
-        <form /*onSubmit={this.sendMessage.bind(this)}*/ ref='contactForm'>
+        <form onSubmit={this.sendMessage.bind(this)} ref='contactForm'>
           <div className='p-container'>
+            <div className='p-margin-f'>
+              <p className='p-title-size'>
+                - Ingresa los datos que correspondan con el documento de autorización del fondo revolvente
+              </p>
+            </div>
             <div className='p-row2'>
               <div className='p-container-i2' style={{marginRight: '20px'}}>
                 <p className='p-title-margin2'>R. de Ingresos</p>
@@ -441,6 +305,37 @@ export default class Presupuesto extends Component {
                   required
                 />
               </div>
+              <div className='p-container-i2' >
+                <p className='p-title-margin2'>Importe</p>
+                <input
+                  className='input-h'
+                  id='importe'
+                  ref={importe => this.inputImporte = importe}
+                  placeholder='$ 704,874.00'
+                  required
+                />
+              </div>
+            </div>
+            <div className='p-col'>
+              <div className='p-container-i3' >
+                <p className='p-title-margin2'>Proyecto</p>
+                <input
+                  className='input-h'
+                  id='proyecto'
+                  ref={proyecto => this.inputProyecto = proyecto}
+                  placeholder='ACCIONES DE INVESTIGACION EJECUTIVAS'
+                  required
+                />
+              </div>
+              <div className='p-container-i3' >
+                <p className='p-title-margin2'>Clave</p>
+                <input
+                  className='input-h'
+                  id='clave'
+                  ref={clave => this.inputClave = clave}
+                  placeholder='26-30-01-6201010-01-253001-1-02-02-404-00-E0018-01-002-AU001-001-B07-85000-00-00-D5-C5-0194-00-01-PF-01-01'
+                />
+              </div>
             </div>
           </div>
           <div className='button-row-s'>
@@ -448,9 +343,8 @@ export default class Presupuesto extends Component {
           </div>
         </form>
         <div className='space-table'>
-          <p className='p-title-size'>- Fondo Revolvente</p>
-          <ListFondo
-            listafondo={this.state.listafondo}
+          <ListComponent
+            lista={this.state.lista}
           />
         </div>
       </div>
