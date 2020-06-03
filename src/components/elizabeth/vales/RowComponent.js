@@ -20,24 +20,27 @@ export default class RowComponent extends Component {
   }
 
   handleOnChange1 (event) {
-    const file = event.target.files[0]
-    const reader = new FileReader();
-    reader.readAsText(file);
-    reader.onloadend = evt => {
-      const readerData = evt.target.result;
-      const parser = new DOMParser();
-      const xml = parser.parseFromString(readerData, "text/xml");
-      console.log(
-        "data",
-        new XMLSerializer().serializeToString(xml.documentElement)
-      );
-      var XMLParser = require("react-xml-parser");
-      var NewXml = new XMLParser().parseFromString(
-        new XMLSerializer().serializeToString(xml.documentElement)
-      );
-      console.log("newxml", NewXml);
-      this.setState({ xml });
-      firebase.database().ref('xml').push(NewXml)
+    for(let i = 0; i < event.target.files.length; i++)
+    {
+      const file = event.target.files[i]
+      const reader = new FileReader();
+      reader.readAsText(file);
+      reader.onloadend = evt => {
+        const readerData = evt.target.result;
+        const parser = new DOMParser();
+        const xml = parser.parseFromString(readerData, "text/xml");
+        console.log(
+          "data",
+          new XMLSerializer().serializeToString(xml.documentElement)
+        );
+        var XMLParser = require("react-xml-parser");
+        var NewXml = new XMLParser().parseFromString(
+          new XMLSerializer().serializeToString(xml.documentElement)
+        );
+        console.log("newxml", NewXml);
+        this.setState({ xml });
+        firebase.database().ref('xml').push(NewXml)
+      }
     }
   }
 
