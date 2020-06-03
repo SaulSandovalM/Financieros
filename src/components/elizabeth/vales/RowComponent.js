@@ -22,6 +22,10 @@ export default class RowComponent extends Component {
   handleOnChange1 (event) {
     for(let i = 0; i < event.target.files.length; i++)
     {
+      if (event.target.files[i].type == 'application/pdf') {
+        //Se envia el archivo sin procesar;
+        //firebase.database().ref('xml').push(NewXml)
+      }
       const file = event.target.files[i]
       const reader = new FileReader();
       reader.readAsText(file);
@@ -38,8 +42,13 @@ export default class RowComponent extends Component {
           new XMLSerializer().serializeToString(xml.documentElement)
         );
         console.log("newxml", NewXml);
-        this.setState({ xml });
-        firebase.database().ref('xml').push(NewXml)
+        console.log("Emisor: " + NewXml.children[0]);
+        console.log("Nombre: " + NewXml.children[0].attributes['Nombre']);
+        console.log("rfc: " + NewXml.children[0].attributes['Rfc']);
+        console.log(NewXml.children[2].children.length); //Realizar for de todos los conceptos
+          //children[2].children.length
+        //this.setState({ xml });
+        //firebase.database().ref('xml').push(NewXml)
       }
     }
   }

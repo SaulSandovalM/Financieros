@@ -108,7 +108,7 @@ export default class Vales extends Component {
   }
 
   sendMessage(e) {
-    e.preventDefault();
+   if(e)  e.preventDefault();
     const params = {
       vale: this.inputVale.value,
       cheque: this.inputCheque.value,
