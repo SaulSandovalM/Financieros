@@ -165,7 +165,7 @@ export default class Vales extends Component {
           <p class='site-s'><b>Vales</b></p>
         </div>
 
-        <form onSubmit={this.sendMessage.bind(this)} ref='contactForm'>
+        <form ref='contactForm'>
         <div className='margin-vale' ref={el => (this.vale= el)}>
           <div className='vale-title-container'>
             <div className='vale-logo-container'>
@@ -386,7 +386,10 @@ export default class Vales extends Component {
           </div>
 
           <div className='last'>
-            Me comprometo a entregar la comprobación que ampara el presente vale en un plazo no mayor  a 5 dias habiles posteriores a la fecha de recibido, de lo contrario reintegraré el recurso por la cantidad sin comprobar.
+            Me comprometo a entregar la comprobación que ampara el presente
+            vale en un plazo no mayor  a 5 dias habiles posteriores a la fecha
+            de recibido, de lo contrario reintegraré el recurso por la cantidad
+            sin comprobar.
           </div>
 
         </div>

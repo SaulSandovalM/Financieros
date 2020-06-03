@@ -11,6 +11,7 @@ export default class Presupuesto extends Component {
     super()
     this.state = {
       pdf: 0,
+      pdf2: 0,
       lista: [
         {
           id: 1,
@@ -18,7 +19,6 @@ export default class Presupuesto extends Component {
           done: false
         },
       ],
-      ingresos: '',
       importe: '',
       proyecto: '',
       clave: '',
@@ -34,6 +34,20 @@ export default class Presupuesto extends Component {
       let percentage = (snapshot.bytesTransferred / snapshot.totalBytes) * 100
       this.setState({
         pdf: percentage
+      })
+    }, (error) => {
+      console.error(error.message)
+    })
+  }
+
+  handleUploads (event) {
+    const file = event.target.files[0]
+    const storageRef = firebase.storage().ref(`presupuesto-fr/${file.name}`)
+    const task = storageRef.put(file)
+    task.on('state_changed', (snapshot) => {
+      let percentage = (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+      this.setState({
+        pdf2: percentage
       })
     }, (error) => {
       console.error(error.message)
@@ -125,7 +139,6 @@ export default class Presupuesto extends Component {
       var lista = [];
       snap.forEach((child) => {
         lista.push({
-          ingresos: child.val().ingresos,
           importe: child.val().importe,
           proyecto: child.val().proyecto,
           clave: child.val().clave,
@@ -177,18 +190,16 @@ export default class Presupuesto extends Component {
   sendMessage(e) {
     e.preventDefault();
     const params = {
-      ingresos: this.inputIngresos.value,
       importe: this.inputImporte.value,
       proyecto: this.inputProyecto.value,
       clave: this.inputClave.value,
     };
     this.setState({
-      ingresos: this.inputIngresos.value,
       importe: this.inputImporte.value,
       proyecto: this.inputProyecto.value,
       clave: this.inputClave.value,
     })
-    if ( params.ingresos && params.importe && params.proyecto && params.clave) {
+    if ( params.importe && params.proyecto && params.clave) {
       var f = parseInt(params.importe);
       const statsRef = firebase.firestore().collection('banco').doc('--stats--');
       const increment = firebase.firestore.FieldValue.increment(f);
@@ -233,6 +244,9 @@ export default class Presupuesto extends Component {
                 }}
                 accept=".pdf" onChange={this.handleUpload.bind(this)}>
               </Dropzone>
+              <progress className='progress' value={this.state.pdf} max='100'>
+                {this.state.pdf} %
+              </progress>
             </div>
             <div className='p-container-i'>
               <p className='p-title-margin'>Archivo Cvs</p>
@@ -282,8 +296,11 @@ export default class Presupuesto extends Component {
                   borderStyle: 'solid',
                   background: 'white',
                 }}
-                accept=".pdf" onChange={this.handleUpload.bind(this)}>
+                accept=".pdf" onChange={this.handleUploads.bind(this)}>
               </Dropzone>
+              <progress className='progress' value={this.state.pdf2} max='100'>
+                {this.state.pdf2} %
+              </progress>
             </div>
           </div>
         </div>
@@ -291,20 +308,11 @@ export default class Presupuesto extends Component {
           <div className='p-container'>
             <div className='p-margin-f'>
               <p className='p-title-size'>
-                - Ingresa los datos que correspondan con el documento de autorización del fondo revolvente
+                - Ingresa los datos que correspondan con el documento
+                  de autorización del fondo revolvente
               </p>
             </div>
             <div className='p-row2'>
-              <div className='p-container-i2' style={{marginRight: '20px'}}>
-                <p className='p-title-margin2'>R. de Ingresos</p>
-                <input
-                  className='input-h'
-                  id='ingresos'
-                  ref={ingresos => this.inputIngresos = ingresos}
-                  placeholder='Aprovechamientos por Cooperaciones'
-                  required
-                />
-              </div>
               <div className='p-container-i2' >
                 <p className='p-title-margin2'>Importe</p>
                 <input
