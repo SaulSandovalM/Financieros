@@ -126,6 +126,12 @@
   flex-direction: column;
   justify-content: center;
 }
+.table-no-row {
+  .width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+}
 .table-banco-mov {
   width: 18%;
   border-bottom: 1px solid #d0d0d0;

@@ -210,3 +210,7 @@
   color: white;
   border: 0px;
 }
+.table-caja-row {
+  display: flex;
+  flex-direction: row;
+}

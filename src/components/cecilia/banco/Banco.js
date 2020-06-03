@@ -7,11 +7,13 @@ import CurrencyFormat from 'react-currency-format';
 export default class Banco extends Component {
   constructor(props) {
     super(props);
-    this.ref = firebase.firestore().collection('banco');
+    this.ref = firebase.firestore().collection('banco').orderBy('no');
     this.unsubscribe = null;
     this.state = {
       contador: {},
       title: '',
+      no: '',
+      dirigido: '',
       cantidad: '',
       movimientos: []
     };
@@ -20,11 +22,13 @@ export default class Banco extends Component {
   onCollectionUpdate = (querySnapshot) => {
     const movimientos = [];
     querySnapshot.forEach((doc) => {
-      const { title, cantidad } = doc.data();
+      const { title, no, dirigido, cantidad } = doc.data();
       movimientos.push({
         key: doc.id,
         doc,
         title,
+        no,
+        dirigido,
         cantidad
       });
     });
@@ -82,7 +86,11 @@ export default class Banco extends Component {
                 <div className='table-left'>
                 </div>
                 <div className='table-banco-title'>
-                  <p className='p-banco-map'>{movimientos.title}</p>
+                  <div className='table-no-row'>
+                    <p className='p-banco-map'>{movimientos.title} </p>
+                    <p className='p-banco-map'>{movimientos.no}</p>
+                    <p className='p-banco-map'>{movimientos.dirigido}</p>
+                  </div>
                 </div>
                 <div className='table-banco-mov'>
                   <div>

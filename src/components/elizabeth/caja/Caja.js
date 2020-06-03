@@ -12,6 +12,8 @@ export default class Caja extends Component {
     this.state = {
       contador: {},
       title: '',
+      no: '',
+      personaR: '',
       cantidad: '',
       movimientos: []
     };
@@ -20,11 +22,13 @@ export default class Caja extends Component {
   onCollectionUpdate = (querySnapshot) => {
     const movimientos = [];
     querySnapshot.forEach((doc) => {
-      const { title, cantidad } = doc.data();
+      const { title, no, personaR, cantidad } = doc.data();
       movimientos.push({
         key: doc.id,
         doc,
         title,
+        no,
+        personaR,
         cantidad
       });
     });
@@ -84,7 +88,11 @@ export default class Caja extends Component {
                 <div className='table-left'>
                 </div>
                 <div className='table-banco-title'>
-                  <p className='p-banco-map'>{movimientos.title}</p>
+                  <div className='table-caja-row'>
+                    <p className='p-banco-map'>{movimientos.title}</p>
+                    <p className='p-banco-map'>{movimientos.no}</p>
+                    <p className='p-banco-map'>{movimientos.personaR}</p>
+                  </div>
                 </div>
                 <div className='table-banco-mov'>
                   <div>

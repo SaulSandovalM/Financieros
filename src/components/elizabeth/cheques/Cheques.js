@@ -23,7 +23,7 @@ export default class Cheques extends Component {
       importe: '',
       fechaE: '',
       dirigido: '',
-      fechaC: '',
+      fechaC: 'Pendiente',
       contador: {},
       contadorCheques: {}
     };
@@ -141,13 +141,6 @@ export default class Cheques extends Component {
     })
     if ( params.numCheque && params.importe && params.fechaE && params.dirigido ) {
       var f = parseInt(params.importe);
-      const statsRef = firebase.firestore().collection('banco').doc('--stats--');
-      const increment = firebase.firestore.FieldValue.increment(-f);
-      const batch = firebase.firestore().batch();
-      const storyRef = firebase.firestore().collection('banco').doc(`${Math.random()}`);
-      batch.set(storyRef, { title: 'Se Genero Cheque', cantidad: '-'+f });
-      batch.set(statsRef, { storyCount: increment }, { merge: true });
-      batch.commit();
       const statsRefT = firebase.firestore().collection('caja').doc('--stats--');
       const increments = firebase.firestore.FieldValue.increment(f);
       const batchs = firebase.firestore().batch();
@@ -162,6 +155,14 @@ export default class Cheques extends Component {
       batchc.set(storyRefc, { title: 'Caja + y Banco -' });
       batchc.set(statsRefc, { storyCount: incrementc }, { merge: true });
       batchc.commit();
+      const statsRef = firebase.firestore().collection('banco').doc('--stats--');
+      const increment = firebase.firestore.FieldValue.increment(-f);
+      const batch = firebase.firestore().batch();
+      const storyRef = firebase.firestore().collection('banco').doc(`${Math.random()}`);
+      batch.set(storyRef, { title: 'Se Genero Cheque # ', no: params.numCheque + ' ',
+                            dirigido: ' Dirigido a ' + params.dirigido , cantidad: '-'+f });
+      batch.set(statsRef, { storyCount: increment }, { merge: true });
+      batch.commit();
       firebase.database().ref('cheques').push(params).then(() => {
         this.showAlert('success', 'Tu solicitud fue enviada.');
       }).catch(() => {
@@ -251,6 +252,7 @@ export default class Cheques extends Component {
                   type='text'
                   id='fechaC'
                   required
+                  value={this.state.fechaC}
                   ref={fechaC => this.inputFechaC = fechaC}
                   />
                 </div>

@@ -178,6 +178,13 @@
   border-bottom: 2px solid;
   margin: 0px;
 }
+.b-fecha-i {
+  width: 100%;
+  padding: 0px;
+  border: 0px solid;
+  border-bottom: 2px solid;
+  margin: 0px;
+}
 .font-size-f {
   font-size: 14px;
 }
@@ -194,6 +201,22 @@
   color: white;
   border: 0px;
 }
+.input-che {
+  width: 20%;
+  border: 0px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

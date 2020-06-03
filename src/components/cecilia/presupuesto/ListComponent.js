@@ -7,39 +7,21 @@ export default class ListComponent extends Component {
   constructor (props) {
    super(props);
    this.state = {
-     lista: [],
+     banco: [],
    };
  }
 
   componentWillMount () {
-    firebase.database().ref('presupuesto/').on('child_added', snapshot => {
+    firebase.database().ref('banco/').on('child_added', snapshot => {
       this.setState({
-        lista: this.state.lista.concat(snapshot.val())
+        banco: this.state.banco.concat(snapshot.val())
       });
     });
   }
 
-  // updateSearch(event) {
-  //   this.setState({search: event.target.value.substr(0,26)});
-  // }
-
   render() {
-
-    // let filterData = this.props.lista.filter(
-    //   (lista) => {
-    //     return this.props.lista.cpa.indexOf(this.state.search) !== -1;
-    //   }
-    // );
-
     return (
       <div>
-        <p className='p-title-size'>
-          <input
-            className='input-h'
-            /*value={this.state.search}
-            onChange={this.updateSearch.bind(this)}*/
-          />
-        </p>
         <div class='table-container-p'>
           <div class='table-left'>
           </div>
@@ -49,9 +31,6 @@ export default class ListComponent extends Component {
           <div class='table-importe-p'>
             <b>IMPORTE</b>
           </div>
-          <div class='table-importe-b'>
-            <b></b>
-          </div>
           <div class='table-right'>
           </div>
         </div>
@@ -60,7 +39,6 @@ export default class ListComponent extends Component {
             <RowComponent
               key={item.id}
               item={item}
-              update={this.props.update}
             />
           )
         }

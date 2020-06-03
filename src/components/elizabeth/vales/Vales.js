@@ -24,18 +24,14 @@ export default class Vales extends Component {
       cheque: '',
       movimiento: '',
       cantidad: '',
+      cantidadc: '',
+      cantidadr: '',
       concepto: '',
       oficioS: '',
       area: '',
       turno: '',
       personaR: '',
-      proveedor: '',
       contador: {},
-      input1: '',
-      input2: '',
-      input3: '',
-      input4: '',
-      input5: ''
     };
   }
 
@@ -57,7 +53,6 @@ export default class Vales extends Component {
           area: child.val().area,
           turno: child.val().turno,
           personaR: child.val().personaR,
-          proveedor: child.val().proveedor,
           done: child.val().done,
           id: child.key
         });
@@ -106,8 +101,8 @@ export default class Vales extends Component {
   componentWillMount() {
     let formRef = firebase.database().ref('vales').orderByKey().limitToLast(1);
     formRef.on('child_added', snapshot => {
-      const { vale, cheque, movimiento, cantidad, concepto, oficioS, area, turno, personaR, proveedor } = snapshot.val();
-      const data = { vale, cheque, movimiento, cantidad, concepto, oficioS, area, turno, personaR, proveedor };
+      const { vale, cheque, movimiento, cantidad, concepto, oficioS, area, turno, personaR } = snapshot.val();
+      const data = { vale, cheque, movimiento, cantidad, concepto, oficioS, area, turno, personaR };
       this.setState({ form: [data].concat(this.state.form) });
     });
   }
@@ -123,8 +118,7 @@ export default class Vales extends Component {
       oficioS: this.inputOficio.value,
       area: this.inputArea.value,
       turno: this.inputTurno.value,
-      personaR: this.inputPersona.value,
-      proveedor: this.inputProveedor.value
+      personaR: this.inputPersona.value
     };
     this.setState({
       vale: this.inputVale.value,
@@ -135,23 +129,22 @@ export default class Vales extends Component {
       oficioS: this.inputOficio.value,
       area: this.inputArea.value,
       turno: this.inputTurno.value,
-      personaR: this.inputPersona.value,
-      proveedor: this.inputProveedor.value
+      personaR: this.inputPersona.value
     })
-    if ( params.vale && params.cheque && params.movimiento && params.cantidad && params.concepto && params.oficioS && params.area && params.turno && params.personaR && params.proveedor ) {
+    if ( params.vale && params.cheque && params.movimiento && params.cantidad && params.concepto && params.oficioS && params.area && params.turno && params.personaR ) {
       var f = parseInt(params.cantidad);
       const statsRef = firebase.firestore().collection('caja').doc('--stats--');
       const increment = firebase.firestore.FieldValue.increment(-f);
       const batch = firebase.firestore().batch();
       const storyRef = firebase.firestore().collection('caja').doc(`${Math.random()}`);
-      batch.set(storyRef, { title: 'Se Genero Un Vale', cantidad: '-'+f });
+      batch.set(storyRef, { title: 'Se Genero Un Vale # ', no: params.vale, personaR: params.personaR , cantidad: '-'+f });
       batch.set(statsRef, { storyCount: increment }, { merge: true });
       batch.commit();
       const statsRefs = firebase.firestore().collection('vales').doc('--stats--');
       const increments = firebase.firestore.FieldValue.increment(1);
       const batchs = firebase.firestore().batch();
       const storyRefs = firebase.firestore().collection('vales').doc(`${Math.random()}`);
-      batchs.set(storyRefs, { title: 'Se genero un vale' });
+      batchs.set(storyRefs, { title: 'Se Genero Un Vale # ', no: params.vale, personaR: params.personaR , cantidad: '-'+f });
       batchs.set(statsRefs, { storyCount: increments }, { merge: true });
       batchs.commit();
       firebase.database().ref('vales').push(params).then(() => {
@@ -188,7 +181,15 @@ export default class Vales extends Component {
 
           <div className='no-cv'>
             <div className='cv'>
-              <p className='p-cv'>No. Cheque</p>
+              <p className='p-cv'>
+                No. Cheque
+                <input
+                  className='input-che'
+                  id='cheque'
+                  required
+                  ref={cheque => this.inputCheque = cheque}
+                />
+              </p>
               <p className='p-cv'>No. Vale {this.state.contador.storyCount}</p>
             </div>
           </div>
@@ -208,26 +209,35 @@ export default class Vales extends Component {
             </div>
             <div className='v-c'>
               <p className='pmcc'>CANTIDAD</p>
-              <input className='input-b' name='input1' onChange={this.handleChange.bind(this)} value={this.state.input1} />
-              <input className='input-b' name='input2' onChange={this.handleChange.bind(this)} value={this.state.input2}/>
-              <input className='input-b' name='input3' onChange={this.handleChange.bind(this)} value={this.state.input3}/>
+              <input
+                className='input-b'
+                name='cantidad'
+                onChange={this.handleChange.bind(this)}
+                value={this.state.cantidad}
+                id='vale'
+                required
+                ref={vale => this.inputCheque = vale}
+              />
+              <input
+                className='input-b' name='cantidadc' onChange={this.handleChange.bind(this)} value={this.state.cantidadc}/>
+              <input className='input-b' name='cantidadr' onChange={this.handleChange.bind(this)} value={this.state.cantidadr}/>
             </div>
             <div className='v-con'>
               <p className='pmcc'>CONCEPTO</p>
-              <input className='input-b' name='input4' onChange={this.handleChange.bind(this)} value={this.state.input4}/>
-              <input className='input-b' name='input5' onChange={this.handleChange.bind(this)} value={this.state.input5}/>
+              <input className='input-b' name='concepto' onChange={this.handleChange.bind(this)} value={this.state.concepto}/>
+              <input className='input-b'/>
               <div className='oat-content'>
                 <div className='o-w'>
                   <p className='p-oat'>Oficio Solicitud</p>
-                  <input className='input-w'/>
+                  <input className='input-w' name='oficioS' onChange={this.handleChange.bind(this)} value={this.state.oficioS}/>
                 </div>
                 <div className='a-w'>
                   <p className='p-oat'>Área</p>
-                  <input className='input-w' />
+                  <input className='input-w' name='area' onChange={this.handleChange.bind(this)} value={this.state.area}/>
                 </div>
                 <div className='t-w'>
                   <p className='p-oat'>Turno</p>
-                  <input className='input-w' />
+                  <input className='input-w' name='turno' onChange={this.handleChange.bind(this)} value={this.state.turno}/>
                 </div>
               </div>
             </div>
@@ -272,7 +282,7 @@ export default class Vales extends Component {
               <b className='font-size-f'>Validado (NRL)</b>
             </div>
             <div className='f-fecha'>
-              <p className='b-fecha'>xxxx xxxx xxxx</p>
+              <input className='b-fecha-i' name='personaR' onChange={this.handleChange.bind(this)} value={this.state.personaR}/>
               <b className='font-size-f'>Recibió</b>
             </div>
           </div>
