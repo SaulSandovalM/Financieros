@@ -30,6 +30,10 @@ export default class Vales extends Component {
       area: '',
       turno: '',
       personaR: '',
+      factura: '',
+      recibos: '',
+      sc: '',
+      reintegroT: '',
       estatus: 'Pendiente',
       contador: {},
       isHidden: true,
@@ -62,6 +66,10 @@ export default class Vales extends Component {
           turno: child.val().turno,
           personaR: child.val().personaR,
           estatus: child.val().estatus,
+          factura: child.val().factura,
+          recibos: child.val().recibos,
+          sc: child.val().sc,
+          reintegroT: child.val().reintegroT,
           done: child.val().done,
           id: child.key
         });
@@ -129,6 +137,10 @@ export default class Vales extends Component {
       area: this.inputArea.value,
       turno: this.inputTurno.value,
       personaR: this.inputPersona.value,
+      factura: this.inputFactura.value,
+      recibos: this.inputRecibos.value,
+      sc: this.inputSC.value,
+      reintegroT: this.inputReintegroT.value,
       estatus: this.state.estatus
     };
     this.setState({
@@ -142,11 +154,16 @@ export default class Vales extends Component {
       area: this.inputArea.value,
       turno: this.inputTurno.value,
       personaR: this.inputPersona.value,
+      factura: this.inputFactura.value,
+      recibos: this.inputRecibos.value,
+      sc: this.inputSC.value,
+      reintegroT: this.inputReintegroT.value,
       estatus: this.state.estatus
     })
     if ( params.vale && params.cheque && params.cantidad && params.cantidadc
         && params.cantidadr && params.concepto && params.oficioS && params.area
-        && params.turno && params.personaR && params.estatus ) {
+        && params.turno && params.personaR && params.factura && params.recibos
+        && params.sc && params.reintegroT && params.estatus ) {
       var f = parseInt(params.cantidad);
       const statsRef = firebase.firestore().collection('caja').doc('--stats--');
       const increment = firebase.firestore.FieldValue.increment(-f);
@@ -325,29 +342,53 @@ export default class Vales extends Component {
             </div>
 
             <div className='frsr-end'>
-              <div className='frsr-w'>
-                <div className='div-4'>
-                  <div className='frsr-w-b'>
-                    <p className='p-oat'>Facturas</p>
-                    <input className='input-w' />
-                  </div>
-                  <div className='frsr-w-b' style={{borderLeft: '0px'}}>
-                    <p className='p-oat'>Recibos</p>
-                    <input className='input-w' />
-                  </div>
+            <div className='frsr-w'>
+              <div className='div-4'>
+                <div className='frsr-w-b'>
+                  <p className='p-oat'>Facturas</p>
+                  <input
+                    className='input-w'
+                    name='factura'
+                    onChange={this.handleChange.bind(this)}
+                    value={this.state.factura}
+                    ref={factura => this.inputFactura = factura}
+                  />
                 </div>
-                <div className='div-4'>
-                  <div className='frsr-w-b'>
-                    <p className='p-oat'>S/C</p>
-                    <input className='input-w' />
-                  </div>
-                  <div className='frsr-w-b' style={{borderLeft: '0px', borderRight: '0px'}}>
-                    <p className='p-oat'>Reintegro Total</p>
-                    <input className='input-w' />
-                  </div>
+                <div className='frsr-w-b' style={{borderLeft: '0px'}}>
+                  <p className='p-oat'>Recibos</p>
+                  <input
+                    className='input-w'
+                    name='recibos'
+                    onChange={this.handleChange.bind(this)}
+                    value={this.state.recibos}
+                    ref={recibos => this.inputRecibos = recibos}
+                  />
+                </div>
+              </div>
+              <div className='div-4'>
+                <div className='frsr-w-b'>
+                  <p className='p-oat'>S/C</p>
+                  <input
+                    className='input-w'
+                    name='sc'
+                    onChange={this.handleChange.bind(this)}
+                    value={this.state.sc}
+                    ref={sc => this.inputSC = sc}
+                  />
+                </div>
+                <div className='frsr-w-b' style={{borderLeft: '0px', borderRight: '0px'}}>
+                  <p className='p-oat'>Reintegro Total</p>
+                  <input
+                    className='input-w'
+                    name='reintegroT'
+                    onChange={this.handleChange.bind(this)}
+                    value={this.state.reintegroT}
+                    ref={reintegroT => this.inputReintegroT = reintegroT}
+                  />
                 </div>
               </div>
             </div>
+          </div>
 
             <div className='firma-content'>
               <div className='f-fecha'>

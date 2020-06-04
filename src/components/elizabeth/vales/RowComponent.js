@@ -22,6 +22,10 @@ export default class RowComponent extends Component {
   handleOnChange1 (event) {
     for(let i = 0; i < event.target.files.length; i++)
     {
+      if (event.target.files[i].type == 'application/pdf') {
+        //Se envia el archivo sin procesar;
+        //firebase.database().ref('xml').push(NewXml)
+      }
       const file = event.target.files[i]
       const storageRef = firebase.storage().ref(`comprobacion/${file.name}`)
       const task = storageRef.put(file)
