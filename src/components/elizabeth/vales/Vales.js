@@ -32,6 +32,11 @@ export default class Vales extends Component {
       turno: '',
       personaR: '',
       contador: {},
+      isHidden:true,
+      factura: '',
+      recibos: '',
+      sc: '',
+      reintegroT: '',
     };
   }
 
@@ -54,7 +59,11 @@ export default class Vales extends Component {
           turno: child.val().turno,
           personaR: child.val().personaR,
           done: child.val().done,
-          id: child.key
+          id: child.key,
+          factura: child.val().factura,
+          recibos: child.val().recibos,
+          sc: child.val().sc,
+          reintegroT: child.val().reintegroT
         });
       });
       this.setState({
@@ -108,30 +117,36 @@ export default class Vales extends Component {
   }
 
   sendMessage(e) {
-   if(e)  e.preventDefault();
+   e.preventDefault();
     const params = {
       vale: this.inputVale.value,
       cheque: this.inputCheque.value,
-      movimiento: this.inputMovimiento.value,
       cantidad: this.inputCantidad.value,
       concepto: this.inputConcepto.value,
       oficioS: this.inputOficio.value,
       area: this.inputArea.value,
       turno: this.inputTurno.value,
-      personaR: this.inputPersona.value
+      personaR: this.inputPersona.value,
+      factura: this.inputFactura.value,
+      recibos: this.inputRecibos.value,
+      sc: this.inputSC.value,
+      reintegroT: this.inputReintegroT.value,
     };
     this.setState({
       vale: this.inputVale.value,
       cheque: this.inputCheque.value,
-      movimiento: this.inputMovimiento.value,
       cantidad: this.inputCantidad.value,
       concepto: this.inputConcepto.value,
       oficioS: this.inputOficio.value,
       area: this.inputArea.value,
       turno: this.inputTurno.value,
-      personaR: this.inputPersona.value
+      personaR: this.inputPersona.value,
+      factura: this.inputFactura.value,
+      recibos: this.inputRecibos.value,
+      sc: this.inputSC.value,
+      reintegroT: this.inputReintegroT.value,
     })
-    if ( params.vale && params.cheque && params.movimiento && params.cantidad && params.concepto && params.oficioS && params.area && params.turno && params.personaR ) {
+    if ( params.vale && params.cheque && params.cantidad && params.concepto && params.oficioS && params.area && params.turno && params.personaR && params.factura && params.recibos && params.sc && params.reintegroT) {
       var f = parseInt(params.cantidad);
       const statsRef = firebase.firestore().collection('caja').doc('--stats--');
       const increment = firebase.firestore.FieldValue.increment(-f);
@@ -158,6 +173,12 @@ export default class Vales extends Component {
       };
     }
 
+    toggleHidden(){
+      this.setState({
+        isHidden:!this.state.isHidden
+      })
+    }
+
   render() {
     return (
       <div class='container-back'>
@@ -165,7 +186,7 @@ export default class Vales extends Component {
           <p class='site-s'><b>Vales</b></p>
         </div>
 
-        <form ref='contactForm'>
+        <form ref='contactForm' onSubmit={this.sendMessage.bind(this)}>
         <div className='margin-vale' ref={el => (this.vale= el)}>
           <div className='vale-title-container'>
             <div className='vale-logo-container'>
@@ -215,39 +236,12 @@ export default class Vales extends Component {
               <p className='pmcc'>MOVIMIENTO</p>
               <p className='p-bv'>
                 Autorizado
-                <input
-                  type='checkbox'
-                  name='movimiento'
-                  id='movimiento'
-                  required
-                  ref={movimiento => this.inputMovimiento = movimiento}
-                  onChange={this.handleChange.bind(this)}
-                  value={this.state.movimiento}
-                />
               </p>
               <p className='p-bv'>
                 Comprobado
-                <input
-                  type='checkbox'
-                  name='movimiento'
-                  id='movimiento'
-                  required
-                  ref={movimiento => this.inputMovimiento = movimiento}
-                  onChange={this.handleChange.bind(this)}
-                  value={this.state.movimiento}
-                />
               </p>
               <p className='p-bv'>
                 Reintegro/Reembolso
-                <input
-                  type='checkbox'
-                  name='movimiento'
-                  id='movimiento'
-                  required
-                  ref={movimiento => this.inputMovimiento = movimiento}
-                  onChange={this.handleChange.bind(this)}
-                  value={this.state.movimiento}
-                />
               </p>
             </div>
             <div className='v-c'>
@@ -257,27 +251,24 @@ export default class Vales extends Component {
                 name='cantidad'
                 onChange={this.handleChange.bind(this)}
                 value={this.state.cantidad}
-                id='cantidad'
                 required
                 ref={cantidad => this.inputCantidad = cantidad}
               />
               <input
                 className='input-b'
-                name='cantidad'
+                name='cantidadc'
                 onChange={this.handleChange.bind(this)}
-                value={this.state.cantidad}
-                id='cantidad'
+                value={this.state.cantidadc}
                 required
-                ref={cantidad => this.inputCantidad = cantidad}
+                ref={cantidadc => this.inputCantidadc = cantidadc}
               />
               <input
                 className='input-b'
-                name='cantidad'
+                name='cantidade'
                 onChange={this.handleChange.bind(this)}
-                value={this.state.cantidad}
-                id='cantidad'
+                value={this.state.cantidade}
                 required
-                ref={cantidad => this.inputCantidad = cantidad}
+                ref={cantidade => this.inputCantidade = cantidade}
               />
             </div>
             <div className='v-con'>
@@ -287,7 +278,6 @@ export default class Vales extends Component {
                 name='concepto'
                 onChange={this.handleChange.bind(this)}
                 value={this.state.concepto}
-                id='concepto'
                 required
                 ref={concepto => this.inputConcepto = concepto}
               />
@@ -300,22 +290,16 @@ export default class Vales extends Component {
                     name='oficioS'
                     onChange={this.handleChange.bind(this)}
                     value={this.state.oficioS}
-                    id='oficioS'
                     required
                     ref={oficioS => this.inputOficio = oficioS}
                   />
                 </div>
                 <div className='a-w'>
                   <p className='p-oat'>Área</p>
-                  <input
-                    className='input-w'
-                    name='area'
-                    onChange={this.handleChange.bind(this)}
-                    value={this.state.area}
-                    id='area'
-                    required
-                    ref={area => this.inputArea = area}
-                  />
+
+                  <select className='input-w' ref={area => this.inputArea = area}>
+                    <option id="area">Informática</option>
+                  </select>
                 </div>
                 <div className='t-w'>
                   <p className='p-oat'>Turno</p>
@@ -324,7 +308,6 @@ export default class Vales extends Component {
                     name='turno'
                     onChange={this.handleChange.bind(this)}
                     value={this.state.turno}
-                    id='turno'
                     required
                     ref={turno => this.inputTurno = turno}
                   />
@@ -338,21 +321,45 @@ export default class Vales extends Component {
               <div className='div-4'>
                 <div className='frsr-w-b'>
                   <p className='p-oat'>Facturas</p>
-                  <input className='input-w' />
+                  <input
+                    className='input-w'
+                    name='factura'
+                    onChange={this.handleChange.bind(this)}
+                    value={this.state.factura}
+                    ref={factura => this.inputFactura = factura}
+                  />
                 </div>
                 <div className='frsr-w-b' style={{borderLeft: '0px'}}>
                   <p className='p-oat'>Recibos</p>
-                  <input className='input-w' />
+                  <input
+                    className='input-w'
+                    name='recibos'
+                    onChange={this.handleChange.bind(this)}
+                    value={this.state.recibos}
+                    ref={recibos => this.inputRecibos = recibos}
+                  />
                 </div>
               </div>
               <div className='div-4'>
                 <div className='frsr-w-b'>
                   <p className='p-oat'>S/C</p>
-                  <input className='input-w' />
+                  <input
+                    className='input-w'
+                    name='sc'
+                    onChange={this.handleChange.bind(this)}
+                    value={this.state.sc}
+                    ref={sc => this.inputSC = sc}
+                  />
                 </div>
                 <div className='frsr-w-b' style={{borderLeft: '0px', borderRight: '0px'}}>
                   <p className='p-oat'>Reintegro Total</p>
-                  <input className='input-w' />
+                  <input
+                    className='input-w'
+                    name='reintegroT'
+                    onChange={this.handleChange.bind(this)}
+                    value={this.state.reintegroT}
+                    ref={reintegroT => this.inputReintegroT = reintegroT}
+                  />
                 </div>
               </div>
             </div>
@@ -377,7 +384,6 @@ export default class Vales extends Component {
                 name='personaR'
                 onChange={this.handleChange.bind(this)}
                 value={this.state.personaR}
-                id='personaR'
                 required
                 ref={personaR => this.inputPersona = personaR}
               />
@@ -393,13 +399,17 @@ export default class Vales extends Component {
           </div>
 
         </div>
+        {!this.state.isHidden &&
+        <div className='boton-v'>
+        <button type='submit'>Guardar</button>
+        </div>}
         </form>
 
         <div className='boton-v'>
           <ReactToPrint
-            trigger={() => <buttom type='submit' className='boton-vale'>Imprimir y guardar</buttom>}
+            trigger={() => <button type='submit' className='boton-vale'>Imprimir y guardar</button>}
             content={()=> this.vale}
-            onAfterPrint={this.sendMessage.bind(this)}
+            onAfterPrint={this.toggleHidden.bind(this)}
           />
         </div>
 
