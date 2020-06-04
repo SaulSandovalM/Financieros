@@ -234,7 +234,7 @@ export default class Cheques extends Component {
                   />
                 </div>
                 <div class='input-row-cheque'>
-                  <p class='p-cheque'><b>Dirigido a</b></p>
+                  <p class='p-cheque'><b>Beneficiario</b></p>
                   <input
                     class='input-sc-cheque'
                     type='text'
