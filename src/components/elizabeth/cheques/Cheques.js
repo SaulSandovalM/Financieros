@@ -24,6 +24,7 @@ export default class Cheques extends Component {
       fechaE: '',
       dirigido: '',
       fechaC: 'Pendiente',
+      fechaCA: '',
       contador: {},
       contadorCheques: {}
     };
@@ -174,6 +175,22 @@ export default class Cheques extends Component {
     };
   }
 
+  update = (item) => {
+    let updates = {};
+    updates['cheques/' + item.id] = {
+      numCheque: item.numCheque,
+      importe: item.importe,
+      fechaE: item.fechaE,
+      dirigido: item.dirigido,
+      fechaC: this.state.fechaCA
+    };
+    firebase.database().ref().update(updates);
+  }
+
+  handleChange(event) {
+    this.setState({fechaCA: event.target.value})
+  }
+
   render() {
     return (
       <div class='container-back-cheques'>
@@ -285,10 +302,35 @@ export default class Cheques extends Component {
               </div>
             </div>
           </form>
+          <div className='p-margin'>
+            <p className='p-title-size'>- Ingrese aqui la fecha de cobro a actualizar</p>
+          </div>
+          <div class='cheque-inputs'>
+            <div class='cheques-inputs-c'>
+              <div class='input-row-cheque'>
+                <p class='p-cheque'><b>Fecha de Cobro</b></p>
+                <input
+                class='input-sc-cheque'
+                type='text'
+                name='fechaCA'
+                required
+                value={this.state.fechaCA}
+                onChange={this.handleChange.bind(this)}
+                />
+              </div>
+              <div class='input-row-cheque'>
+              </div>
+              <div class='input-row-cheque'>
+              </div>
+              <div class='input-row-cheque'>
+              </div>
+            </div>
+          </div>
           <div class='cheques-w'>
             <div class='cheques-col'>
               <ListComponent
                 lista={this.state.lista}
+                update={this.update}
               />
             </div>
           </div>

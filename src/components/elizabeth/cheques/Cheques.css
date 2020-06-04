@@ -125,6 +125,17 @@
   flex-direction: column;
   justify-content: center;
 }
+.row-update {
+  display: flex;
+  flex-direction: row;
+}
+.p-update {
+  margin: 0px;
+  padding-right: 10px;
+}
+.update-b {
+  height: 100%;
+}
 .table-c-fechac {
   width: 31%;
   border-bottom: 1px solid #d0d0d0;

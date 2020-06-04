@@ -31,6 +31,7 @@ import Pdf1 from './components/elizabeth/cheques/pdf/Pdf1';
 import Pdf3 from './components/elizabeth/cheques/pdf/Pdf3';
 import Fond from './components/elizabeth/cheques/pdf/Fond';
 import Comprobacion from './components/elizabeth/comprobacion/Comprobacion';
+import Autorizacion from './components/autorizacion/Autorizacion';
 
 function App(props) {
   const { isAuthenticated, isVerifying } = props;
@@ -191,6 +192,7 @@ function App(props) {
       <Route path='/Pdf1' component={Pdf1}/>
       <Route path='/Fond' component={Fond}/>
       <Route path='/Pdf3' component={Pdf3}/>
+      <Route path='/Autorizacion' component={Autorizacion} />
     </Switch>
   );
 }

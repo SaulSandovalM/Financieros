@@ -29,7 +29,7 @@ export default class ListComponent extends Component {
             <b>#</b>
           </div>
           <div class='table-v-importe'>
-            <b>MOVIMIENTO</b>
+            <b>AUTORIZACION</b>
           </div>
           <div class='table-v-fechae'>
             <b>CONCEPTO</b>
