@@ -103,7 +103,6 @@ export default class Excel extends Component {
   }
 
   render() {
-    const fontSize = 5;
 
     return (
       <div>
