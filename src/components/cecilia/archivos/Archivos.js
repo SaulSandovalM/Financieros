@@ -4,7 +4,10 @@ import './Archivos.css';
 export default class Archivos extends Component {
   render() {
     return (
-      <div class='container-back'>
+      <div className='pf-container'>
+        <div className='site-pf'>
+          <p className='site-pf-s'><b>Archivos</b></p>
+        </div>
       </div>
     )
   }

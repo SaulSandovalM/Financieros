@@ -9,8 +9,8 @@ import Common from './components/common/home/Common';
 import Presupuesto from './components/cecilia/presupuesto/Presupuesto';
 import FondoRevolvente from './components/cecilia/fondor/Fondor';
 import Banco from './components/cecilia/banco/Banco'; //arqueo
-// import Archivos from './components/cecilia/archivos/Archivos';
-//import Meses from './components/cecilia/meses/Meses';
+import Archivos from './components/cecilia/archivos/Archivos';
+import Meses from './components/cecilia/meses/Meses';
 //Parte de Elizabeth
 import Caja from './components/elizabeth/caja/Caja';
 import Cheques from './components/elizabeth/cheques/Cheques';
@@ -63,6 +63,20 @@ function App(props) {
         exact
         path='/FondoRevolvente'
         component={FondoRevolvente}
+        isAuthenticated={isAuthenticated}
+        isVerifying={isVerifying}
+      />
+      <ProtectedRoute
+        exact
+        path='/Archivos'
+        component={Archivos}
+        isAuthenticated={isAuthenticated}
+        isVerifying={isVerifying}
+      />
+      <ProtectedRoute
+        exact
+        path='/Meses'
+        component={Meses}
         isAuthenticated={isAuthenticated}
         isVerifying={isVerifying}
       />

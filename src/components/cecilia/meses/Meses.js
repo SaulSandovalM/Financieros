@@ -4,7 +4,10 @@ import './Meses.css';
 export default class Meses extends Component {
   render() {
     return (
-      <div class='container-back'>
+      <div className='pf-container'>
+        <div className='site-pf'>
+          <p className='site-pf-s'><b>Meses</b></p>
+        </div>
       </div>
     )
   }
