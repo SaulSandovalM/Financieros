@@ -20,7 +20,7 @@ class Nav extends Component {
           <img className='logo' src={'http://cdn.hidalgo.gob.mx/logo_gobhidalgo.svg'} alt=''/>
         </div>
         <div className='navbar-left'>
-          <Link to="/" className="deco">
+          <Link to="/Fondos" className="deco">
             <h3 className="nav-t" style={{fontFamily: 'Arial'}}>Fondos</h3>
           </Link>
         </div>
@@ -39,7 +39,7 @@ class Nav extends Component {
             <h3 className="nav-t" style={{fontFamily: 'Arial'}}>Imprimir</h3>
           </Link>
         </div>
-        <div className='navbar-left'>
+        {/*<div className='navbar-left'>
           <Link to="/ControlP" className="deco">
             <h3 className="nav-t" style={{fontFamily: 'Arial'}}>Control Presupuestal</h3>
           </Link>
@@ -48,7 +48,7 @@ class Nav extends Component {
           <Link to="/Complemento" className="deco">
             <h3 className="nav-t" style={{fontFamily: 'Arial'}}>Complemento de Pago</h3>
           </Link>
-        </div>
+        </div>*/}
         <div className='navbar-left'>
           <Link to="/Caratula" className="deco">
             <h3 className="nav-t" style={{fontFamily: 'Arial'}}>Caratula</h3>

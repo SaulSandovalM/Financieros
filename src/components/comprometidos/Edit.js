@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import firebase from '../../Firebase';
 import './Comprometidos.css';
+import Dropzone from 'react-dropzone';
 
 class Comprometido extends Component {
   constructor(props) {
@@ -109,6 +110,27 @@ class Comprometido extends Component {
     });
   }
 
+  handleUpload (event) {
+    for(let i = 0; i < event.target.files.length; i++)
+    {
+      if (event.target.files[i].type == 'application/pdf') {
+        //Se envia el archivo sin procesar;
+        //firebase.database().ref('xml').push(NewXml)
+      }
+      const file = event.target.files[i]
+      const storageRef = firebase.storage().ref(`comprobacion/${file.name}`)
+      const task = storageRef.put(file)
+      task.on('state_changed', (snapshot) => {
+        let percentage = (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+        this.setState({
+          pdf1: percentage
+        })
+      }, (error) => {
+        console.error(error.message)
+      })
+    }
+  }
+
   render() {
 
     const { importe_comp, isr } = this.state;
@@ -121,9 +143,24 @@ class Comprometido extends Component {
         <div className="comp-container">
           <div className="edit-com-comp">
             <div className="App-edit">
-              <h1 style={{fontFamily: 'Arial'}}>Comprometidos</h1>
+              <h1 style={{fontFamily: 'Arial', margin: '0px'}}>Comprometidos</h1>
+              <div className='facxml-row'>
+                <p>Agrega facturas/xml</p>
+                <Dropzone
+                  style={{
+                    position: 'ab',
+                    width: '100px',
+                    height: '30px',
+                    borderWidth: '1px',
+                    borderColor: '#a9a9a9',
+                    borderStyle: 'solid',
+                    background: 'white',
+                  }}
+                  onChange={this.handleUpload.bind(this)}>
+                </Dropzone>
+              </div>
             </div>
-            <div className="edit-row">
+            <div className="edit-row" style={{marginTop: '30px'}}>
               <label for="fondo" className="tipo-tw" style={{fontFamily: 'Arial'}}>Fondos:</label>
               <input name="fondo" value={this.state.fondo} onChange={this.onChange} className="height-ct" disabled/>
             </div>

@@ -1,9 +1,6 @@
 import React, { Component} from 'react';
 import './Caratula.css';
 import ReactToPrint from 'react-to-print';
-// import firebase from '../../Firebase';
-// import { NumberAsString } from '../fondos/NumerosLetras.js';
-// import clausula from '../../img/clausula.png';
 import boton from '../../img/cua.png';
 import boton2 from '../../img/cua2.png';
 import programa from '../../img/logo_hgo.png';
@@ -11,13 +8,12 @@ import logo2 from  '../../img/logo.jpg';
 import footer from '../../img/footer.png';
 
 class Cpdf extends Component{
-  // constructor(props) {
-  //   super(props);
-  //   this.state = {
-  //     fondo: {},
-  //     key: ''
-  //   };
-  // }
+  constructor(props) {
+    super(props);
+    this.state = {
+      hojas: ''
+    };
+  }
   //
   // componentDidMount() {
   //   const ref = firebase.firestore().collection('fondos').doc(this.props.match.params.id);
@@ -34,10 +30,14 @@ class Cpdf extends Component{
   //   });
   // }
 
+  handleChange(event) {
+    this.setState({[event.target.name]: event.target.value})
+  }
+
   render(){
     return(
-      <div className='cpdf-dad'>
-        <div className='cpdf-subdad' ref={el => (this.holi= el)} >
+      <div className='cpdf-dad2'>
+        <div className='cpdf-subdad2' ref={el => (this.holi= el)} >
           <div class='fondo-procus'>
             <img class="ims" src={programa} alt=''/>
             <img class="im" src={logo2} alt=''/>
@@ -73,8 +73,15 @@ class Cpdf extends Component{
             </div>
             <div class="num-exp">
               <p class="text-2">Número de Expediente:{/*{this.state.}*/}
-              <br/>PGJH-09.1*5C.3/  Fondo 2020
-              <br/>Número de hojas:{/*{this.state.}*/}</p>
+                <br/>PGJH-09.1*5C.3/  Fondo 2020
+                <br/>Número de hojas:
+                <input
+                  className='hojas'
+                  name='hojas'
+                  onChange={this.handleChange.bind(this)}
+                  value={this.state.hojas}
+                />
+              </p>
             </div>
           </div>
           <div class="fundamento">
@@ -150,11 +157,12 @@ class Cpdf extends Component{
         <img className='footer' src={footer} alt=''/>
       </div>
 
-
-      <ReactToPrint
-        trigger={() => <buttom class="bont_imprimir">imprimir</buttom>}
-        content={()=> this.holi}
-      />
+      {this.state.hojas &&
+        <ReactToPrint
+          trigger={() => <buttom class="bont_imprimir">imprimir</buttom>}
+          content={()=> this.holi}
+        />
+      }
     </div>
     )
   }

@@ -2,6 +2,12 @@
   display: flex;
   justify-content: center;
 }
+.App-edit {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+  width: 100%;
+}
 .App {
   padding: 30px;
   width: 85%;
@@ -120,4 +126,9 @@
 }
 .input-edi {
   width: 99%;
+}
+.facxml-row {
+  display: flex;
+  flex-direction: row;
+  width: 300px;
 }
