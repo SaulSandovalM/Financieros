@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { logoutUser } from '../../actions';
+import { logoutUser } from '../../../actions';
 import { connect } from 'react-redux';
 import './Nav.css';
-import logo_h from '../../img/logo_h.svg';
+import logo_h from '../../../img/logo_h.svg';
 
 class Nav extends Component {
   handleLogout = () => {

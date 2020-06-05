@@ -4,7 +4,7 @@ import Nav from './Nav';
 import NavC from './NavC';
 import NavE from './NavE';
 import { StyledMenu } from './Menu.styled';
-import firebase from '../../Firebase';
+import firebase from '../../../Firebase';
 
 const Menu = ({ open, ...props }) => {
 

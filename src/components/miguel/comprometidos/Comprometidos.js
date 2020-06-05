@@ -1,22 +1,23 @@
 import React, { Component } from 'react';
-import firebase from '../../Firebase';
-import './Analitico.css';
+import './Comprometidos.css';
+import firebase from '../../../Firebase';
 import { Link } from 'react-router-dom';
+import CurrencyFormat from 'react-currency-format';
 
-class Analitico extends Component {
+export default class Comprometidos extends Component {
   constructor() {
     super();
     this.ref = firebase.firestore().collection('fondos');
     this.unsubscribe = null;
     this.state = {
-      fondos: []
+      fondos: [],
     };
   }
 
   onCollectionUpdate = (querySnapshot) => {
     const fondos = [];
     querySnapshot.forEach((doc) => {
-      const { fondo, fecha, tipo_doc, oficio_aut, no_oficio, no_aut, no_lici, importe, desc, importe_l, beneficiario, realizo} = doc.data();
+      const { fondo, fecha, tipo_doc, oficio_aut, no_oficio, no_aut, no_lici, importe, desc, importe_l, beneficiario, realizo } = doc.data();
       fondos.push({
         key: doc.id,
         doc, // DocumentSnapshot
@@ -88,9 +89,9 @@ class Analitico extends Component {
     }
 
     return (
-      <div className="cent-ana">
+      <div className="cent-compro">
         <div className="App">
-          <h2 className="title" style={{fontFamily: 'Arial'}}>Analitico</h2>
+          <h2 className="title" style={{fontFamily: 'Arial'}}>Comprometidos</h2>
           <div className="products-al">
             <div className="a-row-t">Fondos</div>
             <div className="a-row-t">Fecha</div>
@@ -102,17 +103,22 @@ class Analitico extends Component {
             {this.state.fondos.map(fondos =>
               <div>
                 {fondos.realizo === admin &&
-                  <div className="products-al">
-                    <div className="a-row">{fondos.fondo}</div>
-                    <div className="a-row">{fondos.fecha}</div>
-                    <div className="a-row">{fondos.realizo}</div>
-                    <div className="a-row">{fondos.tipo_doc}</div>
-                    <div className="a-row">$ {fondos.importe}</div>
-                    <div className="a-row vista">
-                      <Link to={`/edita/${fondos.key}`}>Ver</Link>
-                    </div>
+                <div className="products-al">
+                  <div className="a-row">{fondos.fondo}</div>
+                  <div className="a-row">{fondos.fecha}</div>
+                  <div className="a-row">{fondos.realizo}</div>
+                  <div className="a-row">{fondos.tipo_doc}</div>
+                  <CurrencyFormat
+                    className="a-row"
+                    value={fondos.importe}
+                    displayType={'text'}
+                    thousandSeparator={true}
+                    prefix={' $'} />
+                  <div className="a-row vista">
+                    <Link to={`/edit/${fondos.key}`}>Ver</Link>
                   </div>
-                }
+                </div>
+              }
               </div>
             )}
           </div>
@@ -121,5 +127,3 @@ class Analitico extends Component {
     );
   }
 }
-
-export default Analitico;

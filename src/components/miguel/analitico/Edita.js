@@ -1,5 +1,5 @@
  import React, { Component } from 'react';
-import firebase from '../../Firebase';
+import firebase from '../../../Firebase';
 import './Analitico.css';
 import { DropDownList } from '@progress/kendo-react-dropdowns';
 

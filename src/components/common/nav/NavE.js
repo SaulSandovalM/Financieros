@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { logoutUser } from '../../actions';
+import { logoutUser } from '../../../actions';
 import { connect } from 'react-redux';
 import './Nav.css';
-import logo_h from '../../img/logo_h.svg';
+import logo_h from '../../../img/logo_h.svg';
 
 class NavE extends Component {
   handleLogout = () => {
@@ -22,17 +22,17 @@ class NavE extends Component {
         </div>
         <div className='navbar-left'>
           <Link to='/Caja' className='deco'>
-            <h3 className='nav-t' style={{fontFamily: 'Arial'}}>Caja</h3>
+            <h3 className='nav-t'>Caja</h3>
           </Link>
         </div>
         <div className='navbar-left'>
           <Link to='/Cheques' className='deco'>
-            <h3 className='nav-t' style={{fontFamily: 'Arial'}}>Cheques</h3>
+            <h3 className='nav-t'>Cheques</h3>
           </Link>
         </div>
         <div className='navbar-left'>
           <Link to='/Vales' className='deco'>
-            <h3 className='nav-t' style={{fontFamily: 'Arial'}}>Vales</h3>
+            <h3 className='nav-t'>Vales</h3>
           </Link>
         </div>
         <div className='navbar-left'>
@@ -41,7 +41,7 @@ class NavE extends Component {
               onClick={this.handleLogout}
               className='nav-t'
               style={{background: '#092432', border: 'none'}}>
-              <h3 className='nav-t' style={{fontFamily: 'Arial'}}>
+              <h3 className='nav-t'>
                 Cerrar Sesion
               </h3>
             </button>

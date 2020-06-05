@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import firebase from '../../Firebase';
+import firebase from '../../../Firebase';
 import './Fondos.css';
 import { NumericTextBox, Input } from '@progress/kendo-react-inputs';
 import '@progress/kendo-theme-material/dist/all.css';

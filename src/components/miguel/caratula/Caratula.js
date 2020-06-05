@@ -1,11 +1,11 @@
 import React, { Component} from 'react';
 import './Caratula.css';
 import ReactToPrint from 'react-to-print';
-import boton from '../../img/cua.png';
-import boton2 from '../../img/cua2.png';
-import programa from '../../img/logo_hgo.png';
-import logo2 from  '../../img/logo.jpg';
-import footer from '../../img/footer.png';
+import boton from '../../../img/cua.png';
+import boton2 from '../../../img/cua2.png';
+import programa from '../../../img/logo_hgo.png';
+import logo2 from  '../../../img/logo.jpg';
+import footer from '../../../img/footer.png';
 
 class Cpdf extends Component{
   constructor(props) {

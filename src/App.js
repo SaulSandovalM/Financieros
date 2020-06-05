@@ -7,7 +7,7 @@ import Login from './components/common/login/Login';
 import Common from './components/common/home/Common';
 //Parte de Cecilia
 import Presupuesto from './components/cecilia/presupuesto/Presupuesto';
-//import FondoRevolvente from './components/cecilia/fondor/Fondor';
+import FondoRevolvente from './components/cecilia/fondor/Fondor';
 import Banco from './components/cecilia/banco/Banco'; //arqueo
 // import Archivos from './components/cecilia/archivos/Archivos';
 //import Meses from './components/cecilia/meses/Meses';
@@ -17,20 +17,20 @@ import Cheques from './components/elizabeth/cheques/Cheques';
 import Vales from './components/elizabeth/vales/Vales';
 import Autorizacion from './components/elizabeth/autorizacion/Autorizacion';
 //Parte de Miguel
-import Fondos from './components/fondos/Fondos';
-import Analitico from './components/analitico/Analitico';
-import TablaComprometidos from './components/comprometidos/TablaComprometidos';
-import Consulta from './components/consulta/Consulta';
-import Edit from './components/comprometidos/Edit';
-import Edita from './components/analitico/Edita';
-import Pdf from './components/consulta/pdf';
-import Pppdf from './components/consulta/pppdf';
-import Frpdf from './components/consulta/frpdf';
-import Cpdf from './components/consulta/Cpdf';
+import Fondos from './components/miguel/fondos/Fondos';
+import Comprometidos from './components/miguel/comprometidos/Comprometidos';
+import Edit from './components/miguel/comprometidos/Edit';
+import Analitico from './components/miguel/analitico/Analitico';
+import Edita from './components/miguel/analitico/Edita';
+import Consulta from './components/miguel/consulta/Consulta';
+import Cpdf from './components/miguel/consulta/Cpdf';
+import Pdf from './components/miguel/consulta/pdf';
+import Pppdf from './components/miguel/consulta/pppdf';
+import Frpdf from './components/miguel/consulta/frpdf';
 import ControlP from './components/controlp/ControlP';
 import Add from './components/controlp/Add';
 import Complemento from './components/complemento/Complemento';
-import Caratula from './components/caratula/Caratula';
+import Caratula from './components/miguel/caratula/Caratula';
 
 function App(props) {
   const { isAuthenticated, isVerifying } = props;
@@ -56,6 +56,13 @@ function App(props) {
         exact
         path='/Banco'
         component={Banco}
+        isAuthenticated={isAuthenticated}
+        isVerifying={isVerifying}
+      />
+      <ProtectedRoute
+        exact
+        path='/FondoRevolvente'
+        component={FondoRevolvente}
         isAuthenticated={isAuthenticated}
         isVerifying={isVerifying}
       />
@@ -99,7 +106,7 @@ function App(props) {
       <ProtectedRoute
         exact
         path='/Comprometidos'
-        component={TablaComprometidos}
+        component={Comprometidos}
         isAuthenticated={isAuthenticated}
         isVerifying={isVerifying}
       />

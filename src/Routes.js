@@ -6,7 +6,7 @@ import configureStore from './store/configureStore';
 import { useOnClickOutside } from './hooks';
 import FocusLock from 'react-focus-lock';
 import Burger from './components/nav/Burger';
-import Menu from './components/nav/Menu';
+import Menu from './components/common/nav/Menu';
 import { ThemeProvider } from 'styled-components';
 import { theme } from './theme';
 
@@ -17,7 +17,7 @@ function Routes() {
   const [open, setOpen] = useState(false);
   const node = useRef();
   const menuId = 'main-menu';
-  
+
   useOnClickOutside(node, () => setOpen(false));
 
   return (

@@ -1,22 +1,22 @@
 import React, { Component } from 'react';
-import './Consulta.css';
-import firebase from '../../Firebase';
+import firebase from '../../../Firebase';
+import './Analitico.css';
 import { Link } from 'react-router-dom';
 
-class TablaComprometidos extends Component {
-  constructor(props) {
-  super(props);
-  this.ref = firebase.firestore().collection('fondos');
-  this.unsubscribe = null;
-  this.state = {
-    fondos: []
+class Analitico extends Component {
+  constructor() {
+    super();
+    this.ref = firebase.firestore().collection('fondos');
+    this.unsubscribe = null;
+    this.state = {
+      fondos: []
     };
   }
 
   onCollectionUpdate = (querySnapshot) => {
     const fondos = [];
     querySnapshot.forEach((doc) => {
-      const { fondo, fecha, tipo_doc, oficio_aut, no_oficio, no_aut, no_lici, importe, desc, importe_l, beneficiario, realizo, numero, num_conver } = doc.data();
+      const { fondo, fecha, tipo_doc, oficio_aut, no_oficio, no_aut, no_lici, importe, desc, importe_l, beneficiario, realizo} = doc.data();
       fondos.push({
         key: doc.id,
         doc, // DocumentSnapshot
@@ -32,8 +32,6 @@ class TablaComprometidos extends Component {
         importe_l,
         beneficiario,
         realizo,
-        numero,
-        num_conver
       });
     });
     this.setState({
@@ -53,7 +51,6 @@ class TablaComprometidos extends Component {
     if (user != null) {
       email = user.email;
     }
-    console.log(email);
 
     let admin;
     if (email === 'administrador@procu.com') {
@@ -80,25 +77,26 @@ class TablaComprometidos extends Component {
       admin = 'CENELY';
     } else if (email === 'hector@procu.com') {
       admin = 'HECTOR';
-    } else if (email === 'miau@procu.com') {
-      admin = 'MAO';
+    } else if (email === 'omar@procu.com') {
+      admin = 'OMAR';
     } else if (email === 'omar@procu.com') {
       admin = 'OMAR';
     } else if (email === 'fer@procu.com') {
       admin = 'FERNANDA';
+    } else if (email === 'miau@procu.com') {
+      admin = 'MAURICIO';
     }
-    console.log(admin)
 
     return (
-      <div className="cent-consul">
+      <div className="cent-ana">
         <div className="App">
-          <h2 className="title" style={{fontFamily: 'Arial'}}>Consulta</h2>
+          <h2 className="title" style={{fontFamily: 'Arial'}}>Analitico</h2>
           <div className="products-al">
-            <div className="a-row-t" style={{fontFamily: 'Arial'}}>Fondos</div>
-            <div className="a-row-t" style={{fontFamily: 'Arial'}}>Fecha</div>
-            <div className="a-row-t" style={{fontFamily: 'Arial'}}>Nombre Realizo</div>
-            <div className="a-row-t" style={{fontFamily: 'Arial'}}>Tipo de documento</div>
-            <div className="a-row-t" style={{fontFamily: 'Arial'}}>Importe</div><div className="a-row-t"></div>
+            <div className="a-row-t">Fondos</div>
+            <div className="a-row-t">Fecha</div>
+            <div className="a-row-t">Nombre Realizo</div>
+            <div className="a-row-t">Tipo de documento</div>
+            <div className="a-row-t">Importe</div><div className="a-row-t"></div>
           </div>
           <div>
             {this.state.fondos.map(fondos =>
@@ -109,20 +107,11 @@ class TablaComprometidos extends Component {
                     <div className="a-row">{fondos.fecha}</div>
                     <div className="a-row">{fondos.realizo}</div>
                     <div className="a-row">{fondos.tipo_doc}</div>
-                    <div className="a-row">{fondos.importe}</div>
+                    <div className="a-row">$ {fondos.importe}</div>
                     <div className="a-row vista">
-                    { fondos.tipo_doc === 'Pago Directo' &&
-                      <Link to={`/Pdf/${fondos.key}`}>Ver</Link>
-                    }
-                    { fondos.tipo_doc === 'Fondo Revolvente' &&
-                    <div >
-                      <Link class="archivos" to={`/Pppdf/${fondos.key}`}>Pago Proveedor  </Link>
-                      <br/>
-                      <Link class="archivos"  to={`/Pdf/${fondos.key}`}>Recibo</Link>
-                      </div>
-                    }
+                      <Link to={`/edita/${fondos.key}`}>Ver</Link>
                     </div>
-                </div>
+                  </div>
                 }
               </div>
             )}
@@ -133,4 +122,4 @@ class TablaComprometidos extends Component {
   }
 }
 
-export default TablaComprometidos;
+export default Analitico;
