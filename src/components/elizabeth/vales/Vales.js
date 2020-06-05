@@ -96,7 +96,7 @@ export default class Vales extends Component {
           isLoading: false
         });
       } else {
-        console.log("No such document!");
+        console.log('No hay Documento');
       }
     })
   }
@@ -199,9 +199,9 @@ export default class Vales extends Component {
     var tot = cant1 - cant2;
 
     var today = new Date();
-    var meses =  [ "Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic" ];
+    var meses =  [ 'Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic' ];
     var f = new Date();
-    today = f.getDate() + "/" + meses[f.getMonth()] + "/" + f.getFullYear();
+    today = f.getDate() + '/' + meses[f.getMonth()] + '/' + f.getFullYear();
 
     return (
       <div class='container-back'>

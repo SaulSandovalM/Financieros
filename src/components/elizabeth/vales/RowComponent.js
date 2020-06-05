@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
 import './Vales.css';
 import CurrencyFormat from 'react-currency-format';
-import { Link } from 'react-router-dom';
-import Popup from "reactjs-popup";
+import Popup from 'reactjs-popup';
 import Dropzone from 'react-dropzone';
-import csv from 'csv';
 import firebase from '../../../Firebase';
 
 export default class RowComponent extends Component {
@@ -22,7 +20,7 @@ export default class RowComponent extends Component {
   handleOnChange1 (event) {
     for(let i = 0; i < event.target.files.length; i++)
     {
-      if (event.target.files[i].type == 'application/pdf') {
+      if (event.target.files[i].type === 'application/pdf') {
         //Se envia el archivo sin procesar;
         //firebase.database().ref('xml').push(NewXml)
       }
@@ -77,43 +75,43 @@ export default class RowComponent extends Component {
 
   render() {
 
-    function xmlToJson(xml) {
-
-    // Create the return object
-    var obj = {};
-
-    if (xml.nodeType == 1) { // element
-    // do attributes
-    if (xml.attributes.length > 0) {
-    obj["@attributes"] = {};
-      for (var j = 0; j < xml.attributes.length; j++) {
-        var attribute = xml.attributes.item(j);
-        obj["@attributes"][attribute.nodeName] = attribute.nodeValue;
-      }
-    }
-    } else if (xml.nodeType == 3) { // text
-    obj = xml.nodeValue;
-    }
-
-    // do children
-    if (xml.hasChildNodes()) {
-    for(var i = 0; i < xml.childNodes.length; i++) {
-      var item = xml.childNodes.item(i);
-      var nodeName = item.nodeName;
-      if (typeof(obj[nodeName]) == "undefined") {
-        obj[nodeName] = xmlToJson(item);
-      } else {
-        if (typeof(obj[nodeName].push) == "undefined") {
-          var old = obj[nodeName];
-          obj[nodeName] = [];
-          obj[nodeName].push(old);
-        }
-        obj[nodeName].push(xmlToJson(item));
-      }
-    }
-    }
-    return obj;
-    };
+  //   function xmlToJson(xml) {
+  //
+  //   // Create the return object
+  //   var obj = {};
+  //
+  //   if (xml.nodeType === 1) { // element
+  //   // do attributes
+  //   if (xml.attributes.length > 0) {
+  //   obj['@attributes'] = {};
+  //     for (var j = 0; j < xml.attributes.length; j++) {
+  //       var attribute = xml.attributes.item(j);
+  //       obj['@attributes'][attribute.nodeName] = attribute.nodeValue;
+  //     }
+  //   }
+  // } else if (xml.nodeType === 3) { // text
+  //   obj = xml.nodeValue;
+  //   }
+  //
+  //   // do children
+  //   if (xml.hasChildNodes()) {
+  //   for(var i = 0; i < xml.childNodes.length; i++) {
+  //     var item = xml.childNodes.item(i);
+  //     var nodeName = item.nodeName;
+  //     if (typeof(obj[nodeName]) == 'undefined') {
+  //       obj[nodeName] = xmlToJson(item);
+  //     } else {
+  //       if (typeof(obj[nodeName].push) == 'undefined') {
+  //         var old = obj[nodeName];
+  //         obj[nodeName] = [];
+  //         obj[nodeName].push(old);
+  //       }
+  //       obj[nodeName].push(xmlToJson(item));
+  //     }
+  //   }
+  //   }
+  //   return obj;
+  //   };
 
     return (
       <div class='caja-inputs'>
@@ -159,13 +157,13 @@ export default class RowComponent extends Component {
                         borderStyle: 'solid',
                         borderRadius: '5px',
                         maxFiles: 5}}
-                        accept=".xml" onChange={this.handleOnChange1.bind(this)}
+                        accept='.xml' onChange={this.handleOnChange1.bind(this)}
                         >
                     </Dropzone>
                     <progress className='progress' value={this.state.pdf1} max='100'>
                       {this.state.pdf1} %
                     </progress>
-                    <div className="dz-default dz-message" value={this.state.pdf1} max='100'>
+                    <div className='dz-default dz-message' value={this.state.pdf1} max='100'>
                       Carga {this.state.pdf1} %</div>
                   </div>
                   <div>
@@ -180,13 +178,13 @@ export default class RowComponent extends Component {
                         borderStyle: 'solid',
                         borderRadius: '5px',
                         maxFiles: 5}}
-                        accept=".pdf" onChange={this.handleOnChange2.bind(this)}
+                        accept='.pdf' onChange={this.handleOnChange2.bind(this)}
                         >
                     </Dropzone>
                     <progress className='progress' value={this.state.pdf2} max='100'>
                       {this.state.pdf2} %
                     </progress>
-                    <div className="dz-default dz-message" value={this.state.pdf2} max='100'>
+                    <div className='dz-default dz-message' value={this.state.pdf2} max='100'>
                       Carga {this.state.pdf2} %</div>
                   </div>
                   <div>
@@ -201,13 +199,13 @@ export default class RowComponent extends Component {
                         borderStyle: 'solid',
                         borderRadius: '5px',
                         maxFiles: 5}}
-                        accept=".pdf" onChange={this.handleOnChange3.bind(this)}
+                        accept='.pdf' onChange={this.handleOnChange3.bind(this)}
                         >
                     </Dropzone>
                     <progress className='progress' value={this.state.pdf3} max='100'>
                       {this.state.pdf3} %
                     </progress>
-                    <div className="dz-default dz-message" value={this.state.pdf3} max='100'>
+                    <div className='dz-default dz-message' value={this.state.pdf3} max='100'>
                       Carga {this.state.pdf3} %</div>
                   </div>
                 </div>

@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import firebase from '../../../Firebase';
 import './Banco.css';
-import ListComponent from './ListComponent';
 import CurrencyFormat from 'react-currency-format';
 
 export default class Banco extends Component {

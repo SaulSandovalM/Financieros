@@ -25,7 +25,7 @@ class Cpdf extends Component{
   //         isLoading: false
   //       });
   //     } else {
-  //       console.log("No such document!");
+  //       console.log('No such document!');
   //     }
   //   });
   // }
@@ -38,41 +38,41 @@ class Cpdf extends Component{
     return(
       <div className='cpdf-dad2'>
         <div className='cpdf-subdad2' ref={el => (this.holi= el)} >
-          <div class='fondo-procus'>
-            <img class="ims" src={programa} alt=''/>
-            <img class="im" src={logo2} alt=''/>
+          <div className='fondo-procus'>
+            <img className='ims' src={programa} alt=''/>
+            <img className='im' src={logo2} alt=''/>
           </div>
-          <div class="procu">
-            <p class="text">
+          <div className='procu'>
+            <p className='text'>
               Fondo: PROCURADURÍA GENERAL DE JUSTICIA DEL ESTADO <br/>
               Sub: Fondo: N/A<br/>
               Unidad Administrativa: DIRECCIÓN GENERAL DE ADMINISTRACIÓN Y FINANZAS<br/>
               Area Generadora: DIRECCIÓN DE RECURSOS FINANCIEROS
             </p>
           </div>
-          <div class="acomodar">
-            <div class='seccion-de'>
-              <p  class="text">
+          <div className='acomodar'>
+            <div className='seccion-de'>
+              <p  className='text'>
                 Sección: 5C. Recursos Financieros
                 <br/>Serie: 5C.3 Gastos y Egresos por Partida Presupuestal
                 <br/>Sub-serie: N/A
                 <br/>Código: PGJH-09.1*5C.
               </p>
             </div>
-            <div class='asunto-iz'>
-              <p  class="text-2">
+            <div className='asunto-iz'>
+              <p className='text-2'>
               Asunto: Publicaciones e Impresoras Institucionales Procuraduría General de Justicia
               <br/>y/o Pagos Directos
               </p>
             </div>
           </div>
-          <div class='acomodar-2'>
-            <div class="texto-ofi">
-              <p  class="text">Fecha de Apertura:{/*{this.state.}*/}</p>
-              <p  class="text">Fecha de Cierre:{/*{this.state.}*/}</p>
+          <div className='acomodar-2'>
+            <div className='texto-ofi'>
+              <p  className='text'>Fecha de Apertura:{/*{this.state.}*/}</p>
+              <p  className='text'>Fecha de Cierre:{/*{this.state.}*/}</p>
             </div>
-            <div class="num-exp">
-              <p class="text-2">Número de Expediente:{/*{this.state.}*/}
+            <div className='num-exp'>
+              <p className='text-2'>Número de Expediente:{/*{this.state.}*/}
                 <br/>PGJH-09.1*5C.3/  Fondo 2020
                 <br/>Número de hojas:
                 <input
@@ -84,11 +84,11 @@ class Cpdf extends Component{
               </p>
             </div>
           </div>
-          <div class="fundamento">
+          <div className='fundamento'>
           </div>
-          <div class="clausula">
-            <p class="cons">
-            <b class="negritas">Fundamento legal </b>
+          <div className='clausula'>
+            <p className='cons'>
+            <b className='negritas'>Fundamento legal </b>
              Costitución Politíca de los Estados Unidos Mexicanos, artículo 6 fracción I y II, 8° Costitución politica del
             Estados de Hidalgo, artículo 4 ter 89, 90 y 91. Ley Organica de Ministerio Público del Estado de Hidalgo, artículo 17 y 27 fracciones I, 36.
             Ley de transpariencia y Acceso a la  Información  Publica Gubernamental para el Estado de Hidalgo artículo 5 fracción X, 6, 22 fracciones XVIII y XIX.
@@ -96,62 +96,71 @@ class Cpdf extends Component{
             Reglamento de la Ley de los Archivos del Estado de Hidalgo artículo 2 fracción I.
             </p>
           </div>
-          <div class="cajas">
-            <div class="cajas-valor1">
-              <p class="t-cajass">Valor Documento Primario</p>
-              <p class="t-cajas">Administrativo<img className='svg'src={boton2} alt=''/></p>
-              <p class="t-cajas">Fiscal <img className='svg' src={boton} alt=''/></p>
-              <p class="t-cajas">Legal<img className='svg' src={boton} alt=''/></p>
+          <div className='cajas'>
+            <div className='cajas-valor1'>
+              <p className='t-cajass'>Valor Documento Primario</p>
+              <p className='t-cajas'>Administrativo<img className='svg'src={boton2} alt=''/></p>
+              <p className='t-cajas'>Fiscal <img className='svg' src={boton} alt=''/></p>
+              <p className='t-cajas'>Legal<img className='svg' src={boton} alt=''/></p>
             </div>
-            <div class="cajas-valor2">
-              <p class="t-cajass">Valor Documental Secundario</p>
-              <p class="t-cajas">Informativo <img className='svg' src={boton2} alt=''/></p>
-              <p class="t-cajas">Evidencial<img className='svg' src={boton} alt=''/></p>
-              <p class="t-cajas">Testimonial<img className='svg' src={boton} alt=''/></p>
+            <div className='cajas-valor2'>
+              <p className='t-cajass'>Valor Documental Secundario</p>
+              <p className='t-cajas'>Informativo <img className='svg' src={boton2} alt=''/></p>
+              <p className='t-cajas'>Evidencial<img className='svg' src={boton} alt=''/></p>
+              <p className='t-cajas'>Testimonial<img className='svg' src={boton} alt=''/></p>
             </div>
-            <div class="cajas-valor3">
-              <p class="t-cajass">Clasificación de la Información</p>
-              <p class="t-cajas">Pública<img className='svg' src={boton2} alt=''/></p>
-              <p class="t-cajas">Reservada<img className='svg' src={boton} alt=''/></p>
-              <p class="t-cajas">Cofindencial<img className='svg' src={boton} alt=''/></p>
+            <div className='cajas-valor3'>
+              <p className='t-cajass'>Clasificación de la Información</p>
+              <p className='t-cajas'>Pública<img className='svg' src={boton2} alt=''/></p>
+              <p className='t-cajas'>Reservada<img className='svg' src={boton} alt=''/></p>
+              <p className='t-cajas'>Cofindencial<img className='svg' src={boton} alt=''/></p>
             </div>
           </div>
-          <div class="contenedor">
-            <div class="obser">
-              <div class="vigencia">
-                <p class="vig-t">Vigencia Documental</p>
-                <div class="vigencia2">
-                  <p class="vig-t">En Tramite 1 Años</p>
-                  <p class="vig-t">Concentracion 4 años</p>
-                  <p class="vig-t">Total de Años</p>
+          <div className='contenedor'>
+            <div className='obser'>
+              <div className='vigencia'>
+                <p className='vig-t'>Vigencia Documental</p>
+                <div className='vigencia2'>
+                  <p className='vig-t'>En Tramite 1 Años</p>
+                  <p className='vig-t'>Concentracion 4 años</p>
+                  <p className='vig-t'>Total de Años</p>
                 </div>
               </div>
-              <div class="ubi">
-                <p class="ubi-t">Ubicacion Fisica del Expediente<br/>Archivo tramite de la Procuraduria General de Justicia, Archivo Inv. N 00167758</p>
+              <div className='ubi'>
+                <p className='ubi-t'>Ubicacion Fisica del Expediente<br/>Archivo tramite de la Procuraduria General de Justicia, Archivo Inv. N 00167758</p>
               </div>
             </div>
-            <div class="cuadro">
-              <p class="ubi-t2">Observaciones</p>
+            <div className='cuadro'>
+              <p className='ubi-t2'>Observaciones</p>
             </div>
           </div>
-          <div class="final">
-            <div class="destino">
-              <div class= "df">
-                <p class="t-caja"> Destino Final</p>
+          <div className='final'>
+            <div className='destino'>
+              <div className= 'df'>
+                <p className='t-caja'> Destino Final</p>
               </div>
-              <div class="df-t">
-                <p class="t-cajas">Baja<img className='svg' src={boton} alt=''/></p>
-                <p class="t-cajas">Archivo historico<img className='svg' src={boton} alt=''/></p>
-                <p class="t-cajas">Muestreo<img className='svg' src={boton2} alt=''/></p>
+              <div className='df-t'>
+                <p className='t-cajas'>
+                  Baja
+                  <img className='svg' src={boton} alt=''/>
+                </p>
+                <p className='t-cajas'>
+                  Archivo historico
+                  <img className='svg' src={boton} alt=''/>
+                </p>
+                <p className='t-cajas'>
+                  Muestreo
+                  <img className='svg' src={boton2} alt=''/>
+                </p>
              </div>
           </div>
-          <div class="fe-consulta">
-            <div class= "df">
-              <p class="t-caja">Fecha(s) de Consulta</p>
+          <div className='fe-consulta'>
+            <div className= 'df'>
+              <p className='t-caja'>Fecha(s) de Consulta</p>
             </div>
-            <p class="t-caja">1 dd mm aa</p>
-            <p class="t-caja">2 dd mm aa</p>
-            <p class="t-caja">3 dd mm aa</p>
+            <p className='t-caja'>1 dd mm aa</p>
+            <p className='t-caja'>2 dd mm aa</p>
+            <p className='t-caja'>3 dd mm aa</p>
           </div>
         </div>
         <img className='footer' src={footer} alt=''/>
@@ -159,7 +168,7 @@ class Cpdf extends Component{
 
       {this.state.hojas &&
         <ReactToPrint
-          trigger={() => <buttom class="bont_imprimir">imprimir</buttom>}
+          trigger={() => <buttom className='bont_imprimir'>imprimir</buttom>}
           content={()=> this.holi}
         />
       }

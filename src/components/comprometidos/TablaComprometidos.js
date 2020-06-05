@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './Comprometidos.css';
 import firebase from '../../Firebase';
 import { Link } from 'react-router-dom';
+import CurrencyFormat from 'react-currency-format';
 
 class TablaComprometidos extends Component {
   constructor() {
@@ -107,7 +108,12 @@ class TablaComprometidos extends Component {
                   <div className="a-row">{fondos.fecha}</div>
                   <div className="a-row">{fondos.realizo}</div>
                   <div className="a-row">{fondos.tipo_doc}</div>
-                  <div className="a-row">{fondos.importe}</div>
+                  <CurrencyFormat
+                    className="a-row"
+                    value={fondos.importe}
+                    displayType={'text'}
+                    thousandSeparator={true}
+                    prefix={' $'} />
                   <div className="a-row vista">
                     <Link to={`/edit/${fondos.key}`}>Ver</Link>
                   </div>

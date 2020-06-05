@@ -193,28 +193,28 @@ export default class Cheques extends Component {
 
   render() {
     return (
-      <div class='container-back-cheques'>
-        <div class='site-cheques'>
-          <p class='site-s-cheques'><b>Cheques</b></p>
+      <div className='container-back-cheques'>
+        <div className='site-cheques'>
+          <p className='site-s-cheques'><b>Cheques</b></p>
         </div>
         <div>
-          <form class='cheques-container' onSubmit={this.sendMessage.bind(this)} ref='contactForm'>
-            <div class='cheques-inputs'>
-              <div class='cheques-inputs-c'>
-                <div class='input-row-cheque'>
-                  <p class='p-cheque'><b># Cheque</b></p>
+          <form className='cheques-container' onSubmit={this.sendMessage.bind(this)} ref='contactForm'>
+            <div className='cheques-inputs'>
+              <div className='cheques-inputs-c'>
+                <div className='input-row-cheque'>
+                  <p className='p-cheque'><b># Cheque</b></p>
                   <input
-                    class='input-sc-cheque'
+                    className='input-sc-cheque'
                     id='numCheque'
                     required
                     ref={numCheque => this.inputCheque = numCheque}
                     value={this.state.contadorCheques.storyCount}
                   />
                 </div>
-                <div class='input-row-cheque'>
-                  <p class='p-cheque'><b>Importe</b></p>
+                <div className='input-row-cheque'>
+                  <p className='p-cheque'><b>Importe</b></p>
                   <input
-                    class='input-sc-cheque'
+                    className='input-sc-cheque'
                     type='number'
                     min='1'
                     max='100000'
@@ -223,20 +223,20 @@ export default class Cheques extends Component {
                     ref={importe => this.inputImporte = importe}
                   />
                 </div>
-                <div class='input-row-cheque'>
-                  <p class='p-cheque'><b>Fecha de Emisión</b></p>
+                <div className='input-row-cheque'>
+                  <p className='p-cheque'><b>Fecha de Emisión</b></p>
                   <input
-                    class='input-sc-cheque'
+                    className='input-sc-cheque'
                     type='date'
                     id='fechaE'
                     required
                     ref={fechaE => this.inputFechaE = fechaE}
                   />
                 </div>
-                <div class='input-row-cheque'>
-                  <p class='p-cheque'><b>Beneficiario</b></p>
+                <div className='input-row-cheque'>
+                  <p className='p-cheque'><b>Beneficiario</b></p>
                   <input
-                    class='input-sc-cheque'
+                    className='input-sc-cheque'
                     type='text'
                     id='dirigido'
                     required
@@ -244,10 +244,10 @@ export default class Cheques extends Component {
                   />
                 </div>
               </div>
-              <div class='disponible-cheque'>
+              <div className='disponible-cheque'>
                 <div>
-                  <p class='p-cheque-dis'><b>DINERO DISPONIBLE</b></p>
-                  <p class='cantidad-cheque'>
+                  <p className='p-cheque-dis'><b>DINERO DISPONIBLE</b></p>
+                  <p className='cantidad-cheque'>
                     MXN
                     <CurrencyFormat
                       value={this.state.contador.storyCount}
@@ -260,12 +260,12 @@ export default class Cheques extends Component {
                 </div>
               </div>
             </div>
-            <div class='cheque-inputs'>
-              <div class='cheques-inputs-c'>
-                <div class='input-row-cheque'>
-                  <p class='p-cheque'><b>Fecha de Cobro</b></p>
+            <div className='cheque-inputs'>
+              <div className='cheques-inputs-c'>
+                <div className='input-row-cheque'>
+                  <p className='p-cheque'><b>Fecha de Cobro</b></p>
                   <input
-                  class='input-sc-cheque'
+                  className='input-sc-cheque'
                   type='text'
                   id='fechaC'
                   required
@@ -273,8 +273,8 @@ export default class Cheques extends Component {
                   ref={fechaC => this.inputFechaC = fechaC}
                   />
                 </div>
-                <div class='input-row-cheque'>
-                  <p class='p-cheque'><b>Archivo</b></p>
+                <div className='input-row-cheque'>
+                  <p className='p-cheque'><b>Archivo</b></p>
                   <Dropzone
                     style={{
                       position: 'ab',
@@ -288,29 +288,29 @@ export default class Cheques extends Component {
                     accept=".pdf" onChange={this.handleUpload.bind(this)}>
                   </Dropzone>
                 </div>
-                <div class='input-row-cheque'>
+                <div className='input-row-cheque'>
                 </div>
-                <div class='input-row-cheque'>
+                <div className='input-row-cheque'>
                 </div>
               </div>
-              <div class='disponible-cheque'>
+              <div className='disponible-cheque'>
                 <div>
-                  <div class='input-row-2-cheque'>
-                    <button type='submit' class='input-sc-cheque boton-g-cheque'>Guardar</button>
+                  <div className='input-row-2-cheque'>
+                    <button type='submit' className='input-sc-cheque boton-g-cheque'>Guardar</button>
                   </div>
                 </div>
               </div>
             </div>
           </form>
-          <div className='p-margin'>
-            <p className='p-title-size'>- Ingrese aqui la fecha de cobro a actualizar</p>
+          <div classNameName='p-margin'>
+            <p classNameName='p-title-size'>- Ingrese aqui la fecha de cobro a actualizar</p>
           </div>
-          <div class='cheque-inputs'>
-            <div class='cheques-inputs-c'>
-              <div class='input-row-cheque'>
-                <p class='p-cheque'><b>Fecha de Cobro</b></p>
+          <div className='cheque-inputs'>
+            <div className='cheques-inputs-c'>
+              <div className='input-row-cheque'>
+                <p className='p-cheque'><b>Fecha de Cobro</b></p>
                 <input
-                class='input-sc-cheque'
+                className='input-sc-cheque'
                 type='text'
                 name='fechaCA'
                 required
@@ -318,16 +318,16 @@ export default class Cheques extends Component {
                 onChange={this.handleChange.bind(this)}
                 />
               </div>
-              <div class='input-row-cheque'>
+              <div className='input-row-cheque'>
               </div>
-              <div class='input-row-cheque'>
+              <div className='input-row-cheque'>
               </div>
-              <div class='input-row-cheque'>
+              <div className='input-row-cheque'>
               </div>
             </div>
           </div>
-          <div class='cheques-w'>
-            <div class='cheques-col'>
+          <div className='cheques-w'>
+            <div className='cheques-col'>
               <ListComponent
                 lista={this.state.lista}
                 update={this.update}

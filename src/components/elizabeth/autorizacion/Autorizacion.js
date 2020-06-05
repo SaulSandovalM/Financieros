@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './Autorizacion.css';
-import firebaseConf from '../../Firebase';
+import firebaseConf from '../../../Firebase';
 import ListComponent from './ListComponent';
 
 export default class Autorizacion extends Component {
@@ -69,11 +69,11 @@ export default class Autorizacion extends Component {
 
   render() {
     return (
-      <div class='banco-back'>
-        <div class='site-banco'>
-          <p class='site-banco-s'><b>Autorización</b></p>
+      <div className='banco-back'>
+        <div className='site-banco'>
+          <p className='site-banco-s'><b>Autorización</b></p>
         </div>
-        <div class='banco-container'>
+        <div className='banco-container'>
           <ListComponent
             lista={this.state.lista}
             update={this.update}

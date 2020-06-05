@@ -1,6 +1,7 @@
  import React, { Component } from 'react';
 import firebase from '../../Firebase';
 import './Analitico.css';
+import { DropDownList } from '@progress/kendo-react-dropdowns';
 
 class Edita extends Component {
 
@@ -62,7 +63,7 @@ class Edita extends Component {
   componentDidMount() {
     const ref = firebase.firestore().collection('fondos').doc(this.props.match.params.id);
     const updateRef = firebase.firestore().collection('fondos').doc(this.props.match.params.id).collection('analitico');
-    
+
     this.unsubscribe = updateRef.onSnapshot(this.onCollectionUpdate);
     ref.get().then((doc) => {
       if (doc.exists) {
@@ -146,7 +147,12 @@ class Edita extends Component {
       mm = '0' + mm
     }
     today = yyyy + '-' + mm + '-' + dd;
-    const { nfactura, fechaa, proveedor, partida, importea, isr, iva, total, municipio, area } = this.state;
+    const { nfactura, fechaa, proveedor, partida, importea, isr, iva, municipio, area } = this.state;
+
+    var impo = parseInt(importea);
+    var isri = parseInt(isr);
+    var ivam = parseInt(iva);
+    const tot = impo + isri + ivam;
 
     return (
       <div className="cent-ana-e">
@@ -214,49 +220,16 @@ class Edita extends Component {
                 <div className="same-2">{analitico.fechaa}</div>
                 <div className="prin-2">{analitico.proveedor}</div>
                 <div className="same-2">{analitico.partida}</div>
-                <div className="same-2">{analitico.importea}</div>
-                <div className="same-2">{analitico.isr}</div>
-                <div className="same-2">{analitico.iva}</div>
-                <div className="same-2">{analitico.total}</div>
+                <div className="same-2">$ {analitico.importea}.00</div>
+                <div className="same-2">$ {analitico.isr}.00</div>
+                <div className="same-2">$ {analitico.iva}.00</div>
+                <div className="same-2">$ {analitico.total}.00</div>
                 <div className="same-2">{analitico.municipio}</div>
                 <div className="prin-2">{analitico.area}</div>
               </div>
             </div>
           )}
         </div>
-
-        {/*<div className="tab-ana2">
-          <div className="prin-2">
-            <input className="inp-ana" value="Total" disabled/>
-          </div>
-          <div className="same-2">
-            <input className="inp-ana" value="contador" disabled/>
-          </div>
-          <div className="prin-2">
-            <input className="inp-ana" disabled/>
-          </div>
-          <div className="same-2">
-            <input className="inp-ana" disabled ref="partida"/>
-          </div>
-          <div className="same-2">
-            <input className="inp-ana" name="importe" value={importea} onChange={this.onChange} ref="importe" disabled/>
-          </div>
-          <div className="same-2">
-            <input className="inp-ana" name="isr" value={isr} onChange={this.onChange} ref="isr" disabled/>
-          </div>
-          <div className="same-2">
-            <input className="inp-ana" value="sumar" disabled/>
-          </div>
-          <div className="same-2">
-            <input className="inp-ana" name="total" value={importea} onChange={this.onChange} disabled ref="total"/>
-          </div>
-          <div className="same-2">
-            <input className="inp-ana" name="municipio" value={municipio} onChange={this.onChange} disabled ref="municipio"/>
-          </div>
-          <div className="prin-2">
-            <input className="inp-ana" name="area" value={area} onChange={this.onChange} disabled ref="area"/>
-          </div>
-        </div>*/}
 
         <form onSubmit={this.onSubmit} className="add-tab-a">
           <div className="tab-ana2">
@@ -267,10 +240,64 @@ class Edita extends Component {
               <input className="inp-ana" type="date" name="fechaa" value={fechaa} onChange={this.onChange} ref="fechaa" required/>
             </div>
             <div className="prin-2">
-              <input className="inp-ana" name="proveedor" value={proveedor} onChange={this.onChange} required ref="proveedor"/>
+              <DropDownList style={{width: '100%', borderColor: 'rgba(0,0,0,0.42)', height: '25px'}} data={this.proveedor} name="proveedor" value={proveedor} onChange={this.onChange} required ref="proveedor"/>
             </div>
             <div className="same-2">
-              <input className="inp-ana" name="partida" value={partida} onChange={this.onChange} required ref="partida"/>
+              <select className="inp-ana" name="partida" value={partida} onChange={this.onChange} required ref="partida" >
+                <option name="partida"></option>
+                <option name="partida">211001</option>
+                <option name="partida">211002</option>
+                <option name="partida">212001</option>
+                <option name="partida">212002</option>
+                <option name="partida">214001</option>
+                <option name="partida">214002</option>
+                <option name="partida">215001</option>
+                <option name="partida">216001</option>
+                <option name="partida">217001</option>
+                <option name="partida">221001</option>
+                <option name="partida">221002</option>
+                <option name="partida">246001</option>
+                <option name="partida">251001</option>
+                <option name="partida">253001</option>
+                <option name="partida">254001</option>
+                <option name="partida">255001</option>
+                <option name="partida">261001</option>
+                <option name="partida">271001</option>
+                <option name="partida">272001</option>
+                <option name="partida">291001</option>
+                <option name="partida">292001</option>
+                <option name="partida">311001</option>
+                <option name="partida">313001</option>
+                <option name="partida">318001</option>
+                <option name="partida">323002</option>
+                <option name="partida">334001</option>
+                <option name="partida">338001</option>
+                <option name="partida">341001</option>
+                <option name="partida">351001</option>
+                <option name="partida">352001</option>
+                <option name="partida">353001</option>
+                <option name="partida">355001</option>
+                <option name="partida">357001</option>
+                <option name="partida">358001</option>
+                <option name="partida">361002</option>
+                <option name="partida">372001</option>
+                <option name="partida">375001</option>
+                <option name="partida">381001</option>
+                <option name="partida">392006</option>
+                <option name="partida">394001</option>
+                <option name="partida">218002</option>
+                <option name="partida">312001</option>
+                <option name="partida">371001</option>
+                <option name="partida">247001</option>
+                <option name="partida">249001</option>
+                <option name="partida">359001</option>
+                <option name="partida">336001</option>
+                <option name="partida">275001</option>
+                <option name="partida">211003</option>
+                <option name="partida">541001</option>
+                <option name="partida">515001</option>
+                <option name="partida">339001</option>
+              </select>
             </div>
             <div className="same-2">
               <input className="inp-ana" name="importea" value={importea} onChange={this.onChange} ref="importea" required/>
@@ -282,7 +309,7 @@ class Edita extends Component {
               <input className="inp-ana" name="iva" value={iva} onChange={this.onChange} ref="iva" required/>
             </div>
             <div className="same-2">
-              <input className="inp-ana" name="total" value={total} onChange={this.onChange} required ref="total"/>
+              <input className="inp-ana" name="total" value={tot} onChange={this.onChange} required ref="total"/>
             </div>
             <div className="same-2">
               <input className="inp-ana" name="municipio" value={municipio} onChange={this.onChange} required ref="municipio"/>
@@ -293,7 +320,12 @@ class Edita extends Component {
           </div>
           <div className="form-container-last">
             <div className="botones">
-              <button className="bt-s2" type='submit' style={{fontFamily: 'Arial'}}>Guadar</button>
+              <button
+                className="bt-s2"
+                type='submit'
+                onClick={() => this.setState({ total: this.state.total = tot })}>
+                Guadar
+              </button>
             </div>
           </div>
         </form>

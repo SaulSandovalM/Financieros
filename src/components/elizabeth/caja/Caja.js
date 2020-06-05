@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import firebase from '../../../Firebase';
 import './Caja.css';
-import ListComponent from './ListComponent';
 import CurrencyFormat from 'react-currency-format';
 
 export default class Caja extends Component {
@@ -59,16 +58,16 @@ export default class Caja extends Component {
 
   render() {
     return (
-      <div class='container-back'>
-        <div class='site'>
-          <p class='site-s'><b>Caja</b></p>
+      <div className='container-back'>
+        <div className='site'>
+          <p className='site-s'><b>Caja</b></p>
         </div>
         <div>
-          <div class='caja-container'>
-            <div class='caja-inputs'>
-              <div class='disponible-banco'>
+          <div className='caja-container'>
+            <div className='caja-inputs'>
+              <div className='disponible-banco'>
                 <div>
-                  <p class='cantidad-banco'>
+                  <p className='cantidad-banco'>
                     MXN
                     <CurrencyFormat
                       value={this.state.contador.storyCount}

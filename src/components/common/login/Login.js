@@ -1,18 +1,11 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import { Redirect } from "react-router-dom";
-import { loginUser } from "../../actions";
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom';
+import { loginUser } from '../../../actions';
 import './Login.css'
 
-const containerStyle = {
-  height: '100vh',
-  display: 'flex',
-  alingItems: 'center',
-  justifyContent: 'center',
-};
-
 class Login extends Component {
-  state = { email: "", password: "" };
+  state = { email: '', password: '' };
 
   handleEmailChange = ({ target }) => {
     this.setState({ email: target.value });
@@ -33,31 +26,29 @@ class Login extends Component {
     const { loginError, isAuthenticated } = this.props;
 
     if (isAuthenticated) {
-      return <Redirect to="/Common" />;
+      return <Redirect to='/' />;
     } else {
       return (
-        <div style={{zIndex: '5', position: 'absolute', width: '100%', top: 0, left: 0}}>
-          <div className="back-login">
-            <div style={containerStyle}>
-              <div style={{display: 'flex', justifyContent: 'center', width: '50%'}}>
-                <div className="login">
-                  <h2 style={{fontFamily: 'Arial'}}>Inicia Sesión</h2>
-                  <div style={{display: 'flex', flexDirection: 'column'}} className="border-form-login">
+        <div className='login-container'>
+          <div className='back-login'>
+            <div className='login-ins'>
+              <div className='login-col'>
+                <div className='login'>
+                  <h2>Inicia Sesión</h2>
+                  <div className='border-form-login'>
                     <input
-                      margin="normal"
+                      margin='normal'
                       fullWidth
-                      id="email"
-                      name="email"
-                      className="input-style-1"
+                      id='email'
+                      className='input-style-1'
                       onChange={this.handleEmailChange}
                     />
                     <input
-                      margin="normal"
+                      margin='normal'
                       fullWidth
-                      className="input-style-2"
-                      name="password"
-                      type="password"
-                      id="password"
+                      className='input-style-2'
+                      type='password'
+                      id='password'
                       onChange={this.handlePasswordChange}
                     />
                     {loginError && (
@@ -65,13 +56,13 @@ class Login extends Component {
                         Correo o contraseña icorrectos
                       </p>
                     )}
-                    <div className="cta2">
+                    <div className='cta2'>
                       <button
-                        type="button"
+                        type='button'
                         fullWidth
-                        variant="contained"
-                        color="primary"
-                        className="boton2-l"
+                        variant='contained'
+                        color='primary'
+                        className='boton2-l'
                         onClick={this.handleSubmit}
                       >
                         Ingresar

@@ -22,22 +22,22 @@ export default class ListComponent extends Component {
   render() {
     return (
       <div>
-        <div class='cheques-inputs'>
-          <div class='table-left'>
+        <div className='cheques-inputs'>
+          <div className='table-left'>
           </div>
-          <div class='table-c-num'>
+          <div className='table-c-num'>
             <b>#</b>
           </div>
-          <div class='table-c-importe'>
+          <div className='table-c-importe'>
             <b>FECHA DE EMISION</b>
           </div>
-          <div class='table-c-fechae'>
+          <div className='table-c-fechae'>
             <b>FECHA DE COBRO</b>
           </div>
-          <div class='table-c-fechae'>
+          <div className='table-c-fechae'>
             <b>IMPORTE</b>
           </div>
-          <div class='table-right'>
+          <div className='table-right'>
           </div>
         </div>
         {

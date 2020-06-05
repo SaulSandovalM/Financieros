@@ -113,7 +113,7 @@ class Comprometido extends Component {
   handleUpload (event) {
     for(let i = 0; i < event.target.files.length; i++)
     {
-      if (event.target.files[i].type == 'application/pdf') {
+      if (event.target.files[i].type === 'application/pdf') {
         //Se envia el archivo sin procesar;
         //firebase.database().ref('xml').push(NewXml)
       }
@@ -143,7 +143,7 @@ class Comprometido extends Component {
         <div className="comp-container">
           <div className="edit-com-comp">
             <div className="App-edit">
-              <h1 style={{fontFamily: 'Arial', margin: '0px'}}>Comprometidos</h1>
+              <h1 style={{margin: '0px'}}>Comprometidos</h1>
               <div className='facxml-row'>
                 <p>Agrega facturas/xml</p>
                 <Dropzone
@@ -161,48 +161,48 @@ class Comprometido extends Component {
               </div>
             </div>
             <div className="edit-row" style={{marginTop: '30px'}}>
-              <label for="fondo" className="tipo-tw" style={{fontFamily: 'Arial'}}>Fondos:</label>
+              <label for="fondo" className="tipo-tw">Fondos:</label>
               <input name="fondo" value={this.state.fondo} onChange={this.onChange} className="height-ct" disabled/>
             </div>
             <div className="edit-row">
-              <label for="fecha" className="tipo-tw" style={{fontFamily: 'Arial'}}>Fecha:</label>
+              <label for="fecha" className="tipo-tw">Fecha:</label>
               <input name="fecha" value={this.state.fecha} onChange={this.onChange} className="height-ct" disabled/>
             </div>
             <div className="edit-row">
-              <label for="realizo" className="tipo-tw" style={{fontFamily: 'Arial'}}>Nombre Realizo:</label>
+              <label for="realizo" className="tipo-tw">Nombre Realizo:</label>
               <input name="realizo" value={this.state.realizo} onChange={this.onChange} className="height-ct" disabled/>
             </div>
             <div className="edit-row">
-              <label for="tipo_doc" className="tipo-tw" style={{fontFamily: 'Arial'}}>Tipo de Documento:</label>
+              <label for="tipo_doc" className="tipo-tw">Tipo de Documento:</label>
               <input name="tipo_doc" value={this.state.tipo_doc} onChange={this.onChange} className="height-ct" disabled/>
             </div>
             <div className="edit-row">
-              <label for="importe" className="tipo-tw" style={{fontFamily: 'Arial'}}>Importe:</label>
+              <label for="importe" className="tipo-tw">Importe:</label>
               <input name="importe" value={'$'+this.state.importe} onChange={this.onChange} className="height-ct" disabled/>
             </div>
           </div>
           <div className="table-ed-2">
             <form onSubmit={this.onSubmit} style={{width: '100%'}}>
               <div className="edit-tab-row-t">
-                <div className="tabla-edit-l" style={{fontFamily: 'Arial', color: '#FFF'}}> {/*select*/}
+                <div className="tabla-edit-l" style={{color: '#FFF'}}>
                   Partida
                 </div>
-                <div className="tabla-edit-l" style={{fontFamily: 'Arial', color: '#FFF'}}> {/*select*/}
+                <div className="tabla-edit-l" style={{color: '#FFF'}}>
                   U. Presupuestal
                 </div>
-                <div className="tabla-edit-l" style={{fontFamily: 'Arial', color: '#FFF'}}> {/*select*/}
+                <div className="tabla-edit-l" style={{color: '#FFF'}}>
                   No. de Proyecto
                 </div>
-                <div className="tabla-edit-l" style={{fontFamily: 'Arial', color: '#FFF'}}>
+                <div className="tabla-edit-l" style={{color: '#FFF'}}>
                   Importe
                 </div>
-                <div className="tabla-edit-l" style={{fontFamily: 'Arial', color: '#FFF'}}>
+                <div className="tabla-edit-l" style={{color: '#FFF'}}>
                   ISR
                 </div>
-                <div className="tabla-edit-l" style={{fontFamily: 'Arial', color: '#FFF'}}>
+                <div className="tabla-edit-l" style={{color: '#FFF'}}>
                   Total
                 </div>
-                <div className="tabla-edit-l" style={{fontFamily: 'Arial', color: '#FFF'}}>
+                <div className="tabla-edit-l" style={{color: '#FFF'}}>
                   Fecha
                 </div>
               </div>
@@ -221,28 +221,8 @@ class Comprometido extends Component {
                   </div>
                 )}
               </div>
-            {/*<div className="edit-tab-row-2">
-                <div className="tabla-edit-c">
-                  Total
-                </div>
-                <div className="tabla-edit-c">
-                </div>
-                <div className="tabla-edit-c">
-                </div>
-                <div className="tabla-edit-c">
-                  <input name="importe" value={this.state.importe} onChange={this.onChange} className="input-edi" disabled/>
-                </div>
-                <div className="tabla-edit-c">
-                  0
-                </div>
-                <div className="tabla-edit-c">
-                  <input name="importe" value={this.state.importe} onChange={this.onChange} className="input-edi" disabled/>
-                </div>
-                <div className="tabla-edit-c">
-                </div>
-              </div>*/}
               <div className="edit-tab-row-2">
-                <div className="tabla-edit-c"> {/*select*/}
+                <div className="tabla-edit-c">
                   <select name="partida" onChange={this.onChange} ref="partida" className="input-edi">
                     <option name="partida"></option>
                     <option name="partida">211001</option>
@@ -300,7 +280,7 @@ class Comprometido extends Component {
 
                   </select>
                 </div>
-                <div className="tabla-edit-c"> {/*select*/}
+                <div className="tabla-edit-c">
                   <select name="presupuestal" onChange={this.onChange} ref="presupuestal" className="input-edi">
                     <option name="presupuestal"></option>
                     <option name="presupuestal">2</option>
@@ -327,7 +307,7 @@ class Comprometido extends Component {
                     <option name="presupuestal">24</option>
                   </select>
                 </div>
-                <div className="tabla-edit-c"> {/*select*/}
+                <div className="tabla-edit-c">
                   <select name="no_proyecto" onChange={this.onChange} ref="no_proyecto" className="input-edi">
                     <option name="no_proyecto"></option>
                     <option name="no_proyecto">U027 425</option>

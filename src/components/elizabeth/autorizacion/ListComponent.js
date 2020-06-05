@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './Autorizacion.css';
 import RowComponent from './RowComponent';
-import firebase from '../../Firebase';
+import firebase from '../../../Firebase';
 
 export default class ListComponent extends Component {
   constructor (props) {

@@ -1,8 +1,8 @@
-import React, { useState, useRef } from "react";
-import { Provider } from "react-redux";
-import { BrowserRouter as Router } from "react-router-dom";
-import App from "./App";
-import configureStore from "./store/configureStore";
+import React, { useState, useRef } from 'react';
+import { Provider } from 'react-redux';
+import { BrowserRouter as Router } from 'react-router-dom';
+import App from './App';
+import configureStore from './store/configureStore';
 import { useOnClickOutside } from './hooks';
 import FocusLock from 'react-focus-lock';
 import Burger from './components/nav/Burger';
@@ -16,8 +16,8 @@ function Routes() {
 
   const [open, setOpen] = useState(false);
   const node = useRef();
-  const menuId = "main-menu";
-
+  const menuId = 'main-menu';
+  
   useOnClickOutside(node, () => setOpen(false));
 
   return (

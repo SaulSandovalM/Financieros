@@ -107,7 +107,7 @@ class Analitico extends Component {
                     <div className="a-row">{fondos.fecha}</div>
                     <div className="a-row">{fondos.realizo}</div>
                     <div className="a-row">{fondos.tipo_doc}</div>
-                    <div className="a-row">{fondos.importe}</div>
+                    <div className="a-row">$ {fondos.importe}</div>
                     <div className="a-row vista">
                       <Link to={`/edita/${fondos.key}`}>Ver</Link>
                     </div>
