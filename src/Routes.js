@@ -5,7 +5,7 @@ import App from './App';
 import configureStore from './store/configureStore';
 import { useOnClickOutside } from './hooks';
 import FocusLock from 'react-focus-lock';
-import Burger from './components/nav/Burger';
+import Burger from './components/common/nav/Burger';
 import Menu from './components/common/nav/Menu';
 import { ThemeProvider } from 'styled-components';
 import { theme } from './theme';
