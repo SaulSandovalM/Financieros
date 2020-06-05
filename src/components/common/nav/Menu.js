@@ -3,6 +3,7 @@ import { bool } from 'prop-types';
 import Nav from './Nav';
 import NavC from './NavC';
 import NavE from './NavE';
+import NavN from './NavN';
 import { StyledMenu } from './Menu.styled';
 import firebase from '../../../Firebase';
 
@@ -54,9 +55,10 @@ const Menu = ({ open, ...props }) => {
 
   return (
     <StyledMenu open={open} aria-hidden={!isHidden} {...props}>
+      {admin === 'ADMIN' && <Nav /> }
       {admin === 'CECILIA' && <NavC /> }
       {admin === 'ELI' && <NavE /> }
-      {admin === 'ADMIN' && <Nav /> }
+      {admin === 'NAYRA' && <NavN /> }
     </StyledMenu>
   )
 }
