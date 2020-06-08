@@ -16,6 +16,7 @@ import Caja from './components/elizabeth/caja/Caja';
 import Cheques from './components/elizabeth/cheques/Cheques';
 import Vales from './components/elizabeth/vales/Vales';
 import Autorizacion from './components/elizabeth/autorizacion/Autorizacion';
+import Arqueo from './components/elizabeth/arqueo/Arqueo';
 //Parte de Miguel
 import Fondos from './components/miguel/fondos/Fondos';
 import Comprometidos from './components/miguel/comprometidos/Comprometidos';
@@ -77,6 +78,13 @@ function App(props) {
         exact
         path='/Meses'
         component={Meses}
+        isAuthenticated={isAuthenticated}
+        isVerifying={isVerifying}
+      />
+      <ProtectedRoute
+        exact
+        path='/Arqueo'
+        component={Arqueo}
         isAuthenticated={isAuthenticated}
         isVerifying={isVerifying}
       />

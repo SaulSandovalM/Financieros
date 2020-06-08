@@ -1,0 +1,39 @@
+.archivos-container {
+  margin-top: 50px;
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  width: 100%;
+}
+.table-archivos {
+  width: 24%;
+  border-right: 1px solid #d0d0d0;
+  border-bottom: 1px solid #d0d0d0;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  height: 30px;
+}
+.p-archivos {
+  margin: 0px;
+  padding-left: 5px;
+  font-weight: bold;
+}
+.p-archivos-row-url {
+  margin: 0px;
+  padding-left: 5px;
+  cursor: pointer;
+  text-decoration: underline;
+  color: blue;
+}
+.p-archivos-row {
+  margin: 0px;
+  padding-left: 5px;
+  cursor: pointer;
+}
+.archivos-container-row {
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  width: 100%;
+}

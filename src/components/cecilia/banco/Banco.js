@@ -57,6 +57,21 @@ export default class Banco extends Component {
   }
 
   render() {
+
+    var today = new Date();
+    var dd = today.getDate();
+    var mm = today.getMonth()+1;
+    var yyyy = today.getFullYear();
+    if (dd < 10) {
+      dd = '0' + dd
+    }
+    if(mm < 10){
+      mm = '0' + mm
+    }
+
+    today = yyyy + '-' + mm + '-' + dd;
+    const fechaM = '2020-06-08'
+
     return (
       <div class='banco-back'>
         <div class='site-banco'>
@@ -81,28 +96,32 @@ export default class Banco extends Component {
           </div>
           <div>
             {this.state.movimientos.map(movimientos =>
-              <div className='banco-inputs-list'>
-                <div className='table-left'>
-                </div>
-                <div className='table-banco-title'>
-                  <div className='table-no-row'>
-                    <p className='p-banco-map'>{movimientos.title} </p>
-                    <p className='p-banco-map'>{movimientos.no}</p>
-                    <p className='p-banco-map'>{movimientos.dirigido}</p>
+              <div>
+                {today === fechaM &&
+                <div className='banco-inputs-list'>
+                  <div className='table-left'>
+                  </div>
+                  <div className='table-banco-title'>
+                    <div className='table-no-row'>
+                      <p className='p-banco-map'>{movimientos.title} </p>
+                      <p className='p-banco-map'>{movimientos.no}</p>
+                      <p className='p-banco-map'>{movimientos.dirigido}</p>
+                    </div>
+                  </div>
+                  <div className='table-banco-mov'>
+                    <div>
+                      <CurrencyFormat
+                        value={movimientos.cantidad}
+                        displayType={'text'}
+                        thousandSeparator={true}
+                        prefix={' $'}
+                      />
+                    </div>
+                  </div>
+                  <div className='table-right'>
                   </div>
                 </div>
-                <div className='table-banco-mov'>
-                  <div>
-                    <CurrencyFormat
-                      value={movimientos.cantidad}
-                      displayType={'text'}
-                      thousandSeparator={true}
-                      prefix={' $'}
-                    />
-                  </div>
-                </div>
-                <div className='table-right'>
-                </div>
+                }
               </div>
             )}
           </div>

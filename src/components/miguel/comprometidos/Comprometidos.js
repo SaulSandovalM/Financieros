@@ -113,7 +113,8 @@ export default class Comprometidos extends Component {
                     value={fondos.importe}
                     displayType={'text'}
                     thousandSeparator={true}
-                    prefix={' $'} />
+                    prefix={' $'}
+                  />
                   <div className="a-row vista">
                     <Link to={`/edit/${fondos.key}`}>Ver</Link>
                   </div>

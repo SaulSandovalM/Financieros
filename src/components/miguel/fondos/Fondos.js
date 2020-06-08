@@ -94,8 +94,8 @@ export default class Fondos extends Component {
       batch.set(statsRef, { storyCount: increment }, { merge: true });
       batch.commit();
       console.log(statsRef, { storyCount: increment });
-      //this.props.history.push('/Comprometidos')
-      //this.props.history.push(`/edit/${fondos.key}`)
+      this.props.history.push('/Comprometidos')
+      //this.props.history.push(`/edit/${this.state.fondos.key}`)
     })
     .catch((error) => {
       console.error("Error adding document: ", error);
