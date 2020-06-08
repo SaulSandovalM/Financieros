@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import './Meses.css';
-import firebase from '../../../Firebase';
 import ListComponent from './ListComponent';
 
 export default class Meses extends Component {
