@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './Meses.css';
+import './Registro.css';
 import RowComponent from './RowComponent';
 import firebase from '../../../Firebase';
 

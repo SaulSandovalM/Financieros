@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import './Meses.css';
+import './Registro.css';
 import ListComponent from './ListComponent';
 
-export default class Meses extends Component {
+export default class Registro extends Component {
   constructor () {
     super()
     this.state = {
