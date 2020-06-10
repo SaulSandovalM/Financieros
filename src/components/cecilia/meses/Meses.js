@@ -32,7 +32,7 @@ export default class Meses extends Component {
           done: child.val().done,
           id: child.key
         });
-      });
+      }); 
       this.setState({
         lista: lista
       });
