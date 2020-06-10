@@ -1,0 +1,15 @@
+.filename {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  padding-left: 5px;
+  height: 100%;
+}
+.ui-kendo {
+  background-color: white;
+  border: 1px solid;
+  border-color: grey;
+}
+.k-numerictextbox {
+  position: absolute;
+}

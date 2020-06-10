@@ -8,9 +8,10 @@ import Common from './components/common/home/Common';
 //Parte de Cecilia
 import Presupuesto from './components/cecilia/presupuesto/Presupuesto';
 import FondoRevolvente from './components/cecilia/fondor/Fondor';
-import Banco from './components/cecilia/banco/Banco'; //arqueo
+import Banco from './components/cecilia/banco/Banco';
 import Archivos from './components/cecilia/archivos/Archivos';
-import Meses from './components/cecilia/meses/Meses';
+import Registro from './components/cecilia/registro/Registro';
+import Disponible from './components/cecilia/disponible/Disponible';
 //Parte de Elizabeth
 import Caja from './components/elizabeth/caja/Caja';
 import Cheques from './components/elizabeth/cheques/Cheques';
@@ -76,15 +77,15 @@ function App(props) {
       />
       <ProtectedRoute
         exact
-        path='/Meses'
-        component={Meses}
+        path='/Registro'
+        component={Registro}
         isAuthenticated={isAuthenticated}
         isVerifying={isVerifying}
       />
       <ProtectedRoute
         exact
-        path='/Arqueo'
-        component={Arqueo}
+        path='/Disponible'
+        component={Disponible}
         isAuthenticated={isAuthenticated}
         isVerifying={isVerifying}
       />
@@ -114,6 +115,13 @@ function App(props) {
         exact
         path='/Autorizacion'
         component={Autorizacion}
+        isAuthenticated={isAuthenticated}
+        isVerifying={isVerifying}
+      />
+      <ProtectedRoute
+        exact
+        path='/Arqueo'
+        component={Arqueo}
         isAuthenticated={isAuthenticated}
         isVerifying={isVerifying}
       />

@@ -11,10 +11,6 @@ export default class RowComponent extends Component {
      };
    }
 
-  update = () => {
-    this.props.update(this.props.item);
-  }
-
   render() {
     return (
       <div className='cheques-inputs'>
@@ -29,7 +25,6 @@ export default class RowComponent extends Component {
         <div className='table-c-fechae'>
           <div className='row-update'>
             <p className='p-update'>{this.props.item.fechaC}</p>
-            <button className='update-b' onClick={this.update}>Actualizar</button>
           </div>
         </div>
         <div className='table-c-fechae'>
