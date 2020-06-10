@@ -23,8 +23,7 @@ export default class Cheques extends Component {
       importe: '',
       fechaE: '',
       dirigido: '',
-      fechaC: 'Pendiente',
-      fechaCA: '',
+      fechaC: '',
       contador: {},
       contadorCheques: {}
     };
@@ -67,7 +66,7 @@ export default class Cheques extends Component {
           isLoading: false
         });
       } else {
-        console.log("No such document!");
+        console.log('No hay documento');
       }
     })
   }
@@ -82,7 +81,7 @@ export default class Cheques extends Component {
           isLoading: false
         });
       } else {
-        console.log("No such document!");
+        console.log('No hay documento');
       }
     })
   }
@@ -140,7 +139,7 @@ export default class Cheques extends Component {
       dirigido: this.inputDirigido.value,
       fechaC: this.inputFechaC.value
     })
-    if ( params.numCheque && params.importe && params.fechaE && params.dirigido ) {
+    if (params.numCheque && params.importe && params.fechaE && params.dirigido && params.fechaC) {
       var f = parseInt(params.importe);
       const statsRefT = firebase.firestore().collection('caja').doc('--stats--');
       const increments = firebase.firestore.FieldValue.increment(f);
@@ -175,20 +174,23 @@ export default class Cheques extends Component {
     };
   }
 
-  update = (item) => {
-    let updates = {};
-    updates['cheques/' + item.id] = {
-      numCheque: item.numCheque,
-      importe: item.importe,
-      fechaE: item.fechaE,
-      dirigido: item.dirigido,
-      fechaC: this.state.fechaCA
-    };
-    firebase.database().ref().update(updates);
+  handleChange(event) {
+    this.setState({[event.target.name]: event.target.value})
   }
 
-  handleChange(event) {
-    this.setState({fechaCA: event.target.value})
+  handleKeypress (e) {
+    const characterCode = e.key
+    if (characterCode === 'Backspace') return
+    const characterNumber = Number(characterCode)
+    if (characterNumber >= 0 && characterNumber <= 9) {
+      if (e.currentTarget.value && e.currentTarget.value.length) {
+        return
+      } else if (characterNumber === 0) {
+        e.preventDefault()
+      }
+    } else {
+      e.preventDefault()
+    }
   }
 
   render() {
@@ -216,8 +218,8 @@ export default class Cheques extends Component {
                   <input
                     className='input-sc-cheque'
                     type='number'
+                    onKeyDown={this.handleKeypress.bind(this)}
                     min='1'
-                    max='100000'
                     id='importe'
                     required
                     ref={importe => this.inputImporte = importe}
@@ -234,13 +236,13 @@ export default class Cheques extends Component {
                   />
                 </div>
                 <div className='input-row-cheque'>
-                  <p className='p-cheque'><b>Beneficiario</b></p>
+                  <p className='p-cheque'><b>Fecha de Cobro</b></p>
                   <input
                     className='input-sc-cheque'
-                    type='text'
-                    id='dirigido'
+                    type='date'
+                    id='fechaC'
                     required
-                    ref={dirigido => this.inputDirigido = dirigido}
+                    ref={fechaC => this.inputFechaC = fechaC}
                   />
                 </div>
               </div>
@@ -263,14 +265,13 @@ export default class Cheques extends Component {
             <div className='cheque-inputs'>
               <div className='cheques-inputs-c'>
                 <div className='input-row-cheque'>
-                  <p className='p-cheque'><b>Fecha de Cobro</b></p>
+                  <p className='p-cheque'><b>Beneficiario</b></p>
                   <input
-                  className='input-sc-cheque'
-                  type='text'
-                  id='fechaC'
-                  required
-                  value={this.state.fechaC}
-                  ref={fechaC => this.inputFechaC = fechaC}
+                    className='input-sc-cheque'
+                    type='text'
+                    id='dirigido'
+                    required
+                    ref={dirigido => this.inputDirigido = dirigido}
                   />
                 </div>
                 <div className='input-row-cheque'>
@@ -302,35 +303,13 @@ export default class Cheques extends Component {
               </div>
             </div>
           </form>
-          <div classNameName='p-margin'>
-            <p classNameName='p-title-size'>- Ingrese aqui la fecha de cobro a actualizar</p>
-          </div>
-          <div className='cheque-inputs'>
-            <div className='cheques-inputs-c'>
-              <div className='input-row-cheque'>
-                <p className='p-cheque'><b>Fecha de Cobro</b></p>
-                <input
-                className='input-sc-cheque'
-                type='text'
-                name='fechaCA'
-                required
-                value={this.state.fechaCA}
-                onChange={this.handleChange.bind(this)}
-                />
-              </div>
-              <div className='input-row-cheque'>
-              </div>
-              <div className='input-row-cheque'>
-              </div>
-              <div className='input-row-cheque'>
-              </div>
-            </div>
+          <div className='p-margin'>
+            <p className='p-title-size'>- Movimientos</p>
           </div>
           <div className='cheques-w'>
             <div className='cheques-col'>
               <ListComponent
                 lista={this.state.lista}
-                update={this.update}
               />
             </div>
           </div>

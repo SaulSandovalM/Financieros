@@ -58,19 +58,19 @@ export default class Banco extends Component {
 
   render() {
 
-    var today = new Date();
-    var dd = today.getDate();
-    var mm = today.getMonth()+1;
-    var yyyy = today.getFullYear();
-    if (dd < 10) {
-      dd = '0' + dd
-    }
-    if(mm < 10){
-      mm = '0' + mm
-    }
-
-    today = yyyy + '-' + mm + '-' + dd;
-    const fechaM = '2020-06-08'
+    // var today = new Date();
+    // var dd = today.getDate();
+    // var mm = today.getMonth()+1;
+    // var yyyy = today.getFullYear();
+    // if (dd < 10) {
+    //   dd = '0' + dd
+    // }
+    // if(mm < 10){
+    //   mm = '0' + mm
+    // }
+    //
+    // today = yyyy + '-' + mm + '-' + dd;
+    // const fechaM = '2020-06-08'
 
     return (
       <div class='banco-back'>
@@ -97,7 +97,7 @@ export default class Banco extends Component {
           <div>
             {this.state.movimientos.map(movimientos =>
               <div>
-                {today === fechaM &&
+                {/*{today === fechaM &&*/}
                 <div className='banco-inputs-list'>
                   <div className='table-left'>
                   </div>
@@ -121,7 +121,7 @@ export default class Banco extends Component {
                   <div className='table-right'>
                   </div>
                 </div>
-                }
+                {/*}*/}
               </div>
             )}
           </div>

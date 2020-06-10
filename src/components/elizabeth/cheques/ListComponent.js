@@ -45,9 +45,8 @@ export default class ListComponent extends Component {
             <RowComponent
               key={item.id}
               item={item}
-              update={this.props.update}
             />
-          )
+          ).reverse()
         }
       </div>
     );
