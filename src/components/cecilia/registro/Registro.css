@@ -1,7 +1,8 @@
 .date-container {
   display: flex;
   flex-direction: row;
-  justify-content: center;
+  justify-content: flex-start;
+  margin-top: 20px;
 }
 .margin-input {
   margin: 0px 30px 0px 30px;
@@ -9,6 +10,87 @@
 }
 .table-meses {
   width: 10.6%;
+  border-right: 1px solid #d0d0d0;
+  border-bottom: 1px solid #d0d0d0;
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+.table-meses-up {
+  width: 4.6%;
+  border-right: 1px solid #d0d0d0;
+  border-bottom: 1px solid #d0d0d0;
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+.table-meses-proy {
+  width: 6.6%;
+  border-right: 1px solid #d0d0d0;
+  border-bottom: 1px solid #d0d0d0;
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+.table-meses-par {
+  width: 4.6%;
+  border-right: 1px solid #d0d0d0;
+  border-bottom: 1px solid #d0d0d0;
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+.table-meses-con {
+  width: 52.2%;
+  border-right: 1px solid #d0d0d0;
+  border-bottom: 1px solid #d0d0d0;
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+.table-meses-mes {
+  width: 4.6%;
+  border-right: 1px solid #d0d0d0;
+  border-bottom: 1px solid #d0d0d0;
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+.table-meses-asig {
+  width: 6.6%;
+  border-right: 1px solid #d0d0d0;
+  border-bottom: 1px solid #d0d0d0;
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+.table-meses-gas {
+  width: 6.6%;
+  border-right: 1px solid #d0d0d0;
+  border-bottom: 1px solid #d0d0d0;
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+.table-meses-saldo {
+  width: 6.6%;
+  border-right: 1px solid #d0d0d0;
+  border-bottom: 1px solid #d0d0d0;
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+.table-meses-dis {
+  width: 7.6%;
   border-right: 1px solid #d0d0d0;
   border-bottom: 1px solid #d0d0d0;
   height: 30px;
@@ -24,6 +106,15 @@
 .p-meses-row {
   margin: 0px;
   padding-left: 5px;
+}
+.p-meses-row-con {
+  margin: 0px;
+  padding-left: 5px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
 }
 .meses-container-row {
   display: flex;

@@ -15,32 +15,32 @@ export default class RowComponent extends Component {
       <div className='meses-container-row'>
         <div className='table-left'>
         </div>
-        <div className='table-meses'>
-          <p className='p-meses-row'>UNIDAD</p>
+        <div className='table-meses-up'>
+          <p className='p-meses-row'>{this.props.item.up}</p>
         </div>
-        <div className='table-meses'>
-          <p className='p-meses-row'>PROYECTO</p>
+        <div className='table-meses-proy'>
+          <p className='p-meses-row'>{this.props.item.proy}</p>
         </div>
-        <div className='table-meses'>
-          <p className='p-meses-row'>PARTIDA</p>
+        <div className='table-meses-par'>
+          <p className='p-meses-row'>{this.props.item.ogasto}</p>
         </div>
-        <div className='table-meses'>
-          <p className='p-meses-row'>CONCEPTO</p>
+        <div className='table-meses-con'>
+          <p className='p-meses-row-con'>{this.props.item.np}</p>
         </div>
-        <div className='table-meses'>
+        <div className='table-meses-mes'>
           <p className='p-meses-row'>MES</p>
         </div>
-        <div className='table-meses'>
-          <p className='p-meses-row'>ASIGNADO</p>
+        <div className='table-meses-asig'>
+          <p className='p-meses-row'>{this.props.item.ene}</p>
         </div>
-        <div className='table-meses'>
-          <p className='p-meses-row'>GASTO</p>
+        <div className='table-meses-gas'>
+          <p className='p-meses-row'>{this.props.item.ene}</p>
         </div>
-        <div className='table-meses'>
-          <p className='p-meses-row'>SALDO</p>
+        <div className='table-meses-saldo'>
+          <p className='p-meses-row'>{this.props.item.ene}</p>
         </div>
-        <div className='table-meses'>
-          <p className='p-meses-row'>DISPONIBILIDAD</p>
+        <div className='table-meses-dis'>
+          <p className='p-meses-row'>{this.props.item.ene}</p>
         </div>
         <div className='table-right'>
         </div>

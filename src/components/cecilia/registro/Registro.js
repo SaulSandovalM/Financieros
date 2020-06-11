@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './Registro.css';
 import ListComponent from './ListComponent';
+import firebase from '../../../Firebase';
 
 export default class Registro extends Component {
   constructor () {
@@ -13,11 +14,17 @@ export default class Registro extends Component {
           done: false
         },
       ],
-      fileName: '',
-      oficioS: '',
-      oficioA: '',
-      excel: '',
+      up: '',
+      proy: '',
+      ogasto: '',
+      np: '',
+      ene: '',
     }
+  }
+
+  componentDidMount() {
+    const itemsRef = firebase.database().ref('presupuesto/');
+    this.listenForItems(itemsRef);
   }
 
   listenForItems = (itemsRef) => {
@@ -25,10 +32,11 @@ export default class Registro extends Component {
       var lista = [];
       snap.forEach((child) => {
         lista.push({
-          fileName: child.val().fileName,
-          oficioS: child.val().oficioS,
-          oficioA: child.val().oficioA,
-          excel: child.val().excel,
+          up: child.val().up,
+          proy: child.val().proy,
+          ogasto: child.val().ogasto,
+          np: child.val().np,
+          ene: child.val().ene,
           done: child.val().done,
           id: child.key
         });
@@ -43,14 +51,10 @@ export default class Registro extends Component {
     return (
       <div className='pf-container'>
         <div className='site-pf'>
-          <p className='site-pf-s'><b>Meses</b></p>
+          <p className='site-pf-s'><b>Registro de Fondos 2020</b></p>
         </div>
         <div className='date-container'>
-          <p><b>Seleccione el rango de fechas a buscar</b></p>
-        </div>
-        <div className='date-container'>
-          <input type='date' className='margin-input'/>
-          <input type='date' className='margin-input'/>
+          <p className='p-title-size'><b>- Seleccione el mes para buscar</b></p>
         </div>
         <div>
           <ListComponent

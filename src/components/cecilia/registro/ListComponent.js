@@ -19,44 +19,56 @@ export default class ListComponent extends Component {
     });
   }
 
+  updateSearch(event) {
+    this.setState({search: event.target.value.substr(0,26)});
+  }
+
   render() {
+
+    let filterData = this.state.presupuesto.filter(
+      (presupuesto) => {
+        return presupuesto.ene.indexOf(this.state.search) !== -1;
+      }
+    );
+
     return (
       <div>
+        <input value={this.state.search} onChange={this.updateSearch.bind(this)}/>
         <div className='meses-container'>
           <div className='table-left'>
           </div>
-          <div className='table-meses'>
+          <div className='table-meses-up'>
             <p className='p-meses'>UNIDAD</p>
           </div>
-          <div className='table-meses'>
+          <div className='table-meses-proy'>
             <p className='p-meses'>PROYECTO</p>
           </div>
-          <div className='table-meses'>
+          <div className='table-meses-par'>
             <p className='p-meses'>PARTIDA</p>
           </div>
-          <div className='table-meses'>
+          <div className='table-meses-con'>
             <p className='p-meses'>CONCEPTO</p>
           </div>
-          <div className='table-meses'>
+          <div className='table-meses-mes'>
             <p className='p-meses'>MES</p>
           </div>
-          <div className='table-meses'>
+          <div className='table-meses-asig'>
             <p className='p-meses'>ASIGNADO</p>
           </div>
-          <div className='table-meses'>
+          <div className='table-meses-gas'>
             <p className='p-meses'>GASTO</p>
           </div>
-          <div className='table-meses'>
+          <div className='table-meses-saldo'>
             <p className='p-meses'>SALDO</p>
           </div>
-          <div className='table-meses'>
+          <div className='table-meses-dis'>
             <p className='p-meses'>DISPONIBILIDAD</p>
           </div>
           <div className='table-right'>
           </div>
         </div>
         {
-          this.props.lista.map(item =>
+          filterData.map(item =>
             <RowComponent
               key={item.id}
               item={item}
