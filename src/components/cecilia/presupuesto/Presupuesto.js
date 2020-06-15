@@ -9,7 +9,9 @@ export default class Excel extends Component {
     super()
     this.state = {
       pdf: 0,
-      csv: 0
+      csv: 0,
+      user: null,
+      pictures: []
     }
   }
 
@@ -102,8 +104,45 @@ export default class Excel extends Component {
     reader.readAsBinaryString(file);
   }
 
-  render() {
+  componentWillMount () {
+    // Cada vez que el método 'onAuthStateChanged' se dispara, recibe un objeto (user)
+    // Lo que hacemos es actualizar el estado con el contenido de ese objeto.
+    // Si el usuario se ha autenticado, el objeto tiene información.
+    // Si no, el usuario es 'null'
+    firebase.auth().onAuthStateChanged(user => {
+      this.setState({ user });
+    });
 
+    firebase.database().ref('pictures').on('child_added', snapshot => {
+      this.setState({
+        pictures: this.state.pictures.concat(snapshot.val())
+      });
+    });
+  }
+
+  handleUpload (event) {
+    const file = event.target.files[0];
+    const storageRef = firebase.storage().ref(`fotos/${file.name}`);
+    const task = storageRef.put(file);
+    task.on('state_changed', snapshot => {
+      let percentage = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+      this.setState({
+        uploadValue: percentage
+      })
+    }, error => {
+      console.error(error.message);
+    }, () =>  storageRef.getDownloadURL().then(url =>  {
+      const record = {
+        displayName: this.state.user.displayName,
+        image: url
+      };
+      const dbRef = firebase.database().ref('pictures');
+      const newPicture = dbRef.push();
+      newPicture.set(record);
+    }));
+  }
+
+  render() {
     return (
       <div>
         <div class='presupuesto-container'>
@@ -139,7 +178,7 @@ export default class Excel extends Component {
                     borderColor: 'rgb(102, 102, 102)',
                     borderStyle: 'solid',
                     borderRadius: '5px'}}
-                    accept=".pdf" onChange={this.handleOnChange.bind(this)}>
+                    accept="" onChange={this.handleUpload.bind(this)}>
                 </Dropzone>
                 {/*<progress class='progress' value={this.state.pdf} max='100'>
                   {this.state.pdf} %
