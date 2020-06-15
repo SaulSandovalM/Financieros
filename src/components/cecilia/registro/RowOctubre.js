@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './Registro.css';
 
-export default class RowComponent extends Component {
+export default class RowOctubre extends Component {
   constructor(props){
     super(props);
     this.state = {
@@ -28,19 +28,19 @@ export default class RowComponent extends Component {
           <p className='p-meses-row-con'>{this.props.item.np}</p>
         </div>
         <div className='table-meses-mes'>
-          <p className='p-meses-row'>Enero</p>
+          <p className='p-meses-row'>Octubre</p>
         </div>
         <div className='table-meses-asig'>
-          <p className='p-meses-row'>{this.props.item.ene}</p>
+          <p className='p-meses-row'>{this.props.item.oct}</p>
         </div>
         <div className='table-meses-gas'>
-          <p className='p-meses-row'>{this.props.item.ene}</p>
+          <p className='p-meses-row'>{this.props.item.oct}</p>
         </div>
         <div className='table-meses-saldo'>
-          <p className='p-meses-row'>{this.props.item.ene}</p>
+          <p className='p-meses-row'>{this.props.item.oct}</p>
         </div>
         <div className='table-meses-dis'>
-          <p className='p-meses-row'>{this.props.item.ene}</p>
+          <p className='p-meses-row'>{this.props.item.oct}</p>
         </div>
         <div className='table-right'>
         </div>

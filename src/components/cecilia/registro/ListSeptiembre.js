@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import './Registro.css';
-import RowComponent from './RowComponent';
+import RowSeptiembre from './RowSeptiembre';
 import firebase from '../../../Firebase';
 
-export default class ListComponent extends Component {
+export default class ListSeptiembre extends Component {
   constructor (props) {
     super(props);
     this.state = {
@@ -57,7 +57,7 @@ export default class ListComponent extends Component {
         </div>
         {
           this.props.lista.map(item =>
-            <RowComponent
+            <RowSeptiembre
               key={item.id}
               item={item}
             />

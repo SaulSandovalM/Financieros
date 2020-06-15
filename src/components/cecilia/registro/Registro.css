@@ -18,7 +18,7 @@
   flex-direction: column;
 }
 .table-meses-up {
-  width: 4.6%;
+  width: 6.6%;
   border-right: 1px solid #d0d0d0;
   border-bottom: 1px solid #d0d0d0;
   height: 30px;
@@ -27,7 +27,7 @@
   flex-direction: column;
 }
 .table-meses-proy {
-  width: 6.6%;
+  width: 8.6%;
   border-right: 1px solid #d0d0d0;
   border-bottom: 1px solid #d0d0d0;
   height: 30px;
@@ -36,7 +36,7 @@
   flex-direction: column;
 }
 .table-meses-par {
-  width: 4.6%;
+  width: 6.6%;
   border-right: 1px solid #d0d0d0;
   border-bottom: 1px solid #d0d0d0;
   height: 30px;
@@ -45,7 +45,7 @@
   flex-direction: column;
 }
 .table-meses-con {
-  width: 52.2%;
+  width: 30%;
   border-right: 1px solid #d0d0d0;
   border-bottom: 1px solid #d0d0d0;
   height: 30px;
@@ -54,7 +54,7 @@
   flex-direction: column;
 }
 .table-meses-mes {
-  width: 4.6%;
+  width: 6.6%;
   border-right: 1px solid #d0d0d0;
   border-bottom: 1px solid #d0d0d0;
   height: 30px;
@@ -63,7 +63,7 @@
   flex-direction: column;
 }
 .table-meses-asig {
-  width: 6.6%;
+  width: 8.6%;
   border-right: 1px solid #d0d0d0;
   border-bottom: 1px solid #d0d0d0;
   height: 30px;
@@ -72,7 +72,7 @@
   flex-direction: column;
 }
 .table-meses-gas {
-  width: 6.6%;
+  width: 8.6%;
   border-right: 1px solid #d0d0d0;
   border-bottom: 1px solid #d0d0d0;
   height: 30px;
@@ -81,7 +81,7 @@
   flex-direction: column;
 }
 .table-meses-saldo {
-  width: 6.6%;
+  width: 8.6%;
   border-right: 1px solid #d0d0d0;
   border-bottom: 1px solid #d0d0d0;
   height: 30px;
@@ -90,7 +90,7 @@
   flex-direction: column;
 }
 .table-meses-dis {
-  width: 7.6%;
+  width: 11%;
   border-right: 1px solid #d0d0d0;
   border-bottom: 1px solid #d0d0d0;
   height: 30px;
