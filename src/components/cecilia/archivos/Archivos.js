@@ -10,7 +10,7 @@ export default class Archivos extends Component {
       lista: [
         {
           id: 1,
-          name: 'preuba',
+          name: 'prueba',
           done: false
         },
       ],
@@ -18,6 +18,7 @@ export default class Archivos extends Component {
       oficioS: '',
       oficioA: '',
       excel: '',
+      image: ''
     }
   }
 
@@ -30,6 +31,7 @@ export default class Archivos extends Component {
           oficioS: child.val().oficioS,
           oficioA: child.val().oficioA,
           excel: child.val().excel,
+          image: child.val().image,
           done: child.val().done,
           id: child.key
         });
@@ -41,7 +43,7 @@ export default class Archivos extends Component {
   }
 
   componentDidMount() {
-    const itemsRef = firebase.database().ref('banco/');
+    const itemsRef = firebase.database().ref('pictures/');
     this.listenForItems(itemsRef);
   }
 

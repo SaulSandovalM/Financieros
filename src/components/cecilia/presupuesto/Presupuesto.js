@@ -104,22 +104,6 @@ export default class Excel extends Component {
     reader.readAsBinaryString(file);
   }
 
-  componentWillMount () {
-    // Cada vez que el método 'onAuthStateChanged' se dispara, recibe un objeto (user)
-    // Lo que hacemos es actualizar el estado con el contenido de ese objeto.
-    // Si el usuario se ha autenticado, el objeto tiene información.
-    // Si no, el usuario es 'null'
-    firebase.auth().onAuthStateChanged(user => {
-      this.setState({ user });
-    });
-
-    firebase.database().ref('pictures').on('child_added', snapshot => {
-      this.setState({
-        pictures: this.state.pictures.concat(snapshot.val())
-      });
-    });
-  }
-
   handleUpload (event) {
     const file = event.target.files[0];
     const storageRef = firebase.storage().ref(`fotos/${file.name}`);
