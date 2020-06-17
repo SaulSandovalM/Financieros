@@ -9,9 +9,7 @@ export default class Excel extends Component {
     super()
     this.state = {
       pdf: 0,
-      csv: 0,
-      user: null,
-      pictures: []
+      csv: 0
     }
   }
 
