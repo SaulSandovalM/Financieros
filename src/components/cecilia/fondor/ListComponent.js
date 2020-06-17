@@ -25,10 +25,13 @@ export default class ListComponent extends Component {
         <div class='table-container-p'>
           <div class='table-left'>
           </div>
-          <div class='table-clave-p'>
-            <b>CLAVE</b>
+          <div class='table-up-p-fr'>
+            <b>UP</b>
           </div>
-          <div class='table-importe-p'>
+          <div class='table-up-p-fr'>
+            <b>PARTIDA</b>
+          </div>
+          <div class='table-up-p-fr'>
             <b>IMPORTE</b>
           </div>
           <div class='table-right'>

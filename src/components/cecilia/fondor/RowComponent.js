@@ -16,10 +16,13 @@ export default class RowComponent extends Component {
       <div className='table-container-p'>
         <div className='table-left'>
         </div>
-        <div className='table-clave-p'>
-          <p>{this.props.item.clave}</p>
+        <div className='table-up-p-fr'>
+          <p>{this.props.item.up}</p>
         </div>
-        <div className='table-importe-p'>
+        <div className='table-up-p-fr'>
+          <p>{this.props.item.partida}</p>
+        </div>
+        <div className='table-up-p-fr'>
           <div>
             <CurrencyFormat
               value={this.props.item.importe}

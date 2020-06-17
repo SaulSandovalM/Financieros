@@ -3,9 +3,7 @@ import './Fondor.css';
 import firebase from '../../../Firebase';
 import ListComponent from './ListComponent';
 import CurrencyFormat from 'react-currency-format';
-import { NumericTextBox } from '@progress/kendo-react-inputs';
 import Dropzone from 'react-dropzone';
-import '@progress/kendo-theme-material/dist/all.css';
 
 export default class Fondor extends Component {
   constructor () {
@@ -20,16 +18,16 @@ export default class Fondor extends Component {
           done: false
         },
       ],
+      up: '',
+      partida: '',
       importe: '',
-      proyecto: '',
-      clave: '',
       contador: {}
     }
   }
 
   handleUploads (event) {
     const file = event.target.files[0]
-    const storageRef = firebase.storage().ref(`presupuesto-fr/${file.name}`)
+    const storageRef = firebase.storage().ref(`fondoRevolvente/${file.name}`)
     const task = storageRef.put(file)
     this.setState({
       file: `${file.name}`
@@ -39,9 +37,16 @@ export default class Fondor extends Component {
       this.setState({
         pdf: percentage
       })
-    }, (error) => {
-      console.error(error.message)
-    })
+    }, error => {
+      console.error(error.message);
+    }, () =>  storageRef.getDownloadURL().then(url =>  {
+      const record = {
+        oficio: url
+      };
+      const dbRef = firebase.database().ref('fondo-revolvente');
+      const newPicture = dbRef.push();
+      newPicture.set(record);
+    }));
   }
 
   listenForItems = (itemsRef) => {
@@ -49,9 +54,9 @@ export default class Fondor extends Component {
       var lista = [];
       snap.forEach((child) => {
         lista.push({
+          up: child.val().up,
+          partida: child.val().partida,
           importe: child.val().importe,
-          proyecto: child.val().proyecto,
-          clave: child.val().clave,
           done: child.val().done,
           id: child.key
         });
@@ -100,16 +105,16 @@ export default class Fondor extends Component {
   sendMessage(e) {
     e.preventDefault();
     const params = {
+      up: this.inputUp.value,
+      partida: this.inputPartida.value,
       importe: this.inputImporte.value,
-      proyecto: this.inputProyecto.value,
-      clave: this.inputClave.value,
     };
     this.setState({
+      up: this.inputUp.value,
+      partida: this.inputPartida.value,
       importe: this.inputImporte.value,
-      proyecto: this.inputProyecto.value,
-      clave: this.inputClave.value,
     })
-    if ( params.importe && params.proyecto && params.clave) {
+    if ( params.up && params.partida && params.importe ) {
       var f = parseInt(params.importe);
       const statsRef = firebase.firestore().collection('banco').doc('--stats--');
       const increment = firebase.firestore.FieldValue.increment(f);
@@ -154,8 +159,8 @@ export default class Fondor extends Component {
             </div>
           </div>
           <div className='p-row'>
-            <div className='p-container-i' style={{marginRight: '20px'}}>
-              <p className='p-title-margin'>Archivo Pdf</p>
+            <div className='p-container-ifr' style={{marginRight: '20px'}}>
+              <p className='p-title-margin-fr'>Archivo Pdf</p>
               <Dropzone
                 style={{
                   position: 'ab',
@@ -179,49 +184,44 @@ export default class Fondor extends Component {
         </div>
         {/*{this.state.pdf === 100 &&*/}
           <form onSubmit={this.sendMessage.bind(this)} ref='contactForm'>
-            <div className='p-container'>
-              <div className='p-margin-f'>
-                <p className='p-title-size'>
+            <div className='p-container-fondor'>
+              <div className='p-margin-fr'>
+                <p className='p-title-size-fr'>
                   - Ingresa los datos que correspondan con el documento
                     de autorización del fondo revolvente
                 </p>
               </div>
-              <div className='p-row2'>
-                <div className='p-container-i2' >
-                  <p className='p-title-margin2'>Importe</p>
-                  <div className='ui-kendo'>
-                    <NumericTextBox
-                      format="c2"
-                      min={0}
-                      width='100%'
-                      spinners={false}
-                      id='importe'
-                      ref={importe => this.inputImporte = importe}
-                      placeholder='$ 704,874.00'
-                      required
-                    />
+              <div className='inputs-container-fr'>
+                <div className='inputs-col-fr'>
+                  <div className='inputs-row-fr-2'>
+                    <div className='p-container-ifr2'>
+                      <p className='p-title-margin-fr'>UP</p>
+                      <input
+                        className='input-style-fr'
+                        id='up'
+                        required
+                        ref={up => this.inputUp = up}
+                      />
+                    </div>
+                    <div className='p-container-ifr2'>
+                      <p className='p-title-margin-fr'>Partida</p>
+                      <input
+                        className='input-style-fr'
+                        id='partida'
+                        required
+                        ref={partida => this.inputPartida = partida}
+                      />
+                    </div>
+                    <div className='p-container-ifr2'>
+                      <p className='p-title-margin-fr'>Importe</p>
+                      <input
+                        className='input-style-fr'
+                        id='importe'
+                        required
+                        ref={importe => this.inputImporte = importe}
+                      />
+                    </div>
                   </div>
-                </div>
-              </div>
-              <div className='p-col'>
-                <div className='p-container-i3' >
-                  <p className='p-title-margin2'>Proyecto</p>
-                  <input
-                    className='input-h'
-                    id='proyecto'
-                    ref={proyecto => this.inputProyecto = proyecto}
-                    placeholder='ACCIONES DE INVESTIGACION EJECUTIVAS'
-                    required
-                  />
-                </div>
-                <div className='p-container-i3' >
-                  <p className='p-title-margin2'>Clave</p>
-                  <input
-                    className='input-h'
-                    id='clave'
-                    ref={clave => this.inputClave = clave}
-                    placeholder='26-30-01-6201010-01-253001-1-02-02-404-00-E0018-01-002-AU001-001-B07-85000-00-00-D5-C5-0194-00-01-PF-01-01'
-                  />
                 </div>
               </div>
             </div>
