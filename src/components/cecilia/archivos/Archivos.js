@@ -18,6 +18,8 @@ export default class Archivos extends Component {
       oficioS: '',
       oficioA: '',
       excel: '',
+      displayName: '',
+      image: ''
     }
   }
 
@@ -30,6 +32,8 @@ export default class Archivos extends Component {
           oficioS: child.val().oficioS,
           oficioA: child.val().oficioA,
           excel: child.val().excel,
+          displayName: child.val().displayName,
+          image: child.val().image,
           done: child.val().done,
           id: child.key
         });
@@ -41,7 +45,7 @@ export default class Archivos extends Component {
   }
 
   componentDidMount() {
-    const itemsRef = firebase.database().ref('banco/');
+    const itemsRef = firebase.database().ref('pictures/');
     this.listenForItems(itemsRef);
   }
 

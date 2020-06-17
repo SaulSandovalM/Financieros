@@ -7,14 +7,14 @@ export default class ListComponent extends Component {
   constructor (props) {
    super(props);
    this.state = {
-     banco: [],
+     pictures: [],
    };
  }
 
   componentWillMount () {
-    firebase.database().ref('banco/').on('child_added', snapshot => {
+    firebase.database().ref('pictures/').on('child_added', snapshot => {
       this.setState({
-        banco: this.state.banco.concat(snapshot.val())
+        pictures: this.state.pictures.concat(snapshot.val())
       });
     });
   }

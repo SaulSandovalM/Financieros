@@ -8,9 +8,11 @@ export default class RowComponent extends Component {
       done: false,
       item: 'Atendido',
     };
-   }
+  }
 
   render() {
+
+    var lol = this.props.item.image
     return (
       <div className='archivos-container-row'>
         <div className='table-left'>
@@ -18,16 +20,16 @@ export default class RowComponent extends Component {
         <div className='table-archivos'>
           <p
             onClick={()=> window.open(
-              "https://firebasestorage.googleapis.com/v0/b/financieros-78cb0.appspot.com/o/pdfs%2FFinancieros.pdf?alt=media&token=c34be6d6-aeb3-46d3-bfd2-f6d9ea360ee5", "_blank")}
+              lol, "_blank")}
             className='p-archivos-row-url'>
             Presupuesto2020
           </p>
         </div>
         <div className='table-archivos'>
-          <p className='p-archivos-row'>Oficio Solicitud</p>
+          <p className='p-archivos-row'>{this.props.item.displayName}</p>
         </div>
         <div className='table-archivos'>
-          <p className='p-archivos-row'>Oficio Autroización</p>
+          <p className='p-archivos-row'></p>
         </div>
         <div className='table-archivos'>
           <p className='p-archivos-row'>Excel</p>
