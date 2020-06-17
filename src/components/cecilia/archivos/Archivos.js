@@ -14,11 +14,12 @@ export default class Archivos extends Component {
           done: false
         },
       ],
-      fileName: '',
+      oficioSname: '',
       oficioS: '',
+      oficioAname: '',
       oficioA: '',
+      excelName: '',
       excel: '',
-      image: ''
     }
   }
 
@@ -27,11 +28,12 @@ export default class Archivos extends Component {
       var lista = [];
       snap.forEach((child) => {
         lista.push({
-          fileName: child.val().fileName,
+          oficioSname: child.val().oficioSname,
           oficioS: child.val().oficioS,
+          oficioAname: child.val().oficioAname,
           oficioA: child.val().oficioA,
+          excelName: child.val().excelName,
           excel: child.val().excel,
-          image: child.val().image,
           done: child.val().done,
           id: child.key
         });
@@ -43,7 +45,7 @@ export default class Archivos extends Component {
   }
 
   componentDidMount() {
-    const itemsRef = firebase.database().ref('pictures/');
+    const itemsRef = firebase.database().ref('presupuesto-inicial/');
     this.listenForItems(itemsRef);
   }
 

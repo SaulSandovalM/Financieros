@@ -15,20 +15,6 @@ export default class Excel extends Component {
     }
   }
 
-  handleOnChange (event) {
-    const file = event.target.files[0]
-    const storageRef = firebase.storage().ref(`pdfs/${file.name}`)
-    const task = storageRef.put(file)
-    task.on('state_changed', (snapshot) => {
-      let percentage = (snapshot.bytesTransferred / snapshot.totalBytes) * 100
-      this.setState({
-        pdf: percentage
-      })
-    }, (error) => {
-      console.error(error.message)
-    })
-  }
-
   onDrop(files) {
     this.setState({ files });
     var file = files[0];
@@ -106,7 +92,7 @@ export default class Excel extends Component {
 
   handleUpload (event) {
     const file = event.target.files[0];
-    const storageRef = firebase.storage().ref(`fotos/${file.name}`);
+    const storageRef = firebase.storage().ref(`presupuesto-inicial/${file.name}`);
     const task = storageRef.put(file);
     task.on('state_changed', snapshot => {
       let percentage = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
@@ -117,10 +103,9 @@ export default class Excel extends Component {
       console.error(error.message);
     }, () =>  storageRef.getDownloadURL().then(url =>  {
       const record = {
-        displayName: this.state.user.displayName,
-        image: url
+        oficio: url
       };
-      const dbRef = firebase.database().ref('pictures');
+      const dbRef = firebase.database().ref('presupuesto-inicial');
       const newPicture = dbRef.push();
       newPicture.set(record);
     }));
@@ -162,7 +147,7 @@ export default class Excel extends Component {
                     borderColor: 'rgb(102, 102, 102)',
                     borderStyle: 'solid',
                     borderRadius: '5px'}}
-                    accept="" onChange={this.handleUpload.bind(this)}>
+                    accept=".pdf" onChange={this.handleUpload.bind(this)}>
                 </Dropzone>
                 {/*<progress class='progress' value={this.state.pdf} max='100'>
                   {this.state.pdf} %

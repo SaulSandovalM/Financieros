@@ -45,7 +45,7 @@ export default class Registro extends Component {
   }
 
   componentDidMount() {
-    const itemsRef = firebase.database().ref('presupuesto/');
+    const itemsRef = firebase.database().ref('presupuesto/').orderByChild('up');
     this.listenForItems(itemsRef);
   }
 
@@ -84,6 +84,11 @@ export default class Registro extends Component {
   }
 
   render() {
+
+    const toInputUppercase = e => {
+      e.target.value = ("" + e.target.value).toUpperCase();
+    };
+
     return (
       <div className='pf-container'>
         <div className='site-pf'>
@@ -96,85 +101,86 @@ export default class Registro extends Component {
           name='mes'
           onChange={this.handleChange.bind(this)}
           value={this.state.mes}
+          onInput={toInputUppercase}
         />
-        {this.state.mes === 'enero' &&
+        {this.state.mes === 'ENERO' &&
           <div>
             <ListComponent
               lista={this.state.lista}
             />
           </div>
         }
-        {this.state.mes === 'febrero' &&
+        {this.state.mes === 'FEBRERO' &&
           <div>
             <ListFebrero
               lista={this.state.lista}
             />
           </div>
         }
-        {this.state.mes === 'marzo' &&
+        {this.state.mes === 'MARZO' &&
           <div>
             <ListMarzo
               lista={this.state.lista}
             />
           </div>
         }
-        {this.state.mes === 'abril' &&
+        {this.state.mes === 'ABRIL' &&
           <div>
             <ListAbril
               lista={this.state.lista}
             />
           </div>
         }
-        {this.state.mes === 'mayo' &&
+        {this.state.mes === 'MAYO' &&
           <div>
             <ListMayo
               lista={this.state.lista}
             />
           </div>
         }
-        {this.state.mes === 'junio' &&
+        {this.state.mes === 'JUNIO' &&
           <div>
             <ListJunio
               lista={this.state.lista}
             />
           </div>
         }
-        {this.state.mes === 'julio' &&
+        {this.state.mes === 'JULIO' &&
           <div>
             <ListJulio
               lista={this.state.lista}
             />
           </div>
         }
-        {this.state.mes === 'agosto' &&
+        {this.state.mes === 'AGOSTO' &&
           <div>
             <ListAgosto
               lista={this.state.lista}
             />
           </div>
         }
-        {this.state.mes === 'septiembre' &&
+        {this.state.mes === 'SEPTIEMBRE' &&
           <div>
             <ListSeptiembre
               lista={this.state.lista}
             />
           </div>
         }
-        {this.state.mes === 'octubre' &&
+        {this.state.mes === 'OCTUBRE' &&
           <div>
             <ListOctubre
               lista={this.state.lista}
             />
           </div>
         }
-        {this.state.mes === 'noviembre' &&
+        {this.state.mes === 'NOVIEMBRE' &&
           <div>
             <ListNoviembre
               lista={this.state.lista}
             />
           </div>
         }
-        {this.state.mes === 'diciembre' &&
+        {this.state.mes === 'DICIEMBRE' &&
           <div>
             <ListDiciembre
               lista={this.state.lista}

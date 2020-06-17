@@ -8,32 +8,35 @@ export default class RowComponent extends Component {
       done: false,
       item: 'Atendido',
     };
-   }
+  }
 
   render() {
 
-    var url = this.props.item.image
+    var oficioA = this.props.item.oficioA;
+    var oficioS = this.props.item.oficioS;
+    var excel = this.props.item.excel;
 
     return (
       <div className='archivos-container-row'>
         <div className='table-left'>
         </div>
         <div className='table-archivos'>
-          <p
-            onClick={()=> window.open(
-              url, "_blank")}
+          <p onClick={()=> window.open(oficioS, "_blank")}
             className='p-archivos-row-url'>
-            Presupuesto2020
+            {this.props.item.oficioSname}
           </p>
         </div>
         <div className='table-archivos'>
-          <p className='p-archivos-row'>Oficio Solicitud</p>
+          <p onClick={()=> window.open(oficioA, "_blank")}
+            className='p-archivos-row-url'>
+            {this.props.item.oficioAname}
+          </p>
         </div>
         <div className='table-archivos'>
-          <p className='p-archivos-row'>Oficio Autroización</p>
-        </div>
-        <div className='table-archivos'>
-          <p className='p-archivos-row'>Excel</p>
+          <p onClick={()=> window.open(excel, "_blank")}
+            className='p-archivos-row-url'>
+            {this.props.item.excelName}
+          </p>
         </div>
         <div className='table-right'>
         </div>
