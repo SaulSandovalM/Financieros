@@ -113,20 +113,24 @@ export default class RowComponent extends Component {
   //   return obj;
   //   };
 
+  var auto = this.props.item.estatus;
+
     return (
-      <div class='caja-inputs'>
-        <div class='table-left'>
+      <div>
+      {auto === 'Autorizado'&&
+      <div className='caja-inputs'>
+        <div className='table-left'>
         </div>
-        <div class='table-v-num'>
+        <div className='table-v-num'>
           <b>{this.props.item.vale}</b>
         </div>
-        <div class='table-v-importe'>
+        <div className='table-v-importe'>
           <b>{this.props.item.estatus}</b>
         </div>
-        <div class='table-v-fechae'>
+        <div className='table-v-fechae'>
           <b>{this.props.item.concepto}</b>
         </div>
-        <div class='table-v-cantidad'>
+        <div className='table-v-cantidad'>
           <div>
             <CurrencyFormat
               value={this.props.item.cantidad}
@@ -137,86 +141,90 @@ export default class RowComponent extends Component {
             .00
           </div>
         </div>
-         <div class = 'table-v-cantidad'>
+        <div className='table-v-cantidad'>
           <Popup trigger = {<button>Comprobación</button>} modal>
-          <div>
-            <div className='comprobacion-container'>
-              <div className='comprobacion-content'>
-                <div className='comprobacion-card'>
-                  <h1 className='comprobacion-h1'>Comprobaciones</h1>
-                  <p className='comprobacion-p'>Selecciona la carga de evidencias de tus comprobaciones</p>
-                  <div>
-                    <p>XML:</p>
-                    <Dropzone
-                      style={{
-                        position: 'relative',
-                        width: '100%',
-                        height: '30px',
-                        borderWidth: '2px',
-                        borderColor: 'rgb(102, 102, 102)',
-                        borderStyle: 'solid',
-                        borderRadius: '5px',
-                        maxFiles: 5}}
-                        accept='.xml' onChange={this.handleOnChange1.bind(this)}
-                        >
-                    </Dropzone>
-                    <progress className='progress' value={this.state.pdf1} max='100'>
-                      {this.state.pdf1} %
-                    </progress>
-                    <div className='dz-default dz-message' value={this.state.pdf1} max='100'>
-                      Carga {this.state.pdf1} %</div>
-                  </div>
-                  <div>
-                    <p>FACTURA:</p>
-                    <Dropzone
-                      style={{
-                        position: 'relative',
-                        width: '100%',
-                        height: '30px',
-                        borderWidth: '2px',
-                        borderColor: 'rgb(102, 102, 102)',
-                        borderStyle: 'solid',
-                        borderRadius: '5px',
-                        maxFiles: 5}}
-                        accept='.pdf' onChange={this.handleOnChange2.bind(this)}
-                        >
-                    </Dropzone>
-                    <progress className='progress' value={this.state.pdf2} max='100'>
-                      {this.state.pdf2} %
-                    </progress>
-                    <div className='dz-default dz-message' value={this.state.pdf2} max='100'>
-                      Carga {this.state.pdf2} %</div>
-                  </div>
-                  <div>
-                    <p>RECIBO SIMPLE:</p>
-                    <Dropzone
-                      style={{
-                        position: 'relative',
-                        width: '100%',
-                        height: '30px',
-                        borderWidth: '2px',
-                        borderColor: 'rgb(102, 102, 102)',
-                        borderStyle: 'solid',
-                        borderRadius: '5px',
-                        maxFiles: 5}}
-                        accept='.pdf' onChange={this.handleOnChange3.bind(this)}
-                        >
-                    </Dropzone>
-                    <progress className='progress' value={this.state.pdf3} max='100'>
-                      {this.state.pdf3} %
-                    </progress>
-                    <div className='dz-default dz-message' value={this.state.pdf3} max='100'>
-                      Carga {this.state.pdf3} %</div>
+            <div>
+              <div className='comprobacion-container'>
+                <div className='comprobacion-content'>
+                  <div className='comprobacion-card'>
+                    <h1 className='comprobacion-h1'>Comprobaciones</h1>
+                    <p className='comprobacion-p'>Selecciona la carga de evidencias de tus comprobaciones</p>
+                    <div>
+                      <p>XML:</p>
+                      <Dropzone
+                        style={{
+                          position: 'relative',
+                          width: '100%',
+                          height: '30px',
+                          borderWidth: '2px',
+                          borderColor: 'rgb(102, 102, 102)',
+                          borderStyle: 'solid',
+                          borderRadius: '5px',
+                          maxFiles: 5}}
+                          accept='.xml' onChange={this.handleOnChange1.bind(this)}
+                          >
+                      </Dropzone>
+                      <progress className='progress' value={this.state.pdf1} max='100'>
+                        {this.state.pdf1} %
+                      </progress>
+                      <div className='dz-default dz-message' value={this.state.pdf1} max='100'>
+                        Carga {this.state.pdf1} %
+                      </div>
+                    </div>
+                    <div>
+                      <p>FACTURA:</p>
+                      <Dropzone
+                        style={{
+                          position: 'relative',
+                          width: '100%',
+                          height: '30px',
+                          borderWidth: '2px',
+                          borderColor: 'rgb(102, 102, 102)',
+                          borderStyle: 'solid',
+                          borderRadius: '5px',
+                          maxFiles: 5}}
+                          accept='.pdf' onChange={this.handleOnChange2.bind(this)}
+                          >
+                      </Dropzone>
+                      <progress className='progress' value={this.state.pdf2} max='100'>
+                        {this.state.pdf2} %
+                      </progress>
+                      <div className='dz-default dz-message' value={this.state.pdf2} max='100'>
+                        Carga {this.state.pdf2} %
+                      </div>
+                    </div>
+                    <div>
+                      <p>RECIBO SIMPLE:</p>
+                      <Dropzone
+                        style={{
+                          position: 'relative',
+                          width: '100%',
+                          height: '30px',
+                          borderWidth: '2px',
+                          borderColor: 'rgb(102, 102, 102)',
+                          borderStyle: 'solid',
+                          borderRadius: '5px',
+                          maxFiles: 5}}
+                          accept='.pdf' onChange={this.handleOnChange3.bind(this)}
+                          >
+                      </Dropzone>
+                      <progress className='progress' value={this.state.pdf3} max='100'>
+                        {this.state.pdf3} %
+                      </progress>
+                      <div className='dz-default dz-message' value={this.state.pdf3} max='100'>
+                        Carga {this.state.pdf3} %
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
           </Popup>
-         </div>
+        </div>
         <div class='table-right'>
         </div>
-
+      </div>
+      }
       </div>
     );
   }

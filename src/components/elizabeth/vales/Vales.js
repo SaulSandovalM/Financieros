@@ -342,58 +342,58 @@ export default class Vales extends Component {
             </div>
 
             <div className='frsr-end'>
-            <div className='frsr-w'>
-              <div className='div-4'>
-                <div className='frsr-w-b'>
-                  <p className='p-oat'>Facturas</p>
-                  <input
-                    className='input-w'
-                    name='factura'
-                    onChange={this.handleChange.bind(this)}
-                    value={this.state.factura}
-                    ref={factura => this.inputFactura = factura}
-                  />
+              <div className='frsr-w'>
+                <div className='div-4'>
+                  <div className='frsr-w-b'>
+                    <p className='p-oat'>Facturas</p>
+                    <input
+                      className='input-w'
+                      name='factura'
+                      onChange={this.handleChange.bind(this)}
+                      value={this.state.factura}
+                      ref={factura => this.inputFactura = factura}
+                    />
+                  </div>
+                  <div className='frsr-w-b' style={{borderLeft: '0px'}}>
+                    <p className='p-oat'>Recibos</p>
+                    <input
+                      className='input-w'
+                      name='recibos'
+                      onChange={this.handleChange.bind(this)}
+                      value={this.state.recibos}
+                      ref={recibos => this.inputRecibos = recibos}
+                    />
+                  </div>
                 </div>
-                <div className='frsr-w-b' style={{borderLeft: '0px'}}>
-                  <p className='p-oat'>Recibos</p>
-                  <input
-                    className='input-w'
-                    name='recibos'
-                    onChange={this.handleChange.bind(this)}
-                    value={this.state.recibos}
-                    ref={recibos => this.inputRecibos = recibos}
-                  />
-                </div>
-              </div>
-              <div className='div-4'>
-                <div className='frsr-w-b'>
-                  <p className='p-oat'>S/C</p>
-                  <input
-                    className='input-w'
-                    name='sc'
-                    onChange={this.handleChange.bind(this)}
-                    value={this.state.sc}
-                    ref={sc => this.inputSC = sc}
-                  />
-                </div>
-                <div className='frsr-w-b' style={{borderLeft: '0px', borderRight: '0px'}}>
-                  <p className='p-oat'>Reintegro Total</p>
-                  <input
-                    className='input-w'
-                    name='reintegroT'
-                    onChange={this.handleChange.bind(this)}
-                    value={this.state.reintegroT}
-                    ref={reintegroT => this.inputReintegroT = reintegroT}
-                  />
+                <div className='div-4'>
+                  <div className='frsr-w-b'>
+                    <p className='p-oat'>S/C</p>
+                    <input
+                      className='input-w'
+                      name='sc'
+                      onChange={this.handleChange.bind(this)}
+                      value={this.state.sc}
+                      ref={sc => this.inputSC = sc}
+                    />
+                  </div>
+                  <div className='frsr-w-b' style={{borderLeft: '0px', borderRight: '0px'}}>
+                    <p className='p-oat'>Reintegro Total</p>
+                    <input
+                      className='input-w'
+                      name='reintegroT'
+                      onChange={this.handleChange.bind(this)}
+                      value={this.state.reintegroT}
+                      ref={reintegroT => this.inputReintegroT = reintegroT}
+                    />
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
 
             <div className='firma-content'>
               <div className='f-fecha'>
                 <p className='b-fecha'>{today}</p>
-                <b className='font-size-f'>Fecha</b>
+                <p className='font-size-f'>Fecha</p>
               </div>
               <div className='f-fecha'>
                 <select className='b-auto'
@@ -401,11 +401,11 @@ export default class Vales extends Component {
                   <option id='autorizo'>L.C Nayra Ruiz Laguna</option>
                   <option id='autorizo'>Mtro.León Maximiliano Hernández Valdés</option>
                 </select>
-                <b className='font-size-f'>Autorizó</b>
+                <p className='font-size-f'>Autorizó</p>
               </div>
               <div className='f-fecha'>
-                <p className='b-fecha'>ok</p>
-                <b className='font-size-f'>Validado (NRL)</b>
+                <p className='b-fecha-ok'></p>
+                <p className='font-size-f'>Validado (NRL)</p>
               </div>
               <div className='f-fecha'>
                 <input
@@ -416,7 +416,7 @@ export default class Vales extends Component {
                   required
                   ref={personaR => this.inputPersona = personaR}
                 />
-                <b className='font-size-f'>Recibió</b>
+                <p className='font-size-f'>Recibió</p>
               </div>
             </div>
 
