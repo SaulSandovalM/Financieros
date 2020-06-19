@@ -2,20 +2,7 @@ import React, { Component } from 'react';
 import './Archivos.css';
 
 export default class RowComponent extends Component {
-  constructor(props){
-    super(props);
-    this.state = {
-      done: false,
-      item: 'Atendido',
-    };
-  }
-
   render() {
-
-    var oficioA = this.props.item.oficioA;
-    var oficioS = this.props.item.oficioS;
-    var excel = this.props.item.excel;
-
     return (
       <div className='archivos-container-row'>
         <div className='table-left'>

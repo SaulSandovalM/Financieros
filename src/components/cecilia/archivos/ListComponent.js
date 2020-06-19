@@ -4,21 +4,6 @@ import RowComponent from './RowComponent';
 import firebase from '../../../Firebase';
 
 export default class ListComponent extends Component {
-  constructor (props) {
-   super(props);
-   this.state = {
-     presupuesto: [],
-   };
- }
-
-  componentWillMount () {
-    firebase.database().ref('presupuesto-inicial/').on('child_added', snapshot => {
-      this.setState({
-        presupuesto: this.state.presupuesto.concat(snapshot.val())
-      });
-    });
-  }
-
   render() {
     return (
       <div>
