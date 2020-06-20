@@ -51,6 +51,12 @@
   display: flex;
   flex-direction: row;
   width: 100%;
+  margin-top: 50px;
+}
+.banco-inputs-list2 {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
 }
 .table-banco-up {
   width: 3%;
@@ -117,7 +123,7 @@
   font-size: 18px;
 }
 .table-banco-title {
-  width: 78%;
+  width: 27%;
   border-bottom: 1px solid #d0d0d0;
   border-right: 1px solid #d0d0d0;
   padding-left: 5px;
@@ -146,7 +152,19 @@
   display: flex;
   flex-direction: row;
 }
-
+.p-container-banco {
+  display: flex;
+  flex-direction: column;
+  width: 20%;
+  margin-left: 25px;
+}
+.input-style-banco {
+  height: 30px;
+}
+.p-title-margin-ba {
+  margin: 0px;
+  font-weight: bold;
+}
 
 
 
