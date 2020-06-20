@@ -24,8 +24,11 @@ export default class Cheques extends Component {
       fechaE: '',
       dirigido: '',
       fechaC: '',
+      archivo: '',
       contador: {},
-      contadorCheques: {}
+      contadorCheques: {},
+      file: '',
+      pdf: 0
     };
   }
 
@@ -123,6 +126,28 @@ export default class Cheques extends Component {
     });
   }
 
+  handleUploads (event) {
+    const file = event.target.files[0]
+    const storageRef = firebase.storage().ref(`cheques/${file.name}`)
+    const task = storageRef.put(file)
+    this.setState({
+      file: `${file.name}`
+    })
+    task.on('state_changed', (snapshot) => {
+      let percentage = (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+      this.setState({
+        pdf: percentage
+      })
+    }, error => {
+      console.error(error.message);
+    }, () =>  storageRef.getDownloadURL().then(url =>  {
+      const record = url;
+      this.setState({
+        archivo: record
+      });
+    }));
+  }
+
   sendMessage(e) {
     e.preventDefault();
     const params = {
@@ -130,16 +155,18 @@ export default class Cheques extends Component {
       importe: this.inputImporte.value,
       fechaE: this.inputFechaE.value,
       dirigido: this.inputDirigido.value,
-      fechaC: this.inputFechaC.value
+      fechaC: this.inputFechaC.value,
+      archivo: this.state.archivo
     };
     this.setState({
       numCheque: this.inputCheque.value,
       importe: this.inputImporte.value,
       fechaE: this.inputFechaE.value,
       dirigido: this.inputDirigido.value,
-      fechaC: this.inputFechaC.value
+      fechaC: this.inputFechaC.value,
+      archivo: this.state.archivo
     })
-    if (params.numCheque && params.importe && params.fechaE && params.dirigido && params.fechaC) {
+    if (params.numCheque && params.importe && params.fechaE && params.dirigido && params.fechaC && params.archivo ) {
       var f = parseInt(params.importe);
       const statsRefT = firebase.firestore().collection('caja').doc('--stats--');
       const increments = firebase.firestore.FieldValue.increment(f);
@@ -159,8 +186,8 @@ export default class Cheques extends Component {
       const increment = firebase.firestore.FieldValue.increment(-f);
       const batch = firebase.firestore().batch();
       const storyRef = firebase.firestore().collection('banco').doc(`${Math.random()}`);
-      batch.set(storyRef, { title: 'Se Genero Cheque # ', no: params.numCheque + ' ',
-                            dirigido: ' Dirigido a ' + params.dirigido , cantidad: '-'+f });
+      batch.set(storyRef, { title: 'Cheque # ', no: params.numCheque + ' ',
+                            dirigido: ' - ' + params.dirigido , cantidad: '-'+f });
       batch.set(statsRef, { storyCount: increment }, { merge: true });
       batch.commit();
       firebase.database().ref('cheques').push(params).then(() => {
@@ -286,8 +313,14 @@ export default class Cheques extends Component {
                       borderStyle: 'solid',
                       background: 'white',
                     }}
-                    accept=".pdf" onChange={this.handleUpload.bind(this)}>
+                    accept=".pdf" onChange={this.handleUploads.bind(this)}>
+                    <div className='filename'>
+                      <p className='file-hid'>{this.state.file}</p>
+                    </div>
                   </Dropzone>
+                  <progress className='progress' value={this.state.pdf} max='100'>
+                    {this.state.pdf} %
+                  </progress>
                 </div>
                 <div className='input-row-cheque'>
                 </div>

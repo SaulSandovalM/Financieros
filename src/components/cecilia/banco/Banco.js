@@ -108,22 +108,12 @@ export default class Banco extends Component {
               onChange={this.handleChange.bind(this)}
             />
           </div>
-          <div className='banco-inputs-list'>
+          <div className='banco-inputs-list2'>
             <div className='table-left'>
             </div>
             <div className='table-banco-title'>
               <div className='table-no-row'>
                 <b className='p-banco-map'>MOVIMIENTO REALIZADO</b>
-              </div>
-            </div>
-            <div className='table-banco-title'>
-              <div className='table-no-row'>
-                <b className='p-banco-map'>NUMERO DE MOVIMIENTO</b>
-              </div>
-            </div>
-            <div className='table-banco-title'>
-              <div className='table-no-row'>
-                <b className='p-banco-map'>DIRIGIDO A</b>
               </div>
             </div>
             <div className='table-banco-mov'>
@@ -138,37 +128,29 @@ export default class Banco extends Component {
             {this.state.movimientos.map(movimientos =>
               <div>
                 {this.state.buscador === movimientos.dirigido &&
-                <div className='banco-inputs-list2'>
-                  <div className='table-left'>
-                  </div>
-                  <div className='table-banco-title'>
-                    <div className='table-no-row'>
-                      <p className='p-banco-map'>{movimientos.title}</p>
+                  <div className='banco-inputs-list'>
+                    <div className='table-left'>
+                    </div>
+                    <div className='table-banco-title'>
+                      <div className='table-no-row'>
+                        <p className='p-banco-map'>{movimientos.title} </p>
+                        <p className='p-banco-map'>{movimientos.no}</p>
+                        <p className='p-banco-map'>{movimientos.dirigido}</p>
+                      </div>
+                    </div>
+                    <div className='table-banco-mov'>
+                      <div>
+                        <CurrencyFormat
+                          value={movimientos.cantidad}
+                          displayType={'text'}
+                          thousandSeparator={true}
+                          prefix={' $'}
+                        />
+                      </div>
+                    </div>
+                    <div className='table-right'>
                     </div>
                   </div>
-                  <div className='table-banco-title'>
-                    <div className='table-no-row'>
-                      <p className='p-banco-map'>{movimientos.no}</p>
-                    </div>
-                  </div>
-                  <div className='table-banco-title'>
-                    <div className='table-no-row'>
-                      <p className='p-banco-map'>- {movimientos.dirigido}</p>
-                    </div>
-                  </div>
-                  <div className='table-banco-mov'>
-                    <div>
-                      <CurrencyFormat
-                        value={movimientos.cantidad}
-                        displayType={'text'}
-                        thousandSeparator={true}
-                        prefix={' $'}
-                      />
-                    </div>
-                  </div>
-                  <div className='table-right'>
-                  </div>
-                </div>
                 }
               </div>
             )}
