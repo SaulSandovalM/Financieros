@@ -21,7 +21,9 @@ export default class Fondor extends Component {
       up: '',
       partida: '',
       importe: '',
-      contador: {}
+      archivo: '',
+      contador: {},
+      alert: false
     }
   }
 
@@ -40,12 +42,10 @@ export default class Fondor extends Component {
     }, error => {
       console.error(error.message);
     }, () =>  storageRef.getDownloadURL().then(url =>  {
-      const record = {
-        oficio: url
-      };
-      const dbRef = firebase.database().ref('fondo-revolvente');
-      const newPicture = dbRef.push();
-      newPicture.set(record);
+      const record = url;
+      this.setState({
+        archivo: record
+      });
     }));
   }
 
@@ -57,6 +57,7 @@ export default class Fondor extends Component {
           up: child.val().up,
           partida: child.val().partida,
           importe: child.val().importe,
+          archivo: child.val().archivo,
           done: child.val().done,
           id: child.key
         });
@@ -108,13 +109,15 @@ export default class Fondor extends Component {
       up: this.inputUp.value,
       partida: this.inputPartida.value,
       importe: this.inputImporte.value,
+      archivo: this.state.archivo
     };
     this.setState({
       up: this.inputUp.value,
       partida: this.inputPartida.value,
       importe: this.inputImporte.value,
+      archivo: this.state.archivo
     })
-    if ( params.up && params.partida && params.importe ) {
+    if ( params.up && params.partida && params.importe && params.archivo ) {
       var f = parseInt(params.importe);
       const statsRef = firebase.firestore().collection('banco').doc('--stats--');
       const increment = firebase.firestore.FieldValue.increment(f);
@@ -146,8 +149,8 @@ export default class Fondor extends Component {
               - Agrega el documento de autorización de fondo revolvente
             </p>
             <div>
-              <p class='p-banco'><b>PORCENTAJE AGREGADO</b></p>
-              <p class='cantidad-add-banco'>
+              <p className='p-banco'><b>PORCENTAJE AGREGADO</b></p>
+              <p className='cantidad-add-banco'>
                 MXN
                 <CurrencyFormat
                   value={this.state.contador.storyCount}
@@ -173,7 +176,7 @@ export default class Fondor extends Component {
                 }}
                 accept=".pdf" onChange={this.handleUploads.bind(this)}>
                 <div className='filename'>
-                  {this.state.file}
+                  <p className='file-hid'>{this.state.file}</p>
                 </div>
               </Dropzone>
               <progress className='progress' value={this.state.pdf} max='100'>
@@ -182,54 +185,52 @@ export default class Fondor extends Component {
             </div>
           </div>
         </div>
-        {/*{this.state.pdf === 100 &&*/}
-          <form onSubmit={this.sendMessage.bind(this)} ref='contactForm'>
-            <div className='p-container-fondor'>
-              <div className='p-margin-fr'>
-                <p className='p-title-size-fr'>
-                  - Ingresa los datos que correspondan con el documento
-                    de autorización del fondo revolvente
-                </p>
-              </div>
-              <div className='inputs-container-fr'>
-                <div className='inputs-col-fr'>
-                  <div className='inputs-row-fr-2'>
-                    <div className='p-container-ifr2'>
-                      <p className='p-title-margin-fr'>UP</p>
-                      <input
-                        className='input-style-fr'
-                        id='up'
-                        required
-                        ref={up => this.inputUp = up}
-                      />
-                    </div>
-                    <div className='p-container-ifr2'>
-                      <p className='p-title-margin-fr'>Partida</p>
-                      <input
-                        className='input-style-fr'
-                        id='partida'
-                        required
-                        ref={partida => this.inputPartida = partida}
-                      />
-                    </div>
-                    <div className='p-container-ifr2'>
-                      <p className='p-title-margin-fr'>Importe</p>
-                      <input
-                        className='input-style-fr'
-                        id='importe'
-                        required
-                        ref={importe => this.inputImporte = importe}
-                      />
-                    </div>
+        <form onSubmit={this.sendMessage.bind(this)} ref='contactForm'>
+          <div className='p-container-fondor'>
+            <div className='p-margin-fr'>
+              <p className='p-title-size-fr'>
+                - Ingresa los datos que correspondan con el documento
+                  de autorización del fondo revolvente
+              </p>
+            </div>
+            <div className='inputs-container-fr'>
+              <div className='inputs-col-fr'>
+                <div className='inputs-row-fr-2'>
+                  <div className='p-container-ifr2'>
+                    <p className='p-title-margin-fr'>UP</p>
+                    <input
+                      className='input-style-fr'
+                      id='up'
+                      required
+                      ref={up => this.inputUp = up}
+                    />
+                  </div>
+                  <div className='p-container-ifr2'>
+                    <p className='p-title-margin-fr'>Partida</p>
+                    <input
+                      className='input-style-fr'
+                      id='partida'
+                      required
+                      ref={partida => this.inputPartida = partida}
+                    />
+                  </div>
+                  <div className='p-container-ifr2'>
+                    <p className='p-title-margin-fr'>Importe</p>
+                    <input
+                      className='input-style-fr'
+                      id='importe'
+                      required
+                      ref={importe => this.inputImporte = importe}
+                    />
                   </div>
                 </div>
               </div>
             </div>
-            <div className='button-row-s'>
-              <button type='submit' class='input-sc boton-g'>Agregar</button>
-            </div>
-          </form>
-        {/*}*/}
+          </div>
+          <div className='button-row-s'>
+            <button type='submit' className='input-sc boton-g'>Agregar</button>
+          </div>
+        </form>
         <div className='space-table'>
           <ListComponent
             lista={this.state.lista}

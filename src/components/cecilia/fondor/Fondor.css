@@ -50,17 +50,6 @@
   flex-direction: column;
   justify-content: center;
 }
-
-
-
-
-
-
-
-
-
-
-
 .filename {
   display: flex;
   justify-content: center;
@@ -68,11 +57,11 @@
   padding-left: 5px;
   height: 100%;
 }
-.ui-kendo {
-  background-color: white;
-  border: 1px solid;
-  border-color: grey;
-}
-.k-numerictextbox {
-  position: absolute;
+.file-hid {
+  margin: 0px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
 }
