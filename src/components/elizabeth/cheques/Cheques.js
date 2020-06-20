@@ -4,6 +4,7 @@ import './Cheques.css';
 import ListComponent from './ListComponent';
 import CurrencyFormat from 'react-currency-format';
 import Dropzone from 'react-dropzone';
+import CreatableSelect from 'react-select/creatable';
 
 export default class Cheques extends Component {
   constructor(props) {
@@ -220,6 +221,19 @@ export default class Cheques extends Component {
     }
   }
 
+  /*handleChange = (newValue: any, actionMeta: any) => {
+    console.group('Value Changed');
+    console.log(newValue);
+    console.log(`action: ${actionMeta.action}`);
+    console.groupEnd();
+  };
+  handleInputChange = (inputValue: any, actionMeta: any) => {
+    console.group('Input Changed');
+    console.log(inputValue);
+    console.log(`action: ${actionMeta.action}`);
+    console.groupEnd();
+  };*/
+
   render() {
     return (
       <div className='container-back-cheques'>
@@ -323,6 +337,13 @@ export default class Cheques extends Component {
                   </progress>
                 </div>
                 <div className='input-row-cheque'>
+                  {/*<p className='p-cheque'><b>Beneficiario</b></p>
+                  <CreatableSelect
+                    isClearable
+                    onChange={this.handleChange}
+                    onInputChange={this.handleInputChange}
+                    options={options}
+                  />*/}
                 </div>
                 <div className='input-row-cheque'>
                 </div>
