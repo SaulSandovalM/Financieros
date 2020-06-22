@@ -32,13 +32,22 @@ export default class ListComponent extends Component {
             <b>AUTORIZACION</b>
           </div>
           <div class='table-v-fechae'>
+            <b>AREA</b>
+          </div>
+          <div class='table-v-area'>
             <b>CONCEPTO</b>
           </div>
           <div class='table-v-cantidad'>
             <b>CANTIDAD</b>
           </div>
-          <div class='table-v-cantidad'>
+          <div class='table-v-cheque'>
             <b>COMPROBACION</b>
+          </div>
+          <div class='table-v-cheque'>
+            <b>CHEQUE</b>
+          </div>
+          <div class='table-v-edit'>
+            <b>EDITAR</b>
           </div>
           <div class='table-right'>
           </div>

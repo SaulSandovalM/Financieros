@@ -128,6 +128,9 @@ export default class RowComponent extends Component {
           <b>{this.props.item.estatus}</b>
         </div>
         <div className='table-v-fechae'>
+          <b>{this.props.item.area}</b>
+        </div>
+        <div class='table-v-area'>
           <b>{this.props.item.concepto}</b>
         </div>
         <div className='table-v-cantidad'>
@@ -141,7 +144,7 @@ export default class RowComponent extends Component {
             .00
           </div>
         </div>
-        <div className='table-v-cantidad'>
+        <div className='table-v-cheque'>
           <Popup trigger = {<button>Comprobación</button>} modal>
             <div>
               <div className='comprobacion-container'>
@@ -220,6 +223,12 @@ export default class RowComponent extends Component {
               </div>
             </div>
           </Popup>
+        </div>
+        <div class='table-v-cheque'>
+          <b></b>
+        </div>
+        <div class='table-v-edit'>
+          <b></b>
         </div>
         <div class='table-right'>
         </div>

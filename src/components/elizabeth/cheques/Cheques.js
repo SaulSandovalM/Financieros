@@ -5,6 +5,7 @@ import ListComponent from './ListComponent';
 import CurrencyFormat from 'react-currency-format';
 import Dropzone from 'react-dropzone';
 import CreatableSelect from 'react-select/creatable';
+import check from '../../../img/check.svg.png';
 
 export default class Cheques extends Component {
   constructor(props) {
@@ -337,13 +338,12 @@ export default class Cheques extends Component {
                   </progress>
                 </div>
                 <div className='input-row-cheque'>
-                  {/*<p className='p-cheque'><b>Beneficiario</b></p>
-                  <CreatableSelect
-                    isClearable
-                    onChange={this.handleChange}
-                    onInputChange={this.handleInputChange}
-                    options={options}
-                  />*/}
+                  {this.state.pdf === 100 &&
+                    <div className='input-img'>
+                      <img className='img-check' src={check} alt='' />
+                      <p className='p-check'>Archivo Cargo Correctamente</p>
+                    </div>
+                  }
                 </div>
                 <div className='input-row-cheque'>
                 </div>

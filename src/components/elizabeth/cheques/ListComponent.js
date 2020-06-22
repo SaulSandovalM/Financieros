@@ -34,6 +34,9 @@ export default class ListComponent extends Component {
           <div className='table-c-fechae'>
             <b>FECHA DE COBRO</b>
           </div>
+          <div className='table-c-bene'>
+            <b>BENEFICIARIO</b>
+          </div>
           <div className='table-c-fechae'>
             <b>IMPORTE</b>
           </div>
