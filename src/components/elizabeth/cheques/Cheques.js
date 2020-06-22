@@ -188,7 +188,7 @@ export default class Cheques extends Component {
       const increment = firebase.firestore.FieldValue.increment(-f);
       const batch = firebase.firestore().batch();
       const storyRef = firebase.firestore().collection('banco').doc(`${Math.random()}`);
-      batch.set(storyRef, { title: 'Cheque # ', no: params.numCheque + ' ',
+      batch.set(storyRef, { title: 'Cheque ', no: params.numCheque + ' ',
                             dirigido: ' - ' + params.dirigido , cantidad: '-'+f });
       batch.set(statsRef, { storyCount: increment }, { merge: true });
       batch.commit();

@@ -14,7 +14,8 @@ export default class Caja extends Component {
       no: '',
       personaR: '',
       cantidad: '',
-      movimientos: []
+      movimientos: [],
+      buscador: ''
     };
   }
 
@@ -56,6 +57,10 @@ export default class Caja extends Component {
     })
   }
 
+  handleChange(event) {
+    this.setState({[event.target.name]: event.target.value})
+  }
+
   render() {
     return (
       <div className='container-back'>
@@ -80,31 +85,70 @@ export default class Caja extends Component {
                 </div>
               </div>
             </div>
+            <div className='p-container-banco'>
+              <p className='p-title-margin-ba'>BUSCADOR</p>
+              <input
+                className='input-style-banco'
+                value={this.state.buscador}
+                name='buscador'
+                onChange={this.handleChange.bind(this)}
+              />
+            </div>
+            <div className='banco-inputs-list2'>
+              <div className='table-left'>
+              </div>
+              <div className='table-caja-title'>
+                <div className='table-no-row'>
+                  <b className='p-banco-map'>MOVIMIENTO REALIZADO</b>
+                </div>
+              </div>
+              <div className='table-caja-fecha'>
+                <div className='table-no-row'>
+                  <b className='p-banco-map'>FECHA</b>
+                </div>
+              </div>
+              <div className='table-banco-mov'>
+                <div className='table-no-row'>
+                  <b className='p-banco-map'>CANTIDAD</b>
+                </div>
+              </div>
+              <div className='table-right'>
+              </div>
+            </div>
           </div>
           <div>
             {this.state.movimientos.map(movimientos =>
-              <div className='banco-inputs-list'>
-                <div className='table-left'>
-                </div>
-                <div className='table-banco-title'>
-                  <div className='table-caja-row'>
-                    <p className='p-banco-map'>{movimientos.title}</p>
-                    <p className='p-banco-map'>{movimientos.no}</p>
-                    <p className='p-banco-map'>{movimientos.personaR}</p>
+              <div>
+                {this.state.buscador === movimientos.personaR &&
+                  <div className='banco-inputs-list'>
+                    <div className='table-left'>
+                    </div>
+                    <div className='table-caja-title'>
+                      <div className='table-caja-row'>
+                        <p className='p-banco-map'>{movimientos.title}</p>
+                        <p className='p-banco-map'>{movimientos.no}</p>
+                        <p className='p-banco-map'>{movimientos.personaR}</p>
+                      </div>
+                    </div>
+                    <div className='table-caja-fecha'>
+                      <div className='table-no-row'>
+                        <b className='p-banco-map'>{movimientos.fecha}</b>
+                      </div>
+                    </div>
+                    <div className='table-banco-mov'>
+                      <div>
+                        <CurrencyFormat
+                          value={movimientos.cantidad}
+                          displayType={'text'}
+                          thousandSeparator={true}
+                          prefix={' $'}
+                        />
+                      </div>
+                    </div>
+                    <div className='table-right'>
+                    </div>
                   </div>
-                </div>
-                <div className='table-banco-mov'>
-                  <div>
-                    <CurrencyFormat
-                      value={movimientos.cantidad}
-                      displayType={'text'}
-                      thousandSeparator={true}
-                      prefix={' $'}
-                    />
-                  </div>
-                </div>
-                <div className='table-right'>
-                </div>
+                }
               </div>
             )}
           </div>

@@ -133,9 +133,9 @@ export default class Banco extends Component {
                     </div>
                     <div className='table-banco-title'>
                       <div className='table-no-row'>
-                        <p className='p-banco-map'>{movimientos.title} </p>
+                        <p className='p-banco-map'>{movimientos.title}</p>
                         <p className='p-banco-map'>{movimientos.no}</p>
-                        <p className='p-banco-map'>{movimientos.dirigido}</p>
+                        <p className='p-banco-map'> -{movimientos.dirigido}</p>
                       </div>
                     </div>
                     <div className='table-banco-mov'>
