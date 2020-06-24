@@ -20,6 +20,7 @@ export default class Archivos extends Component {
       oficioA: '',
       fileNameE: '',
       excel: '',
+      tipo: ''
     }
   }
 
@@ -34,6 +35,7 @@ export default class Archivos extends Component {
           oficioA: child.val().oficioA,
           fileNameE: child.val().fileNameE,
           excel: child.val().excel,
+          tipo: child.val().tipo,
           done: child.val().done,
           id: child.key
         });
@@ -55,7 +57,8 @@ export default class Archivos extends Component {
         <div className='site-pf'>
           <p className='site-pf-s'><b>Archivos</b></p>
         </div>
-        <div>
+        <div className='space-butt' />
+        <div className='list-c-container'>
           <ListComponent
             lista={this.state.lista}
           />

@@ -49,7 +49,8 @@ export default class Disponible extends Component {
         <div className='site-pf'>
           <p className='site-pf-s'><b>Disponibilidad por Partida</b></p>
         </div>
-        <div>
+        <div className='space-d-c'/>
+        <div className='table-d-c'>
           <ListComponent
             lista={this.state.lista}
           />

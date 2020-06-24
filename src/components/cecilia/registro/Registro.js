@@ -102,86 +102,87 @@ export default class Registro extends Component {
           onChange={this.handleChange.bind(this)}
           value={this.state.mes}
           onInput={toInputUppercase}
+          className='space-i'
         />
         {this.state.mes === 'ENERO' &&
-          <div>
+          <div className='table-c-r'>
             <ListComponent
               lista={this.state.lista}
             />
           </div>
         }
         {this.state.mes === 'FEBRERO' &&
-          <div>
+          <div className='table-c-r'>
             <ListFebrero
               lista={this.state.lista}
             />
           </div>
         }
         {this.state.mes === 'MARZO' &&
-          <div>
+          <div className='table-c-r'>
             <ListMarzo
               lista={this.state.lista}
             />
           </div>
         }
         {this.state.mes === 'ABRIL' &&
-          <div>
+          <div className='table-c-r'>
             <ListAbril
               lista={this.state.lista}
             />
           </div>
         }
         {this.state.mes === 'MAYO' &&
-          <div>
+          <div className='table-c-r'>
             <ListMayo
               lista={this.state.lista}
             />
           </div>
         }
         {this.state.mes === 'JUNIO' &&
-          <div>
+          <div className='table-c-r'>
             <ListJunio
               lista={this.state.lista}
             />
           </div>
         }
         {this.state.mes === 'JULIO' &&
-          <div>
+          <div className='table-c-r'>
             <ListJulio
               lista={this.state.lista}
             />
           </div>
         }
         {this.state.mes === 'AGOSTO' &&
-          <div>
+          <div className='table-c-r'>
             <ListAgosto
               lista={this.state.lista}
             />
           </div>
         }
         {this.state.mes === 'SEPTIEMBRE' &&
-          <div>
+          <div className='table-c-r'>
             <ListSeptiembre
               lista={this.state.lista}
             />
           </div>
         }
         {this.state.mes === 'OCTUBRE' &&
-          <div>
+          <div className='table-c-r'>
             <ListOctubre
               lista={this.state.lista}
             />
           </div>
         }
         {this.state.mes === 'NOVIEMBRE' &&
-          <div>
+          <div className='table-c-r'>
             <ListNoviembre
               lista={this.state.lista}
             />
           </div>
         }
         {this.state.mes === 'DICIEMBRE' &&
-          <div>
+          <div className='table-c-r'>
             <ListDiciembre
               lista={this.state.lista}
             />

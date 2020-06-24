@@ -26,13 +26,16 @@ export default class ListComponent extends Component {
           <div className='table-left'>
           </div>
           <div className='table-archivos'>
-            <p className='p-archivos'>Oficio Solicitud</p>
+            <p className='p-archivos'>OFICIO SOLICITUD</p>
           </div>
           <div className='table-archivos'>
-            <p className='p-archivos'>Oficio Autroización</p>
+            <p className='p-archivos'>OFICIO AUTORIZACION</p>
           </div>
           <div className='table-archivos'>
-            <p className='p-archivos'>Excel</p>
+            <p className='p-archivos'>EXCEL</p>
+          </div>
+          <div className='table-archivos'>
+            <p className='p-archivos'>TIPO</p>
           </div>
           <div className='table-right'>
           </div>
