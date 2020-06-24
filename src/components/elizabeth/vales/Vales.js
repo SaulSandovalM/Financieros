@@ -176,7 +176,7 @@ export default class Vales extends Component {
       const increments = firebase.firestore.FieldValue.increment(1);
       const batchs = firebase.firestore().batch();
       const storyRefs = firebase.firestore().collection('vales').doc(`${Math.random()}`);
-      batchs.set(storyRefs, { title: 'Se Genero Un Vale # ', no: params.vale, personaR: params.personaR , cantidad: '-'+f });
+      batchs.set(storyRefs, { title: 'Vale ', no: params.vale, personaR: params.personaR , cantidad: '-'+f });
       batchs.set(statsRefs, { storyCount: increments }, { merge: true });
       batchs.commit();
       firebase.database().ref('vales').push(params).then(() => {

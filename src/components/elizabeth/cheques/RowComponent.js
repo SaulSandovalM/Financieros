@@ -20,12 +20,15 @@ export default class RowComponent extends Component {
           <p>{this.props.item.numCheque}</p>
         </div>
         <div className='table-c-importe'>
-          <p>{this.props.item.fechaE}</p>
+          <p>{this.props.item.dirigido}</p>
         </div>
         <div className='table-c-fechae'>
           <div className='row-update'>
             <p className='p-update'>{this.props.item.fechaC}</p>
           </div>
+        </div>
+        <div className='table-c-bene'>
+          <p>{this.props.item.fechaE}</p>
         </div>
         <div className='table-c-fechae'>
           <div>
