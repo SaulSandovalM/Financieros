@@ -12,7 +12,7 @@ export default class ListComponent extends Component {
  }
 
   componentWillMount () {
-    firebase.database().ref('presupuesto-inicial/').on('child_added', snapshot => {
+    firebase.database().ref('archivos-presupuesto/').on('child_added', snapshot => {
       this.setState({
         presupuesto: this.state.presupuesto.concat(snapshot.val())
       });

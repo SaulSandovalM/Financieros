@@ -113,20 +113,6 @@ export default class Cheques extends Component {
     });
   }
 
-  handleUpload (event) {
-    const file = event.target.files[0];
-    const storageRef = firebase.storage().ref(`cheques/${file.name}`);
-    const task = storageRef.put(file);
-    task.on('state_changed', snapshot => {
-      let percentage = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-      this.setState({
-        uploadValue: percentage
-      })
-    }, error => {
-      console.error(error.message);
-    });
-  }
-
   handleUploads (event) {
     const file = event.target.files[0]
     const storageRef = firebase.storage().ref(`cheques/${file.name}`)

@@ -4,7 +4,7 @@ import csv from 'csv';
 import firebase from '../../../Firebase';
 import './Presupuesto.css';
 
-export default class Excel extends Component {
+export default class Transferencia extends Component {
   constructor () {
     super()
     this.state = {

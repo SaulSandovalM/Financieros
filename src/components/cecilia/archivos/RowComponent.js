@@ -23,13 +23,13 @@ export default class RowComponent extends Component {
         <div className='table-archivos'>
           <p onClick={()=> window.open(oficioS, "_blank")}
             className='p-archivos-row-url'>
-            {this.props.item.oficioSname}
+            {this.props.item.fileNameS}
           </p>
         </div>
         <div className='table-archivos'>
           <p onClick={()=> window.open(oficioA, "_blank")}
             className='p-archivos-row-url'>
-            {this.props.item.oficioAname}
+            {this.props.item.fileNameA}
           </p>
         </div>
         <div className='table-archivos'>

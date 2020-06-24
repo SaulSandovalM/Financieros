@@ -25,6 +25,21 @@ class Nav extends Component {
             <h3 className='nav-t'>Presupuesto</h3>
           </Link>
         </div>
+        <div className='subnav'>
+          <Link to='/Ampliacion' className='deco'>
+            <p className='nav-t'>Ampliacion</p>
+          </Link>
+        </div>
+        <div className='subnav'>
+          <Link to='/Reduccion' className='deco'>
+            <p className='nav-t'>Reduccion</p>
+          </Link>
+        </div>
+        <div className='subnav'>
+          <Link to='/Transferencia' className='deco'>
+            <p className='nav-t'>Transferencia</p>
+          </Link>
+        </div>
         <div className='navbar-left'>
           <Link to='/FondoRevolvente' className='deco'>
             <h3 className='nav-t'>Fondo Revolvente</h3>

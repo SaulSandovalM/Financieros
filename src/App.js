@@ -7,6 +7,9 @@ import Login from './components/common/login/Login';
 import Common from './components/common/home/Common';
 //Parte de Cecilia
 import Presupuesto from './components/cecilia/presupuesto/Presupuesto';
+import Ampliacion from './components/cecilia/presupuesto/Ampliacion';
+import Reduccion from './components/cecilia/presupuesto/Reduccion';
+import Transferencia from './components/cecilia/presupuesto/Transferencia';
 import FondoRevolvente from './components/cecilia/fondor/Fondor';
 import Banco from './components/cecilia/banco/Banco';
 import Archivos from './components/cecilia/archivos/Archivos';
@@ -51,6 +54,27 @@ function App(props) {
         exact
         path='/Presupuesto'
         component={Presupuesto}
+        isAuthenticated={isAuthenticated}
+        isVerifying={isVerifying}
+      />
+      <ProtectedRoute
+        exact
+        path='/Ampliacion'
+        component={Ampliacion}
+        isAuthenticated={isAuthenticated}
+        isVerifying={isVerifying}
+      />
+      <ProtectedRoute
+        exact
+        path='/Reduccion'
+        component={Reduccion}
+        isAuthenticated={isAuthenticated}
+        isVerifying={isVerifying}
+      />
+      <ProtectedRoute
+        exact
+        path='/Transferencia'
+        component={Transferencia}
         isAuthenticated={isAuthenticated}
         isVerifying={isVerifying}
       />
