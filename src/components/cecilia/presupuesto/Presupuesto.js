@@ -9,11 +9,10 @@ export default class Excel extends Component {
     super()
     this.state = {
       pdf: 0,
-      pdf2: 0,
       csv: 0,
-      file: '',
-      file2: '',
-      oficioS: '',
+      fileNameE: '',
+      excel: '',
+      fileNameS: '',
       oficioA: '',
       tipo: 'Carga de Presupuesto Inicial'
     }
@@ -21,7 +20,7 @@ export default class Excel extends Component {
 
   onDrop(files) {
     this.setState({ files });
-    var file2 = files[0];
+    var fileNameE = files[0];
     // const reader = new FileReader();
     // reader.onload = () => {
     //   csv.parse(reader.result, (err, data) => {
@@ -91,11 +90,11 @@ export default class Excel extends Component {
     //     };
     //   });
     // };
-    // reader.readAsBinaryString(file2);
-    const storageRef = firebase.storage().ref(`presupuesto/${file2.name}`);
-    const task = storageRef.put(file2);
+    // reader.readAsBinaryString(fileNameE);
+    const storageRef = firebase.storage().ref(`presupuesto/${fileNameE.name}`);
+    const task = storageRef.put(fileNameE);
     this.setState({
-      file2: `${file2.name}`
+      fileNameE: `${fileNameE.name}`
     })
     task.on('state_changed', snapshot => {
       let percentage = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
@@ -107,7 +106,7 @@ export default class Excel extends Component {
     }, () =>  storageRef.getDownloadURL().then(url =>  {
       const record = url;
       this.setState({
-        archivo: record
+        excel: record
       });
     }));
   }
@@ -117,7 +116,7 @@ export default class Excel extends Component {
     const storageRef = firebase.storage().ref(`presupuesto/${file.name}`);
     const task = storageRef.put(file);
     this.setState({
-      file: `${file.name}`
+      fileNameS: `${file.name}`
     })
     task.on('state_changed', snapshot => {
       let percentage = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
@@ -137,6 +136,9 @@ export default class Excel extends Component {
   sendMessage(e) {
     e.preventDefault();
     const params = {
+      fileNameE: this.state.fileNameE,
+      excel: this.state.excel,
+      fileNameS: this.state.fileNameS,
       archivo: this.state.archivo
     };
     this.setState({

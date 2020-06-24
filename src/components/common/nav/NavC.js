@@ -4,8 +4,22 @@ import { logoutUser } from '../../../actions';
 import { connect } from 'react-redux';
 import './Nav.css';
 import logo_h from '../../../img/logo_h.svg';
+import arrow from '../../../img/arrow.svg';
 
 class Nav extends Component {
+  constructor() {
+    super();
+    this.state = {
+      isHidden: true
+    }
+  }
+
+  toggleHidden() {
+   this.setState({
+     isHidden: !this.state.isHidden
+   })
+ }
+
   handleLogout = () => {
     const { dispatch } = this.props;
     dispatch(logoutUser());
@@ -18,28 +32,40 @@ class Nav extends Component {
     return (
       <div className='nav-col'>
         <div className='navbar-navigation'>
-          <img className='logo' src={logo_h} alt=''/>
+          <img className='logo' src={logo_h} alt='' />
         </div>
         <div className='navbar-left'>
           <Link to='/Presupuesto' className='deco'>
-            <h3 className='nav-t'>Presupuesto</h3>
+            <h3 className='nav-t'>
+              Presupuesto
+              <img
+                className='arrow'
+                src={arrow}
+                onClick={this.toggleHidden.bind(this)}
+                alt=''
+              />
+            </h3>
           </Link>
         </div>
-        <div className='subnav'>
-          <Link to='/Ampliacion' className='deco'>
-            <p className='nav-t'>Ampliacion</p>
-          </Link>
-        </div>
-        <div className='subnav'>
-          <Link to='/Reduccion' className='deco'>
-            <p className='nav-t'>Reduccion</p>
-          </Link>
-        </div>
-        <div className='subnav'>
-          <Link to='/Transferencia' className='deco'>
-            <p className='nav-t'>Transferencia</p>
-          </Link>
-        </div>
+        {!this.state.isHidden &&
+          <div>
+            <div className='subnav'>
+              <Link to='/Ampliacion' className='deco'>
+                <p className='nav-t'> &bull; Ampliacion</p>
+              </Link>
+            </div>
+            <div className='subnav'>
+              <Link to='/Reduccion' className='deco'>
+                <p className='nav-t'> &bull; Reduccion</p>
+              </Link>
+            </div>
+            <div className='subnav'>
+              <Link to='/Transferencia' className='deco'>
+                <p className='nav-t'> &bull; Transferencia</p>
+              </Link>
+            </div>
+          </div>
+        }
         <div className='navbar-left'>
           <Link to='/FondoRevolvente' className='deco'>
             <h3 className='nav-t'>Fondo Revolvente</h3>
