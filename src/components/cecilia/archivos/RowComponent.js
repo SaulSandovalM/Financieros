@@ -35,7 +35,7 @@ export default class RowComponent extends Component {
         <div className='table-archivos'>
           <p onClick={()=> window.open(excel, "_blank")}
             className='p-archivos-row-url'>
-            {this.props.item.excelName}
+            {this.props.item.fileNameE}
           </p>
         </div>
         <div className='table-right'>

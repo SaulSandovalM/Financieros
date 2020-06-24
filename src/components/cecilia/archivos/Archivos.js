@@ -18,7 +18,7 @@ export default class Archivos extends Component {
       oficioS: '',
       fileNameS: '',
       oficioA: '',
-      excelName: '',
+      fileNameE: '',
       excel: '',
     }
   }
@@ -32,7 +32,7 @@ export default class Archivos extends Component {
           oficioS: child.val().oficioS,
           fileNameS: child.val().fileNameS,
           oficioA: child.val().oficioA,
-          excelName: child.val().excelName,
+          fileNameE: child.val().fileNameE,
           excel: child.val().excel,
           done: child.val().done,
           id: child.key

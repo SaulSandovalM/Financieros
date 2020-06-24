@@ -13,7 +13,7 @@ export default class Excel extends Component {
       fileNameE: '',
       excel: '',
       fileNameS: '',
-      oficioA: '',
+      oficioS: '',
       tipo: 'Carga de Presupuesto Inicial'
     }
   }
@@ -128,7 +128,7 @@ export default class Excel extends Component {
     }, () =>  storageRef.getDownloadURL().then(url =>  {
       const record = url;
       this.setState({
-        archivo: record
+        oficioS: record
       });
     }));
   }
@@ -139,12 +139,17 @@ export default class Excel extends Component {
       fileNameE: this.state.fileNameE,
       excel: this.state.excel,
       fileNameS: this.state.fileNameS,
-      archivo: this.state.archivo
+      oficioS: this.state.oficioS,
+      tipo: this.state.tipo
     };
     this.setState({
-      archivo: this.state.archivo
+      fileNameE: this.state.fileNameE,
+      excel: this.state.excel,
+      fileNameS: this.state.fileNameS,
+      oficioS: this.state.oficioS,
+      tipo: this.state.tipo
     })
-    if ( params.archivo ) {
+    if ( params.fileNameE && params.excel && params.fileNameS && params.oficioS && params.tipo ) {
       firebase.database().ref('archivos-presupuesto').push(params).then(() => {
         alert('Tu solicitud fue enviada.');
       }).catch(() => {

@@ -21,6 +21,7 @@ export default class Fondor extends Component {
       up: '',
       partida: '',
       importe: '',
+      rubro: '',
       archivo: '',
       contador: {},
       alert: false
@@ -57,6 +58,7 @@ export default class Fondor extends Component {
           up: child.val().up,
           partida: child.val().partida,
           importe: child.val().importe,
+          rubro: child.val().rubro,
           archivo: child.val().archivo,
           done: child.val().done,
           id: child.key
@@ -109,15 +111,17 @@ export default class Fondor extends Component {
       up: this.inputUp.value,
       partida: this.inputPartida.value,
       importe: this.inputImporte.value,
+      rubro: this.inputRubro.value,
       archivo: this.state.archivo
     };
     this.setState({
       up: this.inputUp.value,
       partida: this.inputPartida.value,
       importe: this.inputImporte.value,
+      rubro: this.inputRubro.value,
       archivo: this.state.archivo
     })
-    if ( params.up && params.partida && params.importe && params.archivo ) {
+    if ( params.up && params.partida && params.importe && params.rubro && params.archivo ) {
       var f = parseInt(params.importe);
       const statsRef = firebase.firestore().collection('banco').doc('--stats--');
       const increment = firebase.firestore.FieldValue.increment(f);
@@ -212,6 +216,15 @@ export default class Fondor extends Component {
                       id='partida'
                       required
                       ref={partida => this.inputPartida = partida}
+                    />
+                  </div>
+                  <div className='p-container-ifr2'>
+                    <p className='p-title-margin-fr'>Importe</p>
+                    <input
+                      className='input-style-fr'
+                      id='importe'
+                      required
+                      ref={importe => this.inputImporte = importe}
                     />
                   </div>
                   <div className='p-container-ifr2'>

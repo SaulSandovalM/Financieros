@@ -38,14 +38,14 @@ class Nav extends Component {
           <Link to='/Presupuesto' className='deco'>
             <h3 className='nav-t'>
               Presupuesto
-              <img
-                className='arrow'
-                src={arrow}
-                onClick={this.toggleHidden.bind(this)}
-                alt=''
-              />
             </h3>
           </Link>
+          <img
+            className='arrow'
+            src={arrow}
+            onClick={this.toggleHidden.bind(this)}
+            alt=''
+          />
         </div>
         {!this.state.isHidden &&
           <div>
