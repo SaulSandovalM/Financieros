@@ -167,7 +167,7 @@ export default class Reduccion extends Component {
         <form class='presupuesto-container' onSubmit={this.sendMessage.bind(this)} ref='contactForm'>
           <div class='presupuesto-content'>
             <div class='presupuesto-card'>
-              <h1 class='presupuesto-h1'>Suba los archivos de<br/>Ampliación</h1>
+              <h1 class='presupuesto-h1'>Suba los archivos de<br/>Reduccion</h1>
               <p class='presupuesto-p'>Selecciona tus archivo de Solicitud y Autorización</p>
               <div>
                 <p>Archivo CSV:</p>

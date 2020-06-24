@@ -9,8 +9,13 @@ export default class Transferencia extends Component {
     super()
     this.state = {
       pdf: 0,
+      pdf2: 0,
       csv: 0,
-      archivo: ''
+      file: '',
+      file2: '',
+      oficioS: '',
+      oficioA: '',
+      tipo: 'Transferencia'
     }
   }
 
@@ -106,37 +111,53 @@ export default class Transferencia extends Component {
     }, () =>  storageRef.getDownloadURL().then(url =>  {
       const record = url;
       this.setState({
-        archivo: record
+        oficioA: record
       });
     }));
   }
 
-  showAlert(type, message) {
+  handleUpload2 (event) {
+    const file = event.target.files[0];
+    const storageRef = firebase.storage().ref(`presupuesto/${file.name}`);
+    const task = storageRef.put(file);
     this.setState({
-      alert: true,
-      alertData: {type, message}
-    });
-    setTimeout(() => {
-      this.setState({alert: false});
-    }, 6000);
+      file2: `${file.name}`
+    })
+    task.on('state_changed', snapshot => {
+      let percentage = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+      this.setState({
+        pdf2: percentage
+      })
+    }, error => {
+      console.error(error.message);
+    }, () =>  storageRef.getDownloadURL().then(url =>  {
+      const record = url;
+      this.setState({
+        oficioS: record
+      });
+    }));
   }
 
   sendMessage(e) {
     e.preventDefault();
     const params = {
-      archivo: this.state.archivo
+      oficioS: this.state.oficioS,
+      oficioA: this.state.oficioA,
+      tipo: this.state.tipo
     };
     this.setState({
-      archivo: this.state.archivo
+      oficioS: this.state.oficioS,
+      oficioA: this.state.oficioA,
+      tipo: this.state.tipo
     })
-    if ( params.archivo ) {
+    if ( params.oficioS && params.oficioA && params.tipo ) {
       firebase.database().ref('archivos-presupuesto').push(params).then(() => {
-        this.showAlert('success', 'Tu solicitud fue enviada.');
+        alert('Tus archivos se han enviado correctamente');
       }).catch(() => {
-        this.showAlert('danger', 'Tu solicitud no puede ser enviada');
+        alert('Tu solicitud no puede ser enviada');
       });
     } else {
-      this.showAlert('warning', 'Por favor llene el formulario');
+      alert('Por favor llene el formulario');
     };
   }
 
@@ -146,10 +167,10 @@ export default class Transferencia extends Component {
         <form class='presupuesto-container' onSubmit={this.sendMessage.bind(this)} ref='contactForm'>
           <div class='presupuesto-content'>
             <div class='presupuesto-card'>
-              <h1 class='presupuesto-h1'>Aqui puedes subir<br/>tu presupuesto anual </h1>
-              <p class='presupuesto-p'>Traspasa tu información de Excel para poder usar el sistema</p>
+              <h1 class='presupuesto-h1'>Suba los archivos de<br/>Transferencia</h1>
+              <p class='presupuesto-p'>Selecciona tus archivo de Solicitud y Autorización</p>
               <div>
-                <p>Archivo:</p>
+                <p>Archivo CSV:</p>
                 <Dropzone
                   style={{
                     position: 'relative',
@@ -169,7 +190,7 @@ export default class Transferencia extends Component {
                 </progress>
               </div>
               <div>
-                <p>Presupuesto:</p>
+                <p>Oficio Autorización:</p>
                 <Dropzone
                   style={{
                     position: 'relative',
@@ -186,6 +207,26 @@ export default class Transferencia extends Component {
                 </Dropzone>
                 <progress class='progress' value={this.state.pdf} max='100'>
                   {this.state.pdf} %
+                </progress>
+              </div>
+              <div>
+                <p>Oficio Solicitud:</p>
+                <Dropzone
+                  style={{
+                    position: 'relative',
+                    width: '100%',
+                    height: '30px',
+                    borderWidth: '2px',
+                    borderColor: 'rgb(102, 102, 102)',
+                    borderStyle: 'solid',
+                    borderRadius: '5px'}}
+                    accept=".pdf" onChange={this.handleUpload2.bind(this)}>
+                    <div className='filename'>
+                      <p className='file-hid'>{this.state.file2}</p>
+                    </div>
+                </Dropzone>
+                <progress class='progress' value={this.state.pdf2} max='100'>
+                  {this.state.pdf2} %
                 </progress>
               </div>
               <div className='button-pres'>

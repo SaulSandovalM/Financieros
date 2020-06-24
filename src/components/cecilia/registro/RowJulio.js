@@ -28,7 +28,7 @@ export default class RowJulio extends Component {
           <p className='p-meses-row-con'>{this.props.item.np}</p>
         </div>
         <div className='table-meses-mes'>
-          <p className='p-meses-row'>Febrero</p>
+          <p className='p-meses-row'>Julio</p>
         </div>
         <div className='table-meses-asig'>
           <p className='p-meses-row'>{this.props.item.jul}</p>

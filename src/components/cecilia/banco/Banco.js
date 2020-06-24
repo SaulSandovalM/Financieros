@@ -13,6 +13,7 @@ export default class Banco extends Component {
       title: '',
       no: '',
       dirigido: '',
+      fecha: '',
       cantidad: '',
       movimientos: [],
       buscador: ''
@@ -22,13 +23,14 @@ export default class Banco extends Component {
   onCollectionUpdate = (querySnapshot) => {
     const movimientos = [];
     querySnapshot.forEach((doc) => {
-      const { title, no, dirigido, cantidad } = doc.data();
+      const { title, no, dirigido, fecha, cantidad } = doc.data();
       movimientos.push({
         key: doc.id,
         doc,
         title,
         no,
         dirigido,
+        fecha,
         cantidad
       });
     });
@@ -52,7 +54,7 @@ export default class Banco extends Component {
           isLoading: false
         });
       } else {
-        console.log("No hay nada!");
+        console.log('No hay nada!');
       }
     })
   }
@@ -118,6 +120,11 @@ export default class Banco extends Component {
             </div>
             <div className='table-banco-mov'>
               <div className='table-no-row'>
+                <b className='p-banco-map'>FECHA</b>
+              </div>
+            </div>
+            <div className='table-banco-mov'>
+              <div className='table-no-row'>
                 <b className='p-banco-map'>CANTIDAD</b>
               </div>
             </div>
@@ -136,6 +143,11 @@ export default class Banco extends Component {
                         <p className='p-banco-map'>{movimientos.title}</p>
                         <p className='p-banco-map'>{movimientos.no}</p>
                         <p className='p-banco-map'> -{movimientos.dirigido}</p>
+                      </div>
+                    </div>
+                    <div className='table-banco-mov'>
+                      <div className='table-no-row'>
+                        <b className='p-banco-map'>FECHA</b>
                       </div>
                     </div>
                     <div className='table-banco-mov'>
