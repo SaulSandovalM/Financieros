@@ -18,6 +18,9 @@ export default class RowComponent extends Component {
         <div className='table-meses-up'>
           <p className='p-meses-row'>{this.props.item.up}</p>
         </div>
+        <div className='table-meses-up'>
+          <p className='p-meses-row'>{this.props.item.rubro}</p>
+        </div>
         <div className='table-meses-proy'>
           <p className='p-meses-row'>{this.props.item.par}</p>
         </div>

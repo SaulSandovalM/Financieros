@@ -16,7 +16,8 @@ export default class Disponible extends Component {
       ],
       up: '',
       proyecto: '',
-      disponible: ''
+      disponible: '',
+      rubro: ''
     }
   }
 
@@ -33,6 +34,7 @@ export default class Disponible extends Component {
           up: child.val().up,
           par: child.val().par,
           disponible: child.val().disponible,
+          rubro: child.val().rubro,
           done: child.val().done,
           id: child.key
         });

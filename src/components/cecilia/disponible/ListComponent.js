@@ -28,6 +28,9 @@ export default class ListComponent extends Component {
           <div className='table-meses-up'>
             <p className='p-meses'>UNIDAD</p>
           </div>
+          <div className='table-meses-up'>
+            <p className='p-meses'>RUBRO</p>
+          </div>
           <div className='table-meses-proy'>
             <p className='p-meses'>PARTIDA</p>
           </div>

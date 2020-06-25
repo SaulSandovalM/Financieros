@@ -30,6 +30,7 @@ export default class Registro extends Component {
       proy: '',
       ogasto: '',
       np: '',
+      rubro: '',
       ene: '',
       feb: '',
       mar: '',
@@ -58,6 +59,7 @@ export default class Registro extends Component {
           proy: child.val().proy,
           ogasto: child.val().ogasto,
           np: child.val().np,
+          rubro: child.val().rubro,
           ene: child.val().ene,
           feb: child.val().feb,
           mar: child.val().mar,
@@ -86,7 +88,7 @@ export default class Registro extends Component {
   render() {
 
     const toInputUppercase = e => {
-      e.target.value = ("" + e.target.value).toUpperCase();
+      e.target.value = ('' + e.target.value).toUpperCase();
     };
 
     return (

@@ -34,6 +34,9 @@ export default class ListComponent extends Component {
           <div className='table-meses-par'>
             <p className='p-meses'>PARTIDA</p>
           </div>
+          <div className='table-meses-par'>
+            <p className='p-meses'>RUBRO</p>
+          </div>
           <div className='table-meses-con'>
             <p className='p-meses'>CONCEPTO</p>
           </div>
