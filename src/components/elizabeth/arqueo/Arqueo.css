@@ -83,3 +83,23 @@
   color: white;
   border-width: inherit;
 }
+.table-arqueo-search {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  margin-top: 50px;
+}
+.table-arqueo-content {
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+}
+.title-arqueo-se {
+  width: 9%;
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  border-right: 1px solid #d0d0d0;
+  border-bottom: 1px solid #d0d0d0;
+}
