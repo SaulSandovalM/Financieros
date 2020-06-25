@@ -33,6 +33,8 @@ export default class Vales extends Component {
       recibos: '',
       sc: '',
       reintegroT: '',
+      fecha: '',
+      autorizo: '',
       estatus: 'Pendiente',
       contador: {},
       isHidden: true,
@@ -89,6 +91,8 @@ export default class Vales extends Component {
       recibos: this.inputRecibos.value,
       sc: this.inputSC.value,
       reintegroT: this.inputReintegroT.value,
+      fecha: this.inputFecha.value,
+      autorizo: this.inputAutorizo.value,
       estatus: this.state.estatus
     };
     this.setState({
@@ -106,12 +110,15 @@ export default class Vales extends Component {
       recibos: this.inputRecibos.value,
       sc: this.inputSC.value,
       reintegroT: this.inputReintegroT.value,
+      fecha: this.inputFecha,
+      autorizo: this.inputAutorizo.value,
       estatus: this.state.estatus
     })
     if ( params.vale && params.cheque && params.cantidad && params.cantidadc
         && params.cantidadr && params.concepto && params.oficioS && params.area
-        && params.turno && params.personaR && params.factura && params.recibos
-        && params.sc && params.reintegroT && params.estatus ) {
+        && params.turno && params.factura && params.recibos && params.sc
+        && params.reintegroT && params.autorizo && params.personaR
+        && params.estatus && params.fecha ) {
       var f = parseInt(params.cantidad);
       const statsRef = firebase.firestore().collection('caja').doc('--stats--');
       const increment = firebase.firestore.FieldValue.increment(-f);
@@ -150,11 +157,12 @@ export default class Vales extends Component {
     var meses =  [ 'Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic' ];
     var f = new Date();
     today = f.getDate() + '/' + meses[f.getMonth()] + '/' + f.getFullYear();
+    this.state.fecha = today;
 
     return (
-      <div class='container-back'>
-        <div class='site'>
-          <p class='site-s'><b>Vales</b></p>
+      <div className='container-back'>
+        <div className='site'>
+          <p className='site-s'><b>Vales</b></p>
         </div>
         <form onSubmit={this.sendMessage.bind(this)} ref='contactForm'>
           <div className='margin-vale' ref={el => (this.vale = el)}>
@@ -194,7 +202,7 @@ export default class Vales extends Component {
               </div>
             </div>
             <div className='vale-pro-content'>
-              <p className='p-vp'>VALE PROVICIONAL DE CAJA</p>
+              <p className='p-vp'>VALE PROVISIONAL DE CAJA</p>
             </div>
             <div className='space-v'/>
             <div className='mcc-content'>

@@ -30,11 +30,13 @@ export default class ListVales extends Component {
       area: '',
       turno: '',
       personaR: '',
+      autorizo: '',
       factura: '',
       recibos: '',
       sc: '',
       reintegroT: '',
       estatus: 'Pendiente',
+      fecha: '',
       contador: {},
       isHidden: true,
     };
@@ -60,6 +62,8 @@ export default class ListVales extends Component {
           recibos: child.val().recibos,
           sc: child.val().sc,
           reintegroT: child.val().reintegroT,
+          autorizo: child.val().autorizo,
+          fecha: child.val().fecha,
           done: child.val().done,
           id: child.key
         });
@@ -78,8 +82,8 @@ export default class ListVales extends Component {
   componentWillMount() {
     let formRef = firebase.database().ref('vales').orderByKey().limitToLast(1);
     formRef.on('child_added', snapshot => {
-      const { vale, cheque, cantidad, cantidadc, cantidadr, concepto, oficioS, area, turno, personaR, estatus } = snapshot.val();
-      const data = { vale, cheque, cantidad, cantidadc, cantidadr, concepto, oficioS, area, turno, personaR, estatus };
+      const { vale, cheque, cantidad, cantidadc, cantidadr, concepto, oficioS, area, turno, personaR, estatus, autorizo, fecha } = snapshot.val();
+      const data = { vale, cheque, cantidad, cantidadc, cantidadr, concepto, oficioS, area, turno, personaR, estatus, autorizo, fecha };
       this.setState({ form: [data].concat(this.state.form) });
     });
   }

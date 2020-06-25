@@ -75,165 +75,66 @@ export default class RowComponent extends Component {
 
   render() {
 
-  //   function xmlToJson(xml) {
-  //
-  //   // Create the return object
-  //   var obj = {};
-  //
-  //   if (xml.nodeType === 1) { // element
-  //   // do attributes
-  //   if (xml.attributes.length > 0) {
-  //   obj['@attributes'] = {};
-  //     for (var j = 0; j < xml.attributes.length; j++) {
-  //       var attribute = xml.attributes.item(j);
-  //       obj['@attributes'][attribute.nodeName] = attribute.nodeValue;
-  //     }
-  //   }
-  // } else if (xml.nodeType === 3) { // text
-  //   obj = xml.nodeValue;
-  //   }
-  //
-  //   // do children
-  //   if (xml.hasChildNodes()) {
-  //   for(var i = 0; i < xml.childNodes.length; i++) {
-  //     var item = xml.childNodes.item(i);
-  //     var nodeName = item.nodeName;
-  //     if (typeof(obj[nodeName]) == 'undefined') {
-  //       obj[nodeName] = xmlToJson(item);
-  //     } else {
-  //       if (typeof(obj[nodeName].push) == 'undefined') {
-  //         var old = obj[nodeName];
-  //         obj[nodeName] = [];
-  //         obj[nodeName].push(old);
-  //       }
-  //       obj[nodeName].push(xmlToJson(item));
-  //     }
-  //   }
-  //   }
-  //   return obj;
-  //   };
-
   var auto = this.props.item.estatus;
 
     return (
       <div>
-      {auto === 'Autorizado'&&
-      <div className='caja-inputs'>
-        <div className='table-left'>
-        </div>
-        <div className='table-v-num'>
-          <b>{this.props.item.vale}</b>
-        </div>
-        <div className='table-v-importe'>
-          <b>{this.props.item.estatus}</b>
-        </div>
-        <div className='table-v-fechae'>
-          <b>{this.props.item.area}</b>
-        </div>
-        <div class='table-v-area'>
-          <b>{this.props.item.concepto}</b>
-        </div>
-        <div className='table-v-cantidad'>
-          <div>
-            <CurrencyFormat
-              value={this.props.item.cantidad}
-              displayType={'text'}
-              thousandSeparator={true}
-              prefix={'$ '}
-              decimalSeparator={'.'} />
-            .00
-          </div>
-        </div>
-        <div className='table-v-cheque'>
-          <Popup trigger = {<button>Comprobación</button>} modal>
-            <div>
-              <div className='comprobacion-container'>
-                <div className='comprobacion-content'>
-                  <div className='comprobacion-card'>
-                    <h1 className='comprobacion-h1'>Comprobaciones</h1>
-                    <p className='comprobacion-p'>Selecciona la carga de evidencias de tus comprobaciones</p>
-                    <div>
-                      <p>XML:</p>
-                      <Dropzone
-                        style={{
-                          position: 'relative',
-                          width: '100%',
-                          height: '30px',
-                          borderWidth: '2px',
-                          borderColor: 'rgb(102, 102, 102)',
-                          borderStyle: 'solid',
-                          borderRadius: '5px',
-                          maxFiles: 5}}
-                          accept='.xml' onChange={this.handleOnChange1.bind(this)}
-                          >
-                      </Dropzone>
-                      <progress className='progress' value={this.state.pdf1} max='100'>
-                        {this.state.pdf1} %
-                      </progress>
-                      <div className='dz-default dz-message' value={this.state.pdf1} max='100'>
-                        Carga {this.state.pdf1} %
-                      </div>
-                    </div>
-                    <div>
-                      <p>FACTURA:</p>
-                      <Dropzone
-                        style={{
-                          position: 'relative',
-                          width: '100%',
-                          height: '30px',
-                          borderWidth: '2px',
-                          borderColor: 'rgb(102, 102, 102)',
-                          borderStyle: 'solid',
-                          borderRadius: '5px',
-                          maxFiles: 5}}
-                          accept='.pdf' onChange={this.handleOnChange2.bind(this)}
-                          >
-                      </Dropzone>
-                      <progress className='progress' value={this.state.pdf2} max='100'>
-                        {this.state.pdf2} %
-                      </progress>
-                      <div className='dz-default dz-message' value={this.state.pdf2} max='100'>
-                        Carga {this.state.pdf2} %
-                      </div>
-                    </div>
-                    <div>
-                      <p>RECIBO SIMPLE:</p>
-                      <Dropzone
-                        style={{
-                          position: 'relative',
-                          width: '100%',
-                          height: '30px',
-                          borderWidth: '2px',
-                          borderColor: 'rgb(102, 102, 102)',
-                          borderStyle: 'solid',
-                          borderRadius: '5px',
-                          maxFiles: 5}}
-                          accept='.pdf' onChange={this.handleOnChange3.bind(this)}
-                          >
-                      </Dropzone>
-                      <progress className='progress' value={this.state.pdf3} max='100'>
-                        {this.state.pdf3} %
-                      </progress>
-                      <div className='dz-default dz-message' value={this.state.pdf3} max='100'>
-                        Carga {this.state.pdf3} %
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
+        { auto === 'Pendiente' &&
+          <div class='caja-inputs'>
+            <div class='table-left'>
             </div>
-          </Popup>
-        </div>
-        <div class='table-v-cheque'>
-          <b></b>
-        </div>
-        <div class='table-v-edit'>
-          <b></b>
-        </div>
-        <div class='table-right'>
-        </div>
-      </div>
-      }
+            <div class='table-v-num2'>
+              <b>{this.props.item.vale}</b>
+            </div>
+            <div class='table-v-num2'>
+              <b>{this.props.item.cheque}</b>
+            </div>
+            <div class='table-v-num'>
+              <b>{this.props.item.cantidad}</b>
+            </div>
+            <div class='table-v-num'>
+              <b>{this.props.item.cantidadc}</b>
+            </div>
+            <div class='table-v-num'>
+              <b>{this.props.item.cantidadr}</b>
+            </div>
+            <div class='table-v-num'>
+              <b>{this.props.item.concepto}</b>
+            </div>
+            <div class='table-v-num'>
+              <b>{this.props.item.oficioS}</b>
+            </div>
+            <div class='table-v-num'>
+              <b>{this.props.item.area}</b>
+            </div>
+            <div class='table-v-num'>
+              <b>{this.props.item.turno}</b>
+            </div>
+            <div class='table-v-num'>
+              <b>{this.props.item.factura}</b>
+            </div>
+            <div class='table-v-num'>
+              <b>{this.props.item.recibos}</b>
+            </div>
+            <div class='table-v-num'>
+              <b>{this.props.item.sc}</b>
+            </div>
+            <div class='table-v-num'>
+              <b>{this.props.item.reintegroT}</b>
+            </div>
+            <div class='table-v-num'>
+              <b>{this.props.item.fecha}</b>
+            </div>
+            <div class='table-v-re'>
+              <b>{this.props.item.autorizo}</b>
+            </div>
+            <div class='table-v-num'>
+              <b>{this.props.item.personaR}</b>
+            </div>
+            <div class='table-right'>
+            </div>
+          </div>
+        }
       </div>
     );
   }

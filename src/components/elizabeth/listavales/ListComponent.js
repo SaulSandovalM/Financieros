@@ -25,29 +25,53 @@ export default class ListComponent extends Component {
         <div class='caja-inputs'>
           <div class='table-left'>
           </div>
+          <div class='table-v-num2'>
+            <b># V</b>
+          </div>
+          <div class='table-v-num2'>
+            <b># C</b>
+          </div>
           <div class='table-v-num'>
-            <b>#</b>
+            <b>AUTORIZADO</b>
           </div>
-          <div class='table-v-importe'>
-            <b>AUTORIZACION</b>
+          <div class='table-v-num'>
+            <b>COMPROMETIDO</b>
           </div>
-          <div class='table-v-fechae'>
-            <b>AREA</b>
+          <div class='table-v-num'>
+            <b>REEMBOLSO</b>
           </div>
-          <div class='table-v-area'>
+          <div class='table-v-num'>
             <b>CONCEPTO</b>
           </div>
-          <div class='table-v-cantidad'>
-            <b>CANTIDAD</b>
+          <div class='table-v-num'>
+            <b>OFICIO S</b>
           </div>
-          <div class='table-v-cheque'>
-            <b>COMPROBACION</b>
+          <div class='table-v-num'>
+            <b>AREA</b>
           </div>
-          <div class='table-v-cheque'>
-            <b>CHEQUE</b>
+          <div class='table-v-num'>
+            <b>TURNO</b>
           </div>
-          <div class='table-v-edit'>
-            <b>EDITAR</b>
+          <div class='table-v-num'>
+            <b>FACTURA</b>
+          </div>
+          <div class='table-v-num'>
+            <b>RECIBOS</b>
+          </div>
+          <div class='table-v-num'>
+            <b>S/C</b>
+          </div>
+          <div class='table-v-num'>
+            <b>REINTEGRO</b>
+          </div>
+          <div class='table-v-num'>
+            <b>FECHA</b>
+          </div>
+          <div class='table-v-num'>
+            <b>AUTORAZO</b>
+          </div>
+          <div class='table-v-num'>
+            <b>RECIBIO</b>
           </div>
           <div class='table-right'>
           </div>
