@@ -6,6 +6,9 @@
 .arqueo-content {
   width: 40%;
 }
+.arqueo-content-pop {
+  width: 100%;
+}
 .arqueo-content2 {
   width: 100%;
 }
@@ -14,6 +17,11 @@
   justify-content: left;
   flex-direction: row;
   margin-top: 50px;
+}
+.table-arqueo-pop {
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
 }
 .title-arqueo {
   width: 25%;
@@ -36,6 +44,11 @@
 .data-arqueo {
   display: flex;
   justify-content: left;
+  flex-direction: row;
+}
+.data-arqueo-pop {
+  display: flex;
+  justify-content: center;
   flex-direction: row;
 }
 .p-mar-arqueo {
