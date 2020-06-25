@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import firebase from '../../../Firebase';
-import ListComponent from './ListComponent';
 import './Vales.css';
 import ReactToPrint from 'react-to-print';
 import logovale from '../../../img/logovale.png';
@@ -50,39 +49,7 @@ export default class Vales extends Component {
     this.setState({[event.target.name]: event.target.value})
   }
 
-  listenForItems = (itemsRef) => {
-    itemsRef.on('value', (snap) => {
-      var lista = [];
-      snap.forEach((child) => {
-        lista.push({
-          vale: child.val().vale,
-          cheque: child.val().cheque,
-          cantidad: child.val().cantidad,
-          cantidadc: child.val().cantidadc,
-          cantidadr: child.val().cantidadr,
-          concepto: child.val().concepto,
-          oficioS: child.val().oficioS,
-          area: child.val().area,
-          turno: child.val().turno,
-          personaR: child.val().personaR,
-          estatus: child.val().estatus,
-          factura: child.val().factura,
-          recibos: child.val().recibos,
-          sc: child.val().sc,
-          reintegroT: child.val().reintegroT,
-          done: child.val().done,
-          id: child.key
-        });
-      });
-      this.setState({
-        lista: lista
-      });
-    });
-  }
-
   componentDidMount() {
-    const itemsRef = firebase.database().ref('vales/');
-    this.listenForItems(itemsRef);
     this.consumo();
   }
 
@@ -101,27 +68,8 @@ export default class Vales extends Component {
     })
   }
 
-  showAlert(type, message) {
-    this.setState({
-      alert: true,
-      alertData: {type, message}
-    });
-    setTimeout(() => {
-      this.setState({alert: false});
-    }, 6000);
-  }
-
   resetForm() {
     this.refs.contactForm.reset();
-  }
-
-  componentWillMount() {
-    let formRef = firebase.database().ref('vales').orderByKey().limitToLast(1);
-    formRef.on('child_added', snapshot => {
-      const { vale, cheque, cantidad, cantidadc, cantidadr, concepto, oficioS, area, turno, personaR, estatus } = snapshot.val();
-      const data = { vale, cheque, cantidad, cantidadc, cantidadr, concepto, oficioS, area, turno, personaR, estatus };
-      this.setState({ form: [data].concat(this.state.form) });
-    });
   }
 
   sendMessage(e) {
@@ -180,14 +128,14 @@ export default class Vales extends Component {
       batchs.set(statsRefs, { storyCount: increments }, { merge: true });
       batchs.commit();
       firebase.database().ref('vales').push(params).then(() => {
-        this.showAlert('success', 'Tu solicitud fue enviada.');
+        alert('Tu solicitud fue enviada.');
       }).catch(() => {
-        this.showAlert('danger', 'Tu solicitud no puede ser enviada');
+        alert('Tu solicitud no puede ser enviada');
       });
         this.resetForm();
         this.toggleHidden();
       } else {
-        this.showAlert('warning', 'Por favor llene el formulario');
+        alert('Por favor llene el formulario');
       };
     }
 
@@ -208,7 +156,6 @@ export default class Vales extends Component {
         <div class='site'>
           <p class='site-s'><b>Vales</b></p>
         </div>
-
         <form onSubmit={this.sendMessage.bind(this)} ref='contactForm'>
           <div className='margin-vale' ref={el => (this.vale = el)}>
             <div className='vale-title-container'>
@@ -223,7 +170,6 @@ export default class Vales extends Component {
                 <img className='logovale' src={logoh} alt='' />
               </div>
             </div>
-
             <div className='no-cv'>
               <div className='cv'>
                 <p className='p-cv'>
@@ -247,13 +193,10 @@ export default class Vales extends Component {
                 </p>
               </div>
             </div>
-
             <div className='vale-pro-content'>
               <p className='p-vp'>VALE PROVICIONAL DE CAJA</p>
             </div>
-
             <div className='space-v'/>
-
             <div className='mcc-content'>
               <div className='v-m'>
                 <p className='pmcc'>MOVIMIENTO</p>
@@ -340,7 +283,6 @@ export default class Vales extends Component {
                 </div>
               </div>
             </div>
-
             <div className='frsr-end'>
               <div className='frsr-w'>
                 <div className='div-4'>
@@ -389,7 +331,6 @@ export default class Vales extends Component {
                 </div>
               </div>
             </div>
-
             <div className='firma-content'>
               <div className='f-fecha'>
                 <p className='b-fecha'>{today}</p>
@@ -419,16 +360,13 @@ export default class Vales extends Component {
                 <p className='font-size-f'>Recibió</p>
               </div>
             </div>
-
             <div className='last'>
               Me comprometo a entregar la comprobación que ampara el presente
               vale en un plazo no mayor  a 5 dias habiles posteriores a la fecha
               de recibido, de lo contrario reintegraré el recurso por la cantidad
               sin comprobar.
             </div>
-
           </div>
-
           <div className='boton-v'>
             <ReactToPrint
               trigger={() => <buttom className='boton-vale'>Imprimir</buttom>}
@@ -436,22 +374,12 @@ export default class Vales extends Component {
               onAfterPrint={this.toggleHidden.bind(this)}
             />
           </div>
-
           {!this.state.isHidden &&
             <div className='boton-v'>
               <button type='submit' className='input-sc boton-g'>Guardar</button>
             </div>
           }
-
         </form>
-
-        <div class='caja-w' style={{marginTop: '40px', marginBottom: '40px'}}>
-          <div class='caja-col'>
-            <ListComponent
-              lista={this.state.lista}
-            />
-          </div>
-        </div>
       </div>
     )
   }

@@ -23,6 +23,9 @@ export default class RowComponent extends Component {
           <p>{this.props.item.partida}</p>
         </div>
         <div className='table-up-p-fr'>
+          <p>{this.props.item.rubro}</p>
+        </div>
+        <div className='table-up-p-fr'>
           <div>
             <CurrencyFormat
               value={this.props.item.importe}

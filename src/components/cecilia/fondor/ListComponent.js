@@ -26,10 +26,13 @@ export default class ListComponent extends Component {
           <div class='table-left'>
           </div>
           <div class='table-up-p-fr'>
-            <b>UP</b>
+            <b>Up</b>
           </div>
           <div class='table-up-p-fr'>
             <b>PARTIDA</b>
+          </div>
+          <div class='table-up-p-fr'>
+            <b>RUBRO</b>
           </div>
           <div class='table-up-p-fr'>
             <b>IMPORTE</b>

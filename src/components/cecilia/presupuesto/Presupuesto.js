@@ -155,6 +155,10 @@ export default class Excel extends Component {
       }).catch(() => {
         alert('Tu solicitud no puede ser enviada');
       });
+      this.setState({
+        fileNameE: '',
+        fileNameS: ''
+      });
     } else {
       alert('Por favor llene el formulario');
     };
@@ -169,7 +173,7 @@ export default class Excel extends Component {
               <h1 class='presupuesto-h1'>Aqui puedes subir<br/>tu presupuesto anual </h1>
               <p class='presupuesto-p'>Traspasa tu información de Excel para poder usar el sistema</p>
               <div>
-                <p>Archivo:</p>
+                <p>Archivo CSV:</p>
                 <Dropzone
                   style={{
                     position: 'relative',
@@ -181,7 +185,7 @@ export default class Excel extends Component {
                     borderRadius: '5px'}}
                     accept=".csv" onDropAccepted={this.onDrop.bind(this)}>
                     <div className='filename'>
-                      <p className='file-hid'>{this.state.file2}</p>
+                      <p className='file-hid'>{this.state.fileNameE}</p>
                     </div>
                 </Dropzone>
                 <progress class='progress' value={this.state.csv} max='100'>
@@ -201,7 +205,7 @@ export default class Excel extends Component {
                     borderRadius: '5px'}}
                     accept=".pdf" onChange={this.handleUpload.bind(this)}>
                     <div className='filename'>
-                      <p className='file-hid'>{this.state.file}</p>
+                      <p className='file-hid'>{this.state.fileNameS}</p>
                     </div>
                 </Dropzone>
                 <progress class='progress' value={this.state.pdf} max='100'>

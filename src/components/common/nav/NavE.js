@@ -41,6 +41,11 @@ class NavE extends Component {
           </Link>
         </div>
         <div className='navbar-left'>
+          <Link to='/ListVales' className='deco'>
+            <h3 className='nav-t'>Lista Vales</h3>
+          </Link>
+        </div>
+        <div className='navbar-left'>
           <div className='deco'>
             <button
               onClick={this.handleLogout}

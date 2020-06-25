@@ -24,6 +24,11 @@
   cursor: pointer;
   text-decoration: underline;
   color: blue;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
 }
 .p-archivos-row {
   margin: 0px;

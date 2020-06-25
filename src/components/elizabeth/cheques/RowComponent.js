@@ -41,6 +41,11 @@ export default class RowComponent extends Component {
             .00
           </div>
         </div>
+        <div className='table-c-fechae'>
+          <div className='row-update'>
+
+          </div>
+        </div>
         <div className='table-right'>
         </div>
       </div>

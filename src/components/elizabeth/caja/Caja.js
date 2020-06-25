@@ -94,6 +94,8 @@ export default class Caja extends Component {
                 onChange={this.handleChange.bind(this)}
               />
             </div>
+            <div className='space-table-b' />
+            <div className='table-c-b'>
             <div className='banco-inputs-list2'>
               <div className='table-left'>
               </div>
@@ -151,6 +153,7 @@ export default class Caja extends Component {
                 }
               </div>
             )}
+            </div>
           </div>
         </div>
       </div>

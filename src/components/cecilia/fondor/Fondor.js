@@ -209,12 +209,12 @@ export default class Fondor extends Component {
                     />
                   </div>
                   <div className='p-container-ifr2'>
-                    <p className='p-title-margin-fr'>Importe</p>
+                    <p className='p-title-margin-fr'>Rubro</p>
                     <input
                       className='input-style-fr'
-                      id='importe'
+                      id='rubro'
                       required
-                      ref={importe => this.inputImporte = importe}
+                      ref={rubro => this.inputRubro = rubro}
                     />
                   </div>
                   <div className='p-container-ifr2'>
