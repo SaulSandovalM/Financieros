@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './Registro.css';
 
-export default class RowFebrero extends Component {
+export default class RowAbril extends Component {
   constructor(props){
     super(props);
     this.state = {
@@ -23,6 +23,9 @@ export default class RowFebrero extends Component {
         </div>
         <div className='table-meses-par'>
           <p className='p-meses-row'>{this.props.item.ogasto}</p>
+        </div>
+        <div className='table-meses-par'>
+          <p className='p-meses-row'>{this.props.item.rubro}</p>
         </div>
         <div className='table-meses-con'>
           <p className='p-meses-row-con'>{this.props.item.np}</p>

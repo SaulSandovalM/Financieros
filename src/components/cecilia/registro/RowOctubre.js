@@ -24,6 +24,9 @@ export default class RowOctubre extends Component {
         <div className='table-meses-par'>
           <p className='p-meses-row'>{this.props.item.ogasto}</p>
         </div>
+        <div className='table-meses-par'>
+          <p className='p-meses-row'>{this.props.item.rubro}</p>
+        </div>
         <div className='table-meses-con'>
           <p className='p-meses-row-con'>{this.props.item.np}</p>
         </div>
