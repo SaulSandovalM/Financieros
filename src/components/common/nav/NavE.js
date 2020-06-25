@@ -4,8 +4,22 @@ import { logoutUser } from '../../../actions';
 import { connect } from 'react-redux';
 import './Nav.css';
 import logo_h from '../../../img/logo_h.svg';
+import arrow from '../../../img/arrow.svg';
 
 class NavE extends Component {
+  constructor() {
+    super();
+    this.state = {
+      isHidden: true
+    }
+  }
+
+  toggleHidden() {
+   this.setState({
+     isHidden: !this.state.isHidden
+   })
+ }
+
   handleLogout = () => {
     const { dispatch } = this.props;
     dispatch(logoutUser());
@@ -39,12 +53,27 @@ class NavE extends Component {
           <Link to='/Vales' className='deco'>
             <h3 className='nav-t'>Vales</h3>
           </Link>
+          <img
+            className='arrow'
+            src={arrow}
+            onClick={this.toggleHidden.bind(this)}
+            alt=''
+          />
         </div>
-        <div className='navbar-left'>
-          <Link to='/ListVales' className='deco'>
-            <h3 className='nav-t'>Lista Vales</h3>
-          </Link>
-        </div>
+        {!this.state.isHidden &&
+          <div>
+            <div className='subnav'>
+              <Link to='/ListValesA' className='deco'>
+                <p className='nav-t'> &bull; Vales Autorizados</p>
+              </Link>
+            </div>
+            <div className='subnav'>
+              <Link to='/ListValesP' className='deco'>
+                <p className='nav-t'> &bull; Vales Pendientes</p>
+              </Link>
+            </div>
+          </div>
+        }
         <div className='navbar-left'>
           <div className='deco'>
             <button

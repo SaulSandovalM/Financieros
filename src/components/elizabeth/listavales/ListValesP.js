@@ -6,7 +6,7 @@ import ReactToPrint from 'react-to-print';
 import logovale from '../../../img/logovale.png';
 import logoh from '../../../img/logoh.png';
 
-export default class ListVales extends Component {
+export default class ListValesP extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -92,7 +92,7 @@ export default class ListVales extends Component {
     return (
       <div class='container-back'>
         <div class='site'>
-          <p class='site-s'><b>Lista de Vales</b></p>
+          <p class='site-s'><b>Vales Pendientes</b></p>
         </div>
         <div class='caja-w' style={{marginTop: '40px', marginBottom: '40px'}}>
           <div class='caja-col'>

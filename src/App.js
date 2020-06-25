@@ -19,7 +19,8 @@ import Disponible from './components/cecilia/disponible/Disponible';
 import Caja from './components/elizabeth/caja/Caja';
 import Cheques from './components/elizabeth/cheques/Cheques';
 import Vales from './components/elizabeth/vales/Vales';
-import ListVales from './components/elizabeth/listavales/ListVales';
+import ListValesP from './components/elizabeth/listavales/ListValesP';
+import ListValesA from './components/elizabeth/listavales/ListValesA';
 import Autorizacion from './components/elizabeth/autorizacion/Autorizacion';
 import Arqueo from './components/elizabeth/arqueo/Arqueo';
 //Parte de Miguel
@@ -138,8 +139,15 @@ function App(props) {
       />
       <ProtectedRoute
         exact
-        path='/ListVales'
-        component={ListVales}
+        path='/ListValesP'
+        component={ListValesP}
+        isAuthenticated={isAuthenticated}
+        isVerifying={isVerifying}
+      />
+      <ProtectedRoute
+        exact
+        path='/ListValesA'
+        component={ListValesA}
         isAuthenticated={isAuthenticated}
         isVerifying={isVerifying}
       />

@@ -5,12 +5,12 @@ import Popup from 'reactjs-popup';
 import Dropzone from 'react-dropzone';
 import firebase from '../../../Firebase';
 
-export default class RowComponent extends Component {
+export default class RowAuto extends Component {
   render() {
     var auto = this.props.item.estatus;
     return (
       <div>
-        { auto === 'Pendiente' &&
+        { auto === 'Autorizado' &&
           <div class='caja-inputs'>
             <div class='table-left'>
             </div>
