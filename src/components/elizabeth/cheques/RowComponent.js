@@ -42,7 +42,6 @@ export default class RowComponent extends Component {
               thousandSeparator={true}
               prefix={'$ '}
               decimalSeparator={'.'} />
-            .00
           </div>
         </div>
         <div className='table-c-fechae'>
