@@ -47,6 +47,7 @@ export default class Cheques extends Component {
           dirigido: child.val().dirigido,
           fechaC: child.val().fechaC,
           archivo: child.val().archivo,
+          fileUpdate: child.val().fileUpdate,
           done: child.val().done,
           id: child.key
         });
@@ -179,7 +180,7 @@ export default class Cheques extends Component {
       fechaC: this.inputFechaC.value,
       archivo: this.state.archivo
     })
-    if (params.numCheque && params.importe && params.fechaE && params.dirigido && params.fechaC && params.archivo ) {
+    if ( params.numCheque && params.importe && params.fechaE && params.dirigido && params.fechaC && params.archivo ) {
       var f = parseInt(params.importe);
       const statsRefT = firebase.firestore().collection('caja').doc('--stats--');
       const increments = firebase.firestore.FieldValue.increment(f);
@@ -241,7 +242,8 @@ export default class Cheques extends Component {
       fechaE: item.fechaE,
       dirigido: item.dirigido,
       fechaC: item.fechaC,
-      archivo: this.state.archivo
+      archivo: this.state.archivo,
+      fileUpdate: this.state.fileUpdate
     };
     firebase.database().ref().update(updates);
   }
