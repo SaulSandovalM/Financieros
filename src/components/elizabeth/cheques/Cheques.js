@@ -4,7 +4,6 @@ import './Cheques.css';
 import ListComponent from './ListComponent';
 import CurrencyFormat from 'react-currency-format';
 import Dropzone from 'react-dropzone';
-import CreatableSelect from 'react-select/creatable';
 import check from '../../../img/check.svg.png';
 
 export default class Cheques extends Component {

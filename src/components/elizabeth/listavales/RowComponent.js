@@ -1,9 +1,5 @@
 import React, { Component } from 'react';
 import './ListVales.css';
-import CurrencyFormat from 'react-currency-format';
-import Popup from 'reactjs-popup';
-import Dropzone from 'react-dropzone';
-import firebase from '../../../Firebase';
 
 export default class RowComponent extends Component {
   render() {

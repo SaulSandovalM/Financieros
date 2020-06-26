@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 import './Arqueo.css';
-import CurrencyFormat from 'react-currency-format';
-import firebase from '../../../Firebase';
 
 export default class RowComponent extends Component {
   constructor(props){
