@@ -30,7 +30,9 @@ export default class Cheques extends Component {
       contador: {},
       contadorCheques: {},
       file: '',
-      pdf: 0
+      pdf: 0,
+      fileName: '',
+      update: 0
     };
   }
 
@@ -345,6 +347,27 @@ export default class Cheques extends Component {
           </form>
           <div className='p-margin'>
             <p className='p-title-size'>- Movimientos</p>
+          </div>
+          <div className='update'>
+            <p className='p-cheque'><b>Archivo Actualizado</b></p>
+            <Dropzone
+              style={{
+                position: 'static',
+                width: '100%',
+                height: '29px',
+                borderWidth: '1px',
+                borderColor: '#a9a9a9',
+                borderStyle: 'solid',
+                background: 'white',
+              }}
+              accept=".pdf" onChange={this.handleUploads.bind(this)}>
+              <div className='filename'>
+                <p className='file-hid'>{this.state.fileName}</p>
+              </div>
+            </Dropzone>
+            <progress className='progress' value={this.state.update} max='100'>
+              {this.state.update} %
+            </progress>
           </div>
           <div className='cheques-w'>
             <div className='cheques-col'>
