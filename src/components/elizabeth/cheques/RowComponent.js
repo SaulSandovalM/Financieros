@@ -4,12 +4,16 @@ import CurrencyFormat from 'react-currency-format';
 
 export default class RowComponent extends Component {
   constructor(props){
-     super(props);
-     this.state = {
-       done: false,
-       item: 'Atendido',
-     };
-   }
+    super(props);
+    this.state = {
+      done: false,
+      item: 'Atendido',
+    };
+  }
+
+  update = () => {
+    this.props.update(this.props.item);
+  }
 
   render() {
     return (
@@ -43,7 +47,12 @@ export default class RowComponent extends Component {
         </div>
         <div className='table-c-fechae'>
           <div className='row-update'>
-
+            <p>{this.props.item.archivo}</p>
+          </div>
+        </div>
+        <div className='table-c-fechae'>
+          <div className='row-update'>
+            <button onClick={this.update}>Actualizar</button>
           </div>
         </div>
         <div className='table-right'>

@@ -31,7 +31,8 @@ export default class Cheques extends Component {
       file: '',
       pdf: 0,
       fileName: '',
-      update: 0
+      update: 0,
+      fileUpdate: ''
     };
   }
 
@@ -45,6 +46,7 @@ export default class Cheques extends Component {
           fechaE: child.val().fechaE,
           dirigido: child.val().dirigido,
           fechaC: child.val().fechaC,
+          archivo: child.val().archivo,
           done: child.val().done,
           id: child.key
         });
@@ -137,6 +139,28 @@ export default class Cheques extends Component {
     }));
   }
 
+  updateUpload (event) {
+    const file = event.target.files[0]
+    const storageRef = firebase.storage().ref(`cheques/${file.name}`)
+    const task = storageRef.put(file)
+    this.setState({
+      fileUpdate: `${file.name}`
+    })
+    task.on('state_changed', (snapshot) => {
+      let percentage = (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+      this.setState({
+        update: percentage
+      })
+    }, error => {
+      console.error(error.message);
+    }, () =>  storageRef.getDownloadURL().then(url =>  {
+      const record = url;
+      this.setState({
+        archivo: record
+      });
+    }));
+  }
+
   sendMessage(e) {
     e.preventDefault();
     const params = {
@@ -209,18 +233,18 @@ export default class Cheques extends Component {
     }
   }
 
-  /*handleChange = (newValue: any, actionMeta: any) => {
-    console.group('Value Changed');
-    console.log(newValue);
-    console.log(`action: ${actionMeta.action}`);
-    console.groupEnd();
-  };
-  handleInputChange = (inputValue: any, actionMeta: any) => {
-    console.group('Input Changed');
-    console.log(inputValue);
-    console.log(`action: ${actionMeta.action}`);
-    console.groupEnd();
-  };*/
+  update = (item) => {
+    let updates = {};
+    updates['cheques/' + item.id] = {
+      numCheque: item.numCheque,
+      importe: item.importe,
+      fechaE: item.fechaE,
+      dirigido: item.dirigido,
+      fechaC: item.fechaC,
+      archivo: this.state.archivo
+    };
+    firebase.database().ref().update(updates);
+  }
 
   render() {
     return (
@@ -359,9 +383,9 @@ export default class Cheques extends Component {
                 borderStyle: 'solid',
                 background: 'white',
               }}
-              accept=".pdf" onChange={this.handleUploads.bind(this)}>
+              accept=".pdf" onChange={this.updateUpload.bind(this)}>
               <div className='filename'>
-                <p className='file-hid'>{this.state.fileName}</p>
+                <p className='file-hid'>{this.state.fileUpdate}</p>
               </div>
             </Dropzone>
             <progress className='progress' value={this.state.update} max='100'>
@@ -372,6 +396,7 @@ export default class Cheques extends Component {
             <div className='cheques-col'>
               <ListComponent
                 lista={this.state.lista}
+                update={this.update}
               />
             </div>
           </div>
