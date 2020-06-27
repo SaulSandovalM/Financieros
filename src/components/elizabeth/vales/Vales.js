@@ -91,7 +91,7 @@ export default class Vales extends Component {
       recibos: this.inputRecibos.value,
       sc: this.inputSC.value,
       reintegroT: this.inputReintegroT.value,
-      fecha: this.inputFecha.value,
+      fecha: this.state.fecha,
       autorizo: this.inputAutorizo.value,
       estatus: this.state.estatus
     };
@@ -110,7 +110,7 @@ export default class Vales extends Component {
       recibos: this.inputRecibos.value,
       sc: this.inputSC.value,
       reintegroT: this.inputReintegroT.value,
-      fecha: this.inputFecha,
+      fecha: this.state.fecha,
       autorizo: this.inputAutorizo.value,
       estatus: this.state.estatus
     })
@@ -141,6 +141,7 @@ export default class Vales extends Component {
       });
         this.resetForm();
         this.toggleHidden();
+        this.consumo();
       } else {
         alert('Por favor llene el formulario');
       };
