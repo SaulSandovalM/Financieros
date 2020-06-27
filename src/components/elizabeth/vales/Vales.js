@@ -144,7 +144,7 @@ export default class Vales extends Component {
       } else {
         alert('Por favor llene el formulario');
       };
-    }
+  }
 
   render() {
 

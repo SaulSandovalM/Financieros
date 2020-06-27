@@ -43,6 +43,9 @@ export default class ListComponent extends Component {
           <div className='table-c-fechae'>
             <b>ARCHIVO</b>
           </div>
+          <div className='table-c-fechae'>
+            <b>ACTUALIZAR</b>
+          </div>
           <div className='table-right'>
           </div>
         </div>
@@ -51,6 +54,7 @@ export default class ListComponent extends Component {
             <RowComponent
               key={item.id}
               item={item}
+              update={this.props.update}
             />
           ).reverse()
         }

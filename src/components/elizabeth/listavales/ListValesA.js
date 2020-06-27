@@ -2,9 +2,6 @@ import React, { Component } from 'react';
 import firebase from '../../../Firebase';
 import ListAuto from './ListAuto';
 import './ListVales.css';
-import ReactToPrint from 'react-to-print';
-import logovale from '../../../img/logovale.png';
-import logoh from '../../../img/logoh.png';
 
 export default class ListValesP extends Component {
   constructor(props) {

@@ -4,7 +4,6 @@ import './Cheques.css';
 import ListComponent from './ListComponent';
 import CurrencyFormat from 'react-currency-format';
 import Dropzone from 'react-dropzone';
-import CreatableSelect from 'react-select/creatable';
 import check from '../../../img/check.svg.png';
 
 export default class Cheques extends Component {
@@ -30,7 +29,10 @@ export default class Cheques extends Component {
       contador: {},
       contadorCheques: {},
       file: '',
-      pdf: 0
+      pdf: 0,
+      fileName: '',
+      update: 0,
+      fileUpdate: ''
     };
   }
 
@@ -44,6 +46,8 @@ export default class Cheques extends Component {
           fechaE: child.val().fechaE,
           dirigido: child.val().dirigido,
           fechaC: child.val().fechaC,
+          archivo: child.val().archivo,
+          fileUpdate: child.val().fileUpdate,
           done: child.val().done,
           id: child.key
         });
@@ -136,6 +140,28 @@ export default class Cheques extends Component {
     }));
   }
 
+  updateUpload (event) {
+    const file = event.target.files[0]
+    const storageRef = firebase.storage().ref(`cheques/${file.name}`)
+    const task = storageRef.put(file)
+    this.setState({
+      fileUpdate: `${file.name}`
+    })
+    task.on('state_changed', (snapshot) => {
+      let percentage = (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+      this.setState({
+        update: percentage
+      })
+    }, error => {
+      console.error(error.message);
+    }, () =>  storageRef.getDownloadURL().then(url =>  {
+      const record = url;
+      this.setState({
+        archivo: record
+      });
+    }));
+  }
+
   sendMessage(e) {
     e.preventDefault();
     const params = {
@@ -154,7 +180,7 @@ export default class Cheques extends Component {
       fechaC: this.inputFechaC.value,
       archivo: this.state.archivo
     })
-    if (params.numCheque && params.importe && params.fechaE && params.dirigido && params.fechaC && params.archivo ) {
+    if ( params.numCheque && params.importe && params.fechaE && params.dirigido && params.fechaC && params.archivo ) {
       var f = parseInt(params.importe);
       const statsRefT = firebase.firestore().collection('caja').doc('--stats--');
       const increments = firebase.firestore.FieldValue.increment(f);
@@ -208,18 +234,19 @@ export default class Cheques extends Component {
     }
   }
 
-  /*handleChange = (newValue: any, actionMeta: any) => {
-    console.group('Value Changed');
-    console.log(newValue);
-    console.log(`action: ${actionMeta.action}`);
-    console.groupEnd();
-  };
-  handleInputChange = (inputValue: any, actionMeta: any) => {
-    console.group('Input Changed');
-    console.log(inputValue);
-    console.log(`action: ${actionMeta.action}`);
-    console.groupEnd();
-  };*/
+  update = (item) => {
+    let updates = {};
+    updates['cheques/' + item.id] = {
+      numCheque: item.numCheque,
+      importe: item.importe,
+      fechaE: item.fechaE,
+      dirigido: item.dirigido,
+      fechaC: item.fechaC,
+      archivo: this.state.archivo,
+      fileUpdate: this.state.fileUpdate
+    };
+    firebase.database().ref().update(updates);
+  }
 
   render() {
     return (
@@ -346,10 +373,32 @@ export default class Cheques extends Component {
           <div className='p-margin'>
             <p className='p-title-size'>- Movimientos</p>
           </div>
+          <div className='update'>
+            <p className='p-cheque'><b>Archivo Actualizado</b></p>
+            <Dropzone
+              style={{
+                position: 'static',
+                width: '100%',
+                height: '29px',
+                borderWidth: '1px',
+                borderColor: '#a9a9a9',
+                borderStyle: 'solid',
+                background: 'white',
+              }}
+              accept=".pdf" onChange={this.updateUpload.bind(this)}>
+              <div className='filename'>
+                <p className='file-hid'>{this.state.fileUpdate}</p>
+              </div>
+            </Dropzone>
+            <progress className='progress' value={this.state.update} max='100'>
+              {this.state.update} %
+            </progress>
+          </div>
           <div className='cheques-w'>
             <div className='cheques-col'>
               <ListComponent
                 lista={this.state.lista}
+                update={this.update}
               />
             </div>
           </div>

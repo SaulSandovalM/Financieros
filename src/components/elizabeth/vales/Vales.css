@@ -156,6 +156,7 @@ textarea { resize: none; }
   padding: 0px;
   border-width: 0px;
   border-bottom: 0px;
+  text-align: center;
 }
 .space-c {
   height: 50px;
@@ -305,14 +306,6 @@ select {
     padding: 5px;
     font-size: 10px;
     height: 52px;
-  }
-  .input-w {
-    width: 100%;
-    padding: 0px;
-    margin: 0px;
-    border-width: 0px;
-    border-bottom: 0px;
-    font-size: 10px;
   }
   .frsr-end {
     display: flex;
