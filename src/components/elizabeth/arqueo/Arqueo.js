@@ -506,7 +506,15 @@ export default class Arqueo extends Component {
           </Popup>
         </div>
 
-        <input type="text" value={this.state.search} onChange={this.updateSearch.bind(this)}/>
+        <div className='p-container-ifr2'>
+          <p className='p-title-margin-fr'>Buscador</p>
+          <input
+            className='input-style-fr'
+            type="text"
+            value={this.state.search}
+            onChange={this.updateSearch.bind(this)}
+          />
+        </div>
 
         <div className='table-arqueo-search'>
           <div className='table-arqueo-content'>
