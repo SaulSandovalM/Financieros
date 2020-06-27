@@ -24,8 +24,19 @@ export default class Fondor extends Component {
       rubro: '',
       archivo: '',
       contador: {},
-      alert: false
+      alert: false,
+      searchR: [],
+      search: '',
+      newCantidad: ''
     }
+  }
+
+  handleChange(event) {
+    this.setState({[event.target.name]: event.target.value})
+  }
+
+  updateSearch(event) {
+    this.setState({search: event.target.value.substr(0,20)});
   }
 
   handleUploads (event) {
@@ -74,6 +85,14 @@ export default class Fondor extends Component {
     const itemsRef = firebase.database().ref('banco/');
     this.listenForItems(itemsRef);
     this.consumo();
+  }
+
+  componentWillMount () {
+    firebase.database().ref('presupuesto').on('child_added', snapshot => {
+      this.setState({
+        searchR: this.state.searchR.concat(snapshot.val())
+      });
+    });
   }
 
   consumo = () => {
@@ -131,7 +150,64 @@ export default class Fondor extends Component {
     };
   }
 
+  update = (item) => {
+    let updates = {};
+    updates['presupuesto/' + item.id] = {
+      rm: item.rm,
+      os: item.os,
+      up: item.up,
+      rubro: item.rubro,
+      tg: item.tg,
+      ogasto: item.ogasto,
+      f: item.f,
+      fu: item.fu,
+      sf: item.sf,
+      eje: item.eje,
+      s: item.s,
+      prog: item.prog,
+      sp: item.sp,
+      obj: item.obj,
+      proy: item.proy,
+      est: item.est,
+      ben: item.ben,
+      eg: item.eg,
+      mi: item.mi,
+      pr: item.pr,
+      pb: item.pb,
+      dp: item.dp,
+      indi: item.indi,
+      la: item.la,
+      ods: item.ods,
+      et: item.et,
+      ff: item.ff,
+      of: item.of,
+      np: item.np,
+      cpa: item.cpa,
+      ene: item.ene,
+      feb: item.feb,
+      mar: item.mar,
+      abr: item.abr,
+      may: item.may,
+      jun: item.jun,
+      jul: item.jul,
+      ago: item.ago,
+      sep: item.sep,
+      oct: item.oct,
+      nov: item.nov,
+      dic: this.state.newCantidad,
+      total: item.total,
+    };
+    firebase.database().ref().update(updates);
+  }
+
   render() {
+
+    let filterData = this.state.searchR.filter(
+      (searchR) => {
+        return searchR.up.indexOf(this.state.search) !== -1;
+      }
+    );
+
     return (
       <div className='pf-container'>
         <div className='site-pf'>
@@ -183,40 +259,12 @@ export default class Fondor extends Component {
           <div className='p-container-fondor'>
             <div className='p-margin-fr'>
               <p className='p-title-size-fr'>
-                - Ingresa los datos que correspondan con el documento
-                  de autorización del fondo revolvente
+                - Busca tu partida para crear tu fondo revolvente
               </p>
             </div>
             <div className='inputs-container-fr'>
               <div className='inputs-col-fr'>
                 <div className='inputs-row-fr-2'>
-                  <div className='p-container-ifr2'>
-                    <p className='p-title-margin-fr'>UP</p>
-                    <input
-                      className='input-style-fr'
-                      id='up'
-                      required
-                      ref={up => this.inputUp = up}
-                    />
-                  </div>
-                  <div className='p-container-ifr2'>
-                    <p className='p-title-margin-fr'>Partida</p>
-                    <input
-                      className='input-style-fr'
-                      id='partida'
-                      required
-                      ref={partida => this.inputPartida = partida}
-                    />
-                  </div>
-                  <div className='p-container-ifr2'>
-                    <p className='p-title-margin-fr'>Rubro</p>
-                    <input
-                      className='input-style-fr'
-                      id='rubro'
-                      required
-                      ref={rubro => this.inputRubro = rubro}
-                    />
-                  </div>
                   <div className='p-container-ifr2'>
                     <p className='p-title-margin-fr'>Importe</p>
                     <input
@@ -234,11 +282,50 @@ export default class Fondor extends Component {
             <button type='submit' className='input-sc boton-g'>Agregar</button>
           </div>
         </form>
-        <div className='space-table'>
+        <div>
+          <input
+            type="text"
+            value={this.state.search}
+            onChange={this.updateSearch.bind(this)}
+          />
+        </div>
+        {
+          filterData.map(searchR => (
+            <div className='table-arqueo-content'>
+              <div className='table-left'>
+              </div>
+              <div className='title-arqueo-se'>
+                <p className='p-mar-arqueo'>{searchR.up}</p>
+              </div>
+              <div className='title-arqueo-se'>
+                <p className='p-mar-arqueo'>{searchR.par}</p>
+              </div>
+              <div className='title-arqueo-se'>
+                <p className='p-mar-arqueo'>{searchR.rubro}</p>
+              </div>
+              <div className='title-arqueo-se'>
+                <p className='p-mar-arqueo'>{searchR.dic}</p>
+              </div>
+              <div className='title-arqueo-se'>
+                <button onClick={this.update}>Actualizar</button>
+              </div>
+              <div className='table-right'>
+              </div>
+            </div>
+          )).reverse()
+        }
+        <div>
+          <input
+            name='newCantidad'
+            onChange={this.handleChange.bind(this)}
+            value={this.state.newCantidad}
+          />
+        </div>
+        {/*<div className='space-table'>
           <ListComponent
             lista={this.state.lista}
           />
-        </div>
+        </div>*/}
       </div>
     )
   }
