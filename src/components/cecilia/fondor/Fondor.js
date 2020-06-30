@@ -126,7 +126,6 @@ export default class Fondor extends Component {
         alert('Tu solicitud no puede ser enviada');
       });
       this.resetForm();
-      this.consumo();
       setInterval(this.consumo, 1000);
     } else {
       alert('Por favor llene el formulario');
