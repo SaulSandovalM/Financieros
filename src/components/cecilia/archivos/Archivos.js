@@ -11,9 +11,9 @@ export default class Archivos extends Component {
           <p className='site-pf-s'><b>Archivos</b></p>
         </div>
         <div>
-          <ListComponent
+          {/*<ListComponent
             lista={this.state.lista}
-          />
+          />*/}
         </div>
       </div>
     )

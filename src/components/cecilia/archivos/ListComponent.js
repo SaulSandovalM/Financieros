@@ -7,6 +7,7 @@ export default class ListComponent extends Component {
   render() {
     return (
       <div>
+      {/*
         <div className='archivos-container'>
           <div className='table-left'>
           </div>
@@ -29,7 +30,7 @@ export default class ListComponent extends Component {
               item={item}
             />
           )
-        }
+        } */}
       </div>
     );
   }
