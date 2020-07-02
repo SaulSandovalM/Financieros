@@ -9,6 +9,10 @@ export default class Archivos extends Component {
       <div className='pf-container'>
         <div className='site-pf'>
           <p className='site-pf-s'><b>Archivos</b></p>
+
+        </div>
+        <div>
+              <p> Visualizacion de Archivos</p>
         </div>
         <div>
           {/*<ListComponent
