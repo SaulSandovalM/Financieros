@@ -42,7 +42,6 @@ export default class Archivos extends Component {
       nOficio: this.inputnOficio.value,
       nLici: this.inputnLici.value,
       importe: this.inputImporte.value,
-      iLetra: this.inputiLetra.value,
       beneficiario: this.inputBeneficiario.value,
       descripcion: this.inputDescripcion.value,
       realizo: this.inputRealizo.value
@@ -55,13 +54,12 @@ export default class Archivos extends Component {
       nOficio: this.inputnOficio.value,
       nLici: this.inputnLici.value,
       importe: this.inputImporte.value,
-      iLetra: this.inputiLetra.value,
       beneficiario: this.inputBeneficiario.value,
       descripcion: this.inputDescripcion.value,
       realizo: this.inputRealizo.value
     })
     if ( params.nFondo && params.fecha && params.tDoc && params.oAuto && params.nOficio &&
-        params.nLici && params.importe && params.iLetra && params.beneficiario && params.descripcion && params.realizo ) {
+        params.nLici && params.importe && params.beneficiario && params.descripcion && params.realizo ) {
       firebase.database().ref('fondos').push(params).then(() => {
         alert('Tu solicitud fue enviada.');
       }).catch(() => {
@@ -138,8 +136,8 @@ export default class Archivos extends Component {
     if ( mm < 10 ){
       mm = '0' + mm
     }
-    today = yyyy + '-' + mm + '-' + dd;
-    const { nFondo, fecha, tDoc, oAuto, nOficio, nLici, importe, iLetra, beneficiario, descripcion, realizo } = this.state;
+    today = dd + '/' + mm + '/' + yyyy;
+    const { importe } = this.state;
 
     return (
       <div className='pf-container'>
@@ -147,7 +145,7 @@ export default class Archivos extends Component {
           <p className='site-pf-s'><b>Fondos 2020</b></p>
         </div>
         <div className='space-fm' />
-        <form className="fondos-back" onSubmit={this.onSubmit}>
+        <form className='fondos-bac' onSubmit={this.sendMessage.bind(this)} ref='contactForm'>
           <div className='p-container-fondo'>
             <p className='p-title-margin-fondo'>Num. de Fondo</p>
             <input
@@ -161,10 +159,10 @@ export default class Archivos extends Component {
           <div className='p-container-fondo'>
             <p className='p-title-margin-fondo'>Fecha</p>
             <input
-              type='date'
               className='input-style-fr'
               id='fecha'
               required
+              value={today}
               ref={fecha => this.inputFecha = fecha}
             />
           </div>
@@ -1078,17 +1076,11 @@ export default class Archivos extends Component {
             <input className='input-style-fr'
               id='realizo'
               required
+              value={admin}
               ref={realizo => this.inputRealizo = realizo}
             />
           </div>
-          <button
-            className="bt-s2"
-            type='submit'
-            onClick={() => this.setState({
-              realizo: this.state.realizo = admin,
-              fondo: this.state.fondo = this.state.contador.storyCount
-            })}
-            style={{fontFamily: 'Arial'}}>
+          <button className='bt-s' type='submit'>
             Guadar
           </button>
         </form>

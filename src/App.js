@@ -24,6 +24,7 @@ import ListValesA from './components/elizabeth/listavales/ListValesA';
 import Autorizacion from './components/elizabeth/autorizacion/Autorizacion';
 import Arqueo from './components/elizabeth/arqueo/Arqueo';
 //Parte de Miguel
+import Fmain from './components/miguel/fondos/Fmain';
 import Fondos from './components/miguel/fondos/Fondos';
 import Comprometidos from './components/miguel/comprometidos/Comprometidos';
 import Edit from './components/miguel/comprometidos/Edit';
@@ -168,8 +169,8 @@ function App(props) {
       {/*Rutas de Miguel*/}
       <ProtectedRoute
         exact
-        path='/Fondos'
-        component={Fondos}
+        path='/Fmain'
+        component={Fmain}
         isAuthenticated={isAuthenticated}
         isVerifying={isVerifying}
       />
