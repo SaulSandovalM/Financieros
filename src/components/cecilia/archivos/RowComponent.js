@@ -10,7 +10,7 @@ export default class RowComponent extends Component {
         <div className='table-archivos'>
           <p onClick={()=> window.open(oficioS, "_blank")}
             className='p-archivos-row-url'>
-            {this.props.item.oficioSname}
+             {/*{this.props.item.oficioSname}*/}
           </p>
         </div>
         <div className='table-archivos'>
