@@ -149,8 +149,11 @@
   justify-content: center;
 }
 .row-update {
-  display: flex;
-  flex-direction: row;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
 }
 .p-update {
   margin: 0px;
@@ -171,4 +174,9 @@
 }
 .p-title-size {
   font-size: 18px;
+}
+.m-p {
+  margin: 0px;
+  padding: 2px 0px 0px 0px;
+  line-height: 30px;
 }

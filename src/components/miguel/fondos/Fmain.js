@@ -3,13 +3,14 @@ import ReactDOM from 'react-dom';
 import MultiStep from 'react-multistep';
 import './Fondos.css';
 import Fondos from './Fondos';
+import Fondo from './Fondo';
 // import StepTwo from './stepTwo'
 // import StepThree from './stepThree'
 // import StepFour from './stepFour'
 
 const steps = [
   { component: <Fondos /> },
-  // { component: <StepTwo /> },
+  { component: <Fondo /> },
   // { component: <StepThree /> },
   // { component: <StepFour /> }
 ]

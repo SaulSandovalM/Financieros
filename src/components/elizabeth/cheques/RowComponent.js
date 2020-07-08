@@ -46,7 +46,7 @@ export default class RowComponent extends Component {
         </div>
         <div className='table-c-fechae'>
           <div className='row-update'>
-            <p>{this.props.item.fileUpdate}</p>
+            <p className='m-p'>{this.props.item.fileUpdate}</p>
           </div>
         </div>
         <div className='table-c-fechae'>

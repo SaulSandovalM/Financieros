@@ -3,7 +3,7 @@ import './Fondos.css';
 import firebase from '../../../Firebase';
 import { NumberAsString } from './NumerosLetras.js';
 
-export default class Archivos extends Component {
+export default class Fondos extends Component {
   constructor () {
     super()
     this.state = {
@@ -140,11 +140,10 @@ export default class Archivos extends Component {
     const { importe } = this.state;
 
     return (
-      <div className='pf-container'>
+      <div className='f-container-n'>
         <div className='site-pf'>
           <p className='site-pf-s'><b>Fondos 2020</b></p>
         </div>
-        <div className='space-fm' />
         <form className='fondos-bac' onSubmit={this.sendMessage.bind(this)} ref='contactForm'>
           <div className='p-container-fondo'>
             <p className='p-title-margin-fondo'>Num. de Fondo</p>
