@@ -2,23 +2,36 @@ import React, { Component } from 'react';
 import './Fondos.css';
 import firebase from '../../../Firebase';
 import { NumberAsString } from './NumerosLetras.js';
+import { DropDownList } from '@progress/kendo-react-dropdowns';
+import '@progress/kendo-theme-default/dist/all.css';
 
 export default class Fondos extends Component {
-  constructor () {
-    super()
+  oficio_aut = ["SFP-CPF-01-0020/2020", "SFP-CPF-01-0010/2020", "SFP-CPF-01-0724/2020", "SFP-CPF-01-0681/2020", "SFP-CPF-01-DFDP-0949/2020"];
+  beneficiario = ["Mtro.León Maximiliano Hernández Valdés", "Operadora Omx Sa De CV","AASI INNOVACIONES SA DE CV","Abigail Santillán Moreno","Abraham Andrade Ortiz","Abraham Peña Pérez","Acabados Decorativos De La Huasteca SA De CV","Aceites Y Combustibles Los Ángeles SA De CV","Aceros Damarin SA De CV","Adarick Vite Aranda","Administradora De Centros Comerciales Santa Fe SA De CV","ADOLFO PAZ RIANCHO","Adrián Guevara Rivera","Adrián Guillermo Cueto Hernández","Adriana Ávila Rodríguez","MOTOR AVANZADO REBUIDING SA DE CV","Aeropuertos Y Servicios Auxiliares","Aerovías De México Sa De CV","Agaturismo SA De CV","Aianeli SA De CV","Aianeli SA De CV4","Alberto Alfonso Galindo Galindo","Alberto Severino Jaén Olivas","Aldo Ramírez Cerón","Aldo Román Mendoza García","Alejandra López Alvarado","Alex Steak SA De CV","Alfredo Edmundo Galindo Pérez","Alfredo Laris Hernández","Alheli Paredes Licona","Alma Gabriela Mendoza Rojas","Alma Rosa Basilio Garfias","Aluminio García","Álvaro Samperio Le-Vinson","Ana Fernanda Zapata Santana","Ana Fernanda Zpata Santana","Ana Laura Zacatenco Luna","Ana María Hernández López","Ana Perla Margarita Mendoza Espino","Andrade Bertoloni Arturo","Andrés Guillen Hernández","Andrés Téllez Pino","Ángela Pérez Prado","Angélica González Sánchez","Angélica Morales Avilés","Angélica Sánchez Martínez","Antojitos La Finca","Antonio Lugo Rosas","Aquilino Edgar Herrera Rodríguez","Araceli Pérez Jarillo","Arellano Miranda Elizabeth","Arlan José Chávez Lara","Arlette Macías Escorcia","Armando Miguel Carpio López","Arnulfo Ramírez Cerón","Arturo Cano García","Arturo Flores Meléndez","Arturo Tinajero Jaimes","Aseca, SA de CV","Autobuses Coordinados Zimapan Valles","Autobuses De Oriente Ado SA De CV","Autobuses De Primera Clase","Autobuses Estrella Blanca SA De CV","Autobuses Estrella Blanca Sa De CV","Autobuses México-Zamapan Valle Flecha Roja SA","Autobuses Valle Mezquital S., A. De CV","Autógena De Hidalgo SA De CV","Autogena de Hidalgo, SA de CV ","Autopista Arco Norte Sa De CV","Autopistas Arco Norte SA De CV","Autos Pullman Sa De CV","Autoservicio Jocaran de Progreso, SA de CV","Autoservicio Jocaran SA de CV","Autotransportes De Hidalgo .SA De CV","Autotransportes Del Valle Del Mezquital SA De CV","Autovía Necaxa-Tihuatlan Sa De CV","Autozone De México, S. De RL De CV","Banco Mercantil Del Norte SA De CV","Basualdo Rojo Honey","Beatriz Montaño Jarillo","Beatriz Penélope Isleim Castorena Cortes","Bensaa SA De CV","Berenice Soto Hernández","Bianca Ofelia Galarza Trejo","Blanca Trejo Bautista","Brenda Alemon Hernández","Brenda Leticia Rangel Lugo","Brenda Minelly López López","Burger La Fiesta","C Frank Alexander Veytia ViejoIEJO","C. Adolfo Paz Riancho","C. Alejandra Fonseca Rincon","C. Carlos Haua Bulos","C. Claudi Ramirez Lopez","C. Efren Rodriguez Ramierez","C. Elizabeth Arellano Miranda","C. Erika Jazimin Resendiz Trejo","C. Frank Alexander Veytia Viejo","C. Ines Cruz Hunter","C. Javier Santa Cruz Garcia","C. Jose Luis Magaña Cabrera","C. Jose Luis Zacatenco Lopez","C. Jose solis Gonzalez","C. Leticia Saavedra Nesbaid","C. Luis Eduardo Nahle Pascual","C. Maria De Rosario Gomez Urbina","C. Russel Barradaz Sanchez","C. Saul Salinas Gonzalez","C. Silverio Gonzalez Cuca","C. Wencesñap Sanchez Estrada","C.Lesticia Saavedra Nesbaid","Cadena Comercial Oxxo Sa De CV","Cadena Comercial Oxxo, Sa De CV","Café Estaciones","CAMINO REAL","CAMINOS Y PUENTES FEDERALES","Caminos Y Puentes Federales De Ingresos Y Servicios Conexos","LAVADO DE COCHES LA CUBETA DIGITAL","CARBU EXPRESS, SA DE CV","CARLOS ANTONIO MORALES GARZA","CARLOS ANTONIO QUINTO RIOS","Carlos Antonio Quinto Ríos","CARLOS CELIO ESQUIVEL","Carlos Daniel Ortiz Chavez","Carlos Godinez Perez","Carlos Godínez Pérez","Carlos Haua Bulos","Carlos Luis Gómez Arguelles","Carlos Martin Torres Juárez","Carlos Primitivo Vega Valle","Carreteras Del Pacifico","Caseta Metlapil","Caseta Miradores","Catalina Martínez Guerrero","Cecapiem SA De CV","Cele Filiberto Martínez Cordero","Celia Esparza Loreto","Centro De Copiado","Centro de verificación De Verificación Takechi ​​SA de CV","Cerrajería Aranda","Cerrajería Móvil El Saucillo","Cerro De Biznagas S, A De CV","CFE Suministridor De Servicios BasicosS","City Club","Claudia Corte Herrera","Claudia Judith Flores Leyva","Claudia Mota Rojas","Claudia Ramierez Lopez","Claudia Ramírez López","Cocina Económica La Güerita","Cocina Económica La Parroquia","Cocina Tradicional Campestre De 1981","Coel SA De CV","Com. De Agua Pot. Alcant Y san. Del Mpio De Huichapan","Combustibles Bentan SA DE CV","Combustibles De Pachuca SA De CV","Combustibles Rumloc SA De CV","Comercial Mexicana","Comercial Miura SA DE CV (Sistema De Vigilancia)","Comercializadora Farmacéutica De Chiapas Sapi De CV","Comercializadora Y Distribuidora Brime SA De CV","Comisión Bancaria","Comisión De Agua De Actopan","Comisión De Agua De Actopan Hgo","Comisión De Agua De Tula De Allende","Comisión De Agua De Zimapan","Comisión De Agua Huichapan","Comisión De Agua Ixmiquilpan","Comisión De Agua Mixquiahuala De Juárez","Comisión De Agua Pachuca","Comisión De Agua Potable Y Alcantarillado Del Municipio De Mixquiahuala De Juarez","Comisión De Agua Potable, Alcantarillado Y Saneamiento Del Municipio De Ixmiquilpan, Hgo","Comisión De Agua Potable, Alcantarillado Y Saneamiento Del Municipio De Zimapan, Hgo","Comisión de Agua y Alcantarillado De Sistemas Intermunicipales","Comisión De Agua Y Alcantarillado Del Municipio De Actopan Hidalgo","Comisión De Agua Y Alcantarillado Del Municipio De Tula De Allende","Comisión Federal De Electricidad","Compañía Santa María SA De CV","Concesionaria Autopista Perote-Xalapa.","Concesionaria De Vías Troncales SA De CV","Concesionaria Mexiquense SA De CV","Concesiones Y Promociones Malibran","Conexiones Y Mangueras De Pachuca SA De C V.","Consultora Informática","CONTEXPRESS S DE RL DE CV","Copias Neo SA De CV","Copicentro Pachuca","Corporativo Farmacias Mas SA De CV","Corporativo Yunes Márquez SA De CV","Corte Herrera Claudia","Cortesía En Viajes S. De RL De CV","CRIMELAB SA DE CV","Cristina González Cantera","Curso 'El Delito De Feminicidio'","Cutberto Rodríguez Álvarez","Cynper SA De CV","China Town","Dagoberto Mendoza Morales","Daniel García Luna","Daniel Becerra Castañeda","Daniel García Luna","Daniel López Carrasco","Daniel Miramontes Flores","Daniel Zarate Santiago","David Adrián Martínez Santiago","David Richard Uribe","De Tula De Allende, Hgo.","Delia Serrano Morales","Deportes Pachuca SA De CV","Desarrollo Hotelero De Plaza Pachuca Sa","DEVSOFT SA DE CV","Dhl Exprés México SA De CV","Diana Araceli Zaldívar Cruz","Diana Gálvez Mendoza","Diego Alberto Acevedo De La Rosa","Diego Alberto Espinosa Islas","Dilia Ramos Montaño","Distribuciones Mogu SA DE CV","Distribuidora De Abarrotes Y Semillas De Pachuca SA De CV","Distribuidora De Alimentos Th, SA De CV","Distribuidora Del Manual Moderno SA De CV","Distribuidora El Manual Moderno SA De CV","Distribuidora Fragoso","Domínguez Díaz Daniel","Drícela Austria Serna","Drivecare, SA de CV","Dulce María Calva Sánchez","Edgar Aquilino Herrera Rodríguez","Edgar Dante Rosas Islas","Edgar Mendoza Ceron","Edgar Rabindranath Valdespino Zubieta","Edith Rojas Camacho","Edmundo Alfredo Galindo Pérez","Edson Aguilar Romero","El Palacio De Hierro SA De CV","El Parador De San José","El Pelón Dulcerías","el rincon de periban","El Rincón De Periban","Elda Ceseña Banquera","Eléctrica Ángeles","Eléctrica Barba SA De CV","Electro pura S. De RL De CV","Electropura S. De RL De CV","Elfego Baltazar Piña Verde","Eli Rodríguez Del Ángel","Elideth Sarahi Dorantes López","Elisa Ramírez Escamilla","Eliseo Martínez Ballesteros","Eliu Morales Fragoso","Elizabeth Arellano Miranda","Elizabeth Salinas Aguilar","Elizabeth Troncoso Escamilla","Eloísa Camargo Hernández","Elsa Patricia Rodríguez Reyes","Emilio Prieto Perez","Emilio Prieto Pérez","Emmanuel Ceseña Barquera","Envasadoras De Aguas En México S. De RL De CV (Bonafont)","Eric Salvador Rosas Villa","Erick Jovanni Flores Varela","Erick Mendoza Hernández","Erick Salvador Rosas Villa","Erika Cruz Pérez","ERIKA JAZMIN RESENDIZ TREJO","Ernesto Skewes López","Esli Domínguez Trejo","Especialistas en Alta Cocina SA De CV (Wings)","Esperanza González Díaz","Espinosa Ostos Blanca Deyanira","Estación Acevedo S. De RL","Estación De Servicio Ana SA De CV","Estación De Servicio Ariel SA De CV","Estación de Servicio EMAJUFH SA de CV","Estación De Servicio La Mora","Estación De Servicios Gesa SA De CV","Estación Real De La Plata SA De CV","Estación Santa María La Providencia SA De CV","Estación Valle Dorado SA De CV","Estacionamiento La Posta","Esteban Leopoldo Cartelazo Islas","Esteban Leopoldo Castelazo Islas","Eugenia Vite Silvestre","Eva Pérez Hernández","Eva Rivera Samitez","Fabián Bernardo Moreno Gómez","FABIOLA GONZALEZ OROZCO","Fabiola Santillán García","Farmacias Guadalajara SA De CV","Farum Servicios SA De CV","Fejsa Computaion Y Oficinas De Pachuca SA De CV","FELIPE JIMENEZ GUTIERREZ","Felipe Jiménez Gutiérrez","Felipe Simón Olvera Castelán","Felisa Lugo Chavero","Feliz Ernesto Reyes Molina","Fernando Hidalgo Vergara","Ferre hogar","Ferretería Y Plomería Casa Martínez","Fideicomiso Autopistas Y Puentes Del Golfo Centro","Fierros Y Laminas De Pachuca SA De CV.","Fiesta Inn Pachuca","Filiberto Barrera Dávila","Flor Eugenia Vargas Herrera","Fondo Nacional De Infraestructura","Forlac Store SA De CV","Francisca Quiroz Uribe","Francisco Raúl García Bolio","Francisco Ventura Martínez","Fuente De Sodas Chino´S","Gabriel López Hernández","Gabriela Romero Campos","Manual García Moreno Víctor","Garza Gas De Hidalgo SA De CV","Gas De Provincia Sa De CV","Gas Fast SA De CV","Gas Imperial De Axapusco SA De CV","Gasamake SA De CV","Gasolineria Agua Blanca SA De CV","Gasolineria Rodjaq SA De CV","Gasomer SA De CV","Gastrosur SA De CV","Genaro Oswaldo Márquez Gutiérrez","Germa Mantenimiento Y Diseño SA De CV","Gertell Combustibles SA De CV","Gibran Copca Chávez","Gilberto Bárcenas López","Gilberto Espinosa Ramírez","Gloríela Islas Sosa","Gobierno Del Df Curso Delito De Feminicidio","Gobierno del Estado de Veracruz","González Islas Bernardo","Graciela Moreno Arce","Graciela Moreno Rodríguez","Graciela Taide Quiroz Gutiérrez","Grupo Autopistas Nacionales SA De CV","Grupo Autopistas Nacionales, Sa De CV","Grupo Bekim Empresarial S DE RL DE CV","Grupo Cravioto Distribuciones SA De CV","Grupo Estrella Blanca SA De CV","Grupo Galume SA De CV","Grupo Helen Gasolinera Excelencia y Calidad SA de CV","Grupo O Port SA De CV","Grupo Parisina SA De CV","Grupo Suzuka Argenta SA De CV","Guadalupe Hernández Escamilla","Guillermo Harold Barría García","Gustavo Said Gonzalez Tapia","Gustavo Trejo Montalvo","Gutiérrez Rodríguez Juan Ramón","Guy Jesús Quijano Austria","H. Roberto Aguilar Galindo","Hacienda Yextho","Hacobo Flores Pérez","Héctor Santos González Reyes","Heriberto Padilla Contreras","Herlaz Sistemas de Comunicación SA De CV","HERLAZ SISTEMAS DE COMUNICACIÓN SA DE CV","Herlaz Sistemas De Comunicación, Sa De CV","Hermelinda Peña Hernández","Hernández Valencia Rosalía","Herrera Motors De Hidalgo SA De CV","Herrera Motors De Hidalgo SA De CV","Restaurante Hidalgo Platillos Regionales","Hidrocarburos Hidalgo S, .A De CV","Hidrocarburos Santa Catarina SA De CV","Hidrosina Plus SA De CV","Hilda Lorena Torres Guerrero","Home Depot México S De RL De CV","Hotel Y Restaurante Tezoli","Hoteles Eco turísticos Mexicanos SA De CV","Hoteles Sheraton S. De RL De CV","Huichapan Hgo","Impulsora De Transportes Mexicanos SA De CV","Industrias Long Meng S. De RL Mi","Ines Cruz Hunter","Ing. Rogelio Alberto Téllez Rojo","Ingrid Minerva Rodríguez Vera","Interhidalguenses","Irving Ortiz Flores","Isidro Granados Guerra","Israel Islas Castañeda","Iván Ramírez Hernández","Ivonne Munguía Becerra","J. Irais González García","Jacobo Flores Pérez","Jaime Zapata Venegas","Janeth Olvera Salinas","Jaqueline Gálvez De La Peña","Javier González Mejía","JAVIER LEO CUEVAS","Javier Rodríguez Robles","Javier Santa Cruz Garcia","Javier Santacruz García","Jessica Denisse Zuñiga Rosales","Jesús Elías Salinas Baños","Jesús Ríos Islas","Joao Israel Villegas Trejo","Joaquín Escobar Baños","Johanna Beatriz Hidalgo Hernández","Jorge Erick Piña Vite","Jorge Vargas Martínez","Jose Alfonso López Rubio","José Alfredo Elizalde Hernández","José Antonio Calderón López","José Antonio Jiménez Rodríguez","JOSE ANTONIO SILVA MORENO","José Armando Reyes Samperio","José Augusto Fuentes Marín","José Carlos Vargas Bonetta","José De Jesús Franco Solís","José De Jesús López Peña","José González Beltrána","José Guadalupe Sánchez Guerrero","Jose Ivan Gutierrez Najera","José Jaime Acosta Castro","José Juan Moreno Valle","José Luis Hernández Rosales","José Luis Hidalgo López","JOSE LUIS MAGAÑA CABRERA","José Luis Salinas Elizalde","José Luis Serrano Arroyo","JOSE LUIS ZACATENCO LOPEZ","José Luis Zacatenco López","José Manuel Hernández Hernández","JOSE NERI ISLAS MARTINEZ","José Román Cárdenas Pizano","Jose Roman Pizano Caredenas","Jose Solis Gonzalez","José Solís Gonzále","Josselin Sixto Ruiz","Juan Alberto Peralta Vázquez","Juan Carlos Ángeles Baltazar","Juan Carlos Salinas Rodríguez","Juan Carlos Vergara Bonneta","Juan Gustavo Perez Gónzalez","Juan Hernández Olvera","Juan Iv Rodríguez Sánchez","Juan Leticia Elizalde Zendejas","Juan Manuel García Guzmán","Juan Manuel García Guzmán","Juan Manuel García Hernández","Juan Manuel Lugo Nacif","Juan Manuel Zaldívar Chiapa","Juan Rafael Canales Ángeles","Juan Ramón Gutiérrez Rodríguez","Juan Ramón Vázquez Cruz","Juana Magdalena Ambrosio Vargas","Juana María Escamilla Vázquez","Juana Vargas López","Juárez Hidalgo","Judith M. Luna Mejía","Julieta García Esquivel","Julio Alberto Santillán García","Julio Cesar Salinas González","Julio Rosales Reyes","Julissa Ortiz Barrera","Juventino Pérez Lemoine","Jv Renta","Karen Alina Overa Santos","Karen Judith Márquez Espinoza","Karla Carolina Rivera Escalona","Karla Lizzett Flores Rodríguez","Karla Yadira Hernández Hernández","Kemuel SA De CV","Miguel Oscar De La Vega Bezies","La Braza Arracheras","La Casa Del Juego","La Cubeta Digital","La Flor De Michoacán","La Luz Roja","Laboratorio Coahuila SA De CV","Latanst SA De CV","Latitud 5 Estrellas SA De CV","Laura Cristina Berber Vicaña","Laura Piña Serrano","Laureano Campa Zúñiga","Lazcano Ortiz Beatriz","Lenin Alejandro Castañeda Baños","Leticia Ignacio Mejía","Leticia Saavedra Nesbaid","Lilia Lugo Mejía","Liliana Flores Rossette","Liliana Yazmin Franco Castro","Linda Crystal García Doniz","Liz Arely Castelán Bautista","Liza Angélica Islas Rivera","Lizbeth Pizana Olvera","Lonchería María Isabel","Los Cazadores","Los Negritos Restaurant Bar","Lucero Pérez González","Luis Alberto Ávila Osorio","Luis Angel Mayen Garcia","Luis Ángel Mayen García","Luis Martínez Mejía","Luis Serfain Henkel Castañeda","Luis Vargas Trejos","Luisa Lagarde Vásquez","Llanterama Hidalguense SA De CV","Ma. Elena Lugo Chavero","Ma. Guadalupe Vite Carlos","Macaria Pérez Guerrero","Maderia Rual SA De CV","Maderería Rual SA De CV","Mangueras, Herramientas Y Equipos SA De CV","Manuel Alejandro Calva Hinojosa","Manuel Felix Durán Pérez","Manuel Félix Duran Pérez","Manuel García Guzmán","Maquiladora Espani SA De CV","Marcela Cerón Díaz","Marcelo Ángeles Tivo","Marco Antonio Hernández Gómez","Marco Antonio Hernández Monroy","Marco Antonio López Hernández","Marco Antonio Reyes Hernández","María Alejandra Trejo García","María Catalina Martínez Guerrero","María Cecilia Hernández Castillo","María Concepción Hernández Aragón","María Del Carmen Quintero Bautista","María Del Mar Reyes Pérez Tagle","María Del Rosario González Martínez","María Del Socorro Chávez González","María Erika Ángeles De Haro","María Guadalupe Dávila Hernández","María Guadalupe González Vargas","María Guadalupe Salguero Hernández","María Isabel Teniente Llanos","María José Granillo Granillo","María Leticia Aldana Ugalde","María Luisa Martínez Ortega","María Ramírez Alvarado","María Sofía Escalante Reyes","María Teresa Oliver León","María Trinidad Hernández Rodríguez","Maribel Castro Ángeles","Maribel Olvera Avilés","Maribel Santos Bretado","Mario Luis Zacatenco Viornery","Mario Rodríguez González","Marisarcos Del Distrito Federal SA De CV","Marisol Rivera Vazquez","Marisol Rivera Vázquez","Marlen Pelcastre Nochebuena","Marlen Pérez Cervantes","Marressa Yuzim Picazo Cabrera","Martin Márquez Loyola","Martin Vivar Cazañas","Mary Carmen Ramírez Ríos","Materiales Azulejos Sanitarios Y Ferretería SA De CV","Materiales Hermanos Roldan SA De CV","Materiales Para Construcción SA De CV","Mauro Francisco López Castillo","Mayra Pérez Nájera","Mayra Santa Madrigal Limón","Megapapelera Nixa","Melo Cordero Leticia","Mendoza Tovar Palmira","Meneses Lozada Martin","Mercedes Citlalli Mendoza Meza","Mi Casa","Microvisa Mg Sa De CV","MICROVISA MG SA DE CV","Microvisa SA De CV","Miguel Alejandro Flores Gomez","Miguel Ángel Aguilar Hernández","Miguel Ángel Chávez Trejo","Miguel Ángel Martínez Montiel","Miguel Angel Perez Gonzalez","Miguel Odon Olvera Pérez","Miguel Oscar De La Vega Bezies","Miguel Reyes Valdovinos","Minerva Cruz Licona","Mirage Perisur","Modesta López Canales","Modesta Vázquez Carmona","Mofles González","Multiproductos de Leon SA De CV","Mundo De Mangueras Y Conexiones","Mundo Tool México SA De CV","Nadia Luisa Gavioto Romero","Nallely Roldan Sosa","Nami Pachuca, SA de CV","Nancy Herrera Romero","Nancy Jaramillo Díaz","Narciso Ortiz Velázquez","Nayelhi Chávez Rodríguez","Nayeli Alejandro Calva Hinojosa","Nikzor Travel Sa De CV","Noé Olivia Ramírez Trejo","Noé Olvera Meza","Noel Chávez Martínez","Norma Salinas Alcántara","Novedades Gastronómicas Reforma S. De RLL De CV","Nueva Wal Mart De México, S. De RL De CV","Obed Hernández Carreto","Odt","Office Depot De México SA De CV","Omaña Servicio A Equipo SA De CV","Omar Daniel Hernández García","Omar Guadalupe Cano Fragoso","Omar Pacheco Cortes Rangel","Operadora Omx SA De CV","Operadora Parador De San Javier SA De CV","Operadora Vips S De RL De CV","Oscar Cruz Pérez","Oscar Felipe Serrano Cruz","Oscar Flores Rivera","Oscar Leopoldo Guasso Soto","Ovni Bus SA De CV","Pablo Espinosa Acuña","Pachua-Actopan Ixmiquilpan SA De CV","Pai","Panadería Y Pastelería Geo SA De CV","Paola Romero Guerrero","Paquetexpress","Parrin SA De CV","Patricia Montejo Reyes","Paxair De México SA De CV","Pedro Acosta Rodríguez","Pedro Angel Cabrera Angeles","Pedro Ángel Cabrera Ángeles","Pérez Hernández Javier","Pérez Licona Eduardo","Perkin-Elmer De Meico SA","Pétreos Las Glorias SA De CV","Petreos Las Glorias, SA de CV","Pétreos Sol SA De CV","Petreos Sol, SA de CV","Pinturas En General","Plásticos Jang","Policía Industrial Bancaria del Estado de Hidalgo, SA de CV","Plomoelectrica DE Hhidalgo SA De CV","Posadas De Latinoamerica SA De CV","Pr0ocomex Pachuca SA De CV","PR0OCOMEX PACHUCA SADE CV","Presidencia Municipal","Procomex De Pachuca SA De CV","Promogas SA De CV","Promotora De Autopistas Del Pacifico .SA De. CV","Promotora De Desarrollo Hidalguense SA De SV","Promotora Y Administrador De Carreteras SA De CV","Proyectos Y Construcciones Téllez-Islas","Quintero Vega Irma Lilia","Quiroz Nava Rodrigo","Radio Shack De México SA De CV","Rafael De Jesús Aguirre Ramos","Rafael Herrera Tanco","Rafael Medina Ugalde","Ramírez Arce Mónica","Ramón Ensatiga Morales","Raúl Badillo Ramírez","Raúl Rivera Rodríguez","Raúl Téllez Romero","Rebeca Rangel Copca","Relleno Sanitario","Rembolso De Gasto Arrendamiento Huejutla","Descanso. Mirage Guerrero","Restaurante La Nacional","Restaurante La Vega","Restaurante Quetos","Restaurante California SA De CV","Restaurante Colonial","Restaurante Familiar El Parador De San José","Restaurante Genisa SA De CV","Restaurante Gorditas La Guerra","Restaurante Mirage SA De CV","Restaurante Terrassa De Mirage","Restaurantes California SA De CV","Restaurantes Toks SA De CV","Restaurantes Tu Lunch Sa De CV","Reyes Benítez Karla Leticia","Reyna Meneses Domínguez","Rhema Publicidad","Ricardo Jorge Gonzales Cortes","Ricardo Lázaro Ludlow Zavaleta","Roberto Carlos López Mercado","Roberto González Hernández","Roberto Octavio Tripp Resendiz","Roberto Rodríguez Aguilar","Roberto Rodríguez Romero","Rodolfo García Flores","Rodrigo Quiroz Guerrero","Rodríguez García Edgar Fernando","Rodríguez Rendón Jesús","Rodríguez Reyes Humberto","Roesp Asociados SA De CV","Rogelio L. Moreno Arce","Rogelio Leopoldo Moreno Arce","Romel","Romero Hoyos Ana María","Rosa María Lara Téllez","Russel Barradaz Sanchez","Sabas Hernández Sánchez","Salvador Eric Rosas Villas","Salvador Espinosa Arellano","Sanborn Hermanos SA","Sandra De Elías Vichis","Santos De La Paz SA De CV","Saúl Salinas González","Scden Sa De CV","SCDEN SA DE CV","Sergio Antonio Hernández Suárez","Sergio Antonio Priego Reséndiz","Sergio Ashane Bulos","Sergio Baca Olivo","Sergio Fernando González Cruz","Sergio Jesús Reyes Trejo","Sergio Piña Delgado","Sergio Rivera Chapa","Servicio Acapulco Diamante SA De CV","Servicio También SA De CV","Servicio Apan, SA de CV","Servicio Cúpula SA De CV","Servicio El Once SA De CV","Servicio Huichapan SA De CV","Servicio Jacala SA De CV","Servicio Jacala, SA de CV","Servicio La Fuente SA De CV","Servicio La Loma SA De CV","Servicio Lara SA De CV","Servicio Lara. SA de CV","Servicio Los Cues, SA de CV","Servicio Molango SA de CV","Servicio Monteverde SA De CV","Servicio Parador Santa Bárbara SA de CV","Servicio Postal Mexicano","Servicio Rangel SA De CV","Servicio Rangel, SA de CV","SERVICIO SIOLEN","Servicio Técnico De Hidalgo SA De CV","SERVICIO TEOCALCO SA DE CV","Servicio Toda SA De CV","Servicio Toda, SA de CV","SERVICIO XO SA. DE CV","Servicio Zacualtipan SA de CV","Servicio Zacualtipán SA De CV","Servicio Zacualtipan, SA de CV","SERVICIOS AUTOMOTRICES DE IXMIQUILPAN SACV","SERVICIOS DE INGENIERIA NOAR SA DE CV","Servicios Energéticos de Tizayuca, SA de CV","Servicios Fayad Sa De CV","Servicios Fayad, SA de CV","Servigilga SA De CV","SERVIPROGRESO SA DE CV","Silverio Gonzalez Cuca","Socorro García Ibarra","Socorro Guadalupe Gómez Martínez","Socorro Reséndiz Mancera","Sofía Moedano Flores","Solano Gudiño María Elena","Soluciones Hidraiulicas Arum SAS De CV","Sonia Amparo Mota Olguín","Sotero Palacios Hernández","Sotero Vega Ana","Soto Arriaga Faustina","Sue Ivalu Castillo Asuna","Sumigas SA De CV","Súper Papelera SA De CV","Súper Servicio Meta SA De CV","Súper Servicio Rodríguez SA De CV","Supplyco SA De CV","Susana Peláez Lara","Tahití Silvia Mayorga González","Tania Gema Estrada Alamilla","Tania Vargar Sanchez","Tapia Hernández Luz","Taquería El Mesón De Los Ángeles","Taquería No Que No","Tarifa Promocional Xalapa- Veracruz","TEQUIMEC S DE RL DE CV","Teresa Berenice Tovar Martínez","Teresa Del Niño Jesús Carbajal","Teresa Martínez Martínez","Teresa Salgado García","Tiendas Comercial Mexicana SA De CV","Tiendas Chedrahui SA De CV","Tiendas Soriana SA De CV","Tiendas Soriana Sa De CV","Tintorería Del Norte Del Jardín Colon SA De CV","Tintorerías Gofer SA De CV","Tlapalería Acosta","Tomás Alejandro Herrera Pérez","Tomás Daniel Montes Silverio","Tomasa Villegas Lazcano","Transportes Tepehuas","Trico Pachuca SA De CV","Urbanos Y Suburbanos De Tula SA De CV","Valores Energéticos SA De CV","Valle De Mixquiahuala","Vanguardia Gastronómica Presidente SA De CV","Verificación Ambiental De Hidalgo SACV","Verónica Pérez Reyes","VESALIUS SA DE CV","Vianey Vega Maldonado","Viaticum Valdespino SA De CV","Vicente Ruiz Tapia","Víctor Gerardo Zúñiga Aguirre","Víctor Hernández Gómez","Víctor Hugo Gallardo Garduño","Víctor Hugo Morgado Calva","VINIMED SA DE CV","Violeta Belen González Tapia","Vulcanizador Y Seccionadora", "El Chacón","Vulcanizadora", "Juan C. Doria" ,"Vymec Fuego SA De CV","Wenceslao Sanchez Estrada","Xochil Zenteno Velasco","Yadira Del Carmen Sánchez Nanduca","Yahiti Silvia Mayorga González","Yamil Hernández García","Yessenia Zamora Soto","Yolanda Aragón Quiroz","Yolanda Felicitas Tenorio Vargas","Yolanda Samperio Delgadillo","Yuridia Laguna Peña","Zehidy Ortiz Granillo","Zoila Ángeles Tello","Zulema Anahí Contreras Vizzuet"];
+  tipo_doc = ["Pago Directo", "Fondo Revolvente", "Gasto a Comprobar", "Cancelado"];
+  tipo_doc2 = ["Fondo Revolvente", "Pago Directo"];
+  tipo_doc3 = ["Pago Directo"];
+
+  constructor (props) {
+    super(props);
+    this.ref = firebase.firestore().collection('fondos');
     this.state = {
-      contador: {},
-      nFondo: '',
+      fondo: '',
       fecha: '',
-      tDoc: '',
-      oAuto: '',
-      nOficio: '',
-      nLici: '',
+      tipo_doc: '',
+      oficio_aut: '',
+      no_oficio: '',
+      no_lici: '',
       importe: '',
-      iLetra: '',
+      desc: '',
       beneficiario: '',
-      descripcion: '',
-      realizo: ''
+      realizo: '',
+      fondos: [],
+      allowCustom: true,
+      value: '',
+      suggest: '',
+      key: '',
+      contador: {},
     }
   }
 
@@ -28,52 +41,52 @@ export default class Fondos extends Component {
     this.setState(state);
   }
 
-  resetForm() {
-    this.refs.contactForm.reset();
-  }
-
-  sendMessage(e) {
+  onSubmit = (e) => {
     e.preventDefault();
-    const params = {
-      nFondo: this.inputnFondo.value,
-      fecha: this.inputFecha.value,
-      tDoc: this.inputtDoc.value,
-      oAuto: this.inputoAuto.value,
-      nOficio: this.inputnOficio.value,
-      nLici: this.inputnLici.value,
-      importe: this.inputImporte.value,
-      beneficiario: this.inputBeneficiario.value,
-      descripcion: this.inputDescripcion.value,
-      realizo: this.inputRealizo.value
-    };
-    this.setState({
-      nFondo: this.inputnFondo.value,
-      fecha: this.inputFecha.value,
-      tDoc: this.inputtDoc.value,
-      oAuto: this.inputoAuto.value,
-      nOficio: this.inputnOficio.value,
-      nLici: this.inputnLici.value,
-      importe: this.inputImporte.value,
-      beneficiario: this.inputBeneficiario.value,
-      descripcion: this.inputDescripcion.value,
-      realizo: this.inputRealizo.value
-    })
-    if ( params.nFondo && params.fecha && params.tDoc && params.oAuto && params.nOficio &&
-        params.nLici && params.importe && params.beneficiario && params.descripcion && params.realizo ) {
-      firebase.database().ref('fondos').push(params).then(() => {
-        alert('Tu solicitud fue enviada.');
-      }).catch(() => {
-        alert('Tu solicitud no puede ser enviada');
+    const { fondo, fecha, tipo_doc, oficio_aut, no_oficio, no_lici, importe, desc, beneficiario, realizo } = this.state;
+    this.ref.add({
+      fondo,
+      fecha,
+      tipo_doc,
+      oficio_aut,
+      no_oficio,
+      no_lici,
+      importe,
+      desc,
+      beneficiario,
+      realizo,
+    }).then((docRef) => {
+      this.setState({
+        fondo: '',
+        fecha: '',
+        tipo_doc: '',
+        oficio_aut: '',
+        no_oficio: '',
+        no_lici: '',
+        importe: '',
+        desc: '',
+        beneficiario: '',
+        realizo: '',
       });
-      this.resetForm();
-      setInterval(this.consumo, 1000);
-    } else {
-      alert('Por favor llene el formulario');
-    };
+      const statsRef = firebase.firestore().collection('fondos').doc('--stats--');
+      const increment = firebase.firestore.FieldValue.increment(1);
+      const batch = firebase.firestore().batch();
+      const storyRef = firebase.firestore().collection('fondos').doc(`${Math.random()}`);
+      batch.set(storyRef, { title: 'Nuevo Fondo!' });
+      batch.set(statsRef, { nFondo: increment }, { merge: true });
+      batch.commit();
+      console.log(statsRef, { nFondo: increment });
+      //this.props.history.push('/Comprometidos')
+      this.props.history.push(`/edit/${this.state.fondos.key}`)
+    })
+    .catch((error) => {
+      console.error("Error adding document: ", error);
+    });
   }
 
   componentDidMount() {
     this.consumo();
+    this.unsubscribe = this.ref.onSnapshot(this.onCollectionUpdate);
   }
 
   consumo = () => {
@@ -91,8 +104,34 @@ export default class Fondos extends Component {
     })
   }
 
-  render() {
+  onCollectionUpdate = (querySnapshot) => {
+    const fondos = [];
+    querySnapshot.forEach((doc) => {
+      const { fondo, fecha, tipo_doc, oficio_aut, no_oficio, no_aut, no_lici, importe, desc, importe_l, beneficiario, realizo } = doc.data();
+      fondos.push({
+        key: doc.id,
+        doc, // DocumentSnapshot
+        fondo,
+        fecha,
+        tipo_doc,
+        oficio_aut,
+        no_oficio,
+        no_aut,
+        no_lici,
+        importe,
+        desc,
+        importe_l,
+        beneficiario,
+        realizo,
+      });
+    });
+    this.setState({
+      fondos
+   });
+  }
 
+  render() {
+    console.log();
     var user = firebase.auth().currentUser;
     var email;
     if (user != null) {
@@ -137,952 +176,462 @@ export default class Fondos extends Component {
       mm = '0' + mm
     }
     today = dd + '/' + mm + '/' + yyyy;
-    const { importe } = this.state;
+    const { tipo_doc, oficio_aut, no_oficio, no_lici, importe, desc, beneficiario } = this.state;
+    this.state.fondo = this.state.contador.nFondo;
+    this.state.fecha = today;
+    this.state.realizo = admin;
+    const allowCustom = this.state.allowCustom;
 
     return (
       <div className='f-container-n'>
         <div className='site-pf'>
           <p className='site-pf-s'><b>Fondos 2020</b></p>
         </div>
-        <form className='fondos-bac' onSubmit={this.sendMessage.bind(this)} ref='contactForm'>
-          <div className='p-container-fondo'>
-            <p className='p-title-margin-fondo'>Num. de Fondo</p>
-            <input
-              className='input-style-fr'
-              id='nFondo'
-              value={this.state.contador.nFondo}
-              required
-              ref={nFondo => this.inputnFondo = nFondo}
-            />
+        <div className='col-f-c'>
+          <div className='con-f'>
+            <form className='fondos-bac' onSubmit={this.onSubmit} ref='contactForm'>
+              <div className='fon-d-c'>
+                <div className='p-container-fondo'>
+                  <p className='p-title-margin-fondo'>Num. de Fondo</p>
+                  <input
+                    className='input-style-fr'
+                    value={this.state.contador.nFondo}
+                    required
+                  />
+                </div>
+                <div className='p-container-fondo'>
+                  <p className='p-title-margin-fondo'>Fecha</p>
+                  <input
+                    className='input-style-fr'
+                    required
+                    value={today}
+                  />
+                </div>
+              </div>
+              <div className='fon-d-c'>
+                <div className='p-container-fondo'>
+                  <p className='p-title-margin-fondo'>Tipo de documento</p>
+                  {admin === 'ADMIN' &&
+                    <DropDownList
+                      suggest={true}
+                      style={{
+                        width: '100%',
+                        borderColor: 'rgba(0,0,0,0.42)',
+                        background: 'white',
+                        height: '35px',
+                        color: 'black',
+                        position: 'static'
+                      }}
+                      data={this.tipo_doc}
+                      allowCustom={allowCustom}
+                      name='tipo_doc'
+                      value={tipo_doc}
+                      onChange={this.onChange}
+                      required
+                      ref='tipo_doc'
+                    />
+                  }
+                  {admin === 'NAYRA' &&
+                    <DropDownList
+                      suggest={true}
+                      style={{
+                        width: '100%',
+                        borderColor: 'rgba(0,0,0,0.42)',
+                        background: 'white',
+                        height: '35px',
+                        color: 'black',
+                        position: 'static'
+                      }}
+                      data={this.tipo_doc}
+                      allowCustom={allowCustom}
+                      name='tipo_doc'
+                      value={tipo_doc}
+                      onChange={this.onChange}
+                      required
+                      ref='tipo_doc'
+                    />
+                  }
+                  {admin === 'LAURA' &&
+                    <DropDownList
+                      suggest={true}
+                      style={{
+                        width: '100%',
+                        borderColor: 'rgba(0,0,0,0.42)',
+                        background: 'white',
+                        height: '35px',
+                        color: 'black',
+                        position: 'static'
+                      }}
+                      data={this.tipo_doc}
+                      allowCustom={allowCustom}
+                      name='tipo_doc'
+                      value={tipo_doc}
+                      onChange={this.onChange}
+                      required
+                      ref='tipo_doc'
+                    />
+                  }
+                  {admin === 'MIGUEL' &&
+                    <DropDownList
+                      suggest={true}
+                      style={{
+                        width: '100%',
+                        borderColor: 'rgba(0,0,0,0.42)',
+                        background: 'white',
+                        height: '35px',
+                        color: 'black',
+                        position: 'static'
+                      }}
+                      data={this.tipo_doc2}
+                      allowCustom={allowCustom}
+                      name='tipo_doc'
+                      value={tipo_doc}
+                      onChange={this.onChange}
+                      required
+                      ref='tipo_doc'
+                    />
+                  }
+                  {admin === 'TERESA' &&
+                    <DropDownList
+                      suggest={true}
+                      style={{
+                        width: '100%',
+                        borderColor: 'rgba(0,0,0,0.42)',
+                        background: 'white',
+                        height: '35px',
+                        color: 'black',
+                        position: 'static'
+                      }}
+                      data={this.tipo_doc2}
+                      allowCustom={allowCustom}
+                      name='tipo_doc'
+                      value={tipo_doc}
+                      onChange={this.onChange}
+                      required
+                      ref='tipo_doc'
+                    />
+                  }
+                  {admin === 'MARCOS' &&
+                    <DropDownList
+                      suggest={true}
+                      style={{
+                        width: '100%',
+                        borderColor: 'rgba(0,0,0,0.42)',
+                        background: 'white',
+                        height: '35px',
+                        color: 'black',
+                        position: 'static'
+                      }}
+                      data={this.tipo_doc2}
+                      allowCustom={allowCustom}
+                      name='tipo_doc'
+                      value={tipo_doc}
+                      onChange={this.onChange}
+                      required
+                      ref='tipo_doc'
+                    />
+                  }
+                  {admin === 'ELOY' &&
+                    <DropDownList
+                      suggest={true}
+                      style={{
+                        width: '100%',
+                        borderColor: 'rgba(0,0,0,0.42)',
+                        background: 'white',
+                        height: '35px',
+                        color: 'black',
+                        position: 'static'
+                      }}
+                      data={this.tipo_doc2}
+                      allowCustom={allowCustom}
+                      name='tipo_doc'
+                      value={tipo_doc}
+                      onChange={this.onChange}
+                      required
+                      ref='tipo_doc'
+                    />
+                  }
+                  {admin === 'KARINA' &&
+                    <DropDownList
+                      suggest={true}
+                      style={{
+                        width: '100%',
+                        borderColor: 'rgba(0,0,0,0.42)',
+                        background: 'white',
+                        height: '35px',
+                        color: 'black',
+                        position: 'static'
+                      }}
+                      data={this.tipo_doc2}
+                      allowCustom={allowCustom}
+                      name='tipo_doc'
+                      value={tipo_doc}
+                      onChange={this.onChange}
+                      required
+                      ref='tipo_doc'
+                    />
+                  }
+                  {admin === 'MARTHA' &&
+                    <DropDownList
+                      suggest={true}
+                      style={{
+                        width: '100%',
+                        borderColor: 'rgba(0,0,0,0.42)',
+                        background: 'white',
+                        height: '35px',
+                        color: 'black',
+                        position: 'static'
+                      }}
+                      data={this.tipo_doc2}
+                      allowCustom={allowCustom}
+                      name='tipo_doc'
+                      value={tipo_doc}
+                      onChange={this.onChange}
+                      required
+                      ref='tipo_doc'
+                    />
+                  }
+                  {admin === 'LILIA' &&
+                    <DropDownList
+                      suggest={true}
+                      style={{
+                        width: '100%',
+                        borderColor: 'rgba(0,0,0,0.42)',
+                        background: 'white',
+                        height: '35px',
+                        color: 'black',
+                        position: 'static'
+                      }}
+                      data={this.tipo_doc3}
+                      allowCustom={allowCustom}
+                      name='tipo_doc'
+                      value={tipo_doc}
+                      onChange={this.onChange}
+                      required
+                      ref='tipo_doc'
+                    />
+                  }
+                  {admin === 'CENELY' &&
+                    <DropDownList
+                      suggest={true}
+                      style={{
+                        width: '100%',
+                        borderColor: 'rgba(0,0,0,0.42)',
+                        background: 'white',
+                        height: '35px',
+                        color: 'black',
+                        position: 'static'
+                      }}
+                      data={this.tipo_doc3}
+                      allowCustom={allowCustom}
+                      name='tipo_doc'
+                      value={tipo_doc}
+                      onChange={this.onChange}
+                      required
+                      ref='tipo_doc'
+                    />
+                  }
+                  {admin === 'HECTOR' &&
+                    <DropDownList
+                      suggest={true}
+                      style={{
+                        width: '100%',
+                        borderColor: 'rgba(0,0,0,0.42)',
+                        background: 'white',
+                        height: '35px',
+                        color: 'black',
+                        position: 'static'
+                      }}
+                      data={this.tipo_doc3}
+                      allowCustom={allowCustom}
+                      name='tipo_doc'
+                      value={tipo_doc}
+                      onChange={this.onChange}
+                      required
+                      ref='tipo_doc'
+                      />
+                  }
+                  {admin === 'FERNANDA' &&
+                    <DropDownList
+                      suggest={true}
+                      style={{
+                        width: '100%',
+                        borderColor: 'rgba(0,0,0,0.42)',
+                        background: 'white',
+                        height: '35px',
+                        color: 'black',
+                        position: 'static'
+                      }}
+                      data={this.tipo_doc3}
+                      allowCustom={allowCustom}
+                      name='tipo_doc'
+                      value={tipo_doc}
+                      onChange={this.onChange}
+                      required
+                      ref='tipo_doc'
+                    />
+                  }
+                  {admin === 'OMAR' &&
+                    <DropDownList
+                      suggest={true}
+                      style={{
+                        width: '100%',
+                        borderColor: 'rgba(0,0,0,0.42)',
+                        background: 'white',
+                        height: '35px',
+                        color: 'black',
+                        position: 'static'
+                      }}
+                      data={this.tipo_doc3}
+                      allowCustom={allowCustom}
+                      name='tipo_doc'
+                      value={tipo_doc}
+                      onChange={this.onChange}
+                      required
+                      ref='tipo_doc'
+                    />
+                  }
+                  {admin === 'MAURICIO' &&
+                    <DropDownList
+                      suggest={true}
+                      style={{
+                        width: '100%',
+                        borderColor: 'rgba(0,0,0,0.42)',
+                        background: 'white',
+                        height: '35px',
+                        color: 'black',
+                        position: 'static'
+                      }}
+                      data={this.tipo_doc3}
+                      allowCustom={allowCustom}
+                      name='tipo_doc'
+                      value={tipo_doc}
+                      onChange={this.onChange}
+                      required
+                      ref='tipo_doc'
+                    />
+                  }
+                </div>
+                <div className='p-container-fondo'>
+                  <p className='p-title-margin-fondo'>Oficio de Autorización</p>
+                  <DropDownList
+                    suggest={true}
+                    style={{
+                      width: '100%',
+                      borderColor: 'rgba(0,0,0,0.42)',
+                      background: 'white',
+                      height: '35px',
+                      color: 'black',
+                      position: 'static'
+                    }}
+                    data={this.oficio_aut}
+                    allowCustom={allowCustom}
+                    name='oficio_aut'
+                    value={oficio_aut}
+                    onChange={this.onChange}
+                    required
+                    ref='oficio_aut'
+                  />
+                </div>
+              </div>
+              <div className='fon-d-c'>
+                <div className='p-container-fondo'>
+                  <p className='p-title-margin-fondo'>Num. de Oficio</p>
+                  <input
+                    className='input-style-fr'
+                    name='no_oficio'
+                    onChange={this.onChange}
+                    required
+                    ref='no_oficio'
+                  />
+                </div>
+                <div className='p-container-fondo'>
+                  <p className='p-title-margin-fondo'>Num. de Licitación</p>
+                  <input
+                    className='input-style-fr'
+                    name='no_lici'
+                    onChange={this.onChange}
+                    required
+                    ref='no_lici'
+                  />
+                </div>
+              </div>
+              <div className='fon-d-c'>
+                <div className='p-container-fondo'>
+                  <p className='p-title-margin-fondo'>Importe</p>
+                  <input
+                    className='input-style-fr'
+                    name='importe'
+                    value={importe}
+                    onChange={this.onChange}
+                    required
+                    ref='importe'
+                  />
+                </div>
+                <div className='p-container-fondo'>
+                  <p className='p-title-margin-fondo'>Importe Letra</p>
+                  <input
+                    className='input-style-fr'
+                    onChange={this.onChange}
+                    value={(NumberAsString(importe))}
+                    required
+                  />
+                </div>
+              </div>
+              <div className='fon-d-c'>
+                <div className='p-container-fondo'>
+                  <p className='p-title-margin-fondo'>Beneficiario</p>
+                  <DropDownList
+                    style={{
+                      width: '100%',
+                      borderColor: 'rgba(0,0,0,0.42)',
+                      background: 'white',
+                      height: '35px',
+                      color: 'black',
+                      position: 'static'
+                    }}
+                    data={this.beneficiario}
+                    allowCustom={allowCustom}
+                    name="beneficiario"
+                    value={beneficiario}
+                    onChange={this.onChange}
+                    required
+                    ref="beneficiario"
+                  />
+                </div>
+                <div className='p-container-fondo'>
+                  <p className='p-title-margin-fondo'>Descripcción</p>
+                  <input className='input-style-fr'
+                    id='desc'
+                    name='desc'
+                    onChange={this.onChange}
+                    required
+                    ref='desc'
+                  />
+                </div>
+              </div>
+
+              <div>
+                <h1>2</h1>
+              </div>
+
+              <div>
+                <h1>3</h1>
+              </div>
+
+              <div>
+                <h1>4</h1>
+              </div>
+
+
+              <div className='left-b-f'>
+                <button className='bt-s' type='submit'>
+                  Guadar
+                </button>
+              </div>
+            </form>
           </div>
-          <div className='p-container-fondo'>
-            <p className='p-title-margin-fondo'>Fecha</p>
-            <input
-              className='input-style-fr'
-              id='fecha'
-              required
-              value={today}
-              ref={fecha => this.inputFecha = fecha}
-            />
-          </div>
-          <div className='p-container-fondo'>
-            <p className='p-title-margin-fondo'>Tipo de documento</p>
-            <select
-              className='input-style-fr'
-              required
-              ref={tDoc => this.inputtDoc = tDoc}>
-              <option id='tDoc'>Pago Directo</option>
-              <option id='tDoc'>Fondo Revolvente</option>
-              <option id='tDoc'>Gasto a Comprobar</option>
-              <option id='tDoc'>Cancelado</option>
-            </select>
-          </div>
-          <div className='p-container-fondo'>
-            <p className='p-title-margin-fondo'>Oficio de Autorización</p>
-            <select
-              className='input-style-fr'
-              required
-              ref={oAuto => this.inputoAuto = oAuto}>
-              <option id='oAuto'>SFP-CPF-01-0020/2020</option>
-              <option id='oAuto'>SFP-CPF-01-0010/2020</option>
-              <option id='oAuto'>SFP-CPF-01-0724/2020</option>
-              <option id='oAuto'>SFP-CPF-01-0681/2020</option>
-              <option id='oAuto'>SFP-CPF-01-DFDP-0949/2020</option>
-            </select>
-          </div>
-          <div className='p-container-fondo'>
-            <p className='p-title-margin-fondo'>Num. de Oficio</p>
-            <input
-              className='input-style-fr'
-              id='nOficio'
-              required
-              ref={nOficio => this.inputnOficio = nOficio}
-            />
-          </div>
-          <div className='p-container-fondo'>
-            <p className='p-title-margin-fondo'>Num. de Licitación</p>
-            <input
-              className='input-style-fr'
-              id='nLici'
-              required
-              ref={nLici => this.inputnLici = nLici}
-            />
-          </div>
-          <div className='p-container-fondo'>
-            <p className='p-title-margin-fondo'>Importe</p>
-            <input
-              className='input-style-fr'
-              id='importe'
-              name='importe'
-              value={importe}
-              onChange={this.onChange}
-              required
-              ref={importe => this.inputImporte = importe}
-            />
-          </div>
-          <div className='p-container-fondo'>
-            <p className='p-title-margin-fondo'>Importe Letra</p>
-            <input
-              className='input-style-fr'
-              name='iLetra'
-              onChange={this.onChange}
-              value={(NumberAsString(importe))}
-              required
-              ref='iLetra'
-            />
-          </div>
-          <div className='p-container-fondo'>
-            <p className='p-title-margin-fondo'>Beneficiario</p>
-            <select
-              className='input-style-fr'
-              required
-              ref={beneficiario => this.inputBeneficiario = beneficiario}>
-              <option id='beneficiario'>Mtro.León Maximiliano Hernández Valdés</option>
-              <option id='beneficiario'>Operadora Omx Sa De CV</option>
-              <option id='beneficiario'>AASI INNOVACIONES SA DE CV</option>
-              <option id='beneficiario'>Abigail Santillán Moreno</option>
-              <option id='beneficiario'>Abraham Andrade Ortiz</option>
-              <option id='beneficiario'>Abraham Peña Pérez</option>
-              <option id='beneficiario'>Acabados Decorativos De La Huasteca SA De CV</option>
-              <option id='beneficiario'>Aceites Y Combustibles Los Ángeles SA De CV</option>
-              <option id='beneficiario'>Aceros Damarin SA De CV</option>
-              <option id='beneficiario'>Adarick Vite Aranda</option>
-              <option id='beneficiario'>Administradora De Centros Comerciales Santa Fe SA De CV</option>
-              <option id='beneficiario'>ADOLFO PAZ RIANCHO</option>
-              <option id='beneficiario'>Adrián Guevara Rivera</option>
-              <option id='beneficiario'>Adrián Guillermo Cueto Hernández</option>
-              <option id='beneficiario'>Adriana Ávila Rodríguez</option>
-              <option id='beneficiario'>MOTOR AVANZADO REBUIDING SA DE CV</option>
-              <option id='beneficiario'>Aeropuertos Y Servicios Auxiliares</option>
-              <option id='beneficiario'>Aerovías De México Sa De CV</option>
-              <option id='beneficiario'>Agaturismo SA De CV</option>
-              <option id='beneficiario'>Aianeli SA De CV</option>
-              <option id='beneficiario'>Aianeli SA De CV4</option>
-              <option id='beneficiario'>Alberto Alfonso Galindo Galindo</option>
-              <option id='beneficiario'>Alberto Severino Jaén Olivas</option>
-              <option id='beneficiario'>Aldo Ramírez Cerón</option>
-              <option id='beneficiario'>Aldo Román Mendoza García</option>
-              <option id='beneficiario'>Alejandra López Alvarado</option>
-              <option id='beneficiario'>Alex Steak SA De CV</option>
-              <option id='beneficiario'>Alfredo Edmundo Galindo Pérez</option>
-              <option id='beneficiario'>Alfredo Laris Hernández</option>
-              <option id='beneficiario'>Alheli Paredes Licona</option>
-              <option id='beneficiario'>Alma Gabriela Mendoza Rojas</option>
-              <option id='beneficiario'>Alma Rosa Basilio Garfias</option>
-              <option id='beneficiario'>Aluminio García</option>
-              <option id='beneficiario'>Álvaro Samperio Le-Vinson</option>
-              <option id='beneficiario'>Ana Fernanda Zapata Santana</option>
-              <option id='beneficiario'>Ana Fernanda Zpata Santana</option>
-              <option id='beneficiario'>Ana Laura Zacatenco Luna</option>
-              <option id='beneficiario'>Ana María Hernández López</option>
-              <option id='beneficiario'>Ana Perla Margarita Mendoza Espino</option>
-              <option id='beneficiario'>Andrade Bertoloni Arturo</option>
-              <option id='beneficiario'>Andrés Guillen Hernández</option>
-              <option id='beneficiario'>Andrés Téllez Pino</option>
-              <option id='beneficiario'>Ángela Pérez Prado</option>
-              <option id='beneficiario'>Angélica González Sánchez</option>
-              <option id='beneficiario'>Angélica Morales Avilés</option>
-              <option id='beneficiario'>Angélica Sánchez Martínez</option>
-              <option id='beneficiario'>Antojitos La Finca</option>
-              <option id='beneficiario'>Antonio Lugo Rosas</option>
-              <option id='beneficiario'>Aquilino Edgar Herrera Rodríguez</option>
-              <option id='beneficiario'>Araceli Pérez Jarillo</option>
-              <option id='beneficiario'>Arellano Miranda Elizabeth</option>
-              <option id='beneficiario'>Arlan José Chávez Lara</option>
-              <option id='beneficiario'>Arlette Macías Escorcia</option>
-              <option id='beneficiario'>Armando Miguel Carpio López</option>
-              <option id='beneficiario'>Arnulfo Ramírez Cerón</option>
-              <option id='beneficiario'>Arturo Cano García</option>
-              <option id='beneficiario'>Arturo Flores Meléndez</option>
-              <option id='beneficiario'>Arturo Tinajero Jaimes</option>
-              <option id='beneficiario'>Aseca, SA de CV</option>
-              <option id='beneficiario'>Autobuses Coordinados Zimapan Valles</option>
-              <option id='beneficiario'>Autobuses De Oriente Ado SA De CV</option>
-              <option id='beneficiario'>Autobuses De Primera Clase</option>
-              <option id='beneficiario'>Autobuses Estrella Blanca SA De CV</option>
-              <option id='beneficiario'>Autobuses Estrella Blanca Sa De CV</option>
-              <option id='beneficiario'>Autobuses México-Zamapan Valle Flecha Roja SA</option>
-              <option id='beneficiario'>Autobuses Valle Mezquital S., A. De CV</option>
-              <option id='beneficiario'>Autógena De Hidalgo SA De CV</option>
-              <option id='beneficiario'>Autogena de Hidalgo, SA de CV</option>
-              <option id='beneficiario'>Autopista Arco Norte Sa De CV</option>
-              <option id='beneficiario'>Autopistas Arco Norte SA De CV</option>
-              <option id='beneficiario'>Autos Pullman Sa De CV</option>
-              <option id='beneficiario'>Autoservicio Jocaran de Progreso, SA de CV</option>
-              <option id='beneficiario'>Autoservicio Jocaran SA de CV</option>
-              <option id='beneficiario'>Autotransportes De Hidalgo .SA De CV</option>
-              <option id='beneficiario'>Autotransportes Del Valle Del Mezquital SA De CV</option>
-              <option id='beneficiario'>Autovía Necaxa-Tihuatlan Sa De CV</option>
-              <option id='beneficiario'>Autozone De México, S. De RL De CV</option>
-              <option id='beneficiario'>Banco Mercantil Del Norte SA De CV</option>
-              <option id='beneficiario'>Basualdo Rojo Honey</option>
-              <option id='beneficiario'>Beatriz Montaño Jarillo</option>
-              <option id='beneficiario'>Beatriz Penélope Isleim Castorena Cortes</option>
-              <option id='beneficiario'>Bensaa SA De CV</option>
-              <option id='beneficiario'>Berenice Soto Hernández</option>
-              <option id='beneficiario'>Bianca Ofelia Galarza Trejo</option>
-              <option id='beneficiario'>Blanca Trejo Bautista</option>
-              <option id='beneficiario'>Brenda Alemon Hernández</option>
-              <option id='beneficiario'>Brenda Leticia Rangel Lugo</option>
-              <option id='beneficiario'>Brenda Minelly López López</option>
-              <option id='beneficiario'>Burger La Fiesta</option>
-              <option id='beneficiario'>C Frank Alexander Veytia ViejoIEJO</option>
-              <option id='beneficiario'>C. Adolfo Paz Riancho</option>
-              <option id='beneficiario'>C. Alejandra Fonseca Rincon</option>
-              <option id='beneficiario'>C. Carlos Haua Bulos</option>
-              <option id='beneficiario'>C. Claudi Ramirez Lopez</option>
-              <option id='beneficiario'>C. Efren Rodriguez Ramierez</option>
-              <option id='beneficiario'>C. Elizabeth Arellano Miranda</option>
-              <option id='beneficiario'>C. Erika Jazimin Resendiz Trejo</option>
-              <option id='beneficiario'>C. Frank Alexander Veytia Viejo</option>
-              <option id='beneficiario'>C. Ines Cruz Hunter</option>
-              <option id='beneficiario'>C. Javier Santa Cruz Garcia</option>
-              <option id='beneficiario'>C. Jose Luis Magaña Cabrera</option>
-              <option id='beneficiario'>C. Jose Luis Zacatenco Lopez</option>
-              <option id='beneficiario'>C. Jose solis Gonzalez</option>
-              <option id='beneficiario'>C. Leticia Saavedra Nesbaid</option>
-              <option id='beneficiario'>C. Luis Eduardo Nahle Pascual</option>
-              <option id='beneficiario'>C. Maria De Rosario Gomez Urbina</option>
-              <option id='beneficiario'>C. Russel Barradaz Sanchez</option>
-              <option id='beneficiario'>C. Saul Salinas Gonzalez</option>
-              <option id='beneficiario'>C. Silverio Gonzalez Cuca</option>
-              <option id='beneficiario'>C. Wencesñap Sanchez Estrada</option>
-              <option id='beneficiario'>C.Lesticia Saavedra Nesbaid</option>
-              <option id='beneficiario'>Cadena Comercial Oxxo Sa De CV</option>
-              <option id='beneficiario'>Cadena Comercial Oxxo, Sa De CV</option>
-              <option id='beneficiario'>Café Estaciones</option>
-              <option id='beneficiario'>CAMINO REAL</option>
-              <option id='beneficiario'>CAMINOS Y PUENTES FEDERALES</option>
-              <option id='beneficiario'>Caminos Y Puentes Federales De Ingresos Y Servicios Conexos</option>
-              <option id='beneficiario'>LAVADO DE COCHES LA CUBETA DIGITAL</option>
-              <option id='beneficiario'>CARBU EXPRESS, SA DE CV</option>
-              <option id='beneficiario'>CARLOS ANTONIO MORALES GARZA</option>
-              <option id='beneficiario'>CARLOS ANTONIO QUINTO RIOS</option>
-              <option id='beneficiario'>Carlos Antonio Quinto Ríos</option>
-              <option id='beneficiario'>CARLOS CELIO ESQUIVEL</option>
-              <option id='beneficiario'>Carlos Daniel Ortiz Chavez</option>
-              <option id='beneficiario'>Carlos Godinez Perez</option>
-              <option id='beneficiario'>Carlos Godínez Pérez</option>
-              <option id='beneficiario'>Carlos Haua Bulos</option>
-              <option id='beneficiario'>Carlos Luis Gómez Arguelles</option>
-              <option id='beneficiario'>Carlos Martin Torres Juárez</option>
-              <option id='beneficiario'>Carlos Primitivo Vega Valle</option>
-              <option id='beneficiario'>Carreteras Del Pacifico</option>
-              <option id='beneficiario'>Caseta Metlapil</option>
-              <option id='beneficiario'>Caseta Miradores</option>
-              <option id='beneficiario'>Catalina Martínez Guerrero</option>
-              <option id='beneficiario'>Cecapiem SA De CV</option>
-              <option id='beneficiario'>Cele Filiberto Martínez Cordero</option>
-              <option id='beneficiario'>Celia Esparza Loreto</option>
-              <option id='beneficiario'>Centro De Copiado</option>
-              <option id='beneficiario'>Centro de verificación De Verificación Takechi ​​SA de CV</option>
-              <option id='beneficiario'>Cerrajería Aranda</option>
-              <option id='beneficiario'>Cerrajería Móvil El Saucillo</option>
-              <option id='beneficiario'>Cerro De Biznagas S, A De CV</option>
-              <option id='beneficiario'>CFE Suministridor De Servicios BasicosS</option>
-              <option id='beneficiario'>City Club</option>
-              <option id='beneficiario'>Claudia Corte Herrera</option>
-              <option id='beneficiario'>Claudia Judith Flores Leyva</option>
-              <option id='beneficiario'>Claudia Mota Rojas</option>
-              <option id='beneficiario'>Claudia Ramierez Lopez</option>
-              <option id='beneficiario'>Claudia Ramírez López</option>
-              <option id='beneficiario'>Cocina Económica La Güerita</option>
-              <option id='beneficiario'>Cocina Económica La Parroquia</option>
-              <option id='beneficiario'>Cocina Tradicional Campestre De 1981</option>
-              <option id='beneficiario'>Coel SA De CV</option>
-              <option id='beneficiario'>Com. De Agua Pot. Alcant Y san. Del Mpio De Huichapan</option>
-              <option id='beneficiario'>Combustibles Bentan SA DE CV</option>
-              <option id='beneficiario'>Combustibles De Pachuca SA De CV</option>
-              <option id='beneficiario'>Combustibles Rumloc SA De CV</option>
-              <option id='beneficiario'>Comercial Mexicana</option>
-              <option id='beneficiario'>Comercial Miura SA DE CV (Sistema De Vigilancia)</option>
-              <option id='beneficiario'>Comercializadora Farmacéutica De Chiapas Sapi De CV</option>
-              <option id='beneficiario'>Comercializadora Y Distribuidora Brime SA De CV</option>
-              <option id='beneficiario'>Comisión Bancaria</option>
-              <option id='beneficiario'>Comisión De Agua De Actopan</option>
-              <option id='beneficiario'>Comisión De Agua De Actopan Hgo</option>
-              <option id='beneficiario'>Comisión De Agua De Tula De Allende</option>
-              <option id='beneficiario'>Comisión De Agua De Zimapan</option>
-              <option id='beneficiario'>Comisión De Agua Huichapan</option>
-              <option id='beneficiario'>Comisión De Agua Ixmiquilpan</option>
-              <option id='beneficiario'>Comisión De Agua Mixquiahuala De Juárez</option>
-              <option id='beneficiario'>Comisión De Agua Pachuca</option>
-              <option id='beneficiario'>Comisión De Agua Potable Y Alcantarillado Del Municipio De Mixquiahuala De Juarez</option>
-              <option id='beneficiario'>Comisión De Agua Potable, Alcantarillado Y Saneamiento Del Municipio De Ixmiquilpan, Hgo</option>
-              <option id='beneficiario'>Comisión De Agua Potable, Alcantarillado Y Saneamiento Del Municipio De Zimapan, Hgo</option>
-              <option id='beneficiario'>Comisión de Agua y Alcantarillado De Sistemas Intermunicipales</option>
-              <option id='beneficiario'>Comisión De Agua Y Alcantarillado Del Municipio De Actopan Hidalgo</option>
-              <option id='beneficiario'>Comisión De Agua Y Alcantarillado Del Municipio De Tula De Allende</option>
-              <option id='beneficiario'>Comisión Federal De Electricidad</option>
-              <option id='beneficiario'>Compañía Santa María SA De CV</option>
-              <option id='beneficiario'>Concesionaria Autopista Perote-Xalapa.</option>
-              <option id='beneficiario'>Concesionaria De Vías Troncales SA De CV</option>
-              <option id='beneficiario'>Concesionaria Mexiquense SA De CV</option>
-              <option id='beneficiario'>Concesiones Y Promociones Malibran</option>
-              <option id='beneficiario'>Conexiones Y Mangueras De Pachuca SA De C V.</option>
-              <option id='beneficiario'>Consultora Informática</option>
-              <option id='beneficiario'>CONTEXPRESS S DE RL DE CV</option>
-              <option id='beneficiario'>Copias Neo SA De CV</option>
-              <option id='beneficiario'>Copicentro Pachuca</option>
-              <option id='beneficiario'>Corporativo Farmacias Mas SA De CV</option>
-              <option id='beneficiario'>Corporativo Yunes Márquez SA De CV</option>
-              <option id='beneficiario'>Corte Herrera Claudia</option>
-              <option id='beneficiario'>Cortesía En Viajes S. De RL De CV</option>
-              <option id='beneficiario'>CRIMELAB SA DE CV</option>
-              <option id='beneficiario'>Cristina González Cantera</option>
-              <option id='beneficiario'>Curso 'El Delito De Feminicidio'</option>
-              <option id='beneficiario'>Cutberto Rodríguez Álvarez</option>
-              <option id='beneficiario'>Cynper SA De CV</option>
-              <option id='beneficiario'>China Town</option>
-              <option id='beneficiario'>Dagoberto Mendoza Morales</option>
-              <option id='beneficiario'>Daniel García Luna</option>
-              <option id='beneficiario'>Daniel Becerra Castañeda</option>
-              <option id='beneficiario'>Daniel García Luna</option>
-              <option id='beneficiario'>Daniel López Carrasco</option>
-              <option id='beneficiario'>Daniel Miramontes Flores</option>
-              <option id='beneficiario'>Daniel Zarate Santiago</option>
-              <option id='beneficiario'>David Adrián Martínez Santiago</option>
-              <option id='beneficiario'>David Richard Uribe</option>
-              <option id='beneficiario'>De Tula De Allende, Hgo.</option>
-              <option id='beneficiario'>Delia Serrano Morales</option>
-              <option id='beneficiario'>Deportes Pachuca SA De CV</option>
-              <option id='beneficiario'>Desarrollo Hotelero De Plaza Pachuca Sa</option>
-              <option id='beneficiario'>DEVSOFT SA DE CV</option>
-              <option id='beneficiario'>Dhl Exprés México SA De CV</option>
-              <option id='beneficiario'>Diana Araceli Zaldívar Cruz</option>
-              <option id='beneficiario'>Diana Gálvez Mendoza</option>
-              <option id='beneficiario'>Diego Alberto Acevedo De La Rosa</option>
-              <option id='beneficiario'>Diego Alberto Espinosa Islas</option>
-              <option id='beneficiario'>Dilia Ramos Montaño</option>
-              <option id='beneficiario'>Distribuciones Mogu SA DE CV</option>
-              <option id='beneficiario'>Distribuidora De Abarrotes Y Semillas De Pachuca SA De CV</option>
-              <option id='beneficiario'>Distribuidora De Alimentos Th, SA De CV</option>
-              <option id='beneficiario'>Distribuidora Del Manual Moderno SA De CV</option>
-              <option id='beneficiario'>Distribuidora El Manual Moderno SA De CV</option>
-              <option id='beneficiario'>Distribuidora Fragoso</option>
-              <option id='beneficiario'>Domínguez Díaz Daniel</option>
-              <option id='beneficiario'>Drícela Austria Serna</option>
-              <option id='beneficiario'>Drivecare, SA de CV</option>
-              <option id='beneficiario'>Dulce María Calva Sánchez</option>
-              <option id='beneficiario'>Edgar Aquilino Herrera Rodríguez</option>
-              <option id='beneficiario'>Edgar Dante Rosas Islas</option>
-              <option id='beneficiario'>Edgar Mendoza Ceron</option>
-              <option id='beneficiario'>Edgar Rabindranath Valdespino Zubieta</option>
-              <option id='beneficiario'>Edith Rojas Camacho</option>
-              <option id='beneficiario'>Edmundo Alfredo Galindo Pérez</option>
-              <option id='beneficiario'>Edson Aguilar Romero</option>
-              <option id='beneficiario'>El Palacio De Hierro SA De CV</option>
-              <option id='beneficiario'>El Parador De San José</option>
-              <option id='beneficiario'>El Pelón Dulcerías</option>
-              <option id='beneficiario'>el rincon de periban</option>
-              <option id='beneficiario'>El Rincón De Periban</option>
-              <option id='beneficiario'>Elda Ceseña Banquera</option>
-              <option id='beneficiario'>Eléctrica Ángeles</option>
-              <option id='beneficiario'>Eléctrica Barba SA De CV</option>
-              <option id='beneficiario'>Electro pura S. De RL De CV</option>
-              <option id='beneficiario'>Electropura S. De RL De CV</option>
-              <option id='beneficiario'>Elfego Baltazar Piña Verde</option>
-              <option id='beneficiario'>Eli Rodríguez Del Ángel</option>
-              <option id='beneficiario'>Elideth Sarahi Dorantes López</option>
-              <option id='beneficiario'>Elisa Ramírez Escamilla</option>
-              <option id='beneficiario'>Eliseo Martínez Ballesteros</option>
-              <option id='beneficiario'>Eliu Morales Fragoso</option>
-              <option id='beneficiario'>Elizabeth Arellano Miranda</option>
-              <option id='beneficiario'>Elizabeth Salinas Aguilar</option>
-              <option id='beneficiario'>Elizabeth Troncoso Escamilla</option>
-              <option id='beneficiario'>Eloísa Camargo Hernández</option>
-              <option id='beneficiario'>Elsa Patricia Rodríguez Reyes</option>
-              <option id='beneficiario'>Emilio Prieto Perez</option>
-              <option id='beneficiario'>Emilio Prieto Pérez</option>
-              <option id='beneficiario'>Emmanuel Ceseña Barquera</option>
-              <option id='beneficiario'>Envasadoras De Aguas En México S. De RL De CV (Bonafont)</option>
-              <option id='beneficiario'>Eric Salvador Rosas Villa</option>
-              <option id='beneficiario'>Erick Jovanni Flores Varela</option>
-              <option id='beneficiario'>Erick Mendoza Hernández</option>
-              <option id='beneficiario'>Erick Salvador Rosas Villa</option>
-              <option id='beneficiario'>Erika Cruz Pérez</option>
-              <option id='beneficiario'>ERIKA JAZMIN RESENDIZ TREJO</option>
-              <option id='beneficiario'>Ernesto Skewes López</option>
-              <option id='beneficiario'>Esli Domínguez Trejo</option>
-              <option id='beneficiario'>Especialistas en Alta Cocina SA De CV (Wings)</option>
-              <option id='beneficiario'>Esperanza González Díaz</option>
-              <option id='beneficiario'>Espinosa Ostos Blanca Deyanira</option>
-              <option id='beneficiario'>Estación Acevedo S. De RL</option>
-              <option id='beneficiario'>Estación De Servicio Ana SA De CV</option>
-              <option id='beneficiario'>Estación De Servicio Ariel SA De CV</option>
-              <option id='beneficiario'>Estación de Servicio EMAJUFH SA de CV</option>
-              <option id='beneficiario'>Estación De Servicio La Mora</option>
-              <option id='beneficiario'>Estación De Servicios Gesa SA De CV</option>
-              <option id='beneficiario'>Estación Real De La Plata SA De CV</option>
-              <option id='beneficiario'>Estación Santa María La Providencia SA De CV</option>
-              <option id='beneficiario'>Estación Valle Dorado SA De CV</option>
-              <option id='beneficiario'>Estacionamiento La Posta</option>
-              <option id='beneficiario'>Esteban Leopoldo Cartelazo Islas</option>
-              <option id='beneficiario'>Esteban Leopoldo Castelazo Islas</option>
-              <option id='beneficiario'>Eugenia Vite Silvestre</option>
-              <option id='beneficiario'>Eva Pérez Hernández</option>
-              <option id='beneficiario'>Eva Rivera Samitez</option>
-              <option id='beneficiario'>Fabián Bernardo Moreno Gómez</option>
-              <option id='beneficiario'>FABIOLA GONZALEZ OROZCO</option>
-              <option id='beneficiario'>Fabiola Santillán García</option>
-              <option id='beneficiario'>Farmacias Guadalajara SA De CV</option>
-              <option id='beneficiario'>Farum Servicios SA De CV</option>
-              <option id='beneficiario'>Fejsa Computaion Y Oficinas De Pachuca SA De CV</option>
-              <option id='beneficiario'>FELIPE JIMENEZ GUTIERREZ</option>
-              <option id='beneficiario'>Felipe Jiménez Gutiérrez</option>
-              <option id='beneficiario'>Felipe Simón Olvera Castelán</option>
-              <option id='beneficiario'>Felisa Lugo Chavero</option>
-              <option id='beneficiario'>Feliz Ernesto Reyes Molina</option>
-              <option id='beneficiario'>Fernando Hidalgo Vergara</option>
-              <option id='beneficiario'>Ferre hogar</option>
-              <option id='beneficiario'>Ferretería Y Plomería Casa Martínez</option>
-              <option id='beneficiario'>Fideicomiso Autopistas Y Puentes Del Golfo Centro</option>
-              <option id='beneficiario'>Fierros Y Laminas De Pachuca SA De CV.</option>
-              <option id='beneficiario'>Fiesta Inn Pachuca</option>
-              <option id='beneficiario'>Filiberto Barrera Dávila</option>
-              <option id='beneficiario'>Flor Eugenia Vargas Herrera</option>
-              <option id='beneficiario'>Fondo Nacional De Infraestructura</option>
-              <option id='beneficiario'>Forlac Store SA De CV</option>
-              <option id='beneficiario'>Francisca Quiroz Uribe</option>
-              <option id='beneficiario'>Francisco Raúl García Bolio</option>
-              <option id='beneficiario'>Francisco Ventura Martínez</option>
-              <option id='beneficiario'>Fuente De Sodas Chino´S</option>
-              <option id='beneficiario'>Gabriel López Hernández</option>
-              <option id='beneficiario'>Gabriela Romero Campos</option>
-              <option id='beneficiario'>Manual García Moreno Víctor</option>
-              <option id='beneficiario'>Garza Gas De Hidalgo SA De CV</option>
-              <option id='beneficiario'>Gas De Provincia Sa De CV</option>
-              <option id='beneficiario'>Gas Fast SA De CV</option>
-              <option id='beneficiario'>Gas Imperial De Axapusco SA De CV</option>
-              <option id='beneficiario'>Gasamake SA De CV</option>
-              <option id='beneficiario'>Gasolineria Agua Blanca SA De CV</option>
-              <option id='beneficiario'>Gasolineria Rodjaq SA De CV</option>
-              <option id='beneficiario'>Gasomer SA De CV</option>
-              <option id='beneficiario'>Gastrosur SA De CV</option>
-              <option id='beneficiario'>Genaro Oswaldo Márquez Gutiérrez</option>
-              <option id='beneficiario'>Germa Mantenimiento Y Diseño SA De CV</option>
-              <option id='beneficiario'>Gertell Combustibles SA De CV</option>
-              <option id='beneficiario'>Gibran Copca Chávez</option>
-              <option id='beneficiario'>Gilberto Bárcenas López</option>
-              <option id='beneficiario'>Gilberto Espinosa Ramírez</option>
-              <option id='beneficiario'>Gloríela Islas Sosa</option>
-              <option id='beneficiario'>Gobierno Del Df Curso Delito De Feminicidio</option>
-              <option id='beneficiario'>Gobierno del Estado de Veracruz</option>
-              <option id='beneficiario'>González Islas Bernardo</option>
-              <option id='beneficiario'>Graciela Moreno Arce</option>
-              <option id='beneficiario'>Graciela Moreno Rodríguez</option>
-              <option id='beneficiario'>Graciela Taide Quiroz Gutiérrez</option>
-              <option id='beneficiario'>Grupo Autopistas Nacionales SA De CV</option>
-              <option id='beneficiario'>Grupo Autopistas Nacionales, Sa De CV</option>
-              <option id='beneficiario'>Grupo Bekim Empresarial S DE RL DE CV</option>
-              <option id='beneficiario'>Grupo Cravioto Distribuciones SA De CV</option>
-              <option id='beneficiario'>Grupo Estrella Blanca SA De CV</option>
-              <option id='beneficiario'>Grupo Galume SA De CV</option>
-              <option id='beneficiario'>Grupo Helen Gasolinera Excelencia y Calidad SA de CV</option>
-              <option id='beneficiario'>Grupo O Port SA De CV</option>
-              <option id='beneficiario'>Grupo Parisina SA De CV</option>
-              <option id='beneficiario'>Grupo Suzuka Argenta SA De CV</option>
-              <option id='beneficiario'>Guadalupe Hernández Escamilla</option>
-              <option id='beneficiario'>Guillermo Harold Barría García</option>
-              <option id='beneficiario'>Gustavo Said Gonzalez Tapia</option>
-              <option id='beneficiario'>Gustavo Trejo Montalvo</option>
-              <option id='beneficiario'>Gutiérrez Rodríguez Juan Ramón</option>
-              <option id='beneficiario'>Guy Jesús Quijano Austria</option>
-              <option id='beneficiario'>H. Roberto Aguilar Galindo</option>
-              <option id='beneficiario'>Hacienda Yextho</option>
-              <option id='beneficiario'>Hacobo Flores Pérez</option>
-              <option id='beneficiario'>Héctor Santos González Reyes</option>
-              <option id='beneficiario'>Heriberto Padilla Contreras</option>
-              <option id='beneficiario'>Herlaz Sistemas de Comunicación SA De CV</option>
-              <option id='beneficiario'>HERLAZ SISTEMAS DE COMUNICACIÓN SA DE CV</option>
-              <option id='beneficiario'>Herlaz Sistemas De Comunicación, Sa De CV</option>
-              <option id='beneficiario'>Hermelinda Peña Hernández</option>
-              <option id='beneficiario'>Hernández Valencia Rosalía</option>
-              <option id='beneficiario'>Herrera Motors De Hidalgo SA De CV</option>
-              <option id='beneficiario'>Herrera Motors De Hidalgo SA De CV</option>
-              <option id='beneficiario'>Restaurante Hidalgo Platillos Regionales</option>
-              <option id='beneficiario'>Hidrocarburos Hidalgo S, .A De CV</option>
-              <option id='beneficiario'>Hidrocarburos Santa Catarina SA De CV</option>
-              <option id='beneficiario'>Hidrosina Plus SA De CV</option>
-              <option id='beneficiario'>Hilda Lorena Torres Guerrero</option>
-              <option id='beneficiario'>Home Depot México S De RL De CV</option>
-              <option id='beneficiario'>Hotel Y Restaurante Tezoli</option>
-              <option id='beneficiario'>Hoteles Eco turísticos Mexicanos SA De CV</option>
-              <option id='beneficiario'>Hoteles Sheraton S. De RL De CV</option>
-              <option id='beneficiario'>Huichapan Hgo</option>
-              <option id='beneficiario'>Impulsora De Transportes Mexicanos SA De CV</option>
-              <option id='beneficiario'>Industrias Long Meng S. De RL Mi</option>
-              <option id='beneficiario'>Ines Cruz Hunter</option>
-              <option id='beneficiario'>Ing. Rogelio Alberto Téllez Rojo</option>
-              <option id='beneficiario'>Ingrid Minerva Rodríguez Vera</option>
-              <option id='beneficiario'>Interhidalguenses</option>
-              <option id='beneficiario'>Irving Ortiz Flores</option>
-              <option id='beneficiario'>Isidro Granados Guerra</option>
-              <option id='beneficiario'>Israel Islas Castañeda</option>
-              <option id='beneficiario'>Iván Ramírez Hernández</option>
-              <option id='beneficiario'>Ivonne Munguía Becerra</option>
-              <option id='beneficiario'>J. Irais González García</option>
-              <option id='beneficiario'>Jacobo Flores Pérez</option>
-              <option id='beneficiario'>Jaime Zapata Venegas</option>
-              <option id='beneficiario'>Janeth Olvera Salinas</option>
-              <option id='beneficiario'>Jaqueline Gálvez De La Peña</option>
-              <option id='beneficiario'>Javier González Mejía</option>
-              <option id='beneficiario'>JAVIER LEO CUEVAS</option>
-              <option id='beneficiario'>Javier Rodríguez Robles</option>
-              <option id='beneficiario'>Javier Santa Cruz Garcia</option>
-              <option id='beneficiario'>Javier Santacruz García</option>
-              <option id='beneficiario'>Jessica Denisse Zuñiga Rosales</option>
-              <option id='beneficiario'>Jesús Elías Salinas Baños</option>
-              <option id='beneficiario'>Jesús Ríos Islas</option>
-              <option id='beneficiario'>Joao Israel Villegas Trejo</option>
-              <option id='beneficiario'>Joaquín Escobar Baños</option>
-              <option id='beneficiario'>Johanna Beatriz Hidalgo Hernández</option>
-              <option id='beneficiario'>Jorge Erick Piña Vite</option>
-              <option id='beneficiario'>Jorge Vargas Martínez</option>
-              <option id='beneficiario'>Jose Alfonso López Rubio</option>
-              <option id='beneficiario'>José Alfredo Elizalde Hernández</option>
-              <option id='beneficiario'>José Antonio Calderón López</option>
-              <option id='beneficiario'>José Antonio Jiménez Rodríguez</option>
-              <option id='beneficiario'>JOSE ANTONIO SILVA MORENO</option>
-              <option id='beneficiario'>José Armando Reyes Samperio</option>
-              <option id='beneficiario'>José Augusto Fuentes Marín</option>
-              <option id='beneficiario'>José Carlos Vargas Bonetta</option>
-              <option id='beneficiario'>José De Jesús Franco Solís</option>
-              <option id='beneficiario'>José De Jesús López Peña</option>
-              <option id='beneficiario'>José González Beltrána</option>
-              <option id='beneficiario'>José Guadalupe Sánchez Guerrero</option>
-              <option id='beneficiario'>Jose Ivan Gutierrez Najera</option>
-              <option id='beneficiario'>José Jaime Acosta Castro</option>
-              <option id='beneficiario'>José Juan Moreno Valle</option>
-              <option id='beneficiario'>José Luis Hernández Rosales</option>
-              <option id='beneficiario'>José Luis Hidalgo López</option>
-              <option id='beneficiario'>JOSE LUIS MAGAÑA CABRERA</option>
-              <option id='beneficiario'>José Luis Salinas Elizalde</option>
-              <option id='beneficiario'>José Luis Serrano Arroyo</option>
-              <option id='beneficiario'>JOSE LUIS ZACATENCO LOPEZ</option>
-              <option id='beneficiario'>José Luis Zacatenco López</option>
-              <option id='beneficiario'>José Manuel Hernández Hernández</option>
-              <option id='beneficiario'>JOSE NERI ISLAS MARTINEZ</option>
-              <option id='beneficiario'>José Román Cárdenas Pizano</option>
-              <option id='beneficiario'>Jose Roman Pizano Caredenas</option>
-              <option id='beneficiario'>Jose Solis Gonzalez</option>
-              <option id='beneficiario'>José Solís Gonzále</option>
-              <option id='beneficiario'>Josselin Sixto Ruiz</option>
-              <option id='beneficiario'>Juan Alberto Peralta Vázquez</option>
-              <option id='beneficiario'>Juan Carlos Ángeles Baltazar</option>
-              <option id='beneficiario'>Juan Carlos Salinas Rodríguez</option>
-              <option id='beneficiario'>Juan Carlos Vergara Bonneta</option>
-              <option id='beneficiario'>Juan Gustavo Perez Gónzalez</option>
-              <option id='beneficiario'>Juan Hernández Olvera</option>
-              <option id='beneficiario'>Juan Iv Rodríguez Sánchez</option>
-              <option id='beneficiario'>Juan Leticia Elizalde Zendejas</option>
-              <option id='beneficiario'>Juan Manuel García Guzmán</option>
-              <option id='beneficiario'>Juan Manuel García Guzmán</option>
-              <option id='beneficiario'>Juan Manuel García Hernández</option>
-              <option id='beneficiario'>Juan Manuel Lugo Nacif</option>
-              <option id='beneficiario'>Juan Manuel Zaldívar Chiapa</option>
-              <option id='beneficiario'>Juan Rafael Canales Ángeles</option>
-              <option id='beneficiario'>Juan Ramón Gutiérrez Rodríguez</option>
-              <option id='beneficiario'>Juan Ramón Vázquez Cruz</option>
-              <option id='beneficiario'>Juana Magdalena Ambrosio Vargas</option>
-              <option id='beneficiario'>Juana María Escamilla Vázquez</option>
-              <option id='beneficiario'>Juana Vargas López</option>
-              <option id='beneficiario'>Juárez Hidalgo</option>
-              <option id='beneficiario'>Judith M. Luna Mejía</option>
-              <option id='beneficiario'>Julieta García Esquivel</option>
-              <option id='beneficiario'>Julio Alberto Santillán García</option>
-              <option id='beneficiario'>Julio Cesar Salinas González</option>
-              <option id='beneficiario'>Julio Rosales Reyes</option>
-              <option id='beneficiario'>Julissa Ortiz Barrera</option>
-              <option id='beneficiario'>Juventino Pérez Lemoine</option>
-              <option id='beneficiario'>Jv Renta</option>
-              <option id='beneficiario'>Karen Alina Overa Santos</option>
-              <option id='beneficiario'>Karen Judith Márquez Espinoza</option>
-              <option id='beneficiario'>Karla Carolina Rivera Escalona</option>
-              <option id='beneficiario'>Karla Lizzett Flores Rodríguez</option>
-              <option id='beneficiario'>Karla Yadira Hernández Hernández</option>
-              <option id='beneficiario'>Kemuel SA De CV</option>
-              <option id='beneficiario'>Miguel Oscar De La Vega Bezies</option>
-              <option id='beneficiario'>La Braza Arracheras</option>
-              <option id='beneficiario'>La Casa Del Juego</option>
-              <option id='beneficiario'>La Cubeta Digital</option>
-              <option id='beneficiario'>La Flor De Michoacán</option>
-              <option id='beneficiario'>La Luz Roja</option>
-              <option id='beneficiario'>Laboratorio Coahuila SA De CV</option>
-              <option id='beneficiario'>Latanst SA De CV</option>
-              <option id='beneficiario'>Latitud 5 Estrellas SA De CV</option>
-              <option id='beneficiario'>Laura Cristina Berber Vicaña</option>
-              <option id='beneficiario'>Laura Piña Serrano</option>
-              <option id='beneficiario'>Laureano Campa Zúñiga</option>
-              <option id='beneficiario'>Lazcano Ortiz Beatriz</option>
-              <option id='beneficiario'>Lenin Alejandro Castañeda Baños</option>
-              <option id='beneficiario'>Leticia Ignacio Mejía</option>
-              <option id='beneficiario'>Leticia Saavedra Nesbaid</option>
-              <option id='beneficiario'>Lilia Lugo Mejía</option>
-              <option id='beneficiario'>Liliana Flores Rossette</option>
-              <option id='beneficiario'>Liliana Yazmin Franco Castro</option>
-              <option id='beneficiario'>Linda Crystal García Doniz</option>
-              <option id='beneficiario'>Liz Arely Castelán Bautista</option>
-              <option id='beneficiario'>Liza Angélica Islas Rivera</option>
-              <option id='beneficiario'>Lizbeth Pizana Olvera</option>
-              <option id='beneficiario'>Lonchería María Isabel</option>
-              <option id='beneficiario'>Los Cazadores</option>
-              <option id='beneficiario'>Los Negritos Restaurant Bar</option>
-              <option id='beneficiario'>Lucero Pérez González</option>
-              <option id='beneficiario'>Luis Alberto Ávila Osorio</option>
-              <option id='beneficiario'>Luis Angel Mayen Garcia</option>
-              <option id='beneficiario'>Luis Ángel Mayen García</option>
-              <option id='beneficiario'>Luis Martínez Mejía</option>
-              <option id='beneficiario'>Luis Serfain Henkel Castañeda</option>
-              <option id='beneficiario'>Luis Vargas Trejos</option>
-              <option id='beneficiario'>Luisa Lagarde Vásquez</option>
-              <option id='beneficiario'>Llanterama Hidalguense SA De CV</option>
-              <option id='beneficiario'>Ma. Elena Lugo Chavero</option>
-              <option id='beneficiario'>Ma. Guadalupe Vite Carlos</option>
-              <option id='beneficiario'>Macaria Pérez Guerrero</option>
-              <option id='beneficiario'>Maderia Rual SA De CV</option>
-              <option id='beneficiario'>Maderería Rual SA De CV</option>
-              <option id='beneficiario'>Mangueras, Herramientas Y Equipos SA De CV</option>
-              <option id='beneficiario'>Manuel Alejandro Calva Hinojosa</option>
-              <option id='beneficiario'>anuel Felix Durán Pérez</option>
-              <option id='beneficiario'>Manuel Félix Duran Pérez</option>
-              <option id='beneficiario'>Manuel García Guzmán</option>
-              <option id='beneficiario'>Maquiladora Espani SA De CV</option>
-              <option id='beneficiario'>Marcela Cerón Díaz</option>
-              <option id='beneficiario'>Marcelo Ángeles Tivo</option>
-              <option id='beneficiario'>Marco Antonio Hernández Gómez</option>
-              <option id='beneficiario'>Marco Antonio Hernández Monroy</option>
-              <option id='beneficiario'>Marco Antonio López Hernández</option>
-              <option id='beneficiario'>Marco Antonio Reyes Hernández</option>
-              <option id='beneficiario'>María Alejandra Trejo García</option>
-              <option id='beneficiario'>María Catalina Martínez Guerrero</option>
-              <option id='beneficiario'>María Cecilia Hernández Castillo</option>
-              <option id='beneficiario'>María Concepción Hernández Aragón</option>
-              <option id='beneficiario'>María Del Carmen Quintero Bautista</option>
-              <option id='beneficiario'>María Del Mar Reyes Pérez Tagle</option>
-              <option id='beneficiario'>María Del Rosario González Martínez</option>
-              <option id='beneficiario'>María Del Socorro Chávez González</option>
-              <option id='beneficiario'>María Erika Ángeles De Haro</option>
-              <option id='beneficiario'>María Guadalupe Dávila Hernández</option>
-              <option id='beneficiario'>María Guadalupe González Vargas</option>
-              <option id='beneficiario'>María Guadalupe Salguero Hernández</option>
-              <option id='beneficiario'>María Isabel Teniente Llanos</option>
-              <option id='beneficiario'>María José Granillo Granillo</option>
-              <option id='beneficiario'>María Leticia Aldana Ugalde</option>
-              <option id='beneficiario'>María Luisa Martínez Ortega</option>
-              <option id='beneficiario'>María Ramírez Alvarado</option>
-              <option id='beneficiario'>María Sofía Escalante Reyes</option>
-              <option id='beneficiario'>María Teresa Oliver León</option>
-              <option id='beneficiario'>María Trinidad Hernández Rodríguez</option>
-              <option id='beneficiario'>Maribel Castro Ángeles</option>
-              <option id='beneficiario'>Maribel Olvera Avilés</option>
-              <option id='beneficiario'>Maribel Santos Bretado</option>
-              <option id='beneficiario'>Mario Luis Zacatenco Viornery</option>
-              <option id='beneficiario'>Mario Rodríguez González</option>
-              <option id='beneficiario'>Marisarcos Del Distrito Federal SA De CV</option>
-              <option id='beneficiario'>Marisol Rivera Vazquez</option>
-              <option id='beneficiario'>Marisol Rivera Vázquez</option>
-              <option id='beneficiario'>Marlen Pelcastre Nochebuena</option>
-              <option id='beneficiario'>Marlen Pérez Cervantes</option>
-              <option id='beneficiario'>Marressa Yuzim Picazo Cabrera</option>
-              <option id='beneficiario'>Martin Márquez Loyola</option>
-              <option id='beneficiario'>Martin Vivar Cazañas</option>
-              <option id='beneficiario'>Mary Carmen Ramírez Ríos</option>
-              <option id='beneficiario'>Materiales Azulejos Sanitarios Y Ferretería SA De CV</option>
-              <option id='beneficiario'>Materiales Hermanos Roldan SA De CV</option>
-              <option id='beneficiario'>Materiales Para Construcción SA De CV</option>
-              <option id='beneficiario'>Mauro Francisco López Castillo</option>
-              <option id='beneficiario'>Mayra Pérez Nájera</option>
-              <option id='beneficiario'>Mayra Santa Madrigal Limón</option>
-              <option id='beneficiario'>Megapapelera Nixa</option>
-              <option id='beneficiario'>Melo Cordero Leticia</option>
-              <option id='beneficiario'>Mendoza Tovar Palmira</option>
-              <option id='beneficiario'>Meneses Lozada Martin</option>
-              <option id='beneficiario'>Mercedes Citlalli Mendoza Meza</option>
-              <option id='beneficiario'>Mi Casa</option>
-              <option id='beneficiario'>Microvisa Mg Sa De CV</option>
-              <option id='beneficiario'>MICROVISA MG SA DE CV</option>
-              <option id='beneficiario'>Microvisa SA De CV</option>
-              <option id='beneficiario'>Miguel Alejandro Flores Gomez</option>
-              <option id='beneficiario'>Miguel Ángel Aguilar Hernández</option>
-              <option id='beneficiario'>Miguel Ángel Chávez Trejo</option>
-              <option id='beneficiario'>Miguel Ángel Martínez Montiel</option>
-              <option id='beneficiario'>Miguel Angel Perez Gonzalez</option>
-              <option id='beneficiario'>Miguel Odon Olvera Pérez</option>
-              <option id='beneficiario'>Miguel Oscar De La Vega Bezies</option>
-              <option id='beneficiario'>Miguel Reyes Valdovinos</option>
-              <option id='beneficiario'>Minerva Cruz Licona</option>
-              <option id='beneficiario'>Mirage Perisur</option>
-              <option id='beneficiario'>Modesta López Canales</option>
-              <option id='beneficiario'>Modesta Vázquez Carmona</option>
-              <option id='beneficiario'>Mofles González</option>
-              <option id='beneficiario'>Multiproductos de Leon SA De CV</option>
-              <option id='beneficiario'>Mundo De Mangueras Y Conexiones</option>
-              <option id='beneficiario'>Mundo Tool México SA De CV</option>
-              <option id='beneficiario'>Nadia Luisa Gavioto Romero</option>
-              <option id='beneficiario'>Nallely Roldan Sosa</option>
-              <option id='beneficiario'>Nami Pachuca, SA de CV</option>
-              <option id='beneficiario'>Nancy Herrera Romero</option>
-              <option id='beneficiario'>Nancy Jaramillo Díaz</option>
-              <option id='beneficiario'>Narciso Ortiz Velázquez</option>
-              <option id='beneficiario'>Nayelhi Chávez Rodríguez</option>
-              <option id='beneficiario'>Nayeli Alejandro Calva Hinojosa</option>
-              <option id='beneficiario'>Nikzor Travel Sa De CV</option>
-              <option id='beneficiario'>Noé Olivia Ramírez Trejo</option>
-              <option id='beneficiario'>Noé Olvera Meza</option>
-              <option id='beneficiario'>Noel Chávez Martínez</option>
-              <option id='beneficiario'>Norma Salinas Alcántara</option>
-              <option id='beneficiario'>Novedades Gastronómicas Reforma S. De RLL De CV</option>
-              <option id='beneficiario'>Nueva Wal Mart De México, S. De RL De CV</option>
-              <option id='beneficiario'>Obed Hernández Carreto</option>
-              <option id='beneficiario'>Odt</option>
-              <option id='beneficiario'>Office Depot De México SA De CV</option>
-              <option id='beneficiario'>Omaña Servicio A Equipo SA De CV</option>
-              <option id='beneficiario'>Omar Daniel Hernández García</option>
-              <option id='beneficiario'>Omar Guadalupe Cano Fragoso</option>
-              <option id='beneficiario'>Omar Pacheco Cortes Rangel</option>
-              <option id='beneficiario'>Operadora Omx SA De CV</option>
-              <option id='beneficiario'>Operadora Parador De San Javier SA De CV</option>
-              <option id='beneficiario'>Operadora Vips S De RL De CV</option>
-              <option id='beneficiario'>Oscar Cruz Pérez</option>
-              <option id='beneficiario'>Oscar Felipe Serrano Cruz</option>
-              <option id='beneficiario'>Oscar Flores Rivera</option>
-              <option id='beneficiario'>Oscar Leopoldo Guasso Soto</option>
-              <option id='beneficiario'>Ovni Bus SA De CV</option>
-              <option id='beneficiario'>Pablo Espinosa Acuña</option>
-              <option id='beneficiario'>Pachua-Actopan Ixmiquilpan SA De CV</option>
-              <option id='beneficiario'>Pai</option>
-              <option id='beneficiario'>Panadería Y Pastelería Geo SA De CV</option>
-              <option id='beneficiario'>Paola Romero Guerrero</option>
-              <option id='beneficiario'>Paquetexpress</option>
-              <option id='beneficiario'>Parrin SA De CV</option>
-              <option id='beneficiario'>Patricia Montejo Reyes</option>
-              <option id='beneficiario'>Paxair De México SA De CV</option>
-              <option id='beneficiario'>Pedro Acosta Rodríguez</option>
-              <option id='beneficiario'>Pedro Angel Cabrera Angeles</option>
-              <option id='beneficiario'>Pedro Ángel Cabrera Ángeles</option>
-              <option id='beneficiario'>Pérez Hernández Javier</option>
-              <option id='beneficiario'>Pérez Licona Eduardo</option>
-              <option id='beneficiario'>Perkin-Elmer De Meico SA</option>
-              <option id='beneficiario'>Pétreos Las Glorias SA De CV</option>
-              <option id='beneficiario'>Petreos Las Glorias, SA de CV</option>
-              <option id='beneficiario'>Pétreos Sol SA De CV</option>
-              <option id='beneficiario'>Petreos Sol, SA de CV</option>
-              <option id='beneficiario'>Pinturas En General</option>
-              <option id='beneficiario'>Plásticos Jang</option>
-              <option id='beneficiario'>Policía Industrial Bancaria del Estado de Hidalgo, SA de CV</option>
-              <option id='beneficiario'>Plomoelectrica DE Hhidalgo SA De CV</option>
-              <option id='beneficiario'>Posadas De Latinoamerica SA De CV</option>
-              <option id='beneficiario'>Pr0ocomex Pachuca SA De CV</option>
-              <option id='beneficiario'>PR0OCOMEX PACHUCA SADE CV</option>
-              <option id='beneficiario'>Presidencia Municipal</option>
-              <option id='beneficiario'>Procomex De Pachuca SA De CV</option>
-              <option id='beneficiario'>Promogas SA De CV</option>
-              <option id='beneficiario'>Promotora De Autopistas Del Pacifico .SA De. CV</option>
-              <option id='beneficiario'>Promotora De Desarrollo Hidalguense SA De SV</option>
-              <option id='beneficiario'>Promotora Y Administrador De Carreteras SA De CV</option>
-              <option id='beneficiario'>Proyectos Y Construcciones Téllez-Islas</option>
-              <option id='beneficiario'>Quintero Vega Irma Lilia</option>
-              <option id='beneficiario'>Quiroz Nava Rodrigo</option>
-              <option id='beneficiario'>Radio Shack De México SA De CV</option>
-              <option id='beneficiario'>Rafael De Jesús Aguirre Ramos</option>
-              <option id='beneficiario'>Rafael Herrera Tanco</option>
-              <option id='beneficiario'>Rafael Medina Ugalde</option>
-              <option id='beneficiario'>Ramírez Arce Mónica</option>
-              <option id='beneficiario'>Ramón Ensatiga Morales</option>
-              <option id='beneficiario'>Raúl Badillo Ramírez</option>
-              <option id='beneficiario'>Raúl Rivera Rodríguez</option>
-              <option id='beneficiario'>Raúl Téllez Romero</option>
-              <option id='beneficiario'>Rebeca Rangel Copca</option>
-              <option id='beneficiario'>Relleno Sanitario</option>
-              <option id='beneficiario'>Rembolso De Gasto Arrendamiento Huejutla</option>
-              <option id='beneficiario'>Descanso. Mirage Guerrero</option>
-              <option id='beneficiario'>Restaurante La Nacional</option>
-              <option id='beneficiario'>Restaurante La Vega</option>
-              <option id='beneficiario'>Restaurante Quetos</option>
-              <option id='beneficiario'>Restaurante California SA De CV</option>
-              <option id='beneficiario'>Restaurante Colonial</option>
-              <option id='beneficiario'>Restaurante Familiar El Parador De San José</option>
-              <option id='beneficiario'>Restaurante Genisa SA De CV</option>
-              <option id='beneficiario'>Restaurante Gorditas La Guerra</option>
-              <option id='beneficiario'>Restaurante Mirage SA De CV</option>
-              <option id='beneficiario'>Restaurante Terrassa De Mirage</option>
-              <option id='beneficiario'>Restaurantes California SA De CV</option>
-              <option id='beneficiario'>Restaurantes Toks SA De CV</option>
-              <option id='beneficiario'>Restaurantes Tu Lunch Sa De CV</option>
-              <option id='beneficiario'>Reyes Benítez Karla Leticia</option>
-              <option id='beneficiario'>Reyna Meneses Domínguez</option>
-              <option id='beneficiario'>Rhema Publicidad</option>
-              <option id='beneficiario'>Ricardo Jorge Gonzales Cortes</option>
-              <option id='beneficiario'>Ricardo Lázaro Ludlow Zavaleta</option>
-              <option id='beneficiario'>Roberto Carlos López Mercado</option>
-              <option id='beneficiario'>Roberto González Hernández</option>
-              <option id='beneficiario'>Roberto Octavio Tripp Resendiz</option>
-              <option id='beneficiario'>Roberto Rodríguez Aguilar</option>
-              <option id='beneficiario'>Roberto Rodríguez Romero</option>
-              <option id='beneficiario'>Rodolfo García Flores</option>
-              <option id='beneficiario'>Rodrigo Quiroz Guerrero</option>
-              <option id='beneficiario'>Rodríguez García Edgar Fernando</option>
-              <option id='beneficiario'>Rodríguez Rendón Jesús</option>
-              <option id='beneficiario'>Rodríguez Reyes Humberto</option>
-              <option id='beneficiario'>Roesp Asociados SA De CV</option>
-              <option id='beneficiario'>Rogelio L. Moreno Arce</option>
-              <option id='beneficiario'>Rogelio Leopoldo Moreno Arce</option>
-              <option id='beneficiario'>Romel</option>
-              <option id='beneficiario'>Romero Hoyos Ana María</option>
-              <option id='beneficiario'>Rosa María Lara Téllez</option>
-              <option id='beneficiario'>Russel Barradaz Sanchez</option>
-              <option id='beneficiario'>Sabas Hernández Sánchez</option>
-              <option id='beneficiario'>Salvador Eric Rosas Villas</option>
-              <option id='beneficiario'>Salvador Espinosa Arellano</option>
-              <option id='beneficiario'>Sanborn Hermanos SA</option>
-              <option id='beneficiario'>Sandra De Elías Vichis</option>
-              <option id='beneficiario'>Santos De La Paz SA De CV</option>
-              <option id='beneficiario'>Saúl Salinas González</option>
-              <option id='beneficiario'>Scden Sa De CV</option>
-              <option id='beneficiario'>SCDEN SA DE CV</option>
-              <option id='beneficiario'>Sergio Antonio Hernández Suárez</option>
-              <option id='beneficiario'>Sergio Antonio Priego Reséndiz</option>
-              <option id='beneficiario'>Sergio Ashane Bulos</option>
-              <option id='beneficiario'>Sergio Baca Olivo</option>
-              <option id='beneficiario'>Sergio Fernando González Cruz</option>
-              <option id='beneficiario'>Sergio Jesús Reyes Trejo</option>
-              <option id='beneficiario'>Sergio Piña Delgado</option>
-              <option id='beneficiario'>Sergio Rivera Chapa</option>
-              <option id='beneficiario'>Servicio Acapulco Diamante SA De CV</option>
-              <option id='beneficiario'>Servicio También SA De CV</option>
-              <option id='beneficiario'>Servicio Apan, SA de CV</option>
-              <option id='beneficiario'>Servicio Cúpula SA De CV</option>
-              <option id='beneficiario'>Servicio El Once SA De CV</option>
-              <option id='beneficiario'>Servicio Huichapan SA De CV</option>
-              <option id='beneficiario'>Servicio Jacala SA De CV</option>
-              <option id='beneficiario'>Servicio Jacala, SA de CV</option>
-              <option id='beneficiario'>Servicio La Fuente SA De CV</option>
-              <option id='beneficiario'>Servicio La Loma SA De CV</option>
-              <option id='beneficiario'>Servicio Lara SA De CV</option>
-              <option id='beneficiario'>Servicio Lara. SA de CV</option>
-              <option id='beneficiario'>Servicio Los Cues, SA de CV</option>
-              <option id='beneficiario'>Servicio Molango SA de CV</option>
-              <option id='beneficiario'>Servicio Monteverde SA De CV</option>
-              <option id='beneficiario'>Servicio Parador Santa Bárbara SA de CV</option>
-              <option id='beneficiario'>Servicio Postal Mexicano</option>
-              <option id='beneficiario'>Servicio Rangel SA De CV</option>
-              <option id='beneficiario'>Servicio Rangel, SA de CV</option>
-              <option id='beneficiario'>SERVICIO SIOLEN</option>
-              <option id='beneficiario'>Servicio Técnico De Hidalgo SA De CV</option>
-              <option id='beneficiario'>SERVICIO TEOCALCO SA DE CV</option>
-              <option id='beneficiario'>Servicio Toda SA De CV</option>
-              <option id='beneficiario'>Servicio Toda, SA de CV</option>
-              <option id='beneficiario'>SERVICIO XO SA. DE CV</option>
-              <option id='beneficiario'>Servicio Zacualtipan SA de CV</option>
-              <option id='beneficiario'>Servicio Zacualtipán SA De CV</option>
-              <option id='beneficiario'>Servicio Zacualtipan, SA de CV</option>
-              <option id='beneficiario'>SERVICIOS AUTOMOTRICES DE IXMIQUILPAN SACV</option>
-              <option id='beneficiario'>SERVICIOS DE INGENIERIA NOAR SA DE CV</option>
-              <option id='beneficiario'>Servicios Energéticos de Tizayuca, SA de CV</option>
-              <option id='beneficiario'>Servicios Fayad Sa De CV</option>
-              <option id='beneficiario'>Servicios Fayad, SA de CV</option>
-              <option id='beneficiario'>Servigilga SA De CV</option>
-              <option id='beneficiario'>SERVIPROGRESO SA DE CV</option>
-              <option id='beneficiario'>Silverio Gonzalez Cuca</option>
-              <option id='beneficiario'>Socorro García Ibarra</option>
-              <option id='beneficiario'>Socorro Guadalupe Gómez Martínez</option>
-              <option id='beneficiario'>Socorro Reséndiz Mancera</option>
-              <option id='beneficiario'>Sofía Moedano Flores</option>
-              <option id='beneficiario'>Solano Gudiño María Elena</option>
-              <option id='beneficiario'>Soluciones Hidraiulicas Arum SAS De CV</option>
-              <option id='beneficiario'>Sonia Amparo Mota Olguín</option>
-              <option id='beneficiario'>Sotero Palacios Hernández</option>
-              <option id='beneficiario'>Sotero Vega Ana</option>
-              <option id='beneficiario'>Soto Arriaga Faustina</option>
-              <option id='beneficiario'>Sue Ivalu Castillo Asuna</option>
-              <option id='beneficiario'>Sumigas SA De CV</option>
-              <option id='beneficiario'>Súper Papelera SA De CV</option>
-              <option id='beneficiario'>Súper Servicio Meta SA De CV</option>
-              <option id='beneficiario'>Súper Servicio Rodríguez SA De CV</option>
-              <option id='beneficiario'>Supplyco SA De CV</option>
-              <option id='beneficiario'>Susana Peláez Lara</option>
-              <option id='beneficiario'>Tahití Silvia Mayorga González</option>
-              <option id='beneficiario'>Tania Gema Estrada Alamilla</option>
-              <option id='beneficiario'>Tania Vargar Sanchez</option>
-              <option id='beneficiario'>Tapia Hernández Luz</option>
-              <option id='beneficiario'>Taquería El Mesón De Los Ángeles</option>
-              <option id='beneficiario'>Taquería No Que No</option>
-              <option id='beneficiario'>Tarifa Promocional Xalapa- Veracruz</option>
-              <option id='beneficiario'>TEQUIMEC S DE RL DE CV</option>
-              <option id='beneficiario'>Teresa Berenice Tovar Martínez</option>
-              <option id='beneficiario'>Teresa Del Niño Jesús Carbajal</option>
-              <option id='beneficiario'>Teresa Martínez Martínez</option>
-              <option id='beneficiario'>Teresa Salgado García</option>
-              <option id='beneficiario'>Tiendas Comercial Mexicana SA De CV</option>
-              <option id='beneficiario'>Tiendas Chedrahui SA De CV</option>
-              <option id='beneficiario'>Tiendas Soriana SA De CV</option>
-              <option id='beneficiario'>Tiendas Soriana Sa De CV</option>
-              <option id='beneficiario'>Tintorería Del Norte Del Jardín Colon SA De CV</option>
-              <option id='beneficiario'>Tintorerías Gofer SA De CV</option>
-              <option id='beneficiario'>Tlapalería Acosta</option>
-              <option id='beneficiario'>Tomás Alejandro Herrera Pérez</option>
-              <option id='beneficiario'>Tomás Daniel Montes Silverio</option>
-              <option id='beneficiario'>Tomasa Villegas Lazcano</option>
-              <option id='beneficiario'>Transportes Tepehuas</option>
-              <option id='beneficiario'>Trico Pachuca SA De CV</option>
-              <option id='beneficiario'>Urbanos Y Suburbanos De Tula SA De CV</option>
-              <option id='beneficiario'>Valores Energéticos SA De CV</option>
-              <option id='beneficiario'>Valle De Mixquiahuala</option>
-              <option id='beneficiario'>Vanguardia Gastronómica Presidente SA De CV</option>
-              <option id='beneficiario'>Verificación Ambiental De Hidalgo SACV</option>
-              <option id='beneficiario'>Verónica Pérez Reyes</option>
-              <option id='beneficiario'>VESALIUS SA DE CV</option>
-              <option id='beneficiario'>Vianey Vega Maldonado</option>
-              <option id='beneficiario'>Viaticum Valdespino SA De CV</option>
-              <option id='beneficiario'>Vicente Ruiz Tapia</option>
-              <option id='beneficiario'>Víctor Gerardo Zúñiga Aguirre</option>
-              <option id='beneficiario'>Víctor Hernández Gómez</option>
-              <option id='beneficiario'>Víctor Hugo Gallardo Garduño</option>
-              <option id='beneficiario'>Víctor Hugo Morgado Calva</option>
-              <option id='beneficiario'>VINIMED SA DE CV</option>
-              <option id='beneficiario'>Violeta Belen González Tapia</option>
-              <option id='beneficiario'>Vulcanizador Y Seccionadora</option>
-              <option id='beneficiario'>El Chacón</option>
-              <option id='beneficiario'>Vulcanizadora</option>
-              <option id='beneficiario'>Juan C. Doria</option>
-              <option id='beneficiario'>Vymec Fuego SA De CV</option>
-              <option id='beneficiario'>Wenceslao Sanchez Estrada</option>
-              <option id='beneficiario'>Xochil Zenteno Velasco</option>
-              <option id='beneficiario'>Yadira Del Carmen Sánchez Nanduca</option>
-              <option id='beneficiario'>Yahiti Silvia Mayorga González</option>
-              <option id='beneficiario'>Yamil Hernández García</option>
-              <option id='beneficiario'>Yessenia Zamora Soto</option>
-              <option id='beneficiario'>Yolanda Aragón Quiroz</option>
-              <option id='beneficiario'>Yolanda Felicitas Tenorio Vargas</option>
-              <option id='beneficiario'> Yolanda Samperio Delgadillo</option>
-              <option id='beneficiario'>Yuridia Laguna Peña</option>
-              <option id='beneficiario'>Zehidy Ortiz Granillo</option>
-              <option id='beneficiario'>Zoila Ángeles Tello</option>
-              <option id='beneficiario'>Zulema Anahí Contreras Vizzuet</option>
-            </select>
-          </div>
-          <div className='p-container-fondo'>
-            <p className='p-title-margin-fondo'>Descripcción</p>
-            <input className='input-style-fr'
-              id='descripcion'
-              required
-              ref={descripcion => this.inputDescripcion = descripcion}
-            />
-          </div>
-          <div className='p-container-fondo'>
-            <p className='p-title-margin-fondo'>Realizo</p>
-            <input className='input-style-fr'
-              id='realizo'
-              required
-              value={admin}
-              ref={realizo => this.inputRealizo = realizo}
-            />
-          </div>
-          <button className='bt-s' type='submit'>
-            Guadar
-          </button>
-        </form>
+        </div>
       </div>
     )
   }
