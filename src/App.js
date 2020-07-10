@@ -33,6 +33,14 @@ import ControlP from './components/controlp/ControlP';
 import Add from './components/controlp/Add';
 import Complemento from './components/complemento/Complemento';
 import Caratula from './components/miguel/caratula/Caratula';
+//pdf
+import Gasto from './components/Todospdf/FondoRevolvente/Gasto';
+import objetodegastoFR from './components/Todospdf/FondoRevolvente/objetodegastoFR';
+{/*import Recibo from './components/Todospdf/FondoRevolvente/Recibo';*/}
+{/*import Recibo from './components/Todospdf/FondoRevolvente/Rfr';*/}
+
+
+
 
 function App(props) {
   const { isAuthenticated, isVerifying } = props;
@@ -175,6 +183,40 @@ function App(props) {
         isAuthenticated={isAuthenticated}
         isVerifying={isVerifying}
       />
+
+      <ProtectedRoute
+        exact
+        path='/Gasto'
+        component={Gasto}
+        isAuthenticated={isAuthenticated}
+        isVerifying={isVerifying}
+      />
+      <ProtectedRoute
+        exact
+        path='/objetodegastoFR'
+        component={objetodegastoFR}
+        isAuthenticated={isAuthenticated}
+        isVerifying={isVerifying}
+      />
+
+      {/*}<ProtectedRoute
+        exact
+        path='/Recibo'
+        component={Recibo}
+        isAuthenticated={isAuthenticated}
+        isVerifying={isVerifying}
+      />*/}
+      {/*}<ProtectedRoute
+        exact
+        path='/Rfr'
+        component={Rfr}
+        isAuthenticated={isAuthenticated}
+        isVerifying={isVerifying}
+      />*/}
+
+
+
+
       <Route path='/edit/:id' component={Edit} />
       <Route path='/edita/:id' component={Edita} />
       <Route path='/Pdf/:id' component={Pdf} />
@@ -182,6 +224,13 @@ function App(props) {
       <Route path='/Frpdf/:id' component={Frpdf} />
       <Route path='/Cpdf/:id' component={Cpdf} />
       <Route path='/add/:id' component={Add} />
+      <Route path='/Gasto/:id' component={Gasto}/>
+      <Route path='/objetodegastoFR/:id' component={objetodegastoFR}/>
+      {/*}<Route path='/Recibo/: id' component={Recibo}/>*/}
+      {/*}<Route path='/Recibo/: id' component={Rfr                                                   }/>*/}
+
+
+
     </Switch>
   );
 }

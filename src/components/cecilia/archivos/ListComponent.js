@@ -4,9 +4,17 @@ import RowComponent from './RowComponent';
 import firebase from '../../../Firebase';
 
 export default class ListComponent extends Component {
+  constructor (props){
+    super(props);
+    this.state = {
+      caja:[],
+
+    };
+  }
   render() {
     return (
       <div>
+
         <div className='archivos-container'>
           <div className='table-left'>
           </div>
