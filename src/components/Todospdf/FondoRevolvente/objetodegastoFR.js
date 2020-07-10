@@ -13,41 +13,99 @@ export default class Gasto extends Component{
           <div class='title-so'>
             <h1 class='title'> SOLICITUD PROGRAMÁTICA DEL GASTO</h1>
           </div>
+
+        <div class='fadera'>
           <div class='contenedor-so'>
-                  <p>Gasto a Comprobar</p>
+            <div class='contenedor-1'>
+              <div class="interno">
+                <p class="text-so">Gasto a Comprobar</p>
+                <input class='input-so'/>
+              </div>
+              <div class="interno">
+                  <p class="text-so">Comprobación de gasto</p>
                   <input class='input-so'/>
-                  <p>Comprobación de gasto</p>
-                  <input class="w3-btn w3-blue-grey" />
-                  <p>Creación de fondo Revolvente</p>
-                  <input />
-                  <p>Fondo Revolvente</p>
-                  <input />
-                  <p>Cancelacion de Fondo Revolvente</p>
-                  <input />
-                  <p>Viaticos Anticipados</p>
-                  <input />
-                  <p>Viaticos Denegados</p>
-                  <input />
-                  <p>Comprobación de viaticos</p>
-                  <p>Viaticos al Extrangero</p>
-                  <input />
-                  <p>Validación de Objeto del gasto</p>
-                  <input />
-                  <p>Pago a Proveedores</p>
-                  <input />
-                  <p>Pago a Proveedores por Requisición</p>
-                  <input />
-                  <p>Transferencias</p>
-                  <input />
                   </div>
+                 </div>
+
+                 <div class='contenedor-1'>
+                 <div class="interno">
+                  <p class="text-so">Creación de fondo Revolvente</p>
+                  <input class='input-so' />
+                  </div>
+                  <div class="interno">
+                  <p class="text-so">Fondo Revolvente</p>
+                  <input class='input-so'/>
+                  </div>
+                  <div class="interno">
+                  <p class="text-so">Cancelacion de Fondo Revolvente</p>
+                  <input class='input-so'/>
+                  </div>
+                  </div>
+
+                  <div class='contenedor-1'>
+                  <div class="interno">
+                  <p class="text-so">Viaticos Anticipados</p>
+                  <input class='input-so'/>
+                  </div>
+                  <div class="interno">
+                  <p class="text-so">Viaticos Denegados</p>
+                  <input class='input-so'/>
+                  </div>
+                  <div class="interno">
+                  <p class="text-so">Comprobación de viaticos</p>
+                  <input class='input-so'/>
+                  </div>
+                  <div class="interno">
+                  <p class="text-so">Viaticos al Extrangero</p>
+                  <input class='input-so'/>
+                  </div>
+                  </div>
+
+                  <div class='contenedor-1'>
+                  <div class="interno">
+                  <p class="text-so">Validación de Objeto del gasto</p>
+                  <input class='input-so'/>
+                  </div>
+                  <div class="interno">
+                  <p class="text-so">Pago a Proveedores</p>
+                  <input class='input-so'/>
+                  </div>
+                  <div class="interno">
+                  <p class="text-so">Pago a Proveedores por Requisición</p>
+                  <input class='input-so'/>
+                  </div>
+                  <div class="interno">
+                  <p class="text-so">Transferencias</p>
+                  <input class='input-so'/>
+                  </div>
+                  </div>
+                  </div>
+                  </div>
+
+
+                  <div class="lineas-so">
                   <div>
-                  <p>Beneficiario</p>
-                  <p>Organo Superior</p>
-                  <p>undiad Presupuestal</p>
+                  <p>Beneficiario:</p>
+                  <p>Organo Superior:</p>
+                  <p>undiad Presupuestal:</p>
+                  </div>
+
+
+
                   <div>
                   <p>No. Folio</p>
-        </div>
+                  </div>
+                  </div>
 
+
+
+
+
+                  <div>
+
+
+
+                    <div>
            <div>
            <table>
            <tr>
@@ -126,6 +184,8 @@ export default class Gasto extends Component{
            </tr>
            </table>
            </div>
+           </div>
+
 
           </div>
           <div>

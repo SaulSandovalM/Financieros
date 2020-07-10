@@ -227,7 +227,7 @@ function App(props) {
       <Route path='/Gasto/:id' component={Gasto}/>
       <Route path='/objetodegastoFR/:id' component={objetodegastoFR}/>
       {/*}<Route path='/Recibo/: id' component={Recibo}/>*/}
-      {/*}<Route path='/Recibo/: id' component={Rfr                                                   }/>*/}
+      {/*}<Route path='/Recibo/: id' component={Rfr                                                   ------------------}/>*/}
 
 
 
