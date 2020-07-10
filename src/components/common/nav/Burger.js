@@ -1,6 +1,7 @@
 import React from 'react';
 import { bool, func } from 'prop-types';
 import { StyledBurger } from './Burger.styled';
+import firebase from '../../../Firebase';
 
 const Burger = ({ open, setOpen, ...props }) => {
 

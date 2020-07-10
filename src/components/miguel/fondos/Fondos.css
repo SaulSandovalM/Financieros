@@ -54,3 +54,9 @@
   flex-direction: column;
   height: 90vh;
 }
+.bt-s-f {
+  color: white;
+  background-color: green;
+  border: 0px;
+  padding: 6px;
+}
