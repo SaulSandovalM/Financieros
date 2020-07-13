@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
 import css from './pdfs.css';
+import lpgjh from '../../../img/logo-PGJH.jpg';
+import programa from '../../../img/logo.jpg';
 export default class Gasto extends Component{
     render(){
         return(
@@ -8,7 +10,11 @@ export default class Gasto extends Component{
           </p>
           </div>
           <div class='title-so'>
-            <h5 class='title'>SOLICITUD PROGRAMÁTICA DEL GASTO</h5>
+
+            <img class="pgjh" src={lpgjh} alt=''/>
+            <p>SOLICITUD PROGRAMÁTICA DEL GASTO</p>
+            <img class="ims" src={programa} alt=''/>
+
           </div>
 
         <div class='fadera'>
@@ -58,7 +64,7 @@ export default class Gasto extends Component{
                   </div>
                   </div>
 
-                  <div class='contenedor-1'>
+                <div class='contenedor-1'>
                   <div class="interno">
                   <p class="text-so">Validación de Objeto del gasto</p>
                   <input class='input-so'/>
@@ -80,116 +86,614 @@ export default class Gasto extends Component{
                   </div>
 
 
-                  <div class="lineas-so">
-
-                        <div>
-                        <div class='interno'>
-                        <p>Beneficiario:</p>
-                        <input class='input-so2' />
-                        </div>
-                        <div class='interno'>
-                        <p>Organo Superior:</p>
-                        <input class='input-so2' />
-                        </div>
-                        <div class='interno'>
-                        <p>undiad Presupuestal:</p>
-                        <input class='input-so2' />
-                        </div>
-                        </div>
-                        
-
-
-
-                  <div>
-                  <p>No. Folio</p>
-                  </div>
+                  <div class="padre-lineas">
+                    <div class="lineas-so">
+                          <div class='internos'>
+                            <p class='text-inte'>Beneficiario:</p>
+                              <input class='input-so2'/>
+                          </div>
+                          <div class='internos'>
+                            <p class='text-inte2'>Organo Superior:</p>
+                            <input class='input-so2' />
+                          </div>
+                          <div class='internos'>
+                            <p class='text-inte3'>undiad Presupuestal:</p>
+                            <input class='input-so2' />
+                            </div>
+                      </div>
+                      <div class="folio">
+                        <p>No. Folio</p>
+                        <input class='input-so3' />
+                      </div>
                   </div>
 
-
-
-
-
-                  <div>
-
-
-
-                    <div>
+          <div>
+          <div>
            <div>
            <table>
            <tr>
-           <td>Ramo</td>
-           <td>Año</td>
-           <td>OS</td>
-           <td>UP</td>
-           <td>Rubro de Ingreso</td>
-           <td>Tipo de Gasto</td>
-           <td>Objeto de un Gasto</td>
-           <td>Finalidad</td>
-           <td>Funcion</td>
-           <td>Subfunción</td>
-           <td>Eje Temático</td>
-           <td>Sector</td>
-           <td>Programa</td>
-           <td>bjetivo</td>
-           <td>Proyecto</td>
-           <td>Extrategia</td>
-           <td>Beneficiario</td>
-           <td>Espacio Geografico</td>
-           <td>Descripcion del objeto de Gasto</td>
-           <td>Monto</td>
+           <td className='all-tabla'>Ramo</td>
+           <td className='all-tabla'>Año</td>
+           <td className='all-tabla'>OS</td>
+           <td className='all-tabla'>UP</td>
+           <td className='all-tabla'>Rubro de Ingreso</td>
+           <td className='all-tabla'>Tipo de Gasto</td>
+           <td className='all-tabla'>Objeto de un Gasto</td>
+           <td className='all-tabla'>Finalidad</td>
+           <td className='all-tabla'>Funcion</td>
+           <td className='all-tabla'>Subfunción</td>
+           <td className='all-tabla'>Eje Temático</td>
+           <td className='all-tabla'>Sector</td>
+           <td className='all-tabla'>Programa</td>
+           <td className='all-tabla'>bjetivo</td>
+           <td className='all-tabla'>Proyecto</td>
+           <td className='all-tabla'>Extrategia</td>
+           <td className='all-tabla'>Beneficiario</td>
+           <td className='all-tabla'>Espacio Geografico</td>
+           <td className='dg-tabla all-tabla '>Descripcion del objeto de Gasto</td>
+           <td className='monto-tabla all-tabla'>Monto</td>
            </tr>
 
            <tr>
-           <td>1</td>
-           <td>1</td>
-           <td>1</td>
-           <td>1</td>
-           <td>1</td>
-           <td>1</td>
-           <td>1</td>
-           <td>1</td>
-           <td>1</td>
-           <td>1</td>
-           <td>1</td>
-           <td>1</td>
-           <td>1</td>
-           <td>1</td>
-           <td>1</td>
-           <td>1</td>
-           <td>1</td>
-           <td>1</td>
-           <td>1</td>
-           <td>1</td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
 
            </tr>
 
            <tr>
-           <td></td>
-           <td></td>
-           <td></td>
-           <td></td>
-           <td></td>
-           <td></td>
-           <td></td>
-           <td></td>
-           <td></td>
-           <td></td>
-           <td></td>
-           <td></td>
-           <td></td>
-           <td></td>
-           <td></td>
-           <td></td>
-           <td></td>
-           <td></td>
-
-           <td></td>
-           <td></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
            </tr>
 
            <tr>
-           <th> </th>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
            </tr>
+
+           <tr>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           </tr>
+
+           <tr>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           </tr>
+
+           <tr>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           </tr>
+           <tr>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           </tr>
+           <tr>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           </tr>
+           <tr>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           </tr>
+           <tr>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           </tr>
+           <tr>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           </tr><tr>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           </tr>
+           <tr>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           </tr>
+           <tr>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           </tr>
+           <tr>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           </tr>
+           <tr>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           </tr>
+           <tr>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           </tr>
+           <tr>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           </tr>
+           <tr>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           </tr>
+           <tr>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           </tr>
+           <tr>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           </tr>
+           <tr>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           </tr>
+           <tr>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           </tr>
+           <tr>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           </tr>
+
+           <tr>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           </tr>
+
+
+
+
            </table>
            </div>
            </div>

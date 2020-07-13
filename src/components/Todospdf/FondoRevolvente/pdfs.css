@@ -1,12 +1,5 @@
 /*pdf1*/
-.pgjh{
-      height: 50px;
-      width: 180px;
-}
-.ims{
-    height: 50px;
-    width: 50px;
-  }
+
 .fader-1{
       padding-top: 100px;
       padding-left: 100px;
@@ -118,9 +111,24 @@ th {
 
 }
 /* Todos los Pdf*/
+.pgjh{
+      height: 50px;
+      width: 180px;
+}
+.ims{
+    height: 50px;
+    width: 50px;
+  }
 .title-so{
-            margin-top:100px;
+            margin-top:30px;
             text-align: center;
+            display: flex;
+            justify-content: space-between;
+            padding-bottom: 10px;
+            padding-right: 50px;
+            padding-left: 30px;
+
+
 
 }
 .fadera{
@@ -163,8 +171,66 @@ th {
 
 }
 /*Fase 3 So*/
+
+.padre-lineas{
+  display:flex;
+  height: 110px;
+
+
+}
 .lineas-so{
-  padding-left: 50px;
+  padding-left: 60px;
   padding-right: 50px;
+
+}
+.internos{
+  display: flex;
+
+}
+.text-inte{
+  width: 50px;
+  margin-right: 102px;
+  margin-top: 0px;
+}
+.text-inte2{
   
+  margin-right: 38px;
+  margin-top: 0px;
+}
+.text-inte3{
+  margin-right: 13px;
+  margin-top: 0px;
+}
+.input-so2{
+  margin-top: 0px;
+  height: 15px;
+  width: 500px;
+}
+
+
+
+/* folio, en lineas*/
+.folio{
+
+  height: 50px;
+  border: 1px solid;
+  border-radius:10px;
+  display: flex;
+}
+.input-so3{
+  margin-top: 15px;
+  height: 15px;
+}
+/* Tabla*/
+.all-tabla{
+  font-size: 12px;
+  height: 10px;
+
+}
+.dg-tabla{
+  width: 500px;
+  height: 20px;
+}
+.monto-tabla{
+  width: 200px;
 }
