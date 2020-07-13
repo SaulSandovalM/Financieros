@@ -155,7 +155,7 @@ export default class Vales extends Component {
     var tot = cant1 - cant2;
 
     var today = new Date();
-    var meses =  [ 'Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic' ];
+    var meses =  [ '01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12' ];
     var f = new Date();
     today = f.getDate() + '/' + meses[f.getMonth()] + '/' + f.getFullYear();
     this.state.fecha = today;
@@ -216,7 +216,10 @@ export default class Vales extends Component {
                   Comprobado
                 </p>
                 <p className='p-bv'>
-                  Reintegro/Reembolso
+                  Reintegro
+                </p>
+                <p className='p-bv'>
+                  Reembolso
                 </p>
               </div>
               <div className='v-c'>
@@ -243,6 +246,12 @@ export default class Vales extends Component {
                   value={tot}
                   required
                   ref={cantidadr => this.inputCantidadr = cantidadr}
+                />
+                <input
+                  className='input-b'
+                  name='reembolso'
+                  required
+                  ref={reembolso => this.inputCantidadr = reembolso}
                 />
               </div>
               <div className='v-con'>
@@ -327,7 +336,7 @@ export default class Vales extends Component {
                       ref={sc => this.inputSC = sc}
                     />
                   </div>
-                  <div className='frsr-w-b' style={{borderLeft: '0px', borderRight: '0px'}}>
+                  {/*<div className='frsr-w-b' style={{borderLeft: '0px', borderRight: '0px'}}>
                     <p className='p-oat'>Reintegro Total</p>
                     <input
                       className='input-w'
@@ -336,7 +345,7 @@ export default class Vales extends Component {
                       value={this.state.reintegroT}
                       ref={reintegroT => this.inputReintegroT = reintegroT}
                     />
-                  </div>
+                  </div>*/}
                 </div>
               </div>
             </div>
@@ -352,10 +361,6 @@ export default class Vales extends Component {
                   <option id='autorizo'>Mtro.León Maximiliano Hernández Valdés</option>
                 </select>
                 <p className='font-size-f'>Autorizó</p>
-              </div>
-              <div className='f-fecha'>
-                <p className='b-fecha-ok'></p>
-                <p className='font-size-f'>Validado (NRL)</p>
               </div>
               <div className='f-fecha'>
                 <input

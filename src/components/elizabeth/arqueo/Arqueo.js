@@ -128,11 +128,11 @@ export default class Arqueo extends Component {
 
   render() {
 
-    let filterData = this.state.arqueo.filter(
-      (arqueo) => {
-        return arqueo.fecha.indexOf(this.state.search) !== -1;
-      }
-    );
+    // let filterData = this.state.arqueo.filter(
+    //   (arqueo) => {
+    //     return arqueo.fecha.indexOf(this.state.search) !== -1;
+    //   }
+    // );
 
     var today = new Date(),
     date = today.getDate() + '/' + (today.getMonth() + 1) + '/' + today.getFullYear() ;
@@ -557,49 +557,7 @@ export default class Arqueo extends Component {
             </div>
           </div>
         </div>
-        {
-          filterData.map(arqueo => (
-            <div className='table-arqueo-content'>
-              <div className='table-left'>
-              </div>
-              <div className='title-arqueo-se'>
-                <p className='p-mar-arqueo'>{arqueo.can1000}</p>
-              </div>
-              <div className='title-arqueo-se'>
-                <p className='p-mar-arqueo'>{arqueo.can500}</p>
-              </div>
-              <div className='title-arqueo-se'>
-                <p className='p-mar-arqueo'>{arqueo.can200}</p>
-              </div>
-              <div className='title-arqueo-se'>
-                <p className='p-mar-arqueo'>{arqueo.can100}</p>
-              </div>
-              <div className='title-arqueo-se'>
-                <p className='p-mar-arqueo'>{arqueo.can50}</p>
-              </div>
-              <div className='title-arqueo-se'>
-                <p className='p-mar-arqueo'>{arqueo.can20}</p>
-              </div>
-              <div className='title-arqueo-se'>
-                <p className='p-mar-arqueo'>{arqueo.can10}</p>
-              </div>
-              <div className='title-arqueo-se'>
-                <p className='p-mar-arqueo'>{arqueo.can5}</p>
-              </div>
-              <div className='title-arqueo-se'>
-                <p className='p-mar-arqueo'>{arqueo.can2}</p>
-              </div>
-              <div className='title-arqueo-se'>
-                <p className='p-mar-arqueo'>{arqueo.can1}</p>
-              </div>
-              <div className='title-arqueo-se'>
-                <p className='p-mar-arqueo'>{arqueo.can0}</p>
-              </div>
-              <div className='table-right'>
-              </div>
-            </div>
-          )).reverse()
-        }
+      
       </div>
     )
   }

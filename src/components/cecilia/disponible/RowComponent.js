@@ -15,16 +15,16 @@ export default class RowComponent extends Component {
       <div className='meses-container-row'>
         <div className='table-left'>
         </div>
-        <div className='table-meses-up'>
+        <div className='table-dis-up'>
           <p className='p-meses-row'>{this.props.item.up}</p>
         </div>
-        <div className='table-meses-up'>
+        <div className='table-dis-up'>
           <p className='p-meses-row'>{this.props.item.rubro}</p>
         </div>
-        <div className='table-meses-proy'>
+        <div className='table-dis-up'>
           <p className='p-meses-row'>{this.props.item.par}</p>
         </div>
-        <div className='table-meses-dis'>
+        <div className='table-dis-up'>
           <p className='p-meses-row'>{this.props.item.abr}</p>
         </div>
         <div className='table-right'>

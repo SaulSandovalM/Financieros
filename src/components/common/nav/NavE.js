@@ -49,19 +49,23 @@ class NavE extends Component {
             <h3 className='nav-t'>Cheques</h3>
           </Link>
         </div>
-        <div className='navbar-left'>
-          <Link to='/Vales' className='deco'>
+        <div className='navbar-left' onClick={this.toggleHidden.bind(this)}>
+          <div className='deco'>
             <h3 className='nav-t'>Vales</h3>
-          </Link>
+          </div>
           <img
             className='arrow'
             src={arrow}
-            onClick={this.toggleHidden.bind(this)}
             alt=''
           />
         </div>
         {!this.state.isHidden &&
           <div>
+            <div className='subnav'>
+              <Link to='/Vales' className='deco'>
+                <p className='nav-t'> &bull; Vale</p>
+              </Link>
+            </div>
             <div className='subnav'>
               <Link to='/ListValesA' className='deco'>
                 <p className='nav-t'> &bull; Vales Autorizados</p>
@@ -70,6 +74,11 @@ class NavE extends Component {
             <div className='subnav'>
               <Link to='/ListValesP' className='deco'>
                 <p className='nav-t'> &bull; Vales Pendientes</p>
+              </Link>
+            </div>
+            <div className='subnav'>
+              <Link to='/ListValesP' className='deco'>
+                <p className='nav-t'> &bull; Archivos Vales</p>
               </Link>
             </div>
           </div>
