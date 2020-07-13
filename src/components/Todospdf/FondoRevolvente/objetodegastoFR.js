@@ -5,13 +5,10 @@ export default class Gasto extends Component{
         return(
           <div>
           <div><p>
-          hola mundo
-          jhdfkjdfjkn
-          dfjkjdfhkjdfhgkdjfghkdfjhgdkfjgkdjfhgdkfjhkjfhkdfjhgdkjfhg mike puto
           </p>
           </div>
           <div class='title-so'>
-            <h1 class='title'> SOLICITUD PROGRAMÁTICA DEL GASTO</h1>
+            <h5 class='title'>SOLICITUD PROGRAMÁTICA DEL GASTO</h5>
           </div>
 
         <div class='fadera'>
@@ -84,11 +81,22 @@ export default class Gasto extends Component{
 
 
                   <div class="lineas-so">
-                  <div>
-                  <p>Beneficiario:</p>
-                  <p>Organo Superior:</p>
-                  <p>undiad Presupuestal:</p>
-                  </div>
+
+                        <div>
+                        <div class='interno'>
+                        <p>Beneficiario:</p>
+                        <input class='input-so2' />
+                        </div>
+                        <div class='interno'>
+                        <p>Organo Superior:</p>
+                        <input class='input-so2' />
+                        </div>
+                        <div class='interno'>
+                        <p>undiad Presupuestal:</p>
+                        <input class='input-so2' />
+                        </div>
+                        </div>
+                        
 
 
 

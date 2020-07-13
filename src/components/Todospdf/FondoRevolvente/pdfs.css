@@ -119,12 +119,12 @@ th {
 }
 /* Todos los Pdf*/
 .title-so{
-            margin:100px;
+            margin-top:100px;
             text-align: center;
 
 }
 .fadera{
-  padding: 25px 30px 10px 200px;
+  padding: 10px 30px 10px 200px;
 
 }
 .text-so{
@@ -165,8 +165,6 @@ th {
 /*Fase 3 So*/
 .lineas-so{
   padding-left: 50px;
-  display: flex;
-  justify-content: space-between;
-                                                                                                                                                      
-
+  padding-right: 50px;
+  
 }
