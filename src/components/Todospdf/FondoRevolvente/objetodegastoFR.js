@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import css from './pdfs.css';
-import lpgjh from '../../../img/logo-PGJH.jpg';
+import lpgjh from '../../../img/logo_hgo.png';
 import programa from '../../../img/logo.jpg';
 export default class Gasto extends Component{
     render(){
@@ -123,14 +123,14 @@ export default class Gasto extends Component{
            <td className='all-tabla'>Finalidad</td>
            <td className='all-tabla'>Funcion</td>
            <td className='all-tabla'>Subfunción</td>
-           <td className='all-tabla'>Eje Temático</td>
-           <td className='all-tabla'>Sector</td>
-           <td className='all-tabla'>Programa</td>
-           <td className='all-tabla'>Objetivo</td>
+           <td className='all-tabla'>Eje</td>
+           <td className='all-tabla'>Sect</td>
+           <td className='all-tabla'>Prog</td>
+           <td className='all-tabla'>Obj</td>
            <td className='all-tabla'>Proyecto</td>
-           <td className='all-tabla'>Extrategia</td>
-           <td className='all-tabla'>Beneficiario</td>
-           <td className='all-tabla'>Espacio Geografico</td>
+           <td className='all-tabla'>Ext</td>
+           <td className='all-tabla'>Ben</td>
+           <td className='all-tabla'>E Geo</td>
            <td className='dg-tabla all-tabla '>Descripcion del objeto de Gasto</td>
            <td className='monto-tabla all-tabla'>Monto</td>
            </tr>
@@ -632,40 +632,50 @@ export default class Gasto extends Component{
            </tr>
 
            <tr>
-           <td className='all-tabla'></td>
-           <td className='all-tabla'></td>
-           <td className='all-tabla'></td>
-           <td className='all-tabla'></td>
-           <td className='all-tabla'></td>
-           <td className='all-tabla'></td>
-           <td className='all-tabla'></td>
-           <td className='all-tabla'></td>
-           <td className='all-tabla'></td>
-           <td className='all-tabla'></td>
-           <td className='all-tabla'></td>
-           <td className='all-tabla'></td>
-           <td className='all-tabla'></td>
-           <td className='all-tabla'></td>
-           <td className='all-tabla'></td>
-           <td className='all-tabla'></td>
-           <td className='all-tabla'></td>
-           <td className='all-tabla'></td>
-           <td className='all-tabla'></td>
-
-
+           <td className='all-tabla  border-color'></td>
+           <td className='all-tabla  border-color'></td>
+           <td className='all-tabla  border-color'></td>
+           <td className='all-tabla  border-color'></td>
+           <td className='all-tabla  border-color'></td>
+           <td className='all-tabla  border-color'></td>
+           <td className='all-tabla  border-color'></td>
+           <td className='all-tabla  border-color'></td>
+           <td className='all-tabla  border-color'></td>
+           <td className='all-tabla  border-color'></td>
+           <td className='all-tabla  border-color'></td>
+           <td className='all-tabla  border-color'></td>
+           <td className='all-tabla  border-color'></td>
+           <td className='all-tabla  border-color'></td>
+           <td className='all-tabla  border-color'></td>
+           <td className='all-tabla  border-color'></td>
+           <td className='all-tabla  border-color'></td>
+           <td className='all-tabla  border-color'></td>
+           <td className='all-tabla border-color2'>RETENCION</td>
            <td className='all-tabla'></td>
            </tr>
-
-
-
+           <tr>
+           <td className='all-tabla  border-color'></td>
+           <td className='all-tabla  border-color'></td>
+           <td className='all-tabla  border-color'></td>
+           <td className='all-tabla  border-color'></td>
+           <td className='all-tabla  border-color'></td>
+           <td className='all-tabla  border-color'></td>
+           <td className='all-tabla  border-color'></td>
+           <td className='all-tabla  border-color'></td>
+           <td className='all-tabla  border-color'></td>
+           <td className='all-tabla  border-color'></td>
+           <td className='all-tabla  border-color'></td>
+           <td className='all-tabla  border-color'></td>
+           <td className='all-tabla  border-color'></td>
+           <td className='all-tabla  border-color'></td>
+           <td className='all-tabla  border-color'></td>
+           <td className='all-tabla  border-color'></td>
+           <td className='all-tabla  border-color'></td>
+           <td className='all-tabla  border-color'></td>
+           <td className='all-tabla  border-color' >Total</td>
+           <td className='all-tabla'></td>
+           </tr>
            </table>
-           </div>
-
-
-           </div>
-           <div className='padre-retenc'>
-           <div className='rentencion'>
-           <p>RETENCION</p>
            </div>
            </div>
 

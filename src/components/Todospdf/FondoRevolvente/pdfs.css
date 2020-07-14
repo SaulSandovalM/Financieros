@@ -262,6 +262,13 @@ th {
 .tablas-solas{
   padding-left: 100px;
 }
+.border-color{
+  border-left: white 1px;
+  border-right: white 1px ;
+  border-bottom: white 1px;
+  border-top: white 1px;
+
+}
 
 /*retencion*/
 .padre-retencion{
