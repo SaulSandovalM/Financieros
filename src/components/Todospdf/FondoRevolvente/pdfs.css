@@ -120,7 +120,7 @@ th {
     width: 50px;
   }
 .title-so{
-            margin-top:30px;
+            margin-top:20px;
             text-align: center;
             display: flex;
             justify-content: space-between;
@@ -132,7 +132,12 @@ th {
 
 }
 .fadera{
-  padding: 10px 30px 10px 200px;
+  padding-bottom: 10px;
+  padding-left: 100px;
+  padding-right: 100px;
+  display: flex;
+  justify-content: center;
+
 
 }
 .text-so{
@@ -141,7 +146,7 @@ th {
 
 }
 .contenedor-so{
-              padding-top:20px;
+              padding-top:10px;
               padding-left:20px;
               padding-right:20px;
               height: 80px;
@@ -174,31 +179,39 @@ th {
 
 .padre-lineas{
   display:flex;
-  height: 110px;
+  justify-content: center;
+  height: 80px;
+
+
+
+
 
 
 }
 .lineas-so{
-  padding-left: 60px;
-  padding-right: 50px;
+  width: 780px;
 
 }
 .internos{
   display: flex;
 
+
 }
 .text-inte{
   width: 50px;
-  margin-right: 102px;
+  margin-right: 72px;
   margin-top: 0px;
+  font-size: 11px;
 }
 .text-inte2{
-  
+
   margin-right: 38px;
   margin-top: 0px;
+  font-size: 11px;
 }
 .text-inte3{
-  margin-right: 13px;
+  margin-right: 18px;
+  font-size: 11px;
   margin-top: 0px;
 }
 .input-so2{
@@ -215,22 +228,85 @@ th {
   height: 50px;
   border: 1px solid;
   border-radius:10px;
+  padding-left: 30px;
+  padding-right: 30px;
   display: flex;
+
 }
 .input-so3{
   margin-top: 15px;
   height: 15px;
+  width: 50px;
+}
+.text-folio{
+    padding-top: 8px;
+    font-size: 11px;
 }
 /* Tabla*/
 .all-tabla{
-  font-size: 12px;
+  font-size: 8px;
   height: 10px;
 
 }
 .dg-tabla{
-  width: 500px;
+  width: 300px;
   height: 20px;
 }
 .monto-tabla{
+  width: 150px;
+}
+.tabla-so{
+  padding-left: 20px;
+  padding-right: 20px;
+}
+.tablas-solas{
+  padding-left: 100px;
+}
+
+/*retencion*/
+.padre-retencion{
+  margin:1px;
+}
+.rentencion{
+  padding: 0;
+border: solid 1px;
+}
+/* Observaciones*/
+.obs-sopadre{
+padding-left: 20px;
+padding-right: 20px;
+}
+.obs-so{
+
+  display: flex;
+ justify-content: space-between;
+}
+.input-obs{
+  font-size:8px;
+  width: 500px;
+  height: 15px;
+}
+.text-osb{
+  margin: 0px;
+}
+
+/*firmas*/
+.padre-firmas{
+  padding-left: 20px;
+  padding-right: 20px;
+  display: flex;
+  justify-content: space-between;
+  padding-top: 10px;
+}
+.firmas{
+  border:solid 1px;
+  border-radius: 10px;
   width: 200px;
+  height: 50px;
+
+}
+.text-firmas{
+  text-align: center;
+  margin-top:0px;
+
 }

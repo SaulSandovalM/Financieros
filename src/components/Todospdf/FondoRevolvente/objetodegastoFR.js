@@ -102,22 +102,23 @@ export default class Gasto extends Component{
                             </div>
                       </div>
                       <div class="folio">
-                        <p>No. Folio</p>
+                        <p className='text-folio'>No. Folio</p>
                         <input class='input-so3' />
                       </div>
+
                   </div>
 
           <div>
           <div>
-           <div>
-           <table>
+           <div class="tabla-so">
+           <table >
            <tr>
            <td className='all-tabla'>Ramo</td>
            <td className='all-tabla'>Año</td>
            <td className='all-tabla'>OS</td>
            <td className='all-tabla'>UP</td>
            <td className='all-tabla'>Rubro de Ingreso</td>
-           <td className='all-tabla'>Tipo de Gasto</td>
+           <td className='all-tabla'>TG</td>
            <td className='all-tabla'>Objeto de un Gasto</td>
            <td className='all-tabla'>Finalidad</td>
            <td className='all-tabla'>Funcion</td>
@@ -125,7 +126,7 @@ export default class Gasto extends Component{
            <td className='all-tabla'>Eje Temático</td>
            <td className='all-tabla'>Sector</td>
            <td className='all-tabla'>Programa</td>
-           <td className='all-tabla'>bjetivo</td>
+           <td className='all-tabla'>Objetivo</td>
            <td className='all-tabla'>Proyecto</td>
            <td className='all-tabla'>Extrategia</td>
            <td className='all-tabla'>Beneficiario</td>
@@ -360,49 +361,7 @@ export default class Gasto extends Component{
            <td className='all-tabla'></td>
            <td className='all-tabla'></td>
            </tr>
-           <tr>
-           <td className='all-tabla'></td>
-           <td className='all-tabla'></td>
-           <td className='all-tabla'></td>
-           <td className='all-tabla'></td>
-           <td className='all-tabla'></td>
-           <td className='all-tabla'></td>
-           <td className='all-tabla'></td>
-           <td className='all-tabla'></td>
-           <td className='all-tabla'></td>
-           <td className='all-tabla'></td>
-           <td className='all-tabla'></td>
-           <td className='all-tabla'></td>
-           <td className='all-tabla'></td>
-           <td className='all-tabla'></td>
-           <td className='all-tabla'></td>
-           <td className='all-tabla'></td>
-           <td className='all-tabla'></td>
-           <td className='all-tabla'></td>
-           <td className='all-tabla'></td>
-           <td className='all-tabla'></td>
-           </tr><tr>
-           <td className='all-tabla'></td>
-           <td className='all-tabla'></td>
-           <td className='all-tabla'></td>
-           <td className='all-tabla'></td>
-           <td className='all-tabla'></td>
-           <td className='all-tabla'></td>
-           <td className='all-tabla'></td>
-           <td className='all-tabla'></td>
-           <td className='all-tabla'></td>
-           <td className='all-tabla'></td>
-           <td className='all-tabla'></td>
-           <td className='all-tabla'></td>
-           <td className='all-tabla'></td>
-           <td className='all-tabla'></td>
-           <td className='all-tabla'></td>
-           <td className='all-tabla'></td>
-           <td className='all-tabla'></td>
-           <td className='all-tabla'></td>
-           <td className='all-tabla'></td>
-           <td className='all-tabla'></td>
-           </tr>
+
            <tr>
            <td className='all-tabla'></td>
            <td className='all-tabla'></td>
@@ -425,50 +384,8 @@ export default class Gasto extends Component{
            <td className='all-tabla'></td>
            <td className='all-tabla'></td>
            </tr>
-           <tr>
-           <td className='all-tabla'></td>
-           <td className='all-tabla'></td>
-           <td className='all-tabla'></td>
-           <td className='all-tabla'></td>
-           <td className='all-tabla'></td>
-           <td className='all-tabla'></td>
-           <td className='all-tabla'></td>
-           <td className='all-tabla'></td>
-           <td className='all-tabla'></td>
-           <td className='all-tabla'></td>
-           <td className='all-tabla'></td>
-           <td className='all-tabla'></td>
-           <td className='all-tabla'></td>
-           <td className='all-tabla'></td>
-           <td className='all-tabla'></td>
-           <td className='all-tabla'></td>
-           <td className='all-tabla'></td>
-           <td className='all-tabla'></td>
-           <td className='all-tabla'></td>
-           <td className='all-tabla'></td>
-           </tr>
-           <tr>
-           <td className='all-tabla'></td>
-           <td className='all-tabla'></td>
-           <td className='all-tabla'></td>
-           <td className='all-tabla'></td>
-           <td className='all-tabla'></td>
-           <td className='all-tabla'></td>
-           <td className='all-tabla'></td>
-           <td className='all-tabla'></td>
-           <td className='all-tabla'></td>
-           <td className='all-tabla'></td>
-           <td className='all-tabla'></td>
-           <td className='all-tabla'></td>
-           <td className='all-tabla'></td>
-           <td className='all-tabla'></td>
-           <td className='all-tabla'></td>
-           <td className='all-tabla'></td>
-           <td className='all-tabla'></td>
-           <td className='all-tabla'></td>
-           <td className='all-tabla'></td>
-           <td className='all-tabla'></td>
-           </tr>
+
+
            <tr>
            <td className='all-tabla'></td>
            <td className='all-tabla'></td>
@@ -668,6 +585,29 @@ export default class Gasto extends Component{
            <td className='all-tabla'></td>
            </tr>
 
+
+           <tr>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           </tr>
            <tr>
            <td className='all-tabla'></td>
            <td className='all-tabla'></td>
@@ -691,18 +631,62 @@ export default class Gasto extends Component{
            <td className='all-tabla'></td>
            </tr>
 
+           <tr>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+           <td className='all-tabla'></td>
+
+
+           <td className='all-tabla'></td>
+           </tr>
 
 
 
            </table>
            </div>
+
+
+           </div>
+           <div className='padre-retenc'>
+           <div className='rentencion'>
+           <p>RETENCION</p>
+           </div>
            </div>
 
-
           </div>
-          <div>
-          <p>Observaciones </p>
-          <p> No. De Solicitud</p>
+          <div className='obs-sopadre'>
+          <div className='obs-so'>
+          <p className='text-osb'>Observaciones </p>
+          <input className='input-obs'/>
+          <p className='text-osb'> No. De Solicitud</p>
+          <input/>
+          </div>
+          </div>
+
+
+          <div className='padre-firmas'>
+          <div className='firmas' >
+          <p className='text-firmas'>Elaboro</p>
+          </div>
+          <div className='firmas'>
+          <p className='text-firmas'>Reviso</p>
+          </div>
           </div>
           </div>
 
