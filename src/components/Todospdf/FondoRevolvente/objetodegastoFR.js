@@ -31,10 +31,10 @@ export default class Gasto extends Component{
                  </div>
 
                  <div className='contenedor-1'>
-                 <div className="interno">
-                  <p className="text-so">Creación de fondo Revolvente</p>
-                  <input className='input-so' />
-                  </div>
+                      <div className="interno">
+                        <p className="text-so">Creación de fondo Revolvente</p>
+                        <input className='input-so' />
+                      </div>
                   <div className="interno">
                   <p className="text-so">Fondo Revolvente</p>
                   <input className='input-so'/>

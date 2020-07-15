@@ -184,12 +184,6 @@ th {
   display:flex;
   justify-content: center;
   height: 80px;
-
-
-
-
-
-
 }
 .lineas-so{
   width: 780px;
@@ -197,8 +191,6 @@ th {
 }
 .internos{
   display: flex;
-
-
 }
 .text-inte{
   width: 50px;
@@ -274,7 +266,7 @@ th {
 }
 .text-rete{
   font-size: 8px;
-  text-align:left; 
+  text-align:left;
 
 }
 
@@ -339,5 +331,34 @@ justify-content:center;
   text-align: center;
   margin-top:0px;
   font-size: 10px;
+}
 
+/*Pdf gastp*/
+.title-ga{
+
+   display: flex;
+   justify-content: space-between;
+   margin-top:20px;
+   text-align: center;
+   display: flex;
+   padding-bottom: 10px;
+   padding-right: 50px;
+   padding-left: 30px;
+}
+.faderinp{
+  padding-bottom: 10px;
+  padding-left: 100px;
+  padding-right: 100px;
+  display: flex;
+  justify-content: center;
+}
+.contenedor-ga{
+  padding-top:10px;
+  padding-left:20px;
+  padding-right:20px;
+  height: 150px;
+  width: 1700px;
+  border: 1px solid;
+  display: flex;
+  justify-content: space-between;
 }
