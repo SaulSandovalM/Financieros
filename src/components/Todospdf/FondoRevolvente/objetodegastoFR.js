@@ -131,7 +131,7 @@ export default class Gasto extends Component{
            <td className='all-tabla'>Ext</td>
            <td className='all-tabla'>Ben</td>
            <td className='all-tabla'>E Geo</td>
-           <td className='dg-tabla all-tabla '>Descripcion del objeto de Gasto</td>
+           <td className='dg-tabla all-tabla'>Descripcion del objeto de Gasto</td>
            <td className='monto-tabla all-tabla'>Monto</td>
            </tr>
 
@@ -681,23 +681,27 @@ export default class Gasto extends Component{
 
           </div>
           <div className='obs-sopadre'>
-          <div className='obs-so'>
-          <p className='text-osb'>Observaciones </p>
-          <input className='input-obs'/>
-          <p className='text-osb'> No. De Solicitud</p>
-          <input/>
+                <div className='obs-so'>
+                  <p className='text-osb'>Observaciones </p>
+                  <input className='input-obs'/>
+                <div className='obs-so2'>
+                <p className='text-osb'> No. De Solicitud</p>
+                <input/>
+          </div>
           </div>
           </div>
 
 
           <div className='padre-firmas'>
-          <div className='firmas' >
-          <p className='text-firmas'>Elaboro</p>
+              <div className='firmas' >
+                <p className='text-firmas'>Elaboro</p>
+                </div>
+              <div className='firmas'>
+                <p className='text-firmas'>Reviso</p>
+                </div>
           </div>
-          <div className='firmas'>
-          <p className='text-firmas'>Reviso</p>
-          </div>
-          </div>
+
+
           </div>
 
 
