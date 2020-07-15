@@ -122,7 +122,7 @@ export default class Caja extends Component {
           <div className='color-s'>
             {this.state.movimientos.map(movimientos =>
               <div>
-                {this.state.buscador === movimientos.personaR &&
+                {this.state.buscador === movimientos.fecha &&
                   <div className='banco-inputs-list'>
                     <div className='table-left'>
                     </div>

@@ -119,7 +119,7 @@ export default class Vales extends Component {
         && params.turno && params.factura && params.recibos && params.sc
         && params.reintegroT && params.autorizo && params.personaR
         && params.estatus && params.fecha ) {
-      var f = parseInt(params.cantidad);
+      var f = parseInt(params.cantidadc);
       const statsRef = firebase.firestore().collection('caja').doc('--stats--');
       const increment = firebase.firestore.FieldValue.increment(-f);
       const batch = firebase.firestore().batch();

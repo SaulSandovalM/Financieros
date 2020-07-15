@@ -32,19 +32,22 @@ export default class ListAuto extends Component {
             <b># C</b>
           </div>
           <div class='table-v-num'>
-            <b>AUTORIZADO</b>
+            <b>AUTO</b>
           </div>
           <div class='table-v-num'>
-            <b>COMPROMETIDO</b>
+            <b>COMP</b>
           </div>
           <div class='table-v-num'>
-            <b>REEMBOLSO</b>
+            <b>REEM</b>
           </div>
           <div class='table-v-num'>
-            <b>CONCEPTO</b>
+            <b>REINTEGRO</b>
           </div>
           <div class='table-v-num'>
-            <b>OFICIO S</b>
+            <b>CONC</b>
+          </div>
+          <div class='table-v-num'>
+            <b>OS</b>
           </div>
           <div class='table-v-num'>
             <b>AREA</b>
@@ -60,9 +63,6 @@ export default class ListAuto extends Component {
           </div>
           <div class='table-v-num'>
             <b>S/C</b>
-          </div>
-          <div class='table-v-num'>
-            <b>REINTEGRO</b>
           </div>
           <div class='table-v-num'>
             <b>FECHA</b>

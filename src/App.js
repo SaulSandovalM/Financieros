@@ -21,6 +21,7 @@ import Cheques from './components/elizabeth/cheques/Cheques';
 import Vales from './components/elizabeth/vales/Vales';
 import ListValesP from './components/elizabeth/listavales/ListValesP';
 import ListValesA from './components/elizabeth/listavales/ListValesA';
+import ListArchivosV from './components/elizabeth/listavales/ListArchivosV';
 import Autorizacion from './components/elizabeth/autorizacion/Autorizacion';
 import Arqueo from './components/elizabeth/arqueo/Arqueo';
 //Parte de Miguel
@@ -148,6 +149,13 @@ function App(props) {
         exact
         path='/ListValesA'
         component={ListValesA}
+        isAuthenticated={isAuthenticated}
+        isVerifying={isVerifying}
+      />
+      <ProtectedRoute
+        exact
+        path='/ListArchivosV'
+        component={ListArchivosV}
         isAuthenticated={isAuthenticated}
         isVerifying={isVerifying}
       />

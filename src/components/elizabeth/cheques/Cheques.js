@@ -234,20 +234,6 @@ export default class Cheques extends Component {
     }
   }
 
-  update = (item) => {
-    let updates = {};
-    updates['cheques/' + item.id] = {
-      numCheque: item.numCheque,
-      importe: item.importe,
-      fechaE: item.fechaE,
-      dirigido: item.dirigido,
-      fechaC: item.fechaC,
-      archivo: this.state.archivo,
-      fileUpdate: this.state.fileUpdate
-    };
-    firebase.database().ref().update(updates);
-  }
-
   render() {
     return (
       <div className='container-back-cheques'>
@@ -373,32 +359,10 @@ export default class Cheques extends Component {
           <div className='p-margin'>
             <p className='p-title-size'>- Movimientos</p>
           </div>
-          <div className='update'>
-            <p className='p-cheque'><b>Archivo Actualizado</b></p>
-            <Dropzone
-              style={{
-                position: 'static',
-                width: '100%',
-                height: '29px',
-                borderWidth: '1px',
-                borderColor: '#a9a9a9',
-                borderStyle: 'solid',
-                background: 'white',
-              }}
-              accept=".pdf" onChange={this.updateUpload.bind(this)}>
-              <div className='filename'>
-                <p className='file-hid'>{this.state.fileUpdate}</p>
-              </div>
-            </Dropzone>
-            <progress className='progress' value={this.state.update} max='100'>
-              {this.state.update} %
-            </progress>
-          </div>
           <div className='cheques-w'>
             <div className='cheques-col'>
               <ListComponent
                 lista={this.state.lista}
-                update={this.update}
               />
             </div>
           </div>

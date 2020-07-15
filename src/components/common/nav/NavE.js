@@ -77,7 +77,7 @@ class NavE extends Component {
               </Link>
             </div>
             <div className='subnav'>
-              <Link to='/ListValesP' className='deco'>
+              <Link to='/ListArchivosV' className='deco'>
                 <p className='nav-t'> &bull; Archivos Vales</p>
               </Link>
             </div>

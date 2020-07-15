@@ -128,15 +128,15 @@ export default class Arqueo extends Component {
 
   render() {
 
-    // let filterData = this.state.arqueo.filter(
-    //   (arqueo) => {
-    //     return arqueo.fecha.indexOf(this.state.search) !== -1;
-    //   }
-    // );
+    let filterData = this.state.arqueo.filter(
+      (arqueo) => {
+        return arqueo.fecha.indexOf(this.state.search) !== -1;
+      }
+    );
 
     var today = new Date(),
     date = today.getDate() + '/' + (today.getMonth() + 1) + '/' + today.getFullYear() ;
-    this.state.fecha = today;
+    this.state.fecha = date;
 
     return (
       <div className='pf-container'>
@@ -166,83 +166,6 @@ export default class Arqueo extends Component {
               />
             </div>
           </div>
-
-          {/*<div className='arqueo-col'>
-            <div className='arqueo-content2'>
-              <div className='table-arqueo'>
-                <div className='tipo-arqueo'>
-                </div>
-                <div className='table-left'>
-                </div>
-                <div className='title-arqueo2'>
-                  <p className='p-mar-arqueo'><b>ARQUEO</b></p>
-                </div>
-                <div className='title-arqueo2'>
-                  <p className='p-mar-arqueo'><b>TEÓRICO</b></p>
-                </div>
-                <div className='title-arqueo2'>
-                  <p className='p-mar-arqueo'><b>DIFERENCIA</b></p>
-                </div>
-                <div className='table-right'>
-                </div>
-              </div>
-
-              <div className='data-arqueo'>
-                <div className='tipo-arqueo'>
-                  Efectivo
-                </div>
-                <div className='table-left'>
-                </div>
-                <div className='title-arqueo'>
-                  <p className='p-mar-arqueo'>$</p>
-                </div>
-                <div className='title-arqueo'>
-                  <p className='p-mar-arqueo'>$</p>
-                </div>
-                <div className='title-arqueo'>
-                  <p className='p-mar-arqueo'>$</p>
-                </div>
-                <div className='table-right'>
-                </div>
-              </div>
-              <div className='data-arqueo'>
-                <div className='tipo-arqueo'>
-                  Vales
-                </div>
-                <div className='table-left'>
-                </div>
-                <div className='title-arqueo'>
-                  <p className='p-mar-arqueo'>$</p>
-                </div>
-                <div className='title-arqueo'>
-                  <p className='p-mar-arqueo'>$</p>
-                </div>
-                <div className='title-arqueo'>
-                  <p className='p-mar-arqueo'>$</p>
-                </div>
-                <div className='table-right'>
-                </div>
-              </div>
-              <div className='data-arqueo'>
-                <div className='tipo-arqueo'>
-                  Arqueo Total
-                </div>
-                <div className='table-left'>
-                </div>
-                <div className='title-arqueo'>
-                  <p className='p-mar-arqueo'>$</p>
-                </div>
-                <div className='title-arqueo'>
-                  <p className='p-mar-arqueo'>$</p>
-                </div>
-                <div className='title-arqueo'>
-                  <p className='p-mar-arqueo'>$</p>
-                </div>
-                <div className='table-right'>
-                </div>
-              </div>
-            </div>
-          </div>*/}
         </div>
 
         <div className='botones-arqueo'>
@@ -506,15 +429,7 @@ export default class Arqueo extends Component {
           </Popup>
         </div>
 
-        <div className='p-container-ifr2'>
-          <p className='p-title-margin-fr'>Buscador</p>
-          <input
-            className='input-style-fr'
-            type="text"
-            value={this.state.search}
-            onChange={this.updateSearch.bind(this)}
-          />
-        </div>
+        <input type="text" value={this.state.search} onChange={this.updateSearch.bind(this)}/>
 
         <div className='table-arqueo-search'>
           <div className='table-arqueo-content'>
@@ -557,7 +472,49 @@ export default class Arqueo extends Component {
             </div>
           </div>
         </div>
-      
+        {
+          filterData.map(arqueo => (
+            <div className='table-arqueo-content'>
+              <div className='table-left'>
+              </div>
+              <div className='title-arqueo-se'>
+                <p className='p-mar-arqueo'>{arqueo.can1000}</p>
+              </div>
+              <div className='title-arqueo-se'>
+                <p className='p-mar-arqueo'>{arqueo.can500}</p>
+              </div>
+              <div className='title-arqueo-se'>
+                <p className='p-mar-arqueo'>{arqueo.can200}</p>
+              </div>
+              <div className='title-arqueo-se'>
+                <p className='p-mar-arqueo'>{arqueo.can100}</p>
+              </div>
+              <div className='title-arqueo-se'>
+                <p className='p-mar-arqueo'>{arqueo.can50}</p>
+              </div>
+              <div className='title-arqueo-se'>
+                <p className='p-mar-arqueo'>{arqueo.can20}</p>
+              </div>
+              <div className='title-arqueo-se'>
+                <p className='p-mar-arqueo'>{arqueo.can10}</p>
+              </div>
+              <div className='title-arqueo-se'>
+                <p className='p-mar-arqueo'>{arqueo.can5}</p>
+              </div>
+              <div className='title-arqueo-se'>
+                <p className='p-mar-arqueo'>{arqueo.can2}</p>
+              </div>
+              <div className='title-arqueo-se'>
+                <p className='p-mar-arqueo'>{arqueo.can1}</p>
+              </div>
+              <div className='title-arqueo-se'>
+                <p className='p-mar-arqueo'>{arqueo.can0}</p>
+              </div>
+              <div className='table-right'>
+              </div>
+            </div>
+          )).reverse()
+        }
       </div>
     )
   }
