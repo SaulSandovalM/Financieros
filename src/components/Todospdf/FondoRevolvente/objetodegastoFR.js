@@ -9,108 +9,108 @@ export default class Gasto extends Component{
           <div><p>
           </p>
           </div>
-          <div class='title-so'>
+          <div className='title-so'>
 
-            <img class="pgjh" src={lpgjh} alt=''/>
+            <img className="pgjh" src={lpgjh} alt=''/>
             <p>SOLICITUD PROGRAMÁTICA DEL GASTO</p>
-            <img class="ims" src={programa} alt=''/>
+            <img className="ims" src={programa} alt=''/>
 
           </div>
 
-        <div class='fadera'>
-          <div class='contenedor-so'>
-            <div class='contenedor-1'>
-              <div class="interno">
-                <p class="text-so">Gasto a Comprobar</p>
-                <input class='input-so'/>
+        <div className='fadera'>
+          <div className='contenedor-so'>
+            <div className='contenedor-1'>
+              <div className="interno">
+                <p className="text-so">Gasto a Comprobar</p>
+                <input className='input-so'/>
               </div>
-              <div class="interno">
-                  <p class="text-so">Comprobación de gasto</p>
-                  <input class='input-so'/>
+              <div className="interno">
+                  <p className="text-so">Comprobación de gasto</p>
+                  <input className='input-so'/>
                   </div>
                  </div>
 
-                 <div class='contenedor-1'>
-                 <div class="interno">
-                  <p class="text-so">Creación de fondo Revolvente</p>
-                  <input class='input-so' />
+                 <div className='contenedor-1'>
+                 <div className="interno">
+                  <p className="text-so">Creación de fondo Revolvente</p>
+                  <input className='input-so' />
                   </div>
-                  <div class="interno">
-                  <p class="text-so">Fondo Revolvente</p>
-                  <input class='input-so'/>
+                  <div className="interno">
+                  <p className="text-so">Fondo Revolvente</p>
+                  <input className='input-so'/>
                   </div>
-                  <div class="interno">
-                  <p class="text-so">Cancelacion de Fondo Revolvente</p>
-                  <input class='input-so'/>
-                  </div>
-                  </div>
-
-                  <div class='contenedor-1'>
-                  <div class="interno">
-                  <p class="text-so">Viaticos Anticipados</p>
-                  <input class='input-so'/>
-                  </div>
-                  <div class="interno">
-                  <p class="text-so">Viaticos Denegados</p>
-                  <input class='input-so'/>
-                  </div>
-                  <div class="interno">
-                  <p class="text-so">Comprobación de viaticos</p>
-                  <input class='input-so'/>
-                  </div>
-                  <div class="interno">
-                  <p class="text-so">Viaticos al Extrangero</p>
-                  <input class='input-so'/>
+                  <div className="interno">
+                  <p className="text-so">Cancelacion de Fondo Revolvente</p>
+                  <input className='input-so'/>
                   </div>
                   </div>
 
-                <div class='contenedor-1'>
-                  <div class="interno">
-                  <p class="text-so">Validación de Objeto del gasto</p>
-                  <input class='input-so'/>
+                  <div className='contenedor-1'>
+                  <div className="interno">
+                  <p className="text-so">Viaticos Anticipados</p>
+                  <input className='input-so'/>
                   </div>
-                  <div class="interno">
-                  <p class="text-so">Pago a Proveedores</p>
-                  <input class='input-so'/>
+                  <div className="interno">
+                  <p className="text-so">Viaticos Denegados</p>
+                  <input className='input-so'/>
                   </div>
-                  <div class="interno">
-                  <p class="text-so">Pago a Proveedores por Requisición</p>
-                  <input class='input-so'/>
+                  <div className="interno">
+                  <p className="text-so">Comprobación de viaticos</p>
+                  <input className='input-so'/>
                   </div>
-                  <div class="interno">
-                  <p class="text-so">Transferencias</p>
-                  <input class='input-so'/>
+                  <div className="interno">
+                  <p className="text-so">Viaticos al Extrangero</p>
+                  <input className='input-so'/>
+                  </div>
+                  </div>
+
+                <div className='contenedor-1'>
+                  <div className="interno">
+                  <p className="text-so">Validación de Objeto del gasto</p>
+                  <input className='input-so'/>
+                  </div>
+                  <div className="interno">
+                  <p className="text-so">Pago a Proveedores</p>
+                  <input className='input-so'/>
+                  </div>
+                  <div className="interno">
+                  <p className="text-so">Pago a Proveedores por Requisición</p>
+                  <input className='input-so'/>
+                  </div>
+                  <div className="interno">
+                  <p className="text-so">Transferencias</p>
+                  <input className='input-so'/>
                   </div>
                   </div>
                   </div>
                   </div>
 
 
-                  <div class="padre-lineas">
-                    <div class="lineas-so">
-                          <div class='internos'>
-                            <p class='text-inte'>Beneficiario:</p>
-                              <input class='input-so2'/>
+                  <div className="padre-lineas">
+                    <div className="lineas-so">
+                          <div className='internos'>
+                            <p className='text-inte'>Beneficiario:</p>
+                              <input className='input-so2'/>
                           </div>
-                          <div class='internos'>
-                            <p class='text-inte2'>Organo Superior:</p>
-                            <input class='input-so2' />
+                          <div className='internos'>
+                            <p className='text-inte2'>Organo Superior:</p>
+                            <input className='input-so2' />
                           </div>
-                          <div class='internos'>
-                            <p class='text-inte3'>undiad Presupuestal:</p>
-                            <input class='input-so2' />
+                          <div className='internos'>
+                            <p className='text-inte3'>undiad Presupuestal:</p>
+                            <input className='input-so2' />
                             </div>
                       </div>
-                      <div class="folio">
+                      <div className="folio">
                         <p className='text-folio'>No. Folio</p>
-                        <input class='input-so3' />
+                        <input className='input-so3' />
                       </div>
 
                   </div>
 
           <div>
           <div>
-           <div class="tabla-so">
+           <div className="tabla-so">
            <table >
            <tr>
            <td className='all-tabla'>Ramo</td>
@@ -650,7 +650,7 @@ export default class Gasto extends Component{
            <td className='all-tabla  border-color'></td>
            <td className='all-tabla  border-color'></td>
            <td className='all-tabla  border-color'></td>
-           <td className='all-tabla border-color2'>RETENCION</td>
+           <td className='all-tabla border-color2 text-rete'>RETENCION</td>
            <td className='all-tabla'></td>
            </tr>
            <tr>
@@ -672,7 +672,7 @@ export default class Gasto extends Component{
            <td className='all-tabla  border-color'></td>
            <td className='all-tabla  border-color'></td>
            <td className='all-tabla  border-color'></td>
-           <td className='all-tabla  border-color' >Total</td>
+           <td className='all-tabla  border-color text-rete ' >Total</td>
            <td className='all-tabla'></td>
            </tr>
            </table>

@@ -272,6 +272,11 @@ th {
   border-top: white 1px;
 
 }
+.text-rete{
+  font-size: 8px;
+  text-align:left; 
+
+}
 
 /*retencion*/
 .padre-retencion{
