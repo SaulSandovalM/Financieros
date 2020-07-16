@@ -173,7 +173,7 @@ export default class Arqueo extends Component {
             trigger={<button className='margin-buton-ar'>Agregar</button>}
             modal
             closeOnDocumentClick>
-            <form onSubmit={this.sendMessage.bind(this)} className='arqueo-container' ref='contactForm'>
+            <form onSubmit={this.sendMessage.bind(this)} ref='contactForm'>
               <div className='arqueo-content-pop'>
                 <div className='table-arqueo-pop'>
                   <div className='table-left'>
@@ -422,99 +422,107 @@ export default class Arqueo extends Component {
                   </div>
                 </div>
               </div>
-              <div>
-                <button type='submit' className='input-sc boton-g'>Agregar</button>
+              <div className='botones-arqueo'>
+                <button type='submit' className='margin-buton-ar'>Agregar</button>
               </div>
             </form>
           </Popup>
         </div>
 
-        <input type="text" value={this.state.search} onChange={this.updateSearch.bind(this)}/>
-
-        <div className='table-arqueo-search'>
-          <div className='table-arqueo-content'>
-            <div className='table-left'>
-            </div>
-            <div className='title-arqueo-se'>
-              <p className='p-mar-arqueo'><b>1000</b></p>
-            </div>
-            <div className='title-arqueo-se'>
-              <p className='p-mar-arqueo'><b>500</b></p>
-            </div>
-            <div className='title-arqueo-se'>
-              <p className='p-mar-arqueo'><b>200</b></p>
-            </div>
-            <div className='title-arqueo-se'>
-              <p className='p-mar-arqueo'><b>100</b></p>
-            </div>
-            <div className='title-arqueo-se'>
-              <p className='p-mar-arqueo'><b>50</b></p>
-            </div>
-            <div className='title-arqueo-se'>
-              <p className='p-mar-arqueo'><b>20</b></p>
-            </div>
-            <div className='title-arqueo-se'>
-              <p className='p-mar-arqueo'><b>10</b></p>
-            </div>
-            <div className='title-arqueo-se'>
-              <p className='p-mar-arqueo'><b>5</b></p>
-            </div>
-            <div className='title-arqueo-se'>
-              <p className='p-mar-arqueo'><b>2</b></p>
-            </div>
-            <div className='title-arqueo-se'>
-              <p className='p-mar-arqueo'><b>1</b></p>
-            </div>
-            <div className='title-arqueo-se'>
-              <p className='p-mar-arqueo'><b>0.5</b></p>
-            </div>
-            <div className='table-right'>
-            </div>
+        <div className='sear-content'>
+          <div className='p-container-ifr2'>
+            <p className='p-title-margin-fr'>Ingresa la fecha a buscar</p>
+            <input
+              className='input-style-fr'
+              value={this.state.search} onChange={this.updateSearch.bind(this)}
+            />
           </div>
-        </div>
-        {
-          filterData.map(arqueo => (
+
+          <div className='table-arqueo-search'>
             <div className='table-arqueo-content'>
               <div className='table-left'>
               </div>
               <div className='title-arqueo-se'>
-                <p className='p-mar-arqueo'>{arqueo.can1000}</p>
+                <p className='p-mar-arqueo'><b>1000</b></p>
               </div>
               <div className='title-arqueo-se'>
-                <p className='p-mar-arqueo'>{arqueo.can500}</p>
+                <p className='p-mar-arqueo'><b>500</b></p>
               </div>
               <div className='title-arqueo-se'>
-                <p className='p-mar-arqueo'>{arqueo.can200}</p>
+                <p className='p-mar-arqueo'><b>200</b></p>
               </div>
               <div className='title-arqueo-se'>
-                <p className='p-mar-arqueo'>{arqueo.can100}</p>
+                <p className='p-mar-arqueo'><b>100</b></p>
               </div>
               <div className='title-arqueo-se'>
-                <p className='p-mar-arqueo'>{arqueo.can50}</p>
+                <p className='p-mar-arqueo'><b>50</b></p>
               </div>
               <div className='title-arqueo-se'>
-                <p className='p-mar-arqueo'>{arqueo.can20}</p>
+                <p className='p-mar-arqueo'><b>20</b></p>
               </div>
               <div className='title-arqueo-se'>
-                <p className='p-mar-arqueo'>{arqueo.can10}</p>
+                <p className='p-mar-arqueo'><b>10</b></p>
               </div>
               <div className='title-arqueo-se'>
-                <p className='p-mar-arqueo'>{arqueo.can5}</p>
+                <p className='p-mar-arqueo'><b>5</b></p>
               </div>
               <div className='title-arqueo-se'>
-                <p className='p-mar-arqueo'>{arqueo.can2}</p>
+                <p className='p-mar-arqueo'><b>2</b></p>
               </div>
               <div className='title-arqueo-se'>
-                <p className='p-mar-arqueo'>{arqueo.can1}</p>
+                <p className='p-mar-arqueo'><b>1</b></p>
               </div>
               <div className='title-arqueo-se'>
-                <p className='p-mar-arqueo'>{arqueo.can0}</p>
+                <p className='p-mar-arqueo'><b>0.5</b></p>
               </div>
               <div className='table-right'>
               </div>
             </div>
-          )).reverse()
-        }
+          </div>
+          {
+            filterData.map(arqueo => (
+              <div className='table-arqueo-content'>
+                <div className='table-left'>
+                </div>
+                <div className='title-arqueo-se'>
+                  <p className='p-mar-arqueo'>{arqueo.can1000}</p>
+                </div>
+                <div className='title-arqueo-se'>
+                  <p className='p-mar-arqueo'>{arqueo.can500}</p>
+                </div>
+                <div className='title-arqueo-se'>
+                  <p className='p-mar-arqueo'>{arqueo.can200}</p>
+                </div>
+                <div className='title-arqueo-se'>
+                  <p className='p-mar-arqueo'>{arqueo.can100}</p>
+                </div>
+                <div className='title-arqueo-se'>
+                  <p className='p-mar-arqueo'>{arqueo.can50}</p>
+                </div>
+                <div className='title-arqueo-se'>
+                  <p className='p-mar-arqueo'>{arqueo.can20}</p>
+                </div>
+                <div className='title-arqueo-se'>
+                  <p className='p-mar-arqueo'>{arqueo.can10}</p>
+                </div>
+                <div className='title-arqueo-se'>
+                  <p className='p-mar-arqueo'>{arqueo.can5}</p>
+                </div>
+                <div className='title-arqueo-se'>
+                  <p className='p-mar-arqueo'>{arqueo.can2}</p>
+                </div>
+                <div className='title-arqueo-se'>
+                  <p className='p-mar-arqueo'>{arqueo.can1}</p>
+                </div>
+                <div className='title-arqueo-se'>
+                  <p className='p-mar-arqueo'>{arqueo.can0}</p>
+                </div>
+                <div className='table-right'>
+                </div>
+              </div>
+            )).reverse()
+          }
+        </div>
       </div>
     )
   }
