@@ -90,25 +90,48 @@ export default class Gasto extends Component{
 
                     </div>
                   </div>
-                    <div>
-                        <table>
+
+                  <div className='fader-tabla'>
+                    <div className='tabla-ga' >
+                        <table  className='tablagas'>
                           <tr>
-                            <th>Folio de la Facctura</th>
-                            <th>Importe</th>
-                            <th>Leyenda alusiva al gasto</th>
+                            <td className='alltabla-ga '>Folio de la Facctura</td>
+                            <td className='alltabla-ga '>Importe</td>
+                            <td className='alltabla-ga '>Leyenda alusiva al gasto</td>
                           </tr>
                           <tr>
-                            <td>algo</td>
-                            <td>algo</td>
-                            <td>algo</td>
+                            <td className='all-tab'></td>
+                            <td className='all-tab'></td>
+                            <td className='all-tab'></td>
                           </tr>
                           <tr>
-                            <td>algo</td>
-                            <td>algo</td>
+                            <td className='all-tab'></td>
+                            <td className='all-tab'></td>
+                            <td className='all-tab'></td>
                           </tr>
+                          <tr>
+                            <td className='all-tab'></td>
+                            <td className='all-tab'></td>
+                            <td className='all-tab'></td>
+                          </tr>
+                          <tr>
+                            <td className='all-tab'></td>
+                            <td className='all-tab'></td>
+                            <td className='all-tab'></td>
+                          </tr>
+                          <tr>
+                            <td className='all-tab'></td>
+                            <td className='all-tab'></td>
+                            <td className='all-tab'></td>
+                          </tr>
+                          <tr>
+                          <td className='all-tab text-total-ga'>TOTAL</td>
+                          <td className='all-tab'></td>
+                        </tr>
+
 
                         </table>
-
+            </div>
                     </div>
 
               </div>
