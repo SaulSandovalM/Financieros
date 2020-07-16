@@ -68,7 +68,7 @@ export default class ListAuto extends Component {
             <b>FECHA</b>
           </div>
           <div class='table-v-num'>
-            <b>AUTORAZO</b>
+            <b>AUTORIZO</b>
           </div>
           <div class='table-v-num'>
             <b>RECIBIO</b>

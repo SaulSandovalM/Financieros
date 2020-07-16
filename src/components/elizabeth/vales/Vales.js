@@ -24,6 +24,7 @@ export default class Vales extends Component {
       cantidad: '',
       cantidadc: '',
       cantidadr: '',
+      reembolso: '',
       concepto: '',
       oficioS: '',
       area: '',
@@ -32,7 +33,6 @@ export default class Vales extends Component {
       factura: '',
       recibos: '',
       sc: '',
-      reintegroT: '',
       fecha: '',
       autorizo: '',
       estatus: 'Pendiente',
@@ -74,14 +74,14 @@ export default class Vales extends Component {
     this.refs.contactForm.reset();
   }
 
-  sendMessage(e) {
-    e.preventDefault();
+  sendMessage() {
     const params = {
       vale: this.inputVale.value,
       cheque: this.inputCheque.value,
       cantidad: this.inputCantidad.value,
       cantidadc: this.inputCantidadc.value,
       cantidadr: this.inputCantidadr.value,
+      reembolso: this.inputReembolso.value,
       concepto: this.inputConcepto.value,
       oficioS: this.inputOficio.value,
       area: this.inputArea.value,
@@ -90,7 +90,6 @@ export default class Vales extends Component {
       factura: this.inputFactura.value,
       recibos: this.inputRecibos.value,
       sc: this.inputSC.value,
-      reintegroT: this.inputReintegroT.value,
       fecha: this.state.fecha,
       autorizo: this.inputAutorizo.value,
       estatus: this.state.estatus
@@ -101,6 +100,7 @@ export default class Vales extends Component {
       cantidad: this.inputCantidad.value,
       cantidadc: this.inputCantidadc.value,
       cantidadr: this.inputCantidadr.value,
+      reembolso: this.inputReembolso.value,
       concepto: this.inputConcepto.value,
       oficioS: this.inputOficio.value,
       area: this.inputArea.value,
@@ -109,16 +109,14 @@ export default class Vales extends Component {
       factura: this.inputFactura.value,
       recibos: this.inputRecibos.value,
       sc: this.inputSC.value,
-      reintegroT: this.inputReintegroT.value,
       fecha: this.state.fecha,
       autorizo: this.inputAutorizo.value,
       estatus: this.state.estatus
     })
     if ( params.vale && params.cheque && params.cantidad && params.cantidadc
-        && params.cantidadr && params.concepto && params.oficioS && params.area
-        && params.turno && params.factura && params.recibos && params.sc
-        && params.reintegroT && params.autorizo && params.personaR
-        && params.estatus && params.fecha ) {
+        && params.cantidadr && params.reembolso && params.concepto && params.oficioS
+        && params.area && params.turno && params.factura && params.recibos
+        && params.sc && params.autorizo && params.personaR && params.estatus && params.fecha ) {
       var f = parseInt(params.cantidadc);
       const statsRef = firebase.firestore().collection('caja').doc('--stats--');
       const increment = firebase.firestore.FieldValue.increment(-f);
@@ -140,8 +138,7 @@ export default class Vales extends Component {
         alert('Tu solicitud no puede ser enviada');
       });
         this.resetForm();
-        this.toggleHidden();
-        this.consumo();
+        setInterval(this.consumo, 1000);
       } else {
         alert('Por favor llene el formulario');
       };
@@ -251,7 +248,7 @@ export default class Vales extends Component {
                   className='input-b'
                   name='reembolso'
                   required
-                  ref={reembolso => this.inputCantidadr = reembolso}
+                  ref={reembolso => this.inputReembolso = reembolso}
                 />
               </div>
               <div className='v-con'>
@@ -383,16 +380,11 @@ export default class Vales extends Component {
           </div>
           <div className='boton-v'>
             <ReactToPrint
-              trigger={() => <buttom className='boton-vale'>Imprimir</buttom>}
+              trigger={() => <buttom className='boton-vale'>Imprimir y Guardar</buttom>}
               content={()=> this.vale}
-              onAfterPrint={this.toggleHidden.bind(this)}
+              onAfterPrint={this.sendMessage.bind(this)}
             />
           </div>
-          {!this.state.isHidden &&
-            <div className='boton-v'>
-              <button type='submit' className='input-sc boton-g'>Guardar</button>
-            </div>
-          }
         </form>
       </div>
     )
