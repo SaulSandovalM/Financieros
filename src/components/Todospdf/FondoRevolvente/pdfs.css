@@ -160,9 +160,6 @@ th {
               justify-content: space-between;
 
 }
-.contenedor-1{
-
-}
 
 .interno{
         display:flex;
@@ -175,9 +172,7 @@ th {
 
 
 }
-.contenedor-1{
 
-}
 /*Fase 3 So*/
 
 .padre-lineas{
@@ -345,6 +340,11 @@ justify-content:center;
    padding-right: 50px;
    padding-left: 30px;
 }
+
+.text-titulo-ga{
+  font-weight: bold;
+}
+
 .faderinp{
   padding-bottom: 0px;
   padding-left: 100px;
@@ -352,11 +352,29 @@ justify-content:center;
   display: flex;
   justify-content: center;
 }
+.interno-ga{
+  display:flex;
+  justify-content: space-between;
+  padding-right:10px;
+  padding-bottom: 10px;
+
+}
+.input-ga{
+        border: 2px solid;
+         height: 10px;
+         width: 10px;
+       }
+.text-ga{
+  /*margin:0px;*/
+  margin:3px;
+  font-size: 15px;
+}
+
 .contenedor-ga{
   padding-top:10px;
   padding-left:20px;
   padding-right:20px;
-  height: 200px;
+  height: 100px;
   width: 1700px;
   border: 1px solid;
   display: flex;

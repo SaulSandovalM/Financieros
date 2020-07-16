@@ -17,9 +17,9 @@ export default class Gasto extends Component{
                         </div>
 
                         <div>
-                          <p>ORGANO SUPERIOR</p>
-                          <p>UNIDAD PRESUPUESTAL</p>
-                          <p>OBJETO DE GASTO</p>
+                          <p className='text-titulo-ga'>ORGANO SUPERIOR</p>
+                          <p className='text-titulo-ga'>UNIDAD PRESUPUESTAL</p>
+                          <p className='text-titulo-ga'>OBJETO DE GASTO</p>
                         </div>
 
                         <div>
@@ -34,57 +34,57 @@ export default class Gasto extends Component{
                     <div className='contenedor-ga'>
 
                         <div className='contenedor-1 '>
-                          <div className='interno'>
-                          <p>Gasto a Comprobar</p>
-                          <input className='input-so'/>
+                          <div className='interno-ga'>
+                          <p className='text-ga'>Gasto a Comprobar</p>
+                          <input className='input-ga'/>
                           </div>
 
-                          <div className='interno'>
-                          <p>Comprobacion de Gastos</p>
-                          <input className='input-so'/>
+                          <div className='interno-ga'>
+                          <p className='text-ga'>Comprobacion de Gastos</p>
+                          <input className='input-ga'/>
                           </div>
                           </div>
-
-                          <div className='contenedor-1'>
-                          <div className='interno'>
-                          <p>Creación de Fondo Revolvente</p>
-                          <input className='input-so'/>
-                          </div>
-                          <div className='interno'>
-                          <p>Fondo Revolvente</p>
-                          <input className='input-so'/>
-                          </div>
-                          <div className='interno'>
-                          <p>Cancelacion de Fondo Revolvente</p>
-                          <input className='input-so'/>
-                          </div>
-                          </div>
-
 
                           <div className='contenedor-1'>
-                          <div className='interno'>
-                          <p>Viaticos Anticipados</p>
-                          <input className='input-so'/>
+                          <div className='interno-ga'>
+                          <p className='text-ga'>Creación de Fondo Revolvente</p>
+                          <input className='input-ga'/>
                           </div>
-                          <div className='interno'>
-                          <p>Viaticos Devengados</p>
-                          <input className='input-so'/>
+                          <div className='interno-ga'>
+                          <p className='text-ga'>Fondo Revolvente</p>
+                          <input className='input-ga'/>
                           </div>
-                          <div className='interno'>
-                          <p>Comprobación de Viáticos</p>
-                          <input className='input-so'/>
+                          <div className='interno-ga'>
+                          <p className='text-ga'>Cancelacion de Fondo Revolvente</p>
+                          <input className='input-ga'/>
                           </div>
                           </div>
 
 
                           <div className='contenedor-1'>
-                          <div className='interno'>
-                          <p>Pago a Proveedores</p>
-                          <input className='input-so'/>
+                          <div className='interno-ga'>
+                          <p className='text-ga'>Viaticos Anticipados</p>
+                          <input className='input-ga'/>
                           </div>
-                          <div className='interno'>
-                          <p>Transferencias</p>
-                          <input className='input-so'/>
+                          <div className='interno-ga'>
+                          <p className='text-ga'>Viaticos Devengados</p>
+                          <input className='input-ga'/>
+                          </div>
+                          <div className='interno-ga'>
+                          <p className='text-ga'>Comprobación de Viáticos</p>
+                          <input className='input-ga'/>
+                          </div>
+                          </div>
+
+
+                          <div className='contenedor-1'>
+                          <div className='interno-ga'>
+                          <p className='text-ga'>Pago a Proveedores</p>
+                          <input className='input-ga'/>
+                          </div>
+                          <div className='interno-ga'>
+                          <p className='text-ga'>Transferencias</p>
+                          <input className='input-ga'/>
                           </div>
                           </div>
 
@@ -95,9 +95,9 @@ export default class Gasto extends Component{
                     <div className='tabla-ga' >
                         <table  className='tablagas'>
                           <tr>
-                            <td className='alltabla-ga '>Folio de la Facctura</td>
-                            <td className='alltabla-ga '>Importe</td>
-                            <td className='alltabla-ga '>Leyenda alusiva al gasto</td>
+                            <td className='alltabla-ga '>FOLIO DE LA FACTURA</td>
+                            <td className='alltabla-ga '>IMPORTE</td>
+                            <td className='alltabla-ga '>LEYENDA ALUSIVA AL GASTO</td>
                           </tr>
                           <tr>
                             <td className='all-tab'></td>
