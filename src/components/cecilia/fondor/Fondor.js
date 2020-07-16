@@ -60,6 +60,7 @@ export default class Fondor extends Component {
           importe: child.val().importe,
           rubro: child.val().rubro,
           archivo: child.val().archivo,
+          cpa: child.val().cpa,
           done: child.val().done,
           id: child.key
         });
@@ -83,7 +84,7 @@ export default class Fondor extends Component {
         this.setState({
           contador: doc.data(),
           key: doc.id,
-          isLoading: false
+          isLoading: true
         });
       } else {
         console.log("No hay documento!");
@@ -126,12 +127,16 @@ export default class Fondor extends Component {
         alert('Tu solicitud no puede ser enviada');
       });
       this.resetForm();
+      setInterval(this.consumo, 1000);
     } else {
       alert('Por favor llene el formulario');
     };
   }
 
   render() {
+
+    console.log(this.state.up);
+
     return (
       <div className='pf-container'>
         <div className='site-pf'>
@@ -234,11 +239,13 @@ export default class Fondor extends Component {
             <button type='submit' className='input-sc boton-g'>Agregar</button>
           </div>
         </form>
-        <div className='space-table'>
-          <ListComponent
-            lista={this.state.lista}
-          />
-        </div>
+        {this.inputUp === 10 &&
+          <div className='space-table'>
+            <ListComponent
+              lista={this.state.lista}
+            />
+          </div>
+        }
       </div>
     )
   }

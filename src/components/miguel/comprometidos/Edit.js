@@ -21,7 +21,8 @@ class Comprometido extends Component {
       isr: '',
       total: '',
       fecha_comp: '',
-      comprometidos: []
+      comprometidos: [],
+      number: ''
     };
   }
 
@@ -31,7 +32,7 @@ class Comprometido extends Component {
       const { partida, presupuestal, no_proyecto, importe_comp, isr, total, fecha_comp } = doc.data();
       comprometidos.push({
         key: doc.id,
-        doc, // DocumentSnapshot
+        doc,
         partida,
         presupuestal,
         no_proyecto,
@@ -131,6 +132,11 @@ class Comprometido extends Component {
     }
   }
 
+  handleChange(evt) {
+    const number = (evt.target.validity.valid) ? evt.target.value : this.state.number;
+    this.setState({ number });
+  }
+
   render() {
 
     const { importe_comp, isr } = this.state;
@@ -139,11 +145,13 @@ class Comprometido extends Component {
     var tot = impo + isri;
 
     return (
-      <div class='container-edit' style={{marginTop: '50px'}}>
+      <div className='f-container-n'>
         <div className='comp-container'>
+          <div className='site-pf'>
+            <p className='site-pf-s'><b>Fondos 2020</b></p>
+          </div>
           <div className='edit-com-comp'>
             <div className='App-edit'>
-              <h1 style={{margin: '0px'}}>Comprometidos</h1>
               <div className='facxml-row'>
                 <p>Agrega facturas/xml</p>
                 <Dropzone
@@ -162,47 +170,77 @@ class Comprometido extends Component {
             </div>
             <div className='edit-row' style={{marginTop: '30px'}}>
               <label for='fondo' className='tipo-tw'>Fondos:</label>
-              <input name='fondo' value={this.state.fondo} onChange={this.onChange} className='height-ct' disabled/>
+              <input
+                name='fondo'
+                value={this.state.fondo}
+                onChange={this.onChange}
+                className='height-ct'
+                disabled
+              />
             </div>
             <div className='edit-row'>
               <label for='fecha' className='tipo-tw'>Fecha:</label>
-              <input name='fecha' value={this.state.fecha} onChange={this.onChange} className='height-ct' disabled/>
+              <input
+                name='fecha'
+                value={this.state.fecha}
+                onChange={this.onChange}
+                className='height-ct'
+                disabled
+              />
             </div>
             <div className='edit-row'>
               <label for='realizo' className='tipo-tw'>Nombre Realizo:</label>
-              <input name='realizo' value={this.state.realizo} onChange={this.onChange} className='height-ct' disabled/>
+              <input
+                name='realizo'
+                value={this.state.realizo}
+                onChange={this.onChange}
+                className='height-ct'
+                disabled
+              />
             </div>
             <div className='edit-row'>
               <label for='tipo_doc' className='tipo-tw'>Tipo de Documento:</label>
-              <input name='tipo_doc' value={this.state.tipo_doc} onChange={this.onChange} className='height-ct' disabled/>
+              <input
+                name='tipo_doc'
+                value={this.state.tipo_doc}
+                onChange={this.onChange}
+                className='height-ct'
+                disabled
+              />
             </div>
             <div className='edit-row'>
               <label for='importe' className='tipo-tw'>Importe:</label>
-              <input name='importe' value={'$'+this.state.importe} onChange={this.onChange} className='height-ct' disabled/>
+              <input
+                name='importe'
+                value={'$'+this.state.importe}
+                onChange={this.onChange}
+                className='height-ct'
+                disabled
+              />
             </div>
           </div>
           <div className='table-ed-2'>
-            <form onSubmit={this.onSubmit} style={{width: '100%'}}>
+            <form onSubmit={this.onSubmit} className='form-com'>
               <div className='edit-tab-row-t'>
-                <div className='tabla-edit-l' style={{color: '#FFF'}}>
+                <div className='tabla-edit-l'>
                   Partida
                 </div>
-                <div className='tabla-edit-l' style={{color: '#FFF'}}>
+                <div className='tabla-edit-l'>
                   U. Presupuestal
                 </div>
-                <div className='tabla-edit-l' style={{color: '#FFF'}}>
+                <div className='tabla-edit-l'>
                   No. de Proyecto
                 </div>
-                <div className='tabla-edit-l' style={{color: '#FFF'}}>
+                <div className='tabla-edit-l'>
                   Importe
                 </div>
-                <div className='tabla-edit-l' style={{color: '#FFF'}}>
+                <div className='tabla-edit-l'>
                   ISR
                 </div>
-                <div className='tabla-edit-l' style={{color: '#FFF'}}>
+                <div className='tabla-edit-l'>
                   Total
                 </div>
-                <div className='tabla-edit-l' style={{color: '#FFF'}}>
+                <div className='tabla-edit-l'>
                   Fecha
                 </div>
               </div>
@@ -222,7 +260,7 @@ class Comprometido extends Component {
                 )}
               </div>
               <div className='edit-tab-row-2'>
-                <div className='tabla-edit-c'>
+                <div className='tabla-edit-c2'>
                   <select name='partida' onChange={this.onChange} ref='partida' className='input-edi'>
                     <option name='partida'></option>
                     <option name='partida'>211001</option>
@@ -280,7 +318,7 @@ class Comprometido extends Component {
 
                   </select>
                 </div>
-                <div className='tabla-edit-c'>
+                <div className='tabla-edit-c2'>
                   <select name='presupuestal' onChange={this.onChange} ref='presupuestal' className='input-edi'>
                     <option name='presupuestal'></option>
                     <option name='presupuestal'>2</option>
@@ -307,8 +345,12 @@ class Comprometido extends Component {
                     <option name='presupuestal'>24</option>
                   </select>
                 </div>
-                <div className='tabla-edit-c'>
-                  <select name='no_proyecto' onChange={this.onChange} ref='no_proyecto' className='input-edi'>
+                <div className='tabla-edit-c2'>
+                  <select
+                    name='no_proyecto'
+                    onChange={this.onChange}
+                    ref='no_proyecto'
+                    className='input-edi'>
                     <option name='no_proyecto'></option>
                     <option name='no_proyecto'>U027 425</option>
                     <option name='no_proyecto'>U029 425</option>
@@ -323,17 +365,48 @@ class Comprometido extends Component {
                     <option name='no_proyecto'>U038 2514</option>
                   </select>
                 </div>
-                <div className='tabla-edit-c'>
-                  <input type='number' name='importe_comp' onChange={this.onChange} ref='importe_comp' className='input-edi' />
+                <div className='tabla-edit-c2'>
+                  <input
+                    type='number'
+                    min='1'
+                    onInput={this.handleChange.bind(this)}
+                    value={this.state.number}
+                    name='importe_comp'
+                    onChange={this.onChange}
+                    ref='importe_comp'
+                    className='input-edit-2'
+                  />
                 </div>
-                <div className='tabla-edit-c'>
-                  <input type='number' name='isr' onChange={this.onChange} ref='isr' className='input-edi'/>
+                <div className='tabla-edit-c2'>
+                  <input
+                    type='number'
+                    name='isr'
+                    onInput={this.handleChange.bind(this)}
+                    value={this.state.number}
+                    onChange={this.onChange}
+                    ref='isr'
+                    className='input-edit-2'
+                  />
                 </div>
-                <div className='tabla-edit-c'>
-                  <input name='total' onChange={this.onChange} value={tot} ref='total' className='input-edi'/>
+                <div className='tabla-edit-c2'>
+                  <input
+                    name='total'
+                    onChange={this.onChange}
+                    value={tot}
+                    ref='total'
+                    className='input-edit-2'
+                  />
                 </div>
-                <div className='tabla-edit-c'>
-                  <input type='date' min='2020-01-01' max='2020-12-31' name='fecha_comp' onChange={this.onChange} ref='fecha_comp' className='input-edi'/>
+                <div className='tabla-edit-c2'>
+                  <input
+                    type='date'
+                    min='2020-01-01'
+                    max='2020-12-31'
+                    name='fecha_comp'
+                    onChange={this.onChange}
+                    ref='fecha_comp'
+                    className='input-edit-2'
+                  />
                 </div>
               </div>
               <div className='form-container-last'>
@@ -341,7 +414,6 @@ class Comprometido extends Component {
                   <button
                     className='bt-s2'
                     type='submit'
-                    style={{fontFamily: 'Arial'}}
                     onClick={() => this.setState({ total: this.state.total = tot })}>
                       Guadar
                   </button>

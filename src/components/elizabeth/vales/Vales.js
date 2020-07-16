@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import firebase from '../../../Firebase';
-import ListComponent from './ListComponent';
 import './Vales.css';
 import ReactToPrint from 'react-to-print';
 import logovale from '../../../img/logovale.png';
@@ -25,6 +24,7 @@ export default class Vales extends Component {
       cantidad: '',
       cantidadc: '',
       cantidadr: '',
+      reembolso: '',
       concepto: '',
       oficioS: '',
       area: '',
@@ -33,7 +33,8 @@ export default class Vales extends Component {
       factura: '',
       recibos: '',
       sc: '',
-      reintegroT: '',
+      fecha: '',
+      autorizo: '',
       estatus: 'Pendiente',
       contador: {},
       isHidden: true,
@@ -50,39 +51,7 @@ export default class Vales extends Component {
     this.setState({[event.target.name]: event.target.value})
   }
 
-  listenForItems = (itemsRef) => {
-    itemsRef.on('value', (snap) => {
-      var lista = [];
-      snap.forEach((child) => {
-        lista.push({
-          vale: child.val().vale,
-          cheque: child.val().cheque,
-          cantidad: child.val().cantidad,
-          cantidadc: child.val().cantidadc,
-          cantidadr: child.val().cantidadr,
-          concepto: child.val().concepto,
-          oficioS: child.val().oficioS,
-          area: child.val().area,
-          turno: child.val().turno,
-          personaR: child.val().personaR,
-          estatus: child.val().estatus,
-          factura: child.val().factura,
-          recibos: child.val().recibos,
-          sc: child.val().sc,
-          reintegroT: child.val().reintegroT,
-          done: child.val().done,
-          id: child.key
-        });
-      });
-      this.setState({
-        lista: lista
-      });
-    });
-  }
-
   componentDidMount() {
-    const itemsRef = firebase.database().ref('vales/');
-    this.listenForItems(itemsRef);
     this.consumo();
   }
 
@@ -101,37 +70,18 @@ export default class Vales extends Component {
     })
   }
 
-  showAlert(type, message) {
-    this.setState({
-      alert: true,
-      alertData: {type, message}
-    });
-    setTimeout(() => {
-      this.setState({alert: false});
-    }, 6000);
-  }
-
   resetForm() {
     this.refs.contactForm.reset();
   }
 
-  componentWillMount() {
-    let formRef = firebase.database().ref('vales').orderByKey().limitToLast(1);
-    formRef.on('child_added', snapshot => {
-      const { vale, cheque, cantidad, cantidadc, cantidadr, concepto, oficioS, area, turno, personaR, estatus } = snapshot.val();
-      const data = { vale, cheque, cantidad, cantidadc, cantidadr, concepto, oficioS, area, turno, personaR, estatus };
-      this.setState({ form: [data].concat(this.state.form) });
-    });
-  }
-
-  sendMessage(e) {
-    e.preventDefault();
+  sendMessage() {
     const params = {
       vale: this.inputVale.value,
       cheque: this.inputCheque.value,
       cantidad: this.inputCantidad.value,
       cantidadc: this.inputCantidadc.value,
       cantidadr: this.inputCantidadr.value,
+      reembolso: this.inputReembolso.value,
       concepto: this.inputConcepto.value,
       oficioS: this.inputOficio.value,
       area: this.inputArea.value,
@@ -140,7 +90,8 @@ export default class Vales extends Component {
       factura: this.inputFactura.value,
       recibos: this.inputRecibos.value,
       sc: this.inputSC.value,
-      reintegroT: this.inputReintegroT.value,
+      fecha: this.state.fecha,
+      autorizo: this.inputAutorizo.value,
       estatus: this.state.estatus
     };
     this.setState({
@@ -149,6 +100,7 @@ export default class Vales extends Component {
       cantidad: this.inputCantidad.value,
       cantidadc: this.inputCantidadc.value,
       cantidadr: this.inputCantidadr.value,
+      reembolso: this.inputReembolso.value,
       concepto: this.inputConcepto.value,
       oficioS: this.inputOficio.value,
       area: this.inputArea.value,
@@ -157,19 +109,20 @@ export default class Vales extends Component {
       factura: this.inputFactura.value,
       recibos: this.inputRecibos.value,
       sc: this.inputSC.value,
-      reintegroT: this.inputReintegroT.value,
+      fecha: this.state.fecha,
+      autorizo: this.inputAutorizo.value,
       estatus: this.state.estatus
     })
     if ( params.vale && params.cheque && params.cantidad && params.cantidadc
-        && params.cantidadr && params.concepto && params.oficioS && params.area
-        && params.turno && params.personaR && params.factura && params.recibos
-        && params.sc && params.reintegroT && params.estatus ) {
-      var f = parseInt(params.cantidad);
+        && params.cantidadr && params.reembolso && params.concepto && params.oficioS
+        && params.area && params.turno && params.factura && params.recibos
+        && params.sc && params.autorizo && params.personaR && params.estatus && params.fecha ) {
+      var f = parseInt(params.cantidadc);
       const statsRef = firebase.firestore().collection('caja').doc('--stats--');
       const increment = firebase.firestore.FieldValue.increment(-f);
       const batch = firebase.firestore().batch();
       const storyRef = firebase.firestore().collection('caja').doc(`${Math.random()}`);
-      batch.set(storyRef, { title: 'Se Genero Un Vale # ', no: params.vale, personaR: params.personaR , cantidad: '-'+f });
+      batch.set(storyRef, { title: 'Se Genero Un Vale # ', no: params.vale, personaR: params.personaR , cantidad: '-' + f, fecha: params.fecha });
       batch.set(statsRef, { storyCount: increment }, { merge: true });
       batch.commit();
       const statsRefs = firebase.firestore().collection('vales').doc('--stats--');
@@ -180,16 +133,16 @@ export default class Vales extends Component {
       batchs.set(statsRefs, { storyCount: increments }, { merge: true });
       batchs.commit();
       firebase.database().ref('vales').push(params).then(() => {
-        this.showAlert('success', 'Tu solicitud fue enviada.');
+        alert('Tu solicitud fue enviada.');
       }).catch(() => {
-        this.showAlert('danger', 'Tu solicitud no puede ser enviada');
+        alert('Tu solicitud no puede ser enviada');
       });
         this.resetForm();
-        this.toggleHidden();
+        setInterval(this.consumo, 1000);
       } else {
-        this.showAlert('warning', 'Por favor llene el formulario');
+        alert('Por favor llene el formulario');
       };
-    }
+  }
 
   render() {
 
@@ -199,16 +152,16 @@ export default class Vales extends Component {
     var tot = cant1 - cant2;
 
     var today = new Date();
-    var meses =  [ 'Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic' ];
+    var meses =  [ '01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12' ];
     var f = new Date();
     today = f.getDate() + '/' + meses[f.getMonth()] + '/' + f.getFullYear();
+    this.state.fecha = today;
 
     return (
-      <div class='container-back'>
-        <div class='site'>
-          <p class='site-s'><b>Vales</b></p>
+      <div className='container-back'>
+        <div className='site'>
+          <p className='site-s'><b>Vales</b></p>
         </div>
-
         <form onSubmit={this.sendMessage.bind(this)} ref='contactForm'>
           <div className='margin-vale' ref={el => (this.vale = el)}>
             <div className='vale-title-container'>
@@ -223,7 +176,6 @@ export default class Vales extends Component {
                 <img className='logovale' src={logoh} alt='' />
               </div>
             </div>
-
             <div className='no-cv'>
               <div className='cv'>
                 <p className='p-cv'>
@@ -247,13 +199,10 @@ export default class Vales extends Component {
                 </p>
               </div>
             </div>
-
             <div className='vale-pro-content'>
-              <p className='p-vp'>VALE PROVICIONAL DE CAJA</p>
+              <p className='p-vp'>VALE PROVISIONAL DE CAJA</p>
             </div>
-
             <div className='space-v'/>
-
             <div className='mcc-content'>
               <div className='v-m'>
                 <p className='pmcc'>MOVIMIENTO</p>
@@ -264,7 +213,10 @@ export default class Vales extends Component {
                   Comprobado
                 </p>
                 <p className='p-bv'>
-                  Reintegro/Reembolso
+                  Reintegro
+                </p>
+                <p className='p-bv'>
+                  Reembolso
                 </p>
               </div>
               <div className='v-c'>
@@ -291,6 +243,12 @@ export default class Vales extends Component {
                   value={tot}
                   required
                   ref={cantidadr => this.inputCantidadr = cantidadr}
+                />
+                <input
+                  className='input-b'
+                  name='reembolso'
+                  required
+                  ref={reembolso => this.inputReembolso = reembolso}
                 />
               </div>
               <div className='v-con'>
@@ -340,7 +298,6 @@ export default class Vales extends Component {
                 </div>
               </div>
             </div>
-
             <div className='frsr-end'>
               <div className='frsr-w'>
                 <div className='div-4'>
@@ -376,7 +333,7 @@ export default class Vales extends Component {
                       ref={sc => this.inputSC = sc}
                     />
                   </div>
-                  <div className='frsr-w-b' style={{borderLeft: '0px', borderRight: '0px'}}>
+                  {/*<div className='frsr-w-b' style={{borderLeft: '0px', borderRight: '0px'}}>
                     <p className='p-oat'>Reintegro Total</p>
                     <input
                       className='input-w'
@@ -385,11 +342,10 @@ export default class Vales extends Component {
                       value={this.state.reintegroT}
                       ref={reintegroT => this.inputReintegroT = reintegroT}
                     />
-                  </div>
+                  </div>*/}
                 </div>
               </div>
             </div>
-
             <div className='firma-content'>
               <div className='f-fecha'>
                 <p className='b-fecha'>{today}</p>
@@ -404,10 +360,6 @@ export default class Vales extends Component {
                 <p className='font-size-f'>Autorizó</p>
               </div>
               <div className='f-fecha'>
-                <p className='b-fecha-ok'></p>
-                <p className='font-size-f'>Validado (NRL)</p>
-              </div>
-              <div className='f-fecha'>
                 <input
                   className='b-fecha-i'
                   name='personaR'
@@ -419,39 +371,21 @@ export default class Vales extends Component {
                 <p className='font-size-f'>Recibió</p>
               </div>
             </div>
-
             <div className='last'>
               Me comprometo a entregar la comprobación que ampara el presente
               vale en un plazo no mayor  a 5 dias habiles posteriores a la fecha
               de recibido, de lo contrario reintegraré el recurso por la cantidad
               sin comprobar.
             </div>
-
           </div>
-
           <div className='boton-v'>
             <ReactToPrint
-              trigger={() => <buttom className='boton-vale'>Imprimir</buttom>}
+              trigger={() => <buttom className='boton-vale'>Imprimir y Guardar</buttom>}
               content={()=> this.vale}
-              onAfterPrint={this.toggleHidden.bind(this)}
+              onAfterPrint={this.sendMessage.bind(this)}
             />
           </div>
-
-          {!this.state.isHidden &&
-            <div className='boton-v'>
-              <button type='submit' className='input-sc boton-g'>Guardar</button>
-            </div>
-          }
-
         </form>
-
-        <div class='caja-w' style={{marginTop: '40px', marginBottom: '40px'}}>
-          <div class='caja-col'>
-            <ListComponent
-              lista={this.state.lista}
-            />
-          </div>
-        </div>
       </div>
     )
   }

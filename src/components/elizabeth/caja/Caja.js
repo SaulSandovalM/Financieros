@@ -22,14 +22,15 @@ export default class Caja extends Component {
   onCollectionUpdate = (querySnapshot) => {
     const movimientos = [];
     querySnapshot.forEach((doc) => {
-      const { title, no, personaR, cantidad } = doc.data();
+      const { title, no, personaR, cantidad, fecha } = doc.data();
       movimientos.push({
         key: doc.id,
         doc,
         title,
         no,
         personaR,
-        cantidad
+        cantidad,
+        fecha
       });
     });
     this.setState({
@@ -94,6 +95,8 @@ export default class Caja extends Component {
                 onChange={this.handleChange.bind(this)}
               />
             </div>
+            <div className='space-table-b' />
+            <div className='table-c-p'>
             <div className='banco-inputs-list2'>
               <div className='table-left'>
               </div>
@@ -116,10 +119,10 @@ export default class Caja extends Component {
               </div>
             </div>
           </div>
-          <div>
+          <div className='color-s'>
             {this.state.movimientos.map(movimientos =>
               <div>
-                {this.state.buscador === movimientos.personaR &&
+                {this.state.buscador === movimientos.fecha &&
                   <div className='banco-inputs-list'>
                     <div className='table-left'>
                     </div>
@@ -151,6 +154,7 @@ export default class Caja extends Component {
                 }
               </div>
             )}
+            </div>
           </div>
         </div>
       </div>

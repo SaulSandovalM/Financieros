@@ -40,6 +40,9 @@ export default class ListComponent extends Component {
           <div className='table-c-fechae'>
             <b>IMPORTE</b>
           </div>
+          <div className='table-c-fechae'>
+            <b>ARCHIVO</b>
+          </div>
           <div className='table-right'>
           </div>
         </div>

@@ -77,7 +77,7 @@
   width: 100%;
 }
 .comp-container {
-  width: 90%;
+  width: 100%;
 }
 .edit-com-comp {
   display: flex;
@@ -97,15 +97,16 @@
   background: #092432;
   border-top: 4px solid #dc5f70;
 }
-.tabla-edit-c {
-  width: 14.5%;
+.tabla-edit-c2 {
+  width: 14%;
   text-align: left;
   color: #000;
 }
 .tabla-edit-l {
   width: 14.5%;
   text-align: center;
-  color: #000;
+  color: #fff;
+  font-weight: bold;
 }
 .container {
   margin-top: 100px;
@@ -123,12 +124,39 @@
   display: flex;
   flex-direction: row;
   padding: 5px 0px 0px 0px;
+  justify-content: space-between;
 }
 .input-edi {
-  width: 99%;
+  width: 100%;
+  height: 30px;
+  border: 1px solid;
+  padding: 0px;
+  text-align: center;
+}
+.input-edit-2 {
+  width: 100%;
+  height: 28px;
+  border: 1px solid;
+  padding: 0px;
+  text-align: center;
 }
 .facxml-row {
   display: flex;
   flex-direction: row;
   width: 300px;
+}
+.bt-s2 {
+  background-color: green;
+  border: 0px;
+  color: white;
+  padding: 6px;
+}
+.form-container-last {
+  display: flex;
+  justify-content: flex-end;
+  flex-direction: row;
+  margin-top: 30px;
+}
+.form-com {
+  width: 100%;
 }

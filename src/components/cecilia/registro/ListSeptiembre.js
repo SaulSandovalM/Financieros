@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import './Registro.css';
-import RowSeptiembre from './RowSeptiembre';
+import RowAgosto from './RowAgosto';
 import firebase from '../../../Firebase';
 
-export default class ListSeptiembre extends Component {
+export default class ListAgosto extends Component {
   constructor (props) {
     super(props);
     this.state = {
@@ -26,13 +26,16 @@ export default class ListSeptiembre extends Component {
           <div className='table-left'>
           </div>
           <div className='table-meses-up'>
-            <p className='p-meses'>UNIDAD</p>
+            <p className='p-meses'>UP</p>
           </div>
           <div className='table-meses-proy'>
-            <p className='p-meses'>PROYECTO</p>
+            <p className='p-meses'>PROY</p>
           </div>
           <div className='table-meses-par'>
-            <p className='p-meses'>PARTIDA</p>
+            <p className='p-meses'>P</p>
+          </div>
+          <div className='table-meses-par'>
+            <p className='p-meses'>R</p>
           </div>
           <div className='table-meses-con'>
             <p className='p-meses'>CONCEPTO</p>
@@ -50,14 +53,14 @@ export default class ListSeptiembre extends Component {
             <p className='p-meses'>SALDO</p>
           </div>
           <div className='table-meses-dis'>
-            <p className='p-meses'>DISPONIBILIDAD</p>
+            <p className='p-meses'>DISPONIBLE</p>
           </div>
           <div className='table-right'>
           </div>
         </div>
         {
           this.props.lista.map(item =>
-            <RowSeptiembre
+            <RowAgosto
               key={item.id}
               item={item}
             />

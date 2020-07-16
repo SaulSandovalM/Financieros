@@ -35,20 +35,24 @@ class Nav extends Component {
           <img className='logo' src={logo_h} alt='' />
         </div>
         <div className='navbar-left'>
-          <Link to='/Presupuesto' className='deco'>
+          <div className='deco-c' onClick={this.toggleHidden.bind(this)}>
             <h3 className='nav-t'>
               Presupuesto
             </h3>
-          </Link>
+          </div>
           <img
             className='arrow'
             src={arrow}
-            onClick={this.toggleHidden.bind(this)}
             alt=''
           />
         </div>
         {!this.state.isHidden &&
           <div>
+            <div className='subnav'>
+              <Link to='/Presupuesto' className='deco'>
+                <p className='nav-t'> &bull; Inicial</p>
+              </Link>
+            </div>
             <div className='subnav'>
               <Link to='/Ampliacion' className='deco'>
                 <p className='nav-t'> &bull; Ampliacion</p>
@@ -71,11 +75,11 @@ class Nav extends Component {
             <h3 className='nav-t'>Fondo Revolvente</h3>
           </Link>
         </div>
-        <div className='navbar-left'>
+        {/*<div className='navbar-left'>
           <Link to='/Banco' className='deco'>
             <h3 className='nav-t'>Banco</h3>
           </Link>
-        </div>
+        </div>*/}
         <div className='navbar-left'>
           <Link to='/Archivos' className='deco'>
             <h3 className='nav-t'>Archivos</h3>
