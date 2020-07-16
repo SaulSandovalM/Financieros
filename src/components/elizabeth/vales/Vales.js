@@ -217,6 +217,7 @@ export default class Vales extends Component {
               </div>
               <div className='vale-title-content'>
                 <p className='p-vale'>PROCURADURIA GENERAL DE JUSTICIA</p>
+                <p className='p-vale'>Saul dile a pichon que tiene cara de cotorro graias </p>
                 <p className='p-vale'>DIRECCION GENERAL DE ADMINISTRACION Y FINANZAS</p>
               </div>
               <div className='vale-num-container'>

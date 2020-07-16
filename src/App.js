@@ -34,10 +34,17 @@ import Add from './components/controlp/Add';
 import Complemento from './components/complemento/Complemento';
 import Caratula from './components/miguel/caratula/Caratula';
 //pdf
+//FondoRevolvente
 import Gasto from './components/Todospdf/FondoRevolvente/Gasto';
 import objetodegastoFR from './components/Todospdf/FondoRevolvente/objetodegastoFR';
-{/*import Recibo from './components/Todospdf/FondoRevolvente/Recibo';*/}
-{/*import Recibo from './components/Todospdf/FondoRevolvente/Rfr';*/}
+/*import Recibo from './components/Todospdf/FondoRevolvente/Recibo';*/
+/*import Recibo from './components/Todospdf/FondoRevolvente/Rfr';*/
+
+//Pagpriveedor
+import objetodegastoPP from './components/Todospdf/Pagoproveedor/objetodegastoPP';
+
+
+
 
 
 
@@ -224,10 +231,16 @@ function App(props) {
       <Route path='/Frpdf/:id' component={Frpdf} />
       <Route path='/Cpdf/:id' component={Cpdf} />
       <Route path='/add/:id' component={Add} />
+
+      //pdfs
+      //carpeta fondo revolvente
       <Route path='/Gasto/:id' component={Gasto}/>
       <Route path='/objetodegastoFR/:id' component={objetodegastoFR}/>
       {/*}<Route path='/Recibo/: id' component={Recibo}/>*/}
-      {/*}<Route path='/Recibo/: id' component={Rfr                                                   ------------------}/>*/}
+      {/*}<Route path='/Recibo/: id' component={Rfr}/>*/}
+
+      //Carpe Pago Proveedor
+      <Route path='/objetodegastoPP/:id' component={objetodegastoPP}/>
 
 
 
