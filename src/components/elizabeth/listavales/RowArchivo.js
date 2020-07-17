@@ -13,219 +13,68 @@ export default class RowAuto extends Component {
     this.state = {
       done: false,
       item: 'Atendido',
-      pdf1: 0,
-      pdf2: 0,
-      pdf3: 0
     };
   }
 
-  handleOnChange1 (event) {
-    for(let i = 0; i < event.target.files.length; i++)
-    {
-      if (event.target.files[i].type == 'application/pdf') {
-        //Se envia el archivo sin procesar;
-        //firebase.database().ref('xml').push(NewXml)
-      }
-      const file = event.target.files[i]
-      const reader = new FileReader();
-      reader.readAsText(file);
-      reader.onloadend = evt => {
-        const readerData = evt.target.result;
-        const parser = new DOMParser();
-        const xml = parser.parseFromString(readerData, "text/xml");
-        console.log(
-          "data",
-          new XMLSerializer().serializeToString(xml.documentElement)
-        );
-        var XMLParser = require("react-xml-parser");
-        var NewXml = new XMLParser().parseFromString(
-          new XMLSerializer().serializeToString(xml.documentElement)
-        );
-        console.log("newxml", NewXml);
-        console.log("Emisor: " + NewXml.children[0]);
-        console.log("Nombre: " + NewXml.children[0].attributes['Nombre']);
-        console.log("rfc: " + NewXml.children[0].attributes['Rfc']);
-        console.log(NewXml.children[2].children.length); //Realizar for de todos los conceptos
-          //children[2].children.length
-        //this.setState({ xml });
-        //firebase.database().ref('xml').push(NewXml)
-      }
-    }
-  }
-
-  handleOnChange2 (event) {
-    for(let i = 0; i < event.target.files.length; i++)
-    {
-      const file = event.target.files[i]
-      const storageRef = firebase.storage().ref(`pdfs/${file.name}`)
-      const task = storageRef.put(file)
-      task.on('state_changed', (snapshot) => {
-        let percentage = (snapshot.bytesTransferred / snapshot.totalBytes) * 100
-        this.setState({
-          pdf2: percentage
-        })
-      }, (error) => {
-        console.error(error.message)
-      })
-    }
-
-  }
-
-  handleOnChange3 (event) {
-    for(let i = 0; i < event.target.files.length; i++)
-    {
-      const file = event.target.files[i]
-      const storageRef = firebase.storage().ref(`pdfs/${file.name}`)
-      const task = storageRef.put(file)
-      task.on('state_changed', (snapshot) => {
-        let percentage = (snapshot.bytesTransferred / snapshot.totalBytes) * 100
-        this.setState({
-          pdf3: percentage
-        })
-      }, (error) => {
-        console.error(error.message)
-      })
-    }
+  update = () => {
+    this.props.update(this.props.item);
   }
 
   render() {
-    var auto = this.props.item.estatus;
-    function xmlToJson(xml) {
-    var obj = {};
-    if (xml.nodeType == 1) {
-    if (xml.attributes.length > 0) {
-    obj["@attributes"] = {};
-      for (var j = 0; j < xml.attributes.length; j++) {
-        var attribute = xml.attributes.item(j);
-        obj["@attributes"][attribute.nodeName] = attribute.nodeValue;
-      }
-    }
-    } else if (xml.nodeType == 3) {
-    obj = xml.nodeValue;
-    }
-    if (xml.hasChildNodes()) {
-    for(var i = 0; i < xml.childNodes.length; i++) {
-      var item = xml.childNodes.item(i);
-      var nodeName = item.nodeName;
-      if (typeof(obj[nodeName]) == "undefined") {
-        obj[nodeName] = xmlToJson(item);
-      } else {
-        if (typeof(obj[nodeName].push) == "undefined") {
-          var old = obj[nodeName];
-          obj[nodeName] = [];
-          obj[nodeName].push(old);
-        }
-        obj[nodeName].push(xmlToJson(item));
-      }
-    }
-    }
-    return obj;
-    };
-
     return (
       <div class='caja-inputs'>
-        <div class='table-left'>
+        <div className='table-left'>
         </div>
-        <div class='table-v-num'>
-          <b>{this.props.item.vale}</b>
+        <div className='table-v-num2'>
+          <div>{this.props.item.vale}</div>
         </div>
-        <div class='table-v-importe'>
-          <b>{this.props.item.movimiento}</b>
+        <div className='table-v-num2'>
+          <div>{this.props.item.cheque}</div>
         </div>
-        <div class='table-v-fechae'>
-          <b>{this.props.item.concepto}</b>
+        <div className='table-v-num'>
+          <div>{this.props.item.cantidad}</div>
         </div>
-        <div class='table-v-cantidad'>
-          <div>
-            <CurrencyFormat
-              value={this.props.item.cantidad}
-              displayType={'text'}
-              thousandSeparator={true}
-              prefix={'$ '}
-              decimalSeparator={'.'} />
-            .00
-          </div>
+        <div className='table-v-num'>
+          <div>{this.props.item.cantidadc}</div>
         </div>
-         <div class = 'table-v-cantidad'>
-          <Popup trigger = {<button>Comprobación</button>} modal>
-          <div>
-            <div className='comprobacion-container'>
-              <div className='comprobacion-content'>
-                <div className='comprobacion-card'>
-                  <h1 className='comprobacion-h1'>Comprobaciones</h1>
-                  <p className='comprobacion-p'>Selecciona la carga de evidencias de tus comprobaciones</p>
-                  <div>
-                    <p>XML:</p>
-                    <Dropzone
-                      style={{
-                        position: 'relative',
-                        width: '100%',
-                        height: '30px',
-                        borderWidth: '2px',
-                        borderColor: 'rgb(102, 102, 102)',
-                        borderStyle: 'solid',
-                        borderRadius: '5px',
-                        maxFiles: 5}}
-                        accept=".xml" onChange={this.handleOnChange1.bind(this)}
-                        >
-                    </Dropzone>
-                    <progress className='progress' value={this.state.pdf1} max='100'>
-                      {this.state.pdf1} %
-                    </progress>
-                    <div className="dz-default dz-message" value={this.state.pdf1} max='100'>
-                      Carga {this.state.pdf1} %</div>
-                  </div>
-                  <div>
-                    <p>FACTURA:</p>
-                    <Dropzone
-                      style={{
-                        position: 'relative',
-                        width: '100%',
-                        height: '30px',
-                        borderWidth: '2px',
-                        borderColor: 'rgb(102, 102, 102)',
-                        borderStyle: 'solid',
-                        borderRadius: '5px',
-                        maxFiles: 5}}
-                        accept=".pdf" onChange={this.handleOnChange2.bind(this)}
-                        >
-                    </Dropzone>
-                    <progress className='progress' value={this.state.pdf2} max='100'>
-                      {this.state.pdf2} %
-                    </progress>
-                    <div className="dz-default dz-message" value={this.state.pdf2} max='100'>
-                      Carga {this.state.pdf2} %</div>
-                  </div>
-                  <div>
-                    <p>RECIBO SIMPLE:</p>
-                    <Dropzone
-                      style={{
-                        position: 'relative',
-                        width: '100%',
-                        height: '30px',
-                        borderWidth: '2px',
-                        borderColor: 'rgb(102, 102, 102)',
-                        borderStyle: 'solid',
-                        borderRadius: '5px',
-                        maxFiles: 5}}
-                        accept=".pdf" onChange={this.handleOnChange3.bind(this)}
-                        >
-                    </Dropzone>
-                    <progress className='progress' value={this.state.pdf3} max='100'>
-                      {this.state.pdf3} %
-                    </progress>
-                    <div className="dz-default dz-message" value={this.state.pdf3} max='100'>
-                      Carga {this.state.pdf3} %</div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          </Popup>
-         </div>
+        <div className='table-v-num'>
+          <div>{this.props.item.cantidadr}</div>
+        </div>
+        <div className='table-v-num'>
+          <div>{this.props.item.reembolso}</div>
+        </div>
+        <div className='table-v-num'>
+          <div>{this.props.item.concepto}</div>
+        </div>
+        <div className='table-v-num'>
+          <div>{this.props.item.oficioS}</div>
+        </div>
+        <div className='table-v-num'>
+          <div>{this.props.item.area}</div>
+        </div>
+        <div className='table-v-num'>
+          <div>{this.props.item.turno}</div>
+        </div>
+        <div className='table-v-num'>
+          <div>{this.props.item.recibos}</div>
+        </div>
+        <div className='table-v-num'>
+          <div>{this.props.item.sc}</div>
+        </div>
+        <div className='table-v-num'>
+          <div>{this.props.item.fecha}</div>
+        </div>
+        <div className='table-v-num'>
+          <div>{this.props.item.autorizo}</div>
+        </div>
+        <div className='table-v-num'>
+          <div>{this.props.item.personaR}</div>
+        </div>
+        <div className='table-v-num'>
+          <button onClick={this.update}>Agregar</button>
+        </div>
         <div class='table-right'>
         </div>
-
       </div>
     );
   }

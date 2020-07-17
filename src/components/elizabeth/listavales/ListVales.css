@@ -353,10 +353,19 @@ select {
     text-align: center;
   }
 }
-
-
-
-
+.margin-f-a {
+  margin-top: 20px;
+}
+.inputs-col-ar {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+}
+.p-container-ar {
+  display: flex;
+  flex-direction: column;
+  width: 30%;
+}
 
 
 
@@ -544,7 +553,6 @@ select {
   justify-content: center;
 }
 .table-v-cantidad {
-  width: 10%;
   border-bottom: 1px solid #d0d0d0;
   border-right: 1px solid #d0d0d0;
   padding-left: 5px;

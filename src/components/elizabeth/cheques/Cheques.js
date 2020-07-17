@@ -95,16 +95,6 @@ export default class Cheques extends Component {
     })
   }
 
-  showAlert(type, message) {
-    this.setState({
-      alert: true,
-      alertData: {type, message}
-    });
-    setTimeout(() => {
-      this.setState({alert: false});
-    }, 6000);
-  }
-
   resetForm() {
     this.refs.contactForm.reset();
   }
@@ -129,28 +119,6 @@ export default class Cheques extends Component {
       let percentage = (snapshot.bytesTransferred / snapshot.totalBytes) * 100
       this.setState({
         pdf: percentage
-      })
-    }, error => {
-      console.error(error.message);
-    }, () =>  storageRef.getDownloadURL().then(url =>  {
-      const record = url;
-      this.setState({
-        archivo: record
-      });
-    }));
-  }
-
-  updateUpload (event) {
-    const file = event.target.files[0]
-    const storageRef = firebase.storage().ref(`cheques/${file.name}`)
-    const task = storageRef.put(file)
-    this.setState({
-      fileUpdate: `${file.name}`
-    })
-    task.on('state_changed', (snapshot) => {
-      let percentage = (snapshot.bytesTransferred / snapshot.totalBytes) * 100
-      this.setState({
-        update: percentage
       })
     }, error => {
       console.error(error.message);
@@ -205,13 +173,13 @@ export default class Cheques extends Component {
       batch.set(statsRef, { storyCount: increment }, { merge: true });
       batch.commit();
       firebase.database().ref('cheques').push(params).then(() => {
-        this.showAlert('success', 'Tu solicitud fue enviada.');
+        alert('Tu solicitud fue enviada.');
       }).catch(() => {
-        this.showAlert('danger', 'Tu solicitud no puede ser enviada');
+        alert('Tu solicitud no puede ser enviada');
       });
       this.resetForm();
     } else {
-      this.showAlert('warning', 'Por favor llene el formulario');
+      alert('Por favor llene el formulario');
     };
   }
 

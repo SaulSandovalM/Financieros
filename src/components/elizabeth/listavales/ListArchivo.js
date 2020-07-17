@@ -56,9 +56,6 @@ export default class ListArchivo extends Component {
             <b>TURNO</b>
           </div>
           <div class='table-v-num'>
-            <b>FACTURA</b>
-          </div>
-          <div class='table-v-num'>
             <b>RECIBOS</b>
           </div>
           <div class='table-v-num'>
@@ -73,6 +70,9 @@ export default class ListArchivo extends Component {
           <div class='table-v-num'>
             <b>RECIBIO</b>
           </div>
+          <div class='table-v-num'>
+            <b>COMPROBACION</b>
+          </div>
           <div class='table-right'>
           </div>
         </div>
@@ -81,6 +81,7 @@ export default class ListArchivo extends Component {
             <RowArchivo
               key={item.id}
               item={item}
+              update={this.props.update}
             />
           )
         }

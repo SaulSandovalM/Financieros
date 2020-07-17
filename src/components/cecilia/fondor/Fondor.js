@@ -134,9 +134,6 @@ export default class Fondor extends Component {
   }
 
   render() {
-
-    console.log(this.state.up);
-
     return (
       <div className='pf-container'>
         <div className='site-pf'>
@@ -239,13 +236,11 @@ export default class Fondor extends Component {
             <button type='submit' className='input-sc boton-g'>Agregar</button>
           </div>
         </form>
-        {this.inputUp === 10 &&
-          <div className='space-table'>
-            <ListComponent
-              lista={this.state.lista}
-            />
-          </div>
-        }
+        <div className='space-table'>
+          <ListComponent
+            lista={this.state.lista}
+          />
+        </div>
       </div>
     )
   }
