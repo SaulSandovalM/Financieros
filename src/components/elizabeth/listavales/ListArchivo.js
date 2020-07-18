@@ -56,9 +56,6 @@ export default class ListArchivo extends Component {
             <b>TURNO</b>
           </div>
           <div class='table-v-num'>
-            <b>RECIBOS</b>
-          </div>
-          <div class='table-v-num'>
             <b>S/C</b>
           </div>
           <div class='table-v-num'>
@@ -69,6 +66,9 @@ export default class ListArchivo extends Component {
           </div>
           <div class='table-v-num'>
             <b>RECIBIO</b>
+          </div>
+          <div class='table-v-num'>
+            <b>EDITAR</b>
           </div>
           <div class='table-v-num'>
             <b>COMPROBACION</b>
