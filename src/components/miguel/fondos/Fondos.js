@@ -623,11 +623,11 @@ export default class Fondos extends Component {
                   />
                 </div>
               </div>
-              <div className='left-b-f'>
+              {/*<div className='left-b-f'>
                 <button className='bt-s-f' type='submit'>
                   Guadar
                 </button>
-              </div>
+              </div>*/}
             </form>
           </div>
         </div>

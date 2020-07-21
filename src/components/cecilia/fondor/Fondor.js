@@ -19,10 +19,10 @@ export default class Fondor extends Component {
         },
       ],
       up: '',
-      partida: '',
-      importe: '',
+      par: '',
       rubro: '',
       archivo: '',
+      dic: '',
       contador: {},
       alert: false
     }
@@ -50,13 +50,19 @@ export default class Fondor extends Component {
     }));
   }
 
+  componentDidMount() {
+    const itemsRef = firebase.database().ref('presupuesto/');
+    this.listenForItems(itemsRef);
+    this.consumo();
+  }
+
   listenForItems = (itemsRef) => {
     itemsRef.on('value', (snap) => {
       var lista = [];
       snap.forEach((child) => {
         lista.push({
           up: child.val().up,
-          partida: child.val().partida,
+          par: child.val().par,
           importe: child.val().importe,
           rubro: child.val().rubro,
           archivo: child.val().archivo,
@@ -69,12 +75,6 @@ export default class Fondor extends Component {
         lista: lista
       });
     });
-  }
-
-  componentDidMount() {
-    const itemsRef = firebase.database().ref('banco/');
-    this.listenForItems(itemsRef);
-    this.consumo();
   }
 
   consumo = () => {
@@ -100,19 +100,19 @@ export default class Fondor extends Component {
     e.preventDefault();
     const params = {
       up: this.inputUp.value,
-      partida: this.inputPartida.value,
+      par: this.inputPartida.value,
       importe: this.inputImporte.value,
       rubro: this.inputRubro.value,
       archivo: this.state.archivo
     };
     this.setState({
       up: this.inputUp.value,
-      partida: this.inputPartida.value,
+      par: this.inputPartida.value,
       importe: this.inputImporte.value,
       rubro: this.inputRubro.value,
       archivo: this.state.archivo
     })
-    if ( params.up && params.partida && params.importe && params.rubro && params.archivo ) {
+    if ( params.up && params.par && params.importe && params.rubro && params.archivo ) {
       var f = parseInt(params.importe);
       const statsRef = firebase.firestore().collection('banco').doc('--stats--');
       const increment = firebase.firestore.FieldValue.increment(f);
@@ -134,9 +134,6 @@ export default class Fondor extends Component {
   }
 
   render() {
-
-    console.log(this.state.up);
-
     return (
       <div className='pf-container'>
         <div className='site-pf'>
@@ -239,13 +236,11 @@ export default class Fondor extends Component {
             <button type='submit' className='input-sc boton-g'>Agregar</button>
           </div>
         </form>
-        {this.inputUp === 10 &&
-          <div className='space-table'>
-            <ListComponent
-              lista={this.state.lista}
-            />
-          </div>
-        }
+        <div className='space-table'>
+          <ListComponent
+            lista={this.state.lista}
+          />
+        </div>
       </div>
     )
   }

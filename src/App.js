@@ -25,7 +25,7 @@ import ListArchivosV from './components/elizabeth/listavales/ListArchivosV';
 import Autorizacion from './components/elizabeth/autorizacion/Autorizacion';
 import Arqueo from './components/elizabeth/arqueo/Arqueo';
 //Parte de Miguel
-import Fondos from './components/miguel/fondos/Fondos';
+import Fondos from './components/miguel/fondos/NewFondos';
 import Comprometidos from './components/miguel/comprometidos/Comprometidos';
 import Edit from './components/miguel/comprometidos/Edit';
 import Analitico from './components/miguel/analitico/Analitico';

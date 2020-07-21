@@ -60,3 +60,194 @@
   border: 0px;
   padding: 6px;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.f-f-c-w {
+  width: 75%;
+}
+.n-f-c {
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: row;
+  width: 100%;
+  margin-top: 10px;
+}
+.b-s-f {
+  background-color: #092432;
+  color: white;
+  padding: 8px;
+  border: 0px;
+  border-top-right-radius: 15px;
+  border-top-left-radius: 4px;
+}
+.f-container {
+  width: 100%;
+}
+.f-t-c {
+  margin: 0px;
+}
+.m-f {
+  margin: 20px;
+}
+.f-f {
+  display: flex;
+  flex-direction: row;
+  margin-top: 16px;
+  width: 100%;
+}
+.f-ff {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+}
+.f-f2 {
+  display: flex;
+  flex-direction: row;
+  width: 50%;
+}
+.f-f3 {
+  display: flex;
+  flex-direction: row;
+  margin-top: 15px;
+  margin-right: 20px;
+}
+.fp {
+  margin: 4px;
+  width: 50%;
+}
+.fpb {
+  margin: 4px;
+  width: 24%;
+}
+.f-b-s {
+  height: 20px;
+  text-align: center;
+  width: 50%;
+}
+.f-l-w {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  margin: 15px;
+}
+.l-w {
+  width: 100%;
+  border-bottom: 2px solid;
+}
+.lp {
+  margin: 4px;
+  width: 50%;
+}
+.f-l-s {
+  height: 20px;
+  text-align: center;
+  width: 50%;
+}
+.l-f-c {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+}
+.k-dropdown, .k-dropdowntree {
+  width: 51% !important;
+}
+.f-t-a {
+  width: 50.5%;
+  height: 26px;
+  padding: 0px;
+}
+.c-f-s {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  justify-content: space-between;
+}
+.c-f-s2 {
+  display: flex;
+  flex-direction: row;
+}
+.fpc {
+  margin: 1px;
+}
+.f-c-c {
+  display: flex;
+  flex-direction: row;
+  margin-top: 10px;
+}
+.fc {
+  margin: 4px;
+  width: 150px;
+}
+.ci {
+  height: 20px;
+}
+.fc-w {
+  width: 30%;
+}
+.fcc {
+  display: flex;
+  flex-direction: row;
+}
+.axc {
+  width: 70%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.cx {
+  border: 1px solid;
+  height: 180px;
+  width: 48%;
+}
+.com-com {
+  margin: 20px;
+}
+.table-fc {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  margin-top: 30px;
+}
+.tfc {
+  width: 14.2%;
+  text-align: center;
+  background-color: #092432;
+  color: white;
+  padding: 8px;
+  border-right: 1px solid #FFF;
+}
