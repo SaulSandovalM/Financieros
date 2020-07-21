@@ -105,7 +105,8 @@
   justify-content: flex-start;
   flex-direction: row;
   width: 100%;
-  margin-top: 10px;
+  padding-top: 10px;
+  margin-bottom: -20px;
 }
 .b-s-f {
   background-color: #092432;
@@ -122,7 +123,10 @@
   margin: 0px;
 }
 .m-f {
-  margin: 20px;
+  margin: 20px 0px 20px 0px;
+  border-top: 1px solid;
+  background: #f4f4f4;
+  padding: 0px 20px 0px 20px;
 }
 .f-f {
   display: flex;
@@ -250,4 +254,36 @@
   color: white;
   padding: 8px;
   border-right: 1px solid #FFF;
+}
+.fcc-i {
+  display: flex;
+  flex-direction: row;
+  margin-top: 10px;
+}
+.fimpre {
+  margin: 4px;
+  width: 180px;
+}
+.b-imp {
+  background: green;
+  color: white;
+  padding: 6px;
+  border: 0px;
+  margin-left: 10px;
+  cursor: pointer;
+}
+.fr-b {
+  border-bottom: 2px solid;
+}
+.fr-con {
+  width: 30%;
+}
+.zz {
+  z-index: 3;
+  position: relative;
+  height: 100vh;
+  background-color: white;
+}
+.contra {
+
 }
