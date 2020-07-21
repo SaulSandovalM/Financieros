@@ -10,6 +10,8 @@ export default class ListComponent extends Component {
      presupuesto: [],
      search: '',
      search2: '',
+     nameFilter : '',
+    genreFilter : ','
    };
  }
 
@@ -25,13 +27,49 @@ export default class ListComponent extends Component {
     this.setState({search: event.target.value.substr(0,20)})
   }
 
+  updateSeacrh2(event) {
+    this.setState({search2: event.target.value.substr(0,20)})
+  }
+
+  setMovieState = (e) => {
+  let searchField = e.target.value;
+  this.setState(()=>{
+    return({
+      nameFilter : searchField
+    })
+  })
+}
+
+setGenreState = (e) => {
+  const genreFilter = e.target.value;
+  if(genreFilter === 'All'){
+    this.setState(()=>{
+      return({genreFilter : ','})
+    })
+  }else{
+    this.setState(()=>{
+      return({genreFilter})
+    })
+  }
+}
+
   render() {
 
     let filterData = this.state.presupuesto.filter(
       (presupuesto) => {
-        return presupuesto.up.indexOf(this.state.search) !== -1;
+        return presupuesto.par.indexOf(this.state.search) !== -1;
       }
     );
+
+    // const presupuestoList = this.state.presupuesto.map((presupuesto , i) => {
+    //   if(presupuesto.revenue !== "" && presupuesto.up.indexOf(this.state.nameFilter) >-1  && presupuesto.par.indexOf(this.state.genreFilter) >= 0){
+    //     return(
+    //       <RowComponent presupuesto={presupuesto} key={i}/>
+    //     )
+    //   }else{
+    //     return <tr key={i}></tr>;
+    //   }
+    // })
 
     return (
       <div>
@@ -39,6 +77,11 @@ export default class ListComponent extends Component {
           className='input-style-fr'
           value={this.state.search}
           onChange={this.updateSeacrh.bind(this)}
+        />
+        <input
+          className='input-style-fr'
+          value={this.state.search2}
+          onChange={this.updateSeacrh2.bind(this)}
         />
         <div class='table-container-p'>
           <div class='table-left'>
@@ -69,6 +112,8 @@ export default class ListComponent extends Component {
             />
           )
         }
+
+
       </div>
     );
   }

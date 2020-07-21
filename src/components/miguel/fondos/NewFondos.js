@@ -29,6 +29,32 @@ export default class Fondos extends Component {
       isHidden: 1
     }
   }
+
+  toggleHidden1() {
+    this.setState({
+      isHidden: 1
+    })
+  }
+  toggleHidden2() {
+    this.setState({
+      isHidden: 2
+    })
+  }
+  toggleHidden3() {
+    this.setState({
+      isHidden: 3
+    })
+  }
+  toggleHidden4() {
+    this.setState({
+      isHidden: 4
+    })
+  }
+  toggleHidden5() {
+    this.setState({
+      isHidden: 5
+    })
+  }
   //options
   tipo_doc = ['Pago Directo', 'Fondo Revolvente', 'Gasto a Comprobar', 'Cancelado'];
   tipo_doc2 = ['Fondo Revolvente', 'Pago Directo'];
@@ -38,17 +64,20 @@ export default class Fondos extends Component {
 
     const allowCustom = this.state.allowCustom;
     const { tipo_doc, oficio_aut, no_oficio, no_lici, importe, desc, beneficiario } = this.state;
+    console.log(this.state.isHidden);
 
     return (
-      <div>
+      <div className='zz'>
         <div className='n-f-c'>
-          <button className='b-s-f'>Registro de Fondos</button>
-          <button className='b-s-f'>Comprometido</button>
-          <button className='b-s-f'>Oficios</button>
-          <button className='b-s-f'>Complemento de Pago</button>
+          <button className='b-s-f' onClick={this.toggleHidden1.bind(this)}>Registro de Fondos</button>
+          <button className='b-s-f' onClick={this.toggleHidden2.bind(this)}>Comprometido</button>
+          <button className='b-s-f' onClick={this.toggleHidden3.bind(this)}>Oficios</button>
+          <button className='b-s-f' onClick={this.toggleHidden4.bind(this)}>Contrarecibos</button>
+          <button className='b-s-f' onClick={this.toggleHidden5.bind(this)}>Complemento de Pago</button>
         </div>
 
-        <div className='m-f'>
+        {this.state.isHidden === 1 &&
+          <div className='m-f'>
           <form>
             <div className='f-f-c-w'>
               <div className='f-f'>
@@ -104,8 +133,8 @@ export default class Fondos extends Component {
                 </div>
               </div>
               <div className='f-f'>
-                <div className='f-f2'>
-                  <p className='fp'>Importe letra</p>
+                <div className='f-ff'>
+                  <p className='fpb'>Importe letra</p>
                   <input className='f-b-s'/>
                 </div>
               </div>
@@ -195,9 +224,10 @@ export default class Fondos extends Component {
               </div>
             </div>
           </form>
-        </div>
+        </div>}
 
-        {/*<div className='com-com'>
+        {this.state.isHidden === 2 &&
+          <div className='com-com'>
           <div className='fcc'>
             <div className='fc-w'>
               <div className='f-c-c'>
@@ -255,8 +285,114 @@ export default class Fondos extends Component {
               Fecha
             </div>
           </div>
+        </div>
+      }
 
-        </div>*/}
+        {this.state.isHidden === 3 &&
+          <div>
+          <div className='m-f'>
+            <div className='fr-con'>
+              <p className='fr-b'><b>Fondo Revolvente</b></p>
+            </div>
+            <div className='fcc-i'>
+              <p className='fimpre'>Solicitud Programatica</p>
+              <button className='b-imp'>Imprimir</button>
+            </div>
+            <div className='fcc-i'>
+              <p className='fimpre'>Oficio Presentación</p>
+              <button className='b-imp'>Imprimir</button>
+            </div>
+            <div className='fcc-i'>
+              <p className='fimpre'>Recibo Global</p>
+              <button className='b-imp'>Imprimir</button>
+            </div>
+            <div className='fcc-i'>
+              <p className='fimpre'>Leyenda Alusivas</p>
+              <button className='b-imp'>Imprimir</button>
+            </div>
+          </div>
+
+          <div className='m-f'>
+            <div className='fr-con'>
+              <p className='fr-b'><b>Pago Programatica</b></p>
+            </div>
+            <div className='fcc-i'>
+              <p className='fimpre'>Solicitud Programatica</p>
+              <button className='b-imp'>Imprimir</button>
+            </div>
+            <div className='fcc-i'>
+              <p className='fimpre'>Oficio Presentación</p>
+              <button className='b-imp'>Imprimir</button>
+            </div>
+            <div className='fcc-i'>
+              <p className='fimpre'>Leyenda Alusivas</p>
+              <button className='b-imp'>Imprimir</button>
+            </div>
+          </div>
+
+          <div className='m-f'>
+            <div className='fr-con'>
+              <p className='fr-b'><b>Gastos a Comprobar</b></p>
+            </div>
+            <div className='fcc-i'>
+              <p className='fimpre'>Oficio Presentación</p>
+              <button className='b-imp'>Imprimir</button>
+            </div>
+            <div className='fcc-i'>
+              <p className='fimpre'>Solicitud Programatica</p>
+              <button className='b-imp'>Imprimir</button>
+            </div>
+            <div className='fcc-i'>
+              <p className='fimpre'>Leyendas Alusivas al Gasto</p>
+              <button className='b-imp'>Imprimir</button>
+            </div>
+          </div>
+
+        </div>
+      }
+
+        {this.state.isHidden === 4 &&
+          <div>
+          <div className='m-f'>
+            <div className='fcc-i'>
+              <p className='fimpre'>Fecha Contrarecibo:</p>
+              <input />
+            </div>
+            <div className='fcc-i'>
+              <p className='fimpre'>No. Contrarecibo:</p>
+              <input />
+            </div>
+            <div className='fcc-i'>
+              <p className='fimpre'>Fecha Deposito:</p>
+              <input />
+            </div>
+            <div className='fcc-i'>
+              <p className='fimpre'>Cuenta por Pagar:</p>
+              <input />
+            </div>
+            <div className='fcc-i'>
+              <p className='fimpre'>Beneficiario/Proveedor:</p>
+              <input />
+            </div>
+            <div className='fcc-i'>
+              <p className='fimpre'>Sujeto Contable:</p>
+              <input />
+            </div>
+            <div className='fcc-i'>
+              <p className='fimpre'>Solicitud Programatica:</p>
+              <input />
+            </div>
+            <div className='fcc-i'>
+              <p className='fimpre'>Monto:</p>
+              <input />
+            </div>
+            <div className='fcc-i'>
+              <p className='fimpre'>CPA:</p>
+              <input />
+            </div>
+          </div>
+        </div>}
+
       </div>
     )
   }
