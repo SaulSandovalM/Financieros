@@ -195,20 +195,20 @@ export default class Fondos extends Component {
   sendMessageCompro(e) {
     e.preventDefault();
     const params = {
-      partida: this.inputPartida.partida,
-      up: this.inputUp.up,
+      partida: this.inputPartida.value,
+      up: this.inputUp.value,
       no_proyecto: this.inputNoProyecto.value,
       municipio: this.inputMunicipio.value,
       area: this.inputNoOficio.value,
-      total: this.state.totalImporte
+      total: this.inputTotal.value
     };
     this.setState({
-      partida: this.inputPartida.partida,
-      up: this.inputUp.up,
+      partida: this.inputPartida.value,
+      up: this.inputUp.value,
       no_proyecto: this.inputNoProyecto.value,
       municipio: this.inputMunicipio.value,
       area: this.inputNoOficio.value,
-      total: this.state.totalImporte
+      total: this.inputTotal.value
     })
     if ( params.partida && params.up && params.no_proyecto && params.municipio && params.area && params.total ) {
       firebase.database().ref('fondos').push(params).then(() => {
@@ -855,6 +855,10 @@ export default class Fondos extends Component {
                 <XmlAsi />
               </div>
             </div>
+
+            <input value={(totalImporte.reduce(reducer))}
+              name='total' onChange={this.onChange}
+              ref={total => this.inputTotal = total}/>
 
             <div className='button-row-s'>
               <button type='submit' className='input-sc boton-g'>Agregar</button>
