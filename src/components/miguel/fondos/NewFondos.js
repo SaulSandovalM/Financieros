@@ -896,7 +896,7 @@ export default class Fondos extends Component {
             </div>
             <div className='fcc-i'>
               <p className='fimpre'>Solicitud Programatica</p>
-              <button className='b-imp'>Imprimir</button>
+              <button className='b-imp' onClick={() => this.props.history.push('/Pdf/IopOetql2iBVF1IAsFWd')}>Imprimir</button>
             </div>
             <div className='fcc-i'>
               <p className='fimpre'>Oficio Presentación</p>
