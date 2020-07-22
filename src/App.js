@@ -230,6 +230,7 @@ function App(props) {
       <Route path='/Frpdf/:id' component={Frpdf} />
       <Route path='/Cpdf/:id' component={Cpdf} />
       <Route path='/add/:id' component={Add} />
+      <Route path='/Complemento' component={Complemento} />
     </Switch>
   );
 }
