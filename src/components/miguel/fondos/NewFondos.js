@@ -4,6 +4,8 @@ import firebase from '../../../Firebase';
 import { NumberAsString } from './NumerosLetras.js';
 import { DropDownList } from '@progress/kendo-react-dropdowns';
 import '@progress/kendo-theme-default/dist/all.css';
+import XmlComp from './sin/XmlComp';
+import XmlAsi from './asi/XmlAsi';
 
 export default class Fondos extends Component {
   constructor (props) {
@@ -20,13 +22,20 @@ export default class Fondos extends Component {
       desc: '',
       beneficiario: '',
       realizo: '',
+      //comprometido
+      partida: '',
+      up: '',
+      no_proyecto: '',
       fondos: [],
       allowCustom: true,
       value: '',
       suggest: '',
       key: '',
       contador: {},
-      isHidden: 1
+      isHidden: 1,
+      lista: [],
+      listas: [],
+      totalImporte: ''
     }
   }
 
@@ -61,11 +70,12 @@ export default class Fondos extends Component {
   tipo_doc = ['Pago Directo', 'Fondo Revolvente', 'Gasto a Comprobar', 'Cancelado', 'Licitación'];
   tipo_doc2 = ['Fondo Revolvente', 'Pago Directo'];
   tipo_doc3 = ['Pago Directo'];
+  partida = ['211001', '211002', '212001', '212002', '214001', '214002', '215001', '216001', '217001', '221001', '221002', '246001', '251001', '253001', '254001', '255001', '261001', '271001', '272001', '291001', '292001', '311001', '313001', '318001', '323002', '334001', '338001', '341001', '351001', '352001', '353001', '355001', '357001', '358001', '361002', '372001', '375001', '381001', '392006', '394001', '218002', '312001', '371001', '247001', '249001', '359001', '336001', '275001', '211003', '541001', '515001', '339001'];
+  up = ['2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '20', '21', '22', '23', '24'];
+  no_proyecto = ['U027 425', 'U029 425', 'U027 1208', 'U029 1208', 'U027 1860', 'U029 1860', 'U024 2686','U027 2686','U029 2686','U038 2514',]
+  municipio = ['Acatlán', 'Acaxochitlán', 'Actopan', 'Agua Blanca de Iturbide','Ajacuba','Alfajayucan','Almoloya','Apan','El Arenal','Atitalaquia','Atlapexco','Atotonilco el Grande','Atotonilco de Tula','Calnali','Cardonal','Cuautepec de Hinojosa','Chapantongo','Chapulhuacán','Chilcuautla','Eloxochitlán','Emiliano Zapata','Epazoyucan','Franciso I. Madero','Huasca de Ocampo','Huautla','Huazalingo','Huehuetla','Huejutla de Reyes','Huichapan','Ixmiquilpan','Jacala de Ledezma','Jaltocán','Juárez Hidalgo','Lolotla','Metepec','San Agustín Metzquititlán','Metztitlán','Mineral del Chico','Mineral del Monte','La Misión','Mixquiahuala de Juárez','Molango de Escamilla','Nicolás Flores','Nopala de Villagrán','Omitlán de Juárez','San Felipe Orizatlán','Pacula','Pachuca de Soto','Pisaflores','Progreso de Obregón','Mineral de la Reforma','San Agustín Tlaxiaca','San Bartolo Tutotepec','San Salvador','Santiago de Anaya','Santiago Tulantepec de Lugo Guerrero','Singuilucan','Tasquillo','Tecozautla','Tenango de Doria','Tepeapulco','Tepehuacán de Guerrero','Tepeji del Río de Ocampo','Tepetitlán','Tetepango','Villa de Tezontepec','Tezontepec de Aldama','Tianguistengo','Tizayuca','Tlahuelilpan','Tlahuiltepa','Tlanalapa','Tlanchinol','Tlaxcoapan','Tolcayuca','Tula de Allende','Tulancingo de Bravo','Xochiatipan','Xochicoatlán','Yahualica','Zacualtipán de Ángeles','Zapotlán de Juárez','Zempoala','Zimapán']
+  area = ['Procuraduría General de Justicia','Subprocuraduría de Procedimientos Penales Región Oriente','Fiscalía Especializada para la atención de Delitos cometidos contra la Libertad de Expresión, Periodistas y Personas defensoras de los Derechos Humanos','Dirección General para la Atención de los Asuntos del Sistema Tradicional','Fiscalia de Delitos Electorales','Subprocuraduría de Derechos Humanos y Servicios a la Comunidad','Centro de Justicia Restaurativa Penal Poniente','Fiscalía para la Atención de Delitos de Género','Visitaduría General','Dirección General de Servicios Periciales','Centro de Operación Estratégica','Unidad Especializada en el Combate al Secuestro','Dirección General de Administración y Finanzas','Fiscalía Especializada para la atención de los Delitos de Trata de Personas','Subprocuraduría de Procedimientos Penales Región Poniente','Centro de Atención Temprana Poniente','Dirección General de Investigación y Litigación Poniente','Dirección General de la Policía Investigadora','Centro de Atención Temprana Oriente','Centro de Justicia Restaurativa Penal Oriente','Dirección General de Investigación y Litigación Oriente','Dirección General de Recursos Materiales y Servicios','Fiscalía Especializada en Delitos de Corrupción','Fiscalía Especializada en Materia de Desaparición Forzada de Personas',]
   //consumo de numero de fondo
-
-  componentDidMount() {
-    this.consumo();
-  }
 
   consumo = () => {
     const ref = firebase.firestore().collection('fondos').doc('--stats--');
@@ -88,7 +98,138 @@ export default class Fondos extends Component {
     this.setState(state);
   }
 
+  componentDidMount() {
+    const itemsRef = firebase.database().ref('fondos/');
+    this.listenForItems(itemsRef);
+    const itemsRefs = firebase.database().ref('xml2/');
+    this.listForSum(itemsRefs);
+    this.consumo();
+  }
+
+  listenForItems = (itemsRef) => {
+    itemsRef.on('value', (snap) => {
+      var lista = [];
+      snap.forEach((child) => {
+        lista.push({
+          up: child.val().up,
+          par: child.val().par,
+          importe: child.val().importe,
+          rubro: child.val().rubro,
+          archivo: child.val().archivo,
+          cpa: child.val().cpa,
+          done: child.val().done,
+          id: child.key
+        });
+      });
+      this.setState({
+        lista: lista
+      });
+    });
+  }
+
+  listForSum = (itemsRefs) => {
+    itemsRefs.on('value', (snap) => {
+      var listas = [];
+      snap.forEach((child) => {
+        listas.push({
+          up: child.val().up,
+          par: child.val().par,
+          importe: child.val().importe,
+          rubro: child.val().rubro,
+          archivo: child.val().archivo,
+          cpa: child.val().cpa,
+          done: child.val().done,
+          id: child.key
+        });
+      });
+      this.setState({
+        listas: listas
+      });
+    });
+  }
+
+  resetForm() {
+    this.refs.contactForm.reset();
+  }
+
+  sendMessage(e) {
+    e.preventDefault();
+    const params = {
+      fondo: this.state.fondo,
+      fecha: this.state.fecha,
+      tipo_doc: this.inputTipodoc.value,
+      oficio_aut: this.inputOficioA.value,
+      no_oficio: this.inputNoOficio.value,
+      no_lici: this.inputNoLicitacion.value,
+      importe: this.inputImporte.value,
+      desc: this.inputDesc.value,
+      beneficiario: this.inputBeneficiario.value,
+      realizo: this.state.realizo
+    };
+    this.setState({
+      fondo: this.state.fondo,
+      fecha: this.state.fecha,
+      tipo_doc: this.inputTipodoc.value,
+      oficio_aut: this.inputOficioA.value,
+      no_oficio: this.inputNoOficio.value,
+      no_lici: this.inputNoLicitacion.value,
+      importe: this.inputImporte.value,
+      desc: this.inputDesc.value,
+      beneficiario: this.inputBeneficiario.value,
+      realizo: this.state.realizo
+    })
+    if ( params.fondo && params.fecha && params.tipo_doc && params.oficio_aut && params.no_oficio &&
+        params.no_lici && params.importe && params.desc && params.beneficiario && params.realizo ) {
+      firebase.database().ref('fondos').push(params).then(() => {
+        alert('Tu solicitud fue enviada.');
+      }).catch(() => {
+        alert('Tu solicitud no puede ser enviada');
+      });
+      this.resetForm();
+      setInterval(this.consumo, 1000);
+    } else {
+      alert('Por favor llene el formulario');
+    };
+  }
+
+  sendMessageCompro(e) {
+    e.preventDefault();
+    const params = {
+      partida: this.inputPartida.partida,
+      up: this.inputUp.up,
+      no_proyecto: this.inputNoProyecto.value,
+      municipio: this.inputMunicipio.value,
+      area: this.inputNoOficio.value,
+      total: this.state.totalImporte
+    };
+    this.setState({
+      partida: this.inputPartida.partida,
+      up: this.inputUp.up,
+      no_proyecto: this.inputNoProyecto.value,
+      municipio: this.inputMunicipio.value,
+      area: this.inputNoOficio.value,
+      total: this.state.totalImporte
+    })
+    if ( params.partida && params.up && params.no_proyecto && params.municipio && params.area && params.total ) {
+      firebase.database().ref('fondos').push(params).then(() => {
+        alert('Tu solicitud fue enviada.');
+      }).catch(() => {
+        alert('Tu solicitud no puede ser enviada');
+      });
+      this.resetForm();
+      setInterval(this.consumo, 1000);
+    } else {
+      alert('Por favor llene el formulario');
+    };
+  }
+
   render() {
+
+    let totalImporte = [];
+    this.state.listas.map(item => (
+      totalImporte.push(item.importe)
+    ))
+    const reducer = (a, b) => a + b;
 
     var user = firebase.auth().currentUser;
     var email;
@@ -127,19 +268,19 @@ export default class Fondos extends Component {
     var dd = today.getDate();
     var mm = today.getMonth()+1;
     var yyyy = today.getFullYear();
-    if ( dd < 10 ){
+    if ( dd < 10 ) {
       dd = '0' + dd
     }
-    if ( mm < 10 ){
+    if ( mm < 10 ) {
       mm = '0' + mm
     }
     today = dd + '/' + mm + '/' + yyyy;
     const allowCustom = this.state.allowCustom;
-    const { tipo_doc, oficio_aut, no_oficio, no_lici, importe, desc, beneficiario } = this.state;
+    const { tipo_doc, oficio_aut, no_oficio, no_lici, importe, desc, beneficiario,
+            partida, up, no_proyecto, municipio, area } = this.state;
     this.state.fondo = this.state.contador.nFondo;
     this.state.fecha = today;
     this.state.realizo = admin;
-    console.log(this.state.isHidden);
 
     return (
       <div className='zz'>
@@ -153,7 +294,7 @@ export default class Fondos extends Component {
 
         {this.state.isHidden === 1 &&
           <div className='m-f'>
-          <form>
+          <form onSubmit={this.sendMessage.bind(this)} ref='contactForm'>
             <div className='f-f-c-w'>
               <div className='f-f'>
                 <div className='f-f2'>
@@ -194,7 +335,7 @@ export default class Fondos extends Component {
                       value={tipo_doc}
                       onChange={this.onChange}
                       required
-                      ref='tipo_doc'
+                      ref={tipo_doc => this.inputTipodoc = tipo_doc}
                     />
                   }
                   {admin === 'NAYRA' &&
@@ -213,7 +354,7 @@ export default class Fondos extends Component {
                       value={tipo_doc}
                       onChange={this.onChange}
                       required
-                      ref='tipo_doc'
+                      ref={tipo_doc => this.inputTipodoc = tipo_doc}
                     />
                   }
                   {admin === 'LAURA' &&
@@ -232,7 +373,7 @@ export default class Fondos extends Component {
                       value={tipo_doc}
                       onChange={this.onChange}
                       required
-                      ref='tipo_doc'
+                      ref={tipo_doc => this.inputTipodoc = tipo_doc}
                     />
                   }
                   {admin === 'MIGUEL' &&
@@ -251,7 +392,7 @@ export default class Fondos extends Component {
                       value={tipo_doc}
                       onChange={this.onChange}
                       required
-                      ref='tipo_doc'
+                      ref={tipo_doc => this.inputTipodoc = tipo_doc}
                     />
                   }
                   {admin === 'TERESA' &&
@@ -270,7 +411,7 @@ export default class Fondos extends Component {
                       value={tipo_doc}
                       onChange={this.onChange}
                       required
-                      ref='tipo_doc'
+                      ref={tipo_doc => this.inputTipodoc = tipo_doc}
                     />
                   }
                   {admin === 'MARCOS' &&
@@ -289,7 +430,7 @@ export default class Fondos extends Component {
                       value={tipo_doc}
                       onChange={this.onChange}
                       required
-                      ref='tipo_doc'
+                      ref={tipo_doc => this.inputTipodoc = tipo_doc}
                     />
                   }
                   {admin === 'ELOY' &&
@@ -308,7 +449,7 @@ export default class Fondos extends Component {
                       value={tipo_doc}
                       onChange={this.onChange}
                       required
-                      ref='tipo_doc'
+                      ref={tipo_doc => this.inputTipodoc = tipo_doc}
                     />
                   }
                   {admin === 'KARINA' &&
@@ -327,7 +468,7 @@ export default class Fondos extends Component {
                       value={tipo_doc}
                       onChange={this.onChange}
                       required
-                      ref='tipo_doc'
+                      ref={tipo_doc => this.inputTipodoc = tipo_doc}
                     />
                   }
                   {admin === 'MARTHA' &&
@@ -346,7 +487,7 @@ export default class Fondos extends Component {
                       value={tipo_doc}
                       onChange={this.onChange}
                       required
-                      ref='tipo_doc'
+                      ref={tipo_doc => this.inputTipodoc = tipo_doc}
                     />
                   }
                   {admin === 'LILIA' &&
@@ -365,7 +506,7 @@ export default class Fondos extends Component {
                       value={tipo_doc}
                       onChange={this.onChange}
                       required
-                      ref='tipo_doc'
+                      ref={tipo_doc => this.inputTipodoc = tipo_doc}
                     />
                   }
                   {admin === 'CENELY' &&
@@ -384,7 +525,7 @@ export default class Fondos extends Component {
                       value={tipo_doc}
                       onChange={this.onChange}
                       required
-                      ref='tipo_doc'
+                      ref={tipo_doc => this.inputTipodoc = tipo_doc}
                     />
                   }
                   {admin === 'HECTOR' &&
@@ -403,7 +544,7 @@ export default class Fondos extends Component {
                       value={tipo_doc}
                       onChange={this.onChange}
                       required
-                      ref='tipo_doc'
+                      ref={tipo_doc => this.inputTipodoc = tipo_doc}
                     />
                   }
                   {admin === 'OMAR' &&
@@ -422,7 +563,7 @@ export default class Fondos extends Component {
                       value={tipo_doc}
                       onChange={this.onChange}
                       required
-                      ref='tipo_doc'
+                      ref={tipo_doc => this.inputTipodoc = tipo_doc}
                     />
                   }
                 </div>
@@ -445,7 +586,7 @@ export default class Fondos extends Component {
                     value={oficio_aut}
                     onChange={this.onChange}
                     required
-                    ref='oficio_aut'
+                    ref={oficio_aut => this.inputOficioA = oficio_aut}
                   />
                 </div>
               </div>
@@ -457,7 +598,7 @@ export default class Fondos extends Component {
                     name='no_oficio'
                     onChange={this.onChange}
                     required
-                    ref='no_oficio'
+                    ref={no_oficio => this.inputNoOficio = no_oficio}
                   />
                 </div>
               </div>
@@ -469,7 +610,7 @@ export default class Fondos extends Component {
                     name='no_lici'
                     onChange={this.onChange}
                     required
-                    ref='no_lici'
+                    ref={no_lici => this.inputNoLicitacion = no_lici}
                   />
                 </div>
               </div>
@@ -482,7 +623,7 @@ export default class Fondos extends Component {
                     value={importe}
                     onChange={this.onChange}
                     required
-                    ref='importe'
+                    ref={importe => this.inputImporte = importe}
                   />
                 </div>
               </div>
@@ -515,7 +656,7 @@ export default class Fondos extends Component {
                     value={beneficiario}
                     onChange={this.onChange}
                     required
-                    ref="beneficiario"
+                    ref={beneficiario => this.inputBeneficiario = beneficiario}
                   />
                 </div>
               </div>
@@ -528,7 +669,7 @@ export default class Fondos extends Component {
                     name='desc'
                     onChange={this.onChange}
                     required
-                    ref='desc'
+                    ref={desc => this.inputDesc = desc}
                   />
                 </div>
               </div>
@@ -589,229 +730,137 @@ export default class Fondos extends Component {
                 </div>
               </div>
             </div>
+            <div className='button-row-s'>
+              <button type='submit' className='input-sc boton-g'>Agregar</button>
+            </div>
           </form>
         </div>}
 
         {this.state.isHidden === 2 &&
           <div className='com-com'>
-          <div className='fcc'>
+          <form onSubmit={this.sendMessageCompro.bind(this)} ref='contactForm' className='fcc'>
             <div className='fc-w'>
               <div className='f-c-c'>
                 <p className='fc'>Partida</p>
-                <select name='partida' onChange={this.onChange} ref='partida' className='ci'>
-                  <option name='partida'></option>
-                  <option name='partida'>211001</option>
-                  <option name='partida'>211002</option>
-                  <option name='partida'>212001</option>
-                  <option name='partida'>212002</option>
-                  <option name='partida'>214001</option>
-                  <option name='partida'>214002</option>
-                  <option name='partida'>215001</option>
-                  <option name='partida'>216001</option>
-                  <option name='partida'>217001</option>
-                  <option name='partida'>221001</option>
-                  <option name='partida'>221002</option>
-                  <option name='partida'>246001</option>
-                  <option name='partida'>251001</option>
-                  <option name='partida'>253001</option>
-                  <option name='partida'>254001</option>
-                  <option name='partida'>255001</option>
-                  <option name='partida'>261001</option>
-                  <option name='partida'>271001</option>
-                  <option name='partida'>272001</option>
-                  <option name='partida'>291001</option>
-                  <option name='partida'>292001</option>
-                  <option name='partida'>311001</option>
-                  <option name='partida'>313001</option>
-                  <option name='partida'>318001</option>
-                  <option name='partida'>323002</option>
-                  <option name='partida'>334001</option>
-                  <option name='partida'>338001</option>
-                  <option name='partida'>341001</option>
-                  <option name='partida'>351001</option>
-                  <option name='partida'>352001</option>
-                  <option name='partida'>353001</option>
-                  <option name='partida'>355001</option>
-                  <option name='partida'>357001</option>
-                  <option name='partida'>358001</option>
-                  <option name='partida'>361002</option>
-                  <option name='partida'>372001</option>
-                  <option name='partida'>375001</option>
-                  <option name='partida'>381001</option>
-                  <option name='partida'>392006</option>
-                  <option name='partida'>394001</option>
-                  <option name='partida'>218002</option>
-                  <option name='partida'>312001</option>
-                  <option name='partida'>371001</option>
-                  <option name='partida'>247001</option>
-                  <option name='partida'>249001</option>
-                  <option name='partida'>359001</option>
-                  <option name='partida'>336001</option>
-                  <option name='partida'>275001</option>
-                  <option name='partida'>211003</option>
-                  <option name='partida'>541001</option>
-                  <option name='partida'>515001</option>
-                  <option name='partida'>339001</option>
-                </select>
+                <DropDownList
+                  suggest={true}
+                  style={{
+                    borderColor: 'rgba(0,0,0,0.42)',
+                    background: 'white',
+                    height: '28px',
+                    width: '100%',
+                    color: 'black',
+                    position: 'static',
+                  }}
+                  data={this.partida}
+                  allowCustom={allowCustom}
+                  name="partida"
+                  value={partida}
+                  onChange={this.onChange}
+                  required
+                  ref={partida => this.inputPartida = partida}
+                />
               </div>
               <div className='f-c-c'>
                 <p className='fc'>Unidad Presupuestal</p>
-                <select name='presupuestal' onChange={this.onChange} ref='presupuestal' className='ci'>
-                  <option name='presupuestal'></option>
-                  <option name='presupuestal'>2</option>
-                  <option name='presupuestal'>3</option>
-                  <option name='presupuestal'>4</option>
-                  <option name='presupuestal'>5</option>
-                  <option name='presupuestal'>6</option>
-                  <option name='presupuestal'>7</option>
-                  <option name='presupuestal'>8</option>
-                  <option name='presupuestal'>9</option>
-                  <option name='presupuestal'>10</option>
-                  <option name='presupuestal'>11</option>
-                  <option name='presupuestal'>12</option>
-                  <option name='presupuestal'>13</option>
-                  <option name='presupuestal'>14</option>
-                  <option name='presupuestal'>15</option>
-                  <option name='presupuestal'>16</option>
-                  <option name='presupuestal'>17</option>
-                  <option name='presupuestal'>18</option>
-                  <option name='presupuestal'>20</option>
-                  <option name='presupuestal'>21</option>
-                  <option name='presupuestal'>22</option>
-                  <option name='presupuestal'>23</option>
-                  <option name='presupuestal'>24</option>
-                </select>
+                <DropDownList
+                  suggest={true}
+                  style={{
+                    borderColor: 'rgba(0,0,0,0.42)',
+                    background: 'white',
+                    height: '28px',
+                    width: '100%',
+                    color: 'black',
+                    position: 'static',
+                  }}
+                  data={this.up}
+                  allowCustom={allowCustom}
+                  name="up"
+                  value={up}
+                  onChange={this.onChange}
+                  required
+                  ref={up => this.inputUp = up}
+                />
               </div>
               <div className='f-c-c'>
                 <p className='fc'>No. de Proyecto</p>
-                <select
-                  name='no_proyecto'
+                <DropDownList
+                  suggest={true}
+                  style={{
+                    borderColor: 'rgba(0,0,0,0.42)',
+                    background: 'white',
+                    height: '28px',
+                    width: '100%',
+                    color: 'black',
+                    position: 'static',
+                  }}
+                  data={this.no_proyecto}
+                  allowCustom={allowCustom}
+                  name="no_proyecto"
+                  value={no_proyecto}
                   onChange={this.onChange}
-                  ref='no_proyecto'
-                  className='ci'>
-                  <option name='no_proyecto'></option>
-                  <option name='no_proyecto'>U027 425</option>
-                  <option name='no_proyecto'>U029 425</option>
-                  <option name='no_proyecto'>U027 1208</option>
-                  <option name='no_proyecto'>U029 1208</option>
-                  <option name='no_proyecto'>U027 1860</option>
-                  <option name='no_proyecto'>U029 1860</option>
-                  <option name='no_proyecto'>centralizada</option>
-                  <option name='no_proyecto'>U024 2686</option>
-                  <option name='no_proyecto'>U027 2686</option>
-                  <option name='no_proyecto'>U029 2686</option>
-                  <option name='no_proyecto'>U038 2514</option>
-                </select>
+                  required
+                  ref={no_proyecto => this.inputNoProyecto = no_proyecto}
+                />
               </div>
               <div className='f-c-c'>
                 <p className='fc'>Municipio</p>
-                <select
-                  name='municipio'
+                <DropDownList
+                  suggest={true}
+                  style={{
+                    borderColor: 'rgba(0,0,0,0.42)',
+                    background: 'white',
+                    height: '28px',
+                    width: '100%',
+                    color: 'black',
+                    position: 'static',
+                  }}
+                  data={this.municipio}
+                  allowCustom={allowCustom}
+                  name="municipio"
+                  value={municipio}
                   onChange={this.onChange}
-                  ref='municipio'
-                  className='ci'>
-                  <option name='municipio'></option>
-                  <option name='municipio'>Acatlán</option>
-                  <option name='municipio'>Acaxochitlán</option>
-                  <option name='municipio'>Actopan</option>
-                  <option name='municipio'>Agua Blanca de Iturbide</option>
-                  <option name='municipio'>Ajacuba</option>
-                  <option name='municipio'>Alfajayucan</option>
-                  <option name='municipio'>Almoloya</option>
-                  <option name='municipio'>Apan</option>
-                  <option name='municipio'>El Arenal</option>
-                  <option name='municipio'>Atitalaquia</option>
-                  <option name='municipio'>Atlapexco</option>
-                  <option name='municipio'>Atotonilco el Grande</option>
-                  <option name='municipio'>Atotonilco de Tula</option>
-                  <option name='municipio'>Calnali</option>
-                  <option name='municipio'>Cardonal</option>
-                  <option name='municipio'>Cuautepec de Hinojosa</option>
-                  <option name='municipio'>Chapantongo</option>
-                  <option name='municipio'>Chapulhuacán</option>
-                  <option name='municipio'>Chilcuautla</option>
-                  <option name='municipio'>Eloxochitlán</option>
-                  <option name='municipio'>Emiliano Zapata</option>
-                  <option name='municipio'>Epazoyucan</option>
-                  <option name='municipio'>Franciso I. Madero</option>
-                  <option name='municipio'>Huasca de Ocampo</option>
-                  <option name='municipio'>Huautla</option>
-                  <option name='municipio'>Huazalingo</option>
-                  <option name='municipio'>Huehuetla</option>
-                  <option name='municipio'>Huejutla de Reyes</option>
-                  <option name='municipio'>Huichapan</option>
-                  <option name='municipio'>Ixmiquilpan</option>
-                  <option name='municipio'>Jacala de Ledezma</option>
-                  <option name='municipio'>Jaltocán</option>
-                  <option name='municipio'>Juárez Hidalgo</option>
-                  <option name='municipio'>Lolotla</option>
-                  <option name='municipio'>Metepec</option>
-                  <option name='municipio'>San Agustín Metzquititlán</option>
-                  <option name='municipio'>Metztitlán</option>
-                  <option name='municipio'>Mineral del Chico</option>
-                  <option name='municipio'>Mineral del Monte</option>
-                  <option name='municipio'>La Misión</option>
-                  <option name='municipio'>Mixquiahuala de Juárez</option>
-                  <option name='municipio'>Molango de Escamilla</option>
-                  <option name='municipio'>Nicolás Flores</option>
-                  <option name='municipio'>Nopala de Villagrán</option>
-                  <option name='municipio'>Omitlán de Juárez</option>
-                  <option name='municipio'>San Felipe Orizatlán</option>
-                  <option name='municipio'>Pacula</option>
-                  <option name='municipio'>Pachuca de Soto</option>
-                  <option name='municipio'>Pisaflores</option>
-                  <option name='municipio'>Progreso de Obregón</option>
-                  <option name='municipio'>Mineral de la Reforma</option>
-                  <option name='municipio'>San Agustín Tlaxiaca</option>
-                  <option name='municipio'>San Bartolo Tutotepec</option>
-                  <option name='municipio'>San Salvador</option>
-                  <option name='municipio'>Santiago de Anaya</option>
-                  <option name='municipio'>Santiago Tulantepec de Lugo Guerrero</option>
-                  <option name='municipio'>Singuilucan</option>
-                  <option name='municipio'>Tasquillo</option>
-                  <option name='municipio'>Tecozautla</option>
-                  <option name='municipio'>Tenango de Doria</option>
-                  <option name='municipio'>Tepeapulco</option>
-                  <option name='municipio'>Tepehuacán de Guerrero</option>
-                  <option name='municipio'>Tepeji del Río de Ocampo</option>
-                  <option name='municipio'>Tepetitlán</option>
-                  <option name='municipio'>Tetepango</option>
-                  <option name='municipio'>Villa de Tezontepec</option>
-                  <option name='municipio'>Tezontepec de Aldama</option>
-                  <option name='municipio'>Tianguistengo</option>
-                  <option name='municipio'>Tizayuca</option>
-                  <option name='municipio'>Tlahuelilpan</option>
-                  <option name='municipio'>Tlahuiltepa</option>
-                  <option name='municipio'>Tlanalapa</option>
-                  <option name='municipio'>Tlanchinol</option>
-                  <option name='municipio'>Tlaxcoapan</option>
-                  <option name='municipio'>Tolcayuca</option>
-                  <option name='municipio'>Tula de Allende</option>
-                  <option name='municipio'>Tulancingo de Bravo</option>
-                  <option name='municipio'>Xochiatipan</option>
-                  <option name='municipio'>Xochicoatlán</option>
-                  <option name='municipio'>Yahualica</option>
-                  <option name='municipio'>Zacualtipán de Ángeles</option>
-                  <option name='municipio'>Zapotlán de Juárez</option>
-                  <option name='municipio'>Zempoala</option>
-                  <option name='municipio'>Zimapán</option>
-                </select>
+                  required
+                  ref={municipio => this.inputMunicipio = municipio}
+                />
               </div>
               <div className='f-c-c'>
                 <p className='fc'>Area</p>
-                <input className='ci'/>
+                <DropDownList
+                  suggest={true}
+                  style={{
+                    borderColor: 'rgba(0,0,0,0.42)',
+                    background: 'white',
+                    height: '28px',
+                    width: '100%',
+                    color: 'black',
+                    position: 'static',
+                  }}
+                  data={this.area}
+                  allowCustom={allowCustom}
+                  name="area"
+                  value={area}
+                  onChange={this.onChange}
+                  required
+                  ref={area => this.inputArea = area}
+                />
               </div>
             </div>
 
             <div className='axc'>
               <div className='cx'>
-
+                <XmlComp />
               </div>
               <div className='cx'>
-
+                <XmlAsi />
               </div>
             </div>
-          </div>
+
+            <div className='button-row-s'>
+              <button type='submit' className='input-sc boton-g'>Agregar</button>
+            </div>
+
+          </form>
 
           <div className='table-fc'>
             <div className='tfc'>

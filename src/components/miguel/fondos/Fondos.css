@@ -227,6 +227,8 @@
 .fcc {
   display: flex;
   flex-direction: row;
+  border-top: 1px solid;
+  padding-top: 20px;
 }
 .axc {
   width: 70%;
@@ -287,4 +289,20 @@
 }
 .contra {
 
+}
+.w-xml {
+  width: 20%;
+  text-align: center;
+}
+.xml-back {
+  padding: 0px 20px 0px 20px;
+  background-color: #f4f4f4;
+}
+.xml-container {
+  width: 100%;
+}
+.xml-inputs-list {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
 }
