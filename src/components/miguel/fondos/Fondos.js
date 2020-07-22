@@ -42,12 +42,6 @@ export default class Fondos extends Component {
    })
  }
 
- toggleHiddenB() {
-  this.setState({
-    isHidden: 1
-  })
-}
-
   onChange = (e) => {
     const state = this.state
     state[e.target.name] = e.target.value;
