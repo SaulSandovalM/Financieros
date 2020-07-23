@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './Fondor.css';
 import firebase from '../../../Firebase';
-import ListComponent from './ListComponent';
+import RowComponent from './RowComponent';
 import CurrencyFormat from 'react-currency-format';
 import Dropzone from 'react-dropzone';
 
@@ -24,8 +24,32 @@ export default class Fondor extends Component {
       archivo: '',
       dic: '',
       contador: {},
-      alert: false
+      alert: false,
+      presupuesto: [],
+      search: '',
+      search2: '',
+      search3: ''
     }
+  }
+
+  componentWillMount () {
+    firebase.database().ref('presupuesto/').on('child_added', snapshot => {
+      this.setState({
+        presupuesto: this.state.presupuesto.concat(snapshot.val())
+      });
+    });
+  }
+
+  updateSeacrh(event) {
+    this.setState({search: event.target.value.substr(0,20)})
+  }
+
+  updateSeacrh2(event) {
+    this.setState({search2: event.target.value.substr(0,20)})
+  }
+
+  updateSeacrh3(event) {
+    this.setState({search3: event.target.value.substr(0,20)})
   }
 
   handleUploads (event) {
@@ -51,7 +75,7 @@ export default class Fondor extends Component {
   }
 
   componentDidMount() {
-    const itemsRef = firebase.database().ref('presupuesto/');
+    const itemsRef = firebase.database().ref('presupuesto/').limitToLast(1);
     this.listenForItems(itemsRef);
     this.consumo();
   }
@@ -103,14 +127,16 @@ export default class Fondor extends Component {
       par: this.inputPartida.value,
       importe: this.inputImporte.value,
       rubro: this.inputRubro.value,
-      archivo: this.state.archivo
+      archivo: this.state.archivo,
+      numContra: this.inputNumContra.value
     };
     this.setState({
       up: this.inputUp.value,
       par: this.inputPartida.value,
       importe: this.inputImporte.value,
       rubro: this.inputRubro.value,
-      archivo: this.state.archivo
+      archivo: this.state.archivo,
+      numContra: this.inputNumContra.value
     })
     if ( params.up && params.par && params.importe && params.rubro && params.archivo ) {
       var f = parseInt(params.importe);
@@ -134,6 +160,13 @@ export default class Fondor extends Component {
   }
 
   render() {
+
+    let filterData = this.state.presupuesto.filter(
+      (presupuesto) => {
+        return presupuesto.par.indexOf(this.state.search) !== -1 && presupuesto.up.indexOf(this.state.search2) >= 0 && presupuesto.rubro.indexOf(this.state.search3) >= 0;
+      }
+    );
+
     return (
       <div className='pf-container'>
         <div className='site-pf'>
@@ -181,65 +214,89 @@ export default class Fondor extends Component {
             </div>
           </div>
         </div>
-        <form onSubmit={this.sendMessage.bind(this)} ref='contactForm'>
-          <div className='p-container-fondor'>
-            <div className='p-margin-fr'>
-              <p className='p-title-size-fr'>
-                - Ingresa los datos que correspondan con el documento
-                  de autorización del fondo revolvente
-              </p>
-            </div>
-            <div className='inputs-container-fr'>
-              <div className='inputs-col-fr'>
-                <div className='inputs-row-fr-2'>
-                  <div className='p-container-ifr2'>
-                    <p className='p-title-margin-fr'>UP</p>
-                    <input
-                      className='input-style-fr'
-                      id='up'
-                      required
-                      ref={up => this.inputUp = up}
-                    />
-                  </div>
-                  <div className='p-container-ifr2'>
-                    <p className='p-title-margin-fr'>Partida</p>
-                    <input
-                      className='input-style-fr'
-                      id='partida'
-                      required
-                      ref={partida => this.inputPartida = partida}
-                    />
-                  </div>
-                  <div className='p-container-ifr2'>
-                    <p className='p-title-margin-fr'>Rubro</p>
-                    <input
-                      className='input-style-fr'
-                      id='rubro'
-                      required
-                      ref={rubro => this.inputRubro = rubro}
-                    />
-                  </div>
-                  <div className='p-container-ifr2'>
-                    <p className='p-title-margin-fr'>Importe</p>
-                    <input
-                      className='input-style-fr'
-                      id='importe'
-                      required
-                      ref={importe => this.inputImporte = importe}
-                    />
+        <div>
+          <form onSubmit={this.sendMessage.bind(this)} ref='contactForm'>
+            <div className='p-container-fondor'>
+              <div className='p-margin-fr'>
+                <p className='p-title-size-fr'>
+                  - Ingresa los datos que correspondan con el documento
+                    de autorización del fondo revolvente
+                </p>
+              </div>
+              <div className='inputs-container-fr'>
+                <div className='inputs-col-fr'>
+                  <div className='inputs-row-fr-2'>
+                    <div className='p-container-ifr2'>
+                      <p className='p-title-margin-fr'>Up</p>
+                      <input
+                        className='input-style-fr'
+                        id='up'
+                        required
+                        value={this.state.search}
+                        onChange={this.updateSeacrh.bind(this)}
+                        ref={up => this.inputUp = up}
+                      />
+                    </div>
+                    <div className='p-container-ifr2'>
+                      <p className='p-title-margin-fr'>Partida</p>
+                      <input
+                        className='input-style-fr'
+                        id='partida'
+                        required
+                        value={this.state.search2}
+                        onChange={this.updateSeacrh2.bind(this)}
+                        ref={partida => this.inputPartida = partida}
+                      />
+                    </div>
+                    <div className='p-container-ifr2'>
+                      <p className='p-title-margin-fr'>Rubro</p>
+                      <input
+                        className='input-style-fr'
+                        id='rubro'
+                        required
+                        value={this.state.search3}
+                        onChange={this.updateSeacrh3.bind(this)}
+                        ref={rubro => this.inputRubro = rubro}
+                      />
+                    </div>
+                    <div className='p-container-ifr2'>
+                      <p className='p-title-margin-fr'>Importe</p>
+                      <input
+                        className='input-style-fr'
+                        id='importe'
+                        required
+                        ref={importe => this.inputImporte = importe}
+                      />
+                    </div>
+                    <div className='p-container-ifr2'>
+                      <p className='p-title-margin-fr'>Num de Contrarecibo</p>
+                      <input
+                        className='input-style-fr'
+                        id='numContra'
+                        required
+                        ref={numContra => this.inputNumContra = numContra}
+                      />
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
-          <div className='button-row-s'>
-            <button type='submit' className='input-sc boton-g'>Agregar</button>
-          </div>
-        </form>
-        <div className='space-table'>
-          <ListComponent
-            lista={this.state.lista}
-          />
+            <div className='button-row-s'>
+              <button type='submit' className='input-sc boton-g'>Agregar</button>
+            </div>
+          </form>
+          {this.state.search && this.state.search2 && this.state.search3 &&
+            <div>
+              {
+                filterData.map(item =>
+                  <RowComponent
+                    key={item.id}
+                    item={item}
+                  />
+                )
+              }
+            </div>
+          }
         </div>
       </div>
     )

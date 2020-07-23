@@ -174,13 +174,13 @@ function App(props) {
         isVerifying={isVerifying}
       />
       {/*Rutas de Miguel*/}
-      <ProtectedRoute
+      {/*<ProtectedRoute
         exact
         path='/Fondos'
         component={Fondos}
         isAuthenticated={isAuthenticated}
         isVerifying={isVerifying}
-      />
+      />*/}
       <ProtectedRoute
         exact
         path='/Comprometidos'
@@ -223,6 +223,7 @@ function App(props) {
         isAuthenticated={isAuthenticated}
         isVerifying={isVerifying}
       />
+      <Route path='/fondos' component={Fondos} />
       <Route path='/edit/:id' component={Edit} />
       <Route path='/edita/:id' component={Edita} />
       <Route path='/Pdf/:id' component={Pdf} />

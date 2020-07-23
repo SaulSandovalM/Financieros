@@ -22,7 +22,12 @@
 .p-container-ifr2 {
   display: flex;
   flex-direction: column;
-  width: 20%;
+  width: 19%;
+}
+.p-container-ifrcpa {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
 }
 .p-title-margin-fr {
   margin: 0px;
@@ -34,7 +39,7 @@
 .inputs-col-fr {
   display: flex;
   flex-direction: column;
-  width: 75%;
+  width: 90%;
 }
 .inputs-row-fr-2 {
   display: flex;
