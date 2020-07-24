@@ -1,8 +1,8 @@
 import React, { Component} from 'react';
-import './Consulta.css';
+import './pdfs.css';
 import ReactToPrint from 'react-to-print';
 import firebase from '../../../Firebase';
-import { NumberAsString } from '../fondos/NumerosLetras.js';
+import { NumberAsString } from '../../miguel/fondos/NumerosLetras.js';
 import logo2 from  '../../../img/logo.jpg';
 
 class Pppdf extends Component{

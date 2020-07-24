@@ -36,23 +36,20 @@ import Caratula from './components/miguel/caratula/Caratula';
 //pdf
 //FondoRevolvente
 import Gasto from './components/Todospdf/FondoRevolvente/Gasto';
-import objetodegastoFR from './components/Todospdf/FondoRevolvente/objetodegastoFR';
-/*import Recibo from './components/Todospdf/FondoRevolvente/Recibo';*/
-/*import Recibo from './components/Todospdf/FondoRevolvente/Rfr';*/
+import ObjetodegastoFR from './components/Todospdf/FondoRevolvente/objetodegastoFR';
+import Recibo from './components/Todospdf/FondoRevolvente/Recibo';
+import Rfr from './components/Todospdf/FondoRevolvente/Rfr';
 
 //Pagoproveedor
-import objetodegastoPP from './components/Todospdf/Pagoproveedor/objetodegastoPP';
-import objetodegastoPP from './components/Todospdf/Pagoproveedor/Gasprovee';
-import objetodegastoPP from './components/Todospdf/Pagoproveedor/pagoproveedor';
+import ObjetodegastoPP from './components/Todospdf/Pagoproveedor/objetodegastoPP';
+import Gastoprovee from './components/Todospdf/Pagoproveedor/Gastoprovee';
+import Pagoproveedor from './components/Todospdf/Pagoproveedor/pagoproveedor';
 
 
 //pagoproveedor por requisicion
-import comprobaciondegastocomprobar from './components/Todospdf/Diciembre/comprobaciondegastocomprobar';
-import gastodiciembre from './components/Todospdf/Diciembre/gastodiciembre';
-import objetodegastodiciembre from './components/Todospdf/Diciembre/objetodegastodiciembre';
-
-
-
+import Comprobaciondegastocomprobar from './components/Todospdf/Diciembre/comprobaciondegastocomprobar';
+import Gastodiciembre from './components/Todospdf/Diciembre/gastodiciembre';
+import Objetodegastodiciembre from './components/Todospdf/Diciembre/objetodegastodiciembre';
 //Diciembre
 
 
@@ -208,7 +205,7 @@ function App(props) {
       <ProtectedRoute
         exact
         path='/objetodegastoFR'
-        component={objetodegastoFR}
+        component={ObjetodegastoFR}
         isAuthenticated={isAuthenticated}
         isVerifying={isVerifying}
       />
@@ -242,15 +239,15 @@ function App(props) {
       //pdfs
       //carpeta fondo revolvente
       <Route path='/Gasto/:id' component={Gasto}/>
-      <Route path='/objetodegastoFR/:id' component={objetodegastoFR}/>
+      <Route path='/objetodegastoFR/:id' component={ObjetodegastoFR}/>
       {/*}<Route path='/Recibo/: id' component={Recibo}/>*/}
       {/*}<Route path='/Recibo/: id' component={Rfr}/>*/}
 
       //Carpe Pago Proveedor
-      <Route path='/objetodegastoPP/:id' component={objetodegastoPP}/>
+      <Route path='/objetodegastoPP/:id' component={ObjetodegastoPP}/>
 
       //Diciembre
-      <Route path='/comprobaciondegastocomprobar/:id' component={comprobaciondegastocomprobar}/>
+      <Route path='/comprobaciondegastocomprobar/:id' component={Comprobaciondegastocomprobar}/>
 
 
 

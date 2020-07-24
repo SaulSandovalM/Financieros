@@ -1,8 +1,7 @@
 import React, { Component} from 'react';
-import './Consulta.css';
+import './pdfs.css';
 import ReactToPrint from 'react-to-print';
 import firebase from '../../../Firebase';
-{/*import { NumberAsString } from '../fondos/NumerosLetras.js';*/}
 
 class Recibo extends Component{
   constructor(props) {
@@ -44,7 +43,7 @@ class Recibo extends Component{
           </div>
           <div className='recibi'>
             <p className='texto-de-pdf' style={{textAlign:'justify'}}>Recibí de la Secretaría de Finanzas Públicas  del  Gobierno  del  Estado de Hidalgo la cantidad de
-          {/*   $ {this.state.fondo.importe} ({(NumberAsString(this.state.fondo.importe))})</p>*/}
+          </p>
           </div>
           <div className='concepto'>
             <p className='texto-de-pdf'>Por {this.state.fondo.tipo_doc}</p>

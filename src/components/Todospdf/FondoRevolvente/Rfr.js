@@ -1,8 +1,8 @@
 import React, { Component} from 'react';
-import './Consulta.css';
+import './pdfs.css';
 import ReactToPrint from 'react-to-print';
 import firebase from '../../../Firebase';
-import { NumberAsString } from '../fondos/NumerosLetras.js';
+
 import logo2 from  '../../../img/logo.jpg';
 
 class Frpdf extends Component{
@@ -61,7 +61,7 @@ class Frpdf extends Component{
           </div>
           <div class='texto-ofi_ppp'>
             <p> Por medio de presente me permito enviar a Usted documentación amparada con número de
-            comprobantes 'No.____', por un total de $ {this.state.fondo.importe} ({(NumberAsString(this.state.fondo.importe))}),
+            comprobantes 'No.____', por un total de $,
             para el trámite de Reembolso de Fondo Revolvente, con cargo al proyecto {/*{this.state.comprometido.no_proyecto} y {this.state.fondo.no_proyec}*/},
             otorgado en el oficio de autorización número de oficio {this.state.fondo.oficio_aut} a la Procuraduría General de Justicia del Estado de Hidalgo.</p>
             <p>Sin otro particular por el momento, reciba un cordial saludo</p>

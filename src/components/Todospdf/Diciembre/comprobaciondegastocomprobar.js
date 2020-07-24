@@ -1,8 +1,8 @@
 import React, { Component} from 'react';
-import './Consulta.css';
+import './pdfs.css';
 import ReactToPrint from 'react-to-print';
 import firebase from '../../../Firebase';
-import { NumberAsString } from '../fondos/NumerosLetras.js';
+
 import logo2 from  '../../../img/logo.jpg';
 
 class Frpdf extends Component{
@@ -65,14 +65,14 @@ class Frpdf extends Component{
             la siguiente forma: comprobantes $______________, (importe con letra), reintegro: $_____________,
             (importe con letra), anexando copia original del recibo oficial No. otorgado por caja general, de fecha
             del recibo, correspondiente al proyecto clave y nombre del proyecto, otorgado en el oficio de
-            autorización número del ofidio.
+            autorización número del ofidio.</p>
 
 
             <p>Lo anterior con la finalidad de amortizar en su totalidad el contra-recibo No. con el que se otorgaron
             los gastos a comprobar para llevar a cabo xxxxxxxxxxx, de fecha del contra-recibo de dichos gastos,
             a nombre de nombre del administrativo o persona a favor de quien se le otorgaron los recursos
             correspondientes.</p>
-            
+
             <p>Sin otro particular por el momento, reciba un cordial saludo</p>
           </div>
           <div class='atte'>

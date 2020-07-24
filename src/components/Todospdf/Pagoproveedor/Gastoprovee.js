@@ -5,7 +5,7 @@ import css from './pdfs.css';
 import lpgjh from '../../../img/logo_hgo.png';
 import programa from '../../../img/logo.jpg';
 
-export default class Gasto extends Component{
+export default class Gastoprovee extends Component{
     render(){
         return(
             <div>
