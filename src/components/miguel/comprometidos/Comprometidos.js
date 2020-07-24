@@ -34,6 +34,7 @@ export default class Comprometidos extends Component {
         beneficiario,
         realizo,
       });
+      console.log(doc.id)
     });
     this.setState({
       fondos

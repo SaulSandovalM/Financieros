@@ -112,6 +112,7 @@ export default class RowComponent extends Component {
   //   }
   //   return obj;
   //   };
+  2020-07-22
 
   var auto = this.props.item.estatus;
 
