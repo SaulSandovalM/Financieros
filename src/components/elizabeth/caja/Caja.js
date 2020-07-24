@@ -19,6 +19,7 @@ export default class Caja extends Component {
       fecha: '',
       isHidden: false,
     };
+    this.ref = firebase.firestore().collection('caja').orderBy('fecha');
   }
 
   toggleHidden() {
@@ -31,6 +32,25 @@ export default class Caja extends Component {
     this.setState({
       isHidden: false
     })
+  }
+
+  onCollectionUpdate2 = (querySnapshot) => {
+    const movimientos = [];
+    querySnapshot.forEach((doc) => {
+      const { title, no, personaR, cantidad, fecha } = doc.data();
+      movimientos.push({
+        key: doc.id,
+        doc,
+        title,
+        no,
+        personaR,
+        cantidad,
+        fecha
+      });
+    });
+    this.setState({
+      movimientos
+   });
   }
 
   onCollectionUpdate = (querySnapshot) => {
@@ -53,16 +73,14 @@ export default class Caja extends Component {
   }
 
   ptm() {
-    var startDate = this.state.fecha;
-    var endDate = this.state.fecha;
-    this.ref = firebase.firestore().collection('caja').orderBy('fecha').startAt(startDate).endAt(endDate);
+    var startDate = '15-07-2020';
+    var endDate = '17-07-2020';
+    const ref = firebase.firestore().collection('caja').orderBy('fecha');
+    this.unsubscribe = ref.onSnapshot(this.onCollectionUpdate2);
   }
 
 
   componentDidMount() {
-    var startDate = this.state.fecha;
-    var endDate = this.state.fecha;
-    this.ref = firebase.firestore().collection('caja').orderBy('fecha').startAt(startDate).endAt(endDate);
     this.unsubscribe = this.ref.onSnapshot(this.onCollectionUpdate);
     this.consumo();
   }
