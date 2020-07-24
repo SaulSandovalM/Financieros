@@ -40,13 +40,20 @@ import objetodegastoFR from './components/Todospdf/FondoRevolvente/objetodegasto
 /*import Recibo from './components/Todospdf/FondoRevolvente/Recibo';*/
 /*import Recibo from './components/Todospdf/FondoRevolvente/Rfr';*/
 
-//Pagpriveedor
+//Pagoproveedor
 import objetodegastoPP from './components/Todospdf/Pagoproveedor/objetodegastoPP';
+import objetodegastoPP from './components/Todospdf/Pagoproveedor/Gasprovee';
+import objetodegastoPP from './components/Todospdf/Pagoproveedor/pagoproveedor';
+
+
+//pagoproveedor por requisicion
+import comprobaciondegastocomprobar from './components/Todospdf/Diciembre/comprobaciondegastocomprobar';
+import gastodiciembre from './components/Todospdf/Diciembre/gastodiciembre';
+import objetodegastodiciembre from './components/Todospdf/Diciembre/objetodegastodiciembre';
 
 
 
-
-
+//Diciembre
 
 
 function App(props) {
@@ -241,6 +248,10 @@ function App(props) {
 
       //Carpe Pago Proveedor
       <Route path='/objetodegastoPP/:id' component={objetodegastoPP}/>
+
+      //Diciembre
+      <Route path='/comprobaciondegastocomprobar/:id' component={comprobaciondegastocomprobar}/>
+
 
 
 
