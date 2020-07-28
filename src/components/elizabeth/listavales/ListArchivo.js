@@ -22,58 +22,58 @@ export default class ListArchivo extends Component {
   render() {
     return (
       <div>
-        <div class='caja-inputs'>
-          <div class='table-left'>
+        <div className='caja-inputs'>
+          <div className='table-left'>
           </div>
-          <div class='table-v-num2'>
+          <div className='table-v-num2'>
             <b># V</b>
           </div>
-          <div class='table-v-num2'>
+          <div className='table-v-num2'>
             <b># C</b>
           </div>
-          <div class='table-v-num'>
-            <b>AUTO</b>
+          <div className='table-v-num'>
+            <b className='table-h'>AUTO</b>
           </div>
-          <div class='table-v-num'>
-            <b>COMP</b>
+          <div className='table-v-num'>
+            <b className='table-h'>COMP</b>
           </div>
-          <div class='table-v-num'>
-            <b>REEM</b>
+          <div className='table-v-num'>
+            <b className='table-h'>REEM</b>
           </div>
-          <div class='table-v-num'>
-            <b>REINTEGRO</b>
+          <div className='table-v-num'>
+            <b className='table-h'>REIN</b>
           </div>
-          <div class='table-v-num'>
-            <b>CONC</b>
+          <div className='table-v-num'>
+            <b className='table-h'>CONC</b>
           </div>
-          <div class='table-v-num'>
-            <b>OS</b>
+          <div className='table-v-num'>
+            <b className='table-h'>OS</b>
           </div>
-          <div class='table-v-num'>
-            <b>AREA</b>
+          <div className='table-v-num'>
+            <b className='table-h'>AREA</b>
           </div>
-          <div class='table-v-num'>
-            <b>TURNO</b>
+          <div className='table-v-num'>
+            <b className='table-h'>TURNO</b>
           </div>
-          <div class='table-v-num'>
-            <b>S/C</b>
+          <div className='table-v-num'>
+            <b className='table-h'>S/C</b>
           </div>
-          <div class='table-v-num'>
-            <b>FECHA</b>
+          <div className='table-v-num'>
+            <b className='table-h'>FECHA</b>
           </div>
-          <div class='table-v-num'>
-            <b>AUTORIZO</b>
+          <div className='table-v-num'>
+            <b className='table-h'>AUTOR</b>
           </div>
-          <div class='table-v-num'>
-            <b>RECIBIO</b>
+          <div className='table-v-num'>
+            <b className='table-h'>RECIBO</b>
           </div>
-          <div class='table-v-num'>
-            <b>EDITAR</b>
+          <div className='table-v-num'>
+            <b className='table-h'>EDITAR</b>
           </div>
-          <div class='table-v-num'>
-            <b>COMPROBACION</b>
+          <div className='table-v-num'>
+            <b className='table-h'>COMP</b>
           </div>
-          <div class='table-right'>
+          <div className='table-right'>
           </div>
         </div>
         {

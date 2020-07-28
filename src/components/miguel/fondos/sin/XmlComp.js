@@ -28,6 +28,8 @@ export default class XmlComp extends Component {
           importe: child.val().importe,
           usoCFDI: child.val().usoCFDI,
           estatus: child.val().estatus,
+          name: child.val().name,
+          Certificado: child.val().Certificado,
           done: child.val().done,
           id: child.key
         });
@@ -56,6 +58,8 @@ export default class XmlComp extends Component {
   }
 
   render() {
+    var lol = firebaseConf.database().ref('xml/')//attributes/ 
+    console.log(lol);
     return (
       <div className='xml-back'>
         <div className='xml-container'>

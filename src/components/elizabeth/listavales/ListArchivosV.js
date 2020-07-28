@@ -321,7 +321,8 @@ export default class ListArchivosV extends Component {
             <div className='filename'>
               <p className='file-hid'>{this.state.fileNameE}</p>
             </div>
-        </Dropzone>        <div className='caja-w' style={{marginTop: '40px', marginBottom: '40px'}}>
+        </Dropzone>
+        <div className='caja-w' style={{marginTop: '40px', marginBottom: '40px'}}>
           <div className='caja-col'>
             <ListArchivo
               lista={this.state.lista}

@@ -138,7 +138,6 @@ export default class Cheques extends Component {
       fechaE: this.inputFechaE.value,
       dirigido: this.inputDirigido.value,
       fechaC: this.inputFechaC.value,
-      archivo: this.state.archivo
     };
     this.setState({
       numCheque: this.inputCheque.value,
@@ -146,9 +145,8 @@ export default class Cheques extends Component {
       fechaE: this.inputFechaE.value,
       dirigido: this.inputDirigido.value,
       fechaC: this.inputFechaC.value,
-      archivo: this.state.archivo
     })
-    if ( params.numCheque && params.importe && params.fechaE && params.dirigido && params.fechaC && params.archivo ) {
+    if ( params.numCheque && params.importe && params.fechaE && params.dirigido && params.fechaC ) {
       var f = parseInt(params.importe);
       const statsRefT = firebase.firestore().collection('caja').doc('--stats--');
       const increments = firebase.firestore.FieldValue.increment(f);
@@ -200,6 +198,20 @@ export default class Cheques extends Component {
     } else {
       e.preventDefault()
     }
+  }
+
+  update = (item) => {
+    let updates = {};
+    updates['cheques/' + item.id] = {
+      numCheque: item.numCheque,
+      importe: item.importe,
+      fechaE: item.fechaE,
+      dirigido: item.dirigido,
+      fechaC: item.fechaC,
+      archivo: this.state.archivo,
+      fileUpdate: this.state.fileUpdate
+    };
+    firebase.database().ref().update(updates);
   }
 
   render() {
@@ -284,35 +296,6 @@ export default class Cheques extends Component {
                   />
                 </div>
                 <div className='input-row-cheque'>
-                  <p className='p-cheque'><b>Archivo</b></p>
-                  <Dropzone
-                    style={{
-                      position: 'ab',
-                      width: '100%',
-                      height: '29px',
-                      borderWidth: '1px',
-                      borderColor: '#a9a9a9',
-                      borderStyle: 'solid',
-                      background: 'white',
-                    }}
-                    accept=".pdf" onChange={this.handleUploads.bind(this)}>
-                    <div className='filename'>
-                      <p className='file-hid'>{this.state.file}</p>
-                    </div>
-                  </Dropzone>
-                  <progress className='progress' value={this.state.pdf} max='100'>
-                    {this.state.pdf} %
-                  </progress>
-                </div>
-                <div className='input-row-cheque'>
-                  {this.state.pdf === 100 &&
-                    <div className='input-img'>
-                      <img className='img-check' src={check} alt='' />
-                      <p className='p-check'>Archivo Cargo Correctamente</p>
-                    </div>
-                  }
-                </div>
-                <div className='input-row-cheque'>
                 </div>
               </div>
               <div className='disponible-cheque'>
@@ -325,12 +308,42 @@ export default class Cheques extends Component {
             </div>
           </form>
           <div className='p-margin'>
-            <p className='p-title-size'>- Movimientos</p>
+            <p className='p-title-size'>- Carga de Archivo</p>
+          </div>
+          <div className='input-row-cheque'>
+            <p className='p-cheque'><b>Archivo</b></p>
+            <Dropzone
+              style={{
+                position: 'ab',
+                width: '100%',
+                height: '29px',
+                borderWidth: '1px',
+                borderColor: '#a9a9a9',
+                borderStyle: 'solid',
+                background: 'white',
+              }}
+              accept=".pdf" onChange={this.handleUploads.bind(this)}>
+              <div className='filename'>
+                <p className='file-hid'>{this.state.file}</p>
+              </div>
+            </Dropzone>
+            <progress className='progress' value={this.state.pdf} max='100'>
+              {this.state.pdf} %
+            </progress>
+          </div>
+          <div className='input-row-cheque'>
+            {this.state.pdf === 100 &&
+              <div className='input-img'>
+                <img className='img-check' src={check} alt='' />
+                <p className='p-check'>Archivo Cargo Correctamente</p>
+              </div>
+            }
           </div>
           <div className='cheques-w'>
             <div className='cheques-col'>
               <ListComponent
                 lista={this.state.lista}
+                update={this.update}
               />
             </div>
           </div>
