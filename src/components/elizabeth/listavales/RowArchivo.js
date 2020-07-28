@@ -70,7 +70,6 @@ export default class RowAuto extends Component {
         <div className='table-v-re'>
           <div>{this.props.item.recibos}</div>
         </div>
-        
         <div className='table-v-num'>
           <button onClick={this.update}>Agregar</button>
         </div>
