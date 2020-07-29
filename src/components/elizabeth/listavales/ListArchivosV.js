@@ -1,8 +1,10 @@
-import React, { Component } from 'react';
+import React, { Component, useEffect } from 'react';
 import firebase from '../../../Firebase';
 import ListArchivo from './ListArchivo';
 import './ListVales.css';
 import Dropzone from 'react-dropzone';
+import example from './exa.xml';
+import XMLParser from 'react-xml-parser';
 
 export default class ListArchivosV extends Component {
   constructor(props) {
@@ -49,28 +51,46 @@ export default class ListArchivosV extends Component {
     };
   }
 
-  handleOnChange1 (event) {
-    for(let i = 0; i < event.target.files.length; i++) {
-      const file = event.target.files[i]
-      const storageRef = firebase.storage().ref(`comprobacion/${file.name}`)
-      const task = storageRef.put(file)
-      this.setState({
-        filex: `${file.name}`
-      })
-      task.on('state_changed', (snapshot) => {
-        let percentage = (snapshot.bytesTransferred / snapshot.totalBytes) * 100
-        this.setState({
-          pdf1: percentage
-        })
-      }, error => {
-        console.error(error.message);
-      }, () =>  storageRef.getDownloadURL().then(url =>  {
-        const record = url;
-        this.setState({
-          filexml: record
-        });
-      }));
-    }
+  onDrop(files) {
+    var fileNameE = files;
+    console.log(fileNameE);
+    fetch(fileNameE)
+      .then(res => res.text())
+      .then(data => {
+        var xml = new XMLParser().parseFromString(data);
+        console.log(xml);
+        // fetch('https://financieros-78cb0.firebaseio.com/xml.json', {
+        //   method: 'POST',
+        //   headers: {
+        //     'Accept': 'application/json',
+        //     'Content-Type': 'application/json',
+        //   },
+        //   body: JSON.stringify(xml)
+        // })
+    })
+  }
+
+  handleOnChange1 (files) {
+    // for(let i = 0; i < event.target.files.length; i++) {
+    //   const storageRef = firebase.storage().ref(`comprobacion/${file.name}`)
+    //   const task = storageRef.put(file)
+    //   this.setState({
+    //     filex: `${file.name}`
+    //   })
+    //   task.on('state_changed', (snapshot) => {
+    //     let percentage = (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+    //     this.setState({
+    //       pdf1: percentage
+    //     })
+    //   }, error => {
+    //     console.error(error.message);
+    //   }, () =>  storageRef.getDownloadURL().then(url =>  {
+    //     const record = url;
+    //     this.setState({
+    //       filexml: record
+    //     });
+    //   }));
+    // }
   }
 
   handleOnChange2 (event) {
@@ -196,11 +216,10 @@ export default class ListArchivosV extends Component {
   }
 
   render() {
-    console.log(this.state.filexml);
     return (
-      <div class='container-back'>
-        <div class='site'>
-          <p class='site-s'><b>Actualizacion de Archivos</b></p>
+      <div className='container-back'>
+        <div className='site'>
+          <p className='site-s'><b>Actualizacion de Archivos</b></p>
         </div>
         <form className='margin-f-a' onSubmit={this.sendMessage.bind(this)} ref='contactForm'>
           <div className='p-container-fondor'>
@@ -289,8 +308,22 @@ export default class ListArchivosV extends Component {
             </div>
           </div>
         </form>
-        <div class='caja-w' style={{marginTop: '40px', marginBottom: '40px'}}>
-          <div class='caja-col'>
+        <Dropzone
+          style={{
+            position: 'relative',
+            width: '100%',
+            height: '30px',
+            borderWidth: '2px',
+            borderColor: 'rgb(102, 102, 102)',
+            borderStyle: 'solid',
+            borderRadius: '5px'}}
+            accept=".xml" onDropAccepted={this.onDrop.bind(this)}>
+            <div className='filename'>
+              <p className='file-hid'>{this.state.fileNameE}</p>
+            </div>
+        </Dropzone>
+        <div className='caja-w' style={{marginTop: '40px', marginBottom: '40px'}}>
+          <div className='caja-col'>
             <ListArchivo
               lista={this.state.lista}
               update={this.update}
