@@ -208,6 +208,8 @@ export default class Cheques extends Component {
         this.showAlert('danger', 'Tu solicitud no puede ser enviada');
       });
       this.resetForm();
+      setInterval(this.consumob, 1000);
+      setInterval(this.consumoc, 1000);
     } else {
       this.showAlert('warning', 'Por favor llene el formulario');
     };
