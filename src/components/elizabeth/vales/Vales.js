@@ -81,7 +81,6 @@ export default class Vales extends Component {
       cantidad: this.inputCantidad.value,
       cantidadc: this.inputCantidadc.value,
       cantidadr: this.inputCantidadr.value,
-      reembolso: this.inputReembolso.value,
       concepto: this.inputConcepto.value,
       oficioS: this.inputOficio.value,
       area: this.inputArea.value,
@@ -100,7 +99,6 @@ export default class Vales extends Component {
       cantidad: this.inputCantidad.value,
       cantidadc: this.inputCantidadc.value,
       cantidadr: this.inputCantidadr.value,
-      reembolso: this.inputReembolso.value,
       concepto: this.inputConcepto.value,
       oficioS: this.inputOficio.value,
       area: this.inputArea.value,
@@ -123,6 +121,7 @@ export default class Vales extends Component {
       const batch = firebase.firestore().batch();
       const storyRef = firebase.firestore().collection('caja').doc(`${Math.random()}`);
       batch.set(storyRef, { title: 'Se Genero Un Vale # ', no: params.vale, personaR: params.personaR , cantidad: '-' + f, fecha: params.fecha });
+      console.log(params.fecha);
       batch.set(statsRef, { storyCount: increment }, { merge: true });
       batch.commit();
       const statsRefs = firebase.firestore().collection('vales').doc('--stats--');
@@ -150,13 +149,15 @@ export default class Vales extends Component {
     var cant1 = parseInt(cantidad);
     var cant2 = parseInt(cantidadc);
     var tot = cant1 - cant2;
-
+    var today2 = new Date();
     var today = new Date();
     var meses =  [ '01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12' ];
     var f = new Date();
     today = f.getDate() + '-' + meses[f.getMonth()] + '-' + f.getFullYear();
+    today2 = f.getFullYear() + '-' + meses[f.getMonth()] + '-' + f.getDate() ;
 
-    this.state.fecha = today;
+    this.state.fecha = today2;
+    console.log(today2)
 
     return (
       <div className='container-back'>
@@ -213,7 +214,7 @@ export default class Vales extends Component {
                 <p className='p-bv'>
                   Comprobado
                 </p>
-                {tot > 0 &&
+                {tot >= 0 &&
                   <p className='p-bv'>
                     Reintegro
                   </p>
@@ -242,7 +243,7 @@ export default class Vales extends Component {
                   required
                   ref={cantidadc => this.inputCantidadc = cantidadc}
                 />
-                {tot > 0 &&
+                {tot >= 0 &&
                   <input
                     className='input-b'
                     name='cantidadr'

@@ -2,11 +2,11 @@ import React, { Component } from 'react';
 import firebase from '../../../Firebase';
 import './Caja.css';
 import CurrencyFormat from 'react-currency-format';
-import moment from 'moment';
 
 export default class Caja extends Component {
   constructor(props) {
     super(props);
+    this.ref = firebase.firestore().collection('caja');
     this.unsubscribe = null;
     this.state = {
       contador: {},
@@ -15,42 +15,8 @@ export default class Caja extends Component {
       personaR: '',
       cantidad: '',
       movimientos: [],
-      buscador: '',
-      fecha: '',
-      isHidden: false,
+      buscador: ''
     };
-    this.ref = firebase.firestore().collection('caja').orderBy('fecha');
-  }
-
-  toggleHidden() {
-    this.setState({
-      isHidden: true
-    })
-  }
-
-  toggleHidden2() {
-    this.setState({
-      isHidden: false
-    })
-  }
-
-  onCollectionUpdate2 = (querySnapshot) => {
-    const movimientos = [];
-    querySnapshot.forEach((doc) => {
-      const { title, no, personaR, cantidad, fecha } = doc.data();
-      movimientos.push({
-        key: doc.id,
-        doc,
-        title,
-        no,
-        personaR,
-        cantidad,
-        fecha
-      });
-    });
-    this.setState({
-      movimientos
-   });
   }
 
   onCollectionUpdate = (querySnapshot) => {
@@ -71,14 +37,6 @@ export default class Caja extends Component {
       movimientos
    });
   }
-
-  ptm() {
-    var startDate = '15-07-2020';
-    var endDate = '17-07-2020';
-    const ref = firebase.firestore().collection('caja').orderBy('fecha');
-    this.unsubscribe = ref.onSnapshot(this.onCollectionUpdate2);
-  }
-
 
   componentDidMount() {
     this.unsubscribe = this.ref.onSnapshot(this.onCollectionUpdate);
@@ -106,27 +64,7 @@ export default class Caja extends Component {
 
   render() {
 
-    var today = new Date();
-    var meses =  [ '01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12' ];
-    var f = new Date();
-    today = f.getDate() + '-' + meses[f.getMonth()] + '-' + f.getFullYear();
-    this.state.fecha = today;
-
-    var diasEntreFechas = function(desde, hasta) {
-    	var dia_actual = desde;
-      var fechas = [];
-    	while (dia_actual.isSameOrBefore(hasta)) {
-      	fechas.push(dia_actual.format('DD-MM-YYYY'));
-     		dia_actual.add(1, 'days');
-    	}
-    	return fechas;
-    };
-
-    var desde = moment(this.state.fecha1);
-    var hasta = moment("2020-07-23");
-    var results = diasEntreFechas(desde, hasta);
-    console.log(this.state.buscador);
-
+      console.log(this.state.buscador);
     return (
       <div className='container-back'>
         <div className='site'>
@@ -156,12 +94,8 @@ export default class Caja extends Component {
                 className='input-style-banco'
                 value={this.state.buscador}
                 name='buscador'
-                onChange={this.handleChange.bind(this)}
-              />
-              <input
-                className='input-style-banco'
-                value={this.state.fecha2}
-                name='fecha2'
+                type='date'
+                data-date-format='DD-MM-YYYY'
                 onChange={this.handleChange.bind(this)}
               />
             </div>
@@ -189,12 +123,10 @@ export default class Caja extends Component {
               </div>
             </div>
           </div>
-          <button className='b-s-f' onClick={this.toggleHidden.bind(this)}>ver</button>
-          <button className='b-s-f' onClick={this.ptm}>buscar</button>
-          {this.state.isHidden &&
           <div className='color-s'>
             {this.state.movimientos.map(movimientos =>
               <div>
+                {this.state.buscador === movimientos.fecha &&
                   <div className='banco-inputs-list'>
                     <div className='table-left'>
                     </div>
@@ -223,12 +155,11 @@ export default class Caja extends Component {
                     <div className='table-right'>
                     </div>
                   </div>
+                }
               </div>
             )}
             </div>
-          }
           </div>
-          {results}
         </div>
       </div>
     )
