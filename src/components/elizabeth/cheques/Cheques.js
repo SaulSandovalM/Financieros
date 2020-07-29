@@ -95,6 +95,16 @@ export default class Cheques extends Component {
     })
   }
 
+  showAlert(type, message) {
+    this.setState({
+      alert: true,
+      alertData: {type, message}
+    });
+    setTimeout(() => {
+      this.setState({alert: false});
+    }, 6000);
+  }
+
   resetForm() {
     this.refs.contactForm.reset();
   }
@@ -119,6 +129,28 @@ export default class Cheques extends Component {
       let percentage = (snapshot.bytesTransferred / snapshot.totalBytes) * 100
       this.setState({
         pdf: percentage
+      })
+    }, error => {
+      console.error(error.message);
+    }, () =>  storageRef.getDownloadURL().then(url =>  {
+      const record = url;
+      this.setState({
+        archivo: record
+      });
+    }));
+  }
+
+  updateUpload (event) {
+    const file = event.target.files[0]
+    const storageRef = firebase.storage().ref(`cheques/${file.name}`)
+    const task = storageRef.put(file)
+    this.setState({
+      fileUpdate: `${file.name}`
+    })
+    task.on('state_changed', (snapshot) => {
+      let percentage = (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+      this.setState({
+        update: percentage
       })
     }, error => {
       console.error(error.message);
@@ -171,13 +203,13 @@ export default class Cheques extends Component {
       batch.set(statsRef, { storyCount: increment }, { merge: true });
       batch.commit();
       firebase.database().ref('cheques').push(params).then(() => {
-        alert('Tu solicitud fue enviada.');
+        this.showAlert('success', 'Tu solicitud fue enviada.');
       }).catch(() => {
-        alert('Tu solicitud no puede ser enviada');
+        this.showAlert('danger', 'Tu solicitud no puede ser enviada');
       });
       this.resetForm();
     } else {
-      alert('Por favor llene el formulario');
+      this.showAlert('warning', 'Por favor llene el formulario');
     };
   }
 
@@ -295,6 +327,35 @@ export default class Cheques extends Component {
                     ref={dirigido => this.inputDirigido = dirigido}
                   />
                 </div>
+                {/*<div className='input-row-cheque'>
+                  <p className='p-cheque'><b>Archivo</b></p>
+                  <Dropzone
+                    style={{
+                      position: 'ab',
+                      width: '100%',
+                      height: '29px',
+                      borderWidth: '1px',
+                      borderColor: '#a9a9a9',
+                      borderStyle: 'solid',
+                      background: 'white',
+                    }}
+                    accept=".pdf" onChange={this.handleUploads.bind(this)}>
+                    <div className='filename'>
+                      <p className='file-hid'>{this.state.file}</p>
+                    </div>
+                  </Dropzone>
+                  <progress className='progress' value={this.state.pdf} max='100'>
+                    {this.state.pdf} %
+                  </progress>
+                </div>
+                <div className='input-row-cheque'>
+                  {this.state.pdf === 100 &&
+                    <div className='input-img'>
+                      <img className='img-check' src={check} alt='' />
+                      <p className='p-check'>Archivo Cargo Correctamente</p>
+                    </div>
+                  }
+                </div>*/}
                 <div className='input-row-cheque'>
                 </div>
               </div>
@@ -308,13 +369,13 @@ export default class Cheques extends Component {
             </div>
           </form>
           <div className='p-margin'>
-            <p className='p-title-size'>- Carga de Archivo</p>
+            <p className='p-title-size'>- Movimientos</p>
           </div>
-          <div className='input-row-cheque'>
-            <p className='p-cheque'><b>Archivo</b></p>
+          <div className='update'>
+            <p className='p-cheque'><b>Archivo Actualizado</b></p>
             <Dropzone
               style={{
-                position: 'ab',
+                position: 'static',
                 width: '100%',
                 height: '29px',
                 borderWidth: '1px',
@@ -322,22 +383,14 @@ export default class Cheques extends Component {
                 borderStyle: 'solid',
                 background: 'white',
               }}
-              accept=".pdf" onChange={this.handleUploads.bind(this)}>
+              accept=".pdf" onChange={this.updateUpload.bind(this)}>
               <div className='filename'>
-                <p className='file-hid'>{this.state.file}</p>
+                <p className='file-hid'>{this.state.fileUpdate}</p>
               </div>
             </Dropzone>
-            <progress className='progress' value={this.state.pdf} max='100'>
-              {this.state.pdf} %
+            <progress className='progress' value={this.state.update} max='100'>
+              {this.state.update} %
             </progress>
-          </div>
-          <div className='input-row-cheque'>
-            {this.state.pdf === 100 &&
-              <div className='input-img'>
-                <img className='img-check' src={check} alt='' />
-                <p className='p-check'>Archivo Cargo Correctamente</p>
-              </div>
-            }
           </div>
           <div className='cheques-w'>
             <div className='cheques-col'>
