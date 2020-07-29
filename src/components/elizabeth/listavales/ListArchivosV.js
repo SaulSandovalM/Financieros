@@ -308,20 +308,7 @@ export default class ListArchivosV extends Component {
             </div>
           </div>
         </form>
-        <Dropzone
-          style={{
-            position: 'relative',
-            width: '100%',
-            height: '30px',
-            borderWidth: '2px',
-            borderColor: 'rgb(102, 102, 102)',
-            borderStyle: 'solid',
-            borderRadius: '5px'}}
-            accept=".xml" onDropAccepted={this.onDrop.bind(this)}>
-            <div className='filename'>
-              <p className='file-hid'>{this.state.fileNameE}</p>
-            </div>
-        </Dropzone>
+
         <div className='caja-w' style={{marginTop: '40px', marginBottom: '40px'}}>
           <div className='caja-col'>
             <ListArchivo
