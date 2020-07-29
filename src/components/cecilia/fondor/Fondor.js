@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './Fondor.css';
 import firebase from '../../../Firebase';
 import RowComponent from './RowComponent';
+import ListComponent from  './ListComponent';
 import CurrencyFormat from 'react-currency-format';
 import Dropzone from 'react-dropzone';
 
@@ -12,6 +13,13 @@ export default class Fondor extends Component {
       pdf: 0,
       file: '',
       lista: [
+        {
+          id: 1,
+          name: 'preuba',
+          done: false
+        },
+      ],
+      listaB: [
         {
           id: 1,
           name: 'preuba',
@@ -75,8 +83,10 @@ export default class Fondor extends Component {
   }
 
   componentDidMount() {
-    const itemsRef = firebase.database().ref('presupuesto/').limitToLast(1);
+    const itemsRef = firebase.database().ref('presupuesto/');
     this.listenForItems(itemsRef);
+    const itemsRefBanco = firebase.database().ref('banco/');
+    this.listenForItemsBanco(itemsRefBanco);
     this.consumo();
   }
 
@@ -97,6 +107,25 @@ export default class Fondor extends Component {
       });
       this.setState({
         lista: lista
+      });
+    });
+  }
+
+  listenForItemsBanco = (itemsRefBanco) => {
+    itemsRefBanco.on('value', (snap) => {
+      var listaB = [];
+      snap.forEach((child) => {
+        listaB.push({
+          up: child.val().up,
+          par: child.val().par,
+          importe: child.val().importe,
+          rubro: child.val().rubro,
+          done: child.val().done,
+          id: child.key
+        });
+      });
+      this.setState({
+        listaB: listaB
       });
     });
   }
@@ -163,7 +192,7 @@ export default class Fondor extends Component {
 
     let filterData = this.state.presupuesto.filter(
       (presupuesto) => {
-        return presupuesto.par.indexOf(this.state.search) !== -1 && presupuesto.up.indexOf(this.state.search2) >= 0 && presupuesto.rubro.indexOf(this.state.search3) >= 0;
+        return presupuesto.up.indexOf(this.state.search) !== -1 && presupuesto.par.indexOf(this.state.search2) >= 0 && presupuesto.rubro.indexOf(this.state.search3) >= 0;
       }
     );
 
@@ -297,6 +326,11 @@ export default class Fondor extends Component {
               }
             </div>
           }
+        </div>
+        <div className='space-table'>
+          <ListComponent
+            listaB={this.state.listaB}
+          />
         </div>
       </div>
     )

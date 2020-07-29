@@ -1,86 +1,54 @@
 import React, { Component } from 'react';
 import './Fondor.css';
-import RowComponent from './RowComponent';
+import RowCompoBanco from './RowCompoBanco';
 import firebase from '../../../Firebase';
 
 export default class ListComponent extends Component {
   constructor (props) {
-    super(props);
-    this.state = {
-      presupuesto: [],
-      search: '',
-      search2: '',
-      search3: '',
-    };
+   super(props);
+   this.state = {
+     banco: [],
+   };
  }
 
   componentWillMount () {
-    firebase.database().ref('presupuesto/').on('child_added', snapshot => {
+    firebase.database().ref('banco/').on('child_added', snapshot => {
       this.setState({
-        presupuesto: this.state.presupuesto.concat(snapshot.val())
+        banco: this.state.banco.concat(snapshot.val())
       });
     });
   }
 
-  updateSeacrh(event) {
-    this.setState({search: event.target.value.substr(0,20)})
-  }
-
-  updateSeacrh2(event) {
-    this.setState({search2: event.target.value.substr(0,20)})
-  }
-
-  updateSeacrh3(event) {
-    this.setState({search3: event.target.value.substr(0,20)})
-  }
-
-  sendMessage(e) {
-    e.preventDefault();
-    const params = {
-      archivo: this.state.archivo,
-      up: this.inputUp.value,
-      par: this.inputPartida.value,
-      rubro: this.inputRubro.value,
-      importe: this.inputImporte.value,
-    };
-    this.setState({
-      archivo: this.state.archivo,
-      up: this.inputUp.value,
-      par: this.inputPartida.value,
-      rubro: this.inputRubro.value,
-      importe: this.inputImporte.value,
-    })
-    if ( params.up && params.par && params.importe && params.rubro && params.archivo ) {
-      var f = parseInt(params.importe);
-      const statsRef = firebase.firestore().collection('banco').doc('--stats--');
-      const increment = firebase.firestore.FieldValue.increment(f);
-      const batch = firebase.firestore().batch();
-      const storyRef = firebase.firestore().collection('banco').doc(`${Math.random()}`);
-      batch.set(storyRef, { title: 'Se agredo un fondo' });
-      batch.set(statsRef, { storyCount: increment }, { merge: true });
-      batch.commit();
-      firebase.database().ref('banco').push(params).then(() => {
-        alert('Tu solicitud fue enviada.');
-      }).catch(() => {
-        alert('Tu solicitud no puede ser enviada');
-      });
-      this.resetForm();
-      setInterval(this.consumo, 1000);
-    } else {
-      alert('Por favor llene el formulario');
-    };
-  }
-
   render() {
-
-    let filterData = this.state.presupuesto.filter(
-      (presupuesto) => {
-        return presupuesto.par.indexOf(this.state.search) !== -1 && presupuesto.up.indexOf(this.state.search2) >= 0 && presupuesto.rubro.indexOf(this.state.search3) >= 0;
-      }
-    );
-
     return (
-      
+      <div>
+        <div class='table-container-p'>
+          <div class='table-left'>
+          </div>
+          <div class='table-up-p-fr'>
+            <b>Up</b>
+          </div>
+          <div class='table-up-p-fr'>
+            <b>PARTIDA</b>
+          </div>
+          <div class='table-up-p-fr'>
+            <b>RUBRO</b>
+          </div>
+          <div class='table-up-p-fr'>
+            <b>IMPORTE</b>
+          </div>
+          <div class='table-right'>
+          </div>
+        </div>
+        {
+          this.props.listaB.map(item =>
+            <RowCompoBanco
+              key={item.id}
+              item={item}
+            />
+          )
+        }
+      </div>
     );
   }
 }
