@@ -41,9 +41,6 @@ export default class RowAuto extends Component {
           <div>{this.props.item.cantidadr}</div>
         </div>
         <div className='table-v-re'>
-          <div>{this.props.item.reembolso}</div>
-        </div>
-        <div className='table-v-re'>
           <div>{this.props.item.concepto}</div>
         </div>
         <div className='table-v-re'>

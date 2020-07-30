@@ -57,10 +57,7 @@ export default class ListComponent extends Component {
             <b>COMP</b>
           </div>
           <div class='table-v-num'>
-            <b>REEM</b>
-          </div>
-          <div class='table-v-num'>
-            <b>REINTEGRO</b>
+            <b>REEM/REINT</b>
           </div>
           <div class='table-v-num'>
             <b>CONC</b>

@@ -38,10 +38,7 @@ export default class ListAuto extends Component {
             <b>COMP</b>
           </div>
           <div class='table-v-num'>
-            <b>REEM</b>
-          </div>
-          <div class='table-v-num'>
-            <b>REINTEGRO</b>
+            <b>REEM/REIN</b>
           </div>
           <div class='table-v-num'>
             <b>CONC</b>

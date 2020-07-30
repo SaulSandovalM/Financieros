@@ -38,10 +38,7 @@ export default class ListArchivo extends Component {
             <b className='table-h'>COMP</b>
           </div>
           <div className='table-v-num'>
-            <b className='table-h'>REEM</b>
-          </div>
-          <div className='table-v-num'>
-            <b className='table-h'>REIN</b>
+            <b className='table-h'>REEM/REIN</b>
           </div>
           <div className='table-v-num'>
             <b className='table-h'>CONC</b>

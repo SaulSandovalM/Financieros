@@ -47,9 +47,6 @@ export default class RowAuto extends Component {
               <div>{this.props.item.sc}</div>
             </div>
             <div class='table-v-num'>
-              <div>{this.props.item.reintegroT}</div>
-            </div>
-            <div class='table-v-num'>
               <div>{this.props.item.fecha}</div>
             </div>
             <div class='table-v-re'>
