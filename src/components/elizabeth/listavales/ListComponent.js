@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './ListVales.css';
 import RowComponent from './RowComponent';
 import firebase from '../../../Firebase';
+import XLSX from 'xlsx';
 
 export default class ListComponent extends Component {
   constructor (props) {
@@ -9,6 +10,7 @@ export default class ListComponent extends Component {
     this.state = {
       vales: [],
     };
+    this.exportFile = this.exportFile.bind(this)
   }
 
   componentWillMount () {
@@ -19,9 +21,26 @@ export default class ListComponent extends Component {
     });
   }
 
+  exportFile() {
+    let vales = [['#V', '#C', 'AUTORIZADO', 'COMPOBADO', 'REEM/REIN', 'CONCEPTO', 'OFICIO S', 'AREA', 'TURNO', 'FACTURA', 'RECIBOS', 'S/C', 'FECHA', 'AUTORIZA', 'RECIBIO']]
+    this.state.vales.forEach((vale) => {
+      let valeArray = [vale.vale, vale.cheque, vale.cantidad, vale.cantidadc, vale.cantidadr, vale.reembolso, vale.concepto, vale.oficioS, vale.area, vale.turno, vale.sc, vale.fecha, vale.autorizo, vale.personaR, vale.recibos]
+      vales.push(valeArray)
+    })
+    const wb = XLSX.utils.book_new()
+    const wsAll = XLSX.utils.aoa_to_sheet(vales)
+    XLSX.utils.book_append_sheet(wb, wsAll, 'Vales')
+    XLSX.writeFile(wb, 'Vales_No_Autorizados.xlsx')
+  }
+
   render() {
     return (
       <div>
+        <div className='but-exc'>
+          <button className='input-sc boton-g' onClick={this.exportFile}>
+            Exportar a Excel
+          </button>
+        </div>
         <div class='caja-inputs'>
           <div class='table-left'>
           </div>

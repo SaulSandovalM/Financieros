@@ -7,7 +7,7 @@ export default class ListArchivo extends Component {
   constructor (props) {
     super(props);
     this.state = {
-      vales: [],
+      vales: []
     };
   }
 

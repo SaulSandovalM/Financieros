@@ -59,14 +59,14 @@ export default class ListArchivosV extends Component {
       .then(data => {
         var xml = new XMLParser().parseFromString(data);
         console.log(xml);
-        fetch('https://financieros-78cb0.firebaseio.com/xml.json', {
-          method: 'POST',
-          headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(xml)
-        })
+        // fetch('https://financieros-78cb0.firebaseio.com/xml.json', {
+        //   method: 'POST',
+        //   headers: {
+        //     'Accept': 'application/json',
+        //     'Content-Type': 'application/json',
+        //   },
+        //   body: JSON.stringify(xml)
+        // })
     })
   }
 
