@@ -157,6 +157,7 @@ textarea { resize: none; }
   border-width: 0px;
   border-bottom: 0px;
   text-align: center;
+  -webkit-appearance: none;
 }
 .space-c {
   height: 50px;

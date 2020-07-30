@@ -16,16 +16,52 @@ export default class RowComponent extends Component {
         <div className='table-left'>
         </div>
         <div className='table-dis-up'>
-          <p className='p-meses-row'>{this.props.item.up}</p>
+          <p className='p-h-dis2'>{this.props.item.up}</p>
         </div>
         <div className='table-dis-up'>
-          <p className='p-meses-row'>{this.props.item.rubro}</p>
+          <p className='p-h-dis2'>{this.props.item.rubro}</p>
         </div>
         <div className='table-dis-up'>
-          <p className='p-meses-row'>{this.props.item.par}</p>
+          <p className='p-h-dis2'>{this.props.item.par}</p>
         </div>
         <div className='table-dis-up'>
-          <p className='p-meses-row'>{this.props.item.abr}</p>
+          <p className='p-h-dis2'>{this.props.item.ene}</p>
+        </div>
+        <div className='table-dis-up'>
+          <p className='p-h-dis2'>{this.props.item.feb}</p>
+        </div>
+        <div className='table-dis-up'>
+          <p className='p-h-dis2'>{this.props.item.mar}</p>
+        </div>
+        <div className='table-dis-up'>
+          <p className='p-h-dis2'>{this.props.item.abr}</p>
+        </div>
+        <div className='table-dis-up'>
+          <p className='p-h-dis2'>{this.props.item.may}</p>
+        </div>
+        <div className='table-dis-up'>
+          <p className='p-h-dis2'>{this.props.item.jun}</p>
+        </div>
+        <div className='table-dis-up'>
+          <p className='p-h-dis2'>{this.props.item.jul}</p>
+        </div>
+        <div className='table-dis-up'>
+          <p className='p-h-dis2'>{this.props.item.ago}</p>
+        </div>
+        <div className='table-dis-up'>
+          <p className='p-h-dis2'>{this.props.item.sep}</p>
+        </div>
+        <div className='table-dis-up'>
+          <p className='p-h-dis2'>{this.props.item.oct}</p>
+        </div>
+        <div className='table-dis-up'>
+          <p className='p-h-dis2'>{this.props.item.nov}</p>
+        </div>
+        <div className='table-dis-up'>
+          <p className='p-h-dis2'>{this.props.item.dic}</p>
+        </div>
+        <div className='table-dis-up'>
+          <p className='p-h-dis2'>{this.props.item.dic}</p>
         </div>
         <div className='table-right'>
         </div>

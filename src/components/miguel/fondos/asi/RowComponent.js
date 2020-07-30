@@ -19,8 +19,6 @@ export default class RowComponent extends Component {
     const estaA = this.props.item.estatus;
     let table;
 
-    let suma = this.props.item.importe;
-
     if (estaA === 'Asignado') {
       table =
         <div className='xml-inputs-list'>

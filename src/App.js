@@ -21,6 +21,7 @@ import Cheques from './components/elizabeth/cheques/Cheques';
 import Vales from './components/elizabeth/vales/Vales';
 import ListValesP from './components/elizabeth/listavales/ListValesP';
 import ListValesA from './components/elizabeth/listavales/ListValesA';
+import ListValesN from './components/elizabeth/listavales/ListValesN';
 import ListArchivosV from './components/elizabeth/listavales/ListArchivosV';
 import Autorizacion from './components/elizabeth/autorizacion/Autorizacion';
 import Arqueo from './components/elizabeth/arqueo/Arqueo';
@@ -161,6 +162,13 @@ function App(props) {
       />
       <ProtectedRoute
         exact
+        path='/ListValesN'
+        component={ListValesN}
+        isAuthenticated={isAuthenticated}
+        isVerifying={isVerifying}
+      />
+      <ProtectedRoute
+        exact
         path='/Autorizacion'
         component={Autorizacion}
         isAuthenticated={isAuthenticated}
@@ -174,13 +182,13 @@ function App(props) {
         isVerifying={isVerifying}
       />
       {/*Rutas de Miguel*/}
-      <ProtectedRoute
+      {/*<ProtectedRoute
         exact
         path='/Fondos'
         component={Fondos}
         isAuthenticated={isAuthenticated}
         isVerifying={isVerifying}
-      />
+      />*/}
       <ProtectedRoute
         exact
         path='/Comprometidos'
@@ -223,6 +231,7 @@ function App(props) {
         isAuthenticated={isAuthenticated}
         isVerifying={isVerifying}
       />
+      <Route path='/fondos' component={Fondos} />
       <Route path='/edit/:id' component={Edit} />
       <Route path='/edita/:id' component={Edita} />
       <Route path='/Pdf/:id' component={Pdf} />

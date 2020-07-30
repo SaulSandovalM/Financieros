@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import './ListVales.css';
 
-export default class RowAuto extends Component {
+export default class RowComponent extends Component {
   render() {
-    var auto = this.props.item.estatus;
+    var cheque = this.props.item.cheque;
     return (
       <div>
-        { auto === 'Autorizado' &&
+        { cheque === 'Pendiente' &&
           <div class='caja-inputs'>
             <div class='table-left'>
             </div>

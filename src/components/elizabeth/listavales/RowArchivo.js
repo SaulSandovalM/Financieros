@@ -41,9 +41,6 @@ export default class RowAuto extends Component {
           <div>{this.props.item.cantidadr}</div>
         </div>
         <div className='table-v-re'>
-          <div>{this.props.item.reembolso}</div>
-        </div>
-        <div className='table-v-re'>
           <div>{this.props.item.concepto}</div>
         </div>
         <div className='table-v-re'>
@@ -70,7 +67,6 @@ export default class RowAuto extends Component {
         <div className='table-v-re'>
           <div>{this.props.item.recibos}</div>
         </div>
-        
         <div className='table-v-num'>
           <button onClick={this.update}>Agregar</button>
         </div>

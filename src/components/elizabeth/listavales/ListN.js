@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import './ListVales.css';
-import RowAuto from './RowAuto';
+import RowN from './RowN';
 import firebase from '../../../Firebase';
 
-export default class ListAuto extends Component {
+export default class ListN extends Component {
   constructor (props) {
     super(props);
     this.state = {
@@ -75,7 +75,7 @@ export default class ListAuto extends Component {
         </div>
         {
           this.props.lista.map(item =>
-            <RowAuto
+            <RowN
               key={item.id}
               item={item}
             />

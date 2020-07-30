@@ -81,7 +81,6 @@ export default class Vales extends Component {
       cantidad: this.inputCantidad.value,
       cantidadc: this.inputCantidadc.value,
       cantidadr: this.inputCantidadr.value,
-      reembolso: this.inputReembolso.value,
       concepto: this.inputConcepto.value,
       oficioS: this.inputOficio.value,
       area: this.inputArea.value,
@@ -100,7 +99,6 @@ export default class Vales extends Component {
       cantidad: this.inputCantidad.value,
       cantidadc: this.inputCantidadc.value,
       cantidadr: this.inputCantidadr.value,
-      reembolso: this.inputReembolso.value,
       concepto: this.inputConcepto.value,
       oficioS: this.inputOficio.value,
       area: this.inputArea.value,
@@ -114,7 +112,7 @@ export default class Vales extends Component {
       estatus: this.state.estatus
     })
     if ( params.vale && params.cheque && params.cantidad && params.cantidadc
-        && params.cantidadr && params.reembolso && params.concepto && params.oficioS
+        && params.cantidadr && params.concepto && params.oficioS
         && params.area && params.turno && params.factura && params.recibos
         && params.sc && params.autorizo && params.personaR && params.estatus && params.fecha ) {
       var f = parseInt(params.cantidadc);
@@ -123,6 +121,7 @@ export default class Vales extends Component {
       const batch = firebase.firestore().batch();
       const storyRef = firebase.firestore().collection('caja').doc(`${Math.random()}`);
       batch.set(storyRef, { title: 'Se Genero Un Vale # ', no: params.vale, personaR: params.personaR , cantidad: '-' + f, fecha: params.fecha });
+      console.log(params.fecha);
       batch.set(statsRef, { storyCount: increment }, { merge: true });
       batch.commit();
       const statsRefs = firebase.firestore().collection('vales').doc('--stats--');
@@ -150,12 +149,41 @@ export default class Vales extends Component {
     var cant1 = parseInt(cantidad);
     var cant2 = parseInt(cantidadc);
     var tot = cant1 - cant2;
-
+    var today2 = new Date();
     var today = new Date();
     var meses =  [ '01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12' ];
     var f = new Date();
-    today = f.getDate() + '/' + meses[f.getMonth()] + '/' + f.getFullYear();
-    this.state.fecha = today;
+    today = f.getDate() + '-' + meses[f.getMonth()] + '-' + f.getFullYear();
+    today2 = f.getFullYear() + '-' + meses[f.getMonth()] + '-' + f.getDate() ;
+
+    this.state.fecha = today2;
+
+    let button;
+    if (tot >= 0 && cant2 == 0) {
+      button =
+        <div style={{width: '100%'}}>
+          <input
+            className='input-b'
+            name='cantidadr'
+            style={{width: '92%'}}
+            value={0}
+            required
+            ref={cantidadr => this.inputCantidadr = cantidadr}
+          />
+        </div>;
+    } else {
+      button =
+      <div style={{width: '100%'}}>
+        <input
+          className='input-b'
+          name='cantidadr'
+          value={tot}
+          style={{width: '92%'}}
+          required
+          ref={cantidadr => this.inputCantidadr = cantidadr}
+        />
+      </div>;
+    }
 
     return (
       <div className='container-back'>
@@ -212,12 +240,16 @@ export default class Vales extends Component {
                 <p className='p-bv'>
                   Comprobado
                 </p>
-                <p className='p-bv'>
-                  Reintegro
-                </p>
-                <p className='p-bv'>
-                  Reembolso
-                </p>
+                {tot >= 0 &&
+                  <p className='p-bv'>
+                    Reintegro
+                  </p>
+                }
+                {tot < 0 &&
+                  <p className='p-bv'>
+                    Reembolso
+                  </p>
+                }
               </div>
               <div className='v-c'>
                 <p className='pmcc'>CANTIDAD</p>
@@ -237,19 +269,7 @@ export default class Vales extends Component {
                   required
                   ref={cantidadc => this.inputCantidadc = cantidadc}
                 />
-                <input
-                  className='input-b'
-                  name='cantidadr'
-                  value={tot}
-                  required
-                  ref={cantidadr => this.inputCantidadr = cantidadr}
-                />
-                <input
-                  className='input-b'
-                  name='reembolso'
-                  required
-                  ref={reembolso => this.inputReembolso = reembolso}
-                />
+                {button}
               </div>
               <div className='v-con'>
                 <p className='pmcc'>CONCEPTO</p>
@@ -275,14 +295,34 @@ export default class Vales extends Component {
                   </div>
                   <div className='a-w'>
                     <p className='p-oat'>Área</p>
-                    <input
-                      className='input-w'
-                      name='area'
-                      onChange={this.handleChange.bind(this)}
-                      value={this.state.area}
-                      required
-                      ref={area => this.inputArea = area}
-                    />
+                    <select className='input-w' required
+                      ref={area => this.inputArea = area}>
+                      <option id='area'>Procuraduría General de Justicia</option>
+                      <option id='area'>Subprocuraduría de Procedimientos Penales Región Oriente</option>
+                      <option id='area'>Fiscalía Especializada para la atención de Delitos cometidos contra la Libertad de Expresión</option>
+                      <option id='area'>Periodistas y Personas defensoras de los Derechos Humanos</option>
+                      <option id='area'>Dirección General para la Atención de los Asuntos del Sistema Tradicional</option>
+                      <option id='area'>Fiscalia de Delitos Electorales</option>
+                      <option id='area'>Subprocuraduría de Derechos Humanos y Servicios a la Comunidad</option>
+                      <option id='area'>Centro de Justicia Restaurativa Penal Poniente</option>
+                      <option id='area'>Fiscalía para la Atención de Delitos de Género</option>
+                      <option id='area'>Visitaduría General</option>
+                      <option id='area'>Dirección General de Servicios Periciales</option>
+                      <option id='area'>Centro de Operación Estratégica</option>
+                      <option id='area'>Unidad Especializada en el Combate al Secuestro</option>
+                      <option id='area'>Dirección General de Administración y Finanzas</option>
+                      <option id='area'>Fiscalía Especializada para la atención de los Delitos de Trata de Personas</option>
+                      <option id='area'>Subprocuraduría de Procedimientos Penales Región Poniente</option>
+                      <option id='area'>Centro de Atención Temprana Poniente</option>
+                      <option id='area'>Dirección General de Investigación y Litigación Poniente</option>
+                      <option id='area'>Dirección General de la Policía Investigadora</option>
+                      <option id='area'>Centro de Atención Temprana Oriente</option>
+                      <option id='area'>Centro de Justicia Restaurativa Penal Oriente</option>
+                      <option id='area'>Dirección General de Investigación y Litigación Oriente</option>
+                      <option id='area'>Dirección General de Recursos Materiales y Servicios</option>
+                      <option id='area'>Fiscalía Especializada en Delitos de Corrupción</option>
+                      <option id='area'>Fiscalía Especializada en Materia de Desaparición Forzada de Personas</option>
+                    </select>
                   </div>
                   <div className='t-w'>
                     <p className='p-oat'>Turno</p>

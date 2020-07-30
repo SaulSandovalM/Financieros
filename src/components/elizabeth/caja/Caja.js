@@ -63,6 +63,8 @@ export default class Caja extends Component {
   }
 
   render() {
+
+      console.log(this.state.buscador);
     return (
       <div className='container-back'>
         <div className='site'>
@@ -92,6 +94,8 @@ export default class Caja extends Component {
                 className='input-style-banco'
                 value={this.state.buscador}
                 name='buscador'
+                type='date'
+                data-date-format='DD-MM-YYYY'
                 onChange={this.handleChange.bind(this)}
               />
             </div>

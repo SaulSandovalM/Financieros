@@ -19,11 +19,11 @@ export default class RowComponent extends Component {
     const estaA = this.props.item.estatus;
     let table;
 
-    if (estaA === 'sin asignar') {
-      table =
+    return (
+      <div>
         <div className='xml-inputs-list'>
           <div className='w-xml'>
-            <p>{this.props.item.folio}</p>
+            <p>{this.props.item.name}</p>
           </div>
           <div className='w-xml'>
             <p>{this.props.item.fecha}</p>
@@ -37,12 +37,7 @@ export default class RowComponent extends Component {
           <div className='w-xml' style={{padding: '10px'}}>
             <button onClick={this.update}> + </button>
           </div>
-        </div>;
-    }
-
-    return (
-      <div>
-        {table}
+        </div>
       </div>
     );
   }

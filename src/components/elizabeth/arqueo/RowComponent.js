@@ -40,7 +40,7 @@ export default class RowComponent extends Component {
             twenti + ten + five + two + one + point;
 
     return (
-      <div>
+      <div style={{width: '100%'}}>
         <div className='data-arqueo'>
           <div className='table-left'>
           </div>

@@ -498,7 +498,7 @@ select {
   justify-content: flex-end;
 }
 .table-v-num {
-  width: 7%;
+  width: 6.9%;
   border-bottom: 1px solid #d0d0d0;
   border-right: 1px solid #d0d0d0;
   padding-left: 5px;
@@ -509,7 +509,7 @@ select {
   justify-content: center;
 }
 .table-v-re {
-  width: 7%;
+  width: 6.9%;
   padding-left: 5px;
   border-bottom: 1px solid #d0d0d0;
   border-right: 1px solid #d0d0d0;
@@ -521,16 +521,24 @@ select {
   -webkit-line-clamp: 1;
   -webkit-box-orient: vertical;
 }
+.table-h {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+}
 .table-v-num2 {
   width: 3%;
+  padding-left: 5px;
   border-bottom: 1px solid #d0d0d0;
   border-right: 1px solid #d0d0d0;
-  padding-left: 5px;
-  height: 30px;
+  line-height: 30px;
   font-size: 12px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
 }
 .table-v-importe {
   width: 15%;
@@ -669,6 +677,13 @@ body {
   height: 0px;
   width: 200px;
   border-top: 1px solid;
+}
+.nel {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
 }
 
 

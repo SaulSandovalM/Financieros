@@ -1,6 +1,7 @@
 .arqueo-container {
   display: flex;
   flex-direction: row;
+  justify-content: space-between;
   width: 100%;
 }
 .arqueo-container-pop {
@@ -10,7 +11,7 @@
   width: 100%;
 }
 .arqueo-content {
-  width: 100%;
+  width: 30%;
 }
 .arqueo-content-pop {
   width: 100%;
@@ -26,9 +27,9 @@
 }
 .table-arqueo {
   display: flex;
-  justify-content: center;
   flex-direction: row;
   margin-top: 50px;
+  width: 100%;
 }
 .table-arqueo-pop {
   display: flex;
@@ -36,7 +37,7 @@
   flex-direction: row;
 }
 .title-arqueo {
-  width: 25%;
+  width: 31.3%;
   height: 30px;
   display: flex;
   justify-content: center;
@@ -55,7 +56,6 @@
 }
 .data-arqueo {
   display: flex;
-  justify-content: center;
   flex-direction: row;
 }
 .data-arqueo-pop {
@@ -89,9 +89,6 @@
   margin-bottom: 50px;
   width: 100%;
 }
-.but-end {
-
-}
 .margin-buton-ar {
   margin-left: 10px;
   margin-right: 10px;
@@ -119,4 +116,14 @@
   flex-direction: column;
   border-right: 1px solid #d0d0d0;
   border-bottom: 1px solid #d0d0d0;
+}
+.title-ar {
+  width: 75%;
+  display: flex;
+  justify-content: space-between;
+  padding-top: 30px;
+}
+.cen-tit {
+  display: flex;
+  justify-content: center;
 }

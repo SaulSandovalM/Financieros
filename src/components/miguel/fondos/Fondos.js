@@ -32,7 +32,8 @@ export default class Fondos extends Component {
       suggest: '',
       key: '',
       contador: {},
-      isHidden: 1
+      isHidden: 1,
+      f: ''
     }
   }
 
@@ -82,9 +83,9 @@ export default class Fondos extends Component {
       batch.set(storyRef, { title: 'Nuevo Fondo!' });
       batch.set(statsRef, { nFondo: increment }, { merge: true });
       batch.commit();
-      console.log(statsRef, { nFondo: increment });
+      this.perro()
       //this.props.history.push('/Comprometidos')
-      this.props.history.push(`/edit/${this.state.fondos.key}`)
+      this.props.history.push(`/edit/${this.state.f}`)
     })
     .catch((error) => {
       console.error("Error al guardar: ", error);
@@ -105,6 +106,7 @@ export default class Fondos extends Component {
           key: doc.id,
           isLoading: false
         });
+        console.log(doc.data());
       } else {
         console.log('No hay nada!');
       }
@@ -131,10 +133,27 @@ export default class Fondos extends Component {
         beneficiario,
         realizo,
       });
+      //console.log(doc.id)
     });
     this.setState({
       fondos
    });
+  }
+
+  perro = () => {
+    firebase.firestore().collection('fondos').orderBy("fondo", "desc").limit(1).get()
+      .then(snapshot => {
+        snapshot.forEach(doc => {
+          const data = doc.data();
+          this.setState({
+            f: doc.id
+          })
+          console.log(this.state.f);
+        });
+      })
+      .catch(err => {
+        console.log('Error getting documents', err);
+      });
   }
 
   render() {
@@ -617,11 +636,11 @@ export default class Fondos extends Component {
                   />
                 </div>
               </div>
-              {/*<div className='left-b-f'>
+              <div className='left-b-f'>
                 <button className='bt-s-f' type='submit'>
                   Guadar
                 </button>
-              </div>*/}
+              </div>
             </form>
           </div>
         </div>
