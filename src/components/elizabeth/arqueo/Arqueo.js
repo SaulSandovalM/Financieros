@@ -31,7 +31,8 @@ export default class Arqueo extends Component {
       can0: '',
       arqueo: [],
       fecha: '',
-      search: ''
+      search: '',
+      numCheque: ''
     };
   }
 
@@ -52,6 +53,7 @@ export default class Arqueo extends Component {
           can1: child.val().can1,
           can0: child.val().can0,
           fecha: child.val().fecha,
+          numCheque: child.val().numCheque,
           done: child.val().done,
           id: child.key
         });
@@ -93,7 +95,8 @@ export default class Arqueo extends Component {
       can2: this.inputCan2.value,
       can1: this.inputCan1.value,
       can0: this.inputCan0.value,
-      fecha: this.state.fecha
+      fecha: this.state.fecha,
+      numCheque: this.inputCheque.value
     };
     this.setState({
       can1000: this.inputCan1000.value,
@@ -107,11 +110,12 @@ export default class Arqueo extends Component {
       can2: this.inputCan2.value,
       can1: this.inputCan1.value,
       can0: this.inputCan0.value,
-      fecha: this.state.fecha
+      fecha: this.state.fecha,
+      numCheque: this.inputCheque.value
     })
     if ( params.can1000 && params.can500 && params.can200 && params.can100
           && params.can50 && params.can20 && params.can10 && params.can5
-          && params.can2 && params.can1 && params.can0 && params.fecha ) {
+          && params.can2 && params.can1 && params.can0 && params.fecha && params.numCheque ) {
       firebase.database().ref('arqueo').push(params).then(() => {
         alert('Tu solicitud fue enviada.');
       }).catch(() => {
@@ -146,6 +150,7 @@ export default class Arqueo extends Component {
           <p className='site-pf-s'><b>Arqueo</b></p>
         </div>
         <div className='arqueo-container'>
+
           <div className='arqueo-content'>
             <div className='table-arqueo'>
               <div className='table-left'>
@@ -167,364 +172,371 @@ export default class Arqueo extends Component {
                 lista={this.state.lista}
               />
             </div>
-          </div>
-        </div>
-
-        <div className='botones-arqueo'>
-          <Popup
-            trigger={<button className='margin-buton-ar'>Agregar</button>}
-            modal
-            closeOnDocumentClick>
-            <form onSubmit={this.sendMessage.bind(this)} ref='contactForm'>
-              <div className='arqueo-content-pop'>
-                <div className='table-arqueo-pop'>
-                  <div className='table-left'>
-                  </div>
-                  <div className='title-arqueo'>
-                    <p className='p-mar-arqueo'><b>DENOMINACION</b></p>
-                  </div>
-                  <div className='title-arqueo'>
-                    <p className='p-mar-arqueo'><b>CANTIDAD</b></p>
-                  </div>
-                  <div className='title-arqueo'>
-                    <p className='p-mar-arqueo'><b>DENOMINACIÓN</b></p>
-                  </div>
-                  <div className='table-right'>
-                  </div>
-                </div>
-                <div className='data-arqueo-pop'>
-                  <div className='table-left'>
-                  </div>
-                  <div className='title-arqueo'>
-                    <p className='p-mar-arqueo'>1000</p>
-                  </div>
-                  <div className='title-arqueo'>
-                    <p className='p-mar-arqueo'>
+            <div className='botones-arqueo'>
+              <Popup
+                trigger={<button className='margin-buton-ar'>Actualizar</button>}
+                modal
+                closeOnDocumentClick>
+                <form onSubmit={this.sendMessage.bind(this)} ref='contactForm'>
+                  <div className='cen-tit'>
+                    <div className='title-ar'>
+                      <b>AGREGA EL NUMERO DE CHEQUE PARA REALIZAR TU ARQUEO</b>
                       <input
-                        id='can1000'
-                        required
-                        ref={can1000 => this.inputCan1000 = can1000}
-                      />
-                    </p>
+                        id='numCheque'
+                        ref={numCheque => this.inputCheque = numCheque}/>
+                    </div>
                   </div>
-                  <div className='title-arqueo'>
-                    <p className='p-mar-arqueo'>$</p>
+                  <div className='arqueo-content-pop'>
+                    <div className='table-arqueo-pop'>
+                      <div className='table-left'>
+                      </div>
+                      <div className='title-arqueo'>
+                        <p className='p-mar-arqueo'><b>DENOMINACION</b></p>
+                      </div>
+                      <div className='title-arqueo'>
+                        <p className='p-mar-arqueo'><b>CANTIDAD</b></p>
+                      </div>
+                      <div className='title-arqueo'>
+                        <p className='p-mar-arqueo'><b>DENOMINACIÓN</b></p>
+                      </div>
+                      <div className='table-right'>
+                      </div>
+                    </div>
+                    <div className='data-arqueo-pop'>
+                      <div className='table-left'>
+                      </div>
+                      <div className='title-arqueo'>
+                        <p className='p-mar-arqueo'>1000</p>
+                      </div>
+                      <div className='title-arqueo'>
+                        <p className='p-mar-arqueo'>
+                          <input
+                            id='can1000'
+                            required
+                            ref={can1000 => this.inputCan1000 = can1000}
+                          />
+                        </p>
+                      </div>
+                      <div className='title-arqueo'>
+                        <p className='p-mar-arqueo'>$</p>
+                      </div>
+                      <div className='table-right'>
+                      </div>
+                    </div>
+                    <div className='data-arqueo-pop'>
+                      <div className='table-left'>
+                      </div>
+                      <div className='title-arqueo'>
+                        <p className='p-mar-arqueo'>500</p>
+                      </div>
+                      <div className='title-arqueo'>
+                        <p className='p-mar-arqueo'>
+                          <input
+                            id='can500'
+                            required
+                            ref={can500 => this.inputCan500 = can500}
+                          />
+                        </p>
+                      </div>
+                      <div className='title-arqueo'>
+                        <p className='p-mar-arqueo'>$</p>
+                      </div>
+                      <div className='table-right'>
+                      </div>
+                    </div>
+                    <div className='data-arqueo-pop'>
+                      <div className='table-left'>
+                      </div>
+                      <div className='title-arqueo'>
+                        <p className='p-mar-arqueo'>200</p>
+                      </div>
+                      <div className='title-arqueo'>
+                        <p className='p-mar-arqueo'>
+                          <input
+                            id='can200'
+                            required
+                            ref={can200 => this.inputCan200 = can200}
+                          />
+                        </p>
+                      </div>
+                      <div className='title-arqueo'>
+                        <p className='p-mar-arqueo'>$</p>
+                      </div>
+                      <div className='table-right'>
+                      </div>
+                    </div>
+                    <div className='data-arqueo-pop'>
+                      <div className='table-left'>
+                      </div>
+                      <div className='title-arqueo'>
+                        <p className='p-mar-arqueo'>100</p>
+                      </div>
+                      <div className='title-arqueo'>
+                        <p className='p-mar-arqueo'>
+                          <input
+                            id='can100'
+                            required
+                            ref={can100 => this.inputCan100 = can100}
+                          />
+                        </p>
+                      </div>
+                      <div className='title-arqueo'>
+                        <p className='p-mar-arqueo'>$</p>
+                      </div>
+                      <div className='table-right'>
+                      </div>
+                    </div>
+                    <div className='data-arqueo-pop'>
+                      <div className='table-left'>
+                      </div>
+                      <div className='title-arqueo'>
+                        <p className='p-mar-arqueo'>50</p>
+                      </div>
+                      <div className='title-arqueo'>
+                        <p className='p-mar-arqueo'>
+                          <input
+                            id='can50'
+                            required
+                            ref={can50 => this.inputCan50 = can50}
+                          />
+                        </p>
+                      </div>
+                      <div className='title-arqueo'>
+                        <p className='p-mar-arqueo'>$</p>
+                      </div>
+                      <div className='table-right'>
+                      </div>
+                    </div>
+                    <div className='data-arqueo-pop'>
+                      <div className='table-left'>
+                      </div>
+                      <div className='title-arqueo'>
+                        <p className='p-mar-arqueo'>20</p>
+                      </div>
+                      <div className='title-arqueo'>
+                        <p className='p-mar-arqueo'>
+                          <input
+                            id='can20'
+                            required
+                            ref={can20 => this.inputCan20 = can20}
+                          />
+                        </p>
+                      </div>
+                      <div className='title-arqueo'>
+                        <p className='p-mar-arqueo'>$</p>
+                      </div>
+                      <div className='table-right'>
+                      </div>
+                    </div>
+                    <div className='data-arqueo-pop'>
+                      <div className='table-left'>
+                      </div>
+                      <div className='title-arqueo'>
+                        <p className='p-mar-arqueo'>10</p>
+                      </div>
+                      <div className='title-arqueo'>
+                        <p className='p-mar-arqueo'>
+                          <input
+                            id='can10'
+                            required
+                            ref={can10 => this.inputCan10 = can10}
+                          />
+                        </p>
+                      </div>
+                      <div className='title-arqueo'>
+                        <p className='p-mar-arqueo'>$</p>
+                      </div>
+                      <div className='table-right'>
+                      </div>
+                    </div>
+                    <div className='data-arqueo-pop'>
+                      <div className='table-left'>
+                      </div>
+                      <div className='title-arqueo'>
+                        <p className='p-mar-arqueo'>5</p>
+                      </div>
+                      <div className='title-arqueo'>
+                        <p className='p-mar-arqueo'>
+                          <input
+                            id='can5'
+                            required
+                            ref={can5 => this.inputCan5 = can5}
+                          />
+                        </p>
+                      </div>
+                      <div className='title-arqueo'>
+                        <p className='p-mar-arqueo'>$</p>
+                      </div>
+                      <div className='table-right'>
+                      </div>
+                    </div>
+                    <div className='data-arqueo-pop'>
+                      <div className='table-left'>
+                      </div>
+                      <div className='title-arqueo'>
+                        <p className='p-mar-arqueo'>2</p>
+                      </div>
+                      <div className='title-arqueo'>
+                        <p className='p-mar-arqueo'>
+                          <input
+                            id='can2'
+                            required
+                            ref={can2 => this.inputCan2 = can2}
+                          />
+                        </p>
+                      </div>
+                      <div className='title-arqueo'>
+                        <p className='p-mar-arqueo'>$</p>
+                      </div>
+                      <div className='table-right'>
+                      </div>
+                    </div>
+                    <div className='data-arqueo-pop'>
+                      <div className='table-left'>
+                      </div>
+                      <div className='title-arqueo'>
+                        <p className='p-mar-arqueo'>1</p>
+                      </div>
+                      <div className='title-arqueo'>
+                        <p className='p-mar-arqueo'>
+                          <input
+                            id='can1'
+                            required
+                            ref={can1 => this.inputCan1 = can1}
+                          />
+                        </p>
+                      </div>
+                      <div className='title-arqueo'>
+                        <p className='p-mar-arqueo'>$</p>
+                      </div>
+                      <div className='table-right'>
+                      </div>
+                    </div>
+                    <div className='data-arqueo-pop'>
+                      <div className='table-left'>
+                      </div>
+                      <div className='title-arqueo'>
+                        <p className='p-mar-arqueo'>0.5</p>
+                      </div>
+                      <div className='title-arqueo'>
+                        <p className='p-mar-arqueo'>
+                          <input
+                            id='can0'
+                            required
+                            ref={can0 => this.inputCan0 = can0}
+                          />
+                        </p>
+                      </div>
+                      <div className='title-arqueo'>
+                        <p className='p-mar-arqueo'>$</p>
+                      </div>
+                      <div className='table-right'>
+                      </div>
+                    </div>
                   </div>
-                  <div className='table-right'>
+                  <div className='botones-arqueo'>
+                    <button type='submit' className='margin-buton-ar'>Actualizar</button>
                   </div>
-                </div>
-                <div className='data-arqueo-pop'>
-                  <div className='table-left'>
-                  </div>
-                  <div className='title-arqueo'>
-                    <p className='p-mar-arqueo'>500</p>
-                  </div>
-                  <div className='title-arqueo'>
-                    <p className='p-mar-arqueo'>
-                      <input
-                        id='can500'
-                        required
-                        ref={can500 => this.inputCan500 = can500}
-                      />
-                    </p>
-                  </div>
-                  <div className='title-arqueo'>
-                    <p className='p-mar-arqueo'>$</p>
-                  </div>
-                  <div className='table-right'>
-                  </div>
-                </div>
-                <div className='data-arqueo-pop'>
-                  <div className='table-left'>
-                  </div>
-                  <div className='title-arqueo'>
-                    <p className='p-mar-arqueo'>200</p>
-                  </div>
-                  <div className='title-arqueo'>
-                    <p className='p-mar-arqueo'>
-                      <input
-                        id='can200'
-                        required
-                        ref={can200 => this.inputCan200 = can200}
-                      />
-                    </p>
-                  </div>
-                  <div className='title-arqueo'>
-                    <p className='p-mar-arqueo'>$</p>
-                  </div>
-                  <div className='table-right'>
-                  </div>
-                </div>
-                <div className='data-arqueo-pop'>
-                  <div className='table-left'>
-                  </div>
-                  <div className='title-arqueo'>
-                    <p className='p-mar-arqueo'>100</p>
-                  </div>
-                  <div className='title-arqueo'>
-                    <p className='p-mar-arqueo'>
-                      <input
-                        id='can100'
-                        required
-                        ref={can100 => this.inputCan100 = can100}
-                      />
-                    </p>
-                  </div>
-                  <div className='title-arqueo'>
-                    <p className='p-mar-arqueo'>$</p>
-                  </div>
-                  <div className='table-right'>
-                  </div>
-                </div>
-                <div className='data-arqueo-pop'>
-                  <div className='table-left'>
-                  </div>
-                  <div className='title-arqueo'>
-                    <p className='p-mar-arqueo'>50</p>
-                  </div>
-                  <div className='title-arqueo'>
-                    <p className='p-mar-arqueo'>
-                      <input
-                        id='can50'
-                        required
-                        ref={can50 => this.inputCan50 = can50}
-                      />
-                    </p>
-                  </div>
-                  <div className='title-arqueo'>
-                    <p className='p-mar-arqueo'>$</p>
-                  </div>
-                  <div className='table-right'>
-                  </div>
-                </div>
-                <div className='data-arqueo-pop'>
-                  <div className='table-left'>
-                  </div>
-                  <div className='title-arqueo'>
-                    <p className='p-mar-arqueo'>20</p>
-                  </div>
-                  <div className='title-arqueo'>
-                    <p className='p-mar-arqueo'>
-                      <input
-                        id='can20'
-                        required
-                        ref={can20 => this.inputCan20 = can20}
-                      />
-                    </p>
-                  </div>
-                  <div className='title-arqueo'>
-                    <p className='p-mar-arqueo'>$</p>
-                  </div>
-                  <div className='table-right'>
-                  </div>
-                </div>
-                <div className='data-arqueo-pop'>
-                  <div className='table-left'>
-                  </div>
-                  <div className='title-arqueo'>
-                    <p className='p-mar-arqueo'>10</p>
-                  </div>
-                  <div className='title-arqueo'>
-                    <p className='p-mar-arqueo'>
-                      <input
-                        id='can10'
-                        required
-                        ref={can10 => this.inputCan10 = can10}
-                      />
-                    </p>
-                  </div>
-                  <div className='title-arqueo'>
-                    <p className='p-mar-arqueo'>$</p>
-                  </div>
-                  <div className='table-right'>
-                  </div>
-                </div>
-                <div className='data-arqueo-pop'>
-                  <div className='table-left'>
-                  </div>
-                  <div className='title-arqueo'>
-                    <p className='p-mar-arqueo'>5</p>
-                  </div>
-                  <div className='title-arqueo'>
-                    <p className='p-mar-arqueo'>
-                      <input
-                        id='can5'
-                        required
-                        ref={can5 => this.inputCan5 = can5}
-                      />
-                    </p>
-                  </div>
-                  <div className='title-arqueo'>
-                    <p className='p-mar-arqueo'>$</p>
-                  </div>
-                  <div className='table-right'>
-                  </div>
-                </div>
-                <div className='data-arqueo-pop'>
-                  <div className='table-left'>
-                  </div>
-                  <div className='title-arqueo'>
-                    <p className='p-mar-arqueo'>2</p>
-                  </div>
-                  <div className='title-arqueo'>
-                    <p className='p-mar-arqueo'>
-                      <input
-                        id='can2'
-                        required
-                        ref={can2 => this.inputCan2 = can2}
-                      />
-                    </p>
-                  </div>
-                  <div className='title-arqueo'>
-                    <p className='p-mar-arqueo'>$</p>
-                  </div>
-                  <div className='table-right'>
-                  </div>
-                </div>
-                <div className='data-arqueo-pop'>
-                  <div className='table-left'>
-                  </div>
-                  <div className='title-arqueo'>
-                    <p className='p-mar-arqueo'>1</p>
-                  </div>
-                  <div className='title-arqueo'>
-                    <p className='p-mar-arqueo'>
-                      <input
-                        id='can1'
-                        required
-                        ref={can1 => this.inputCan1 = can1}
-                      />
-                    </p>
-                  </div>
-                  <div className='title-arqueo'>
-                    <p className='p-mar-arqueo'>$</p>
-                  </div>
-                  <div className='table-right'>
-                  </div>
-                </div>
-                <div className='data-arqueo-pop'>
-                  <div className='table-left'>
-                  </div>
-                  <div className='title-arqueo'>
-                    <p className='p-mar-arqueo'>0.5</p>
-                  </div>
-                  <div className='title-arqueo'>
-                    <p className='p-mar-arqueo'>
-                      <input
-                        id='can0'
-                        required
-                        ref={can0 => this.inputCan0 = can0}
-                      />
-                    </p>
-                  </div>
-                  <div className='title-arqueo'>
-                    <p className='p-mar-arqueo'>$</p>
-                  </div>
-                  <div className='table-right'>
-                  </div>
-                </div>
-              </div>
-              <div className='botones-arqueo'>
-                <button type='submit' className='margin-buton-ar'>Agregar</button>
-              </div>
-            </form>
-          </Popup>
-        </div>
-
-        <div className='sear-content'>
-          <div className='p-container-ifr2'>
-            <p className='p-title-margin-fr'>Ingresa la fecha a buscar</p>
-            <input
-            type='date'
-              className='input-style-fr'
-              value={this.state.search} onChange={this.updateSearch.bind(this)}
-            />
-          </div>
-
-          <div className='table-arqueo-search'>
-            <div className='table-arqueo-content'>
-              <div className='table-left'>
-              </div>
-              <div className='title-arqueo-se'>
-                <p className='p-mar-arqueo'><b>1000</b></p>
-              </div>
-              <div className='title-arqueo-se'>
-                <p className='p-mar-arqueo'><b>500</b></p>
-              </div>
-              <div className='title-arqueo-se'>
-                <p className='p-mar-arqueo'><b>200</b></p>
-              </div>
-              <div className='title-arqueo-se'>
-                <p className='p-mar-arqueo'><b>100</b></p>
-              </div>
-              <div className='title-arqueo-se'>
-                <p className='p-mar-arqueo'><b>50</b></p>
-              </div>
-              <div className='title-arqueo-se'>
-                <p className='p-mar-arqueo'><b>20</b></p>
-              </div>
-              <div className='title-arqueo-se'>
-                <p className='p-mar-arqueo'><b>10</b></p>
-              </div>
-              <div className='title-arqueo-se'>
-                <p className='p-mar-arqueo'><b>5</b></p>
-              </div>
-              <div className='title-arqueo-se'>
-                <p className='p-mar-arqueo'><b>2</b></p>
-              </div>
-              <div className='title-arqueo-se'>
-                <p className='p-mar-arqueo'><b>1</b></p>
-              </div>
-              <div className='title-arqueo-se'>
-                <p className='p-mar-arqueo'><b>0.5</b></p>
-              </div>
-              <div className='table-right'>
-              </div>
+                </form>
+              </Popup>
             </div>
           </div>
-          {
-            filterData.map(arqueo => (
+
+          <div style={{width: '65%', background: 'white', margin: '-45px -30px 0px 0px', padding: '90px 30px 30px 30px', height: '88vh'}}>
+            <div className='p-container-ifr2'>
+              <p className='p-title-margin-fr'>Ingresa la fecha a buscar</p>
+              <input
+                type='date'
+                className='input-style-fr'
+                value={this.state.search} onChange={this.updateSearch.bind(this)}
+              />
+            </div>
+            <div className='table-arqueo-search'>
               <div className='table-arqueo-content'>
                 <div className='table-left'>
                 </div>
                 <div className='title-arqueo-se'>
-                  <p className='p-mar-arqueo'>{arqueo.can1000}</p>
+                  <p className='p-mar-arqueo'><b>1000</b></p>
                 </div>
                 <div className='title-arqueo-se'>
-                  <p className='p-mar-arqueo'>{arqueo.can500}</p>
+                  <p className='p-mar-arqueo'><b>500</b></p>
                 </div>
                 <div className='title-arqueo-se'>
-                  <p className='p-mar-arqueo'>{arqueo.can200}</p>
+                  <p className='p-mar-arqueo'><b>200</b></p>
                 </div>
                 <div className='title-arqueo-se'>
-                  <p className='p-mar-arqueo'>{arqueo.can100}</p>
+                  <p className='p-mar-arqueo'><b>100</b></p>
                 </div>
                 <div className='title-arqueo-se'>
-                  <p className='p-mar-arqueo'>{arqueo.can50}</p>
+                  <p className='p-mar-arqueo'><b>50</b></p>
                 </div>
                 <div className='title-arqueo-se'>
-                  <p className='p-mar-arqueo'>{arqueo.can20}</p>
+                  <p className='p-mar-arqueo'><b>20</b></p>
                 </div>
                 <div className='title-arqueo-se'>
-                  <p className='p-mar-arqueo'>{arqueo.can10}</p>
+                  <p className='p-mar-arqueo'><b>10</b></p>
                 </div>
                 <div className='title-arqueo-se'>
-                  <p className='p-mar-arqueo'>{arqueo.can5}</p>
+                  <p className='p-mar-arqueo'><b>5</b></p>
                 </div>
                 <div className='title-arqueo-se'>
-                  <p className='p-mar-arqueo'>{arqueo.can2}</p>
+                  <p className='p-mar-arqueo'><b>2</b></p>
                 </div>
                 <div className='title-arqueo-se'>
-                  <p className='p-mar-arqueo'>{arqueo.can1}</p>
+                  <p className='p-mar-arqueo'><b>1</b></p>
                 </div>
                 <div className='title-arqueo-se'>
-                  <p className='p-mar-arqueo'>{arqueo.can0}</p>
+                  <p className='p-mar-arqueo'><b>0.5</b></p>
                 </div>
                 <div className='table-right'>
                 </div>
               </div>
-            )).reverse()
-          }
+            </div>
+            {
+              filterData.map(arqueo => (
+                <div className='table-arqueo-content'>
+                  <div className='table-left'>
+                  </div>
+                  <div className='title-arqueo-se'>
+                    <p className='p-mar-arqueo'>{arqueo.can1000}</p>
+                  </div>
+                  <div className='title-arqueo-se'>
+                    <p className='p-mar-arqueo'>{arqueo.can500}</p>
+                  </div>
+                  <div className='title-arqueo-se'>
+                    <p className='p-mar-arqueo'>{arqueo.can200}</p>
+                  </div>
+                  <div className='title-arqueo-se'>
+                    <p className='p-mar-arqueo'>{arqueo.can100}</p>
+                  </div>
+                  <div className='title-arqueo-se'>
+                    <p className='p-mar-arqueo'>{arqueo.can50}</p>
+                  </div>
+                  <div className='title-arqueo-se'>
+                    <p className='p-mar-arqueo'>{arqueo.can20}</p>
+                  </div>
+                  <div className='title-arqueo-se'>
+                    <p className='p-mar-arqueo'>{arqueo.can10}</p>
+                  </div>
+                  <div className='title-arqueo-se'>
+                    <p className='p-mar-arqueo'>{arqueo.can5}</p>
+                  </div>
+                  <div className='title-arqueo-se'>
+                    <p className='p-mar-arqueo'>{arqueo.can2}</p>
+                  </div>
+                  <div className='title-arqueo-se'>
+                    <p className='p-mar-arqueo'>{arqueo.can1}</p>
+                  </div>
+                  <div className='title-arqueo-se'>
+                    <p className='p-mar-arqueo'>{arqueo.can0}</p>
+                  </div>
+                  <div className='table-right'>
+                  </div>
+                </div>
+              )).reverse()
+            }
+          </div>
+
         </div>
       </div>
     )
