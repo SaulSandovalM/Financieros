@@ -30,7 +30,8 @@ export default class Arqueo extends Component {
       can1: '',
       can0: '',
       arqueo: [],
-      fecha: ''
+      fecha: '',
+      search: ''
     };
   }
 
@@ -134,9 +135,10 @@ export default class Arqueo extends Component {
       }
     );
 
-    var today = new Date(),
-    date = today.getDate() + '/' + (today.getMonth() + 1) + '/' + today.getFullYear() ;
-    this.state.fecha = date;
+    var meses =  [ '01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12' ];
+    var today = new Date();
+    today = today.getFullYear() + '-' + meses[today.getMonth()] + '-' + today.getDate() ;
+    this.state.fecha = today;
 
     return (
       <div className='pf-container'>
@@ -433,6 +435,7 @@ export default class Arqueo extends Component {
           <div className='p-container-ifr2'>
             <p className='p-title-margin-fr'>Ingresa la fecha a buscar</p>
             <input
+            type='date'
               className='input-style-fr'
               value={this.state.search} onChange={this.updateSearch.bind(this)}
             />

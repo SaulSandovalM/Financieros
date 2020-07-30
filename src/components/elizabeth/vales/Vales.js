@@ -112,7 +112,7 @@ export default class Vales extends Component {
       estatus: this.state.estatus
     })
     if ( params.vale && params.cheque && params.cantidad && params.cantidadc
-        && params.cantidadr && params.reembolso && params.concepto && params.oficioS
+        && params.cantidadr && params.concepto && params.oficioS
         && params.area && params.turno && params.factura && params.recibos
         && params.sc && params.autorizo && params.personaR && params.estatus && params.fecha ) {
       var f = parseInt(params.cantidadc);
@@ -157,7 +157,33 @@ export default class Vales extends Component {
     today2 = f.getFullYear() + '-' + meses[f.getMonth()] + '-' + f.getDate() ;
 
     this.state.fecha = today2;
-    console.log(today2)
+
+    let button;
+    if (tot >= 0 && cant2 == 0) {
+      button =
+        <div style={{width: '100%'}}>
+          <input
+            className='input-b'
+            name='cantidadr'
+            style={{width: '92%'}}
+            value={0}
+            required
+            ref={cantidadr => this.inputCantidadr = cantidadr}
+          />
+        </div>;
+    } else {
+      button =
+      <div style={{width: '100%'}}>
+        <input
+          className='input-b'
+          name='cantidadr'
+          value={tot}
+          style={{width: '92%'}}
+          required
+          ref={cantidadr => this.inputCantidadr = cantidadr}
+        />
+      </div>;
+    }
 
     return (
       <div className='container-back'>
@@ -243,24 +269,7 @@ export default class Vales extends Component {
                   required
                   ref={cantidadc => this.inputCantidadc = cantidadc}
                 />
-                {tot >= 0 &&
-                  <input
-                    className='input-b'
-                    name='cantidadr'
-                    value={tot}
-                    required
-                    ref={cantidadr => this.inputCantidadr = cantidadr}
-                  />
-                }
-                {tot < 0 &&
-                  <input
-                    className='input-b'
-                    name='cantidadr'
-                    value={tot}
-                    required
-                    ref={cantidadr => this.inputCantidadr = cantidadr}
-                  />
-                }
+                {button}
               </div>
               <div className='v-con'>
                 <p className='pmcc'>CONCEPTO</p>
