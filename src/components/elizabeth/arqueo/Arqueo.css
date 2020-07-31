@@ -127,3 +127,28 @@
   display: flex;
   justify-content: center;
 }
+.arqueoI {
+  display: flex;
+  justify-content: center;
+}
+.tabla-arq {
+  display: flex;
+  flex-direction: row;
+}
+.tb-1 {
+  width: 10%;
+  border: 1px solid;
+}
+.tb-n {
+  font-weight: bold;
+  margin: 5px;
+  text-align: center;
+}
+.tb-2 {
+  width: 40%;
+  border: 1px solid;
+}
+.tb-3 {
+  width: 20%;
+  border: 1px solid;
+}

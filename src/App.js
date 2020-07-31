@@ -25,6 +25,7 @@ import ListValesN from './components/elizabeth/listavales/ListValesN';
 import ListArchivosV from './components/elizabeth/listavales/ListArchivosV';
 import Autorizacion from './components/elizabeth/autorizacion/Autorizacion';
 import Arqueo from './components/elizabeth/arqueo/Arqueo';
+import ArqueoD from './components/elizabeth/arqueo/ArqueoD';
 //Parte de Miguel
 import Fondos from './components/miguel/fondos/NewFondos';
 import Comprometidos from './components/miguel/comprometidos/Comprometidos';
@@ -178,6 +179,13 @@ function App(props) {
         exact
         path='/Arqueo'
         component={Arqueo}
+        isAuthenticated={isAuthenticated}
+        isVerifying={isVerifying}
+      />
+      <ProtectedRoute
+        exact
+        path='/ArqueoD'
+        component={ArqueoD}
         isAuthenticated={isAuthenticated}
         isVerifying={isVerifying}
       />
