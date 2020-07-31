@@ -3,7 +3,6 @@ import firebase from '../../../Firebase';
 import ListArchivo from './ListArchivo';
 import './ListVales.css';
 import Dropzone from 'react-dropzone';
-import example from './exa.xml';
 import XMLParser from 'react-xml-parser';
 
 export default class ListArchivosV extends Component {
@@ -51,10 +50,10 @@ export default class ListArchivosV extends Component {
     };
   }
 
-  onDrop(files) {
-    var fileNameE = files;
-    console.log(fileNameE);
-    fetch(fileNameE)
+  onDrop(event) {
+    const file = event.target.files;
+    console.log(file);
+    fetch(file)
       .then(res => res.text())
       .then(data => {
         var xml = new XMLParser().parseFromString(data);
@@ -70,28 +69,30 @@ export default class ListArchivosV extends Component {
     })
   }
 
-  handleOnChange1 (files) {
-    // for(let i = 0; i < event.target.files.length; i++) {
-    //   const storageRef = firebase.storage().ref(`comprobacion/${file.name}`)
-    //   const task = storageRef.put(file)
-    //   this.setState({
-    //     filex: `${file.name}`
-    //   })
-    //   task.on('state_changed', (snapshot) => {
-    //     let percentage = (snapshot.bytesTransferred / snapshot.totalBytes) * 100
-    //     this.setState({
-    //       pdf1: percentage
-    //     })
-    //   }, error => {
-    //     console.error(error.message);
-    //   }, () =>  storageRef.getDownloadURL().then(url =>  {
-    //     const record = url;
-    //     this.setState({
-    //       filexml: record
-    //     });
-    //   }));
-    // }
-  }
+  handleOnChange1 (event) {
+    const files = event.target.files;
+    for (var i = 0; i < files.length; i++) {
+      const file = files[i];
+      var xml = file;
+      if (file.type == 'text/xml') {
+        var reader = new FileReader();
+        reader.onloadend = function () {
+          var xml = new XMLParser().parseFromString(reader.result);
+          fetch(xml).then(res => res.text()).then(data => {
+            fetch('https://financieros-78cb0.firebaseio.com/xml.json', {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                  },
+                  body: JSON.stringify(xml)
+                })
+            })
+        }
+        reader.readAsText(xml);
+      }
+    }
+  };
 
   handleOnChange2 (event) {
     for(let i = 0; i < event.target.files.length; i++)
@@ -246,7 +247,7 @@ export default class ListArchivosV extends Component {
                         background: 'white',
                         position: 'static'
                       }}
-                      accept=".xml" onChange={this.onDrop.bind(this)}>
+                      accept=".xml" onChange={this.handleOnChange1.bind(this)}>
                       <div className='filename'>
                         <p className='file-hid'>{this.state.filex}</p>
                       </div>
