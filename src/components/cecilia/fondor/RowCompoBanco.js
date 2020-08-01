@@ -1,21 +1,20 @@
-import React, { Component } from 'react';
-import CurrencyFormat from 'react-currency-format';
-import './Fondor.css';
+import React, { Component } from 'react'
+import CurrencyFormat from 'react-currency-format'
+import './Fondor.css'
 
 export default class RowComponent extends Component {
-  constructor(props){
-     super(props);
-     this.state = {
-       done: false,
-       item: 'Atendido',
-     };
-   }
+  constructor (props) {
+    super(props)
+    this.state = {
+      done: false,
+      item: 'Atendido'
+    }
+  }
 
-  render() {
+  render () {
     return (
       <div className='table-container-p'>
-        <div className='table-left'>
-        </div>
+        <div className='table-left' />
         <div className='table-up-p-fr'>
           <p>{this.props.item.up}</p>
         </div>
@@ -29,15 +28,14 @@ export default class RowComponent extends Component {
           <div>
             <CurrencyFormat
               value={this.props.item.importe}
-              displayType={'text'}
-              thousandSeparator={true}
-              prefix={' $'} />
+              displayType='text'
+              prefix=' $'
+            />
             .00
           </div>
         </div>
-        <div className='table-right'>
-        </div>
+        <div className='table-right' />
       </div>
-    );
+    )
   }
 }
