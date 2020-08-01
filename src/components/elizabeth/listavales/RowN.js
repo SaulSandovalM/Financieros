@@ -1,15 +1,14 @@
-import React, { Component } from 'react';
-import './ListVales.css';
+import React, { Component } from 'react'
+import './ListVales.css'
 
 export default class RowComponent extends Component {
-  render() {
-    var cheque = this.props.item.cheque;
+  render () {
+    var cheque = this.props.item.cheque
     return (
       <div>
-        { cheque === 'Pendiente' &&
+        {cheque === 'Pendiente' &&
           <div class='caja-inputs'>
-            <div class='table-left'>
-            </div>
+            <div class='table-left' />
             <div class='table-v-num2'>
               <div>{this.props.item.vale}</div>
             </div>
@@ -55,11 +54,9 @@ export default class RowComponent extends Component {
             <div class='table-v-re'>
               <div>{this.props.item.personaR}</div>
             </div>
-            <div class='table-right'>
-            </div>
-          </div>
-        }
+            <div class='table-right' />
+          </div>}
       </div>
-    );
+    )
   }
 }

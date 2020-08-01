@@ -1,11 +1,11 @@
-import React, { Component } from 'react';
-import '../Fondos.css';
-import firebaseConf from '../../../../Firebase';
-import ListComponent from './ListComponent';
+import React, { Component } from 'react'
+import '../Fondos.css'
+import firebaseConf from '../../../../Firebase'
+import ListComponent from './ListComponent'
 
 export default class XmlComp extends Component {
-  constructor(){
-    super();
+  constructor () {
+    super()
     this.state = {
       nuevo: '',
       lista: [
@@ -13,14 +13,14 @@ export default class XmlComp extends Component {
           id: 1,
           name: 'preuba',
           done: false
-        },
+        }
       ]
     }
   }
 
   listenForItems = (itemsRef) => {
     itemsRef.on('value', (snap) => {
-      var lista = [];
+      var lista = []
       snap.forEach((child) => {
         lista.push({
           folio: child.val().folio,
@@ -30,33 +30,33 @@ export default class XmlComp extends Component {
           estatus: child.val().estatus,
           done: child.val().done,
           id: child.key
-        });
-      });
+        })
+      })
       this.setState({
         lista: lista
-      });
-    });
+      })
+    })
   }
 
-  componentDidMount() {
-    const itemsRef = firebaseConf.database().ref('xml2/');
-    this.listenForItems(itemsRef);
+  componentDidMount () {
+    const itemsRef = firebaseConf.database().ref('xml2/')
+    this.listenForItems(itemsRef)
   }
 
   update = (item) => {
-    let updates = {};
+    let updates = {}
     updates['xml/' + item.id] = {
       folio: item.folio,
       fecha: item.fecha,
       importe: item.importe,
       usoCFDI: item.usoCFDI,
       estatus: 'sin asignar'
-    };
-    firebaseConf.database().ref().update(updates);
-    firebaseConf.database().ref('xml2/' + item.id).remove();
+    }
+    firebaseConf.database().ref().update(updates)
+    firebaseConf.database().ref('xml2/' + item.id).remove()
   }
 
-  render() {
+  render () {
     return (
       <div className='xml-back'>
         <div className='xml-container'>

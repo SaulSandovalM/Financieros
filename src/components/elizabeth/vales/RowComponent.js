@@ -73,56 +73,14 @@ export default class RowComponent extends Component {
     }
   }
 
-  render() {
-
-  //   function xmlToJson(xml) {
-  //
-  //   // Create the return object
-  //   var obj = {};
-  //
-  //   if (xml.nodeType === 1) { // element
-  //   // do attributes
-  //   if (xml.attributes.length > 0) {
-  //   obj['@attributes'] = {};
-  //     for (var j = 0; j < xml.attributes.length; j++) {
-  //       var attribute = xml.attributes.item(j);
-  //       obj['@attributes'][attribute.nodeName] = attribute.nodeValue;
-  //     }
-  //   }
-  // } else if (xml.nodeType === 3) { // text
-  //   obj = xml.nodeValue;
-  //   }
-  //
-  //   // do children
-  //   if (xml.hasChildNodes()) {
-  //   for(var i = 0; i < xml.childNodes.length; i++) {
-  //     var item = xml.childNodes.item(i);
-  //     var nodeName = item.nodeName;
-  //     if (typeof(obj[nodeName]) == 'undefined') {
-  //       obj[nodeName] = xmlToJson(item);
-  //     } else {
-  //       if (typeof(obj[nodeName].push) == 'undefined') {
-  //         var old = obj[nodeName];
-  //         obj[nodeName] = [];
-  //         obj[nodeName].push(old);
-  //       }
-  //       obj[nodeName].push(xmlToJson(item));
-  //     }
-  //   }
-  //   }
-  //   return obj;
-  //   };
-  2020-07-22
-
-  var auto = this.props.item.estatus;
-
+  render () {
+    var auto = this.props.item.estatus
     return (
       <div>
-      {auto === 'Autorizado'&&
-      <div className='caja-inputs'>
-        <div className='table-left'>
-        </div>
-        <div className='table-v-num'>
+        {auto === 'Autorizado'&&
+          <div className='caja-inputs'>
+            <div className='table-left' />
+            <div className='table-v-num'>
           <b>{this.props.item.vale}</b>
         </div>
         <div className='table-v-importe'>

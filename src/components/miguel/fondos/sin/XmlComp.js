@@ -58,7 +58,7 @@ export default class XmlComp extends Component {
   }
 
   render() {
-    var lol = firebaseConf.database().ref('xml/')//attributes/ 
+    var lol = firebaseConf.database().ref('xml/')//attributes/
     console.log(lol);
     return (
       <div className='xml-back'>

@@ -1,20 +1,19 @@
-import React, { Component } from 'react';
-import './Registro.css';
+import React, { Component } from 'react'
+import './Registro.css'
 
 export default class RowComponent extends Component {
-  constructor(props){
-    super(props);
+  constructor (props) {
+    super(props)
     this.state = {
       done: false,
-      item: 'Atendido',
-    };
-   }
+      item: 'Atendido'
+    }
+  }
 
-  render() {
+  render () {
     return (
       <div className='meses-container-row'>
-        <div className='table-left'>
-        </div>
+        <div className='table-left' />
         <div className='table-meses-up'>
           <p className='p-meses-row'>{this.props.item.up}</p>
         </div>
@@ -45,9 +44,8 @@ export default class RowComponent extends Component {
         <div className='table-meses-dis'>
           <p className='p-meses-row'>{this.props.item.ene}</p>
         </div>
-        <div className='table-right'>
-        </div>
+        <div className='table-right' />
       </div>
-    );
+    )
   }
 }

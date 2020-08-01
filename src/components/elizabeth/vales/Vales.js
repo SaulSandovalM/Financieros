@@ -1,20 +1,20 @@
-import React, { Component } from 'react';
-import firebase from '../../../Firebase';
-import './Vales.css';
-import ReactToPrint from 'react-to-print';
-import logovale from '../../../img/logovale.png';
-import logoh from '../../../img/logoh.png';
+import React, { Component } from 'react'
+import firebase from '../../../Firebase'
+import './Vales.css'
+import ReactToPrint from 'react-to-print'
+import logovale from '../../../img/logovale.png'
+import logoh from '../../../img/logoh.png'
 
 export default class Vales extends Component {
-  constructor(props) {
-    super(props);
+  constructor (props) {
+    super(props)
     this.state = {
       lista: [
         {
           id: 1,
           name: 'preuba',
           done: false
-        },
+        }
       ],
       form: [],
       alert: false,
@@ -37,44 +37,44 @@ export default class Vales extends Component {
       autorizo: '',
       estatus: 'Pendiente',
       contador: {},
-      isHidden: true,
-    };
+      isHidden: true
+    }
   }
 
-  toggleHidden() {
-   this.setState({
-     isHidden: !this.state.isHidden
-   })
- }
-
-  handleChange(event) {
-    this.setState({[event.target.name]: event.target.value})
+  toggleHidden () {
+    this.setState({
+      isHidden: !this.state.isHidden
+    })
   }
 
-  componentDidMount() {
-    this.consumo();
+  handleChange (event) {
+    this.setState({ [event.target.name]: event.target.value })
+  }
+
+  componentDidMount () {
+    this.consumo()
   }
 
   consumo = () => {
-    const ref = firebase.firestore().collection('vales').doc('--stats--');
+    const ref = firebase.firestore().collection('vales').doc('--stats--')
     ref.get().then((doc) => {
       if (doc.exists) {
         this.setState({
           contador: doc.data(),
           key: doc.id,
           isLoading: false
-        });
+        })
       } else {
-        console.log('No hay Documento');
+        console.log('No hay Documento')
       }
     })
   }
 
-  resetForm() {
-    this.refs.contactForm.reset();
+  resetForm () {
+    this.refs.contactForm.reset()
   }
 
-  sendMessage() {
+  sendMessage () {
     const params = {
       vale: this.inputVale.value,
       cheque: this.inputCheque.value,
@@ -92,7 +92,7 @@ export default class Vales extends Component {
       fecha: this.state.fecha,
       autorizo: this.inputAutorizo.value,
       estatus: this.state.estatus
-    };
+    }
     this.setState({
       vale: this.inputVale.value,
       cheque: this.inputCheque.value,
@@ -111,78 +111,77 @@ export default class Vales extends Component {
       autorizo: this.inputAutorizo.value,
       estatus: this.state.estatus
     })
-    if ( params.vale && params.cheque && params.cantidad && params.cantidadc
-        && params.cantidadr && params.concepto && params.oficioS
-        && params.area && params.turno && params.factura && params.recibos
-        && params.sc && params.autorizo && params.personaR && params.estatus && params.fecha ) {
-      var f = parseInt(params.cantidadc);
-      const statsRef = firebase.firestore().collection('caja').doc('--stats--');
-      const increment = firebase.firestore.FieldValue.increment(-f);
-      const batch = firebase.firestore().batch();
-      const storyRef = firebase.firestore().collection('caja').doc(`${Math.random()}`);
-      batch.set(storyRef, { title: 'Se Genero Un Vale # ', no: params.vale, personaR: params.personaR , cantidad: '-' + f, fecha: params.fecha });
-      console.log(params.fecha);
-      batch.set(statsRef, { storyCount: increment }, { merge: true });
-      batch.commit();
-      const statsRefs = firebase.firestore().collection('vales').doc('--stats--');
-      const increments = firebase.firestore.FieldValue.increment(1);
-      const batchs = firebase.firestore().batch();
-      const storyRefs = firebase.firestore().collection('vales').doc(`${Math.random()}`);
-      batchs.set(storyRefs, { title: 'Vale ', no: params.vale, personaR: params.personaR , cantidad: '-'+f });
-      batchs.set(statsRefs, { storyCount: increments }, { merge: true });
-      batchs.commit();
+    if (params.vale && params.cheque && params.cantidad && params.cantidadc &&
+        params.cantidadr && params.concepto && params.oficioS && params.area &&
+        params.turno && params.factura && params.recibos && params.sc &&
+        params.autorizo && params.personaR && params.estatus && params.fecha) {
+      var f = parseInt(params.cantidadc)
+      const statsRef = firebase.firestore().collection('caja').doc('--stats--')
+      const increment = firebase.firestore.FieldValue.increment(-f)
+      const batch = firebase.firestore().batch()
+      const storyRef = firebase.firestore().collection('caja').doc(`${Math.random()}`)
+      batch.set(storyRef, { title: 'Se Genero Un Vale # ', no: params.vale, personaR: params.personaR, cantidad: '-' + f, fecha: params.fecha })
+      console.log(params.fecha)
+      batch.set(statsRef, { storyCount: increment }, { merge: true })
+      batch.commit()
+      const statsRefs = firebase.firestore().collection('vales').doc('--stats--')
+      const increments = firebase.firestore.FieldValue.increment(1)
+      const batchs = firebase.firestore().batch()
+      const storyRefs = firebase.firestore().collection('vales').doc(`${Math.random()}`)
+      batchs.set(storyRefs, { title: 'Vale ', no: params.vale, personaR: params.personaR, cantidad: '-' + f })
+      batchs.set(statsRefs, { storyCount: increments }, { merge: true })
+      batchs.commit()
       firebase.database().ref('vales').push(params).then(() => {
-        alert('Tu solicitud fue enviada.');
+        alert('Tu solicitud fue enviada.')
       }).catch(() => {
-        alert('Tu solicitud no puede ser enviada');
-      });
-        this.resetForm();
-        setInterval(this.consumo, 1000);
-      } else {
-        alert('Por favor llene el formulario');
-      };
+        alert('Tu solicitud no puede ser enviada')
+      })
+      this.resetForm()
+      setInterval(this.consumo, 1000)
+    } else {
+      alert('Por favor llene el formulario')
+    }
   }
 
-  render() {
+  render () {
+    const { cantidad, cantidadc } = this.state
+    var cant1 = parseInt(cantidad)
+    var cant2 = parseInt(cantidadc)
+    var tot = cant1 - cant2
+    var today2 = new Date()
+    var today = new Date()
+    var meses = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12']
+    var f = new Date()
+    today = f.getDate() + '-' + meses[f.getMonth()] + '-' + f.getFullYear()
+    today2 = f.getFullYear() + '-' + meses[f.getMonth()] + '-' + f.getDate()
 
-    const { cantidad, cantidadc } = this.state;
-    var cant1 = parseInt(cantidad);
-    var cant2 = parseInt(cantidadc);
-    var tot = cant1 - cant2;
-    var today2 = new Date();
-    var today = new Date();
-    var meses =  [ '01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12' ];
-    var f = new Date();
-    today = f.getDate() + '-' + meses[f.getMonth()] + '-' + f.getFullYear();
-    today2 = f.getFullYear() + '-' + meses[f.getMonth()] + '-' + f.getDate() ;
+    this.state.fecha = today2
 
-    this.state.fecha = today2;
-
-    let button;
-    if (tot >= 0 && cant2 == 0) {
+    let button
+    if (tot >= 0 && cant2 === 0) {
       button =
-        <div style={{width: '100%'}}>
+        <div style={{ width: '100%' }}>
           <input
             className='input-b'
             name='cantidadr'
-            style={{width: '92%'}}
+            style={{ width: '92%' }}
             value={0}
             required
             ref={cantidadr => this.inputCantidadr = cantidadr}
           />
-        </div>;
+        </div>
     } else {
       button =
-      <div style={{width: '100%'}}>
-        <input
-          className='input-b'
-          name='cantidadr'
-          value={tot}
-          style={{width: '92%'}}
-          required
-          ref={cantidadr => this.inputCantidadr = cantidadr}
-        />
-      </div>;
+        <div style={{ width: '100%' }}>
+          <input
+            className='input-b'
+            name='cantidadr'
+            value={tot}
+            style={{ width: '92%' }}
+            required
+            ref={cantidadr => this.inputCantidadr = cantidadr}
+          />
+        </div>
     }
 
     return (
@@ -230,7 +229,7 @@ export default class Vales extends Component {
             <div className='vale-pro-content'>
               <p className='p-vp'>VALE PROVISIONAL DE CAJA</p>
             </div>
-            <div className='space-v'/>
+            <div className='space-v' />
             <div className='mcc-content'>
               <div className='v-m'>
                 <p className='pmcc'>MOVIMIENTO</p>
@@ -295,7 +294,8 @@ export default class Vales extends Component {
                   </div>
                   <div className='a-w'>
                     <p className='p-oat'>Área</p>
-                    <select className='input-w' required
+                    <select
+                      className='input-w' required
                       ref={area => this.inputArea = area}>
                       <option id='area'>Procuraduría General de Justicia</option>
                       <option id='area'>Subprocuraduría de Procedimientos Penales Región Oriente</option>
@@ -373,16 +373,6 @@ export default class Vales extends Component {
                       ref={sc => this.inputSC = sc}
                     />
                   </div>
-                  {/*<div className='frsr-w-b' style={{borderLeft: '0px', borderRight: '0px'}}>
-                    <p className='p-oat'>Reintegro Total</p>
-                    <input
-                      className='input-w'
-                      name='reintegroT'
-                      onChange={this.handleChange.bind(this)}
-                      value={this.state.reintegroT}
-                      ref={reintegroT => this.inputReintegroT = reintegroT}
-                    />
-                  </div>*/}
                 </div>
               </div>
             </div>
@@ -392,7 +382,8 @@ export default class Vales extends Component {
                 <p className='font-size-f'>Fecha</p>
               </div>
               <div className='f-fecha'>
-                <select className='b-auto'
+                <select
+                  className='b-auto'
                   ref={autorizo => this.inputAutorizo = autorizo}>
                   <option id='autorizo'>L.C Nayra Ruiz Laguna</option>
                   <option id='autorizo'>Mtro.León Maximiliano Hernández Valdés</option>
@@ -421,7 +412,7 @@ export default class Vales extends Component {
           <div className='boton-v'>
             <ReactToPrint
               trigger={() => <buttom className='boton-vale'>Imprimir y Guardar</buttom>}
-              content={()=> this.vale}
+              content={() => this.vale}
               onAfterPrint={this.sendMessage.bind(this)}
             />
           </div>

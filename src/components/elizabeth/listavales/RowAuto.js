@@ -1,15 +1,14 @@
-import React, { Component } from 'react';
-import './ListVales.css';
+import React, { Component } from 'react'
+import './ListVales.css'
 
 export default class RowAuto extends Component {
-  render() {
-    var auto = this.props.item.estatus;
+  render () {
+    var auto = this.props.item.estatus
     return (
       <div>
-        { auto === 'Autorizado' &&
+        {auto === 'Autorizado' &&
           <div class='caja-inputs'>
-            <div class='table-left'>
-            </div>
+            <div class='table-left' />
             <div class='table-v-num2'>
               <div>{this.props.item.vale}</div>
             </div>
@@ -55,11 +54,9 @@ export default class RowAuto extends Component {
             <div class='table-v-re'>
               <div>{this.props.item.personaR}</div>
             </div>
-            <div class='table-right'>
-            </div>
-          </div>
-        }
+            <div class='table-right' />
+          </div>}
       </div>
-    );
+    )
   }
 }

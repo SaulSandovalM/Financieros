@@ -1,30 +1,29 @@
-import React, { Component } from 'react';
-import './ListVales.css';
-import RowN from './RowN';
-import firebase from '../../../Firebase';
+import React, { Component } from 'react'
+import './ListVales.css'
+import RowN from './RowN'
+import firebase from '../../../Firebase'
 
 export default class ListN extends Component {
   constructor (props) {
-    super(props);
+    super(props)
     this.state = {
-      vales: [],
-    };
+      vales: []
+    }
   }
 
   componentWillMount () {
     firebase.database().ref('vales/').on('child_added', snapshot => {
       this.setState({
         vales: this.state.vales.concat(snapshot.val())
-      });
-    });
+      })
+    })
   }
 
-  render() {
+  render () {
     return (
       <div>
         <div class='caja-inputs'>
-          <div class='table-left'>
-          </div>
+          <div class='table-left' />
           <div class='table-v-num2'>
             <b># V</b>
           </div>
@@ -70,8 +69,7 @@ export default class ListN extends Component {
           <div class='table-v-num'>
             <b>RECIBIO</b>
           </div>
-          <div class='table-right'>
-          </div>
+          <div class='table-right' />
         </div>
         {
           this.props.lista.map(item =>
@@ -82,6 +80,6 @@ export default class ListN extends Component {
           )
         }
       </div>
-    );
+    )
   }
 }

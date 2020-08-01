@@ -1,25 +1,25 @@
-import React, { Component } from 'react';
-import './Arqueo.css';
-import RowComponent from './RowComponent';
-import firebase from '../../../Firebase';
+import React, { Component } from 'react'
+import './Arqueo.css'
+import RowComponent from './RowComponent'
+import firebase from '../../../Firebase'
 
 export default class ListComponent extends Component {
   constructor (props) {
-    super(props);
+    super(props)
     this.state = {
-      arqueo: [],
-    };
+      arqueo: []
+    }
   }
 
   componentWillMount () {
     firebase.database().ref('arqueo/').on('child_added', snapshot => {
       this.setState({
         arqueo: this.state.arqueo.concat(snapshot.val())
-      });
-    });
+      })
+    })
   }
 
-  render() {
+  render () {
     return (
       <div>
         {
@@ -31,6 +31,6 @@ export default class ListComponent extends Component {
           )
         }
       </div>
-    );
+    )
   }
 }

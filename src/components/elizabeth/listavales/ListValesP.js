@@ -1,18 +1,18 @@
-import React, { Component } from 'react';
-import firebase from '../../../Firebase';
-import ListComponent from './ListComponent';
-import './ListVales.css';
+import React, { Component } from 'react'
+import firebase from '../../../Firebase'
+import ListComponent from './ListComponent'
+import './ListVales.css'
 
 export default class ListValesP extends Component {
-  constructor(props) {
-    super(props);
+  constructor (props) {
+    super(props)
     this.state = {
       lista: [
         {
           id: 1,
           name: 'preuba',
           done: false
-        },
+        }
       ],
       form: [],
       alert: false,
@@ -35,13 +35,13 @@ export default class ListValesP extends Component {
       estatus: 'Pendiente',
       fecha: '',
       contador: {},
-      isHidden: true,
-    };
+      isHidden: true
+    }
   }
 
   listenForItems = (itemsRef) => {
     itemsRef.on('value', (snap) => {
-      var lista = [];
+      var lista = []
       snap.forEach((child) => {
         lista.push({
           vale: child.val().vale,
@@ -63,35 +63,35 @@ export default class ListValesP extends Component {
           fecha: child.val().fecha,
           done: child.val().done,
           id: child.key
-        });
-      });
+        })
+      })
       this.setState({
         lista: lista
-      });
-    });
+      })
+    })
   }
 
-  componentDidMount() {
-    const itemsRef = firebase.database().ref('vales/');
-    this.listenForItems(itemsRef);
+  componentDidMount () {
+    const itemsRef = firebase.database().ref('vales/')
+    this.listenForItems(itemsRef)
   }
 
-  componentWillMount() {
-    let formRef = firebase.database().ref('vales').orderByKey().limitToLast(1);
+  componentWillMount () {
+    const formRef = firebase.database().ref('vales').orderByKey().limitToLast(1)
     formRef.on('child_added', snapshot => {
-      const { vale, cheque, cantidad, cantidadc, cantidadr, concepto, oficioS, area, turno, personaR, estatus, autorizo, fecha } = snapshot.val();
-      const data = { vale, cheque, cantidad, cantidadc, cantidadr, concepto, oficioS, area, turno, personaR, estatus, autorizo, fecha };
-      this.setState({ form: [data].concat(this.state.form) });
-    });
+      const { vale, cheque, cantidad, cantidadc, cantidadr, concepto, oficioS, area, turno, personaR, estatus, autorizo, fecha } = snapshot.val()
+      const data = { vale, cheque, cantidad, cantidadc, cantidadr, concepto, oficioS, area, turno, personaR, estatus, autorizo, fecha }
+      this.setState({ form: [data].concat(this.state.form) })
+    })
   }
 
-  render() {
+  render () {
     return (
       <div class='container-back'>
         <div class='site'>
           <p class='site-s'><b>Vales Pendientes</b></p>
         </div>
-        <div class='caja-w' style={{marginTop: '40px', marginBottom: '40px'}}>
+        <div class='caja-w' style={{ marginTop: '40px', marginBottom: '40px' }}>
           <div class='caja-col'>
             <ListComponent
               lista={this.state.lista}

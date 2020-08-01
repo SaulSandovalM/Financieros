@@ -1,63 +1,63 @@
+.con-f {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
 .space-fm {
   margin-top: 60px;
 }
 .p-title-margin-fondo {
-  margin: 0px;
   font-weight: bold;
+  margin: 0;
 }
 .p-container-fondo {
   display: flex;
   flex-direction: column;
+  margin: 20px 0 0 0;
   width: 40%;
-  margin: 20px 0px 0px 0px;
 }
 .input-style-fr {
   height: 30px;
   text-align: center;
 }
 .f-container-n {
-  padding: 0px 30px 0px 30px;
   background-color: #f4f4f4;
-  min-height: 100vh
-}
-.con-f {
-  display: flex;
-  justify-content: center;
-  flex-direction: row;
+  min-height: 100vh;
+  padding: 0 30px 0 30px;
 }
 .fondos-bac {
-  width: 60%;
   height: auto;
+  width: 60%;
   z-index: 1
 }
 .fon-t {
   display: flex;
-  justify-content: space-between;
   flex-direction: row;
+  justify-content: space-between;
   width: 100%;
 }
 .fon-d-c {
   display: flex;
-  justify-content: space-around;
   flex-direction: row;
+  justify-content: space-around;
 }
 .left-b-f {
-  width: 100%;
-  margin-top: 30px;
   display: flex;
-  justify-content: flex-end;
   flex-direction: row;
+  justify-content: flex-end;
+  margin-top: 30px;
+  width: 100%;
 }
 .col-f-c {
   display: flex;
-  justify-content: center;
   flex-direction: column;
   height: 90vh;
+  justify-content: center;
 }
 .bt-s-f {
-  color: white;
   background-color: green;
-  border: 0px;
+  border: 0;
+  color: white;
   padding: 6px;
 }
 

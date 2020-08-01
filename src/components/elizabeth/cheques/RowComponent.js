@@ -1,25 +1,24 @@
-import React, { Component } from 'react';
-import './Cheques.css';
-import CurrencyFormat from 'react-currency-format';
+import React, { Component } from 'react'
+import './Cheques.css'
+import CurrencyFormat from 'react-currency-format'
 
 export default class RowComponent extends Component {
-  constructor(props){
-    super(props);
+  constructor (props) {
+    super(props)
     this.state = {
       done: false,
-      item: 'Atendido',
-    };
+      item: 'Atendido'
+    }
   }
 
-  update = () => {
-    this.props.update(this.props.item);
+  handleUpdate = () => {
+    this.props.update(this.props.item)
   }
 
-  render() {
+  render () {
     return (
       <div className='cheques-inputs'>
-        <div className='table-left'>
-        </div>
+        <div className='table-left' />
         <div className='table-c-num'>
           <p>{this.props.item.numCheque}</p>
         </div>
@@ -38,10 +37,10 @@ export default class RowComponent extends Component {
           <div>
             <CurrencyFormat
               value={this.props.item.importe}
-              displayType={'text'}
-              thousandSeparator={true}
-              prefix={'$ '}
-              decimalSeparator={'.'} />
+              displayType='text'
+              prefix='$ '
+              decimalSeparator='.'
+            />
           </div>
         </div>
         <div className='table-c-fechae'>
@@ -50,11 +49,10 @@ export default class RowComponent extends Component {
           </div>
         </div>
         <div className='table-c-fechae'>
-          <button onClick={this.update}>Actualizar</button>
+          <button onClick={this.handleUpdate}>Actualizar</button>
         </div>
-        <div className='table-right'>
-        </div>
+        <div className='table-right' />
       </div>
-    );
+    )
   }
 }

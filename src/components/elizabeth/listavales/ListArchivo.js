@@ -1,30 +1,29 @@
-import React, { Component } from 'react';
-import './ListVales.css';
-import RowArchivo from './RowArchivo';
-import firebase from '../../../Firebase';
+import React, { Component } from 'react'
+import './ListVales.css'
+import RowArchivo from './RowArchivo'
+import firebase from '../../../Firebase'
 
 export default class ListArchivo extends Component {
   constructor (props) {
-    super(props);
+    super(props)
     this.state = {
       vales: []
-    };
+    }
   }
 
   componentWillMount () {
     firebase.database().ref('vales/').on('child_added', snapshot => {
       this.setState({
         vales: this.state.vales.concat(snapshot.val())
-      });
-    });
+      })
+    })
   }
 
-  render() {
+  render () {
     return (
       <div>
         <div className='caja-inputs'>
-          <div className='table-left'>
-          </div>
+          <div className='table-left' />
           <div className='table-v-num2'>
             <b># V</b>
           </div>
@@ -70,8 +69,7 @@ export default class ListArchivo extends Component {
           <div className='table-v-num'>
             <b className='table-h'>COMP</b>
           </div>
-          <div className='table-right'>
-          </div>
+          <div className='table-right' />
         </div>
         {
           this.props.lista.map(item =>
@@ -83,6 +81,6 @@ export default class ListArchivo extends Component {
           )
         }
       </div>
-    );
+    )
   }
 }

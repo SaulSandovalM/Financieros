@@ -1,18 +1,18 @@
-import React, { Component } from 'react';
-import './Arqueo.css';
-import firebase from '../../../Firebase';
-import ListComponent from './ListComponent';
+import React, { Component } from 'react'
+import './Arqueo.css'
+import firebase from '../../../Firebase'
+import ListComponent from './ListComponent'
 
 export default class ArqueoD extends Component {
-  constructor(props) {
-    super(props);
+  constructor (props) {
+    super(props)
     this.state = {
       lista: [
         {
           id: 1,
           name: 'preuba',
           done: false
-        },
+        }
       ],
       form: [],
       alert: false,
@@ -32,12 +32,12 @@ export default class ArqueoD extends Component {
       fecha: '',
       search: '',
       numCheque: ''
-    };
+    }
   }
-  
+
   listenForItems = (itemsRef) => {
     itemsRef.on('value', (snap) => {
-      var lista = [];
+      var lista = []
       snap.forEach((child) => {
         lista.push({
           can1000: child.val().can1000,
@@ -55,20 +55,20 @@ export default class ArqueoD extends Component {
           numCheque: child.val().numCheque,
           done: child.val().done,
           id: child.key
-        });
-      });
+        })
+      })
       this.setState({
         lista: lista
-      });
-    });
+      })
+    })
   }
 
-  componentDidMount() {
-    const itemsRef = firebase.database().ref('arqueo/').limitToLast(1);
-    this.listenForItems(itemsRef);
+  componentDidMount () {
+    const itemsRef = firebase.database().ref('arqueo/').limitToLast(1)
+    this.listenForItems(itemsRef)
   }
 
-  render() {
+  render () {
     return (
       <div>
         <div className='arqueoI'>
@@ -96,8 +96,7 @@ export default class ArqueoD extends Component {
         </div>
         <div className='arqueo-content'>
           <div className='table-arqueo'>
-            <div className='table-left'>
-            </div>
+            <div className='table-left' />
             <div className='title-arqueo'>
               <p className='p-mar-arqueo'><b>DENOMINACION</b></p>
             </div>
@@ -107,8 +106,7 @@ export default class ArqueoD extends Component {
             <div className='title-arqueo'>
               <p className='p-mar-arqueo'><b>DENOMINACIÓN</b></p>
             </div>
-            <div className='table-right'>
-            </div>
+            <div className='table-right' />
           </div>
           <div>
             <ListComponent

@@ -1,24 +1,20 @@
-import React, { Component } from 'react';
-import '../Fondos.css';
+import React, { Component } from 'react'
+import '../Fondos.css'
 
 export default class RowComponent extends Component {
-  constructor(props){
-    super(props);
+  constructor (props) {
+    super(props)
     this.state = {
       done: false,
-      item: 'Atendido',
-    };
+      item: 'Atendido'
+    }
   }
 
   update = () => {
-    this.props.update(this.props.item);
+    this.props.update(this.props.item)
   }
 
-  render() {
-
-    const estaA = this.props.item.estatus;
-    let table;
-
+  render () {
     return (
       <div>
         <div className='xml-inputs-list'>
@@ -39,6 +35,6 @@ export default class RowComponent extends Component {
           </div>
         </div>
       </div>
-    );
+    )
   }
 }

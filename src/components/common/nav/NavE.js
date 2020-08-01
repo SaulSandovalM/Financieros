@@ -1,38 +1,36 @@
-import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
-import { logoutUser } from '../../../actions';
-import { connect } from 'react-redux';
-import './Nav.css';
-import logo_h from '../../../img/logo_h.svg';
-import arrow from '../../../img/arrow.svg';
+import React, { Component } from 'react'
+import { Link } from 'react-router-dom'
+import { logoutUser } from '../../../actions'
+import { connect } from 'react-redux'
+import './Nav.css'
+import logoH from '../../../img/logo_h.svg'
+import arrow from '../../../img/arrow.svg'
 
 class NavE extends Component {
-  constructor() {
-    super();
+  constructor () {
+    super()
     this.state = {
       isHidden: true
     }
   }
 
-  toggleHidden() {
-   this.setState({
-     isHidden: !this.state.isHidden
-   })
- }
+  toggleHidden () {
+    this.setState({
+      isHidden: !this.state.isHidden
+    })
+  }
 
   handleLogout = () => {
-    const { dispatch } = this.props;
-    dispatch(logoutUser());
-  };
+    const { dispatch } = this.props
+    dispatch(logoutUser())
+  }
 
-  render() {
-
-    const { isLoggingOut, logoutError } = this.props;
-
+  render () {
+    const { isLoggingOut, logoutError } = this.props
     return (
       <div className='nav-col'>
         <div className='navbar-navigation'>
-          <img className='logo' src={logo_h} alt=''/>
+          <img className='logo' src={logoH} alt='' />
         </div>
         <div className='navbar-left'>
           <Link to='/Caja' className='deco'>
@@ -63,31 +61,30 @@ class NavE extends Component {
           <div>
             <div className='subnav'>
               <Link to='/Vales' className='deco'>
-                <p className='nav-t'> &bull; Vale</p>
+                <p className='nav-t'> &bull Vale</p>
               </Link>
             </div>
             <div className='subnav'>
               <Link to='/ListValesA' className='deco'>
-                <p className='nav-t'> &bull; Vales Autorizados</p>
+                <p className='nav-t'> &bull Vales Autorizados</p>
               </Link>
             </div>
             <div className='subnav'>
               <Link to='/ListValesP' className='deco'>
-                <p className='nav-t'> &bull; Vales No Autorizados</p>
+                <p className='nav-t'> &bull Vales No Autorizados</p>
               </Link>
             </div>
             <div className='subnav'>
               <Link to='/ListValesN' className='deco'>
-                <p className='nav-t'> &bull; Vales Pendientes</p>
+                <p className='nav-t'> &bull Vales Pendientes</p>
               </Link>
             </div>
             <div className='subnav'>
               <Link to='/ListArchivosV' className='deco'>
-                <p className='nav-t'> &bull; Archivos Vales</p>
+                <p className='nav-t'> &bull Archivos Vales</p>
               </Link>
             </div>
-          </div>
-        }
+          </div>}
         <div className='navbar-left'>
           <div className='deco'>
             <button
@@ -107,11 +104,11 @@ class NavE extends Component {
   }
 }
 
-function mapStateToProps(state) {
+function mapStateToProps (state) {
   return {
     isLoggingOut: state.auth.isLoggingOut,
     logoutError: state.auth.logoutError
-  };
+  }
 }
 
-export default connect(mapStateToProps)(NavE);
+export default connect(mapStateToProps)(NavE)

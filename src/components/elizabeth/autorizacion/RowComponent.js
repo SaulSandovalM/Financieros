@@ -1,29 +1,27 @@
-import React, { Component } from 'react';
-import './Autorizacion.css';
+import React, { Component } from 'react'
+import './Autorizacion.css'
 
 export default class RowComponent extends Component {
-  constructor(props){
-    super(props);
+  constructor (props) {
+    super(props)
     this.state = {
       done: false,
-      item: 'Atendido',
-    };
+      item: 'Atendido'
+    }
   }
 
-  update = () => {
-    this.props.update(this.props.item);
+  handleUpdate = () => {
+    this.props.update(this.props.item)
   }
 
-  render() {
-
-    const estaA = this.props.item.estatus;
-    let table;
+  render () {
+    const estaA = this.props.item.estatus
+    let table
 
     if (estaA === 'Pendiente') {
       table =
         <div className='banco-inputs-list'>
-          <div className='table-left'>
-          </div>
+          <div className='table-left' />
           <div className='table-banco-up'>
             <p>{this.props.item.vale}</p>
           </div>
@@ -40,17 +38,16 @@ export default class RowComponent extends Component {
             <p>{this.props.item.turno}</p>
           </div>
           <div className='table-banco-porcentaje'>
-            <button onClick={this.update}>Autorizar</button>
+            <button onClick={this.handleUpdate}>Autorizar</button>
           </div>
-          <div className='table-right'>
-          </div>
-        </div>;
+          <div className='table-right' />
+        </div>
     }
 
     return (
       <div>
         {table}
       </div>
-    );
+    )
   }
 }

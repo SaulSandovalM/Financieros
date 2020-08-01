@@ -1,11 +1,11 @@
-import React, { Component } from 'react';
-import './Autorizacion.css';
-import firebaseConf from '../../../Firebase';
-import ListComponent from './ListComponent';
+import React, { Component } from 'react'
+import './Autorizacion.css'
+import firebaseConf from '../../../Firebase'
+import ListComponent from './ListComponent'
 
 export default class Autorizacion extends Component {
-  constructor(){
-    super();
+  constructor () {
+    super()
     this.state = {
       nuevo: '',
       lista: [
@@ -13,14 +13,14 @@ export default class Autorizacion extends Component {
           id: 1,
           name: 'preuba',
           done: false
-        },
+        }
       ]
     }
   }
 
   listenForItems = (itemsRef) => {
     itemsRef.on('value', (snap) => {
-      var lista = [];
+      var lista = []
       snap.forEach((child) => {
         lista.push({
           vale: child.val().vale,
@@ -42,21 +42,21 @@ export default class Autorizacion extends Component {
           estatus: child.val().estatus,
           done: child.val().done,
           id: child.key
-        });
-      });
+        })
+      })
       this.setState({
         lista: lista
-      });
-    });
+      })
+    })
   }
 
-  componentDidMount() {
-    const itemsRef = firebaseConf.database().ref('vales/');
-    this.listenForItems(itemsRef);
+  componentDidMount () {
+    const itemsRef = firebaseConf.database().ref('vales/')
+    this.listenForItems(itemsRef)
   }
 
   update = (item) => {
-    let updates = {};
+    let updates = {}
     updates['vales/' + item.id] = {
       vale: item.vale,
       cheque: item.cheque,
@@ -75,11 +75,11 @@ export default class Autorizacion extends Component {
       fecha: item.fecha,
       autorizo: item.autorizo,
       estatus: 'Autorizado'
-    };
-    firebaseConf.database().ref().update(updates);
+    }
+    firebaseConf.database().ref().update(updates)
   }
 
-  render() {
+  render () {
     return (
       <div className='banco-back'>
         <div className='site-banco'>
