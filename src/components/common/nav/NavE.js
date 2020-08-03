@@ -61,27 +61,27 @@ class NavE extends Component {
           <div>
             <div className='subnav'>
               <Link to='/Vales' className='deco'>
-                <p className='nav-t'> &bull Vale</p>
+                <p className='nav-t'> • Vale</p>
               </Link>
             </div>
             <div className='subnav'>
               <Link to='/ListValesA' className='deco'>
-                <p className='nav-t'> &bull Vales Autorizados</p>
+                <p className='nav-t'> • Vales Autorizados</p>
               </Link>
             </div>
             <div className='subnav'>
               <Link to='/ListValesP' className='deco'>
-                <p className='nav-t'> &bull Vales No Autorizados</p>
+                <p className='nav-t'> • Vales No Autorizados</p>
               </Link>
             </div>
             <div className='subnav'>
               <Link to='/ListValesN' className='deco'>
-                <p className='nav-t'> &bull Vales Pendientes</p>
+                <p className='nav-t'> • Vales Pendientes</p>
               </Link>
             </div>
             <div className='subnav'>
               <Link to='/ListArchivosV' className='deco'>
-                <p className='nav-t'> &bull Archivos Vales</p>
+                <p className='nav-t'> • Archivos Vales</p>
               </Link>
             </div>
           </div>}

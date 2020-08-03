@@ -1,10 +1,10 @@
-import React, { Component } from 'react';
-import './Fondor.css';
-import firebase from '../../../Firebase';
-import RowComponent from './RowComponent';
-import ListComponent from  './ListComponent';
-import CurrencyFormat from 'react-currency-format';
-import Dropzone from 'react-dropzone';
+import React, { Component } from 'react'
+import './Fondor.css'
+import firebase from '../../../Firebase'
+import RowComponent from './RowComponent'
+import ListComponent from './ListComponent'
+import CurrencyFormat from 'react-currency-format'
+import Dropzone from 'react-dropzone'
 
 export default class Fondor extends Component {
   constructor () {
@@ -17,14 +17,14 @@ export default class Fondor extends Component {
           id: 1,
           name: 'preuba',
           done: false
-        },
+        }
       ],
       listaB: [
         {
           id: 1,
           name: 'preuba',
           done: false
-        },
+        }
       ],
       up: '',
       par: '',
@@ -44,20 +44,20 @@ export default class Fondor extends Component {
     firebase.database().ref('presupuesto/').on('child_added', snapshot => {
       this.setState({
         presupuesto: this.state.presupuesto.concat(snapshot.val())
-      });
-    });
+      })
+    })
   }
 
-  updateSeacrh(event) {
-    this.setState({search: event.target.value.substr(0,20)})
+  updateSeacrh (event) {
+    this.setState({ search: event.target.value.substr(0, 20) })
   }
 
-  updateSeacrh2(event) {
-    this.setState({search2: event.target.value.substr(0,20)})
+  updateSeacrh2 (event) {
+    this.setState({ search2: event.target.value.substr(0, 20) })
   }
 
-  updateSeacrh3(event) {
-    this.setState({search3: event.target.value.substr(0,20)})
+  updateSeacrh3 (event) {
+    this.setState({ search3: event.target.value.substr(0, 20) })
   }
 
   handleUploads (event) {
@@ -68,31 +68,31 @@ export default class Fondor extends Component {
       file: `${file.name}`
     })
     task.on('state_changed', (snapshot) => {
-      let percentage = (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+      const percentage = (snapshot.bytesTransferred / snapshot.totalBytes) * 100
       this.setState({
         pdf: percentage
       })
     }, error => {
-      console.error(error.message);
-    }, () =>  storageRef.getDownloadURL().then(url =>  {
-      const record = url;
+      console.error(error.message)
+    }, () => storageRef.getDownloadURL().then(url => {
+      const record = url
       this.setState({
         archivo: record
-      });
-    }));
+      })
+    }))
   }
 
-  componentDidMount() {
-    const itemsRef = firebase.database().ref('presupuesto/');
-    this.listenForItems(itemsRef);
-    const itemsRefBanco = firebase.database().ref('banco/');
-    this.listenForItemsBanco(itemsRefBanco);
-    this.consumo();
+  componentDidMount () {
+    const itemsRef = firebase.database().ref('presupuesto/')
+    this.listenForItems(itemsRef)
+    const itemsRefBanco = firebase.database().ref('banco/')
+    this.listenForItemsBanco(itemsRefBanco)
+    this.consumo()
   }
 
   listenForItems = (itemsRef) => {
     itemsRef.on('value', (snap) => {
-      var lista = [];
+      var lista = []
       snap.forEach((child) => {
         lista.push({
           up: child.val().up,
@@ -103,17 +103,17 @@ export default class Fondor extends Component {
           cpa: child.val().cpa,
           done: child.val().done,
           id: child.key
-        });
-      });
+        })
+      })
       this.setState({
         lista: lista
-      });
-    });
+      })
+    })
   }
 
   listenForItemsBanco = (itemsRefBanco) => {
     itemsRefBanco.on('value', (snap) => {
-      var listaB = [];
+      var listaB = []
       snap.forEach((child) => {
         listaB.push({
           up: child.val().up,
@@ -122,35 +122,35 @@ export default class Fondor extends Component {
           rubro: child.val().rubro,
           done: child.val().done,
           id: child.key
-        });
-      });
+        })
+      })
       this.setState({
         listaB: listaB
-      });
-    });
+      })
+    })
   }
 
   consumo = () => {
-    const ref = firebase.firestore().collection('banco').doc('--stats--');
+    const ref = firebase.firestore().collection('banco').doc('--stats--')
     ref.get().then((doc) => {
       if (doc.exists) {
         this.setState({
           contador: doc.data(),
           key: doc.id,
           isLoading: true
-        });
+        })
       } else {
-        console.log("No hay documento!");
+        console.log('No hay documento!')
       }
     })
   }
 
-  resetForm() {
-    this.refs.contactForm.reset();
+  resetForm () {
+    this.refs.contactForm.reset()
   }
 
-  sendMessage(e) {
-    e.preventDefault();
+  sendMessage (e) {
+    e.preventDefault()
     const params = {
       up: this.inputUp.value,
       par: this.inputPartida.value,
@@ -158,7 +158,7 @@ export default class Fondor extends Component {
       rubro: this.inputRubro.value,
       archivo: this.state.archivo,
       numContra: this.inputNumContra.value
-    };
+    }
     this.setState({
       up: this.inputUp.value,
       par: this.inputPartida.value,
@@ -167,34 +167,33 @@ export default class Fondor extends Component {
       archivo: this.state.archivo,
       numContra: this.inputNumContra.value
     })
-    if ( params.up && params.par && params.importe && params.rubro && params.archivo ) {
-      var f = parseInt(params.importe);
-      const statsRef = firebase.firestore().collection('banco').doc('--stats--');
-      const increment = firebase.firestore.FieldValue.increment(f);
-      const batch = firebase.firestore().batch();
-      const storyRef = firebase.firestore().collection('banco').doc(`${Math.random()}`);
-      batch.set(storyRef, { title: 'Se agredo un fondo' });
-      batch.set(statsRef, { storyCount: increment }, { merge: true });
-      batch.commit();
+    if (params.up && params.par && params.importe && params.rubro && params.archivo) {
+      var f = parseInt(params.importe)
+      const statsRef = firebase.firestore().collection('banco').doc('--stats--')
+      const increment = firebase.firestore.FieldValue.increment(f)
+      const batch = firebase.firestore().batch()
+      const storyRef = firebase.firestore().collection('banco').doc(`${Math.random()}`)
+      batch.set(storyRef, { title: 'Se agredo un fondo' })
+      batch.set(statsRef, { storyCount: increment }, { merge: true })
+      batch.commit()
       firebase.database().ref('banco').push(params).then(() => {
-        alert('Tu solicitud fue enviada.');
+        alert('Tu solicitud fue enviada.')
       }).catch(() => {
-        alert('Tu solicitud no puede ser enviada');
-      });
-      this.resetForm();
-      setInterval(this.consumo, 1000);
+        alert('Tu solicitud no puede ser enviada')
+      })
+      this.resetForm()
+      setInterval(this.consumo, 1000)
     } else {
-      alert('Por favor llene el formulario');
-    };
+      alert('Por favor llene el formulario')
+    }
   }
 
-  render() {
-
-    let filterData = this.state.presupuesto.filter(
+  render () {
+    const filterData = this.state.presupuesto.filter(
       (presupuesto) => {
-        return presupuesto.up.indexOf(this.state.search) !== -1 && presupuesto.par.indexOf(this.state.search2) >= 0 && presupuesto.rubro.indexOf(this.state.search3) >= 0;
+        return presupuesto.up.indexOf(this.state.search) !== -1 && presupuesto.par.indexOf(this.state.search2) >= 0 && presupuesto.rubro.indexOf(this.state.search3) >= 0
       }
-    );
+    )
 
     return (
       <div className='pf-container'>
@@ -212,15 +211,16 @@ export default class Fondor extends Component {
                 MXN
                 <CurrencyFormat
                   value={this.state.contador.storyCount}
-                  displayType={'text'}
-                  thousandSeparator={true}
-                  prefix={' $'} />
+                  displayType='text'
+                  thousandSeparator
+                  prefix=' $'
+                />
                 .00
               </p>
             </div>
           </div>
           <div className='p-row'>
-            <div className='p-container-ifr' style={{marginRight: '20px'}}>
+            <div className='p-container-ifr' style={{ marginRight: '20px' }}>
               <p className='p-title-margin-fr'>Archivo Pdf</p>
               <Dropzone
                 style={{
@@ -230,9 +230,10 @@ export default class Fondor extends Component {
                   borderWidth: '1px',
                   borderColor: '#a9a9a9',
                   borderStyle: 'solid',
-                  background: 'white',
+                  background: 'white'
                 }}
-                accept=".pdf" onChange={this.handleUploads.bind(this)}>
+                accept='.pdf' onChange={this.handleUploads.bind(this)}
+              >
                 <div className='filename'>
                   <p className='file-hid'>{this.state.file}</p>
                 </div>
@@ -324,8 +325,7 @@ export default class Fondor extends Component {
                   />
                 )
               }
-            </div>
-          }
+            </div>}
         </div>
         <div className='space-table'>
           <ListComponent

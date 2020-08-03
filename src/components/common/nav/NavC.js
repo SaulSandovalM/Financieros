@@ -48,22 +48,22 @@ class Nav extends Component {
           <div>
             <div className='subnav'>
               <Link to='/Presupuesto' className='deco'>
-                <p className='nav-t'> &bull Inicial</p>
+                <p className='nav-t'> • Inicial</p>
               </Link>
             </div>
             <div className='subnav'>
               <Link to='/Ampliacion' className='deco'>
-                <p className='nav-t'> &bull Ampliacion</p>
+                <p className='nav-t'> • Ampliacion</p>
               </Link>
             </div>
             <div className='subnav'>
               <Link to='/Reduccion' className='deco'>
-                <p className='nav-t'> &bull Reduccion</p>
+                <p className='nav-t'> • Reduccion</p>
               </Link>
             </div>
             <div className='subnav'>
               <Link to='/Transferencia' className='deco'>
-                <p className='nav-t'> &bull Transferencia</p>
+                <p className='nav-t'> • Transferencia</p>
               </Link>
             </div>
           </div>}

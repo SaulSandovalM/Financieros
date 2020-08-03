@@ -18,7 +18,7 @@ export default class Excel extends Component {
     }
   }
 
-  onDrop(files) {
+  onDrop (files) {
     this.setState({ files })
     var fileNameE = files[0]
     const reader = new FileReader()
@@ -167,11 +167,11 @@ export default class Excel extends Component {
   render () {
     return (
       <div>
-        <form class='presupuesto-container' onSubmit={this.sendMessage.bind(this)} ref='contactForm'>
-          <div class='presupuesto-content'>
-            <div class='presupuesto-card'>
-              <h1 class='presupuesto-h1'>Aqui puedes subir<br />tu presupuesto anual </h1>
-              <p class='presupuesto-p'>Traspasa tu información de Excel para poder usar el sistema</p>
+        <form className='presupuesto-container' onSubmit={this.sendMessage.bind(this)} ref='contactForm'>
+          <div className='presupuesto-content'>
+            <div className='presupuesto-card'>
+              <h1 className='presupuesto-h1'>Aqui puedes subir<br />tu presupuesto anual </h1>
+              <p className='presupuesto-p'>Traspasa tu información de Excel para poder usar el sistema</p>
               <div>
                 <p>Archivo CSV:</p>
                 <Dropzone
@@ -184,12 +184,13 @@ export default class Excel extends Component {
                     borderStyle: 'solid',
                     borderRadius: '5px'
                   }}
-                  accept='.csv' onDropAccepted={this.onDrop.bind(this)}>
+                  accept='.csv' onDropAccepted={this.onDrop.bind(this)}
+                >
                   <div className='filename'>
                     <p className='file-hid'>{this.state.fileNameE}</p>
                   </div>
                 </Dropzone>
-                <progress class='progress' value={this.state.csv} max='100'>
+                <progress className='progress' value={this.state.csv} max='100'>
                   {this.state.csv} %
                 </progress>
               </div>
@@ -205,12 +206,13 @@ export default class Excel extends Component {
                     borderStyle: 'solid',
                     borderRadius: '5px'
                   }}
-                  accept='.pdf' onChange={this.handleUpload.bind(this)}>
+                  accept='.pdf' onChange={this.handleUpload.bind(this)}
+                >
                   <div className='filename'>
                     <p className='file-hid'>{this.state.fileNameS}</p>
                   </div>
                 </Dropzone>
-                <progress class='progress' value={this.state.pdf} max='100'>
+                <progress className='progress' value={this.state.pdf} max='100'>
                   {this.state.pdf} %
                 </progress>
               </div>

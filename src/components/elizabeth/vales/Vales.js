@@ -149,13 +149,9 @@ export default class Vales extends Component {
     var cant2 = parseInt(cantidadc)
     var tot = cant1 - cant2
     var today2 = new Date()
-    var today = new Date()
     var meses = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12']
     var f = new Date()
-    today = f.getDate() + '-' + meses[f.getMonth()] + '-' + f.getFullYear()
     today2 = f.getFullYear() + '-' + meses[f.getMonth()] + '-' + f.getDate()
-
-    this.state.fecha = today2
 
     let button
     if (tot >= 0 && cant2 === 0) {
@@ -176,7 +172,7 @@ export default class Vales extends Component {
           <input
             className='input-b'
             name='cantidadr'
-            value={tot}
+            defaultValue={tot}
             style={{ width: '92%' }}
             required
             ref={cantidadr => this.inputCantidadr = cantidadr}
@@ -378,7 +374,7 @@ export default class Vales extends Component {
             </div>
             <div className='firma-content'>
               <div className='f-fecha'>
-                <p className='b-fecha'>{today}</p>
+                <p className='b-fecha'>{today2}</p>
                 <p className='font-size-f'>Fecha</p>
               </div>
               <div className='f-fecha'>
@@ -411,7 +407,7 @@ export default class Vales extends Component {
           </div>
           <div className='boton-v'>
             <ReactToPrint
-              trigger={() => <buttom className='boton-vale'>Imprimir y Guardar</buttom>}
+              trigger={() => <div className='boton-vale'>Imprimir y Guardar</div>}
               content={() => this.vale}
               onAfterPrint={this.sendMessage.bind(this)}
             />

@@ -50,36 +50,36 @@ export default class Registro extends Component {
     this.listenForItems(itemsRef)
   }
 
-  // listenForItems = (itemsRef) => {
-  //   itemsRef.on('value', (snap) => {
-  //     var lista = []
-  //     snap.forEach((child) => {
-  //       lista.push({
-  //         up: child.val().up,
-  //         proy: child.val().proy,
-  //         ogasto: child.val().ogasto,
-  //         np: child.val().np,
-  //         rubro: child.val().rubro,
-  //         ene: child.val().ene,
-  //         feb: child.val().feb,
-  //         mar: child.val().mar,
-  //         abr: child.val().abr,
-  //         may: child.val().may,
-  //         jun: child.val().jun,
-  //         jul: child.val().jul,
-  //         ago: child.val().ago,
-  //         sep: child.val().sep,
-  //         nov: child.val().nov,
-  //         dic: child.val().dic,
-  //         done: child.val().done,
-  //         id: child.key
-  //       })
-  //     })
-  //     this.setState({
-  //       lista: lista
-  //     })
-  //   })
-  // }
+  listenForItems = (itemsRef) => {
+    itemsRef.on('value', (snap) => {
+      var lista = []
+      snap.forEach((child) => {
+        lista.push({
+          up: child.val().up,
+          proy: child.val().proy,
+          ogasto: child.val().ogasto,
+          np: child.val().np,
+          rubro: child.val().rubro,
+          ene: child.val().ene,
+          feb: child.val().feb,
+          mar: child.val().mar,
+          abr: child.val().abr,
+          may: child.val().may,
+          jun: child.val().jun,
+          jul: child.val().jul,
+          ago: child.val().ago,
+          sep: child.val().sep,
+          nov: child.val().nov,
+          dic: child.val().dic,
+          done: child.val().done,
+          id: child.key
+        })
+      })
+      this.setState({
+        lista: lista
+      })
+    })
+  }
 
   handleChange (event) {
     this.setState({ [event.target.name]: event.target.value })

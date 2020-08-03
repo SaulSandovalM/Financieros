@@ -29,6 +29,7 @@ export default class RowComponent extends Component {
             <CurrencyFormat
               value={this.props.item.importe}
               displayType='text'
+              thousandSeparator
               prefix=' $'
             />
             .00

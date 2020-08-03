@@ -79,6 +79,7 @@ export default class Caja extends Component {
                       value={this.state.contador.storyCount}
                       displayType='text'
                       prefix=' $'
+                      thousandSeparator
                       decimalSeparator='.'
                     />
                     .00
@@ -141,9 +142,9 @@ export default class Caja extends Component {
                         <div>
                           <CurrencyFormat
                             value={movimientos.cantidad}
-                            displayType={'text'}
-                            thousandSeparator={true}
-                            prefix={' $'}
+                            displayType='text'
+                            thousandSeparator
+                            prefix=' $'
                           />
                         </div>
                       </div>

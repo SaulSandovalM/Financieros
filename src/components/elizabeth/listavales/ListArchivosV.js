@@ -49,25 +49,6 @@ export default class ListArchivosV extends Component {
     }
   }
 
-  onDrop(event) {
-    const file = event.target.files
-    console.log(file)
-    fetch(file)
-      .then(res => res.text())
-      .then(data => {
-        var xml = new XMLParser().parseFromString(data)
-        console.log(xml)
-        // fetch('https://financieros-78cb0.firebaseio.com/xml.json', {
-        //   method: 'POST',
-        //   headers: {
-        //     'Accept': 'application/json',
-        //     'Content-Type': 'application/json',
-        //   },
-        //   body: JSON.stringify(xml)
-        // })
-    })
-  }
-
   handleOnChange1 (event) {
     const files = event.target.files
     for (var i = 0; i < files.length; i++) {

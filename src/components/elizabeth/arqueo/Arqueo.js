@@ -95,7 +95,7 @@ export default class Arqueo extends Component {
       can2: this.inputCan2.value,
       can1: this.inputCan1.value,
       can0: this.inputCan0.value,
-      fecha: this.state.fecha,
+      fecha: this.inputFecha.value,
       numCheque: this.inputCheque.value
     }
     this.setState({
@@ -110,7 +110,7 @@ export default class Arqueo extends Component {
       can2: this.inputCan2.value,
       can1: this.inputCan1.value,
       can0: this.inputCan0.value,
-      fecha: this.state.fecha,
+      fecha: this.inputFecha.value,
       numCheque: this.inputCheque.value
     })
     if (params.can1000 && params.can500 && params.can200 && params.can100 &&
@@ -141,7 +141,6 @@ export default class Arqueo extends Component {
     var meses = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12']
     var today = new Date()
     today = today.getFullYear() + '-' + meses[today.getMonth()] + '-' + today.getDate()
-    this.state.fecha = today
 
     return (
       <div className='pf-container'>
@@ -180,6 +179,15 @@ export default class Arqueo extends Component {
                       <input
                         id='numCheque'
                         ref={numCheque => this.inputCheque = numCheque} />
+                    </div>
+                  </div>
+                  <div className='cen-tit' style={{display: 'none'}}>
+                    <div className='title-ar'>
+                      <b>AGREGA EL NUMERO DE CHEQUE PARA REALIZAR TU ARQUEO</b>
+                      <input
+                        id='fecha'
+                        value={today}
+                        ref={fecha => this.inputFecha = fecha} />
                     </div>
                   </div>
                   <div className='arqueo-content-pop'>

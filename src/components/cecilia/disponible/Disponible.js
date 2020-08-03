@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
-import './Disponible.css';
-import firebase from '../../../Firebase';
-import ListComponent from './ListComponent';
+import React, { Component } from 'react'
+import './Disponible.css'
+import firebase from '../../../Firebase'
+import ListComponent from './ListComponent'
 
 export default class Disponible extends Component {
   constructor () {
@@ -12,7 +12,7 @@ export default class Disponible extends Component {
           id: 1,
           name: 'preuba',
           done: false
-        },
+        }
       ],
       up: '',
       proyecto: '',
@@ -21,14 +21,14 @@ export default class Disponible extends Component {
     }
   }
 
-  componentDidMount() {
-    const itemsRef = firebase.database().ref('presupuesto/').orderByChild('up');
-    this.listenForItems(itemsRef);
+  componentDidMount () {
+    const itemsRef = firebase.database().ref('presupuesto/').orderByChild('up')
+    this.listenForItems(itemsRef)
   }
 
   listenForItems = (itemsRef) => {
     itemsRef.on('value', (snap) => {
-      var lista = [];
+      var lista = []
       snap.forEach((child) => {
         lista.push({
           up: child.val().up,
@@ -37,21 +37,21 @@ export default class Disponible extends Component {
           rubro: child.val().rubro,
           done: child.val().done,
           id: child.key
-        });
-      });
+        })
+      })
       this.setState({
         lista: lista
-      });
-    });
+      })
+    })
   }
 
-  render() {
+  render () {
     return (
       <div className='pf-container'>
         <div className='site-pf'>
           <p className='site-pf-s'><b>Disponibilidad por Partida</b></p>
         </div>
-        <div className='space-d-c'/>
+        <div className='space-d-c' />
         <div className='table-d-c'>
           <ListComponent
             lista={this.state.lista}

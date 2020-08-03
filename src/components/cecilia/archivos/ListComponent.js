@@ -1,30 +1,29 @@
-import React, { Component } from 'react';
-import './Archivos.css';
-import RowComponent from './RowComponent';
-import firebase from '../../../Firebase';
+import React, { Component } from 'react'
+import './Archivos.css'
+import RowComponent from './RowComponent'
+import firebase from '../../../Firebase'
 
 export default class ListComponent extends Component {
   constructor (props) {
-   super(props);
-   this.state = {
-     presupuesto: [],
-   };
- }
+    super(props)
+    this.state = {
+      presupuesto: []
+    }
+  }
 
   componentWillMount () {
     firebase.database().ref('archivos-presupuesto/').on('child_added', snapshot => {
       this.setState({
         presupuesto: this.state.presupuesto.concat(snapshot.val())
-      });
-    });
+      })
+    })
   }
 
-  render() {
+  render () {
     return (
       <div>
         <div className='archivos-container'>
-          <div className='table-left'>
-          </div>
+          <div className='table-left' />
           <div className='table-archivos'>
             <p className='p-archivos'>OFICIO SOLICITUD</p>
           </div>
@@ -37,8 +36,7 @@ export default class ListComponent extends Component {
           <div className='table-archivos'>
             <p className='p-archivos'>TIPO</p>
           </div>
-          <div className='table-right'>
-          </div>
+          <div className='table-right' />
         </div>
         {
           this.props.lista.map(item =>
@@ -49,6 +47,6 @@ export default class ListComponent extends Component {
           )
         }
       </div>
-    );
+    )
   }
 }
