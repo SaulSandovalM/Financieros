@@ -19,6 +19,12 @@
 	flex-direction: row;
 	justify-content: left;
 }
+.subnav {
+	display: flex;
+	flex-direction: row;
+	justify-content: left;
+	padding-left: 30px;
+}
 .logo {
   width: 90%;
   height: 67px;
@@ -33,4 +39,13 @@
 }
 .deco {
 	text-decoration: none;
+}
+.deco-c {
+	text-decoration: none;
+	cursor: pointer;
+}
+.arrow {
+	height: 10px;
+	padding-left: 10px;
+	padding-top: 26px;
 }

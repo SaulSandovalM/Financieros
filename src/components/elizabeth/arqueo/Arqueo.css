@@ -1,11 +1,52 @@
+.arqueo-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+}
+.arqueo-container-pop {
+  display: flex;
+  flex-direction: row;
+  margin: 40px 0px 40px 0px;
+  width: 100%;
+}
+.arqueo-content {
+  width: 30%;
+}
+.arqueo-content-pop {
+  width: 100%;
+  margin-top: 30px;
+}
+.arqueo-content2 {
+  width: 100%;
+}
+.sear-content {
+  background-color: white;
+  margin: -30px;
+  padding: 30px;
+}
 .table-arqueo {
+  display: flex;
+  flex-direction: row;
+  margin-top: 50px;
+  width: 100%;
+}
+.table-arqueo-pop {
   display: flex;
   justify-content: center;
   flex-direction: row;
-  margin-top: 50px;
 }
 .title-arqueo {
-  width: 15%;
+  width: 31.3%;
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  border-right: 1px solid #d0d0d0;
+  border-bottom: 1px solid #d0d0d0;
+}
+.title-arqueo2 {
+  width: 25%;
   height: 30px;
   display: flex;
   justify-content: center;
@@ -15,6 +56,10 @@
 }
 .data-arqueo {
   display: flex;
+  flex-direction: row;
+}
+.data-arqueo-pop {
+  display: flex;
   justify-content: center;
   flex-direction: row;
 }
@@ -22,4 +67,88 @@
   margin: 0px;
   padding-left: 5px;
   text-align: center;
+  font-size: 16px;
+}
+.tipo-arqueo {
+  width: 10%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+.arqueo-col {
+  width: 60%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.botones-arqueo {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  margin-top: 30px;
+  margin-bottom: 50px;
+  width: 100%;
+}
+.margin-buton-ar {
+  margin-left: 10px;
+  margin-right: 10px;
+  padding: 6px;
+  background-color: green;
+  color: white;
+  border-width: inherit;
+}
+.table-arqueo-search {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  margin-top: 50px;
+}
+.table-arqueo-content {
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+}
+.title-arqueo-se {
+  width: 9%;
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  border-right: 1px solid #d0d0d0;
+  border-bottom: 1px solid #d0d0d0;
+}
+.title-ar {
+  width: 75%;
+  display: flex;
+  justify-content: space-between;
+  padding-top: 30px;
+}
+.cen-tit {
+  display: flex;
+  justify-content: center;
+}
+.arqueoI {
+  display: flex;
+  justify-content: center;
+}
+.tabla-arq {
+  display: flex;
+  flex-direction: row;
+}
+.tb-1 {
+  width: 10%;
+  border: 1px solid;
+}
+.tb-n {
+  font-weight: bold;
+  margin: 5px;
+  text-align: center;
+}
+.tb-2 {
+  width: 40%;
+  border: 1px solid;
+}
+.tb-3 {
+  width: 20%;
+  border: 1px solid;
 }

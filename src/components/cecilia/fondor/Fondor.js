@@ -1,9 +1,10 @@
-import React, { Component } from 'react';
-import './Fondor.css';
-import firebase from '../../../Firebase';
-import ListComponent from './ListComponent';
-import CurrencyFormat from 'react-currency-format';
-import Dropzone from 'react-dropzone';
+import React, { Component } from 'react'
+import './Fondor.css'
+import firebase from '../../../Firebase'
+import RowComponent from './RowComponent'
+import ListComponent from './ListComponent'
+import CurrencyFormat from 'react-currency-format'
+import Dropzone from 'react-dropzone'
 
 export default class Fondor extends Component {
   constructor () {
@@ -16,13 +17,47 @@ export default class Fondor extends Component {
           id: 1,
           name: 'preuba',
           done: false
-        },
+        }
+      ],
+      listaB: [
+        {
+          id: 1,
+          name: 'preuba',
+          done: false
+        }
       ],
       up: '',
-      partida: '',
-      importe: '',
-      contador: {}
+      par: '',
+      rubro: '',
+      archivo: '',
+      dic: '',
+      contador: {},
+      alert: false,
+      presupuesto: [],
+      search: '',
+      search2: '',
+      search3: ''
     }
+  }
+
+  componentWillMount () {
+    firebase.database().ref('presupuesto/').on('child_added', snapshot => {
+      this.setState({
+        presupuesto: this.state.presupuesto.concat(snapshot.val())
+      })
+    })
+  }
+
+  updateSeacrh (event) {
+    this.setState({ search: event.target.value.substr(0, 20) })
+  }
+
+  updateSeacrh2 (event) {
+    this.setState({ search2: event.target.value.substr(0, 20) })
+  }
+
+  updateSeacrh3 (event) {
+    this.setState({ search3: event.target.value.substr(0, 20) })
   }
 
   handleUploads (event) {
@@ -33,108 +68,133 @@ export default class Fondor extends Component {
       file: `${file.name}`
     })
     task.on('state_changed', (snapshot) => {
-      let percentage = (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+      const percentage = (snapshot.bytesTransferred / snapshot.totalBytes) * 100
       this.setState({
         pdf: percentage
       })
     }, error => {
-      console.error(error.message);
-    }, () =>  storageRef.getDownloadURL().then(url =>  {
-      const record = {
-        oficio: url
-      };
-      const dbRef = firebase.database().ref('fondo-revolvente');
-      const newPicture = dbRef.push();
-      newPicture.set(record);
-    }));
+      console.error(error.message)
+    }, () => storageRef.getDownloadURL().then(url => {
+      const record = url
+      this.setState({
+        archivo: record
+      })
+    }))
+  }
+
+  componentDidMount () {
+    const itemsRef = firebase.database().ref('presupuesto/')
+    this.listenForItems(itemsRef)
+    const itemsRefBanco = firebase.database().ref('banco/')
+    this.listenForItemsBanco(itemsRefBanco)
+    this.consumo()
   }
 
   listenForItems = (itemsRef) => {
     itemsRef.on('value', (snap) => {
-      var lista = [];
+      var lista = []
       snap.forEach((child) => {
         lista.push({
           up: child.val().up,
-          partida: child.val().partida,
+          par: child.val().par,
           importe: child.val().importe,
+          rubro: child.val().rubro,
+          archivo: child.val().archivo,
+          cpa: child.val().cpa,
           done: child.val().done,
           id: child.key
-        });
-      });
+        })
+      })
       this.setState({
         lista: lista
-      });
-    });
+      })
+    })
   }
 
-  componentDidMount() {
-    const itemsRef = firebase.database().ref('banco/');
-    this.listenForItems(itemsRef);
-    this.consumo();
+  listenForItemsBanco = (itemsRefBanco) => {
+    itemsRefBanco.on('value', (snap) => {
+      var listaB = []
+      snap.forEach((child) => {
+        listaB.push({
+          up: child.val().up,
+          par: child.val().par,
+          importe: child.val().importe,
+          rubro: child.val().rubro,
+          done: child.val().done,
+          id: child.key
+        })
+      })
+      this.setState({
+        listaB: listaB
+      })
+    })
   }
 
   consumo = () => {
-    const ref = firebase.firestore().collection('banco').doc('--stats--');
+    const ref = firebase.firestore().collection('banco').doc('--stats--')
     ref.get().then((doc) => {
       if (doc.exists) {
         this.setState({
           contador: doc.data(),
           key: doc.id,
-          isLoading: false
-        });
+          isLoading: true
+        })
       } else {
-        console.log("No hay documento!");
+        console.log('No hay documento!')
       }
     })
   }
 
-  showAlert(type, message) {
-    this.setState({
-      alert: true,
-      alertData: {type, message}
-    });
-    setTimeout(() => {
-      this.setState({alert: false});
-    }, 6000);
+  resetForm () {
+    this.refs.contactForm.reset()
   }
 
-  resetForm() {
-    this.refs.contactForm.reset();
-  }
-
-  sendMessage(e) {
-    e.preventDefault();
+  sendMessage (e) {
+    e.preventDefault()
     const params = {
       up: this.inputUp.value,
-      partida: this.inputPartida.value,
+      par: this.inputPartida.value,
       importe: this.inputImporte.value,
-    };
+      rubro: this.inputRubro.value,
+      archivo: this.state.archivo,
+      numContra: this.inputNumContra.value
+    }
     this.setState({
       up: this.inputUp.value,
-      partida: this.inputPartida.value,
+      par: this.inputPartida.value,
       importe: this.inputImporte.value,
+      rubro: this.inputRubro.value,
+      archivo: this.state.archivo,
+      numContra: this.inputNumContra.value
     })
-    if ( params.up && params.partida && params.importe ) {
-      var f = parseInt(params.importe);
-      const statsRef = firebase.firestore().collection('banco').doc('--stats--');
-      const increment = firebase.firestore.FieldValue.increment(f);
-      const batch = firebase.firestore().batch();
-      const storyRef = firebase.firestore().collection('banco').doc(`${Math.random()}`);
-      batch.set(storyRef, { title: 'Se agredo un fondo' });
-      batch.set(statsRef, { storyCount: increment }, { merge: true });
-      batch.commit();
+    if (params.up && params.par && params.importe && params.rubro && params.archivo) {
+      var f = parseInt(params.importe)
+      const statsRef = firebase.firestore().collection('banco').doc('--stats--')
+      const increment = firebase.firestore.FieldValue.increment(f)
+      const batch = firebase.firestore().batch()
+      const storyRef = firebase.firestore().collection('banco').doc(`${Math.random()}`)
+      batch.set(storyRef, { title: 'Se agredo un fondo' })
+      batch.set(statsRef, { storyCount: increment }, { merge: true })
+      batch.commit()
       firebase.database().ref('banco').push(params).then(() => {
-        this.showAlert('success', 'Tu solicitud fue enviada.');
+        alert('Tu solicitud fue enviada.')
       }).catch(() => {
-        this.showAlert('danger', 'Tu solicitud no puede ser enviada');
-      });
-      this.resetForm();
+        alert('Tu solicitud no puede ser enviada')
+      })
+      this.resetForm()
+      setInterval(this.consumo, 1000)
     } else {
-      this.showAlert('warning', 'Por favor llene el formulario');
-    };
+      alert('Por favor llene el formulario')
+    }
   }
 
-  render() {
+  render () {
+    const filterData = this.state.presupuesto.filter(
+      (presupuesto) => {
+        return presupuesto.up.indexOf(this.state.search) !== -1 && presupuesto.par.indexOf(this.state.search2) >= 0 && presupuesto.rubro.indexOf(this.state.search3) >= 0
+      }
+    )
+
     return (
       <div className='pf-container'>
         <div className='site-pf'>
@@ -146,20 +206,21 @@ export default class Fondor extends Component {
               - Agrega el documento de autorización de fondo revolvente
             </p>
             <div>
-              <p class='p-banco'><b>PORCENTAJE AGREGADO</b></p>
-              <p class='cantidad-add-banco'>
+              <p className='p-banco'><b>PORCENTAJE AGREGADO</b></p>
+              <p className='cantidad-add-banco'>
                 MXN
                 <CurrencyFormat
                   value={this.state.contador.storyCount}
-                  displayType={'text'}
-                  thousandSeparator={true}
-                  prefix={' $'} />
+                  displayType='text'
+                  thousandSeparator
+                  prefix=' $'
+                />
                 .00
               </p>
             </div>
           </div>
           <div className='p-row'>
-            <div className='p-container-ifr' style={{marginRight: '20px'}}>
+            <div className='p-container-ifr' style={{ marginRight: '20px' }}>
               <p className='p-title-margin-fr'>Archivo Pdf</p>
               <Dropzone
                 style={{
@@ -169,11 +230,12 @@ export default class Fondor extends Component {
                   borderWidth: '1px',
                   borderColor: '#a9a9a9',
                   borderStyle: 'solid',
-                  background: 'white',
+                  background: 'white'
                 }}
-                accept=".pdf" onChange={this.handleUploads.bind(this)}>
+                accept='.pdf' onChange={this.handleUploads.bind(this)}
+              >
                 <div className='filename'>
-                  {this.state.file}
+                  <p className='file-hid'>{this.state.file}</p>
                 </div>
               </Dropzone>
               <progress className='progress' value={this.state.pdf} max='100'>
@@ -182,7 +244,7 @@ export default class Fondor extends Component {
             </div>
           </div>
         </div>
-        {/*{this.state.pdf === 100 &&*/}
+        <div>
           <form onSubmit={this.sendMessage.bind(this)} ref='contactForm'>
             <div className='p-container-fondor'>
               <div className='p-margin-fr'>
@@ -195,11 +257,13 @@ export default class Fondor extends Component {
                 <div className='inputs-col-fr'>
                   <div className='inputs-row-fr-2'>
                     <div className='p-container-ifr2'>
-                      <p className='p-title-margin-fr'>UP</p>
+                      <p className='p-title-margin-fr'>Up</p>
                       <input
                         className='input-style-fr'
                         id='up'
                         required
+                        value={this.state.search}
+                        onChange={this.updateSeacrh.bind(this)}
                         ref={up => this.inputUp = up}
                       />
                     </div>
@@ -209,7 +273,20 @@ export default class Fondor extends Component {
                         className='input-style-fr'
                         id='partida'
                         required
+                        value={this.state.search2}
+                        onChange={this.updateSeacrh2.bind(this)}
                         ref={partida => this.inputPartida = partida}
+                      />
+                    </div>
+                    <div className='p-container-ifr2'>
+                      <p className='p-title-margin-fr'>Rubro</p>
+                      <input
+                        className='input-style-fr'
+                        id='rubro'
+                        required
+                        value={this.state.search3}
+                        onChange={this.updateSeacrh3.bind(this)}
+                        ref={rubro => this.inputRubro = rubro}
                       />
                     </div>
                     <div className='p-container-ifr2'>
@@ -221,18 +298,38 @@ export default class Fondor extends Component {
                         ref={importe => this.inputImporte = importe}
                       />
                     </div>
+                    <div className='p-container-ifr2'>
+                      <p className='p-title-margin-fr'>Num de Contrarecibo</p>
+                      <input
+                        className='input-style-fr'
+                        id='numContra'
+                        required
+                        ref={numContra => this.inputNumContra = numContra}
+                      />
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
             <div className='button-row-s'>
-              <button type='submit' class='input-sc boton-g'>Agregar</button>
+              <button type='submit' className='input-sc boton-g'>Agregar</button>
             </div>
           </form>
-        {/*}*/}
+          {this.state.search && this.state.search2 && this.state.search3 &&
+            <div>
+              {
+                filterData.map(item =>
+                  <RowComponent
+                    key={item.id}
+                    item={item}
+                  />
+                )
+              }
+            </div>}
+        </div>
         <div className='space-table'>
           <ListComponent
-            lista={this.state.lista}
+            listaB={this.state.listaB}
           />
         </div>
       </div>

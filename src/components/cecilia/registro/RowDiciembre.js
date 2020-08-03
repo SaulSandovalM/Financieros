@@ -1,20 +1,19 @@
-import React, { Component } from 'react';
-import './Registro.css';
+import React, { Component } from 'react'
+import './Registro.css'
 
 export default class RowDiciembre extends Component {
-  constructor(props){
-    super(props);
+  constructor (props) {
+    super(props)
     this.state = {
       done: false,
-      item: 'Atendido',
-    };
-   }
+      item: 'Atendido'
+    }
+  }
 
-  render() {
+  render () {
     return (
       <div className='meses-container-row'>
-        <div className='table-left'>
-        </div>
+        <div className='table-left' />
         <div className='table-meses-up'>
           <p className='p-meses-row'>{this.props.item.up}</p>
         </div>
@@ -23,6 +22,9 @@ export default class RowDiciembre extends Component {
         </div>
         <div className='table-meses-par'>
           <p className='p-meses-row'>{this.props.item.ogasto}</p>
+        </div>
+        <div className='table-meses-par'>
+          <p className='p-meses-row'>{this.props.item.rubro}</p>
         </div>
         <div className='table-meses-con'>
           <p className='p-meses-row-con'>{this.props.item.np}</p>
@@ -42,9 +44,8 @@ export default class RowDiciembre extends Component {
         <div className='table-meses-dis'>
           <p className='p-meses-row'>{this.props.item.dic}</p>
         </div>
-        <div className='table-right'>
-        </div>
+        <div className='table-right' />
       </div>
-    );
+    )
   }
 }

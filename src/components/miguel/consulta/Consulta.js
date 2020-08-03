@@ -1,91 +1,89 @@
-import React, { Component } from 'react';
-import './Consulta.css';
-import firebase from '../../../Firebase';
-import { Link } from 'react-router-dom';
+import React, { Component } from 'react'
+import './Consulta.css'
+import firebase from '../../../Firebase'
+import { Link } from 'react-router-dom'
 
-class TablaComprometidos extends Component {
-  constructor(props) {
-  super(props);
-  this.ref = firebase.firestore().collection('fondos');
-  this.unsubscribe = null;
-  this.state = {
-    fondos: []
-    };
+export default class TablaComprometidos extends Component {
+  constructor (props) {
+    super(props)
+    this.ref = firebase.firestore().collection('fondos')
+    this.unsubscribe = null
+    this.state = {
+      fondos: []
+    }
   }
 
-  onCollectionUpdate = (querySnapshot) => {
-    const fondos = [];
-    querySnapshot.forEach((doc) => {
-      const { fondo, fecha, tipo_doc, oficio_aut, no_oficio, no_aut, no_lici, importe, desc, importe_l, beneficiario, realizo, numero, num_conver } = doc.data();
-      fondos.push({
-        key: doc.id,
-        doc, // DocumentSnapshot
-        fondo,
-        fecha,
-        tipo_doc,
-        oficio_aut,
-        no_oficio,
-        no_aut,
-        no_lici,
-        importe,
-        desc,
-        importe_l,
-        beneficiario,
-        realizo,
-        numero,
-        num_conver
-      });
-    });
-    this.setState({
-      fondos
-   });
+  // onCollectionUpdate = (querySnapshot) => {
+  //   const fondos = []
+  //   querySnapshot.forEach((doc) => {
+  //     const { fondo, fecha, tipo_doc, oficio_aut, no_oficio, no_aut, no_lici, importe, desc, importe_l, beneficiario, realizo, numero, num_conver } = doc.data()
+  //     fondos.push({
+  //       key: doc.id,
+  //       doc, // DocumentSnapshot
+  //       fondo,
+  //       fecha,
+  //       tipo_doc,
+  //       oficio_aut,
+  //       no_oficio,
+  //       no_aut,
+  //       no_lici,
+  //       importe,
+  //       desc,
+  //       importe_l,
+  //       beneficiario,
+  //       realizo,
+  //       numero,
+  //       num_conver
+  //     })
+  //   })
+  //   this.setState({
+  //     fondos
+  //  })
+  // }
+
+  componentDidMount () {
+    this.unsubscribe = this.ref.onSnapshot(this.onCollectionUpdate)
   }
 
-  componentDidMount() {
-    this.unsubscribe = this.ref.onSnapshot(this.onCollectionUpdate);
-  }
-
-  render() {
-
-    var user = firebase.auth().currentUser;
-    var email;
+  render () {
+    var user = firebase.auth().currentUser
+    var email
 
     if (user != null) {
-      email = user.email;
+      email = user.email
     }
-    console.log(email);
 
-    let admin;
+    let admin
     if (email === 'administrador@procu.com') {
-      admin = 'ADMIN';
+      admin = 'ADMIN'
     } else if (email === 'nayra@procu.com') {
-      admin = 'NAYRA';
+      admin = 'NAYRA'
     } else if (email === 'laura@procu.com') {
-      admin = 'LAURA';
+      admin = 'LAURA'
     } else if (email === 'miguel@procu.com') {
-      admin = 'MIGUEL';
+      admin = 'MIGUEL'
     } else if (email === 'teresa@procu.com') {
-      admin = 'TERESA';
+      admin = 'TERESA'
     } else if (email === 'marcos@procu.com') {
-      admin = 'MARCOS';
+      admin = 'MARCOS'
     } else if (email === 'eloy@procu.com') {
-      admin = 'ELOY';
+      admin = 'ELOY'
     } else if (email === 'karina@procu.com') {
-      admin = 'KARINA';
+      admin = 'KARINA'
     } else if (email === 'martha@procu.com') {
-      admin = 'MARTHA';
+      admin = 'MARTHA'
     } else if (email === 'lilia@procu.com') {
-      admin = 'LILIA';
+      admin = 'LILIA'
     } else if (email === 'cenely@procu.com') {
-      admin = 'CENELY';
+      admin = 'CENELY'
     } else if (email === 'hector@procu.com') {
-      admin = 'HECTOR';
+      admin = 'HECTOR'
     } else if (email === 'miau@procu.com') {
-      admin = 'MAO';
+      admin = 'MAO'
     } else if (email === 'omar@procu.com') {
-      admin = 'OMAR';
+      admin = 'OMAR'
     } else if (email === 'fer@procu.com') {
-      admin = 'FERNANDA';
+      admin = 'FERNANDA'
     }
     console.log(admin)
 
@@ -129,8 +127,6 @@ class TablaComprometidos extends Component {
           </div>
         </div>
       </div>
-    );
+    )
   }
 }
-
-export default TablaComprometidos;

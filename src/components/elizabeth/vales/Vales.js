@@ -1,21 +1,20 @@
-import React, { Component } from 'react';
-import firebase from '../../../Firebase';
-import ListComponent from './ListComponent';
-import './Vales.css';
-import ReactToPrint from 'react-to-print';
-import logovale from '../../../img/logovale.png';
-import logoh from '../../../img/logoh.png';
+import React, { Component } from 'react'
+import firebase from '../../../Firebase'
+import './Vales.css'
+import ReactToPrint from 'react-to-print'
+import logovale from '../../../img/logovale.png'
+import logoh from '../../../img/logoh.png'
 
 export default class Vales extends Component {
-  constructor(props) {
-    super(props);
+  constructor (props) {
+    super(props)
     this.state = {
       lista: [
         {
           id: 1,
           name: 'preuba',
           done: false
-        },
+        }
       ],
       form: [],
       alert: false,
@@ -25,6 +24,7 @@ export default class Vales extends Component {
       cantidad: '',
       cantidadc: '',
       cantidadr: '',
+      reembolso: '',
       concepto: '',
       oficioS: '',
       area: '',
@@ -33,99 +33,48 @@ export default class Vales extends Component {
       factura: '',
       recibos: '',
       sc: '',
-      reintegroT: '',
+      fecha: '',
+      autorizo: '',
       estatus: 'Pendiente',
       contador: {},
-      isHidden: true,
-    };
+      isHidden: true
+    }
   }
 
-  toggleHidden() {
-   this.setState({
-     isHidden: !this.state.isHidden
-   })
- }
-
-  handleChange(event) {
-    this.setState({[event.target.name]: event.target.value})
+  toggleHidden () {
+    this.setState({
+      isHidden: !this.state.isHidden
+    })
   }
 
-  listenForItems = (itemsRef) => {
-    itemsRef.on('value', (snap) => {
-      var lista = [];
-      snap.forEach((child) => {
-        lista.push({
-          vale: child.val().vale,
-          cheque: child.val().cheque,
-          cantidad: child.val().cantidad,
-          cantidadc: child.val().cantidadc,
-          cantidadr: child.val().cantidadr,
-          concepto: child.val().concepto,
-          oficioS: child.val().oficioS,
-          area: child.val().area,
-          turno: child.val().turno,
-          personaR: child.val().personaR,
-          estatus: child.val().estatus,
-          factura: child.val().factura,
-          recibos: child.val().recibos,
-          sc: child.val().sc,
-          reintegroT: child.val().reintegroT,
-          done: child.val().done,
-          id: child.key
-        });
-      });
-      this.setState({
-        lista: lista
-      });
-    });
+  handleChange (event) {
+    this.setState({ [event.target.name]: event.target.value })
   }
 
-  componentDidMount() {
-    const itemsRef = firebase.database().ref('vales/');
-    this.listenForItems(itemsRef);
-    this.consumo();
+  componentDidMount () {
+    this.consumo()
   }
 
   consumo = () => {
-    const ref = firebase.firestore().collection('vales').doc('--stats--');
+    const ref = firebase.firestore().collection('vales').doc('--stats--')
     ref.get().then((doc) => {
       if (doc.exists) {
         this.setState({
           contador: doc.data(),
           key: doc.id,
           isLoading: false
-        });
+        })
       } else {
-        console.log('No hay Documento');
+        console.log('No hay Documento')
       }
     })
   }
 
-  showAlert(type, message) {
-    this.setState({
-      alert: true,
-      alertData: {type, message}
-    });
-    setTimeout(() => {
-      this.setState({alert: false});
-    }, 6000);
+  resetForm () {
+    this.refs.contactForm.reset()
   }
 
-  resetForm() {
-    this.refs.contactForm.reset();
-  }
-
-  componentWillMount() {
-    let formRef = firebase.database().ref('vales').orderByKey().limitToLast(1);
-    formRef.on('child_added', snapshot => {
-      const { vale, cheque, cantidad, cantidadc, cantidadr, concepto, oficioS, area, turno, personaR, estatus } = snapshot.val();
-      const data = { vale, cheque, cantidad, cantidadc, cantidadr, concepto, oficioS, area, turno, personaR, estatus };
-      this.setState({ form: [data].concat(this.state.form) });
-    });
-  }
-
-  sendMessage(e) {
-    e.preventDefault();
+  sendMessage () {
     const params = {
       vale: this.inputVale.value,
       cheque: this.inputCheque.value,
@@ -140,9 +89,10 @@ export default class Vales extends Component {
       factura: this.inputFactura.value,
       recibos: this.inputRecibos.value,
       sc: this.inputSC.value,
-      reintegroT: this.inputReintegroT.value,
+      fecha: this.state.fecha,
+      autorizo: this.inputAutorizo.value,
       estatus: this.state.estatus
-    };
+    }
     this.setState({
       vale: this.inputVale.value,
       cheque: this.inputCheque.value,
@@ -157,58 +107,84 @@ export default class Vales extends Component {
       factura: this.inputFactura.value,
       recibos: this.inputRecibos.value,
       sc: this.inputSC.value,
-      reintegroT: this.inputReintegroT.value,
+      fecha: this.state.fecha,
+      autorizo: this.inputAutorizo.value,
       estatus: this.state.estatus
     })
-    if ( params.vale && params.cheque && params.cantidad && params.cantidadc
-        && params.cantidadr && params.concepto && params.oficioS && params.area
-        && params.turno && params.personaR && params.factura && params.recibos
-        && params.sc && params.reintegroT && params.estatus ) {
-      var f = parseInt(params.cantidad);
-      const statsRef = firebase.firestore().collection('caja').doc('--stats--');
-      const increment = firebase.firestore.FieldValue.increment(-f);
-      const batch = firebase.firestore().batch();
-      const storyRef = firebase.firestore().collection('caja').doc(`${Math.random()}`);
-      batch.set(storyRef, { title: 'Se Genero Un Vale # ', no: params.vale, personaR: params.personaR , cantidad: '-'+f });
-      batch.set(statsRef, { storyCount: increment }, { merge: true });
-      batch.commit();
-      const statsRefs = firebase.firestore().collection('vales').doc('--stats--');
-      const increments = firebase.firestore.FieldValue.increment(1);
-      const batchs = firebase.firestore().batch();
-      const storyRefs = firebase.firestore().collection('vales').doc(`${Math.random()}`);
-      batchs.set(storyRefs, { title: 'Se Genero Un Vale # ', no: params.vale, personaR: params.personaR , cantidad: '-'+f });
-      batchs.set(statsRefs, { storyCount: increments }, { merge: true });
-      batchs.commit();
+    if (params.vale && params.cheque && params.cantidad && params.cantidadc &&
+        params.cantidadr && params.concepto && params.oficioS && params.area &&
+        params.turno && params.factura && params.recibos && params.sc &&
+        params.autorizo && params.personaR && params.estatus && params.fecha) {
+      var f = parseInt(params.cantidadc)
+      const statsRef = firebase.firestore().collection('caja').doc('--stats--')
+      const increment = firebase.firestore.FieldValue.increment(-f)
+      const batch = firebase.firestore().batch()
+      const storyRef = firebase.firestore().collection('caja').doc(`${Math.random()}`)
+      batch.set(storyRef, { title: 'Se Genero Un Vale # ', no: params.vale, personaR: params.personaR, cantidad: '-' + f, fecha: params.fecha })
+      console.log(params.fecha)
+      batch.set(statsRef, { storyCount: increment }, { merge: true })
+      batch.commit()
+      const statsRefs = firebase.firestore().collection('vales').doc('--stats--')
+      const increments = firebase.firestore.FieldValue.increment(1)
+      const batchs = firebase.firestore().batch()
+      const storyRefs = firebase.firestore().collection('vales').doc(`${Math.random()}`)
+      batchs.set(storyRefs, { title: 'Vale ', no: params.vale, personaR: params.personaR, cantidad: '-' + f })
+      batchs.set(statsRefs, { storyCount: increments }, { merge: true })
+      batchs.commit()
       firebase.database().ref('vales').push(params).then(() => {
-        this.showAlert('success', 'Tu solicitud fue enviada.');
+        alert('Tu solicitud fue enviada.')
       }).catch(() => {
-        this.showAlert('danger', 'Tu solicitud no puede ser enviada');
-      });
-        this.resetForm();
-        this.toggleHidden();
-      } else {
-        this.showAlert('warning', 'Por favor llene el formulario');
-      };
+        alert('Tu solicitud no puede ser enviada')
+      })
+      this.resetForm()
+      setInterval(this.consumo, 1000)
+    } else {
+      alert('Por favor llene el formulario')
+    }
+  }
+
+  render () {
+    const { cantidad, cantidadc } = this.state
+    var cant1 = parseInt(cantidad)
+    var cant2 = parseInt(cantidadc)
+    var tot = cant1 - cant2
+    var today2 = new Date()
+    var meses = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12']
+    var f = new Date()
+    today2 = f.getFullYear() + '-' + meses[f.getMonth()] + '-' + f.getDate()
+
+    let button
+    if (tot >= 0 && cant2 === 0) {
+      button =
+        <div style={{ width: '100%' }}>
+          <input
+            className='input-b'
+            name='cantidadr'
+            style={{ width: '92%' }}
+            value={0}
+            required
+            ref={cantidadr => this.inputCantidadr = cantidadr}
+          />
+        </div>
+    } else {
+      button =
+        <div style={{ width: '100%' }}>
+          <input
+            className='input-b'
+            name='cantidadr'
+            defaultValue={tot}
+            style={{ width: '92%' }}
+            required
+            ref={cantidadr => this.inputCantidadr = cantidadr}
+          />
+        </div>
     }
 
-  render() {
-
-    const { cantidad, cantidadc } = this.state;
-    var cant1 = parseInt(cantidad);
-    var cant2 = parseInt(cantidadc);
-    var tot = cant1 - cant2;
-
-    var today = new Date();
-    var meses =  [ 'Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic' ];
-    var f = new Date();
-    today = f.getDate() + '/' + meses[f.getMonth()] + '/' + f.getFullYear();
-
     return (
-      <div class='container-back'>
-        <div class='site'>
-          <p class='site-s'><b>Vales</b></p>
+      <div className='container-back'>
+        <div className='site'>
+          <p className='site-s'><b>Vales</b></p>
         </div>
-
         <form onSubmit={this.sendMessage.bind(this)} ref='contactForm'>
           <div className='margin-vale' ref={el => (this.vale = el)}>
             <div className='vale-title-container'>
@@ -224,7 +200,6 @@ export default class Vales extends Component {
                 <img className='logovale' src={logoh} alt='' />
               </div>
             </div>
-
             <div className='no-cv'>
               <div className='cv'>
                 <p className='p-cv'>
@@ -248,13 +223,10 @@ export default class Vales extends Component {
                 </p>
               </div>
             </div>
-
             <div className='vale-pro-content'>
-              <p className='p-vp'>VALE PROVICIONAL DE CAJA</p>
+              <p className='p-vp'>VALE PROVISIONAL DE CAJA</p>
             </div>
-
-            <div className='space-v'/>
-
+            <div className='space-v' />
             <div className='mcc-content'>
               <div className='v-m'>
                 <p className='pmcc'>MOVIMIENTO</p>
@@ -264,9 +236,16 @@ export default class Vales extends Component {
                 <p className='p-bv'>
                   Comprobado
                 </p>
-                <p className='p-bv'>
-                  Reintegro/Reembolso
-                </p>
+                {tot >= 0 &&
+                  <p className='p-bv'>
+                    Reintegro
+                  </p>
+                }
+                {tot < 0 &&
+                  <p className='p-bv'>
+                    Reembolso
+                  </p>
+                }
               </div>
               <div className='v-c'>
                 <p className='pmcc'>CANTIDAD</p>
@@ -286,13 +265,7 @@ export default class Vales extends Component {
                   required
                   ref={cantidadc => this.inputCantidadc = cantidadc}
                 />
-                <input
-                  className='input-b'
-                  name='cantidadr'
-                  value={tot}
-                  required
-                  ref={cantidadr => this.inputCantidadr = cantidadr}
-                />
+                {button}
               </div>
               <div className='v-con'>
                 <p className='pmcc'>CONCEPTO</p>
@@ -318,14 +291,35 @@ export default class Vales extends Component {
                   </div>
                   <div className='a-w'>
                     <p className='p-oat'>Área</p>
-                    <input
-                      className='input-w'
-                      name='area'
-                      onChange={this.handleChange.bind(this)}
-                      value={this.state.area}
-                      required
-                      ref={area => this.inputArea = area}
-                    />
+                    <select
+                      className='input-w' required
+                      ref={area => this.inputArea = area}>
+                      <option id='area'>Procuraduría General de Justicia</option>
+                      <option id='area'>Subprocuraduría de Procedimientos Penales Región Oriente</option>
+                      <option id='area'>Fiscalía Especializada para la atención de Delitos cometidos contra la Libertad de Expresión</option>
+                      <option id='area'>Periodistas y Personas defensoras de los Derechos Humanos</option>
+                      <option id='area'>Dirección General para la Atención de los Asuntos del Sistema Tradicional</option>
+                      <option id='area'>Fiscalia de Delitos Electorales</option>
+                      <option id='area'>Subprocuraduría de Derechos Humanos y Servicios a la Comunidad</option>
+                      <option id='area'>Centro de Justicia Restaurativa Penal Poniente</option>
+                      <option id='area'>Fiscalía para la Atención de Delitos de Género</option>
+                      <option id='area'>Visitaduría General</option>
+                      <option id='area'>Dirección General de Servicios Periciales</option>
+                      <option id='area'>Centro de Operación Estratégica</option>
+                      <option id='area'>Unidad Especializada en el Combate al Secuestro</option>
+                      <option id='area'>Dirección General de Administración y Finanzas</option>
+                      <option id='area'>Fiscalía Especializada para la atención de los Delitos de Trata de Personas</option>
+                      <option id='area'>Subprocuraduría de Procedimientos Penales Región Poniente</option>
+                      <option id='area'>Centro de Atención Temprana Poniente</option>
+                      <option id='area'>Dirección General de Investigación y Litigación Poniente</option>
+                      <option id='area'>Dirección General de la Policía Investigadora</option>
+                      <option id='area'>Centro de Atención Temprana Oriente</option>
+                      <option id='area'>Centro de Justicia Restaurativa Penal Oriente</option>
+                      <option id='area'>Dirección General de Investigación y Litigación Oriente</option>
+                      <option id='area'>Dirección General de Recursos Materiales y Servicios</option>
+                      <option id='area'>Fiscalía Especializada en Delitos de Corrupción</option>
+                      <option id='area'>Fiscalía Especializada en Materia de Desaparición Forzada de Personas</option>
+                    </select>
                   </div>
                   <div className='t-w'>
                     <p className='p-oat'>Turno</p>
@@ -341,72 +335,57 @@ export default class Vales extends Component {
                 </div>
               </div>
             </div>
-
             <div className='frsr-end'>
-            <div className='frsr-w'>
-              <div className='div-4'>
-                <div className='frsr-w-b'>
-                  <p className='p-oat'>Facturas</p>
-                  <input
-                    className='input-w'
-                    name='factura'
-                    onChange={this.handleChange.bind(this)}
-                    value={this.state.factura}
-                    ref={factura => this.inputFactura = factura}
-                  />
+              <div className='frsr-w'>
+                <div className='div-4'>
+                  <div className='frsr-w-b'>
+                    <p className='p-oat'>Facturas</p>
+                    <input
+                      className='input-w'
+                      name='factura'
+                      onChange={this.handleChange.bind(this)}
+                      value={this.state.factura}
+                      ref={factura => this.inputFactura = factura}
+                    />
+                  </div>
+                  <div className='frsr-w-b' style={{borderLeft: '0px'}}>
+                    <p className='p-oat'>Recibos</p>
+                    <input
+                      className='input-w'
+                      name='recibos'
+                      onChange={this.handleChange.bind(this)}
+                      value={this.state.recibos}
+                      ref={recibos => this.inputRecibos = recibos}
+                    />
+                  </div>
                 </div>
-                <div className='frsr-w-b' style={{borderLeft: '0px'}}>
-                  <p className='p-oat'>Recibos</p>
-                  <input
-                    className='input-w'
-                    name='recibos'
-                    onChange={this.handleChange.bind(this)}
-                    value={this.state.recibos}
-                    ref={recibos => this.inputRecibos = recibos}
-                  />
-                </div>
-              </div>
-              <div className='div-4'>
-                <div className='frsr-w-b'>
-                  <p className='p-oat'>S/C</p>
-                  <input
-                    className='input-w'
-                    name='sc'
-                    onChange={this.handleChange.bind(this)}
-                    value={this.state.sc}
-                    ref={sc => this.inputSC = sc}
-                  />
-                </div>
-                <div className='frsr-w-b' style={{borderLeft: '0px', borderRight: '0px'}}>
-                  <p className='p-oat'>Reintegro Total</p>
-                  <input
-                    className='input-w'
-                    name='reintegroT'
-                    onChange={this.handleChange.bind(this)}
-                    value={this.state.reintegroT}
-                    ref={reintegroT => this.inputReintegroT = reintegroT}
-                  />
+                <div className='div-4'>
+                  <div className='frsr-w-b'>
+                    <p className='p-oat'>S/C</p>
+                    <input
+                      className='input-w'
+                      name='sc'
+                      onChange={this.handleChange.bind(this)}
+                      value={this.state.sc}
+                      ref={sc => this.inputSC = sc}
+                    />
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-
             <div className='firma-content'>
               <div className='f-fecha'>
-                <p className='b-fecha'>{today}</p>
-                <b className='font-size-f'>Fecha</b>
+                <p className='b-fecha'>{today2}</p>
+                <p className='font-size-f'>Fecha</p>
               </div>
               <div className='f-fecha'>
-                <select className='b-auto'
+                <select
+                  className='b-auto'
                   ref={autorizo => this.inputAutorizo = autorizo}>
                   <option id='autorizo'>L.C Nayra Ruiz Laguna</option>
                   <option id='autorizo'>Mtro.León Maximiliano Hernández Valdés</option>
                 </select>
-                <b className='font-size-f'>Autorizó</b>
-              </div>
-              <div className='f-fecha'>
-                <p className='b-fecha'>ok</p>
-                <b className='font-size-f'>Validado (NRL)</b>
+                <p className='font-size-f'>Autorizó</p>
               </div>
               <div className='f-fecha'>
                 <input
@@ -417,42 +396,24 @@ export default class Vales extends Component {
                   required
                   ref={personaR => this.inputPersona = personaR}
                 />
-                <b className='font-size-f'>Recibió</b>
+                <p className='font-size-f'>Recibió</p>
               </div>
             </div>
-
             <div className='last'>
               Me comprometo a entregar la comprobación que ampara el presente
               vale en un plazo no mayor  a 5 dias habiles posteriores a la fecha
               de recibido, de lo contrario reintegraré el recurso por la cantidad
               sin comprobar.
             </div>
-
           </div>
-
           <div className='boton-v'>
             <ReactToPrint
-              trigger={() => <buttom className='boton-vale'>Imprimir</buttom>}
-              content={()=> this.vale}
-              onAfterPrint={this.toggleHidden.bind(this)}
+              trigger={() => <div className='boton-vale'>Imprimir y Guardar</div>}
+              content={() => this.vale}
+              onAfterPrint={this.sendMessage.bind(this)}
             />
           </div>
-
-          {!this.state.isHidden &&
-            <div className='boton-v'>
-              <button type='submit' className='input-sc boton-g'>Guardar</button>
-            </div>
-          }
-
         </form>
-
-        <div class='caja-w' style={{marginTop: '40px', marginBottom: '40px'}}>
-          <div class='caja-col'>
-            <ListComponent
-              lista={this.state.lista}
-            />
-          </div>
-        </div>
       </div>
     )
   }

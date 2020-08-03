@@ -1,8 +1,8 @@
-import React, { Component } from 'react';
-import './Common.css';
+import React, { Component } from 'react'
+import './Common.css'
 
 export default class Common extends Component {
-  render() {
+  render () {
     return (
       <div className='common'>
         <div className='common-container'>

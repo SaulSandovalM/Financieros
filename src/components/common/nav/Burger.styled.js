@@ -1,7 +1,7 @@
-import styled from 'styled-components';
+import styled from 'styled-components'
 
 export const StyledBurger = styled.button`
-  position: absolute;
+  position: fixed;
   top: 2%;
   left: 2rem;
   display: flex;
@@ -41,4 +41,4 @@ export const StyledBurger = styled.button`
       transform: ${({ open }) => open ? 'rotate(-45deg)' : 'rotate(0)'};
     }
   }
-`;
+`

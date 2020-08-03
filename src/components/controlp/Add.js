@@ -1,11 +1,11 @@
-import React, { Component } from 'react';
-import firebase from '../../Firebase';
-import './Control.css';
+import React, { Component } from 'react'
+import firebase from '../../Firebase'
+import './Control.css'
 
 class Add extends Component {
   constructor(props) {
-    super(props);
-    this.unsubscribe = null;
+    super(props)
+    this.unsubscribe = null
     this.state = {
       key: '',
       fondo: '',
@@ -19,13 +19,13 @@ class Add extends Component {
       fecha_deposito: '',
       mes_pago: '',
       control: []
-    };
+    }
   }
 
   onCollectionUpdate = (querySnapshot) => {
-    const control = [];
+    const control = []
     querySnapshot.forEach((doc) => {
-      const { fecha_contra, no_contra, fecha_deposito, mes_pago } = doc.data();
+      const { fecha_contra, no_contra, fecha_deposito, mes_pago } = doc.data()
       control.push({
         key: doc.id,
         doc, // DocumentSnapshot
@@ -33,20 +33,20 @@ class Add extends Component {
         no_contra,
         fecha_deposito,
         mes_pago,
-      });
-    });
+      })
+    })
     this.setState({
       control
-   });
+   })
   }
 
   componentDidMount() {
-    const ref = firebase.firestore().collection('fondos').doc(this.props.match.params.id);
-    const updateRef = firebase.firestore().collection('fondos').doc(this.props.match.params.id).collection('control');
-    this.unsubscribe = updateRef.onSnapshot(this.onCollectionUpdate);
+    const ref = firebase.firestore().collection('fondos').doc(this.props.match.params.id)
+    const updateRef = firebase.firestore().collection('fondos').doc(this.props.match.params.id).collection('control')
+    this.unsubscribe = updateRef.onSnapshot(this.onCollectionUpdate)
     ref.get().then((doc) => {
       if (doc.exists) {
-        const fondos = doc.data();
+        const fondos = doc.data()
         this.setState({
           key: doc.id,
           fondo: fondos.fondo,
@@ -59,25 +59,25 @@ class Add extends Component {
           no_contra: fondos.no_contra,
           fecha_deposito: fondos.fecha_deposito,
           mes_pago: fondos.mes_pago,
-        });
+        })
       } else {
-        console.log("No se encuentra documento");
+        console.log("No se encuentra documento")
       }
-    });
+    })
   }
 
   onChange = (e) => {
     const state = this.state
-    state[e.target.name] = e.target.value;
-    this.setState({fondos:state});
+    state[e.target.name] = e.target.value
+    this.setState({fondos:state})
   }
 
   onSubmit = (e) => {
-    e.preventDefault();
+    e.preventDefault()
 
-    const { fecha_contra, no_contra, fecha_deposito, mes_pago } = this.state;
+    const { fecha_contra, no_contra, fecha_deposito, mes_pago } = this.state
 
-    const updateRef = firebase.firestore().collection('fondos').doc(this.props.match.params.id).collection('control').doc();
+    const updateRef = firebase.firestore().collection('fondos').doc(this.props.match.params.id).collection('control').doc()
     updateRef.set({
       fecha_contra,
       no_contra,
@@ -89,11 +89,11 @@ class Add extends Component {
         no_contra: '',
         fecha_deposito: '',
         mes_pago: '',
-      });
+      })
     })
     .catch((error) => {
-      console.error("Error Agregando el documento: ", error);
-    });
+      console.error("Error Agregando el documento: ", error)
+    })
   }
 
   render() {
@@ -214,8 +214,8 @@ class Add extends Component {
           </div>
         </div>
       </div>
-    );
+    )
   }
 }
 
-export default Add;
+export default Add

@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from 'styled-components'
 
 export const StyledMenu = styled.nav`
   display: flex;
@@ -10,7 +10,7 @@ export const StyledMenu = styled.nav`
   width: 13%;
   text-align: left;
   padding: 0rem 2rem 0rem 2rem;
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   transition: transform 0.3s ease-in-out;
@@ -35,4 +35,4 @@ export const StyledMenu = styled.nav`
       color: ${({ theme }) => theme.primaryHover};
     }
   }
-`;
+`

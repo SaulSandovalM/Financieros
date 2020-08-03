@@ -1,40 +1,33 @@
-import React, { Component } from 'react';
-import CurrencyFormat from 'react-currency-format';
-import './Fondor.css';
+import React, { Component } from 'react'
+import './Fondor.css'
 
 export default class RowComponent extends Component {
-  constructor(props){
-     super(props);
-     this.state = {
-       done: false,
-       item: 'Atendido',
-     };
-   }
+  constructor (props) {
+    super(props)
+    this.state = {
+      done: false
+    }
+  }
 
-  render() {
+  render () {
+    console.log(this.props.item.cpa)
     return (
       <div className='table-container-p'>
-        <div className='table-left'>
-        </div>
-        <div className='table-up-p-fr'>
-          <p>{this.props.item.up}</p>
-        </div>
-        <div className='table-up-p-fr'>
-          <p>{this.props.item.partida}</p>
-        </div>
-        <div className='table-up-p-fr'>
-          <div>
-            <CurrencyFormat
-              value={this.props.item.importe}
-              displayType={'text'}
-              thousandSeparator={true}
-              prefix={' $'} />
-            .00
+        <div className='inputs-container-fr'>
+          <div className='inputs-col-fr'>
+            <div className='inputs-row-fr-2'>
+              <div className='p-container-ifrcpa'>
+                <p className='p-title-margin-fr'>CPA</p>
+                <input
+                  className='input-style-fr'
+                  required
+                  defaultValue={this.props.item.cpa}
+                />
+              </div>
+            </div>
           </div>
         </div>
-        <div className='table-right'>
-        </div>
       </div>
-    );
+    )
   }
 }

@@ -1,38 +1,40 @@
-import React, { Component } from 'react';
-import './Registro.css';
-import RowJulio from './RowJulio';
-import firebase from '../../../Firebase';
+import React, { Component } from 'react'
+import './Registro.css'
+import RowJulio from './RowJulio'
+import firebase from '../../../Firebase'
 
 export default class ListJulio extends Component {
   constructor (props) {
-    super(props);
+    super(props)
     this.state = {
       presupuesto: []
-    };
+    }
   }
 
   componentWillMount () {
     firebase.database().ref('presupuesto/').on('child_added', snapshot => {
       this.setState({
         presupuesto: this.state.presupuesto.concat(snapshot.val())
-      });
-    });
+      })
+    })
   }
 
-  render() {
+  render () {
     return (
       <div>
         <div className='meses-container'>
-          <div className='table-left'>
-          </div>
+          <div className='table-left' />
           <div className='table-meses-up'>
-            <p className='p-meses'>UNIDAD</p>
+            <p className='p-meses'>UP</p>
           </div>
           <div className='table-meses-proy'>
-            <p className='p-meses'>PROYECTO</p>
+            <p className='p-meses'>PROY</p>
           </div>
           <div className='table-meses-par'>
-            <p className='p-meses'>PARTIDA</p>
+            <p className='p-meses'>P</p>
+          </div>
+          <div className='table-meses-par'>
+            <p className='p-meses'>R</p>
           </div>
           <div className='table-meses-con'>
             <p className='p-meses'>CONCEPTO</p>
@@ -50,10 +52,9 @@ export default class ListJulio extends Component {
             <p className='p-meses'>SALDO</p>
           </div>
           <div className='table-meses-dis'>
-            <p className='p-meses'>DISPONIBILIDAD</p>
+            <p className='p-meses'>DISPONIBLE</p>
           </div>
-          <div className='table-right'>
-          </div>
+          <div className='table-right' />
         </div>
         {
           this.props.lista.map(item =>
@@ -64,6 +65,6 @@ export default class ListJulio extends Component {
           )
         }
       </div>
-    );
+    )
   }
 }

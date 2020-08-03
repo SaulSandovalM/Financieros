@@ -26,6 +26,26 @@
   justify-content: space-between;
   width: 60%;
 }
+.table-caja-title {
+  width: 50%;
+  border-bottom: 1px solid #d0d0d0;
+  border-right: 1px solid #d0d0d0;
+  padding-left: 5px;
+  height: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.table-caja-fecha {
+  width: 28%;
+  border-bottom: 1px solid #d0d0d0;
+  border-right: 1px solid #d0d0d0;
+  padding-left: 5px;
+  height: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
 .caja-inputs-c2 {
   display: flex;
   flex-direction: row;
@@ -213,4 +233,16 @@
 .table-caja-row {
   display: flex;
   flex-direction: row;
+}
+.table-c-p {
+  background: white;
+  margin-left: -18px;
+  margin-right: -18px;
+  padding: 30px 30px 0px 30px;
+}
+.color-s {
+  background: white;
+  margin-left: -18px;
+  margin-right: -18px;
+  padding: 0px 30px 30px 30px;
 }

@@ -1,11 +1,9 @@
-import React from 'react';
-import { bool, func } from 'prop-types';
-import { StyledBurger } from './Burger.styled';
+import React from 'react'
+import { bool, func } from 'prop-types'
+import { StyledBurger } from './Burger.styled'
 
 const Burger = ({ open, setOpen, ...props }) => {
-
-  const isExpanded = open ? true : false;
-
+  const isExpanded = open !== false
   return (
     <StyledBurger
       aria-label='Toggle menu'
@@ -21,7 +19,7 @@ const Burger = ({ open, setOpen, ...props }) => {
 
 Burger.propTypes = {
   open: bool.isRequired,
-  setOpen: func.isRequired,
-};
+  setOpen: func.isRequired
+}
 
-export default Burger;
+export default Burger

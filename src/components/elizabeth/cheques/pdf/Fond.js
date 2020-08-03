@@ -1,8 +1,7 @@
-import React, { Component } from 'react';
-import firebase from '../../../../Firebase';
-
-import lpgjh from '../../../../img/logo-PGJH.jpg';
-import programa from '../../../../img/logo.jpg';
+import React, { Component } from 'react'
+import firebase from '../../../../Firebase'
+import lpgjh from '../../../../img/logo-PGJH.jpg'
+import programa from '../../../../img/logo.jpg'
 
 export default class Fond extends Component {
     render(){

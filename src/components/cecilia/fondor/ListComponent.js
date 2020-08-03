@@ -1,51 +1,52 @@
-import React, { Component } from 'react';
-import './Fondor.css';
-import RowComponent from './RowComponent';
-import firebase from '../../../Firebase';
+import React, { Component } from 'react'
+import './Fondor.css'
+import RowCompoBanco from './RowCompoBanco'
+import firebase from '../../../Firebase'
 
 export default class ListComponent extends Component {
   constructor (props) {
-   super(props);
-   this.state = {
-     banco: [],
-   };
- }
+    super(props)
+    this.state = {
+      banco: []
+    }
+  }
 
   componentWillMount () {
     firebase.database().ref('banco/').on('child_added', snapshot => {
       this.setState({
         banco: this.state.banco.concat(snapshot.val())
-      });
-    });
+      })
+    })
   }
 
-  render() {
+  render () {
     return (
       <div>
-        <div class='table-container-p'>
-          <div class='table-left'>
+        <div className='table-container-p'>
+          <div className='table-left' />
+          <div className='table-up-p-fr'>
+            <b>Up</b>
           </div>
-          <div class='table-up-p-fr'>
-            <b>UP</b>
-          </div>
-          <div class='table-up-p-fr'>
+          <div className='table-up-p-fr'>
             <b>PARTIDA</b>
           </div>
-          <div class='table-up-p-fr'>
+          <div className='table-up-p-fr'>
+            <b>RUBRO</b>
+          </div>
+          <div className='table-up-p-fr'>
             <b>IMPORTE</b>
           </div>
-          <div class='table-right'>
-          </div>
+          <div className='table-right' />
         </div>
         {
-          this.props.lista.map(item =>
-            <RowComponent
+          this.props.listaB.map(item =>
+            <RowCompoBanco
               key={item.id}
               item={item}
             />
           )
         }
       </div>
-    );
+    )
   }
 }

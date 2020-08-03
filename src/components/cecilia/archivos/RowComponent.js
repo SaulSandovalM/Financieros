@@ -1,35 +1,54 @@
-import React, { Component } from 'react';
-import './Archivos.css';
+import React, { Component } from 'react'
+import './Archivos.css'
 
 export default class RowComponent extends Component {
-  constructor(props){
-    super(props);
+  constructor (props) {
+    super(props)
     this.state = {
       done: false,
-      item: 'Atendido',
-
-    };
+      item: 'Atendido'
+    }
   }
-  render() {
+
+  render () {
+    var oficioA = this.props.item.oficioA
+    var oficioS = this.props.item.oficioS
+    var excel = this.props.item.excel
+
     return (
-
-      <div>
       <div className='archivos-container-row'>
-        <div className='table-left'>
+        <div className='table-left' />
+        <div className='table-archivos'>
+          <p
+            className='p-archivos-row-url'
+            onClick={() => window.open(oficioS, '_blank')}
+          >
+            {this.props.item.fileNameS}
+          </p>
         </div>
-
-        <div class='table-archivos'>
-        <p>{this.props.item.ofis}</p>
+        <div className='table-archivos'>
+          <p
+            className='p-archivos-row-url'
+            onClick={() => window.open(oficioA, '_blank')}
+          >
+            {this.props.item.fileNameA}
+          </p>
         </div>
-
-        <div class='table-archivos'>
-        <p>{this.props.item.ofia}</p>
+        <div className='table-archivos'>
+          <p
+            className='p-archivos-row-url'
+            onClick={() => window.open(excel, '_blank')}
+          >
+            {this.props.item.fileNameE}
+          </p>
         </div>
-        <div class='table-archivos'>
-        <p>{this.props.item.excel}</p>
+        <div className='table-archivos'>
+          <p className='p-archivos-row'>
+            {this.props.item.tipo}
+          </p>
         </div>
+        <div className='table-right' />
       </div>
-      </div>
-    );
+    )
   }
 }
