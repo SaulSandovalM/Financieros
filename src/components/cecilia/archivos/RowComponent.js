@@ -14,9 +14,10 @@ export default class RowComponent extends Component {
     var oficioA = this.props.item.oficioA
     var oficioS = this.props.item.oficioS
     var excel = this.props.item.excel
-
+    
     return (
-      <div className='archivos-container-row'>
+      <div>
+       <div className='archivos-container-row'>
         <div className='table-left' />
         <div className='table-archivos'>
           <p
