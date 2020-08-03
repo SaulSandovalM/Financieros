@@ -188,6 +188,60 @@ export default class Fondor extends Component {
     }
   }
 
+  update = (item) => {
+    let updates = {}
+    updates['presupuesto/' + item.id] = {
+      rm: item.rm,
+      os: item.os,
+      up: item.up,
+      rubro: item.rubro,
+      tg: item.tg,
+      ogasto: item.ogasto,
+      f: item.f,
+      fu: item.fu,
+      sf: item.sf,
+      eje: item.eje,
+      s: item.s,
+      dig: item.dig,
+      prog: item.prog,
+      sp: item.sp,
+      obj: item.obj,
+      proy: item.proy,
+      est: item.est,
+      ben: item.ben,
+      eg: item.eg,
+      mi: item.mi,
+      obra: item.obra,
+      pr: item.pr,
+      pb: item.pb,
+      dp: item.dp,
+      indi: item.indi,
+      par: item.par,
+      la: item.la,
+      ods: item.ods,
+      et: item.et,
+      meta: item.meta,
+      ff: item.ff,
+      of: item.of,
+      np: item.np,
+      cpa: item.cpa,
+      ene: item.ene,
+      feb: item.feb,
+      mar: item.mar,
+      abr: item.abr,
+      may: item.may,
+      jun: item.jun,
+      jul: item.jul,
+      ago: item.ago,
+      sep: item.sep,
+      oct: item.oct,
+      nov: item.nov,
+      dic: '6,000.00',
+      total: item.total
+    }
+    firebase.database().ref().update(updates)
+  }
+
   render () {
     const filterData = this.state.presupuesto.filter(
       (presupuesto) => {
@@ -322,6 +376,7 @@ export default class Fondor extends Component {
                   <RowComponent
                     key={item.id}
                     item={item}
+                    update={this.update}
                   />
                 )
               }

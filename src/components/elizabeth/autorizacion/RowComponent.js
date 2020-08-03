@@ -10,7 +10,7 @@ export default class RowComponent extends Component {
     }
   }
 
-  handleUpdate = () => {
+  onhandleUpdate = () => {
     this.props.update(this.props.item)
   }
 
@@ -38,7 +38,7 @@ export default class RowComponent extends Component {
             <p>{this.props.item.turno}</p>
           </div>
           <div className='table-banco-porcentaje'>
-            <button onClick={this.handleUpdate}>Autorizar</button>
+            <button onClick={this.onhandleUpdate}>Autorizar</button>
           </div>
           <div className='table-right' />
         </div>

@@ -55,7 +55,7 @@ export default class Autorizacion extends Component {
     this.listenForItems(itemsRef)
   }
 
-  update = (item) => {
+  onhandleUpdate = (item) => {
     let updates = {}
     updates['vales/' + item.id] = {
       vale: item.vale,
@@ -88,7 +88,7 @@ export default class Autorizacion extends Component {
         <div className='banco-container'>
           <ListComponent
             lista={this.state.lista}
-            update={this.update}
+            update={this.onhandleUpdate}
           />
         </div>
       </div>

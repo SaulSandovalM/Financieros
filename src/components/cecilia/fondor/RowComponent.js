@@ -9,8 +9,11 @@ export default class RowComponent extends Component {
     }
   }
 
+  onhandleUpdate = () => {
+    this.props.update(this.props.item)
+  }
+
   render () {
-    console.log(this.props.item.cpa)
     return (
       <div className='table-container-p'>
         <div className='inputs-container-fr'>
@@ -25,6 +28,7 @@ export default class RowComponent extends Component {
                 />
               </div>
             </div>
+            <button onClick={this.onhandleUpdate}>Autorizar</button>
           </div>
         </div>
       </div>

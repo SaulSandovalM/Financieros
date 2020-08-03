@@ -30,8 +30,8 @@
   width: 100%;
 }
 .p-title-margin-fr {
-  margin: 0px;
   font-weight: bold;
+  margin: 0;
 }
 .input-style-fr {
   height: 30px;
