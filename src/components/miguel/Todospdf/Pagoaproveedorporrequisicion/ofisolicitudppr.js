@@ -1,9 +1,9 @@
 import React, { Component} from 'react';
-import './Consulta.css';
+import './pdfs.css';
 import ReactToPrint from 'react-to-print';
-import firebase from '../../../Firebase';
-import { NumberAsString } from '../fondos/NumerosLetras.js';
-import logo2 from  '../../../img/logo.jpg';
+import firebase from '../../../../Firebase'
+import { NumberAsString } from '../../fondos/NumerosLetras.js';
+import logo2 from  '../../../../img/logo.jpg';
 
 class Frpdf extends Component{
   constructor(props) {

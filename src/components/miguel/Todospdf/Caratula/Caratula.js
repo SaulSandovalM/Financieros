@@ -6,6 +6,7 @@ import boton2 from '../../../img/cua2.png'
 import programa from '../../../img/logo_hgo.png'
 import logo2 from '../../../img/logo.jpg'
 import footer from '../../../img/footer.png'
+import firebase from '../../../../Firebase'
 
 export default class Cpdf extends Component {
   constructor (props) {

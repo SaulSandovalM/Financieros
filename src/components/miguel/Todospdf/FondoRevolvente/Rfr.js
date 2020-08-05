@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import './pdfs.css'
 import ReactToPrint from 'react-to-print'
-import firebase from '../../../Firebase'
-import logo2 from '../../../img/logo.jpg'
+import firebase from '../../../../Firebase'
+import logo2 from '../../../../img/logo.jpg'
 
 export default class Frpdf extends Component {
   constructor (props) {

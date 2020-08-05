@@ -42,6 +42,31 @@ import Add from './components/controlp/Add'
 import Complemento from './components/complemento/Complemento'
 import Caratula from './components/miguel/caratula/Caratula'
 
+
+
+//pdf
+//FondoRevolvente
+import Gasto from './components/miguel/Todospdf/FondoRevolvente/Gasto'
+import ObjetodegastoFR from './components/miguel/Todospdf/FondoRevolvente/objetodegastoFR'
+import Recibo from './components/miguel/Todospdf/FondoRevolvente/Recibo'
+import Rfr from './components/miguel/Todospdf/FondoRevolvente/Rfr'
+
+//Pagoproveedor
+import ObjetodegastoPP from './components/miguel/Todospdf/Pagoproveedor/objetodegastoPP'
+import Gastoprovee from './components/miguel/Todospdf/Pagoproveedor/Gastoprovee'
+import Pagoproveedor from './components/miguel/Todospdf/Pagoproveedor/pagoproveedor'
+
+
+//Diciembre
+import Comprobaciondegastocomprobar from './components/miguel/Todospdf/Diciembre/Comprobaciondegastocomprobar'
+import Gastodiciembre from './components/miguel/Todospdf/Diciembre/gastodiciembre'
+import Objetodegastodiciembre from './components/miguel/Todospdf/Diciembre/objetodegastodiciembre'
+//pagoproveedor por requisicion
+import Gastoppr from './components/miguel/Todospdf/Pagoaproveedorporrequisicion/gastoppr'
+import Solicitudppr from './components/miguel/Todospdf/Pagoaproveedorporrequisicion/solicitudppr'
+import Ofisolicitudppr from './components/miguel/Todospdf/Pagoaproveedorporrequisicion/ofisolicitudppr'
+
+
 function App (props) {
   const { isAuthenticated, isVerifying } = props
   return (
@@ -247,6 +272,29 @@ function App (props) {
       <Route path='/Frpdf/:id' component={Frpdf} />
       <Route path='/Cpdf/:id' component={Cpdf} />
       <Route path='/add/:id' component={Add} />
+
+//todos lods pdf
+      <Route path='/Gasto:id' component={Gasto}/>
+      <Route path='/ObjetodegastoFR:id' component={ObjetodegastoFR}/>
+      <Route path='/Recibo:id' component={Recibo}/>
+      <Route path='/Rfr:id' component={Rfr}/>
+
+
+      <Route path='/ObjetodegastoPP:id' component={ObjetodegastoPP}/>
+      <Route path='/Gastoprovee:id' component={Gastoprovee}/>
+      <Route path='/Pagoproveedor:id' component={Pagoproveedor}/>
+
+
+    <Route path='/Comprobaciondegastocomprobar:id' component={Comprobaciondegastocomprobar}/>
+      <Route path='/Gastodiciembre:id' component={Gastodiciembre}/>
+      <Route path='/Objetodegastodiciembre:id' component={Objetodegastodiciembre}/>
+
+
+      <Route path='/Gastoppr:id' component={Gastoppr}/>
+      <Route path='/Solicitudppr:id' component={Solicitudppr}/>
+      <Route path='/Ofisolicitudppr:id' component={Ofisolicitudppr}/>
+
+
     </Switch>
   )
 }

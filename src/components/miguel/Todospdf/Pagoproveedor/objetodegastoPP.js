@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
-import lpgjh from '../../../img/logo_hgo.png'
-import programa from '../../../img/logo.jpg'
+import lpgjh from '../../../../img/logo_hgo.png'
+import programa from '../../../../img/logo.jpg'
+import firebase from '../../../../Firebase'
 
 export default class objetodegastoPP extends Component {
   render () {
