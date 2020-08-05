@@ -892,7 +892,11 @@ export default class Fondos extends Component {
         </div>
       }
 
+
+//FondoRevolvente
         {this.state.isHidden === 3 &&
+
+
           <div>
           <div className='m-f'>
             <div className='fr-con'>
@@ -903,8 +907,8 @@ export default class Fondos extends Component {
               <button className='b-imp' onClick={() => this.props.history.push('/Pdf/IopOetql2iBVF1IAsFWd')}>Imprimir</button>
             </div>
             <div className='fcc-i'>
-              <p className='fimpre'>Oficio Presentación</p>
-              <button className='b-imp'>Imprimir</button>
+              <p className='fimpre'>Reembolso de FR</p>
+              <button className='b-imp'onClick={() => this.props.history.push('/Pdf/')}>Imprimir</button>
             </div>
             <div className='fcc-i'>
               <p className='fimpre'>Recibo Global</p>

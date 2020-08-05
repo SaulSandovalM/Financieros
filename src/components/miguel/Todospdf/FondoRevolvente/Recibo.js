@@ -12,20 +12,20 @@ export default class Recibo extends Component {
     }
   }
 
-  componentDidMount () {
-    const ref = firebase.firestore().collection('fondos').doc(this.props.match.params.id)
-    ref.get().then((doc) => {
-      if (doc.exists) {
-        this.setState({
-          fondo: doc.data(),
-          key: doc.id,
-          isLoading: false
-        })
-      } else {
-        console.log('No such document!')
-      }
-    })
-  }
+  // componentDidMount () {
+  //   const ref = firebase.firestore().collection('fondos').doc(this.props.match.params.id)
+  //   ref.get().then((doc) => {
+  //     if (doc.exists) {
+  //       this.setState({
+  //         fondo: doc.data(),
+  //         key: doc.id,
+  //         isLoading: false
+  //       })
+  //     } else {
+  //       console.log('No such document!')
+  //     }
+  //   })
+  // }
 
   render () {
     var today = new Date()
