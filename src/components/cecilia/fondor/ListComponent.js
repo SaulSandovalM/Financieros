@@ -80,10 +80,10 @@ export default class ListComponent extends Component {
   }
 
   getPresu = () => {
-    const { listaB } = this.props.listaB
+    const listaB = this.props.listaB
     const filterPres = listaB.filter(
-      (presupuesto) => {
-        return presupuesto.up.indexOf(this.state.search) !== -1 && presupuesto.par.indexOf(this.state.search2) >= 0 && presupuesto.rubro.indexOf(this.state.search3) >= 0
+      (listaB) => {
+        return listaB.up.indexOf(this.state.search) !== -1 && listaB.par.indexOf(this.state.search2) >= 0 && listaB.rubro.indexOf(this.state.search3) >= 0
       }
     )
     return filterPres.map(item =>
@@ -94,7 +94,6 @@ export default class ListComponent extends Component {
       />
     )
   };
-
 
   render () {
     const filterData = this.state.presupuesto.filter(
@@ -201,15 +200,6 @@ export default class ListComponent extends Component {
           </div>
           <div className='table-right' />
         </div>
-        {/*
-          this.props.listaB.map(item =>
-            <RowCompoBanco
-              key={item.id}
-              item={item}
-              update={this.props.update}
-            />
-          )
-        */}
         {
           this.props.listaB.map(item =>
             <RowCompoBanco
@@ -219,6 +209,7 @@ export default class ListComponent extends Component {
             />
           )
         }
+        {/* this.getPresu() */}
       </div>
     )
   }
