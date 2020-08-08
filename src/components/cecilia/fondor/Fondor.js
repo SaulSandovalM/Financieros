@@ -30,7 +30,7 @@ export default class Fondor extends Component {
       par: '',
       rubro: '',
       archivo: '',
-      dic: '',
+      importe: '',
       contador: {},
       alert: false,
       presupuesto: [],
@@ -85,7 +85,7 @@ export default class Fondor extends Component {
   componentDidMount () {
     const itemsRef = firebase.database().ref('presupuesto/')
     this.listenForItems(itemsRef)
-    const itemsRefBanco = firebase.database().ref('banco/')
+    const itemsRefBanco = firebase.database().ref('presupuesto/')
     this.listenForItemsBanco(itemsRefBanco)
     this.consumo()
   }
@@ -116,10 +116,54 @@ export default class Fondor extends Component {
       var listaB = []
       snap.forEach((child) => {
         listaB.push({
-          up: child.val().up,
+          abr: child.val().abr,
+          ago: child.val().ago,
+          ben: child.val().ben,
+          cpa: child.val().cpa,
+          dic: child.val().dic,
+          resdic: child.val().resdic,
+          dig: child.val().dig,
+          dp: child.val().dp,
+          eg: child.val().eg,
+          eje: child.val().eje,
+          ene: child.val().ene,
+          est: child.val().est,
+          et: child.val().et,
+          f: child.val().f,
+          feb: child.val().feb,
+          ff: child.val().ff,
+          fu: child.val().fu,
+          indi: child.val().indi,
+          jul: child.val().jul,
+          jun: child.val().jun,
+          la: child.val().la,
+          mar: child.val().mar,
+          may: child.val().may,
+          meta: child.val().meta,
+          mi: child.val().mi,
+          nov: child.val().nov,
+          np: child.val().np,
+          obj: child.val().obj,
+          obra: child.val().obra,
+          oct: child.val().oct,
+          ods: child.val().ods,
+          of: child.val().of,
+          ogasto: child.val().ogasto,
+          os: child.val().os,
           par: child.val().par,
-          importe: child.val().importe,
+          pb: child.val().pb,
+          pr: child.val().pr,
+          prog: child.val().prog,
+          proy: child.val().proy,
+          rm: child.val().rm,
           rubro: child.val().rubro,
+          s: child.val().s,
+          sep: child.val().sep,
+          sf: child.val().sf,
+          sp: child.val().sp,
+          tg: child.val().tg,
+          total: child.val().total,
+          up: child.val().up,
           done: child.val().done,
           id: child.key
         })
@@ -188,13 +232,75 @@ export default class Fondor extends Component {
     }
   }
 
-  render () {
-    const filterData = this.state.presupuesto.filter(
-      (presupuesto) => {
-        return presupuesto.up.indexOf(this.state.search) !== -1 && presupuesto.par.indexOf(this.state.search2) >= 0 && presupuesto.rubro.indexOf(this.state.search3) >= 0
-      }
-    )
+  handleChange (event) {
+    this.setState({ [event.target.name]: event.target.value })
+  }
 
+  update = (item) => {
+    let updates = {}
+    updates['presupuesto/' + item.id] = {
+      abr: item.abr,
+      ago: item.ago,
+      ben: item.ben,
+      cpa: item.cpa,
+      dic: item.dic - this.state.importe,
+      resdic: item.resdic + parseInt(this.state.importe),
+      dig: item.dig,
+      dp: item.dp,
+      eg: item.eg,
+      eje: item.eje,
+      ene: item.ene,
+      est: item.est,
+      et: item.et,
+      f: item.f,
+      feb: item.feb,
+      ff: item.ff,
+      fu: item.fu,
+      indi: item.indi,
+      jul: item.jul,
+      jun: item.jun,
+      la: item.la,
+      mar: item.mar,
+      may: item.may,
+      meta: item.meta,
+      mi: item.mi,
+      nov: item.nov,
+      np: item.np,
+      obj: item.obj,
+      obra: item.obra,
+      oct: item.oct,
+      ods: item.ods,
+      of: item.of,
+      ogasto: item.ogasto,
+      os: item.os,
+      par: item.par,
+      pb: item.pb,
+      pr: item.pr,
+      prog: item.prog,
+      proy: item.proy,
+      rm: item.rm,
+      rubro: item.rubro,
+      s: item.s,
+      sep: item.sep,
+      sf: item.sf,
+      sp: item.sp,
+      tg: item.tg,
+      total: item.total,
+      up: item.up,
+      estatus: 'FR'
+    }
+    firebase.database().ref().update(updates)
+    var f = parseInt(this.state.importe)
+    const statsRef = firebase.firestore().collection('banco').doc('--stats--')
+    const increment = firebase.firestore.FieldValue.increment(f)
+    const batch = firebase.firestore().batch()
+    const storyRef = firebase.firestore().collection('banco').doc(`${Math.random()}`)
+    batch.set(storyRef, { title: 'Se agredo un fondo' })
+    batch.set(statsRef, { storyCount: increment }, { merge: true })
+    batch.commit()
+  }
+
+  render () {
     return (
       <div className='pf-container'>
         <div className='site-pf'>
@@ -262,8 +368,6 @@ export default class Fondor extends Component {
                         className='input-style-fr'
                         id='up'
                         required
-                        value={this.state.search}
-                        onChange={this.updateSeacrh.bind(this)}
                         ref={up => this.inputUp = up}
                       />
                     </div>
@@ -273,8 +377,6 @@ export default class Fondor extends Component {
                         className='input-style-fr'
                         id='partida'
                         required
-                        value={this.state.search2}
-                        onChange={this.updateSeacrh2.bind(this)}
                         ref={partida => this.inputPartida = partida}
                       />
                     </div>
@@ -284,8 +386,6 @@ export default class Fondor extends Component {
                         className='input-style-fr'
                         id='rubro'
                         required
-                        value={this.state.search3}
-                        onChange={this.updateSeacrh3.bind(this)}
                         ref={rubro => this.inputRubro = rubro}
                       />
                     </div>
@@ -294,7 +394,9 @@ export default class Fondor extends Component {
                       <input
                         className='input-style-fr'
                         id='importe'
+                        name='importe'
                         required
+                        onChange={this.handleChange.bind(this)}
                         ref={importe => this.inputImporte = importe}
                       />
                     </div>
@@ -315,7 +417,7 @@ export default class Fondor extends Component {
               <button type='submit' className='input-sc boton-g'>Agregar</button>
             </div>
           </form>
-          {this.state.search && this.state.search2 && this.state.search3 &&
+          {/*this.state.search && this.state.search2 && this.state.search3 &&
             <div>
               {
                 filterData.map(item =>
@@ -325,11 +427,12 @@ export default class Fondor extends Component {
                   />
                 )
               }
-            </div>}
+            </div>*/}
         </div>
         <div className='space-table'>
           <ListComponent
             listaB={this.state.listaB}
+            update={this.update}
           />
         </div>
       </div>
