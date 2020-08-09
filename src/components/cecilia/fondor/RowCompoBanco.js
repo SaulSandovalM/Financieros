@@ -7,7 +7,8 @@ export default class RowComponent extends Component {
     super(props)
     this.state = {
       done: false,
-      item: 'Atendido'
+      item: 'Atendido',
+      up: ''
     }
   }
 
@@ -16,36 +17,49 @@ export default class RowComponent extends Component {
   }
 
   render () {
-    return (
-      <div className='table-container-p'>
-        <div className='table-left' />
-        <div className='table-up-p-frn'>
-          <p>{this.props.item.up}</p>
-        </div>
-        <div className='table-up-p-frn'>
-          <p>{this.props.item.par}</p>
-        </div>
-        <div className='table-up-p-frn'>
-          <p>{this.props.item.rubro}</p>
-        </div>
-        <div className='table-up-p-frn'>
-          <div>
-            <CurrencyFormat
-              value={this.props.item.resdic}
-              displayType='text'
-              thousandSeparator
-              prefix=' $'
-            />
-            .00
+    const up = this.props.item.up
+    const par = this.props.item.par
+    const rubro = this.props.item.rubro
+    let button;
+    if (up === this.props.search && par === this.props.search2 && rubro === this.props.search3) {
+      button =
+      <div>
+        <div className='table-container-p'>
+          <div className='table-left' />
+          <div className='table-up-p-frn'>
+            <p>{this.props.item.up}</p>
           </div>
+          <div className='table-up-p-frn'>
+            <p>{this.props.item.par}</p>
+          </div>
+          <div className='table-up-p-frn'>
+            <p>{this.props.item.rubro}</p>
+          </div>
+          <div className='table-up-p-frn'>
+            <div>
+              <CurrencyFormat
+                value={this.props.item.dic}
+                displayType='text'
+                thousandSeparator
+                prefix=' $'
+              />
+              .00
+            </div>
+          </div>
+          <div className='table-cpa'>
+            <p>{this.props.item.cpa}</p>
+          </div>
+          <div className='table-up-p-frn'>
+            <button onClick={this.update}>Agregar</button>
+          </div>
+          <div className='table-right' />
         </div>
-        <div className='table-cpa'>
-          <p>{this.props.item.cpa}</p>
-        </div>
-        <div className='table-up-p-frn'>
-          <button onClick={this.update}>Agregar</button>
-        </div>
-        <div className='table-right' />
+      </div>
+    }
+
+    return (
+      <div>
+        {button}
       </div>
     )
   }

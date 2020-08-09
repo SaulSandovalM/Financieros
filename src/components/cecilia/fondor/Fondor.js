@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import './Fondor.css'
 import firebase from '../../../Firebase'
-import RowComponent from './RowComponent'
 import ListComponent from './ListComponent'
+import ListFr from './ListFr'
 import CurrencyFormat from 'react-currency-format'
 import Dropzone from 'react-dropzone'
 
@@ -83,32 +83,9 @@ export default class Fondor extends Component {
   }
 
   componentDidMount () {
-    const itemsRef = firebase.database().ref('presupuesto/')
-    this.listenForItems(itemsRef)
     const itemsRefBanco = firebase.database().ref('presupuesto/')
     this.listenForItemsBanco(itemsRefBanco)
     this.consumo()
-  }
-
-  listenForItems = (itemsRef) => {
-    itemsRef.on('value', (snap) => {
-      var lista = []
-      snap.forEach((child) => {
-        lista.push({
-          up: child.val().up,
-          par: child.val().par,
-          importe: child.val().importe,
-          rubro: child.val().rubro,
-          archivo: child.val().archivo,
-          cpa: child.val().cpa,
-          done: child.val().done,
-          id: child.key
-        })
-      })
-      this.setState({
-        lista: lista
-      })
-    })
   }
 
   listenForItemsBanco = (itemsRefBanco) => {
@@ -121,7 +98,6 @@ export default class Fondor extends Component {
           ben: child.val().ben,
           cpa: child.val().cpa,
           dic: child.val().dic,
-          resdic: child.val().resdic,
           dig: child.val().dig,
           dp: child.val().dp,
           eg: child.val().eg,
@@ -164,6 +140,7 @@ export default class Fondor extends Component {
           tg: child.val().tg,
           total: child.val().total,
           up: child.val().up,
+          estatus: child.val().estatus,
           done: child.val().done,
           id: child.key
         })
@@ -193,45 +170,6 @@ export default class Fondor extends Component {
     this.refs.contactForm.reset()
   }
 
-  sendMessage (e) {
-    e.preventDefault()
-    const params = {
-      up: this.inputUp.value,
-      par: this.inputPartida.value,
-      importe: this.inputImporte.value,
-      rubro: this.inputRubro.value,
-      archivo: this.state.archivo,
-      numContra: this.inputNumContra.value
-    }
-    this.setState({
-      up: this.inputUp.value,
-      par: this.inputPartida.value,
-      importe: this.inputImporte.value,
-      rubro: this.inputRubro.value,
-      archivo: this.state.archivo,
-      numContra: this.inputNumContra.value
-    })
-    if (params.up && params.par && params.importe && params.rubro && params.archivo) {
-      var f = parseInt(params.importe)
-      const statsRef = firebase.firestore().collection('banco').doc('--stats--')
-      const increment = firebase.firestore.FieldValue.increment(f)
-      const batch = firebase.firestore().batch()
-      const storyRef = firebase.firestore().collection('banco').doc(`${Math.random()}`)
-      batch.set(storyRef, { title: 'Se agredo un fondo' })
-      batch.set(statsRef, { storyCount: increment }, { merge: true })
-      batch.commit()
-      firebase.database().ref('banco').push(params).then(() => {
-        alert('Tu solicitud fue enviada.')
-      }).catch(() => {
-        alert('Tu solicitud no puede ser enviada')
-      })
-      this.resetForm()
-      setInterval(this.consumo, 1000)
-    } else {
-      alert('Por favor llene el formulario')
-    }
-  }
-
   handleChange (event) {
     this.setState({ [event.target.name]: event.target.value })
   }
@@ -244,7 +182,6 @@ export default class Fondor extends Component {
       ben: item.ben,
       cpa: item.cpa,
       dic: item.dic - this.state.importe,
-      resdic: item.resdic + parseInt(this.state.importe),
       dig: item.dig,
       dp: item.dp,
       eg: item.eg,
@@ -298,6 +235,8 @@ export default class Fondor extends Component {
     batch.set(storyRef, { title: 'Se agredo un fondo' })
     batch.set(statsRef, { storyCount: increment }, { merge: true })
     batch.commit()
+    alert('Tu solicitud fue enviada.')
+    setInterval(this.consumo, 1000)
   }
 
   render () {
@@ -351,7 +290,7 @@ export default class Fondor extends Component {
           </div>
         </div>
         <div>
-          <form onSubmit={this.sendMessage.bind(this)} ref='contactForm'>
+          <div>
             <div className='p-container-fondor'>
               <div className='p-margin-fr'>
                 <p className='p-title-size-fr'>
@@ -362,33 +301,7 @@ export default class Fondor extends Component {
               <div className='inputs-container-fr'>
                 <div className='inputs-col-fr'>
                   <div className='inputs-row-fr-2'>
-                    <div className='p-container-ifr2'>
-                      <p className='p-title-margin-fr'>Up</p>
-                      <input
-                        className='input-style-fr'
-                        id='up'
-                        required
-                        ref={up => this.inputUp = up}
-                      />
-                    </div>
-                    <div className='p-container-ifr2'>
-                      <p className='p-title-margin-fr'>Partida</p>
-                      <input
-                        className='input-style-fr'
-                        id='partida'
-                        required
-                        ref={partida => this.inputPartida = partida}
-                      />
-                    </div>
-                    <div className='p-container-ifr2'>
-                      <p className='p-title-margin-fr'>Rubro</p>
-                      <input
-                        className='input-style-fr'
-                        id='rubro'
-                        required
-                        ref={rubro => this.inputRubro = rubro}
-                      />
-                    </div>
+                    <div className='no' />
                     <div className='p-container-ifr2'>
                       <p className='p-title-margin-fr'>Importe</p>
                       <input
@@ -396,6 +309,7 @@ export default class Fondor extends Component {
                         id='importe'
                         name='importe'
                         required
+                        style={{zIndex: '3'}}
                         onChange={this.handleChange.bind(this)}
                         ref={importe => this.inputImporte = importe}
                       />
@@ -405,7 +319,7 @@ export default class Fondor extends Component {
                       <input
                         className='input-style-fr'
                         id='numContra'
-                        required
+                        style={{zIndex: '3'}}
                         ref={numContra => this.inputNumContra = numContra}
                       />
                     </div>
@@ -413,26 +327,17 @@ export default class Fondor extends Component {
                 </div>
               </div>
             </div>
-            <div className='button-row-s'>
-              <button type='submit' className='input-sc boton-g'>Agregar</button>
-            </div>
-          </form>
-          {/*this.state.search && this.state.search2 && this.state.search3 &&
-            <div>
-              {
-                filterData.map(item =>
-                  <RowComponent
-                    key={item.id}
-                    item={item}
-                  />
-                )
-              }
-            </div>*/}
+          </div>
         </div>
         <div className='space-table'>
           <ListComponent
             listaB={this.state.listaB}
             update={this.update}
+          />
+        </div>
+        <div className='space-table2'>
+          <ListFr
+            listaB={this.state.listaB}
           />
         </div>
       </div>

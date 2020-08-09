@@ -79,34 +79,12 @@ export default class ListComponent extends Component {
     this.setState({ [event.target.name]: event.target.value })
   }
 
-  getPresu = () => {
-    const listaB = this.props.listaB
-    const filterPres = listaB.filter(
-      (listaB) => {
-        return listaB.up.indexOf(this.state.search) !== -1 && listaB.par.indexOf(this.state.search2) >= 0 && listaB.rubro.indexOf(this.state.search3) >= 0
-      }
-    )
-    return filterPres.map(item =>
-      <RowCompoBanco
-        key={item.id}
-        item={item}
-        update={this.props.update}
-      />
-    )
-  };
-
   render () {
-    const filterData = this.state.presupuesto.filter(
-      (presupuesto) => {
-        return presupuesto.up.indexOf(this.state.search) !== -1 && presupuesto.par.indexOf(this.state.search2) >= 0 && presupuesto.rubro.indexOf(this.state.search3) >= 0
-      }
-    )
-
     return (
       <div>
         <div>
-          <form onSubmit={this.sendMessage.bind(this)} ref='contactForm'>
-            <div className='p-container-fondor'>
+          <div>
+            <div className='p-container-fondor' style={{background: '#f4f4f4', padding: '30px'}}>
               <div className='p-margin-fr'>
                 <p className='p-title-size-fr'>
                   - Ingresa los datos que correspondan con el documento
@@ -115,8 +93,8 @@ export default class ListComponent extends Component {
               </div>
               <div className='inputs-container-fr'>
                 <div className='inputs-col-fr'>
-                  <div className='inputs-row-fr-2'>
-                    <div className='p-container-ifr2'>
+                  <div className='inputs-row-fr-2' style={{width: '60%'}}>
+                    <div className='p-container-ifr3'>
                       <p className='p-title-margin-fr'>Up</p>
                       <input
                         className='input-style-fr'
@@ -127,7 +105,7 @@ export default class ListComponent extends Component {
                         ref={up => this.inputUp = up}
                       />
                     </div>
-                    <div className='p-container-ifr2'>
+                    <div className='p-container-ifr3'>
                       <p className='p-title-margin-fr'>Partida</p>
                       <input
                         className='input-style-fr'
@@ -138,7 +116,7 @@ export default class ListComponent extends Component {
                         ref={partida => this.inputPartida = partida}
                       />
                     </div>
-                    <div className='p-container-ifr2'>
+                    <div className='p-container-ifr3'>
                       <p className='p-title-margin-fr'>Rubro</p>
                       <input
                         className='input-style-fr'
@@ -149,36 +127,13 @@ export default class ListComponent extends Component {
                         ref={rubro => this.inputRubro = rubro}
                       />
                     </div>
-                    <div className='p-container-ifr2'>
-                      <p className='p-title-margin-fr'>Importe</p>
-                      <input
-                        className='input-style-fr'
-                        id='importe'
-                        name='importe'
-                        required
-                        onChange={this.handleChange.bind(this)}
-                        ref={importe => this.inputImporte = importe}
-                      />
-                    </div>
-                    <div className='p-container-ifr2'>
-                      <p className='p-title-margin-fr'>Num de Contrarecibo</p>
-                      <input
-                        className='input-style-fr'
-                        id='numContra'
-                        required
-                        ref={numContra => this.inputNumContra = numContra}
-                      />
-                    </div>
                   </div>
                 </div>
               </div>
             </div>
-            <div className='button-row-s'>
-              <button type='submit' className='input-sc boton-g'>Agregar</button>
-            </div>
-          </form>
+          </div>
         </div>
-        <div className='table-container-p'>
+        <div className='table-container-fr'>
           <div className='table-left' />
           <div className='table-up-p-frn'>
             <b>Up</b>
@@ -196,7 +151,7 @@ export default class ListComponent extends Component {
             <b>CPA</b>
           </div>
           <div className='table-up-p-frn'>
-            <button onClick={this.update}>Agregar</button>
+            <b>Agregar</b>
           </div>
           <div className='table-right' />
         </div>
@@ -206,10 +161,12 @@ export default class ListComponent extends Component {
               key={item.id}
               item={item}
               update={this.props.update}
+              search={this.state.search}
+              search2={this.state.search2}
+              search3={this.state.search3}
             />
           )
         }
-        {/* this.getPresu() */}
       </div>
     )
   }
