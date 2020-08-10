@@ -365,8 +365,11 @@ select {
   display: flex;
   flex-direction: column;
   width: 30%;
+  margin-right: 15px;
 }
-
+.input-val-p {
+  margin-top: 40px;
+}
 
 
 
@@ -600,11 +603,6 @@ select {
   justify-content: center;
 }
 
-/*-------MODAL-----------*/
-body {
-  margin: 0px;
-  font-family: Arial;
-}
 .comprobacion-container {
   width: 100%;
   background-color: #f4f4f4;

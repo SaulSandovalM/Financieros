@@ -37,7 +37,7 @@ export default class ListArchivosV extends Component {
       estatus: 'Pendiente',
       contador: {},
       isHidden: true,
-      pdf1: 0,
+      xml: 0,
       pdf2: 0,
       pdf3: 0,
       filex: '',
@@ -50,7 +50,7 @@ export default class ListArchivosV extends Component {
   }
 
   handleOnChange1 (event) {
-    const files = event.target.files
+    const files = event.target.files[0]
     for (var i = 0; i < files.length; i++) {
       const file = files[i]
       var xml = file
@@ -72,55 +72,69 @@ export default class ListArchivosV extends Component {
         reader.readAsText(xml)
       }
     }
+    const file = event.target.files[i]
+    const storageRef = firebase.storage().ref(`comprobacion/${file.name}`)
+    const task = storageRef.put(file)
+    this.setState({
+      filex: `${file.name}`
+    })
+    task.on('state_changed', (snapshot) => {
+      let percentage = (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+      this.setState({
+        xml: percentage
+      })
+    }, error => {
+      console.error(error.message)
+    }, () =>  storageRef.getDownloadURL().then(url =>  {
+      const record = url
+      this.setState({
+        filefactura: record
+      })
+    }))
   }
 
   handleOnChange2 (event) {
-    for(let i = 0; i < event.target.files.length; i++)
-    {
-      const file = event.target.files[i]
-      const storageRef = firebase.storage().ref(`comprobacion/${file.name}`)
-      const task = storageRef.put(file)
+    const file = event.target.files[0]
+    const storageRef = firebase.storage().ref(`comprobacion/${file.name}`)
+    const task = storageRef.put(file)
+    this.setState({
+      filef: `${file.name}`
+    })
+    task.on('state_changed', (snapshot) => {
+      let percentage = (snapshot.bytesTransferred / snapshot.totalBytes) * 100
       this.setState({
-        filef: `${file.name}`
+        pdf2: percentage
       })
-      task.on('state_changed', (snapshot) => {
-        let percentage = (snapshot.bytesTransferred / snapshot.totalBytes) * 100
-        this.setState({
-          pdf2: percentage
-        })
-      }, error => {
-        console.error(error.message)
-      }, () =>  storageRef.getDownloadURL().then(url =>  {
-        const record = url
-        this.setState({
-          filefactura: record
-        })
-      }))
-    }
+    }, error => {
+      console.error(error.message)
+    }, () =>  storageRef.getDownloadURL().then(url =>  {
+      const record = url
+      this.setState({
+        filefactura: record
+      })
+    }))
   }
 
   handleOnChange3 (event) {
-    for (let i = 0; i < event.target.files.length; i++) {
-      const file = event.target.files[i]
-      const storageRef = firebase.storage().ref(`comprobacion/${file.name}`)
-      const task = storageRef.put(file)
+    const file = event.target.files[0]
+    const storageRef = firebase.storage().ref(`comprobacion/${file.name}`)
+    const task = storageRef.put(file)
+    this.setState({
+      filer: `${file.name}`
+    })
+    task.on('state_changed', (snapshot) => {
+      const percentage = (snapshot.bytesTransferred / snapshot.totalBytes) * 100
       this.setState({
-        filer: `${file.name}`
+        pdf3: percentage
       })
-      task.on('state_changed', (snapshot) => {
-        const percentage = (snapshot.bytesTransferred / snapshot.totalBytes) * 100
-        this.setState({
-          pdf3: percentage
-        })
-      }, error => {
-        console.error(error.message)
-      }, () => storageRef.getDownloadURL().then(url => {
-        const record = url
-        this.setState({
-          filerecibo: record
-        })
-      }))
-    }
+    }, error => {
+      console.error(error.message)
+    }, () => storageRef.getDownloadURL().then(url => {
+      const record = url
+      this.setState({
+        filerecibo: record
+      })
+    }))
   }
 
   listenForItems = (itemsRef) => {
@@ -230,8 +244,8 @@ export default class ListArchivosV extends Component {
                         <p className='file-hid'>{this.state.filex}</p>
                       </div>
                     </Dropzone>
-                    <progress className='progress' value={this.state.pdf1} max='100'>
-                      {this.state.pdf1} %
+                    <progress className='progress' value={this.state.xml} max='100'>
+                      {this.state.xml} %
                     </progress>
                   </div>
                   <div className='p-container-ar'>

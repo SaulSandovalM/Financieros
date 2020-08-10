@@ -61,13 +61,13 @@ export default class ListN extends Component {
             <b>S/C</b>
           </div>
           <div class='table-v-num'>
-            <b>FECHA</b>
-          </div>
-          <div class='table-v-num'>
             <b>AUTORIZO</b>
           </div>
           <div class='table-v-num'>
             <b>RECIBIO</b>
+          </div>
+          <div class='table-v-num'>
+            <b>ACTUALIZAR</b>
           </div>
           <div class='table-right' />
         </div>
@@ -76,6 +76,7 @@ export default class ListN extends Component {
             <RowN
               key={item.id}
               item={item}
+              update={this.props.update}
             />
           )
         }

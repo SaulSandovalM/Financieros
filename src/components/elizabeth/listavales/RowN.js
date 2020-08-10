@@ -2,6 +2,18 @@ import React, { Component } from 'react'
 import './ListVales.css'
 
 export default class RowComponent extends Component {
+  constructor (props) {
+    super(props)
+    this.state = {
+      done: false,
+      item: 'Atendido'
+    }
+  }
+
+  update = () => {
+    this.props.update(this.props.item)
+  }
+
   render () {
     var cheque = this.props.item.cheque
     return (
@@ -45,14 +57,14 @@ export default class RowComponent extends Component {
             <div class='table-v-num'>
               <div>{this.props.item.sc}</div>
             </div>
-            <div class='table-v-num'>
-              <div>{this.props.item.fecha}</div>
-            </div>
             <div class='table-v-re'>
               <div>{this.props.item.autorizo}</div>
             </div>
             <div class='table-v-re'>
               <div>{this.props.item.personaR}</div>
+            </div>
+            <div class='table-v-num'>
+              <button onClick={this.update}>Actualizar</button>
             </div>
             <div class='table-right' />
           </div>}

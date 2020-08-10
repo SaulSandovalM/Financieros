@@ -17,26 +17,14 @@ export default class ListValesN extends Component {
       form: [],
       alert: false,
       alertData: {},
-      vale: '',
       cheque: '',
-      cantidad: '',
-      cantidadc: '',
-      cantidadr: '',
-      concepto: '',
-      oficioS: '',
-      area: '',
-      turno: '',
-      personaR: '',
-      autorizo: '',
-      factura: '',
-      recibos: '',
-      sc: '',
-      reintegroT: '',
-      estatus: 'Pendiente',
-      fecha: '',
       contador: {},
       isHidden: true
     }
+  }
+
+  handleChange (event) {
+    this.setState({ [event.target.name]: event.target.value })
   }
 
   listenForItems = (itemsRef) => {
@@ -85,16 +73,48 @@ export default class ListValesN extends Component {
     })
   }
 
+  update = (item) => {
+    let updates = {}
+    updates['vales/' + item.id] = {
+      vale: item.vale,
+      cheque: this.state.cheque,
+      cantidad: item.cantidad,
+      cantidadc: item.cantidadc,
+      cantidadr: item.cantidadr,
+      concepto: item.concepto,
+      oficioS: item.oficioS,
+      area: item.area,
+      turno: item.turno,
+      personaR: item.personaR,
+      factura: item.factura,
+      recibos: item.recibos,
+      sc: item.sc,
+      fecha: item.fecha,
+      autorizo: item.autorizo,
+      estatus: item.estatus
+    }
+    firebase.database().ref().update(updates)
+  }
+
   render () {
     return (
-      <div class='container-back'>
-        <div class='site'>
-          <p class='site-s'><b>Vales Pendientes</b></p>
+      <div className='container-back'>
+        <div className='site'>
+          <p className='site-s'><b>Vales Pendientes</b></p>
         </div>
-        <div class='caja-w' style={{ marginTop: '40px', marginBottom: '40px' }}>
-          <div class='caja-col'>
+        <div className='input-val-p'>
+          <p>Ingresa el numero de cheque</p>
+          <input
+            name='cheque'
+            value={this.state.cheque}
+            onChange={this.handleChange.bind(this)}
+          />
+        </div>
+        <div className='caja-w' style={{ marginTop: '40px', marginBottom: '40px' }}>
+          <div className='caja-col'>
             <ListN
               lista={this.state.lista}
+              update={this.update}
             />
           </div>
         </div>

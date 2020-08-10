@@ -24,7 +24,6 @@ export default class Vales extends Component {
       cantidad: '',
       cantidadc: '',
       cantidadr: '',
-      reembolso: '',
       concepto: '',
       oficioS: '',
       area: '',
@@ -152,33 +151,7 @@ export default class Vales extends Component {
     var meses = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12']
     var f = new Date()
     today2 = f.getFullYear() + '-' + meses[f.getMonth()] + '-' + f.getDate()
-
-    let button
-    if (tot >= 0 && cant2 === 0) {
-      button =
-        <div style={{ width: '100%' }}>
-          <input
-            className='input-b'
-            name='cantidadr'
-            style={{ width: '92%' }}
-            value={0}
-            required
-            ref={cantidadr => this.inputCantidadr = cantidadr}
-          />
-        </div>
-    } else {
-      button =
-        <div style={{ width: '100%' }}>
-          <input
-            className='input-b'
-            name='cantidadr'
-            defaultValue={tot}
-            style={{ width: '92%' }}
-            required
-            ref={cantidadr => this.inputCantidadr = cantidadr}
-          />
-        </div>
-    }
+    this.state.fecha = today2
 
     return (
       <div className='container-back'>
@@ -193,7 +166,6 @@ export default class Vales extends Component {
               </div>
               <div className='vale-title-content'>
                 <p className='p-vale'>PROCURADURIA GENERAL DE JUSTICIA</p>
-                <p className='p-vale'>Saul dile a pichon que tiene cara de cotorro graias </p>
                 <p className='p-vale'>DIRECCION GENERAL DE ADMINISTRACION Y FINANZAS</p>
               </div>
               <div className='vale-num-container'>
@@ -265,7 +237,24 @@ export default class Vales extends Component {
                   required
                   ref={cantidadc => this.inputCantidadc = cantidadc}
                 />
-                {button}
+                {tot >= 0 &&
+                  <input
+                    className='input-b'
+                    name='cantidadr'
+                    value={tot}
+                    required
+                    ref={cantidadr => this.inputCantidadr = cantidadr}
+                  />
+                }
+                {tot < 0 &&
+                  <input
+                    className='input-b'
+                    name='cantidadr'
+                    value={tot}
+                    required
+                    ref={cantidadr => this.inputCantidadr = cantidadr}
+                  />
+                }
               </div>
               <div className='v-con'>
                 <p className='pmcc'>CONCEPTO</p>
@@ -414,6 +403,11 @@ export default class Vales extends Component {
             />
           </div>
         </form>
+        <div className=''>
+          <div>
+
+          </div>
+        </div>
       </div>
     )
   }
