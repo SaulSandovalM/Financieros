@@ -217,7 +217,7 @@ function App (props) {
       /> */}
       <ProtectedRoute
         exact
-        path='/Comprometidos'
+        path='/Comprometidos/:id'
         component={Comprometidos}
         isAuthenticated={isAuthenticated}
         isVerifying={isVerifying}

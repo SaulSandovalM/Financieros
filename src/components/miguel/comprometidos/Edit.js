@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import firebase from '../../../Firebase';
 import './Comprometidos.css';
-import Dropzone from 'react-dropzone';
 
 class Comprometido extends Component {
   constructor(props) {
@@ -83,9 +82,7 @@ class Comprometido extends Component {
 
   onSubmit = (e) => {
     e.preventDefault();
-
     const { partida, presupuestal, no_proyecto, importe_comp, isr, total, fecha_comp } = this.state;
-
     const updateRef = firebase.firestore().collection('fondos').doc(this.props.match.params.id).collection('comprometidos').doc();
     updateRef.set({
       partida,
@@ -148,26 +145,9 @@ class Comprometido extends Component {
       <div className='f-container-n'>
         <div className='comp-container'>
           <div className='site-pf'>
-            <p className='site-pf-s'><b>Fondos 2020</b></p>
+            <p className='site-pf-s'><b>Comprometidos</b></p>
           </div>
           <div className='edit-com-comp'>
-            <div className='App-edit'>
-              <div className='facxml-row'>
-                <p>Agrega facturas/xml</p>
-                <Dropzone
-                  style={{
-                    position: 'ab',
-                    width: '100px',
-                    height: '30px',
-                    borderWidth: '1px',
-                    borderColor: '#a9a9a9',
-                    borderStyle: 'solid',
-                    background: 'white',
-                  }}
-                  onChange={this.handleUpload.bind(this)}>
-                </Dropzone>
-              </div>
-            </div>
             <div className='edit-row' style={{marginTop: '30px'}}>
               <label for='fondo' className='tipo-tw'>Fondos:</label>
               <input

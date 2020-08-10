@@ -1,131 +1,436 @@
-import React, { Component } from 'react';
-import './Comprometidos.css';
-import firebase from '../../../Firebase';
-import { Link } from 'react-router-dom';
-import CurrencyFormat from 'react-currency-format';
+import React, { Component } from 'react'
+import './Comprometidos.css'
+import firebase from '../../../Firebase'
+import ListComponent from './ListComponent'
+import { DropDownList } from '@progress/kendo-react-dropdowns'
+import '@progress/kendo-theme-default/dist/all.css'
+import XmlComp from './sin/XmlComp'
+import XmlAsi from './asi/XmlAsi'
 
 export default class Comprometidos extends Component {
-  constructor() {
-    super();
-    this.ref = firebase.firestore().collection('fondos');
+  constructor(props) {
+    super(props);
     this.unsubscribe = null;
     this.state = {
-      fondos: [],
+      key: '',
+      fondo: '',
+      fecha: '',
+      realizo: '',
+      tipo_doc: '',
+      importe: '',
+      partida: '',
+      no_oficio: '',
+      no_proyecto: '',
+      municipio: '',
+      area: '',
+      importe_comp: '',
+      isr: '',
+      total: '',
+      fecha_comp: '',
+      comprometidos: [],
+      number: '',
+      listaB: [
+        {
+          id: 1,
+          name: 'preuba',
+          done: false
+        }
+      ]
     };
   }
 
   onCollectionUpdate = (querySnapshot) => {
-    const fondos = [];
+    const comprometidos = [];
     querySnapshot.forEach((doc) => {
-      const { fondo, fecha, tipo_doc, oficio_aut, no_oficio, no_aut, no_lici, importe, desc, importe_l, beneficiario, realizo } = doc.data();
-      fondos.push({
+      const { partida, presupuestal, no_proyecto } = doc.data(); // importe_comp, isr, total, fecha_comp
+      comprometidos.push({
         key: doc.id,
-        doc, // DocumentSnapshot
-        fondo,
-        fecha,
-        tipo_doc,
-        oficio_aut,
-        no_oficio,
-        no_aut,
-        no_lici,
-        importe,
-        desc,
-        importe_l,
-        beneficiario,
-        realizo,
+        doc,
+        partida,
+        presupuestal,
+        no_proyecto,
+        // importe_comp,
+        // isr,
+        // total,
+        // fecha_comp
       });
-      console.log(doc.id)
     });
     this.setState({
-      fondos
+      comprometidos
    });
   }
 
   componentDidMount() {
-    this.unsubscribe = this.ref.onSnapshot(this.onCollectionUpdate);
+    const ref = firebase.firestore().collection('fondos').doc(this.props.match.params.id);
+    const updateRef = firebase.firestore().collection('fondos').doc(this.props.match.params.id).collection('comprometidos');
+    this.unsubscribe = updateRef.onSnapshot(this.onCollectionUpdate);
+    ref.get().then((doc) => {
+      if (doc.exists) {
+        const fondos = doc.data();
+        this.setState({
+          key: doc.id,
+          fondo: fondos.fondo,
+          fecha: fondos.fecha,
+          realizo: fondos.realizo,
+          tipo_doc: fondos.tipo_doc,
+          importe: fondos.importe,
+          partida: fondos.partida,
+          presupuestal: fondos.presupuestal,
+          no_proyecto: fondos.no_proyecto,
+          importe_comp: fondos.importe_comp,
+          isr: fondos.isr,
+          total: fondos.total,
+          fecha_comp: fondos.fecha_comp
+        });
+      } else {
+        console.log('No se encuentra documento');
+      }
+    });
+    const itemsRefBanco = firebase.database().ref('presupuesto/')
+    this.listenForItemsBanco(itemsRefBanco)
+  }
+
+  onChange = (e) => {
+    const state = this.state
+    state[e.target.name] = e.target.value;
+    this.setState({fondos:state});
+  }
+
+  onSubmit = (e) => {
+    e.preventDefault();
+    const { partida, presupuestal, no_proyecto, municipio, area } = this.state; // importe_comp, isr, total, fecha_comp
+    const updateRef = firebase.firestore().collection('fondos').doc(this.props.match.params.id).collection('comprometidos').doc();
+    updateRef.set({
+      partida,
+      presupuestal,
+      no_proyecto,
+      municipio,
+      area
+      // importe_comp,
+      // isr,
+      // total,
+      // fecha_comp
+    }).then((docRef) => {
+      this.setState({
+        partida: '',
+        presupuestal: '',
+        no_proyecto: '',
+        municipio: '',
+        area: ''
+        // importe_comp: '',
+        // isr: '',
+        // total: '',
+        // fecha_comp: ''
+      });
+    })
+    .catch((error) => {
+      console.error('Error adding document: ', error);
+    });
+  }
+
+  partida = ['211001', '211002', '212001', '212002', '214001', '214002', '215001', '216001', '217001', '221001', '221002', '246001', '251001', '253001', '254001', '255001', '261001', '271001', '272001', '291001', '292001', '311001', '313001', '318001', '323002', '334001', '338001', '341001', '351001', '352001', '353001', '355001', '357001', '358001', '361002', '372001', '375001', '381001', '392006', '394001', '218002', '312001', '371001', '247001', '249001', '359001', '336001', '275001', '211003', '541001', '515001', '339001']
+  up = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '20', '21', '22', '23', '24']
+  no_proyecto = ['U027 425', 'U029 425', 'U027 1208', 'U029 1208', 'U027 1860', 'U029 1860', 'U024 2686','U027 2686','U029 2686','U038 2514',]
+  municipio = ['Acatlán', 'Acaxochitlán', 'Actopan', 'Agua Blanca de Iturbide','Ajacuba','Alfajayucan','Almoloya','Apan','El Arenal','Atitalaquia','Atlapexco','Atotonilco el Grande','Atotonilco de Tula','Calnali','Cardonal','Cuautepec de Hinojosa','Chapantongo','Chapulhuacán','Chilcuautla','Eloxochitlán','Emiliano Zapata','Epazoyucan','Franciso I. Madero','Huasca de Ocampo','Huautla','Huazalingo','Huehuetla','Huejutla de Reyes','Huichapan','Ixmiquilpan','Jacala de Ledezma','Jaltocán','Juárez Hidalgo','Lolotla','Metepec','San Agustín Metzquititlán','Metztitlán','Mineral del Chico','Mineral del Monte','La Misión','Mixquiahuala de Juárez','Molango de Escamilla','Nicolás Flores','Nopala de Villagrán','Omitlán de Juárez','San Felipe Orizatlán','Pacula','Pachuca de Soto','Pisaflores','Progreso de Obregón','Mineral de la Reforma','San Agustín Tlaxiaca','San Bartolo Tutotepec','San Salvador','Santiago de Anaya','Santiago Tulantepec de Lugo Guerrero','Singuilucan','Tasquillo','Tecozautla','Tenango de Doria','Tepeapulco','Tepehuacán de Guerrero','Tepeji del Río de Ocampo','Tepetitlán','Tetepango','Villa de Tezontepec','Tezontepec de Aldama','Tianguistengo','Tizayuca','Tlahuelilpan','Tlahuiltepa','Tlanalapa','Tlanchinol','Tlaxcoapan','Tolcayuca','Tula de Allende','Tulancingo de Bravo','Xochiatipan','Xochicoatlán','Yahualica','Zacualtipán de Ángeles','Zapotlán de Juárez','Zempoala','Zimapán']
+  area = ['Procuraduría General de Justicia','Subprocuraduría de Procedimientos Penales Región Oriente','Fiscalía Especializada para la atención de Delitos cometidos contra la Libertad de Expresión', 'Periodistas y Personas defensoras de los Derechos Humanos','Dirección General para la Atención de los Asuntos del Sistema Tradicional','Fiscalia de Delitos Electorales','Subprocuraduría de Derechos Humanos y Servicios a la Comunidad','Centro de Justicia Restaurativa Penal Poniente','Fiscalía para la Atención de Delitos de Género','Visitaduría General','Dirección General de Servicios Periciales','Centro de Operación Estratégica','Unidad Especializada en el Combate al Secuestro','Dirección General de Administración y Finanzas','Fiscalía Especializada para la atención de los Delitos de Trata de Personas','Subprocuraduría de Procedimientos Penales Región Poniente','Centro de Atención Temprana Poniente','Dirección General de Investigación y Litigación Poniente','Dirección General de la Policía Investigadora','Centro de Atención Temprana Oriente','Centro de Justicia Restaurativa Penal Oriente','Dirección General de Investigación y Litigación Oriente','Dirección General de Recursos Materiales y Servicios','Fiscalía Especializada en Delitos de Corrupción','Fiscalía Especializada en Materia de Desaparición Forzada de Personas',]
+
+  update = (item) => {
+    let updates = {}
+    updates['presupuesto/' + item.id] = {
+      abr: item.abr,
+      ago: item.ago,
+      ben: item.ben,
+      cpa: item.cpa,
+      dic: item.dic,
+      dig: item.dig,
+      dp: item.dp,
+      eg: item.eg,
+      eje: item.eje,
+      ene: item.ene,
+      est: item.est,
+      et: item.et,
+      f: item.f,
+      feb: item.feb,
+      ff: item.ff,
+      fu: item.fu,
+      indi: item.indi,
+      jul: item.jul,
+      jun: item.jun,
+      la: item.la,
+      mar: item.mar,
+      may: item.may,
+      meta: item.meta,
+      mi: item.mi,
+      nov: item.nov,
+      np: item.np,
+      obj: item.obj,
+      obra: item.obra,
+      oct: item.oct,
+      ods: item.ods,
+      of: item.of,
+      ogasto: item.ogasto,
+      os: item.os,
+      par: item.par,
+      pb: item.pb,
+      pr: item.pr,
+      prog: item.prog,
+      proy: item.proy,
+      rm: item.rm,
+      rubro: item.rubro,
+      s: item.s,
+      sep: item.sep,
+      sf: item.sf,
+      sp: item.sp,
+      tg: item.tg,
+      total: item.total,
+      up: item.up,
+      estatus: 'FR'
+    }
+    firebase.database().ref().update(updates)
+     const { no_proyecto, municipio, area } = this.state; // importe_comp, isr, total, fecha_comp
+    const updateRef = firebase.firestore().collection('fondos').doc(this.props.match.params.id).collection('comprometidos').doc();
+    updateRef.set({
+      partida: item.par,
+      presupuestal: item.up,
+      no_proyecto,
+      municipio,
+      area
+      // importe_comp,
+      // isr,
+      // total,
+      // fecha_comp
+    }).then((docRef) => {
+      this.setState({
+        partida: '',
+        presupuestal: '',
+        no_proyecto: '',
+        municipio: '',
+        area: ''
+        // importe_comp: '',
+        // isr: '',
+        // total: '',
+        // fecha_comp: ''
+      });
+    })
+    .catch((error) => {
+      console.error('Error adding document: ', error);
+    });
+    alert('Tu solicitud fue enviada.')
+  }
+
+  listenForItemsBanco = (itemsRefBanco) => {
+    itemsRefBanco.on('value', (snap) => {
+      var listaB = []
+      snap.forEach((child) => {
+        listaB.push({
+          abr: child.val().abr,
+          ago: child.val().ago,
+          ben: child.val().ben,
+          cpa: child.val().cpa,
+          dic: child.val().dic,
+          dig: child.val().dig,
+          dp: child.val().dp,
+          eg: child.val().eg,
+          eje: child.val().eje,
+          ene: child.val().ene,
+          est: child.val().est,
+          et: child.val().et,
+          f: child.val().f,
+          feb: child.val().feb,
+          ff: child.val().ff,
+          fu: child.val().fu,
+          indi: child.val().indi,
+          jul: child.val().jul,
+          jun: child.val().jun,
+          la: child.val().la,
+          mar: child.val().mar,
+          may: child.val().may,
+          meta: child.val().meta,
+          mi: child.val().mi,
+          nov: child.val().nov,
+          np: child.val().np,
+          obj: child.val().obj,
+          obra: child.val().obra,
+          oct: child.val().oct,
+          ods: child.val().ods,
+          of: child.val().of,
+          ogasto: child.val().ogasto,
+          os: child.val().os,
+          par: child.val().par,
+          pb: child.val().pb,
+          pr: child.val().pr,
+          prog: child.val().prog,
+          proy: child.val().proy,
+          rm: child.val().rm,
+          rubro: child.val().rubro,
+          s: child.val().s,
+          sep: child.val().sep,
+          sf: child.val().sf,
+          sp: child.val().sp,
+          tg: child.val().tg,
+          total: child.val().total,
+          up: child.val().up,
+          estatus: child.val().estatus,
+          done: child.val().done,
+          id: child.key
+        })
+      })
+      this.setState({
+        listaB: listaB
+      })
+    })
   }
 
   render() {
-
-    var user = firebase.auth().currentUser;
-    var email;
-
+    var user = firebase.auth().currentUser
+    var email
     if (user != null) {
-      email = user.email;
+      email = user.email
     }
-
-    let admin;
+    let admin
     if (email === 'administrador@procu.com') {
-      admin = 'ADMIN';
+      admin = 'ADMIN'
     } else if (email === 'nayra@procu.com') {
-      admin = 'NAYRA';
+      admin = 'NAYRA'
     } else if (email === 'laura@procu.com') {
-      admin = 'LAURA';
+      admin = 'LAURA'
     } else if (email === 'miguel@procu.com') {
-      admin = 'MIGUEL';
+      admin = 'MIGUEL'
     } else if (email === 'teresa@procu.com') {
-      admin = 'TERESA';
+      admin = 'TERESA'
     } else if (email === 'marcos@procu.com') {
-      admin = 'MARCOS';
+      admin = 'MARCOS'
     } else if (email === 'eloy@procu.com') {
-      admin = 'ELOY';
+      admin = 'ELOY'
     } else if (email === 'karina@procu.com') {
-      admin = 'KARINA';
+      admin = 'KARINA'
     } else if (email === 'martha@procu.com') {
-      admin = 'MARTHA';
+      admin = 'MARTHA'
     } else if (email === 'lilia@procu.com') {
-      admin = 'LILIA';
+      admin = 'LILIA'
     } else if (email === 'cenely@procu.com') {
-      admin = 'CENELY';
+      admin = 'CENELY'
     } else if (email === 'hector@procu.com') {
-      admin = 'HECTOR';
+      admin = 'HECTOR'
     } else if (email === 'omar@procu.com') {
-      admin = 'OMAR';
+      admin = 'OMAR'
     } else if (email === 'omar@procu.com') {
-      admin = 'OMAR';
+      admin = 'OMAR'
     } else if (email === 'fer@procu.com') {
-      admin = 'FERNANDA';
+      admin = 'FERNANDA'
     } else if (email === 'miau@procu.com') {
-      admin = 'MAURICIO';
+      admin = 'MAURICIO'
     }
+    const allowCustom = this.state.allowCustom
+    const { partida, up, no_proyecto, municipio, area } = this.state
 
     return (
-      <div className="cent-compro">
-        <div className="App">
-          <h2 className="title" style={{fontFamily: 'Arial'}}>Comprometidos</h2>
-          <div className="products-al">
-            <div className="a-row-t">Fondos</div>
-            <div className="a-row-t">Fecha</div>
-            <div className="a-row-t">Nombre Realizo</div>
-            <div className="a-row-t">Tipo de documento</div>
-            <div className="a-row-t">Importe</div><div className="a-row-t"></div>
+      <div className='compro-container'>
+        <form className='fcc'>
+          <div className='fc-w' style={{marginTop: '80px'}}>
+            <div className='f-c-c'>
+              <p className='fc'>No. de Proyecto</p>
+              <DropDownList
+                suggest
+                style={{
+                  borderColor: 'rgba(0,0,0,0.42)',
+                  background: 'white',
+                  height: '28px',
+                  width: '100%',
+                  color: 'black',
+                  position: 'static',
+                }}
+                data={this.no_proyecto}
+                allowCustom={allowCustom}
+                name='no_proyecto'
+                value={no_proyecto}
+                onChange={this.onChange}
+                required
+                ref='no_proyecto'
+              />
+            </div>
+            <div className='f-c-c'>
+              <p className='fc'>Municipio</p>
+              <DropDownList
+                suggest
+                style={{
+                  borderColor: 'rgba(0,0,0,0.42)',
+                  background: 'white',
+                  height: '28px',
+                  width: '100%',
+                  color: 'black',
+                  position: 'static',
+                }}
+                data={this.municipio}
+                allowCustom={allowCustom}
+                name='municipio'
+                value={municipio}
+                onChange={this.onChange}
+                required
+                ref='municipio'
+              />
+            </div>
+            <div className='f-c-c'>
+              <p className='fc'>Area</p>
+              <DropDownList
+                suggest
+                style={{
+                  borderColor: 'rgba(0,0,0,0.42)',
+                  background: 'white',
+                  height: '28px',
+                  width: '100%',
+                  color: 'black',
+                  position: 'static',
+                }}
+                data={this.area}
+                allowCustom={allowCustom}
+                name='area'
+                value={area}
+                onChange={this.onChange}
+                required
+                ref='area'
+              />
+            </div>
           </div>
-          <div>
-            {this.state.fondos.map(fondos =>
-              <div>
-                {fondos.realizo === admin &&
-                <div className="products-al">
-                  <div className="a-row">{fondos.fondo}</div>
-                  <div className="a-row">{fondos.fecha}</div>
-                  <div className="a-row">{fondos.realizo}</div>
-                  <div className="a-row">{fondos.tipo_doc}</div>
-                  <CurrencyFormat
-                    className="a-row"
-                    value={fondos.importe}
-                    displayType={'text'}
-                    thousandSeparator={true}
-                    prefix={' $'}
-                  />
-                  <div className="a-row vista">
-                    <Link to={`/edit/${fondos.key}`}>Ver</Link>
-                  </div>
-                </div>
-              }
+
+          {/*<div className='axc'>
+            <div className='cx'>
+              <XmlComp />
+            </div>
+            <div className='cx'>
+              <XmlAsi />
+            </div>
+          </div>*/}
+
+          {/*<input
+            value={(totalImporte.reduce(reducer))}
+            name='total'
+            onChange={this.onChange}
+            ref={total => this.inputTotal = total}
+          />*/}
+        </form>
+        <div>
+          <ListComponent
+            listaB={this.state.listaB}
+            update={this.update}
+          />
+        </div>
+        <div>
+          {this.state.comprometidos.map(comprometidos =>
+            <div>
+              <div className='products-al'>
+                <div className='tabla-edit-c'>{comprometidos.partida}</div>
+                <div className='tabla-edit-c'>{comprometidos.presupuestal}</div>
+                <div className='tabla-edit-c'>{comprometidos.no_proyecto}</div>
+                <div className='tabla-edit-c'>{'$'+comprometidos.importe_comp}</div>
+                <div className='tabla-edit-c'>{'$'+comprometidos.isr}</div>
+                <div className='tabla-edit-c'>{'$'+comprometidos.total}</div>
+                <div className='tabla-edit-c'>{comprometidos.fecha_comp}</div>
               </div>
-            )}
-          </div>
+            </div>
+          )}
         </div>
       </div>
-    );
+    )
   }
 }
