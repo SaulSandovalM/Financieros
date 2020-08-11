@@ -4,13 +4,11 @@ import firebase from '../../../Firebase'
 import ListComponent from './ListComponent'
 import { DropDownList } from '@progress/kendo-react-dropdowns'
 import '@progress/kendo-theme-default/dist/all.css'
-import XmlComp from './sin/XmlComp'
-import XmlAsi from './asi/XmlAsi'
 
 export default class Comprometidos extends Component {
   constructor(props) {
-    super(props);
-    this.unsubscribe = null;
+    super(props)
+    this.unsubscribe = null
     this.state = {
       key: '',
       fondo: '',
@@ -35,14 +33,68 @@ export default class Comprometidos extends Component {
           name: 'preuba',
           done: false
         }
+      ],
+      listaSin: [
+        {
+          id: 1,
+          name: 'preuba',
+          done: false
+        },
+      ],
+      listaAsi: [
+        {
+          id: 1,
+          name: 'preuba',
+          done: false
+        }
       ]
-    };
+    }
+  }
+
+  listenForItems = (itemsRef) => {
+    itemsRef.on('value', (snap) => {
+      var listaSin = []
+      snap.forEach((child) => {
+        listaSin.push({
+          folio: child.val().folio,
+          fecha: child.val().fecha,
+          importe: child.val().importe,
+          usoCFDI: child.val().usoCFDI,
+          estatus: child.val().estatus,
+          done: child.val().done,
+          id: child.key
+        })
+      })
+      this.setState({
+        listaSin: listaSin
+      })
+    })
+  }
+
+  listenForItemsAsi = (itemsRefAsi) => {
+    itemsRefAsi.on('value', (snap) => {
+      var listaAsi = []
+      snap.forEach((child) => {
+        listaAsi.push({
+          folio: child.val().folio,
+          fecha: child.val().fecha,
+          importe: child.val().importe,
+          usoCFDI: child.val().usoCFDI,
+          estatus: child.val().estatus,
+          done: child.val().done,
+          id: child.key
+        })
+      })
+      this.setState({
+        listaAsi: listaAsi
+      })
+    })
   }
 
   onCollectionUpdate = (querySnapshot) => {
-    const comprometidos = [];
+    const comprometidos = []
     querySnapshot.forEach((doc) => {
-      const { partida, presupuestal, no_proyecto } = doc.data(); // importe_comp, isr, total, fecha_comp
+      const { partida, presupuestal, no_proyecto } = doc.data() // importe_comp, isr, total, fecha_comp
       comprometidos.push({
         key: doc.id,
         doc,
@@ -53,20 +105,20 @@ export default class Comprometidos extends Component {
         // isr,
         // total,
         // fecha_comp
-      });
-    });
+      })
+    })
     this.setState({
       comprometidos
-   });
+   })
   }
 
   componentDidMount() {
-    const ref = firebase.firestore().collection('fondos').doc(this.props.match.params.id);
-    const updateRef = firebase.firestore().collection('fondos').doc(this.props.match.params.id).collection('comprometidos');
-    this.unsubscribe = updateRef.onSnapshot(this.onCollectionUpdate);
+    const ref = firebase.firestore().collection('fondos').doc(this.props.match.params.id)
+    const updateRef = firebase.firestore().collection('fondos').doc(this.props.match.params.id).collection('comprometidos')
+    this.unsubscribe = updateRef.onSnapshot(this.onCollectionUpdate)
     ref.get().then((doc) => {
       if (doc.exists) {
-        const fondos = doc.data();
+        const fondos = doc.data()
         this.setState({
           key: doc.id,
           fondo: fondos.fondo,
@@ -81,25 +133,54 @@ export default class Comprometidos extends Component {
           isr: fondos.isr,
           total: fondos.total,
           fecha_comp: fondos.fecha_comp
-        });
+        })
       } else {
-        console.log('No se encuentra documento');
+        console.log('No se encuentra documento')
       }
-    });
+    })
     const itemsRefBanco = firebase.database().ref('presupuesto/')
     this.listenForItemsBanco(itemsRefBanco)
+    const itemsRef = firebase.database().ref('xml/')
+    this.listenForItems(itemsRef)
+    const itemsRefAsi = firebase.database().ref('xml2/')
+    this.listenForItemsAsi(itemsRefAsi)
+  }
+
+  updateSin = (item) => {
+    let updates = {}
+    updates['xml2/' + item.id] = {
+      folio: item.folio,
+      fecha: item.fecha,
+      importe: item.importe,
+      usoCFDI: item.usoCFDI,
+      estatus: 'Asignado'
+    }
+    firebase.database().ref().update(updates)
+  }
+
+  updateAsi = (item) => {
+    let updates = {}
+    updates['xml/' + item.id] = {
+      folio: item.folio,
+      fecha: item.fecha,
+      importe: item.importe,
+      usoCFDI: item.usoCFDI,
+      estatus: 'sin asignar'
+    }
+    firebase.database().ref().update(updates)
+    firebase.database().ref('xml2/' + item.id).remove()
   }
 
   onChange = (e) => {
     const state = this.state
-    state[e.target.name] = e.target.value;
-    this.setState({fondos:state});
+    state[e.target.name] = e.target.value
+    this.setState({fondos:state})
   }
 
   onSubmit = (e) => {
-    e.preventDefault();
-    const { partida, presupuestal, no_proyecto, municipio, area } = this.state; // importe_comp, isr, total, fecha_comp
-    const updateRef = firebase.firestore().collection('fondos').doc(this.props.match.params.id).collection('comprometidos').doc();
+    e.preventDefault()
+    const { partida, presupuestal, no_proyecto, municipio, area } = this.state // importe_comp, isr, total, fecha_comp
+    const updateRef = firebase.firestore().collection('fondos').doc(this.props.match.params.id).collection('comprometidos').doc()
     updateRef.set({
       partida,
       presupuestal,
@@ -121,11 +202,11 @@ export default class Comprometidos extends Component {
         // isr: '',
         // total: '',
         // fecha_comp: ''
-      });
+      })
     })
     .catch((error) => {
-      console.error('Error adding document: ', error);
-    });
+      console.error('Error adding document: ', error)
+    })
   }
 
   partida = ['211001', '211002', '212001', '212002', '214001', '214002', '215001', '216001', '217001', '221001', '221002', '246001', '251001', '253001', '254001', '255001', '261001', '271001', '272001', '291001', '292001', '311001', '313001', '318001', '323002', '334001', '338001', '341001', '351001', '352001', '353001', '355001', '357001', '358001', '361002', '372001', '375001', '381001', '392006', '394001', '218002', '312001', '371001', '247001', '249001', '359001', '336001', '275001', '211003', '541001', '515001', '339001']
@@ -187,8 +268,8 @@ export default class Comprometidos extends Component {
       estatus: 'FR'
     }
     firebase.database().ref().update(updates)
-     const { no_proyecto, municipio, area } = this.state; // importe_comp, isr, total, fecha_comp
-    const updateRef = firebase.firestore().collection('fondos').doc(this.props.match.params.id).collection('comprometidos').doc();
+    const { no_proyecto, municipio, area } = this.state // importe_comp, isr, total, fecha_comp
+    const updateRef = firebase.firestore().collection('fondos').doc(this.props.match.params.id).collection('comprometidos').doc()
     updateRef.set({
       partida: item.par,
       presupuestal: item.up,
@@ -210,11 +291,11 @@ export default class Comprometidos extends Component {
         // isr: '',
         // total: '',
         // fecha_comp: ''
-      });
+      })
     })
     .catch((error) => {
-      console.error('Error adding document: ', error);
-    });
+      console.error('Error adding document: ', error)
+    })
     alert('Tu solicitud fue enviada.')
   }
 
@@ -324,10 +405,16 @@ export default class Comprometidos extends Component {
     const allowCustom = this.state.allowCustom
     const { partida, up, no_proyecto, municipio, area } = this.state
 
+    const totalImporte = []
+    this.state.listaAsi.map(item => (
+      totalImporte.push(item.importe)
+    ))
+    const reducer = (a, b) => a + b
+
     return (
       <div className='compro-container'>
         <form className='fcc'>
-          <div className='fc-w' style={{marginTop: '80px'}}>
+          <div className='fc-w' style={{ marginTop: '80px' }}>
             <div className='f-c-c'>
               <p className='fc'>No. de Proyecto</p>
               <DropDownList
@@ -393,14 +480,63 @@ export default class Comprometidos extends Component {
             </div>
           </div>
 
-          {/*<div className='axc'>
+          <div className='axc'>
             <div className='cx'>
-              <XmlComp />
+              <div className='xml-back'>
+                <div className='xml-container'>
+                  {
+                    this.state.listaSin.map(item =>
+                      <div key={item.id}>
+                        <div className='xml-inputs-list'>
+                          <div className='w-xml'>
+                            <p>{item.name}</p>
+                          </div>
+                          <div className='w-xml'>
+                            <p>{item.fecha}</p>
+                          </div>
+                          <div className='w-xml'>
+                            <p>{item.importe}</p>
+                          </div>
+                          <div className='w-xml'>
+                            <p>{item.usoCFDI}</p>
+                          </div>
+                          <div className='w-xml' style={{padding: '10px'}}>
+                            <button onClick={this.updateSin}> + </button>
+                          </div>
+                        </div>
+                      </div>
+                    )
+                  }
+                </div>
+              </div>
             </div>
             <div className='cx'>
-              <XmlAsi />
+              {
+                this.state.listaAsi.map(item =>
+                  <div>
+                    <div className='xml-inputs-list'>
+                      <div className='w-xml'>
+                        <p>{item.folio}</p>
+                      </div>
+                      <div className='w-xml'>
+                        <p>{item.fecha}</p>
+                      </div>
+                      <div className='w-xml'>
+                        <p>{item.importe}</p>
+                      </div>
+                      <div className='w-xml'>
+                        <p>{item.usoCFDI}</p>
+                      </div>
+                      <div className='w-xml' style={{ padding: '10px' }}>
+                        <button onClick={this.updateAsi}> - </button>
+                      </div>
+                    </div>
+                  </div>
+                )
+              }
+              {(totalImporte.reduce(reducer))}
             </div>
-          </div>*/}
+          </div>
 
           {/*<input
             value={(totalImporte.reduce(reducer))}
@@ -422,9 +558,9 @@ export default class Comprometidos extends Component {
                 <div className='tabla-edit-c'>{comprometidos.partida}</div>
                 <div className='tabla-edit-c'>{comprometidos.presupuestal}</div>
                 <div className='tabla-edit-c'>{comprometidos.no_proyecto}</div>
-                <div className='tabla-edit-c'>{'$'+comprometidos.importe_comp}</div>
-                <div className='tabla-edit-c'>{'$'+comprometidos.isr}</div>
-                <div className='tabla-edit-c'>{'$'+comprometidos.total}</div>
+                <div className='tabla-edit-c'>{' $ ' + comprometidos.importe_comp}</div>
+                <div className='tabla-edit-c'>{' $ ' + comprometidos.isr}</div>
+                <div className='tabla-edit-c'>{' $ ' + comprometidos.total}</div>
                 <div className='tabla-edit-c'>{comprometidos.fecha_comp}</div>
               </div>
             </div>

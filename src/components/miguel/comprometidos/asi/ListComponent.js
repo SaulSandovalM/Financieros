@@ -7,7 +7,8 @@ export default class ListComponent extends Component {
   constructor (props) {
     super(props)
     this.state = {
-      xml: []
+      xml: [],
+      total: []
     }
   }
 
@@ -25,6 +26,7 @@ export default class ListComponent extends Component {
       totalImporte.push(item.importe)
     ))
     const reducer = (a, b) => a + b
+    this.state.total = totalImporte
 
     return (
       <div>
@@ -34,6 +36,7 @@ export default class ListComponent extends Component {
               key={item.id}
               item={item}
               update={this.props.update}
+              total={this.state.total}
             />
           )
         }

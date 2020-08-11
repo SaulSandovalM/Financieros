@@ -1,13 +1,12 @@
-import React, { Component } from 'react';
-import '../Comprometidos.css';
-import firebaseConf from '../../../../Firebase';
-import ListComponent from './ListComponent';
+import React, { Component } from 'react'
+import '../Comprometidos.css'
+import firebaseConf from '../../../../Firebase'
+import ListComponent from './ListComponent'
 
 export default class XmlComp extends Component {
-  constructor(){
-    super();
+  constructor () {
+    super()
     this.state = {
-      nuevo: '',
       lista: [
         {
           id: 1,
@@ -20,7 +19,7 @@ export default class XmlComp extends Component {
 
   listenForItems = (itemsRef) => {
     itemsRef.on('value', (snap) => {
-      var lista = [];
+      var lista = []
       snap.forEach((child) => {
         lista.push({
           folio: child.val().folio,
@@ -32,34 +31,32 @@ export default class XmlComp extends Component {
           Certificado: child.val().Certificado,
           done: child.val().done,
           id: child.key
-        });
-      });
+        })
+      })
       this.setState({
         lista: lista
-      });
-    });
+      })
+    })
   }
 
   componentDidMount() {
-    const itemsRef = firebaseConf.database().ref('xml/');
-    this.listenForItems(itemsRef);
+    const itemsRef = firebaseConf.database().ref('xml/')
+    this.listenForItems(itemsRef)
   }
 
   update = (item) => {
-    let updates = {};
+    let updates = {}
     updates['xml2/' + item.id] = {
       folio: item.folio,
       fecha: item.fecha,
       importe: item.importe,
       usoCFDI: item.usoCFDI,
       estatus: 'Asignado'
-    };
-    firebaseConf.database().ref().update(updates);
+    }
+    firebaseConf.database().ref().update(updates)
   }
 
   render() {
-    var lol = firebaseConf.database().ref('xml/')//attributes/
-    console.log(lol);
     return (
       <div className='xml-back'>
         <div className='xml-container'>
