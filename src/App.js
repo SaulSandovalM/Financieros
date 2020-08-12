@@ -29,6 +29,8 @@ import ArqueoD from './components/elizabeth/arqueo/ArqueoD'
 // Parte de Miguel
 import Fondos from './components/miguel/fondos/NewFondos'
 import Comprometidos from './components/miguel/comprometidos/Comprometidos'
+import Oficios from './components/miguel/oficios/Oficios'
+
 import Edit from './components/miguel/comprometidos/Edit'
 import Analitico from './components/miguel/analitico/Analitico'
 import Edita from './components/miguel/analitico/Edita'
@@ -208,17 +210,24 @@ function App (props) {
         isVerifying={isVerifying}
       />
       {/* Rutas de Miguel */}
-      {/* <ProtectedRoute
+      <ProtectedRoute
         exact
         path='/Fondos'
         component={Fondos}
         isAuthenticated={isAuthenticated}
         isVerifying={isVerifying}
-      /> */}
+      />
       <ProtectedRoute
         exact
         path='/Comprometidos/:id'
         component={Comprometidos}
+        isAuthenticated={isAuthenticated}
+        isVerifying={isVerifying}
+      />
+      <ProtectedRoute
+        exact
+        path='/Oficios/:id'
+        component={Oficios}
         isAuthenticated={isAuthenticated}
         isVerifying={isVerifying}
       />
@@ -257,7 +266,6 @@ function App (props) {
         isAuthenticated={isAuthenticated}
         isVerifying={isVerifying}
       />
-      <Route path='/fondos' component={Fondos} />
       <Route path='/edit/:id' component={Edit} />
       <Route path='/edita/:id' component={Edita} />
       <Route path='/Pdf/:id' component={Pdf} />

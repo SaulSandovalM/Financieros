@@ -27,7 +27,7 @@ export default class Comprometidos extends Component {
       total: '',
       fecha_comp: '',
       comprometidos: [],
-      number: '',
+      total: '',
       listaB: [
         {
           id: 1,
@@ -95,14 +95,14 @@ export default class Comprometidos extends Component {
   onCollectionUpdate = (querySnapshot) => {
     const comprometidos = []
     querySnapshot.forEach((doc) => {
-      const { partida, presupuestal, no_proyecto } = doc.data() // importe_comp, isr, total, fecha_comp
+      const { partida, presupuestal, no_proyecto, importe_comp } = doc.data() // importe_comp, isr, total, fecha_comp
       comprometidos.push({
         key: doc.id,
         doc,
         partida,
         presupuestal,
         no_proyecto,
-        // importe_comp,
+        importe_comp,
         // isr,
         // total,
         // fecha_comp
@@ -178,38 +178,6 @@ export default class Comprometidos extends Component {
     this.setState({fondos:state})
   }
 
-  onSubmit = (e) => {
-    e.preventDefault()
-    const { partida, presupuestal, no_proyecto, municipio, area } = this.state // importe_comp, isr, total, fecha_comp
-    const updateRef = firebase.firestore().collection('fondos').doc(this.props.match.params.id).collection('comprometidos').doc()
-    updateRef.set({
-      partida,
-      presupuestal,
-      no_proyecto,
-      municipio,
-      area
-      // importe_comp,
-      // isr,
-      // total,
-      // fecha_comp
-    }).then((docRef) => {
-      this.setState({
-        partida: '',
-        presupuestal: '',
-        no_proyecto: '',
-        municipio: '',
-        area: ''
-        // importe_comp: '',
-        // isr: '',
-        // total: '',
-        // fecha_comp: ''
-      })
-    })
-    .catch((error) => {
-      console.error('Error adding document: ', error)
-    })
-  }
-
   partida = ['211001', '211002', '212001', '212002', '214001', '214002', '215001', '216001', '217001', '221001', '221002', '246001', '251001', '253001', '254001', '255001', '261001', '271001', '272001', '291001', '292001', '311001', '313001', '318001', '323002', '334001', '338001', '341001', '351001', '352001', '353001', '355001', '357001', '358001', '361002', '372001', '375001', '381001', '392006', '394001', '218002', '312001', '371001', '247001', '249001', '359001', '336001', '275001', '211003', '541001', '515001', '339001']
   up = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '20', '21', '22', '23', '24']
   no_proyecto = ['U027 425', 'U029 425', 'U027 1208', 'U029 1208', 'U027 1860', 'U029 1860', 'U024 2686','U027 2686','U029 2686','U038 2514',]
@@ -269,15 +237,15 @@ export default class Comprometidos extends Component {
       estatus: 'FR'
     }
     firebase.database().ref().update(updates)
-    const { no_proyecto, municipio, area } = this.state // importe_comp, isr, total, fecha_comp
+    const { no_proyecto, municipio, area } = this.state //  isr, total, fecha_comp
     const updateRef = firebase.firestore().collection('fondos').doc(this.props.match.params.id).collection('comprometidos').doc()
     updateRef.set({
       partida: item.par,
       presupuestal: item.up,
       no_proyecto,
       municipio,
-      area
-      // importe_comp,
+      area,
+      importe_comp: this.state.total,
       // isr,
       // total,
       // fecha_comp
@@ -287,8 +255,8 @@ export default class Comprometidos extends Component {
         presupuestal: '',
         no_proyecto: '',
         municipio: '',
-        area: ''
-        // importe_comp: '',
+        area: '',
+        importe_comp: ''
         // isr: '',
         // total: '',
         // fecha_comp: ''
@@ -407,11 +375,12 @@ export default class Comprometidos extends Component {
       totalImporte.push(item.importe)
     ))
     const reducer = (a, b) => a + b
-    console.log(totalImporte)
+    this.state.total = totalImporte.reduce(reducer)
+    console.log(this.state.total)
 
     return (
       <div className='compro-container'>
-        <form className='fcc'>
+        <div className='fcc'>
           <div className='fc-w' style={{ marginTop: '80px' }}>
             <div className='f-c-c'>
               <p className='fc'>No. de Proyecto</p>
@@ -483,40 +452,35 @@ export default class Comprometidos extends Component {
               <XmlComp />
             </div>
             <div className='cx'>
-              {
-                this.state.listaAsi.map(item =>
-                  <div>
-                    <div className='xml-inputs-list'>
-                      <div className='w-xml'>
-                        <p>{item.name}</p>
-                      </div>
-                      <div className='w-xml'>
-                        <p>{item.fecha}</p>
-                      </div>
-                      <div className='w-xml'>
-                        <p>{item.importe}</p>
-                      </div>
-                      <div className='w-xml'>
-                        <p>{item.usoCFDI}</p>
-                      </div>
-                      <div className='w-xml' style={{ padding: '10px' }}>
-                        <button onClick={this.updateAsi}> - </button>
+              <div className='asi-l'>
+                {
+                  this.state.listaAsi.map(item =>
+                    <div>
+                      <div className='xml-inputs-list'>
+                        <div className='w-xml'>
+                          <p>{item.name}</p>
+                        </div>
+                        <div className='w-xml'>
+                          <p>{item.fecha}</p>
+                        </div>
+                        <div className='w-xml'>
+                          <p>{item.importe}</p>
+                        </div>
+                        <div className='w-xml'>
+                          <p>{item.usoCFDI}</p>
+                        </div>
+                        <div className='w-xml' style={{ padding: '10px' }}>
+                          <button onClick={this.updateAsi}> - </button>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                )
-              }
-              {(totalImporte.reduce(reducer))}
+                  )
+                }
+                {(totalImporte.reduce(reducer))}
+              </div>
             </div>
           </div>
-
-          {/*<input
-            value={(totalImporte.reduce(reducer))}
-            name='total'
-            onChange={this.onChange}
-            ref={total => this.inputTotal = total}
-          />*/}
-        </form>
+        </div>
         <div>
           <ListComponent
             listaB={this.state.listaB}
@@ -533,10 +497,15 @@ export default class Comprometidos extends Component {
                 <div className='tabla-edit-c'>{' $ ' + comprometidos.importe_comp}</div>
                 <div className='tabla-edit-c'>{' $ ' + comprometidos.isr}</div>
                 <div className='tabla-edit-c'>{' $ ' + comprometidos.total}</div>
-                <div className='tabla-edit-c'>{comprometidos.fecha_comp}</div>
+                <div className='tabla-edit-c'>{comprometidos.importe_comp}</div>
               </div>
             </div>
           )}
+        </div>
+        <div className='left-b-f'>
+          <button className='bt-s-f' onClick={this.perro}>
+            Guadar
+          </button>
         </div>
       </div>
     )

@@ -110,13 +110,13 @@ export default class ListComponent extends Component {
             Importe
           </div>
           <div className='tfc'>
-            ISR
+            Isr
+          </div>
+          <div className='tfc'>
+            Iva
           </div>
           <div className='tfc'>
             Total
-          </div>
-          <div className='tfc'>
-            Fecha
           </div>
         </div>
         {
