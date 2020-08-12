@@ -56,7 +56,7 @@ export default class Comprometidos extends Component {
       var listaSin = []
       snap.forEach((child) => {
         listaSin.push({
-          folio: child.val().folio,
+          name: child.val().name,
           fecha: child.val().fecha,
           importe: child.val().importe,
           usoCFDI: child.val().usoCFDI,
@@ -395,10 +395,6 @@ export default class Comprometidos extends Component {
       admin = 'HECTOR'
     } else if (email === 'omar@procu.com') {
       admin = 'OMAR'
-    } else if (email === 'omar@procu.com') {
-      admin = 'OMAR'
-    } else if (email === 'fer@procu.com') {
-      admin = 'FERNANDA'
     } else if (email === 'miau@procu.com') {
       admin = 'MAURICIO'
     }
@@ -486,7 +482,7 @@ export default class Comprometidos extends Component {
                 <div className='xml-container'>
                   {
                     this.state.listaSin.map(item =>
-                      <div key={item.id}>
+                      <div>
                         <div className='xml-inputs-list'>
                           <div className='w-xml'>
                             <p>{item.name}</p>
@@ -516,7 +512,7 @@ export default class Comprometidos extends Component {
                   <div>
                     <div className='xml-inputs-list'>
                       <div className='w-xml'>
-                        <p>{item.folio}</p>
+                        <p>{item.name}</p>
                       </div>
                       <div className='w-xml'>
                         <p>{item.fecha}</p>
