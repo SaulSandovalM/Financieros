@@ -868,7 +868,7 @@ export default class Fondos extends Component {
 
             <div className='m-f'>
               <div className='fr-con'>
-                <p className='fr-b' ><b>Gastos a Comprobar</b></p>
+                <p className='fr-b' ><b>Pago Proveedor</b></p>
               </div>
               <div className='fcc-i'>
                 <p className='fimpre'>Oficio Pago Proveedor</p>
@@ -879,7 +879,7 @@ export default class Fondos extends Component {
                 <button className='b-imp'onClick={() => this.props.history.push('/objetodegastoPP/IopOetql2iBVF1IAsFWd')}>Imprimir</button>
               </div>
               <div className='fcc-i'>
-                <p className='fimpre'>Leyendas Alusivas al Gasto</p>
+                <p className='fimpre'>Leyendas Alusivas</p>
                 <button className='b-imp'onClick={() => this.props.history.push('/Gastoprovee/IopOetql2iBVF1IAsFWd')}>Imprimir</button>
               </div>
             </div>
@@ -898,7 +898,7 @@ export default class Fondos extends Component {
                 <button className='b-imp'onClick={() => this.props.history.push('/objetodegastodiciembre/IopOetql2iBVF1IAsFWd')}>Imprimir</button>
               </div>
               <div className='fcc-i'>
-                <p className='fimpre'>Leyendas Alusivas al Gasto</p>
+                <p className='fimpre'>Leyendas Alusivas</p>
                 <button className='b-imp'onClick={() => this.props.history.push('/gastodiciembre/IopOetql2iBVF1IAsFWd')}>Imprimir</button>
               </div>
             </div>
