@@ -31,7 +31,7 @@ export default class Cpdf extends Component {
   render () {
     var today = new Date()
     var meses = new Array ('Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre')
-    var diasSemana = new Array('Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado')
+    var diasSemana = new Array ('Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado')
     var f = new Date()
     today = diasSemana[f.getDay()] + ', ' + f.getDate() + ' de ' + meses[f.getMonth()] + ' de ' + f.getFullYear()
 
@@ -40,7 +40,7 @@ export default class Cpdf extends Component {
         <div className='site-pf'>
           <p className='site-pf-s'><b>Oficios</b></p>
         </div>
-        <div>
+        <div style={{ zIndex: '3', background: 'white', width: '100%', position: 'absolute', height: '90vh', marginTop: '15px' }}>
           <div className='m-f'>
             <div className='fr-con'>
               <p className='fr-b'><b>Fondo Revolvente</b></p>
@@ -103,7 +103,7 @@ export default class Cpdf extends Component {
           </div>
         </div>
 
-        <div className='subdad' ref={el => (this.holi = el)}>
+        <div className='subdad' ref={el => (this.holi = el)} style={{ zIndex: '2', position: 'absolute' }}>
           <div className='bueno'>
             <p>Bueno por: {this.state.fondo.importe}</p>
           </div>
@@ -120,11 +120,37 @@ export default class Cpdf extends Component {
             <p>Pachuca de Soto, Hgo a {today}</p>
           </div>
           <div className='refe'>
-            <p>DIRECTOR GENERAL DE<br/>ADMINISTRACIÓN Y FINANZAS</p>
+            <p>DIRECTOR GENERAL DE<br />ADMINISTRACIÓN Y FINANZAS</p>
           </div>
           <div className='firma-dad'>
             <div className='firma-raya'>
-              <p>MTRO. LEÓN MAXIMILIANO HERNÁNDEZ VALDÉS<br/>R.F.C.: HEVL-750104</p>
+              <p>MTRO. LEÓN MAXIMILIANO HERNÁNDEZ VALDÉS<br />R.F.C.: HEVL-750104</p>
+            </div>
+          </div>
+        </div>
+
+        <div className='subdad' ref={el => (this.holi = el)} style={{ zIndex: '2', position: 'absolute' }}>
+          <div className='bueno'>
+            <p>Bueno por: {this.state.fondo.importe}</p>
+          </div>
+          <div className='recibi'>
+            <p>
+              Recibí   de la  Secretaría  de  Finanzas Públicas  del  Gobierno  del  Estado de Hidalgo la cantidad de:
+              $ {this.state.fondo.importe} ({(NumberAsString(this.state.fondo.importe))})
+            </p>
+          </div>
+          <div className='concepto'>
+            <p>Por {this.state.fondo.tipo_doc}</p>
+          </div>
+          <div className='fecha'>
+            <p>Pachuca de Soto, Hgo a {today}</p>
+          </div>
+          <div className='refe'>
+            <p>DIRECTOR GENERAL DE<br />ADMINISTRACIÓN Y FINANZAS</p>
+          </div>
+          <div className='firma-dad'>
+            <div className='firma-raya'>
+              <p>MTRO. LEÓN MAXIMILIANO HERNÁNDEZ VALDÉS<br />R.F.C.: HEVL-750104</p>
             </div>
           </div>
         </div>
