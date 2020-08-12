@@ -823,7 +823,7 @@ export default class Fondos extends Component {
               </div>
             </div>
           </div>}
-
+// Fondo Revolvene
         {this.state.isHidden === 3 &&
           <div>
             <div className='m-f'>
@@ -832,55 +832,55 @@ export default class Fondos extends Component {
               </div>
               <div className='fcc-i'>
                 <p className='fimpre'>Solicitud Programatica</p>
-                <button className='b-imp' onClick={() => this.props.history.push('/Pdf/IopOetql2iBVF1IAsFWd')}>Imprimir</button>
+                <button className='b-imp' onClick={() => this.props.history.push('/objetodegastoFR/IopOetql2iBVF1IAsFWd')}>Imprimir</button>
               </div>
               <div className='fcc-i'>
                 <p className='fimpre'>Reembolso de FR</p>
-                <button className='b-imp'>Imprimir</button>
+                <button className='b-imp' onClick={() => this.props.history.push('/Rfr/IopOetql2iBVF1IAsFWd')}>Imprimir</button>
               </div>
               <div className='fcc-i'>
-                <p className='fimpre'>Recibo Global</p>
-                <button className='b-imp'>Imprimir</button>
+                <p className='fimpre'>Recibo Global FR</p>
+                <button className='b-imp'onClick={() => this.props.history.push('/Recibo/IopOetql2iBVF1IAsFWd')}>Imprimir</button>
               </div>
               <div className='fcc-i'>
-                <p className='fimpre'>Leyenda Alusivas</p>
-                <button className='b-imp'>Imprimir</button>
+                <p className='fimpre'>Leyenda Alusivas FR</p>
+                <button className='b-imp' onClick={() => this.props.history.push('/Gasto/IopOetql2iBVF1IAsFWd')}>Imprimir</button>
               </div>
             </div>
 
             <div className='m-f'>
               <div className='fr-con'>
-                <p className='fr-b'><b>Pago Programatica</b></p>
+                <p className='fr-b' ><b>Pago Provedor por Requisición</b></p>
               </div>
               <div className='fcc-i'>
                 <p className='fimpre'>Solicitud Programatica</p>
-                <button className='b-imp'>Imprimir</button>
+                <button className='b-imp' onClick={() => this.props.history.push('/Solicitudppr/IopOetql2iBVF1IAsFWd')}>Imprimir</button>
               </div>
               <div className='fcc-i'>
-                <p className='fimpre'>Oficio Presentación</p>
-                <button className='b-imp'>Imprimir</button>
+                <p className='fimpre'>Solicitud de PPR</p>
+                <button className='b-imp' onClick={() => this.props.history.push('/ofisolicitudppr/IopOetql2iBVF1IAsFWd')}>Imprimir</button>
               </div>
               <div className='fcc-i'>
                 <p className='fimpre'>Leyenda Alusivas</p>
-                <button className='b-imp'>Imprimir</button>
+                <button className='b-imp' onClick={() => this.props.history.push('/gastoppr/IopOetql2iBVF1IAsFWd')}>Imprimir</button>
               </div>
             </div>
 
             <div className='m-f'>
               <div className='fr-con'>
-                <p className='fr-b'><b>Gastos a Comprobar</b></p>
+                <p className='fr-b' ><b>Gastos a Comprobar</b></p>
               </div>
               <div className='fcc-i'>
-                <p className='fimpre'>Oficio Presentación</p>
-                <button className='b-imp'>Imprimir</button>
+                <p className='fimpre'>Oficio Pago Proveedor</p>
+                <button className='b-imp'onClick={() => this.props.history.push('/pagoproveedor/IopOetql2iBVF1IAsFWd')}>Imprimir</button>
               </div>
               <div className='fcc-i'>
                 <p className='fimpre'>Solicitud Programatica</p>
-                <button className='b-imp'>Imprimir</button>
+                <button className='b-imp'onClick={() => this.props.history.push('/objetodegastoPP/IopOetql2iBVF1IAsFWd')}>Imprimir</button>
               </div>
               <div className='fcc-i'>
                 <p className='fimpre'>Leyendas Alusivas al Gasto</p>
-                <button className='b-imp'>Imprimir</button>
+                <button className='b-imp'onClick={() => this.props.history.push('/Gastoprovee/IopOetql2iBVF1IAsFWd')}>Imprimir</button>
               </div>
             </div>
           </div>}
