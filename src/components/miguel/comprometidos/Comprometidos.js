@@ -28,6 +28,7 @@ export default class Comprometidos extends Component {
       fecha_comp: '',
       comprometidos: [],
       total: '',
+      idP: '',
       listaB: [
         {
           id: 1,
@@ -120,6 +121,8 @@ export default class Comprometidos extends Component {
     ref.get().then((doc) => {
       if (doc.exists) {
         const fondos = doc.data()
+        const idP = doc.id
+        this.state.idP = idP
         this.setState({
           key: doc.id,
           fondo: fondos.fondo,
@@ -331,6 +334,10 @@ export default class Comprometidos extends Component {
     })
   }
 
+  cambio = () => {
+    this.props.history.push(`/Oficios/${this.state.idP}`)
+  }
+
   render() {
     var user = firebase.auth().currentUser
     var email
@@ -503,7 +510,7 @@ export default class Comprometidos extends Component {
           )}
         </div>
         <div className='left-b-f'>
-          <button className='bt-s-f' onClick={this.perro}>
+          <button className='bt-s-f' onClick={this.cambio}>
             Guadar
           </button>
         </div>

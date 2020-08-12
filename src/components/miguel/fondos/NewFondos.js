@@ -244,15 +244,6 @@ export default class Fondos extends Component {
 
     return (
       <div className='zz'>
-        <div className='n-f-c'>
-          <button className='b-s-f' onClick={this.toggleHidden1.bind(this)}>Registro de Fondos</button>
-          <button className='b-s-f' onClick={this.toggleHidden2.bind(this)}>Comprometido</button>
-          <button className='b-s-f' onClick={this.toggleHidden3.bind(this)}>Oficios</button>
-          <button className='b-s-f' onClick={this.toggleHidden4.bind(this)}>Contrarecibos</button>
-          <button className='b-s-f' onClick={this.toggleHidden5.bind(this)}>Complemento de Pago</button>
-        </div>
-
-        {this.state.isHidden === 1 &&
           <div className='m-f'>
             <form onSubmit={this.onSubmit}>
               <div className='f-f-c-w'>
@@ -664,9 +655,9 @@ export default class Fondos extends Component {
                 <button onClick={this.perro} className='input-sc boton-g'>Agregar</button>
               </div>
             </form>
-          </div>}
+          </div>
 
-        {this.state.isHidden === 2 &&
+        {/*this.state.isHidden === 2 &&
           <div className='com-com'>
             <form onSubmit={this.sendMessageCompro.bind(this)} ref='contactForm' className='fcc'>
               <div className='fc-w'>
@@ -786,12 +777,12 @@ export default class Fondos extends Component {
                 </div>
               </div>
 
-              {/*<input
+              <input
                 value={(totalImporte.reduce(reducer))}
                 name='total'
                 onChange={this.onChange}
                 ref={total => this.inputTotal = total}
-              />*/}
+              />
 
               <div className='button-row-s'>
                 <button type='submit' className='input-sc boton-g'>Agregar</button>
@@ -822,9 +813,9 @@ export default class Fondos extends Component {
                 Fecha
               </div>
             </div>
-          </div>}
+          </div>*/}
 
-        {this.state.isHidden === 3 &&
+        {/*this.state.isHidden === 3 &&
           <div>
             <div className='m-f'>
               <div className='fr-con'>
@@ -883,7 +874,7 @@ export default class Fondos extends Component {
                 <button className='b-imp'>Imprimir</button>
               </div>
             </div>
-          </div>}
+          </div>*/}
 
         {this.state.isHidden === 4 &&
           <div>
