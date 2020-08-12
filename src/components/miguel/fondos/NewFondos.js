@@ -843,7 +843,7 @@ export default class Fondos extends Component {
                 <button className='b-imp'onClick={() => this.props.history.push('/Recibo/IopOetql2iBVF1IAsFWd')}>Imprimir</button>
               </div>
               <div className='fcc-i'>
-                <p className='fimpre'>Leyenda Alusivas FR</p>
+                <p className='fimpre'>Leyenda Alusivas  FR</p>
                 <button className='b-imp' onClick={() => this.props.history.push('/Gasto/IopOetql2iBVF1IAsFWd')}>Imprimir</button>
               </div>
             </div>
@@ -883,6 +883,48 @@ export default class Fondos extends Component {
                 <button className='b-imp'onClick={() => this.props.history.push('/Gastoprovee/IopOetql2iBVF1IAsFWd')}>Imprimir</button>
               </div>
             </div>
+
+
+            <div className='m-f'>
+              <div className='fr-con'>
+                <p className='fr-b' ><b>Diciembre</b></p>
+              </div>
+              <div className='fcc-i'>
+                <p className='fimpre'>Comprobacion de Gasto a Comprobar</p>
+                <button className='b-imp'onClick={() => this.props.history.push('/comprobaciondegastocomprobar/IopOetql2iBVF1IAsFWd')}>Imprimir</button>
+              </div>
+              <div className='fcc-i'>
+                <p className='fimpre'>Solicitud Programatica</p>
+                <button className='b-imp'onClick={() => this.props.history.push('/objetodegastodiciembre/IopOetql2iBVF1IAsFWd')}>Imprimir</button>
+              </div>
+              <div className='fcc-i'>
+                <p className='fimpre'>Leyendas Alusivas al Gasto</p>
+                <button className='b-imp'onClick={() => this.props.history.push('/gastodiciembre/IopOetql2iBVF1IAsFWd')}>Imprimir</button>
+              </div>
+            </div>
+
+            <div className='m-f'>
+              <div className='fr-con'>
+                <p className='fr-b' ><b>Caratula</b></p>
+              </div>
+              <div className='fcc-i'>
+                <p className='fimpre'>Caratula</p>
+                <button className='b-imp'onClick={() => this.props.history.push('/Caratula/IopOetql2iBVF1IAsFWd')}>Imprimir</button>
+              </div>
+            </div>
+
+            <div className='m-f'>
+              <div className='fr-con'>
+                <p className='fr-b' ><b>Tabular</b></p>
+              </div>
+              <div className='fcc-i'>
+                <p className='fimpre'>Tabular</p>
+                <button className='b-imp'onClick={() => this.props.history.push('/Tabular/IopOetql2iBVF1IAsFWd')}>Imprimir</button>
+              </div>
+            </div>
+
+
+
           </div>}
 
         {this.state.isHidden === 4 &&

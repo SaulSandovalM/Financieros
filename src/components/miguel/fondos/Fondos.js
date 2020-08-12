@@ -84,7 +84,6 @@ export default class Fondos extends Component {
       batch.set(statsRef, { nFondo: increment }, { merge: true })
       batch.commit()
       this.perro()
-      //this.props.history.push('/Comprometidos')
       this.props.history.push(`/edit/${this.state.f}`)
     })
     .catch((error) => {

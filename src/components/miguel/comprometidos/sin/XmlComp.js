@@ -58,7 +58,7 @@ export default class XmlComp extends Component {
 
   render() {
     return (
-      <div className='xml-back'>
+      <div className='xml-back-l'>
         <div className='xml-container'>
           <ListComponent
             lista={this.state.lista}
