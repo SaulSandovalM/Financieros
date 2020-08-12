@@ -4,6 +4,7 @@ import firebase from '../../../Firebase'
 import ListComponent from './ListComponent'
 import { DropDownList } from '@progress/kendo-react-dropdowns'
 import '@progress/kendo-theme-default/dist/all.css'
+import XmlComp from './sin/XmlComp'
 
 export default class Comprometidos extends Component {
   constructor(props) {
@@ -34,13 +35,13 @@ export default class Comprometidos extends Component {
           done: false
         }
       ],
-      listaSin: [
-        {
-          id: 1,
-          name: 'preuba',
-          done: false
-        },
-      ],
+      // listaSin: [
+      //   {
+      //     id: 1,
+      //     name: 'preuba',
+      //     done: false
+      //   },
+      // ],
       listaAsi: [
         {
           id: 1,
@@ -51,25 +52,25 @@ export default class Comprometidos extends Component {
     }
   }
 
-  listenForItems = (itemsRef) => {
-    itemsRef.on('value', (snap) => {
-      var listaSin = []
-      snap.forEach((child) => {
-        listaSin.push({
-          name: child.val().name,
-          fecha: child.val().fecha,
-          importe: child.val().importe,
-          usoCFDI: child.val().usoCFDI,
-          estatus: child.val().estatus,
-          done: child.val().done,
-          id: child.key
-        })
-      })
-      this.setState({
-        listaSin: listaSin
-      })
-    })
-  }
+  // listenForItems = (itemsRef) => {
+  //   itemsRef.on('value', (snap) => {
+  //     var listaSin = []
+  //     snap.forEach((child) => {
+  //       listaSin.push({
+  //         name: child.val().name,
+  //         fecha: child.val().fecha,
+  //         importe: child.val().importe,
+  //         usoCFDI: child.val().usoCFDI,
+  //         estatus: child.val().estatus,
+  //         done: child.val().done,
+  //         id: child.key
+  //       })
+  //     })
+  //     this.setState({
+  //       listaSin: listaSin
+  //     })
+  //   })
+  // }
 
   listenForItemsAsi = (itemsRefAsi) => {
     itemsRefAsi.on('value', (snap) => {
@@ -140,23 +141,23 @@ export default class Comprometidos extends Component {
     })
     const itemsRefBanco = firebase.database().ref('presupuesto/')
     this.listenForItemsBanco(itemsRefBanco)
-    const itemsRef = firebase.database().ref('xml/')
-    this.listenForItems(itemsRef)
+    // const itemsRef = firebase.database().ref('xml/')
+    // this.listenForItems(itemsRef)
     const itemsRefAsi = firebase.database().ref('xml2/')
     this.listenForItemsAsi(itemsRefAsi)
   }
 
-  updateSin = (item) => {
-    let updates = {}
-    updates['xml2/' + item.id] = {
-      folio: item.folio,
-      fecha: item.fecha,
-      importe: item.importe,
-      usoCFDI: item.usoCFDI,
-      estatus: 'Asignado'
-    }
-    firebase.database().ref().update(updates)
-  }
+  // updateSin = (item) => {
+  //   let updates = {}
+  //   updates['xml2/' + item.id] = {
+  //     folio: item.folio,
+  //     fecha: item.fecha,
+  //     importe: item.importe,
+  //     usoCFDI: item.usoCFDI,
+  //     estatus: 'Asignado'
+  //   }
+  //   firebase.database().ref().update(updates)
+  // }
 
   updateAsi = (item) => {
     let updates = {}
@@ -294,7 +295,7 @@ export default class Comprometidos extends Component {
       })
     })
     .catch((error) => {
-      console.error('Error adding document: ', error)
+      console.error('Error: ', error)
     })
     alert('Tu solicitud fue enviada.')
   }
@@ -406,6 +407,7 @@ export default class Comprometidos extends Component {
       totalImporte.push(item.importe)
     ))
     const reducer = (a, b) => a + b
+    console.log(totalImporte)
 
     return (
       <div className='compro-container'>
@@ -478,33 +480,7 @@ export default class Comprometidos extends Component {
 
           <div className='axc'>
             <div className='cx'>
-              <div className='xml-back'>
-                <div className='xml-container'>
-                  {
-                    this.state.listaSin.map(item =>
-                      <div>
-                        <div className='xml-inputs-list'>
-                          <div className='w-xml'>
-                            <p>{item.name}</p>
-                          </div>
-                          <div className='w-xml'>
-                            <p>{item.fecha}</p>
-                          </div>
-                          <div className='w-xml'>
-                            <p>{item.importe}</p>
-                          </div>
-                          <div className='w-xml'>
-                            <p>{item.usoCFDI}</p>
-                          </div>
-                          <div className='w-xml' style={{padding: '10px'}}>
-                            <button onClick={this.updateSin}> + </button>
-                          </div>
-                        </div>
-                      </div>
-                    )
-                  }
-                </div>
-              </div>
+              <XmlComp />
             </div>
             <div className='cx'>
               {
