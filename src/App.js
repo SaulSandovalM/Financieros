@@ -275,7 +275,7 @@ function App (props) {
       <Route path='/add/:id' component={Add} />
       {/* todos lods pdf */}
       <Route path='/Gasto' component={Gasto} />
-      <Route path='/ObjetodegastoFR/:id' component={ObjetodegastoFR} />
+      <Route path='/ObjetodegastoFR' component={ObjetodegastoFR} />
       <Route path='/Recibo' component={Recibo} />
       <Route path='/Rfr:id' component={Rfr} />
       <Route path='/ObjetodegastoPP:id' component={ObjetodegastoPP} />
