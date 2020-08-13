@@ -1,3 +1,17 @@
 .site-pf-of {
   padding-left: 80px;
 }
+.m-f {
+  margin: 0;
+  background: #f4f4f4;
+  padding: 75px 20px 0px 20px;
+}
+.title-so-o {
+  margin-top: 0;
+  text-align: center;
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 10px;
+  padding-right: 50px;
+  padding-left: 30px;
+}

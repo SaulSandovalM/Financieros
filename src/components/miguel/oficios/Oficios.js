@@ -39,7 +39,7 @@ export default class Cpdf extends Component {
 
     return (
       <div>
-        <div style={{ zIndex: '3', background: 'white', width: '100%', position: 'absolute', height: '95vh', paddingTop: '15px' }}>
+        <div style={{ zIndex: '3', background: '#f4f4f4', width: '100%', position: 'absolute', height: '100%' }}>
           <div className='m-f'>
             <div className='fr-con'>
               <p className='fr-b'><b>Fondo Revolvente</b></p>
@@ -47,28 +47,28 @@ export default class Cpdf extends Component {
             <div className='fcc-i'>
               <p className='fimpre'>Solicitud Programatica</p>
               <ReactToPrint
-                trigger={() => <buttom className='b-imp'>imprimir</buttom>}
+                trigger={() => <buttom className='b-imp'>Imprimir</buttom>}
                 content={() => this.ogfr}
               />
             </div>
             <div className='fcc-i'>
               <p className='fimpre'>Reembolso de FR</p>
               <ReactToPrint
-                trigger={() => <buttom className='b-imp'>imprimir</buttom>}
+                trigger={() => <buttom className='b-imp'>Imprimir</buttom>}
                 content={() => this.rfr}
               />
             </div>
             <div className='fcc-i'>
               <p className='fimpre'>Recibo Global</p>
               <ReactToPrint
-                trigger={() => <buttom className='b-imp'>imprimir</buttom>}
+                trigger={() => <buttom className='b-imp'>Imprimir</buttom>}
                 content={() => this.rec}
               />
             </div>
             <div className='fcc-i'>
               <p className='fimpre'>Leyenda Alusivas</p>
               <ReactToPrint
-                trigger={() => <buttom className='b-imp'>imprimir</buttom>}
+                trigger={() => <buttom className='b-imp'>Imprimir</buttom>}
                 content={() => this.gas}
               />
             </div>
@@ -81,21 +81,21 @@ export default class Cpdf extends Component {
             <div className='fcc-i'>
               <p className='fimpre'>Solicitud Programatica</p>
               <ReactToPrint
-                trigger={() => <buttom className='b-imp'>imprimir</buttom>}
+                trigger={() => <buttom className='b-imp'>Imprimir</buttom>}
                 content={() => this.sol}
               />
             </div>
             <div className='fcc-i'>
               <p className='fimpre'>Oficio Presentación</p>
               <ReactToPrint
-                trigger={() => <buttom className='b-imp'>imprimir</buttom>}
+                trigger={() => <buttom className='b-imp'>Imprimir</buttom>}
                 content={() => this.ofi}
               />
             </div>
             <div className='fcc-i'>
               <p className='fimpre'>Leyenda Alusivas</p>
               <ReactToPrint
-                trigger={() => <buttom className='b-imp'>imprimir</buttom>}
+                trigger={() => <buttom className='b-imp'>Imprimir</buttom>}
                 content={() => this.gasto}
               />
             </div>
@@ -120,233 +120,21 @@ export default class Cpdf extends Component {
           </div>
         </div>
 
-        <div className='subdad' ref={el => (this.ogfr = el)} style={{ zIndex: '2', position: 'absolute' }}>
-          <div className='bueno'>
-            <p>Bueno por: {this.state.fondo.importe}</p>
-          </div>
-          <div className='recibi'>
-            <p>
-              Recibí   de la  Secretaría  de  Finanzas Públicas  del  Gobierno  del  Estado de Hidalgo la cantidad de:
-              $ {this.state.fondo.importe} ({(NumberAsString(this.state.fondo.importe))})
-            </p>
-          </div>
-          <div className='concepto'>
-            <p>Por {this.state.fondo.tipo_doc}</p>
-          </div>
-          <div className='fecha'>
-            <p>Pachuca de Soto, Hgo a {today}</p>
-          </div>
-          <div className='refe'>
-            <p>DIRECTOR GENERAL DE<br />ADMINISTRACIÓN Y FINANZAS</p>
-          </div>
-          <div className='firma-dad'>
-            <div className='firma-raya'>
-              <p>MTRO. LEÓN MAXIMILIANO HERNÁNDEZ VALDÉS<br />R.F.C.: HEVL-750104</p>
-            </div>
-          </div>
-        </div>
 
-        <div className='pppdf-subdad' ref={el => (this.rfr = el)} style={{ zIndex: '2', position: 'absolute' }}>
-          <div className='fondo-procu'>
-            <img className='ime' src={logo2} alt='' />
-          </div>
-          <div className='no-oficio'>
-            <p>
-              <b>Oficio No:</b> PGI/DGAyF/ {this.state.fondo.no_oficio}
-              <br /> Pachuca de Soto, Hidalgo a {today}
-              <br /><b>Asunto </b>  Reembolso de Fondo Revolvente
-            </p>
-          </div>
-          <div className='prensente'>
-            <p>
-              <b>
-                Lic. César Alberto González López
-                <br />Subsecretario de Egresos de la
-                <br /> Secretaría de Finanzas Públicas
-                <br />Presente
-              </b>
-            </p>
-          </div>
-          <div className='añadido'>
-            <p>
-              <b>
-                AT'N: L.C.P. Karina Barrios Velázquez
-                <br />Directora General de Contabilidad
-                <br />Gubernamental
-              </b>
-            </p>
-          </div>
-          <div className='texto-ofi_ppp'>
-            <p>
-              Por medio de presente me permito enviar a Usted documentación amparada con número de
-              comprobantes 'No.____', por un total de $,
-              para el trámite de Reembolso de Fondo Revolvente, con cargo al proyecto {/* {this.state.comprometido.no_proyecto} y {this.state.fondo.no_proyec} */},
-              otorgado en el oficio de autorización número de oficio {this.state.fondo.oficio_aut} a la Procuraduría General de Justicia del Estado de Hidalgo.
-            </p>
-            <p>Sin otro particular por el momento, reciba un cordial saludo</p>
-          </div>
-          <div className='atte'>
-            <p>
-              Atentamente <br />Director General
-            </p>
-          </div>
-          <div className='firma-dad'>
-            <div className='firma-raya'>
-              <p className='mtro'>MTRO. LEÓN MAXIMILIANO HERNÁNDEZ VALDÉS</p>
-            </div>
-          </div>
-          <div className='ccp'>
-            <p className='text'>C.C.P...- Expedien<br />Minutario<br />LMHV/NRL/macht</p>
-          </div>
-        </div>
 
-        <div className='subdad' ref={el => (this.rec = el)} style={{ zIndex: '2', position: 'absolute' }}>
-          <div className='bueno'>
-            <p className='texto-de-pdf'>
-              Bueno por: {this.state.fondo.importe}
-            </p>
-          </div>
-          <div className='recibi'>
-            <p className='texto-de-pdf' style={{ textAlign: 'justify' }}>
-              Recibí de la Secretaría de Finanzas Públicas  del  Gobierno  del  Estado de Hidalgo la cantidad de
-            </p>
-          </div>
-          <div className='concepto'>
-            <p className='texto-de-pdf'>
-              Por {this.state.fondo.tipo_doc}
-            </p>
-          </div>
-          <div className='fecha'>
-            <p className='texto-de-pdf'>
-              Pachuca de Soto, Hgo a {today}
-            </p>
-          </div>
-          <div className='refe'>
-            <p className='texto-de-pdf'>
-              DIRECTOR GENERAL DE<br />ADMINISTRACIÓN Y FINANZAS
-            </p>
-          </div>
-          <div className='firma-dad-r'>
-            <div className='firma-raya-r'>
-              <p className='texto-de-pdf' style={{ textAlign: 'center' }}>
-                MTRO. LEÓN MAXIMILIANO HERNÁNDEZ VALDÉS<br />R.F.C.: HEVL-750104
-              </p>
-            </div>
-          </div>
-        </div>
 
-        <div ref={el => (this.gas = el)} style={{ zIndex: '2', position: 'absolute' }}>
-          <div>
-            <div className='title-ga'>
-              <div>
-                <img className='pgjh' src={lpgjh} alt='' />
-              </div>
-              <div>
-                <p className='text-titulo-ga'>ORGANO SUPERIOR</p>
-                <p className='text-titulo-ga'>UNIDAD PRESUPUESTAL</p>
-                <p className='text-titulo-ga'>OBJETO DE GASTO</p>
-              </div>
-              <div>
-                <img className='ims' src={logo2} alt='' />
-              </div>
-            </div>
-          </div>
-          <div className='faderinp'>
-            <div className='contenedor-ga'>
-              <div className='contenedor-1 '>
-                <div className='interno-ga'>
-                  <p className='text-ga'>Gasto a Comprobar</p>
-                  <input className='input-ga' />
-                </div>
-                <div className='interno-ga'>
-                  <p className='text-ga'>Comprobacion de Gastos</p>
-                  <input className='input-ga' />
-                </div>
-              </div>
-              <div className='contenedor-1'>
-                <div className='interno-ga'>
-                  <p className='text-ga'>Creación de Fondo Revolvente</p>
-                  <input className='input-ga' />
-                </div>
-                <div className='interno-ga'>
-                  <p className='text-ga'>Fondo Revolvente</p>
-                  <input className='input-ga' />
-                </div>
-                <div className='interno-ga'>
-                  <p className='text-ga'>Cancelacion de Fondo Revolvente</p>
-                  <input className='input-ga' />
-                </div>
-              </div>
-              <div className='contenedor-1'>
-                <div className='interno-ga'>
-                  <p className='text-ga'>Viaticos Anticipados</p>
-                  <input className='input-ga' />
-                </div>
-                <div className='interno-ga'>
-                  <p className='text-ga'>Viaticos Devengados</p>
-                  <input className='input-ga' />
-                </div>
-                <div className='interno-ga'>
-                  <p className='text-ga'>Comprobación de Viáticos</p>
-                  <input className='input-ga' />
-                </div>
-              </div>
-              <div className='contenedor-1'>
-                <div className='interno-ga'>
-                  <p className='text-ga'>Pago a Proveedores</p>
-                  <input className='input-ga' />
-                </div>
-                <div className='interno-ga'>
-                  <p className='text-ga'>Transferencias</p>
-                  <input className='input-ga' />
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className='fader-tabla'>
-            <div className='tabla-ga'>
-              <table className='tablagas'>
-                <tr>
-                  <td className='alltabla-ga '>FOLIO DE LA FACTURA</td>
-                  <td className='alltabla-ga '>IMPORTE</td>
-                  <td className='alltabla-ga '>LEYENDA ALUSIVA AL GASTO</td>
-                </tr>
-                <tr>
-                  <td className='all-tab' />
-                  <td className='all-tab' />
-                  <td className='all-tab' />
-                </tr>
-                <tr>
-                  <td className='all-tab' />
-                  <td className='all-tab' />
-                  <td className='all-tab' />
-                </tr>
-                <tr>
-                  <td className='all-tab' />
-                  <td className='all-tab' />
-                  <td className='all-tab' />
-                </tr>
-                <tr>
-                  <td className='all-tab' />
-                  <td className='all-tab' />
-                  <td className='all-tab' />
-                </tr>
-                <tr>
-                  <td className='all-tab' />
-                  <td className='all-tab' />
-                  <td className='all-tab' />
-                </tr>
-                <tr>
-                  <td className='all-tab text-total-ga'>TOTAL</td>
-                  <td className='all-tab' />
-                </tr>
-              </table>
-            </div>
-          </div>
-        </div>
 
-        <div>
-          <div className='title-so' ref={el => (this.sol = el)} style={{ zIndex: '2', position: 'absolute' }}>
+
+
+
+
+
+
+
+
+        <div ref={el => (this.ogfr = el)}>
+          <div />
+          <div className='title-so-o'>
             <img className='pgjh' src={lpgjh} alt='' />
             <p>SOLICITUD PROGRAMÁTICA DEL GASTO</p>
             <img className='ims' src={logo2} alt='' />
@@ -959,11 +747,11 @@ export default class Cpdf extends Component {
                     <td className='all-tabla border-color' />
                     <td className='all-tabla border-color' />
                     <td className='all-tabla border-color' />
-                    <td className='all-tabla border-color' />
-                    <td className='all-tabla border-color' />
-                    <td className='all-tabla border-color' />
-                    <td className='all-tabla border-color' />
-                    <td className='all-tabla border-color' />
+                    <td className='all-tabla  border-color' />
+                    <td className='all-tabla  border-color' />
+                    <td className='all-tabla  border-color' />
+                    <td className='all-tabla  border-color' />
+                    <td className='all-tabla  border-color' />
                     <td className='all-tabla border-color2 text-rete'>RETENCION</td>
                     <td className='all-tabla' />
                   </tr>
@@ -995,7 +783,7 @@ export default class Cpdf extends Component {
           </div>
           <div className='obs-sopadre'>
             <div className='obs-so'>
-              <p className='text-osb'>Observaciones </p>
+              <p className='text-osb'>Observaciones</p>
               <input className='input-obs' />
               <div className='obs-so2'>
                 <p className='text-osb'> No. De Solicitud</p>
@@ -1009,174 +797,6 @@ export default class Cpdf extends Component {
             </div>
             <div className='firmas'>
               <p className='text-firmas'>Reviso</p>
-            </div>
-          </div>
-        </div>
-
-        <div className='pppdf-subdad' ref={el => (this.ofi = el)} style={{ zIndex: '2', position: 'absolute' }}>
-          <div class='fondo-procu'>
-            <img class='ime' src={logo2} alt='' />
-          </div>
-          <div class='no-oficio'>
-            <p>
-              <b>Oficio No:</b> PGI/DGAyF/ {this.state.fondo.no_oficio}
-              <br /> Pachuca de Soto, Hidalgo a {today}
-              <br /><b>Asunto </b>Solicitud de Pago Proveedor por Requisicón
-            </p>
-          </div>
-          <div class='prensente'>
-            <p>
-              <b>
-                Lic. César Alberto González López
-                <br />Subsecretario de Egresos de la
-                <br /> Secretaría de Finanzas Públicas
-                <br />Presente
-              </b>
-            </p>
-          </div>
-          <div class='añadido'>
-            <p>
-              <b>
-                AT'N: L.C.P. Karina Barrios Velázquez
-                <br />Directora General de Contabilidad
-                <br />Gubernamental
-              </b>
-            </p>
-          </div>
-          <div class='texto-ofi_ppp'>
-            <p>
-              Por medio de presente me permito enviar a Usted documentación por un numero total de
-              $ {this.state.fondo.importe} ({(NumberAsString(this.state.fondo.importe))}), amparada con CFDI No______, numero de
-              prequisición_______ pedido/contrato ___________, asi como la poliza de afectacion,
-              presumpuestal al momento del comprometido num________ que se emite la Direccion General de
-              Compras Publicas; para que se efectúe el tramite de pago  a favro del proveedor ___________________
-              , por la (compra o presentacion de servicios  xxxxxxxxxxx, con cargo
-              al proyecto (clave y nombre del proyecto) y de lso recursos otorgados con el oficio de autorización
-              (numero de oficio), numero de oficio a la secretaria de _______________________________.
-            </p>
-            <p>Sin otro particular por el momento, reciba un cordial saludo</p>
-          </div>
-          <div class='atte'>
-            <p> Atentamente
-              <br />Director General
-            </p>
-          </div>
-          <div class='firma-dad'>
-            <div class='firma-raya'>
-              <p class='mtro'>MTRO. LEÓN MAXIMILIANO HERNÁNDEZ VALDÉS</p>
-            </div>
-          </div>
-          <div class='ccp'>
-            <p class='text'>C.C.P...- Expedien<br />Minutario<br />LMHV/NRL/macht</p>
-          </div>
-        </div>
-
-        <div ref={el => (this.gasto = el)} style={{ zIndex: '2', position: 'absolute' }}>
-          <div>
-            <div className='title-ga'>
-              <div>
-                <img className='pgjh' src={lpgjh} alt='' />
-              </div>
-              <div>
-                <p className='text-titulo-ga'>ORGANO SUPERIOR</p>
-                <p className='text-titulo-ga'>UNIDAD PRESUPUESTAL</p>
-                <p className='text-titulo-ga'>OBJETO DE GASTO</p>
-              </div>
-              <div>
-                <img className='ims' src={logo2} alt='' />
-              </div>
-            </div>
-          </div>
-          <div className='faderinp'>
-            <div className='contenedor-ga'>
-              <div className='contenedor-1 '>
-                <div className='interno-ga'>
-                  <p className='text-ga'>Gasto a Comprobar</p>
-                  <input className='input-ga' />
-                </div>
-                <div className='interno-ga'>
-                  <p className='text-ga'>Comprobacion de Gastos</p>
-                  <input className='input-ga' />
-                </div>
-              </div>
-              <div className='contenedor-1'>
-                <div className='interno-ga'>
-                  <p className='text-ga'>Creación de Fondo Revolvente</p>
-                  <input className='input-ga' />
-                </div>
-                <div className='interno-ga'>
-                  <p className='text-ga'>Fondo Revolvente</p>
-                  <input className='input-ga' />
-                </div>
-                <div className='interno-ga'>
-                  <p className='text-ga'>Cancelacion de Fondo Revolvente</p>
-                  <input className='input-ga' />
-                </div>
-              </div>
-              <div className='contenedor-1'>
-                <div className='interno-ga'>
-                  <p className='text-ga'>Viaticos Anticipados</p>
-                  <input className='input-ga' />
-                </div>
-                <div className='interno-ga'>
-                  <p className='text-ga'>Viaticos Devengados</p>
-                  <input className='input-ga' />
-                </div>
-                <div className='interno-ga'>
-                  <p className='text-ga'>Comprobación de Viáticos</p>
-                  <input className='input-ga' />
-                </div>
-              </div>
-              <div className='contenedor-1'>
-                <div className='interno-ga'>
-                  <p className='text-ga'>Pago a Proveedores</p>
-                  <input className='input-ga' />
-                </div>
-                <div className='interno-ga'>
-                  <p className='text-ga'>Transferencias</p>
-                  <input className='input-ga' />
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className='fader-tabla'>
-            <div className='tabla-ga'>
-              <table className='tablagas'>
-                <tr>
-                  <td className='alltabla-ga'>FOLIO DE LA FACTURA</td>
-                  <td className='alltabla-ga'>IMPORTE</td>
-                  <td className='alltabla-ga'>LEYENDA ALUSIVA AL GASTO</td>
-                </tr>
-                <tr>
-                  <td className='all-tab' />
-                  <td className='all-tab' />
-                  <td className='all-tab' />
-                </tr>
-                <tr>
-                  <td className='all-tab' />
-                  <td className='all-tab' />
-                  <td className='all-tab' />
-                </tr>
-                <tr>
-                  <td className='all-tab' />
-                  <td className='all-tab' />
-                  <td className='all-tab' />
-                </tr>
-                <tr>
-                  <td className='all-tab' />
-                  <td className='all-tab' />
-                  <td className='all-tab' />
-                </tr>
-                <tr>
-                  <td className='all-tab' />
-                  <td className='all-tab' />
-                  <td className='all-tab' />
-                </tr>
-                <tr>
-                  <td className='all-tab text-total-ga'>TOTAL</td>
-                  <td className='all-tab' />
-                </tr>
-              </table>
             </div>
           </div>
         </div>

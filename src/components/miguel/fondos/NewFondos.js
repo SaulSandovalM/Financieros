@@ -20,6 +20,13 @@ export default class Fondos extends Component {
       desc: '',
       beneficiario: '',
       realizo: '',
+      requisicion: '',
+      ncomprobantes: '',
+      ncfdi: '',
+      poliza: '',
+      cfe: '',
+      nscfe: '',
+      observaciones: '',
       fondos: [],
       allowCustom: true,
       value: '',
@@ -38,7 +45,9 @@ export default class Fondos extends Component {
 
   onSubmit = (e) => {
     e.preventDefault()
-    const { fondo, fecha, tipo_doc, oficio_aut, no_oficio, no_lici, importe, desc, beneficiario, realizo } = this.state
+    const { fondo, fecha, tipo_doc, oficio_aut, no_oficio, no_lici, importe, desc,
+            beneficiario, realizo, requisicion, ncomprobantes, ncfdi, poliza, cfe,
+            nscfe, observaciones } = this.state
     this.ref.add({
       fondo,
       fecha,
@@ -50,6 +59,13 @@ export default class Fondos extends Component {
       desc,
       beneficiario,
       realizo,
+      requisicion,
+      ncomprobantes,
+      ncfdi,
+      poliza,
+      cfe,
+      nscfe,
+      observaciones
     }).then((docRef) => {
       this.setState({
         fondo: '',
@@ -62,12 +78,17 @@ export default class Fondos extends Component {
         desc: '',
         beneficiario: '',
         realizo: '',
+        requisicion: '',
+        ncomprobantes: '',
+        ncfdi: '',
+        poliza: '',
+        cfe: '',
+        nscfe: '',
+        observaciones: ''
       })
       const statsRef = firebase.firestore().collection('fondos').doc('--stats--')
       const increment = firebase.firestore.FieldValue.increment(1)
       const batch = firebase.firestore().batch()
-      const storyRef = firebase.firestore().collection('fondos').doc(`${Math.random()}`)
-      batch.set(storyRef, { title: 'Nuevo Fondo!' })
       batch.set(statsRef, { nFondo: increment }, { merge: true })
       batch.commit()
       this.perro()
@@ -102,7 +123,9 @@ export default class Fondos extends Component {
   onCollectionUpdate = (querySnapshot) => {
     const fondos = []
     querySnapshot.forEach((doc) => {
-      const { fondo, fecha, tipo_doc, oficio_aut, no_oficio, no_aut, no_lici, importe, desc, importe_l, beneficiario, realizo } = doc.data()
+      const { fondo, fecha, tipo_doc, oficio_aut, no_oficio, no_aut, no_lici, importe,
+              desc, importe_l, beneficiario, realizo, requisicion, ncomprobantes, ncfdi,
+              poliza, cfe, nscfe, observaciones } = doc.data()
       fondos.push({
         key: doc.id,
         doc,
@@ -118,6 +141,13 @@ export default class Fondos extends Component {
         importe_l,
         beneficiario,
         realizo,
+        requisicion,
+        ncomprobantes,
+        ncfdi,
+        poliza,
+        cfe,
+        nscfe,
+        observaciones
       })
     })
     this.setState({
@@ -146,6 +176,7 @@ export default class Fondos extends Component {
   tipo_doc = ['Pago Directo', 'Fondo Revolvente', 'Gasto a Comprobar', 'Cancelado', 'Licitación']
   tipo_doc2 = ['Fondo Revolvente', 'Pago Directo']
   tipo_doc3 = ['Pago Directo']
+  tipo_doc4 = ['Fondo Revolvente']
   partida = ['211001', '211002', '212001', '212002', '214001', '214002', '215001', '216001', '217001', '221001', '221002', '246001', '251001', '253001', '254001', '255001', '261001', '271001', '272001', '291001', '292001', '311001', '313001', '318001', '323002', '334001', '338001', '341001', '351001', '352001', '353001', '355001', '357001', '358001', '361002', '372001', '375001', '381001', '392006', '394001', '218002', '312001', '371001', '247001', '249001', '359001', '336001', '275001', '211003', '541001', '515001', '339001']
   up = ['2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '20', '21', '22', '23', '24']
   no_proyecto = ['U027 425', 'U029 425', 'U027 1208', 'U029 1208', 'U027 1860', 'U029 1860', 'U024 2686','U027 2686','U029 2686','U038 2514',]
@@ -198,13 +229,13 @@ export default class Fondos extends Component {
     }
     today = dd + '/' + mm + '/' + yyyy
     const allowCustom = this.state.allowCustom
-    const { tipo_doc, oficio_aut, no_oficio, no_lici, importe, desc, beneficiario, partida, up, no_proyecto, municipio, area } = this.state
+    const { tipo_doc, oficio_aut, importe, beneficiario } = this.state
     this.state.fondo = this.state.contador.nFondo
     this.state.fecha = today
     this.state.realizo = admin
 
     return (
-      <div className='zz' style={{marginTop: '70px'}}>
+      <div className='zz'>
           <div className='m-f'>
             <form onSubmit={this.onSubmit}>
               <div className='f-f-c-w'>
@@ -232,24 +263,6 @@ export default class Fondos extends Component {
                   <div className='f-f2'>
                     <p className='fp'>Tipo de Documento</p>
                     {admin === 'ADMIN' &&
-                      <DropDownList
-                        suggest
-                        style={{
-                          borderColor: 'rgba(0,0,0,0.42)',
-                          background: 'white',
-                          height: '28px',
-                          color: 'black',
-                          position: 'static'
-                        }}
-                        data={this.tipo_doc}
-                        allowCustom={allowCustom}
-                        name='tipo_doc'
-                        value={tipo_doc}
-                        onChange={this.onChange}
-                        required
-                        ref='tipo_doc'
-                      />}
-                    {admin === 'NAYRA' &&
                       <DropDownList
                         suggest
                         style={{
@@ -295,7 +308,7 @@ export default class Fondos extends Component {
                           color: 'black',
                           position: 'static'
                         }}
-                        data={this.tipo_doc}
+                        data={this.tipo_doc4}
                         allowCustom={allowCustom}
                         name='tipo_doc'
                         value={tipo_doc}
@@ -313,7 +326,7 @@ export default class Fondos extends Component {
                           color: 'black',
                           position: 'static'
                         }}
-                        data={this.tipo_doc}
+                        data={this.tipo_doc4}
                         allowCustom={allowCustom}
                         name='tipo_doc'
                         value={tipo_doc}
@@ -331,7 +344,7 @@ export default class Fondos extends Component {
                           color: 'black',
                           position: 'static'
                         }}
-                        data={this.tipo_doc}
+                        data={this.tipo_doc4}
                         allowCustom={allowCustom}
                         name='tipo_doc'
                         value={tipo_doc}
@@ -349,7 +362,7 @@ export default class Fondos extends Component {
                           color: 'black',
                           position: 'static'
                         }}
-                        data={this.tipo_doc}
+                        data={this.tipo_doc2}
                         allowCustom={allowCustom}
                         name='tipo_doc'
                         value={tipo_doc}
@@ -367,7 +380,7 @@ export default class Fondos extends Component {
                           color: 'black',
                           position: 'static'
                         }}
-                        data={this.tipo_doc}
+                        data={this.tipo_doc3}
                         allowCustom={allowCustom}
                         name='tipo_doc'
                         value={tipo_doc}
@@ -385,7 +398,7 @@ export default class Fondos extends Component {
                           color: 'black',
                           position: 'static'
                         }}
-                        data={this.tipo_doc}
+                        data={this.tipo_doc4}
                         allowCustom={allowCustom}
                         name='tipo_doc'
                         value={tipo_doc}
@@ -403,7 +416,7 @@ export default class Fondos extends Component {
                           color: 'black',
                           position: 'static'
                         }}
-                        data={this.tipo_doc}
+                        data={this.tipo_doc3}
                         allowCustom={allowCustom}
                         name='tipo_doc'
                         value={tipo_doc}
@@ -421,7 +434,7 @@ export default class Fondos extends Component {
                           color: 'black',
                           position: 'static'
                         }}
-                        data={this.tipo_doc}
+                        data={this.tipo_doc3}
                         allowCustom={allowCustom}
                         name='tipo_doc'
                         value={tipo_doc}
@@ -439,7 +452,7 @@ export default class Fondos extends Component {
                           color: 'black',
                           position: 'static'
                         }}
-                        data={this.tipo_doc}
+                        data={this.tipo_doc3}
                         allowCustom={allowCustom}
                         name='tipo_doc'
                         value={tipo_doc}
@@ -457,7 +470,7 @@ export default class Fondos extends Component {
                           color: 'black',
                           position: 'static'
                         }}
-                        data={this.tipo_doc}
+                        data={this.tipo_doc3}
                         allowCustom={allowCustom}
                         name='tipo_doc'
                         value={tipo_doc}
@@ -508,7 +521,6 @@ export default class Fondos extends Component {
                       className='f-b-s'
                       name='no_lici'
                       onChange={this.onChange}
-                      required
                       ref='no_lici'
                     />
                   </div>
@@ -579,19 +591,43 @@ export default class Fondos extends Component {
                   </div>
                   <div className='f-f3'>
                     <p className='lp'>Requisición Pedido</p>
-                    <input className='f-l-s'/ >
+                    <input
+                      className='f-l-s'
+                      id='requisicion'
+                      name='requisicion'
+                      onChange={this.onChange}
+                      ref='requisicion'
+                    />
                   </div>
                   <div className='f-f3'>
                     <p className='lp'>Número de Comprobantes</p>
-                    <input className='f-l-s'/>
+                    <input
+                      className='f-l-s'
+                      id='ncomprobantes'
+                      name='ncomprobantes'
+                      onChange={this.onChange}
+                      ref='ncomprobantes'
+                    />
                   </div>
                   <div className='f-f3'>
                     <p className='lp'>Número CFDI</p>
-                    <input className='f-l-s'/>
+                    <input
+                      className='f-l-s'
+                      id='ncfdi'
+                      name='ncfdi'
+                      onChange={this.onChange}
+                      ref='ncfdi'
+                    />
                   </div>
                   <div className='f-f3'>
                     <p className='lp'>Poliza Comprometido</p>
-                    <input className='f-l-s'/>
+                    <input
+                      className='f-l-s'
+                      id='poliza'
+                      name='poliza'
+                      onChange={this.onChange}
+                      ref='poliza'
+                    />
                   </div>
                 </div>
                 <div className='f-l-w'>
@@ -600,15 +636,33 @@ export default class Fondos extends Component {
                   </div>
                   <div className='f-f3'>
                     <p className='lp'>Cta CFE</p>
-                    <input className='f-l-s'/>
+                    <input
+                      className='f-l-s'
+                      id='cfe'
+                      name='cfe'
+                      onChange={this.onChange}
+                      ref='cfe'
+                    />
                   </div>
                   <div className='f-f3'>
                     <p className='lp'>No Servicio CFE</p>
-                    <input className='f-l-s'/>
+                    <input
+                      className='f-l-s'
+                      id='nscfe'
+                      name='nscfe'
+                      onChange={this.onChange}
+                      ref='nscfe'
+                    />
                   </div>
                   <div className='f-f3'>
                     <p className='lp'>Observaciones</p>
-                    <input className='f-l-s'/>
+                    <input
+                      className='f-l-s'
+                      id='observaciones'
+                      name='observaciones'
+                      onChange={this.onChange}
+                      ref='observaciones'
+                    />
                   </div>
                 </div>
               </div>

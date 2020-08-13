@@ -374,7 +374,7 @@ export default class Comprometidos extends Component {
       admin = 'MAURICIO'
     }
     const allowCustom = this.state.allowCustom
-    const { partida, up, no_proyecto, municipio, area } = this.state
+    const { no_proyecto, municipio, area } = this.state
 
     const totalImporte = []
     this.state.listaAsi.map(item => (
@@ -382,7 +382,6 @@ export default class Comprometidos extends Component {
     ))
     const reducer = (a, b) => a + b
     this.state.total = totalImporte.reduce(reducer)
-    console.log(this.state.total)
 
     return (
       <div className='compro-container'>
@@ -510,7 +509,7 @@ export default class Comprometidos extends Component {
         </div>
         <div className='left-b-f'>
           <button className='bt-s-f' onClick={this.cambio}>
-            Guadar
+            Comprometido Finalizado
           </button>
         </div>
       </div>
