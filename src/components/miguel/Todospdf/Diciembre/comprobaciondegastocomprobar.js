@@ -14,20 +14,7 @@ export default class Comprobaciondegastocomprobar extends Component {
     }
   }
 
-  componentDidMount () {
-    const ref = firebase.firestore().collection('fondos').doc(this.props.match.params.id)
-    ref.get().then((doc) => {
-      if (doc.exists) {
-        this.setState({
-          fondo: doc.data(),
-          key: doc.id,
-          isLoading: false
-        })
-      } else {
-        console.log('No hay documento')
-      }
-    })
-  }
+
 
   render () {
     var today = new Date()
@@ -45,7 +32,7 @@ export default class Comprobaciondegastocomprobar extends Component {
           <div className='no-oficio'>
             <p>
               <b>Oficio No: </b>
-              PGI/DGAyF/ {this.state.fondo.no_oficio}<br />
+              PGI/DGAyF/ <br />
               Pachuca de Soto, Hidalgo a {today}<br />
               <b>Asunto </b>
               Solicitud de Pago Proveedor por Requisicón
