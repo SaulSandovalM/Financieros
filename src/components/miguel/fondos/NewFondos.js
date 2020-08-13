@@ -72,7 +72,7 @@ export default class Fondos extends Component {
       batch.set(statsRef, { nFondo: increment }, { merge: true })
       batch.commit()
       this.perro()
-      this.props.history.push(`/edit/${this.state.f}`)
+      this.props.history.push(`/Comprometidos/${this.state.f}`)
     })
     .catch((error) => {
       console.error('Error al guardar: ', error)

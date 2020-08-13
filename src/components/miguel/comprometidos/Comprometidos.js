@@ -24,7 +24,6 @@ export default class Comprometidos extends Component {
       area: '',
       importe_comp: '',
       isr: '',
-      total: '',
       fecha_comp: '',
       comprometidos: [],
       total: '',
