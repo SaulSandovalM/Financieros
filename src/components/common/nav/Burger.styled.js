@@ -13,7 +13,7 @@ export const StyledBurger = styled.button`
   border: none;
   cursor: pointer;
   padding: 0;
-  z-index: 1;
+  z-index: 5;
 
   &:focus {
     outline: none;
