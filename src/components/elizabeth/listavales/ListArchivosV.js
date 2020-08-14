@@ -54,7 +54,7 @@ export default class ListArchivosV extends Component {
   onDrop(files) {
     var fileNameE = files;
     console.log(fileNameE);
-    fetch(fileNameE)
+    fetch(example)
       .then(res => res.text())
       .then(data => {
         var xml = new XMLParser().parseFromString(data);
