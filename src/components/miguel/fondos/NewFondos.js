@@ -671,48 +671,6 @@ export default class Fondos extends Component {
               </div>
             </form>
           </div>
-
-        {this.state.isHidden === 4 &&
-          <div>
-            <div className='m-f'>
-              <div className='fcc-i'>
-                <p className='fimpre'>Fecha Contrarecibo:</p>
-                <input />
-              </div>
-              <div className='fcc-i'>
-                <p className='fimpre'>No. Contrarecibo:</p>
-                <input />
-              </div>
-              <div className='fcc-i'>
-                <p className='fimpre'>Fecha Deposito:</p>
-                <input />
-              </div>
-              <div className='fcc-i'>
-                <p className='fimpre'>Cuenta por Pagar:</p>
-                <input />
-              </div>
-              <div className='fcc-i'>
-                <p className='fimpre'>Beneficiario/Proveedor:</p>
-                <input />
-              </div>
-              <div className='fcc-i'>
-                <p className='fimpre'>Sujeto Contable:</p>
-                <input />
-              </div>
-              <div className='fcc-i'>
-                <p className='fimpre'>Solicitud Programatica:</p>
-                <input />
-              </div>
-              <div className='fcc-i'>
-                <p className='fimpre'>Monto:</p>
-                <input />
-              </div>
-              <div className='fcc-i'>
-                <p className='fimpre'>CPA:</p>
-                <input />
-              </div>
-            </div>
-          </div>}
       </div>
     )
   }

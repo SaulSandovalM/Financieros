@@ -5,6 +5,8 @@ import ListComponent from './ListComponent'
 import { DropDownList } from '@progress/kendo-react-dropdowns'
 import '@progress/kendo-theme-default/dist/all.css'
 import XmlComp from './sin/XmlComp'
+import Dropzone from 'react-dropzone'
+import XMLParser from 'react-xml-parser'
 
 export default class Comprometidos extends Component {
   constructor(props) {
@@ -48,9 +50,61 @@ export default class Comprometidos extends Component {
           name: 'preuba',
           done: false
         }
+      ],
+      listaPago: [
+        {
+          id: 1,
+          name: 'preuba',
+          done: false
+        }
       ]
     }
   }
+
+  handleOnChange1 (event) {
+    const files = event.target.files[0]
+    for (var i = 0; i < files.length; i++) {
+      const file = files[i]
+      var xml = file
+      if (file.type === 'text/xml') {
+        var reader = new FileReader()
+        reader.onloadend = function () {
+          var xml = new XMLParser().parseFromString(reader.result)
+          fetch(xml).then(res => res.text()).then(data => {
+            fetch('https://financieros-78cb0.firebaseio.com/xmlP.json', {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                  },
+                  body: JSON.stringify(xml)
+                })
+            })
+        }
+        reader.readAsText(xml)
+      }
+    }
+    const file = event.target.files[i]
+    const storageRef = firebase.storage().ref(`comprobacion/${file.name}`)
+    const task = storageRef.put(file)
+    this.setState({
+      filex: `${file.name}`
+    })
+    task.on('state_changed', (snapshot) => {
+      const percentage = (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+      this.setState({
+        xml: percentage
+      })
+    }, error => {
+      console.error(error.message)
+    }, () => storageRef.getDownloadURL().then(url => {
+      const record = url
+      this.setState({
+        filefactura: record
+      })
+    }))
+  }
+
 
   // listenForItems = (itemsRef) => {
   //   itemsRef.on('value', (snap) => {
@@ -88,6 +142,26 @@ export default class Comprometidos extends Component {
       })
       this.setState({
         listaAsi: listaAsi
+      })
+    })
+  }
+
+  listenForItemsPago = (itemsRefPago) => {
+    itemsRefPago.on('value', (snap) => {
+      var listaPago = []
+      snap.forEach((child) => {
+        listaPago.push({
+          folio: child.val().folio,
+          fecha: child.val().fecha,
+          importe: child.val().importe,
+          usoCFDI: child.val().usoCFDI,
+          estatus: child.val().estatus,
+          done: child.val().done,
+          id: child.key
+        })
+      })
+      this.setState({
+        listaPago: listaPago
       })
     })
   }
@@ -147,6 +221,8 @@ export default class Comprometidos extends Component {
     // this.listenForItems(itemsRef)
     const itemsRefAsi = firebase.database().ref('xml2/')
     this.listenForItemsAsi(itemsRefAsi)
+    const itemsRefPago = firebase.database().ref('xmlP/')
+    this.listenForItemsPago(itemsRefPago)
   }
 
   // updateSin = (item) => {
@@ -338,41 +414,41 @@ export default class Comprometidos extends Component {
   }
 
   render() {
-    var user = firebase.auth().currentUser
-    var email
-    if (user != null) {
-      email = user.email
-    }
-    let admin
-    if (email === 'administrador@procu.com') {
-      admin = 'ADMIN'
-    } else if (email === 'nayra@procu.com') {
-      admin = 'NAYRA'
-    } else if (email === 'laura@procu.com') {
-      admin = 'LAURA'
-    } else if (email === 'miguel@procu.com') {
-      admin = 'MIGUEL'
-    } else if (email === 'teresa@procu.com') {
-      admin = 'TERESA'
-    } else if (email === 'marcos@procu.com') {
-      admin = 'MARCOS'
-    } else if (email === 'eloy@procu.com') {
-      admin = 'ELOY'
-    } else if (email === 'karina@procu.com') {
-      admin = 'KARINA'
-    } else if (email === 'martha@procu.com') {
-      admin = 'MARTHA'
-    } else if (email === 'lilia@procu.com') {
-      admin = 'LILIA'
-    } else if (email === 'cenely@procu.com') {
-      admin = 'CENELY'
-    } else if (email === 'hector@procu.com') {
-      admin = 'HECTOR'
-    } else if (email === 'omar@procu.com') {
-      admin = 'OMAR'
-    } else if (email === 'miau@procu.com') {
-      admin = 'MAURICIO'
-    }
+    // var user = firebase.auth().currentUser
+    // var email
+    // if (user != null) {
+    //   email = user.email
+    // }
+    // let admin
+    // if (email === 'administrador@procu.com') {
+    //   admin = 'ADMIN'
+    // } else if (email === 'nayra@procu.com') {
+    //   admin = 'NAYRA'
+    // } else if (email === 'laura@procu.com') {
+    //   admin = 'LAURA'
+    // } else if (email === 'miguel@procu.com') {
+    //   admin = 'MIGUEL'
+    // } else if (email === 'teresa@procu.com') {
+    //   admin = 'TERESA'
+    // } else if (email === 'marcos@procu.com') {
+    //   admin = 'MARCOS'
+    // } else if (email === 'eloy@procu.com') {
+    //   admin = 'ELOY'
+    // } else if (email === 'karina@procu.com') {
+    //   admin = 'KARINA'
+    // } else if (email === 'martha@procu.com') {
+    //   admin = 'MARTHA'
+    // } else if (email === 'lilia@procu.com') {
+    //   admin = 'LILIA'
+    // } else if (email === 'cenely@procu.com') {
+    //   admin = 'CENELY'
+    // } else if (email === 'hector@procu.com') {
+    //   admin = 'HECTOR'
+    // } else if (email === 'omar@procu.com') {
+    //   admin = 'OMAR'
+    // } else if (email === 'miau@procu.com') {
+    //   admin = 'MAURICIO'
+    // }
     const allowCustom = this.state.allowCustom
     const { no_proyecto, municipio, area } = this.state
 
@@ -382,6 +458,13 @@ export default class Comprometidos extends Component {
     ))
     const reducer = (a, b) => a + b
     this.state.total = totalImporte.reduce(reducer)
+
+    // const totalImporteP = []
+    // this.state.listaPago.map(item => (
+    //   totalImporteP.push(item.importe)
+    // ))
+    // const reducer = (a, b) => a + b
+    // this.state.total = totalImporteP.reduce(reducer)
 
     return (
       <div className='compro-container'>
@@ -455,6 +538,24 @@ export default class Comprometidos extends Component {
           <div className='axc'>
             <div className='cx'>
               <XmlComp />
+              {/* <Dropzone
+                style={{
+                  width: '100%',
+                  height: '100%',
+                  borderWidth: '1px',
+                  borderColor: 'rgb(102, 102, 102)',
+                  borderStyle: 'solid',
+                  borderRadius: '1px',
+                  maxFiles: 5,
+                  background: 'white',
+                  position: 'static'
+                }}
+                accept='.xml' onChange={this.handleOnChange1.bind(this)}
+              >
+                <div className='filename'>
+                  <p className='file-hid'>{this.state.filex}</p>
+                </div>
+              </Dropzone> */}
             </div>
             <div className='cx'>
               <div className='asi-l'>
@@ -483,6 +584,32 @@ export default class Comprometidos extends Component {
                 }
                 {(totalImporte.reduce(reducer))}
               </div>
+              {/* <div className='asi-l'>
+                {
+                  this.state.listaPago.map(item =>
+                    <div>
+                      <div className='xml-inputs-list'>
+                        <div className='w-xml'>
+                          <p>{item.name}</p>
+                        </div>
+                        <div className='w-xml'>
+                          <p>{item.fecha}</p>
+                        </div>
+                        <div className='w-xml'>
+                          <p>{item.importe}</p>
+                        </div>
+                        <div className='w-xml'>
+                          <p>{item.usoCFDI}</p>
+                        </div>
+                        <div className='w-xml' style={{ padding: '10px' }}>
+                          <button onClick={this.updateAsi}> - </button>
+                        </div>
+                      </div>
+                    </div>
+                  )
+                }
+                {(totalImporte.reduce(reducer))}
+              </div> */}
             </div>
           </div>
         </div>

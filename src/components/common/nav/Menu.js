@@ -4,6 +4,7 @@ import Nav from './Nav'
 import NavC from './NavC'
 import NavE from './NavE'
 import NavN from './NavN'
+import NavArchivos from './NavArchivos'
 import { StyledMenu } from './Menu.styled'
 import firebase from '../../../Firebase'
 
@@ -66,6 +67,7 @@ const Menu = ({ open, ...props }) => {
       {admin === 'NAYRA' && <NavN />}
       {admin === 'ELI' && <NavE />}
       {admin === 'CECILIA' && <NavC />}
+      {admin === 'JUAN' && <NavArchivos />}
       {/* admin === 'LAURA' && <Nav /> */}
       {/* admin === 'JUAN' && <Nav /> */}
     </StyledMenu>
