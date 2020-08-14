@@ -9,6 +9,7 @@ export default class Fondos extends Component {
   constructor (props) {
     super(props)
     this.ref = firebase.firestore().collection('fondos')
+    this.unsubscribe = null
     this.state = {
       fondo: '',
       fecha: '',
@@ -35,6 +36,25 @@ export default class Fondos extends Component {
       contador: {},
       f: ''
     }
+  }
+
+  onCollectionUpdate = (querySnapshot) => {
+    const fondos = []
+    querySnapshot.forEach((doc) => {
+      const { fondo, tipo_doc, importe, fecha, contrarecibo } = doc.data()
+      fondos.push({
+        key: doc.id,
+        doc,
+        fondo,
+        tipo_doc,
+        importe,
+        fecha,
+        contrarecibo
+      })
+    })
+    this.setState({
+      fondos
+   })
   }
 
   onChange = (e) => {
@@ -120,41 +140,6 @@ export default class Fondos extends Component {
     })
   }
 
-  onCollectionUpdate = (querySnapshot) => {
-    const fondos = []
-    querySnapshot.forEach((doc) => {
-      const { fondo, fecha, tipo_doc, oficio_aut, no_oficio, no_aut, no_lici, importe,
-              desc, importe_l, beneficiario, realizo, requisicion, ncomprobantes, ncfdi,
-              poliza, cfe, nscfe, observaciones } = doc.data()
-      fondos.push({
-        key: doc.id,
-        doc,
-        fondo,
-        fecha,
-        tipo_doc,
-        oficio_aut,
-        no_oficio,
-        no_aut,
-        no_lici,
-        importe,
-        desc,
-        importe_l,
-        beneficiario,
-        realizo,
-        requisicion,
-        ncomprobantes,
-        ncfdi,
-        poliza,
-        cfe,
-        nscfe,
-        observaciones
-      })
-    })
-    this.setState({
-      fondos
-   })
-  }
-
   perro = () => {
     firebase.firestore().collection('fondos').orderBy('fondo', 'desc').limit(1).get()
     .then(snapshot => {
@@ -236,441 +221,478 @@ export default class Fondos extends Component {
 
     return (
       <div className='zz'>
-          <div className='m-f'>
-            <form onSubmit={this.onSubmit}>
-              <div className='f-f-c-w'>
-                <div className='f-f'>
-                  <div className='f-f2'>
-                    <p className='fp'>Fondo</p>
-                    <input
-                      className='f-b-s'
-                      value={this.state.contador.nFondo}
-                      required
-                    />
+        <div className='m-f'>
+          {/* buscador por fondo */}
+          <div className='sea-t'>
+            <div className='sea-f-w'>
+              <input className='input-sea' />
+              <div className='space-seach'>
+                <div className='fondo-t-s'>
+                  <div className='fon-tab-ba'>
+                    <p className='fon-p-c'>Num Fondo</p>
                   </div>
-                </div>
-                <div className='f-f'>
-                  <div className='f-f2'>
-                    <p className='fp'>Fecha</p>
-                    <input
-                      className='f-b-s'
-                      required
-                      value={today}
-                    />
+                  <div className='fon-tab-ba'>
+                    <p className='fon-p-c'>Tipo de Documento</p>
                   </div>
-                </div>
-                <div className='f-f'>
-                  <div className='f-f2'>
-                    <p className='fp'>Tipo de Documento</p>
-                    {admin === 'ADMIN' &&
-                      <DropDownList
-                        suggest
-                        style={{
-                          borderColor: 'rgba(0,0,0,0.42)',
-                          background: 'white',
-                          height: '28px',
-                          color: 'black',
-                          position: 'static'
-                        }}
-                        data={this.tipo_doc}
-                        allowCustom={allowCustom}
-                        name='tipo_doc'
-                        value={tipo_doc}
-                        onChange={this.onChange}
-                        required
-                        ref='tipo_doc'
-                      />}
-                    {admin === 'LAURA' &&
-                      <DropDownList
-                        suggest
-                        style={{
-                          borderColor: 'rgba(0,0,0,0.42)',
-                          background: 'white',
-                          height: '28px',
-                          color: 'black',
-                          position: 'static'
-                        }}
-                        data={this.tipo_doc}
-                        allowCustom={allowCustom}
-                        name='tipo_doc'
-                        value={tipo_doc}
-                        onChange={this.onChange}
-                        required
-                        ref='tipo_doc'
-                      />}
-                    {admin === 'MIGUEL' &&
-                      <DropDownList
-                        suggest
-                        style={{
-                          borderColor: 'rgba(0,0,0,0.42)',
-                          background: 'white',
-                          height: '28px',
-                          color: 'black',
-                          position: 'static'
-                        }}
-                        data={this.tipo_doc4}
-                        allowCustom={allowCustom}
-                        name='tipo_doc'
-                        value={tipo_doc}
-                        onChange={this.onChange}
-                        required
-                        ref='tipo_doc'
-                      />}
-                    {admin === 'TERESA' &&
-                      <DropDownList
-                        suggest
-                        style={{
-                          borderColor: 'rgba(0,0,0,0.42)',
-                          background: 'white',
-                          height: '28px',
-                          color: 'black',
-                          position: 'static'
-                        }}
-                        data={this.tipo_doc4}
-                        allowCustom={allowCustom}
-                        name='tipo_doc'
-                        value={tipo_doc}
-                        onChange={this.onChange}
-                        required
-                        ref='tipo_doc'
-                      />}
-                    {admin === 'MARCOS' &&
-                      <DropDownList
-                        suggest
-                        style={{
-                          borderColor: 'rgba(0,0,0,0.42)',
-                          background: 'white',
-                          height: '28px',
-                          color: 'black',
-                          position: 'static'
-                        }}
-                        data={this.tipo_doc4}
-                        allowCustom={allowCustom}
-                        name='tipo_doc'
-                        value={tipo_doc}
-                        onChange={this.onChange}
-                        required
-                        ref='tipo_doc'
-                      />}
-                    {admin === 'ELOY' &&
-                      <DropDownList
-                        suggest
-                        style={{
-                          borderColor: 'rgba(0,0,0,0.42)',
-                          background: 'white',
-                          height: '28px',
-                          color: 'black',
-                          position: 'static'
-                        }}
-                        data={this.tipo_doc2}
-                        allowCustom={allowCustom}
-                        name='tipo_doc'
-                        value={tipo_doc}
-                        onChange={this.onChange}
-                        required
-                        ref='tipo_doc'
-                      />}
-                    {admin === 'KARINA' &&
-                      <DropDownList
-                        suggest
-                        style={{
-                          borderColor: 'rgba(0,0,0,0.42)',
-                          background: 'white',
-                          height: '28px',
-                          color: 'black',
-                          position: 'static'
-                        }}
-                        data={this.tipo_doc3}
-                        allowCustom={allowCustom}
-                        name='tipo_doc'
-                        value={tipo_doc}
-                        onChange={this.onChange}
-                        required
-                        ref='tipo_doc'
-                      />}
-                    {admin === 'MARTHA' &&
-                      <DropDownList
-                        suggest
-                        style={{
-                          borderColor: 'rgba(0,0,0,0.42)',
-                          background: 'white',
-                          height: '28px',
-                          color: 'black',
-                          position: 'static'
-                        }}
-                        data={this.tipo_doc4}
-                        allowCustom={allowCustom}
-                        name='tipo_doc'
-                        value={tipo_doc}
-                        onChange={this.onChange}
-                        required
-                        ref='tipo_doc'
-                      />}
-                    {admin === 'LILIA' &&
-                      <DropDownList
-                        suggest
-                        style={{
-                          borderColor: 'rgba(0,0,0,0.42)',
-                          background: 'white',
-                          height: '28px',
-                          color: 'black',
-                          position: 'static'
-                        }}
-                        data={this.tipo_doc3}
-                        allowCustom={allowCustom}
-                        name='tipo_doc'
-                        value={tipo_doc}
-                        onChange={this.onChange}
-                        required
-                        ref='tipo_doc'
-                      />}
-                    {admin === 'CENELY' &&
-                      <DropDownList
-                        suggest
-                        style={{
-                          borderColor: 'rgba(0,0,0,0.42)',
-                          background: 'white',
-                          height: '28px',
-                          color: 'black',
-                          position: 'static'
-                        }}
-                        data={this.tipo_doc3}
-                        allowCustom={allowCustom}
-                        name='tipo_doc'
-                        value={tipo_doc}
-                        onChange={this.onChange}
-                        required
-                        ref='tipo_doc'
-                      />}
-                    {admin === 'HECTOR' &&
-                      <DropDownList
-                        suggest
-                        style={{
-                          borderColor: 'rgba(0,0,0,0.42)',
-                          background: 'white',
-                          height: '28px',
-                          color: 'black',
-                          position: 'static'
-                        }}
-                        data={this.tipo_doc3}
-                        allowCustom={allowCustom}
-                        name='tipo_doc'
-                        value={tipo_doc}
-                        onChange={this.onChange}
-                        required
-                        ref='tipo_doc'
-                      />}
-                    {admin === 'OMAR' &&
-                      <DropDownList
-                        suggest
-                        style={{
-                          borderColor: 'rgba(0,0,0,0.42)',
-                          background: 'white',
-                          height: '28px',
-                          color: 'black',
-                          position: 'static'
-                        }}
-                        data={this.tipo_doc3}
-                        allowCustom={allowCustom}
-                        name='tipo_doc'
-                        value={tipo_doc}
-                        onChange={this.onChange}
-                        required
-                        ref='tipo_doc'
-                      />}
+                  <div className='fon-tab-ba'>
+                    <p className='fon-p-c'>Importe</p>
                   </div>
-                </div>
-                <div className='f-f'>
-                  <div className='f-f2'>
-                    <p className='fp'>Oficio de Autorización</p>
-                    <DropDownList
-                      suggest
-                      style={{
-                        borderColor: 'rgba(0,0,0,0.42)',
-                        background: 'white',
-                        height: '28px',
-                        color: 'black',
-                        position: 'static'
-                      }}
-                      data={this.oficio_aut}
-                      allowCustom={allowCustom}
-                      name='oficio_aut'
-                      value={oficio_aut}
-                      onChange={this.onChange}
-                      required
-                      ref='oficio_aut'
-                    />
+                  <div className='fon-tab-ba'>
+                    <p className='fon-p-c'>Fecha</p>
                   </div>
-                </div>
-                <div className='f-f'>
-                  <div className='f-f2'>
-                    <p className='fp'>No. de Oficio</p>
-                    <input
-                      className='f-b-s'
-                      name='no_oficio'
-                      onChange={this.onChange}
-                      required
-                      ref='no_oficio'
-                    />
-                  </div>
-                </div>
-                <div className='f-f'>
-                  <div className='f-f2'>
-                    <p className='fp'>No. de Licitación</p>
-                    <input
-                      className='f-b-s'
-                      name='no_lici'
-                      onChange={this.onChange}
-                      ref='no_lici'
-                    />
-                  </div>
-                </div>
-                <div className='f-f'>
-                  <div className='f-f2'>
-                    <p className='fp'>Importe</p>
-                    <input
-                      className='f-b-s'
-                      name='importe'
-                      value={importe}
-                      onChange={this.onChange}
-                      required
-                      ref='importe'
-                    />
-                  </div>
-                </div>
-                <div className='f-f'>
-                  <div className='f-ff'>
-                    <p className='fpb'>Importe letra</p>
-                    <input
-                      className='f-b-s'
-                      onChange={this.onChange}
-                      value={(NumberAsString(importe))}
-                    />
-                  </div>
-                </div>
-                <div className='f-f'>
-                  <div className='f-ff'>
-                    <p className='fpb'>Beneficiario</p>
-                    <DropDownList
-                      suggest
-                      style={{
-                        borderColor: 'rgba(0,0,0,0.42)',
-                        background: 'white',
-                        height: '28px',
-                        color: 'black',
-                        position: 'static'
-                      }}
-                      data={this.beneficiario}
-                      allowCustom={allowCustom}
-                      name='beneficiario'
-                      value={beneficiario}
-                      onChange={this.onChange}
-                      required
-                      ref='beneficiario'
-                    />
-                  </div>
-                </div>
-                <div className='f-f'>
-                  <div className='f-ff'>
-                    <p className='fpb'>Descripcción</p>
-                    <input
-                      className='f-b-s'
-                      id='desc'
-                      name='desc'
-                      onChange={this.onChange}
-                      required
-                      ref='desc'
-                    />
+                  <div className='fon-tab-ba'>
+                    <p className='fon-p-c'>Contrarecibo</p>
                   </div>
                 </div>
               </div>
-              <div className='l-f-c'>
-                <div className='f-l-w'>
-                  <div className='l-w'>
-                    <p className='lp'>Licitación</p>
-                  </div>
-                  <div className='f-f3'>
-                    <p className='lp'>Requisición Pedido</p>
-                    <input
-                      className='f-l-s'
-                      id='requisicion'
-                      name='requisicion'
-                      onChange={this.onChange}
-                      ref='requisicion'
-                    />
-                  </div>
-                  <div className='f-f3'>
-                    <p className='lp'>Número de Comprobantes</p>
-                    <input
-                      className='f-l-s'
-                      id='ncomprobantes'
-                      name='ncomprobantes'
-                      onChange={this.onChange}
-                      ref='ncomprobantes'
-                    />
-                  </div>
-                  <div className='f-f3'>
-                    <p className='lp'>Número CFDI</p>
-                    <input
-                      className='f-l-s'
-                      id='ncfdi'
-                      name='ncfdi'
-                      onChange={this.onChange}
-                      ref='ncfdi'
-                    />
-                  </div>
-                  <div className='f-f3'>
-                    <p className='lp'>Poliza Comprometido</p>
-                    <input
-                      className='f-l-s'
-                      id='poliza'
-                      name='poliza'
-                      onChange={this.onChange}
-                      ref='poliza'
-                    />
-                  </div>
-                </div>
-                <div className='f-l-w'>
-                  <div className='l-w'>
-                    <p className='lp'>Pago CFE</p>
-                  </div>
-                  <div className='f-f3'>
-                    <p className='lp'>Cta CFE</p>
-                    <input
-                      className='f-l-s'
-                      id='cfe'
-                      name='cfe'
-                      onChange={this.onChange}
-                      ref='cfe'
-                    />
-                  </div>
-                  <div className='f-f3'>
-                    <p className='lp'>No Servicio CFE</p>
-                    <input
-                      className='f-l-s'
-                      id='nscfe'
-                      name='nscfe'
-                      onChange={this.onChange}
-                      ref='nscfe'
-                    />
-                  </div>
-                  <div className='f-f3'>
-                    <p className='lp'>Observaciones</p>
-                    <input
-                      className='f-l-s'
-                      id='observaciones'
-                      name='observaciones'
-                      onChange={this.onChange}
-                      ref='observaciones'
-                    />
-                  </div>
-                </div>
-              </div>
-              <div className='button-row-s'>
-                <button onClick={this.perro} className='input-sc boton-g'>Agregar</button>
-              </div>
-            </form>
+            </div>
           </div>
+          <div>
+            {this.state.fondos.map(fondos =>
+              <div className='fondo-t-s'>
+                <p>{fondos.fondo}</p>
+                <p>{fondos.tipo_doc}</p>
+                <p>{fondos.importe}</p>
+                <p>{fondos.fecha}</p>
+                <p>{fondos.contrarecibo}</p>
+              </div>
+            )}
+          </div>
+
+          <form onSubmit={this.onSubmit}>
+            <div className='f-f-c-w'>
+              <div className='f-f'>
+                <div className='f-f2'>
+                  <p className='fp'>Fondo</p>
+                  <input
+                    className='f-b-s'
+                    value={this.state.contador.nFondo}
+                    required
+                  />
+                </div>
+              </div>
+              <div className='f-f'>
+                <div className='f-f2'>
+                  <p className='fp'>Fecha</p>
+                  <input
+                    className='f-b-s'
+                    required
+                    value={today}
+                  />
+                </div>
+              </div>
+              <div className='f-f'>
+                <div className='f-f2'>
+                  <p className='fp'>Tipo de Documento</p>
+                  {admin === 'ADMIN' &&
+                    <DropDownList
+                      suggest
+                      style={{
+                        borderColor: 'rgba(0,0,0,0.42)',
+                        background: 'white',
+                        height: '28px',
+                        color: 'black',
+                        position: 'static'
+                      }}
+                      data={this.tipo_doc}
+                      allowCustom={allowCustom}
+                      name='tipo_doc'
+                      value={tipo_doc}
+                      onChange={this.onChange}
+                      required
+                      ref='tipo_doc'
+                    />}
+                  {admin === 'LAURA' &&
+                    <DropDownList
+                      suggest
+                      style={{
+                        borderColor: 'rgba(0,0,0,0.42)',
+                        background: 'white',
+                        height: '28px',
+                        color: 'black',
+                        position: 'static'
+                      }}
+                      data={this.tipo_doc}
+                      allowCustom={allowCustom}
+                      name='tipo_doc'
+                      value={tipo_doc}
+                      onChange={this.onChange}
+                      required
+                      ref='tipo_doc'
+                    />}
+                  {admin === 'MIGUEL' &&
+                    <DropDownList
+                      suggest
+                      style={{
+                        borderColor: 'rgba(0,0,0,0.42)',
+                        background: 'white',
+                        height: '28px',
+                        color: 'black',
+                        position: 'static'
+                      }}
+                      data={this.tipo_doc4}
+                      allowCustom={allowCustom}
+                      name='tipo_doc'
+                      value={tipo_doc}
+                      onChange={this.onChange}
+                      required
+                      ref='tipo_doc'
+                    />}
+                  {admin === 'TERESA' &&
+                    <DropDownList
+                      suggest
+                      style={{
+                        borderColor: 'rgba(0,0,0,0.42)',
+                        background: 'white',
+                        height: '28px',
+                        color: 'black',
+                        position: 'static'
+                      }}
+                      data={this.tipo_doc4}
+                      allowCustom={allowCustom}
+                      name='tipo_doc'
+                      value={tipo_doc}
+                      onChange={this.onChange}
+                      required
+                      ref='tipo_doc'
+                    />}
+                  {admin === 'MARCOS' &&
+                    <DropDownList
+                      suggest
+                      style={{
+                        borderColor: 'rgba(0,0,0,0.42)',
+                        background: 'white',
+                        height: '28px',
+                        color: 'black',
+                        position: 'static'
+                      }}
+                      data={this.tipo_doc4}
+                      allowCustom={allowCustom}
+                      name='tipo_doc'
+                      value={tipo_doc}
+                      onChange={this.onChange}
+                      required
+                      ref='tipo_doc'
+                    />}
+                  {admin === 'ELOY' &&
+                    <DropDownList
+                      suggest
+                      style={{
+                        borderColor: 'rgba(0,0,0,0.42)',
+                        background: 'white',
+                        height: '28px',
+                        color: 'black',
+                        position: 'static'
+                      }}
+                      data={this.tipo_doc2}
+                      allowCustom={allowCustom}
+                      name='tipo_doc'
+                      value={tipo_doc}
+                      onChange={this.onChange}
+                      required
+                      ref='tipo_doc'
+                    />}
+                  {admin === 'KARINA' &&
+                    <DropDownList
+                      suggest
+                      style={{
+                        borderColor: 'rgba(0,0,0,0.42)',
+                        background: 'white',
+                        height: '28px',
+                        color: 'black',
+                        position: 'static'
+                      }}
+                      data={this.tipo_doc3}
+                      allowCustom={allowCustom}
+                      name='tipo_doc'
+                      value={tipo_doc}
+                      onChange={this.onChange}
+                      required
+                      ref='tipo_doc'
+                    />}
+                  {admin === 'MARTHA' &&
+                    <DropDownList
+                      suggest
+                      style={{
+                        borderColor: 'rgba(0,0,0,0.42)',
+                        background: 'white',
+                        height: '28px',
+                        color: 'black',
+                        position: 'static'
+                      }}
+                      data={this.tipo_doc4}
+                      allowCustom={allowCustom}
+                      name='tipo_doc'
+                      value={tipo_doc}
+                      onChange={this.onChange}
+                      required
+                      ref='tipo_doc'
+                    />}
+                  {admin === 'LILIA' &&
+                    <DropDownList
+                      suggest
+                      style={{
+                        borderColor: 'rgba(0,0,0,0.42)',
+                        background: 'white',
+                        height: '28px',
+                        color: 'black',
+                        position: 'static'
+                      }}
+                      data={this.tipo_doc3}
+                      allowCustom={allowCustom}
+                      name='tipo_doc'
+                      value={tipo_doc}
+                      onChange={this.onChange}
+                      required
+                      ref='tipo_doc'
+                    />}
+                  {admin === 'CENELY' &&
+                    <DropDownList
+                      suggest
+                      style={{
+                        borderColor: 'rgba(0,0,0,0.42)',
+                        background: 'white',
+                        height: '28px',
+                        color: 'black',
+                        position: 'static'
+                      }}
+                      data={this.tipo_doc3}
+                      allowCustom={allowCustom}
+                      name='tipo_doc'
+                      value={tipo_doc}
+                      onChange={this.onChange}
+                      required
+                      ref='tipo_doc'
+                    />}
+                  {admin === 'HECTOR' &&
+                    <DropDownList
+                      suggest
+                      style={{
+                        borderColor: 'rgba(0,0,0,0.42)',
+                        background: 'white',
+                        height: '28px',
+                        color: 'black',
+                        position: 'static'
+                      }}
+                      data={this.tipo_doc3}
+                      allowCustom={allowCustom}
+                      name='tipo_doc'
+                      value={tipo_doc}
+                      onChange={this.onChange}
+                      required
+                      ref='tipo_doc'
+                    />}
+                  {admin === 'OMAR' &&
+                    <DropDownList
+                      suggest
+                      style={{
+                        borderColor: 'rgba(0,0,0,0.42)',
+                        background: 'white',
+                        height: '28px',
+                        color: 'black',
+                        position: 'static'
+                      }}
+                      data={this.tipo_doc3}
+                      allowCustom={allowCustom}
+                      name='tipo_doc'
+                      value={tipo_doc}
+                      onChange={this.onChange}
+                      required
+                      ref='tipo_doc'
+                    />}
+                </div>
+              </div>
+              <div className='f-f'>
+                <div className='f-f2'>
+                  <p className='fp'>Oficio de Autorización</p>
+                  <DropDownList
+                    suggest
+                    style={{
+                      borderColor: 'rgba(0,0,0,0.42)',
+                      background: 'white',
+                      height: '28px',
+                      color: 'black',
+                      position: 'static'
+                    }}
+                    data={this.oficio_aut}
+                    allowCustom={allowCustom}
+                    name='oficio_aut'
+                    value={oficio_aut}
+                    onChange={this.onChange}
+                    required
+                    ref='oficio_aut'
+                  />
+                </div>
+              </div>
+              <div className='f-f'>
+                <div className='f-f2'>
+                  <p className='fp'>No. de Oficio</p>
+                  <input
+                    className='f-b-s'
+                    name='no_oficio'
+                    onChange={this.onChange}
+                    required
+                    ref='no_oficio'
+                  />
+                </div>
+              </div>
+              <div className='f-f'>
+                <div className='f-f2'>
+                  <p className='fp'>No. de Licitación</p>
+                  <input
+                    className='f-b-s'
+                    name='no_lici'
+                    onChange={this.onChange}
+                    ref='no_lici'
+                  />
+                </div>
+              </div>
+              <div className='f-f'>
+                <div className='f-f2'>
+                  <p className='fp'>Importe</p>
+                  <input
+                    className='f-b-s'
+                    name='importe'
+                    value={importe}
+                    onChange={this.onChange}
+                    required
+                    ref='importe'
+                  />
+                </div>
+              </div>
+              <div className='f-f'>
+                <div className='f-ff'>
+                  <p className='fpb'>Importe letra</p>
+                  <input
+                    className='f-b-s'
+                    onChange={this.onChange}
+                    value={(NumberAsString(importe))}
+                  />
+                </div>
+              </div>
+              <div className='f-f'>
+                <div className='f-ff'>
+                  <p className='fpb'>Beneficiario</p>
+                  <DropDownList
+                    suggest
+                    style={{
+                      borderColor: 'rgba(0,0,0,0.42)',
+                      background: 'white',
+                      height: '28px',
+                      color: 'black',
+                      position: 'static'
+                    }}
+                    data={this.beneficiario}
+                    allowCustom={allowCustom}
+                    name='beneficiario'
+                    value={beneficiario}
+                    onChange={this.onChange}
+                    required
+                    ref='beneficiario'
+                  />
+                </div>
+              </div>
+              <div className='f-f'>
+                <div className='f-ff'>
+                  <p className='fpb'>Descripcción</p>
+                  <input
+                    className='f-b-s'
+                    id='desc'
+                    name='desc'
+                    onChange={this.onChange}
+                    required
+                    ref='desc'
+                  />
+                </div>
+              </div>
+            </div>
+            <div className='l-f-c'>
+              <div className='f-l-w'>
+                <div className='l-w'>
+                  <p className='lp'>Licitación</p>
+                </div>
+                <div className='f-f3'>
+                  <p className='lp'>Requisición Pedido</p>
+                  <input
+                    className='f-l-s'
+                    id='requisicion'
+                    name='requisicion'
+                    onChange={this.onChange}
+                    ref='requisicion'
+                  />
+                </div>
+                <div className='f-f3'>
+                  <p className='lp'>Número de Comprobantes</p>
+                  <input
+                    className='f-l-s'
+                    id='ncomprobantes'
+                    name='ncomprobantes'
+                    onChange={this.onChange}
+                    ref='ncomprobantes'
+                  />
+                </div>
+                <div className='f-f3'>
+                  <p className='lp'>Número CFDI</p>
+                  <input
+                    className='f-l-s'
+                    id='ncfdi'
+                    name='ncfdi'
+                    onChange={this.onChange}
+                    ref='ncfdi'
+                  />
+                </div>
+                <div className='f-f3'>
+                  <p className='lp'>Poliza Comprometido</p>
+                  <input
+                    className='f-l-s'
+                    id='poliza'
+                    name='poliza'
+                    onChange={this.onChange}
+                    ref='poliza'
+                  />
+                </div>
+              </div>
+              <div className='f-l-w'>
+                <div className='l-w'>
+                  <p className='lp'>Pago CFE</p>
+                </div>
+                <div className='f-f3'>
+                  <p className='lp'>Cta CFE</p>
+                  <input
+                    className='f-l-s'
+                    id='cfe'
+                    name='cfe'
+                    onChange={this.onChange}
+                    ref='cfe'
+                  />
+                </div>
+                <div className='f-f3'>
+                  <p className='lp'>No Servicio CFE</p>
+                  <input
+                    className='f-l-s'
+                    id='nscfe'
+                    name='nscfe'
+                    onChange={this.onChange}
+                    ref='nscfe'
+                  />
+                </div>
+                <div className='f-f3'>
+                  <p className='lp'>Observaciones</p>
+                  <input
+                    className='f-l-s'
+                    id='observaciones'
+                    name='observaciones'
+                    onChange={this.onChange}
+                    ref='observaciones'
+                  />
+                </div>
+              </div>
+            </div>
+            <div className='button-row-s'>
+              <button onClick={this.perro} className='input-sc boton-g'>Agregar</button>
+            </div>
+          </form>
+        </div>
       </div>
     )
   }

@@ -287,7 +287,6 @@ function App (props) {
       <Route path='/Recibo' component={Recibo} />
       <Route path='/Rfr' component={Rfr} />
 
-
       <Route path='/ObjetodegastoPP:id' component={ObjetodegastoPP} />
       <Route path='/Gastoprovee:id' component={Gastoprovee} />
       <Route path='/Pagoproveedor:id' component={Pagoproveedor} />

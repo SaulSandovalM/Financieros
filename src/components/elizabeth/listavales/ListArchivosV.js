@@ -50,7 +50,7 @@ export default class ListArchivosV extends Component {
   }
 
   handleOnChange1 (event) {
-    const files = event.target.files[0]
+    const files = event.target.files
     for (var i = 0; i < files.length; i++) {
       const file = files[i]
       var xml = file
@@ -62,8 +62,8 @@ export default class ListArchivosV extends Component {
             fetch('https://financieros-78cb0.firebaseio.com/xml.json', {
                 method: 'POST',
                 headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json',
+                     'Accept': 'application/json',
+                     'Content-Type': 'application/json',
                   },
                   body: JSON.stringify(xml)
                 })
@@ -72,25 +72,6 @@ export default class ListArchivosV extends Component {
         reader.readAsText(xml)
       }
     }
-    const file = event.target.files[i]
-    const storageRef = firebase.storage().ref(`comprobacion/${file.name}`)
-    const task = storageRef.put(file)
-    this.setState({
-      filex: `${file.name}`
-    })
-    task.on('state_changed', (snapshot) => {
-      let percentage = (snapshot.bytesTransferred / snapshot.totalBytes) * 100
-      this.setState({
-        xml: percentage
-      })
-    }, error => {
-      console.error(error.message)
-    }, () =>  storageRef.getDownloadURL().then(url =>  {
-      const record = url
-      this.setState({
-        filefactura: record
-      })
-    }))
   }
 
   handleOnChange2 (event) {

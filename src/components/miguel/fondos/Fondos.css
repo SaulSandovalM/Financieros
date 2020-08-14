@@ -60,16 +60,40 @@
   color: white;
   padding: 6px;
 }
-
-
-
-
-
-
-
-
-
-
+.space-seach {
+  height: 300px;
+}
+.input-sea {
+  height: 20px;
+  text-align: center;
+  width: 10%;
+}
+.button-sea {
+  height: 20px;
+  background: green;
+  border: 0;
+}
+.fondo-t-s {
+  display: flex;
+  flex-direction: row;
+  margin-top: 15px;
+}
+.fon-tab-ba {
+  background: #092432;
+  width: 20%;
+  text-align: center;
+}
+.fon-p-c {
+  color: white;
+  padding: 0 20px 0 20px;
+}
+.sea-f-w {
+  width: 80%;
+}
+.sea-t {
+  display: flex;
+  justify-content: center;
+}
 
 
 

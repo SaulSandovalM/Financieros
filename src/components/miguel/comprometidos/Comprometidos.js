@@ -62,7 +62,7 @@ export default class Comprometidos extends Component {
   }
 
   handleOnChange1 (event) {
-    const files = event.target.files[0]
+    const files = event.target.files
     for (var i = 0; i < files.length; i++) {
       const file = files[i]
       var xml = file
@@ -84,27 +84,7 @@ export default class Comprometidos extends Component {
         reader.readAsText(xml)
       }
     }
-    const file = event.target.files[i]
-    const storageRef = firebase.storage().ref(`comprobacion/${file.name}`)
-    const task = storageRef.put(file)
-    this.setState({
-      filex: `${file.name}`
-    })
-    task.on('state_changed', (snapshot) => {
-      const percentage = (snapshot.bytesTransferred / snapshot.totalBytes) * 100
-      this.setState({
-        xml: percentage
-      })
-    }, error => {
-      console.error(error.message)
-    }, () => storageRef.getDownloadURL().then(url => {
-      const record = url
-      this.setState({
-        filefactura: record
-      })
-    }))
   }
-
 
   // listenForItems = (itemsRef) => {
   //   itemsRef.on('value', (snap) => {
