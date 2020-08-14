@@ -22,12 +22,14 @@ export default class Fondos extends Component {
       beneficiario: '',
       realizo: '',
       requisicion: '',
+      pedido: '',
       ncomprobantes: '',
       ncfdi: '',
       poliza: '',
       cfe: '',
       nscfe: '',
       observaciones: '',
+      numCompro: '',
       fondos: [],
       allowCustom: true,
       value: '',
@@ -66,8 +68,8 @@ export default class Fondos extends Component {
   onSubmit = (e) => {
     e.preventDefault()
     const { fondo, fecha, tipo_doc, oficio_aut, no_oficio, no_lici, importe, desc,
-            beneficiario, realizo, requisicion, ncomprobantes, ncfdi, poliza, cfe,
-            nscfe, observaciones } = this.state
+            beneficiario, realizo, requisicion, pedido, ncomprobantes, ncfdi, poliza,
+            cfe, nscfe, observaciones, numCompro } = this.state
     this.ref.add({
       fondo,
       fecha,
@@ -80,12 +82,14 @@ export default class Fondos extends Component {
       beneficiario,
       realizo,
       requisicion,
+      pedido,
       ncomprobantes,
       ncfdi,
       poliza,
       cfe,
       nscfe,
-      observaciones
+      observaciones,
+      numCompro
     }).then((docRef) => {
       this.setState({
         fondo: '',
@@ -99,12 +103,14 @@ export default class Fondos extends Component {
         beneficiario: '',
         realizo: '',
         requisicion: '',
+        pedido: '',
         ncomprobantes: '',
         ncfdi: '',
         poliza: '',
         cfe: '',
         nscfe: '',
-        observaciones: ''
+        observaciones: '',
+        numCompro: ''
       })
       const statsRef = firebase.firestore().collection('fondos').doc('--stats--')
       const increment = firebase.firestore.FieldValue.increment(1)
@@ -247,7 +253,7 @@ export default class Fondos extends Component {
               </div>
             </div>
           </div>
-          <div>
+          {/*<div>
             {this.state.fondos.map(fondos =>
               <div className='fondo-t-s'>
                 <p>{fondos.fondo}</p>
@@ -257,7 +263,7 @@ export default class Fondos extends Component {
                 <p>{fondos.contrarecibo}</p>
               </div>
             )}
-          </div>
+          </div>*/}
 
           <form onSubmit={this.onSubmit}>
             <div className='f-f-c-w'>
@@ -538,17 +544,6 @@ export default class Fondos extends Component {
               </div>
               <div className='f-f'>
                 <div className='f-f2'>
-                  <p className='fp'>No. de Licitación</p>
-                  <input
-                    className='f-b-s'
-                    name='no_lici'
-                    onChange={this.onChange}
-                    ref='no_lici'
-                  />
-                </div>
-              </div>
-              <div className='f-f'>
-                <div className='f-f2'>
                   <p className='fp'>Importe</p>
                   <input
                     className='f-b-s'
@@ -594,7 +589,7 @@ export default class Fondos extends Component {
               </div>
               <div className='f-f'>
                 <div className='f-ff'>
-                  <p className='fpb'>Descripcción</p>
+                  <p className='fpb'>Descripción</p>
                   <input
                     className='f-b-s'
                     id='desc'
@@ -605,6 +600,19 @@ export default class Fondos extends Component {
                   />
                 </div>
               </div>
+              <div className='f-f'>
+                <div className='f-ff'>
+                  <p className='fpb'>Num de Comprobantes</p>
+                  <input
+                    className='f-b-s'
+                    id='numCompro'
+                    name='numCompro'
+                    onChange={this.onChange}
+                    required
+                    ref='numCompro'
+                  />
+                </div>
+              </div>
             </div>
             <div className='l-f-c'>
               <div className='f-l-w'>
@@ -612,13 +620,33 @@ export default class Fondos extends Component {
                   <p className='lp'>Licitación</p>
                 </div>
                 <div className='f-f3'>
-                  <p className='lp'>Requisición Pedido</p>
+                  <p className='lp'>No. de Licitación</p>
+                  <input
+                    className='f-l-s'
+                    id='no_lici'
+                    name='no_lici'
+                    onChange={this.onChange}
+                    ref='no_lici'
+                  />
+                </div>
+                <div className='f-f3'>
+                  <p className='lp'>Requisición</p>
                   <input
                     className='f-l-s'
                     id='requisicion'
                     name='requisicion'
                     onChange={this.onChange}
                     ref='requisicion'
+                  />
+                </div>
+                <div className='f-f3'>
+                  <p className='lp'>Pedido</p>
+                  <input
+                    className='f-l-s'
+                    id='pedido'
+                    name='pedido'
+                    onChange={this.onChange}
+                    ref='pedido'
                   />
                 </div>
                 <div className='f-f3'>
@@ -629,16 +657,6 @@ export default class Fondos extends Component {
                     name='ncomprobantes'
                     onChange={this.onChange}
                     ref='ncomprobantes'
-                  />
-                </div>
-                <div className='f-f3'>
-                  <p className='lp'>Número CFDI</p>
-                  <input
-                    className='f-l-s'
-                    id='ncfdi'
-                    name='ncfdi'
-                    onChange={this.onChange}
-                    ref='ncfdi'
                   />
                 </div>
                 <div className='f-f3'>
