@@ -78,6 +78,10 @@
   flex-direction: row;
   margin-top: 15px;
 }
+.fondo-t-s2 {
+  display: flex;
+  flex-direction: row;
+}
 .fon-tab-ba {
   background: #092432;
   width: 20%;
