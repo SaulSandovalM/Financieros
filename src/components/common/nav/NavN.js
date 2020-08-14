@@ -1,24 +1,22 @@
-import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
-import { logoutUser } from '../../../actions';
-import { connect } from 'react-redux';
-import './Nav.css';
-import logo_h from '../../../img/logo_h.svg';
+import React, { Component } from 'react'
+import { Link } from 'react-router-dom'
+import { logoutUser } from '../../../actions'
+import { connect } from 'react-redux'
+import './Nav.css'
+import logoH from '../../../img/logo_h.svg'
 
 class Nav extends Component {
   handleLogout = () => {
-    const { dispatch } = this.props;
-    dispatch(logoutUser());
-  };
+    const { dispatch } = this.props
+    dispatch(logoutUser())
+  }
 
-  render() {
-
-    const { isLoggingOut, logoutError } = this.props;
-
+  render () {
+    const { isLoggingOut, logoutError } = this.props
     return (
       <div className='nav-col'>
         <div className='navbar-navigation'>
-          <img className='logo' src={logo_h} alt=''/>
+          <img className='logo' src={logoH} alt='' />
         </div>
         <div className='navbar-left'>
           <Link to='/Autorizacion' className='deco'>
@@ -44,11 +42,11 @@ class Nav extends Component {
   }
 }
 
-function mapStateToProps(state) {
+function mapStateToProps (state) {
   return {
     isLoggingOut: state.auth.isLoggingOut,
     logoutError: state.auth.logoutError
-  };
+  }
 }
 
-export default connect(mapStateToProps)(Nav);
+export default connect(mapStateToProps)(Nav)

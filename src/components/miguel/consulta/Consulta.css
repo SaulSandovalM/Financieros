@@ -21,33 +21,33 @@
 .row-aa {
   display: flex;
   flex-direction: row;
-  width: 100%;
-  margin: 15px;
   font-family: arial;
+  margin: 15px;
+  width: 100%;
 }
 .a-row-t {
-  width: 20%;
-  height: 30px;
-  font-size: 17px;
-  text-align: center;
-  font-weight: normal;
-  color: white;
-  border-right: 2px solid;
-  padding: 5px;
   background: #092432;
-  border-top: 4px solid #dc5f70;
   border-bottom: 1px solid #dc5f70;
+  border-right: 2px solid;
+  border-top: 4px solid #dc5f70;
+  color: white;
+  font-weight: normal;
+  font-size: 17px;
+  height: 30px;
+  padding: 5px;
+  text-align: center;
+  width: 20%;
 }
 .a-row {
-  margin-top: 5px;
-  width: 18.5%;
-  font-size: 15px;
-  text-align: left;
-  padding-left: 20px;
+  background:#FFFFF0;
   color: black;
   font-family: sans-serif;
-  background:#FFFFF0;
+  font-size: 15px;
+  margin-top: 5px;
+  padding-left: 20px;
   padding-left: 15px;
+  text-align: left;
+  width: 18.5%;
 }
 .vista{
   display:flex;

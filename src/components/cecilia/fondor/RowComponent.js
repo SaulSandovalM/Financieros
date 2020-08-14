@@ -1,17 +1,19 @@
-import React, { Component } from 'react';
-import CurrencyFormat from 'react-currency-format';
-import './Fondor.css';
+import React, { Component } from 'react'
+import './Fondor.css'
 
 export default class RowComponent extends Component {
-  constructor(props){
-     super(props);
-     this.state = {
-       done: false
-     };
-   }
+  constructor (props) {
+    super(props)
+    this.state = {
+      done: false
+    }
+  }
 
-  render() {
-    console.log(this.props.item.cpa);
+  onhandleUpdate = () => {
+    this.props.update(this.props.item)
+  }
+
+  render () {
     return (
       <div className='table-container-p'>
         <div className='inputs-container-fr'>
@@ -26,9 +28,10 @@ export default class RowComponent extends Component {
                 />
               </div>
             </div>
+            <button onClick={this.onhandleUpdate}>Autorizar</button>
           </div>
         </div>
       </div>
-    );
+    )
   }
 }

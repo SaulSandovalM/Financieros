@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
-import './Archivos.css';
-import firebase from '../../../Firebase';
-import ListComponent from './ListComponent';
+import React, { Component } from 'react'
+import './Archivos.css'
+import firebase from '../../../Firebase'
+import ListComponent from './ListComponent'
 
 export default class Archivos extends Component {
   constructor () {
@@ -12,7 +12,7 @@ export default class Archivos extends Component {
           id: 1,
           name: 'prueba',
           done: false
-        },
+        }
       ],
       fileNameA: '',
       oficioS: '',
@@ -26,7 +26,7 @@ export default class Archivos extends Component {
 
   listenForItems = (itemsRef) => {
     itemsRef.on('value', (snap) => {
-      var lista = [];
+      var lista = []
       snap.forEach((child) => {
         lista.push({
           fileNameA: child.val().fileNameA,
@@ -38,20 +38,20 @@ export default class Archivos extends Component {
           tipo: child.val().tipo,
           done: child.val().done,
           id: child.key
-        });
-      });
+        })
+      })
       this.setState({
         lista: lista
-      });
-    });
+      })
+    })
   }
 
-  componentDidMount() {
-    const itemsRef = firebase.database().ref('archivos-presupuesto/');
-    this.listenForItems(itemsRef);
+  componentDidMount () {
+    const itemsRef = firebase.database().ref('archivos-presupuesto/')
+    this.listenForItems(itemsRef)
   }
 
-  render() {
+  render () {
     return (
       <div className='pf-container'>
         <div className='site-pf'>

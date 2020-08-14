@@ -1,31 +1,30 @@
-import React, { Component } from 'react';
-import '../Fondos.css';
-import RowComponent from './RowComponent';
-import firebase from '../../../../Firebase';
+import React, { Component } from 'react'
+import '../Fondos.css'
+import RowComponent from './RowComponent'
+import firebase from '../../../../Firebase'
 
 export default class ListComponent extends Component {
   constructor (props) {
-   super(props);
-   this.state = {
-     xml: [],
-   };
- }
+    super(props)
+    this.state = {
+      xml: []
+    }
+  }
 
   componentWillMount () {
     firebase.database().ref('xml2/').on('child_added', snapshot => {
       this.setState({
         xml: this.state.xml.concat(snapshot.val())
-      });
-    });
+      })
+    })
   }
 
-  render() {
-
-    let totalImporte = [];
+  render () {
+    const totalImporte = []
     this.props.lista.map(item => (
       totalImporte.push(item.importe)
     ))
-    const reducer = (a, b) => a + b;
+    const reducer = (a, b) => a + b
 
     return (
       <div>
@@ -38,8 +37,8 @@ export default class ListComponent extends Component {
             />
           )
         }
-        {(totalImporte.reduce(reducer))} 
+        {(totalImporte.reduce(reducer))}
       </div>
-    );
+    )
   }
 }

@@ -1,14 +1,13 @@
-import React, { Component, useEffect } from 'react';
-import firebase from '../../../Firebase';
-import ListArchivo from './ListArchivo';
-import './ListVales.css';
-import Dropzone from 'react-dropzone';
-import example from './exa.xml';
-import XMLParser from 'react-xml-parser';
+import React, { Component } from 'react'
+import firebase from '../../../Firebase'
+import ListArchivo from './ListArchivo'
+import './ListVales.css'
+import Dropzone from 'react-dropzone'
+import XMLParser from 'react-xml-parser'
 
 export default class ListArchivosV extends Component {
   constructor(props) {
-    super(props);
+    super(props)
     this.state = {
       lista: [
         {
@@ -36,7 +35,6 @@ export default class ListArchivosV extends Component {
       fecha: '',
       autorizo: '',
       estatus: 'Pendiente',
-      fecha: '',
       contador: {},
       isHidden: true,
       pdf1: 0,
@@ -48,49 +46,32 @@ export default class ListArchivosV extends Component {
       filexml: '',
       filefactura: '',
       filerecibo: ''
-    };
+    }
   }
 
-  onDrop(files) {
-    var fileNameE = files;
-    console.log(fileNameE);
-    fetch(example)
-      .then(res => res.text())
-      .then(data => {
-        var xml = new XMLParser().parseFromString(data);
-        console.log(xml);
-        // fetch('https://financieros-78cb0.firebaseio.com/xml.json', {
-        //   method: 'POST',
-        //   headers: {
-        //     'Accept': 'application/json',
-        //     'Content-Type': 'application/json',
-        //   },
-        //   body: JSON.stringify(xml)
-        // })
-    })
-  }
-
-  handleOnChange1 (files) {
-    // for(let i = 0; i < event.target.files.length; i++) {
-    //   const storageRef = firebase.storage().ref(`comprobacion/${file.name}`)
-    //   const task = storageRef.put(file)
-    //   this.setState({
-    //     filex: `${file.name}`
-    //   })
-    //   task.on('state_changed', (snapshot) => {
-    //     let percentage = (snapshot.bytesTransferred / snapshot.totalBytes) * 100
-    //     this.setState({
-    //       pdf1: percentage
-    //     })
-    //   }, error => {
-    //     console.error(error.message);
-    //   }, () =>  storageRef.getDownloadURL().then(url =>  {
-    //     const record = url;
-    //     this.setState({
-    //       filexml: record
-    //     });
-    //   }));
-    // }
+  handleOnChange1 (event) {
+    const files = event.target.files
+    for (var i = 0; i < files.length; i++) {
+      const file = files[i]
+      var xml = file
+      if (file.type === 'text/xml') {
+        var reader = new FileReader()
+        reader.onloadend = function () {
+          var xml = new XMLParser().parseFromString(reader.result)
+          fetch(xml).then(res => res.text()).then(data => {
+            fetch('https://financieros-78cb0.firebaseio.com/xml.json', {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                  },
+                  body: JSON.stringify(xml)
+                })
+            })
+        }
+        reader.readAsText(xml)
+      }
+    }
   }
 
   handleOnChange2 (event) {
@@ -108,19 +89,18 @@ export default class ListArchivosV extends Component {
           pdf2: percentage
         })
       }, error => {
-        console.error(error.message);
+        console.error(error.message)
       }, () =>  storageRef.getDownloadURL().then(url =>  {
-        const record = url;
+        const record = url
         this.setState({
           filefactura: record
-        });
-      }));
+        })
+      }))
     }
   }
 
   handleOnChange3 (event) {
-    for(let i = 0; i < event.target.files.length; i++)
-    {
+    for (let i = 0; i < event.target.files.length; i++) {
       const file = event.target.files[i]
       const storageRef = firebase.storage().ref(`comprobacion/${file.name}`)
       const task = storageRef.put(file)
@@ -128,24 +108,24 @@ export default class ListArchivosV extends Component {
         filer: `${file.name}`
       })
       task.on('state_changed', (snapshot) => {
-        let percentage = (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+        const percentage = (snapshot.bytesTransferred / snapshot.totalBytes) * 100
         this.setState({
           pdf3: percentage
         })
       }, error => {
-        console.error(error.message);
-      }, () =>  storageRef.getDownloadURL().then(url =>  {
-        const record = url;
+        console.error(error.message)
+      }, () => storageRef.getDownloadURL().then(url => {
+        const record = url
         this.setState({
           filerecibo: record
-        });
-      }));
+        })
+      }))
     }
   }
 
   listenForItems = (itemsRef) => {
     itemsRef.on('value', (snap) => {
-      var lista = [];
+      var lista = []
       snap.forEach((child) => {
         lista.push({
           vale: child.val().vale,
@@ -167,55 +147,55 @@ export default class ListArchivosV extends Component {
           autorizo: child.val().autorizo,
           done: child.val().done,
           id: child.key
-        });
-      });
+        })
+      })
       this.setState({
         lista: lista
-      });
-    });
-  }
-
-  componentDidMount() {
-    const itemsRef = firebase.database().ref('vales/');
-    this.listenForItems(itemsRef);
-  }
-
-  resetForm() {
-    this.refs.contactForm.reset();
-  }
-
-  sendMessage(e) {
-    e.preventDefault();
-    const params = {
-      xml: this.inputXml.value,
-    };
-    this.setState({
-      xml: this.inputXml.value,
+      })
     })
-    if ( params.xml ) {
+  }
+
+  componentDidMount () {
+    const itemsRef = firebase.database().ref('vales/')
+    this.listenForItems(itemsRef)
+  }
+
+  resetForm () {
+    this.refs.contactForm.reset()
+  }
+
+  sendMessage (e) {
+    e.preventDefault()
+    const params = {
+      xml: this.inputXml.value
+    }
+    this.setState({
+      xml: this.inputXml.value
+    })
+    if (params.xml) {
       firebase.database().ref('xml').push(params).then(() => {
-        alert('Tu solicitud fue enviada.');
+        alert('Tu solicitud fue enviada.')
       }).catch(() => {
-        alert('Tu solicitud no puede ser enviada');
-      });
-      this.resetForm();
+        alert('Tu solicitud no puede ser enviada')
+      })
+      this.resetForm()
     } else {
-      alert('Por favor llene el formulario');
-    };
+      alert('Por favor llene el formulario')
+    }
   }
 
   update = (item) => {
-    let updates = {};
+    let updates = {}
     updates['vales/' + item.id + '/comprobacion/'] = {
       filexml: this.state.filexml,
       filefactura: this.state.filefactura,
       filerecibo: this.state.filerecibo
-    };
-    firebase.database().ref().update(updates);
-    alert('Tu solicitud fue enviada.');
+    }
+    firebase.database().ref().update(updates)
+    alert('Tu solicitud fue enviada.')
   }
 
-  render() {
+  render () {
     return (
       <div className='container-back'>
         <div className='site'>
@@ -235,7 +215,6 @@ export default class ListArchivosV extends Component {
                     <p className='p-title-margin-fr'>XML</p>
                     <Dropzone
                       style={{
-                        position: 'relative',
                         width: '100%',
                         height: '30px',
                         borderWidth: '1px',
@@ -246,7 +225,7 @@ export default class ListArchivosV extends Component {
                         background: 'white',
                         position: 'static'
                       }}
-                      accept=".xml" onChange={this.onDrop.bind(this)}>
+                      accept='.xml' onChange={this.handleOnChange1.bind(this)}>
                       <div className='filename'>
                         <p className='file-hid'>{this.state.filex}</p>
                       </div>
@@ -259,7 +238,6 @@ export default class ListArchivosV extends Component {
                     <p className='p-title-margin-fr'>FACTURA</p>
                     <Dropzone
                       style={{
-                        position: 'relative',
                         width: '100%',
                         height: '30px',
                         borderWidth: '1px',
@@ -270,7 +248,7 @@ export default class ListArchivosV extends Component {
                         background: 'white',
                         position: 'static'
                       }}
-                      accept=".pdf" onChange={this.handleOnChange2.bind(this)}>
+                      accept='.pdf' onChange={this.handleOnChange2.bind(this)}>
                       <div className='filename'>
                         <p className='file-hid'>{this.state.filef}</p>
                       </div>
@@ -283,7 +261,6 @@ export default class ListArchivosV extends Component {
                     <p className='p-title-margin-fr'>RECIBO</p>
                     <Dropzone
                       style={{
-                        position: 'relative',
                         width: '100%',
                         height: '30px',
                         borderWidth: '1px',
@@ -294,7 +271,7 @@ export default class ListArchivosV extends Component {
                         background: 'white',
                         position: 'static'
                       }}
-                      accept=".pdf" onChange={this.handleOnChange3.bind(this)}>
+                      accept='.pdf' onChange={this.handleOnChange3.bind(this)}>
                       <div className='filename'>
                         <p className='file-hid'>{this.state.filer}</p>
                       </div>
@@ -308,8 +285,7 @@ export default class ListArchivosV extends Component {
             </div>
           </div>
         </form>
-
-        <div className='caja-w' style={{marginTop: '40px', marginBottom: '40px'}}>
+        <div className='caja-w' style={{ marginTop: '40px', marginBottom: '40px' }}>
           <div className='caja-col'>
             <ListArchivo
               lista={this.state.lista}

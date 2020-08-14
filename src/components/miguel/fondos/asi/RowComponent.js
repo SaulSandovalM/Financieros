@@ -1,23 +1,22 @@
-import React, { Component } from 'react';
-import '../Fondos.css';
+import React, { Component } from 'react'
+import '../Fondos.css'
 
 export default class RowComponent extends Component {
-  constructor(props){
-    super(props);
+  constructor (props) {
+    super(props)
     this.state = {
       done: false,
-      item: 'Atendido',
-    };
+      item: 'Atendido'
+    }
   }
 
   update = () => {
     this.props.update(this.props.item);
   }
 
-  render() {
-
-    const estaA = this.props.item.estatus;
-    let table;
+  render () {
+    const estaA = this.props.item.estatus
+    let table
 
     if (estaA === 'Asignado') {
       table =
@@ -34,16 +33,16 @@ export default class RowComponent extends Component {
           <div className='w-xml'>
             <p>{this.props.item.usoCFDI}</p>
           </div>
-          <div className='w-xml' style={{padding: '10px'}}>
+          <div className='w-xml' style={{ padding: '10px' }}>
             <button onClick={this.update}> - </button>
           </div>
-        </div>;
+        </div>
     }
 
     return (
       <div>
         {table}
       </div>
-    );
+    )
   }
 }

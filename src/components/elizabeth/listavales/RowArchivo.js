@@ -1,30 +1,23 @@
-import React, { Component } from 'react';
-import './ListVales.css';
-import { Link } from 'react-router-dom';
-import Popup from "reactjs-popup";
-import Dropzone from 'react-dropzone';
-import csv from 'csv';
-import CurrencyFormat from 'react-currency-format';
-import firebase from '../../../Firebase';
+import React, { Component } from 'react'
+import './ListVales.css'
 
 export default class RowAuto extends Component {
-  constructor(props){
-    super(props);
+  constructor (props) {
+    super(props)
     this.state = {
       done: false,
-      item: 'Atendido',
-    };
+      item: 'Atendido'
+    }
   }
 
-  update = () => {
-    this.props.update(this.props.item);
+  handleUpdate = () => {
+    this.props.update(this.props.item)
   }
 
-  render() {
+  render () {
     return (
       <div class='caja-inputs'>
-        <div className='table-left'>
-        </div>
+        <div className='table-left' />
         <div className='table-v-num2'>
           <div>{this.props.item.vale}</div>
         </div>
@@ -68,11 +61,10 @@ export default class RowAuto extends Component {
           <div>{this.props.item.recibos}</div>
         </div>
         <div className='table-v-num'>
-          <button onClick={this.update}>Agregar</button>
+          <button onClick={this.handleUpdate}>Agregar</button>
         </div>
-        <div class='table-right'>
-        </div>
+        <div class='table-right' />
       </div>
-    );
+    )
   }
 }

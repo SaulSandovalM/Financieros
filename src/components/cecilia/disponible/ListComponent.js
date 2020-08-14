@@ -1,35 +1,35 @@
-import React, { Component } from 'react';
-import './Disponible.css';
-import RowComponent from './RowComponent';
-import firebase from '../../../Firebase';
-import XLSX from 'xlsx';
+import React, { Component } from 'react'
+import './Disponible.css'
+import RowComponent from './RowComponent'
+import firebase from '../../../Firebase'
+import XLSX from 'xlsx'
 
 export default class ListComponent extends Component {
   constructor (props) {
-    super(props);
+    super(props)
     this.state = {
       presupuesto: [],
-      search: '',
-    };
-    this.exportFile = this.exportFile.bind(this)
+      search: ''
+    }
+    this.handleFile = this.handleFile.bind(this)
   }
 
   componentWillMount () {
     firebase.database().ref('presupuesto/').on('child_added', snapshot => {
       this.setState({
         presupuesto: this.state.presupuesto.concat(snapshot.val())
-      });
-    });
+      })
+    })
   }
 
-  updateSeacrh(event) {
-    this.setState({search: event.target.value.substr(0,20)})
+  updateSeacrh (event) {
+    this.setState({ search: event.target.value.substr(0, 20) })
   }
 
-  exportFile() {
-    let presupuesto = [['UP', 'PARTIDA', 'RUBRO', 'ENERO', 'FEBRERO', 'MARZO', 'ABRIL', 'MAYO', 'JUNIO', 'JULIO', 'AGOSTO', 'SEPTIEMBRE', 'OCTUBRE', 'NOVIEMBRE', 'DICIEMBRE', 'DISPONIBLE']]
+  handleFile () {
+    const presupuesto = [['UP', 'PARTIDA', 'RUBRO', 'ENERO', 'FEBRERO', 'MARZO', 'ABRIL', 'MAYO', 'JUNIO', 'JULIO', 'AGOSTO', 'SEPTIEMBRE', 'OCTUBRE', 'NOVIEMBRE', 'DICIEMBRE', 'DISPONIBLE']]
     this.state.presupuesto.forEach((pres) => {
-      let presArray = [pres.up, pres.par, pres.rubro, pres.ene, pres.feb, pres.mar, pres.abr, pres.may, pres.jun, pres.jul, pres.ago, pres.sep, pres.oct, pres.nov, pres.dic, pres.dic]
+      const presArray = [pres.up, pres.par, pres.rubro, pres.ene, pres.feb, pres.mar, pres.abr, pres.may, pres.jun, pres.jul, pres.ago, pres.sep, pres.oct, pres.nov, pres.dic, pres.dic]
       presupuesto.push(presArray)
     })
     const wb = XLSX.utils.book_new()
@@ -38,14 +38,12 @@ export default class ListComponent extends Component {
     XLSX.writeFile(wb, 'Disponible-Presupuesto.xlsx')
   }
 
-
-  render() {
-
-    let filterData = this.state.presupuesto.filter(
+  render () {
+    const filterData = this.state.presupuesto.filter(
       (presupuesto) => {
-        return presupuesto.up.indexOf(this.state.search) !== -1;
+        return presupuesto.up.indexOf(this.state.search) !== -1
       }
-    );
+    )
 
     return (
       <div>
@@ -60,14 +58,13 @@ export default class ListComponent extends Component {
           />
         </div>
         <div className='but-exc'>
-          <button className='input-sc boton-g' onClick={this.exportFile}>
+          <button className='input-sc boton-g' onClick={this.handleFile}>
             Exportar a Excel
           </button>
         </div>
         <div>
           <div className='meses-container'>
-            <div className='table-left'>
-            </div>
+            <div className='table-left' />
             <div className='table-dis-up'>
               <p className='p-h-dis'>UNIDAD</p>
             </div>
@@ -116,8 +113,7 @@ export default class ListComponent extends Component {
             <div className='table-dis-up'>
               <p className='p-h-dis'>DISPONIBILIDAD</p>
             </div>
-            <div className='table-right'>
-            </div>
+            <div className='table-right' />
           </div>
           {
             filterData.map(item =>
@@ -129,6 +125,6 @@ export default class ListComponent extends Component {
           }
         </div>
       </div>
-    );
+    )
   }
 }

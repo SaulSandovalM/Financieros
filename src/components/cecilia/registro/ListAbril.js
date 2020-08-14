@@ -1,30 +1,29 @@
-import React, { Component } from 'react';
-import './Registro.css';
-import RowAbril from './RowAbril';
-import firebase from '../../../Firebase';
+import React, { Component } from 'react'
+import './Registro.css'
+import RowAbril from './RowAbril'
+import firebase from '../../../Firebase'
 
 export default class ListAbril extends Component {
   constructor (props) {
-    super(props);
+    super(props)
     this.state = {
       presupuesto: []
-    };
+    }
   }
 
   componentWillMount () {
     firebase.database().ref('presupuesto/').on('child_added', snapshot => {
       this.setState({
         presupuesto: this.state.presupuesto.concat(snapshot.val())
-      });
-    });
+      })
+    })
   }
 
-  render() {
+  render () {
     return (
       <div>
         <div className='meses-container'>
-          <div className='table-left'>
-          </div>
+          <div className='table-left' />
           <div className='table-meses-up'>
             <p className='p-meses'>UP</p>
           </div>
@@ -55,8 +54,7 @@ export default class ListAbril extends Component {
           <div className='table-meses-dis'>
             <p className='p-meses'>DISPONIBLE</p>
           </div>
-          <div className='table-right'>
-          </div>
+          <div className='table-right' />
         </div>
         {
           this.props.lista.map(item =>
@@ -67,6 +65,6 @@ export default class ListAbril extends Component {
           )
         }
       </div>
-    );
+    )
   }
 }
