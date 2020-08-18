@@ -2,32 +2,98 @@ import React, { Component } from 'react'
 import './Oficios.css'
 import ReactToPrint from 'react-to-print'
 import firebase from '../../../Firebase'
-import { NumberAsString } from '../fondos/NumerosLetras.js'
+import { NumberAsString } from '../fondos/NumerosLetras'
 import logo2 from '../../../img/logo.jpg'
 import lpgjh from '../../../img/logo_hgo.png'
 
 export default class Cpdf extends Component {
   constructor (props) {
     super(props)
+    this.unsubscribe = null
     this.state = {
       fondo: {},
-      key: ''
+      key: '',
+      comprometidos: [],
+      total: '',
+      fecha: '',
+      importe: '',
+      no_oficio: ''
     }
   }
 
   componentDidMount () {
+    const updateRef = firebase.firestore().collection('fondos').doc(this.props.match.params.id).collection('comprometidos')
+    this.unsubscribe = updateRef.onSnapshot(this.onCollectionUpdate)
     const ref = firebase.firestore().collection('fondos').doc(this.props.match.params.id)
     ref.get().then((doc) => {
       if (doc.exists) {
+        const fondos = doc.data()
         this.setState({
-          fondo: doc.data(),
           key: doc.id,
-          isLoading: false
+          año: fondos.año,
+          ramo: fondos.ramo,
+          os: fondos.os,
+          up: fondos.up,
+          rubro: fondos.rubro,
+          tg: fondos.tg,
+          ogasto: fondos.ogasto,
+          f: fondos.f,
+          fu: fondos.fu,
+          sf: fondos.sf,
+          eje: fondos.eje,
+          s: fondos.s,
+          prog: fondos.prog,
+          obj: fondos.obj,
+          proy: fondos.proy,
+          est: fondos.est,
+          ben: fondos.ben,
+          eg: fondos.eg,
+          importe_comp: fondos.importe_comp,
+          // fecha: fondos.fecha cambiar el valor
+          numCompro: fondos.numCompro,
+          importe: fondos.importe,
+          no_oficio: fondos.no_oficio
         })
       } else {
-        console.log('No such document!')
+        console.log('No se encuentra documento')
       }
     })
+  }
+
+  onCollectionUpdate = (querySnapshot) => {
+    const comprometidos = []
+    querySnapshot.forEach((doc) => {
+      const { año, ramo, os, up, rubro, tg, ogasto, f, fu, sf, eje, s, prog, obj, proy, est, ben, eg, importe_comp } = doc.data() // importe_comp, isr, total, fecha_comp
+      comprometidos.push({
+        key: doc.id,
+        doc,
+        año,
+        ramo,
+        os,
+        up,
+        rubro,
+        tg,
+        ogasto,
+        f,
+        fu,
+        sf,
+        eje,
+        s,
+        prog,
+        obj,
+        proy,
+        est,
+        ben,
+        eg,
+        importe_comp
+        // isr,
+        // total,
+        // fecha_comp
+      })
+    })
+    this.setState({
+      comprometidos
+   })
   }
 
   render () {
@@ -36,6 +102,14 @@ export default class Cpdf extends Component {
     var diasSemana = new Array ('Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado')
     var f = new Date()
     today = diasSemana[f.getDay()] + ', ' + f.getDate() + ' de ' + meses[f.getMonth()] + ' de ' + f.getFullYear()
+
+    // const totalImporte = []
+    // this.state.comprometidos.map(comprometidos => (
+    //   totalImporte.push(comprometidos.importe_comp)
+    // ))
+    // console.log(totalImporte)
+    // const reducer = (a, b) => a + b
+    // this.state.total = totalImporte.reduce(reducer)
 
     return (
       <div>
@@ -154,8 +228,8 @@ export default class Cpdf extends Component {
               />
             </div>
           </div>
-
         </div>
+
         {/* fondo revolvente */}
         <div ref={el => (this.ogfr = el)} style={{ zIndex: '2', position: 'absolute' }}>
           <div />
@@ -169,7 +243,7 @@ export default class Cpdf extends Component {
               <div className='contenedor-1'>
                 <div className='interno'>
                   <p className='text-so'>Gasto a Comprobar</p>
-                  <input className='input-so' />
+                  <input className='input-so' type='checkbox' checked />
                 </div>
                 <div className='interno'>
                   <p className='text-so'>Comprobación de gasto</p>
@@ -274,28 +348,68 @@ export default class Cpdf extends Component {
                     <td className='dg-tabla all-tabla'>Descripcion del objeto de Gasto</td>
                     <td className='monto-tabla all-tabla'>Monto</td>
                   </tr>
-                  <tr>
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                  </tr>
+                  {this.state.comprometidos.map(comprometidos =>
+                    <tr>
+                      <td className='all-tabla'>
+                        {comprometidos.ramo}
+                      </td>
+                      <td className='all-tabla'>
+                        {comprometidos.año}
+                      </td>
+                      <td className='all-tabla'>
+                        {comprometidos.os}
+                      </td>
+                      <td className='all-tabla'>
+                        {comprometidos.up}
+                      </td>
+                      <td className='all-tabla'>
+                        {comprometidos.rubro}
+                      </td>
+                      <td className='all-tabla'>
+                        {comprometidos.tg}
+                      </td>
+                      <td className='all-tabla'>
+                        {comprometidos.ogasto}
+                      </td>
+                      <td className='all-tabla'>
+                        {comprometidos.f}
+                      </td>
+                      <td className='all-tabla'>
+                        {comprometidos.fu}
+                      </td>
+                      <td className='all-tabla'>
+                        {comprometidos.sf}
+                      </td>
+                      <td className='all-tabla'>
+                        {comprometidos.eje}
+                      </td>
+                      <td className='all-tabla'>
+                        {comprometidos.s}
+                      </td>
+                      <td className='all-tabla'>
+                        {comprometidos.prog}
+                      </td>
+                      <td className='all-tabla'>
+                        {comprometidos.obj}
+                      </td>
+                      <td className='all-tabla'>
+                        {comprometidos.proy}
+                      </td>
+                      <td className='all-tabla'>
+                        {comprometidos.est}
+                      </td>
+                      <td className='all-tabla'>
+                        {comprometidos.ben}
+                      </td>
+                      <td className='all-tabla'>
+                        {comprometidos.eg}
+                      </td>
+                      <td className='all-tabla' />
+                      <td className='all-tabla'>
+                        {comprometidos.importe_comp}
+                      </td>
+                    </tr>
+                  )}
                   <tr>
                     <td className='all-tabla' />
                     <td className='all-tabla' />
@@ -832,7 +946,7 @@ export default class Cpdf extends Component {
           </div>
           <div className='no-oficio'>
             <p>
-              <b>Oficio No:</b> PGI/DGAyF/ {this.state.fondo.no_oficio}
+              <b>Oficio No:</b> PGI/DGAyF/ {this.state.fecha}
               <br /> Pachuca de Soto, Hidalgo a {today}
               <br /><b>Asunto </b>  Reembolso de Fondo Revolvente
             </p>
@@ -858,10 +972,10 @@ export default class Cpdf extends Component {
           </div>
           <div className='texto-ofi_ppp'>
             <p>
-              Por medio de presente me permito enviar a Usted documentación amparada con número de
-              comprobantes 'No.____', por un total de $,
+              Por medio de presente me permito enviar a Usted documentación amparada
+              con {this.state.numCompro} de comprobantes por un total de $ {this.state.importe} ({(NumberAsString(this.state.importe))}),
               para el trámite de Reembolso de Fondo Revolvente, con cargo al proyecto {/* {this.state.comprometido.no_proyecto} y {this.state.fondo.no_proyec} */},
-              otorgado en el oficio de autorización número de oficio {this.state.fondo.oficio_aut} a la Procuraduría General de Justicia del Estado de Hidalgo.
+              otorgado en el oficio de autorización {this.state.no_oficio} a la Procuraduría General de Justicia del Estado de Hidalgo.
             </p>
             <p>Sin otro particular por el momento, reciba un cordial saludo</p>
           </div>

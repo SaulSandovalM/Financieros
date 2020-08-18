@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import './Fondos.css'
 import firebase from '../../../Firebase'
-import { NumberAsString } from './NumerosLetras.js'
+import { NumberAsString } from './NumerosLetras'
 import { DropDownList } from '@progress/kendo-react-dropdowns'
 import '@progress/kendo-theme-default/dist/all.css'
 import { Link } from 'react-router-dom'
@@ -25,7 +25,6 @@ export default class Fondos extends Component {
       requisicion: '',
       pedido: '',
       ncomprobantes: '',
-      ncfdi: '',
       poliza: '',
       cfe: '',
       nscfe: '',
@@ -70,7 +69,7 @@ export default class Fondos extends Component {
   onSubmit = (e) => {
     e.preventDefault()
     const { fondo, fecha, tipo_doc, oficio_aut, no_oficio, no_lici, importe, desc,
-            beneficiario, realizo, requisicion, pedido, ncomprobantes, ncfdi, poliza,
+            beneficiario, realizo, requisicion, pedido, ncomprobantes, poliza,
             cfe, nscfe, observaciones, numCompro } = this.state
     this.ref.add({
       fondo,
@@ -86,7 +85,6 @@ export default class Fondos extends Component {
       requisicion,
       pedido,
       ncomprobantes,
-      ncfdi,
       poliza,
       cfe,
       nscfe,
@@ -107,7 +105,6 @@ export default class Fondos extends Component {
         requisicion: '',
         pedido: '',
         ncomprobantes: '',
-        ncfdi: '',
         poliza: '',
         cfe: '',
         nscfe: '',
@@ -230,6 +227,7 @@ export default class Fondos extends Component {
     this.state.fondo = this.state.contador.nFondo
     this.state.fecha = today
     this.state.realizo = admin
+    console.log(this.state.f)
 
     return (
       <div className='zz'>
@@ -277,8 +275,13 @@ export default class Fondos extends Component {
                       <div className='fon-tab-ba-con'>
                         <p className='fon-p-con'>{fondos.fecha}</p>
                       </div>
-                      <div className='fon-tab-ba-con'>
-                        <Link to={`/fondoEditable/${fondos.key}`}>Editar</Link>
+                      <div className='fon-tab-ba-conl'>
+                        <Link
+                          to={`/FondoE/${fondos.key}`}
+                          className='fon-p-con'
+                        >
+                          Editar
+                        </Link>
                       </div>
                     </div>
                     }
@@ -670,16 +673,6 @@ export default class Fondos extends Component {
                     name='pedido'
                     onChange={this.onChange}
                     ref='pedido'
-                  />
-                </div>
-                <div className='f-f3'>
-                  <p className='lp'>Número de Comprobantes</p>
-                  <input
-                    className='f-l-s'
-                    id='ncomprobantes'
-                    name='ncomprobantes'
-                    onChange={this.onChange}
-                    ref='ncomprobantes'
                   />
                 </div>
                 <div className='f-f3'>

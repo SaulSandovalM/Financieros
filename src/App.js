@@ -29,6 +29,7 @@ import Arqueo from './components/elizabeth/arqueo/Arqueo'
 import ArqueoD from './components/elizabeth/arqueo/ArqueoD'
 // Parte de Miguel
 import Fondos from './components/miguel/fondos/NewFondos'
+import FondoE from './components/miguel/fondos/FondoE'
 import Comprometidos from './components/miguel/comprometidos/Comprometidos'
 import Oficios from './components/miguel/oficios/Oficios'
 
@@ -236,6 +237,13 @@ function App (props) {
         exact
         path='/Oficios/:id'
         component={Oficios}
+        isAuthenticated={isAuthenticated}
+        isVerifying={isVerifying}
+      />
+      <ProtectedRoute
+        exact
+        path='/FondoE/:id'
+        component={FondoE}
         isAuthenticated={isAuthenticated}
         isVerifying={isVerifying}
       />

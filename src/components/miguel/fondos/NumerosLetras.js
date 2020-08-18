@@ -83,21 +83,21 @@ const Centenas = num => {
       }
       return 'CIEN'
     case 2:
-      return 'DOSCIENTOS' + Decenas(decenas)
+      return 'DOSCIENTOS ' + Decenas(decenas)
     case 3:
-      return 'TRESCIENTOS' + Decenas(decenas)
+      return 'TRESCIENTOS ' + Decenas(decenas)
     case 4:
-      return 'CUATROCIENTOS' + Decenas(decenas)
+      return 'CUATROCIENTOS ' + Decenas(decenas)
     case 5:
-      return 'QUINIENTOS' + Decenas(decenas)
+      return 'QUINIENTOS ' + Decenas(decenas)
     case 6:
-      return 'SEISCIENTOS' + Decenas(decenas)
+      return 'SEISCIENTOS ' + Decenas(decenas)
     case 7:
-      return 'SETECIENTOS' + Decenas(decenas)
+      return 'SETECIENTOS ' + Decenas(decenas)
     case 8:
-      return 'OCHOCIENTOS' + Decenas(decenas)
+      return 'OCHOCIENTOS ' + Decenas(decenas)
     case 9:
-      return 'NOVECIENTOS' + Decenas(decenas)
+      return 'NOVECIENTOS ' + Decenas(decenas)
     default:
       return Decenas(decenas)
   }
