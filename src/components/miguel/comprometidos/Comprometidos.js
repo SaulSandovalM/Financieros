@@ -277,6 +277,7 @@ export default class Comprometidos extends Component {
       ods: item.ods,
       of: item.of,
       ogasto: item.ogasto,
+      npar: item.npar,
       os: item.os,
       par: item.par,
       pb: item.pb,
@@ -326,6 +327,7 @@ export default class Comprometidos extends Component {
       est: item.est,
       ben: item.ben,
       eg: item.eg,
+      npar: item.npar
     }).then((docRef) => {
       this.setState({
         partida: '',
