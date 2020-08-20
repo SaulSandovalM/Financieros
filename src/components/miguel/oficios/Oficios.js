@@ -15,7 +15,13 @@ export default class Cpdf extends Component {
     this.state = {
       fondo: {},
       key: '',
-      comprometidos: [],
+      comprometidos: [
+        {
+          id: 1,
+          name: 'preuba',
+          done: false
+        }
+      ],
       total: '',
       fecha: '',
       importe: '',
@@ -124,15 +130,12 @@ export default class Cpdf extends Component {
     var f = new Date()
     today = diasSemana[f.getDay()] + ', ' + f.getDate() + ' de ' + meses[f.getMonth()] + ' de ' + f.getFullYear()
 
-    // const totalImporte = []
-    // this.state.comprometidos.map(comprometidos => (
-    //   totalImporte.push(comprometidos.importe_comp)
-    // ))
-    // console.log(totalImporte)
-    // const reducer = (a, b) => a + b
-    // this.state.total = totalImporte.reduce(reducer)
-
-    console.log(this.state.pressStatus)
+    const totalImporte = []
+    this.state.comprometidos.map(comprometidos => (
+      totalImporte.push(comprometidos.importe_comp)
+    ))
+    const reducer = (a, b) => a + b
+    this.state.total = totalImporte.reduce(reducer)
 
     return (
       <div>
@@ -1056,7 +1059,9 @@ export default class Cpdf extends Component {
                     <td className='all-tablai border-color' />
                     <td className='all-tablai border-color' />
                     <td className='all-tablai border-color text-rete'>Total</td>
-                    <td className='all-tablai' />
+                    <td className='all-tablai'>
+                      {(totalImporte.reduce(reducer))}
+                    </td>
                   </tr>
                 </table>
               </div>

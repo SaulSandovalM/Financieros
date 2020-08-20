@@ -86,12 +86,10 @@
   display: flex;
   justify-content: space-between;
 }
-.lol {
-  overflow: scroll;
-}
 .lll {
   min-height: 100vh;
   z-index: 2;
+  page-break-before: always;
 }
 .popup-content {
   height: 100%;
