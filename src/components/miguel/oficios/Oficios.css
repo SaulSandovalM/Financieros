@@ -45,7 +45,7 @@
 }
 .bene-i {
   margin: 0;
-  font-size: 10px;
+  font-size: 12px;
 }
 .fs-if {
   margin-top: 18px;
@@ -59,4 +59,42 @@
 .nopass {
   z-index: 2;
   position: absolute;
+}
+.text-intei {
+  font-size: 12px;
+  margin-top: 0;
+  width: 120px;
+}
+.all-tablai {
+  font-size: 11px;
+  height: 15px;
+}
+.text-osb {
+  margin-top: 7px;
+  font-size: 12px;
+  width: 60px;
+}
+.text-soi {
+  margin: 3px;
+  font-size: 12px;
+}
+.contenedor-soi {
+  padding: 10px;
+  width: 1050px;
+  border: 1px solid;
+  border-radius: 20px;
+  display: flex;
+  justify-content: space-between;
+}
+.lol {
+  overflow: scroll;
+}
+.lll {
+  min-height: 100vh;
+  z-index: 2;
+}
+.popup-content {
+  height: 100%;
+  overflow: scroll;
+  width: 100%;
 }
