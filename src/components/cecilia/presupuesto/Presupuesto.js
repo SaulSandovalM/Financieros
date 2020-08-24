@@ -26,57 +26,60 @@ export default class Excel extends Component {
       csv.parse(reader.result, (err, data) => {
         var userList = []
         for (var i = 0; i < data.length; i++) {
-          const rm = data[i][0]
-          const os = data[i][1]
-          const up = data[i][2]
-          const rubro = data[i][3]
-          const tg = data[i][4]
-          const ogasto = data[i][5]
-          const f = data[i][6]
-          const fu = data[i][7]
-          const sf = data[i][8]
-          const eje = data[i][9]
-          const s = data[i][10]
-          const prog = data[i][11]
-          const sp = data[i][12]
-          const obj = data[i][13]
-          const proy = data[i][14]
-          const est = data[i][15]
-          const ben = data[i][16]
-          const eg = data[i][17]
-          const mi = data[i][18]
-          const pr = data[i][19]
-          const pb = data[i][20]
-          const dp = data[i][21]
-          const indi = data[i][22]
-          const la = data[i][23]
-          const ods = data[i][24]
-          const et = data[i][25]
-          const ff = data[i][26]
-          const of = data[i][27]
-          const np = data[i][28]
-          const cpa = data[i][29]
-          const ene = data[i][30]
-          const feb = data[i][31]
-          const mar = data[i][32]
-          const abr = data[i][33]
-          const may = data[i][34]
-          const jun = data[i][35]
-          const jul = data[i][36]
-          const ago = data[i][37]
-          const sep = data[i][38]
-          const oct = data[i][39]
-          const nov = data[i][40]
-          const dic = data[i][41]
-          const total = data[i][42]
+          const año = data[i][0]
+          const rm = data[i][1]
+          const ur = data[i][2]
+          const up = data[i][3]
+          const rubro = data[i][4]
+          const tg = data[i][5]
+          const ogasto = data[i][6]
+          const f = data[i][7]
+          const fu = data[i][8]
+          const sf = data[i][9]
+          const eje = data[i][10]
+          const s = data[i][11]
+          const prog = data[i][12]
+          const sp = data[i][13]
+          const obj = data[i][14]
+          const proy = data[i][15]
+          const est = data[i][16]
+          const obra = data[i][17]
+          const ben = data[i][18]
+          const eg = data[i][19]
+          const mi = data[i][20]
+          const pr = data[i][21]
+          const ped = data[i][22]
+          const itrans = data[i][23]
+          const igest = data[i][24]
+          const la = data[i][25]
+          const ods = data[i][26]
+          const et = data[i][27]
+          const ff = data[i][28]
+          const of = data[i][29]
+          const np = data[i][30]
+          const cpa = data[i][31]
+          const ene = data[i][32]
+          const feb = data[i][33]
+          const mar = data[i][34]
+          const abr = data[i][35]
+          const may = data[i][36]
+          const jun = data[i][37]
+          const jul = data[i][38]
+          const ago = data[i][39]
+          const sep = data[i][40]
+          const oct = data[i][41]
+          const nov = data[i][42]
+          const dic = data[i][43]
+          const total = data[i][44]
           const presupuesto = {
-            'rm': rm, 'os': os, 'up': up, 'rubro': rubro, 'tg': tg, 'ogasto': ogasto,
-            'f': f, 'fu': fu, 'sf': sf, 'eje': eje, 's': s, 'prog': prog, 'sp': sp,
-            'obj': obj, 'proy': proy, 'est': est, 'ben': ben, 'eg': eg, 'mi': mi,
-            'pr': pr, 'pb': pb, 'dp': dp, 'indi': indi, 'la': la, 'ods': ods, 'et': et,
-            'ff': ff, 'of': of, 'np': np, 'cpa': cpa, 'ene': ene, 'feb': feb, 'mar': mar,
-            'abr': abr, 'may': may, 'jun': jun, 'jul': jul, 'ago': ago, 'sep': sep,
-            'oct': oct, 'nov': nov, 'dic': dic, 'total': total
+            'año': año, 'rm': rm, 'ur': ur, 'up': up, 'rubro': rubro, 'tg': tg,
+            'ogasto': ogasto, 'f': f, 'fu': fu, 'sf': sf, 'eje': eje, 's': s,
+            'prog': prog, 'sp': sp, 'obj': obj, 'proy': proy, 'est': est,
+            'obra': obra, 'ben': ben, 'eg': eg, 'mi': mi, 'pr': pr, 'ped': ped,
+            'itrans': itrans, 'igest': igest, 'la': la, 'ods': ods, 'et': et,
+            'ff': ff, 'of': of, 'np': np, 'cpa': cpa, 'ene': ene, 'feb': feb,
+            'mar': mar, 'abr': abr, 'may': may, 'jun': jun, 'jul': jul,
+            'ago': ago, 'sep': sep, 'oct': oct, 'nov': nov, 'dic': dic, 'total': total
           }
           userList.push(presupuesto)
           fetch('https://financieros-78cb0.firebaseio.com/presupuesto.json', {

@@ -96,3 +96,20 @@
   overflow: scroll;
   width: 100%;
 }
+.c-b-i {
+  display: flex;
+  justify-content: center;
+}
+.td {
+  padding: 0;
+}
+.all-tab-l {
+  height: 60%;
+  width: 99%;
+  padding: 0;
+  border: 0;
+  text-align: center;
+}
+.all-tab-f {
+  height: 80px;
+}

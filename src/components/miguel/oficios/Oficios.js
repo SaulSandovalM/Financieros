@@ -26,7 +26,8 @@ export default class Cpdf extends Component {
       fecha: '',
       importe: '',
       no_oficio: '',
-      pressStatus: true
+      pressStatus: true,
+      text: ''
     }
   }
 
@@ -122,6 +123,12 @@ export default class Cpdf extends Component {
       comprometidos
     })
   }
+
+  handleChange(event) {
+    this.setState({
+      text: event.target.value
+    });
+  };
 
   render () {
     var today = new Date()
@@ -250,33 +257,19 @@ export default class Cpdf extends Component {
                             <td className='alltabla-ga'>LEYENDA ALUSIVA AL GASTO</td>
                           </tr>
                           <tr>
-                            <td className='all-tab' />
-                            <td className='all-tab' />
-                            <td className='all-tab' />
+                            <td className='all-tab-f' />
+                            <td className='all-tab-f' />
+                            <td className='all-tab-f td'>
+                              <input
+                                className='all-tab-l'
+                                type='text'
+                                onKeyUp={this.handleChange.bind(this)}
+                              />
+                            </td>
                           </tr>
                           <tr>
-                            <td className='all-tab' />
-                            <td className='all-tab' />
-                            <td className='all-tab' />
-                          </tr>
-                          <tr>
-                            <td className='all-tab' />
-                            <td className='all-tab' />
-                            <td className='all-tab' />
-                          </tr>
-                          <tr>
-                            <td className='all-tab' />
-                            <td className='all-tab' />
-                            <td className='all-tab' />
-                          </tr>
-                          <tr>
-                            <td className='all-tab' />
-                            <td className='all-tab' />
-                            <td className='all-tab' />
-                          </tr>
-                          <tr>
-                            <td className='all-tab text-total-ga'>TOTAL</td>
-                            <td className='all-tab' />
+                            <td className='text-total-ga'>TOTAL</td>
+                            <td />
                           </tr>
                         </table>
                       </div>
@@ -284,7 +277,11 @@ export default class Cpdf extends Component {
                   </div>
                   )}
                   <ReactToPrint
-                    trigger={() => <buttom className='b-imp'>Imprimir</buttom>}
+                    trigger={() =>
+                      <div className='c-b-i'>
+                        <buttom className='b-imp'>Imprimir</buttom>
+                      </div>
+                      }
                     content={() => this.gas}
                   />
                   </div>
