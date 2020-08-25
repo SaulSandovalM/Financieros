@@ -40,7 +40,7 @@ export default class ListComponent extends Component {
     e.preventDefault()
     const params = {
       up: this.inputUp.value,
-      par: this.inputPartida.value,
+      ogasto: this.inputPartida.value,
       importe: this.inputImporte.value,
       rubro: this.inputRubro.value,
       archivo: this.state.archivo,
@@ -48,19 +48,17 @@ export default class ListComponent extends Component {
     }
     this.setState({
       up: this.inputUp.value,
-      par: this.inputPartida.value,
+      ogasto: this.inputPartida.value,
       importe: this.inputImporte.value,
       rubro: this.inputRubro.value,
       archivo: this.state.archivo,
       numContra: this.inputNumContra.value
     })
-    if (params.up && params.par && params.importe && params.rubro && params.archivo) {
+    if (params.up && params.ogasto && params.importe && params.rubro && params.archivo) {
       var f = parseInt(params.importe)
       const statsRef = firebase.firestore().collection('banco').doc('--stats--')
       const increment = firebase.firestore.FieldValue.increment(f)
       const batch = firebase.firestore().batch()
-      const storyRef = firebase.firestore().collection('banco').doc(`${Math.random()}`)
-      batch.set(storyRef, { title: 'Se agredo un fondo' })
       batch.set(statsRef, { storyCount: increment }, { merge: true })
       batch.commit()
       firebase.database().ref('banco').push(params).then(() => {
@@ -84,16 +82,16 @@ export default class ListComponent extends Component {
       <div>
         <div>
           <div>
-            <div className='p-container-fondor' style={{background: '#f4f4f4', padding: '30px'}}>
+            <div className='p-container-fondor' style={{ background: '#f4f4f4', padding: '30px' }}>
               <div className='p-margin-fr'>
                 <p className='p-title-size-fr'>
                   - Ingresa los datos que correspondan con el documento
                     de autorización del fondo revolvente
                 </p>
               </div>
-              <div className='inputs-container-fr'>
+              <div className='inputs-container-fr' ref='contactForm'>
                 <div className='inputs-col-fr'>
-                  <div className='inputs-row-fr-2' style={{width: '60%'}}>
+                  <div className='inputs-row-fr-2' style={{ width: '60%' }}>
                     <div className='p-container-ifr3'>
                       <p className='p-title-margin-fr'>Up</p>
                       <input

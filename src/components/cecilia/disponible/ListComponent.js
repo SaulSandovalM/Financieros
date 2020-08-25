@@ -29,7 +29,20 @@ export default class ListComponent extends Component {
   handleFile () {
     const presupuesto = [['UP', 'PARTIDA', 'RUBRO', 'ENERO', 'FEBRERO', 'MARZO', 'ABRIL', 'MAYO', 'JUNIO', 'JULIO', 'AGOSTO', 'SEPTIEMBRE', 'OCTUBRE', 'NOVIEMBRE', 'DICIEMBRE', 'DISPONIBLE']]
     this.state.presupuesto.forEach((pres) => {
-      const presArray = [pres.up, pres.par, pres.rubro, pres.ene, pres.feb, pres.mar, pres.abr, pres.may, pres.jun, pres.jul, pres.ago, pres.sep, pres.oct, pres.nov, pres.dic, pres.dic]
+      const ene = parseInt(pres.ene)
+      const feb = parseInt(pres.feb)
+      const mar = parseInt(pres.mar)
+      const abr = parseInt(pres.abr)
+      const may = parseInt(pres.may)
+      const jun = parseInt(pres.jun)
+      const jul = parseInt(pres.jul)
+      const ago = parseInt(pres.ago)
+      const sep = parseInt(pres.sep)
+      const oct = parseInt(pres.oct)
+      const nov = parseInt(pres.nov)
+      const dic = parseInt(pres.dic)
+      const dis = ene + feb + mar + abr + may + jun + jul + ago + sep + oct + nov + dic
+      const presArray = [pres.up, pres.ogasto, pres.rubro, pres.ene, pres.feb, pres.mar, pres.abr, pres.may, pres.jun, pres.jul, pres.ago, pres.sep, pres.oct, pres.nov, pres.dic, dis]
       presupuesto.push(presArray)
     })
     const wb = XLSX.utils.book_new()

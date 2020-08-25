@@ -95,11 +95,10 @@ export default class Fondor extends Component {
         listaB.push({
           abr: child.val().abr,
           ago: child.val().ago,
+          año: child.val().año,
           ben: child.val().ben,
           cpa: child.val().cpa,
           dic: child.val().dic,
-          dig: child.val().dig,
-          dp: child.val().dp,
           eg: child.val().eg,
           eje: child.val().eje,
           ene: child.val().ene,
@@ -109,13 +108,13 @@ export default class Fondor extends Component {
           feb: child.val().feb,
           ff: child.val().ff,
           fu: child.val().fu,
-          indi: child.val().indi,
+          igest: child.val().igest,
+          itrans: child.val().itrans,
           jul: child.val().jul,
           jun: child.val().jun,
           la: child.val().la,
           mar: child.val().mar,
           may: child.val().may,
-          meta: child.val().meta,
           mi: child.val().mi,
           nov: child.val().nov,
           np: child.val().np,
@@ -125,9 +124,7 @@ export default class Fondor extends Component {
           ods: child.val().ods,
           of: child.val().of,
           ogasto: child.val().ogasto,
-          os: child.val().os,
-          par: child.val().par,
-          pb: child.val().pb,
+          ped: child.val().ped,
           pr: child.val().pr,
           prog: child.val().prog,
           proy: child.val().proy,
@@ -140,7 +137,9 @@ export default class Fondor extends Component {
           tg: child.val().tg,
           total: child.val().total,
           up: child.val().up,
+          ur: child.val().ur,
           estatus: child.val().estatus,
+          npro: child.val().npro,
           done: child.val().done,
           id: child.key
         })
@@ -179,11 +178,11 @@ export default class Fondor extends Component {
     updates['presupuesto/' + item.id] = {
       abr: item.abr,
       ago: item.ago,
+      año: item.año,
       ben: item.ben,
       cpa: item.cpa,
       dic: item.dic - this.state.importe,
-      dig: item.dig,
-      dp: item.dp,
+      gasdic: this.state.importe,
       eg: item.eg,
       eje: item.eje,
       ene: item.ene,
@@ -193,13 +192,13 @@ export default class Fondor extends Component {
       feb: item.feb,
       ff: item.ff,
       fu: item.fu,
-      indi: item.indi,
+      igest: item.igest,
+      itrans: item.itrans,
       jul: item.jul,
       jun: item.jun,
       la: item.la,
       mar: item.mar,
       may: item.may,
-      meta: item.meta,
       mi: item.mi,
       nov: item.nov,
       np: item.np,
@@ -209,9 +208,7 @@ export default class Fondor extends Component {
       ods: item.ods,
       of: item.of,
       ogasto: item.ogasto,
-      os: item.os,
-      par: item.par,
-      pb: item.pb,
+      ped: item.ped,
       pr: item.pr,
       prog: item.prog,
       proy: item.proy,
@@ -224,6 +221,8 @@ export default class Fondor extends Component {
       tg: item.tg,
       total: item.total,
       up: item.up,
+      ur: item.ur,
+      npro: item.npro,
       estatus: 'FR'
     }
     firebase.database().ref().update(updates)
@@ -231,8 +230,6 @@ export default class Fondor extends Component {
     const statsRef = firebase.firestore().collection('banco').doc('--stats--')
     const increment = firebase.firestore.FieldValue.increment(f)
     const batch = firebase.firestore().batch()
-    const storyRef = firebase.firestore().collection('banco').doc(`${Math.random()}`)
-    batch.set(storyRef, { title: 'Se agredo un fondo' })
     batch.set(statsRef, { storyCount: increment }, { merge: true })
     batch.commit()
     alert('Tu solicitud fue enviada.')

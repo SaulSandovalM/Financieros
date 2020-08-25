@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import './Disponible.css'
+import CurrencyFormat from 'react-currency-format'
 
 export default class RowComponent extends Component {
   constructor (props) {
@@ -11,6 +12,19 @@ export default class RowComponent extends Component {
   }
 
   render () {
+    const ene = parseInt(this.props.item.ene)
+    const feb = parseInt(this.props.item.feb)
+    const mar = parseInt(this.props.item.mar)
+    const abr = parseInt(this.props.item.abr)
+    const may = parseInt(this.props.item.may)
+    const jun = parseInt(this.props.item.jun)
+    const jul = parseInt(this.props.item.jul)
+    const ago = parseInt(this.props.item.ago)
+    const sep = parseInt(this.props.item.sep)
+    const oct = parseInt(this.props.item.oct)
+    const nov = parseInt(this.props.item.nov)
+    const dic = parseInt(this.props.item.dic)
+
     return (
       <div className='meses-container-row'>
         <div className='table-left' />
@@ -21,46 +35,137 @@ export default class RowComponent extends Component {
           <p className='p-h-dis2'>{this.props.item.rubro}</p>
         </div>
         <div className='table-dis-up'>
-          <p className='p-h-dis2'>{this.props.item.par}</p>
+          <p className='p-h-dis2'>{this.props.item.ogasto}</p>
         </div>
         <div className='table-dis-up'>
-          <p className='p-h-dis2'>{this.props.item.ene}</p>
+          <p className='p-h-dis2'>
+            <CurrencyFormat
+              value={this.props.item.ene}
+              displayType='text'
+              thousandSeparator
+              prefix='$ '
+            />
+          </p>
         </div>
         <div className='table-dis-up'>
-          <p className='p-h-dis2'>{this.props.item.feb}</p>
+          <p className='p-h-dis2'>
+            <CurrencyFormat
+              value={this.props.item.feb}
+              displayType='text'
+              thousandSeparator
+              prefix='$ '
+            />
+          </p>
         </div>
         <div className='table-dis-up'>
-          <p className='p-h-dis2'>{this.props.item.mar}</p>
+          <p className='p-h-dis2'>
+            <CurrencyFormat
+              value={this.props.item.mar}
+              displayType='text'
+              thousandSeparator
+              prefix='$ '
+            />
+          </p>
         </div>
         <div className='table-dis-up'>
-          <p className='p-h-dis2'>{this.props.item.abr}</p>
+          <p className='p-h-dis2'>
+            <CurrencyFormat
+              value={this.props.item.abr}
+              displayType='text'
+              thousandSeparator
+              prefix='$ '
+            />
+          </p>
         </div>
         <div className='table-dis-up'>
-          <p className='p-h-dis2'>{this.props.item.may}</p>
+          <p className='p-h-dis2'>
+            <CurrencyFormat
+              value={this.props.item.may}
+              displayType='text'
+              thousandSeparator
+              prefix='$ '
+            />
+          </p>
         </div>
         <div className='table-dis-up'>
-          <p className='p-h-dis2'>{this.props.item.jun}</p>
+          <p className='p-h-dis2'>
+            <CurrencyFormat
+              value={this.props.item.jun}
+              displayType='text'
+              thousandSeparator
+              prefix='$ '
+            />
+          </p>
         </div>
         <div className='table-dis-up'>
-          <p className='p-h-dis2'>{this.props.item.jul}</p>
+          <p className='p-h-dis2'>
+            <CurrencyFormat
+              value={this.props.item.jul}
+              displayType='text'
+              thousandSeparator
+              prefix='$ '
+            />
+          </p>
         </div>
         <div className='table-dis-up'>
-          <p className='p-h-dis2'>{this.props.item.ago}</p>
+          <p className='p-h-dis2'>
+            <CurrencyFormat
+              value={this.props.item.ago}
+              displayType='text'
+              thousandSeparator
+              prefix='$ '
+            />
+          </p>
         </div>
         <div className='table-dis-up'>
-          <p className='p-h-dis2'>{this.props.item.sep}</p>
+          <p className='p-h-dis2'>
+            <CurrencyFormat
+              value={this.props.item.sep}
+              displayType='text'
+              thousandSeparator
+              prefix='$ '
+            />
+          </p>
         </div>
         <div className='table-dis-up'>
-          <p className='p-h-dis2'>{this.props.item.oct}</p>
+          <p className='p-h-dis2'>
+            <CurrencyFormat
+              value={this.props.item.oct}
+              displayType='text'
+              thousandSeparator
+              prefix='$ '
+            />
+          </p>
         </div>
         <div className='table-dis-up'>
-          <p className='p-h-dis2'>{this.props.item.nov}</p>
+          <p className='p-h-dis2'>
+            <CurrencyFormat
+              value={this.props.item.nov}
+              displayType='text'
+              thousandSeparator
+              prefix='$ '
+            />
+          </p>
         </div>
         <div className='table-dis-up'>
-          <p className='p-h-dis2'>{this.props.item.dic}</p>
+          <p className='p-h-dis2'>
+            <CurrencyFormat
+              value={this.props.item.dic}
+              displayType='text'
+              thousandSeparator
+              prefix='$ '
+            />
+          </p>
         </div>
         <div className='table-dis-up'>
-          <p className='p-h-dis2'>{this.props.item.dic}</p>
+          <p className='p-h-dis2'>
+            <CurrencyFormat
+              value={ene + feb + mar + abr + may + jun + jul + ago + sep + oct + nov + dic}
+              displayType='text'
+              thousandSeparator
+              prefix='$ '
+            />
+          </p>
         </div>
         <div className='table-right' />
       </div>

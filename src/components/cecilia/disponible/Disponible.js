@@ -32,7 +32,7 @@ export default class Disponible extends Component {
       snap.forEach((child) => {
         lista.push({
           up: child.val().up,
-          par: child.val().par,
+          ogasto: child.val().ogasto,
           disponible: child.val().disponible,
           rubro: child.val().rubro,
           done: child.val().done,

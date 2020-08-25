@@ -16,6 +16,15 @@
   justify-content: center;
   flex-direction: column;
 }
+.table-disup {
+  width: 4%;
+  border-right: 1px solid #d0d0d0;
+  border-bottom: 1px solid #d0d0d0;
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
 .p-container-dis {
   display: flex;
   flex-direction: column;
