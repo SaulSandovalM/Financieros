@@ -5,6 +5,8 @@ import firebase from '../../../Firebase'
 export default class Fondos extends Component {
   constructor (props) {
     super(props)
+    this.ref = firebase.firestore().collection('fondos')
+    this.unsubscribe = null
     this.state = {
       alert: false,
       fechaC: '',
@@ -12,8 +14,28 @@ export default class Fondos extends Component {
       fechaD: '',
       cuantaP: '',
       bene_pro: '',
-      sujetoC: ''
+      sujetoC: '',
+      fondos: []
     }
+  }
+
+  componentDidMount () {
+    this.unsubscribe = this.ref.onSnapshot(this.onCollectionUpdate)
+  }
+
+  onCollectionUpdate = (querySnapshot) => {
+    const fondos = []
+    querySnapshot.forEach((doc) => {
+      const { fondo } = doc.data()
+      fondos.push({
+        key: doc.id,
+        doc,
+        fondo
+      })
+    })
+    this.setState({
+      fondos
+   })
   }
 
   resetForm () {
@@ -91,6 +113,22 @@ export default class Fondos extends Component {
               <input />
             </div> */}
           </div>
+        </div>
+
+        <div style={{margin: '25px'}}>
+          {this.state.fondos.map(fondos =>
+            <div>
+              <div className='banco-inputs-list'>
+                <div className='table-left' />
+                <div className='table-banco-titlef'>
+                  <div className='table-no-row'>
+                    <p className='p-banco-map'>{fondos.fondo}</p>
+                  </div>
+                </div>
+                <div className='table-right' />
+              </div>
+            </div>
+          )}
         </div>
       </div>
     )
