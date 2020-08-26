@@ -16,6 +16,8 @@ import Archivos from './components/cecilia/archivos/Archivos'
 import Registro from './components/cecilia/registro/Registro'
 import Disponible from './components/cecilia/disponible/Disponible'
 import Contra from './components/cecilia/contrarecibo/Contra'
+import Show from './components/cecilia/contrarecibo/Show'
+import Editcontra from './components/cecilia/contrarecibo/Editcontra'
 // Parte de Elizabeth
 import Caja from './components/elizabeth/caja/Caja'
 import Cheques from './components/elizabeth/cheques/Cheques'
@@ -289,6 +291,8 @@ function App (props) {
       <Route path='/Frpdf/:id' component={Frpdf} />
       <Route path='/Cpdf/:id' component={Cpdf} />
       <Route path='/add/:id' component={Add} />
+      <Route path='/Show/:id' component={Show} />
+      <Route path='/Editcontra/:id' component={Editcontra} />
       {/* todos lods pdf */}
       <Route path='/Gasto' component={Gasto} />
       <Route path='/ObjetodegastoFR' component={ObjetodegastoFR} />

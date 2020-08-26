@@ -12,3 +12,10 @@
   flex-direction: column;
   justify-content: center;
 }
+.contra-container-fc {
+  background-color: #f4f4f4;
+}
+.mar-con {
+  margin: 0 25px 25px 25px;
+  padding-top: 40px;
+}

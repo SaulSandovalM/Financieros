@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import './Contra.css'
 import firebase from '../../../Firebase'
+import { Link } from 'react-router-dom'
 
 export default class Fondos extends Component {
   constructor (props) {
@@ -8,13 +9,6 @@ export default class Fondos extends Component {
     this.ref = firebase.firestore().collection('fondos')
     this.unsubscribe = null
     this.state = {
-      alert: false,
-      fechaC: '',
-      noC: '',
-      fechaD: '',
-      cuantaP: '',
-      bene_pro: '',
-      sujetoC: '',
       fondos: []
     }
   }
@@ -38,84 +32,13 @@ export default class Fondos extends Component {
    })
   }
 
-  resetForm () {
-    this.refs.contactForm.reset()
-  }
-
-  sendMessage () {
-    const params = {
-      fechaC: this.inputFechaC.value,
-      noC: this.inputNoC.value,
-      fechaD: this.inputFechaD.value,
-      cuantaP: this.inputCuentaP.value,
-      bene_pro: this.inputBene.value,
-      sujetoC: this.inputSujetoC.value
-    }
-    this.setState({
-      fechaC: this.inputFechaC.value,
-      noC: this.inputNoC.value,
-      fechaD: this.inputFechaD.value,
-      cuantaP: this.inputCuentaP.value,
-      bene_pro: this.inputBene.value,
-      sujetoC: this.inputSujetoC.value
-    })
-    if (params.fecha) {
-      firebase.database().ref('vales').push(params).then(() => {
-        alert('Tu solicitud fue enviada.')
-      }).catch(() => {
-        alert('Tu solicitud no puede ser enviada')
-      })
-      this.resetForm()
-    } else {
-      alert('Por favor llene el formulario')
-    }
-  }
-
   render () {
     return (
-      <div className='contra-container'>
-        <div>
-          <div className='m-f'>
-            <div className='fcc-i'>
-              <p className='fimpre'>Fecha Contrarecibo:</p>
-              <input />
-            </div>
-            <div className='fcc-i'>
-              <p className='fimpre'>No. Contrarecibo:</p>
-              <input />
-            </div>
-            <div className='fcc-i'>
-              <p className='fimpre'>Fecha Deposito:</p>
-              <input />
-            </div>
-            <div className='fcc-i'>
-              <p className='fimpre'>Cuenta por Pagar:</p>
-              <input />
-            </div>
-            <div className='fcc-i'>
-              <p className='fimpre'>Beneficiario/Proveedor:</p>
-              <input />
-            </div>
-            <div className='fcc-i'>
-              <p className='fimpre'>Sujeto Contable:</p>
-              <input />
-            </div>
-            {/* <div className='fcc-i'>
-              <p className='fimpre'>Solicitud Programatica:</p>
-              <input />
-            </div>
-            <div className='fcc-i'>
-              <p className='fimpre'>Monto:</p>
-              <input />
-            </div>
-            <div className='fcc-i'>
-              <p className='fimpre'>CPA:</p>
-              <input />
-            </div> */}
-          </div>
+      <div className='contra-container-fc'>
+        <div className='site-pf'>
+          <p className='site-pf-s'><b>Contrarecibo</b></p>
         </div>
-
-        <div style={{margin: '25px'}}>
+        <div className='mar-con'>
           {this.state.fondos.map(fondos =>
             <div>
               <div className='banco-inputs-list'>
@@ -123,6 +46,7 @@ export default class Fondos extends Component {
                 <div className='table-banco-titlef'>
                   <div className='table-no-row'>
                     <p className='p-banco-map'>{fondos.fondo}</p>
+                    <Link to={`/show/${fondos.key}`}>Agregar</Link>
                   </div>
                 </div>
                 <div className='table-right' />
