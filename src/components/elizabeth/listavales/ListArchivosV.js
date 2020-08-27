@@ -159,6 +159,10 @@ export default class ListArchivosV extends Component {
     this.refs.contactForm.reset()
   }
 
+  handleChange (event) {
+    this.setState({ [event.target.name]: event.target.value })
+  }
+
   sendMessage (e) {
     e.preventDefault()
     const params = {
@@ -191,6 +195,7 @@ export default class ListArchivosV extends Component {
   }
 
   render () {
+    console.log(this.state.filerecibo)
     return (
       <div className='container-back'>
         <div className='site'>
@@ -254,26 +259,7 @@ export default class ListArchivosV extends Component {
                   </div>
                   <div className='p-container-ar'>
                     <p className='p-title-margin-fr'>RECIBO</p>
-                    <Dropzone
-                      style={{
-                        width: '100%',
-                        height: '30px',
-                        borderWidth: '1px',
-                        borderColor: 'rgb(102, 102, 102)',
-                        borderStyle: 'solid',
-                        borderRadius: '1px',
-                        maxFiles: 5,
-                        background: 'white',
-                        position: 'static'
-                      }}
-                      accept='.pdf' onChange={this.handleOnChange3.bind(this)}>
-                      <div className='filename'>
-                        <p className='file-hid'>{this.state.filer}</p>
-                      </div>
-                    </Dropzone>
-                    <progress className='progress' value={this.state.pdf3} max='100'>
-                      {this.state.pdf3} %
-                    </progress>
+                    <input type='number' name='filerecibo' className='recibo-n' value={this.state.filerecibo} onChange={this.handleChange.bind(this)}/>
                   </div>
                 </div>
               </div>

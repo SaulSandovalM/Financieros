@@ -100,7 +100,7 @@ export default class ListValesN extends Component {
     return (
       <div className='container-back'>
         <div className='site'>
-          <p className='site-s'><b>Vales Pendientes</b></p>
+          <p className='site-s'><b>Vales Pendientes de Numero de Cheque</b></p>
         </div>
         <div className='input-val-p'>
           <p>Ingresa el numero de cheque</p>

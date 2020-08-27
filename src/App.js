@@ -22,9 +22,9 @@ import Editcontra from './components/cecilia/contrarecibo/Editcontra'
 import Caja from './components/elizabeth/caja/Caja'
 import Cheques from './components/elizabeth/cheques/Cheques'
 import Vales from './components/elizabeth/vales/Vales'
-import ListValesP from './components/elizabeth/listavales/ListValesP'
-import ListValesA from './components/elizabeth/listavales/ListValesA'
-import ListValesN from './components/elizabeth/listavales/ListValesN'
+import ListValesA from './components/elizabeth/listavales/ListValesA' // Autorizados
+import ListValesP from './components/elizabeth/listavales/ListValesP' // Vales Pendientes de Autorizacion Nayra
+import ListValesN from './components/elizabeth/listavales/ListValesN' // Pendientes de numero de cheques
 import ListArchivosV from './components/elizabeth/listavales/ListArchivosV'
 import Autorizacion from './components/elizabeth/autorizacion/Autorizacion'
 import Arqueo from './components/elizabeth/arqueo/Arqueo'
@@ -34,37 +34,12 @@ import Fondos from './components/miguel/fondos/NewFondos'
 import FondoE from './components/miguel/fondos/FondoE'
 import Comprometidos from './components/miguel/comprometidos/Comprometidos'
 import Oficios from './components/miguel/oficios/Oficios'
-
-import Edit from './components/miguel/comprometidos/Edit'
-import Analitico from './components/miguel/analitico/Analitico'
-import Edita from './components/miguel/analitico/Edita'
 import Consulta from './components/miguel/consulta/Consulta'
 import Cpdf from './components/miguel/consulta/Cpdf'
-import Pdf from './components/miguel/consulta/pdf'
-import Pppdf from './components/miguel/consulta/pppdf'
-import Frpdf from './components/miguel/consulta/frpdf'
 import ControlP from './components/controlp/ControlP'
 import Add from './components/controlp/Add'
 import Complemento from './components/complemento/Complemento'
 import Caratula from './components/miguel/caratula/Caratula'
-// pdf
-// FondoRevolvente
-import Gasto from './components/miguel/Todospdf/FondoRevolvente/Gasto'
-import ObjetodegastoFR from './components/miguel/Todospdf/FondoRevolvente/objetodegastoFR'
-import Recibo from './components/miguel/Todospdf/FondoRevolvente/Recibo'
-import Rfr from './components/miguel/Todospdf/FondoRevolvente/Rfr'
-// Pagoproveedor
-import ObjetodegastoPP from './components/miguel/Todospdf/Pagoproveedor/objetodegastoPP'
-import Gastoprovee from './components/miguel/Todospdf/Pagoproveedor/Gastoprovee'
-import Pagoproveedor from './components/miguel/Todospdf/Pagoproveedor/pagoproveedor'
-// Diciembre
-import Comprobaciondegastocomprobar from './components/miguel/Todospdf/Diciembre/comprobaciondegastocomprobar'
-import Gastodiciembre from './components/miguel/Todospdf/Diciembre/gastodiciembre'
-import Objetodegastodiciembre from './components/miguel/Todospdf/Diciembre/objetodegastodiciembre'
-// pagoproveedor por requisicion
-import Gastoppr from './components/miguel/Todospdf/Pagoaproveedorporrequisicion/gastoppr'
-import Solicitudppr from './components/miguel/Todospdf/Pagoaproveedorporrequisicion/solicitudppr'
-import Ofisolicitudppr from './components/miguel/Todospdf/Pagoaproveedorporrequisicion/ofisolicitudppr'
 
 function App (props) {
   const { isAuthenticated, isVerifying } = props
@@ -251,13 +226,6 @@ function App (props) {
       />
       <ProtectedRoute
         exact
-        path='/Analitico'
-        component={Analitico}
-        isAuthenticated={isAuthenticated}
-        isVerifying={isVerifying}
-      />
-      <ProtectedRoute
-        exact
         path='/Consulta'
         component={Consulta}
         isAuthenticated={isAuthenticated}
@@ -284,30 +252,17 @@ function App (props) {
         isAuthenticated={isAuthenticated}
         isVerifying={isVerifying}
       />
-      <Route path='/edit/:id' component={Edit} />
-      <Route path='/edita/:id' component={Edita} />
-      <Route path='/Pdf/:id' component={Pdf} />
-      <Route path='/Pppdf/:id' component={Pppdf} />
-      <Route path='/Frpdf/:id' component={Frpdf} />
+      <ProtectedRoute
+        exact
+        path='/Show/:id'
+        component={Show}
+        isAuthenticated={isAuthenticated}
+        isVerifying={isVerifying}
+      />
       <Route path='/Cpdf/:id' component={Cpdf} />
       <Route path='/add/:id' component={Add} />
-      <Route path='/Show/:id' component={Show} />
       <Route path='/Editcontra/:id' component={Editcontra} />
       {/* todos lods pdf */}
-      <Route path='/Gasto' component={Gasto} />
-      <Route path='/ObjetodegastoFR' component={ObjetodegastoFR} />
-      <Route path='/Recibo' component={Recibo} />
-      <Route path='/Rfr' component={Rfr} />
-
-      <Route path='/ObjetodegastoPP:id' component={ObjetodegastoPP} />
-      <Route path='/Gastoprovee:id' component={Gastoprovee} />
-      <Route path='/Pagoproveedor:id' component={Pagoproveedor} />
-      <Route path='/Comprobaciondegastocomprobar:id' component={Comprobaciondegastocomprobar} />
-      <Route path='/Gastodiciembre:id' component={Gastodiciembre} />
-      <Route path='/Objetodegastodiciembre:id' component={Objetodegastodiciembre} />
-      <Route path='/Gastoppr:id' component={Gastoppr} />
-      <Route path='/Solicitudppr:id' component={Solicitudppr} />
-      <Route path='/Ofisolicitudppr:id' component={Ofisolicitudppr} />
     </Switch>
   )
 }
