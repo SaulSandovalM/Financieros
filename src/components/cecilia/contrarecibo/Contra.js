@@ -20,16 +20,19 @@ export default class Fondos extends Component {
   onCollectionUpdate = (querySnapshot) => {
     const fondos = []
     querySnapshot.forEach((doc) => {
-      const { fondo } = doc.data()
+      const { fondo, desc, fecha, importe } = doc.data()
       fondos.push({
         key: doc.id,
         doc,
-        fondo
+        fondo,
+        desc,
+        fecha,
+        importe
       })
     })
     this.setState({
       fondos
-   })
+    })
   }
 
   render () {
@@ -38,15 +41,20 @@ export default class Fondos extends Component {
         <div className='site-pf'>
           <p className='site-pf-s'><b>Contrarecibo</b></p>
         </div>
+        <div className='back-a' />
         <div className='mar-con'>
           {this.state.fondos.map(fondos =>
             <div>
               <div className='banco-inputs-list'>
                 <div className='table-left' />
                 <div className='table-banco-titlef'>
-                  <div className='table-no-row'>
+                  <div className='table-no-rows'>
                     <p className='p-banco-map'>{fondos.fondo}</p>
-                    <Link to={`/show/${fondos.key}`}>Agregar</Link>
+                    <p className='p-banco-map'>{fondos.desc}</p>
+                    <p className='p-banco-map'>{fondos.fecha}</p>
+                    <p className='p-banco-map'>{fondos.importe}</p>
+                    <Link to={`/Agregarcontra/${this.state.key}`} className='p-banco-map'>Agregar</Link>
+                    <Link to={`/Editcontra/${this.state.key}`} className='p-banco-map'>Editar</Link>
                   </div>
                 </div>
                 <div className='table-right' />

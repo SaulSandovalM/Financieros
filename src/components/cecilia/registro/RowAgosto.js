@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import './Registro.css'
+import CurrencyFormat from 'react-currency-format'
 
 export default class RowAgosto extends Component {
   constructor (props) {
@@ -11,6 +12,8 @@ export default class RowAgosto extends Component {
   }
 
   render () {
+    const saldo = this.props.item.ago
+    const gasto = this.props.item.ago
     return (
       <div className='meses-container-row'>
         <div className='table-left' />
@@ -33,16 +36,36 @@ export default class RowAgosto extends Component {
           <p className='p-meses-row'>Agosto</p>
         </div>
         <div className='table-meses-asig'>
-          <p className='p-meses-row'>{this.props.item.ago}</p>
+          <CurrencyFormat
+            value={this.props.item.ago}
+            displayType='text'
+            thousandSeparator
+            prefix='$ '
+          />
         </div>
         <div className='table-meses-gas'>
-          <p className='p-meses-row'>{this.props.item.ago}</p>
+          <CurrencyFormat
+            value={this.props.item.gasago}
+            displayType='text'
+            thousandSeparator
+            prefix='$ '
+          />
         </div>
         <div className='table-meses-saldo'>
-          <p className='p-meses-row'>{this.props.item.ago}</p>
+          <CurrencyFormat
+            value={this.props.item.ago}
+            displayType='text'
+            thousandSeparator
+            prefix='$ '
+          />
         </div>
         <div className='table-meses-dis'>
-          <p className='p-meses-row'>{this.props.item.ago}</p>
+          <CurrencyFormat
+            value={saldo - gasto}
+            displayType='text'
+            thousandSeparator
+            prefix='$ '
+          />
         </div>
         <div className='table-right' />
       </div>

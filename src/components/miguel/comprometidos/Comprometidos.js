@@ -149,7 +149,7 @@ export default class Comprometidos extends Component {
   onCollectionUpdate = (querySnapshot) => {
     const comprometidos = []
     querySnapshot.forEach((doc) => {
-      const { partida, presupuestal, no_proyecto, importe_comp } = doc.data() // importe_comp, isr, total, fecha_comp
+      const { partida, presupuestal, no_proyecto, importe_comp } = doc.data()
       comprometidos.push({
         key: doc.id,
         doc,

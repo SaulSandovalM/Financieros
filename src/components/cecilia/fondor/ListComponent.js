@@ -93,7 +93,7 @@ export default class ListComponent extends Component {
                 <div className='inputs-col-fr'>
                   <div className='inputs-row-fr-2' style={{ width: '60%' }}>
                     <div className='p-container-ifr3'>
-                      <p className='p-title-margin-fr'>Up</p>
+                      <p className='p-title-margin-fr'>UP</p>
                       <input
                         className='input-style-fr'
                         id='up'

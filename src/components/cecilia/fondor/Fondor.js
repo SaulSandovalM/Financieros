@@ -99,6 +99,7 @@ export default class Fondor extends Component {
           ben: child.val().ben,
           cpa: child.val().cpa,
           dic: child.val().dic,
+          gasdic: child.val().gasdic,
           eg: child.val().eg,
           eje: child.val().eje,
           ene: child.val().ene,

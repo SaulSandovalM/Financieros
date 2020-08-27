@@ -180,6 +180,9 @@ export default class Vales extends Component {
                     className='input-che'
                     id='cheque'
                     required
+                    name='cheque'
+                    onChange={this.handleChange.bind(this)}
+                    value={this.state.cheque}
                     ref={cheque => this.inputCheque = cheque}
                   />
                 </p>

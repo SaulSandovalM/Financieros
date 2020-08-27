@@ -270,7 +270,6 @@ export default class Cheques extends Component {
                   <input
                     className='input-sc-cheque'
                     type='number'
-                    onKeyDown={this.handleKeypress.bind(this)}
                     min='1'
                     id='importe'
                     required
