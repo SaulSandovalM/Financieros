@@ -129,6 +129,7 @@
 }
 .arqueoI {
   display: flex;
+  flex-direction: row;
   justify-content: center;
 }
 .tabla-arq {
@@ -144,6 +145,10 @@
   margin: 5px;
   text-align: center;
 }
+.tb-nr {
+  margin: 5px;
+  text-align: center;
+}
 .tb-2 {
   width: 40%;
   border: 1px solid;
@@ -151,4 +156,7 @@
 .tb-3 {
   width: 20%;
   border: 1px solid;
+}
+.ar-pad {
+  padding: 60px 30px 10px 30px;
 }

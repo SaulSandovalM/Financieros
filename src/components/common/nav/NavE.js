@@ -43,6 +43,11 @@ class NavE extends Component {
           </Link>
         </div>
         <div className='navbar-left'>
+          <Link to='/ArqueoD' className='deco'>
+            <h3 className='nav-t'>Impresión de Arqueo</h3>
+          </Link>
+        </div>
+        <div className='navbar-left'>
           <Link to='/Cheques' className='deco'>
             <h3 className='nav-t'>Cheques</h3>
           </Link>

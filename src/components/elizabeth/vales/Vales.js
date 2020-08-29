@@ -31,7 +31,7 @@ export default class Vales extends Component {
       personaR: '',
       factura: '',
       recibos: '',
-      sc: '',
+      sc: ' ',
       fecha: '',
       autorizo: '',
       estatus: 'Pendiente',
@@ -152,6 +152,7 @@ export default class Vales extends Component {
     var f = new Date()
     today2 = f.getFullYear() + '-' + meses[f.getMonth()] + '-' + f.getDate()
     this.state.fecha = today2
+    console.log(this.state.sc)
 
     return (
       <div className='container-back'>

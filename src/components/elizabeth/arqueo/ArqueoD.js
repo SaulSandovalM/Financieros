@@ -2,12 +2,21 @@ import React, { Component } from 'react'
 import './Arqueo.css'
 import firebase from '../../../Firebase'
 import ListComponent from './ListComponent'
+import ListComponentV from './ListComponentV'
+import ReactToPrint from 'react-to-print'
 
 export default class ArqueoD extends Component {
   constructor (props) {
     super(props)
     this.state = {
       lista: [
+        {
+          id: 1,
+          name: 'preuba',
+          done: false
+        }
+      ],
+      listaVales: [
         {
           id: 1,
           name: 'preuba',
@@ -63,56 +72,93 @@ export default class ArqueoD extends Component {
     })
   }
 
+  listenForVales = (itemsRefVales) => {
+    itemsRefVales.on('value', (snap) => {
+      var listaVales = []
+      snap.forEach((child) => {
+        listaVales.push({
+          vale: child.val().vale,
+          estatus: child.val().estatus,
+          cantidad: child.val().cantidad,
+          fecha: child.val().fecha,
+          concepto: child.val().concepto,
+          personaR: child.val().personaR,
+          done: child.val().done,
+          id: child.key
+        })
+      })
+      this.setState({
+        listaVales: listaVales
+      })
+    })
+  }
+
   componentDidMount () {
     const itemsRef = firebase.database().ref('arqueo/').limitToLast(1)
     this.listenForItems(itemsRef)
+    const itemsRefVales = firebase.database().ref('vales/')
+    this.listenForVales(itemsRefVales)
   }
 
   render () {
     return (
       <div>
-        <div className='arqueoI'>
-          <p>ARQUEO DE CAJA CHICA</p>
-        </div>
-        <div className='tabla-arq'>
-          <div className='tb-1'>
-            <p className='tb-n'>VALE</p>
+        <div className='ar-pad' ref={el => (this.arqueo = el)}>
+          <p>Dirección General de Administración y Finanzas</p>
+          <div className='arqueoI'>
+            <p>ARQUEO DE CAJA CHICA</p>
           </div>
-          <div className='tb-1'>
-            <p className='tb-n'>STATUS DE PAGO</p>
-          </div>
-          <div className='tb-1'>
-            <p className='tb-n'>PAGO REAL</p>
-          </div>
-          <div className='tb-1'>
-            <p className='tb-n'>FECHA</p>
-          </div>
-          <div className='tb-2'>
-            <p className='tb-n'>DESCRIPCIÓN</p>
-          </div>
-          <div className='tb-3'>
-            <p className='tb-n'>BENEFICIARIO</p>
-          </div>
-        </div>
-        <div className='arqueo-content'>
-          <div className='table-arqueo'>
-            <div className='table-left' />
-            <div className='title-arqueo'>
-              <p className='p-mar-arqueo'><b>DENOMINACION</b></p>
+          <div className='tabla-arq'>
+            <div className='tb-1'>
+              <p className='tb-n'>VALE</p>
             </div>
-            <div className='title-arqueo'>
-              <p className='p-mar-arqueo'><b>CANTIDAD</b></p>
+            <div className='tb-1'>
+              <p className='tb-n'>ESTATUS DE PAGO</p>
             </div>
-            <div className='title-arqueo'>
-              <p className='p-mar-arqueo'><b>DENOMINACIÓN</b></p>
+            <div className='tb-1'>
+              <p className='tb-n'>PAGO REAL</p>
             </div>
-            <div className='table-right' />
+            <div className='tb-1'>
+              <p className='tb-n'>FECHA</p>
+            </div>
+            <div className='tb-2'>
+              <p className='tb-n'>DESCRIPCIÓN</p>
+            </div>
+            <div className='tb-3'>
+              <p className='tb-n'>BENEFICIARIO</p>
+            </div>
           </div>
           <div>
-            <ListComponent
-              lista={this.state.lista}
+            <ListComponentV
+              listaVales={this.state.listaVales}
             />
           </div>
+          <div className='arqueo-content'>
+            <div className='table-arqueo'>
+              <div className='table-left' />
+              <div className='title-arqueo'>
+                <p className='p-mar-arqueo'><b>DENOMINACION</b></p>
+              </div>
+              <div className='title-arqueo'>
+                <p className='p-mar-arqueo'><b>CANTIDAD</b></p>
+              </div>
+              <div className='title-arqueo'>
+                <p className='p-mar-arqueo'><b>DENOMINACIÓN</b></p>
+              </div>
+              <div className='table-right' />
+            </div>
+            <div>
+              <ListComponent
+                lista={this.state.lista}
+              />
+            </div>
+          </div>
+        </div>
+        <div className='boton-v'>
+          <ReactToPrint
+            trigger={() => <div className='boton-vale'>Imprimir</div>}
+            content={() => this.arqueo}
+          />
         </div>
       </div>
     )

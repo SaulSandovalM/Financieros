@@ -104,7 +104,7 @@ export default class Caja extends Component {
                 <div className='table-left' />
                 <div className='table-caja-title'>
                   <div className='table-no-row'>
-                    <b className='p-banco-map'>MOVIMIENTO REALIZADO</b>
+                    <b className='p-banco-map2'>MOVIMIENTO REALIZADO</b>
                   </div>
                 </div>
                 <div className='table-caja-fecha'>
@@ -114,7 +114,7 @@ export default class Caja extends Component {
                 </div>
                 <div className='table-banco-mov'>
                   <div className='table-no-row'>
-                    <b className='p-banco-map'>CANTIDAD</b>
+                    <b className='p-banco-map2'>CANTIDAD</b>
                   </div>
                 </div>
                 <div className='table-right' />
@@ -128,14 +128,14 @@ export default class Caja extends Component {
                       <div className='table-left' />
                       <div className='table-caja-title'>
                         <div className='table-caja-row'>
-                          <p className='p-banco-map'>{movimientos.title}</p>
-                          <p className='p-banco-map'>{movimientos.no}</p>
-                          <p className='p-banco-map'>{movimientos.personaR}</p>
+                          <p className='p-banco-map2'>{movimientos.title}</p>
+                          <p className='p-banco-map2'>{movimientos.no}</p>
+                          <p className='p-banco-map2'>{movimientos.personaR}</p>
                         </div>
                       </div>
                       <div className='table-caja-fecha'>
                         <div className='table-no-row'>
-                          <b className='p-banco-map'>{movimientos.fecha}</b>
+                          <b className='p-banco-map2'>{movimientos.fecha}</b>
                         </div>
                       </div>
                       <div className='table-banco-mov'>

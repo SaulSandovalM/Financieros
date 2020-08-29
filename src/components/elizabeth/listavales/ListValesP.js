@@ -89,7 +89,7 @@ export default class ListValesP extends Component {
     return (
       <div class='container-back'>
         <div class='site'>
-          <p class='site-s'><b>Vales Pendientes</b></p>
+          <p class='site-s'><b>Vales Pendientes de Autorizar</b></p>
         </div>
         <div class='caja-w' style={{ marginTop: '40px', marginBottom: '40px' }}>
           <div class='caja-col'>

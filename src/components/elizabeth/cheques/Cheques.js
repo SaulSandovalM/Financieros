@@ -306,6 +306,7 @@ export default class Cheques extends Component {
                       value={this.state.contador.storyCount}
                       displayType='text'
                       prefix=' $'
+                      thousandSeparator
                       decimalSeparator='.'
                     />
                     .00
