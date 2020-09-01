@@ -8,6 +8,7 @@ import logoh from '../../../img/logoh.png'
 export default class Vales extends Component {
   constructor (props) {
     super(props)
+    this.unsubscribe = null
     this.state = {
       lista: [
         {
@@ -36,6 +37,7 @@ export default class Vales extends Component {
       autorizo: '',
       estatus: 'Pendiente',
       contador: {},
+      contadorc: {},
       isHidden: true
     }
   }
@@ -51,7 +53,9 @@ export default class Vales extends Component {
   }
 
   componentDidMount () {
+    this.unsubscribe = firebase.firestore().collection('caja').onSnapshot(this.onCollectionUpdate)
     this.consumo()
+    this.consumoc()
   }
 
   consumo = () => {
@@ -65,6 +69,40 @@ export default class Vales extends Component {
         })
       } else {
         console.log('No hay Documento')
+      }
+    })
+  }
+
+  onCollectionUpdate = (querySnapshot) => {
+    const movimientos = []
+    querySnapshot.forEach((doc) => {
+      const { title, no, personaR, cantidad, fecha } = doc.data()
+      movimientos.push({
+        key: doc.id,
+        doc,
+        title,
+        no,
+        personaR,
+        cantidad,
+        fecha
+      })
+    })
+    this.setState({
+      movimientos
+   })
+  }
+
+  consumoc = () => {
+    const ref = firebase.firestore().collection('caja').doc('--stats--')
+    ref.get().then((doc) => {
+      if (doc.exists) {
+        this.setState({
+          contadorc: doc.data(),
+          key: doc.id,
+          isLoading: false
+        })
+      } else {
+        console.log("No hay nada!")
       }
     })
   }
@@ -399,6 +437,7 @@ export default class Vales extends Component {
               sin comprobar.
             </div>
           </div>
+          {this.state.cantidad < this.state.contadorc.storyCount &&
           <div className='boton-v'>
             <ReactToPrint
               trigger={() => <div className='boton-vale'>Imprimir y Guardar</div>}
@@ -406,6 +445,7 @@ export default class Vales extends Component {
               onAfterPrint={this.sendMessage.bind(this)}
             />
           </div>
+          }
         </form>
         <div className=''>
           <div>
