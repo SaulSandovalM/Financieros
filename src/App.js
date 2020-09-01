@@ -16,7 +16,6 @@ import Archivos from './components/cecilia/archivos/Archivos'
 import Registro from './components/cecilia/registro/Registro'
 import Disponible from './components/cecilia/disponible/Disponible'
 import Contra from './components/cecilia/contrarecibo/Contra'
-import Show from './components/cecilia/contrarecibo/Show'
 import Editcontra from './components/cecilia/contrarecibo/Editcontra'
 // Parte de Elizabeth
 import Caja from './components/elizabeth/caja/Caja'
@@ -121,6 +120,13 @@ function App (props) {
         exact
         path='/Contra'
         component={Contra}
+        isAuthenticated={isAuthenticated}
+        isVerifying={isVerifying}
+      />
+      <ProtectedRoute
+        exact
+        path='/Editcontra/:id'
+        component={Editcontra}
         isAuthenticated={isAuthenticated}
         isVerifying={isVerifying}
       />
@@ -252,17 +258,8 @@ function App (props) {
         isAuthenticated={isAuthenticated}
         isVerifying={isVerifying}
       />
-      <ProtectedRoute
-        exact
-        path='/Show/:id'
-        component={Show}
-        isAuthenticated={isAuthenticated}
-        isVerifying={isVerifying}
-      />
       <Route path='/Cpdf/:id' component={Cpdf} />
       <Route path='/add/:id' component={Add} />
-      <Route path='/Editcontra/:id' component={Editcontra} />
-      {/* todos lods pdf */}
     </Switch>
   )
 }

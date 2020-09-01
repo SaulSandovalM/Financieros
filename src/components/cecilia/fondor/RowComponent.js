@@ -22,7 +22,7 @@ export default class RowComponent extends Component {
                 <p>{this.props.item.up}</p>
               </div>
               <div className='table-up-p-frn'>
-                <p>{this.props.item.par}</p>
+                <p>{this.props.item.ogasto}</p>
               </div>
               <div className='table-up-p-frn'>
                 <p>{this.props.item.rubro}</p>
