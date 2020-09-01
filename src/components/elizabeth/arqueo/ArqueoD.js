@@ -106,7 +106,7 @@ export default class ArqueoD extends Component {
         <div className='ar-pad' ref={el => (this.arqueo = el)}>
           <p>Dirección General de Administración y Finanzas</p>
           <div className='arqueoI'>
-            <p>ARQUEO DE CAJA CHICA</p>
+            <p className='tb-n'>ARQUEO DE CAJA CHICA</p>
           </div>
           <div className='tabla-arq'>
             <div className='tb-1'>
