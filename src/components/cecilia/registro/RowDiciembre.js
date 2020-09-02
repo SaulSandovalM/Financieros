@@ -72,3 +72,8 @@ export default class RowDiciembre extends Component {
     )
   }
 }
+// num fo
+// clave presupuesto
+// importe
+// cuanta por pagar para
+// num contra // fondo // fechacontra-agregar  // monto // estatus np 

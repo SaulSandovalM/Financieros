@@ -2,37 +2,37 @@ import React, { Component } from 'react'
 import './Contra.css'
 import firebase from '../../../Firebase'
 import { Link } from 'react-router-dom'
+import CurrencyFormat from 'react-currency-format'
 
 export default class Fondos extends Component {
-  constructor (props) {
-    super(props)
-    this.ref = firebase.firestore().collection('fondos')
-    this.unsubscribe = null
+  constructor(props) {
+    super(props);
+    this.ref = firebase.firestore().collection('boards');
+    this.unsubscribe = null;
     this.state = {
-      fondos: []
-    }
-  }
-
-  componentDidMount () {
-    this.unsubscribe = this.ref.onSnapshot(this.onCollectionUpdate)
+      boards: []
+    };
   }
 
   onCollectionUpdate = (querySnapshot) => {
-    const fondos = []
+    const boards = [];
     querySnapshot.forEach((doc) => {
-      const { fondo, desc, fecha, importe } = doc.data()
-      fondos.push({
+      const { title, description, author } = doc.data();
+      boards.push({
         key: doc.id,
         doc,
-        fondo,
-        desc,
-        fecha,
-        importe
-      })
-    })
+        title,
+        description,
+        author,
+      });
+    });
     this.setState({
-      fondos
-    })
+      boards
+   });
+  }
+
+  componentDidMount() {
+    this.unsubscribe = this.ref.onSnapshot(this.onCollectionUpdate);
   }
 
   render () {
@@ -49,12 +49,18 @@ export default class Fondos extends Component {
                 <div className='table-left' />
                 <div className='table-banco-titlef'>
                   <div className='table-no-rows'>
-                    <p className='p-banco-map'>{fondos.fondo}</p>
-                    <p className='p-banco-map'>{fondos.desc}</p>
-                    <p className='p-banco-map'>{fondos.fecha}</p>
-                    <p className='p-banco-map'>{fondos.importe}</p>
-                    <Link to={`/Agregarcontra/${this.state.key}`} className='p-banco-map'>Agregar</Link>
-                    <Link to={`/Editcontra/${this.state.key}`} className='p-banco-map'>Editar</Link>
+                    <p className='p-banco-map-f'>{fondos.fondo}</p>
+                    <p className='p-banco-map'>{fondos.tipo_doc}</p>
+                    <p className='p-banco-map'>{fondos.beneficiario}</p>
+                    <p className='p-banco-map'>
+                      <CurrencyFormat
+                        value={fondos.importe}
+                        displayType='text'
+                        thousandSeparator
+                        prefix=' $ '
+                      />
+                    </p>
+                    <Link to={`/Editcontra/${this.state.key}`} className='p-banco-map'>Agregar Contrarecibo</Link>
                   </div>
                 </div>
                 <div className='table-right' />

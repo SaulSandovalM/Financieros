@@ -1,12 +1,11 @@
 import React, { Component } from 'react'
-import './Fondor.css'
+import './Reduccion.css'
 import firebase from '../../../Firebase'
 import ListComponent from './ListComponent'
-import ListFr from './ListFr'
-import CurrencyFormat from 'react-currency-format'
+import ListReduccion from './ListReduccion'
 import Dropzone from 'react-dropzone'
 
-export default class Fondor extends Component {
+export default class Reduccion extends Component {
   constructor () {
     super()
     this.state = {
@@ -62,7 +61,7 @@ export default class Fondor extends Component {
 
   handleUploads (event) {
     const file = event.target.files[0]
-    const storageRef = firebase.storage().ref(`fondoRevolvente/${file.name}`)
+    const storageRef = firebase.storage().ref(`presupuesto/${file.name}`)
     const task = storageRef.put(file)
     this.setState({
       file: `${file.name}`
@@ -85,7 +84,6 @@ export default class Fondor extends Component {
   componentDidMount () {
     const itemsRefBanco = firebase.database().ref('presupuesto/')
     this.listenForItemsBanco(itemsRefBanco)
-    this.consumo()
   }
 
   listenForItemsBanco = (itemsRefBanco) => {
@@ -94,7 +92,9 @@ export default class Fondor extends Component {
       snap.forEach((child) => {
         listaB.push({
           abr: child.val().abr,
+          gasabr: child.val().gasabr,
           ago: child.val().ago,
+          gasago: child.val().gasago,
           año: child.val().año,
           ben: child.val().ben,
           cpa: child.val().cpa,
@@ -103,25 +103,33 @@ export default class Fondor extends Component {
           eg: child.val().eg,
           eje: child.val().eje,
           ene: child.val().ene,
+          gasene: child.val().gasene,
           est: child.val().est,
           et: child.val().et,
           f: child.val().f,
           feb: child.val().feb,
+          gasfeb: child.val().gasfeb,
           ff: child.val().ff,
           fu: child.val().fu,
           igest: child.val().igest,
           itrans: child.val().itrans,
           jul: child.val().jul,
+          gasjul: child.val().gasjul,
           jun: child.val().jun,
+          gasjun: child.val().gasjun,
           la: child.val().la,
           mar: child.val().mar,
+          gasmar: child.val().gasmar,
           may: child.val().may,
+          gasmay: child.val().gasmay,
           mi: child.val().mi,
           nov: child.val().nov,
+          gasnov: child.val().gasnov,
           np: child.val().np,
           obj: child.val().obj,
           obra: child.val().obra,
           oct: child.val().oct,
+          gasoct: child.val().gasoct,
           ods: child.val().ods,
           of: child.val().of,
           ogasto: child.val().ogasto,
@@ -133,6 +141,7 @@ export default class Fondor extends Component {
           rubro: child.val().rubro,
           s: child.val().s,
           sep: child.val().sep,
+          gassep: child.val().gassep,
           sf: child.val().sf,
           sp: child.val().sp,
           tg: child.val().tg,
@@ -150,25 +159,6 @@ export default class Fondor extends Component {
     })
   }
 
-  consumo = () => {
-    const ref = firebase.firestore().collection('banco').doc('--stats--')
-    ref.get().then((doc) => {
-      if (doc.exists) {
-        this.setState({
-          contador: doc.data(),
-          key: doc.id,
-          isLoading: true
-        })
-      } else {
-        console.log('No hay documento!')
-      }
-    })
-  }
-
-  resetForm () {
-    this.refs.contactForm.reset()
-  }
-
   handleChange (event) {
     this.setState({ [event.target.name]: event.target.value })
   }
@@ -177,34 +167,44 @@ export default class Fondor extends Component {
     let updates = {}
     updates['presupuesto/' + item.id] = {
       abr: item.abr,
+      gasabr: item.gasabr,
       ago: item.ago,
+      gasago: item.gasago,
       año: item.año,
       ben: item.ben,
       cpa: item.cpa,
-      dic: item.dic - this.state.importe,
-      gasdic: this.state.importe,
+      dic: item.dic,
+      gasdic: item.gasdic,
       eg: item.eg,
       eje: item.eje,
       ene: item.ene,
+      gasene: item.gasene,
       est: item.est,
       et: item.et,
       f: item.f,
       feb: item.feb,
+      gasfeb: item.gasfeb,
       ff: item.ff,
       fu: item.fu,
       igest: item.igest,
       itrans: item.itrans,
       jul: item.jul,
+      gasjul: item.gasjul,
       jun: item.jun,
+      gasjun: item.gasjun,
       la: item.la,
       mar: item.mar,
+      gasmar: item.gasmar,
       may: item.may,
+      gasmay: item.gasmay,
       mi: item.mi,
       nov: item.nov,
+      gasnov: item.gasnov,
       np: item.np,
       obj: item.obj,
       obra: item.obra,
       oct: item.oct,
+      gasoct: item.gasoct,
       ods: item.ods,
       of: item.of,
       ogasto: item.ogasto,
@@ -215,50 +215,32 @@ export default class Fondor extends Component {
       rm: item.rm,
       rubro: item.rubro,
       s: item.s,
-      sep: item.sep,
+      sep: item.sep - parseInt(this.state.importe),
+      gassep: this.state.importe,
       sf: item.sf,
       sp: item.sp,
       tg: item.tg,
       total: item.total,
       up: item.up,
       ur: item.ur,
-      estatus: 'FR'
+      estatus: 'Reduccion'
     }
     firebase.database().ref().update(updates)
-    var f = parseInt(this.state.importe)
-    const statsRef = firebase.firestore().collection('banco').doc('--stats--')
-    const increment = firebase.firestore.FieldValue.increment(f)
-    const batch = firebase.firestore().batch()
-    batch.set(statsRef, { storyCount: increment }, { merge: true })
-    batch.commit()
     alert('Tu solicitud fue enviada.')
-    setInterval(this.consumo, 1000)
   }
 
   render () {
     return (
       <div className='pf-container'>
         <div className='site-pf'>
-          <p className='site-pf-s'><b>Fondo Revolvente</b></p>
+          <p className='site-pf-s'><b>Reducción</b></p>
         </div>
         <div className='p-container-fr'>
           <div className='p-margin-row'>
             <p className='p-title-size'>
-              - Agrega el documento de autorización de fondo revolvente
+              - Agrega el documento de solicitud/autorización para la reducción
             </p>
-            <div>
-              <p className='p-banco'><b>PORCENTAJE AGREGADO</b></p>
-              <p className='cantidad-add-banco'>
-                MXN
-                <CurrencyFormat
-                  value={this.state.contador.storyCount}
-                  displayType='text'
-                  thousandSeparator
-                  prefix=' $'
-                />
-                .00
-              </p>
-            </div>
+            <div />
           </div>
           <div className='p-row'>
             <div className='p-container-ifr' style={{ marginRight: '20px' }}>
@@ -290,8 +272,7 @@ export default class Fondor extends Component {
             <div className='p-container-fondor'>
               <div className='p-margin-fr'>
                 <p className='p-title-size-fr'>
-                  - Ingresa los datos que correspondan con el documento
-                    de autorización del fondo revolvente
+                  - Busca los datos para hacer tu reducción
                 </p>
               </div>
               <div className='inputs-container-fr'>
@@ -310,15 +291,6 @@ export default class Fondor extends Component {
                         ref={importe => this.inputImporte = importe}
                       />
                     </div>
-                    <div className='p-container-ifr2'>
-                      <p className='p-title-margin-fr'>Num de Contrarecibo</p>
-                      <input
-                        className='input-style-fr'
-                        id='numContra'
-                        style={{zIndex: '3'}}
-                        ref={numContra => this.inputNumContra = numContra}
-                      />
-                    </div>
                   </div>
                 </div>
               </div>
@@ -332,7 +304,7 @@ export default class Fondor extends Component {
           />
         </div>
         <div className='space-table2'>
-          <ListFr
+          <ListReduccion
             listaB={this.state.listaB}
           />
         </div>

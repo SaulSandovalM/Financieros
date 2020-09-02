@@ -126,7 +126,7 @@ export default class Vales extends Component {
       factura: this.inputFactura.value,
       recibos: this.inputRecibos.value,
       sc: this.inputSC.value,
-      fecha: this.state.fecha,
+      fecha: this.inputFecha.value,
       autorizo: this.inputAutorizo.value,
       estatus: this.state.estatus
     }
@@ -144,7 +144,7 @@ export default class Vales extends Component {
       factura: this.inputFactura.value,
       recibos: this.inputRecibos.value,
       sc: this.inputSC.value,
-      fecha: this.state.fecha,
+      fecha: this.inputFecha.value,
       autorizo: this.inputAutorizo.value,
       estatus: this.state.estatus
     })
@@ -189,8 +189,6 @@ export default class Vales extends Component {
     var meses = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12']
     var f = new Date()
     today2 = f.getFullYear() + '-' + meses[f.getMonth()] + '-' + f.getDate()
-    this.state.fecha = today2
-    console.log(this.state.sc)
 
     return (
       <div className='container-back'>
@@ -406,7 +404,14 @@ export default class Vales extends Component {
             </div>
             <div className='firma-content'>
               <div className='f-fecha'>
-                <p className='b-fecha'>{today2}</p>
+                <input
+                  className='b-fecha-i'
+                  name='fecha'
+                  onChange={this.handleChange.bind(this)}
+                  value={today2}
+                  required
+                  ref={fecha => this.inputFecha = fecha}
+                />
                 <p className='font-size-f'>Fecha</p>
               </div>
               <div className='f-fecha'>

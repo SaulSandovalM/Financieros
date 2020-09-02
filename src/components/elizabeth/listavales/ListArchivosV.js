@@ -4,6 +4,7 @@ import ListArchivo from './ListArchivo'
 import './ListVales.css'
 import Dropzone from 'react-dropzone'
 import XMLParser from 'react-xml-parser'
+import {xhr, xmlhttp, ActiveXObject} from 'ajax'
 
 export default class ListArchivosV extends Component {
   constructor(props) {
@@ -45,34 +46,54 @@ export default class ListArchivosV extends Component {
       filer: '',
       filexml: '',
       filefactura: '',
-      filerecibo: ''
+      filerecibo: '',
+      prueba: ''
     }
   }
 
   handleOnChange1 (event) {
-    const files = event.target.files
-    for (var i = 0; i < files.length; i++) {
-      const file = files[i]
-      var xml = file
-      if (file.type === 'text/xml') {
-        var reader = new FileReader()
-        reader.onloadend = function () {
-          var xml = new XMLParser().parseFromString(reader.result)
-          fetch(xml).then(res => res.text()).then(data => {
-            fetch('https://financieros-78cb0.firebaseio.com/xml.json', {
-                method: 'POST',
-                headers: {
-                     'Accept': 'application/json',
-                     'Content-Type': 'application/json',
-                  },
-                  body: JSON.stringify(xml)
-                })
-            })
-        }
-        reader.readAsText(xml)
+    const totalArchivos = event.target.files
+    var arr = []
+    for (var i = 0; i < totalArchivos.length; i++) {
+      const archivo = totalArchivos[i]
+      var file = archivo
+      var reader  = new FileReader()
+      reader.onloadend = function () {
+        console.log('Enseguida sigue el archivo')
+        console.log(reader.result)
+        var XMLParser = require('react-xml-parser')
+        var xml = new XMLParser().parseFromString(reader.result)
+        var perro = xml.children[0].attributes['Rfc']
+        console.log(perro)
       }
+      reader.readAsText(file)
     }
   }
+
+  // handleOnChange1 (event) {
+  //   const files = event.target.files
+  //   for (var i = 0; i < files.length; i++) {
+  //     const file = files[i]
+  //     var xml = file
+  //     if (file.type === 'text/xml') {
+  //       var reader = new FileReader()
+  //       reader.onloadend = function () {
+  //         var xml = new XMLParser().parseFromString(reader.result)
+  //         fetch(xml).then(res => res.text()).then(data => {
+  //           fetch('https://financieros-78cb0.firebaseio.com/xml.json', {
+  //             method: 'POST',
+  //             headers: {
+  //               'Accept': 'application/json',
+  //               'Content-Type': 'application/json',
+  //             },
+  //               body: JSON.stringify(xml)
+  //           })
+  //         })
+  //       }
+  //       reader.readAsText(xml)
+  //     }
+  //   }
+  // }
 
   handleOnChange2 (event) {
     const file = event.target.files[0]
@@ -195,7 +216,6 @@ export default class ListArchivosV extends Component {
   }
 
   render () {
-    console.log(this.state.filerecibo)
     return (
       <div className='container-back'>
         <div className='site'>

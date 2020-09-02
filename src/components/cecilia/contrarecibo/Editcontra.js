@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import firebase from '../../../Firebase'
-import { Link } from 'react-router-dom'
 
 export default class Edit extends Component {
   constructor (props) {
@@ -8,42 +7,65 @@ export default class Edit extends Component {
     this.unsubscribe = null
     this.state = {
       key: '',
+      fechaContra: '',
+      numContra: '',
+      fechaDepo: '',
+      cuentaPagar: '',
+      cuentaPagarPara: '',
       beneficiario: '',
-      cfe: '',
-      desc: '',
-      fecha: '',
-      fondo: '',
-      importe: '',
-      ncomprobantes: '',
-      no_lici: '',
-      no_oficio: '',
-      nscfe: '',
-      numCompro: '',
-      observaciones: '',
-      oficio_aut: '',
-      pedido: '',
-      poliza: '',
-      realizo: '',
-      requisicion: '',
-      tipo_doc: ''
+      sujetoContable: ''
     }
   }
 
+  componentDidMount() {
+   const ref = firebase.firestore().collection('fondos').doc(this.props.match.params.id).collection('contrarecibo').doc()
+   ref.get().then((doc) => {
+     if (doc.exists) {
+       const contra = doc.data();
+       this.setState({
+         key: doc.id,
+         title: contra.title,
+         fechaContra: contra.fechaContra,
+         numContra: contra.numContra,
+         fechaDepo: contra.fechaDepo,
+         cuentaPagar: contra.cuentaPagar,
+         cuentaPagarPara: contra.cuentaPagarPara,
+         beneficiario: contra.beneficiario,
+         sujetoContable: contra.sujetoContable
+       });
+     } else {
+       console.log('No hay documento');
+     }
+   });
+ }
+
   onChange = (e) => {
     const state = this.state
-    state[e.target.name] = e.target.value
-    this.setState({fondoe:state})
+    state[e.target.name] = e.target.value;
+    this.setState({ contra: state });
   }
 
   onSubmit = (e) => {
     e.preventDefault()
-    const { beneficiario } = this.state
+    const { fechaContra, numContra, fechaDepo, cuentaPagar, cuentaPagarPara, beneficiario, sujetoContable } = this.state
     const updateRef = firebase.firestore().collection('fondos').doc(this.props.match.params.id).collection('contrarecibo').doc()
     updateRef.set({
-      beneficiario
+      fechaContra,
+      numContra,
+      fechaDepo,
+      cuentaPagar,
+      cuentaPagarPara,
+      beneficiario,
+      sujetoContable
     }).then((docRef) => {
       this.setState({
-        beneficiario: ''
+        fechaContra: '',
+        numContra: '',
+        fechaDepo: '',
+        cuentaPagar: '',
+        cuentaPagarPara: '',
+        beneficiario: '',
+        sujetoContable: ''
       })
     })
     .catch((error) => {
@@ -94,7 +116,7 @@ export default class Edit extends Component {
                   <input />
                 </div>
               </div>
-              <button type='submit'>Submit</button>
+              <button type='submit'>Guardar</button>
             </form>
           </div>
         </div>
