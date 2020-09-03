@@ -4,7 +4,6 @@ import firebase from '../../../Firebase'
 export default class Edit extends Component {
   constructor (props) {
     super(props)
-    this.unsubscribe = null
     this.state = {
       key: '',
       fechaContra: '',
@@ -17,27 +16,27 @@ export default class Edit extends Component {
     }
   }
 
-  componentDidMount() {
-   const ref = firebase.firestore().collection('fondos').doc(this.props.match.params.id).collection('contrarecibo').doc()
-   ref.get().then((doc) => {
-     if (doc.exists) {
-       const contra = doc.data();
-       this.setState({
-         key: doc.id,
-         title: contra.title,
-         fechaContra: contra.fechaContra,
-         numContra: contra.numContra,
-         fechaDepo: contra.fechaDepo,
-         cuentaPagar: contra.cuentaPagar,
-         cuentaPagarPara: contra.cuentaPagarPara,
-         beneficiario: contra.beneficiario,
-         sujetoContable: contra.sujetoContable
-       });
-     } else {
-       console.log('No hay documento');
-     }
-   });
- }
+  componentDidMount () {
+    const ref = firebase.firestore().collection('fondos').doc(this.props.match.params.id).collection('contrarecibo').doc()
+    ref.get().then((doc) => {
+      if (doc.exists) {
+        const contra = doc.data();
+        this.setState({
+          key: doc.id,
+          title: contra.title,
+          fechaContra: contra.fechaContra,
+          numContra: contra.numContra,
+          fechaDepo: contra.fechaDepo,
+          cuentaPagar: contra.cuentaPagar,
+          cuentaPagarPara: contra.cuentaPagarPara,
+          beneficiario: contra.beneficiario,
+          sujetoContable: contra.sujetoContable
+        });
+      } else {
+        console.log('No hay documento');
+      }
+    });
+  }
 
   onChange = (e) => {
     const state = this.state
@@ -72,12 +71,13 @@ export default class Edit extends Component {
       console.error('Error: ', error)
     })
     alert('Tu solicitud fue enviada.')
+    this.props.history.push('/Contra')
   }
 
   render () {
     return (
       <div>
-        <div>
+        <div className='container-all'>
           <div>
             <h3>
               Agregar Contrarecibo
@@ -85,9 +85,54 @@ export default class Edit extends Component {
           </div>
           <div>
             <form onSubmit={this.onSubmit}>
-              <div className='m-f'>
+              <div>
                 <div className='fcc-i'>
                   <p className='fimpre'>Fecha Contrarecibo:</p>
+                  <input
+                    name='fechaContra'
+                    value={this.state.fechaContra}
+                    onChange={this.onChange}
+                    ref='fechaContra'
+                  />
+                </div>
+                <div className='fcc-i'>
+                  <p className='fimpre'>No. Contrarecibo:</p>
+                  <input
+                    name='numContra'
+                    value={this.state.numContra}
+                    onChange={this.onChange}
+                    ref='numContra'
+                  />
+                </div>
+                <div className='fcc-i'>
+                  <p className='fimpre'>Fecha Deposito:</p>
+                  <input
+                    name='fechaDepo'
+                    value={this.state.fechaDepo}
+                    onChange={this.onChange}
+                    ref='fechaDepo'
+                  />
+                </div>
+                <div className='fcc-i'>
+                  <p className='fimpre'>Cuenta por Pagar:</p>
+                  <input
+                    name='cuentaPagar'
+                    value={this.state.cuentaPagar}
+                    onChange={this.onChange}
+                    ref='cuentaPagar'
+                  />
+                </div>
+                <div className='fcc-i'>
+                  <p className='fimpre'>Cuenta por Pagar Para:</p>
+                  <input
+                    name='cuentaPagarPara'
+                    value={this.state.cuentaPagarPara}
+                    onChange={this.onChange}
+                    ref='cuentaPagarPara'
+                  />
+                </div>
+                <div className='fcc-i'>
+                  <p className='fimpre'>Beneficiario/Proveedor:</p>
                   <input
                     name='beneficiario'
                     value={this.state.beneficiario}
@@ -96,27 +141,18 @@ export default class Edit extends Component {
                   />
                 </div>
                 <div className='fcc-i'>
-                  <p className='fimpre'>No. Contrarecibo:</p>
-                  <input />
-                </div>
-                <div className='fcc-i'>
-                  <p className='fimpre'>Fecha Deposito:</p>
-                  <input />
-                </div>
-                <div className='fcc-i'>
-                  <p className='fimpre'>Cuenta por Pagar:</p>
-                  <input />
-                </div>
-                <div className='fcc-i'>
-                  <p className='fimpre'>Beneficiario/Proveedor:</p>
-                  <input />
-                </div>
-                <div className='fcc-i'>
                   <p className='fimpre'>Sujeto Contable:</p>
-                  <input />
+                  <input
+                    name='sujetoContable'
+                    value={this.state.sujetoContable}
+                    onChange={this.onChange}
+                    ref='sujetoContable'
+                  />
                 </div>
               </div>
-              <button type='submit'>Guardar</button>
+              <div className='cont-but'>
+                <button type='submit' className='but-g'>Guardar</button>
+              </div>
             </form>
           </div>
         </div>

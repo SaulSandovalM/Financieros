@@ -45,6 +45,18 @@
   -webkit-box-orient: vertical;
   width: 23%;
 }
+.p-banco-map-b {
+  border-left: 1px solid #d0d0d0;
+  display: -webkit-box;
+  font-size: 18px;
+  margin: 0;
+  overflow: hidden;
+  padding-left: 5px;
+  text-overflow: ellipsis;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  width: 40%;
+}
 .p-banco-map-f {
   display: -webkit-box;
   font-size: 18px;
@@ -56,6 +68,30 @@
   -webkit-box-orient: vertical;
   width: 5%;
 }
+.p-banco-map-t {
+  border-left: 1px solid #d0d0d0;
+  display: -webkit-box;
+  font-size: 18px;
+  margin: 0;
+  overflow: hidden;
+  padding-left: 5px;
+  text-overflow: ellipsis;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  width: 10%;
+}
 .style-lt {
   text-align: right;
+}
+.container-all {
+  margin: 80px 20px 20px 20px;
+}
+.cont-but {
+  margin-top: 20px;
+}
+.but-g {
+  background: green;
+  color: white;
+  padding: 5px;
+  border: 0;
 }

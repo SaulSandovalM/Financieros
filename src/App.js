@@ -17,6 +17,7 @@ import Registro from './components/cecilia/registro/Registro'
 import Disponible from './components/cecilia/disponible/Disponible'
 import Contra from './components/cecilia/contrarecibo/Contra'
 import Editcontra from './components/cecilia/contrarecibo/Editcontra'
+import CargaC from './components/cecilia/cargacontra/CargaC'
 // Parte de Elizabeth
 import Caja from './components/elizabeth/caja/Caja'
 import Cheques from './components/elizabeth/cheques/Cheques'
@@ -127,6 +128,13 @@ function App (props) {
         exact
         path='/Editcontra/:id'
         component={Editcontra}
+        isAuthenticated={isAuthenticated}
+        isVerifying={isVerifying}
+      />
+      <ProtectedRoute
+        exact
+        path='/CargaC'
+        component={CargaC}
         isAuthenticated={isAuthenticated}
         isVerifying={isVerifying}
       />

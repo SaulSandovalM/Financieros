@@ -7,27 +7,28 @@ import CurrencyFormat from 'react-currency-format'
 export default class Fondos extends Component {
   constructor(props) {
     super(props);
-    this.ref = firebase.firestore().collection('boards');
+    this.ref = firebase.firestore().collection('fondos');
     this.unsubscribe = null;
     this.state = {
-      boards: []
+      fondos: []
     };
   }
 
   onCollectionUpdate = (querySnapshot) => {
-    const boards = [];
+    const fondos = [];
     querySnapshot.forEach((doc) => {
-      const { title, description, author } = doc.data();
-      boards.push({
+      const { fondo, tipo_doc, importe, beneficiario } = doc.data();
+      fondos.push({
         key: doc.id,
         doc,
-        title,
-        description,
-        author,
+        fondo,
+        tipo_doc,
+        importe,
+        beneficiario
       });
     });
     this.setState({
-      boards
+      fondos
    });
   }
 
@@ -50,8 +51,8 @@ export default class Fondos extends Component {
                 <div className='table-banco-titlef'>
                   <div className='table-no-rows'>
                     <p className='p-banco-map-f'>{fondos.fondo}</p>
-                    <p className='p-banco-map'>{fondos.tipo_doc}</p>
-                    <p className='p-banco-map'>{fondos.beneficiario}</p>
+                    <p className='p-banco-map-t'>{fondos.tipo_doc}</p>
+                    <p className='p-banco-map-b'>{fondos.beneficiario}</p>
                     <p className='p-banco-map'>
                       <CurrencyFormat
                         value={fondos.importe}
@@ -60,7 +61,7 @@ export default class Fondos extends Component {
                         prefix=' $ '
                       />
                     </p>
-                    <Link to={`/Editcontra/${this.state.key}`} className='p-banco-map'>Agregar Contrarecibo</Link>
+                    <Link to={`/Editcontra/${fondos.key}`} className='p-banco-map'>Agregar Contrarecibo</Link>
                   </div>
                 </div>
                 <div className='table-right' />
