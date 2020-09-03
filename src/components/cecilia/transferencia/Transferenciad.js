@@ -1,12 +1,11 @@
 import React, { Component } from 'react'
-import './Ampliacion.css'
+import './Transferencia.css'
 import firebase from '../../../Firebase'
 import ListComponent from './ListComponent'
-import ListAmpliacion from './ListAmpliacion'
-import CurrencyFormat from 'react-currency-format'
+import ListTransferencia from './ListTransferencia'
 import Dropzone from 'react-dropzone'
 
-export default class Ampliacion extends Component {
+export default class Transferencia extends Component {
   constructor () {
     super()
     this.state = {
@@ -224,57 +223,21 @@ export default class Ampliacion extends Component {
       total: item.total,
       up: item.up,
       ur: item.ur,
-      estatus: 'Ampliacion'
+      estatus: 'Transferencia'
     }
     firebase.database().ref().update(updates)
     alert('Tu solicitud fue enviada.')
-    window.location.reload(false);
   }
 
   render () {
     return (
-      <div className='pf-container'>
-        <div className='site-pf'>
-          <p className='site-pf-s'><b>Ampliación</b></p>
-        </div>
-        <div className='p-container-fr'>
-          <div className='p-margin-row'>
-            <p className='p-title-size'>
-              - Agrega el documento de solicitud/autorización para la amplición
-            </p>
-            <div />
-          </div>
-          <div className='p-row'>
-            <div className='p-container-ifr' style={{ marginRight: '20px' }}>
-              <p className='p-title-margin-fr'>Archivo Pdf</p>
-              <Dropzone
-                style={{
-                  position: 'ab',
-                  width: '100%',
-                  height: '29px',
-                  borderWidth: '1px',
-                  borderColor: '#a9a9a9',
-                  borderStyle: 'solid',
-                  background: 'white'
-                }}
-                accept='.pdf' onChange={this.handleUploads.bind(this)}
-              >
-                <div className='filename'>
-                  <p className='file-hid'>{this.state.file}</p>
-                </div>
-              </Dropzone>
-              <progress className='progress' value={this.state.pdf} max='100'>
-                {this.state.pdf} %
-              </progress>
-            </div>
-          </div>
-        </div>
+      <div className='pf-container-f' style={{marginTop: '60px'}}>
         <div>
           <div>
             <div className='p-container-fondor'>
               <div className='p-margin-fr'>
                 <p className='p-title-size-fr'>
-                  - Busca los datos para hacer tu ampliación
+                  - Busca los datos para hacer tu transferencia/adición
                 </p>
               </div>
               <div className='inputs-container-fr'>
@@ -303,11 +266,6 @@ export default class Ampliacion extends Component {
           <ListComponent
             listaB={this.state.listaB}
             update={this.update}
-          />
-        </div>
-        <div className='space-table2'>
-          <ListAmpliacion
-            listaB={this.state.listaB}
           />
         </div>
       </div>

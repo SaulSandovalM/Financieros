@@ -1,10 +1,11 @@
 import React, { Component } from 'react'
 import './Transferencia.css'
+import Transferencia from './Transferencia'
+import Transferenciad from './Transferenciad'
+import ListTransferencia from './ListTransferencia'
 import firebase from '../../../Firebase'
-import ListComponent from './ListComponent'
-import Dropzone from 'react-dropzone'
 
-export default class Transferencia extends Component {
+export default class ContainerT extends Component {
   constructor () {
     super()
     this.state = {
@@ -162,144 +163,48 @@ export default class Transferencia extends Component {
     this.setState({ [event.target.name]: event.target.value })
   }
 
-  update = (item) => {
-    let updates = {}
-    updates['presupuesto/' + item.id] = {
-      abr: item.abr,
-      gasabr: item.gasabr,
-      ago: item.ago,
-      gasago: item.gasago,
-      año: item.año,
-      ben: item.ben,
-      cpa: item.cpa,
-      dic: item.dic,
-      gasdic: item.gasdic,
-      eg: item.eg,
-      eje: item.eje,
-      ene: item.ene,
-      gasene: item.gasene,
-      est: item.est,
-      et: item.et,
-      f: item.f,
-      feb: item.feb,
-      gasfeb: item.gasfeb,
-      ff: item.ff,
-      fu: item.fu,
-      igest: item.igest,
-      itrans: item.itrans,
-      jul: item.jul,
-      gasjul: item.gasjul,
-      jun: item.jun,
-      gasjun: item.gasjun,
-      la: item.la,
-      mar: item.mar,
-      gasmar: item.gasmar,
-      may: item.may,
-      gasmay: item.gasmay,
-      mi: item.mi,
-      nov: item.nov,
-      gasnov: item.gasnov,
-      np: item.np,
-      obj: item.obj,
-      obra: item.obra,
-      oct: item.oct,
-      gasoct: item.gasoct,
-      ods: item.ods,
-      of: item.of,
-      ogasto: item.ogasto,
-      ped: item.ped,
-      pr: item.pr,
-      prog: item.prog,
-      proy: item.proy,
-      rm: item.rm,
-      rubro: item.rubro,
-      s: item.s,
-      sep: item.sep - parseInt(this.state.importe),
-      gassep: this.state.importe,
-      sf: item.sf,
-      sp: item.sp,
-      tg: item.tg,
-      total: item.total,
-      up: item.up,
-      ur: item.ur,
-      estatus: 'Transferencia'
-    }
-    firebase.database().ref().update(updates)
-    alert('Tu solicitud fue enviada.')
-  }
-
   render () {
     return (
-      <div className='pf-container-f'>
-        <div className='site-pf'>
-          <p className='site-pf-s'><b>Transferencia</b></p>
-        </div>
-        <div className='p-container-fr'>
-          <div className='p-margin-row'>
-            <p className='p-title-size'>
-              - Agrega el documento de solicitud/autorización para la Transferencia
-            </p>
-          </div>
-          <div className='p-row'>
-            <div className='p-container-ifr' style={{ marginRight: '20px' }}>
-              <p className='p-title-margin-fr'>Archivo Pdf</p>
-              <Dropzone
-                style={{
-                  position: 'ab',
-                  width: '100%',
-                  height: '29px',
-                  borderWidth: '1px',
-                  borderColor: '#a9a9a9',
-                  borderStyle: 'solid',
-                  background: 'white'
-                }}
-                accept='.pdf' onChange={this.handleUploads.bind(this)}
-              >
-                <div className='filename'>
-                  <p className='file-hid'>{this.state.file}</p>
-                </div>
-              </Dropzone>
-              <progress className='progress' value={this.state.pdf} max='100'>
-                {this.state.pdf} %
-              </progress>
+      <div>
+        <Transferencia />
+        <Transferenciad />
+        <div className='pf-container-f' style={{ paddingTop: '50px' }}>
+          <div className='p-container-fondor'>
+            <div className='p-margin-fr'>
+              <p className='p-title-size-fr'>
+                - Lista de Trasferencias
+              </p>
             </div>
           </div>
         </div>
-        <div>
-          <div>
-            <div className='p-container-fondor'>
-              <div className='p-margin-fr'>
-                <p className='p-title-size-fr'>
-                  - Busca los datos para hacer tu transferencia/reducción
-                </p>
-              </div>
-              <div className='inputs-container-fr'>
-                <div className='inputs-col-fr'>
-                  <div className='inputs-row-fr-2'>
-                    <div className='no' />
-                    <div className='p-container-ifr2'>
-                      <p className='p-title-margin-fr'>Importe</p>
-                      <input
-                        className='input-style-fr'
-                        id='importe'
-                        name='importe'
-                        required
-                        style={{zIndex: '3'}}
-                        onChange={this.handleChange.bind(this)}
-                        ref={importe => this.inputImporte = importe}
-                      />
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+        <div className='table-container-fr'>
+          <div className='table-left' />
+          <div className='table-up-p-frn'>
+            <b>UP</b>
           </div>
+          <div className='table-up-p-frn'>
+            <b>PARTIDA</b>
+          </div>
+          <div className='table-up-p-frn'>
+            <b>RUBRO</b>
+          </div>
+          <div className='table-up-p-frn'>
+            <b>IMPORTE</b>
+          </div>
+          <div className='table-cpa'>
+            <b>CPA</b>
+          </div>
+          <div className='table-up-p-frn'>
+            <b>ESTATUS</b>
+          </div>
+          <div className='table-right' />
         </div>
-        <div className='space-table'>
-          <ListComponent
-            listaB={this.state.listaB}
-            update={this.update}
-          />
+        <div className='pf-container-f'>
+          <div className='space-table2'>
+            <ListTransferencia
+              listaB={this.state.listaB}
+            />
+          </div>
         </div>
       </div>
     )

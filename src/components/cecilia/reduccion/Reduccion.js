@@ -227,6 +227,7 @@ export default class Reduccion extends Component {
     }
     firebase.database().ref().update(updates)
     alert('Tu solicitud fue enviada.')
+    window.location.reload(false);
   }
 
   render () {

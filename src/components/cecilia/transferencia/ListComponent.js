@@ -44,7 +44,7 @@ export default class ListComponent extends Component {
             <div className='p-container-fondor' style={{ background: '#f4f4f4', padding: '30px' }}>
               <div className='p-margin-fr'>
                 <p className='p-title-size-fr'>
-                  - Busca los datos para hacer tu transferencia
+                  -
                 </p>
               </div>
               <div className='inputs-container-fr' ref='contactForm'>
