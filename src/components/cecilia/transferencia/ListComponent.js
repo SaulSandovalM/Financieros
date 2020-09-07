@@ -88,22 +88,22 @@ export default class ListComponent extends Component {
         </div>
         <div className='table-container-fr'>
           <div className='table-left' />
-          <div className='table-up-p-frn'>
+          <div className='table-up-p-frn-t'>
             <b>UP</b>
           </div>
-          <div className='table-up-p-frn'>
+          <div className='table-up-p-frn-tt'>
             <b>PARTIDA</b>
           </div>
-          <div className='table-up-p-frn'>
+          <div className='table-up-p-frn-tt'>
             <b>RUBRO</b>
           </div>
-          <div className='table-up-p-frn'>
+          <div className='table-up-p-frn-tt'>
             <b>IMPORTE</b>
           </div>
-          <div className='table-cpa'>
+          <div className='table-cpa-t'>
             <b>CPA</b>
           </div>
-          <div className='table-up-p-frn'>
+          <div className='table-up-p-frn-tt'>
             <b>ESTATUS</b>
           </div>
           <div className='table-right' />

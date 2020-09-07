@@ -216,7 +216,7 @@ export default class Ampliacion extends Component {
       rm: item.rm,
       rubro: item.rubro,
       s: item.s,
-      sep: item.sep + parseInt(this.state.importe),
+      sep: parseInt(item.sep) + parseInt(this.state.importe),
       gassep: this.state.importe,
       sf: item.sf,
       sp: item.sp,

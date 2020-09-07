@@ -77,14 +77,13 @@ export default class ListComponent extends Component {
         </div>
         <div>
           <div className='meses-container'>
-            <div className='table-left' />
-            <div className='table-dis-up'>
-              <p className='p-h-dis'>UNIDAD</p>
+            <div className='table-dis-up-u'>
+              <p className='p-h-dis'>UP</p>
             </div>
-            <div className='table-dis-up'>
+            <div className='table-dis-up-t'>
               <p className='p-h-dis'>RUBRO</p>
             </div>
-            <div className='table-dis-up'>
+            <div className='table-dis-up-t'>
               <p className='p-h-dis'>PARTIDA</p>
             </div>
             <div className='table-dis-up'>
@@ -126,7 +125,6 @@ export default class ListComponent extends Component {
             <div className='table-dis-up'>
               <p className='p-h-dis'>DISPONIBILIDAD</p>
             </div>
-            <div className='table-right' />
           </div>
           {
             filterData.map(item =>

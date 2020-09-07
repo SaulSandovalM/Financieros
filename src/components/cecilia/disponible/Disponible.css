@@ -8,7 +8,25 @@
   margin-top: 30px;
 }
 .table-dis-up {
-  width: 5.9%;
+  width: 6.4%;
+  border-right: 1px solid #d0d0d0;
+  border-bottom: 1px solid #d0d0d0;
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+.table-dis-up-t {
+  width: 6%;
+  border-right: 1px solid #d0d0d0;
+  border-bottom: 1px solid #d0d0d0;
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+.table-dis-up-u {
+  width: 3%;
   border-right: 1px solid #d0d0d0;
   border-bottom: 1px solid #d0d0d0;
   height: 30px;

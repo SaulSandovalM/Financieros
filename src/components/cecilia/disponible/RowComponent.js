@@ -27,14 +27,13 @@ export default class RowComponent extends Component {
 
     return (
       <div className='meses-container-row'>
-        <div className='table-left' />
-        <div className='table-dis-up'>
+        <div className='table-dis-up-u'>
           <p className='p-h-dis2'>{this.props.item.up}</p>
         </div>
-        <div className='table-dis-up'>
+        <div className='table-dis-up-t'>
           <p className='p-h-dis2'>{this.props.item.rubro}</p>
         </div>
-        <div className='table-dis-up'>
+        <div className='table-dis-up-t'>
           <p className='p-h-dis2'>{this.props.item.ogasto}</p>
         </div>
         <div className='table-dis-up'>
@@ -167,7 +166,6 @@ export default class RowComponent extends Component {
             />
           </p>
         </div>
-        <div className='table-right' />
       </div>
     )
   }
