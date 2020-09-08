@@ -26,16 +26,16 @@ export default class RowComponent extends Component {
       <div>
         <div className='table-container-p'>
           <div className='table-left' />
-          <div className='table-up-p-frn'>
+          <div className='table-up-p-frn-fr'>
             <p>{this.props.item.up}</p>
           </div>
-          <div className='table-up-p-frn'>
+          <div className='table-up-p-frn-d'>
             <p>{this.props.item.ogasto}</p>
           </div>
-          <div className='table-up-p-frn'>
+          <div className='table-up-p-frn-d'>
             <p>{this.props.item.rubro}</p>
           </div>
-          <div className='table-up-p-frn'>
+          <div className='table-up-p-frn-d'>
             <div>
               <CurrencyFormat
                 value={this.props.item.dic}
@@ -46,10 +46,10 @@ export default class RowComponent extends Component {
               .00
             </div>
           </div>
-          <div className='table-cpa'>
+          <div className='table-cpa-d'>
             <p>{this.props.item.cpa}</p>
           </div>
-          <div className='table-up-p-frn'>
+          <div className='table-up-p-frn-d'>
             <button onClick={this.update}>Agregar</button>
           </div>
           <div className='table-right' />

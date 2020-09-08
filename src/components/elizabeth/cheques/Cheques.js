@@ -309,7 +309,6 @@ export default class Cheques extends Component {
                       thousandSeparator
                       decimalSeparator='.'
                     />
-                    .00
                   </p>
                 </div>
               </div>

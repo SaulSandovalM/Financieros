@@ -256,7 +256,6 @@ export default class Fondor extends Component {
                   thousandSeparator
                   prefix=' $'
                 />
-                .00
               </p>
             </div>
           </div>

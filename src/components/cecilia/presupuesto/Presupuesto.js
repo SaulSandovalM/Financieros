@@ -60,27 +60,42 @@ export default class Excel extends Component {
           const np = data[i][31]
           const cpa = data[i][32]
           const ene = data[i][33]
-          const feb = data[i][34]
-          const mar = data[i][35]
-          const abr = data[i][36]
-          const may = data[i][37]
-          const jun = data[i][38]
-          const jul = data[i][39]
-          const ago = data[i][40]
-          const sep = data[i][41]
-          const oct = data[i][42]
-          const nov = data[i][43]
-          const dic = data[i][44]
-          const total = data[i][45]
+          const gasene = data[i][34]
+          const feb = data[i][35]
+          const gasfeb = data[i][36]
+          const mar = data[i][37]
+          const gasmar = data[i][38]
+          const abr = data[i][39]
+          const gasabr = data[i][40]
+          const may = data[i][41]
+          const gasmay = data[i][42]
+          const jun = data[i][43]
+          const gasjun = data[i][44]
+          const jul = data[i][45]
+          const gasjul = data[i][46]
+          const ago = data[i][47]
+          const gasago = data[i][48]
+          const sep = data[i][49]
+          const gassep = data[i][50]
+          const oct = data[i][51]
+          const gasoct = data[i][52]
+          const nov = data[i][53]
+          const gasnov = data[i][54]
+          const dic = data[i][55]
+          const gasdic = data[i][56]
+          const total = data[i][57]
           const presupuesto = {
             'año': año, 'rm': rm, 'ur': ur, 'up': up, 'rubro': rubro, 'tg': tg,
             'ogasto': ogasto, 'npro': npro, 'f': f, 'fu': fu, 'sf': sf, 'eje': eje,
             's': s, 'prog': prog, 'sp': sp, 'obj': obj, 'proy': proy, 'est': est,
             'obra': obra, 'ben': ben, 'eg': eg, 'mi': mi, 'pr': pr, 'ped': ped,
             'itrans': itrans, 'igest': igest, 'la': la, 'ods': ods, 'et': et,
-            'ff': ff, 'of': of, 'np': np, 'cpa': cpa, 'ene': ene, 'feb': feb,
-            'mar': mar, 'abr': abr, 'may': may, 'jun': jun, 'jul': jul,
-            'ago': ago, 'sep': sep, 'oct': oct, 'nov': nov, 'dic': dic, 'total': total
+            'ff': ff, 'of': of, 'np': np, 'cpa': cpa, 'ene': ene, 'gasene': gasene,
+            'feb': feb, 'gasfeb': gasfeb, 'mar': mar, 'gasmar': gasmar, 'abr': abr,
+            'gasabr': gasabr, 'may': may, 'gasmay': gasmay, 'jun': jun, 'gasjun': gasjun,
+            'jul': jul, 'gasjul': gasjul, 'ago': ago, 'gasago': gasago, 'sep': sep,
+            'gassep': gassep, 'oct': oct, 'gasoct': gasoct, 'nov': nov, 'gasnov': gasnov,
+            'dic': dic, 'gasdic': gasdic, 'total': total
           }
           userList.push(presupuesto)
           fetch('https://financieros-78cb0.firebaseio.com/presupuesto.json', {

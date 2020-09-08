@@ -171,151 +171,160 @@ export default class Edit extends Component {
             <form onSubmit={this.onSubmit}>
               <div>
                 <div className='fcc-i'>
-                  <p className='fimpre'>Beneficiario:</p>
-                  <input
-                    value={this.state.beneficiario}
-                    name='beneficiario'
-                    onChange={this.onChange}
-                  />
-                </div>
-                <div className='fcc-i'>
                   <p className='fimpre'>Cfe:</p>
                   <input
                     name='cfe'
                     onChange={this.onChange}
                     value={this.state.cfe}
+                    disabled
                   />
                 </div>
                 <div className='fcc-i'>
-                  <p className='fimpre'>desc:</p>
+                  <p className='fimpre'>Descripción:</p>
                   <input
                     name='desc'
                     onChange={this.onChange}
                     value={this.state.desc}
+                    disabled
                   />
                 </div>
                 <div className='fcc-i'>
-                  <p className='fimpre'>fecha:</p>
+                  <p className='fimpre'>Fecha:</p>
                   <input
                     name='fecha'
                     onChange={this.onChange}
                     value={this.state.fecha}
+                    disabled
                   />
                 </div>
                 <div className='fcc-i'>
-                  <p className='fimpre'>fondo:</p>
+                  <p className='fimpre'>Fondo:</p>
                   <input
                     name='fondo'
                     onChange={this.onChange}
                     value={this.state.fondo}
+                    disabled
                   />
                 </div>
                 <div className='fcc-i'>
-                  <p className='fimpre'>importe:</p>
+                  <p className='fimpre'>Importe:</p>
                   <input
                     name='importe'
                     onChange={this.onChange}
                     value={this.state.importe}
+                    disabled
                   />
                 </div>
                 <div className='fcc-i'>
-                  <p className='fimpre'>n comprobantes:</p>
+                  <p className='fimpre'>Num. Comprobantes:</p>
                   <input
                     name='ncomprobantes'
                     onChange={this.onChange}
                     value={this.state.ncomprobantes}
+                    disabled
                   />
                 </div>
                 <div className='fcc-i'>
-                  <p className='fimpre'>no_lici:</p>
+                  <p className='fimpre'>No. Licitación:</p>
                   <input
                     name='no_lici'
                     onChange={this.onChange}
                     value={this.state.no_lici}
+                    disabled
                   />
                 </div>
                 <div className='fcc-i'>
-                  <p className='fimpre'>no_oficio:</p>
+                  <p className='fimpre'>No. Oficio:</p>
                   <input
                     name='no_oficio'
                     onChange={this.onChange}
                     value={this.state.no_oficio}
+                    disabled
                   />
                 </div>
                 <div className='fcc-i'>
-                  <p className='fimpre'>nscfe:</p>
+                  <p className='fimpre'>No. de Servicio:</p>
                   <input
                     name='nscfe'
                     onChange={this.onChange}
                     value={this.state.nscfe}
+                    disabled
                   />
                 </div>
                 <div className='fcc-i'>
-                  <p className='fimpre'>numCompro:</p>
+                  <p className='fimpre'>Num. Comprobantes:</p>
                   <input
                     name='numCompro'
                     onChange={this.onChange}
                     value={this.state.numCompro}
+                    disabled
                   />
                 </div>
                 <div className='fcc-i'>
-                  <p className='fimpre'>observaciones:</p>
+                  <p className='fimpre'>Observaciones:</p>
                   <input
                     name='observaciones'
                     onChange={this.onChange}
                     value={this.state.observaciones}
+                    disabled
                   />
                 </div>
                 <div className='fcc-i'>
-                  <p className='fimpre'>oficio_aut:</p>
+                  <p className='fimpre'>Oficio Autorización:</p>
                   <input
                     name='oficio_aut'
                     onChange={this.onChange}
                     value={this.state.oficio_aut}
+                    disabled
                   />
                 </div>
                 <div className='fcc-i'>
-                  <p className='fimpre'>pedido:</p>
+                  <p className='fimpre'>Pedido:</p>
                   <input
                     name='pedido'
                     onChange={this.onChange}
                     value={this.state.pedido}
+                    disabled
                   />
                 </div>
                 <div className='fcc-i'>
-                  <p className='fimpre'>poliza:</p>
+                  <p className='fimpre'>Poliza:</p>
                   <input
                     name='poliza'
                     onChange={this.onChange}
                     value={this.state.poliza}
+                    disabled
                   />
                 </div>
                 <div className='fcc-i'>
-                  <p className='fimpre'>realizo:</p>
+                  <p className='fimpre'>Realizo:</p>
                   <input
                     name='realizo'
                     onChange={this.onChange}
                     value={this.state.realizo}
+                    disabled
                   />
                 </div>
                 <div className='fcc-i'>
-                  <p className='fimpre'>requisicion:</p>
+                  <p className='fimpre'>Requisición:</p>
                   <input
                     name='requisicion'
                     onChange={this.onChange}
                     value={this.state.requisicion}
+                    disabled
                   />
                 </div>
                 <div className='fcc-i'>
-                  <p className='fimpre'>tipo_doc:</p>
+                  <p className='fimpre'>Tipo Documento:</p>
                   <input
                     name='tipo_doc'
                     onChange={this.onChange}
                     value={this.state.tipo_doc}
+                    disabled
                   />
                 </div>
                 <div className='fcc-i'>
-                  <p className='fimpre'>fechaContra:</p>
+                  <p className='fimpre'>Fecha de Contrarecibo:</p>
                   <input
                     name='fechaContra'
                     onChange={this.onChange}
@@ -323,7 +332,7 @@ export default class Edit extends Component {
                   />
                 </div>
                 <div className='fcc-i'>
-                  <p className='fimpre'>numContra:</p>
+                  <p className='fimpre'>Num. de Contrarecibo:</p>
                   <input
                     name='numContra'
                     onChange={this.onChange}
@@ -331,7 +340,7 @@ export default class Edit extends Component {
                   />
                 </div>
                 <div className='fcc-i'>
-                  <p className='fimpre'>fechaDepo:</p>
+                  <p className='fimpre'>Fecha de Deposito:</p>
                   <input
                     name='fechaDepo'
                     onChange={this.onChange}
@@ -339,7 +348,7 @@ export default class Edit extends Component {
                   />
                 </div>
                 <div className='fcc-i'>
-                  <p className='fimpre'>cuentaPagar:</p>
+                  <p className='fimpre'>Cuenta por Pagar:</p>
                   <input
                     name='cuentaPagar'
                     onChange={this.onChange}
@@ -347,7 +356,7 @@ export default class Edit extends Component {
                   />
                 </div>
                 <div className='fcc-i'>
-                  <p className='fimpre'>cuentaPagarPara:</p>
+                  <p className='fimpre'>Cuenta por Pagar Para:</p>
                   <input
                     name='cuentaPagarPara'
                     onChange={this.onChange}
@@ -355,11 +364,19 @@ export default class Edit extends Component {
                   />
                 </div>
                 <div className='fcc-i'>
-                  <p className='fimpre'>sujetoContable:</p>
+                  <p className='fimpre'>Sujeto Contable:</p>
                   <input
                     name='sujetoContable'
                     onChange={this.onChange}
                     value={this.state.sujetoContable}
+                  />
+                </div>
+                <div className='fcc-i'>
+                  <p className='fimpre'>Beneficiario:</p>
+                  <input
+                    value={this.state.beneficiario}
+                    name='beneficiario'
+                    onChange={this.onChange}
                   />
                 </div>
               </div>

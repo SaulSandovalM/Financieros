@@ -82,7 +82,6 @@ export default class Caja extends Component {
                       thousandSeparator
                       decimalSeparator='.'
                     />
-                    .00
                   </p>
                 </div>
               </div>
