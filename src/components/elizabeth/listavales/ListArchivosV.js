@@ -3,8 +3,7 @@ import firebase from '../../../Firebase'
 import ListArchivo from './ListArchivo'
 import './ListVales.css'
 import Dropzone from 'react-dropzone'
-import XMLParser from 'react-xml-parser'
-import {xhr, xmlhttp, ActiveXObject} from 'ajax'
+import { xhr, xmlhttp, ActiveXObject } from 'ajax'
 
 export default class ListArchivosV extends Component {
   constructor(props) {
@@ -76,8 +75,7 @@ export default class ListArchivosV extends Component {
       reader.onloadend = function () {
         var XMLParser = require('react-xml-parser')
         var xml = new XMLParser().parseFromString(reader.result)
-        var perro = xml.attributes['Total']
-        var perra = xml.children[0].attributes['Nombre']
+        var perro = [xml.attributes['Fecha'], 'perra']
         fetch(xml).then(res => res.text()).then(data => {
           fetch('https://financieros-78cb0.firebaseio.com/xml.json', {
             method: 'POST',
@@ -85,7 +83,7 @@ export default class ListArchivosV extends Component {
               'Accept': 'application/json',
               'Content-Type': 'application/json',
             },
-              body: JSON.stringify(perra)
+              body: JSON.stringify(perro)
           })
         })
       }
