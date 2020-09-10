@@ -13,7 +13,7 @@ export default class RowJunio extends Component {
 
   render () {
     const saldo = this.props.item.jun
-    const gasto = this.props.item.jun
+    const gasto = this.props.item.gasjun
     return (
       <div className='meses-container-row'>
         <div className='table-left' />

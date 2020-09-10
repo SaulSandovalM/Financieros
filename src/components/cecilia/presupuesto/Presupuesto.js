@@ -84,18 +84,25 @@ export default class Excel extends Component {
           const dic = data[i][55]
           const gasdic = data[i][56]
           const total = data[i][57]
+          const ampliacion = data[i][58]
+          const reduccion = data[i][59]
+          const trasferencia = data[i][60]
           const presupuesto = {
             'año': año, 'rm': rm, 'ur': ur, 'up': up, 'rubro': rubro, 'tg': tg,
             'ogasto': ogasto, 'npro': npro, 'f': f, 'fu': fu, 'sf': sf, 'eje': eje,
             's': s, 'prog': prog, 'sp': sp, 'obj': obj, 'proy': proy, 'est': est,
             'obra': obra, 'ben': ben, 'eg': eg, 'mi': mi, 'pr': pr, 'ped': ped,
             'itrans': itrans, 'igest': igest, 'la': la, 'ods': ods, 'et': et,
-            'ff': ff, 'of': of, 'np': np, 'cpa': cpa, 'ene': ene, 'gasene': gasene,
-            'feb': feb, 'gasfeb': gasfeb, 'mar': mar, 'gasmar': gasmar, 'abr': abr,
-            'gasabr': gasabr, 'may': may, 'gasmay': gasmay, 'jun': jun, 'gasjun': gasjun,
-            'jul': jul, 'gasjul': gasjul, 'ago': ago, 'gasago': gasago, 'sep': sep,
-            'gassep': gassep, 'oct': oct, 'gasoct': gasoct, 'nov': nov, 'gasnov': gasnov,
-            'dic': dic, 'gasdic': gasdic, 'total': total
+            'ff': ff, 'of': of, 'np': np, 'cpa': cpa, 'ene': parseInt(ene),
+            'gasene': parseInt(gasene), 'feb': parseInt(feb), 'gasfeb': parseInt(gasfeb),
+            'mar': parseInt(mar), 'gasmar': parseInt(gasmar), 'abr': parseInt(abr),
+            'gasabr': parseInt(gasabr), 'may': parseInt(may), 'gasmay': parseInt(gasmay),
+            'jun': parseInt(jun), 'gasjun': parseInt(gasjun), 'jul': parseInt(jul),
+            'gasjul': parseInt(gasjul), 'ago': parseInt(ago), 'gasago': parseInt(gasago),
+            'sep': parseInt(sep), 'gassep': parseInt(gassep), 'oct': parseInt(oct),
+            'gasoct': parseInt(gasoct), 'nov': parseInt(nov), 'gasnov': parseInt(gasnov),
+            'dic': parseInt(dic), 'gasdic': parseInt(gasdic), 'total': parseInt(total),
+            'ampliacion': ampliacion, 'reduccion': reduccion, 'trasferencia': trasferencia
           }
           userList.push(presupuesto)
           fetch('https://financieros-78cb0.firebaseio.com/presupuesto.json', {

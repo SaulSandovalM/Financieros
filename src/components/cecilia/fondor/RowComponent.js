@@ -30,7 +30,7 @@ export default class RowComponent extends Component {
               <div className='table-up-p-frn-d'>
                 <div>
                   <CurrencyFormat
-                    value={this.props.item.gasdic}
+                    value={this.props.item.gassep}
                     displayType='text'
                     thousandSeparator
                     prefix=' $'

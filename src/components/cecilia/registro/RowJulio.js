@@ -13,7 +13,7 @@ export default class RowJulio extends Component {
 
   render () {
     const saldo = this.props.item.jul
-    const gasto = this.props.item.jul
+    const gasto = this.props.item.gasjul
     return (
       <div className='meses-container-row'>
         <div className='table-left' />

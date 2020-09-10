@@ -13,7 +13,7 @@ export default class RowDiciembre extends Component {
 
   render () {
     const saldo = this.props.item.dic
-    const gasto = this.props.item.dic
+    const gasto = this.props.item.gasdic
     return (
       <div className='meses-container-row'>
         <div className='table-left' />
@@ -76,4 +76,4 @@ export default class RowDiciembre extends Component {
 // clave presupuesto
 // importe
 // cuanta por pagar para
-// num contra // fondo // fechacontra-agregar  // monto // estatus np 
+// num contra // fondo // fechacontra-agregar  // monto // estatus np

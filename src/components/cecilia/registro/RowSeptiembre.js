@@ -13,7 +13,7 @@ export default class RowAgosto extends Component {
 
   render () {
     const saldo = this.props.item.sep
-    const gasto = this.props.item.sep
+    const gasto = this.props.item.gassep
     return (
       <div className='meses-container-row'>
         <div className='table-left' />

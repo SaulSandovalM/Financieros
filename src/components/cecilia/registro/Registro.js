@@ -71,6 +71,17 @@ export default class Registro extends Component {
           sep: child.val().sep,
           nov: child.val().nov,
           dic: child.val().dic,
+          gasene: child.val().gasene,
+          gasfeb: child.val().gasfeb,
+          gasabr: child.val().gasabr,
+          gasmay: child.val().gasmay,
+          gasjun: child.val().gasjun,
+          gasjul: child.val().gasjul,
+          gasago: child.val().gasago,
+          gassep: child.val().gassep,
+          gasoct: child.val().gasoct,
+          gasnov: child.val().gasnov,
+          gasdic: child.val().gasdic,
           done: child.val().done,
           id: child.key
         })

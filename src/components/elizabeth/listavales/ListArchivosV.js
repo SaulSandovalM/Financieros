@@ -51,49 +51,47 @@ export default class ListArchivosV extends Component {
     }
   }
 
-  handleOnChange1 (event) {
-    const totalArchivos = event.target.files
-    var arr = []
-    for (var i = 0; i < totalArchivos.length; i++) {
-      const archivo = totalArchivos[i]
-      var file = archivo
-      var reader  = new FileReader()
-      reader.onloadend = function () {
-        console.log('Enseguida sigue el archivo')
-        console.log(reader.result)
-        var XMLParser = require('react-xml-parser')
-        var xml = new XMLParser().parseFromString(reader.result)
-        var perro = xml.children[0].attributes['Rfc']
-        console.log(perro)
-      }
-      reader.readAsText(file)
-    }
-  }
-
   // handleOnChange1 (event) {
-  //   const files = event.target.files
-  //   for (var i = 0; i < files.length; i++) {
-  //     const file = files[i]
-  //     var xml = file
-  //     if (file.type === 'text/xml') {
-  //       var reader = new FileReader()
-  //       reader.onloadend = function () {
-  //         var xml = new XMLParser().parseFromString(reader.result)
-  //         fetch(xml).then(res => res.text()).then(data => {
-  //           fetch('https://financieros-78cb0.firebaseio.com/xml.json', {
-  //             method: 'POST',
-  //             headers: {
-  //               'Accept': 'application/json',
-  //               'Content-Type': 'application/json',
-  //             },
-  //               body: JSON.stringify(xml)
-  //           })
-  //         })
-  //       }
-  //       reader.readAsText(xml)
+  //   const totalArchivos = event.target.files
+  //   for (var i = 0; i < totalArchivos.length; i++) {
+  //     const archivo = totalArchivos[i]
+  //     var file = archivo
+  //     var reader  = new FileReader()
+  //     reader.onloadend = function () {
+  //       var XMLParser = require('react-xml-parser')
+  //       var xml = new XMLParser().parseFromString(reader.result)
+  //       var perro = xml.attributes['Total']
+  //       console.log(perro)
   //     }
+  //     reader.readAsText(file)
   //   }
   // }
+
+  handleOnChange1 (event) {
+    const files = event.target.files
+    for (var i = 0; i < files.length; i++) {
+      const file = files[i]
+      var xml = file
+      var reader = new FileReader()
+      reader.onloadend = function () {
+        var XMLParser = require('react-xml-parser')
+        var xml = new XMLParser().parseFromString(reader.result)
+        var perro = xml.attributes['Total']
+        var perra = xml.children[0].attributes['Nombre']
+        fetch(xml).then(res => res.text()).then(data => {
+          fetch('https://financieros-78cb0.firebaseio.com/xml.json', {
+            method: 'POST',
+            headers: {
+              'Accept': 'application/json',
+              'Content-Type': 'application/json',
+            },
+              body: JSON.stringify(perra)
+          })
+        })
+      }
+      reader.readAsText(xml)
+    }
+  }
 
   handleOnChange2 (event) {
     const file = event.target.files[0]
