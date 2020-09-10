@@ -41,6 +41,23 @@ import Add from './components/controlp/Add'
 import Complemento from './components/complemento/Complemento'
 import Caratula from './components/miguel/caratula/Caratula'
 
+import Gasto from './components/miguel/Todospdf/FondoRevolvente/Gasto'
+import ObjetodegastoFR from './components/miguel/Todospdf/FondoRevolvente/objetodegastoFR'
+import Recibo from './components/miguel/Todospdf/FondoRevolvente/Recibo'
+import Rfr from './components/miguel/Todospdf/FondoRevolvente/Rfr'
+// Pagoproveedor
+import ObjetodegastoPP from './components/miguel/Todospdf/Pagoproveedor/objetodegastoPP'
+import Gastoprovee from './components/miguel/Todospdf/Pagoproveedor/Gastoprovee'
+import Pagoproveedor from './components/miguel/Todospdf/Pagoproveedor/pagoproveedor'
+// Diciembre
+import Comprobaciondegastocomprobar from './components/miguel/Todospdf/Diciembre/comprobaciondegastocomprobar'
+import Gastodiciembre from './components/miguel/Todospdf/Diciembre/gastodiciembre'
+import Objetodegastodiciembre from './components/miguel/Todospdf/Diciembre/objetodegastodiciembre'
+// pagoproveedor por requisicion
+import Gastoppr from './components/miguel/Todospdf/Pagoaproveedorporrequisicion/gastoppr'
+import Solicitudppr from './components/miguel/Todospdf/Pagoaproveedorporrequisicion/solicitudppr'
+import Ofisolicitudppr from './components/miguel/Todospdf/Pagoaproveedorporrequisicion/ofisolicitudppr'
+
 function App (props) {
   const { isAuthenticated, isVerifying } = props
   return (
