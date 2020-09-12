@@ -59,6 +59,7 @@
 .nopass {
   z-index: 2;
   position: absolute;
+  width: 100%;
 }
 .text-intei {
   font-size: 12px;
