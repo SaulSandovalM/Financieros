@@ -3,7 +3,6 @@ import firebase from '../../../Firebase'
 import ListArchivo from './ListArchivo'
 import './ListVales.css'
 import Dropzone from 'react-dropzone'
-import { xhr, xmlhttp, ActiveXObject } from 'ajax'
 
 export default class ListArchivosV extends Component {
   constructor(props) {
@@ -50,22 +49,6 @@ export default class ListArchivosV extends Component {
     }
   }
 
-  // handleOnChange1 (event) {
-  //   const totalArchivos = event.target.files
-  //   for (var i = 0; i < totalArchivos.length; i++) {
-  //     const archivo = totalArchivos[i]
-  //     var file = archivo
-  //     var reader  = new FileReader()
-  //     reader.onloadend = function () {
-  //       var XMLParser = require('react-xml-parser')
-  //       var xml = new XMLParser().parseFromString(reader.result)
-  //       var perro = xml.attributes['Total']
-  //       console.log(perro)
-  //     }
-  //     reader.readAsText(file)
-  //   }
-  // }
-
   handleOnChange1 (event) {
     const files = event.target.files
     for (var i = 0; i < files.length; i++) {
@@ -75,7 +58,7 @@ export default class ListArchivosV extends Component {
       reader.onloadend = function () {
         var XMLParser = require('react-xml-parser')
         var xml = new XMLParser().parseFromString(reader.result)
-        var perro = [xml.attributes['Fecha'], 'perra']
+        var data = [xml.attributes['Fecha'], xml.attributes['Total'], xml.attributes['Folio']]
         fetch(xml).then(res => res.text()).then(data => {
           fetch('https://financieros-78cb0.firebaseio.com/xml.json', {
             method: 'POST',
@@ -83,7 +66,7 @@ export default class ListArchivosV extends Component {
               'Accept': 'application/json',
               'Content-Type': 'application/json',
             },
-              body: JSON.stringify(perro)
+              body: JSON.stringify(xml)
           })
         })
       }

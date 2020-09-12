@@ -53,7 +53,6 @@ export default class XmlComp extends Component {
       usoCFDI: item.usoCFDI,
       estatus: 'Asignado'
     }
-    firebaseConf.database().ref().update(updates)
   }
 
   render() {
