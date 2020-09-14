@@ -33,7 +33,7 @@ export default class Comprometidos extends Component {
       listaB: [
         {
           id: 1,
-          name: 'preuba',
+          name: 'Cargando Datos ... ',
           done: false
         }
       ],
@@ -47,14 +47,14 @@ export default class Comprometidos extends Component {
       listaAsi: [
         {
           id: 1,
-          name: 'preuba',
+          name: 'Cargando Datos ... ',
           done: false
         }
       ],
       listaPago: [
         {
           id: 1,
-          name: 'preuba',
+          name: 'Cargando Datos ... ',
           done: false
         }
       ]
@@ -205,35 +205,27 @@ export default class Comprometidos extends Component {
     this.listenForItemsPago(itemsRefPago)
   }
 
-  // updateSin = (item) => {
-  //   let updates = {}
-  //   updates['xml2/' + item.id] = {
-  //     folio: item.folio,
-  //     fecha: item.fecha,
-  //     importe: item.importe,
-  //     usoCFDI: item.usoCFDI,
-  //     estatus: 'Asignado'
-  //   }
-  //   firebase.database().ref().update(updates)
-  // }
-
-  updateAsi = (item) => {
+  updateAsi = (itema) => {
+    console.log('Empieza el script')
     let updates = {}
-    updates['xml/' + item.id] = {
-      folio: item.folio,
-      fecha: item.fecha,
-      importe: item.importe,
-      usoCFDI: item.usoCFDI,
-      estatus: 'sin asignar'
+    console.log('Traer id ' + itema.id)
+    updates['xml2/' + itema.id] = {
+      folio: itema.folio,
+      fecha: itema.fecha,
+      importe: itema.importe,
+      usoCFDI: itema.usoCFDI,
+      estatus: 'Asignado'
     }
+    console.log('Se lleva la variable updates con los datos de itema ' + itema.id)
     firebase.database().ref().update(updates)
-    firebase.database().ref('xml2/' + item.id).remove()
+    firebase.database().ref('xml2/' + itema.id).remove()
+    console.log('Termina el script')
   }
 
   onChange = (e) => {
     const state = this.state
     state[e.target.name] = e.target.value
-    this.setState({fondos:state})
+    this.setState({ fondos:state })
   }
 
   partida = ['211001', '211002', '212001', '212002', '214001', '214002', '215001', '216001', '217001', '221001', '221002', '246001', '251001', '253001', '254001', '255001', '261001', '271001', '272001', '291001', '292001', '311001', '313001', '318001', '323002', '334001', '338001', '341001', '351001', '352001', '353001', '355001', '357001', '358001', '361002', '372001', '375001', '381001', '392006', '394001', '218002', '312001', '371001', '247001', '249001', '359001', '336001', '275001', '211003', '541001', '515001', '339001']
@@ -242,58 +234,140 @@ export default class Comprometidos extends Component {
   municipio = ['Acatlán', 'Acaxochitlán', 'Actopan', 'Agua Blanca de Iturbide','Ajacuba','Alfajayucan','Almoloya','Apan','El Arenal','Atitalaquia','Atlapexco','Atotonilco el Grande','Atotonilco de Tula','Calnali','Cardonal','Cuautepec de Hinojosa','Chapantongo','Chapulhuacán','Chilcuautla','Eloxochitlán','Emiliano Zapata','Epazoyucan','Franciso I. Madero','Huasca de Ocampo','Huautla','Huazalingo','Huehuetla','Huejutla de Reyes','Huichapan','Ixmiquilpan','Jacala de Ledezma','Jaltocán','Juárez Hidalgo','Lolotla','Metepec','San Agustín Metzquititlán','Metztitlán','Mineral del Chico','Mineral del Monte','La Misión','Mixquiahuala de Juárez','Molango de Escamilla','Nicolás Flores','Nopala de Villagrán','Omitlán de Juárez','San Felipe Orizatlán','Pacula','Pachuca de Soto','Pisaflores','Progreso de Obregón','Mineral de la Reforma','San Agustín Tlaxiaca','San Bartolo Tutotepec','San Salvador','Santiago de Anaya','Santiago Tulantepec de Lugo Guerrero','Singuilucan','Tasquillo','Tecozautla','Tenango de Doria','Tepeapulco','Tepehuacán de Guerrero','Tepeji del Río de Ocampo','Tepetitlán','Tetepango','Villa de Tezontepec','Tezontepec de Aldama','Tianguistengo','Tizayuca','Tlahuelilpan','Tlahuiltepa','Tlanalapa','Tlanchinol','Tlaxcoapan','Tolcayuca','Tula de Allende','Tulancingo de Bravo','Xochiatipan','Xochicoatlán','Yahualica','Zacualtipán de Ángeles','Zapotlán de Juárez','Zempoala','Zimapán']
   area = ['Procuraduría General de Justicia','Subprocuraduría de Procedimientos Penales Región Oriente','Fiscalía Especializada para la atención de Delitos cometidos contra la Libertad de Expresión', 'Periodistas y Personas defensoras de los Derechos Humanos','Dirección General para la Atención de los Asuntos del Sistema Tradicional','Fiscalia de Delitos Electorales','Subprocuraduría de Derechos Humanos y Servicios a la Comunidad','Centro de Justicia Restaurativa Penal Poniente','Fiscalía para la Atención de Delitos de Género','Visitaduría General','Dirección General de Servicios Periciales','Centro de Operación Estratégica','Unidad Especializada en el Combate al Secuestro','Dirección General de Administración y Finanzas','Fiscalía Especializada para la atención de los Delitos de Trata de Personas','Subprocuraduría de Procedimientos Penales Región Poniente','Centro de Atención Temprana Poniente','Dirección General de Investigación y Litigación Poniente','Dirección General de la Policía Investigadora','Centro de Atención Temprana Oriente','Centro de Justicia Restaurativa Penal Oriente','Dirección General de Investigación y Litigación Oriente','Dirección General de Recursos Materiales y Servicios','Fiscalía Especializada en Delitos de Corrupción','Fiscalía Especializada en Materia de Desaparición Forzada de Personas',]
 
+  listenForItemsBanco = (itemsRefBanco) => {
+    itemsRefBanco.on('value', (snap) => {
+      var listaB = []
+      snap.forEach((child) => {
+        listaB.push({
+          abr: child.val().abr,
+          gasabr: child.val().gasabr,
+          ago: child.val().ago,
+          gasago: child.val().gasago,
+          año: child.val().año,
+          ben: child.val().ben,
+          cpa: child.val().cpa,
+          dic: child.val().dic,
+          gasdic: child.val().gasdic,
+          eg: child.val().eg,
+          eje: child.val().eje,
+          ene: child.val().ene,
+          gasene: child.val().gasene,
+          est: child.val().est,
+          et: child.val().et,
+          f: child.val().f,
+          feb: child.val().feb,
+          gasfeb: child.val().gasfeb,
+          ff: child.val().ff,
+          fu: child.val().fu,
+          igest: child.val().igest,
+          itrans: child.val().itrans,
+          jul: child.val().jul,
+          gasjul: child.val().gasjul,
+          jun: child.val().jun,
+          gasjun: child.val().gasjun,
+          la: child.val().la,
+          mar: child.val().mar,
+          gasmar: child.val().gasmar,
+          may: child.val().may,
+          gasmay: child.val().gasmay,
+          mi: child.val().mi,
+          nov: child.val().nov,
+          gasnov: child.val().gasnov,
+          np: child.val().np,
+          obj: child.val().obj,
+          obra: child.val().obra,
+          oct: child.val().oct,
+          gasoct: child.val().gasoct,
+          ods: child.val().ods,
+          of: child.val().of,
+          ogasto: child.val().ogasto,
+          ped: child.val().ped,
+          pr: child.val().pr,
+          prog: child.val().prog,
+          proy: child.val().proy,
+          rm: child.val().rm,
+          rubro: child.val().rubro,
+          s: child.val().s,
+          sep: child.val().sep,
+          gassep: child.val().gassep,
+          sf: child.val().sf,
+          sp: child.val().sp,
+          tg: child.val().tg,
+          total: child.val().total,
+          up: child.val().up,
+          ur: child.val().ur,
+          estatus: child.val().estatus,
+          done: child.val().done,
+          id: child.key
+        })
+      })
+      this.setState({
+        listaB: listaB
+      })
+    })
+  }
+
   update = (item) => {
     let updates = {}
     updates['presupuesto/' + item.id] = {
       abr: item.abr,
+      gasabr: item.gasabr,
       ago: item.ago,
+      gasago: item.gasago,
+      año: item.año,
       ben: item.ben,
       cpa: item.cpa,
       dic: item.dic,
-      dig: item.dig,
-      dp: item.dp,
+      gasdic: item.gasdic,
       eg: item.eg,
       eje: item.eje,
       ene: item.ene,
+      gasene: item.gasene,
       est: item.est,
       et: item.et,
       f: item.f,
       feb: item.feb,
+      gasfeb: item.gasfeb,
       ff: item.ff,
       fu: item.fu,
-      indi: item.indi,
+      igest: item.igest,
+      itrans: item.itrans,
       jul: item.jul,
+      gasjul: item.gasjul,
       jun: item.jun,
+      gasjun: item.gasjun,
       la: item.la,
       mar: item.mar,
+      gasmar: item.gasmar,
       may: item.may,
-      meta: item.meta,
+      gasmay: item.gasmay,
       mi: item.mi,
       nov: item.nov,
+      gasnov: item.gasnov,
       np: item.np,
       obj: item.obj,
       obra: item.obra,
       oct: item.oct,
+      gasoct: item.gasoct,
       ods: item.ods,
       of: item.of,
       ogasto: item.ogasto,
-      npar: item.npar,
-      os: item.os,
-      par: item.par,
-      pb: item.pb,
+      ped: item.ped,
       pr: item.pr,
       prog: item.prog,
       proy: item.proy,
       rm: item.rm,
       rubro: item.rubro,
       s: item.s,
-      sep: item.sep,
+      sep: item.sep - parseInt(this.state.total),
+      gassep: this.state.total,
       sf: item.sf,
       sp: item.sp,
       tg: item.tg,
       total: item.total,
       up: item.up,
-      estatus: 'FR'
+      ur: item.ur,
+      estatus: item.estatus,
     }
     firebase.database().ref().update(updates)
     const { no_proyecto, municipio, area } = this.state //  isr, total, fecha_comp
@@ -347,68 +421,6 @@ export default class Comprometidos extends Component {
     alert('Tu solicitud fue enviada.')
   }
 
-  listenForItemsBanco = (itemsRefBanco) => {
-    itemsRefBanco.on('value', (snap) => {
-      var listaB = []
-      snap.forEach((child) => {
-        listaB.push({
-          abr: child.val().abr,
-          ago: child.val().ago,
-          ben: child.val().ben,
-          cpa: child.val().cpa,
-          dic: child.val().dic,
-          dig: child.val().dig,
-          dp: child.val().dp,
-          eg: child.val().eg,
-          eje: child.val().eje,
-          ene: child.val().ene,
-          est: child.val().est,
-          et: child.val().et,
-          f: child.val().f,
-          feb: child.val().feb,
-          ff: child.val().ff,
-          fu: child.val().fu,
-          indi: child.val().indi,
-          jul: child.val().jul,
-          jun: child.val().jun,
-          la: child.val().la,
-          mar: child.val().mar,
-          may: child.val().may,
-          meta: child.val().meta,
-          mi: child.val().mi,
-          nov: child.val().nov,
-          np: child.val().np,
-          obj: child.val().obj,
-          obra: child.val().obra,
-          oct: child.val().oct,
-          ods: child.val().ods,
-          of: child.val().of,
-          ogasto: child.val().ogasto,
-          os: child.val().os,
-          par: child.val().par,
-          pb: child.val().pb,
-          pr: child.val().pr,
-          prog: child.val().prog,
-          proy: child.val().proy,
-          rm: child.val().rm,
-          rubro: child.val().rubro,
-          s: child.val().s,
-          sep: child.val().sep,
-          sf: child.val().sf,
-          sp: child.val().sp,
-          tg: child.val().tg,
-          total: child.val().total,
-          up: child.val().up,
-          estatus: child.val().estatus,
-          done: child.val().done,
-          id: child.key
-        })
-      })
-      this.setState({
-        listaB: listaB
-      })
-    })
-  }
 
   cambio = () => {
     this.props.history.push(`/Oficios/${this.state.idP}`)
@@ -459,13 +471,7 @@ export default class Comprometidos extends Component {
     ))
     const reducer = (a, b) => a + b
     this.state.total = totalImporte.reduce(reducer)
-
-    // const totalImporteP = []
-    // this.state.listaPago.map(item => (
-    //   totalImporteP.push(item.importe)
-    // ))
-    // const reducer = (a, b) => a + b
-    // this.state.total = totalImporteP.reduce(reducer)
+    console.log(this.state.listaAsi)
 
     return (
       <div className='compro-container'>
@@ -561,56 +567,28 @@ export default class Comprometidos extends Component {
             <div className='cx'>
               <div className='asi-l'>
                 {
-                  this.state.listaAsi.map(item =>
-                    <div>
-                      <div className='xml-inputs-list'>
-                        <div className='w-xml'>
-                          <p>{item.name}</p>
-                        </div>
-                        <div className='w-xml'>
-                          <p>{item.fecha}</p>
-                        </div>
-                        <div className='w-xml'>
-                          <p>{item.importe}</p>
-                        </div>
-                        <div className='w-xml'>
-                          <p>{item.usoCFDI}</p>
-                        </div>
-                        <div className='w-xml' style={{ padding: '10px' }}>
-                          <button onClick={this.updateAsi}> - </button>
-                        </div>
+                  this.state.listaAsi.map(itema =>
+                    <div className='xml-inputs-list' key={itema.id} itema={itema}>
+                      <div className='w-xml'>
+                        <p>{itema.name}</p>
+                      </div>
+                      <div className='w-xml'>
+                        <p>{itema.fecha}</p>
+                      </div>
+                      <div className='w-xml'>
+                        <p>{itema.importe}</p>
+                      </div>
+                      <div className='w-xml'>
+                        <p>{itema.usoCFD}</p>
+                      </div>
+                      <div className='w-xml' style={{ padding: '10px' }}>
+                        <button onClick={this.updateAsi.bind(this)}> - </button>
                       </div>
                     </div>
                   )
                 }
                 {(totalImporte.reduce(reducer))}
               </div>
-              {/* <div className='asi-l'>
-                {
-                  this.state.listaPago.map(item =>
-                    <div>
-                      <div className='xml-inputs-list'>
-                        <div className='w-xml'>
-                          <p>{item.name}</p>
-                        </div>
-                        <div className='w-xml'>
-                          <p>{item.fecha}</p>
-                        </div>
-                        <div className='w-xml'>
-                          <p>{item.importe}</p>
-                        </div>
-                        <div className='w-xml'>
-                          <p>{item.usoCFDI}</p>
-                        </div>
-                        <div className='w-xml' style={{ padding: '10px' }}>
-                          <button onClick={this.updateAsi}> - </button>
-                        </div>
-                      </div>
-                    </div>
-                  )
-                }
-                {(totalImporte.reduce(reducer))}
-              </div> */}
             </div>
           </div>
         </div>

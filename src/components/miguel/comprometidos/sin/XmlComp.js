@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import '../Comprometidos.css'
-import firebaseConf from '../../../../Firebase'
+import firebase from '../../../../Firebase'
 import ListComponent from './ListComponent'
 
 export default class XmlComp extends Component {
@@ -10,7 +10,7 @@ export default class XmlComp extends Component {
       lista: [
         {
           id: 1,
-          name: 'preuba',
+          name: 'Cargando Datos ... ',
           done: false
         },
       ]
@@ -40,7 +40,7 @@ export default class XmlComp extends Component {
   }
 
   componentDidMount() {
-    const itemsRef = firebaseConf.database().ref('xml/')
+    const itemsRef = firebase.database().ref('xml/')
     this.listenForItems(itemsRef)
   }
 
@@ -53,6 +53,8 @@ export default class XmlComp extends Component {
       usoCFDI: item.usoCFDI,
       estatus: 'Asignado'
     }
+    firebase.database().ref().update(updates)
+    firebase.database().ref('xml/' + item.id).remove()
   }
 
   render() {
