@@ -462,7 +462,7 @@ export default class Cpdf extends Component {
               <p className='fs-if'>{this.state.fondo2}</p>
             </div>
           </div>
-          <div>
+          <div style={{ height: '60vh'}}>
             <div>
               <div className='tabla-so'>
                 <table>
@@ -1304,7 +1304,7 @@ export default class Cpdf extends Component {
         </div>
 
         {/* Pago Provedor por Requisición */}
-        <div ref={el => (this.sol = el)} style={{ zIndex: '2', position: 'absolute'}}>
+        <div ref={el => (this.sol = el)} style={{ zIndex: '2', position: 'absolute' }}>
         <div />
           <div className='title-so-o'>
             <img className='pgjh' src={lpgjh} alt='' />
@@ -1394,7 +1394,7 @@ export default class Cpdf extends Component {
               <p className='fs-if'>{this.state.fondo2}</p>
             </div>
           </div>
-          <div>
+          <div style={{ height: '60vh'}}>
             <div>
               <div className='tabla-so'>
                 <table>
@@ -2346,7 +2346,7 @@ export default class Cpdf extends Component {
               <p className='fs-if'>{this.state.fondo2}</p>
             </div>
           </div>
-          <div>
+          <div style={{ height: '60vh'}}>
             <div>
               <div className='tabla-so'>
                 <table>
@@ -3239,7 +3239,7 @@ export default class Cpdf extends Component {
               <input className='input-so3' />
             </div>
           </div>
-          <div>
+          <div style={{ height: '60vh'}}>
             <div>
               <div className='tabla-so'>
                 <table>
