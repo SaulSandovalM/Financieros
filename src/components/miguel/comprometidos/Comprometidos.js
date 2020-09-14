@@ -86,25 +86,25 @@ export default class Comprometidos extends Component {
     }
   }
 
-  // listenForItems = (itemsRef) => {
-  //   itemsRef.on('value', (snap) => {
-  //     var listaSin = []
-  //     snap.forEach((child) => {
-  //       listaSin.push({
-  //         name: child.val().name,
-  //         fecha: child.val().fecha,
-  //         importe: child.val().importe,
-  //         usoCFDI: child.val().usoCFDI,
-  //         estatus: child.val().estatus,
-  //         done: child.val().done,
-  //         id: child.key
-  //       })
-  //     })
-  //     this.setState({
-  //       listaSin: listaSin
-  //     })
-  //   })
-  // }
+  listenForItems = (itemsRef) => {
+    itemsRef.on('value', (snap) => {
+      var listaSin = []
+      snap.forEach((child) => {
+        listaSin.push({
+          name: child.val().name,
+          fecha: child.val().fecha,
+          importe: child.val().importe,
+          usoCFDI: child.val().usoCFDI,
+          estatus: child.val().estatus,
+          done: child.val().done,
+          id: child.key
+        })
+      })
+      this.setState({
+        listaSin: listaSin
+      })
+    })
+  }
 
   listenForItemsAsi = (itemsRefAsi) => {
     itemsRefAsi.on('value', (snap) => {
@@ -197,8 +197,8 @@ export default class Comprometidos extends Component {
     })
     const itemsRefBanco = firebase.database().ref('presupuesto/')
     this.listenForItemsBanco(itemsRefBanco)
-    // const itemsRef = firebase.database().ref('xml/')
-    // this.listenForItems(itemsRef)
+    const itemsRef = firebase.database().ref('xml/')
+    this.listenForItems(itemsRef)
     const itemsRefAsi = firebase.database().ref('xml2/')
     this.listenForItemsAsi(itemsRefAsi)
     const itemsRefPago = firebase.database().ref('xmlP/')
@@ -225,7 +225,7 @@ export default class Comprometidos extends Component {
   onChange = (e) => {
     const state = this.state
     state[e.target.name] = e.target.value
-    this.setState({ fondos:state })
+    this.setState({ fondos: state })
   }
 
   partida = ['211001', '211002', '212001', '212002', '214001', '214002', '215001', '216001', '217001', '221001', '221002', '246001', '251001', '253001', '254001', '255001', '261001', '271001', '272001', '291001', '292001', '311001', '313001', '318001', '323002', '334001', '338001', '341001', '351001', '352001', '353001', '355001', '357001', '358001', '361002', '372001', '375001', '381001', '392006', '394001', '218002', '312001', '371001', '247001', '249001', '359001', '336001', '275001', '211003', '541001', '515001', '339001']
@@ -471,7 +471,6 @@ export default class Comprometidos extends Component {
     ))
     const reducer = (a, b) => a + b
     this.state.total = totalImporte.reduce(reducer)
-    console.log(this.state.listaAsi)
 
     return (
       <div className='compro-container'>
@@ -568,9 +567,9 @@ export default class Comprometidos extends Component {
               <div className='asi-l'>
                 {
                   this.state.listaAsi.map(itema =>
-                    <div className='xml-inputs-list' key={itema.id} itema={itema}>
+                    <div className='xml-inputs-list' key={itema.id} item={itema}>
                       <div className='w-xml'>
-                        <p>{itema.name}</p>
+                        <p>{itema.folio}</p>
                       </div>
                       <div className='w-xml'>
                         <p>{itema.fecha}</p>
@@ -582,7 +581,7 @@ export default class Comprometidos extends Component {
                         <p>{itema.usoCFD}</p>
                       </div>
                       <div className='w-xml' style={{ padding: '10px' }}>
-                        <button onClick={this.updateAsi.bind(this)}> - </button>
+                        <button onClick={this.updateAsi}> - </button>
                       </div>
                     </div>
                   )
