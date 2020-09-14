@@ -205,21 +205,17 @@ export default class Comprometidos extends Component {
     this.listenForItemsPago(itemsRefPago)
   }
 
-  updateAsi = (itema) => {
-    console.log('Empieza el script')
+  updateAsi = (item) => {
     let updates = {}
-    console.log('Traer id ' + itema.id)
-    updates['xml2/' + itema.id] = {
-      folio: itema.folio,
-      fecha: itema.fecha,
-      importe: itema.importe,
-      usoCFDI: itema.usoCFDI,
+    updates['xml2/' + item.id] = {
+      folio: item.folio,
+      fecha: item.fecha,
+      importe: item.importe,
+      usoCFDI: item.usoCFDI,
       estatus: 'Asignado'
     }
-    console.log('Se lleva la variable updates con los datos de itema ' + itema.id)
     firebase.database().ref().update(updates)
-    firebase.database().ref('xml2/' + itema.id).remove()
-    console.log('Termina el script')
+    firebase.database().ref('xml2/' + item.id).remove()
   }
 
   onChange = (e) => {
@@ -421,7 +417,6 @@ export default class Comprometidos extends Component {
     alert('Tu solicitud fue enviada.')
   }
 
-
   cambio = () => {
     this.props.history.push(`/Oficios/${this.state.idP}`)
   }
@@ -566,19 +561,19 @@ export default class Comprometidos extends Component {
             <div className='cx'>
               <div className='asi-l'>
                 {
-                  this.state.listaAsi.map(itema =>
-                    <div className='xml-inputs-list' key={itema.id} item={itema}>
+                  this.state.listaAsi.map(item =>
+                    <div className='xml-inputs-list' key={item.id}>
                       <div className='w-xml'>
-                        <p>{itema.folio}</p>
+                        <p>{item.folio}</p>
                       </div>
                       <div className='w-xml'>
-                        <p>{itema.fecha}</p>
+                        <p>{item.fecha}</p>
                       </div>
                       <div className='w-xml'>
-                        <p>{itema.importe}</p>
+                        <p>{item.importe}</p>
                       </div>
                       <div className='w-xml'>
-                        <p>{itema.usoCFD}</p>
+                        <p>{item.usoCFD}</p>
                       </div>
                       <div className='w-xml' style={{ padding: '10px' }}>
                         <button onClick={this.updateAsi}> - </button>
