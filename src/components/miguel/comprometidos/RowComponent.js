@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import CurrencyFormat from 'react-currency-format'
 import './Comprometidos.css'
 
 export default class RowComponent extends Component {

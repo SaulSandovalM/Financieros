@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import './pdfs.css'
 import ReactToPrint from 'react-to-print'
-import firebase from '../../../../Firebase'
 import logo2 from '../../../../img/logo.jpg'
 
 

@@ -2,8 +2,6 @@ import React, { Component } from 'react'
 import './Transferencia.css'
 import firebase from '../../../Firebase'
 import ListComponent from './ListComponent'
-import ListTransferencia from './ListTransferencia'
-import Dropzone from 'react-dropzone'
 
 export default class Transferencia extends Component {
   constructor () {

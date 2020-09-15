@@ -37,13 +37,6 @@ export default class Comprometidos extends Component {
           done: false
         }
       ],
-      // listaSin: [
-      //   {
-      //     id: 1,
-      //     name: 'preuba',
-      //     done: false
-      //   },
-      // ],
       listaAsi: [
         {
           id: 1,
@@ -207,7 +200,6 @@ export default class Comprometidos extends Component {
 
   updateAsi = (item) => {
     let updates = {}
-    console.log('el id es: ' + item.id)
     updates['xml/' + item.id] = {
       folio: item.folio,
       fecha: item.fecha,
@@ -537,35 +529,37 @@ export default class Comprometidos extends Component {
             </div>
           </div>
 
-          <div className='axc'>
-            <div className='cx'>
-              <XmlComp />
-              {/* <Dropzone
-                style={{
-                  width: '100%',
-                  height: '100%',
-                  borderWidth: '1px',
-                  borderColor: 'rgb(102, 102, 102)',
-                  borderStyle: 'solid',
-                  borderRadius: '1px',
-                  maxFiles: 5,
-                  background: 'white',
-                  position: 'static'
-                }}
-                accept='.xml' onChange={this.handleOnChange1.bind(this)}
-              >
-                <div className='filename'>
-                  <p className='file-hid'>{this.state.filex}</p>
+          <div style={{display: 'flex', width: '70%'}}>
+            <div className='axc'>
+              <div className='cx'>
+                <XmlComp />
+                {/* <Dropzone
+                  style={{
+                    width: '100%',
+                    height: '100%',
+                    borderWidth: '1px',
+                    borderColor: 'rgb(102, 102, 102)',
+                    borderStyle: 'solid',
+                    borderRadius: '1px',
+                    maxFiles: 5,
+                    background: 'white',
+                    position: 'static'
+                  }}
+                  accept='.xml' onChange={this.handleOnChange1.bind(this)}
+                >
+                  <div className='filename'>
+                    <p className='file-hid'>{this.state.filex}</p>
+                  </div>
+                </Dropzone> */}
+              </div>
+              <div className='cx'>
+                <div className='asi-l'>
+                  <List
+                    listaAsi={this.state.listaAsi}
+                    updateAsi={this.updateAsi}
+                  />
+                  {(totalImporte.reduce(reducer))}
                 </div>
-              </Dropzone> */}
-            </div>
-            <div className='cx'>
-              <div className='asi-l'>
-              <List
-                listaAsi={this.state.listaAsi}
-                updateAsi={this.updateAsi}
-              />
-                {(totalImporte.reduce(reducer))}
               </div>
             </div>
           </div>

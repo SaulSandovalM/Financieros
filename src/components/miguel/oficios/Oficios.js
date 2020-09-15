@@ -132,8 +132,8 @@ export default class Cpdf extends Component {
 
   render () {
     var today = new Date()
-    var meses = new Array ('Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre')
-    var diasSemana = new Array ('Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado')
+    var meses = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre']
+    var diasSemana = ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado']
     var f = new Date()
     today = diasSemana[f.getDay()] + ', ' + f.getDate() + ' de ' + meses[f.getMonth()] + ' de ' + f.getFullYear()
 
@@ -142,7 +142,6 @@ export default class Cpdf extends Component {
       totalImporte.push(comprometidos.importe_comp)
     ))
     const reducer = (a, b) => a + b
-    this.state.total = totalImporte.reduce(reducer)
 
     return (
       <div>

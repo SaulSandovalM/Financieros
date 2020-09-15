@@ -46,7 +46,6 @@ export default class ListComponent extends Component {
 
   render () {
     const allowCustom = this.state.allowCustom
-    const { partida, up, no_proyecto, municipio, area } = this.state
 
     return (
       <div>

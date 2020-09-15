@@ -3,7 +3,6 @@ import './Ampliacion.css'
 import firebase from '../../../Firebase'
 import ListComponent from './ListComponent'
 import ListAmpliacion from './ListAmpliacion'
-import CurrencyFormat from 'react-currency-format'
 import Dropzone from 'react-dropzone'
 
 export default class Ampliacion extends Component {
