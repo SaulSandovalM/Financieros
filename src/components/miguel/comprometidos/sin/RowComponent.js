@@ -30,7 +30,7 @@ export default class RowComponent extends Component {
           <div className='w-xml'>
             <p>{this.props.item.usoCFDI}</p>
           </div>
-          <div className='w-xml' style={{padding: '10px'}}>
+          <div className='w-xml' style={{ padding: '10px' }}>
             <button onClick={this.update}> + </button>
           </div>
         </div>

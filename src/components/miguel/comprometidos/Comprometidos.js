@@ -207,7 +207,8 @@ export default class Comprometidos extends Component {
 
   updateAsi = (item) => {
     let updates = {}
-    updates['xml2/' + item.id] = {
+    console.log('el id es: ' + item.id)
+    updates['xml/' + item.id] = {
       folio: item.folio,
       fecha: item.fecha,
       importe: item.importe,
@@ -560,27 +561,10 @@ export default class Comprometidos extends Component {
             </div>
             <div className='cx'>
               <div className='asi-l'>
-                {
-                  this.state.listaAsi.map(item =>
-                    <div className='xml-inputs-list' key={item.id}>
-                      <div className='w-xml'>
-                        <p>{item.folio}</p>
-                      </div>
-                      <div className='w-xml'>
-                        <p>{item.fecha}</p>
-                      </div>
-                      <div className='w-xml'>
-                        <p>{item.importe}</p>
-                      </div>
-                      <div className='w-xml'>
-                        <p>{item.usoCFD}</p>
-                      </div>
-                      <div className='w-xml' style={{ padding: '10px' }}>
-                        <button onClick={this.updateAsi}> - </button>
-                      </div>
-                    </div>
-                  )
-                }
+              <List
+                listaAsi={this.state.listaAsi}
+                updateAsi={this.updateAsi}
+              />
                 {(totalImporte.reduce(reducer))}
               </div>
             </div>
@@ -611,6 +595,77 @@ export default class Comprometidos extends Component {
           <button className='bt-s-f' onClick={this.cambio}>
             Comprometido Finalizado
           </button>
+        </div>
+      </div>
+    )
+  }
+}
+
+class List extends Component {
+  constructor (props) {
+    super(props)
+    this.state = {
+      xml: []
+    }
+  }
+
+  componentWillMount () {
+    firebase.database().ref('xml2/').on('child_added', snapshot => {
+      this.setState({
+        xml: this.state.xml.concat(snapshot.val())
+      })
+    })
+  }
+
+  render () {
+    return (
+      <div>
+        {
+          this.props.listaAsi.map(item =>
+            <Row
+              key={item.id}
+              item={item}
+              updateAsi={this.props.updateAsi}
+            />
+          )
+        }
+      </div>
+    )
+  }
+}
+
+class Row extends Component {
+  constructor (props) {
+    super(props)
+    this.state = {
+      done: false,
+      item: 'Atendido'
+    }
+  }
+
+  updateAsi = () => {
+    this.props.updateAsi(this.props.item)
+  }
+
+  render () {
+    return (
+      <div>
+        <div className='xml-inputs-list'>
+          <div className='w-xml'>
+            <p>{this.props.item.folio}</p>
+          </div>
+          <div className='w-xml'>
+            <p>{this.props.item.fecha}</p>
+          </div>
+          <div className='w-xml'>
+            <p>{this.props.item.importe}</p>
+          </div>
+          <div className='w-xml'>
+            <p>{this.props.item.usoCFD}</p>
+          </div>
+          <div className='w-xml' style={{ padding: '10px' }}>
+            <button onClick={this.updateAsi}> - </button>
+          </div>
         </div>
       </div>
     )
