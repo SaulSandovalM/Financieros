@@ -19,7 +19,7 @@ const Menu = ({ open, ...props }) => {
   let admin
   if (email === 'administrador@procu.com') {
     admin = 'ADMIN'
-  } else if (email === 'cecilia@procu.com') {
+  } else if (email === 'cecilia@gmail.com') {
     admin = 'CECILIA'
   } else if (email === 'nayra@procu.com') {
     admin = 'NAYRA'
@@ -53,7 +53,7 @@ const Menu = ({ open, ...props }) => {
 
   return (
     <StyledMenu open={open} aria-hidden={!isHidden} {...props}>
-      {admin === 'ADMIN' && <NavC />}
+      {admin === 'ADMIN' && <NavE />}
       {admin === 'OMAR' && <Nav />}
       {admin === 'LILIA' && <Nav />}
       {admin === 'HECTOR' && <Nav />}

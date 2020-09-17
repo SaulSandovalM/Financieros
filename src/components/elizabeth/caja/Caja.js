@@ -63,6 +63,12 @@ export default class Caja extends Component {
   }
 
   render () {
+    var today = new Date()
+    var meses = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12']
+    var f = new Date()
+    today = f.getFullYear() + '-' + meses[f.getMonth()] + '-' + f.getDate()
+    console.log(this.state.buscador)
+
     return (
       <div className='container-back'>
         <div className='site'>
@@ -122,7 +128,8 @@ export default class Caja extends Component {
             <div className='color-s'>
               {this.state.movimientos.map(movimientos =>
                 <div>
-                  {this.state.buscador === movimientos.fecha &&
+                  {
+                    (this.state.buscador === movimientos.fecha || today === movimientos.fecha) ?
                     <div className='banco-inputs-list'>
                       <div className='table-left' />
                       <div className='table-caja-title'>
@@ -148,7 +155,7 @@ export default class Caja extends Component {
                         </div>
                       </div>
                       <div className='table-right' />
-                    </div>
+                    </div> : null
                     }
               </div>
               )}
