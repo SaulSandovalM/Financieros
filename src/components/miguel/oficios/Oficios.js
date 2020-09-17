@@ -547,7 +547,7 @@ export default class Cpdf extends Component {
                         {comprometidos.npar}
                       </td>
                       <td className='all-tablai'>
-                        {comprometidos.importe_comp}
+                        $ {comprometidos.importe_comp}
                       </td>
                     </tr>
                   )}
@@ -1056,7 +1056,7 @@ export default class Cpdf extends Component {
                     <td className='all-tablai border-color' />
                     <td className='all-tablai border-color text-rete'>Total</td>
                     <td className='all-tablai'>
-                      {(totalImporte.reduce(reducer))}
+                      $ {(totalImporte.reduce(reducer))}
                     </td>
                   </tr>
                 </table>
@@ -1479,7 +1479,7 @@ export default class Cpdf extends Component {
                         {comprometidos.npar}
                       </td>
                       <td className='all-tablai'>
-                        {comprometidos.importe_comp}
+                        $ {comprometidos.importe_comp}
                       </td>
                     </tr>
                   )}
@@ -1987,7 +1987,9 @@ export default class Cpdf extends Component {
                     <td className='all-tablai border-color' />
                     <td className='all-tablai border-color' />
                     <td className='all-tablai border-color text-rete'>Total</td>
-                    <td className='all-tablai' />
+                    <td className='all-tablai'>
+                      $ {(totalImporte.reduce(reducer))}
+                    </td>
                   </tr>
                 </table>
               </div>
@@ -2431,7 +2433,7 @@ export default class Cpdf extends Component {
                         {comprometidos.npar}
                       </td>
                       <td className='all-tablai'>
-                        {comprometidos.importe_comp}
+                        $ {comprometidos.importe_comp}
                       </td>
                     </tr>
                   )}

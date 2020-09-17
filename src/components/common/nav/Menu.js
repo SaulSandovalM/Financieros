@@ -53,20 +53,20 @@ const Menu = ({ open, ...props }) => {
 
   return (
     <StyledMenu open={open} aria-hidden={!isHidden} {...props}>
-      {admin === 'ADMIN' && <NavE />}
+      {admin === 'ADMIN' && <Nav />}
+      {admin === 'CECILIA' && <NavC />}
+      {admin === 'NAYRA' && <NavN />}
+      {admin === 'ELI' && <NavE />}
+      {admin === 'MIGUEL' && <Nav />}
       {admin === 'OMAR' && <Nav />}
       {admin === 'LILIA' && <Nav />}
       {admin === 'HECTOR' && <Nav />}
       {admin === 'CENELY' && <Nav />}
       {admin === 'KARINA' && <Nav />}
       {admin === 'ELOY' && <Nav />}
-      {admin === 'MIGUEL' && <Nav />}
       {admin === 'TERESA' && <Nav />}
       {admin === 'MARCOS' && <Nav />}
       {admin === 'MARTHA' && <Nav />}
-      {admin === 'NAYRA' && <NavN />}
-      {admin === 'ELI' && <NavE />}
-      {admin === 'CECILIA' && <NavC />}
       {admin === 'JUAN' && <NavArchivos />}
       {/* admin === 'LAURA' && <Nav /> */}
       {/* admin === 'JUAN' && <Nav /> */}
