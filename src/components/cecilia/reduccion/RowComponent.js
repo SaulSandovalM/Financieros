@@ -14,7 +14,7 @@ export default class RowComponent extends Component {
   render () {
     return (
       <div>
-        {this.props.item.estatus === 'Reduccion' &&
+        {this.props.item.reduccion === 'Reduccion' &&
           <div>
             <div className='table-container-p'>
               <div className='table-left' />
