@@ -102,7 +102,7 @@ export default class Vales extends Component {
           isLoading: false
         })
       } else {
-        console.log("No hay nada!")
+        console.log('No hay nada!')
       }
     })
   }
@@ -158,7 +158,6 @@ export default class Vales extends Component {
       const batch = firebase.firestore().batch()
       const storyRef = firebase.firestore().collection('caja').doc(`${Math.random()}`)
       batch.set(storyRef, { title: 'Se Genero Un Vale # ', no: params.vale, personaR: params.personaR, cantidad: '-' + f, fecha: params.fecha })
-      console.log(params.fecha)
       batch.set(statsRef, { storyCount: increment }, { merge: true })
       batch.commit()
       const statsRefs = firebase.firestore().collection('vales').doc('--stats--')
@@ -443,24 +442,19 @@ export default class Vales extends Component {
             </div>
           </div>
           {this.state.cantidad < this.state.contadorc.storyCount ?
-          <div className='boton-v'>
-            <ReactToPrint
-              trigger={() => <div className='boton-vale'>Imprimir y Guardar</div>}
-              content={() => this.vale}
-              print={this.sendMessage.bind(this)}
-            />
-          </div>
-          :
-          <div className='boton-v'>
-            <p className='no-cant'>La cantidad es mayor a la disponible</p>
-          </div>
+            <div className='boton-v'>
+              <ReactToPrint
+                trigger={() => <div className='boton-vale'>Imprimir y Guardar</div>}
+                content={() => this.vale}
+                onAfterPrint={this.sendMessage.bind(this)}
+              />
+            </div>
+            :
+            <div className='boton-v'>
+              <p className='no-cant'>La cantidad es mayor a la disponible</p>
+            </div>
           }
         </form>
-        <div className=''>
-          <div>
-
-          </div>
-        </div>
       </div>
     )
   }
