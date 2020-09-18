@@ -12,7 +12,7 @@ export default class Cheques extends Component {
       lista: [
         {
           id: 1,
-          name: 'preuba',
+          name: 'Prueba',
           done: false
         }
       ],
@@ -217,20 +217,6 @@ export default class Cheques extends Component {
     this.setState({ [event.target.name]: event.target.value })
   }
 
-  handleKeypress (e) {
-    const characterCode = e.key
-    if (characterCode === 'Backspace') return
-    const characterNumber = Number(characterCode)
-    if (characterNumber >= 0 && characterNumber <= 9) {
-      if (e.currentTarget.value && e.currentTarget.value.length) {
-      } else if (characterNumber === 0) {
-        e.preventDefault()
-      }
-    } else {
-      e.preventDefault()
-    }
-  }
-
   update = (item) => {
     let updates = {}
     updates['cheques/' + item.id] = {
@@ -246,6 +232,7 @@ export default class Cheques extends Component {
   }
 
   render () {
+    console.log(this.state.importe)
     return (
       <div className='container-back-cheques'>
         <div className='site-cheques'>
@@ -270,9 +257,12 @@ export default class Cheques extends Component {
                   <input
                     className='input-sc-cheque'
                     type='number'
-                    min='1'
+                    step='any'
                     id='importe'
+                    name='importe'
                     required
+                    onChange={this.handleChange.bind(this)}
+                    value={this.state.importe}
                     ref={importe => this.inputImporte = importe}
                   />
                 </div>
@@ -330,7 +320,11 @@ export default class Cheques extends Component {
               <div className='disponible-cheque'>
                 <div>
                   <div className='input-row-2-cheque'>
-                    <button type='submit' className='input-sc-cheque boton-g-cheque'>Guardar</button>
+                    {this.state.contador.storyCount < this.state.importe ?
+                      <p>El importe pasa la cantidad disponible</p>
+                      :
+                      <button type='submit' className='input-sc-cheque boton-g-cheque'>Guardar</button>
+                    }
                   </div>
                 </div>
               </div>

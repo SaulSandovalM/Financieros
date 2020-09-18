@@ -17,14 +17,15 @@ export default class Fondos extends Component {
   onCollectionUpdate = (querySnapshot) => {
     const fondos = [];
     querySnapshot.forEach((doc) => {
-      const { fondo, tipo_doc, importe, beneficiario } = doc.data();
+      const { fondo, tipo_doc, importe, beneficiario, fechaContra } = doc.data();
       fondos.push({
         key: doc.id,
         doc,
         fondo,
         tipo_doc,
         importe,
-        beneficiario
+        beneficiario,
+        fechaContra
       });
     });
     this.setState({
@@ -62,6 +63,9 @@ export default class Fondos extends Component {
                       />
                     </p>
                     <Link to={`/Editcontra/${fondos.key}`} className='p-banco-map'>Agregar Contrarecibo</Link>
+                    <p className='p-banco-map'>
+                      {fondos.fechaContra && <p style={{margin: '0'}}>Contrarecibo Agregado</p>}
+                    </p>
                   </div>
                 </div>
                 <div className='table-right' />

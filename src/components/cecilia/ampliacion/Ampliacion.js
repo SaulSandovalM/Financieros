@@ -233,7 +233,7 @@ export default class Ampliacion extends Component {
     }
     firebase.database().ref().update(updates)
     alert('Tu solicitud fue enviada.')
-    window.location.reload(false);
+    window.location.reload(false)
   }
 
   render () {
