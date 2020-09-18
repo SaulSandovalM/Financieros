@@ -201,3 +201,7 @@
   background-color: green;
   color: white;
 }
+.xml-con-in {
+  display: flex;
+  width: 70%;
+}
