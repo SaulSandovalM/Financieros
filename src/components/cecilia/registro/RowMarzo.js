@@ -37,7 +37,7 @@ export default class RowMarzo extends Component {
         </div>
         <div className='table-meses-asig'>
           <CurrencyFormat
-            value={this.props.item.mar}
+            value={saldo + gasto}
             displayType='text'
             thousandSeparator
             prefix='$ '
@@ -61,7 +61,7 @@ export default class RowMarzo extends Component {
         </div>
         <div className='table-meses-dis'>
           <CurrencyFormat
-            value={saldo - gasto}
+            value={this.props.item.mar}
             displayType='text'
             thousandSeparator
             prefix='$ '

@@ -16,7 +16,7 @@ export default class RowComponent extends Component {
   }
 
   render () {
-    const par = this.props.item.par
+    const par = this.props.item.ogasto
     const up = this.props.item.up
     let button;
     if (par === this.props.search && up === this.props.search2 ) {
@@ -25,7 +25,7 @@ export default class RowComponent extends Component {
         <div className='row-c-b'>
           <div className='row-c'>
             <div className='row-c-c'>
-              <p className='pp-c'>{this.props.item.par}</p>
+              <p className='pp-c'>{this.props.item.ogasto}</p>
             </div>
             <div className='row-c-c'>
               <p className='pp-c'>{this.props.item.up}</p>

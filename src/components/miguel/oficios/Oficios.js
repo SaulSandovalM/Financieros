@@ -27,7 +27,8 @@ export default class Cpdf extends Component {
       importe: '',
       no_oficio: '',
       pressStatus: true,
-      text: ''
+      text: '',
+      perro: ''
     }
   }
 
@@ -91,7 +92,7 @@ export default class Cpdf extends Component {
   onCollectionUpdate = (querySnapshot) => {
     const comprometidos = []
     querySnapshot.forEach((doc) => {
-      const { año, ramo, os, up, rubro, tg, ogasto, f, fu, sf, eje, s, prog, obj, proy, est, ben, eg, importe_comp } = doc.data() // importe_comp, isr, total, fecha_comp
+      const { año, ramo, os, up, rubro, tg, ogasto, npro, f, fu, sf, eje, s, prog, obj, proy, est, ben, eg, importe_comp } = doc.data()
       comprometidos.push({
         key: doc.id,
         doc,
@@ -102,6 +103,7 @@ export default class Cpdf extends Component {
         rubro,
         tg,
         ogasto,
+        npro,
         f,
         fu,
         sf,
@@ -113,10 +115,8 @@ export default class Cpdf extends Component {
         est,
         ben,
         eg,
-        importe_comp
-        // isr,
-        // total,
-        // fecha_comp
+        importe_comp,
+        dataF: []
       })
     })
     this.setState({
@@ -127,8 +127,8 @@ export default class Cpdf extends Component {
   handleChange(event) {
     this.setState({
       text: event.target.value
-    });
-  };
+    })
+  }
 
   render () {
     var today = new Date()
@@ -142,6 +142,7 @@ export default class Cpdf extends Component {
       totalImporte.push(comprometidos.importe_comp)
     ))
     const reducer = (a, b) => a + b
+    console.log(this.state.perro)
 
     return (
       <div>
@@ -173,118 +174,118 @@ export default class Cpdf extends Component {
             </div>
             <div className='fcc-i'>
               <p className='fimpre'>Leyenda Alusivas</p>
-                <Popup
-                  trigger={<buttom className='b-imp'>Imprimir</buttom>}
-                  modal
-                  closeOnDocumentClick>
-                  <div ref={el => (this.gas = el)} style={{ zIndex: '2', width: '100%' }}>
-                  {this.state.comprometidos.map(comprometidos =>
-                  <div className='lll'>
-                    <div style={{ width: '100%' }}>
-                      <div className='title-ga'>
-                        <div>
-                          <img className='pgjh' src={lpgjh} alt='' />
-                        </div>
-                        <div>
-                          <p className='text-titulo-ga'>PROCURADURÍA GENERAL DE JUSTICA DE HIDALGO</p>
-                          <p className='text-titulo-ga'>{comprometidos.up}</p>
-                          <p className='text-titulo-ga'>{comprometidos.ogasto}</p>
-                        </div>
-                        <div>
-                          <img className='ims' src={logo2} alt='' />
-                        </div>
+              <Popup
+                trigger={<buttom className='b-imp'>Imprimir</buttom>}
+                modal
+                closeOnDocumentClick>
+                <div ref={el => (this.gas = el)} style={{ zIndex: '2', width: '100%' }}>
+                {this.state.comprometidos.map(comprometidos =>
+                <div className='lll'>
+                  <div style={{ width: '100%' }}>
+                    <div className='title-ga'>
+                      <div>
+                        <img className='pgjh' src={lpgjh} alt='' />
                       </div>
-                    </div>
-                    <div className='faderinpo'>
-                      <div className='contenedor-ga'>
-                        <div className='contenedor-1 '>
-                          <div className='interno-ga2'>
-                            <p className='text-gai'>Gasto a Comprobar</p>
-                            <input className='input-gai' type='checkbox' disabled />
-                          </div>
-                          <div className='interno-ga2'>
-                            <p className='text-gai'>Comprobacion de Gastos</p>
-                            <input className='input-gai' type='checkbox' disabled />
-                          </div>
-                        </div>
-                        <div className='contenedor-1'>
-                          <div className='interno-ga2'>
-                            <p className='text-gai'>Creación de Fondo Revolvente</p>
-                            <input className='input-gai' type='checkbox' disabled />
-                          </div>
-                          <div className='interno-ga2'>
-                            <p className='text-gai'>Fondo Revolvente</p>
-                            <input className='input-gai' type='checkbox' checked />
-                          </div>
-                          <div className='interno-ga2'>
-                            <p className='text-gai'>Cancelacion de Fondo Revolvente</p>
-                            <input className='input-gai' type='checkbox' disabled />
-                          </div>
-                        </div>
-                        <div className='contenedor-1'>
-                          <div className='interno-ga2'>
-                            <p className='text-gai'>Viaticos Anticipados</p>
-                            <input className='input-gai' type='checkbox' disabled />
-                          </div>
-                          <div className='interno-ga2'>
-                            <p className='text-gai'>Viaticos Devengados</p>
-                            <input className='input-gai' type='checkbox' disabled />
-                          </div>
-                          <div className='interno-ga2'>
-                            <p className='text-gai'>Comprobación de Viáticos</p>
-                            <input className='input-gai' type='checkbox' disabled />
-                          </div>
-                        </div>
-                        <div className='contenedor-1'>
-                          <div className='interno-ga2'>
-                            <p className='text-gai'>Pago a Proveedores</p>
-                            <input className='input-gai' type='checkbox' disabled />
-                          </div>
-                          <div className='interno-ga2'>
-                            <p className='text-gai'>Transferencias</p>
-                            <input className='input-gai' type='checkbox' disabled />
-                          </div>
-                        </div>
+                      <div>
+                        <p className='text-titulo-ga'>PROCURADURÍA GENERAL DE JUSTICA DE HIDALGO</p>
+                        <p className='text-titulo-ga'>{comprometidos.up}</p>
+                        <p className='text-titulo-ga'>{comprometidos.dataF === this.state.perro}</p>
                       </div>
-                    </div>
-                    <div>
-                      <div className='tabla-ga'>
-                        <table className='tablagas'>
-                          <tr>
-                            <td className='alltabla-ga'>FOLIO DE LA FACTURA</td>
-                            <td className='alltabla-ga'>IMPORTE</td>
-                            <td className='alltabla-ga'>LEYENDA ALUSIVA AL GASTO</td>
-                          </tr>
-                          <tr>
-                            <td className='all-tab-f' />
-                            <td className='all-tab-f' />
-                            <td className='all-tab-f td'>
-                              <input
-                                className='all-tab-l'
-                                type='text'
-                                onKeyUp={this.handleChange.bind(this)}
-                              />
-                            </td>
-                          </tr>
-                          <tr>
-                            <td className='text-total-ga'>TOTAL</td>
-                            <td />
-                          </tr>
-                        </table>
+                      <div>
+                        <img className='ims' src={logo2} alt='' />
                       </div>
                     </div>
                   </div>
-                  )}
-                  <ReactToPrint
-                    trigger={() =>
-                      <div className='c-b-i'>
-                        <buttom className='b-imp'>Imprimir</buttom>
+                  <div className='faderinpo'>
+                    <div className='contenedor-ga'>
+                      <div className='contenedor-1 '>
+                        <div className='interno-ga2'>
+                          <p className='text-gai'>Gasto a Comprobar</p>
+                          <input className='input-gai' type='checkbox' disabled />
+                        </div>
+                        <div className='interno-ga2'>
+                          <p className='text-gai'>Comprobacion de Gastos</p>
+                          <input className='input-gai' type='checkbox' disabled />
+                        </div>
                       </div>
-                      }
-                    content={() => this.gas}
-                  />
+                      <div className='contenedor-1'>
+                        <div className='interno-ga2'>
+                          <p className='text-gai'>Creación de Fondo Revolvente</p>
+                          <input className='input-gai' type='checkbox' disabled />
+                        </div>
+                        <div className='interno-ga2'>
+                          <p className='text-gai'>Fondo Revolvente</p>
+                          <input className='input-gai' type='checkbox' checked />
+                        </div>
+                        <div className='interno-ga2'>
+                          <p className='text-gai'>Cancelacion de Fondo Revolvente</p>
+                          <input className='input-gai' type='checkbox' disabled />
+                        </div>
+                      </div>
+                      <div className='contenedor-1'>
+                        <div className='interno-ga2'>
+                          <p className='text-gai'>Viaticos Anticipados</p>
+                          <input className='input-gai' type='checkbox' disabled />
+                        </div>
+                        <div className='interno-ga2'>
+                          <p className='text-gai'>Viaticos Devengados</p>
+                          <input className='input-gai' type='checkbox' disabled />
+                        </div>
+                        <div className='interno-ga2'>
+                          <p className='text-gai'>Comprobación de Viáticos</p>
+                          <input className='input-gai' type='checkbox' disabled />
+                        </div>
+                      </div>
+                      <div className='contenedor-1'>
+                        <div className='interno-ga2'>
+                          <p className='text-gai'>Pago a Proveedores</p>
+                          <input className='input-gai' type='checkbox' disabled />
+                        </div>
+                        <div className='interno-ga2'>
+                          <p className='text-gai'>Transferencias</p>
+                          <input className='input-gai' type='checkbox' disabled />
+                        </div>
+                      </div>
+                    </div>
                   </div>
-                </Popup>
+                  <div>
+                    <div className='tabla-ga'>
+                      <table className='tablagas'>
+                        <tr>
+                          <td className='alltabla-ga'>FOLIO DE LA FACTURA</td>
+                          <td className='alltabla-ga'>IMPORTE</td>
+                          <td className='alltabla-ga'>LEYENDA ALUSIVA AL GASTO</td>
+                        </tr>
+                        <tr>
+                          <td className='all-tab-f' />
+                          <td className='all-tab-f' />
+                          <td className='all-tab-f td'>
+                            <input
+                              className='all-tab-l'
+                              type='text'
+                              onKeyUp={this.handleChange.bind(this)}
+                            />
+                          </td>
+                        </tr>
+                        <tr>
+                          <td className='text-total-ga'>TOTAL</td>
+                          <td />
+                        </tr>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+                )}
+                <ReactToPrint
+                  trigger={() =>
+                    <div className='c-b-i'>
+                      <buttom className='b-imp'>Imprimir</buttom>
+                    </div>
+                    }
+                  content={() => this.gas}
+                />
+                </div>
+              </Popup>
             </div>
           </div>
 
@@ -372,7 +373,6 @@ export default class Cpdf extends Component {
 
         {/* fondo revolvente */}
         <div ref={el => (this.ogfr = el)} style={{ zIndex: '2', position: 'absolute' }}>
-          <div />
           <div className='title-so-o'>
             <img className='pgjh' src={lpgjh} alt='' />
             <p>SOLICITUD PROGRAMÁTICA DEL GASTO</p>
@@ -454,6 +454,7 @@ export default class Cpdf extends Component {
               </div>
               <div className='internos'>
                 <p className='text-intei'>Unidad Presupuestal:</p>
+                <p className='bene-i'>{this.state.beneficiario}</p>
               </div>
             </div>
             <div className='folio'>
@@ -544,7 +545,7 @@ export default class Cpdf extends Component {
                         {comprometidos.eg}
                       </td>
                       <td className='all-tablai'>
-                        {comprometidos.npar}
+                        {comprometidos.npro}
                       </td>
                       <td className='all-tablai'>
                         $ {comprometidos.importe_comp}
@@ -1476,7 +1477,7 @@ export default class Cpdf extends Component {
                         {comprometidos.eg}
                       </td>
                       <td className='all-tablai'>
-                        {comprometidos.npar}
+                        {comprometidos.npro}
                       </td>
                       <td className='all-tablai'>
                         $ {comprometidos.importe_comp}
@@ -2430,7 +2431,7 @@ export default class Cpdf extends Component {
                         {comprometidos.eg}
                       </td>
                       <td className='all-tablai'>
-                        {comprometidos.npar}
+                        {comprometidos.npro}
                       </td>
                       <td className='all-tablai'>
                         $ {comprometidos.importe_comp}
@@ -2941,7 +2942,9 @@ export default class Cpdf extends Component {
                     <td className='all-tablai border-color' />
                     <td className='all-tablai border-color' />
                     <td className='all-tablai border-color text-rete'>Total</td>
-                    <td className='all-tablai' />
+                    <td className='all-tablai'>
+                      $ {(totalImporte.reduce(reducer))}
+                    </td>
                   </tr>
                 </table>
               </div>
@@ -3148,74 +3151,71 @@ export default class Cpdf extends Component {
         </div>
 
         <div ref={el => (this.spd = el)} style={{ zIndex: '2', position: 'absolute' }}>
-          <div>
-            <p />
-          </div>
-          <div className='title-so'>
+          <div className='title-so-o'>
             <img className='pgjh' src={lpgjh} alt='' />
             <p>SOLICITUD PROGRAMÁTICA DEL GASTO</p>
             <img className='ims' src={logo2} alt='' />
           </div>
           <div className='fadera'>
-            <div className='contenedor-so'>
+            <div className='contenedor-soi'>
               <div className='contenedor-1'>
                 <div className='interno'>
-                  <p className='text-so'>Gasto a Comprobar</p>
-                  <input className='input-so' />
+                  <p className='text-soi'>Gasto a Comprobar</p>
+                  <input className='input-so' type='checkbox' />
                 </div>
                 <div className='interno'>
-                  <p className='text-so'>Comprobación de gasto</p>
-                  <input className='input-so' />
+                  <p className='text-soi'>Comprobación de gasto</p>
+                  <input className='input-so' type='checkbox' />
                 </div>
               </div>
               <div className='contenedor-1'>
                 <div className='interno'>
-                  <p className='text-so'>Creación de fondo Revolvente</p>
-                  <input className='input-so' />
+                  <p className='text-soi'>Creación de fondo Revolvente</p>
+                  <input className='input-so' type='checkbox' />
                 </div>
                 <div className='interno'>
-                  <p className='text-so'>Fondo Revolvente</p>
-                  <input className='input-so' />
+                  <p className='text-soi'>Fondo Revolvente</p>
+                  <input className='input-so' type='checkbox' checked/>
                 </div>
                 <div className='interno'>
-                  <p className='text-so'>Cancelacion de Fondo Revolvente</p>
-                  <input className='input-so' />
-                </div>
-              </div>
-              <div className='contenedor-1'>
-                <div className='interno'>
-                  <p className='text-so'>Viaticos Anticipados</p>
-                  <input className='input-so' />
-                </div>
-                <div className='interno'>
-                  <p className='text-so'>Viaticos Denegados</p>
-                  <input className='input-so' />
-                </div>
-                <div className='interno'>
-                  <p className='text-so'>Comprobación de viaticos</p>
-                  <input className='input-so' />
-                </div>
-                <div className='interno'>
-                  <p className='text-so'>Viaticos al Extrangero</p>
-                  <input className='input-so' />
+                  <p className='text-soi'>Cancelacion de Fondo Revolvente</p>
+                  <input className='input-so' type='checkbox'/>
                 </div>
               </div>
               <div className='contenedor-1'>
                 <div className='interno'>
-                  <p className='text-so'>Validación de Objeto del gasto</p>
-                  <input className='input-so' />
+                  <p className='text-soi'>Viaticos Anticipados</p>
+                  <input className='input-so' type='checkbox'/>
                 </div>
                 <div className='interno'>
-                  <p className='text-so'>Pago a Proveedores</p>
-                  <input className='input-so' />
+                  <p className='text-soi'>Viaticos Denegados</p>
+                  <input className='input-so' type='checkbox'/>
                 </div>
                 <div className='interno'>
-                  <p className='text-so'>Pago a Proveedores por Requisición</p>
-                  <input className='input-so' />
+                  <p className='text-soi'>Comprobación de viaticos</p>
+                  <input className='input-so' type='checkbox'/>
                 </div>
                 <div className='interno'>
-                  <p className='text-so'>Transferencias</p>
-                  <input className='input-so' />
+                  <p className='text-soi'>Viaticos al Extrangero</p>
+                  <input className='input-so' type='checkbox'/>
+                </div>
+              </div>
+              <div className='contenedor-1'>
+                <div className='interno'>
+                  <p className='text-soi'>Validación de Objeto del gasto</p>
+                  <input className='input-so' type='checkbox'/>
+                </div>
+                <div className='interno'>
+                  <p className='text-soi'>Pago a Proveedores</p>
+                  <input className='input-so' type='checkbox'/>
+                </div>
+                <div className='interno'>
+                  <p className='text-soi'>Pago a Proveedores por Requisición</p>
+                  <input className='input-so' type='checkbox'/>
+                </div>
+                <div className='interno'>
+                  <p className='text-soi'>Transferencias</p>
+                  <input className='input-so' type='checkbox'/>
                 </div>
               </div>
             </div>
@@ -3223,21 +3223,21 @@ export default class Cpdf extends Component {
           <div className='padre-lineas'>
             <div className='lineas-so'>
               <div className='internos'>
-                <p className='text-inte'>Beneficiario:</p>
-                <input className='input-so2' />
+                <p className='text-intei'>Beneficiario:</p>
+                <p className='bene-i'>{this.state.beneficiario}</p>
               </div>
               <div className='internos'>
-                <p className='text-inte2'>Organo Superior:</p>
-                <input className='input-so2' />
+                <p className='text-intei'>Organo Superior:</p>
+                <p className='bene-i'>Procuraduria General de Justicia del Estado</p>
               </div>
               <div className='internos'>
-                <p className='text-inte3'>undiad Presupuestal:</p>
-                <input className='input-so2' />
+                <p className='text-intei'>Unidad Presupuestal:</p>
+                <p className='bene-i'>{this.state.beneficiario}</p>
               </div>
             </div>
             <div className='folio'>
               <p className='text-folio'>No. Folio</p>
-              <input className='input-so3' />
+              <p className='fs-if'>{this.state.fondo2}</p>
             </div>
           </div>
           <div style={{ height: '60vh'}}>
@@ -3245,554 +3245,598 @@ export default class Cpdf extends Component {
               <div className='tabla-so'>
                 <table>
                   <tr>
-                    <td className='all-tabla'>Ramo</td>
-                    <td className='all-tabla'>Año</td>
-                    <td className='all-tabla'>OS</td>
-                    <td className='all-tabla'>UP</td>
-                    <td className='all-tabla'>Rubro de Ingreso</td>
-                    <td className='all-tabla'>TG</td>
-                    <td className='all-tabla'>Objeto de un Gasto</td>
-                    <td className='all-tabla'>Finalidad</td>
-                    <td className='all-tabla'>Funcion</td>
-                    <td className='all-tabla'>Subfunción</td>
-                    <td className='all-tabla'>Eje</td>
-                    <td className='all-tabla'>Sect</td>
-                    <td className='all-tabla'>Prog</td>
-                    <td className='all-tabla'>Obj</td>
-                    <td className='all-tabla'>Proyecto</td>
-                    <td className='all-tabla'>Ext</td>
-                    <td className='all-tabla'>Ben</td>
-                    <td className='all-tabla'>E Geo</td>
-                    <td className='dg-tabla all-tabla'>Descripcion del objeto de Gasto</td>
-                    <td className='monto-tabla all-tabla'>Monto</td>
+                    <td className='all-tablai'>Ramo</td>
+                    <td className='all-tablai'>Año</td>
+                    <td className='all-tablai'>OS</td>
+                    <td className='all-tablai'>UP</td>
+                    <td className='all-tablai'>Rubro de Ingreso</td>
+                    <td className='all-tablai'>TG</td>
+                    <td className='all-tablai'>Objeto de un Gasto</td>
+                    <td className='all-tablai'>Finalidad</td>
+                    <td className='all-tablai'>Funcion</td>
+                    <td className='all-tablai'>Subfunción</td>
+                    <td className='all-tablai'>Eje</td>
+                    <td className='all-tablai'>Sect</td>
+                    <td className='all-tablai'>Prog</td>
+                    <td className='all-tablai'>Obj</td>
+                    <td className='all-tablai'>Proyecto</td>
+                    <td className='all-tablai'>Ext</td>
+                    <td className='all-tablai'>Ben</td>
+                    <td className='all-tablai'>E Geo</td>
+                    <td className='dg-tabla all-tablai'>Descripcion del objeto de Gasto</td>
+                    <td className='monto-tabla all-tablai'>Monto</td>
+                  </tr>
+                  {this.state.comprometidos.map(comprometidos =>
+                    <tr>
+                      <td className='all-tablai'>
+                        {comprometidos.ramo}
+                      </td>
+                      <td className='all-tablai'>
+                        {comprometidos.año}
+                      </td>
+                      <td className='all-tablai'>
+                        {comprometidos.os}
+                      </td>
+                      <td className='all-tablai'>
+                        {comprometidos.up}
+                      </td>
+                      <td className='all-tablai'>
+                        {comprometidos.rubro}
+                      </td>
+                      <td className='all-tablai'>
+                        {comprometidos.tg}
+                      </td>
+                      <td className='all-tablai'>
+                        {comprometidos.ogasto}
+                      </td>
+                      <td className='all-tablai'>
+                        {comprometidos.f}
+                      </td>
+                      <td className='all-tablai'>
+                        {comprometidos.fu}
+                      </td>
+                      <td className='all-tablai'>
+                        {comprometidos.sf}
+                      </td>
+                      <td className='all-tablai'>
+                        {comprometidos.eje}
+                      </td>
+                      <td className='all-tablai'>
+                        {comprometidos.s}
+                      </td>
+                      <td className='all-tablai'>
+                        {comprometidos.prog}
+                      </td>
+                      <td className='all-tablai'>
+                        {comprometidos.obj}
+                      </td>
+                      <td className='all-tablai'>
+                        {comprometidos.proy}
+                      </td>
+                      <td className='all-tablai'>
+                        {comprometidos.est}
+                      </td>
+                      <td className='all-tablai'>
+                        {comprometidos.ben}
+                      </td>
+                      <td className='all-tablai'>
+                        {comprometidos.eg}
+                      </td>
+                      <td className='all-tablai'>
+                        {comprometidos.npro}
+                      </td>
+                      <td className='all-tablai'>
+                        $ {comprometidos.importe_comp}
+                      </td>
+                    </tr>
+                  )}
+                  <tr>
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
                   </tr>
                   <tr>
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
                   </tr>
                   <tr>
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
                   </tr>
                   <tr>
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
                   </tr>
                   <tr>
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
                   </tr>
                   <tr>
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
                   </tr>
                   <tr>
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
                   </tr>
                   <tr>
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
                   </tr>
                   <tr>
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
                   </tr>
                   <tr>
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
                   </tr>
                   <tr>
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
                   </tr>
                   <tr>
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
                   </tr>
                   <tr>
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
                   </tr>
                   <tr>
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
                   </tr>
                   <tr>
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
                   </tr>
                   <tr>
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
                   </tr>
                   <tr>
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
                   </tr>
                   <tr>
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
                   </tr>
                   <tr>
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
                   </tr>
                   <tr>
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
                   </tr>
                   <tr>
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
                   </tr>
                   <tr>
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
+                    <td className='all-tablai border-color' />
+                    <td className='all-tablai border-color' />
+                    <td className='all-tablai border-color' />
+                    <td className='all-tablai border-color' />
+                    <td className='all-tablai border-color' />
+                    <td className='all-tablai border-color' />
+                    <td className='all-tablai border-color' />
+                    <td className='all-tablai border-color' />
+                    <td className='all-tablai border-color' />
+                    <td className='all-tablai border-color' />
+                    <td className='all-tablai border-color' />
+                    <td className='all-tablai border-color' />
+                    <td className='all-tablai border-color' />
+                    <td className='all-tablai  border-color' />
+                    <td className='all-tablai  border-color' />
+                    <td className='all-tablai  border-color' />
+                    <td className='all-tablai  border-color' />
+                    <td className='all-tablai  border-color' />
+                    <td className='all-tablai border-color2 text-rete'>RETENCION</td>
+                    <td className='all-tablai' />
                   </tr>
                   <tr>
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                    <td className='all-tabla' />
-                  </tr>
-                  <tr>
-                    <td className='all-tabla border-color' />
-                    <td className='all-tabla border-color' />
-                    <td className='all-tabla border-color' />
-                    <td className='all-tabla border-color' />
-                    <td className='all-tabla border-color' />
-                    <td className='all-tabla border-color' />
-                    <td className='all-tabla border-color' />
-                    <td className='all-tabla border-color' />
-                    <td className='all-tabla border-color' />
-                    <td className='all-tabla border-color' />
-                    <td className='all-tabla border-color' />
-                    <td className='all-tabla border-color' />
-                    <td className='all-tabla border-color' />
-                    <td className='all-tabla border-color' />
-                    <td className='all-tabla border-color' />
-                    <td className='all-tabla border-color' />
-                    <td className='all-tabla border-color' />
-                    <td className='all-tabla border-color' />
-                    <td className='all-tabla border-color2 text-rete'>RETENCION</td>
-                    <td className='all-tabla' />
-                  </tr>
-                  <tr>
-                    <td className='all-tabla border-color' />
-                    <td className='all-tabla border-color' />
-                    <td className='all-tabla border-color' />
-                    <td className='all-tabla border-color' />
-                    <td className='all-tabla border-color' />
-                    <td className='all-tabla border-color' />
-                    <td className='all-tabla border-color' />
-                    <td className='all-tabla border-color' />
-                    <td className='all-tabla border-color' />
-                    <td className='all-tabla border-color' />
-                    <td className='all-tabla border-color' />
-                    <td className='all-tabla border-color' />
-                    <td className='all-tabla border-color' />
-                    <td className='all-tabla border-color' />
-                    <td className='all-tabla border-color' />
-                    <td className='all-tabla border-color' />
-                    <td className='all-tabla border-color' />
-                    <td className='all-tabla border-color' />
-                    <td className='all-tabla border-color text-rete'>Total</td>
-                    <td className='all-tabla' />
+                    <td className='all-tablai border-color' />
+                    <td className='all-tablai border-color' />
+                    <td className='all-tablai border-color' />
+                    <td className='all-tablai border-color' />
+                    <td className='all-tablai border-color' />
+                    <td className='all-tablai border-color' />
+                    <td className='all-tablai border-color' />
+                    <td className='all-tablai border-color' />
+                    <td className='all-tablai border-color' />
+                    <td className='all-tablai border-color' />
+                    <td className='all-tablai border-color' />
+                    <td className='all-tablai border-color' />
+                    <td className='all-tablai border-color' />
+                    <td className='all-tablai border-color' />
+                    <td className='all-tablai border-color' />
+                    <td className='all-tablai border-color' />
+                    <td className='all-tablai border-color' />
+                    <td className='all-tablai border-color' />
+                    <td className='all-tablai border-color text-rete'>Total</td>
+                    <td className='all-tablai'>
+                      $ {(totalImporte.reduce(reducer))}
+                    </td>
                   </tr>
                 </table>
               </div>
@@ -3801,9 +3845,9 @@ export default class Cpdf extends Component {
           <div className='obs-sopadre'>
             <div className='obs-so'>
               <p className='text-osb'>Observaciones</p>
-              <input className='input-obs' />
+              <div className='input-obs' />
               <div className='obs-so2'>
-                <p className='text-osb'>No. De Solicitud</p>
+                <p className='text-osb'> No. De Solicitud</p>
                 <input />
               </div>
             </div>
@@ -3819,113 +3863,117 @@ export default class Cpdf extends Component {
         </div>
 
         <div ref={el => (this.lap = el)} style={{ zIndex: '2', position: 'absolute', width: '100%' }}>
-          <div>
-            <div className='title-ga'>
-              <div>
-                <img className='pgjh' src={lpgjh} alt='' />
+          {this.state.comprometidos.map(comprometidos =>
+            <div style={{ height: '100vh', zIndex: '2', position: 'absolute', width: '100%' }}>
+              <div style={{ width: '100%' }}>
+                <div className='title-ga'>
+                  <div>
+                    <img className='pgjh' src={lpgjh} alt='' />
+                  </div>
+                  <div>
+                    <p className='text-titulo-ga'>PROCURADURÍA GENERAL DE JUSTICA DE HIDALGO</p>
+                    <p className='text-titulo-ga'>{comprometidos.up}</p>
+                    <p className='text-titulo-ga'>{comprometidos.ogasto}</p>
+                  </div>
+                  <div>
+                    <img className='ims' src={logo2} alt='' />
+                  </div>
+                </div>
+              </div>
+              <div className='faderinpo'>
+                <div className='contenedor-ga'>
+                  <div className='contenedor-1 '>
+                    <div className='interno-ga2'>
+                      <p className='text-gai'>Gasto a Comprobar</p>
+                      <input className='input-gai' type='checkbox' />
+                    </div>
+                    <div className='interno-ga2'>
+                      <p className='text-gai'>Comprobacion de Gastos</p>
+                      <input className='input-gai' type='checkbox' checked />
+                    </div>
+                  </div>
+                  <div className='contenedor-1'>
+                    <div className='interno-ga2'>
+                      <p className='text-gai'>Creación de Fondo Revolvente</p>
+                      <input className='input-gai' type='checkbox' />
+                    </div>
+                    <div className='interno-ga2'>
+                      <p className='text-gai'>Fondo Revolvente</p>
+                      <input className='input-gai' type='checkbox' />
+                    </div>
+                    <div className='interno-ga2'>
+                      <p className='text-gai'>Cancelacion de Fondo Revolvente</p>
+                      <input className='input-gai' type='checkbox' />
+                    </div>
+                  </div>
+                  <div className='contenedor-1'>
+                    <div className='interno-ga2'>
+                      <p className='text-gai'>Viaticos Anticipados</p>
+                      <input className='input-gai' type='checkbox' />
+                    </div>
+                    <div className='interno-ga2'>
+                      <p className='text-gai'>Viaticos Devengados</p>
+                      <input className='input-gai' type='checkbox' />
+                    </div>
+                    <div className='interno-ga2'>
+                      <p className='text-gai'>Comprobación de Viáticos</p>
+                      <input className='input-gai' type='checkbox' />
+                    </div>
+                  </div>
+                  <div className='contenedor-1'>
+                    <div className='interno-ga2'>
+                      <p className='text-gai'>Pago a Proveedores</p>
+                      <input className='input-gai' type='checkbox' />
+                    </div>
+                    <div className='interno-ga2'>
+                      <p className='text-gai'>Transferencias</p>
+                      <input className='input-gai' type='checkbox' />
+                    </div>
+                  </div>
+                </div>
               </div>
               <div>
-                <p className='text-titulo-ga'>ORGANO SUPERIOR</p>
-                <p className='text-titulo-ga'>UNIDAD PRESUPUESTAL</p>
-                <p className='text-titulo-ga'>OBJETO DE GASTO</p>
-              </div>
-              <div>
-                <img className='ims' src={logo2} alt='' />
-              </div>
-            </div>
-          </div>
-          <div className='faderinp'>
-            <div className='contenedor-ga'>
-              <div className='contenedor-1 '>
-                <div className='interno-ga'>
-                  <p className='text-ga'>Gasto a Comprobar</p>
-                  <input className='input-ga' />
-                </div>
-                <div className='interno-ga'>
-                  <p className='text-ga'>Comprobacion de Gastos</p>
-                  <input className='input-ga' />
-                </div>
-              </div>
-              <div className='contenedor-1'>
-                <div className='interno-ga'>
-                  <p className='text-ga'>Creación de Fondo Revolvente</p>
-                  <input className='input-ga' />
-                </div>
-                <div className='interno-ga'>
-                  <p className='text-ga'>Fondo Revolvente</p>
-                  <input className='input-ga' />
-                </div>
-                <div className='interno-ga'>
-                  <p className='text-ga'>Cancelacion de Fondo Revolvente</p>
-                  <input className='input-ga' />
-                </div>
-              </div>
-              <div className='contenedor-1'>
-                <div className='interno-ga'>
-                  <p className='text-ga'>Viaticos Anticipados</p>
-                  <input className='input-ga' />
-                </div>
-                <div className='interno-ga'>
-                  <p className='text-ga'>Viaticos Devengados</p>
-                  <input className='input-ga' />
-                </div>
-                <div className='interno-ga'>
-                  <p className='text-ga'>Comprobación de Viáticos</p>
-                  <input className='input-ga' />
-                </div>
-              </div>
-              <div className='contenedor-1'>
-                <div className='interno-ga'>
-                  <p className='text-ga'>Pago a Proveedores</p>
-                  <input className='input-ga' />
-                </div>
-                <div className='interno-ga'>
-                  <p className='text-ga'>Transferencias</p>
-                  <input className='input-ga' />
+                <div className='tabla-ga'>
+                  <table className='tablagas'>
+                    <tr>
+                      <td className='alltabla-ga'>FOLIO DE LA FACTURA</td>
+                      <td className='alltabla-ga'>IMPORTE</td>
+                      <td className='alltabla-ga'>LEYENDA ALUSIVA AL GASTO</td>
+                    </tr>
+                    <tr>
+                      <td className='all-tab' />
+                      <td className='all-tab' />
+                      <td className='all-tab' />
+                    </tr>
+                    <tr>
+                      <td className='all-tab' />
+                      <td className='all-tab' />
+                      <td className='all-tab' />
+                    </tr>
+                    <tr>
+                      <td className='all-tab' />
+                      <td className='all-tab' />
+                      <td className='all-tab' />
+                    </tr>
+                    <tr>
+                      <td className='all-tab' />
+                      <td className='all-tab' />
+                      <td className='all-tab' />
+                    </tr>
+                    <tr>
+                      <td className='all-tab' />
+                      <td className='all-tab' />
+                      <td className='all-tab' />
+                    </tr>
+                    <tr>
+                      <td className='all-tab text-total-ga'>TOTAL</td>
+                      <td className='all-tab' />
+                    </tr>
+                  </table>
                 </div>
               </div>
             </div>
-          </div>
-          <div className='fader-tabla'>
-            <div className='tabla-ga'>
-              <table className='tablagas'>
-                <tr>
-                  <td className='alltabla-ga '>FOLIO DE LA FACTURA</td>
-                  <td className='alltabla-ga '>IMPORTE</td>
-                  <td className='alltabla-ga '>LEYENDA ALUSIVA AL GASTO</td>
-                </tr>
-                <tr>
-                  <td className='all-tab' />
-                  <td className='all-tab' />
-                  <td className='all-tab' />
-                </tr>
-                <tr>
-                  <td className='all-tab' />
-                  <td className='all-tab' />
-                  <td className='all-tab' />
-                </tr>
-                <tr>
-                  <td className='all-tab' />
-                  <td className='all-tab' />
-                  <td className='all-tab' />
-                </tr>
-                <tr>
-                  <td className='all-tab' />
-                  <td className='all-tab' />
-                  <td className='all-tab' />
-                </tr>
-                <tr>
-                  <td className='all-tab' />
-                  <td className='all-tab' />
-                  <td className='all-tab' />
-                </tr>
-                <tr>
-                  <td className='all-tab text-total-ga'>TOTAL</td>
-                  <td className='all-tab' />
-                </tr>
-              </table>
-            </div>
-          </div>
+          )}
         </div>
 
       </div>

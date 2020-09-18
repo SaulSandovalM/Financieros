@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import './Registro.css'
-import RowAgosto from './RowAgosto'
+import RowSeptiembre from './RowSeptiembre'
 import firebase from '../../../Firebase'
 
 export default class ListAgosto extends Component {
@@ -58,7 +58,7 @@ export default class ListAgosto extends Component {
         </div>
         {
           this.props.lista.map(item =>
-            <RowAgosto
+            <RowSeptiembre
               key={item.id}
               item={item}
             />

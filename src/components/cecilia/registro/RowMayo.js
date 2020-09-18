@@ -37,7 +37,7 @@ export default class RowMayo extends Component {
         </div>
         <div className='table-meses-asig'>
           <CurrencyFormat
-            value={this.props.item.may}
+            value={saldo + gasto}
             displayType='text'
             thousandSeparator
             prefix='$ '
@@ -61,7 +61,7 @@ export default class RowMayo extends Component {
         </div>
         <div className='table-meses-dis'>
           <CurrencyFormat
-            value={saldo - gasto}
+            value={this.props.item.may}
             displayType='text'
             thousandSeparator
             prefix='$ '
