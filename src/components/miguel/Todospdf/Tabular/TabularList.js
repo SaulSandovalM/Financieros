@@ -45,10 +45,10 @@ export default class TabularList extends Component {
 
   render() {
     return (
-      <div className='cent-compro'>
+      <div className='cent-compro' >
         <div className='App'>
           <h2 className='title' style={{fontFamily: 'Arial'}}>Impresion de Tabular</h2>
-          <div className='products-al'>
+          <div className='products-al' style={{ zIndex: '2', position: 'relative' }}>
             <div className='a-row-t'>Fondos</div>
             <div className='a-row-t'>Nombre Realizo</div>
             <div className='a-row-t'>Tipo de documento</div>
@@ -56,7 +56,7 @@ export default class TabularList extends Component {
             <div className='a-row-t'>Tabular</div>
             <div className='a-row-t'>Tabular Individual</div>
           </div>
-          <div>
+          <div style={{ marginTop: '-23px', zIndex: '1', position: 'relative' }}>
             {this.state.fondos.map(fondos =>
               <div>
                 <div className='products-al'>

@@ -42,12 +42,6 @@ export default class TabularIndi extends Component {
   }
 
   render () {
-    const totalImporte = []
-    this.state.comprometidos.map(comprometidos => (
-      totalImporte.push(comprometidos.importe_comp)
-    ))
-    const reducer = (a, b) => a + b
-
     return (
       <div style={{margin: '80px'}}>
         <ReactToPrint
