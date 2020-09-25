@@ -118,6 +118,19 @@ export default class Cpdf extends Component {
         importe_comp,
         dataF: []
       })
+      firebase.firestore().collection('fondos').doc(doc.id).collection('comprometidos').get().then(participantsSnapshot => {
+        for( let i = 0; i < participantsSnapshot.size; i++ ) {
+          if( participantsSnapshot.docs[i].exists ) {
+            if( comprometidos.includes(participantsSnapshot.docs[i].data().uid) ) {
+              let { importe } = participantsSnapshot.docs[i].data();
+              let dataF = { importe }
+              comprometidos['comprometidos'].push(dataF)
+              comprometidos.push(comprometidos)
+              break
+            }
+          }
+        }
+      })
     })
     this.setState({
       comprometidos
@@ -189,7 +202,7 @@ export default class Cpdf extends Component {
                       <div>
                         <p className='text-titulo-ga'>PROCURADURÍA GENERAL DE JUSTICA DE HIDALGO</p>
                         <p className='text-titulo-ga'>{comprometidos.up}</p>
-                        <p className='text-titulo-ga'>{comprometidos.dataF === this.state.perro}</p>
+                        <p className='text-titulo-ga'>{comprometidos.dataF}</p>
                       </div>
                       <div>
                         <img className='ims' src={logo2} alt='' />

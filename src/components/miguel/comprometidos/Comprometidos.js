@@ -418,7 +418,7 @@ export default class Comprometidos extends Component {
       est: item.est,
       ben: item.ben,
       eg: item.eg,
-      dataF: ['prueba1', 'prueba2', 'prueba3']
+      dataF: ({ importe: 500 })
     }).then((docRef) => {
       this.setState({
         partida: '',
