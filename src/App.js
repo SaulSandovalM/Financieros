@@ -40,7 +40,9 @@ import ControlP from './components/controlp/ControlP'
 import Add from './components/controlp/Add'
 import Complemento from './components/complemento/Complemento'
 import Caratula from './components/miguel/caratula/Caratula'
-import Tabular from './components/miguel/Todospdf/Tabular/tabular'
+import Tabular from './components/miguel/Todospdf/Tabular/Tabular'
+import TabularList from './components/miguel/Todospdf/Tabular/TabularList'
+import TabularIndi from './components/miguel/Todospdf/Tabular/TabularIndi'
 
 function App (props) {
   const { isAuthenticated, isVerifying } = props
@@ -267,9 +269,29 @@ function App (props) {
         isAuthenticated={isAuthenticated}
         isVerifying={isVerifying}
       />
+      <ProtectedRoute
+        exact
+        path='/TabularList'
+        component={TabularList}
+        isAuthenticated={isAuthenticated}
+        isVerifying={isVerifying}
+      />
+      <ProtectedRoute
+        exact
+        path='/Tabular/:id'
+        component={Tabular}
+        isAuthenticated={isAuthenticated}
+        isVerifying={isVerifying}
+      />
+      <ProtectedRoute
+        exact
+        path='/TabularIndi/:id'
+        component={TabularIndi}
+        isAuthenticated={isAuthenticated}
+        isVerifying={isVerifying}
+      />
       <Route path='/Cpdf/:id' component={Cpdf} />
       <Route path='/add/:id' component={Add} />
-      <Route path='/Tabular' component={Tabular} />
     </Switch>
   )
 }

@@ -37,7 +37,7 @@ class NavArchivos extends Component {
           </Link>
         </div>
         <div className='navbar-left'>
-          <Link to='/Tabular' className='deco'>
+          <Link to='/TabularList' className='deco'>
             <h3 className='nav-t'>Tabular</h3>
           </Link>
         </div>
