@@ -40,6 +40,7 @@ import ControlP from './components/controlp/ControlP'
 import Add from './components/controlp/Add'
 import Complemento from './components/complemento/Complemento'
 import Caratula from './components/miguel/caratula/Caratula'
+import Tabular from './components/miguel/Todospdf/Tabular/tabular'
 
 function App (props) {
   const { isAuthenticated, isVerifying } = props
@@ -268,6 +269,7 @@ function App (props) {
       />
       <Route path='/Cpdf/:id' component={Cpdf} />
       <Route path='/add/:id' component={Add} />
+      <Route path='/Tabular' component={Tabular} />
     </Switch>
   )
 }

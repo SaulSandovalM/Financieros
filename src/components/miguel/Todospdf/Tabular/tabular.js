@@ -1,69 +1,69 @@
-import React, {Component} from 'react';
-import css from './pdfs.css';
-export default class tabular extends Component{
-  render(){
-    return()
-    <div>
-    <div>
-    <div>
-    <h1>PROCURADURIA GENERAL DE JUSTICIA</h1>
-    <h1>DIRECCION GENERAL DE ADMINISTRACION Y FINANZAS</h1>
-    <h1>DIRECCION DE RECURSOS FINANCIEROS</h1>
-    </div>
-    <div>
-    <div>
-    <p>Partida</p>
-    <p>numero</p>
-    </div>
-    <div>
-    <p>U.P.</p>
-    <p>numero</p>
-    </div>
-  <div>
-  <table>
-  <tr>
-  <td>Importe</td>
-  </tr>
-  <tr>
-  <th></th>
-  <th></th>
-  <th></th>
-  <th></th>
-  <th></th>
-  <th></th>
-  <th></th>
-  <th></th>
-  <th></th>
-  <th></th>
-  <th></th>
-  <th></th>
-  <th></th>
-  <th></th>
-  <th></th>
-  <th></th>
-  <th></th>
-  <th></th>
-  <th></th>
-  <th></th>
-  <th></th>
-  <th></th>
-  <th></th>
-  <th></th>
-  <th></th>
-  </tr>
+import React, { Component } from 'react'
+import css from './pdfs.css'
+import ReactToPrint from 'react-to-print'
 
-  </table>
-
-  </div>
-    <p></p>
-    </div>
-
-
-
-
-    </div>
-
-    </div>
-
-
+export default class tabular extends Component {
+  render () {
+    return (
+      <div>
+        <div className='tab-container'>
+          <div className='tab-content'>
+            <div className='tab-border'>
+              <div className='tab-title'>
+                <div>
+                  <p className='tab-p-m'>PROCURADURÍA GENERAL DE JUSTICIA</p>
+                  <p className='tab-p-m'>DIRECCIÓN GENERAL DE ADMINISTRACIÓN Y FINANZAS</p>
+                  <p className='tab-p-m'>DIRECCIÓN DE RECURSOS FINANCIEROS</p>
+                </div>
+              </div>
+              <div className='tab-tabular-content'>
+                <div>
+                  <p className='tab-p-m'>TABULAR</p>
+                  <div className='tab-tabular'>
+                    <div className='tab-pui-content'>
+                      <div className='tab-pui'>
+                        <p className='tab-p-m'>PARTIDA</p>
+                      </div>
+                      <div className='tab-pui'>
+                        <p className='tab-p-m'>U.P.</p>
+                      </div>
+                      <div className='tab-pui'>
+                        <p className='tab-p-m'>IMPORTE</p>
+                      </div>
+                    </div>
+                  </div>
+                  <div className='tab-tabular'>
+                    <div className='tab-pui-content'>
+                      <div className='tab-pui'>
+                        <p className='tab-p-m'>214001</p>
+                      </div>
+                      <div className='tab-pui'>
+                        <p className='tab-p-m'>10</p>
+                      </div>
+                      <div className='tab-pui-border'>
+                        <p className='tab-p-m'>$</p>
+                        <p className='tab-p-m'>85,109.49</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div className='tab-tabular'>
+                  <div className='tab-pui-content'>
+                    <div className='tab-pui'>
+                      <p className='tab-p-m'>TOTAL</p>
+                    </div>
+                    <div className='tab-pui' />
+                    <div className='tab-pui-border'>
+                      <p className='tab-p-m'>$</p>
+                      <p className='tab-p-m'>85,109.49</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    )
+  }
 }

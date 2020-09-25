@@ -587,7 +587,7 @@ export default class Comprometidos extends Component {
                 }
               </div>
               <div className='cx'>
-              {admin === 'MARCOS' ?
+              {admin === 'ADMIN' ?
                 <div className='asi-l'>
                   <Listp
                     listaAsip={this.state.listaAsip}

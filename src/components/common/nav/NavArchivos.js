@@ -37,6 +37,11 @@ class NavArchivos extends Component {
           </Link>
         </div>
         <div className='navbar-left'>
+          <Link to='/Tabular' className='deco'>
+            <h3 className='nav-t'>Tabular</h3>
+          </Link>
+        </div>
+        <div className='navbar-left'>
           <div className='deco'>
             <button
               onClick={this.handleLogout}
