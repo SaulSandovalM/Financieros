@@ -143,6 +143,7 @@ export default class Cpdf extends Component {
     })
   }
 
+
   render () {
     var today = new Date()
     var meses = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre']
@@ -155,7 +156,6 @@ export default class Cpdf extends Component {
       totalImporte.push(comprometidos.importe_comp)
     ))
     const reducer = (a, b) => a + b
-    console.log(this.state.perro)
 
     return (
       <div>

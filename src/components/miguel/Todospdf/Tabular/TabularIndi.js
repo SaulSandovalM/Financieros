@@ -38,7 +38,7 @@ export default class TabularIndi extends Component {
     })
     this.setState({
       comprometidos
-   })
+    })
   }
 
   render () {
