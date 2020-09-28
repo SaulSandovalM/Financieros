@@ -44,13 +44,6 @@ export default class Comprometidos extends Component {
           done: false
         }
       ],
-      listaAsip: [
-        {
-          id: 1,
-          name: 'Cargando Datos ... ',
-          done: false
-        }
-      ],
       listaPago: [
         {
           id: 1,
@@ -122,26 +115,6 @@ export default class Comprometidos extends Component {
       })
       this.setState({
         listaAsi: listaAsi
-      })
-    })
-  }
-
-  listenForItemsAsi = (itemsRefAsi) => {
-    itemsRefAsi.on('value', (snap) => {
-      var listaAsip = []
-      snap.forEach((child) => {
-        listaAsip.push({
-          folio: child.val().folio,
-          fecha: child.val().fecha,
-          importe: child.val().importe,
-          usoCFDI: child.val().usoCFDI,
-          estatus: child.val().estatus,
-          done: child.val().done,
-          id: child.key
-        })
-      })
-      this.setState({
-        listaAsip: listaAsip
       })
     })
   }
@@ -233,6 +206,19 @@ export default class Comprometidos extends Component {
     }
     firebase.database().ref().update(updates)
     firebase.database().ref('xml2/' + item.id).remove()
+  }
+
+  updatePago = (item) => {
+    let updates = {}
+    updates['xmlP/' + item.id] = {
+      folio: item.folio,
+      fecha: item.fecha,
+      importe: item.importe,
+      usoCFDI: item.usoCFDI,
+      estatus: 'Asignado'
+    }
+    firebase.database().ref().update(updates)
+    firebase.database().ref('xmlP/' + item.id).remove()
   }
 
   onChange = (e) => {
@@ -418,7 +404,7 @@ export default class Comprometidos extends Component {
       est: item.est,
       ben: item.ben,
       eg: item.eg,
-      dataF: ({ importe: 500 })
+      dataF: [this.state.listaPago]
     }).then((docRef) => {
       this.setState({
         partida: '',
@@ -472,6 +458,8 @@ export default class Comprometidos extends Component {
       admin = 'HECTOR'
     } else if (email === 'omar@procu.com') {
       admin = 'OMAR'
+    } else if (email === 'miau@procu.com') {
+      admin = 'MAURICIO'
     }
     const allowCustom = this.state.allowCustom
     const { no_proyecto, municipio, area } = this.state
@@ -484,11 +472,13 @@ export default class Comprometidos extends Component {
     this.state.total = totalImporte.reduce(reducer)
 
     const totalImportep = []
-    this.state.listaAsip.map(item => (
+    this.state.listaPago.map(item => (
       totalImportep.push(item.importe)
     ))
     const reducerp = (a, b) => a + b
     this.state.total = totalImportep.reduce(reducerp)
+
+    console.log(this.state.listaPago)
 
     return (
       <div className='compro-container'>
@@ -558,52 +548,51 @@ export default class Comprometidos extends Component {
               />
             </div>
           </div>
-
-          <div className='xml-con-in'>
+          <div style={{display: 'flex', width: '70%'}}>
             <div className='axc'>
               <div className='cx'>
-                {admin === 'MARCOS' ?
-                  <Dropzone
-                    style={{
-                      width: '100%',
-                      height: '100%',
-                      borderWidth: '1px',
-                      borderColor: 'rgb(102, 102, 102)',
-                      borderStyle: 'solid',
-                      borderRadius: '1px',
-                      maxFiles: 5,
-                      background: 'white',
-                      position: 'static',
-                      placeholder: 'Agregar'
-                    }}
-                    accept='.xml' onChange={this.handleOnChange1.bind(this)}
-                  >
-                    <div className='filename'>
-                      <p className='file-hid'>{this.state.filex}</p>
-                    </div>
-                  </Dropzone>
-                  :
-                  <XmlComp />
-                }
+              {admin === 'MARCOS' ?
+                <Dropzone
+                  style={{
+                    width: '100%',
+                    height: '100%',
+                    borderWidth: '1px',
+                    borderColor: 'rgb(102, 102, 102)',
+                    borderStyle: 'solid',
+                    borderRadius: '1px',
+                    maxFiles: 5,
+                    background: 'white',
+                    position: 'static',
+                    placeholder: 'Agregar'
+                  }}
+                  accept='.xml' onChange={this.handleOnChange1.bind(this)}
+                >
+                  <div className='filename'>
+                    <p className='file-hid'>{this.state.filex}</p>
+                  </div>
+                </Dropzone>
+                :
+                <XmlComp />
+              }
               </div>
               <div className='cx'>
-              {admin === 'ADMIN' ?
-                <div className='asi-l'>
-                  <Listp
-                    listaAsip={this.state.listaAsip}
-                    updateAsi={this.updateAsi}
-                  />
-                  {(totalImporte.reduce(reducer))}
-                </div>
-                :
-                <div className='asi-l'>
-                  <List
-                    listaAsi={this.state.listaAsi}
-                    updateAsi={this.updateAsi}
-                  />
-                  {(totalImporte.reduce(reducer))}
-                </div>
-              }
+                {admin === 'ADMIN' ?
+                  <div className='asi-l'>
+                    <Listp
+                      listaPago={this.state.listaPago}
+                      updatePago={this.updatePago}
+                    />
+                    {(totalImportep.reduce(reducer))}
+                  </div>
+                  :
+                  <div className='asi-l'>
+                    <List
+                      listaAsi={this.state.listaAsi}
+                      updateAsi={this.updateAsi}
+                    />
+                    {(totalImporte.reduce(reducer))}
+                  </div>
+                }
               </div>
             </div>
           </div>
@@ -623,8 +612,8 @@ export default class Comprometidos extends Component {
                 <div className='tabla-edit-c'>{comprometidos.no_proyecto}</div>
                 <div className='tabla-edit-c'>{' $ ' + comprometidos.importe_comp}</div>
                 <div className='tabla-edit-c'>{' $ ' + comprometidos.isr}</div>
-                <div className='tabla-edit-c'>{' $ ' + comprometidos.total}</div>
-                <div className='tabla-edit-c'>{comprometidos.importe_comp}</div>
+                <div className='tabla-edit-c'>{' $ ' + comprometidos.iva}</div>
+                <div className='tabla-edit-c'>{' $ ' + comprometidos.importe_comp}</div>
               </div>
             </div>
           )}
@@ -730,11 +719,11 @@ class Listp extends Component {
     return (
       <div>
         {
-          this.props.listaAsip.map(item =>
+          this.props.listaPago.map(item =>
             <Rowp
               key={item.id}
               item={item}
-              updateAsip={this.props.updateAsip}
+              updatePago={this.props.updatePago}
             />
           )
         }
@@ -752,8 +741,8 @@ class Rowp extends Component {
     }
   }
 
-  updateAsip = () => {
-    this.props.updateAsip(this.props.item)
+  updatePago = () => {
+    this.props.updatePago(this.props.item)
   }
 
   render () {
@@ -773,7 +762,7 @@ class Rowp extends Component {
             <p>{this.props.item.usoCFD}</p>
           </div>
           <div className='w-xml' style={{ padding: '10px' }}>
-            <button onClick={this.updateAsip}> - </button>
+            <button onClick={this.updatePago}> - </button>
           </div>
         </div>
       </div>

@@ -174,7 +174,7 @@ export default class Fondos extends Component {
   tipo_doc2 = ['Fondo Revolvente', 'Pago Directo']
   tipo_doc3 = ['Pago Directo']
   tipo_doc4 = ['Fondo Revolvente']
-  
+
   render () {
     var user = firebase.auth().currentUser
     var email
@@ -254,7 +254,13 @@ export default class Fondos extends Component {
                     <p className='fon-p-c'>Fecha</p>
                   </div>
                   <div className='fon-tab-ba'>
+                    <p className='fon-p-c'>Fondo</p>
+                  </div>
+                  <div className='fon-tab-ba'>
                     <p className='fon-p-c'>Contrarecibo</p>
+                  </div>
+                  <div className='fon-tab-ba'>
+                    <p className='fon-p-c'>Oficios</p>
                   </div>
                 </div>
                 {this.state.fondos.map(fondos =>
@@ -274,11 +280,24 @@ export default class Fondos extends Component {
                         <p className='fon-p-con'>{fondos.fecha}</p>
                       </div>
                       <div className='fon-tab-ba-conl'>
+                        <Link to={`/FondoE/${fondos.key}`} className='fon-p-con'>
+                          Editar
+                        </Link>
+                      </div>
+                      <div className='fon-tab-ba-conl'>
                         <Link
-                          to={`/FondoE/${fondos.key}`}
+                          to={`/Comprometidos/${fondos.key}`}
                           className='fon-p-con'
                         >
                           Editar
+                        </Link>
+                      </div>
+                      <div className='fon-tab-ba-conl'>
+                        <Link
+                          to={`/Oficios/${fondos.key}`}
+                          className='fon-p-con'
+                        >
+                          Imprimir
                         </Link>
                       </div>
                     </div>

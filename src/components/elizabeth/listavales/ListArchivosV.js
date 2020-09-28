@@ -66,7 +66,7 @@ export default class ListArchivosV extends Component {
               'Accept': 'application/json',
               'Content-Type': 'application/json',
             },
-              body: JSON.stringify(xml)
+              body: JSON.stringify(data)
           })
         })
       }

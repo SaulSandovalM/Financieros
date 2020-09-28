@@ -85,18 +85,18 @@
 }
 .fon-tab-ba {
   background: #092432;
-  width: 20%;
+  width: 15%;
   text-align: center;
 }
 .fon-tab-ba-conl {
   display: flex;
   justify-content: center;
   flex-direction: column;
-  width: 20%;
+  width: 15%;
 }
 .fon-tab-ba-con {
   text-align: center;
-  width: 20%;
+  width: 15%;
 }
 .fon-p-c {
   color: white;

@@ -60,14 +60,14 @@ export default class TabularList extends Component {
             {this.state.fondos.map(fondos =>
               <div>
                 <div className='products-al'>
-                  <div className='a-row'>{fondos.fondo}</div>
-                  <div className='a-row'>{fondos.realizo}</div>
-                  <div className='a-row'>{fondos.tipo_doc}</div>
-                  <div className='a-row'>$ {fondos.importe}</div>
-                  <div className='a-row vista'>
+                  <div className='a-row-f'>{fondos.fondo}</div>
+                  <div className='a-row-f'>{fondos.realizo}</div>
+                  <div className='a-row-f'>{fondos.tipo_doc}</div>
+                  <div className='a-row-f'>$ {fondos.importe}</div>
+                  <div className='a-row-f vista'>
                     <Link to={`/Tabular/${fondos.key}`}>Ver</Link>
                   </div>
-                  <div className='a-row vista'>
+                  <div className='a-row-f vista'>
                     <Link to={`/TabularIndi/${fondos.key}`}>Ver</Link>
                   </div>
                 </div>

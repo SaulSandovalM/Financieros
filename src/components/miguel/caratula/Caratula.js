@@ -53,10 +53,12 @@ export default class Cpdf extends Component{
   render(){
     return(
       <div className='cpdf-dad2'>
-        <ReactToPrint
-          trigger={() => <buttom className='b-imp'>Imprimir</buttom>}
-          content={() => this.holi}
-        />
+        <div className='btm-car'>
+          <ReactToPrint
+            trigger={() => <buttom className='b-imp'>Imprimir</buttom>}
+            content={() => this.holi}
+          />
+        </div>
         <div ref={el => (this.holi = el)}>
         {this.state.comprometidos.map(comprometidos =>
           <div style={{display: 'flex', justifyContent: 'center'}}>
