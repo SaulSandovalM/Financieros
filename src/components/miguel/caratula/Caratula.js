@@ -61,8 +61,8 @@ export default class Cpdf extends Component{
         </div>
         <div ref={el => (this.holi = el)}>
         {this.state.comprometidos.map(comprometidos =>
-          <div style={{display: 'flex', justifyContent: 'center'}}>
-            <div style={{ display: 'flex', justifyContent: 'center', flexDirection: 'colum'}}>
+          <div style={{display: 'flex', justifyContent: 'center', flexDirection: 'column'}}>
+            <div style={{ display: 'flex', justifyContent: 'center'}}>
               <div className='cpdf-subdad-f'>
                 <div className='fondo-procus'>
                   <img className='ims' src={programa} alt='' />
