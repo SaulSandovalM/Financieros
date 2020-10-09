@@ -225,7 +225,6 @@ export default class Fondos extends Component {
     this.state.fecha = today
     this.state.realizo = admin
     this.state.fondo = this.state.contador.nFondo
-    console.log(this.state.fondo)
 
     return (
       <div className='zz'>
@@ -257,7 +256,7 @@ export default class Fondos extends Component {
                     <p className='fon-p-c'>Fondo</p>
                   </div>
                   <div className='fon-tab-ba'>
-                    <p className='fon-p-c'>Contrarecibo</p>
+                    <p className='fon-p-c'>Comprometido</p>
                   </div>
                   <div className='fon-tab-ba'>
                     <p className='fon-p-c'>Oficios</p>
@@ -382,7 +381,7 @@ export default class Fondos extends Component {
                         color: 'black',
                         position: 'static'
                       }}
-                      data={this.tipo_doc4}
+                      data={this.tipo_doc}
                       allowCustom={allowCustom}
                       name='tipo_doc'
                       value={tipo_doc}
@@ -660,88 +659,90 @@ export default class Fondos extends Component {
                 </div>
               </div>
             </div>
-            <div className='l-f-c'>
-              <div className='f-l-w'>
-                <div className='l-w'>
-                  <p className='lp'>Licitación</p>
+            {admin === 'MIGUEL' &&
+              <div className='l-f-c'>
+                <div className='f-l-w'>
+                  <div className='l-w'>
+                    <p className='lp'>Licitación</p>
+                  </div>
+                  <div className='f-f3'>
+                    <p className='lp'>No. de Licitación</p>
+                    <input
+                      className='f-l-s'
+                      id='no_lici'
+                      name='no_lici'
+                      onChange={this.onChange}
+                      ref='no_lici'
+                    />
+                  </div>
+                  <div className='f-f3'>
+                    <p className='lp'>Requisición</p>
+                    <input
+                      className='f-l-s'
+                      id='requisicion'
+                      name='requisicion'
+                      onChange={this.onChange}
+                      ref='requisicion'
+                    />
+                  </div>
+                  <div className='f-f3'>
+                    <p className='lp'>Pedido</p>
+                    <input
+                      className='f-l-s'
+                      id='pedido'
+                      name='pedido'
+                      onChange={this.onChange}
+                      ref='pedido'
+                    />
+                  </div>
+                  <div className='f-f3'>
+                    <p className='lp'>Poliza Comprometido</p>
+                    <input
+                      className='f-l-s'
+                      id='poliza'
+                      name='poliza'
+                      onChange={this.onChange}
+                      ref='poliza'
+                    />
+                  </div>
                 </div>
-                <div className='f-f3'>
-                  <p className='lp'>No. de Licitación</p>
-                  <input
-                    className='f-l-s'
-                    id='no_lici'
-                    name='no_lici'
-                    onChange={this.onChange}
-                    ref='no_lici'
-                  />
-                </div>
-                <div className='f-f3'>
-                  <p className='lp'>Requisición</p>
-                  <input
-                    className='f-l-s'
-                    id='requisicion'
-                    name='requisicion'
-                    onChange={this.onChange}
-                    ref='requisicion'
-                  />
-                </div>
-                <div className='f-f3'>
-                  <p className='lp'>Pedido</p>
-                  <input
-                    className='f-l-s'
-                    id='pedido'
-                    name='pedido'
-                    onChange={this.onChange}
-                    ref='pedido'
-                  />
-                </div>
-                <div className='f-f3'>
-                  <p className='lp'>Poliza Comprometido</p>
-                  <input
-                    className='f-l-s'
-                    id='poliza'
-                    name='poliza'
-                    onChange={this.onChange}
-                    ref='poliza'
-                  />
+                <div className='f-l-w'>
+                  <div className='l-w'>
+                    <p className='lp'>Pago CFE</p>
+                  </div>
+                  <div className='f-f3'>
+                    <p className='lp'>Cta CFE</p>
+                    <input
+                      className='f-l-s'
+                      id='cfe'
+                      name='cfe'
+                      onChange={this.onChange}
+                      ref='cfe'
+                    />
+                  </div>
+                  <div className='f-f3'>
+                    <p className='lp'>No Servicio CFE</p>
+                    <input
+                      className='f-l-s'
+                      id='nscfe'
+                      name='nscfe'
+                      onChange={this.onChange}
+                      ref='nscfe'
+                    />
+                  </div>
+                  <div className='f-f3'>
+                    <p className='lp'>Observaciones</p>
+                    <input
+                      className='f-l-s'
+                      id='observaciones'
+                      name='observaciones'
+                      onChange={this.onChange}
+                      ref='observaciones'
+                    />
+                  </div>
                 </div>
               </div>
-              <div className='f-l-w'>
-                <div className='l-w'>
-                  <p className='lp'>Pago CFE</p>
-                </div>
-                <div className='f-f3'>
-                  <p className='lp'>Cta CFE</p>
-                  <input
-                    className='f-l-s'
-                    id='cfe'
-                    name='cfe'
-                    onChange={this.onChange}
-                    ref='cfe'
-                  />
-                </div>
-                <div className='f-f3'>
-                  <p className='lp'>No Servicio CFE</p>
-                  <input
-                    className='f-l-s'
-                    id='nscfe'
-                    name='nscfe'
-                    onChange={this.onChange}
-                    ref='nscfe'
-                  />
-                </div>
-                <div className='f-f3'>
-                  <p className='lp'>Observaciones</p>
-                  <input
-                    className='f-l-s'
-                    id='observaciones'
-                    name='observaciones'
-                    onChange={this.onChange}
-                    ref='observaciones'
-                  />
-                </div>
-              </div>
-            </div>
+            }
             <div className='button-row-s'>
               <button onClick={this.order} className='input-sc boton-g'>Agregar</button>
             </div>

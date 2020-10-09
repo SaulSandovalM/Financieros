@@ -15,3 +15,18 @@
   justify-content: flex-end;
   margin: 20px;
 }
+.text-22 {
+  font-size: 16px;
+  padding-left: 10px;
+  text-align: center;
+}
+.text-fr {
+  font-size: 17px;
+  padding-left: 10px;
+}
+.cpdf-subdad-fi {
+  width: 80%;
+}
+.page-s {
+  page-break-before: always;
+}

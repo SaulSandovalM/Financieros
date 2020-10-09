@@ -59,36 +59,37 @@ export default class Cpdf extends Component{
             content={() => this.holi}
           />
         </div>
-        <div ref={el => (this.holi = el)}>
+        <div ref={el => (this.holi = el)} className='page-s'>
         {this.state.comprometidos.map(comprometidos =>
-          <div style={{display: 'flex', justifyContent: 'center', flexDirection: 'column'}}>
+          <div style={{display: 'flex', justifyContent: 'center', flexDirection: 'column', marginTop: '50px'}}>
             <div style={{ display: 'flex', justifyContent: 'center'}}>
-              <div className='cpdf-subdad-f'>
+              <div className='cpdf-subdad-fi'>
                 <div className='fondo-procus'>
                   <img className='ims' src={programa} alt='' />
                   <img className='im' src={logo2} alt='' />
                 </div>
                 <div className='procu'>
-                  <p className='text'>
-                    Fondo: PROCURADURÍA GENERAL DE JUSTICIA DEL ESTADO <br />
-                    Sub: Fondo: N/A<br />
-                    Unidad Administrativa: DIRECCIÓN GENERAL DE ADMINISTRACIÓN Y FINANZAS<br />
-                    Area Generadora: DIRECCIÓN DE RECURSOS FINANCIEROS
+                  <p className='text-fr'>
+                    Fondo: Procuraduría General de Justicia Del Estado de Hidalgo<br />
+                    Subfondo: 09 Dirección General de Administración y Finanzas<br />
+                    Unidad Administrativa: Dirección General de Administración y Finanzas<br />
+                    Area Generadora: Dirección de Recursos Financieros
                   </p>
                 </div>
                 <div className='acomodar'>
                   <div className='seccion-de'>
                     <p className='text'>
                       Sección: 5C. Recursos Financieros
-                      <br />Serie: 5C.3 Gastos y Egresos por Partida Presupuestal
-                      <br />Sub-serie: N/A
-                      <br />Código: PGJH-09.1*5C.
+                      <br />Serie: 5C.12 Asignación y Optimización de Recuersos
+                      <br />Sub-serie: No Aplica
+                      <br />Código: PGJH-09.1*5C.12
                     </p>
                   </div>
                   <div className='asunto-iz'>
-                    <p className='text-2'>
-                      Asunto: Publicaciones e Impresoras Institucionales Procuraduría General de Justicia
-                      <br />y/o Pagos Directos
+                    <p className='text-22'>
+                      Asunto:
+                      <br />
+                      Creación del Fondo Revolvente
                     </p>
                   </div>
                 </div>
@@ -124,8 +125,8 @@ export default class Cpdf extends Component{
                   <div className='cajas-valor1'>
                     <p className='t-cajass'>Valor Documento Primario</p>
                     <p className='t-cajas'>Administrativo<img className='svg' src={boton2} alt='' /></p>
-                    <p className='t-cajas'>Fiscal <img className='svg' src={boton} alt='' /></p>
-                    <p className='t-cajas'>Legal<img className='svg' src={boton} alt='' /></p>
+                    <p className='t-cajas'>Fiscal <img className='svg' src={boton2} alt='' /></p>
+                    <p className='t-cajas'>Legal<img className='svg' src={boton2} alt='' /></p>
                   </div>
                   <div className='cajas-valor2'>
                     <p className='t-cajass'>Valor Documental Secundario</p>
@@ -147,11 +148,10 @@ export default class Cpdf extends Component{
                       <div className='vigencia2'>
                         <p className='vig-t'>En Tramite 1 Años</p>
                         <p className='vig-t'>Concentracion 4 años</p>
-                        <p className='vig-t'>Total de Años</p>
                       </div>
                     </div>
                     <div className='ubi'>
-                      <p className='ubi-t'>Ubicacion Fisica del Expediente<br />Archivo tramite de la Procuraduria General de Justicia, Archivo Inv. N 00167758</p>
+                      <p className='ubi-t'>Ubicacion Fisica del Expediente<br />Archivo tramite de la Procuraduria General de Justicia</p>
                     </div>
                   </div>
                   <div className='cuadro'>
@@ -174,7 +174,7 @@ export default class Cpdf extends Component{
                       </p>
                       <p className='t-cajas'>
                         Muestreo
-                        <img className='svg' src={boton2} alt='' />
+                        <img className='svg' src={boton} alt='' />
                       </p>
                     </div>
                   </div>
@@ -182,9 +182,6 @@ export default class Cpdf extends Component{
                     <div className='df'>
                       <p className='t-caja'>Fecha(s) de Consulta</p>
                     </div>
-                    <p className='t-caja'>1 dd mm aa</p>
-                    <p className='t-caja'>2 dd mm aa</p>
-                    <p className='t-caja'>3 dd mm aa</p>
                   </div>
                 </div>
                 <img className='footer' src={footer} alt='' />

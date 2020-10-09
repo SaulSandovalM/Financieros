@@ -180,14 +180,14 @@ export default class Vales extends Component {
   }
 
   render () {
-    const { cantidad, cantidadc } = this.state
-    var cant1 = parseInt(cantidad)
-    var cant2 = parseInt(cantidadc)
-    var tot = cant1 - cant2
+    var today = new Date()
     var today2 = new Date()
-    var meses = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12']
+    var meses = ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic']
+    var meses2 = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12']
     var f = new Date()
-    today2 = f.getFullYear() + '-' + meses[f.getMonth()] + '-' + f.getDate()
+    today = f.getDate() + '-' + meses[f.getMonth()] + '-' + f.getFullYear()
+    today2 = f.getFullYear() + '-' + meses2[f.getMonth()] + '-' + f.getDate()
+    this.state.fecha = today2
 
     return (
       <div className='container-back'>
@@ -247,16 +247,9 @@ export default class Vales extends Component {
                 <p className='p-bv'>
                   Comprobado
                 </p>
-                {tot >= 0 &&
-                  <p className='p-bv'>
-                    Reintegro
-                  </p>
-                }
-                {tot < 0 &&
-                  <p className='p-bv'>
-                    Reembolso
-                  </p>
-                }
+                <p className='p-bv'>
+                  Reintegro/Reembolso
+                </p>
               </div>
               <div className='v-c'>
                 <p className='pmcc'>CANTIDAD</p>
@@ -276,24 +269,14 @@ export default class Vales extends Component {
                   required
                   ref={cantidadc => this.inputCantidadc = cantidadc}
                 />
-                {tot >= 0 &&
-                  <input
-                    className='input-b'
-                    name='cantidadr'
-                    value={tot}
-                    required
-                    ref={cantidadr => this.inputCantidadr = cantidadr}
-                  />
-                }
-                {tot < 0 &&
-                  <input
-                    className='input-b'
-                    name='cantidadr'
-                    value={tot}
-                    required
-                    ref={cantidadr => this.inputCantidadr = cantidadr}
-                  />
-                }
+                <input
+                  className='input-b'
+                  name='cantidadr'
+                  onChange={this.handleChange.bind(this)}
+                  value={this.state.cantidadr}
+                  required
+                  ref={cantidadr => this.inputCantidadr = cantidadr}
+                />
               </div>
               <div className='v-con'>
                 <p className='pmcc'>CONCEPTO</p>
@@ -406,10 +389,8 @@ export default class Vales extends Component {
                 <input
                   className='b-fecha-i'
                   name='fecha'
-                  onChange={this.handleChange.bind(this)}
-                  value={today2}
+                  value={today}
                   required
-                  ref={fecha => this.inputFecha = fecha}
                 />
                 <p className='font-size-f'>Fecha</p>
               </div>
