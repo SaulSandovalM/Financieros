@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import Dropzone from 'react-dropzone'
 import firebase from '../../../Firebase'
 import './CargaC.css'
+import Alert from '@material-ui/lab/Alert'
 
 export default class Contra extends Component {
   constructor () {
@@ -18,7 +19,7 @@ export default class Contra extends Component {
   }
 
   handleUpload (event) {
-    for(let i = 0; i < event.target.files.length; i++) {
+    for (let i = 0; i < event.target.files.length; i++) {
       const file = event.target.files[i]
       const storageRef = firebase.storage().ref(`contrarecibo/${file.name}`)
       const task = storageRef.put(file)
@@ -36,6 +37,11 @@ export default class Contra extends Component {
   render () {
     return (
       <div>
+        {this.state.pdf === 100 &&
+          <div className='alert-cont'>
+            <Alert severity='success' variant='outlined'>Se han subido los archivos!</Alert>
+          </div>
+        }
         <form className='presupuesto-container'>
           <div className='presupuesto-content'>
             <div className='presupuesto-card'>

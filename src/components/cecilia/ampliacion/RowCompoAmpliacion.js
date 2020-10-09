@@ -38,7 +38,7 @@ export default class RowCompoAmpliacion extends Component {
           <div className='table-up-p-frn-p'>
             <div>
               <CurrencyFormat
-                value={this.props.item.sep}
+                value={this.props.item.oct}
                 displayType='text'
                 thousandSeparator
                 prefix=' $'

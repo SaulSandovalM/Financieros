@@ -277,7 +277,8 @@ export default class FondoE extends Component {
                 </div>
               </div>
             </div>
-            <div className='l-f-c'>
+
+            {/*<div className='l-f-c'>
               <div className='f-l-w'>
                 <div className='l-w'>
                   <p className='lp'>Licitación</p>
@@ -365,7 +366,8 @@ export default class FondoE extends Component {
                   />
                 </div>
               </div>
-            </div>
+            </div>*/}
+
             <div className='button-row-s'>
               <button onClick={this.perro} className='input-sc boton-g'>Guardar</button>
             </div>

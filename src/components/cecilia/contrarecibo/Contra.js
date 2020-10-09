@@ -6,18 +6,18 @@ import CurrencyFormat from 'react-currency-format'
 
 export default class Fondos extends Component {
   constructor(props) {
-    super(props);
-    this.ref = firebase.firestore().collection('fondos');
-    this.unsubscribe = null;
+    super(props)
+    this.ref = firebase.firestore().collection('fondos').orderBy('fondo', 'desc')
+    this.unsubscribe = null
     this.state = {
       fondos: []
-    };
+    }
   }
 
   onCollectionUpdate = (querySnapshot) => {
-    const fondos = [];
+    const fondos = []
     querySnapshot.forEach((doc) => {
-      const { fondo, tipo_doc, importe, beneficiario, fechaContra } = doc.data();
+      const { fondo, tipo_doc, importe, beneficiario, fechaContra } = doc.data()
       fondos.push({
         key: doc.id,
         doc,
@@ -26,15 +26,15 @@ export default class Fondos extends Component {
         importe,
         beneficiario,
         fechaContra
-      });
-    });
+      })
+    })
     this.setState({
       fondos
-   });
+   })
   }
 
   componentDidMount() {
-    this.unsubscribe = this.ref.onSnapshot(this.onCollectionUpdate);
+    this.unsubscribe = this.ref.onSnapshot(this.onCollectionUpdate)
   }
 
   render () {

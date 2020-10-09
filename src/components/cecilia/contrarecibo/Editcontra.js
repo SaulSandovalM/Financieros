@@ -104,7 +104,6 @@ export default class Edit extends Component {
       fecha,
       fondo,
       importe,
-      ncomprobantes,
       no_lici,
       no_oficio,
       nscfe,
@@ -131,7 +130,6 @@ export default class Edit extends Component {
         fecha: '',
         fondo: '',
         importe: '',
-        ncomprobantes: '',
         no_lici: '',
         no_oficio: '',
         nscfe: '',
@@ -171,15 +169,6 @@ export default class Edit extends Component {
             <form onSubmit={this.onSubmit}>
               <div>
                 <div className='fcc-i'>
-                  <p className='fimpre'>Cfe:</p>
-                  <input
-                    name='cfe'
-                    onChange={this.onChange}
-                    value={this.state.cfe}
-                    disabled
-                  />
-                </div>
-                <div className='fcc-i'>
                   <p className='fimpre'>Descripción:</p>
                   <input
                     name='desc'
@@ -216,38 +205,11 @@ export default class Edit extends Component {
                   />
                 </div>
                 <div className='fcc-i'>
-                  <p className='fimpre'>Num. Comprobantes:</p>
-                  <input
-                    name='ncomprobantes'
-                    onChange={this.onChange}
-                    value={this.state.ncomprobantes}
-                    disabled
-                  />
-                </div>
-                <div className='fcc-i'>
-                  <p className='fimpre'>No. Licitación:</p>
-                  <input
-                    name='no_lici'
-                    onChange={this.onChange}
-                    value={this.state.no_lici}
-                    disabled
-                  />
-                </div>
-                <div className='fcc-i'>
                   <p className='fimpre'>No. Oficio:</p>
                   <input
                     name='no_oficio'
                     onChange={this.onChange}
                     value={this.state.no_oficio}
-                    disabled
-                  />
-                </div>
-                <div className='fcc-i'>
-                  <p className='fimpre'>No. de Servicio:</p>
-                  <input
-                    name='nscfe'
-                    onChange={this.onChange}
-                    value={this.state.nscfe}
                     disabled
                   />
                 </div>
@@ -261,15 +223,6 @@ export default class Edit extends Component {
                   />
                 </div>
                 <div className='fcc-i'>
-                  <p className='fimpre'>Observaciones:</p>
-                  <input
-                    name='observaciones'
-                    onChange={this.onChange}
-                    value={this.state.observaciones}
-                    disabled
-                  />
-                </div>
-                <div className='fcc-i'>
                   <p className='fimpre'>Oficio Autorización:</p>
                   <input
                     name='oficio_aut'
@@ -279,38 +232,11 @@ export default class Edit extends Component {
                   />
                 </div>
                 <div className='fcc-i'>
-                  <p className='fimpre'>Pedido:</p>
-                  <input
-                    name='pedido'
-                    onChange={this.onChange}
-                    value={this.state.pedido}
-                    disabled
-                  />
-                </div>
-                <div className='fcc-i'>
-                  <p className='fimpre'>Poliza:</p>
-                  <input
-                    name='poliza'
-                    onChange={this.onChange}
-                    value={this.state.poliza}
-                    disabled
-                  />
-                </div>
-                <div className='fcc-i'>
                   <p className='fimpre'>Realizo:</p>
                   <input
                     name='realizo'
                     onChange={this.onChange}
                     value={this.state.realizo}
-                    disabled
-                  />
-                </div>
-                <div className='fcc-i'>
-                  <p className='fimpre'>Requisición:</p>
-                  <input
-                    name='requisicion'
-                    onChange={this.onChange}
-                    value={this.state.requisicion}
                     disabled
                   />
                 </div>

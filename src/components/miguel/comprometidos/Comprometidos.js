@@ -551,7 +551,7 @@ export default class Comprometidos extends Component {
           <div style={{display: 'flex', width: '70%'}}>
             <div className='axc'>
               <div className='cx'>
-              {admin === 'MARCOS' ?
+              {admin === 'ADMIN' ?
                 <Dropzone
                   style={{
                     width: '100%',

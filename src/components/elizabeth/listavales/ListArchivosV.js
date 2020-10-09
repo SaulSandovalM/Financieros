@@ -50,6 +50,25 @@ export default class ListArchivosV extends Component {
   }
 
   handleOnChange1 (event) {
+    const file = event.target.files[0]
+    const storageRef = firebase.storage().ref(`comprobacion/${file.name}`)
+    const task = storageRef.put(file)
+    this.setState({
+      filex: `${file.name}`
+    })
+    task.on('state_changed', (snapshot) => {
+      let percentage = (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+      this.setState({
+        xml: percentage
+      })
+    }, error => {
+      console.error(error.message)
+    }, () =>  storageRef.getDownloadURL().then(url =>  {
+      const record = url
+      this.setState({
+        filefactura: record
+      })
+    }))
     const files = event.target.files
     for (var i = 0; i < files.length; i++) {
       const file = files[i]
