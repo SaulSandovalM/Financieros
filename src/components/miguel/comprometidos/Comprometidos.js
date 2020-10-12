@@ -407,6 +407,7 @@ export default class Comprometidos extends Component {
             <div className='f-c-c'>
               <p className='fc'>Fecha</p>
               <input
+                type='date'
                 style={{ height: '22px', width: '50%'}}
                 name='fecha_compro'
                 value={fecha_compro}

@@ -8,7 +8,7 @@ import lpgjh from '../../../img/logo_hgo.png'
 import CurrencyFormat from 'react-currency-format'
 import Popup from 'reactjs-popup'
 
-export default class Cpdf extends Component {
+export default class Oficios extends Component {
   constructor (props) {
     super(props)
     this.unsubscribe = null
@@ -30,7 +30,8 @@ export default class Cpdf extends Component {
       text: '',
       cfdi: '',
       up: '',
-      perro: ''
+      perro: '',
+      desc: ''
     }
   }
 
@@ -135,10 +136,8 @@ export default class Cpdf extends Component {
     })
   }
 
-  handleChange(event) {
-    this.setState({
-      text: event.target.value
-    })
+  handleChange (event) {
+    this.setState({ [event.target.name]: event.target.value })
   }
 
   render () {
@@ -147,13 +146,11 @@ export default class Cpdf extends Component {
     var diasSemana = ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado']
     var f = new Date()
     today = diasSemana[f.getDay()] + ', ' + f.getDate() + ' de ' + meses[f.getMonth()] + ' de ' + f.getFullYear()
-
     const totalImporte = []
     this.state.comprometidos.map(comprometidos => (
       totalImporte.push(comprometidos.importe_total)
     ))
     const reducer = (a, b) => a + b
-    console.log((totalImporte.reduce(reducer)))
 
     return (
       <div>
@@ -201,7 +198,7 @@ export default class Cpdf extends Component {
                         <div>
                           <p className='text-titulo-ga'>PROCURADURÍA GENERAL DE JUSTICA DE HIDALGO</p>
                           <p className='text-titulo-ga'>{comprometidos.up}</p>
-                          <p className='text-titulo-ga'>{comprometidos.dataF}</p>
+                          <p className='text-titulo-ga'>{comprometidos.partida}</p>
                         </div>
                         <div>
                           <img className='ims' src={logo2} alt='' />
@@ -274,8 +271,9 @@ export default class Cpdf extends Component {
                             <td className='all-tab-f td'>
                               <input
                                 className='all-tab-l'
-                                type='text'
-                                onKeyUp={this.handleChange.bind(this)}
+                                name='hojas'
+                                onChange={this.handleChange.bind(this)}
+                                value={this.state.hojas}
                               />
                             </td>
                           </tr>
@@ -288,6 +286,7 @@ export default class Cpdf extends Component {
                     </div>
                   </div>
                   )}
+                  </div>
                   <ReactToPrint
                     trigger={() =>
                       <div className='c-b-i'>
@@ -296,7 +295,6 @@ export default class Cpdf extends Component {
                       }
                     content={() => this.gas}
                   />
-                  </div>
                 </Popup>
               </div>
             </div>
@@ -337,7 +335,7 @@ export default class Cpdf extends Component {
                         <div>
                           <p className='text-titulo-ga'>PROCURADURÍA GENERAL DE JUSTICA DE HIDALGO</p>
                           <p className='text-titulo-ga'>{comprometidos.up}</p>
-                          <p className='text-titulo-ga'>{comprometidos.dataF}</p>
+                          <p className='text-titulo-ga'>{comprometidos.partida}</p>
                         </div>
                         <div>
                           <img className='ims' src={logo2} alt='' />
@@ -414,8 +412,9 @@ export default class Cpdf extends Component {
                             <td className='all-tab-f td'>
                               <input
                                 className='all-tab-l'
-                                type='text'
-                                onKeyUp={this.handleChange.bind(this)}
+                                name='hojas'
+                                onChange={this.handleChange.bind(this)}
+                                value={this.state.hojas}
                               />
                             </td>
                           </tr>
@@ -434,14 +433,14 @@ export default class Cpdf extends Component {
                         <buttom className='b-imp'>Imprimir</buttom>
                       </div>
                       }
-                    content={() => this.gas}
+                    content={() => this.gasto}
                   />
                   </div>
                 </Popup>
               </div>
             </div>
           }
-          {this.state.tipo_doc === 'Pago Directo' &&
+          {!this.state.no_lici &&
             <div className='m-f'>
               <div className='fr-con'>
                 <p className='fr-b'><b>Pago Proveedor</b></p>
@@ -574,7 +573,7 @@ export default class Cpdf extends Component {
                         <buttom className='b-imp'>Imprimir</buttom>
                       </div>
                       }
-                    content={() => this.gas}
+                    content={() => this.la}
                   />
                   </div>
                 </Popup>
@@ -1685,7 +1684,7 @@ export default class Cpdf extends Component {
                 </div>
                 <div className='interno'>
                   <p className='text-soi'>Fondo Revolvente</p>
-                  <input className='input-so' type='checkbox' checked/>
+                  <input className='input-so' type='checkbox' />
                 </div>
                 <div className='interno'>
                   <p className='text-soi'>Cancelacion de Fondo Revolvente</p>
@@ -1721,7 +1720,7 @@ export default class Cpdf extends Component {
                 </div>
                 <div className='interno'>
                   <p className='text-soi'>Pago a Proveedores por Requisición</p>
-                  <input className='input-so' type='checkbox'/>
+                  <input className='input-so' type='checkbox' checked/>
                 </div>
                 <div className='interno'>
                   <p className='text-soi'>Transferencias</p>
@@ -2411,9 +2410,9 @@ export default class Cpdf extends Component {
               cantidad amparada con CFDI No {this.state.cfdi},
               número de requisición {this.state.requisicion} pedido/contrato {this.state.pedido},
               asi como la poliza de afectacion presupuestal al momento del comprometido
-              núm. ________ que se emite la Direccion General de Compras Públicas;
+              núm. {this.state.no_lici} que se emite la Direccion General de Compras Públicas;
               para que se efectúe el trámite de pago  a favor del proveedor {this.state.beneficiario},
-              por la (compra o presentacion de servicios  xxxxxxxxxxx, con cargo
+              por la compra o presentacion de servicios, con cargo
               al proyecto (clave y nombre del proyecto) y de los recursos otorgados
               con el oficio de autorización {this.state.no_oficio}, a la a la
               Procuraduría General de Justicia del Estado de Hidalgo.
@@ -2436,7 +2435,7 @@ export default class Cpdf extends Component {
           </div>
         </div>
 
-        <div ref={el => (this.gasto = el)} style={{ zIndex: '2', position: 'absolute', width: '100%' }}>
+        <div ref={el => (this.gast = el)} style={{ zIndex: '2', position: 'absolute', width: '100%' }}>
           {this.state.comprometidos.map(comprometidos =>
           <div style={{ height: '100vh', zIndex: '2', position: 'absolute', width: '100%' }}>
             <div style={{ width: '100%' }}>
