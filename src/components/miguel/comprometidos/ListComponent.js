@@ -105,15 +105,6 @@ export default class ListComponent extends Component {
             No. de Proyecto
           </div>
           <div className='tfc'>
-            Municipio
-          </div>
-          <div className='tfc'>
-            Area
-          </div>
-          <div className='tfc'>
-            Fecha
-          </div>
-          <div className='tfc'>
             Importe
           </div>
           <div className='tfc'>
