@@ -31,7 +31,8 @@ export default class Oficios extends Component {
       cfdi: '',
       up: '',
       perro: '',
-      desc: ''
+      desc: '',
+      perro: ''
     }
   }
 
@@ -151,7 +152,6 @@ export default class Oficios extends Component {
       totalImporte.push(comprometidos.importe_total)
     ))
     const reducer = (a, b) => a + b
-
     return (
       <div>
         <div style={{ zIndex: '3', background: '#f4f4f4', width: '100%', position: 'absolute', height: '100vh' }}>
@@ -269,7 +269,7 @@ export default class Oficios extends Component {
                             <td className='all-tab-f'>{comprometidos.num_factura}</td>
                             <td className='all-tab-f'>{comprometidos.importe_total}</td>
                             <td className='all-tab-f td'>
-                              <input
+                              <textarea
                                 className='all-tab-l'
                                 name='hojas'
                                 onChange={this.handleChange.bind(this)}
@@ -325,7 +325,7 @@ export default class Oficios extends Component {
                   modal
                   closeOnDocumentClick>
                   <div ref={el => (this.gasto = el)} style={{ zIndex: '2', width: '100%' }}>
-                  {this.state.comprometidos.map(comprometidos =>
+                  {this.state.comprometidos.map((comprometidos, i) =>
                   <div className='lll'>
                     <div style={{ width: '100%' }}>
                       <div className='title-ga'>
@@ -410,11 +410,11 @@ export default class Oficios extends Component {
                             <td className='all-tab-f'>{comprometidos.num_factura}</td>
                             <td className='all-tab-f'>{comprometidos.importe_total}</td>
                             <td className='all-tab-f td'>
-                              <input
+                              <textarea
                                 className='all-tab-l'
-                                name='hojas'
+                                name={i}
                                 onChange={this.handleChange.bind(this)}
-                                value={this.state.hojas}
+                                value={this.state.i}
                               />
                             </td>
                           </tr>
@@ -432,7 +432,7 @@ export default class Oficios extends Component {
                       <div className='c-b-i'>
                         <buttom className='b-imp'>Imprimir</buttom>
                       </div>
-                      }
+                    }
                     content={() => this.gasto}
                   />
                   </div>
@@ -551,7 +551,7 @@ export default class Oficios extends Component {
                             <td className='all-tab-f'>{comprometidos.num_factura}</td>
                             <td className='all-tab-f'>{comprometidos.importe_total}</td>
                             <td className='all-tab-f td'>
-                              <input
+                              <textarea
                                 className='all-tab-l'
                                 type='text'
                                 onKeyUp={this.handleChange.bind(this)}
