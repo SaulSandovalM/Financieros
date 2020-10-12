@@ -28,6 +28,8 @@ export default class Cpdf extends Component {
       no_oficio: '',
       pressStatus: true,
       text: '',
+      cfdi: '',
+      up: '',
       perro: ''
     }
   }
@@ -42,6 +44,7 @@ export default class Cpdf extends Component {
         this.setState({
           key: doc.id,
           año: fondos.año,
+          ur: fondos.ur,
           ramo: fondos.ramo,
           os: fondos.os,
           up: fondos.up,
@@ -60,15 +63,18 @@ export default class Cpdf extends Component {
           ben: fondos.ben,
           eg: fondos.eg,
           importe_comp: fondos.importe_comp,
+          importe_total: fondos.importe_total,
           // fecha: fondos.fecha cambiar el valor
           numCompro: fondos.numCompro,
           importe: fondos.importe,
           no_oficio: fondos.no_oficio,
+          cfdi: fondos.cfdi,
           desc: fondos.desc,
           beneficiario: fondos.beneficiario,
           requisicion: fondos.requisicion,
           pedido: fondos.pedido,
-          fondo2: fondos.fondo
+          fondo2: fondos.fondo,
+          tipo_doc: fondos.tipo_doc,
         })
       } else {
         console.log('No se encuentra documento')
@@ -92,17 +98,18 @@ export default class Cpdf extends Component {
   onCollectionUpdate = (querySnapshot) => {
     const comprometidos = []
     querySnapshot.forEach((doc) => {
-      const { año, ramo, os, up, rubro, tg, ogasto, npro, f, fu, sf, eje, s, prog, obj, proy, est, ben, eg, importe_comp } = doc.data()
+      const { año, ramo, up, rubro, tg, partida, npro, f, fu, sf, eje, s, prog,
+              obj, proy, est, ben, eg, importe_comp, ur, importe_total, no_proyecto,
+              num_factura } = doc.data()
       comprometidos.push({
         key: doc.id,
         doc,
         año,
         ramo,
-        os,
         up,
         rubro,
         tg,
-        ogasto,
+        partida,
         npro,
         f,
         fu,
@@ -116,20 +123,10 @@ export default class Cpdf extends Component {
         ben,
         eg,
         importe_comp,
-        dataF: []
-      })
-      firebase.firestore().collection('fondos').doc(doc.id).collection('comprometidos').get().then(participantsSnapshot => {
-        for( let i = 0; i < participantsSnapshot.size; i++ ) {
-          if( participantsSnapshot.docs[i].exists ) {
-            if( comprometidos.includes(participantsSnapshot.docs[i].data().uid) ) {
-              let { importe } = participantsSnapshot.docs[i].data();
-              let dataF = { importe }
-              comprometidos['comprometidos'].push(dataF)
-              comprometidos.push(comprometidos)
-              break
-            }
-          }
-        }
+        importe_total,
+        ur,
+        no_proyecto,
+        num_factura
       })
     })
     this.setState({
@@ -143,7 +140,6 @@ export default class Cpdf extends Component {
     })
   }
 
-
   render () {
     var today = new Date()
     var meses = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre']
@@ -153,208 +149,210 @@ export default class Cpdf extends Component {
 
     const totalImporte = []
     this.state.comprometidos.map(comprometidos => (
-      totalImporte.push(comprometidos.importe_comp)
+      totalImporte.push(comprometidos.importe_total)
     ))
     const reducer = (a, b) => a + b
+    console.log((totalImporte.reduce(reducer)))
 
     return (
       <div>
         <div style={{ zIndex: '3', background: '#f4f4f4', width: '100%', position: 'absolute', height: '100vh' }}>
-          <div className='m-f'>
-            <div className='fr-con'>
-              <p className='fr-b'><b>Fondo Revolvente</b></p>
-            </div>
-            <div className='fcc-i'>
-              <p className='fimpre'>Solicitud Programatica</p>
-              <ReactToPrint
-                trigger={() => <buttom className='b-imp'>Imprimir</buttom>}
-                content={() => this.ogfr}
-              />
-            </div>
-            <div className='fcc-i'>
-              <p className='fimpre'>Reembolso de FR</p>
-              <ReactToPrint
-                trigger={() => <buttom className='b-imp'>Imprimir</buttom>}
-                content={() => this.rfr}
-              />
-            </div>
-            <div className='fcc-i'>
-              <p className='fimpre'>Recibo Global</p>
-              <ReactToPrint
-                trigger={() => <buttom className='b-imp'>Imprimir</buttom>}
-                content={() => this.rec}
-              />
-            </div>
-            <div className='fcc-i'>
-              <p className='fimpre'>Leyenda Alusivas</p>
-              <Popup
-                trigger={<buttom className='b-imp'>Imprimir</buttom>}
-                modal
-                closeOnDocumentClick>
-                <div ref={el => (this.gas = el)} style={{ zIndex: '2', width: '100%' }}>
-                {this.state.comprometidos.map(comprometidos =>
-                <div className='lll'>
-                  <div style={{ width: '100%' }}>
-                    <div className='title-ga'>
-                      <div>
-                        <img className='pgjh' src={lpgjh} alt='' />
-                      </div>
-                      <div>
-                        <p className='text-titulo-ga'>PROCURADURÍA GENERAL DE JUSTICA DE HIDALGO</p>
-                        <p className='text-titulo-ga'>{comprometidos.up}</p>
-                        <p className='text-titulo-ga'>{comprometidos.dataF}</p>
-                      </div>
-                      <div>
-                        <img className='ims' src={logo2} alt='' />
-                      </div>
-                    </div>
-                  </div>
-                  <div className='faderinpo'>
-                    <div className='contenedor-ga'>
-                      <div className='contenedor-1 '>
-                        <div className='interno-ga2'>
-                          <p className='text-gai'>Gasto a Comprobar</p>
-                          <input className='input-gai' type='checkbox' disabled />
-                        </div>
-                        <div className='interno-ga2'>
-                          <p className='text-gai'>Comprobacion de Gastos</p>
-                          <input className='input-gai' type='checkbox' disabled />
-                        </div>
-                      </div>
-                      <div className='contenedor-1'>
-                        <div className='interno-ga2'>
-                          <p className='text-gai'>Creación de Fondo Revolvente</p>
-                          <input className='input-gai' type='checkbox' disabled />
-                        </div>
-                        <div className='interno-ga2'>
-                          <p className='text-gai'>Fondo Revolvente</p>
-                          <input className='input-gai' type='checkbox' checked />
-                        </div>
-                        <div className='interno-ga2'>
-                          <p className='text-gai'>Cancelacion de Fondo Revolvente</p>
-                          <input className='input-gai' type='checkbox' disabled />
-                        </div>
-                      </div>
-                      <div className='contenedor-1'>
-                        <div className='interno-ga2'>
-                          <p className='text-gai'>Viaticos Anticipados</p>
-                          <input className='input-gai' type='checkbox' disabled />
-                        </div>
-                        <div className='interno-ga2'>
-                          <p className='text-gai'>Viaticos Devengados</p>
-                          <input className='input-gai' type='checkbox' disabled />
-                        </div>
-                        <div className='interno-ga2'>
-                          <p className='text-gai'>Comprobación de Viáticos</p>
-                          <input className='input-gai' type='checkbox' disabled />
-                        </div>
-                      </div>
-                      <div className='contenedor-1'>
-                        <div className='interno-ga2'>
-                          <p className='text-gai'>Pago a Proveedores</p>
-                          <input className='input-gai' type='checkbox' disabled />
-                        </div>
-                        <div className='interno-ga2'>
-                          <p className='text-gai'>Transferencias</p>
-                          <input className='input-gai' type='checkbox' disabled />
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div>
-                    <div className='tabla-ga'>
-                      <table className='tablagas'>
-                        <tr>
-                          <td className='alltabla-ga'>FOLIO DE LA FACTURA</td>
-                          <td className='alltabla-ga'>IMPORTE</td>
-                          <td className='alltabla-ga'>LEYENDA ALUSIVA AL GASTO</td>
-                        </tr>
-                        <tr>
-                          <td className='all-tab-f' />
-                          <td className='all-tab-f' />
-                          <td className='all-tab-f td'>
-                            <input
-                              className='all-tab-l'
-                              type='text'
-                              onKeyUp={this.handleChange.bind(this)}
-                            />
-                          </td>
-                        </tr>
-                        <tr>
-                          <td className='text-total-ga'>TOTAL</td>
-                          <td />
-                        </tr>
-                      </table>
-                    </div>
-                  </div>
-                </div>
-                )}
+            <div className='m-f'>
+              <div className='fr-con'>
+                <p className='fr-b'><b>Fondo Revolvente</b></p>
+              </div>
+              <div className='fcc-i'>
+                <p className='fimpre'>Solicitud Programatica</p>
                 <ReactToPrint
-                  trigger={() =>
-                    <div className='c-b-i'>
-                      <buttom className='b-imp'>Imprimir</buttom>
-                    </div>
-                    }
-                  content={() => this.gas}
+                  trigger={() => <buttom className='b-imp'>Imprimir</buttom>}
+                  content={() => this.ogfr}
                 />
-                </div>
-              </Popup>
+              </div>
+              <div className='fcc-i'>
+                <p className='fimpre'>Reembolso de FR</p>
+                <ReactToPrint
+                  trigger={() => <buttom className='b-imp'>Imprimir</buttom>}
+                  content={() => this.rfr}
+                />
+              </div>
+              <div className='fcc-i'>
+                <p className='fimpre'>Recibo Global</p>
+                <ReactToPrint
+                  trigger={() => <buttom className='b-imp'>Imprimir</buttom>}
+                  content={() => this.rec}
+                />
+              </div>
+              <div className='fcc-i'>
+                <p className='fimpre'>Leyenda Alusivas</p>
+                <Popup
+                  trigger={<buttom className='b-imp'>Imprimir</buttom>}
+                  modal
+                  closeOnDocumentClick>
+                  <div ref={el => (this.gas = el)} style={{ zIndex: '2', width: '100%' }}>
+                  {this.state.comprometidos.map(comprometidos =>
+                  <div className='lll'>
+                    <div style={{ width: '100%' }}>
+                      <div className='title-ga'>
+                        <div>
+                          <img className='pgjh' src={lpgjh} alt='' />
+                        </div>
+                        <div>
+                          <p className='text-titulo-ga'>PROCURADURÍA GENERAL DE JUSTICA DE HIDALGO</p>
+                          <p className='text-titulo-ga'>{comprometidos.up}</p>
+                          <p className='text-titulo-ga'>{comprometidos.dataF}</p>
+                        </div>
+                        <div>
+                          <img className='ims' src={logo2} alt='' />
+                        </div>
+                      </div>
+                    </div>
+                    <div className='faderinpo'>
+                      <div className='contenedor-ga'>
+                        <div className='contenedor-1 '>
+                          <div className='interno-ga2'>
+                            <p className='text-gai'>Gasto a Comprobar</p>
+                            <input className='input-gai' type='checkbox' disabled />
+                          </div>
+                          <div className='interno-ga2'>
+                            <p className='text-gai'>Comprobacion de Gastos</p>
+                            <input className='input-gai' type='checkbox' disabled />
+                          </div>
+                        </div>
+                        <div className='contenedor-1'>
+                          <div className='interno-ga2'>
+                            <p className='text-gai'>Creación de Fondo Revolvente</p>
+                            <input className='input-gai' type='checkbox' disabled />
+                          </div>
+                          <div className='interno-ga2'>
+                            <p className='text-gai'>Fondo Revolvente</p>
+                            <input className='input-gai' type='checkbox' checked />
+                          </div>
+                          <div className='interno-ga2'>
+                            <p className='text-gai'>Cancelacion de Fondo Revolvente</p>
+                            <input className='input-gai' type='checkbox' disabled />
+                          </div>
+                        </div>
+                        <div className='contenedor-1'>
+                          <div className='interno-ga2'>
+                            <p className='text-gai'>Viaticos Anticipados</p>
+                            <input className='input-gai' type='checkbox' disabled />
+                          </div>
+                          <div className='interno-ga2'>
+                            <p className='text-gai'>Viaticos Devengados</p>
+                            <input className='input-gai' type='checkbox' disabled />
+                          </div>
+                          <div className='interno-ga2'>
+                            <p className='text-gai'>Comprobación de Viáticos</p>
+                            <input className='input-gai' type='checkbox' disabled />
+                          </div>
+                        </div>
+                        <div className='contenedor-1'>
+                          <div className='interno-ga2'>
+                            <p className='text-gai'>Pago a Proveedores</p>
+                            <input className='input-gai' type='checkbox' disabled />
+                          </div>
+                          <div className='interno-ga2'>
+                            <p className='text-gai'>Transferencias</p>
+                            <input className='input-gai' type='checkbox' disabled />
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div>
+                      <div className='tabla-ga'>
+                        <table className='tablagas'>
+                          <tr>
+                            <td className='alltabla-ga'>FOLIO DE LA FACTURA</td>
+                            <td className='alltabla-ga'>IMPORTE</td>
+                            <td className='alltabla-ga'>LEYENDA ALUSIVA AL GASTO</td>
+                          </tr>
+                          <tr>
+                            <td className='all-tab-f'>{comprometidos.num_factura}</td>
+                            <td className='all-tab-f'>{comprometidos.importe_total}</td>
+                            <td className='all-tab-f td'>
+                              <input
+                                className='all-tab-l'
+                                type='text'
+                                onKeyUp={this.handleChange.bind(this)}
+                              />
+                            </td>
+                          </tr>
+                          <tr>
+                            <td className='text-total-ga'>TOTAL</td>
+                            <td />
+                          </tr>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+                  )}
+                  <ReactToPrint
+                    trigger={() =>
+                      <div className='c-b-i'>
+                        <buttom className='b-imp'>Imprimir</buttom>
+                      </div>
+                      }
+                    content={() => this.gas}
+                  />
+                  </div>
+                </Popup>
+              </div>
             </div>
-          </div>
 
-          <div className='m-f'>
-            <div className='fr-con'>
-              <p className='fr-b'><b>Pago Provedor por Requisición</b></p>
+            <div className='m-f'>
+              <div className='fr-con'>
+                <p className='fr-b'><b>Pago Provedor por Requisición</b></p>
+              </div>
+              <div className='fcc-i'>
+                <p className='fimpre'>Solicitud Programatica</p>
+                <ReactToPrint
+                  trigger={() => <buttom className='b-imp'>Imprimir</buttom>}
+                  content={() => this.sol}
+                />
+              </div>
+              <div className='fcc-i'>
+                <p className='fimpre'>Solicitud de PPR</p>
+                <ReactToPrint
+                  trigger={() => <buttom className='b-imp'>Imprimir</buttom>}
+                  content={() => this.ofi}
+                />
+              </div>
+              <div className='fcc-i'>
+                <p className='fimpre'>Leyenda Alusivas</p>
+                <ReactToPrint
+                  trigger={() => <buttom className='b-imp'>Imprimir</buttom>}
+                  content={() => this.gasto}
+                />
+              </div>
             </div>
-            <div className='fcc-i'>
-              <p className='fimpre'>Solicitud Programatica</p>
-              <ReactToPrint
-                trigger={() => <buttom className='b-imp'>Imprimir</buttom>}
-                content={() => this.sol}
-              />
-            </div>
-            <div className='fcc-i'>
-              <p className='fimpre'>Solicitud de PPR</p>
-              <ReactToPrint
-                trigger={() => <buttom className='b-imp'>Imprimir</buttom>}
-                content={() => this.ofi}
-              />
-            </div>
-            <div className='fcc-i'>
-              <p className='fimpre'>Leyenda Alusivas</p>
-              <ReactToPrint
-                trigger={() => <buttom className='b-imp'>Imprimir</buttom>}
-                content={() => this.gasto}
-              />
-            </div>
-          </div>
 
-          <div className='m-f'>
-            <div className='fr-con'>
-              <p className='fr-b'><b>Pago Proveedor</b></p>
+            <div className='m-f'>
+              <div className='fr-con'>
+                <p className='fr-b'><b>Pago Proveedor</b></p>
+              </div>
+              <div className='fcc-i'>
+                <p className='fimpre'>Oficio Pago Proveedor</p>
+                <ReactToPrint
+                  trigger={() => <buttom className='b-imp'>Imprimir</buttom>}
+                  content={() => this.opp}
+                />
+              </div>
+              <div className='fcc-i'>
+                <p className='fimpre'>Solicitud Programatica</p>
+                <ReactToPrint
+                  trigger={() => <buttom className='b-imp'>Imprimir</buttom>}
+                  content={() => this.sp}
+                />
+              </div>
+              <div className='fcc-i'>
+                <p className='fimpre'>Leyendas Alusivas</p>
+                <ReactToPrint
+                  trigger={() => <buttom className='b-imp'>Imprimir</buttom>}
+                  content={() => this.la}
+                />
+              </div>
             </div>
-            <div className='fcc-i'>
-              <p className='fimpre'>Oficio Pago Proveedor</p>
-              <ReactToPrint
-                trigger={() => <buttom className='b-imp'>Imprimir</buttom>}
-                content={() => this.opp}
-              />
-            </div>
-            <div className='fcc-i'>
-              <p className='fimpre'>Solicitud Programatica</p>
-              <ReactToPrint
-                trigger={() => <buttom className='b-imp'>Imprimir</buttom>}
-                content={() => this.sp}
-              />
-            </div>
-            <div className='fcc-i'>
-              <p className='fimpre'>Leyendas Alusivas</p>
-              <ReactToPrint
-                trigger={() => <buttom className='b-imp'>Imprimir</buttom>}
-                content={() => this.la}
-              />
-            </div>
-          </div>
+
 
           <div className='m-f'>
             <div className='fr-con'>
@@ -467,7 +465,9 @@ export default class Cpdf extends Component {
               </div>
               <div className='internos'>
                 <p className='text-intei'>Unidad Presupuestal:</p>
-                <p className='bene-i'>{this.state.beneficiario}</p>
+                {this.state.comprometidos.map(comprometidos =>
+                  <p className='bene-i'>{comprometidos.up}</p>
+                )}
               </div>
             </div>
             <div className='folio'>
@@ -510,7 +510,7 @@ export default class Cpdf extends Component {
                         {comprometidos.año}
                       </td>
                       <td className='all-tablai'>
-                        {comprometidos.os}
+                        {comprometidos.ur}
                       </td>
                       <td className='all-tablai'>
                         {comprometidos.up}
@@ -522,7 +522,7 @@ export default class Cpdf extends Component {
                         {comprometidos.tg}
                       </td>
                       <td className='all-tablai'>
-                        {comprometidos.ogasto}
+                        {comprometidos.partida}
                       </td>
                       <td className='all-tablai'>
                         {comprometidos.f}
@@ -561,7 +561,7 @@ export default class Cpdf extends Component {
                         {comprometidos.npro}
                       </td>
                       <td className='all-tablai'>
-                        $ {comprometidos.importe_comp}
+                        $ {comprometidos.importe_total}
                       </td>
                     </tr>
                   )}
@@ -1128,13 +1128,16 @@ export default class Cpdf extends Component {
             </p>
           </div>
           <div className='texto-ofi_ppp'>
-            <p>
+            <p style={{display: 'flex', flexDirection: 'row', }}>
               Por medio de presente me permito enviar a Usted documentación amparada
               con {this.state.numCompro} de comprobantes por un total
               de $ {this.state.importe} ({(NumberAsString(this.state.importe))}),
               para el trámite de Reembolso de Fondo Revolvente, con cargo al
-              proyecto {this.state.proy} {this.state.np}
-              otorgado en el oficio de autorización {this.state.no_oficio} a la
+              proyecto {this.state.proy} {this.state.comprometidos.slice(0, 1).map(comprometidos =>
+                <div style={{margin: '0', whiteSpace: 'nowrap', display: 'flex'}}>
+                  {comprometidos.no_proyecto}
+                </div>
+              )}otorgado en el oficio de autorización {this.state.no_oficio} a la
               Procuraduría General de Justicia del Estado de Hidalgo.
             </p>
             <p>Sin otro particular por el momento, reciba un cordial saludo</p>
@@ -1212,7 +1215,7 @@ export default class Cpdf extends Component {
                 <div>
                   <p className='text-titulo-ga'>PROCURADURÍA GENERAL DE JUSTICA DE HIDALGO</p>
                   <p className='text-titulo-ga'>{comprometidos.up}</p>
-                  <p className='text-titulo-ga'>{comprometidos.ogasto}</p>
+                  <p className='text-titulo-ga'>{comprometidos.partida}</p>
                 </div>
                 <div>
                   <img className='ims' src={logo2} alt='' />
@@ -1400,6 +1403,9 @@ export default class Cpdf extends Component {
               </div>
               <div className='internos'>
                 <p className='text-intei'>Unidad Presupuestal:</p>
+                {this.state.comprometidos.map(comprometidos =>
+                  <p className='bene-i'>{comprometidos.up}</p>
+                )}
               </div>
             </div>
             <div className='folio'>
@@ -1442,7 +1448,7 @@ export default class Cpdf extends Component {
                         {comprometidos.año}
                       </td>
                       <td className='all-tablai'>
-                        {comprometidos.os}
+                        {comprometidos.ur}
                       </td>
                       <td className='all-tablai'>
                         {comprometidos.up}
@@ -1454,7 +1460,7 @@ export default class Cpdf extends Component {
                         {comprometidos.tg}
                       </td>
                       <td className='all-tablai'>
-                        {comprometidos.ogasto}
+                        {comprometidos.partida}
                       </td>
                       <td className='all-tablai'>
                         {comprometidos.f}
@@ -2030,17 +2036,17 @@ export default class Cpdf extends Component {
         </div>
 
         <div className='pppdf-subdad' ref={el => (this.ofi = el)} style={{ zIndex: '2', position: 'absolute' }}>
-          <div class='fondo-procu'>
-            <img class='ime' src={logo2} alt='' />
+          <div className='fondo-procu'>
+            <img className='ime' src={logo2} alt='' />
           </div>
-          <div class='no-oficio'>
+          <div className='no-oficio'>
             <p>
               <b>Oficio No:</b>PGI/DGAyF/{this.state.no_oficio}/2020
               <br /> Pachuca de Soto, Hidalgo a {today}
               <br /><b>Asunto </b>Solicitud de Pago Proveedor por Requisicón
             </p>
           </div>
-          <div class='prensente'>
+          <div className='prensente'>
             <p>
               <b>
                 Lic. César Alberto González López
@@ -2050,7 +2056,7 @@ export default class Cpdf extends Component {
               </b>
             </p>
           </div>
-          <div class='añadido'>
+          <div className='añadido'>
             <p>
               <b>
                 AT'N: L.C.P. Karina Barrios Velázquez
@@ -2059,7 +2065,7 @@ export default class Cpdf extends Component {
               </b>
             </p>
           </div>
-          <div class='texto-ofi_ppp'>
+          <div className='texto-ofi_ppp'>
             <p>
               Por medio de presente me permito enviar a Usted documentación por
               un importe total de $ {this.state.importe} ({(NumberAsString(this.state.importe))}),
@@ -2075,7 +2081,7 @@ export default class Cpdf extends Component {
             </p>
             <p>Sin otro particular por el momento, reciba un cordial saludo</p>
           </div>
-          <div class='atte'>
+          <div className='atte'>
             <p>
               Atentamente
               <br />Director General
@@ -2102,7 +2108,7 @@ export default class Cpdf extends Component {
                 <div>
                   <p className='text-titulo-ga'>PROCURADURÍA GENERAL DE JUSTICA DE HIDALGO</p>
                   <p className='text-titulo-ga'>{comprometidos.up}</p>
-                  <p className='text-titulo-ga'>{comprometidos.ogasto}</p>
+                  <p className='text-titulo-ga'>{comprometidos.partida}</p>
                 </div>
                 <div>
                   <img className='ims' src={logo2} alt='' />
@@ -2239,12 +2245,12 @@ export default class Cpdf extends Component {
           <div className='texto-ofi_ppp'>
             <p>
               Por este medio me permito enviar a Usted documentación por un importe
-              total de $ {this.state.importe} ({(NumberAsString(this.state.importe))}),
-              cantidad amparada con los comprobantes No. {this.state.numCompro},
+              total de $ {this.state.importe}.00 ({(NumberAsString(this.state.importe))}),
+              cantidad amparada con los CFDI No. {this.state.cfdi},
               para el trámite de pago a favor del proveedor {this.state.beneficiario},
               por la compra o prestación de  servicios {this.state.desc},
-              con cargo al proyecto {/* {this.state.comprometido.no_proyecto} y {this.state.fondo.no_proyec} */}
-              y a los recursos otorgados con el oficio de autorización {this.state.fondo.oficio_aut},
+              con cargo al proyecto {this.state.no_proyecto} y {this.state.no_proyec}
+              y a los recursos otorgados con el oficio de autorización {this.state.no_oficio},
               a la Procuraduria General de Justicia del Estado de Hidalgo.
             </p>
             <p>Sin otro particular por el momento, reciba un cordial saludo</p>
@@ -2354,6 +2360,7 @@ export default class Cpdf extends Component {
               </div>
               <div className='internos'>
                 <p className='text-intei'>Unidad Presupuestal:</p>
+                <p className='bene-i'>{this.state.up}</p>
               </div>
             </div>
             <div className='folio'>
@@ -2396,7 +2403,7 @@ export default class Cpdf extends Component {
                         {comprometidos.año}
                       </td>
                       <td className='all-tablai'>
-                        {comprometidos.os}
+                        {comprometidos.ur}
                       </td>
                       <td className='all-tablai'>
                         {comprometidos.up}
@@ -2408,7 +2415,7 @@ export default class Cpdf extends Component {
                         {comprometidos.tg}
                       </td>
                       <td className='all-tablai'>
-                        {comprometidos.ogasto}
+                        {comprometidos.partida}
                       </td>
                       <td className='all-tablai'>
                         {comprometidos.f}
@@ -2994,7 +3001,7 @@ export default class Cpdf extends Component {
                 <div>
                   <p className='text-titulo-ga'>PROCURADURÍA GENERAL DE JUSTICA DE HIDALGO</p>
                   <p className='text-titulo-ga'>{comprometidos.up}</p>
-                  <p className='text-titulo-ga'>{comprometidos.ogasto}</p>
+                  <p className='text-titulo-ga'>{comprometidos.partida}</p>
                 </div>
                 <div>
                   <img className='ims' src={logo2} alt='' />
@@ -3288,7 +3295,7 @@ export default class Cpdf extends Component {
                         {comprometidos.año}
                       </td>
                       <td className='all-tablai'>
-                        {comprometidos.os}
+                        {comprometidos.ur}
                       </td>
                       <td className='all-tablai'>
                         {comprometidos.up}
@@ -3300,7 +3307,7 @@ export default class Cpdf extends Component {
                         {comprometidos.tg}
                       </td>
                       <td className='all-tablai'>
-                        {comprometidos.ogasto}
+                        {comprometidos.partida}
                       </td>
                       <td className='all-tablai'>
                         {comprometidos.f}
@@ -3886,7 +3893,7 @@ export default class Cpdf extends Component {
                   <div>
                     <p className='text-titulo-ga'>PROCURADURÍA GENERAL DE JUSTICA DE HIDALGO</p>
                     <p className='text-titulo-ga'>{comprometidos.up}</p>
-                    <p className='text-titulo-ga'>{comprometidos.ogasto}</p>
+                    <p className='text-titulo-ga'>{comprometidos.partida}</p>
                   </div>
                   <div>
                     <img className='ims' src={logo2} alt='' />

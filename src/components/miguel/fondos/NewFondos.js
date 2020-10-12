@@ -30,6 +30,7 @@ export default class Fondos extends Component {
       nscfe: '',
       observaciones: '',
       numCompro: '',
+      cfdi: '',
       fondos: [],
       allowCustom: true,
       value: '',
@@ -70,7 +71,7 @@ export default class Fondos extends Component {
     e.preventDefault()
     const { fondo, fecha, tipo_doc, oficio_aut, no_oficio, no_lici, importe, desc,
             beneficiario, realizo, requisicion, pedido, ncomprobantes, poliza,
-            cfe, nscfe, observaciones, numCompro } = this.state
+            cfe, nscfe, observaciones, numCompro, cfdi } = this.state
     this.ref.add({
       fondo,
       fecha,
@@ -89,7 +90,8 @@ export default class Fondos extends Component {
       cfe,
       nscfe,
       observaciones,
-      numCompro
+      numCompro,
+      cfdi
     }).then((docRef) => {
       this.setState({
         fondo: '',
@@ -109,7 +111,8 @@ export default class Fondos extends Component {
         cfe: '',
         nscfe: '',
         observaciones: '',
-        numCompro: ''
+        numCompro: '',
+        cfdi: ''
       })
       const statsRef = firebase.firestore().collection('fondos').doc('--stats--')
       const increment = firebase.firestore.FieldValue.increment(1)
@@ -655,6 +658,19 @@ export default class Fondos extends Component {
                     onChange={this.onChange}
                     required
                     ref='numCompro'
+                  />
+                </div>
+              </div>
+              <div className='f-f'>
+                <div className='f-ff'>
+                  <p className='fpb'>CFDI</p>
+                  <input
+                    className='f-b-s'
+                    id='cfdi'
+                    name='cfdi'
+                    onChange={this.onChange}
+                    required
+                    ref='cfdi'
                   />
                 </div>
               </div>
