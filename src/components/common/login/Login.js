@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom'
 import { loginUser } from '../../../actions'
+import TextField from '@material-ui/core/TextField'
+import Button from '@material-ui/core/Button';
 import './Login.css'
 
 class Login extends Component {
@@ -38,39 +40,39 @@ class Login extends Component {
             <div className='login-ins'>
               <div className='login-col'>
                 <div className='login'>
-                  <h2>Inicia Sesión</h2>
+                  <h2 className='login-color'>Bienvenido!</h2>
                   <div className='border-form-login'>
-                    <input
-                      margin='normal'
-                      fullWidth
-                      id='email'
-                      className='input-style-1'
-                      onChange={this.handleEmailChange}
-                    />
-                    <input
-                      margin='normal'
-                      fullWidth
-                      className='input-style-2'
-                      type='password'
-                      id='password'
-                      onChange={this.handlePasswordChange}
-                    />
-                    {loginError && (
-                      <p>
+                    <div className='input-cen-log'>
+                      <TextField
+                        label='Correo'
+                        id='email'
+                        onChange={ this.handleEmailChange }
+                        className='correo'
+                      />
+                    </div>
+                    <div className='input-cen-log'>
+                      <TextField
+                        label='Contraseña'
+                        id='password'
+                        type='password'
+                        onChange={ this.handlePasswordChange }
+                        className='contraseña'
+                      />
+                    </div>
+                    { loginError && (
+                      <p className='error-log'>
                         Correo o contraseña icorrectos
                       </p>
                     )}
                     <div className='cta2'>
-                      <button
-                        type='button'
-                        fullWidth
+                      <Button
                         variant='contained'
                         color='primary'
-                        className='boton2-l'
-                        onClick={this.handleSubmit}
+                        onClick={ this.handleSubmit }
+                        style={{ background: '#092432' }}
                       >
-                        Ingresar
-                      </button>
+                        ENTRAR
+                      </Button>
                     </div>
                   </div>
                 </div>
