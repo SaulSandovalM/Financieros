@@ -90,8 +90,6 @@ export default class Fondos extends Component {
       cfe,
       nscfe,
       observaciones,
-      numCompro,
-      cfdi,
       no_proyecto
     }).then((docRef) => {
       this.setState({
@@ -112,8 +110,6 @@ export default class Fondos extends Component {
         cfe: '',
         nscfe: '',
         observaciones: '',
-        numCompro: '',
-        cfdi: '',
         no_proyecto: ''
       })
       const statsRef = firebase.firestore().collection('fondos').doc('--stats--')
@@ -670,32 +666,6 @@ export default class Fondos extends Component {
                     onChange={this.onChange}
                     required
                     ref='no_proyecto'
-                  />
-                </div>
-              </div>
-              <div className='f-f'>
-                <div className='f-ff'>
-                  <p className='fpb'>Num de Comprobantes</p>
-                  <input
-                    className='f-b-s'
-                    id='numCompro'
-                    name='numCompro'
-                    onChange={this.onChange}
-                    required
-                    ref='numCompro'
-                  />
-                </div>
-              </div>
-              <div className='f-f'>
-                <div className='f-ff'>
-                  <p className='fpb'>CFDI</p>
-                  <input
-                    className='f-b-s'
-                    id='cfdi'
-                    name='cfdi'
-                    onChange={this.onChange}
-                    required
-                    ref='cfdi'
                   />
                 </div>
               </div>
