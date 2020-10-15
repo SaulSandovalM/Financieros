@@ -1756,26 +1756,26 @@ export default class Oficios extends Component {
               <div className='tabla-so'>
                 <table>
                   <tr>
-                    <td className='all-tablai'>Ramo</td>
-                    <td className='all-tablai'>Año</td>
-                    <td className='all-tablai'>OS</td>
-                    <td className='all-tablai'>UP</td>
-                    <td className='all-tablai'>Rubro de Ingreso</td>
-                    <td className='all-tablai'>TG</td>
-                    <td className='all-tablai'>Objeto de un Gasto</td>
-                    <td className='all-tablai'>Finalidad</td>
-                    <td className='all-tablai'>Funcion</td>
-                    <td className='all-tablai'>Subfunción</td>
-                    <td className='all-tablai'>Eje</td>
-                    <td className='all-tablai'>Sect</td>
-                    <td className='all-tablai'>Prog</td>
-                    <td className='all-tablai'>Obj</td>
-                    <td className='all-tablai'>Proyecto</td>
-                    <td className='all-tablai'>Ext</td>
-                    <td className='all-tablai'>Ben</td>
-                    <td className='all-tablai'>E Geo</td>
-                    <td className='dg-tabla all-tablai'>Descripcion del objeto de Gasto</td>
-                    <td className='monto-tabla all-tablai'>Monto</td>
+                    <td className='all-tablai' style={{ transform: 'rotate(90deg)', height: '170px'}}>Ramo</td>
+                    <td className='all-tablai' style={{ transform: 'rotate(90deg)', height: '170px'}}>Año</td>
+                    <td className='all-tablai' style={{ transform: 'rotate(90deg)', height: '170px'}}>OS</td>
+                    <td className='all-tablai' style={{ transform: 'rotate(90deg)', height: '170px'}}>UP</td>
+                    <td className='all-tablai' style={{ transform: 'rotate(90deg)', height: '170px'}}>Rubro de Ingreso</td>
+                    <td className='all-tablai' style={{ transform: 'rotate(90deg)', height: '170px'}}>TG</td>
+                    <td className='all-tablai' style={{ transform: 'rotate(90deg)', height: '170px'}}>Objeto de un Gasto</td>
+                    <td className='all-tablai' style={{ transform: 'rotate(90deg)', height: '170px'}}>Finalidad</td>
+                    <td className='all-tablai' style={{ transform: 'rotate(90deg)', height: '170px'}}>Funcion</td>
+                    <td className='all-tablai' style={{ transform: 'rotate(90deg)', height: '170px'}}>Subfunción</td>
+                    <td className='all-tablai' style={{ transform: 'rotate(90deg)', height: '170px'}}>Eje</td>
+                    <td className='all-tablai' style={{ transform: 'rotate(90deg)', height: '170px'}}>Sect</td>
+                    <td className='all-tablai' style={{ transform: 'rotate(90deg)', height: '170px'}}>Prog</td>
+                    <td className='all-tablai' style={{ transform: 'rotate(90deg)', height: '170px'}}>Obj</td>
+                    <td className='all-tablai' style={{ transform: 'rotate(90deg)', height: '170px'}}>Proyecto</td>
+                    <td className='all-tablai' style={{ transform: 'rotate(90deg)', height: '170px'}}>Ext</td>
+                    <td className='all-tablai' style={{ transform: 'rotate(90deg)', height: '170px'}}>Ben</td>
+                    <td className='all-tablai' style={{ transform: 'rotate(90deg)', height: '170px'}}>E Geo</td>
+                    <td className='dg-tabla all-tablai' style={{ transform: 'rotate(90deg)', height: '170px'}}>Descripcion del objeto de Gasto</td>
+                    <td className='monto-tabla all-tablai' style={{ transform: 'rotate(90deg)', height: '170px'}}>Monto</td>
                   </tr>
                   {this.state.comprometidos.map(comprometidos =>
                     <tr>
