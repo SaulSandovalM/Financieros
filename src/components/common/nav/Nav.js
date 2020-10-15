@@ -29,6 +29,11 @@ class Nav extends Component {
           </Link>
         </div>
         <div className='navbar-left'>
+          <Link to='/Contrarecibo' className='deco'>
+            <h3 className='nav-t'>Contrarecibo</h3>
+          </Link>
+        </div>
+        <div className='navbar-left'>
           <div className='deco'>
             <button
               onClick={this.handleLogout}

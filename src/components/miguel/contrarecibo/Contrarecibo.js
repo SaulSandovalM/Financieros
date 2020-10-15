@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
-import './Contra.css'
+import './Contrarecibo.css'
 import firebase from '../../../Firebase'
-import { Link } from 'react-router-dom'
 import CurrencyFormat from 'react-currency-format'
 
 export default class Contra extends Component {
@@ -62,7 +61,6 @@ export default class Contra extends Component {
                         prefix=' $ '
                       />
                     </p>
-                    <Link to={`/Editcontra/${fondos.key}`} className='p-banco-map'>Agregar Contrarecibo</Link>
                     <p className='p-banco-map'>
                       {fondos.fechaContra && <p style={{margin: '0'}}>Contrarecibo Agregado</p>}
                     </p>

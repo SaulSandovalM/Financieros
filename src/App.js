@@ -40,6 +40,7 @@ import ControlP from './components/controlp/ControlP'
 import Add from './components/controlp/Add'
 import Complemento from './components/complemento/Complemento'
 import Caratula from './components/miguel/caratula/Caratula'
+import Contrarecibo from './components/miguel/contrarecibo/Contrarecibo'
 import Tabular from './components/miguel/Todospdf/Tabular/Tabular'
 import TabularList from './components/miguel/Todospdf/Tabular/TabularList'
 import TabularIndi from './components/miguel/Todospdf/Tabular/TabularIndi'
@@ -287,6 +288,13 @@ function App (props) {
         exact
         path='/TabularIndi/:id'
         component={TabularIndi}
+        isAuthenticated={isAuthenticated}
+        isVerifying={isVerifying}
+      />
+      <ProtectedRoute
+        exact
+        path='/Contrarecibo'
+        component={Contrarecibo}
         isAuthenticated={isAuthenticated}
         isVerifying={isVerifying}
       />
