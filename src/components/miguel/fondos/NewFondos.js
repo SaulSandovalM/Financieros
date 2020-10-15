@@ -29,7 +29,7 @@ export default class Fondos extends Component {
       cfe: '',
       nscfe: '',
       observaciones: '',
-      numCompro: '',
+      numProy: '',
       fondos: [],
       allowCustom: true,
       value: '',
@@ -70,7 +70,7 @@ export default class Fondos extends Component {
     e.preventDefault()
     const { fondo, fecha, tipo_doc, oficio_aut, no_oficio, no_lici, importe, desc,
             beneficiario, realizo, requisicion, pedido, ncomprobantes, poliza,
-            cfe, nscfe, observaciones, numCompro } = this.state
+            cfe, nscfe, observaciones, numProy } = this.state
     this.ref.add({
       fondo,
       fecha,
@@ -89,7 +89,7 @@ export default class Fondos extends Component {
       cfe,
       nscfe,
       observaciones,
-      numCompro
+      numProy
     }).then((docRef) => {
       this.setState({
         fondo: '',
@@ -109,7 +109,7 @@ export default class Fondos extends Component {
         cfe: '',
         nscfe: '',
         observaciones: '',
-        numCompro: ''
+        numProy: ''
       })
       const statsRef = firebase.firestore().collection('fondos').doc('--stats--')
       const increment = firebase.firestore.FieldValue.increment(1)
@@ -174,6 +174,7 @@ export default class Fondos extends Component {
   tipo_doc2 = ['Fondo Revolvente', 'Pago Directo']
   tipo_doc3 = ['Pago Directo']
   tipo_doc4 = ['Fondo Revolvente']
+  no_proyecto = ['AU001', 'AU002', 'AU003', 'AU004', 'AU005', 'AU007', 'AU009','AU010','AU011','AU012','AU014','AU015','AU016','AU017','AU018','AU019','AU020','AU021','AU023','AU024','AU025','AU026','AU027','A1D11']
 
   render () {
     var user = firebase.auth().currentUser
@@ -221,7 +222,7 @@ export default class Fondos extends Component {
     }
     today = dd + '/' + mm + '/' + yyyy
     const allowCustom = this.state.allowCustom
-    const { tipo_doc, oficio_aut, importe, beneficiario } = this.state
+    const { tipo_doc, oficio_aut, importe, beneficiario, numProy } = this.state
     this.state.fecha = today
     this.state.realizo = admin
     this.state.fondo = this.state.contador.nFondo
@@ -647,14 +648,24 @@ export default class Fondos extends Component {
               </div>
               <div className='f-f'>
                 <div className='f-ff'>
-                  <p className='fpb'>Num de Comprobantes</p>
-                  <input
-                    className='f-b-s'
-                    id='numCompro'
-                    name='numCompro'
+                  <p className='fpb'>Num. Proyecto</p>
+                  <DropDownList
+                    suggest
+                    style={{
+                      borderColor: 'rgba(0,0,0,0.42)',
+                      background: 'white',
+                      height: '28px',
+                      width: '100%',
+                      color: 'black',
+                      position: 'static',
+                    }}
+                    data={this.no_proyecto}
+                    allowCustom={allowCustom}
+                    name='numProy'
+                    value={numProy}
                     onChange={this.onChange}
                     required
-                    ref='numCompro'
+                    ref='numProy'
                   />
                 </div>
               </div>

@@ -145,9 +145,14 @@
   flex-direction: row;
   width: 300px;
 }
+.cx2 {
+  border: 1px solid;
+  height: 300px;
+  width: 48%;
+}
 .bt-s2 {
   background-color: green;
-  border: 0px;
+  border: 0;
   color: white;
   padding: 6px;
 }
@@ -167,6 +172,10 @@
   display: flex;
   flex-direction: row;
   border-top: 1px solid;
+}
+.fcc2 {
+  display: flex;
+  flex-direction: column;
   padding-top: 20px;
 }
 .xml-back-l {
