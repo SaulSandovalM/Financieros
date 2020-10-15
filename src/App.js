@@ -25,7 +25,7 @@ import Vales from './components/elizabeth/vales/Vales'
 import ListValesA from './components/elizabeth/listavales/ListValesA' // Autorizados
 import ListValesP from './components/elizabeth/listavales/ListValesP' // Vales Pendientes de Autorizacion Nayra
 import ListValesN from './components/elizabeth/listavales/ListValesN' // Pendientes de numero de cheques
-// import ListArchivosV from './components/elizabeth/listavales/ListArchivosV'
+import ListArchivosV from './components/elizabeth/listavales/ListArchivosV'
 import Autorizacion from './components/elizabeth/autorizacion/Autorizacion'
 import Arqueo from './components/elizabeth/arqueo/Arqueo'
 import ArqueoD from './components/elizabeth/arqueo/ArqueoD'
@@ -177,13 +177,13 @@ function App (props) {
         isAuthenticated={isAuthenticated}
         isVerifying={isVerifying}
       />
-      {/*<ProtectedRoute
+      <ProtectedRoute
         exact
         path='/ListArchivosV'
         component={ListArchivosV}
         isAuthenticated={isAuthenticated}
         isVerifying={isVerifying}
-      />*/}
+      />
       <ProtectedRoute
         exact
         path='/ListValesN'

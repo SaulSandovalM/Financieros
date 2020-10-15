@@ -84,11 +84,11 @@ class NavE extends Component {
                 <p className='nav-t'> • Pendientes</p>
               </Link>
             </div>
-            {/*<div className='subnav'>
+            <div className='subnav'>
               <Link to='/ListArchivosV' className='deco'>
                 <p className='nav-t'> • Archivos Vales</p>
               </Link>
-            </div>*/}
+            </div>
           </div>}
         <div className='navbar-left'>
           <div className='deco'>

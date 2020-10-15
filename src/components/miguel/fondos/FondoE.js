@@ -24,6 +24,7 @@ export default class FondoE extends Component {
       cfe: '',
       nscfe: '',
       observaciones: '',
+      numCompro: '',
       allowCustom: true,
     }
   }

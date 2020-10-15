@@ -8,16 +8,6 @@
   flex-direction: row;
   width: 100%;
 }
-.punma {
-  display: flex;
-  flex-direction: column;
-  margin-top: 10px;
-  width: 12.5%;
-}
-.fc-wf {
-  width: 100%;
-  display: flex;
-}
 .App {
   padding: 30px;
   width: 85%;
@@ -112,11 +102,6 @@
   text-align: left;
   color: #000;
 }
-.tabla-edit-f {
-  width: 14.2%;
-  text-align: center;
-  color: #000;
-}
 .tabla-edit-l {
   width: 14.5%;
   text-align: center;
@@ -204,7 +189,7 @@
   width: 100%;
 }
 .row-c-c {
-  width: 10%;
+  width: 16.6%;
   text-align: center;
   height: 19px;
 }
