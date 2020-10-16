@@ -19,33 +19,33 @@ const Menu = ({ open, ...props }) => {
   let admin
   if (email === 'administrador@procu.com') {
     admin = 'ADMIN'
-  } else if (email === 'cecilia@procu.com') {
+  } else if (email === 'cecilia@procuraduria.com') {
     admin = 'CECILIA'
-  } else if (email === 'nayra@procu.com') {
+  } else if (email === 'nayra@procuraduria.com') {
     admin = 'NAYRA'
-  } else if (email === 'laura@procu.com') {
+  } else if (email === 'laura@procuraduria.com') {
     admin = 'LAURA'
-  } else if (email === 'miguel@procu.com') {
+  } else if (email === 'miguel@procuraduria.com') {
     admin = 'MIGUEL'
-  } else if (email === 'teresa@procu.com') {
+  } else if (email === 'teresa@procuraduria.com') {
     admin = 'TERESA'
-  } else if (email === 'marcos@procu.com') {
+  } else if (email === 'marcos@procuraduria.com') {
     admin = 'MARCOS'
-  } else if (email === 'eloy@procu.com') {
+  } else if (email === 'eloy@procuraduria.com') {
     admin = 'ELOY'
-  } else if (email === 'karina@procu.com') {
+  } else if (email === 'karina@procuraduria.com') {
     admin = 'KARINA'
-  } else if (email === 'martha@procu.com') {
+  } else if (email === 'martha@procuraduria.com') {
     admin = 'MARTHA'
-  } else if (email === 'lilia@procu.com') {
+  } else if (email === 'lilia@procuraduria.com') {
     admin = 'LILIA'
-  } else if (email === 'cenely@procu.com') {
+  } else if (email === 'cenely@procuraduria.com') {
     admin = 'CENELY'
-  } else if (email === 'hector@procu.com') {
+  } else if (email === 'hector@procuraduria.com') {
     admin = 'HECTOR'
-  } else if (email === 'omar@procu.com') {
+  } else if (email === 'omar@procuraduria.com') {
     admin = 'OMAR'
-  } else if (email === 'eli@procu.com') {
+  } else if (email === 'elizabeth@procuraduria.com') {
     admin = 'ELI'
   }
 

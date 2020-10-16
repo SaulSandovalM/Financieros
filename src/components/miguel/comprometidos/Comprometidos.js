@@ -63,8 +63,13 @@ export default class Comprometidos extends Component {
         var reader = new FileReader()
         reader.onloadend = function () {
           var xml = new XMLParser().parseFromString(reader.result)
-          var data = [xml.attributes['Fecha'], xml.attributes['Total']]
-          fetch(xml).then(res => res.text()).then(xml => {
+          const data = {
+            fecha: xml.attributes['Fecha'],
+            total: xml.attributes['Total'],
+            nombre: xml.children[0].attributes['Nombre'],
+            fecha2: xml.children[4].children[0].attributes['FechaTimbrado']
+          }
+          fetch(data).then(res => res.text()).then(xml => {
             fetch('https://financieros-78cb0.firebaseio.com/xmlP.json', {
                 method: 'POST',
                 headers: {
@@ -127,7 +132,7 @@ export default class Comprometidos extends Component {
         listaPago.push({
           folio: child.val().folio,
           fecha: child.val().fecha,
-          importe: child.val().importe,
+          total: child.val().total,
           usoCFDI: child.val().usoCFDI,
           estatus: child.val().estatus,
           done: child.val().done,
@@ -790,7 +795,7 @@ class Rowp extends Component {
             <p>{this.props.item.fecha}</p>
           </div>
           <div className='w-xml'>
-            <p>{this.props.item.importe}</p>
+            <p>{this.props.item.total}</p>
           </div>
           <div className='w-xml'>
             <p>{this.props.item.usoCFD}</p>
