@@ -7,7 +7,8 @@ export default class ListComponent extends Component {
   constructor (props) {
     super(props)
     this.state = {
-      xml: []
+      xml: [],
+      search: ''
     }
   }
 
@@ -19,11 +20,25 @@ export default class ListComponent extends Component {
     })
   }
 
+  updateSeacrh (event) {
+    this.setState({ search: event.target.value.substr(0, 20) })
+  }
+
   render () {
+    const filterData = this.state.xml.filter(
+      (xml) => {
+        return xml.folio.indexOf(this.state.search) !== -1
+      }
+    )
+
     return (
       <div>
+        <input
+          value={this.state.search}
+          onChange={this.updateSeacrh.bind(this)}
+        />
         {
-          this.props.lista.map(item =>
+          filterData.map(item =>
             <RowComponent
               key={item.id}
               item={item}

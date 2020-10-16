@@ -19,7 +19,7 @@ export default class RowComponent extends Component {
       <div>
         <div className='xml-inputs-list'>
           <div className='w-xml'>
-            <p>{this.props.item.name}</p>
+            <p>{this.props.item.folio}</p>
           </div>
           <div className='w-xml'>
             <p>{this.props.item.fecha}</p>

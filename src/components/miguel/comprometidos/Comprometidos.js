@@ -16,6 +16,7 @@ export default class Comprometidos extends Component {
       key: '',
       fondo: '',
       fecha: '',
+      iva: '',
       realizo: '',
       tipo_doc: '',
       importe: '',
@@ -62,14 +63,15 @@ export default class Comprometidos extends Component {
         var reader = new FileReader()
         reader.onloadend = function () {
           var xml = new XMLParser().parseFromString(reader.result)
-          fetch(xml).then(res => res.text()).then(data => {
+          var data = [xml.attributes['Fecha'], xml.attributes['Total']]
+          fetch(xml).then(res => res.text()).then(xml => {
             fetch('https://financieros-78cb0.firebaseio.com/xmlP.json', {
                 method: 'POST',
                 headers: {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json',
                   },
-                  body: JSON.stringify(xml)
+                  body: JSON.stringify(data)
                 })
             })
         }
@@ -208,10 +210,8 @@ export default class Comprometidos extends Component {
   updatePago = (item) => {
     let updates = {}
     updates['xmlP/' + item.id] = {
-      folio: item.folio,
-      fecha: item.fecha,
+      Fecha: item.Fecha,
       importe: item.importe,
-      usoCFDI: item.usoCFDI,
       estatus: 'Asignado'
     }
     firebase.database().ref().update(updates)
@@ -372,14 +372,15 @@ export default class Comprometidos extends Component {
       trasferencia: item.trasferencia
     }
     firebase.database().ref().update(updates)
-    const { municipio, area } = this.state
+    const { municipio, area, totalr, fechar } = this.state
     const updateRef = firebase.firestore().collection('fondos').doc(this.props.match.params.id).collection('comprometidos').doc()
     updateRef.set({
       partida: item.ogasto,
       presupuestal: item.up,
       municipio,
       area,
-      importe_comp: this.state.total,
+      fecha: fechar,
+      importe_comp: totalr,
       año: item.año,
       ramo: item.rm,
       ur: item.ur,
@@ -467,7 +468,7 @@ export default class Comprometidos extends Component {
       admin = 'MAURICIO'
     }
     const allowCustom = this.state.allowCustom
-    const { municipio, area } = this.state
+    const { municipio, area, importer, iva, isr, totalr, fechar } = this.state
 
     const totalImporte = []
     this.state.listaAsi.map(item => (
@@ -475,21 +476,68 @@ export default class Comprometidos extends Component {
     ))
     const reducer = (a, b) => a + b
     this.state.total = totalImporte.reduce(reducer)
-    console.log(this.state.viewxml)
-
-    // const totalImportep = []
-    // this.state.listaPago.map(item => (
-    //   totalImportep.push(item.importe)
-    // ))
-    // const reducerp = (a, b) => a + b
-    // this.state.total = totalImportep.reduce(reducerp)
 
     return (
-      <div className='compro-container'>
-        <button onClick={this.cambioxml.bind(this)} style={{width: '100px'}}>Xml</button>
-        <button onClick={this.cambiorecibo.bind(this)} style={{width: '100px'}}>Recibo</button>
+      <div className='compro-container' style={{marginTop: '80px'}}>
+        <button onClick={this.cambioxml.bind(this)} style={{width: '100px'}}>Ocultar Recibo</button>
+        <button onClick={this.cambiorecibo.bind(this)} style={{width: '100px'}}>Agregar Recibo</button>
 
-        {this.state.viewxml === 1 &&
+        {this.state.viewxml === 0 &&
+          <div style={{ marginLeft: '500px', position: 'absolute', marginTop: '-45px'}}>
+            <p style={{ fontWeight: 'bold', fontSize: '16px'}}>Recibo</p>
+            <div style={{display: 'flex', margin: '10px', height: '25px'}}>
+              <p style={{width: '100px', margin: '0'}}>importe</p>
+              <input
+                name='importe'
+                onChange={this.onChange}
+                required
+                value={importer}
+                ref='importe'
+              />
+            </div>
+            <div style={{display: 'flex', margin: '10px', height: '25px'}}>
+              <p style={{width: '100px', margin: '0'}}>iva</p>
+              <input
+                name='iva'
+                onChange={this.onChange}
+                required
+                value={iva}
+                ref='iva'
+              />
+            </div>
+            <div style={{display: 'flex', margin: '10px', height: '25px'}}>
+              <p style={{width: '100px', margin: '0'}}>isr</p>
+              <input
+                name='isr'
+                onChange={this.onChange}
+                required
+                value={isr}
+                ref='isr'
+              />
+            </div>
+            <div style={{display: 'flex', margin: '10px', height: '25px'}}>
+              <p style={{width: '100px', margin: '0'}}>Total</p>
+              <input
+                name='total'
+                onChange={this.onChange}
+                required
+                value={totalr}
+                ref='total'
+              />
+            </div>
+            <div style={{display: 'flex', margin: '10px', height: '25px'}}>
+              <p style={{width: '100px', margin: '0'}}>fecha</p>
+              <input
+                name='total'
+                onChange={this.onChange}
+                required
+                value={fechar}
+                ref='total'
+              />
+            </div>
+          </div>
+        }
+
         <div className='fcc2'>
           <div className='fc-w'>
             <div className='f-c-c'>
@@ -582,7 +630,6 @@ export default class Comprometidos extends Component {
             </div>
           </div>
         </div>
-        }
 
         <div style={{marginTop: '-408px'}}>
           <ListComponent
