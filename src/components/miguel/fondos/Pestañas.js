@@ -7,6 +7,7 @@ import Tab from '@material-ui/core/Tab'
 import Typography from '@material-ui/core/Typography'
 import Box from '@material-ui/core/Box'
 import Fondo from './Fondo'
+import Comprometidos from '../comprometidos/Comprometidos'
 
 function TabPanel (props) {
   const { children, value, index, ...other } = props
@@ -69,10 +70,10 @@ export default function SimpleTabs () {
         <Fondo />
       </TabPanel>
       <TabPanel value={value} index={1}>
-        Item Two
+        Comprometidos
       </TabPanel>
       <TabPanel value={value} index={2}>
-        Item Three
+        Oficios
       </TabPanel>
     </div>
   )

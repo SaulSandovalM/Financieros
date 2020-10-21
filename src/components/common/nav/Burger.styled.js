@@ -2,13 +2,13 @@ import styled from 'styled-components'
 
 export const StyledBurger = styled.button`
   position: fixed;
-  top: 2%;
-  left: 2rem;
+  top: 2.4%;
+  left: 1.5rem;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
   width: 2rem;
-  height: 2rem;
+  height: 1.1rem;
   background: transparent;
   border: none;
   cursor: pointer;
@@ -20,9 +20,9 @@ export const StyledBurger = styled.button`
   }
 
   span {
-    width: 2rem;
+    width: 1.4rem;
     height: 0.25rem;
-    background: ${({ theme, open }) => open ? theme.primaryDark : theme.primaryLight};
+    background: white;
     border-radius: 10px;
     transition: all 0.3s linear;
     position: relative;
