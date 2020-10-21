@@ -22,12 +22,12 @@ function Routes () {
     <ThemeProvider theme={theme}>
       <Provider store={store}>
         <Router>
-          <div ref={node}>
+          {/* <div ref={node}>
             <FocusLock disabled={!open}>
               <Burger open={open} setOpen={setOpen} aria-controls={menuId} />
               <Menu open={open} setOpen={setOpen} id={menuId} />
             </FocusLock>
-          </div>
+          </div> */}
           <App />
         </Router>
       </Provider>

@@ -136,6 +136,86 @@
 
 
 
+/* Estilos de Fondo */
+.fondo-container {
+  min-height: 85vh;
+  width: 100%;
+  display: flex;
+}
+.div-content-fab {
+  bottom: 0;
+  margin: 30px;
+  position: fixed;
+  right: 0;
+}
+.card-fondo-con {
+  width: 100%;
+  padding: 20px;
+}
+.card-fondo-con2 {
+  width: 100%;
+  padding: 20px;
+  margin-top: 20px;
+}
+.field {
+  width: 100%;
+}
+.fondo-content {
+  width: 100%;
+  display: flex;
+}
+.card-f {
+  width: 50%;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
