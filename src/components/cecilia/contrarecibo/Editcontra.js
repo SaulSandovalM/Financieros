@@ -1,27 +1,35 @@
 import React, { Component } from 'react'
 import firebase from '../../../Firebase'
+import Fab from '@material-ui/core/Fab'
+import CheckIcon from '@material-ui/icons/Check'
+import Paper from '@material-ui/core/Paper'
+import TextField from '@material-ui/core/TextField'
+import Grid from '@material-ui/core/Grid'
+import Alert from '@material-ui/lab/Alert';
 
 export default class Edit extends Component {
   constructor (props) {
     super(props)
     this.state = {
       key: '',
-      fechaContra: '',
-      numContra: '',
-      fechaDepo: '',
-      cuentaPagar: '',
-      cuentaPagarPara: '',
-      beneficiario: '',
-      sujetoContable: '',
-      desc: '',
-      fecha: '',
       fondo: '',
-      importe: '',
-      no_lici: '',
-      no_oficio: '',
+      fecha: '',
+      tipo_doc: '',
       oficio_aut: '',
+      no_oficio: '',
+      importe: '',
+      beneficiario: '',
+      desc: '',
+      numProy: '',
       realizo: '',
-      tipo_doc: ''
+      no_lici: '',
+      requisicion: '',
+      pedido: '',
+      ncomprobantes: '',
+      poliza: '',
+      cfe: '',
+      nscfe: '',
+      observaciones: '',
     }
   }
 
@@ -32,24 +40,23 @@ export default class Edit extends Component {
         const fondoD = doc.data();
         this.setState({
           key: doc.id,
-          beneficiario: fondoD.beneficiario,
-          cfe: fondoD.cfe,
-          desc: fondoD.desc,
-          fecha: fondoD.fecha,
           fondo: fondoD.fondo,
-          importe: fondoD.improte,
-          ncomprobantes: fondoD.ncomprobantes,
-          no_lici: fondoD.no_lici,
-          no_oficio: fondoD.no_oficio,
-          nscfe: fondoD.nscfe,
-          numCompro: fondoD.numCompro,
-          observaciones: fondoD.observaciones,
+          fecha: fondoD.fecha,
+          tipo_doc: fondoD.tipo_doc,
           oficio_aut: fondoD.oficio_aut,
+          no_oficio: fondoD.no_oficio,
+          importe: fondoD.importe,
+          beneficiario: fondoD.beneficiario,
+          desc: fondoD.desc,
+          numProy: fondoD.numProy,
+          realizo: fondoD.realizo,
+          no_lici: fondoD.no_lici,
+          requisicion: fondoD.requisicion,
           pedido: fondoD.pedido,
           poliza: fondoD.poliza,
-          realizo: fondoD.realizo,
-          requisicion: fondoD.requisicion,
-          tipo_doc: fondoD.tipo_doc,
+          cfe: fondoD.cfe,
+          nscfe: fondoD.nscfe,
+          observaciones: fondoD.observaciones,
           fechaContra: fondoD.fechaContra,
           numContra: fondoD.numContra,
           fechaDepo: fondoD.fechaContra,
@@ -72,24 +79,23 @@ export default class Edit extends Component {
   onSubmit = (e) => {
     e.preventDefault()
     const {
-      beneficiario,
-      cfe,
-      desc,
-      fecha,
       fondo,
-      importe,
-      ncomprobantes,
-      no_lici,
-      no_oficio,
-      nscfe,
-      numCompro,
-      observaciones,
+      fecha,
+      tipo_doc,
       oficio_aut,
+      no_oficio,
+      importe,
+      beneficiario,
+      desc,
+      numProy,
+      realizo,
+      no_lici,
+      requisicion,
       pedido,
       poliza,
-      realizo,
-      requisicion,
-      tipo_doc,
+      cfe,
+      nscfe,
+      observaciones,
       fechaContra,
       numContra,
       fechaDepo,
@@ -98,23 +104,23 @@ export default class Edit extends Component {
       sujetoContable } = this.state
     const updateRef = firebase.firestore().collection('fondos').doc(this.state.key)
     updateRef.set({
-      beneficiario,
-      cfe,
-      desc,
-      fecha,
       fondo,
-      importe,
-      no_lici,
-      no_oficio,
-      nscfe,
-      numCompro,
-      observaciones,
+      fecha,
+      tipo_doc,
       oficio_aut,
+      no_oficio,
+      importe,
+      beneficiario,
+      desc,
+      numProy,
+      realizo,
+      no_lici,
+      requisicion,
       pedido,
       poliza,
-      realizo,
-      requisicion,
-      tipo_doc,
+      cfe,
+      nscfe,
+      observaciones,
       fechaContra,
       numContra,
       fechaDepo,
@@ -124,23 +130,23 @@ export default class Edit extends Component {
       estatus: 'Contrarecibo'
     }).then((docRef) => {
       this.setState({
-        beneficiario: '',
-        cfe: '',
-        desc: '',
-        fecha: '',
         fondo: '',
-        importe: '',
-        no_lici: '',
-        no_oficio: '',
-        nscfe: '',
-        numCompro: '',
-        observaciones: '',
+        fecha: '',
+        tipo_doc: '',
         oficio_aut: '',
+        no_oficio: '',
+        importe: '',
+        beneficiario: '',
+        desc: '',
+        numProy: '',
+        realizo: '',
+        no_lici: '',
+        requisicion: '',
         pedido: '',
         poliza: '',
-        realizo: '',
-        requisicion: '',
-        tipo_doc: '',
+        cfe: '',
+        nscfe: '',
+        observaciones: '',
         fechaContra: '',
         numContra: '',
         fechaDepo: '',
@@ -157,162 +163,202 @@ export default class Edit extends Component {
   }
 
   render () {
+    console.log(this.state.realizo)
     return (
-      <div>
-        <div className='container-all'>
-          <div>
-            <h3>
-              Agregar Contrarecibo
-            </h3>
-          </div>
-          <div>
-            <form onSubmit={this.onSubmit}>
-              <div>
-                <div className='fcc-i'>
-                  <p className='fimpre'>Descripción:</p>
-                  <input
-                    name='desc'
-                    onChange={this.onChange}
-                    value={this.state.desc}
-                    disabled
+      <form onSubmit={this.onSubmit} className='editcontra-container'>
+        <div style={{marginTop: '60px'}}>
+          <Grid container spacing={3}>
+            <Grid item xs={12}>
+              <Paper style={{ padding: '20px', display: 'flex', justifyContent: 'space-between' }}>
+                <div style={{ width: '48%' }}>
+                  <div style={{ marginBottom: '15px' }}><b>Fondo</b></div>
+                  <div>
+                    perro
+                  </div>
+                  <div style={{ display: 'flex', flexDirection: 'column'  }}>
+                    <TextField
+                      style={{ marginBottom: '15px' }}
+                      label='Fondo'
+                      name='fondo'
+                      value={this.state.fondo}
+                    />
+                    <TextField
+                      style={{ marginBottom: '15px' }}
+                      label='Fecha'
+                      name='fecha'
+                      value={this.state.fecha}
+                    />
+                    <TextField
+                      style={{ marginBottom: '15px' }}
+                      label='Tipo de Documento'
+                      name='tipo_doc'
+                      value={this.state.tipo_doc}
+                    />
+                    <TextField
+                      style={{ marginBottom: '15px' }}
+                      label='Oficio de Autorización'
+                      name='oficio_aut'
+                      value={this.state.oficio_aut}
+                    />
+                    <TextField
+                      style={{ marginBottom: '15px' }}
+                      label='No. de Oficio'
+                      name='no_oficio'
+                      value={this.state.no_oficio}
+                    />
+                    <TextField
+                      style={{ marginBottom: '15px' }}
+                      label='Importe'
+                      name='importe'
+                      value={'$ ' + this.state.importe}
+                    />
+                    <TextField
+                      style={{ marginBottom: '15px' }}
+                      label='Beneficiario'
+                      name='beneficiario'
+                      value={this.state.beneficiario}
+                    />
+                    <TextField
+                      style={{ marginBottom: '15px' }}
+                      label='Descripción'
+                      name='desc'
+                      value={this.state.desc}
+                    />
+                    <TextField
+                      style={{ marginBottom: '15px' }}
+                      label='No. de Proyecto'
+                      name='numProy'
+                      value={this.state.numProy}
+                    />
+                    <TextField
+                      label='Realizo'
+                      name='realizo'
+                      value={this.state.realizo}
+                    />
+                  </div>
+                </div>
+                <div style={{ width: '48%' }}>
+                  <div style={{ marginBottom: '15px' }}><b>Licitación</b></div>
+                  <TextField
+                    className='field'
+                    style={{ marginBottom: '15px' }}
+                    label='No. de Licitación'
+                    name='no_lici'
+                    value={this.state.no_lici}
+                  />
+                  <TextField
+                    className='field'
+                    style={{ marginBottom: '15px' }}
+                    label='Requisición'
+                    name='requisicion'
+                    value={this.state.requisicion}
+                  />
+                  <TextField
+                    className='field'
+                    style={{ marginBottom: '15px' }}
+                    label='Pedido'
+                    name='pedido'
+                    value={this.state.pedido}
+                  />
+                  <TextField
+                    className='field'
+                    style={{ marginBottom: '15px' }}
+                    label='Poliza Comprometido'
+                    name='poliza'
+                    value={this.state.poliza}
+                  />
+                  <div style={{ marginBottom: '15px', marginTop: '30px' }}><b>Pago CFE</b></div>
+                  <TextField
+                    className='field'
+                    style={{ marginBottom: '15px' }}
+                    label='Cta CFE'
+                    name='cfe'
+                    value={this.state.cfe}
+                  />
+                  <TextField
+                    className='field'
+                    style={{ marginBottom: '15px' }}
+                    label='No Servicio CFE'
+                    name='nscfe'
+                    value={this.state.nscfe}
+                  />
+                  <TextField
+                    className='field'
+                    style={{ marginBottom: '15px' }}
+                    label='Observaciones'
+                    name='observaciones'
+                    value={this.state.observaciones}
                   />
                 </div>
-                <div className='fcc-i'>
-                  <p className='fimpre'>Fecha:</p>
-                  <input
-                    name='fecha'
-                    onChange={this.onChange}
-                    value={this.state.fecha}
-                    disabled
-                  />
-                </div>
-                <div className='fcc-i'>
-                  <p className='fimpre'>Fondo:</p>
-                  <input
-                    name='fondo'
-                    onChange={this.onChange}
-                    value={this.state.fondo}
-                    disabled
-                  />
-                </div>
-                <div className='fcc-i'>
-                  <p className='fimpre'>Importe:</p>
-                  <input
-                    name='importe'
-                    onChange={this.onChange}
-                    value={this.state.importe}
-                    disabled
-                  />
-                </div>
-                <div className='fcc-i'>
-                  <p className='fimpre'>No. Oficio:</p>
-                  <input
-                    name='no_oficio'
-                    onChange={this.onChange}
-                    value={this.state.no_oficio}
-                    disabled
-                  />
-                </div>
-                <div className='fcc-i'>
-                  <p className='fimpre'>Num. Comprobantes:</p>
-                  <input
-                    name='numCompro'
-                    onChange={this.onChange}
-                    value={this.state.numCompro}
-                    disabled
-                  />
-                </div>
-                <div className='fcc-i'>
-                  <p className='fimpre'>Oficio Autorización:</p>
-                  <input
-                    name='oficio_aut'
-                    onChange={this.onChange}
-                    value={this.state.oficio_aut}
-                    disabled
-                  />
-                </div>
-                <div className='fcc-i'>
-                  <p className='fimpre'>Realizo:</p>
-                  <input
-                    name='realizo'
-                    onChange={this.onChange}
-                    value={this.state.realizo}
-                    disabled
-                  />
-                </div>
-                <div className='fcc-i'>
-                  <p className='fimpre'>Tipo Documento:</p>
-                  <input
-                    name='tipo_doc'
-                    onChange={this.onChange}
-                    value={this.state.tipo_doc}
-                    disabled
-                  />
-                </div>
-                <div className='fcc-i'>
-                  <p className='fimpre'>Fecha de Contrarecibo:</p>
-                  <input
-                    name='fechaContra'
-                    onChange={this.onChange}
-                    value={this.state.fechaContra}
-                  />
-                </div>
-                <div className='fcc-i'>
-                  <p className='fimpre'>Num. de Contrarecibo:</p>
-                  <input
-                    name='numContra'
-                    onChange={this.onChange}
-                    value={this.state.numContra}
-                  />
-                </div>
-                <div className='fcc-i'>
-                  <p className='fimpre'>Fecha de Deposito:</p>
-                  <input
-                    name='fechaDepo'
-                    onChange={this.onChange}
-                    value={this.state.fechaDepo}
-                  />
-                </div>
-                <div className='fcc-i'>
-                  <p className='fimpre'>Cuenta por Pagar:</p>
-                  <input
-                    name='cuentaPagar'
-                    onChange={this.onChange}
-                    value={this.state.cuentaPagar}
-                  />
-                </div>
-                <div className='fcc-i'>
-                  <p className='fimpre'>Cuenta por Pagar Para:</p>
-                  <input
-                    name='cuentaPagarPara'
-                    onChange={this.onChange}
-                    value={this.state.cuentaPagarPara}
-                  />
-                </div>
-                <div className='fcc-i'>
-                  <p className='fimpre'>Sujeto Contable:</p>
-                  <input
-                    name='sujetoContable'
-                    onChange={this.onChange}
-                    value={this.state.sujetoContable}
-                  />
-                </div>
-                <div className='fcc-i'>
-                  <p className='fimpre'>Beneficiario:</p>
-                  <input
-                    value={this.state.beneficiario}
-                    name='beneficiario'
-                    onChange={this.onChange}
-                  />
-                </div>
+              </Paper>
+            </Grid>
+          </Grid>
+          <Grid item xs={12} style={{ marginTop: '20px' }}>
+            <Paper style={{ padding: '20px' }}>
+              <div style={{ marginBottom: '15px' }}>Agregar Contrarecibo</div>
+              <div style={{ display: 'flex', flexDirection: 'column' }}>
+                <TextField
+                  style={{ marginBottom: '15px' }}
+                  label='Fecha de Contrarecibo'
+                  name='fondo'
+                  onChange={this.onChange}
+                  value={this.state.fechaContra}
+                  required
+                />
+                <TextField
+                  style={{ marginBottom: '15px' }}
+                  label='Numero de Contrarecibo'
+                  name='fecha'
+                  onChange={this.onChange}
+                  value={this.state.numContra}
+                  required
+                />
+                <TextField
+                  style={{ marginBottom: '15px' }}
+                  label='Fecha de Deposito'
+                  name='tipo_doc'
+                  onChange={this.onChange}
+                  value={this.state.fechaDepo}
+                  required
+                />
+                <TextField
+                  style={{ marginBottom: '15px' }}
+                  label='Cuenta por Pagar'
+                  name='oficio_aut'
+                  onChange={this.onChange}
+                  value={this.state.cuentaPagar}
+                  required
+                />
+                <TextField
+                  style={{ marginBottom: '15px' }}
+                  label='Cuenta por Pagar Para'
+                  name='no_oficio'
+                  onChange={this.onChange}
+                  value={this.state.cuentaPagarPara}
+                  required
+                />
+                <TextField
+                  label='Sujeto Contable'
+                  name='importe'
+                  onChange={this.onChange}
+                  value={this.state.sujetoContable}
+                  required
+                />
               </div>
-              <div className='cont-but'>
-                <button type='submit' className='but-g'>Guardar</button>
-              </div>
-            </form>
+            </Paper>
+          </Grid>
+          <div className='div-content-fab'>
+            <Fab
+              color='primary'
+              aria-label='add'
+              style={{ background: 'green' }}
+              type='submit'
+            >
+              <CheckIcon />
+            </Fab>
           </div>
         </div>
-      </div>
+      </form>
     )
   }
 }

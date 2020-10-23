@@ -1,3 +1,64 @@
+/* Estilos de Contrarecibo */
+.contrarecibo-container {
+  background: #f5f5f5;
+  padding: 30px;
+  margin-top: 60px;
+}
+.table-num-f {
+  border-left: 0;
+  border-right: white;
+  border-top: 0;
+  width: 6%;
+}
+.table-tipo {
+  border-left: 0;
+  border-right: white;
+  border-top: 0;
+  width: 10%;
+}
+.table-bene {
+  border-left: 0;
+  border-right: white;
+  border-top: 0;
+  width: 36%;
+}
+.table-same {
+  border-left: 0;
+  border-right: white;
+  border-top: 0;
+  width: 16%;
+}
+.link-edit {
+  text-decoration: none;
+}
+/* Estilos de Agregar Contrarecibo */
+.editcontra-container {
+  background: #f5f5f5;
+  padding: 30px;
+}
+.edit-content {
+  width: 50%;
+}
+.edit-paper {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 .contra-container {
   background-color: #f4f4f4;
   height: 100vh;

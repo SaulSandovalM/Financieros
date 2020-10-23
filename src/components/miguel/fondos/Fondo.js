@@ -414,6 +414,11 @@ export default class Fondos extends Component {
             </Paper>
           </Grid>
         </Grid>
+        <div className='div-content-fab'>
+          <Fab color="primary" aria-label="add" style={{ background: 'green' }}>
+            <CheckIcon />
+          </Fab>
+        </div>
       </div>
     )
   }

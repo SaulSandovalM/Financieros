@@ -3,6 +3,7 @@ import './Disponible.css'
 import RowComponent from './RowComponent'
 import firebase from '../../../Firebase'
 import XLSX from 'xlsx'
+import TextField from '@material-ui/core/TextField'
 
 export default class ListComponent extends Component {
   constructor (props) {
@@ -61,11 +62,9 @@ export default class ListComponent extends Component {
     return (
       <div>
         <div className='p-container-dis'>
-          <p className='p-title-margin-fr'>
-            Ingresa la Unidad Presupuestal a buscar
-          </p>
-          <input
-            className='input-style-fr'
+          <TextField
+            style={{ width: '350px' }}
+            label='Ingresa la Unidad Presupuestal a Buscar'
             value={this.state.search}
             onChange={this.updateSeacrh.bind(this)}
           />

@@ -2,6 +2,13 @@ import React, { Component } from 'react'
 import './Registro.css'
 import RowNoviembre from './RowNoviembre'
 import firebase from '../../../Firebase'
+import Table from '@material-ui/core/Table'
+import TableBody from '@material-ui/core/TableBody'
+import TableCell from '@material-ui/core/TableCell'
+import TableContainer from '@material-ui/core/TableContainer'
+import TableHead from '@material-ui/core/TableHead'
+import TableRow from '@material-ui/core/TableRow'
+import Paper from '@material-ui/core/Paper'
 
 export default class ListNoviembre extends Component {
   constructor (props) {
@@ -22,48 +29,54 @@ export default class ListNoviembre extends Component {
   render () {
     return (
       <div>
-        <div className='meses-container'>
-          <div className='table-left' />
-          <div className='table-meses-up'>
-            <p className='p-meses'>UP</p>
-          </div>
-          <div className='table-meses-proy'>
-            <p className='p-meses'>PROY</p>
-          </div>
-          <div className='table-meses-par'>
-            <p className='p-meses'>P</p>
-          </div>
-          <div className='table-meses-par'>
-            <p className='p-meses'>R</p>
-          </div>
-          <div className='table-meses-con'>
-            <p className='p-meses'>CONCEPTO</p>
-          </div>
-          <div className='table-meses-mes'>
-            <p className='p-meses'>MES</p>
-          </div>
-          <div className='table-meses-asig'>
-            <p className='p-meses'>ASIGNADO</p>
-          </div>
-          <div className='table-meses-gas'>
-            <p className='p-meses'>GASTO</p>
-          </div>
-          <div className='table-meses-saldo'>
-            <p className='p-meses'>SALDO</p>
-          </div>
-          <div className='table-meses-dis'>
-            <p className='p-meses'>DISPONIBLE</p>
-          </div>
-          <div className='table-right' />
-        </div>
-        {
-          this.props.lista.map(item =>
-            <RowNoviembre
-              key={item.id}
-              item={item}
-            />
-          )
-        }
+        <TableContainer component={Paper}>
+          <Table size='small'>
+            <TableHead>
+              <TableRow>
+                <TableCell className='table-meses-up'>
+                  <b>Up</b>
+                </TableCell>
+                <TableCell className='table-meses-proy'>
+                  <b>Proyecto</b>
+                </TableCell>
+                <TableCell className='table-meses-par'>
+                  <b>Partida</b>
+                </TableCell>
+                <TableCell className='table-meses-par'>
+                  <b>Rubro</b>
+                </TableCell>
+                <TableCell className='table-meses-con'>
+                  <b>Concepto</b>
+                </TableCell>
+                <TableCell className='table-meses-mes'>
+                  <b>Mes</b>
+                </TableCell>
+                <TableCell className='table-meses-asig'>
+                  <b>Asignado</b>
+                </TableCell>
+                <TableCell className='table-meses-asig'>
+                  <b>Gasto</b>
+                </TableCell>
+                <TableCell className='table-meses-asig'>
+                  <b>Saldo</b>
+                </TableCell>
+                <TableCell className='table-meses-asig'>
+                  <b>Disponible</b>
+                </TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {
+                this.props.lista.map(item =>
+                  <RowNoviembre
+                    key={item.id}
+                    item={item}
+                  />
+                )
+              }
+            </TableBody>
+          </Table>
+        </TableContainer>
       </div>
     )
   }

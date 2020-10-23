@@ -45,9 +45,8 @@
 }
 .p-container-dis {
   display: flex;
-  flex-direction: column;
   width: 30%;
-  margin-bottom: 20px;
+  padding-top: 40px;
 }
 .p-h-dis {
   overflow: hidden;

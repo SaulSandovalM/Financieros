@@ -13,6 +13,7 @@ import ListOctubre from './ListOctubre'
 import ListNoviembre from './ListNoviembre'
 import ListDiciembre from './ListDiciembre'
 import firebase from '../../../Firebase'
+import TextField from '@material-ui/core/TextField'
 
 export default class Registro extends Component {
   constructor () {
@@ -73,6 +74,7 @@ export default class Registro extends Component {
           dic: child.val().dic,
           gasene: child.val().gasene,
           gasfeb: child.val().gasfeb,
+          gasmar: child.val().gasmar,
           gasabr: child.val().gasabr,
           gasmay: child.val().gasmay,
           gasjun: child.val().gasjun,
@@ -102,19 +104,14 @@ export default class Registro extends Component {
     }
 
     return (
-      <div className='pf-container'>
-        <div className='site-pf'>
-          <p className='site-pf-s'><b>Registro de Fondos 2020</b></p>
-        </div>
-        <div className='date-container'>
-          <p className='p-title-size'><b>- Seleccione el mes para buscar</b></p>
-        </div>
-        <input
+      <div className='pf-container' style={{ paddingTop: '90px' }}>
+        <TextField
+          style={{ width: '250px' }}
+          label='Seleccione el mes para buscar'
           name='mes'
           onChange={this.handleChange.bind(this)}
           value={this.state.mes}
           onInput={toInputUppercase}
-          className='space-i'
         />
         {this.state.mes === 'ENERO' &&
           <div className='table-c-r'>

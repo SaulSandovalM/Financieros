@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import './Registro.css'
 import CurrencyFormat from 'react-currency-format'
+import TableCell from '@material-ui/core/TableCell'
+import TableRow from '@material-ui/core/TableRow'
 
 export default class RowNoviembre extends Component {
   constructor (props) {
@@ -15,60 +17,58 @@ export default class RowNoviembre extends Component {
     const saldo = this.props.item.nov
     const gasto = this.props.item.gasnov
     return (
-      <div className='meses-container-row'>
-        <div className='table-left' />
-        <div className='table-meses-up'>
-          <p className='p-meses-row'>{this.props.item.up}</p>
-        </div>
-        <div className='table-meses-proy'>
-          <p className='p-meses-row'>{this.props.item.proy}</p>
-        </div>
-        <div className='table-meses-par'>
-          <p className='p-meses-row'>{this.props.item.ogasto}</p>
-        </div>
-        <div className='table-meses-par'>
-          <p className='p-meses-row'>{this.props.item.rubro}</p>
-        </div>
-        <div className='table-meses-con'>
-          <p className='p-meses-row-con'>{this.props.item.np}</p>
-        </div>
-        <div className='table-meses-mes'>
-          <p className='p-meses-row'>Noviembre</p>
-        </div>
-        <div className='table-meses-asig'>
+      <TableRow>
+        <TableCell className='table-meses-up'>
+          <div>{this.props.item.up}</div>
+        </TableCell>
+        <TableCell className='table-meses-proy'>
+          <div>{this.props.item.proy}</div>
+        </TableCell>
+        <TableCell className='table-meses-par'>
+          <div>{this.props.item.ogasto}</div>
+        </TableCell>
+        <TableCell className='table-meses-par'>
+          <div>{this.props.item.rubro}</div>
+        </TableCell>
+        <TableCell className='table-meses-con'>
+          <div className='hi'>{this.props.item.np}</div>
+        </TableCell>
+        <TableCell className='table-meses-mes'>
+          <div>Noviembre</div>
+        </TableCell>
+        <TableCell className='table-meses-asig'>
           <CurrencyFormat
             value={saldo + gasto}
             displayType='text'
             thousandSeparator
             prefix='$ '
           />
-        </div>
-        <div className='table-meses-gas'>
+        </TableCell>
+        <TableCell className='table-meses-asig'>
           <CurrencyFormat
             value={this.props.item.gasnov}
             displayType='text'
             thousandSeparator
             prefix='$ '
           />
-        </div>
-        <div className='table-meses-saldo'>
+        </TableCell>
+        <TableCell className='table-meses-asig'>
           <CurrencyFormat
             value={this.props.item.nov}
             displayType='text'
             thousandSeparator
             prefix='$ '
           />
-        </div>
-        <div className='table-meses-dis'>
+        </TableCell>
+        <TableCell className='table-meses-asig'>
           <CurrencyFormat
             value={this.props.item.nov}
             displayType='text'
             thousandSeparator
             prefix='$ '
           />
-        </div>
-        <div className='table-right' />
-      </div>
+        </TableCell>
+      </TableRow>
     )
   }
 }

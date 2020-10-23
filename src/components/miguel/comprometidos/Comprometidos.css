@@ -214,3 +214,41 @@
   display: flex;
   width: 70%;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Diseño de NewComprometidos  */
+.compro-color {
+  background: #f5f5f5;
+}
+.paper-content {
+  width: 100%;
+}
+.border-icon {
+  width: 2%;
+  border-top: 0;
+  border-left: 0;
+  border-right-color: white;
+}
+.border-des {
+  border-top: 0;
+  border-left: 0;
+  border-right-color: white;
+}
+.border-table {
+  width: 14%;
+  border-top: 0;
+  border-left: 0;
+  border-right-color: white;
+}
