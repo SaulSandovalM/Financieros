@@ -271,10 +271,7 @@ export default class Fondor extends Component {
 
   render () {
     return (
-      <div className='pf-container'>
-        <div className='site-pf'>
-          <p className='site-pf-s'><b>Fondo Revolvente</b></p>
-        </div>
+      <div className='pf-container' style={{ marginTop: '60px' }}>
         <div className='p-container-fr'>
           <div className='p-margin-row'>
             <p className='p-title-size'>
@@ -335,13 +332,13 @@ export default class Fondor extends Component {
                     </div>
                     <div className='p-container-ifr2'>
                       <TextField
-                        label='Importe'
+                        label='Numero de Contrarecibo'
                         id='numContra'
                         name='numContra'
                         required
                         style={{zIndex: '3'}}
                         onChange={this.handleChange.bind(this)}
-                        ref={numContra => this.inputImporte = numContra}
+                        ref={numContra => this.inputNumContra = numContra}
                       />
                     </div>
                   </div>
@@ -350,13 +347,13 @@ export default class Fondor extends Component {
             </div>
           </div>
         </div>
-        <div className='space-table'>
+        <div className='space-table' style={{ background: '#f4f4f4'}}>
           <ListComponent
             listaB={this.state.listaB}
             update={this.update}
           />
         </div>
-        <div className='space-table2'>
+        <div className='space-table2' style={{ background: '#f4f4f4'}}>
           <ListFr
             listaB={this.state.listaB}
           />

@@ -217,9 +217,9 @@ export default class Transferencia extends Component {
       gasjul: item.gasjul,
       ago: item.ago,
       gasago: item.gasago,
-      sep: parseInt(item.sep) + parseInt(this.state.importe),
+      sep: parseInt(item.sep),
       gassep: item.gassep,
-      oct: item.oct,
+      oct: item.oct + parseInt(this.state.importe),
       gasoct: item.gasoct,
       nov: item.nov,
       gasnov: item.gasnov,
@@ -236,7 +236,7 @@ export default class Transferencia extends Component {
 
   render () {
     return (
-      <div className='pf-container-f' style={{marginTop: '60px'}}>
+      <div className='pf-container-f' style={{paddingTop: '60px'}}>
         <div>
           <div>
             <div className='p-container-fondor'>

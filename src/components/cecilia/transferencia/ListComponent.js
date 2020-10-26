@@ -45,7 +45,7 @@ export default class ListComponent extends Component {
 
   render () {
     return (
-      <div>
+      <div style={{ background: '#f4f4f4' }}>
         <div>
           <div>
             <div className='p-container-fondor' style={{ background: '#f4f4f4', padding: '30px' }}>
@@ -88,7 +88,7 @@ export default class ListComponent extends Component {
             </div>
           </div>
         </div>
-        <div style={{ margin: '30px' }}>
+        <div style={{ margin: '0 30px 0 30px' }}>
           <TableContainer component={Paper}>
             <Table size='small'>
               <TableHead>

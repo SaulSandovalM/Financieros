@@ -174,7 +174,7 @@ export default class ContainerT extends Component {
 
   render () {
     return (
-      <div>
+      <div style={{ background: '#f4f4f4', minHeight: '100vh' }}>
         <Transferencia />
         <Transferenciad />
         <div className='pf-container-f' style={{ paddingTop: '50px' }}>
@@ -186,7 +186,7 @@ export default class ContainerT extends Component {
             </div>
           </div>
         </div>
-        <div style={{ margin: '30px' }}>
+        <div style={{ margin: '0 30px 0 30px' }}>
           <ListTransferencia
             listaB={this.state.listaB}
           />

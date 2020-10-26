@@ -1,6 +1,9 @@
 import React, { Component } from 'react'
 import CurrencyFormat from 'react-currency-format'
 import './Fondor.css'
+import TableBody from '@material-ui/core/TableBody'
+import TableCell from '@material-ui/core/TableCell'
+import TableRow from '@material-ui/core/TableRow'
 
 export default class RowComponent extends Component {
   constructor (props) {
@@ -23,44 +26,39 @@ export default class RowComponent extends Component {
     let button;
     if (up === this.props.search && ogasto === this.props.search2 && rubro === this.props.search3) {
       button =
-      <div>
-        <div className='table-container-p'>
-          <div className='table-left' />
-          <div className='table-up-p-frn-fr'>
-            <p>{this.props.item.up}</p>
-          </div>
-          <div className='table-up-p-frn-d'>
-            <p>{this.props.item.ogasto}</p>
-          </div>
-          <div className='table-up-p-frn-d'>
-            <p>{this.props.item.rubro}</p>
-          </div>
-          <div className='table-up-p-frn-d'>
-            <div>
-              <CurrencyFormat
-                value={this.props.item.dic}
-                displayType='text'
-                thousandSeparator
-                prefix=' $'
-              />
-              .00
-            </div>
-          </div>
-          <div className='table-cpa-d'>
-            <p>{this.props.item.cpa}</p>
-          </div>
-          <div className='table-up-p-frn-d'>
-            <button onClick={this.update}>Agregar</button>
-          </div>
-          <div className='table-right' />
+      <TableRow>
+        <TableCell className='table-up-p-frn-a'>
+          <p style={{ margin: '0' }}>{this.props.item.up}</p>
+        </TableCell>
+        <TableCell className='table-up-p-frn-p'>
+          <p style={{ margin: '0' }}>{this.props.item.ogasto}</p>
+        </TableCell>
+        <TableCell className='table-up-p-frn-p'>
+          <p style={{ margin: '0' }}>{this.props.item.rubro}</p>
+        </TableCell>
+        <TableCell className='table-up-p-frn-p'>
+        <div>
+          <CurrencyFormat
+            value={this.props.item.dic}
+            displayType='text'
+            thousandSeparator
+            prefix=' $'
+          />
         </div>
-      </div>
+        </TableCell>
+        <TableCell className='table-cpa-a'>
+          <p style={{ margin: '0' }}>{this.props.item.cpa}</p>
+        </TableCell>
+        <TableCell className='table-up-p-frn-p'>
+          <button onClick={this.update}>AGREGAR</button>
+        </TableCell>
+      </TableRow>
     }
 
     return (
-      <div>
+      <TableBody>
         {button}
-      </div>
+      </TableBody>
     )
   }
 }
