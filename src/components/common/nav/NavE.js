@@ -3,8 +3,8 @@ import { Link } from 'react-router-dom'
 import { logoutUser } from '../../../actions'
 import { connect } from 'react-redux'
 import './Nav.css'
-import logoH from '../../../img/logo_h.svg'
 import arrow from '../../../img/arrow.svg'
+import Typography from '@material-ui/core/Typography'
 
 class NavE extends Component {
   constructor () {
@@ -29,79 +29,117 @@ class NavE extends Component {
     const { isLoggingOut, logoutError } = this.props
     return (
       <div className='nav-col'>
-        <div className='navbar-navigation'>
-          <img className='logo' src={logoH} alt='' />
-        </div>
-        <div className='navbar-left'>
-          <Link to='/Caja' className='deco'>
-            <h3 className='nav-t'>Caja</h3>
-          </Link>
-        </div>
-        <div className='navbar-left'>
-          <Link to='/Arqueo' className='deco'>
-            <h3 className='nav-t'>Arqueo</h3>
-          </Link>
-        </div>
-        <div className='navbar-left'>
-          <Link to='/ArqueoD' className='deco'>
-            <h3 className='nav-t'>Impresión de Arqueo</h3>
-          </Link>
-        </div>
-        <div className='navbar-left'>
-          <Link to='/Cheques' className='deco'>
-            <h3 className='nav-t'>Cheques</h3>
-          </Link>
-        </div>
-        <div className='navbar-left' onClick={this.toggleHidden.bind(this)}>
-          <div className='deco'>
-            <h3 className='nav-t'>Vales</h3>
+        <div style={{ display: 'flex', flexDirection: 'column'}}>
+          <div className='navbar-left' style={{ marginTop: '30px' }}>
+            <Link to='/Caja' className='deco'>
+              <span className='material-icons' style={{ color: 'white', marginTop: '3px', marginRight: '15px' }}>
+                local_atm
+              </span>
+              <Typography className='nav-t' variant='h6' style={{ marginBottom: '15px', color: 'white' }}>
+                Caja
+              </Typography>
+            </Link>
           </div>
-          <img
-            className='arrow'
-            src={arrow}
-            alt=''
-          />
+          <div className='navbar-left'>
+            <Link to='/Arqueo' className='deco'>
+              <span className='material-icons' style={{ color: 'white', marginTop: '3px', marginRight: '15px' }}>
+                folder_open
+              </span>
+              <Typography className='nav-t' variant='h6' style={{ marginBottom: '15px', color: 'white' }}>
+                Arqueo
+              </Typography>
+            </Link>
+          </div>
+          <div className='navbar-left'>
+            <Link to='/ArqueoD' className='deco'>
+              <span className='material-icons' style={{ color: 'white', marginTop: '3px', marginRight: '15px' }}>
+                plagiarism
+              </span>
+              <Typography className='nav-t' variant='h6' style={{ marginBottom: '15px', color: 'white' }}>
+                Impresión de Arqueo
+              </Typography>
+            </Link>
+          </div>
+          <div className='navbar-left'>
+            <Link to='/Cheques' className='deco'>
+              <span className='material-icons' style={{ color: 'white', marginTop: '3px', marginRight: '15px' }}>
+                playlist_add_check
+              </span>
+              <Typography className='nav-t' variant='h6' style={{ marginBottom: '15px', color: 'white' }}>
+                Cheques
+              </Typography>
+            </Link>
+          </div>
+          <div className='navbar-left'>
+            <div className='deco-c' onClick={this.toggleHidden.bind(this)}>
+              <span className='material-icons' style={{ color: 'white', marginTop: '3px', marginRight: '15px' }}>
+                attach_money
+              </span>
+              <Typography variant='h6' style={{ marginBottom: '15px', color: 'white' }}>
+                Vales
+              </Typography>
+            </div>
+            <img
+              className='arrow'
+              src={arrow}
+              alt=''
+            />
+          </div>
+          {!this.state.isHidden &&
+            <div>
+              <div className='subnav'>
+                <Link to='/Vales' className='deco'>
+                  <Typography className='nav-t' style={{ marginBottom: '15px', color: 'white' }}>
+                    • Vale
+                  </Typography>
+                </Link>
+              </div>
+              <div className='subnav'>
+                <Link to='/ListValesA' className='deco'>
+                  <Typography className='nav-t' style={{ marginBottom: '15px', color: 'white' }}>
+                    • Autorizados
+                  </Typography>
+                </Link>
+              </div>
+              <div className='subnav'>
+                <Link to='/ListValesP' className='deco'>
+                  <Typography className='nav-t' style={{ marginBottom: '15px', color: 'white' }}>
+                    • No Autorizados
+                  </Typography>
+                </Link>
+              </div>
+              <div className='subnav'>
+                <Link to='/ListValesN' className='deco'>
+                  <Typography className='nav-t' style={{ marginBottom: '15px', color: 'white' }}>
+                    • Pendientes
+                  </Typography>
+                </Link>
+              </div>
+              <div className='subnav'>
+                <Link to='/ListArchivosV' className='deco'>
+                  <Typography className='nav-t' style={{ marginBottom: '15px', color: 'white' }}>
+                    • Archivos Vales
+                  </Typography>
+                </Link>
+              </div>
+            </div>}
         </div>
-        {!this.state.isHidden &&
-          <div>
-            <div className='subnav'>
-              <Link to='/Vales' className='deco'>
-                <p className='nav-t'> • Vale</p>
-              </Link>
+        <div>
+          <div className='navbar-left'>
+            <div className='deco'>
+              <button
+                onClick={this.handleLogout}
+                style={{ background: '#092432', border: 'none', display: 'flex' }}>
+                <span className='material-icons' style={{ color: 'white', marginTop: '3px', marginRight: '15px' }}>
+                  person
+                </span>
+                <Typography className='nav-t' variant='h6' style={{ marginBottom: '15px', color: 'white' }}>
+                  Cerrar Sesión
+                </Typography>
+              </button>
+              {isLoggingOut && <p>Cerrando Sesion....</p>}
+              {logoutError && <p>Error al Cerrar Sesion</p>}
             </div>
-            <div className='subnav'>
-              <Link to='/ListValesA' className='deco'>
-                <p className='nav-t'> • Autorizados</p>
-              </Link>
-            </div>
-            <div className='subnav'>
-              <Link to='/ListValesP' className='deco'>
-                <p className='nav-t'> • No Autorizados</p>
-              </Link>
-            </div>
-            <div className='subnav'>
-              <Link to='/ListValesN' className='deco'>
-                <p className='nav-t'> • Pendientes</p>
-              </Link>
-            </div>
-            <div className='subnav'>
-              <Link to='/ListArchivosV' className='deco'>
-                <p className='nav-t'> • Archivos Vales</p>
-              </Link>
-            </div>
-          </div>}
-        <div className='navbar-left'>
-          <div className='deco'>
-            <button
-              onClick={this.handleLogout}
-              className='nav-t'
-              style={{background: '#092432', border: 'none'}}>
-              <h3 className='nav-t'>
-                Cerrar Sesion
-              </h3>
-            </button>
-            {isLoggingOut && <p>Cerrando Sesion....</p>}
-            {logoutError && <p>Error al Cerrar Sesion</p>}
           </div>
         </div>
       </div>
