@@ -53,11 +53,7 @@ export default class Archivos extends Component {
 
   render () {
     return (
-      <div className='pf-container'>
-        <div className='site-pf'>
-          <p className='site-pf-s'><b>Archivos</b></p>
-        </div>
-        <div className='space-butt' />
+      <div className='pfa-container'>
         <div className='list-c-container'>
           <ListComponent
             lista={this.state.lista}

@@ -7,17 +7,17 @@
   width: 100%;
 }
 .p-title-size-fr {
-  font-size: 18px;
+  height: 25px;
 }
 .inputs-container-fr {
   display: flex;
   flex-direction: row;
   width: 100%;
 }
-.p-container-ifr {
+.p-container-ifra {
   display: flex;
   flex-direction: column;
-  width: 15%;
+  width: 25%;
 }
 .p-container-ifr2 {
   display: flex;
@@ -55,54 +55,34 @@
   display: flex;
 }
 .table-up-p-fr {
-  border-bottom: 1px solid #d0d0d0;
-  padding-left: 5px;
-  border-right: 1px solid #d0d0d0;
   width: 72%;
-  height: 30px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+  border-left: 0;
+  border-right: white;
+  border-top: 0;
 }
 .table-up-p-frn-p {
   width: 7%;
-  border-bottom: 1px solid #d0d0d0;
-  border-right: 1px solid #d0d0d0;
-  padding-left: 5px;
-  height: 30px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+  border-left: 0;
+  border-right: white;
+  border-top: 0;
 }
 .table-up-p-frn-a {
   width: 4%;
-  border-bottom: 1px solid #d0d0d0;
-  border-right: 1px solid #d0d0d0;
-  padding-left: 5px;
-  height: 30px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+  border-left: 0;
+  border-right: white;
+  border-top: 0;
 }
 .table-cpa-a {
   width: 65%;
-  border-bottom: 1px solid #d0d0d0;
-  border-right: 1px solid #d0d0d0;
-  padding-left: 5px;
-  height: 30px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+  border-left: 0;
+  border-right: white;
+  border-top: 0;
 }
 .table-up-p-frn2 {
   width: 6%;
-  border-bottom: 1px solid #d0d0d0;
-  border-right: 1px solid #d0d0d0;
-  padding-left: 5px;
-  height: 30px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+  border-left: 0;
+  border-right: white;
+  border-top: 0;
 }
 .filename {
   display: flex;
@@ -125,15 +105,15 @@
   -webkit-line-clamp: 1;
   -webkit-box-orient: vertical;
 }
-.space-table {
+.space-table-am {
   margin-top: -150px;
-  background: white;
+  background: #f4f4f4;
   margin-left: -30px;
   margin-right: -30px;
 }
-.space-table2 {
+.space-table2-am {
   margin-top: -30px;
-  background: white;
+  background: #f4f4f4;
   margin-left: -30px;
   margin-right: -30px;
 }

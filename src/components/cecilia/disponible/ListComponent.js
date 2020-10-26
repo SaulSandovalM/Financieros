@@ -4,6 +4,13 @@ import RowComponent from './RowComponent'
 import firebase from '../../../Firebase'
 import XLSX from 'xlsx'
 import TextField from '@material-ui/core/TextField'
+import Table from '@material-ui/core/Table'
+import TableCell from '@material-ui/core/TableCell'
+import TableContainer from '@material-ui/core/TableContainer'
+import TableHead from '@material-ui/core/TableHead'
+import TableRow from '@material-ui/core/TableRow'
+import Paper from '@material-ui/core/Paper'
+import Button from '@material-ui/core/Button'
 
 export default class ListComponent extends Component {
   constructor (props) {
@@ -68,71 +75,80 @@ export default class ListComponent extends Component {
             value={this.state.search}
             onChange={this.updateSeacrh.bind(this)}
           />
-        </div>
-        <div className='but-exc'>
-          <button className='input-sc boton-g' onClick={this.handleFile}>
-            Exportar a Excel
-          </button>
+          <Button
+            variant='contained'
+            color='primary'
+            onClick={this.handleFile}
+            style={{ background: '#092432' }}
+          >
+            EXPORTAR A EXCEL
+          </Button>
         </div>
         <div>
-          <div className='meses-container'>
-            <div className='table-dis-up-u'>
-              <p className='p-h-dis'>UP</p>
-            </div>
-            <div className='table-dis-up-t'>
-              <p className='p-h-dis'>RUBRO</p>
-            </div>
-            <div className='table-dis-up-t'>
-              <p className='p-h-dis'>PARTIDA</p>
-            </div>
-            <div className='table-dis-up'>
-              <p className='p-h-dis'>ENERO</p>
-            </div>
-            <div className='table-dis-up'>
-              <p className='p-h-dis'>FEBRERO</p>
-            </div>
-            <div className='table-dis-up'>
-              <p className='p-h-dis'>MARZO</p>
-            </div>
-            <div className='table-dis-up'>
-              <p className='p-h-dis'>ABRIL</p>
-            </div>
-            <div className='table-dis-up'>
-              <p className='p-h-dis'>MAYO</p>
-            </div>
-            <div className='table-dis-up'>
-              <p className='p-h-dis'>JUNIO</p>
-            </div>
-            <div className='table-dis-up'>
-              <p className='p-h-dis'>JULIO</p>
-            </div>
-            <div className='table-dis-up'>
-              <p className='p-h-dis'>AGOSTO</p>
-            </div>
-            <div className='table-dis-up'>
-              <p className='p-h-dis'>SEPTIEMBRE</p>
-            </div>
-            <div className='table-dis-up'>
-              <p className='p-h-dis'>OCTUBRE</p>
-            </div>
-            <div className='table-dis-up'>
-              <p className='p-h-dis'>NOVIEMBRE</p>
-            </div>
-            <div className='table-dis-up'>
-              <p className='p-h-dis'>DICIEMBRE</p>
-            </div>
-            <div className='table-dis-up'>
-              <p className='p-h-dis'>DISPONIBILIDAD</p>
-            </div>
-          </div>
-          {
-            filterData.map(item =>
-              <RowComponent
-                key={item.id}
-                item={item}
-              />
-            )
-          }
+          <TableContainer component={Paper}>
+            <Table size='small'>
+              <TableHead>
+                <TableRow>
+                  <TableCell className='table-num-dup'>
+                    <b>Up</b>
+                  </TableCell>
+                  <TableCell className='table-num-d'>
+                    <b>Rubro</b>
+                  </TableCell>
+                  <TableCell className='table-num-d'>
+                    <b>Partida</b>
+                  </TableCell>
+                  <TableCell className='table-num-d'>
+                    <b>Enero</b>
+                  </TableCell>
+                  <TableCell className='table-num-d'>
+                    <b>Febrero</b>
+                  </TableCell>
+                  <TableCell className='table-num-d'>
+                    <b>Marzo</b>
+                  </TableCell>
+                  <TableCell className='table-num-d'>
+                    <b>Abril</b>
+                  </TableCell>
+                  <TableCell className='table-num-d'>
+                    <b>Mayo</b>
+                  </TableCell>
+                  <TableCell className='table-num-d'>
+                    <b>Junio</b>
+                  </TableCell>
+                  <TableCell className='table-num-d'>
+                    <b>Julio</b>
+                  </TableCell>
+                  <TableCell className='table-num-d'>
+                    <b>Agosto</b>
+                  </TableCell>
+                  <TableCell className='table-num-d'>
+                    <b>Septiembre</b>
+                  </TableCell>
+                  <TableCell className='table-num-d'>
+                    <b>Octubre</b>
+                  </TableCell>
+                  <TableCell className='table-num-d'>
+                    <b>Noviembre</b>
+                  </TableCell>
+                  <TableCell className='table-num-d'>
+                    <b>Diciembre</b>
+                  </TableCell>
+                  <TableCell className='table-num-d'>
+                    <b>Disponible</b>
+                  </TableCell>
+                </TableRow>
+              </TableHead>
+              {
+                filterData.map(item =>
+                  <RowComponent
+                    key={item.id}
+                    item={item}
+                  />
+                )
+              }
+            </Table>
+          </TableContainer>
         </div>
       </div>
     )

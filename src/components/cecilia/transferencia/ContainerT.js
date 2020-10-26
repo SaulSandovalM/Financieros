@@ -4,6 +4,12 @@ import Transferencia from './Transferencia'
 import Transferenciad from './Transferenciad'
 import ListTransferencia from './ListTransferencia'
 import firebase from '../../../Firebase'
+import Table from '@material-ui/core/Table'
+import TableCell from '@material-ui/core/TableCell'
+import TableContainer from '@material-ui/core/TableContainer'
+import TableHead from '@material-ui/core/TableHead'
+import TableRow from '@material-ui/core/TableRow'
+import Paper from '@material-ui/core/Paper'
 
 export default class ContainerT extends Component {
   constructor () {
@@ -180,34 +186,10 @@ export default class ContainerT extends Component {
             </div>
           </div>
         </div>
-        <div className='table-container-fr'>
-          <div className='table-left' />
-          <div className='table-up-p-frn-t'>
-            <b>UP</b>
-          </div>
-          <div className='table-up-p-frn-tt'>
-            <b>PARTIDA</b>
-          </div>
-          <div className='table-up-p-frn-tt'>
-            <b>RUBRO</b>
-          </div>
-          <div className='table-up-p-frn-tt'>
-            <b>IMPORTE</b>
-          </div>
-          <div className='table-cpa-t'>
-            <b>CPA</b>
-          </div>
-          <div className='table-up-p-frn-tt'>
-            <b>ESTATUS</b>
-          </div>
-          <div className='table-right' />
-        </div>
-        <div className='pf-container-f'>
-          <div className='space-table2'>
-            <ListTransferencia
-              listaB={this.state.listaB}
-            />
-          </div>
+        <div style={{ margin: '30px' }}>
+          <ListTransferencia
+            listaB={this.state.listaB}
+          />
         </div>
       </div>
     )

@@ -3,8 +3,8 @@ import Dropzone from 'react-dropzone'
 import csv from 'csv'
 import firebase from '../../../Firebase'
 import './Presupuesto.css'
-import Paper from '@material-ui/core/Paper'
-import Grid from '@material-ui/core/Grid'
+import Typography from '@material-ui/core/Typography'
+import Button from '@material-ui/core/Button'
 
 export default class Excel extends Component {
   constructor () {
@@ -194,11 +194,11 @@ export default class Excel extends Component {
 
   render () {
     return (
-      <div style={{ padding: '24px', background: '#f4f4f4'}}>
+      <div style={{ padding: '24px', background: '#f4f4f4' }}>
         <form className='presupuesto-container' onSubmit={this.sendMessage.bind(this)} ref='contactForm'>
           <div className='presupuesto-content'>
             <div className='presupuesto-card'>
-              <h1 className='presupuesto-h1'>Aqui puedes subir<br />tu presupuesto anual </h1>
+              <Typography variant='h4'><b>Aqui puedes subir<br />tu presupuesto anual</b></Typography>
               <p className='presupuesto-p'>Traspasa tu información de Excel para poder usar el sistema</p>
               <div>
                 <p>Archivo CSV:</p>
@@ -245,7 +245,14 @@ export default class Excel extends Component {
                 </progress>
               </div>
               <div className='button-pres'>
-                <button type='submit' className='button-sty'>Guardar</button>
+                <Button
+                  variant='contained'
+                  color='primary'
+                  style={{ background: '#092432' }}
+                  type='submit'
+                >
+                  GUARDAR
+                </Button>
               </div>
             </div>
           </div>

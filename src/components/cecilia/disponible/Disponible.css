@@ -45,8 +45,10 @@
 }
 .p-container-dis {
   display: flex;
-  width: 30%;
+  width: 100%;
   padding-top: 40px;
+  justify-content: space-between;
+  margin-bottom: 20px;
 }
 .p-h-dis {
   overflow: hidden;
@@ -69,4 +71,16 @@
   display: flex;
   justify-content: flex-end;
   width: 100%;
+}
+.table-num-d {
+  border-left: 0;
+  border-right: white;
+  border-top: 0;
+  width: 6.4%;
+}
+.table-num-dup {
+  border-left: 0;
+  border-right: white;
+  border-top: 0;
+  width: 3%;
 }

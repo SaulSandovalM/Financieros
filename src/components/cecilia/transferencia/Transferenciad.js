@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import './Transferencia.css'
 import firebase from '../../../Firebase'
 import ListComponent from './ListComponent'
+import TextField from '@material-ui/core/TextField'
 
 export default class Transferencia extends Component {
   constructor () {
@@ -249,9 +250,8 @@ export default class Transferencia extends Component {
                   <div className='inputs-row-fr-2'>
                     <div className='no' />
                     <div className='p-container-ifr2'>
-                      <p className='p-title-margin-fr'>Importe</p>
-                      <input
-                        className='input-style-fr'
+                      <TextField
+                        label='Importe'
                         id='importe'
                         name='importe'
                         required

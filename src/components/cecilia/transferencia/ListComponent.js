@@ -2,6 +2,13 @@ import React, { Component } from 'react'
 import './Transferencia.css'
 import RowCompoTransferencia from './RowCompoTransferencia'
 import firebase from '../../../Firebase'
+import TextField from '@material-ui/core/TextField'
+import Table from '@material-ui/core/Table'
+import TableCell from '@material-ui/core/TableCell'
+import TableContainer from '@material-ui/core/TableContainer'
+import TableHead from '@material-ui/core/TableHead'
+import TableRow from '@material-ui/core/TableRow'
+import Paper from '@material-ui/core/Paper'
 
 export default class ListComponent extends Component {
   constructor (props) {
@@ -43,17 +50,14 @@ export default class ListComponent extends Component {
           <div>
             <div className='p-container-fondor' style={{ background: '#f4f4f4', padding: '30px' }}>
               <div className='p-margin-fr'>
-                <p className='p-title-size-fr'>
-                  -
-                </p>
+                <p className='p-title-size-fr' />
               </div>
               <div className='inputs-container-fr' ref='contactForm'>
                 <div className='inputs-col-fr'>
-                  <div className='inputs-row-fr-2' style={{ width: '60%' }}>
+                  <div className='inputs-row-fr-2' style={{ width: '61%' }}>
                     <div className='p-container-ifr3'>
-                      <p className='p-title-margin-fr'>UP</p>
-                      <input
-                        className='input-style-fr'
+                      <TextField
+                        label='Up'
                         id='up'
                         required
                         value={this.state.search}
@@ -61,9 +65,8 @@ export default class ListComponent extends Component {
                       />
                     </div>
                     <div className='p-container-ifr3'>
-                      <p className='p-title-margin-fr'>Partida</p>
-                      <input
-                        className='input-style-fr'
+                      <TextField
+                        label='Partida'
                         id='partida'
                         required
                         value={this.state.search2}
@@ -71,9 +74,8 @@ export default class ListComponent extends Component {
                       />
                     </div>
                     <div className='p-container-ifr3'>
-                      <p className='p-title-margin-fr'>Rubro</p>
-                      <input
-                        className='input-style-fr'
+                      <TextField
+                        label='Rubro'
                         id='rubro'
                         required
                         value={this.state.search3}
@@ -86,40 +88,46 @@ export default class ListComponent extends Component {
             </div>
           </div>
         </div>
-        <div className='table-container-fr'>
-          <div className='table-left' />
-          <div className='table-up-p-frn-t'>
-            <b>UP</b>
-          </div>
-          <div className='table-up-p-frn-tt'>
-            <b>PARTIDA</b>
-          </div>
-          <div className='table-up-p-frn-tt'>
-            <b>RUBRO</b>
-          </div>
-          <div className='table-up-p-frn-tt'>
-            <b>IMPORTE</b>
-          </div>
-          <div className='table-cpa-t'>
-            <b>CPA</b>
-          </div>
-          <div className='table-up-p-frn-tt'>
-            <b>ESTATUS</b>
-          </div>
-          <div className='table-right' />
+        <div style={{ margin: '30px' }}>
+          <TableContainer component={Paper}>
+            <Table size='small'>
+              <TableHead>
+                <TableRow>
+                  <TableCell className='table-up-p-frn-a'>
+                    <b>Up</b>
+                  </TableCell>
+                  <TableCell className='table-up-p-frn-p'>
+                    <b>Partida</b>
+                  </TableCell>
+                  <TableCell className='table-up-p-frn-p'>
+                    <b>Rubro</b>
+                  </TableCell>
+                  <TableCell className='table-up-p-frn-p'>
+                    <b>Importe</b>
+                  </TableCell>
+                  <TableCell className='table-cpa-a'>
+                    <b>Cpa</b>
+                  </TableCell>
+                  <TableCell className='table-up-p-frn-p'>
+                    <b>Estatus</b>
+                  </TableCell>
+                </TableRow>
+              </TableHead>
+              {
+                this.props.listaB.map(item =>
+                  <RowCompoTransferencia
+                    key={item.id}
+                    item={item}
+                    update={this.props.update}
+                    search={this.state.search}
+                    search2={this.state.search2}
+                    search3={this.state.search3}
+                  />
+                )
+              }
+            </Table>
+          </TableContainer>
         </div>
-        {
-          this.props.listaB.map(item =>
-            <RowCompoTransferencia
-              key={item.id}
-              item={item}
-              update={this.props.update}
-              search={this.state.search}
-              search2={this.state.search2}
-              search3={this.state.search3}
-            />
-          )
-        }
       </div>
     )
   }

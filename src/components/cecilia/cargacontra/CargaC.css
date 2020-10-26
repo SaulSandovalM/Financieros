@@ -3,4 +3,5 @@
   right: 0;
   top: 0;
   margin: 20px;
+  z-index: 100000;
 }

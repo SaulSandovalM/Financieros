@@ -2,6 +2,12 @@ import React, { Component } from 'react'
 import './Archivos.css'
 import RowComponent from './RowComponent'
 import firebase from '../../../Firebase'
+import Table from '@material-ui/core/Table'
+import TableCell from '@material-ui/core/TableCell'
+import TableContainer from '@material-ui/core/TableContainer'
+import TableHead from '@material-ui/core/TableHead'
+import TableRow from '@material-ui/core/TableRow'
+import Paper from '@material-ui/core/Paper'
 
 export default class ListComponent extends Component {
   constructor (props) {
@@ -22,30 +28,34 @@ export default class ListComponent extends Component {
   render () {
     return (
       <div>
-        <div className='archivos-container'>
-          <div className='table-left' />
-          <div className='table-archivos'>
-            <p className='p-archivos'>OFICIO SOLICITUD</p>
-          </div>
-          <div className='table-archivos'>
-            <p className='p-archivos'>OFICIO AUTORIZACION</p>
-          </div>
-          <div className='table-archivos'>
-            <p className='p-archivos'>EXCEL</p>
-          </div>
-          <div className='table-archivos'>
-            <p className='p-archivos'>TIPO</p>
-          </div>
-          <div className='table-right' />
-        </div>
-        {
-          this.props.lista.map(item =>
-            <RowComponent
-              key={item.id}
-              item={item}
-            />
-          )
-        }
+        <TableContainer component={Paper}>
+          <Table size='small'>
+            <TableHead>
+              <TableRow>
+                <TableCell className='table-arch'>
+                  <b>Oficio Solicitud</b>
+                </TableCell>
+                <TableCell className='table-arch'>
+                  <b>Oficio Autorización</b>
+                </TableCell>
+                <TableCell className='table-arch'>
+                  <b>Excel</b>
+                </TableCell>
+                <TableCell className='table-arch'>
+                  <b>Tipo de Movimiento</b>
+                </TableCell>
+              </TableRow>
+            </TableHead>
+            {
+              this.props.lista.map(item =>
+                <RowComponent
+                  key={item.id}
+                  item={item}
+                />
+              )
+            }
+          </Table>
+        </TableContainer>
       </div>
     )
   }

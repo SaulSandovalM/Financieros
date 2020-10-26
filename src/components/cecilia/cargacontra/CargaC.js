@@ -3,6 +3,7 @@ import Dropzone from 'react-dropzone'
 import firebase from '../../../Firebase'
 import './CargaC.css'
 import Alert from '@material-ui/lab/Alert'
+import Button from '@material-ui/core/Button'
 
 export default class Contra extends Component {
   constructor () {
@@ -39,7 +40,7 @@ export default class Contra extends Component {
       <div>
         {this.state.pdf === 100 &&
           <div className='alert-cont'>
-            <Alert severity='success' variant='outlined'>Se han subido los archivos!</Alert>
+            <Alert severity='success' variant='filled'>Se han subido los archivos!</Alert>
           </div>
         }
         <form className='presupuesto-container'>
@@ -66,7 +67,14 @@ export default class Contra extends Component {
                 </progress>
               </div>
               <div className='button-pres'>
-                <button type='submit' className='button-sty'>Guardar</button>
+                <Button
+                  variant='contained'
+                  color='primary'
+                  style={{ background: '#092432' }}
+                  type='submit'
+                >
+                  GUARDAR
+                </Button>
               </div>
             </div>
           </div>

@@ -3,6 +3,8 @@ import './Transferencia.css'
 import firebase from '../../../Firebase'
 import ListComponent from './ListComponent'
 import Dropzone from 'react-dropzone'
+import TextField from '@material-ui/core/TextField'
+import Alert from '@material-ui/lab/Alert'
 
 export default class Transferencia extends Component {
   constructor () {
@@ -247,27 +249,18 @@ export default class Transferencia extends Component {
             </p>
           </div>
           <div className='p-row'>
-            <div className='p-container-ifr' style={{ marginRight: '20px' }}>
-              <p className='p-title-margin-fr'>Archivo Pdf</p>
-              <Dropzone
-                style={{
-                  position: 'ab',
-                  width: '100%',
-                  height: '29px',
-                  borderWidth: '1px',
-                  borderColor: '#a9a9a9',
-                  borderStyle: 'solid',
-                  background: 'white'
-                }}
-                accept='.pdf' onChange={this.handleUploads.bind(this)}
-              >
-                <div className='filename'>
-                  <p className='file-hid'>{this.state.file}</p>
+            <div className='p-container-ifra' style={{ marginRight: '20px' }}>
+              <TextField
+                type='file'
+                label='Archivo Pdf'
+                required
+                onChange={this.handleUploads.bind(this)}
+              />
+              {this.state.pdf === 100 &&
+                <div className='alert-cont'>
+                  <Alert severity='success' variant='filled'>Se han subido los archivos!</Alert>
                 </div>
-              </Dropzone>
-              <progress className='progress' value={this.state.pdf} max='100'>
-                {this.state.pdf} %
-              </progress>
+              }
             </div>
           </div>
         </div>
@@ -284,9 +277,8 @@ export default class Transferencia extends Component {
                   <div className='inputs-row-fr-2'>
                     <div className='no' />
                     <div className='p-container-ifr2'>
-                      <p className='p-title-margin-fr'>Importe</p>
-                      <input
-                        className='input-style-fr'
+                      <TextField
+                        label='Importe'
                         id='importe'
                         name='importe'
                         required

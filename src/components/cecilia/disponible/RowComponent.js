@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import './Disponible.css'
 import CurrencyFormat from 'react-currency-format'
+import TableBody from '@material-ui/core/TableBody'
+import TableCell from '@material-ui/core/TableCell'
 
 export default class RowComponent extends Component {
   constructor (props) {
@@ -26,147 +28,121 @@ export default class RowComponent extends Component {
     const dic = parseInt(this.props.item.dic)
 
     return (
-      <div className='meses-container-row'>
-        <div className='table-dis-up-u'>
-          <p className='p-h-dis2'>{this.props.item.up}</p>
-        </div>
-        <div className='table-dis-up-t'>
-          <p className='p-h-dis2'>{this.props.item.rubro}</p>
-        </div>
-        <div className='table-dis-up-t'>
-          <p className='p-h-dis2'>{this.props.item.ogasto}</p>
-        </div>
-        <div className='table-dis-up'>
-          <p className='p-h-dis2'>
-            <CurrencyFormat
-              value={this.props.item.ene}
-              displayType='text'
-              thousandSeparator
-              prefix='$ '
-            />
-          </p>
-        </div>
-        <div className='table-dis-up'>
-          <p className='p-h-dis2'>
-            <CurrencyFormat
-              value={this.props.item.feb}
-              displayType='text'
-              thousandSeparator
-              prefix='$ '
-            />
-          </p>
-        </div>
-        <div className='table-dis-up'>
-          <p className='p-h-dis2'>
-            <CurrencyFormat
-              value={this.props.item.mar}
-              displayType='text'
-              thousandSeparator
-              prefix='$ '
-            />
-          </p>
-        </div>
-        <div className='table-dis-up'>
-          <p className='p-h-dis2'>
-            <CurrencyFormat
-              value={this.props.item.abr}
-              displayType='text'
-              thousandSeparator
-              prefix='$ '
-            />
-          </p>
-        </div>
-        <div className='table-dis-up'>
-          <p className='p-h-dis2'>
-            <CurrencyFormat
-              value={this.props.item.may}
-              displayType='text'
-              thousandSeparator
-              prefix='$ '
-            />
-          </p>
-        </div>
-        <div className='table-dis-up'>
-          <p className='p-h-dis2'>
-            <CurrencyFormat
-              value={this.props.item.jun}
-              displayType='text'
-              thousandSeparator
-              prefix='$ '
-            />
-          </p>
-        </div>
-        <div className='table-dis-up'>
-          <p className='p-h-dis2'>
-            <CurrencyFormat
-              value={this.props.item.jul}
-              displayType='text'
-              thousandSeparator
-              prefix='$ '
-            />
-          </p>
-        </div>
-        <div className='table-dis-up'>
-          <p className='p-h-dis2'>
-            <CurrencyFormat
-              value={this.props.item.ago}
-              displayType='text'
-              thousandSeparator
-              prefix='$ '
-            />
-          </p>
-        </div>
-        <div className='table-dis-up'>
-          <p className='p-h-dis2'>
-            <CurrencyFormat
-              value={this.props.item.sep}
-              displayType='text'
-              thousandSeparator
-              prefix='$ '
-            />
-          </p>
-        </div>
-        <div className='table-dis-up'>
-          <p className='p-h-dis2'>
-            <CurrencyFormat
-              value={this.props.item.oct}
-              displayType='text'
-              thousandSeparator
-              prefix='$ '
-            />
-          </p>
-        </div>
-        <div className='table-dis-up'>
-          <p className='p-h-dis2'>
-            <CurrencyFormat
-              value={this.props.item.nov}
-              displayType='text'
-              thousandSeparator
-              prefix='$ '
-            />
-          </p>
-        </div>
-        <div className='table-dis-up'>
-          <p className='p-h-dis2'>
-            <CurrencyFormat
-              value={this.props.item.dic}
-              displayType='text'
-              thousandSeparator
-              prefix='$ '
-            />
-          </p>
-        </div>
-        <div className='table-dis-up'>
-          <p className='p-h-dis2'>
-            <CurrencyFormat
-              value={ene + feb + mar + abr + may + jun + jul + ago + sep + oct + nov + dic}
-              displayType='text'
-              thousandSeparator
-              prefix='$ '
-            />
-          </p>
-        </div>
-      </div>
+      <TableBody>
+        <TableCell className='table-num-dup'>
+          <div>{this.props.item.up}</div>
+        </TableCell>
+        <TableCell className='table-num-d'>
+          <div>{this.props.item.rubro}</div>
+        </TableCell>
+        <TableCell className='table-num-d'>
+          <div>{this.props.item.ogasto}</div>
+        </TableCell>
+        <TableCell className='table-num-d'>
+          <CurrencyFormat
+            value={this.props.item.ene}
+            displayType='text'
+            thousandSeparator
+            prefix='$ '
+          />
+        </TableCell>
+        <TableCell className='table-num-d'>
+          <CurrencyFormat
+            value={this.props.item.feb}
+            displayType='text'
+            thousandSeparator
+            prefix='$ '
+          />
+        </TableCell>
+        <TableCell className='table-num-d'>
+          <CurrencyFormat
+            value={this.props.item.mar}
+            displayType='text'
+            thousandSeparator
+            prefix='$ '
+          />
+        </TableCell>
+        <TableCell className='table-num-d'>
+          <CurrencyFormat
+            value={this.props.item.abr}
+            displayType='text'
+            thousandSeparator
+            prefix='$ '
+          />
+        </TableCell>
+        <TableCell className='table-num-d'>
+          <CurrencyFormat
+            value={this.props.item.may}
+            displayType='text'
+            thousandSeparator
+            prefix='$ '
+          />
+        </TableCell>
+        <TableCell className='table-num-d'>
+          <CurrencyFormat
+            value={this.props.item.jun}
+            displayType='text'
+            thousandSeparator
+            prefix='$ '
+          />
+        </TableCell>
+        <TableCell className='table-num-d'>
+          <CurrencyFormat
+            value={this.props.item.jul}
+            displayType='text'
+            thousandSeparator
+            prefix='$ '
+          />
+        </TableCell>
+        <TableCell className='table-num-d'>
+          <CurrencyFormat
+            value={this.props.item.ago}
+            displayType='text'
+            thousandSeparator
+            prefix='$ '
+          />
+        </TableCell>
+        <TableCell className='table-num-d'>
+          <CurrencyFormat
+            value={this.props.item.sep}
+            displayType='text'
+            thousandSeparator
+            prefix='$ '
+          />
+        </TableCell>
+        <TableCell className='table-num-d'>
+          <CurrencyFormat
+            value={this.props.item.oct}
+            displayType='text'
+            thousandSeparator
+            prefix='$ '
+          />
+        </TableCell>
+        <TableCell className='table-num-d'>
+          <CurrencyFormat
+            value={this.props.item.nov}
+            displayType='text'
+            thousandSeparator
+            prefix='$ '
+          />
+        </TableCell>
+        <TableCell className='table-num-d'>
+          <CurrencyFormat
+            value={this.props.item.dic}
+            displayType='text'
+            thousandSeparator
+            prefix='$ '
+          />
+        </TableCell>
+        <TableCell className='table-num-d'>
+          <CurrencyFormat
+            value={ene + feb + mar + abr + may + jun + jul + ago + sep + oct + nov + dic}
+            displayType='text'
+            thousandSeparator
+            prefix='$ '
+          />
+        </TableCell>
+      </TableBody>
     )
   }
 }
