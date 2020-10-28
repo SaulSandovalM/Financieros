@@ -2,6 +2,12 @@ import React, { Component } from 'react'
 import './Cheques.css'
 import RowComponent from './RowComponent'
 import firebase from '../../../Firebase'
+import Table from '@material-ui/core/Table'
+import TableCell from '@material-ui/core/TableCell'
+import TableContainer from '@material-ui/core/TableContainer'
+import TableHead from '@material-ui/core/TableHead'
+import TableRow from '@material-ui/core/TableRow'
+import Paper from '@material-ui/core/Paper'
 
 export default class ListComponent extends Component {
   constructor (props) {
@@ -22,40 +28,30 @@ export default class ListComponent extends Component {
   render () {
     return (
       <div>
-        <div className='cheques-inputs'>
-          <div className='table-left' />
-          <div className='table-c-num'>
-            <b>#</b>
-          </div>
-          <div className='table-c-importe'>
-            <b>BENEFICIARIO</b>
-          </div>
-          <div className='table-c-fechae'>
-            <b>FECHA DE COBRO</b>
-          </div>
-          <div className='table-c-bene'>
-            <b>FECHA DE EMISION</b>
-          </div>
-          <div className='table-c-fechae'>
-            <b>IMPORTE</b>
-          </div>
-          <div className='table-c-fechae'>
-            <b>ARCHIVO</b>
-          </div>
-          <div className='table-c-fechae'>
-            <b>ACTUALIZACION</b>
-          </div>
-          <div className='table-right' />
-        </div>
-        {
-          this.props.lista.map(item =>
-            <RowComponent
-              key={item.id}
-              item={item}
-              update={this.props.update}
-            />
-          ).reverse()
-        }
+        <TableContainer component={Paper}>
+          <Table>
+            <TableHead>
+              <TableRow>
+                <TableCell className='table-c-num'><b>#</b></TableCell>
+                <TableCell className='table-c-importe'><b>Beneficiario</b></TableCell>
+                <TableCell className='table-c-bene'><b>Fecha de Cobro</b></TableCell>
+                <TableCell className='table-c-bene'><b>Fecha de Emisión</b></TableCell>
+                <TableCell className='table-c-fechae'><b>Importe</b></TableCell>
+                <TableCell className='table-c-archivo'><b>Archivo</b></TableCell>
+                <TableCell className='table-c-but' align='right'><b>Actualización</b></TableCell>
+              </TableRow>
+            </TableHead>
+            {
+              this.props.lista.map(item =>
+                <RowComponent
+                  key={item.id}
+                  item={item}
+                  update={this.props.update}
+                />
+              ).reverse()
+            }
+          </Table>
+        </TableContainer>
       </div>
     )
   }

@@ -190,10 +190,7 @@ export default class Vales extends Component {
     this.state.fecha = today2
 
     return (
-      <div className='container-back'>
-        <div className='site'>
-          <p className='site-s'><b>Vales</b></p>
-        </div>
+      <div className='container-back' style={{ marginTop: '80px' }}>
         <form onSubmit={this.sendMessage.bind(this)} ref='contactForm'>
           <div className='margin-vale' ref={el => (this.vale = el)}>
             <div className='vale-title-container'>

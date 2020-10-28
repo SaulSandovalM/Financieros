@@ -42,7 +42,6 @@
   display: flex;
   justify-content: center;
   flex-direction: column;
-  border-right: 1px solid #d0d0d0;
   border-bottom: 1px solid #d0d0d0;
 }
 .title-arqueo2 {
@@ -66,7 +65,7 @@
 .p-mar-arqueo {
   margin: 0px;
   text-align: center;
-  font-size: 10px;
+  font-size: 14px;
 }
 .tipo-arqueo {
   width: 10%;
@@ -113,7 +112,6 @@
   display: flex;
   justify-content: center;
   flex-direction: column;
-  border-right: 1px solid #d0d0d0;
   border-bottom: 1px solid #d0d0d0;
 }
 .title-ar {

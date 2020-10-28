@@ -87,12 +87,9 @@ export default class ListValesP extends Component {
 
   render () {
     return (
-      <div class='container-back'>
-        <div class='site'>
-          <p class='site-s'><b>Vales Autorizados</b></p>
-        </div>
-        <div class='caja-w' style={{ marginTop: '40px', marginBottom: '40px' }}>
-          <div class='caja-col'>
+      <div className='container-back'>
+        <div className='list-va-a' style={{ paddingTop: '80px' }}>
+          <div className='caja-col'>
             <ListAuto
               lista={this.state.lista}
             />

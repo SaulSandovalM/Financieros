@@ -2,6 +2,12 @@ import React, { Component } from 'react'
 import './ListVales.css'
 import RowN from './RowN'
 import firebase from '../../../Firebase'
+import Table from '@material-ui/core/Table'
+import TableCell from '@material-ui/core/TableCell'
+import TableContainer from '@material-ui/core/TableContainer'
+import TableHead from '@material-ui/core/TableHead'
+import TableRow from '@material-ui/core/TableRow'
+import Paper from '@material-ui/core/Paper'
 
 export default class ListN extends Component {
   constructor (props) {
@@ -22,64 +28,42 @@ export default class ListN extends Component {
   render () {
     return (
       <div>
-        <div class='caja-inputs'>
-          <div class='table-left' />
-          <div class='table-v-num2'>
-            <b># V</b>
-          </div>
-          <div class='table-v-num2'>
-            <b># C</b>
-          </div>
-          <div class='table-v-num'>
-            <b>AUTO</b>
-          </div>
-          <div class='table-v-num'>
-            <b>COMP</b>
-          </div>
-          <div class='table-v-num'>
-            <b>REEM/REIN</b>
-          </div>
-          <div class='table-v-num'>
-            <b>CONC</b>
-          </div>
-          <div class='table-v-num'>
-            <b>OS</b>
-          </div>
-          <div class='table-v-num'>
-            <b>AREA</b>
-          </div>
-          <div class='table-v-num'>
-            <b>TURNO</b>
-          </div>
-          <div class='table-v-num'>
-            <b>FACTURA</b>
-          </div>
-          <div class='table-v-num'>
-            <b>RECIBOS</b>
-          </div>
-          <div class='table-v-num'>
-            <b>S/C</b>
-          </div>
-          <div class='table-v-num'>
-            <b>AUTORIZO</b>
-          </div>
-          <div class='table-v-num'>
-            <b>RECIBIO</b>
-          </div>
-          <div class='table-v-num'>
-            <b>ACTUALIZAR</b>
-          </div>
-          <div class='table-right' />
-        </div>
-        {
-          this.props.lista.map(item =>
-            <RowN
-              key={item.id}
-              item={item}
-              update={this.props.update}
-            />
-          )
-        }
+        <TableContainer component={Paper}>
+          <Table>
+            <TableHead>
+              <TableRow>
+                <TableCell className='table-v-num2'>
+                  <b>Vale</b>
+                </TableCell>
+                <TableCell className='table-v-num2'>
+                  <b>Cheque</b>
+                </TableCell>
+                <TableCell className='table-v-num'><b>Autorizado</b></TableCell>
+                <TableCell className='table-v-num'><b>Comprovado</b></TableCell>
+                <TableCell className='table-v-num'><b>Reintegro</b></TableCell>
+                <TableCell className='table-v-num'><b>Concepto</b></TableCell>
+                <TableCell className='table-v-num'><b>OS</b></TableCell>
+                <TableCell className='table-v-num'><b>Area</b></TableCell>
+                <TableCell className='table-v-num'><b>Turno</b></TableCell>
+                <TableCell className='table-v-num'><b>Facturas</b></TableCell>
+                <TableCell className='table-v-num'><b>Recibos</b></TableCell>
+                <TableCell className='table-v-num'><b>S/C</b></TableCell>
+                <TableCell className='table-v-num'><b>Fecha</b></TableCell>
+                <TableCell className='table-v-num'><b>Recibio</b></TableCell>
+                <TableCell className='table-v-num'><b>Autorizar</b></TableCell>
+              </TableRow>
+            </TableHead>
+            {
+              this.props.lista.map(item =>
+                <RowN
+                  key={item.id}
+                  item={item}
+                  update={this.props.update}
+                />
+              )
+            }
+          </Table>
+        </TableContainer>
       </div>
     )
   }

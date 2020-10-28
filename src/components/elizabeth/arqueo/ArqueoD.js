@@ -135,17 +135,15 @@ export default class ArqueoD extends Component {
           </div>
           <div className='arqueo-content'>
             <div className='table-arqueo'>
-              <div className='table-left' />
               <div className='title-arqueo'>
-                <p className='p-mar-arqueo'><b>DENOMINACION</b></p>
+                <p className='p-mar-arqueo'><b>Denominaciónote</b></p>
               </div>
               <div className='title-arqueo'>
-                <p className='p-mar-arqueo'><b>CANTIDAD</b></p>
+                <p className='p-mar-arqueo'><b>Cantidad</b></p>
               </div>
               <div className='title-arqueo'>
-                <p className='p-mar-arqueo'><b>DENOMINACIÓN</b></p>
+                <p className='p-mar-arqueo'><b>Total</b></p>
               </div>
-              <div className='table-right' />
             </div>
             <div>
               <ListComponent

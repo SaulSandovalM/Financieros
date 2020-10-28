@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import firebase from '../../../Firebase'
 import ListN from './ListN'
 import './ListVales.css'
+import TextField from '@material-ui/core/TextField'
 
 export default class ListValesN extends Component {
   constructor (props) {
@@ -98,19 +99,17 @@ export default class ListValesN extends Component {
 
   render () {
     return (
-      <div className='container-back'>
-        <div className='site'>
-          <p className='site-s'><b>Vales Pendientes de Numero de Cheque</b></p>
-        </div>
+      <div className='container-back' style={{ paddingTop: '60px' }}>
         <div className='input-val-p'>
-          <p>Ingresa el numero de cheque</p>
-          <input
+          <TextField
+          style={{ width: '100%' }}
+            label='Ingresa el numero de cheque'
             name='cheque'
             value={this.state.cheque}
             onChange={this.handleChange.bind(this)}
           />
         </div>
-        <div className='caja-w' style={{ marginTop: '40px', marginBottom: '40px' }}>
+        <div className='caja-w' style={{ background: '#f4f4f4' }}>
           <div className='caja-col'>
             <ListN
               lista={this.state.lista}

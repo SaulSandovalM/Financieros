@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import firebase from '../../../Firebase'
 import ListArchivo from './ListArchivo'
 import './ListVales.css'
-import Dropzone from 'react-dropzone'
+import TextField from '@material-ui/core/TextField'
 
 export default class ListArchivosV extends Component {
   constructor(props) {
@@ -215,10 +215,7 @@ export default class ListArchivosV extends Component {
 
   render () {
     return (
-      <div className='container-back'>
-        <div className='site'>
-          <p className='site-s'><b>Actualizacion de Archivos</b></p>
-        </div>
+      <div className='container-back' style={{ paddingTop: '60px' }}>
         <form className='margin-f-a' onSubmit={this.sendMessage.bind(this)} ref='contactForm'>
           <div className='p-container-fondor'>
             <div className='p-margin-fr'>
@@ -230,61 +227,39 @@ export default class ListArchivosV extends Component {
               <div className='inputs-col-ar'>
                 <div className='inputs-row-fr-2'>
                   <div className='p-container-ar'>
-                    <p className='p-title-margin-fr'>XML</p>
-                    <Dropzone
-                      style={{
-                        width: '100%',
-                        height: '30px',
-                        borderWidth: '1px',
-                        borderColor: 'rgb(102, 102, 102)',
-                        borderStyle: 'solid',
-                        borderRadius: '1px',
-                        maxFiles: 5,
-                        background: 'white',
-                        position: 'static'
-                      }}
-                      accept='.xml' onChange={this.handleOnChange1.bind(this)}>
-                      <div className='filename'>
-                        <p className='file-hid'>{this.state.filex}</p>
-                      </div>
-                    </Dropzone>
+                    <TextField
+                      label='Xml'
+                      type='file'
+                      onChange={this.handleOnChange1.bind(this)}
+                    />
                     <progress className='progress' value={this.state.xml} max='100'>
                       {this.state.xml} %
                     </progress>
                   </div>
                   <div className='p-container-ar'>
-                    <p className='p-title-margin-fr'>FACTURA</p>
-                    <Dropzone
-                      style={{
-                        width: '100%',
-                        height: '30px',
-                        borderWidth: '1px',
-                        borderColor: 'rgb(102, 102, 102)',
-                        borderStyle: 'solid',
-                        borderRadius: '1px',
-                        maxFiles: 5,
-                        background: 'white',
-                        position: 'static'
-                      }}
-                      accept='.pdf' onChange={this.handleOnChange2.bind(this)}>
-                      <div className='filename'>
-                        <p className='file-hid'>{this.state.filef}</p>
-                      </div>
-                    </Dropzone>
+                    <TextField
+                      label='Factura'
+                      type='file'
+                      onChange={this.handleOnChange2.bind(this)}
+                    />
                     <progress className='progress' value={this.state.pdf2} max='100'>
                       {this.state.pdf2} %
                     </progress>
                   </div>
                   <div className='p-container-ar'>
-                    <p className='p-title-margin-fr'>RECIBO</p>
-                    <input type='number' name='filerecibo' className='recibo-n' value={this.state.filerecibo} onChange={this.handleChange.bind(this)}/>
+                    <TextField
+                      label='Recibo'
+                      type='number'
+                      name='filerecibo'
+                      value={this.state.filerecibo} onChange={this.handleChange.bind(this)}
+                    />
                   </div>
                 </div>
               </div>
             </div>
           </div>
         </form>
-        <div className='caja-w' style={{ marginTop: '40px', marginBottom: '40px' }}>
+        <div className='caja-w' style={{ marginTop: '40px' }}>
           <div className='caja-col'>
             <ListArchivo
               lista={this.state.lista}

@@ -3,7 +3,9 @@ import firebase from '../../../Firebase'
 import './Cheques.css'
 import ListComponent from './ListComponent'
 import CurrencyFormat from 'react-currency-format'
-import Dropzone from 'react-dropzone'
+import TextField from '@material-ui/core/TextField'
+import Alert from '@material-ui/lab/Alert'
+import Button from '@material-ui/core/Button'
 
 export default class Cheques extends Component {
   constructor (props) {
@@ -243,19 +245,20 @@ export default class Cheques extends Component {
             <div className='cheques-inputs'>
               <div className='cheques-inputs-c'>
                 <div className='input-row-cheque'>
-                  <p className='p-cheque'><b># Cheque</b></p>
-                  <input
-                    className='input-sc-cheque'
+                  <TextField
+                    label='No. de Cheque'
                     id='numCheque'
                     required
                     ref={numCheque => this.inputCheque = numCheque}
                     value={this.state.contadorCheques.storyCount}
+                    InputLabelProps={{
+                      shrink: true,
+                    }}
                   />
                 </div>
                 <div className='input-row-cheque'>
-                  <p className='p-cheque'><b>Importe</b></p>
-                  <input
-                    className='input-sc-cheque'
+                  <TextField
+                    label='Importe'
                     type='number'
                     step='any'
                     id='importe'
@@ -267,23 +270,27 @@ export default class Cheques extends Component {
                   />
                 </div>
                 <div className='input-row-cheque'>
-                  <p className='p-cheque'><b>Fecha de Emisión</b></p>
-                  <input
-                    className='input-sc-cheque'
+                  <TextField
+                    label='Fecha de Emisión'
                     type='date'
                     id='fechaE'
                     required
                     ref={fechaE => this.inputFechaE = fechaE}
+                    InputLabelProps={{
+                      shrink: true,
+                    }}
                   />
                 </div>
                 <div className='input-row-cheque'>
-                  <p className='p-cheque'><b>Fecha de Cobro</b></p>
-                  <input
-                    className='input-sc-cheque'
+                  <TextField
+                    label='Fecha de Cobro'
                     type='date'
                     id='fechaC'
                     required
                     ref={fechaC => this.inputFechaC = fechaC}
+                    InputLabelProps={{
+                      shrink: true,
+                    }}
                   />
                 </div>
               </div>
@@ -306,10 +313,8 @@ export default class Cheques extends Component {
             <div className='cheque-inputs'>
               <div className='cheques-inputs-c'>
                 <div className='input-row-cheque'>
-                  <p className='p-cheque'><b>Beneficiario</b></p>
-                  <input
-                    className='input-sc-cheque'
-                    type='text'
+                  <TextField
+                    label='Beneficiario'
                     id='dirigido'
                     required
                     ref={dirigido => this.inputDirigido = dirigido}
@@ -323,7 +328,14 @@ export default class Cheques extends Component {
                     {this.state.contador.storyCount < this.state.importe ?
                       <p>El importe pasa la cantidad disponible</p>
                       :
-                      <button type='submit' className='input-sc-cheque boton-g-cheque'>Guardar</button>
+                      <Button
+                        variant='contained'
+                        color='primary'
+                        style={{ background: 'green' }}
+                        type='submit'
+                      >
+                        GUARDAR
+                      </Button>
                     }
                   </div>
                 </div>
@@ -333,26 +345,23 @@ export default class Cheques extends Component {
           <div className='p-margin'>
             <p className='p-title-size'>- Movimientos</p>
           </div>
-          <div className='update'>
-            <p className='p-cheque'><b>Archivo Actualizado</b></p>
-            <Dropzone
-              style={{
-                position: 'static',
-                width: '100%',
-                height: '29px',
-                borderWidth: '1px',
-                borderColor: '#a9a9a9',
-                borderStyle: 'solid',
-                background: 'white',
+          <div style={{ width: '60%' }}>
+            <TextField
+              label='Actualizar Archivo'
+              style={{ width: '100%' }}
+              type='file'
+              onChange={this.updateUpload.bind(this)}
+              InputLabelProps={{
+                shrink: true,
               }}
-              accept='.pdf' onChange={this.updateUpload.bind(this)}>
-              <div className='filename'>
-                <p className='file-hid'>{this.state.fileUpdate}</p>
+            />
+            {this.state.update === 100 &&
+              <div className='alert-cont'>
+                <Alert variant="filled" severity="success">
+                  Su archivo se ha cargado correctamente!
+                </Alert>
               </div>
-            </Dropzone>
-            <progress className='progress' value={this.state.update} max='100'>
-              {this.state.update} %
-            </progress>
+            }
           </div>
           <div className='cheques-w'>
             <div className='cheques-col'>

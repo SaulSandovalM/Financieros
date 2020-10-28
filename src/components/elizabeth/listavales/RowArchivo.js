@@ -1,5 +1,8 @@
 import React, { Component } from 'react'
 import './ListVales.css'
+import TableBody from '@material-ui/core/TableBody'
+import TableCell from '@material-ui/core/TableCell'
+import Button from '@material-ui/core/Button'
 
 export default class RowAuto extends Component {
   constructor (props) {
@@ -16,55 +19,56 @@ export default class RowAuto extends Component {
 
   render () {
     return (
-      <div class='caja-inputs'>
-        <div className='table-left' />
-        <div className='table-v-num2'>
-          <div>{this.props.item.vale}</div>
-        </div>
-        <div className='table-v-num2'>
-          <div>{this.props.item.cheque}</div>
-        </div>
-        <div className='table-v-re'>
-          <div>{this.props.item.cantidad}</div>
-        </div>
-        <div className='table-v-re'>
-          <div>{this.props.item.cantidadc}</div>
-        </div>
-        <div className='table-v-re'>
-          <div>{this.props.item.cantidadr}</div>
-        </div>
-        <div className='table-v-re'>
-          <div>{this.props.item.concepto}</div>
-        </div>
-        <div className='table-v-re'>
-          <div>{this.props.item.oficioS}</div>
-        </div>
-        <div className='table-v-re'>
-          <div>{this.props.item.area}</div>
-        </div>
-        <div className='table-v-re'>
-          <div>{this.props.item.turno}</div>
-        </div>
-        <div className='table-v-re'>
-          <div>{this.props.item.sc}</div>
-        </div>
-        <div className='table-v-re'>
-          <div>{this.props.item.fecha}</div>
-        </div>
-        <div className='table-v-re'>
-          <div>{this.props.item.autorizo}</div>
-        </div>
-        <div className='table-v-re'>
-          <div>{this.props.item.personaR}</div>
-        </div>
-        <div className='table-v-re'>
-          <div>{this.props.item.recibos}</div>
-        </div>
-        <div className='table-v-num'>
-          <button onClick={this.handleUpdate}>Agregar</button>
-        </div>
-        <div class='table-right' />
-      </div>
+      <TableBody>
+        <TableCell className='table-v-num2'>
+          {this.props.item.vale}
+        </TableCell>
+        <TableCell className='table-v-num2'>
+          {this.props.item.cheque}
+        </TableCell>
+        <TableCell className='table-v-num2'>
+          {this.props.item.cantidad}
+        </TableCell>
+        <TableCell className='table-v-num2'>
+          {this.props.item.cantidadc}
+        </TableCell>
+        <TableCell className='table-v-num2'>
+          {this.props.item.cantidadr}
+        </TableCell>
+        <TableCell className='table-v-num2'>
+          {this.props.item.concepto}
+        </TableCell>
+        <TableCell className='table-v-num2'>
+          {this.props.item.oficioS}
+        </TableCell>
+        <TableCell className='table-v-num2'>
+          {this.props.item.area}
+        </TableCell>
+        <TableCell className='table-v-num2'>
+          {this.props.item.turno}
+        </TableCell>
+        <TableCell className='table-v-num2'>
+          {this.props.item.sc}
+        </TableCell>
+        <TableCell className='table-v-num2'>
+          {this.props.item.fecha}
+        </TableCell>
+        <TableCell className='table-v-num2'>
+          {this.props.item.personaR}
+        </TableCell>
+        <TableCell className='table-v-num2'>
+          
+        </TableCell>
+        <TableCell className='table-v-num2'>
+          <Button
+            variant='contained'
+            color='primary'
+            onClick={this.handleUpdate}
+          >
+            Agregar
+          </Button>
+        </TableCell>
+      </TableBody>
     )
   }
 }

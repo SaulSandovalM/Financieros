@@ -41,7 +41,6 @@ export default class RowComponent extends Component {
     return (
       <div style={{ width: '100%' }}>
         <div className='data-arqueo'>
-          <div className='table-left' />
           <div className='title-arqueo'>
             <p className='p-mar-arqueo'>1000</p>
           </div>
@@ -51,10 +50,8 @@ export default class RowComponent extends Component {
           <div className='title-arqueo'>
             <p className='p-mar-arqueo'>$ {thousand}</p>
           </div>
-          <div className='table-right' />
         </div>
         <div className='data-arqueo'>
-          <div className='table-left' />
           <div className='title-arqueo'>
             <p className='p-mar-arqueo'>500</p>
           </div>
@@ -64,10 +61,8 @@ export default class RowComponent extends Component {
           <div className='title-arqueo'>
             <p className='p-mar-arqueo'>$ {fivehundred}</p>
           </div>
-          <div className='table-right' />
         </div>
         <div className='data-arqueo'>
-          <div className='table-left' />
           <div className='title-arqueo'>
             <p className='p-mar-arqueo'>200</p>
           </div>
@@ -77,10 +72,8 @@ export default class RowComponent extends Component {
           <div className='title-arqueo'>
             <p className='p-mar-arqueo'>$ {twohundred}</p>
           </div>
-          <div className='table-right' />
         </div>
         <div className='data-arqueo'>
-          <div className='table-left' />
           <div className='title-arqueo'>
             <p className='p-mar-arqueo'>100</p>
           </div>
@@ -90,10 +83,8 @@ export default class RowComponent extends Component {
           <div className='title-arqueo'>
             <p className='p-mar-arqueo'>$ {onehundred}</p>
           </div>
-          <div className='table-right' />
         </div>
         <div className='data-arqueo'>
-          <div className='table-left' />
           <div className='title-arqueo'>
             <p className='p-mar-arqueo'>50</p>
           </div>
@@ -103,10 +94,8 @@ export default class RowComponent extends Component {
           <div className='title-arqueo'>
             <p className='p-mar-arqueo'>$ {fiveteen}</p>
           </div>
-          <div className='table-right' />
         </div>
         <div className='data-arqueo'>
-          <div className='table-left' />
           <div className='title-arqueo'>
             <p className='p-mar-arqueo'>20</p>
           </div>
@@ -116,10 +105,8 @@ export default class RowComponent extends Component {
           <div className='title-arqueo'>
             <p className='p-mar-arqueo'>$ {twenti}</p>
           </div>
-          <div className='table-right' />
         </div>
         <div className='data-arqueo'>
-          <div className='table-left' />
           <div className='title-arqueo'>
             <p className='p-mar-arqueo'>10</p>
           </div>
@@ -129,10 +116,8 @@ export default class RowComponent extends Component {
           <div className='title-arqueo'>
             <p className='p-mar-arqueo'>$ {ten}</p>
           </div>
-          <div className='table-right' />
         </div>
         <div className='data-arqueo'>
-          <div className='table-left' />
           <div className='title-arqueo'>
             <p className='p-mar-arqueo'>5</p>
           </div>
@@ -142,10 +127,8 @@ export default class RowComponent extends Component {
           <div className='title-arqueo'>
             <p className='p-mar-arqueo'>$ {five}</p>
           </div>
-          <div className='table-right' />
         </div>
         <div className='data-arqueo'>
-          <div className='table-left' />
           <div className='title-arqueo'>
             <p className='p-mar-arqueo'>2</p>
           </div>
@@ -155,10 +138,8 @@ export default class RowComponent extends Component {
           <div className='title-arqueo'>
             <p className='p-mar-arqueo'>$ {two}</p>
           </div>
-          <div className='table-right' />
         </div>
         <div className='data-arqueo'>
-          <div className='table-left' />
           <div className='title-arqueo'>
             <p className='p-mar-arqueo'>1</p>
           </div>
@@ -168,10 +149,8 @@ export default class RowComponent extends Component {
           <div className='title-arqueo'>
             <p className='p-mar-arqueo'>$ {one}</p>
           </div>
-          <div className='table-right' />
         </div>
         <div className='data-arqueo'>
-          <div className='table-left' />
           <div className='title-arqueo'>
             <p className='p-mar-arqueo'>0.5</p>
           </div>
@@ -181,10 +160,8 @@ export default class RowComponent extends Component {
           <div className='title-arqueo'>
             <p className='p-mar-arqueo'>$ {point}</p>
           </div>
-          <div className='table-right' />
         </div>
         <div className='data-arqueo'>
-          <div className='table-left' />
           <div className='title-arqueo'>
             <b className='p-mar-arqueo'>Total</b>
           </div>
@@ -194,7 +171,6 @@ export default class RowComponent extends Component {
           <div className='title-arqueo'>
             <p className='p-mar-arqueo'>$ {res}</p>
           </div>
-          <div className='table-right' />
         </div>
       </div>
     )

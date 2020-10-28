@@ -2,6 +2,14 @@ import React, { Component } from 'react'
 import firebase from '../../../Firebase'
 import './Caja.css'
 import CurrencyFormat from 'react-currency-format'
+import TextField from '@material-ui/core/TextField'
+import Table from '@material-ui/core/Table';
+import TableBody from '@material-ui/core/TableBody';
+import TableCell from '@material-ui/core/TableCell';
+import TableContainer from '@material-ui/core/TableContainer';
+import TableHead from '@material-ui/core/TableHead';
+import TableRow from '@material-ui/core/TableRow';
+import Paper from '@material-ui/core/Paper';
 
 export default class Caja extends Component {
   constructor (props) {
@@ -53,7 +61,7 @@ export default class Caja extends Component {
           isLoading: false
         })
       } else {
-        console.log("No hay nada!")
+        console.log('No hay nada!')
       }
     })
   }
@@ -93,73 +101,50 @@ export default class Caja extends Component {
               </div>
             </div>
             <div className='p-container-banco'>
-              <p className='p-title-margin-ba'>BUSCADOR</p>
-              <input
-                className='input-style-banco'
+              <TextField
                 value={this.state.buscador}
                 name='buscador'
                 type='date'
                 data-date-format='DD-MM-YYYY'
                 onChange={this.handleChange.bind(this)}
+                label='Buscador'
+                InputLabelProps={{
+                  shrink: true,
+                }}
               />
             </div>
             <div className='space-table-b' />
-            <div className='table-c-p'>
-              <div className='banco-inputs-list2'>
-                <div className='table-left' />
-                <div className='table-caja-title'>
-                  <div className='table-no-row'>
-                    <b className='p-banco-map2'>MOVIMIENTO REALIZADO</b>
-                  </div>
-                </div>
-                <div className='table-caja-fecha'>
-                  <div className='table-no-row'>
-                    <b className='p-banco-map'>FECHA</b>
-                  </div>
-                </div>
-                <div className='table-banco-mov'>
-                  <div className='table-no-row'>
-                    <b className='p-banco-map2'>CANTIDAD</b>
-                  </div>
-                </div>
-                <div className='table-right' />
-              </div>
-            </div>
-            <div className='color-s'>
-              {this.state.movimientos.map(movimientos =>
-                <div>
-                  {
-                    (this.state.buscador === movimientos.fecha || today === movimientos.fecha) ?
-                    <div className='banco-inputs-list'>
-                      <div className='table-left' />
-                      <div className='table-caja-title'>
-                        <div className='table-caja-row'>
-                          <p className='p-banco-map2'>{movimientos.title}</p>
-                          <p className='p-banco-map2'>{movimientos.no}</p>
-                          <p className='p-banco-map2'>{movimientos.personaR}</p>
-                        </div>
-                      </div>
-                      <div className='table-caja-fecha'>
-                        <div className='table-no-row'>
-                          <b className='p-banco-map2'>{movimientos.fecha}</b>
-                        </div>
-                      </div>
-                      <div className='table-banco-mov'>
-                        <div>
-                          <CurrencyFormat
-                            value={movimientos.cantidad}
-                            displayType='text'
-                            thousandSeparator
-                            prefix=' $'
-                          />
-                        </div>
-                      </div>
-                      <div className='table-right' />
-                    </div> : null
+            <TableContainer component={Paper}>
+              <Table aria-label='simple table'>
+                <TableHead>
+                  <TableRow>
+                    <TableCell className='table-caja'><b>Movimientos</b></TableCell>
+                    <TableCell className='table-caja'><b>Fecha</b></TableCell>
+                    <TableCell className='table-caja'><b>Cantidad</b></TableCell>
+                  </TableRow>
+                </TableHead>
+                {this.state.movimientos.map(movimientos =>
+                  <TableBody>
+                    {
+                      (this.state.buscador === movimientos.fecha || today === movimientos.fecha) ?
+                        <TableRow>
+                          <TableCell className='table-caja'>{movimientos.title} - {movimientos.no} - {movimientos.personaR}</TableCell>
+                          <TableCell className='table-caja'>{movimientos.fecha}</TableCell>
+                          <TableCell className='table-caja'>
+                            <CurrencyFormat
+                              value={movimientos.cantidad}
+                              displayType='text'
+                              thousandSeparator
+                              prefix=' $'
+                            />
+                          </TableCell>
+                        </TableRow>
+                      : null
                     }
-              </div>
-              )}
-            </div>
+                  </TableBody>
+                )}
+              </Table>
+            </TableContainer>
           </div>
         </div>
       </div>

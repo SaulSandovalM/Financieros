@@ -1,6 +1,10 @@
 import React, { Component } from 'react'
 import './Cheques.css'
 import CurrencyFormat from 'react-currency-format'
+import TableBody from '@material-ui/core/TableBody'
+import TableCell from '@material-ui/core/TableCell'
+import TableRow from '@material-ui/core/TableRow'
+import Button from '@material-ui/core/Button'
 
 export default class RowComponent extends Component {
   constructor (props) {
@@ -17,42 +21,42 @@ export default class RowComponent extends Component {
 
   render () {
     return (
-      <div className='cheques-inputs'>
-        <div className='table-left' />
-        <div className='table-c-num'>
-          <p>{this.props.item.numCheque}</p>
-        </div>
-        <div className='table-c-importe'>
-          <p>{this.props.item.dirigido}</p>
-        </div>
-        <div className='table-c-fechae'>
-          <div className='row-update'>
-            <p className='p-update'>{this.props.item.fechaC}</p>
-          </div>
-        </div>
-        <div className='table-c-bene'>
-          <p>{this.props.item.fechaE}</p>
-        </div>
-        <div className='table-c-fechae'>
-          <div>
+      <TableBody>
+        <TableRow>
+          <TableCell className='table-c-num'>
+            {this.props.item.numCheque}
+          </TableCell>
+          <TableCell className='table-c-importe'>
+            {this.props.item.dirigido}
+          </TableCell>
+          <TableCell className='table-c-bene'>
+            {this.props.item.fechaC}
+          </TableCell>
+          <TableCell className='table-c-bene'>
+            {this.props.item.fechaE}
+          </TableCell>
+          <TableCell className='table-c-fechae'>
             <CurrencyFormat
               value={this.props.item.importe}
               displayType='text'
               prefix='$ '
               decimalSeparator='.'
             />
-          </div>
-        </div>
-        <div className='table-c-fechae'>
-          <div className='row-update'>
-            <p className='m-p'>{this.props.item.fileUpdate}</p>
-          </div>
-        </div>
-        <div className='table-c-fechae'>
-          <button onClick={this.handleUpdate}>Actualizar</button>
-        </div>
-        <div className='table-right' />
-      </div>
+          </TableCell>
+          <TableCell className='table-c-fechae'>
+            {this.props.item.fileUpdate}
+          </TableCell>
+          <TableCell className='table-c-fechae' align='right'>
+            <Button
+              variant='contained'
+              color='primary'
+              onClick={this.handleUpdate}
+            >
+              Actualizar
+            </Button>
+          </TableCell>
+        </TableRow>
+      </TableBody>
     )
   }
 }

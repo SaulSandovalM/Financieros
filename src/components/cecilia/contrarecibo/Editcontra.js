@@ -5,7 +5,6 @@ import CheckIcon from '@material-ui/icons/Check'
 import Paper from '@material-ui/core/Paper'
 import TextField from '@material-ui/core/TextField'
 import Grid from '@material-ui/core/Grid'
-import Alert from '@material-ui/lab/Alert';
 
 export default class Edit extends Component {
   constructor (props) {

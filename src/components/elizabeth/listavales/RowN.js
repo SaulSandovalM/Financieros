@@ -1,5 +1,9 @@
 import React, { Component } from 'react'
 import './ListVales.css'
+import TableBody from '@material-ui/core/TableBody'
+import TableCell from '@material-ui/core/TableCell'
+import TableRow from '@material-ui/core/TableRow'
+import Button from '@material-ui/core/Button'
 
 export default class RowComponent extends Component {
   constructor (props) {
@@ -17,58 +21,62 @@ export default class RowComponent extends Component {
   render () {
     var cheque = this.props.item.cheque
     return (
-      <div>
+      <TableBody>
         {cheque === 'Pendiente' &&
-          <div class='caja-inputs'>
-            <div class='table-left' />
-            <div class='table-v-num2'>
-              <div>{this.props.item.vale}</div>
-            </div>
-            <div class='table-v-num2'>
-              <div>{this.props.item.cheque}</div>
-            </div>
-            <div class='table-v-num'>
-              <div>{this.props.item.cantidad}</div>
-            </div>
-            <div class='table-v-num'>
-              <div>{this.props.item.cantidadc}</div>
-            </div>
-            <div class='table-v-num'>
-              <div>{this.props.item.cantidadr}</div>
-            </div>
-            <div class='table-v-re'>
-              <div>{this.props.item.concepto}</div>
-            </div>
-            <div class='table-v-num'>
-              <div>{this.props.item.oficioS}</div>
-            </div>
-            <div class='table-v-re'>
-              <div>{this.props.item.area}</div>
-            </div>
-            <div class='table-v-num'>
-              <div>{this.props.item.turno}</div>
-            </div>
-            <div class='table-v-num'>
-              <div>{this.props.item.factura}</div>
-            </div>
-            <div class='table-v-num'>
-              <div>{this.props.item.recibos}</div>
-            </div>
-            <div class='table-v-num'>
-              <div>{this.props.item.sc}</div>
-            </div>
-            <div class='table-v-re'>
-              <div>{this.props.item.autorizo}</div>
-            </div>
-            <div class='table-v-re'>
-              <div>{this.props.item.personaR}</div>
-            </div>
-            <div class='table-v-num'>
-              <button onClick={this.update}>Actualizar</button>
-            </div>
-            <div class='table-right' />
-          </div>}
-      </div>
+          <TableRow className='caja-inputs'>
+            <TableCell className='table-v-num2'>
+              {this.props.item.vale}
+            </TableCell>
+            <TableCell className='table-v-num2'>
+              {this.props.item.cheque}
+            </TableCell>
+            <TableCell className='table-v-num'>
+              {this.props.item.cantidad}
+            </TableCell>
+            <TableCell className='table-v-num'>
+              {this.props.item.cantidadc}
+            </TableCell>
+            <TableCell className='table-v-num'>
+              {this.props.item.cantidadr}
+            </TableCell>
+            <TableCell className='table-v-num'>
+              {this.props.item.concepto}
+            </TableCell>
+            <TableCell className='table-v-num'>
+              {this.props.item.oficioS}
+            </TableCell>
+            <TableCell className='table-v-num'>
+              {this.props.item.area}
+            </TableCell>
+            <TableCell className='table-v-num'>
+              {this.props.item.turno}
+            </TableCell>
+            <TableCell className='table-v-num'>
+              {this.props.item.factura}
+            </TableCell>
+            <TableCell className='table-v-num'>
+              {this.props.item.recibos}
+            </TableCell>
+            <TableCell className='table-v-num'>
+              {this.props.item.sc}
+            </TableCell>
+            <TableCell className='table-v-num'>
+              {this.props.item.fecha}
+            </TableCell>
+            <TableCell className='table-v-num'>
+              {this.props.item.personaR}
+            </TableCell>
+            <TableCell className='table-v-num'>
+              <Button
+                variant='contained'
+                color='primary'
+                onClick={this.update}
+              >
+                Actualizar
+              </Button>
+            </TableCell>
+          </TableRow>}
+      </TableBody>
     )
   }
 }

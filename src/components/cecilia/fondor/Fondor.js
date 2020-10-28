@@ -4,7 +4,6 @@ import firebase from '../../../Firebase'
 import ListComponent from './ListComponent'
 import ListFr from './ListFr'
 import CurrencyFormat from 'react-currency-format'
-import Dropzone from 'react-dropzone'
 import TextField from '@material-ui/core/TextField'
 import Alert from '@material-ui/lab/Alert'
 

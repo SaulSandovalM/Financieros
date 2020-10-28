@@ -2,6 +2,12 @@ import React, { Component } from 'react'
 import './ListVales.css'
 import RowArchivo from './RowArchivo'
 import firebase from '../../../Firebase'
+import Table from '@material-ui/core/Table'
+import TableCell from '@material-ui/core/TableCell'
+import TableContainer from '@material-ui/core/TableContainer'
+import TableHead from '@material-ui/core/TableHead'
+import TableRow from '@material-ui/core/TableRow'
+import Paper from '@material-ui/core/Paper'
 
 export default class ListArchivo extends Component {
   constructor (props) {
@@ -22,64 +28,37 @@ export default class ListArchivo extends Component {
   render () {
     return (
       <div>
-        <div className='caja-inputs'>
-          <div className='table-left' />
-          <div className='table-v-num2'>
-            <b># V</b>
-          </div>
-          <div className='table-v-num2'>
-            <b># C</b>
-          </div>
-          <div className='table-v-num'>
-            <b className='table-h'>AUTO</b>
-          </div>
-          <div className='table-v-num'>
-            <b className='table-h'>COMP</b>
-          </div>
-          <div className='table-v-num'>
-            <b className='table-h'>REEM/REIN</b>
-          </div>
-          <div className='table-v-num'>
-            <b className='table-h'>CONC</b>
-          </div>
-          <div className='table-v-num'>
-            <b className='table-h'>OS</b>
-          </div>
-          <div className='table-v-num'>
-            <b className='table-h'>AREA</b>
-          </div>
-          <div className='table-v-num'>
-            <b className='table-h'>TURNO</b>
-          </div>
-          <div className='table-v-num'>
-            <b className='table-h'>S/C</b>
-          </div>
-          <div className='table-v-num'>
-            <b className='table-h'>FECHA</b>
-          </div>
-          <div className='table-v-num'>
-            <b className='table-h'>AUTOR</b>
-          </div>
-          <div className='table-v-num'>
-            <b className='table-h'>RECIBO</b>
-          </div>
-          <div className='table-v-num'>
-            <b className='table-h'>EDITAR</b>
-          </div>
-          <div className='table-v-num'>
-            <b className='table-h'>COMP</b>
-          </div>
-          <div className='table-right' />
-        </div>
-        {
-          this.props.lista.map(item =>
-            <RowArchivo
-              key={item.id}
-              item={item}
-              update={this.props.update}
-            />
-          )
-        }
+        <TableContainer component={Paper}>
+          <Table>
+            <TableHead>
+              <TableRow>
+                <TableCell className='table-v-num'><b>Vales</b></TableCell>
+                <TableCell className='table-v-num'><b>Cheques</b></TableCell>
+                <TableCell className='table-v-num'><b>Autorizado</b></TableCell>
+                <TableCell className='table-v-num'><b>Comprobado</b></TableCell>
+                <TableCell className='table-v-num'><b>Reintegro</b></TableCell>
+                <TableCell className='table-v-num'><b>Concepto</b></TableCell>
+                <TableCell className='table-v-num'><b>OS</b></TableCell>
+                <TableCell className='table-v-num'><b>Area</b></TableCell>
+                <TableCell className='table-v-num'><b>Turno</b></TableCell>
+                <TableCell className='table-v-num'><b>S/C</b></TableCell>
+                <TableCell className='table-v-num'><b>Fecha</b></TableCell>
+                <TableCell className='table-v-num'><b>Recibo</b></TableCell>
+                <TableCell className='table-v-num'><b>Editar</b></TableCell>
+                <TableCell className='table-v-num'><b>Comprobantes</b></TableCell>
+              </TableRow>
+            </TableHead>
+            {
+              this.props.lista.map(item =>
+                <RowArchivo
+                  key={item.id}
+                  item={item}
+                  update={this.props.update}
+                />
+              )
+            }
+          </Table>
+        </TableContainer>
       </div>
     )
   }

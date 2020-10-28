@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import './Transferencia.css'
 import firebase from '../../../Firebase'
 import ListComponent from './ListComponent'
-import Dropzone from 'react-dropzone'
 import TextField from '@material-ui/core/TextField'
 import Alert from '@material-ui/lab/Alert'
 

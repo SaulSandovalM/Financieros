@@ -3,7 +3,6 @@ import './Reduccion.css'
 import firebase from '../../../Firebase'
 import ListComponent from './ListComponent'
 import ListReduccion from './ListReduccion'
-import Dropzone from 'react-dropzone'
 import TextField from '@material-ui/core/TextField'
 import Alert from '@material-ui/lab/Alert'
 

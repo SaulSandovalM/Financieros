@@ -362,16 +362,17 @@ select {
 .inputs-col-ar {
   display: flex;
   flex-direction: column;
-  width: 50%;
+  width: 100%;
 }
 .p-container-ar {
   display: flex;
   flex-direction: column;
-  width: 30%;
+  width: 100%;
   margin-right: 15px;
 }
 .input-val-p {
   margin-top: 40px;
+  width: 300px;
 }
 
 
@@ -393,8 +394,14 @@ select {
 
 
 
-
-
+.list-va-a {
+  background-color: #f4f4f4;
+  margin-left: -20px;
+  margin-right: -20px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
 
 
 
@@ -504,15 +511,15 @@ select {
   justify-content: flex-end;
 }
 .table-v-num {
-  width: 6.9%;
-  border-bottom: 1px solid #d0d0d0;
-  border-right: 1px solid #d0d0d0;
-  padding-left: 5px;
-  height: 30px;
-  font-size: 12px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+  width: auto;
+  border-right: white;
+  border-left: 0;
+  border-top: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
 }
 .table-v-re {
   width: 6.9%;
@@ -534,12 +541,10 @@ select {
   -webkit-box-orient: vertical;
 }
 .table-v-num2 {
-  width: 3%;
-  padding-left: 5px;
-  border-bottom: 1px solid #d0d0d0;
-  border-right: 1px solid #d0d0d0;
-  line-height: 30px;
-  font-size: 12px;
+  width: auto;
+  border-right: white;
+  border-left: 0;
+  border-top: 0;
   overflow: hidden;
   text-overflow: ellipsis;
   display: -webkit-box;

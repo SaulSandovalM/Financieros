@@ -88,10 +88,7 @@ export default class ListValesP extends Component {
   render () {
     return (
       <div class='container-back'>
-        <div class='site'>
-          <p class='site-s'><b>Vales Pendientes de Autorizar</b></p>
-        </div>
-        <div class='caja-w' style={{ marginTop: '40px', marginBottom: '40px' }}>
+        <div class='caja-w' style={{ paddingTop: '80px', background: '#f4f4f4' }}>
           <div class='caja-col'>
             <ListComponent
               lista={this.state.lista}

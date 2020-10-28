@@ -3,6 +3,7 @@ import './Arqueo.css'
 import firebase from '../../../Firebase'
 import Popup from 'reactjs-popup'
 import ListComponent from './ListComponent'
+import TextField from '@material-ui/core/TextField'
 
 export default class Arqueo extends Component {
   constructor (props) {
@@ -143,24 +144,19 @@ export default class Arqueo extends Component {
     today = today.getFullYear() + '-' + meses[today.getMonth()] + '-' + today.getDate()
 
     return (
-      <div className='pf-container'>
-        <div className='site-pf'>
-          <p className='site-pf-s'><b>Arqueo</b></p>
-        </div>
+      <div className='pf-container' style={{ marginTop: '60px' }}>
         <div className='arqueo-container'>
           <div className='arqueo-content'>
             <div className='table-arqueo'>
-              <div className='table-left' />
               <div className='title-arqueo'>
-                <p className='p-mar-arqueo'><b>DENOMINACION</b></p>
+                <p className='p-mar-arqueo'><b>Denominación</b></p>
               </div>
               <div className='title-arqueo'>
-                <p className='p-mar-arqueo'><b>CANTIDAD</b></p>
+                <p className='p-mar-arqueo'><b>Cantidad</b></p>
               </div>
               <div className='title-arqueo'>
-                <p className='p-mar-arqueo'><b>DENOMINACIÓN</b></p>
+                <p className='p-mar-arqueo'><b>Total</b></p>
               </div>
-              <div className='table-right' />
             </div>
             <div>
               <ListComponent
@@ -192,7 +188,7 @@ export default class Arqueo extends Component {
                   </div>
                   <div className='arqueo-content-pop'>
                     <div className='table-arqueo-pop'>
-                      <div className='table-left' />
+
                       <div className='title-arqueo'>
                         <p className='p-mar-arqueo'><b>DENOMINACION</b></p>
                       </div>
@@ -202,10 +198,8 @@ export default class Arqueo extends Component {
                       <div className='title-arqueo'>
                         <p className='p-mar-arqueo'><b>DENOMINACIÓN</b></p>
                       </div>
-                      <div className='table-right' />
                     </div>
                     <div className='data-arqueo-pop'>
-                      <div className='table-left' />
                       <div className='title-arqueo'>
                         <p className='p-mar-arqueo'>1000</p>
                       </div>
@@ -221,11 +215,8 @@ export default class Arqueo extends Component {
                       <div className='title-arqueo'>
                         <p className='p-mar-arqueo'>$</p>
                       </div>
-                      <div className='table-right' />
                     </div>
                     <div className='data-arqueo-pop'>
-                      <div className='table-left'>
-                      </div>
                       <div className='title-arqueo'>
                         <p className='p-mar-arqueo'>500</p>
                       </div>
@@ -241,10 +232,8 @@ export default class Arqueo extends Component {
                       <div className='title-arqueo'>
                         <p className='p-mar-arqueo'>$</p>
                       </div>
-                      <div className='table-right' />
                     </div>
                     <div className='data-arqueo-pop'>
-                      <div className='table-left' />
                       <div className='title-arqueo'>
                         <p className='p-mar-arqueo'>200</p>
                       </div>
@@ -260,10 +249,8 @@ export default class Arqueo extends Component {
                       <div className='title-arqueo'>
                         <p className='p-mar-arqueo'>$</p>
                       </div>
-                      <div className='table-right' />
                     </div>
                     <div className='data-arqueo-pop'>
-                      <div className='table-left' />
                       <div className='title-arqueo'>
                         <p className='p-mar-arqueo'>100</p>
                       </div>
@@ -279,10 +266,8 @@ export default class Arqueo extends Component {
                       <div className='title-arqueo'>
                         <p className='p-mar-arqueo'>$</p>
                       </div>
-                      <div className='table-right' />
                     </div>
                     <div className='data-arqueo-pop'>
-                      <div className='table-left' />
                       <div className='title-arqueo'>
                         <p className='p-mar-arqueo'>50</p>
                       </div>
@@ -298,10 +283,8 @@ export default class Arqueo extends Component {
                       <div className='title-arqueo'>
                         <p className='p-mar-arqueo'>$</p>
                       </div>
-                      <div className='table-right' />
                     </div>
                     <div className='data-arqueo-pop'>
-                      <div className='table-left' />
                       <div className='title-arqueo'>
                         <p className='p-mar-arqueo'>20</p>
                       </div>
@@ -317,10 +300,8 @@ export default class Arqueo extends Component {
                       <div className='title-arqueo'>
                         <p className='p-mar-arqueo'>$</p>
                       </div>
-                      <div className='table-right' />
                     </div>
                     <div className='data-arqueo-pop'>
-                      <div className='table-left' />
                       <div className='title-arqueo'>
                         <p className='p-mar-arqueo'>10</p>
                       </div>
@@ -336,10 +317,9 @@ export default class Arqueo extends Component {
                       <div className='title-arqueo'>
                         <p className='p-mar-arqueo'>$</p>
                       </div>
-                      <div className='table-right' />
                     </div>
                     <div className='data-arqueo-pop'>
-                      <div className='table-left' />
+
                       <div className='title-arqueo'>
                         <p className='p-mar-arqueo'>5</p>
                       </div>
@@ -355,10 +335,8 @@ export default class Arqueo extends Component {
                       <div className='title-arqueo'>
                         <p className='p-mar-arqueo'>$</p>
                       </div>
-                      <div className='table-right' />
                     </div>
                     <div className='data-arqueo-pop'>
-                      <div className='table-left' />
                       <div className='title-arqueo'>
                         <p className='p-mar-arqueo'>2</p>
                       </div>
@@ -374,10 +352,8 @@ export default class Arqueo extends Component {
                       <div className='title-arqueo'>
                         <p className='p-mar-arqueo'>$</p>
                       </div>
-                      <div className='table-right' />
                     </div>
                     <div className='data-arqueo-pop'>
-                      <div className='table-left' />
                       <div className='title-arqueo'>
                         <p className='p-mar-arqueo'>1</p>
                       </div>
@@ -393,10 +369,8 @@ export default class Arqueo extends Component {
                       <div className='title-arqueo'>
                         <p className='p-mar-arqueo'>$</p>
                       </div>
-                      <div className='table-right' />
                     </div>
                     <div className='data-arqueo-pop'>
-                      <div className='table-left' />
                       <div className='title-arqueo'>
                         <p className='p-mar-arqueo'>0.5</p>
                       </div>
@@ -412,7 +386,6 @@ export default class Arqueo extends Component {
                       <div className='title-arqueo'>
                         <p className='p-mar-arqueo'>$</p>
                       </div>
-                      <div className='table-right' />
                     </div>
                   </div>
                   <div className='botones-arqueo'>
@@ -422,19 +395,20 @@ export default class Arqueo extends Component {
               </Popup>
             </div>
           </div>
-
           <div style={{ width: '65%', background: 'white', margin: '-45px -30px 0px 0px', padding: '90px 30px 30px 30px', height: '88vh' }}>
             <div className='p-container-ifr2'>
-              <p className='p-title-margin-fr'>Ingresa la fecha a buscar</p>
-              <input
+              <TextField
                 type='date'
-                className='input-style-fr'
+                label='Fecha'
                 value={this.state.search} onChange={this.updateSearch.bind(this)}
+                InputLabelProps={{
+                  shrink: true,
+                }}
               />
             </div>
             <div className='table-arqueo-search'>
               <div className='table-arqueo-content'>
-                <div className='table-left' />
+
                 <div className='title-arqueo-se'>
                   <p className='p-mar-arqueo'><b>1000</b></p>
                 </div>
@@ -468,13 +442,13 @@ export default class Arqueo extends Component {
                 <div className='title-arqueo-se'>
                   <p className='p-mar-arqueo'><b>0.5</b></p>
                 </div>
-                <div className='table-right' />
+
               </div>
             </div>
             {
               filterData.map(arqueo => (
                 <div className='table-arqueo-content'>
-                  <div className='table-left' />
+
                   <div className='title-arqueo-se'>
                     <p className='p-mar-arqueo'>{arqueo.can1000}</p>
                   </div>
@@ -508,7 +482,7 @@ export default class Arqueo extends Component {
                   <div className='title-arqueo-se'>
                     <p className='p-mar-arqueo'>{arqueo.can0}</p>
                   </div>
-                  <div className='table-right' />
+
                 </div>
               )).reverse()
             }
