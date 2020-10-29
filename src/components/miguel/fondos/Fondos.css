@@ -158,7 +158,13 @@
   margin-top: 20px;
 }
 .field {
-  width: 100%;
+  width: 45%;
+  border-top: 0;
+  border-left: 0;
+  border-right: 0;
+  border-bottom: .5px solid grey;
+  padding: 6px;
+  font-size: 1rem;
 }
 .fondo-content {
   width: 100%;
@@ -167,9 +173,6 @@
 .card-f {
   width: 50%;
 }
-
-
-
 
 
 

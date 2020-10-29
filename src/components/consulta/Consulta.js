@@ -56,27 +56,27 @@ class TablaComprometidos extends Component {
     console.log(email);
 
     let admin;
-    if (email == 'administrador@procu.com') {
+    if (email === 'administrador@procu.com') {
       admin = 'ADMIN';
-    } else if (email == 'hector@procu.com') {
+    } else if (email === 'hector@procu.com') {
       admin = 'HECTOR';
-    } else if (email == 'maguel@procu.com') {
+    } else if (email === 'maguel@procu.com') {
       admin = 'MIGUEL';
-    } else if (email == 'liliana@procu.com') {
+    } else if (email === 'liliana@procu.com') {
       admin = 'LILIANA';
-    } else if (email == 'liliana@procu.com') {
+    } else if (email === 'liliana@procu.com') {
       admin = 'LILIANA';
-    } else if (email == 'liliana@procu.com') {
+    } else if (email === 'liliana@procu.com') {
       admin = 'LILIANA';
-    } else if (email == 'liliana@procu.com') {
+    } else if (email === 'liliana@procu.com') {
       admin = 'LILIANA';
-    } else if (email == 'liliana@procu.com') {
+    } else if (email === 'liliana@procu.com') {
       admin = 'LILIANA';
-    } else if (email == 'liliana@procu.com') {
+    } else if (email === 'liliana@procu.com') {
       admin = 'LILIANA';
-    } else if (email == 'liliana@procu.com') {
+    } else if (email === 'liliana@procu.com') {
       admin = 'LILIANA';
-    } else if (email == 'liliana@procu.com') {
+    } else if (email === 'liliana@procu.com') {
       admin = 'LILIANA';
     }
     console.log(admin)

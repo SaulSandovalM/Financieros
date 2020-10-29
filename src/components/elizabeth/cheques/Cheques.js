@@ -3,11 +3,6 @@ import firebase from '../../../Firebase'
 import './Cheques.css'
 import ListComponent from './ListComponent'
 import CurrencyFormat from 'react-currency-format'
-import TextField from '@material-ui/core/TextField'
-import Alert from '@material-ui/lab/Alert'
-import Button from '@material-ui/core/Button'
-import LinearProgress from '@material-ui/core/LinearProgress'
-import CurrencyTextField from '@unicef/material-ui-currency-textfield'
 import Dropzone from 'react-dropzone'
 
 export default class Cheques extends Component {
