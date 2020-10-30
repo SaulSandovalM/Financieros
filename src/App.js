@@ -32,7 +32,7 @@ import ArqueoD from './components/elizabeth/arqueo/ArqueoD'
 // Parte de Miguel
 import Fondos from './components/miguel/fondos/NewFondos'
 import FondoE from './components/miguel/fondos/FondoE'
-import Comprometidos from './components/miguel/comprometidos/Comprometidos'
+import Comprometidos from './components/miguel/comprometidos/NewComprometidos'
 import Oficios from './components/miguel/oficios/Oficios'
 import Consulta from './components/miguel/consulta/Consulta'
 import Cpdf from './components/miguel/consulta/Cpdf'

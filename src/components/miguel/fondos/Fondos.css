@@ -158,7 +158,6 @@
   margin-top: 20px;
 }
 .field {
-  width: 45%;
   border-top: 0;
   border-left: 0;
   border-right: 0;
@@ -173,9 +172,6 @@
 .card-f {
   width: 50%;
 }
-
-
-
 
 
 
@@ -311,7 +307,7 @@
   width: 100%;
 }
 .k-dropdown, .k-dropdowntree {
-  width: 51% !important;
+  width: 100% !important;
 }
 .f-t-a {
   width: 50.5%;

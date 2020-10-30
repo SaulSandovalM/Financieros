@@ -10,7 +10,7 @@ import TableRow from '@material-ui/core/TableRow'
 import IconButton from '@material-ui/core/IconButton'
 import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown'
 import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp'
-import AddIcon from '@material-ui/icons/Add';
+import AddIcon from '@material-ui/icons/Add'
 import Box from '@material-ui/core/Box'
 import Collapse from '@material-ui/core/Collapse'
 import Typography from '@material-ui/core/Typography'
@@ -25,7 +25,6 @@ import ListItemText from '@material-ui/core/ListItemText'
 import ListItemIcon from '@material-ui/core/ListItemIcon'
 import FormControl from '@material-ui/core/FormControl'
 import Select from '@material-ui/core/Select'
-import InputLabel from '@material-ui/core/InputLabel'
 import MenuItem from '@material-ui/core/MenuItem'
 
 export default class NewComprometidos extends Component {
@@ -47,7 +46,7 @@ export default class NewComprometidos extends Component {
     const { open } = this.state
 
     return (
-      <div>
+      <div style={{ padding: '90px 30px 30px 30px', background: '#f4f4f4', minHeight: '88.5vh' }}>
         <div>
           <Grid container spacing={3} justify='center' alignItems='center'>
             <Grid item xs>

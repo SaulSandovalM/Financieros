@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom'
 import { logoutUser } from '../../../actions'
 import { connect } from 'react-redux'
 import './Nav.css'
-import logoH from '../../../img/logo_h.svg'
 import Typography from '@material-ui/core/Typography'
 
 class Nav extends Component {
