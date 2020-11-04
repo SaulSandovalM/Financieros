@@ -20,7 +20,19 @@
   border-left: 0;
   border-right-color: white;
   border-top: 0;
-  width: 10.8%;
+  width: 36%;
+}
+.border-table2 {
+  border-left: 0;
+  border-right-color: white;
+  border-top: 0;
+  width: 7% !important;
+}
+.border-table3 {
+  border-left: 0;
+  border-right-color: white;
+  border-top: 0;
+  width: 12%;
 }
 .table-row-c {
   width: 100%;

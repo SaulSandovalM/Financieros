@@ -17,6 +17,7 @@ import ListItemText from '@material-ui/core/ListItemText'
 import ListItemIcon from '@material-ui/core/ListItemIcon'
 import firebase from '../../../Firebase'
 import CurrencyFormat from 'react-currency-format'
+import Fab from '@material-ui/core/Fab'
 
 export default class NewComprometidos extends Component {
   constructor (props) {
@@ -33,6 +34,7 @@ export default class NewComprometidos extends Component {
       rubro: '',
       up: '',
       presupuesto: [],
+      comprometidos: []
     }
     this.handleClick = this.handleClick.bind(this)
   }
@@ -51,6 +53,32 @@ export default class NewComprometidos extends Component {
     })
     const itemsRef = firebase.database().ref('presupuesto/')
     this.listenForItems(itemsRef)
+    const ref = firebase.firestore().collection('fondos').doc(this.props.match.params.id)
+    const updateRef = firebase.firestore().collection('fondos').doc(this.props.match.params.id).collection('comprometidos')
+    this.unsubscribe = updateRef.onSnapshot(this.onCollectionUpdate)
+    ref.get().then((doc) => {
+      if (doc.exists) {
+        const fondos = doc.data()
+        const idP = doc.id
+        this.state.idP = idP
+        this.setState({
+          key: doc.id,
+          fondo: fondos.fondo,
+          fecha: fondos.fecha,
+          realizo: fondos.realizo,
+          tipo_doc: fondos.tipo_doc,
+          importe: fondos.importe,
+          partida: fondos.partida,
+          presupuestal: fondos.presupuestal,
+          importe_comp: fondos.importe_comp,
+          isr: fondos.isr,
+          total: fondos.total,
+          fecha_comp: fondos.fecha_comp
+        })
+      } else {
+        console.log('No se encuentra documento')
+      }
+    })
   }
 
   listenForItems = (itemsRef) => {
@@ -137,23 +165,45 @@ export default class NewComprometidos extends Component {
   }
 
   updateSeacrh (event) {
-    this.setState({ search: event.target.value.substr(0, 20) })
+    this.setState({ partida: event.target.value.substr(0, 20) })
   }
 
   updateSeacrh2 (event) {
-    this.setState({ search2: event.target.value.substr(0, 7) })
+    this.setState({ up: event.target.value.substr(0, 7) })
   }
 
   updateSeacrh3 (event) {
-    this.setState({ search3: event.target.value.substr(0, 7) })
+    this.setState({ rubro: event.target.value.substr(0, 7) })
   }
 
   updateSeacrh4 (event) {
-    this.setState({ search4: event.target.value.substr(0, 7) })
+    this.setState({ municipio: event.target.value.substr(0, 7) })
   }
 
   updateSeacrh5 (event) {
-    this.setState({ search5: event.target.value.substr(0, 7) })
+    this.setState({ area: event.target.value.substr(0, 7) })
+  }
+
+  onCollectionUpdate = (querySnapshot) => {
+    const comprometidos = []
+    querySnapshot.forEach((doc) => {
+      const { partida, presupuestal, importe_comp, rubro, municipio, area, isr, iva } = doc.data()
+      comprometidos.push({
+        key: doc.id,
+        doc,
+        partida,
+        presupuestal,
+        importe_comp,
+        rubro,
+        municipio,
+        area,
+        isr,
+        iva
+      })
+    })
+    this.setState({
+      comprometidos
+   })
   }
 
   update = (item) => {
@@ -265,10 +315,14 @@ export default class NewComprometidos extends Component {
     alert('Tu solicitud fue enviada.')
   }
 
-  partida = ['211001', '211002', '212001', '212002', '214001', '214002', '215001', '216001', '217001', '221001', '221002', '246001', '251001', '253001', '254001', '255001', '261001', '271001', '272001', '291001', '292001', '311001', '313001', '318001', '323002', '334001', '338001', '341001', '351001', '352001', '353001', '355001', '357001', '358001', '361002', '372001', '375001', '381001', '392006', '394001', '218002', '312001', '371001', '247001', '249001', '359001', '336001', '275001', '211003', '541001', '515001', '339001']
-  rubro = ['1501010', '4302010', '4303010', '4303020', '4306030', '451010', '5106050', '5106110', '6106010', '6106020', '6901010', '8103010', '8402060']
-  up = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12', '13', '14', '15', '16', '17', '18', '20', '21', '22', '23', '24']
-  municipio = ['Acatlán', 'Acaxochitlán', 'Actopan', 'Agua Blanca de Iturbide','Ajacuba','Alfajayucan','Almoloya','Apan','El Arenal','Atitalaquia','Atlapexco','Atotonilco el Grande','Atotonilco de Tula','Calnali','Cardonal','Cuautepec de Hinojosa','Chapantongo','Chapulhuacán','Chilcuautla','Eloxochitlán','Emiliano Zapata','Epazoyucan','Franciso I. Madero','Huasca de Ocampo','Huautla','Huazalingo','Huehuetla','Huejutla de Reyes','Huichapan','Ixmiquilpan','Jacala de Ledezma','Jaltocán','Juárez Hidalgo','Lolotla','Metepec','San Agustín Metzquititlán','Metztitlán','Mineral del Chico','Mineral del Monte','La Misión','Mixquiahuala de Juárez','Molango de Escamilla','Nicolás Flores','Nopala de Villagrán','Omitlán de Juárez','San Felipe Orizatlán','Pacula','Pachuca de Soto','Pisaflores','Progreso de Obregón','Mineral de la Reforma','San Agustín Tlaxiaca','San Bartolo Tutotepec','San Salvador','Santiago de Anaya','Santiago Tulantepec de Lugo Guerrero','Singuilucan','Tasquillo','Tecozautla','Tenango de Doria','Tepeapulco','Tepehuacán de Guerrero','Tepeji del Río de Ocampo','Tepetitlán','Tetepango','Villa de Tezontepec','Tezontepec de Aldama','Tianguistengo','Tizayuca','Tlahuelilpan','Tlahuiltepa','Tlanalapa','Tlanchinol','Tlaxcoapan','Tolcayuca','Tula de Allende','Tulancingo de Bravo','Xochiatipan','Xochicoatlán','Yahualica','Zacualtipán de Ángeles','Zapotlán de Juárez','Zempoala','Zimapán']
+  cambio = () => {
+    this.props.history.push(`/Oficios/${this.state.idP}`)
+  }
+
+  partida = ['211001','211002','212001','212002','214001','214002','215001','216001','217001','221001','221002','246001','251001','253001','254001','255001','261001','271001','272001','291001','292001','311001','313001','318001','323002','334001','338001','341001','351001','352001','353001','355001','357001','358001','361002','372001','375001','381001','392006','394001','218002','312001','371001','247001','249001','359001','336001','275001','211003','541001','515001','339001']
+  rubro = ['1501010','4302010','4303010','4303020','4306030','451010','5106050','5106110','6106010','6106020','6901010','8103010','8402060']
+  up = ['01','02','03','04','05','06','07','08','09','10','11','12','13','14','15','16','17','18','20','21','22','23','24']
+  municipio = ['Acatlán','Acaxochitlán','Actopan','Agua Blanca de Iturbide','Ajacuba','Alfajayucan','Almoloya','Apan','El Arenal','Atitalaquia','Atlapexco','Atotonilco el Grande','Atotonilco de Tula','Calnali','Cardonal','Cuautepec de Hinojosa','Chapantongo','Chapulhuacán','Chilcuautla','Eloxochitlán','Emiliano Zapata','Epazoyucan','Franciso I. Madero','Huasca de Ocampo','Huautla','Huazalingo','Huehuetla','Huejutla de Reyes','Huichapan','Ixmiquilpan','Jacala de Ledezma','Jaltocán','Juárez Hidalgo','Lolotla','Metepec','San Agustín Metzquititlán','Metztitlán','Mineral del Chico','Mineral del Monte','La Misión','Mixquiahuala de Juárez','Molango de Escamilla','Nicolás Flores','Nopala de Villagrán','Omitlán de Juárez','San Felipe Orizatlán','Pacula','Pachuca de Soto','Pisaflores','Progreso de Obregón','Mineral de la Reforma','San Agustín Tlaxiaca','San Bartolo Tutotepec','San Salvador','Santiago de Anaya','Santiago Tulantepec de Lugo Guerrero','Singuilucan','Tasquillo','Tecozautla','Tenango de Doria','Tepeapulco','Tepehuacán de Guerrero','Tepeji del Río de Ocampo','Tepetitlán','Tetepango','Villa de Tezontepec','Tezontepec de Aldama','Tianguistengo','Tizayuca','Tlahuelilpan','Tlahuiltepa','Tlanalapa','Tlanchinol','Tlaxcoapan','Tolcayuca','Tula de Allende','Tulancingo de Bravo','Xochiatipan','Xochicoatlán','Yahualica','Zacualtipán de Ángeles','Zapotlán de Juárez','Zempoala','Zimapán']
   area = ['Procuraduría General de Justicia','Subprocuraduría de Procedimientos Penales Región Oriente','Fiscalía Especializada para la atención de Delitos cometidos contra la Libertad de Expresión', 'Periodistas y Personas defensoras de los Derechos Humanos','Dirección General para la Atención de los Asuntos del Sistema Tradicional','Fiscalia de Delitos Electorales','Subprocuraduría de Derechos Humanos y Servicios a la Comunidad','Centro de Justicia Restaurativa Penal Poniente','Fiscalía para la Atención de Delitos de Género','Visitaduría General','Dirección General de Servicios Periciales','Centro de Operación Estratégica','Unidad Especializada en el Combate al Secuestro','Dirección General de Administración y Finanzas','Fiscalía Especializada para la atención de los Delitos de Trata de Personas','Subprocuraduría de Procedimientos Penales Región Poniente','Centro de Atención Temprana Poniente','Dirección General de Investigación y Litigación Poniente','Dirección General de la Policía Investigadora','Centro de Atención Temprana Oriente','Centro de Justicia Restaurativa Penal Oriente','Dirección General de Investigación y Litigación Oriente','Dirección General de Recursos Materiales y Servicios','Fiscalía Especializada en Delitos de Corrupción','Fiscalía Especializada en Materia de Desaparición Forzada de Personas',]
 
   render () {
@@ -331,8 +385,6 @@ export default class NewComprometidos extends Component {
       </Card>
     )
 
-    const { partida, rubro, up } = this.state
-
     return (
       <div className='div-compro-container'>
         {/* this.state.xml.map(item =>
@@ -379,31 +431,31 @@ export default class NewComprometidos extends Component {
                 <TableHead>
                   <TableRow>
                     <TableCell className='border-icon' />
-                    <TableCell className='border-table'>
+                    <TableCell className='border-table2'>
                       <b>Partida</b>
                     </TableCell>
-                    <TableCell className='border-table'>
+                    <TableCell className='border-table2'>
                       <b>Up</b>
                     </TableCell>
-                    <TableCell className='border-table'>
+                    <TableCell className='border-table2'>
                       <b>Rubro</b>
                     </TableCell>
-                    <TableCell className='border-table'>
+                    <TableCell className='border-table3'>
                       <b>Municipio</b>
                     </TableCell>
                     <TableCell className='border-table'>
                       <b>Area</b>
                     </TableCell>
-                    <TableCell className='border-table'>
+                    <TableCell className='border-table2'>
                       <b>Importe</b>
                     </TableCell>
-                    <TableCell className='border-table'>
+                    <TableCell className='border-table2'>
                       <b>Iva</b>
                     </TableCell>
-                    <TableCell className='border-table'>
+                    <TableCell className='border-table2'>
                       <b>Isr</b>
                     </TableCell>
-                    <TableCell className='border-table'>
+                    <TableCell className='border-table2'>
                       <b>Total</b>
                     </TableCell>
                   </TableRow>
@@ -420,7 +472,7 @@ export default class NewComprometidos extends Component {
                     }
                     </div>
                   )}
-                  <TableCell className='border-table'>
+                  <TableCell className='border-table2'>
                     <select
                       className='select-compro'
                       name='partida'
@@ -434,7 +486,7 @@ export default class NewComprometidos extends Component {
                       )}
                     </select>
                   </TableCell>
-                  <TableCell className='border-table'>
+                  <TableCell className='border-table2'>
                     <select
                       className='select-compro'
                       name='presupuestal'
@@ -448,7 +500,7 @@ export default class NewComprometidos extends Component {
                       )}
                     </select>
                   </TableCell>
-                  <TableCell className='border-table'>
+                  <TableCell className='border-table2'>
                     <select
                       className='select-compro'
                       name='rubro'
@@ -462,7 +514,7 @@ export default class NewComprometidos extends Component {
                       )}
                     </select>
                   </TableCell>
-                  <TableCell className='border-table'>
+                  <TableCell className='border-table3'>
                     <select
                       className='select-compro'
                       name='municipio'
@@ -490,7 +542,7 @@ export default class NewComprometidos extends Component {
                       )}
                     </select>
                   </TableCell>
-                  <TableCell className='border-table'>
+                  <TableCell className='border-table2'>
                     <CurrencyFormat
                       value={0}
                       displayType='text'
@@ -499,7 +551,7 @@ export default class NewComprometidos extends Component {
                       decimalSeparator='.'
                     />
                   </TableCell>
-                  <TableCell className='border-table'>
+                  <TableCell className='border-table2'>
                     <CurrencyFormat
                       value={0}
                       displayType='text'
@@ -508,7 +560,7 @@ export default class NewComprometidos extends Component {
                       decimalSeparator='.'
                     />
                   </TableCell>
-                  <TableCell className='border-table'>
+                  <TableCell className='border-table2'>
                     <CurrencyFormat
                       value={0}
                       displayType='text'
@@ -517,7 +569,7 @@ export default class NewComprometidos extends Component {
                       decimalSeparator='.'
                     />
                   </TableCell>
-                  <TableCell className='border-table'>
+                  <TableCell className='border-table2'>
                     <CurrencyFormat
                       value={0}
                       displayType='text'
@@ -527,25 +579,55 @@ export default class NewComprometidos extends Component {
                     />
                   </TableCell>
                 </TableRow>
-                <TableRow className='table-row-c'>
-                  <TableCell className='border-icon'>
-                    <IconButton size='small' className='border-des'>
-                      <CheckIcon style={{ color: 'green', cursor: 'auto' }}/>
-                    </IconButton>
-                  </TableCell>
-                  <TableCell className='border-table'>211002</TableCell>
-                  <TableCell className='border-table'>13</TableCell>
-                  <TableCell className='border-table'>9513578</TableCell>
-                  <TableCell className='border-table'>Pachuca</TableCell>
-                  <TableCell className='border-table'>Informatica</TableCell>
-                  <TableCell className='border-table'>$ 1500.00</TableCell>
-                  <TableCell className='border-table'>$ 20.00</TableCell>
-                  <TableCell className='border-table'>$ 0.00</TableCell>
-                  <TableCell className='border-table'>$ 1520.00</TableCell>
-                </TableRow>
+                {this.state.comprometidos.map(comprometidos =>
+                  <TableRow className='table-row-c'>
+                    <TableCell className='border-icon'>
+                      <IconButton size='small' className='border-des'>
+                        <CheckIcon style={{ color: 'green', cursor: 'auto' }} />
+                      </IconButton>
+                    </TableCell>
+                    <TableCell className='border-table2'>
+                      {comprometidos.partida}
+                    </TableCell>
+                    <TableCell className='border-table2'>
+                      {comprometidos.presupuestal}
+                    </TableCell>
+                    <TableCell className='border-table2'>
+                      {comprometidos.rubro}
+                    </TableCell>
+                    <TableCell className='border-table3'>
+                      {comprometidos.municipio}
+                    </TableCell>
+                    <TableCell className='border-table'>
+                      {comprometidos.area}
+                    </TableCell>
+                    <TableCell className='border-table2'>
+                      {' $ ' + comprometidos.importe_comp}
+                    </TableCell>
+                    <TableCell className='border-table2'>
+                      {' $ ' + comprometidos.iva}
+                    </TableCell>
+                    <TableCell className='border-table2'>
+                      {' $ ' + comprometidos.isr}
+                    </TableCell>
+                    <TableCell className='border-table2'>
+                      {comprometidos.importe_comp + comprometidos.iva + comprometidos.isr}
+                    </TableCell>
+                  </TableRow>
+                )}
               </Paper>
             </Grid>
           </Grid>
+        </div>
+        <div className='div-content-fab'>
+          <Fab
+            color='primary'
+            aria-label='add'
+            style={{ background: 'green' }}
+            onClick={this.cambio}
+          >
+            <CheckIcon />
+          </Fab>
         </div>
       </div>
     )
