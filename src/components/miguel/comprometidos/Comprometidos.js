@@ -8,7 +8,6 @@ import XmlComp from './sin/XmlComp'
 import Dropzone from 'react-dropzone'
 import XMLParser from 'react-xml-parser'
 
-
 export default class Comprometidos extends Component {
   constructor(props) {
     super(props)

@@ -32,7 +32,7 @@ class Nav extends Component {
           <div className='navbar-left' style={{ marginTop: '40px' }}>
             <Link to='/Fondos' className='deco'>
               <span className='material-icons' style={{ color: 'white', marginTop: '3px', marginRight: '15px' }}>
-                local_atm
+                request_quote
               </span>
               <Typography className='nav-t' variant='h6' style={{ marginBottom: '15px', color: 'white' }}>
                 Fondos
@@ -42,7 +42,7 @@ class Nav extends Component {
           <div className='navbar-left'>
             <Link to='/Caratula' className='deco'>
               <span className='material-icons' style={{ color: 'white', marginTop: '3px', marginRight: '15px' }}>
-                folder_open
+                text_snippet
               </span>
               <Typography className='nav-t' variant='h6' style={{ marginBottom: '15px', color: 'white' }}>
                 Caratula
@@ -52,7 +52,7 @@ class Nav extends Component {
           <div className='navbar-left'>
             <Link to='/Contrarecibo' className='deco'>
               <span className='material-icons' style={{ color: 'white', marginTop: '3px', marginRight: '15px' }}>
-                plagiarism
+                payments
               </span>
               <Typography className='nav-t' variant='h6' style={{ marginBottom: '15px', color: 'white' }}>
                 Contrarecibo
@@ -62,7 +62,7 @@ class Nav extends Component {
           <div className='navbar-left'>
             <Link to='/Tabular' className='deco'>
               <span className='material-icons' style={{ color: 'white', marginTop: '3px', marginRight: '15px' }}>
-                playlist_add_check
+                format_list_bulleted
               </span>
               <Typography className='nav-t' variant='h6' style={{ marginBottom: '15px', color: 'white' }}>
                 Tabular
