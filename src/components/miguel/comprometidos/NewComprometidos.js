@@ -15,9 +15,9 @@ import List from '@material-ui/core/List'
 import ListItem from '@material-ui/core/ListItem'
 import ListItemText from '@material-ui/core/ListItemText'
 import ListItemIcon from '@material-ui/core/ListItemIcon'
-import firebase from '../../../Firebase'
 import CurrencyFormat from 'react-currency-format'
 import Fab from '@material-ui/core/Fab'
+import firebase from '../../../Firebase'
 
 export default class NewComprometidos extends Component {
   constructor (props) {
@@ -27,14 +27,15 @@ export default class NewComprometidos extends Component {
       open: false,
       allowCustom: true,
       checked: [],
-      left: [0, 1, 2, 3],
-      right: [4, 5, 6, 7],
+      right: [0],
       xml: [],
       partida: '',
       rubro: '',
       up: '',
       presupuesto: [],
-      comprometidos: []
+      comprometidos: [],
+      search: '',
+      total: ''
     }
     this.handleClick = this.handleClick.bind(this)
   }
@@ -164,24 +165,28 @@ export default class NewComprometidos extends Component {
     this.setState(state)
   }
 
-  updateSeacrh (event) {
+  seacrh (event) {
+    this.setState({ search: event.target.value.substr(0, 20) })
+  }
+
+  updateSearch (event) {
     this.setState({ partida: event.target.value.substr(0, 20) })
   }
 
-  updateSeacrh2 (event) {
+  updateSearch2 (event) {
     this.setState({ up: event.target.value.substr(0, 7) })
   }
 
-  updateSeacrh3 (event) {
+  updateSearch3 (event) {
     this.setState({ rubro: event.target.value.substr(0, 7) })
   }
 
-  updateSeacrh4 (event) {
-    this.setState({ municipio: event.target.value.substr(0, 7) })
+  updateSearch4 (event) {
+    this.setState({ municipio: event.target.value })
   }
 
-  updateSeacrh5 (event) {
-    this.setState({ area: event.target.value.substr(0, 7) })
+  updateSearch5 (event) {
+    this.setState({ area: event.target.value })
   }
 
   onCollectionUpdate = (querySnapshot) => {
@@ -242,8 +247,8 @@ export default class NewComprometidos extends Component {
       of: item.of,
       np: item.np,
       cpa: item.cpa,
-      ene: item.ene,
-      gasene: item.gasene,
+      ene: item.ene - parseInt(this.state.total),
+      gasene: item.gasene + parseInt(this.state.total),
       feb: item.feb,
       gasfeb: item.gasfeb,
       mar: item.mar,
@@ -260,8 +265,8 @@ export default class NewComprometidos extends Component {
       gasago: item.gasago,
       sep: item.sep,
       gassep: item.gassep,
-      oct: item.oct - parseInt(this.state.total),
-      gasoct: item.gasoct + parseInt(this.state.total),
+      oct: item.oct ,
+      gasoct: item.gasoct,
       nov: item.nov,
       gasnov: item.gasnov,
       dic: item.dic,
@@ -272,7 +277,7 @@ export default class NewComprometidos extends Component {
       trasferencia: item.trasferencia
     }
     firebase.database().ref().update(updates)
-    const { municipio, area, totalr, fechar } = this.state
+    const { municipio, area, total, fechar } = this.state
     const updateRef = firebase.firestore().collection('fondos').doc(this.props.match.params.id).collection('comprometidos').doc()
     updateRef.set({
       partida: item.ogasto,
@@ -280,7 +285,7 @@ export default class NewComprometidos extends Component {
       municipio,
       area,
       fecha: fechar,
-      importe_comp: totalr,
+      importe_comp: total,
       año: item.año,
       ramo: item.rm,
       ur: item.ur,
@@ -326,7 +331,8 @@ export default class NewComprometidos extends Component {
   area = ['','Procuraduría General de Justicia','Subprocuraduría de Procedimientos Penales Región Oriente','Fiscalía Especializada para la atención de Delitos cometidos contra la Libertad de Expresión', 'Periodistas y Personas defensoras de los Derechos Humanos','Dirección General para la Atención de los Asuntos del Sistema Tradicional','Fiscalia de Delitos Electorales','Subprocuraduría de Derechos Humanos y Servicios a la Comunidad','Centro de Justicia Restaurativa Penal Poniente','Fiscalía para la Atención de Delitos de Género','Visitaduría General','Dirección General de Servicios Periciales','Centro de Operación Estratégica','Unidad Especializada en el Combate al Secuestro','Dirección General de Administración y Finanzas','Fiscalía Especializada para la atención de los Delitos de Trata de Personas','Subprocuraduría de Procedimientos Penales Región Poniente','Centro de Atención Temprana Poniente','Dirección General de Investigación y Litigación Poniente','Dirección General de la Policía Investigadora','Centro de Atención Temprana Oriente','Centro de Justicia Restaurativa Penal Oriente','Dirección General de Investigación y Litigación Oriente','Dirección General de Recursos Materiales y Servicios','Fiscalía Especializada en Delitos de Corrupción','Fiscalía Especializada en Materia de Desaparición Forzada de Personas',]
 
   render () {
-    const { checked, left, right } = this.state
+    const { checked, right } = this.state
+    const left = this.state.xml
 
     function not (a, b) {
       return a.filter((value) => b.indexOf(value) === -1)
@@ -363,39 +369,132 @@ export default class NewComprometidos extends Component {
       this.setState({ checked: not(checked, rightChecked) })
     }
 
-    const customList = (title, items) => (
-      <Card className='card-compro'>
-        <List dense component='div' role='list'>
-          {items.map((value) => {
-            return (
-              <ListItem key={value} button onClick={handleToggle(value)}>
-                <ListItemIcon>
-                  <Checkbox
-                    checked={checked.indexOf(value) !== -1}
-                    tabIndex={-1}
-                    disableRipple
-                  />
-                </ListItemIcon>
-                <ListItemText primary={value} />
-              </ListItem>
-            )
-          })}
-          <ListItem />
-        </List>
-      </Card>
+    const customListLeft = (title, items) => (
+      <div>
+        <div className='recibo-container'>
+          Buscador
+          <input
+            className='input-compro'
+            value={this.state.search}
+            onChange={this.seacrh.bind(this)}
+            placeholder='Ingresa el folio a buscar'
+          />
+        </div>
+        <Card className='card-compro'>
+          <List dense component='div' role='list'>
+            {filterData.map((value) => {
+              return (
+                <ListItem key={value} button onClick={handleToggle(value)}>
+                  <ListItemIcon>
+                    <Checkbox
+                      checked={checked.indexOf(value) !== -1}
+                      tabIndex={-1}
+                      disableRipple
+                    />
+                  </ListItemIcon>
+                  <ListItemText className='list-align' primary={value.folio} />
+                  <ListItemText className='list-align' primary={'$ ' + value.importe} />
+                  <ListItemText className='list-align' primary={'$ ' + value.iva} />
+                  <ListItemText className='list-align' primary={'$ ' + value.isr} />
+                </ListItem>
+              )
+            })}
+            <ListItem />
+          </List>
+        </Card>
+      </div>
     )
+
+    const customListRight = (title, items) => (
+      <div>
+        <div className='recibo-container'>
+          Agrega un Recibo
+          <div className='recibo-content'>
+            <button className='recibo-btn'> + </button>
+            <input
+              className='input-r'
+              placeholder='Importe'
+            />
+            <input
+              className='input-r'
+              placeholder='Iva'
+            />
+            <input
+              className='input-r'
+              placeholder='Isr'
+            />
+            <input
+              className='input-r'
+              placeholder='Total'
+            />
+            <input
+              className='input-r'
+              placeholder='Fecha'
+            />
+          </div>
+        </div>
+        <Card className='card-compro'>
+          <List dense component='div' role='list'>
+            {items.map((value) => {
+              return (
+                <ListItem key={value} button onClick={handleToggle(value)}>
+                  <ListItemIcon>
+                    <Checkbox
+                      checked={checked.indexOf(value) !== -1}
+                      tabIndex={-1}
+                      disableRipple
+                    />
+                  </ListItemIcon>
+                  <ListItemText className='list-align' primary={value.folio} />
+                  <ListItemText className='list-align' primary={'$ ' + value.importe} />
+                  <ListItemText className='list-align' primary={'$ ' + value.iva} />
+                  <ListItemText className='list-align' primary={'$ ' + value.isr} />
+                </ListItem>
+              )
+            })}
+            <ListItem />
+          </List>
+        </Card>
+      </div>
+    )
+
+    const filterData = this.state.xml.filter(
+      (xml) => {
+        return xml.folio.indexOf(this.state.search) !== -1
+      }
+    )
+
+    const totalImporteImporte = []
+    right.map(items => (
+      totalImporteImporte.push(items.importe)
+    ))
+    const reducerImporte = (a, b) => a + b
+    this.state.importe = totalImporteImporte.reduce(reducerImporte)
+
+    const totalImporteIva = []
+    right.map(items => (
+      totalImporteIva.push(items.iva)
+    ))
+    const reducerIva = (a, b) => a + b
+    this.state.iva = totalImporteIva.reduce(reducerIva)
+
+    const totalImporteIsr = []
+    right.map(items => (
+      totalImporteIsr.push(items.isr)
+    ))
+    const reducerIsr = (a, b) => a + b
+    this.state.isr = totalImporteIsr.reduce(reducerIsr)
+
+    const total = this.state.importe + this.state.iva + this.state.isr
+    const totalcompro = total
+    this.state.total = totalcompro
 
     return (
       <div className='div-compro-container'>
-        {/* this.state.xml.map(item =>
-          <div>
-            perro
-          </div>
-        ) */}
         <div>
           <Grid container spacing={3} justify='center' alignItems='center'>
             <Grid item xs>
-              {customList('Choices', left)}
+              {customListLeft('Choices', left)}
             </Grid>
             <Grid item>
               <Grid container direction='column' alignItems='center'>
@@ -418,7 +517,7 @@ export default class NewComprometidos extends Component {
               </Grid>
             </Grid>
             <Grid item xs>
-              {customList('Choices', right)}
+              {customListRight('Choices', right)}
             </Grid>
           </Grid>
         </div>
@@ -461,7 +560,7 @@ export default class NewComprometidos extends Component {
                 <TableRow className='table-row-c'>
                   {this.state.presupuesto.map(item =>
                     <div>
-                    {this.state.search === item.ogasto && this.state.search2 === item.up && this.state.search3 === item.rubro ?
+                    {this.state.partida === item.ogasto && this.state.up === item.up && this.state.rubro === item.rubro ?
                       <TableCell className='border-icon'>
                         <IconButton size='small' className='border-des' onClick={this.update}>
                           <AddIcon />
@@ -475,8 +574,8 @@ export default class NewComprometidos extends Component {
                       className='select-compro'
                       name='partida'
                       ref='partida'
-                      value={this.state.search}
-                      onChange={this.updateSeacrh.bind(this)}
+                      value={this.state.partida}
+                      onChange={this.updateSearch.bind(this)}
                       required
                     >
                       {this.partida.map((x,y) =>
@@ -489,8 +588,8 @@ export default class NewComprometidos extends Component {
                       className='select-compro'
                       name='presupuestal'
                       ref='presupuestal'
-                      value={this.state.search2}
-                      onChange={this.updateSeacrh2.bind(this)}
+                      value={this.state.up}
+                      onChange={this.updateSearch2.bind(this)}
                       required
                     >
                       {this.up.map((x,y) =>
@@ -503,8 +602,8 @@ export default class NewComprometidos extends Component {
                       className='select-compro'
                       name='rubro'
                       ref='rubro'
-                      value={this.state.search3}
-                      onChange={this.updateSeacrh3.bind(this)}
+                      value={this.state.rubro}
+                      onChange={this.updateSearch3.bind(this)}
                       required
                     >
                       {this.rubro.map((x,y) =>
@@ -517,8 +616,8 @@ export default class NewComprometidos extends Component {
                       className='select-compro'
                       name='municipio'
                       ref='municipio'
-                      value={this.state.search4}
-                      onChange={this.updateSeacrh3.bind(this)}
+                      value={this.state.municipio}
+                      onChange={this.updateSearch3.bind(this)}
                       required
                     >
                       {this.municipio.map((x,y) =>
@@ -531,8 +630,8 @@ export default class NewComprometidos extends Component {
                       className='select-compro'
                       name='area'
                       ref='area'
-                      value={this.state.search5}
-                      onChange={this.updateSeacrh3.bind(this)}
+                      value={this.state.area}
+                      onChange={this.updateSearch5.bind(this)}
                       required
                     >
                       {this.area.map((x,y) =>
@@ -541,40 +640,75 @@ export default class NewComprometidos extends Component {
                     </select>
                   </TableCell>
                   <TableCell className='border-table2'>
-                    <CurrencyFormat
-                      value={0}
-                      displayType='text'
-                      prefix=' $ '
-                      thousandSeparator
-                      decimalSeparator='.'
-                    />
+                    {this.state.importe ?
+                      <CurrencyFormat
+                        value={this.state.importe}
+                        displayType='text'
+                        prefix=' $ '
+                        thousandSeparator
+                        decimalSeparator='.'
+                      /> :
+                      <CurrencyFormat
+                        value={0}
+                        displayType='text'
+                        prefix=' $ '
+                        thousandSeparator
+                        decimalSeparator='.'
+                      />}
                   </TableCell>
                   <TableCell className='border-table2'>
-                    <CurrencyFormat
-                      value={0}
-                      displayType='text'
-                      prefix=' $ '
-                      thousandSeparator
-                      decimalSeparator='.'
-                    />
+                    {this.state.importe ?
+                      <CurrencyFormat
+                        value={this.state.iva}
+                        displayType='text'
+                        prefix=' $ '
+                        thousandSeparator
+                        decimalSeparator='.'
+                      /> :
+                      <CurrencyFormat
+                        value={0}
+                        displayType='text'
+                        prefix=' $ '
+                        thousandSeparator
+                        decimalSeparator='.'
+                      />
+                    }
                   </TableCell>
                   <TableCell className='border-table2'>
-                    <CurrencyFormat
-                      value={0}
-                      displayType='text'
-                      prefix=' $ '
-                      thousandSeparator
-                      decimalSeparator='.'
-                    />
+                    {this.state.importe ?
+                      <CurrencyFormat
+                        value={this.state.isr}
+                        displayType='text'
+                        prefix=' $ '
+                        thousandSeparator
+                        decimalSeparator='.'
+                      /> :
+                      <CurrencyFormat
+                        value={0}
+                        displayType='text'
+                        prefix=' $ '
+                        thousandSeparator
+                        decimalSeparator='.'
+                      />
+                    }
                   </TableCell>
                   <TableCell className='border-table2'>
-                    <CurrencyFormat
-                      value={0}
-                      displayType='text'
-                      prefix=' $ '
-                      thousandSeparator
-                      decimalSeparator='.'
-                    />
+                    {this.state.importe ?
+                      <CurrencyFormat
+                        value={total}
+                        displayType='text'
+                        prefix=' $ '
+                        thousandSeparator
+                        decimalSeparator='.'
+                      /> :
+                      <CurrencyFormat
+                        value={0}
+                        displayType='text'
+                        prefix=' $ '
+                        thousandSeparator
+                        decimalSeparator='.'
+                      />
+                    }
                   </TableCell>
                 </TableRow>
                 {this.state.comprometidos.map(comprometidos =>

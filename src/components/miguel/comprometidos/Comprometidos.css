@@ -26,7 +26,7 @@
   border-left: 0;
   border-right-color: white;
   border-top: 0;
-  width: 7% !important;
+  width: 7%;
 }
 .border-table3 {
   border-left: 0;
@@ -54,4 +54,39 @@
   height: 30px;
   text-align-last: left;
   width: 100%;
+}
+.input-compro {
+  border-bottom: 1px solid grey;
+  border-left: 0;
+  border-right: 0;
+  border-top: 0;
+  padding: 10px;
+  width: 98%;
+}
+.list-align {
+  width: 20%;
+}
+.recibo-content {
+  display: flex;
+  height: 36px;
+}
+.input-r {
+  border-bottom: 1px solid grey;
+  border-left: 0;
+  border-right: 0;
+  border-top: 0;
+  width: 18%;
+}
+.recibo-container {
+  display: flex;
+  flex-direction: column;
+}
+.recibo-btn {
+  background: white;
+  border-left: 0;
+  border-right: 0;
+  border-top: 0;
+  border-bottom: 1px solid grey;
+  width: 8%;
+  font-size: 22px;
 }
