@@ -144,7 +144,7 @@ export default class Arqueo extends Component {
     today = today.getFullYear() + '-' + meses[today.getMonth()] + '-' + today.getDate()
 
     return (
-      <div className='pf-container' style={{ marginTop: '60px' }}>
+      <div className='pf-container-a' style={{ marginTop: '40px' }}>
         <div className='arqueo-container'>
           <div className='arqueo-content'>
             <div className='table-arqueo'>
@@ -168,7 +168,7 @@ export default class Arqueo extends Component {
                 trigger={<button className='margin-buton-ar'>Actualizar</button>}
                 modal
                 closeOnDocumentClick>
-                <form onSubmit={this.sendMessage.bind(this)} ref='contactForm'>
+                <form onSubmit={this.sendMessage.bind(this)} ref='contactForm' style={{ display: 'flex', justifyContent: 'center', flexDirection: 'column', height: '100%' }}>
                   <div className='cen-tit'>
                     <div className='title-ar'>
                       <b>AGREGA EL NUMERO DE CHEQUE PARA REALIZAR TU ARQUEO</b>

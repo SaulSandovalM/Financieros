@@ -4,6 +4,7 @@ import './Cheques.css'
 import ListComponent from './ListComponent'
 import CurrencyFormat from 'react-currency-format'
 import Dropzone from 'react-dropzone'
+import CurrencyInput from 'react-currency-masked-input'
 
 export default class Cheques extends Component {
   constructor (props) {
@@ -232,7 +233,7 @@ export default class Cheques extends Component {
   }
 
   render () {
-    console.log(this.state.importe)
+
     return (
       <div className='container-back-cheques'>
         <div className='site-cheques'>
@@ -243,7 +244,7 @@ export default class Cheques extends Component {
             <div className='cheques-inputs'>
               <div className='cheques-inputs-c'>
                 <div className='input-row-cheque'>
-                  <p className='p-cheque'><b># Cheque</b></p>
+                  <p className='p-cheque'># Cheque</p>
                   <input
                     className='input-sc-cheque'
                     id='numCheque'
@@ -253,7 +254,7 @@ export default class Cheques extends Component {
                   />
                 </div>
                 <div className='input-row-cheque'>
-                  <p className='p-cheque'><b>Importe</b></p>
+                  <p className='p-cheque'>Importe</p>
                   <input
                     className='input-sc-cheque'
                     type='number'
@@ -265,9 +266,10 @@ export default class Cheques extends Component {
                     value={this.state.importe}
                     ref={importe => this.inputImporte = importe}
                   />
+                  <CurrencyInput name="myInput" required />
                 </div>
                 <div className='input-row-cheque'>
-                  <p className='p-cheque'><b>Fecha de Emisión</b></p>
+                  <p className='p-cheque'>Fecha de Emisión</p>
                   <input
                     className='input-sc-cheque'
                     type='date'
@@ -277,7 +279,7 @@ export default class Cheques extends Component {
                   />
                 </div>
                 <div className='input-row-cheque'>
-                  <p className='p-cheque'><b>Fecha de Cobro</b></p>
+                  <p className='p-cheque'>Fecha de Cobro</p>
                   <input
                     className='input-sc-cheque'
                     type='date'
@@ -306,7 +308,7 @@ export default class Cheques extends Component {
             <div className='cheque-inputs'>
               <div className='cheques-inputs-c'>
                 <div className='input-row-cheque'>
-                  <p className='p-cheque'><b>Beneficiario</b></p>
+                  <p className='p-cheque'>Beneficiario</p>
                   <input
                     className='input-sc-cheque'
                     type='text'
@@ -334,16 +336,20 @@ export default class Cheques extends Component {
             <p className='p-title-size'>- Movimientos</p>
           </div>
           <div className='update'>
-            <p className='p-cheque'><b>Archivo Actualizado</b></p>
+            <p className='p-cheque'>Archivo Actualizado</p>
             <Dropzone
               style={{
                 position: 'static',
                 width: '100%',
                 height: '29px',
                 borderWidth: '1px',
-                borderColor: '#a9a9a9',
+                borderRight: '0',
+                borderLeft: '0',
+                borderTop: '0',
+                borderColor: 'grey',
                 borderStyle: 'solid',
-                background: 'white',
+                background: '#f4f4f4',
+                padding: '6px'
               }}
               accept='.pdf' onChange={this.updateUpload.bind(this)}>
               <div className='filename'>

@@ -33,7 +33,9 @@
   width: 23%;
 }
 .p-cheque {
-  margin: 0px;
+  margin: 0;
+  color: grey;
+  font-size: 14px;
 }
 .p-check {
   color: green;
@@ -49,6 +51,12 @@
 }
 .input-sc-cheque {
   height: 25px;
+  border-right: 0;
+  border-left: 0;
+  border-top: 0;
+  border-bottom: 1px solid grey;
+  background: #f4f4f4;
+  padding: 6px;
 }
 .disponible-cheque {
   width: 40%;
@@ -57,7 +65,7 @@
   justify-content: flex-end;
 }
 .p-cheque-dis {
-  margin: 0px;
+  margin: 0;
   color: grey;
   font-size: 12px;
   text-align: right;

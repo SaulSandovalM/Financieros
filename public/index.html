@@ -16,6 +16,33 @@
     -->
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
+    <input id="myInput" inputmode="numeric" value="0,00">
+
+    <script src="./node_modules/simple-mask-money/lib/simple-mask-money.js"></script>
+    <script>
+
+      // configuration
+      const args = {
+        afterFormat(e) { console.log('afterFormat', e); },
+        allowNegative: false,
+        beforeFormat(e) { console.log('beforeFormat', e); },
+        negativeSignAfter: false,
+        prefix: '',
+        suffix: '',
+        fixed: true,
+        fractionDigits: 2,
+        decimalSeparator: ',',
+        thousandsSeparator: '.',
+        cursor: 'move'
+      };
+
+      // select the element
+      const input = SimpleMaskMoney.setMask('#myInput', args);
+
+      // This method return value of your input in format number to save in your database
+      input.formatToNumber();
+
+    </script> 
     <!--
       Notice the use of %PUBLIC_URL% in the tags above.
       It will be replaced with the URL of the `public` folder during the build.
