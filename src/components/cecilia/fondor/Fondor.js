@@ -84,6 +84,10 @@ export default class Fondor extends Component {
     }))
   }
 
+  handleChangeI (event) {
+    this.setState({ [event.target.name]: event.target.value })
+  }
+
   componentDidMount () {
     const itemsRefBanco = firebase.database().ref('presupuesto/')
     this.listenForItemsBanco(itemsRefBanco)
@@ -269,6 +273,8 @@ export default class Fondor extends Component {
   }
 
   render () {
+    console.log(this.state.importe)
+
     return (
       <div className='pf-container' style={{ marginTop: '60px' }}>
         <div className='p-container-fr'>
@@ -328,6 +334,16 @@ export default class Fondor extends Component {
                         onChange={this.handleChange.bind(this)}
                         ref={importe => this.inputImporte = importe}
                       />
+                      {/* <CurrencyFormat
+                        id='importe'
+                        name='importe'
+                        required
+                        style={{ zIndex: '3' }}
+                        onChange={this.handleChangeI.bind(this)}
+                        value={this.state.importe}
+                        thousandSeparator
+                        prefix=' $'
+                      /> */}
                     </div>
                     <div className='p-container-ifr2'>
                       <TextField

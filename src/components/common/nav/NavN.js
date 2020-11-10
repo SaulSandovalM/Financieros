@@ -3,9 +3,22 @@ import { Link } from 'react-router-dom'
 import { logoutUser } from '../../../actions'
 import { connect } from 'react-redux'
 import './Nav.css'
-import logoH from '../../../img/logo_h.svg'
+import Typography from '@material-ui/core/Typography'
 
-class Nav extends Component {
+class NavN extends Component {
+  constructor () {
+    super()
+    this.state = {
+      isHidden: true
+    }
+  }
+
+  toggleHidden () {
+    this.setState({
+      isHidden: !this.state.isHidden
+    })
+  }
+
   handleLogout = () => {
     const { dispatch } = this.props
     dispatch(logoutUser())
@@ -15,26 +28,44 @@ class Nav extends Component {
     const { isLoggingOut, logoutError } = this.props
     return (
       <div className='nav-col'>
-        <div className='navbar-navigation'>
-          <img className='logo' src={logoH} alt='' />
+        <div style={{ display: 'flex', flexDirection: 'column'}}>
+          <div className='navbar-left' style={{ marginTop: '40px' }}>
+            <Link to='/Autorizacion' className='deco'>
+              <span className='material-icons' style={{ color: 'white', marginTop: '3px', marginRight: '15px' }}>
+                done_all
+              </span>
+              <Typography className='nav-t' variant='h6' style={{ marginBottom: '15px', color: 'white' }}>
+                Autorización
+              </Typography>
+            </Link>
+          </div>
+          <div className='navbar-left'>
+            <Link to='/ListValesA' className='deco'>
+              <span className='material-icons' style={{ color: 'white', marginTop: '3px', marginRight: '15px' }}>
+                attach_money
+              </span>
+              <Typography className='nav-t' variant='h6' style={{ marginBottom: '15px', color: 'white' }}>
+                Vales Autorizados
+              </Typography>
+            </Link>
+          </div>
         </div>
-        <div className='navbar-left'>
-          <Link to='/Autorizacion' className='deco'>
-            <h3 className='nav-t'>Autorización</h3>
-          </Link>
-        </div>
-        <div className='navbar-left'>
-          <div className='deco'>
-            <button
-              onClick={this.handleLogout}
-              className='nav-t'
-              style={{background: '#092432', border: 'none'}}>
-              <h3 className='nav-t'>
-                Cerrar Sesion
-              </h3>
-            </button>
-            {isLoggingOut && <p>Cerrando Sesion....</p>}
-            {logoutError && <p>Error al Cerrar Sesion</p>}
+        <div>
+          <div className='navbar-left'>
+            <div className='deco'>
+              <button
+                onClick={this.handleLogout}
+                style={{ background: '#092432', border: 'none', display: 'flex' }}>
+                <span className='material-icons' style={{ color: 'white', marginTop: '3px', marginRight: '15px' }}>
+                  person
+                </span>
+                <Typography className='nav-t' variant='h6' style={{ marginBottom: '15px', color: 'white' }}>
+                  Cerrar Sesión
+                </Typography>
+              </button>
+              {isLoggingOut && <p>Cerrando Sesion....</p>}
+              {logoutError && <p>Error al Cerrar Sesion</p>}
+            </div>
           </div>
         </div>
       </div>
@@ -49,4 +80,4 @@ function mapStateToProps (state) {
   }
 }
 
-export default connect(mapStateToProps)(Nav)
+export default connect(mapStateToProps)(NavN)

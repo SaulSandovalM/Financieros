@@ -1,5 +1,8 @@
 import React, { Component } from 'react'
 import './Autorizacion.css'
+import TableBody from '@material-ui/core/TableBody'
+import TableCell from '@material-ui/core/TableCell'
+import TableRow from '@material-ui/core/TableRow'
 
 export default class RowComponent extends Component {
   constructor (props) {
@@ -16,38 +19,59 @@ export default class RowComponent extends Component {
 
   render () {
     const estaA = this.props.item.estatus
-    let table
-
-    if (estaA === 'Pendiente') {
-      table =
-        <div className='banco-inputs-list'>
-          <div className='table-left' />
-          <div className='table-banco-up'>
-            <p>{this.props.item.vale}</p>
-          </div>
-          <div className='table-banco-partida'>
-            <p>{this.props.item.cantidad}</p>
-          </div>
-          <div className='table-banco-proyecto'>
-            <p>{this.props.item.concepto}</p>
-          </div>
-          <div className='table-banco-nombre'>
-            <p>{this.props.item.area}</p>
-          </div>
-          <div className='table-banco-monto'>
-            <p>{this.props.item.turno}</p>
-          </div>
-          <div className='table-banco-porcentaje'>
-            <button onClick={this.update}>Autorizar</button>
-          </div>
-          <div className='table-right' />
-        </div>
-    }
 
     return (
-      <div>
-        {table}
-      </div>
+      <TableBody>
+        {estaA === 'Pendiente' &&
+          <TableRow className='caja-inputs'>
+            <TableCell className='table-v-num2'>
+              {this.props.item.vale}
+            </TableCell>
+            <TableCell className='table-v-num2'>
+              {this.props.item.cheque}
+            </TableCell>
+            <TableCell className='table-v-num'>
+              {this.props.item.cantidad}
+            </TableCell>
+            <TableCell className='table-v-num'>
+              {this.props.item.cantidadc}
+            </TableCell>
+            <TableCell className='table-v-num'>
+              {this.props.item.cantidadr}
+            </TableCell>
+            <TableCell className='table-v-num'>
+              {this.props.item.concepto}
+            </TableCell>
+            <TableCell className='table-v-num'>
+              {this.props.item.oficioS}
+            </TableCell>
+            <TableCell className='table-v-num'>
+              {this.props.item.area}
+            </TableCell>
+            <TableCell className='table-v-num'>
+              {this.props.item.turno}
+            </TableCell>
+            <TableCell className='table-v-num'>
+              {this.props.item.factura}
+            </TableCell>
+            <TableCell className='table-v-num'>
+              {this.props.item.recibos}
+            </TableCell>
+            <TableCell className='table-v-num'>
+              {this.props.item.sc}
+            </TableCell>
+            <TableCell className='table-v-num'>
+              {this.props.item.fecha}
+            </TableCell>
+            <TableCell className='table-v-num'>
+              {this.props.item.personaR}
+            </TableCell>
+            <TableCell className='table-v-num'>
+              <button onClick={this.update}>Autorizar</button>
+            </TableCell>
+          </TableRow>
+        }
+      </TableBody>
     )
   }
 }

@@ -51,9 +51,6 @@ export default class RowAuto extends Component {
               {this.props.item.fecha}
             </TableCell>
             <TableCell className='table-v-num'>
-              {this.props.item.autorizo}
-            </TableCell>
-            <TableCell className='table-v-num'>
               {this.props.item.personaR}
             </TableCell>
           </TableRow>}

@@ -1,6 +1,9 @@
 import React, { Component } from 'react'
 import CurrencyFormat from 'react-currency-format'
 import './Fondor.css'
+import TableBody from '@material-ui/core/TableBody'
+import TableCell from '@material-ui/core/TableCell'
+import TableRow from '@material-ui/core/TableRow'
 
 export default class RowComponent extends Component {
   constructor (props) {
@@ -13,41 +16,36 @@ export default class RowComponent extends Component {
 
   render () {
     return (
-      <div>
+      <TableBody>
         {this.props.item.estatus === 'FR' &&
-          <div>
-            <div className='table-container-p'>
-              <div className='table-left' />
-              <div className='table-up-p-frn-fr'>
-                <p>{this.props.item.up}</p>
+          <TableRow>
+            <TableCell className='table-up-p-frn-a'>
+              <p style={{ margin: '0' }}>{this.props.item.up}</p>
+            </TableCell>
+            <TableCell className='table-up-p-frn-p'>
+              <p style={{ margin: '0' }}>{this.props.item.ogasto}</p>
+            </TableCell>
+            <TableCell className='table-up-p-frn-p'>
+              <p style={{ margin: '0' }}>{this.props.item.rubro}</p>
+            </TableCell>
+            <TableCell className='table-up-p-frn-p'>
+              <div>
+                <CurrencyFormat
+                  value={this.props.item.gasdic}
+                  displayType='text'
+                  thousandSeparator
+                  prefix=' $'
+                />
               </div>
-              <div className='table-up-p-frn-d'>
-                <p>{this.props.item.ogasto}</p>
-              </div>
-              <div className='table-up-p-frn-d'>
-                <p>{this.props.item.rubro}</p>
-              </div>
-              <div className='table-up-p-frn-d'>
-                <div>
-                  <CurrencyFormat
-                    value={this.props.item.gasdic}
-                    displayType='text'
-                    thousandSeparator
-                    prefix=' $'
-                  />
-                  .00
-                </div>
-              </div>
-              <div className='table-cpa-d'>
-                <p>{this.props.item.cpa}</p>
-              </div>
-              <div className='table-up-p-frn-d'>
-                <b>Agregado</b>
-              </div>
-              <div className='table-right' />
-            </div>
-          </div>}
-      </div>
+            </TableCell>
+            <TableCell className='table-cpa-a'>
+              <p style={{ margin: '0' }}>{this.props.item.cpa}</p>
+            </TableCell>
+            <TableCell className='table-up-p-frn-p'>
+              Agregado
+            </TableCell>
+          </TableRow>}
+      </TableBody>
     )
   }
 }

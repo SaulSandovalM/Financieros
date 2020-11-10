@@ -2,6 +2,9 @@ import React, { Component } from 'react'
 import './Fondor.css'
 import RowComponent from './RowComponent'
 import firebase from '../../../Firebase'
+import Paper from '@material-ui/core/Paper'
+import TableContainer from '@material-ui/core/TableContainer'
+import Table from '@material-ui/core/Table'
 
 export default class ListComponent extends Component {
   constructor (props) {
@@ -21,15 +24,19 @@ export default class ListComponent extends Component {
 
   render () {
     return (
-      <div style={{ marginTop: '30px' }}>
-        {
-          this.props.listaB.map(item =>
-            <RowComponent
-              key={item.id}
-              item={item}
-            />
-          )
-        }
+      <div style={{ margin: '30px' }}>
+        <TableContainer component={Paper}>
+          <Table size='small'>
+            {
+              this.props.listaB.map(item =>
+                <RowComponent
+                  key={item.id}
+                  item={item}
+                />
+              )
+            }
+          </Table>
+        </TableContainer>
       </div>
     )
   }

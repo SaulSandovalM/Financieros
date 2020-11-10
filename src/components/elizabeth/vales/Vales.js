@@ -113,7 +113,7 @@ export default class Vales extends Component {
 
   sendMessage () {
     const params = {
-      vale: this.inputVale.value,
+      vale: this.state.contador.storyCount,
       cheque: this.inputCheque.value,
       cantidad: this.inputCantidad.value,
       cantidadc: this.inputCantidadc.value,
@@ -126,12 +126,12 @@ export default class Vales extends Component {
       factura: this.inputFactura.value,
       recibos: this.inputRecibos.value,
       sc: this.inputSC.value,
-      fecha: this.inputFecha.value,
+      fecha: this.state.fecha,
       autorizo: this.inputAutorizo.value,
       estatus: this.state.estatus
     }
     this.setState({
-      vale: this.inputVale.value,
+      vale: this.state.contador.storyCount,
       cheque: this.inputCheque.value,
       cantidad: this.inputCantidad.value,
       cantidadc: this.inputCantidadc.value,
@@ -144,7 +144,7 @@ export default class Vales extends Component {
       factura: this.inputFactura.value,
       recibos: this.inputRecibos.value,
       sc: this.inputSC.value,
-      fecha: this.inputFecha.value,
+      fecha: this.state.fecha,
       autorizo: this.inputAutorizo.value,
       estatus: this.state.estatus
     })
@@ -190,7 +190,7 @@ export default class Vales extends Component {
     this.state.fecha = today2
 
     return (
-      <div className='container-back' style={{ marginTop: '80px' }}>
+      <div className='container-back-v' style={{ marginTop: '80px' }}>
         <form onSubmit={this.sendMessage.bind(this)} ref='contactForm'>
           <div className='margin-vale' ref={el => (this.vale = el)}>
             <div className='vale-title-container'>

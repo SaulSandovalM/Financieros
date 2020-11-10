@@ -79,10 +79,7 @@ export default class Autorizacion extends Component {
 
   render () {
     return (
-      <div className='banco-back'>
-        <div className='site-banco'>
-          <p className='site-banco-s'><b>Autorización</b></p>
-        </div>
+      <div className='banco-back' style={{ marginTop: '30px' }}>
         <div className='banco-container'>
           <ListComponent
             lista={this.state.lista}

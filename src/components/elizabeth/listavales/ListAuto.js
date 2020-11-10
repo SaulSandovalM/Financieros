@@ -49,7 +49,6 @@ export default class ListAuto extends Component {
                 <TableCell className='table-v-num'><b>Recibos</b></TableCell>
                 <TableCell className='table-v-num'><b>S/C</b></TableCell>
                 <TableCell className='table-v-num'><b>Fecha</b></TableCell>
-                <TableCell className='table-v-num'><b>Autorizo</b></TableCell>
                 <TableCell className='table-v-num'><b>Recibio</b></TableCell>
               </TableRow>
             </TableHead>

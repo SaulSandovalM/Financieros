@@ -37,14 +37,14 @@ export default class RowComponent extends Component {
           <p style={{ margin: '0' }}>{this.props.item.rubro}</p>
         </TableCell>
         <TableCell className='table-up-p-frn-p'>
-        <div>
-          <CurrencyFormat
-            value={this.props.item.dic}
-            displayType='text'
-            thousandSeparator
-            prefix=' $'
-          />
-        </div>
+          <div>
+            <CurrencyFormat
+              value={this.props.item.dic}
+              displayType='text'
+              thousandSeparator
+              prefix=' $'
+            />
+          </div>
         </TableCell>
         <TableCell className='table-cpa-a'>
           <p style={{ margin: '0' }}>{this.props.item.cpa}</p>

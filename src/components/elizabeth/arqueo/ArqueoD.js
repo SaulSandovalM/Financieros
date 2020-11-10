@@ -136,7 +136,7 @@ export default class ArqueoD extends Component {
           <div className='arqueo-content'>
             <div className='table-arqueo'>
               <div className='title-arqueo'>
-                <p className='p-mar-arqueo'><b>Denominaciónote</b></p>
+                <p className='p-mar-arqueo'><b>Denominación</b></p>
               </div>
               <div className='title-arqueo'>
                 <p className='p-mar-arqueo'><b>Cantidad</b></p>

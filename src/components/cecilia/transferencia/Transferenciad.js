@@ -242,7 +242,7 @@ export default class Transferencia extends Component {
             <div className='p-container-fondor'>
               <div className='p-margin-fr'>
                 <p className='p-title-size-fr'>
-                  - Busca los datos para hacer tu transferencia/adición
+                  - Busca los datos para hacer tu transferencia/ampliación
                 </p>
               </div>
               <div className='inputs-container-fr'>
