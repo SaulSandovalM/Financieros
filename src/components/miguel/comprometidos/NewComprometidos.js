@@ -28,6 +28,7 @@ export default class NewComprometidos extends Component {
       allowCustom: true,
       checked: [],
       right: [0],
+      empty: [0],
       xml: [],
       partida: '',
       rubro: '',
@@ -35,7 +36,7 @@ export default class NewComprometidos extends Component {
       presupuesto: [],
       comprometidos: [],
       search: '',
-      total: ''
+      total: '',
     }
     this.handleClick = this.handleClick.bind(this)
   }
@@ -488,6 +489,8 @@ export default class NewComprometidos extends Component {
     const total = this.state.importe + this.state.iva + this.state.isr
     const totalcompro = total
     this.state.total = totalcompro
+
+    console.log(this.state.total)
 
     return (
       <div className='div-compro-container'>

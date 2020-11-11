@@ -5,6 +5,10 @@ import Fab from '@material-ui/core/Fab'
 import CheckIcon from '@material-ui/icons/Check'
 import Paper from '@material-ui/core/Paper'
 import Grid from '@material-ui/core/Grid'
+import TextField from '@material-ui/core/TextField'
+import PropTypes from 'prop-types'
+import MaskedInput from 'react-text-mask'
+import NumberFormat from 'react-number-format'
 import './Fondos.css'
 
 export default class Fondos extends Component {
@@ -153,8 +157,6 @@ export default class Fondos extends Component {
   componentDidMount() {
     this.consumo()
     this.unsubscribe = this.ref.onSnapshot(this.onCollectionUpdate)
-    const itemsRef = firebase.database().ref('fondo')
-    this.listenForItems(itemsRef)
     const wishRef = firebase.database().ref('fondo/3q4t5w63q4fw3563')
     wishRef.once('value').then(snapshot => {
       let updatedWish = snapshot.val()
@@ -175,20 +177,6 @@ export default class Fondos extends Component {
       updatedWish.num = updatedWish.num + 1
       wishRef.set(updatedWish)
     })
-  }
-
-  listenForItems = (itemsRef) => {
-    itemsRef.on('value', (snap) => {
-      var numFondo = [];
-      snap.forEach((child) => {
-        numFondo.push({
-          num: child.val().num,
-        });
-      });
-      this.setState({
-        numFondo: numFondo
-      });
-    });
   }
 
   consumo = () => {
@@ -333,6 +321,7 @@ export default class Fondos extends Component {
                       value={tipo_doc}
                       onChange={this.onChange}
                       name='tipo_doc'
+                      required
                     >
                       {this.tipo_doc.map((x,y) =>
                         <option name={y}>{x}</option>
@@ -345,6 +334,7 @@ export default class Fondos extends Component {
                       value={tipo_doc}
                       onChange={this.onChange}
                       name='tipo_doc'
+                      required
                     >
                       {this.tipo_doc.map((x,y) =>
                         <option name={y}>{x}</option>
@@ -357,6 +347,7 @@ export default class Fondos extends Component {
                       value={tipo_doc}
                       onChange={this.onChange}
                       name='tipo_doc'
+                      required
                     >
                       {this.tipo_doc.map((x,y) =>
                         <option name={y}>{x}</option>
@@ -369,6 +360,7 @@ export default class Fondos extends Component {
                       value={tipo_doc}
                       onChange={this.onChange}
                       name='tipo_doc'
+                      required
                     >
                       {this.tipo_doc4.map((x,y) =>
                         <option name={y}>{x}</option>
@@ -381,6 +373,7 @@ export default class Fondos extends Component {
                       value={tipo_doc}
                       onChange={this.onChange}
                       name='tipo_doc'
+                      required
                     >
                       {this.tipo_doc4.map((x,y) =>
                         <option name={y}>{x}</option>
@@ -393,6 +386,7 @@ export default class Fondos extends Component {
                       value={tipo_doc}
                       onChange={this.onChange}
                       name='tipo_doc'
+                      required
                     >
                       {this.tipo_doc2.map((x,y) =>
                         <option name={y}>{x}</option>
@@ -405,6 +399,7 @@ export default class Fondos extends Component {
                       value={tipo_doc}
                       onChange={this.onChange}
                       name='tipo_doc'
+                      required
                     >
                       {this.tipo_doc3.map((x,y) =>
                         <option name={y}>{x}</option>
@@ -417,6 +412,7 @@ export default class Fondos extends Component {
                       value={tipo_doc}
                       onChange={this.onChange}
                       name='tipo_doc'
+                      required
                     >
                       {this.tipo_doc4.map((x,y) =>
                         <option name={y}>{x}</option>
@@ -429,6 +425,7 @@ export default class Fondos extends Component {
                       value={tipo_doc}
                       onChange={this.onChange}
                       name='tipo_doc'
+                      required
                     >
                       {this.tipo_doc3.map((x,y) =>
                         <option name={y}>{x}</option>
@@ -441,6 +438,7 @@ export default class Fondos extends Component {
                       value={tipo_doc}
                       onChange={this.onChange}
                       name='tipo_doc'
+                      required
                     >
                       {this.tipo_doc3.map((x,y) =>
                         <option name={y}>{x}</option>
@@ -453,6 +451,7 @@ export default class Fondos extends Component {
                       value={tipo_doc}
                       onChange={this.onChange}
                       name='tipo_doc'
+                      required
                     >
                       {this.tipo_doc3.map((x,y) =>
                         <option name={y}>{x}</option>
@@ -465,6 +464,7 @@ export default class Fondos extends Component {
                       value={tipo_doc}
                       onChange={this.onChange}
                       name='tipo_doc'
+                      required
                     >
                       {this.tipo_doc3.map((x,y) =>
                         <option name={y}>{x}</option>
@@ -479,6 +479,7 @@ export default class Fondos extends Component {
                     value={oficio_aut}
                     onChange={this.onChange}
                     name='oficio_aut'
+                    required
                   >
                     {this.oficio_aut.map((x,y) =>
                       <option name={y}>{x}</option>
@@ -498,14 +499,17 @@ export default class Fondos extends Component {
                   />
                 </div>
                 <div className='div-con'>
-                  <p className='p-label'>Importe</p>
-                  <input
-                    className='field'
-                    name='importe'
+                  <TextField
+                    label='Importe'
                     value={importe}
                     onChange={this.onChange}
+                    id='importe'
+                    name='importe'
+                    InputProps={{
+                      inputComponent: NumberFormatCustom
+                    }}
                     required
-                    ref='importe'
+                    ref={importe => this.inputImporte = importe}
                   />
                 </div>
               </div>
@@ -657,4 +661,52 @@ export default class Fondos extends Component {
       </form>
     )
   }
+}
+
+function TextMaskCustom(props) {
+  const { inputRef, ...other } = props;
+
+  return (
+    <MaskedInput
+      {...other}
+      ref={(ref) => {
+        inputRef(ref ? ref.inputElement : null);
+      }}
+      mask={['(', /[1-9]/, /\d/, /\d/, ')', ' ', /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/]}
+      placeholderChar={'\u2000'}
+      showMask
+    />
+  );
+}
+
+TextMaskCustom.propTypes = {
+  inputRef: PropTypes.func.isRequired,
+};
+
+function NumberFormatCustom(props) {
+  const { inputRef, onChange, ...other } = props;
+
+  return (
+    <NumberFormat
+      {...other}
+      getInputRef={inputRef}
+      onValueChange={(values) => {
+        onChange({
+          target: {
+            name: props.name,
+            value: values.value,
+          },
+        });
+      }}
+      thousandSeparator
+      isNumericString
+      prefix='$'
+    />
+  );
+}
+
+NumberFormatCustom.propTypes = {
+  inputRef: PropTypes.func.isRequired,
+  name: PropTypes.string.isRequired,
+  onChange: PropTypes.func.isRequired,
 }

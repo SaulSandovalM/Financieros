@@ -171,10 +171,7 @@ export default class Edit extends Component {
               <Paper style={{ padding: '20px', display: 'flex', justifyContent: 'space-between' }}>
                 <div style={{ width: '48%' }}>
                   <div style={{ marginBottom: '15px' }}><b>Fondo</b></div>
-                  <div>
-                    perro
-                  </div>
-                  <div style={{ display: 'flex', flexDirection: 'column'  }}>
+                  <div style={{ display: 'flex', flexDirection: 'column' }}>
                     <TextField
                       style={{ marginBottom: '15px' }}
                       label='Fondo'
@@ -299,7 +296,7 @@ export default class Edit extends Component {
                 <TextField
                   style={{ marginBottom: '15px' }}
                   label='Fecha de Contrarecibo'
-                  name='fondo'
+                  name='fechacontra'
                   onChange={this.onChange}
                   value={this.state.fechaContra}
                   required
@@ -307,7 +304,7 @@ export default class Edit extends Component {
                 <TextField
                   style={{ marginBottom: '15px' }}
                   label='Numero de Contrarecibo'
-                  name='fecha'
+                  name='numcontra'
                   onChange={this.onChange}
                   value={this.state.numContra}
                   required
@@ -315,7 +312,7 @@ export default class Edit extends Component {
                 <TextField
                   style={{ marginBottom: '15px' }}
                   label='Fecha de Deposito'
-                  name='tipo_doc'
+                  name='fechadepo'
                   onChange={this.onChange}
                   value={this.state.fechaDepo}
                   required
@@ -323,7 +320,7 @@ export default class Edit extends Component {
                 <TextField
                   style={{ marginBottom: '15px' }}
                   label='Cuenta por Pagar'
-                  name='oficio_aut'
+                  name='cuentaPagar'
                   onChange={this.onChange}
                   value={this.state.cuentaPagar}
                   required
@@ -331,14 +328,14 @@ export default class Edit extends Component {
                 <TextField
                   style={{ marginBottom: '15px' }}
                   label='Cuenta por Pagar Para'
-                  name='no_oficio'
+                  name='cuentaPagarPara'
                   onChange={this.onChange}
                   value={this.state.cuentaPagarPara}
                   required
                 />
                 <TextField
                   label='Sujeto Contable'
-                  name='importe'
+                  name='sujetoContable'
                   onChange={this.onChange}
                   value={this.state.sujetoContable}
                   required

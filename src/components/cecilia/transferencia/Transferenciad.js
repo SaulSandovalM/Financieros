@@ -3,6 +3,9 @@ import './Transferencia.css'
 import firebase from '../../../Firebase'
 import ListComponent from './ListComponent'
 import TextField from '@material-ui/core/TextField'
+import PropTypes from 'prop-types'
+import MaskedInput from 'react-text-mask'
+import NumberFormat from 'react-number-format'
 
 export default class Transferencia extends Component {
   constructor () {
@@ -254,6 +257,9 @@ export default class Transferencia extends Component {
                         label='Importe'
                         id='importe'
                         name='importe'
+                        InputProps={{
+                          inputComponent: NumberFormatCustom
+                        }}
                         required
                         style={{zIndex: '3'}}
                         onChange={this.handleChange.bind(this)}
@@ -275,4 +281,52 @@ export default class Transferencia extends Component {
       </div>
     )
   }
+}
+
+function TextMaskCustom(props) {
+  const { inputRef, ...other } = props;
+
+  return (
+    <MaskedInput
+      {...other}
+      ref={(ref) => {
+        inputRef(ref ? ref.inputElement : null);
+      }}
+      mask={['(', /[1-9]/, /\d/, /\d/, ')', ' ', /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/]}
+      placeholderChar={'\u2000'}
+      showMask
+    />
+  );
+}
+
+TextMaskCustom.propTypes = {
+  inputRef: PropTypes.func.isRequired,
+};
+
+function NumberFormatCustom(props) {
+  const { inputRef, onChange, ...other } = props;
+
+  return (
+    <NumberFormat
+      {...other}
+      getInputRef={inputRef}
+      onValueChange={(values) => {
+        onChange({
+          target: {
+            name: props.name,
+            value: values.value,
+          },
+        });
+      }}
+      thousandSeparator
+      isNumericString
+      prefix='$'
+    />
+  );
+}
+
+NumberFormatCustom.propTypes = {
+  inputRef: PropTypes.func.isRequired,
+  name: PropTypes.string.isRequired,
+  onChange: PropTypes.func.isRequired,
 }

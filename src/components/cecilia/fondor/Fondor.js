@@ -6,6 +6,9 @@ import ListFr from './ListFr'
 import CurrencyFormat from 'react-currency-format'
 import TextField from '@material-ui/core/TextField'
 import Alert from '@material-ui/lab/Alert'
+import PropTypes from 'prop-types'
+import MaskedInput from 'react-text-mask'
+import NumberFormat from 'react-number-format'
 
 export default class Fondor extends Component {
   constructor () {
@@ -327,11 +330,13 @@ export default class Fondor extends Component {
                     <div className='p-container-ifr2'>
                       <TextField
                         label='Importe'
+                        value={this.state.importe}
+                        onChange={this.handleChange.bind(this)}
                         id='importe'
                         name='importe'
-                        required
-                        style={{zIndex: '3'}}
-                        onChange={this.handleChange.bind(this)}
+                        InputProps={{
+                          inputComponent: NumberFormatCustom
+                        }}
                         ref={importe => this.inputImporte = importe}
                       />
                       {/* <CurrencyFormat
@@ -376,4 +381,52 @@ export default class Fondor extends Component {
       </div>
     )
   }
+}
+
+function TextMaskCustom(props) {
+  const { inputRef, ...other } = props;
+
+  return (
+    <MaskedInput
+      {...other}
+      ref={(ref) => {
+        inputRef(ref ? ref.inputElement : null);
+      }}
+      mask={['(', /[1-9]/, /\d/, /\d/, ')', ' ', /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/]}
+      placeholderChar={'\u2000'}
+      showMask
+    />
+  );
+}
+
+TextMaskCustom.propTypes = {
+  inputRef: PropTypes.func.isRequired,
+};
+
+function NumberFormatCustom(props) {
+  const { inputRef, onChange, ...other } = props;
+
+  return (
+    <NumberFormat
+      {...other}
+      getInputRef={inputRef}
+      onValueChange={(values) => {
+        onChange({
+          target: {
+            name: props.name,
+            value: values.value,
+          },
+        });
+      }}
+      thousandSeparator
+      isNumericString
+      prefix='$'
+    />
+  );
+}
+
+NumberFormatCustom.propTypes = {
+  inputRef: PropTypes.func.isRequired,
+  name: PropTypes.string.isRequired,
+  onChange: PropTypes.func.isRequired,
 }

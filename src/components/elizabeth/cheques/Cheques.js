@@ -4,6 +4,11 @@ import './Cheques.css'
 import ListComponent from './ListComponent'
 import CurrencyFormat from 'react-currency-format'
 import Dropzone from 'react-dropzone'
+import TextField from '@material-ui/core/TextField'
+import PropTypes from 'prop-types'
+import MaskedInput from 'react-text-mask'
+import NumberFormat from 'react-number-format'
+import Button from '@material-ui/core/Button'
 
 export default class Cheques extends Component {
   constructor (props) {
@@ -165,14 +170,14 @@ export default class Cheques extends Component {
     e.preventDefault()
     const params = {
       numCheque: this.inputCheque.value,
-      importe: this.inputImporte.value,
+      importe: this.state.importe,
       fechaE: this.inputFechaE.value,
       dirigido: this.inputDirigido.value,
       fechaC: this.inputFechaC.value
     }
     this.setState({
       numCheque: this.inputCheque.value,
-      importe: this.inputImporte.value,
+      importe: 0,
       fechaE: this.inputFechaE.value,
       dirigido: this.inputDirigido.value,
       fechaC: this.inputFechaC.value
@@ -232,8 +237,6 @@ export default class Cheques extends Component {
   }
 
   render () {
-    console.log(this.state.importe)
-
     return (
       <div className='container-back-cheques'>
         <div className='site-cheques'>
@@ -254,16 +257,15 @@ export default class Cheques extends Component {
                   />
                 </div>
                 <div className='input-row-cheque'>
-                  <p className='p-cheque'>Importe</p>
-                  <input
-                    className='input-sc-cheque'
-                    type='number'
-                    step='any'
+                  <TextField
+                    label='Importe'
+                    value={this.state.importe}
+                    onChange={this.handleChange.bind(this)}
                     id='importe'
                     name='importe'
-                    required
-                    onChange={this.handleChange.bind(this)}
-                    value={this.state.importe}
+                    InputProps={{
+                      inputComponent: NumberFormatCustom
+                    }}
                     ref={importe => this.inputImporte = importe}
                   />
                 </div>
@@ -296,7 +298,7 @@ export default class Cheques extends Component {
                     <CurrencyFormat
                       value={this.state.contador.storyCount}
                       displayType='text'
-                      prefix=' $'
+                      prefix=' $ '
                       thousandSeparator
                       decimalSeparator='.'
                     />
@@ -324,7 +326,15 @@ export default class Cheques extends Component {
                     {this.state.contador.storyCount < this.state.importe ?
                       <p>El importe pasa la cantidad disponible</p>
                       :
-                      <button type='submit' className='input-sc-cheque boton-g-cheque'>Guardar</button>
+                      <Button
+                        style={{ background: 'green' }}
+                        variant='contained'
+                        color='primary'
+                        onClick={this.handleUpdate}
+                        type='submit'
+                      >
+                        Guardar
+                      </Button>
                     }
                   </div>
                 </div>
@@ -371,4 +381,52 @@ export default class Cheques extends Component {
       </div>
     )
   }
+}
+
+function TextMaskCustom(props) {
+  const { inputRef, ...other } = props;
+
+  return (
+    <MaskedInput
+      {...other}
+      ref={(ref) => {
+        inputRef(ref ? ref.inputElement : null);
+      }}
+      mask={['(', /[1-9]/, /\d/, /\d/, ')', ' ', /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/]}
+      placeholderChar={'\u2000'}
+      showMask
+    />
+  );
+}
+
+TextMaskCustom.propTypes = {
+  inputRef: PropTypes.func.isRequired,
+};
+
+function NumberFormatCustom(props) {
+  const { inputRef, onChange, ...other } = props;
+
+  return (
+    <NumberFormat
+      {...other}
+      getInputRef={inputRef}
+      onValueChange={(values) => {
+        onChange({
+          target: {
+            name: props.name,
+            value: values.value,
+          },
+        });
+      }}
+      thousandSeparator
+      isNumericString
+      prefix='$'
+    />
+  );
+}
+
+NumberFormatCustom.propTypes = {
+  inputRef: PropTypes.func.isRequired,
+  name: PropTypes.string.isRequired,
+  onChange: PropTypes.func.isRequired,
 }
