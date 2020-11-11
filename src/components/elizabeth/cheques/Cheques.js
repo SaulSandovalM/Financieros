@@ -4,7 +4,6 @@ import './Cheques.css'
 import ListComponent from './ListComponent'
 import CurrencyFormat from 'react-currency-format'
 import Dropzone from 'react-dropzone'
-import CurrencyInput from 'react-currency-masked-input'
 
 export default class Cheques extends Component {
   constructor (props) {
@@ -233,6 +232,7 @@ export default class Cheques extends Component {
   }
 
   render () {
+    console.log(this.state.importe)
 
     return (
       <div className='container-back-cheques'>
@@ -266,7 +266,6 @@ export default class Cheques extends Component {
                     value={this.state.importe}
                     ref={importe => this.inputImporte = importe}
                   />
-                  <CurrencyInput name="myInput" required />
                 </div>
                 <div className='input-row-cheque'>
                   <p className='p-cheque'>Fecha de Emisión</p>

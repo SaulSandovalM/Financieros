@@ -32,6 +32,7 @@ export default class Fondos extends Component {
       observaciones: '',
       numProy: '',
       fondos: [],
+      numFondo: [],
       value: '',
       key: '',
       contador: {},
@@ -142,6 +143,7 @@ export default class Fondos extends Component {
         })
         batch.commit()
         this.order()
+        this.incrementFondo()
       })
       .catch((error) => {
         console.error('Error al guardar: ', error)
@@ -151,6 +153,42 @@ export default class Fondos extends Component {
   componentDidMount() {
     this.consumo()
     this.unsubscribe = this.ref.onSnapshot(this.onCollectionUpdate)
+    const itemsRef = firebase.database().ref('fondo')
+    this.listenForItems(itemsRef)
+    const wishRef = firebase.database().ref('fondo/3q4t5w63q4fw3563')
+    wishRef.once('value').then(snapshot => {
+      let updatedWish = snapshot.val()
+      this.setState({
+        num: updatedWish.num
+      })
+      wishRef.set(updatedWish)
+    })
+  }
+
+  incrementFondo = () => {
+    const wishRef = firebase.database().ref('fondo/3q4t5w63q4fw3563')
+    wishRef.once('value').then(snapshot => {
+      let updatedWish = snapshot.val()
+      this.setState({
+        num: updatedWish.num
+      })
+      updatedWish.num = updatedWish.num + 1
+      wishRef.set(updatedWish)
+    })
+  }
+
+  listenForItems = (itemsRef) => {
+    itemsRef.on('value', (snap) => {
+      var numFondo = [];
+      snap.forEach((child) => {
+        numFondo.push({
+          num: child.val().num,
+        });
+      });
+      this.setState({
+        numFondo: numFondo
+      });
+    });
   }
 
   consumo = () => {
@@ -254,7 +292,10 @@ export default class Fondos extends Component {
     const { tipo_doc, oficio_aut, importe, beneficiario, no_proyecto } = this.state
     this.state.fecha = today
     this.state.realizo = admin
-    this.state.fondo = this.state.contador.nFondo
+    let perro = this.state.numFondo.map(item =>
+      item.num
+    )
+    this.state.fondo = this.state.num
 
     return (
       <form className='form-fondo' onSubmit={this.onSubmit}>
@@ -267,9 +308,10 @@ export default class Fondos extends Component {
                   <p className='p-label'>Fondo</p>
                   <input
                     className='field'
-                    value={this.state.contador.nFondo}
-                    required
+                    value={this.state.num}
                     name='fondo'
+                    ref='fondo'
+                    required
                     onChange={this.onChange}
                   />
                 </div>
