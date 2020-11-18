@@ -2,6 +2,13 @@ import React, { Component } from 'react'
 import firebase from '../../../../Firebase'
 import './pdfs.css'
 import { Link } from 'react-router-dom'
+import Table from '@material-ui/core/Table'
+import TableCell from '@material-ui/core/TableCell'
+import TableContainer from '@material-ui/core/TableContainer'
+import TableHead from '@material-ui/core/TableHead'
+import TableRow from '@material-ui/core/TableRow'
+import Paper from '@material-ui/core/Paper'
+import TableBody from '@material-ui/core/TableBody'
 
 export default class TabularList extends Component {
   constructor() {
@@ -45,36 +52,63 @@ export default class TabularList extends Component {
 
   render() {
     return (
-      <div className='cent-compro' >
-        <div className='App'>
-          <h2 className='title' style={{fontFamily: 'Arial'}}>Impresion de Tabular</h2>
-          <div className='products-al' style={{ zIndex: '2', position: 'relative' }}>
-            <div className='a-row-t'>Fondos</div>
-            <div className='a-row-t'>Nombre Realizo</div>
-            <div className='a-row-t'>Tipo de documento</div>
-            <div className='a-row-t'>Importe</div>
-            <div className='a-row-t'>Tabular</div>
-            <div className='a-row-t'>Tabular Individual</div>
-          </div>
-          <div style={{ marginTop: '-23px', zIndex: '1', position: 'relative' }}>
-            {this.state.fondos.map(fondos =>
-              <div>
-                <div className='products-al'>
-                  <div className='a-row-f'>{fondos.fondo}</div>
-                  <div className='a-row-f'>{fondos.realizo}</div>
-                  <div className='a-row-f'>{fondos.tipo_doc}</div>
-                  <div className='a-row-f'>$ {fondos.importe}</div>
-                  <div className='a-row-f vista'>
+      <div className='cent-compro'>
+        <TableContainer component={Paper}>
+          <Table size='small'>
+            <TableHead>
+              <TableRow>
+                <TableCell className='table-tab'>
+                  <b>Fondos</b>
+                </TableCell>
+                <TableCell className='table-tab'>
+                  <b>Nombre Realizo</b>
+                </TableCell>
+                <TableCell className='table-tab'>
+                  <b>Tipo de documento</b>
+                </TableCell>
+                <TableCell className='table-tab'>
+                  <b>Importe</b>
+                </TableCell>
+                <TableCell className='table-tab'>
+                  <b>Tabular</b>
+                </TableCell>
+                <TableCell className='table-tab'>
+                  <b>Tabular Individual</b>
+                </TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {this.state.fondos.map(fondos =>
+                <TableRow>
+                  <TableCell className='table-tab'>
+                    <div className='click-arch'>
+                      {fondos.fondo}
+                    </div>
+                  </TableCell>
+                  <TableCell className='table-tab'>
+                    <div className='click-arch'>
+                      {fondos.realizo}
+                    </div>
+                  </TableCell>
+                  <TableCell className='table-tab'>
+                    <div className='click-arch'>
+                      {fondos.tipo_doc}
+                    </div>
+                  </TableCell>
+                  <TableCell className='table-tab'>
+                    $ {fondos.importe}
+                  </TableCell>
+                  <TableCell className='table-tab'>
                     <Link to={`/Tabular/${fondos.key}`}>Ver</Link>
-                  </div>
-                  <div className='a-row-f vista'>
+                  </TableCell>
+                  <TableCell className='table-tab'>
                     <Link to={`/TabularIndi/${fondos.key}`}>Ver</Link>
-                  </div>
-                </div>
-              </div>
-            )}
-          </div>
-        </div>
+                  </TableCell>
+                </TableRow>
+              )}
+            </TableBody>
+          </Table>
+        </TableContainer>
       </div>
     )
   }

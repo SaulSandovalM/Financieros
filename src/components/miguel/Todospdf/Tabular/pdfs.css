@@ -63,3 +63,13 @@
   text-align: left;
   width: 18.5%;
 }
+.table-tab {
+  border-left: 0;
+  border-right: white;
+  border-top: 0;
+  width: 16%;
+}
+.cent-compro {
+  background: #f4f4f4;
+  padding: 80px 30px 30px 30px;
+}

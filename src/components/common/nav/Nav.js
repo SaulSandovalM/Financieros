@@ -60,7 +60,7 @@ class Nav extends Component {
             </Link>
           </div>
           <div className='navbar-left'>
-            <Link to='/Tabular' className='deco'>
+            <Link to='/TabularList' className='deco'>
               <span className='material-icons' style={{ color: 'white', marginTop: '3px', marginRight: '15px' }}>
                 format_list_bulleted
               </span>
