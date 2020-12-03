@@ -18,6 +18,7 @@ import ListItemIcon from '@material-ui/core/ListItemIcon'
 import CurrencyFormat from 'react-currency-format'
 import Fab from '@material-ui/core/Fab'
 import firebase from '../../../Firebase'
+import Dropzone from 'react-dropzone'
 
 export default class NewComprometidos extends Component {
   constructor (props) {
@@ -27,7 +28,7 @@ export default class NewComprometidos extends Component {
       open: false,
       allowCustom: true,
       checked: [],
-      right: [0],
+      right: [],
       empty: [0],
       xml: [],
       partida: '',
@@ -166,7 +167,7 @@ export default class NewComprometidos extends Component {
     this.setState(state)
   }
 
-  seacrh (event) {
+  upsearch (event) {
     this.setState({ search: event.target.value.substr(0, 20) })
   }
 
@@ -332,6 +333,40 @@ export default class NewComprometidos extends Component {
   area = ['','Procuraduría General de Justicia','Subprocuraduría de Procedimientos Penales Región Oriente','Fiscalía Especializada para la atención de Delitos cometidos contra la Libertad de Expresión', 'Periodistas y Personas defensoras de los Derechos Humanos','Dirección General para la Atención de los Asuntos del Sistema Tradicional','Fiscalia de Delitos Electorales','Subprocuraduría de Derechos Humanos y Servicios a la Comunidad','Centro de Justicia Restaurativa Penal Poniente','Fiscalía para la Atención de Delitos de Género','Visitaduría General','Dirección General de Servicios Periciales','Centro de Operación Estratégica','Unidad Especializada en el Combate al Secuestro','Dirección General de Administración y Finanzas','Fiscalía Especializada para la atención de los Delitos de Trata de Personas','Subprocuraduría de Procedimientos Penales Región Poniente','Centro de Atención Temprana Poniente','Dirección General de Investigación y Litigación Poniente','Dirección General de la Policía Investigadora','Centro de Atención Temprana Oriente','Centro de Justicia Restaurativa Penal Oriente','Dirección General de Investigación y Litigación Oriente','Dirección General de Recursos Materiales y Servicios','Fiscalía Especializada en Delitos de Corrupción','Fiscalía Especializada en Materia de Desaparición Forzada de Personas',]
 
   render () {
+    var user = firebase.auth().currentUser
+    var email
+    if (user != null) {
+      email = user.email
+    }
+    let admin
+    if (email === 'administrador@procuraduria.com') {
+      admin = 'ADMIN'
+    } else if (email === 'nayra@procuraduria.com') {
+      admin = 'NAYRA'
+    } else if (email === 'laura@procuraduria.com') {
+      admin = 'LAURA'
+    } else if (email === 'miguel@procuraduria.com') {
+      admin = 'MIGUEL'
+    } else if (email === 'teresa@procuraduria.com') {
+      admin = 'TERESA'
+    } else if (email === 'marcos@procuraduria.com') {
+      admin = 'MARCOS'
+    } else if (email === 'eloy@procuraduria.com') {
+      admin = 'ELOY'
+    } else if (email === 'karina@procuraduria.com') {
+      admin = 'KARINA'
+    } else if (email === 'martha@procuraduria.com') {
+      admin = 'MARTHA'
+    } else if (email === 'lilia@procuraduria.com') {
+      admin = 'LILIA'
+    } else if (email === 'cenely@procuraduria.com') {
+      admin = 'CENELY'
+    } else if (email === 'hector@procuraduria.com') {
+      admin = 'HECTOR'
+    } else if (email === 'omar@procuraduria.com') {
+      admin = 'OMAR'
+    }
+
     const { checked, right } = this.state
     const left = this.state.xml
 
@@ -377,7 +412,7 @@ export default class NewComprometidos extends Component {
           <input
             className='input-compro'
             value={this.state.search}
-            onChange={this.seacrh.bind(this)}
+            onChange={this.upsearch.bind(this)}
             placeholder='Ingresa el folio a buscar'
           />
         </div>
@@ -459,45 +494,99 @@ export default class NewComprometidos extends Component {
       </div>
     )
 
+    const customListPago = (title, items) => (
+      <div>
+        <div className='recibo-container'>
+          Agregar tus XML
+          <Dropzone
+            style={{
+              width: '100%',
+              height: '36px',
+              borderWidth: '1px',
+              borderColor: 'grey',
+              borderStyle: 'solid',
+              borderTop: '0',
+              borderLeft: 0,
+              borderRight: 0,
+              maxFiles: 5,
+              background: 'white',
+              position: 'static',
+              placeholder: 'Agregar'
+            }}
+            accept='.xml'
+          />
+        </div>
+        <Card className='card-compro'>
+          <List dense component='div' role='list'>
+            {items.map((value) => {
+              return (
+                <ListItem key={value} button onClick={handleToggle(value)}>
+                  <ListItemIcon>
+                    <Checkbox
+                      checked={checked.indexOf(value) !== -1}
+                      tabIndex={-1}
+                      disableRipple
+                    />
+                  </ListItemIcon>
+                  <ListItemText className='list-align' primary={value.folio} />
+                  <ListItemText className='list-align' primary={'$ ' + value.importe} />
+                  <ListItemText className='list-align' primary={'$ ' + value.iva} />
+                  <ListItemText className='list-align' primary={'$ ' + value.isr} />
+                </ListItem>
+              )
+            })}
+            <ListItem />
+          </List>
+        </Card>
+      </div>
+    )
+
     const filterData = this.state.xml.filter(
       (xml) => {
         return xml.folio.indexOf(this.state.search) !== -1
       }
     )
 
-    const totalImporteImporte = []
-    right.map(items => (
-      totalImporteImporte.push(items.importe)
-    ))
-    const reducerImporte = (a, b) => a + b
-    this.state.importe = totalImporteImporte.reduce(reducerImporte)
+    const array1 = this.state.right
 
-    const totalImporteIva = []
-    right.map(items => (
-      totalImporteIva.push(items.iva)
-    ))
-    const reducerIva = (a, b) => a + b
-    this.state.iva = totalImporteIva.reduce(reducerIva)
+    if (Object.keys(array1).length !== 0) {
+      const totalImporteImporte = []
+      right.map(items => (
+        totalImporteImporte.push(items.importe)
+      ))
+      const reducerImporte = (a, b) => a + b
+      this.state.importe = totalImporteImporte.reduce(reducerImporte)
 
-    const totalImporteIsr = []
-    right.map(items => (
-      totalImporteIsr.push(items.isr)
-    ))
-    const reducerIsr = (a, b) => a + b
-    this.state.isr = totalImporteIsr.reduce(reducerIsr)
+      const totalImporteIva = []
+      right.map(items => (
+        totalImporteIva.push(items.iva)
+      ))
+      const reducerIva = (a, b) => a + b
+      this.state.iva = totalImporteIva.reduce(reducerIva)
 
-    const total = this.state.importe + this.state.iva + this.state.isr
-    const totalcompro = total
-    this.state.total = totalcompro
+      const totalImporteIsr = []
+      right.map(items => (
+        totalImporteIsr.push(items.isr)
+      ))
+      const reducerIsr = (a, b) => a + b
+      this.state.isr = totalImporteIsr.reduce(reducerIsr)
 
-    console.log(this.state.total)
+      const total = this.state.importe + this.state.iva + this.state.isr
+      const totalcompro = total
+      this.state.total = totalcompro
+    }
+
+    console.log(admin)
 
     return (
       <div className='div-compro-container'>
         <div>
           <Grid container spacing={3} justify='center' alignItems='center'>
             <Grid item xs>
-              {customListLeft('Choices', left)}
+              {admin === 'ELOY' || admin === 'MARCOS' || admin === 'KARINA' ?
+                customListPago('Choices', left) :
+                customListLeft('Choices', left)
+              }
             </Grid>
             <Grid item>
               <Grid container direction='column' alignItems='center'>
@@ -698,7 +787,7 @@ export default class NewComprometidos extends Component {
                   <TableCell className='border-table2'>
                     {this.state.importe ?
                       <CurrencyFormat
-                        value={total}
+                        value={this.state.total}
                         displayType='text'
                         prefix=' $ '
                         thousandSeparator
