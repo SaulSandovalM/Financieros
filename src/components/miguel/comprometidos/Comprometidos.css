@@ -1,6 +1,6 @@
 .card-compro {
   height: 250px;
-  overflow-y: scroll !important;
+  overflow-y: scroll;
 }
 .div-compro-container {
   background: #f4f4f4;

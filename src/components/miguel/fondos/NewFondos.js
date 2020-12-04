@@ -262,7 +262,7 @@ export default class Fondos extends Component {
       mm = '0' + mm
     }
     today = dd + '/' + mm + '/' + yyyy
-    const { tipo_doc, oficio_aut, importe, beneficiario, no_proyecto, proyecto } = this.state
+    const { tipo_doc, oficio_aut, importe, beneficiario, no_proyecto } = this.state
     this.state.fecha = today
     this.state.realizo = admin
     this.state.fondo = this.state.num

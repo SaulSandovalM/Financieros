@@ -7,8 +7,6 @@ import { useOnClickOutside } from './hooks'
 import FocusLock from 'react-focus-lock'
 import Burger from './components/common/nav/Burger'
 import Menu from './components/common/nav/Menu'
-import { ThemeProvider } from 'styled-components'
-import { theme } from './theme'
 
 const store = configureStore()
 
@@ -19,7 +17,7 @@ function Routes () {
   useOnClickOutside(node, () => setOpen(false))
 
   return (
-    <ThemeProvider theme={theme}>
+    <div>
       <Provider store={store}>
         <Router>
           <div ref={node}>
@@ -31,7 +29,7 @@ function Routes () {
           <App />
         </Router>
       </Provider>
-    </ThemeProvider>
+    </div>
   )
 }
 

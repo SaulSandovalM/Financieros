@@ -123,7 +123,7 @@ class Addcomple extends Component {
     }
     today = yyyy + '-' + mm + '-' + dd;
 
-    const { fecha_actual, folio_ing, contrarecibo, fecha_contra, poliza, fecha_deposito, mes_pago } = this.state;
+    const { fecha_actual, folio_ing, contrarecibo, fecha_contra, poliza, fecha_deposito } = this.state;
 
     return (
       <div class="container-edit" style={{marginTop: '50px'}}>

@@ -31,8 +31,7 @@ export default class Oficios extends Component {
       cfdi: '',
       up: '',
       perro: '',
-      desc: '',
-      perro: ''
+      desc: ''
     }
   }
 

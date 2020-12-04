@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import './Contrarecibo.css'
 import firebase from '../../../Firebase'
-import { Link } from 'react-router-dom'
 import CurrencyFormat from 'react-currency-format'
 import Table from '@material-ui/core/Table'
 import TableBody from '@material-ui/core/TableBody'

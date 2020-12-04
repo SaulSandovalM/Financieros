@@ -4,6 +4,7 @@ import Grid from '@material-ui/core/Grid'
 import Paper from '@material-ui/core/Paper'
 import TableCell from '@material-ui/core/TableCell'
 import TableHead from '@material-ui/core/TableHead'
+import TableBody from '@material-ui/core/TableBody'
 import TableRow from '@material-ui/core/TableRow'
 import IconButton from '@material-ui/core/IconButton'
 import CheckIcon from '@material-ui/icons/Check'
@@ -34,10 +35,17 @@ export default class NewComprometidos extends Component {
       partida: '',
       rubro: '',
       up: '',
-      presupuesto: [],
+      presupuesto: [
+        {
+          id: 1,
+          name: 'preuba',
+          done: false
+        }
+      ],
       comprometidos: [],
       search: '',
       total: '',
+      contra: []
     }
     this.handleClick = this.handleClick.bind(this)
   }
@@ -46,42 +54,6 @@ export default class NewComprometidos extends Component {
     this.setState(state => ({
       open: !state.open
     }))
-  }
-
-  componentWillMount () {
-    firebase.database().ref('xml/').on('child_added', snapshot => {
-      this.setState({
-        xml: this.state.xml.concat(snapshot.val())
-      })
-    })
-    const itemsRef = firebase.database().ref('presupuesto/')
-    this.listenForItems(itemsRef)
-    const ref = firebase.firestore().collection('fondos').doc(this.props.match.params.id)
-    const updateRef = firebase.firestore().collection('fondos').doc(this.props.match.params.id).collection('comprometidos')
-    this.unsubscribe = updateRef.onSnapshot(this.onCollectionUpdate)
-    ref.get().then((doc) => {
-      if (doc.exists) {
-        const fondos = doc.data()
-        const idP = doc.id
-        this.state.idP = idP
-        this.setState({
-          key: doc.id,
-          fondo: fondos.fondo,
-          fecha: fondos.fecha,
-          realizo: fondos.realizo,
-          tipo_doc: fondos.tipo_doc,
-          importe: fondos.importe,
-          partida: fondos.partida,
-          presupuestal: fondos.presupuestal,
-          importe_comp: fondos.importe_comp,
-          isr: fondos.isr,
-          total: fondos.total,
-          fecha_comp: fondos.fecha_comp
-        })
-      } else {
-        console.log('No se encuentra documento')
-      }
-    })
   }
 
   listenForItems = (itemsRef) => {
@@ -151,13 +123,48 @@ export default class NewComprometidos extends Component {
           reduccion: child.val().reduccion,
           trasferencia: child.val().trasferencia,
           estatus: child.val().estatus,
-          done: child.val().done,
           id: child.key
         })
       })
       this.setState({
         presupuesto: presupuesto
       })
+    })
+  }
+
+  componentDidMount () {
+    firebase.database().ref('xml/').on('child_added', snapshot => {
+      this.setState({
+        xml: this.state.xml.concat(snapshot.val())
+      })
+    })
+    const itemsRef = firebase.database().ref('presupuesto/')
+    this.listenForItems(itemsRef)
+    const ref = firebase.firestore().collection('fondos').doc(this.props.match.params.id)
+    const updateRef = firebase.firestore().collection('fondos').doc(this.props.match.params.id).collection('comprometidos')
+    this.unsubscribe = updateRef.onSnapshot(this.onCollectionUpdate)
+    ref.get().then((doc) => {
+      if (doc.exists) {
+        const fondos = doc.data()
+        const idP = doc.id
+        this.state.idP = idP
+        this.setState({
+          key: doc.id,
+          fondo: fondos.fondo,
+          fecha: fondos.fecha,
+          realizo: fondos.realizo,
+          tipo_doc: fondos.tipo_doc,
+          importe: fondos.importe,
+          partida: fondos.partida,
+          presupuestal: fondos.presupuestal,
+          importe_comp: fondos.importe_comp,
+          isr: fondos.isr,
+          total: fondos.total,
+          fecha_comp: fondos.fecha_comp
+        })
+      } else {
+        console.log('No se encuentra documento')
+      }
     })
   }
 
@@ -249,8 +256,8 @@ export default class NewComprometidos extends Component {
       of: item.of,
       np: item.np,
       cpa: item.cpa,
-      ene: item.ene - parseInt(this.state.total),
-      gasene: item.gasene + parseInt(this.state.total),
+      ene: item.ene,
+      gasene: item.gasene,
       feb: item.feb,
       gasfeb: item.gasfeb,
       mar: item.mar,
@@ -279,6 +286,7 @@ export default class NewComprometidos extends Component {
       trasferencia: item.trasferencia
     }
     firebase.database().ref().update(updates)
+    console.log('hasta aqui funciona')
     const { municipio, area, total, fechar } = this.state
     const updateRef = firebase.firestore().collection('fondos').doc(this.props.match.params.id).collection('comprometidos').doc()
     updateRef.set({
@@ -306,7 +314,7 @@ export default class NewComprometidos extends Component {
       proy: item.proy,
       est: item.est,
       ben: item.ben,
-      eg: item.eg,
+      eg: item.eg
     }).then((docRef) => {
       this.setState({
         partida: '',
@@ -327,7 +335,7 @@ export default class NewComprometidos extends Component {
   }
 
   partida = ['','211001','211002','212001','212002','214001','214002','215001','216001','217001','221001','221002','246001','251001','253001','254001','255001','261001','271001','272001','291001','292001','311001','313001','318001','323002','334001','338001','341001','351001','352001','353001','355001','357001','358001','361002','372001','375001','381001','392006','394001','218002','312001','371001','247001','249001','359001','336001','275001','211003','541001','515001','339001']
-  rubro = ['','1501010','4302010','4303010','4303020','4306030','451010','5106050','5106110','6106010','6106020','6901010','8103010','8402060']
+  rubro = ['','1501010','4302010','4303010','4303020','4306030','4501010','5106050','5106110','6106010','6106020','6901010','8103010','8402060']
   up = ['','01','02','03','04','05','06','07','08','09','10','11','12','13','14','15','16','17','18','20','21','22','23','24']
   municipio = ['','Acatlán','Acaxochitlán','Actopan','Agua Blanca de Iturbide','Ajacuba','Alfajayucan','Almoloya','Apan','El Arenal','Atitalaquia','Atlapexco','Atotonilco el Grande','Atotonilco de Tula','Calnali','Cardonal','Cuautepec de Hinojosa','Chapantongo','Chapulhuacán','Chilcuautla','Eloxochitlán','Emiliano Zapata','Epazoyucan','Franciso I. Madero','Huasca de Ocampo','Huautla','Huazalingo','Huehuetla','Huejutla de Reyes','Huichapan','Ixmiquilpan','Jacala de Ledezma','Jaltocán','Juárez Hidalgo','Lolotla','Metepec','San Agustín Metzquititlán','Metztitlán','Mineral del Chico','Mineral del Monte','La Misión','Mixquiahuala de Juárez','Molango de Escamilla','Nicolás Flores','Nopala de Villagrán','Omitlán de Juárez','San Felipe Orizatlán','Pacula','Pachuca de Soto','Pisaflores','Progreso de Obregón','Mineral de la Reforma','San Agustín Tlaxiaca','San Bartolo Tutotepec','San Salvador','Santiago de Anaya','Santiago Tulantepec de Lugo Guerrero','Singuilucan','Tasquillo','Tecozautla','Tenango de Doria','Tepeapulco','Tepehuacán de Guerrero','Tepeji del Río de Ocampo','Tepetitlán','Tetepango','Villa de Tezontepec','Tezontepec de Aldama','Tianguistengo','Tizayuca','Tlahuelilpan','Tlahuiltepa','Tlanalapa','Tlanchinol','Tlaxcoapan','Tolcayuca','Tula de Allende','Tulancingo de Bravo','Xochiatipan','Xochicoatlán','Yahualica','Zacualtipán de Ángeles','Zapotlán de Juárez','Zempoala','Zimapán']
   area = ['','Procuraduría General de Justicia','Subprocuraduría de Procedimientos Penales Región Oriente','Fiscalía Especializada para la atención de Delitos cometidos contra la Libertad de Expresión', 'Periodistas y Personas defensoras de los Derechos Humanos','Dirección General para la Atención de los Asuntos del Sistema Tradicional','Fiscalia de Delitos Electorales','Subprocuraduría de Derechos Humanos y Servicios a la Comunidad','Centro de Justicia Restaurativa Penal Poniente','Fiscalía para la Atención de Delitos de Género','Visitaduría General','Dirección General de Servicios Periciales','Centro de Operación Estratégica','Unidad Especializada en el Combate al Secuestro','Dirección General de Administración y Finanzas','Fiscalía Especializada para la atención de los Delitos de Trata de Personas','Subprocuraduría de Procedimientos Penales Región Poniente','Centro de Atención Temprana Poniente','Dirección General de Investigación y Litigación Poniente','Dirección General de la Policía Investigadora','Centro de Atención Temprana Oriente','Centro de Justicia Restaurativa Penal Oriente','Dirección General de Investigación y Litigación Oriente','Dirección General de Recursos Materiales y Servicios','Fiscalía Especializada en Delitos de Corrupción','Fiscalía Especializada en Materia de Desaparición Forzada de Personas',]
@@ -366,7 +374,6 @@ export default class NewComprometidos extends Component {
     } else if (email === 'omar@procuraduria.com') {
       admin = 'OMAR'
     }
-
     const { checked, right } = this.state
     const left = this.state.xml
 
@@ -420,7 +427,7 @@ export default class NewComprometidos extends Component {
           <List dense component='div' role='list'>
             {filterData.map((value) => {
               return (
-                <ListItem key={value} button onClick={handleToggle(value)}>
+                <ListItem key={value.name} button onClick={handleToggle(value)}>
                   <ListItemIcon>
                     <Checkbox
                       checked={checked.indexOf(value) !== -1}
@@ -473,7 +480,7 @@ export default class NewComprometidos extends Component {
           <List dense component='div' role='list'>
             {items.map((value) => {
               return (
-                <ListItem key={value} button onClick={handleToggle(value)}>
+                <ListItem key={value.name} button onClick={handleToggle(value)}>
                   <ListItemIcon>
                     <Checkbox
                       checked={checked.indexOf(value) !== -1}
@@ -520,7 +527,7 @@ export default class NewComprometidos extends Component {
           <List dense component='div' role='list'>
             {items.map((value) => {
               return (
-                <ListItem key={value} button onClick={handleToggle(value)}>
+                <ListItem key={value.name} button onClick={handleToggle(value)}>
                   <ListItemIcon>
                     <Checkbox
                       checked={checked.indexOf(value) !== -1}
@@ -574,9 +581,10 @@ export default class NewComprometidos extends Component {
       const total = this.state.importe + this.state.iva + this.state.isr
       const totalcompro = total
       this.state.total = totalcompro
+      this.state.contra = right
     }
 
-    console.log(admin)
+    console.log(this.state.presupuesto)
 
     return (
       <div className='div-compro-container'>
@@ -613,236 +621,234 @@ export default class NewComprometidos extends Component {
             </Grid>
           </Grid>
         </div>
-        <div>
-          <Grid container spacing={3}>
-            <Grid item xs={12}>
-              <Paper className='paper-content'>
-                <TableHead>
-                  <TableRow>
-                    <TableCell className='border-icon' />
-                    <TableCell className='border-table2'>
-                      <b>Partida</b>
-                    </TableCell>
-                    <TableCell className='border-table2'>
-                      <b>Up</b>
-                    </TableCell>
-                    <TableCell className='border-table2'>
-                      <b>Rubro</b>
-                    </TableCell>
-                    <TableCell className='border-table3'>
-                      <b>Municipio</b>
-                    </TableCell>
-                    <TableCell className='border-table'>
-                      <b>Area</b>
-                    </TableCell>
-                    <TableCell className='border-table2'>
-                      <b>Importe</b>
-                    </TableCell>
-                    <TableCell className='border-table2'>
-                      <b>Iva</b>
-                    </TableCell>
-                    <TableCell className='border-table2'>
-                      <b>Isr</b>
-                    </TableCell>
-                    <TableCell className='border-table2'>
-                      <b>Total</b>
-                    </TableCell>
-                  </TableRow>
-                </TableHead>
-                <TableRow className='table-row-c'>
-                  {this.state.presupuesto.map(item =>
-                    <div>
-                    {this.state.partida === item.ogasto && this.state.up === item.up && this.state.rubro === item.rubro ?
-                      <TableCell className='border-icon'>
-                        <IconButton size='small' className='border-des' onClick={this.update}>
-                          <AddIcon />
-                        </IconButton>
-                      </TableCell> : null
-                    }
-                    </div>
-                  )}
+        <Grid container spacing={3}>
+          <Grid item xs={12}>
+            <Paper className='paper-content'>
+              <TableHead>
+                <TableRow>
+                  <TableCell className='border-icon' />
                   <TableCell className='border-table2'>
-                    <select
-                      className='select-compro'
-                      name='partida'
-                      ref='partida'
-                      value={this.state.partida}
-                      onChange={this.updateSearch.bind(this)}
-                      required
-                    >
-                      {this.partida.map((x,y) =>
-                        <option name={y}>{x}</option>
-                      )}
-                    </select>
+                    <b>Partida</b>
                   </TableCell>
                   <TableCell className='border-table2'>
-                    <select
-                      className='select-compro'
-                      name='presupuestal'
-                      ref='presupuestal'
-                      value={this.state.up}
-                      onChange={this.updateSearch2.bind(this)}
-                      required
-                    >
-                      {this.up.map((x,y) =>
-                        <option name={y}>{x}</option>
-                      )}
-                    </select>
+                    <b>Up</b>
                   </TableCell>
                   <TableCell className='border-table2'>
-                    <select
-                      className='select-compro'
-                      name='rubro'
-                      ref='rubro'
-                      value={this.state.rubro}
-                      onChange={this.updateSearch3.bind(this)}
-                      required
-                    >
-                      {this.rubro.map((x,y) =>
-                        <option name={y}>{x}</option>
-                      )}
-                    </select>
+                    <b>Rubro</b>
                   </TableCell>
                   <TableCell className='border-table3'>
-                    <select
-                      className='select-compro'
-                      name='municipio'
-                      ref='municipio'
-                      value={this.state.municipio}
-                      onChange={this.updateSearch3.bind(this)}
-                      required
-                    >
-                      {this.municipio.map((x,y) =>
-                        <option name={y}>{x}</option>
-                      )}
-                    </select>
+                    <b>Municipio</b>
                   </TableCell>
                   <TableCell className='border-table'>
-                    <select
-                      className='select-compro'
-                      name='area'
-                      ref='area'
-                      value={this.state.area}
-                      onChange={this.updateSearch5.bind(this)}
-                      required
-                    >
-                      {this.area.map((x,y) =>
-                        <option name={y}>{x}</option>
-                      )}
-                    </select>
+                    <b>Area</b>
                   </TableCell>
                   <TableCell className='border-table2'>
-                    {this.state.importe ?
-                      <CurrencyFormat
-                        value={this.state.importe}
-                        displayType='text'
-                        prefix=' $ '
-                        thousandSeparator
-                        decimalSeparator='.'
-                      /> :
-                      <CurrencyFormat
-                        value={0}
-                        displayType='text'
-                        prefix=' $ '
-                        thousandSeparator
-                        decimalSeparator='.'
-                      />}
+                    <b>Importe</b>
                   </TableCell>
                   <TableCell className='border-table2'>
-                    {this.state.importe ?
-                      <CurrencyFormat
-                        value={this.state.iva}
-                        displayType='text'
-                        prefix=' $ '
-                        thousandSeparator
-                        decimalSeparator='.'
-                      /> :
-                      <CurrencyFormat
-                        value={0}
-                        displayType='text'
-                        prefix=' $ '
-                        thousandSeparator
-                        decimalSeparator='.'
-                      />
-                    }
+                    <b>Iva</b>
                   </TableCell>
                   <TableCell className='border-table2'>
-                    {this.state.importe ?
-                      <CurrencyFormat
-                        value={this.state.isr}
-                        displayType='text'
-                        prefix=' $ '
-                        thousandSeparator
-                        decimalSeparator='.'
-                      /> :
-                      <CurrencyFormat
-                        value={0}
-                        displayType='text'
-                        prefix=' $ '
-                        thousandSeparator
-                        decimalSeparator='.'
-                      />
-                    }
+                    <b>Isr</b>
                   </TableCell>
                   <TableCell className='border-table2'>
-                    {this.state.importe ?
-                      <CurrencyFormat
-                        value={this.state.total}
-                        displayType='text'
-                        prefix=' $ '
-                        thousandSeparator
-                        decimalSeparator='.'
-                      /> :
-                      <CurrencyFormat
-                        value={0}
-                        displayType='text'
-                        prefix=' $ '
-                        thousandSeparator
-                        decimalSeparator='.'
-                      />
-                    }
+                    <b>Total</b>
                   </TableCell>
                 </TableRow>
-                {this.state.comprometidos.map(comprometidos =>
-                  <TableRow className='table-row-c'>
+              </TableHead>
+              <TableBody className='table-row-c'>
+                {this.state.presupuesto.map(item =>
+                  <div key={item.id} item={item}>
+                  {this.state.partida === item.ogasto && this.state.up === item.up && this.state.rubro === item.rubro ?
                     <TableCell className='border-icon'>
-                      <IconButton size='small' className='border-des'>
-                        <CheckIcon style={{ color: 'green', cursor: 'auto' }} />
+                      <IconButton size='small' className='border-des' onClick={this.update}>
+                        <AddIcon />
                       </IconButton>
-                    </TableCell>
-                    <TableCell className='border-table2'>
-                      {comprometidos.partida}
-                    </TableCell>
-                    <TableCell className='border-table2'>
-                      {comprometidos.presupuestal}
-                    </TableCell>
-                    <TableCell className='border-table2'>
-                      {comprometidos.rubro}
-                    </TableCell>
-                    <TableCell className='border-table3'>
-                      {comprometidos.municipio}
-                    </TableCell>
-                    <TableCell className='border-table'>
-                      {comprometidos.area}
-                    </TableCell>
-                    <TableCell className='border-table2'>
-                      {' $ ' + comprometidos.importe_comp}
-                    </TableCell>
-                    <TableCell className='border-table2'>
-                      {' $ ' + comprometidos.iva}
-                    </TableCell>
-                    <TableCell className='border-table2'>
-                      {' $ ' + comprometidos.isr}
-                    </TableCell>
-                    <TableCell className='border-table2'>
-                      {' $ ' + (comprometidos.importe_comp + comprometidos.iva + comprometidos.isr)}
-                    </TableCell>
-                  </TableRow>
+                    </TableCell> : null
+                  }
+                  </div>
                 )}
-              </Paper>
-            </Grid>
+                <TableCell className='border-table2'>
+                  <select
+                    className='select-compro'
+                    name='partida'
+                    ref='partida'
+                    value={this.state.partida}
+                    onChange={this.updateSearch.bind(this)}
+                    required
+                  >
+                    {this.partida.map((x,y) =>
+                      <option name={y}>{x}</option>
+                    )}
+                  </select>
+                </TableCell>
+                <TableCell className='border-table2'>
+                  <select
+                    className='select-compro'
+                    name='presupuestal'
+                    ref='presupuestal'
+                    value={this.state.up}
+                    onChange={this.updateSearch2.bind(this)}
+                    required
+                  >
+                    {this.up.map((x,y) =>
+                      <option name={y}>{x}</option>
+                    )}
+                  </select>
+                </TableCell>
+                <TableCell className='border-table2'>
+                  <select
+                    className='select-compro'
+                    name='rubro'
+                    ref='rubro'
+                    value={this.state.rubro}
+                    onChange={this.updateSearch3.bind(this)}
+                    required
+                  >
+                    {this.rubro.map((x,y) =>
+                      <option name={y}>{x}</option>
+                    )}
+                  </select>
+                </TableCell>
+                <TableCell className='border-table3'>
+                  <select
+                    className='select-compro'
+                    name='municipio'
+                    ref='municipio'
+                    value={this.state.municipio}
+                    onChange={this.updateSearch4.bind(this)}
+                    required
+                  >
+                    {this.municipio.map((x,y) =>
+                      <option name={y}>{x}</option>
+                    )}
+                  </select>
+                </TableCell>
+                <TableCell className='border-table'>
+                  <select
+                    className='select-compro'
+                    name='area'
+                    ref='area'
+                    value={this.state.area}
+                    onChange={this.updateSearch5.bind(this)}
+                    required
+                  >
+                    {this.area.map((x,y) =>
+                      <option name={y}>{x}</option>
+                    )}
+                  </select>
+                </TableCell>
+                <TableCell className='border-table2'>
+                  {this.state.importe ?
+                    <CurrencyFormat
+                      value={this.state.importe}
+                      displayType='text'
+                      prefix=' $ '
+                      thousandSeparator
+                      decimalSeparator='.'
+                    /> :
+                    <CurrencyFormat
+                      value={0}
+                      displayType='text'
+                      prefix=' $ '
+                      thousandSeparator
+                      decimalSeparator='.'
+                    />}
+                </TableCell>
+                <TableCell className='border-table2'>
+                  {this.state.importe ?
+                    <CurrencyFormat
+                      value={this.state.iva}
+                      displayType='text'
+                      prefix=' $ '
+                      thousandSeparator
+                      decimalSeparator='.'
+                    /> :
+                    <CurrencyFormat
+                      value={0}
+                      displayType='text'
+                      prefix=' $ '
+                      thousandSeparator
+                      decimalSeparator='.'
+                    />
+                  }
+                </TableCell>
+                <TableCell className='border-table2'>
+                  {this.state.importe ?
+                    <CurrencyFormat
+                      value={this.state.isr}
+                      displayType='text'
+                      prefix=' $ '
+                      thousandSeparator
+                      decimalSeparator='.'
+                    /> :
+                    <CurrencyFormat
+                      value={0}
+                      displayType='text'
+                      prefix=' $ '
+                      thousandSeparator
+                      decimalSeparator='.'
+                    />
+                  }
+                </TableCell>
+                <TableCell className='border-table2'>
+                  {this.state.importe ?
+                    <CurrencyFormat
+                      value={this.state.total}
+                      displayType='text'
+                      prefix=' $ '
+                      thousandSeparator
+                      decimalSeparator='.'
+                    /> :
+                    <CurrencyFormat
+                      value={0}
+                      displayType='text'
+                      prefix=' $ '
+                      thousandSeparator
+                      decimalSeparator='.'
+                    />
+                  }
+                </TableCell>
+              </TableBody>
+              {this.state.comprometidos.map(comprometidos =>
+                <TableRow key={comprometidos.name} className='table-row-c'>
+                  <TableCell className='border-icon'>
+                    <IconButton size='small' className='border-des'>
+                      <CheckIcon style={{ color: 'green', cursor: 'auto' }} />
+                    </IconButton>
+                  </TableCell>
+                  <TableCell className='border-table2'>
+                    {comprometidos.partida}
+                  </TableCell>
+                  <TableCell className='border-table2'>
+                    {comprometidos.presupuestal}
+                  </TableCell>
+                  <TableCell className='border-table2'>
+                    {comprometidos.rubro}
+                  </TableCell>
+                  <TableCell className='border-table3'>
+                    {comprometidos.municipio}
+                  </TableCell>
+                  <TableCell className='border-table'>
+                    {comprometidos.area}
+                  </TableCell>
+                  <TableCell className='border-table2'>
+                    {' $ ' + comprometidos.importe_comp}
+                  </TableCell>
+                  <TableCell className='border-table2'>
+                    {' $ ' + comprometidos.iva}
+                  </TableCell>
+                  <TableCell className='border-table2'>
+                    {' $ ' + comprometidos.isr}
+                  </TableCell>
+                  <TableCell className='border-table2'>
+                    {' $ ' + (comprometidos.importe_comp + comprometidos.iva + comprometidos.isr)}
+                  </TableCell>
+                </TableRow>
+              )}
+            </Paper>
           </Grid>
-        </div>
+        </Grid>
         <div className='div-content-fab'>
           <Fab
             color='primary'
