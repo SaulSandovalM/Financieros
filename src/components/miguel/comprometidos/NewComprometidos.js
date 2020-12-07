@@ -20,6 +20,7 @@ import CurrencyFormat from 'react-currency-format'
 import Fab from '@material-ui/core/Fab'
 import firebase from '../../../Firebase'
 import Dropzone from 'react-dropzone'
+import ListC from './ListC'
 
 export default class NewComprometidos extends Component {
   constructor (props) {
@@ -222,6 +223,7 @@ export default class NewComprometidos extends Component {
 
   update = (item) => {
     let updates = {}
+    console.log(item)
     updates['presupuesto/' + item.id] = {
       año: item.año,
       rm: item.rm,
@@ -285,8 +287,9 @@ export default class NewComprometidos extends Component {
       reduccion: item.reduccion,
       trasferencia: item.trasferencia
     }
+    console.log(updates)
     firebase.database().ref().update(updates)
-    console.log('hasta aqui funciona')
+    console.log('ya paso del update')
     const { municipio, area, total, fechar } = this.state
     const updateRef = firebase.firestore().collection('fondos').doc(this.props.match.params.id).collection('comprometidos').doc()
     updateRef.set({
