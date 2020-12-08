@@ -650,7 +650,7 @@ export default class NewComprometidos extends Component {
                   </TableCell>
                   <TableCell className='border-table2'>
                     <b>Iva</b>
-                  </TableCell>
+                  </TableCell>p
                   <TableCell className='border-table2'>
                     <b>Isr</b>
                   </TableCell>

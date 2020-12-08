@@ -4,6 +4,7 @@ import Nav from './Nav'
 import NavC from './NavC'
 import NavE from './NavE'
 import NavN from './NavN'
+import NavLiz from './NavLiz'
 import NavArchivos from './NavArchivos'
 import { StyledMenu } from './Menu.styled'
 import firebase from '../../../Firebase'
@@ -23,8 +24,8 @@ const Menu = ({ open, ...props }) => {
     admin = 'CECILIA'
   } else if (email === 'nayra@procuraduria.com') {
     admin = 'NAYRA'
-  } else if (email === 'laura@procuraduria.com') {
-    admin = 'LAURA'
+  } else if (email === 'lizbeth@procuraduria.com') {
+    admin = 'LIZBETH'
   } else if (email === 'miguel@procuraduria.com') {
     admin = 'MIGUEL'
   } else if (email === 'teresa@procuraduria.com') {
@@ -68,7 +69,7 @@ const Menu = ({ open, ...props }) => {
       {admin === 'MARCOS' && <Nav />}
       {admin === 'MARTHA' && <Nav />}
       {admin === 'JUAN' && <NavArchivos />}
-      {/* admin === 'LAURA' && <Nav /> */}
+      {admin === 'LIZBETH' && <NavLiz />}
       {/* admin === 'JUAN' && <Nav /> */}
     </StyledMenu>
   )
