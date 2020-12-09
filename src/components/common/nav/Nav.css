@@ -40,6 +40,19 @@
 	color: #FFF;
   margin-bottom: 30px;
 }
+@media(max-width: 1500px) {
+	.nav-t {
+		color: #FFF;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		display: -webkit-box;
+		-webkit-line-clamp: 1;
+		-webkit-box-orient: vertical;
+	}
+	.mb {
+		margin-bottom: 20px;
+	}
+}
 .deco {
 	text-decoration: none;
   display: flex;

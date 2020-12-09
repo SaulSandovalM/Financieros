@@ -151,7 +151,7 @@ export default class ContainerT extends Component {
           total: child.val().total,
           ampliacion: child.val().ampliacion,
           reduccion: child.val().reduccion,
-          trasferencia: child.val().trasferencia,
+          transferencia: child.val().transferencia,
           done: child.val().done,
           id: child.key
         })

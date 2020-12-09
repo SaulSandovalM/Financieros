@@ -42,7 +42,7 @@ export default class RowComponent extends Component {
               <p style={{ margin: '0' }}>{this.props.item.cpa}</p>
             </TableCell>
             <TableCell className='table-up-p-frn-p'>
-              <button onClick={this.update}>Ampliar</button>
+              <p>Ampliarda</p>
             </TableCell>
           </TableRow>
         }

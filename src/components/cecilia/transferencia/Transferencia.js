@@ -232,7 +232,7 @@ export default class Transferencia extends Component {
       total: item.total,
       ampliacion: item.ampliacion,
       reduccion: item.reduccion,
-      trasferencia: 'Transferencia'
+      transferencia: 'Transferencia'
     }
     firebase.database().ref().update(updates)
     alert('Tu solicitud fue enviada.')
