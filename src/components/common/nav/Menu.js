@@ -5,6 +5,7 @@ import NavC from './NavC'
 import NavE from './NavE'
 import NavN from './NavN'
 import NavLiz from './NavLiz'
+import NavJ from './NavJ'
 import NavArchivos from './NavArchivos'
 import { StyledMenu } from './Menu.styled'
 import firebase from '../../../Firebase'
@@ -48,6 +49,8 @@ const Menu = ({ open, ...props }) => {
     admin = 'OMAR'
   } else if (email === 'elizabeth@procuraduria.com') {
     admin = 'ELI'
+  } else if (email === 'juan@procuraduria.com') {
+    admin = 'JUAN'
   }
 
   const isHidden = open !== false
@@ -70,7 +73,7 @@ const Menu = ({ open, ...props }) => {
       {admin === 'MARTHA' && <Nav />}
       {admin === 'JUAN' && <NavArchivos />}
       {admin === 'LIZBETH' && <NavLiz />}
-      {/* admin === 'JUAN' && <Nav /> */}
+      {admin === 'JUAN' && <NavJ />}
     </StyledMenu>
   )
 }

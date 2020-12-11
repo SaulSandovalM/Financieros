@@ -20,7 +20,7 @@ import CurrencyFormat from 'react-currency-format'
 import Fab from '@material-ui/core/Fab'
 import firebase from '../../../Firebase'
 import Dropzone from 'react-dropzone'
-import ListC from './ListC'
+import TextField from '@material-ui/core/TextField'
 
 export default class NewComprometidos extends Component {
   constructor (props) {
@@ -219,6 +219,54 @@ export default class NewComprometidos extends Component {
     this.setState({
       comprometidos
    })
+  }
+
+  handleOnChange1 (event) {
+    const file = event.target.files[0]
+    const storageRef = firebase.storage().ref(`comprobacion/${file.name}`)
+    const task = storageRef.put(file)
+    this.setState({
+      filex: `${file.name}`
+    })
+    task.on('state_changed', (snapshot) => {
+      let percentage = (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+      this.setState({
+        xml: percentage
+      })
+    }, error => {
+      console.error(error.message)
+    }, () =>  storageRef.getDownloadURL().then(url =>  {
+      const record = url
+      this.setState({
+        filefactura: record
+      })
+    }))
+    const files = event.target.files
+    for (var i = 0; i < files.length; i++) {
+      const file = files[i]
+      var xml = file
+      var reader = new FileReader()
+      reader.onloadend = function () {
+        var XMLParser = require('react-xml-parser')
+        var xml = new XMLParser().parseFromString(reader.result)
+        const data = {
+          'fecha': xml.attributes['Fecha'],
+          'total': xml.attributes['Total'],
+          'folio': xml.attributes['Folio']
+        }
+        fetch(xml).then(res => res.text()).then(xml => {
+          fetch('https://financieros-78cb0.firebaseio.com/xml.json', {
+            method: 'POST',
+            headers: {
+              'Accept': 'application/json',
+              'Content-Type': 'application/json',
+            },
+              body: JSON.stringify(data)
+          })
+        })
+      }
+      reader.readAsText(xml)
+    }
   }
 
   update = (item) => {
@@ -508,22 +556,10 @@ export default class NewComprometidos extends Component {
       <div>
         <div className='recibo-container'>
           Agregar tus XML
-          <Dropzone
-            style={{
-              width: '100%',
-              height: '36px',
-              borderWidth: '1px',
-              borderColor: 'grey',
-              borderStyle: 'solid',
-              borderTop: '0',
-              borderLeft: 0,
-              borderRight: 0,
-              maxFiles: 5,
-              background: 'white',
-              position: 'static',
-              placeholder: 'Agregar'
-            }}
-            accept='.xml'
+          <TextField
+            type='file'
+            onChange={this.handleOnChange1.bind(this)}
+            style={{ background: 'white' }}
           />
         </div>
         <Card className='card-compro'>
@@ -594,7 +630,7 @@ export default class NewComprometidos extends Component {
         <div>
           <Grid container spacing={3} justify='center' alignItems='center'>
             <Grid item xs>
-              {admin === 'ELOY' || admin === 'MARCOS' || admin === 'KARINA' ?
+              {admin === 'OMAR' || admin === 'MARCOS' || admin === 'KARINA' ?
                 customListPago('Choices', left) :
                 customListLeft('Choices', left)
               }
@@ -650,7 +686,7 @@ export default class NewComprometidos extends Component {
                   </TableCell>
                   <TableCell className='border-table2'>
                     <b>Iva</b>
-                  </TableCell>p
+                  </TableCell>
                   <TableCell className='border-table2'>
                     <b>Isr</b>
                   </TableCell>
