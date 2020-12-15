@@ -101,8 +101,7 @@ export default class Fondos extends Component {
       poliza,
       cfe,
       nscfe,
-      observaciones,
-      numProy
+      observaciones
     } = this.state
     this.ref.add({
         fondo,
@@ -121,8 +120,7 @@ export default class Fondos extends Component {
         poliza,
         cfe,
         nscfe,
-        observaciones,
-        numProy
+        observaciones
       }).then((docRef) => {
         this.setState({
           fondo: '',
@@ -141,8 +139,7 @@ export default class Fondos extends Component {
           poliza: '',
           cfe: '',
           nscfe: '',
-          observaciones: '',
-          numProy: ''
+          observaciones: ''
         })
         this.incrementFondo()
         this.order()

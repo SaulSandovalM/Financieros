@@ -78,7 +78,7 @@ class Nav extends Component {
             </div>}
           <div className='navbar-left mb'>
             <Link to='/FondoRevolvente' className='deco'>
-              <span className='material-icons' style={{ color: 'white', marginTop: '3px', marginRight: '15px' }}>
+              <span className='material-icons' style={{ color: 'white', marginTop: '3px', marginRight: '15px', marginBottom: '15px' }}>
                 local_atm
               </span>
               <Typography className='nav-t' variant='h6'>

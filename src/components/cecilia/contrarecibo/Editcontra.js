@@ -19,7 +19,7 @@ export default class Edit extends Component {
       importe: '',
       beneficiario: '',
       desc: '',
-      numProy: '',
+      no_proyecto: [],
       realizo: '',
       no_lici: '',
       requisicion: '',
@@ -29,6 +29,14 @@ export default class Edit extends Component {
       cfe: '',
       nscfe: '',
       observaciones: '',
+      fechaContra: '',
+      numContra: '',
+      fechaDepo: '',
+      cuentaPagar: '',
+      cuentaPagarPara: '',
+      sujetoContable: '',
+      cr: '',
+      fechaPago: ''
     }
   }
 
@@ -47,7 +55,7 @@ export default class Edit extends Component {
           importe: fondoD.importe,
           beneficiario: fondoD.beneficiario,
           desc: fondoD.desc,
-          numProy: fondoD.numProy,
+          no_proyecto: fondoD.no_proyecto,
           realizo: fondoD.realizo,
           no_lici: fondoD.no_lici,
           requisicion: fondoD.requisicion,
@@ -58,10 +66,12 @@ export default class Edit extends Component {
           observaciones: fondoD.observaciones,
           fechaContra: fondoD.fechaContra,
           numContra: fondoD.numContra,
-          fechaDepo: fondoD.fechaContra,
+          fechaDepo: fondoD.fechaDepo,
           cuentaPagar: fondoD.cuentaPagar,
           cuentaPagarPara: fondoD.cuentaPagarPara,
-          sujetoContable: fondoD.sujetoContable
+          sujetoContable: fondoD.sujetoContable,
+          cr: fondoD.cr,
+          fechaPago: fondoD.fechaPago
         });
       } else {
         console.log('No hay documento!');
@@ -86,32 +96,7 @@ export default class Edit extends Component {
       importe,
       beneficiario,
       desc,
-      numProy,
-      realizo,
-      no_lici,
-      requisicion,
-      pedido,
-      poliza,
-      cfe,
-      nscfe,
-      observaciones,
-      fechaContra,
-      numContra,
-      fechaDepo,
-      cuentaPagar,
-      cuentaPagarPara,
-      sujetoContable } = this.state
-    const updateRef = firebase.firestore().collection('fondos').doc(this.state.key)
-    updateRef.set({
-      fondo,
-      fecha,
-      tipo_doc,
-      oficio_aut,
-      no_oficio,
-      importe,
-      beneficiario,
-      desc,
-      numProy,
+      no_proyecto,
       realizo,
       no_lici,
       requisicion,
@@ -126,7 +111,37 @@ export default class Edit extends Component {
       cuentaPagar,
       cuentaPagarPara,
       sujetoContable,
-      estatus: 'Contrarecibo'
+      cr,
+      fechaPago
+    } = this.state
+    const updateRef = firebase.firestore().collection('fondos').doc(this.state.key)
+    updateRef.set({
+      fondo,
+      fecha,
+      tipo_doc,
+      oficio_aut,
+      no_oficio,
+      importe,
+      beneficiario,
+      desc,
+      no_proyecto,
+      realizo,
+      no_lici,
+      requisicion,
+      pedido,
+      poliza,
+      cfe,
+      nscfe,
+      observaciones,
+      fechaContra,
+      numContra,
+      fechaDepo,
+      cuentaPagar,
+      cuentaPagarPara,
+      sujetoContable,
+      estatus: 'Contrarecibo',
+      cr,
+      fechaPago
     }).then((docRef) => {
       this.setState({
         fondo: '',
@@ -137,7 +152,7 @@ export default class Edit extends Component {
         importe: '',
         beneficiario: '',
         desc: '',
-        numProy: '',
+        no_proyecto: '',
         realizo: '',
         no_lici: '',
         requisicion: '',
@@ -151,7 +166,9 @@ export default class Edit extends Component {
         fechaDepo: '',
         cuentaPagar: '',
         cuentaPagarPara: '',
-        sujetoContable: ''
+        sujetoContable: '',
+        cr: '',
+        fechaPago: ''
       })
     })
     .catch((error) => {
@@ -223,8 +240,8 @@ export default class Edit extends Component {
                     <TextField
                       style={{ marginBottom: '15px' }}
                       label='No. de Proyecto'
-                      name='numProy'
-                      value={this.state.numProy}
+                      name='no_proyecto'
+                      value={this.state.no_proyecto}
                     />
                     <TextField
                       label='Realizo'
@@ -296,7 +313,7 @@ export default class Edit extends Component {
                 <TextField
                   style={{ marginBottom: '15px' }}
                   label='Fecha de Contrarecibo'
-                  name='fechacontra'
+                  name='fechaContra'
                   onChange={this.onChange}
                   value={this.state.fechaContra}
                   required
@@ -304,7 +321,7 @@ export default class Edit extends Component {
                 <TextField
                   style={{ marginBottom: '15px' }}
                   label='Numero de Contrarecibo'
-                  name='numcontra'
+                  name='numContra'
                   onChange={this.onChange}
                   value={this.state.numContra}
                   required
@@ -312,7 +329,7 @@ export default class Edit extends Component {
                 <TextField
                   style={{ marginBottom: '15px' }}
                   label='Fecha de Deposito'
-                  name='fechadepo'
+                  name='fechaDepo'
                   onChange={this.onChange}
                   value={this.state.fechaDepo}
                   required
@@ -334,10 +351,26 @@ export default class Edit extends Component {
                   required
                 />
                 <TextField
+                  style={{ marginBottom: '15px' }}
                   label='Sujeto Contable'
                   name='sujetoContable'
                   onChange={this.onChange}
                   value={this.state.sujetoContable}
+                  required
+                />
+                <TextField
+                  style={{ marginBottom: '15px' }}
+                  label='CR'
+                  name='cr'
+                  onChange={this.onChange}
+                  value={this.state.cr}
+                  required
+                />
+                <TextField
+                  label='Fecha de Pago'
+                  name='fechaPago'
+                  onChange={this.onChange}
+                  value={this.state.fechaPago}
                   required
                 />
               </div>
