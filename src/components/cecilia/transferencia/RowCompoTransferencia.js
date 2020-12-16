@@ -28,28 +28,135 @@ export default class RowCompoTransferencia extends Component {
       button =
       <TableRow>
         <TableCell className='table-up-p-frn-a'>
-          <p style={{ margin: '0' }}>{this.props.item.up}</p>
+          <i>{this.props.item.up}</i>
         </TableCell>
         <TableCell className='table-up-p-frn-p'>
-          <p style={{ margin: '0' }}>{this.props.item.ogasto}</p>
+          <i>{this.props.item.ogasto}</i>
         </TableCell>
         <TableCell className='table-up-p-frn-p'>
-          <p style={{ margin: '0' }}>{this.props.item.rubro}</p>
+          <i>{this.props.item.rubro}</i>
         </TableCell>
-        <TableCell className='table-up-p-frn-p'>
-        <div>
-          <CurrencyFormat
-            value={this.props.item.oct}
-            displayType='text'
-            thousandSeparator
-            prefix=' $'
-          />
-        </div>
+        <TableCell className='mes-t'>
+          <i>
+            <CurrencyFormat
+              value={this.props.item.ene}
+              displayType='text'
+              thousandSeparator
+              prefix=' $'
+            />
+          </i>
         </TableCell>
-        <TableCell className='table-cpa-a'>
-          <p style={{ margin: '0' }}>{this.props.item.cpa}</p>
+        <TableCell className='mes-t'>
+          <i>
+            <CurrencyFormat
+              value={this.props.item.feb}
+              displayType='text'
+              thousandSeparator
+              prefix=' $'
+            />
+          </i>
         </TableCell>
-        <TableCell className='table-up-p-frn-p'>
+        <TableCell className='mes-t'>
+          <i>
+            <CurrencyFormat
+              value={this.props.item.mar}
+              displayType='text'
+              thousandSeparator
+              prefix=' $'
+            />
+          </i>
+        </TableCell>
+        <TableCell className='mes-t'>
+          <i>
+            <CurrencyFormat
+              value={this.props.item.abr}
+              displayType='text'
+              thousandSeparator
+              prefix=' $'
+            />
+          </i>
+        </TableCell>
+        <TableCell className='mes-t'>
+          <i>
+            <CurrencyFormat
+              value={this.props.item.may}
+              displayType='text'
+              thousandSeparator
+              prefix=' $'
+            />
+          </i>
+        </TableCell>
+        <TableCell className='mes-t'>
+          <i>
+            <CurrencyFormat
+              value={this.props.item.jun}
+              displayType='text'
+              thousandSeparator
+              prefix=' $'
+            />
+          </i>
+        </TableCell>
+        <TableCell className='mes-t'>
+          <i>
+            <CurrencyFormat
+              value={this.props.item.jul}
+              displayType='text'
+              thousandSeparator
+              prefix=' $'
+            />
+          </i>
+        </TableCell>
+        <TableCell className='mes-t'>
+          <i>
+            <CurrencyFormat
+              value={this.props.item.ago}
+              displayType='text'
+              thousandSeparator
+              prefix=' $'
+            />
+          </i>
+        </TableCell>
+        <TableCell className='mes-t'>
+          <i>
+            <CurrencyFormat
+              value={this.props.item.sep}
+              displayType='text'
+              thousandSeparator
+              prefix=' $'
+            />
+          </i>
+        </TableCell>
+        <TableCell className='mes-t'>
+          <i>
+            <CurrencyFormat
+              value={this.props.item.oct}
+              displayType='text'
+              thousandSeparator
+              prefix=' $'
+            />
+          </i>
+        </TableCell>
+        <TableCell className='mes-t'>
+          <i>
+            <CurrencyFormat
+              value={this.props.item.nov}
+              displayType='text'
+              thousandSeparator
+              prefix=' $'
+            />
+          </i>
+        </TableCell>
+        <TableCell className='mes-t'>
+          <i>
+            <CurrencyFormat
+              value={this.props.item.dic}
+              displayType='text'
+              thousandSeparator
+              prefix=' $'
+            />
+          </i>
+        </TableCell>
+        <TableCell className='mes-t'>
           <button onClick={this.update}>Transferir</button>
         </TableCell>
       </TableRow>

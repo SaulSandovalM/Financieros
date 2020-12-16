@@ -13,7 +13,7 @@
 .p-title-size-fr {
   font-size: 18px;
 }
-.inputs-container-fr {
+.inputs-container-fr-t {
   display: flex;
   flex-direction: row;
   width: 100%;
@@ -129,8 +129,8 @@
   -webkit-line-clamp: 1;
   -webkit-box-orient: vertical;
 }
-.space-table {
-  margin-top: -150px;
+.space-table-t {
+  margin-top: -169px;
   background: white;
   margin-left: -30px;
   margin-right: -30px;

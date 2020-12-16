@@ -300,17 +300,17 @@ export default class Fondor extends Component {
           </div>
           <div className='p-row'>
             <div className='p-container-ifr' style={{ marginRight: '20px' }}>
-            <TextField
-              type='file'
-              label='Archivo Pdf'
-              required
-              onChange={this.handleUploads.bind(this)}
-            />
-            {this.state.pdf === 100 &&
-              <div className='alert-cont'>
-                <Alert severity='success' variant='filled'>Se han subido los archivos!</Alert>
-              </div>
-            }
+              <TextField
+                type='file'
+                label='Archivo Pdf'
+                required
+                onChange={this.handleUploads.bind(this)}
+              />
+              {this.state.pdf === 100 &&
+                <div className='alert-cont'>
+                  <Alert severity='success' variant='filled'>Se han subido los archivos!</Alert>
+                </div>
+              }
             </div>
           </div>
         </div>
@@ -339,16 +339,6 @@ export default class Fondor extends Component {
                         }}
                         ref={importe => this.inputImporte = importe}
                       />
-                      {/* <CurrencyFormat
-                        id='importe'
-                        name='importe'
-                        required
-                        style={{ zIndex: '3' }}
-                        onChange={this.handleChangeI.bind(this)}
-                        value={this.state.importe}
-                        thousandSeparator
-                        prefix=' $'
-                      /> */}
                     </div>
                     <div className='p-container-ifr2'>
                       <TextField

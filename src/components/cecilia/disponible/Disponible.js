@@ -50,8 +50,7 @@ export default class Disponible extends Component {
       <div className='pf-container'>
         <div className='space-d-c' />
         <div className='table-d-c'>
-          <ListComponent
-          />
+          <ListComponent />
         </div>
       </div>
     )

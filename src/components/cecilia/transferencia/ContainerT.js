@@ -35,7 +35,20 @@ export default class ContainerT extends Component {
       presupuesto: [],
       search: '',
       search2: '',
-      search3: ''
+      search3: '',
+      impoene: '',
+      impofeb: '',
+      impomar: '',
+      impoabr: '',
+      impomay: '',
+      impojun: '',
+      impojul: '',
+      impoago: '',
+      imposep: '',
+      impooct: '',
+      imponov: '',
+      impodic: '',
+      oficio: ''
     }
   }
 
@@ -152,6 +165,7 @@ export default class ContainerT extends Component {
           ampliacion: child.val().ampliacion,
           reduccion: child.val().reduccion,
           transferencia: child.val().transferencia,
+          oficio: child.val().oficio,
           done: child.val().done,
           id: child.key
         })
@@ -170,8 +184,7 @@ export default class ContainerT extends Component {
     return (
       <div style={{ background: '#f4f4f4', minHeight: '100vh' }}>
         <Transferencia />
-        <Transferenciad />
-        <div className='pf-container-f' style={{ paddingTop: '50px' }}>
+        <div className='pf-container-f' style={{ paddingTop: '20px' }}>
           <div className='p-container-fondor'>
             <div className='p-margin-fr'>
               <p className='p-title-size-fr'>

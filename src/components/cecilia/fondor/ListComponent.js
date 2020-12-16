@@ -86,17 +86,12 @@ export default class ListComponent extends Component {
 
   render () {
     return (
-      <div>
+      <div style={{ marginTop: '61px' }}>
         <div>
           <div>
             <div className='p-container-fondor' style={{ background: '#f4f4f4', padding: '30px' }}>
-              <div className='p-margin-fr'>
-                <p className='p-title-size-fr'>
-                  -
-                </p>
-              </div>
               <div className='inputs-container-fr' ref='contactForm'>
-                <div className='inputs-col-fr'>
+                <div className='inputs-col-fr-t'>
                   <div className='inputs-row-fr-2' style={{ width: '60%' }}>
                     <div className='p-container-ifr3'>
                       <TextField
@@ -148,13 +143,43 @@ export default class ListComponent extends Component {
                   <TableCell className='table-up-p-frn-p'>
                     <b>Rubro</b>
                   </TableCell>
-                  <TableCell className='table-up-p-frn-p'>
-                    <b>Importe</b>
+                  <TableCell className='mes-t'>
+                    <b>Enero</b>
                   </TableCell>
-                  <TableCell className='table-cpa-a'>
-                    <b>Cpa</b>
+                  <TableCell className='mes-t'>
+                    <b>Febrero</b>
                   </TableCell>
-                  <TableCell className='table-up-p-frn-p'>
+                  <TableCell className='mes-t'>
+                    <b>Marzo</b>
+                  </TableCell>
+                  <TableCell className='mes-t'>
+                    <b>Abril</b>
+                  </TableCell>
+                  <TableCell className='mes-t'>
+                    <b>Mayo</b>
+                  </TableCell>
+                  <TableCell className='mes-t'>
+                    <b>Junio</b>
+                  </TableCell>
+                  <TableCell className='mes-t'>
+                    <b>Julio</b>
+                  </TableCell>
+                  <TableCell className='mes-t'>
+                    <b>Agosto</b>
+                  </TableCell>
+                  <TableCell className='mes-t'>
+                    <b>Septiembre</b>
+                  </TableCell>
+                  <TableCell className='mes-t'>
+                    <b>Octubre</b>
+                  </TableCell>
+                  <TableCell className='mes-t'>
+                    <b>Noviembre</b>
+                  </TableCell>
+                  <TableCell className='mes-t'>
+                    <b>Diciembre</b>
+                  </TableCell>
+                  <TableCell className='mes-t'>
                     <b>Estatus</b>
                   </TableCell>
                 </TableRow>

@@ -40,13 +40,43 @@ export default class ListComponent extends Component {
               <TableCell className='table-up-p-frn-p'>
                 <b>Rubro</b>
               </TableCell>
-              <TableCell className='table-up-p-frn-p'>
-                <b>Importe</b>
+              <TableCell className='mes-t'>
+                <b>Enero</b>
               </TableCell>
-              <TableCell className='table-cpa-a'>
-                <b>Cpa</b>
+              <TableCell className='mes-t'>
+                <b>Febrero</b>
               </TableCell>
-              <TableCell className='table-up-p-frn-p'>
+              <TableCell className='mes-t'>
+                <b>Marzo</b>
+              </TableCell>
+              <TableCell className='mes-t'>
+                <b>Abril</b>
+              </TableCell>
+              <TableCell className='mes-t'>
+                <b>Mayo</b>
+              </TableCell>
+              <TableCell className='mes-t'>
+                <b>Junio</b>
+              </TableCell>
+              <TableCell className='mes-t'>
+                <b>Julio</b>
+              </TableCell>
+              <TableCell className='mes-t'>
+                <b>Agosto</b>
+              </TableCell>
+              <TableCell className='mes-t'>
+                <b>Septiembre</b>
+              </TableCell>
+              <TableCell className='mes-t'>
+                <b>Octubre</b>
+              </TableCell>
+              <TableCell className='mes-t'>
+                <b>Noviembre</b>
+              </TableCell>
+              <TableCell className='mes-t'>
+                <b>Diciembre</b>
+              </TableCell>
+              <TableCell className='mes-t'>
                 <b>Estatus</b>
               </TableCell>
             </TableRow>

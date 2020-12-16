@@ -38,7 +38,20 @@ export default class Transferencia extends Component {
       presupuesto: [],
       search: '',
       search2: '',
-      search3: ''
+      search3: '',
+      impoene: '',
+      impofeb: '',
+      impomar: '',
+      impoabr: '',
+      impomay: '',
+      impojun: '',
+      impojul: '',
+      impoago: '',
+      imposep: '',
+      impooct: '',
+      imponov: '',
+      impodic: '',
+      oficio: ''
     }
   }
 
@@ -154,7 +167,8 @@ export default class Transferencia extends Component {
           total: child.val().total,
           ampliacion: child.val().ampliacion,
           reduccion: child.val().reduccion,
-          trasferencia: child.val().trasferencia,
+          transferencia: child.val().transferencia,
+          oficio: child.val().oficio,
           done: child.val().done,
           id: child.key
         })
@@ -205,34 +219,35 @@ export default class Transferencia extends Component {
       of: item.of,
       np: item.np,
       cpa: item.cpa,
-      ene: item.ene,
+      ene: parseInt(this.state.impoene),
       gasene: item.gasene,
-      feb: item.feb,
+      feb: parseInt(this.state.impofeb),
       gasfeb: item.gasfeb,
-      mar: item.mar,
+      mar: parseInt(this.state.impomar),
       gasmar: item.gasmar,
-      abr: item.abr,
+      abr: parseInt(this.state.impoabr),
       gasabr: item.gasabr,
-      may: item.may,
+      may: parseInt(this.state.impomay),
       gasmay: item.gasmay,
-      jun: item.jun,
+      jun: parseInt(this.state.impojun),
       gasjun: item.gasjun,
-      jul: item.jul,
+      jul: parseInt(this.state.impojul),
       gasjul: item.gasjul,
-      ago: item.ago,
+      ago: parseInt(this.state.impoago),
       gasago: item.gasago,
-      sep: parseInt(item.sep),
+      sep: parseInt(this.state.imposep),
       gassep: item.gassep,
-      oct: item.oct - parseInt(this.state.importe),
+      oct: parseInt(this.state.impooct),
       gasoct: item.gasoct,
-      nov: item.nov,
+      nov: parseInt(this.state.imponov),
       gasnov: item.gasnov,
-      dic: item.dic,
+      dic: parseInt(this.state.impodic),
       gasdic: item.gasdic,
       total: item.total,
       ampliacion: item.ampliacion,
       reduccion: item.reduccion,
-      transferencia: 'Transferencia'
+      transferencia: 'Transferencia',
+      oficio: this.state.oficio
     }
     firebase.database().ref().update(updates)
     alert('Tu solicitud fue enviada.')
@@ -271,26 +286,182 @@ export default class Transferencia extends Component {
             <div className='p-container-fondor'>
               <div className='p-margin-fr'>
                 <p className='p-title-size-fr'>
-                  - Busca los datos para hacer tu transferencia/reducción
+                  - Ingresa los datos correspondientes para hacer la transferencia
                 </p>
               </div>
-              <div className='inputs-container-fr'>
+              <div className='cale-f'>
+                <div className='cal-cont'>
+                  <TextField
+                    label='Enero'
+                    id='impoene'
+                    name='impoene'
+                    InputProps={{
+                      inputComponent: NumberFormatCustom
+                    }}
+                    required
+                    onChange={this.handleChange.bind(this)}
+                    ref={impoene => this.inputImpoene = impoene}
+                  />
+                </div>
+                <div className='cal-cont'>
+                  <TextField
+                    label='Febrero'
+                    id='impofeb'
+                    name='impofeb'
+                    InputProps={{
+                      inputComponent: NumberFormatCustom
+                    }}
+                    required
+                    onChange={this.handleChange.bind(this)}
+                    ref={impofeb => this.inputImpofeb = impofeb}
+                  />
+                </div>
+                <div className='cal-cont'>
+                  <TextField
+                    label='Marzo'
+                    id='impomar'
+                    name='impomar'
+                    InputProps={{
+                      inputComponent: NumberFormatCustom
+                    }}
+                    required
+                    onChange={this.handleChange.bind(this)}
+                    ref={impomar => this.inputImpomar = impomar}
+                  />
+                </div>
+                <div className='cal-cont'>
+                  <TextField
+                    label='Abril'
+                    id='impoabr'
+                    name='impoabr'
+                    InputProps={{
+                      inputComponent: NumberFormatCustom
+                    }}
+                    required
+                    onChange={this.handleChange.bind(this)}
+                    ref={impoabr => this.inputImpoabr = impoabr}
+                  />
+                </div>
+                <div className='cal-cont'>
+                  <TextField
+                    label='Mayo'
+                    id='impomay'
+                    name='impomay'
+                    InputProps={{
+                      inputComponent: NumberFormatCustom
+                    }}
+                    required
+                    onChange={this.handleChange.bind(this)}
+                    ref={impomay => this.inputImpomay = impomay}
+                  />
+                </div>
+                <div className='cal-cont'>
+                  <TextField
+                    label='Junio'
+                    id='impojun'
+                    name='impojun'
+                    InputProps={{
+                      inputComponent: NumberFormatCustom
+                    }}
+                    required
+                    onChange={this.handleChange.bind(this)}
+                    ref={impojun => this.inputImpojun = impojun}
+                  />
+                </div>
+                <div className='cal-cont'>
+                  <TextField
+                    label='Julio'
+                    id='impojul'
+                    name='impojul'
+                    InputProps={{
+                      inputComponent: NumberFormatCustom
+                    }}
+                    required
+                    onChange={this.handleChange.bind(this)}
+                    ref={impojul => this.inputImpojul = impojul}
+                  />
+                </div>
+
+                <div className='cal-cont'>
+                  <TextField
+                    label='Agosto'
+                    id='impoago'
+                    name='impoago'
+                    InputProps={{
+                      inputComponent: NumberFormatCustom
+                    }}
+                    required
+                    onChange={this.handleChange.bind(this)}
+                    ref={impoago => this.inputImpoago = impoago}
+                  />
+                </div>
+                <div className='cal-cont'>
+                  <TextField
+                    label='Septiembre'
+                    id='imposep'
+                    name='imposep'
+                    InputProps={{
+                      inputComponent: NumberFormatCustom
+                    }}
+                    required
+                    onChange={this.handleChange.bind(this)}
+                    ref={imposep => this.inputImposep = imposep}
+                  />
+                </div>
+                <div className='cal-cont'>
+                  <TextField
+                    label='Octubre'
+                    id='impooct'
+                    name='impooct'
+                    InputProps={{
+                      inputComponent: NumberFormatCustom
+                    }}
+                    required
+                    onChange={this.handleChange.bind(this)}
+                    ref={impooct => this.inputImpooct = impooct}
+                  />
+                </div>
+                <div className='cal-cont'>
+                  <TextField
+                    label='Novimbre'
+                    id='imponov'
+                    name='imponov'
+                    InputProps={{
+                      inputComponent: NumberFormatCustom
+                    }}
+                    required
+                    onChange={this.handleChange.bind(this)}
+                    ref={imponov => this.inputImponov = imponov}
+                  />
+                </div>
+                <div className='cal-cont'>
+                  <TextField
+                    label='Diciembre'
+                    id='impodic'
+                    name='impodic'
+                    InputProps={{
+                      inputComponent: NumberFormatCustom
+                    }}
+                    required
+                    onChange={this.handleChange.bind(this)}
+                    ref={impodic => this.inputImpodic = impodic}
+                  />
+                </div>
+              </div>
+              <div className='inputs-container-fr-t'>
                 <div className='inputs-col-fr'>
                   <div className='inputs-row-fr-2'>
                     <div className='no' />
                     <div className='p-container-ifr2'>
-                    <TextField
-                      label='Importe'
-                      id='importe'
-                      name='importe'
-                      InputProps={{
-                        inputComponent: NumberFormatCustom
-                      }}
-                      required
-                      style={{zIndex: '3'}}
-                      onChange={this.handleChange.bind(this)}
-                      ref={importe => this.inputImporte = importe}
-                    />
+                      <TextField
+                        label='Oficio de autorización'
+                        id='oficio'
+                        name='oficio'
+                        required
+                        style={{ zIndex: '3', marginTop: '20px' }}
+                        onChange={this.handleChange.bind(this)}
+                        ref={oficio => this.inputOficio = oficio}
+                      />
                     </div>
                   </div>
                 </div>
@@ -298,7 +469,7 @@ export default class Transferencia extends Component {
             </div>
           </div>
         </div>
-        <div className='space-table'>
+        <div className='space-table-t'>
           <ListComponent
             listaB={this.state.listaB}
             update={this.update}
