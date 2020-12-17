@@ -459,9 +459,6 @@ export default class Ampliacion extends Component {
                         label='Oficio de autorización'
                         id='oficio'
                         name='oficio'
-                        InputProps={{
-                          inputComponent: NumberFormatCustom
-                        }}
                         required
                         style={{zIndex: '3'}}
                         onChange={this.handleChange.bind(this)}

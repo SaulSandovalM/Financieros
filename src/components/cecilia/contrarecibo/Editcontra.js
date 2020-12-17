@@ -34,9 +34,7 @@ export default class Edit extends Component {
       fechaDepo: '',
       cuentaPagar: '',
       cuentaPagarPara: '',
-      sujetoContable: '',
-      cr: '',
-      fechaPago: ''
+      sujetoContable: ''
     }
   }
 
@@ -69,9 +67,7 @@ export default class Edit extends Component {
           fechaDepo: fondoD.fechaDepo,
           cuentaPagar: fondoD.cuentaPagar,
           cuentaPagarPara: fondoD.cuentaPagarPara,
-          sujetoContable: fondoD.sujetoContable,
-          cr: fondoD.cr,
-          fechaPago: fondoD.fechaPago
+          sujetoContable: fondoD.sujetoContable
         });
       } else {
         console.log('No hay documento!');
@@ -110,9 +106,7 @@ export default class Edit extends Component {
       fechaDepo,
       cuentaPagar,
       cuentaPagarPara,
-      sujetoContable,
-      cr,
-      fechaPago
+      sujetoContable
     } = this.state
     const updateRef = firebase.firestore().collection('fondos').doc(this.state.key)
     updateRef.set({
@@ -139,9 +133,7 @@ export default class Edit extends Component {
       cuentaPagar,
       cuentaPagarPara,
       sujetoContable,
-      estatus: 'Contrarecibo',
-      cr,
-      fechaPago
+      estatus: 'Contrarecibo'
     }).then((docRef) => {
       this.setState({
         fondo: '',
@@ -166,9 +158,7 @@ export default class Edit extends Component {
         fechaDepo: '',
         cuentaPagar: '',
         cuentaPagarPara: '',
-        sujetoContable: '',
-        cr: '',
-        fechaPago: ''
+        sujetoContable: ''
       })
     })
     .catch((error) => {
@@ -356,21 +346,6 @@ export default class Edit extends Component {
                   name='sujetoContable'
                   onChange={this.onChange}
                   value={this.state.sujetoContable}
-                  required
-                />
-                <TextField
-                  style={{ marginBottom: '15px' }}
-                  label='CR'
-                  name='cr'
-                  onChange={this.onChange}
-                  value={this.state.cr}
-                  required
-                />
-                <TextField
-                  label='Fecha de Pago'
-                  name='fechaPago'
-                  onChange={this.onChange}
-                  value={this.state.fechaPago}
                   required
                 />
               </div>

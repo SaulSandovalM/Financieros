@@ -184,6 +184,7 @@ export default class ContainerT extends Component {
     return (
       <div style={{ background: '#f4f4f4', minHeight: '100vh' }}>
         <Transferencia />
+        <Transferenciad />
         <div className='pf-container-f' style={{ paddingTop: '20px' }}>
           <div className='p-container-fondor'>
             <div className='p-margin-fr'>

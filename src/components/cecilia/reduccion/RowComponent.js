@@ -149,7 +149,7 @@ export default class RowComponent extends Component {
               </i>
             </TableCell>
             <TableCell className='mes-t'>
-              <i>Ampliada</i>
+              <i>Reducida</i>
             </TableCell>
           </TableRow>
         }

@@ -24,7 +24,7 @@ export default class Contra extends Component {
   onCollectionUpdate = (querySnapshot) => {
     const fondos = []
     querySnapshot.forEach((doc) => {
-      const { fondo, tipo_doc, importe, beneficiario, fechaContra } = doc.data()
+      const { fondo, tipo_doc, importe, beneficiario, fechaContra, numContra, fechaDepo } = doc.data()
       fondos.push({
         key: doc.id,
         doc,
@@ -32,7 +32,9 @@ export default class Contra extends Component {
         tipo_doc,
         importe,
         beneficiario,
-        fechaContra
+        fechaContra,
+        numContra,
+        fechaDepo
       })
     })
     this.setState({
@@ -64,10 +66,16 @@ export default class Contra extends Component {
                   <b>Importe</b>
                 </TableCell>
                 <TableCell className='table-same'>
-                  <b>Agregar Contrarecibo</b>
+                  <b>CR</b>
+                </TableCell>
+                <TableCell className='table-same'>
+                  <b>Fecha de Pago</b>
                 </TableCell>
                 <TableCell className='table-same'>
                   <b>Estatus</b>
+                </TableCell>
+                <TableCell className='table-same'>
+                  <b>Agregar Contrarecibo</b>
                 </TableCell>
               </TableRow>
             </TableHead>
@@ -91,9 +99,10 @@ export default class Contra extends Component {
                   />
                 </TableCell>
                 <TableCell component='th' scope='row' className='table-same'>
-                  <Link to={`/Editcontra/${fondos.key}`} className='link-edit'>
-                    Agregar Contrarecibo
-                  </Link>
+                  {fondos.numContra}
+                </TableCell>
+                <TableCell component='th' scope='row' className='table-same'>
+                  {fondos.fechaDepo}
                 </TableCell>
                 <TableCell component='th' scope='row' className='table-same'>
                   {fondos.fechaContra &&
@@ -101,6 +110,11 @@ export default class Contra extends Component {
                       Contrarecibo Agregado
                     </p>
                   }
+                </TableCell>
+                <TableCell component='th' scope='row' className='table-same'>
+                  <Link to={`/Editcontra/${fondos.key}`} className='link-edit'>
+                    Agregar Contrarecibo
+                  </Link>
                 </TableCell>
               </TableBody>
             )}

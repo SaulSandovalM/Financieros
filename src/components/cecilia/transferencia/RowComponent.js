@@ -17,7 +17,7 @@ export default class RowComponent extends Component {
   render () {
     return (
       <TableBody>
-        {this.props.item.transferencia === 'Transferencia' &&
+        {this.props.item.transferencia === 'T/A' || this.props.item.transferencia === 'T/R' ?
           <TableRow>
             <TableCell className='table-up-p-frn-a'>
               <i>{this.props.item.up}</i>
@@ -149,10 +149,9 @@ export default class RowComponent extends Component {
               </i>
             </TableCell>
             <TableCell className='mes-t'>
-              <p>Transferido</p>
+              {this.props.item.transferencia === 'T/R' ? <p>T/R</p> : <p>T/A</p>}
             </TableCell>
-          </TableRow>
-        }
+          </TableRow> : null}
       </TableBody>
     )
   }

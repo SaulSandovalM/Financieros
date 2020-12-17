@@ -219,34 +219,34 @@ export default class Transferencia extends Component {
       of: item.of,
       np: item.np,
       cpa: item.cpa,
-      ene: parseInt(this.state.impoene),
+      ene: parseInt(item.ene) - parseInt(this.state.impoene),
       gasene: item.gasene,
-      feb: parseInt(this.state.impofeb),
+      feb: parseInt(item.feb) - parseInt(this.state.impofeb),
       gasfeb: item.gasfeb,
-      mar: parseInt(this.state.impomar),
+      mar: parseInt(item.mar) - parseInt(this.state.impomar),
       gasmar: item.gasmar,
-      abr: parseInt(this.state.impoabr),
+      abr: parseInt(item.abr) - parseInt(this.state.impoabr),
       gasabr: item.gasabr,
-      may: parseInt(this.state.impomay),
+      may: parseInt(item.may) - parseInt(this.state.impomay),
       gasmay: item.gasmay,
-      jun: parseInt(this.state.impojun),
+      jun: parseInt(item.jun) - parseInt(this.state.impojun),
       gasjun: item.gasjun,
-      jul: parseInt(this.state.impojul),
+      jul: parseInt(item.jul) - parseInt(this.state.impojul),
       gasjul: item.gasjul,
-      ago: parseInt(this.state.impoago),
+      ago: parseInt(item.ago) - parseInt(this.state.impoago),
       gasago: item.gasago,
-      sep: parseInt(this.state.imposep),
+      sep: parseInt(item.sep) - parseInt(this.state.imposep),
       gassep: item.gassep,
-      oct: parseInt(this.state.impooct),
+      oct: parseInt(item.oct) - parseInt(this.state.impooct),
       gasoct: item.gasoct,
-      nov: parseInt(this.state.imponov),
+      nov: parseInt(item.nov) - parseInt(this.state.imponov),
       gasnov: item.gasnov,
-      dic: parseInt(this.state.impodic),
+      dic: parseInt(item.dic) - parseInt(this.state.impodic),
       gasdic: item.gasdic,
       total: item.total,
       ampliacion: item.ampliacion,
       reduccion: item.reduccion,
-      transferencia: 'Transferencia',
+      transferencia: 'T/R',
       oficio: this.state.oficio
     }
     firebase.database().ref().update(updates)
@@ -286,7 +286,7 @@ export default class Transferencia extends Component {
             <div className='p-container-fondor'>
               <div className='p-margin-fr'>
                 <p className='p-title-size-fr'>
-                  - Ingresa los datos correspondientes para hacer la transferencia
+                  - Ingresa los datos correspondientes para hacer la transferencia/reducción
                 </p>
               </div>
               <div className='cale-f'>

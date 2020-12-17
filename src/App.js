@@ -10,6 +10,7 @@ import Presupuesto from './components/cecilia/presupuesto/Presupuesto'
 import Ampliacion from './components/cecilia/ampliacion/Ampliacion'
 import Reduccion from './components/cecilia/reduccion/Reduccion'
 import Transferencia from './components/cecilia/transferencia/ContainerT'
+import Saldos from './components/cecilia/saldos/Saldos'
 import FondoRevolvente from './components/cecilia/fondor/Fondor'
 import Banco from './components/cecilia/banco/Banco'
 import Archivos from './components/cecilia/archivos/Archivos'
@@ -83,6 +84,13 @@ function App (props) {
         exact
         path='/Transferencia'
         component={Transferencia}
+        isAuthenticated={isAuthenticated}
+        isVerifying={isVerifying}
+      />
+      <ProtectedRoute
+        exact
+        path='/Saldos'
+        component={Saldos}
         isAuthenticated={isAuthenticated}
         isVerifying={isVerifying}
       />

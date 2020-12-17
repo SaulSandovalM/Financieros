@@ -162,7 +162,8 @@ export default class Fondor extends Component {
           total: child.val().total,
           ampliacion: child.val().ampliacion,
           reduccion: child.val().reduccion,
-          trasferencia: child.val().trasferencia,
+          transferencia: child.val().transferencia,
+          oficio: child.val().oficio,
           estatus: child.val().estatus,
           done: child.val().done,
           id: child.key
@@ -233,39 +234,46 @@ export default class Fondor extends Component {
       of: item.of,
       np: item.np,
       cpa: item.cpa,
-      ene: item.ene,
+      ene: parseInt(item.ene) - parseInt(this.state.impoene),
       gasene: item.gasene,
-      feb: item.feb,
+      feb: parseInt(item.feb) - parseInt(this.state.impofeb),
       gasfeb: item.gasfeb,
-      mar: item.mar,
+      mar: parseInt(item.mar) - parseInt(this.state.impomar),
       gasmar: item.gasmar,
-      abr: item.abr,
+      abr: parseInt(item.abr) - parseInt(this.state.impoabr),
       gasabr: item.gasabr,
-      may: item.may,
+      may: parseInt(item.may) - parseInt(this.state.impomay),
       gasmay: item.gasmay,
-      jun: item.jun,
+      jun: parseInt(item.jun) - parseInt(this.state.impojun),
       gasjun: item.gasjun,
-      jul: item.jul,
+      jul: parseInt(item.jul) - parseInt(this.state.impojul),
       gasjul: item.gasjul,
-      ago: item.ago,
+      ago: parseInt(item.ago) - parseInt(this.state.impoago),
       gasago: item.gasago,
-      sep: item.sep,
-      gassep: item.sep,
-      oct: item.oct,
+      sep: parseInt(item.sep) - parseInt(this.state.imposep),
+      gassep: item.gassep,
+      oct: parseInt(item.oct) - parseInt(this.state.impooct),
       gasoct: item.gasoct,
-      nov: item.nov,
+      nov: parseInt(item.nov) - parseInt(this.state.imponov),
       gasnov: item.gasnov,
-      dic: item.dic - parseInt(this.state.importe),
-      gasdic: parseInt(this.state.importe), // Pendiente de confirmacion
+      dic: parseInt(item.dic) - parseInt(this.state.impodic),
+      gasdic: item.gasdic,
       total: item.total,
       ampliacion: item.ampliacion,
       reduccion: item.reduccion,
-      trasferencia: item.trasferencia,
+      transferencia: item.transferencia,
+      oficio: item.oficio,
       estatus: 'FR',
       numContra: this.state.numContra
     }
     firebase.database().ref().update(updates)
-    var f = parseInt(this.state.importe)
+    const sum =
+        parseInt(this.state.impoene) + parseInt(this.state.impofeb) + parseInt(this.state.impomar)
+      + parseInt(this.state.impoabr) + parseInt(this.state.impomay) + parseInt(this.state.impojun)
+      + parseInt(this.state.impojul) + parseInt(this.state.impoago) + parseInt(this.state.imposep)
+      + parseInt(this.state.impooct) + parseInt(this.state.imponov) + parseInt(this.state.impodic)
+    var f = sum
+    console.log(f)
     const statsRef = firebase.firestore().collection('banco').doc('--stats--')
     const increment = firebase.firestore.FieldValue.increment(f)
     const batch = firebase.firestore().batch()
@@ -276,8 +284,6 @@ export default class Fondor extends Component {
   }
 
   render () {
-    console.log(this.state.importe)
-
     return (
       <div className='pf-container' style={{ marginTop: '60px' }}>
         <div className='p-container-fr'>
@@ -308,7 +314,9 @@ export default class Fondor extends Component {
               />
               {this.state.pdf === 100 &&
                 <div className='alert-cont'>
-                  <Alert severity='success' variant='filled'>Se han subido los archivos!</Alert>
+                  <Alert severity='success' variant='filled'>
+                    Se han subido los archivos!
+                  </Alert>
                 </div>
               }
             </div>
@@ -323,23 +331,169 @@ export default class Fondor extends Component {
                     de autorización del fondo revolvente
                 </p>
               </div>
+              <div className='cale-f'>
+                <div className='cal-cont'>
+                  <TextField
+                    label='Enero'
+                    id='impoene'
+                    name='impoene'
+                    required
+                    InputProps={{
+                      inputComponent: NumberFormatCustom
+                    }}
+                    onChange={this.handleChange.bind(this)}
+                    ref={impoene => this.inputImpoene = impoene}
+                  />
+                </div>
+                <div className='cal-cont'>
+                  <TextField
+                    label='Febrero'
+                    id='impofeb'
+                    name='impofeb'
+                    required
+                    InputProps={{
+                      inputComponent: NumberFormatCustom
+                    }}
+                    onChange={this.handleChange.bind(this)}
+                    ref={impofeb => this.inputImpofeb = impofeb}
+                  />
+                </div>
+                <div className='cal-cont'>
+                  <TextField
+                    label='Marzo'
+                    id='impomar'
+                    name='impomar'
+                    required
+                    InputProps={{
+                      inputComponent: NumberFormatCustom
+                    }}
+                    onChange={this.handleChange.bind(this)}
+                    ref={impomar => this.inputImpomar = impomar}
+                  />
+                </div>
+                <div className='cal-cont'>
+                  <TextField
+                    label='Abril'
+                    id='impoabr'
+                    name='impoabr'
+                    required
+                    InputProps={{
+                      inputComponent: NumberFormatCustom
+                    }}
+                    onChange={this.handleChange.bind(this)}
+                    ref={impoabr => this.inputImpoabr = impoabr}
+                  />
+                </div>
+                <div className='cal-cont'>
+                  <TextField
+                    label='Mayo'
+                    id='impomay'
+                    name='impomay'
+                    required
+                    InputProps={{
+                      inputComponent: NumberFormatCustom
+                    }}
+                    onChange={this.handleChange.bind(this)}
+                    ref={impomay => this.inputImpomay = impomay}
+                  />
+                </div>
+                <div className='cal-cont'>
+                  <TextField
+                    label='Junio'
+                    id='impojun'
+                    name='impojun'
+                    required
+                    InputProps={{
+                      inputComponent: NumberFormatCustom
+                    }}
+                    onChange={this.handleChange.bind(this)}
+                    ref={impojun => this.inputImpojun = impojun}
+                  />
+                </div>
+                <div className='cal-cont'>
+                  <TextField
+                    label='Julio'
+                    id='impojul'
+                    name='impojul'
+                    required
+                    InputProps={{
+                      inputComponent: NumberFormatCustom
+                    }}
+                    onChange={this.handleChange.bind(this)}
+                    ref={impojul => this.inputImpojul = impojul}
+                  />
+                </div>
+
+                <div className='cal-cont'>
+                  <TextField
+                    label='Agosto'
+                    id='impoago'
+                    name='impoago'
+                    required
+                    InputProps={{
+                      inputComponent: NumberFormatCustom
+                    }}
+                    onChange={this.handleChange.bind(this)}
+                    ref={impoago => this.inputImpoago = impoago}
+                  />
+                </div>
+                <div className='cal-cont'>
+                  <TextField
+                    label='Septiembre'
+                    id='imposep'
+                    name='imposep'
+                    required
+                    InputProps={{
+                      inputComponent: NumberFormatCustom
+                    }}
+                    onChange={this.handleChange.bind(this)}
+                    ref={imposep => this.inputImposep = imposep}
+                  />
+                </div>
+                <div className='cal-cont'>
+                  <TextField
+                    label='Octubre'
+                    id='impooct'
+                    name='impooct'
+                    required
+                    InputProps={{
+                      inputComponent: NumberFormatCustom
+                    }}
+                    onChange={this.handleChange.bind(this)}
+                    ref={impooct => this.inputImpooct = impooct}
+                  />
+                </div>
+                <div className='cal-cont'>
+                  <TextField
+                    label='Novimbre'
+                    id='imponov'
+                    name='imponov'
+                    required
+                    InputProps={{
+                      inputComponent: NumberFormatCustom
+                    }}
+                    onChange={this.handleChange.bind(this)}
+                    ref={imponov => this.inputImponov = imponov}
+                  />
+                </div>
+                <div className='cal-cont'>
+                  <TextField
+                    label='Diciembre'
+                    id='impodic'
+                    name='impodic'
+                    required
+                    InputProps={{
+                      inputComponent: NumberFormatCustom
+                    }}
+                    onChange={this.handleChange.bind(this)}
+                    ref={impodic => this.inputImpodic = impodic}
+                  />
+                </div>
+              </div>
               <div className='inputs-container-fr'>
                 <div className='inputs-col-fr'>
                   <div className='inputs-row-fr-2'>
                     <div className='no' />
-                    <div className='p-container-ifr2'>
-                      <TextField
-                        label='Importe'
-                        value={this.state.importe}
-                        onChange={this.handleChange.bind(this)}
-                        id='importe'
-                        name='importe'
-                        InputProps={{
-                          inputComponent: NumberFormatCustom
-                        }}
-                        ref={importe => this.inputImporte = importe}
-                      />
-                    </div>
                     <div className='p-container-ifr2'>
                       <TextField
                         label='Numero de Contrarecibo'

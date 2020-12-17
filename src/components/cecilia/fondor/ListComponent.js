@@ -86,11 +86,11 @@ export default class ListComponent extends Component {
 
   render () {
     return (
-      <div style={{ marginTop: '61px' }}>
+      <div style={{ marginTop: '40px' }}>
         <div>
           <div>
             <div className='p-container-fondor' style={{ background: '#f4f4f4', padding: '30px' }}>
-              <div className='inputs-container-fr' ref='contactForm'>
+              <div className='inputs-container-frf' ref='contactForm'>
                 <div className='inputs-col-fr-t'>
                   <div className='inputs-row-fr-2' style={{ width: '60%' }}>
                     <div className='p-container-ifr3'>
