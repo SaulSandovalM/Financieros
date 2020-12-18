@@ -78,7 +78,7 @@ class Nav extends Component {
               <div className='subnav'>
                 <Link to='/Saldos' className='deco'>
                   <Typography className='nav-t' style={{ marginBottom: '15px', color: 'white' }}>
-                    • Saldos
+                    • Reportes
                   </Typography>
                 </Link>
               </div>

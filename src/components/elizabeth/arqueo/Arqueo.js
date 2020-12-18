@@ -55,6 +55,7 @@ export default class Arqueo extends Component {
           can0: child.val().can0,
           fecha: child.val().fecha,
           numCheque: child.val().numCheque,
+          total: child.val().total,
           done: child.val().done,
           id: child.key
         })
@@ -97,7 +98,8 @@ export default class Arqueo extends Component {
       can1: this.inputCan1.value,
       can0: this.inputCan0.value,
       fecha: this.inputFecha.value,
-      numCheque: this.inputCheque.value
+      numCheque: this.inputCheque.value,
+      total: this.inputTotal.value,
     }
     this.setState({
       can1000: this.inputCan1000.value,
@@ -112,11 +114,13 @@ export default class Arqueo extends Component {
       can1: this.inputCan1.value,
       can0: this.inputCan0.value,
       fecha: this.inputFecha.value,
-      numCheque: this.inputCheque.value
+      numCheque: this.inputCheque.value,
+      total: this.inputTotal.value
     })
     if (params.can1000 && params.can500 && params.can200 && params.can100 &&
       params.can50 && params.can20 && params.can10 && params.can5 &&
-      params.can2 && params.can1 && params.can0 && params.fecha && params.numCheque) {
+      params.can2 && params.can1 && params.can0 && params.fecha
+      && params.numCheque && params.total) {
       firebase.database().ref('arqueo').push(params).then(() => {
         alert('Tu solicitud fue enviada.')
       }).catch(() => {
@@ -142,6 +146,9 @@ export default class Arqueo extends Component {
     var meses = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12']
     var today = new Date()
     today = today.getFullYear() + '-' + meses[today.getMonth()] + '-' + today.getDate()
+
+    var total = this.state.can0;
+    console.log(total)
 
     return (
       <div className='pf-container-a' style={{ marginTop: '40px' }}>
@@ -387,6 +394,24 @@ export default class Arqueo extends Component {
                         <p className='p-mar-arqueo'>$</p>
                       </div>
                     </div>
+                    <div className='data-arqueo-pop'>
+                      <div className='title-arqueo'>
+                        <p className='p-mar-arqueo'>Total</p>
+                      </div>
+                      <div className='title-arqueo'>
+                        <p className='p-mar-arqueo'>
+                          <input
+                            id='total'
+                            required
+                            value={total}
+                            ref={total => this.inputTotal = total}
+                          />
+                        </p>
+                      </div>
+                      <div className='title-arqueo'>
+                        <p className='p-mar-arqueo'>$</p>
+                      </div>
+                    </div>
                   </div>
                   <div className='botones-arqueo'>
                     <button type='submit' className='margin-buton-ar'>Actualizar</button>
@@ -448,7 +473,6 @@ export default class Arqueo extends Component {
             {
               filterData.map(arqueo => (
                 <div className='table-arqueo-content'>
-
                   <div className='title-arqueo-se'>
                     <p className='p-mar-arqueo'>{arqueo.can1000}</p>
                   </div>
@@ -482,7 +506,6 @@ export default class Arqueo extends Component {
                   <div className='title-arqueo-se'>
                     <p className='p-mar-arqueo'>{arqueo.can0}</p>
                   </div>
-
                 </div>
               )).reverse()
             }

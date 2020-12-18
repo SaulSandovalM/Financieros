@@ -4,6 +4,7 @@ import firebase from '../../../Firebase'
 import ListComponent from './ListComponent'
 import ListComponentV from './ListComponentV'
 import ReactToPrint from 'react-to-print'
+import CurrencyFormat from 'react-currency-format'
 
 export default class ArqueoD extends Component {
   constructor (props) {
@@ -62,6 +63,7 @@ export default class ArqueoD extends Component {
           can0: child.val().can0,
           fecha: child.val().fecha,
           numCheque: child.val().numCheque,
+          total: child.val().total,
           done: child.val().done,
           id: child.key
         })
@@ -77,6 +79,7 @@ export default class ArqueoD extends Component {
       var listaVales = []
       snap.forEach((child) => {
         listaVales.push({
+          cheque: child.val().cheque,
           vale: child.val().vale,
           estatus: child.val().estatus,
           cantidad: child.val().cantidad,
@@ -101,6 +104,18 @@ export default class ArqueoD extends Component {
   }
 
   render () {
+    var today = new Date()
+    var today2 = new Date()
+    var yesterday = new Date()
+    var yesterday2 = new Date()
+    var meses = ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre']
+    var dias = ['domingo, ', 'lunes, ', 'martes, ', 'miercoles, ', 'jueves, ', 'viernes, ', 'sabado, ']
+    var f = new Date()
+    today = dias[f.getUTCDay()] + f.getDate() + ' de ' + meses[f.getMonth()] + ' de ' + f.getFullYear()
+    today2 = f.getFullYear() + '-' + [f.getMonth() + 1] + '-' + f.getDate()
+    yesterday = dias[f.getUTCDay() - 1] + [f.getDate() - 1] + ' de ' + meses[f.getMonth()] + ' de ' + f.getFullYear()
+    yesterday2 = f.getFullYear() + '-' + [f.getMonth() + 1] + '-' + [f.getDate() - 1]
+
     return (
       <div>
         <div className='ar-pad' ref={el => (this.arqueo = el)}>
@@ -128,10 +143,76 @@ export default class ArqueoD extends Component {
               <p className='tb-n'>BENEFICIARIO</p>
             </div>
           </div>
+          <div className='tabla-arq'>
+            <div className='tb-1'>
+              <p className='tb-n'></p>
+            </div>
+            <div className='tb-1'>
+              <p className='tb-n'></p>
+            </div>
+            <div className='tb-1'>
+              {
+                this.state.lista.map(item =>
+                  <div className='tb-n'>
+                    {item.fecha === yesterday2 &&
+                      <CurrencyFormat
+                        value={item.total}
+                        displayType='text'
+                        thousandSeparator
+                        prefix='$ '
+                      />
+                    }
+                  </div>
+                )
+              }
+            </div>
+            <div className='tb-1'>
+              <p className='tb-n'></p>
+            </div>
+            <div className='tb-2'>
+              <p className='tb-n'>{yesterday}</p>
+            </div>
+            <div className='tb-3'>
+              <p className='tb-n'></p>
+            </div>
+          </div>
           <div>
             <ListComponentV
               listaVales={this.state.listaVales}
             />
+          </div>
+          <div className='tabla-arq'>
+            <div className='tb-1'>
+              <p className='tb-n'></p>
+            </div>
+            <div className='tb-1'>
+              <p className='tb-n'></p>
+            </div>
+            <div className='tb-1'>
+              {
+                this.state.lista.map(item =>
+                  <div className='tb-n'>
+                    {item.fecha === today2 &&
+                      <CurrencyFormat
+                        value={item.total}
+                        displayType='text'
+                        thousandSeparator
+                        prefix='$ '
+                      />
+                    }
+                  </div>
+                )
+              }
+            </div>
+            <div className='tb-1'>
+              <p className='tb-n'></p>
+            </div>
+            <div className='tb-2'>
+              <p className='tb-n'>{today}</p>
+            </div>
+            <div className='tb-3'>
+              <p className='tb-n'></p>
+            </div>
           </div>
           <div className='arqueo-content'>
             <div className='table-arqueo'>

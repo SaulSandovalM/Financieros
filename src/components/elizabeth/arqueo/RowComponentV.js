@@ -16,10 +16,11 @@ export default class RowComponentV extends Component {
     var f = new Date()
     today = f.getFullYear() + '-' + meses[f.getMonth()] + '-' + f.getDate()
     var fecha = this.props.item.fecha
+    var estatus = this.props.item.cheque
 
     return (
       <div style={{ width: '100%' }}>
-        {today === fecha &&
+        {today === fecha && estatus !== 'Pendiente' &&
           <div className='tabla-arq'>
             <div className='tb-1'>
               <p className='tb-nr'>{this.props.item.vale}</p>

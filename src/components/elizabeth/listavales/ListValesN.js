@@ -92,7 +92,7 @@ export default class ListValesN extends Component {
       sc: item.sc,
       fecha: item.fecha,
       autorizo: item.autorizo,
-      estatus: item.estatus
+      estatus: 'autorizado'
     }
     firebase.database().ref().update(updates)
   }
@@ -102,7 +102,7 @@ export default class ListValesN extends Component {
       <div className='container-back' style={{ paddingTop: '60px' }}>
         <div className='input-val-p'>
           <TextField
-          style={{ width: '100%' }}
+            style={{ width: '100%' }}
             label='Ingresa el numero de cheque'
             name='cheque'
             value={this.state.cheque}
