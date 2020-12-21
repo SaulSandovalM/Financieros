@@ -77,8 +77,13 @@ export default class ListArchivosV extends Component {
       reader.onloadend = function () {
         var XMLParser = require('react-xml-parser')
         var xml = new XMLParser().parseFromString(reader.result)
-        var data = [xml.attributes['Fecha'], xml.attributes['Total'], xml.attributes['Folio']]
-        fetch(xml).then(res => res.text()).then(data => {
+        const data = {
+          'fecha': xml.attributes['Fecha'],
+          'total': xml.attributes['Total'],
+          'folio': xml.attributes['Folio'],
+          'importe': xml.children['']
+        }
+        fetch(xml).then(res => res.text()).then(xml => {
           fetch('https://financieros-78cb0.firebaseio.com/xml.json', {
             method: 'POST',
             headers: {

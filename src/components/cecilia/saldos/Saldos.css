@@ -1,0 +1,21 @@
+.saldo-container {
+  background: #f4f4f4;
+  height: 93vh;
+  padding-top: 60px;
+}
+.table-content {
+  margin: 30px;
+}
+.table-data-sd {
+  width: 6.5%;
+  border-top: 0;
+  border-left: 0;
+  border-right-color: white;
+  font-weight: bold;
+}
+.table-data-s {
+  width: 6.5%;
+  border-top: 0;
+  border-left: 0;
+  border-right-color: white;
+}
