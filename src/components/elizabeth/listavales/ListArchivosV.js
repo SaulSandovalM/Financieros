@@ -77,11 +77,17 @@ export default class ListArchivosV extends Component {
       reader.onloadend = function () {
         var XMLParser = require('react-xml-parser')
         var xml = new XMLParser().parseFromString(reader.result)
+        console.log(xml)
         const data = {
-          'fecha': xml.attributes['Fecha'],
           'total': xml.attributes['Total'],
-          'folio': xml.attributes['Folio'],
-          'importe': xml.children['']
+          'subtotal': xml.attributes['SubTotal'] ? xml.attributes['SubTotal'] : 0,
+          'folio': xml.attributes['Folio'] ? xml.attributes['Folio'] : '0',
+          'Nombre': xml.children['0'].attributes['Nombre'],
+          'importe': xml.children['2'].children['0'].attributes['Importe'],
+          'iva': xml.children['3'].attributes['TotalImpuestosTrasladados'],
+          'isr': xml.children['3'].attributes['TotalImpuestosRetenidos'] ? xml.children['3'].attributes['TotalImpuestosRetenidos'] : 0,
+          'fecha': xml.children['4'].children['0'].attributes['FechaTimbrado'],
+          'uuid': xml.children['4'].children['0'].attributes['UUID'],
         }
         fetch(xml).then(res => res.text()).then(xml => {
           fetch('https://financieros-78cb0.firebaseio.com/xml.json', {
@@ -90,7 +96,7 @@ export default class ListArchivosV extends Component {
               'Accept': 'application/json',
               'Content-Type': 'application/json',
             },
-              body: JSON.stringify(data)
+              body: JSON.stringify(data),
           })
         })
       }

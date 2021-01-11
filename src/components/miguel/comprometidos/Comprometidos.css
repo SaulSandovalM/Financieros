@@ -90,3 +90,6 @@
   width: 8%;
   font-size: 22px;
 }
+.MuiCard-root {
+  overflow: scroll !important;
+}

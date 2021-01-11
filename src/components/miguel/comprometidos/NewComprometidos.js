@@ -46,7 +46,11 @@ export default class NewComprometidos extends Component {
       comprometidos: [],
       search: '',
       total: '',
-      contra: []
+      contra: [],
+      uuid: 'NA',
+      nombre: 'NA',
+      folio: 'NA',
+      subtotal: 'NA'
     }
     this.handleClick = this.handleClick.bind(this)
   }
@@ -249,10 +253,17 @@ export default class NewComprometidos extends Component {
       reader.onloadend = function () {
         var XMLParser = require('react-xml-parser')
         var xml = new XMLParser().parseFromString(reader.result)
+        console.log(xml)
         const data = {
-          'fecha': xml.attributes['Fecha'],
           'total': xml.attributes['Total'],
-          'folio': xml.attributes['Folio']
+          'subtotal': xml.attributes['SubTotal'] ? xml.attributes['SubTotal'] : 0,
+          'folio': xml.attributes['Folio'] ? xml.attributes['Folio'] : '0',
+          'Nombre': xml.children['0'].attributes['Nombre'],
+          'importe': xml.children['2'].children['0'].attributes['Importe'],
+          'iva': xml.children['3'].attributes['TotalImpuestosTrasladados'],
+          'isr': xml.children['3'].attributes['TotalImpuestosRetenidos'] ? xml.children['3'].attributes['TotalImpuestosRetenidos'] : 0,
+          'fecha': xml.children['4'].children['0'].attributes['FechaTimbrado'],
+          'uuid': xml.children['4'].children['0'].attributes['UUID'],
         }
         fetch(xml).then(res => res.text()).then(xml => {
           fetch('https://financieros-78cb0.firebaseio.com/xml.json', {
@@ -261,7 +272,7 @@ export default class NewComprometidos extends Component {
               'Accept': 'application/json',
               'Content-Type': 'application/json',
             },
-              body: JSON.stringify(data)
+              body: JSON.stringify(data),
           })
         })
       }
@@ -391,6 +402,46 @@ export default class NewComprometidos extends Component {
   municipio = ['','Acatlán','Acaxochitlán','Actopan','Agua Blanca de Iturbide','Ajacuba','Alfajayucan','Almoloya','Apan','El Arenal','Atitalaquia','Atlapexco','Atotonilco el Grande','Atotonilco de Tula','Calnali','Cardonal','Cuautepec de Hinojosa','Chapantongo','Chapulhuacán','Chilcuautla','Eloxochitlán','Emiliano Zapata','Epazoyucan','Franciso I. Madero','Huasca de Ocampo','Huautla','Huazalingo','Huehuetla','Huejutla de Reyes','Huichapan','Ixmiquilpan','Jacala de Ledezma','Jaltocán','Juárez Hidalgo','Lolotla','Metepec','San Agustín Metzquititlán','Metztitlán','Mineral del Chico','Mineral del Monte','La Misión','Mixquiahuala de Juárez','Molango de Escamilla','Nicolás Flores','Nopala de Villagrán','Omitlán de Juárez','San Felipe Orizatlán','Pacula','Pachuca de Soto','Pisaflores','Progreso de Obregón','Mineral de la Reforma','San Agustín Tlaxiaca','San Bartolo Tutotepec','San Salvador','Santiago de Anaya','Santiago Tulantepec de Lugo Guerrero','Singuilucan','Tasquillo','Tecozautla','Tenango de Doria','Tepeapulco','Tepehuacán de Guerrero','Tepeji del Río de Ocampo','Tepetitlán','Tetepango','Villa de Tezontepec','Tezontepec de Aldama','Tianguistengo','Tizayuca','Tlahuelilpan','Tlahuiltepa','Tlanalapa','Tlanchinol','Tlaxcoapan','Tolcayuca','Tula de Allende','Tulancingo de Bravo','Xochiatipan','Xochicoatlán','Yahualica','Zacualtipán de Ángeles','Zapotlán de Juárez','Zempoala','Zimapán']
   area = ['','Procuraduría General de Justicia','Subprocuraduría de Procedimientos Penales Región Oriente','Fiscalía Especializada para la atención de Delitos cometidos contra la Libertad de Expresión', 'Periodistas y Personas defensoras de los Derechos Humanos','Dirección General para la Atención de los Asuntos del Sistema Tradicional','Fiscalia de Delitos Electorales','Subprocuraduría de Derechos Humanos y Servicios a la Comunidad','Centro de Justicia Restaurativa Penal Poniente','Fiscalía para la Atención de Delitos de Género','Visitaduría General','Dirección General de Servicios Periciales','Centro de Operación Estratégica','Unidad Especializada en el Combate al Secuestro','Dirección General de Administración y Finanzas','Fiscalía Especializada para la atención de los Delitos de Trata de Personas','Subprocuraduría de Procedimientos Penales Región Poniente','Centro de Atención Temprana Poniente','Dirección General de Investigación y Litigación Poniente','Dirección General de la Policía Investigadora','Centro de Atención Temprana Oriente','Centro de Justicia Restaurativa Penal Oriente','Dirección General de Investigación y Litigación Oriente','Dirección General de Recursos Materiales y Servicios','Fiscalía Especializada en Delitos de Corrupción','Fiscalía Especializada en Materia de Desaparición Forzada de Personas',]
 
+  resetForm () {
+    this.refs.contactForm.reset()
+  }
+
+  sendRecibo (e) {
+    e.preventDefault()
+    const params = {
+      importe: this.inputImporte.value,
+      iva: this.inputIva.value,
+      isr: this.inputIsr.value,
+      total: this.inputTotal.value,
+      fecha: this.inputFecha.value,
+      uuid: this.state.uuid,
+      subtotal: this.state.subtotal,
+      folio: this.state.folio,
+      nombre: this.state.nombre
+    }
+    this.setState({
+      importe: this.inputImporte.value,
+      iva: this.inputIva.value,
+      isr: this.inputIsr.value,
+      total: this.inputTotal.value,
+      fecha: this.inputFecha.value,
+      uuid: this.state.uuid,
+      subtotal: this.state.subtotal,
+      folio: this.state.folio,
+      nombre: this.state.nombre
+    })
+    if (params.importe && params.iva && params.isr && params.total && params.fecha) {
+      firebase.database().ref('xml').push(params).then(() => {
+        alert('Se ha agregado tu recibo')
+      }).catch(() => {
+        alert('Tu solicitud no puede ser enviada')
+      })
+      this.resetForm()
+    } else {
+      alert('Por favor llene el formulario')
+    }
+  }
+
   render () {
     var user = firebase.auth().currentUser
     var email
@@ -478,7 +529,7 @@ export default class NewComprometidos extends Component {
           <List dense component='div' role='list'>
             {filterData.map((value) => {
               return (
-                <ListItem key={value.name} button onClick={handleToggle(value)}>
+                <ListItem key={value.name} button onClick={handleToggle(value)} style={{ overFlow: 'scroll' }}>
                   <ListItemIcon>
                     <Checkbox
                       checked={checked.indexOf(value) !== -1}
@@ -490,6 +541,7 @@ export default class NewComprometidos extends Component {
                   <ListItemText className='list-align' primary={'$ ' + value.importe} />
                   <ListItemText className='list-align' primary={'$ ' + value.iva} />
                   <ListItemText className='list-align' primary={'$ ' + value.isr} />
+                  <ListItemText className='list-align' primary={value.fecha} />
                 </ListItem>
               )
             })}
@@ -503,29 +555,44 @@ export default class NewComprometidos extends Component {
       <div>
         <div className='recibo-container'>
           Agrega un Recibo
-          <div className='recibo-content'>
-            <button className='recibo-btn'> + </button>
+          <form className='recibo-content' onSubmit={this.sendRecibo.bind(this)} ref='contactForm'>
+            <button className='recibo-btn' type='submit'> + </button>
             <input
               className='input-r'
               placeholder='Importe'
+              id='importe'
+              required
+              ref={importe => this.inputImporte = importe}
             />
             <input
               className='input-r'
               placeholder='Iva'
+              id='iva'
+              required
+              ref={iva => this.inputIva = iva}
             />
             <input
               className='input-r'
               placeholder='Isr'
+              id='isr'
+              required
+              ref={isr => this.inputIsr = isr}
             />
             <input
               className='input-r'
               placeholder='Total'
+              id='total'
+              required
+              ref={total => this.inputTotal = total}
             />
             <input
               className='input-r'
               placeholder='Fecha'
+              id='fecha'
+              required
+              ref={fecha => this.inputFecha = fecha}
             />
-          </div>
+          </form>
         </div>
         <Card className='card-compro'>
           <List dense component='div' role='list'>
@@ -543,6 +610,7 @@ export default class NewComprometidos extends Component {
                   <ListItemText className='list-align' primary={'$ ' + value.importe} />
                   <ListItemText className='list-align' primary={'$ ' + value.iva} />
                   <ListItemText className='list-align' primary={'$ ' + value.isr} />
+                  <ListItemText className='list-align' primary={value.fecha} />
                 </ListItem>
               )
             })}
@@ -578,6 +646,7 @@ export default class NewComprometidos extends Component {
                   <ListItemText className='list-align' primary={'$ ' + value.importe} />
                   <ListItemText className='list-align' primary={'$ ' + value.iva} />
                   <ListItemText className='list-align' primary={'$ ' + value.isr} />
+                  <ListItemText className='list-align' primary={value.fecha} />
                 </ListItem>
               )
             })}
@@ -598,32 +667,30 @@ export default class NewComprometidos extends Component {
     if (Object.keys(array1).length !== 0) {
       const totalImporteImporte = []
       right.map(items => (
-        totalImporteImporte.push(items.importe)
+        totalImporteImporte.push(parseFloat(items.importe))
       ))
       const reducerImporte = (a, b) => a + b
       this.state.importe = totalImporteImporte.reduce(reducerImporte)
 
       const totalImporteIva = []
       right.map(items => (
-        totalImporteIva.push(items.iva)
+        totalImporteIva.push(parseFloat(items.iva))
       ))
       const reducerIva = (a, b) => a + b
       this.state.iva = totalImporteIva.reduce(reducerIva)
 
       const totalImporteIsr = []
       right.map(items => (
-        totalImporteIsr.push(items.isr)
+        totalImporteIsr.push(parseFloat(items.isr))
       ))
       const reducerIsr = (a, b) => a + b
       this.state.isr = totalImporteIsr.reduce(reducerIsr)
 
-      const total = this.state.importe + this.state.iva + this.state.isr
+      const total = parseFloat(this.state.importe) + parseFloat(this.state.iva) - parseFloat(this.state.isr)
       const totalcompro = total
       this.state.total = totalcompro
       this.state.contra = right
     }
-
-    console.log(this.state.presupuesto)
 
     return (
       <div className='div-compro-container'>
@@ -698,13 +765,13 @@ export default class NewComprometidos extends Component {
               <TableBody className='table-row-c'>
                 {this.state.presupuesto.map(item =>
                   <div key={item.id} item={item}>
-                  {this.state.partida === item.ogasto && this.state.up === item.up && this.state.rubro === item.rubro ?
-                    <TableCell className='border-icon'>
-                      <IconButton size='small' className='border-des' onClick={this.update}>
-                        <AddIcon />
-                      </IconButton>
-                    </TableCell> : null
-                  }
+                    {this.state.partida === item.ogasto && this.state.up === item.up && this.state.rubro === item.rubro ?
+                      <TableCell className='border-icon'>
+                        <IconButton size='small' className='border-des' onClick={this.update}>
+                          <AddIcon />
+                        </IconButton>
+                      </TableCell> : null
+                    }
                   </div>
                 )}
                 <TableCell className='border-table2'>
