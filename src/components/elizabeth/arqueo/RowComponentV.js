@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import './Arqueo.css'
+import CurrencyFormat from 'react-currency-format'
 
 export default class RowComponentV extends Component {
   constructor (props) {
@@ -16,11 +17,12 @@ export default class RowComponentV extends Component {
     var f = new Date()
     today = f.getFullYear() + '-' + meses[f.getMonth()] + '-' + f.getDate()
     var fecha = this.props.item.fecha
-    var estatus = this.props.item.cheque
+    var cheque = this.props.item.cheque
+    var estatus = this.props.item.estatus
 
     return (
       <div style={{ width: '100%' }}>
-        {today === fecha && estatus !== 'Pendiente' &&
+        {today === fecha && cheque !== 'Pendiente' && estatus !== 'Pendiente' &&
           <div className='tabla-arq'>
             <div className='tb-1'>
               <p className='tb-nr'>{this.props.item.vale}</p>
@@ -29,7 +31,18 @@ export default class RowComponentV extends Component {
               <p className='tb-nr'>{this.props.item.estatus}</p>
             </div>
             <div className='tb-1'>
-              <p className='tb-nr'>{this.props.item.cantidad}</p>
+              <CurrencyFormat
+                value={this.props.item.cantidad}
+                style={{
+                  display: 'flex',
+                  justifyContent: 'center',
+                  marginTop: '5px',
+                  fontSize: '12px'
+                }}
+                displayType='text'
+                thousandSeparator
+                prefix='$ '
+              />
             </div>
             <div className='tb-1'>
               <p className='tb-nr'>{this.props.item.fecha}</p>

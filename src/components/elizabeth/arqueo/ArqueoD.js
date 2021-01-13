@@ -113,8 +113,12 @@ export default class ArqueoD extends Component {
     var f = new Date()
     today = dias[f.getUTCDay()] + f.getDate() + ' de ' + meses[f.getMonth()] + ' de ' + f.getFullYear()
     today2 = f.getFullYear() + '-' + [f.getMonth() + 1] + '-' + f.getDate()
+    var today3 = today2.replace(/\b(\d{1})\b/g, '0$1')
     yesterday = dias[f.getUTCDay() - 1] + [f.getDate() - 1] + ' de ' + meses[f.getMonth()] + ' de ' + f.getFullYear()
     yesterday2 = f.getFullYear() + '-' + [f.getMonth() + 1] + '-' + [f.getDate() - 1]
+    var yesterdayF = yesterday2.replace(/\b(\d{1})\b/g, '0$1')
+    console.log(today3)
+    console.log(this.state.lista.map(item => <div>{item.fecha}</div>))
 
     return (
       <div>
@@ -154,7 +158,7 @@ export default class ArqueoD extends Component {
               {
                 this.state.lista.map(item =>
                   <div className='tb-n'>
-                    {item.fecha === yesterday2 &&
+                    {item.fecha === yesterdayF &&
                       <CurrencyFormat
                         value={item.total}
                         displayType='text'
@@ -192,7 +196,7 @@ export default class ArqueoD extends Component {
               {
                 this.state.lista.map(item =>
                   <div className='tb-n'>
-                    {item.fecha === today2 &&
+                    {item.fecha === today3 &&
                       <CurrencyFormat
                         value={item.total}
                         displayType='text'

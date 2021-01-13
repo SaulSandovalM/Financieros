@@ -147,8 +147,7 @@ export default class Arqueo extends Component {
     var today = new Date()
     today = today.getFullYear() + '-' + meses[today.getMonth()] + '-' + today.getDate()
 
-    var total = this.state.can0;
-    console.log(total)
+    var total = this.inputCan0 * 0.5
 
     return (
       <div className='pf-container-a' style={{ marginTop: '40px' }}>

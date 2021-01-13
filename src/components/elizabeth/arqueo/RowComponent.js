@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import './Arqueo.css'
+import CurrencyFormat from 'react-currency-format'
 
 export default class RowComponent extends Component {
   constructor (props) {
@@ -48,7 +49,13 @@ export default class RowComponent extends Component {
             <p className='p-mar-arqueo'>{mil}</p>
           </div>
           <div className='title-arqueo'>
-            <p className='p-mar-arqueo'>$ {thousand}</p>
+            <CurrencyFormat
+              className='p-mar-arqueo'
+              value={thousand}
+              displayType='text'
+              thousandSeparator
+              prefix='$ '
+            />
           </div>
         </div>
         <div className='data-arqueo'>
@@ -59,7 +66,13 @@ export default class RowComponent extends Component {
             <p className='p-mar-arqueo'>{quinientos}</p>
           </div>
           <div className='title-arqueo'>
-            <p className='p-mar-arqueo'>$ {fivehundred}</p>
+            <CurrencyFormat
+              className='p-mar-arqueo'
+              value={fivehundred}
+              displayType='text'
+              thousandSeparator
+              prefix='$ '
+            />
           </div>
         </div>
         <div className='data-arqueo'>
@@ -70,7 +83,13 @@ export default class RowComponent extends Component {
             <p className='p-mar-arqueo'>{docientos}</p>
           </div>
           <div className='title-arqueo'>
-            <p className='p-mar-arqueo'>$ {twohundred}</p>
+            <CurrencyFormat
+              className='p-mar-arqueo'
+              value={twohundred}
+              displayType='text'
+              thousandSeparator
+              prefix='$ '
+            />
           </div>
         </div>
         <div className='data-arqueo'>
@@ -81,7 +100,13 @@ export default class RowComponent extends Component {
             <p className='p-mar-arqueo'>{cien}</p>
           </div>
           <div className='title-arqueo'>
-            <p className='p-mar-arqueo'>$ {onehundred}</p>
+            <CurrencyFormat
+              className='p-mar-arqueo'
+              value={onehundred}
+              displayType='text'
+              thousandSeparator
+              prefix='$ '
+            />
           </div>
         </div>
         <div className='data-arqueo'>
@@ -92,7 +117,13 @@ export default class RowComponent extends Component {
             <p className='p-mar-arqueo'>{cincuenta}</p>
           </div>
           <div className='title-arqueo'>
-            <p className='p-mar-arqueo'>$ {fiveteen}</p>
+            <CurrencyFormat
+              className='p-mar-arqueo'
+              value={fiveteen}
+              displayType='text'
+              thousandSeparator
+              prefix='$ '
+            />
           </div>
         </div>
         <div className='data-arqueo'>
@@ -103,7 +134,13 @@ export default class RowComponent extends Component {
             <p className='p-mar-arqueo'>{veinte}</p>
           </div>
           <div className='title-arqueo'>
-            <p className='p-mar-arqueo'>$ {twenti}</p>
+            <CurrencyFormat
+              className='p-mar-arqueo'
+              value={twenti}
+              displayType='text'
+              thousandSeparator
+              prefix='$ '
+            />
           </div>
         </div>
         <div className='data-arqueo'>
@@ -114,7 +151,13 @@ export default class RowComponent extends Component {
             <p className='p-mar-arqueo'>{diez}</p>
           </div>
           <div className='title-arqueo'>
-            <p className='p-mar-arqueo'>$ {ten}</p>
+            <CurrencyFormat
+              className='p-mar-arqueo'
+              value={ten}
+              displayType='text'
+              thousandSeparator
+              prefix='$ '
+            />
           </div>
         </div>
         <div className='data-arqueo'>
@@ -125,7 +168,13 @@ export default class RowComponent extends Component {
             <p className='p-mar-arqueo'>{cinco}</p>
           </div>
           <div className='title-arqueo'>
-            <p className='p-mar-arqueo'>$ {five}</p>
+            <CurrencyFormat
+              className='p-mar-arqueo'
+              value={five}
+              displayType='text'
+              thousandSeparator
+              prefix='$ '
+            />
           </div>
         </div>
         <div className='data-arqueo'>
@@ -136,7 +185,13 @@ export default class RowComponent extends Component {
             <p className='p-mar-arqueo'>{dos}</p>
           </div>
           <div className='title-arqueo'>
-            <p className='p-mar-arqueo'>$ {two}</p>
+            <CurrencyFormat
+              className='p-mar-arqueo'
+              value={two}
+              displayType='text'
+              thousandSeparator
+              prefix='$ '
+            />
           </div>
         </div>
         <div className='data-arqueo'>
@@ -147,7 +202,13 @@ export default class RowComponent extends Component {
             <p className='p-mar-arqueo'>{uno}</p>
           </div>
           <div className='title-arqueo'>
-            <p className='p-mar-arqueo'>$ {one}</p>
+            <CurrencyFormat
+              className='p-mar-arqueo'
+              value={one}
+              displayType='text'
+              thousandSeparator
+              prefix='$ '
+            />
           </div>
         </div>
         <div className='data-arqueo'>
@@ -158,7 +219,13 @@ export default class RowComponent extends Component {
             <p className='p-mar-arqueo'>{punto}</p>
           </div>
           <div className='title-arqueo'>
-            <p className='p-mar-arqueo'>$ {point}</p>
+            <CurrencyFormat
+              className='p-mar-arqueo'
+              value={point}
+              displayType='text'
+              thousandSeparator
+              prefix='$ '
+            />
           </div>
         </div>
         <div className='data-arqueo'>
@@ -169,7 +236,13 @@ export default class RowComponent extends Component {
             <p className='p-mar-arqueo'>{total}</p>
           </div>
           <div className='title-arqueo'>
-            <p className='p-mar-arqueo'>$ {res}</p>
+            <CurrencyFormat
+              className='p-mar-arqueo'
+              value={res}
+              displayType='text'
+              thousandSeparator
+              prefix='$ '
+            />
           </div>
         </div>
       </div>
