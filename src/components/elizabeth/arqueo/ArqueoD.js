@@ -13,7 +13,14 @@ export default class ArqueoD extends Component {
       lista: [
         {
           id: 1,
-          name: 'preuba',
+          name: 'prueba',
+          done: false
+        }
+      ],
+      listay: [
+        {
+          id: 1,
+          name: 'prueba',
           done: false
         }
       ],
@@ -74,6 +81,36 @@ export default class ArqueoD extends Component {
     })
   }
 
+  listenForItemsy = (itemsRefy) => {
+    itemsRefy.on('value', (snap) => {
+      var listay = []
+      snap.forEach((child) => {
+        listay.push({
+          can1000: child.val().can1000,
+          can500: child.val().can500,
+          can200: child.val().can200,
+          can100: child.val().can100,
+          can50: child.val().can50,
+          can20: child.val().can20,
+          can10: child.val().can10,
+          can5: child.val().can5,
+          can2: child.val().can2,
+          can1: child.val().can1,
+          can0: child.val().can0,
+          fecha: child.val().fecha,
+          hora: child.val().hora,
+          numCheque: child.val().numCheque,
+          total: child.val().total,
+          done: child.val().done,
+          id: child.key
+        })
+      })
+      this.setState({
+        listay: listay
+      })
+    })
+  }
+
   listenForVales = (itemsRefVales) => {
     itemsRefVales.on('value', (snap) => {
       var listaVales = []
@@ -99,6 +136,8 @@ export default class ArqueoD extends Component {
   componentDidMount () {
     const itemsRef = firebase.database().ref('arqueo/').limitToLast(1)
     this.listenForItems(itemsRef)
+    const itemsRefy = firebase.database().ref('arqueo/')
+    this.listenForItemsy(itemsRefy)
     const itemsRefVales = firebase.database().ref('vales/')
     this.listenForVales(itemsRefVales)
   }
@@ -117,8 +156,6 @@ export default class ArqueoD extends Component {
     yesterday = dias[f.getUTCDay() - 1] + [f.getDate() - 1] + ' de ' + meses[f.getMonth()] + ' de ' + f.getFullYear()
     yesterday2 = f.getFullYear() + '-' + [f.getMonth() + 1] + '-' + [f.getDate() - 1]
     var yesterdayF = yesterday2.replace(/\b(\d{1})\b/g, '0$1')
-    console.log(today3)
-    console.log(this.state.lista.map(item => <div>{item.fecha}</div>))
 
     return (
       <div>
@@ -156,9 +193,9 @@ export default class ArqueoD extends Component {
             </div>
             <div className='tb-1'>
               {
-                this.state.lista.map(item =>
+                this.state.listay.map(item =>
                   <div className='tb-n'>
-                    {item.fecha === yesterdayF &&
+                    {item.fecha === yesterdayF && item.hora < '24:00' &&
                       <CurrencyFormat
                         value={item.total}
                         displayType='text'

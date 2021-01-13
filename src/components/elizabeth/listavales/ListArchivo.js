@@ -39,7 +39,7 @@ export default class ListArchivo extends Component {
                 <TableCell className='table-v-num'><b>Reintegro</b></TableCell>
                 <TableCell className='table-v-num'><b>Concepto</b></TableCell>
                 <TableCell className='table-v-num'><b>OS</b></TableCell>
-                <TableCell className='table-v-num'><b>Area</b></TableCell>
+                <TableCell className='table-v-num'><b>Área</b></TableCell>
                 <TableCell className='table-v-num'><b>Turno</b></TableCell>
                 <TableCell className='table-v-num'><b>S/C</b></TableCell>
                 <TableCell className='table-v-num'><b>Fecha</b></TableCell>

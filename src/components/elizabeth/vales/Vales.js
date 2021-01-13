@@ -190,7 +190,7 @@ export default class Vales extends Component {
     this.state.fecha = today2
 
     return (
-      <div className='container-back-v' style={{ marginTop: '80px' }}>
+      <div className='container-back-v' style={{ paddingTop: '80px' }}>
         <form onSubmit={this.sendMessage.bind(this)} ref='contactForm'>
           <div className='margin-vale' ref={el => (this.vale = el)}>
             <div className='vale-title-container'>
@@ -200,6 +200,7 @@ export default class Vales extends Component {
               <div className='vale-title-content'>
                 <p className='p-vale'>PROCURADURIA GENERAL DE JUSTICIA</p>
                 <p className='p-vale'>DIRECCION GENERAL DE ADMINISTRACION Y FINANZAS</p>
+                <p className='p-vale'>DIRECCION DE RECURSOS FINANCIEROS</p>
               </div>
               <div className='vale-num-container'>
                 <img className='logovale' src={logoh} alt='' />

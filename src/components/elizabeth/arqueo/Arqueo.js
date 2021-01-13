@@ -19,17 +19,17 @@ export default class Arqueo extends Component {
       form: [],
       alert: false,
       alertData: {},
-      can1000: '',
-      can500: '',
-      can200: '',
-      can100: '',
-      can50: '',
-      can20: '',
-      can10: '',
-      can5: '',
-      can2: '',
-      can1: '',
-      can0: '',
+      can1000: '0',
+      can500: '0',
+      can200: '0',
+      can100: '0',
+      can50: '0',
+      can20: '0',
+      can10: '0',
+      can5: '0',
+      can2: '0',
+      can1: '0',
+      can0: '0',
       arqueo: [],
       fecha: '',
       search: '',
@@ -99,7 +99,7 @@ export default class Arqueo extends Component {
       can0: this.inputCan0.value,
       fecha: this.inputFecha.value,
       numCheque: this.inputCheque.value,
-      total: this.inputTotal.value,
+      total: this.state.total,
     }
     this.setState({
       can1000: this.inputCan1000.value,
@@ -136,6 +136,10 @@ export default class Arqueo extends Component {
     this.setState({ search: event.target.value.substr(0, 20) })
   }
 
+  handleChange (event) {
+    this.setState({ [event.target.name]: event.target.value })
+  }
+
   render () {
     const filterData = this.state.arqueo.filter(
       (arqueo) => {
@@ -146,8 +150,26 @@ export default class Arqueo extends Component {
     var meses = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12']
     var today = new Date()
     today = today.getFullYear() + '-' + meses[today.getMonth()] + '-' + today.getDate()
-
-    var total = this.inputCan0 * 0.5
+    var total = parseInt(this.state.can1000) + parseInt(this.state.can500) +
+                parseInt(this.state.can200) + parseInt(this.state.can100) +
+                parseInt(this.state.can50) + parseInt(this.state.can20) +
+                parseInt(this.state.can10) + parseInt(this.state.can5) +
+                parseInt(this.state.can2) + parseInt(this.state.can1) +
+                parseInt(this.state.can0)
+    var mil = parseInt(this.state.can1000) * 1000
+    var quinientos = parseInt(this.state.can500) * 500
+    var doscientos = parseInt(this.state.can200) * 200
+    var cien = parseInt(this.state.can100) * 100
+    var cincuenta = parseInt(this.state.can50) * 50
+    var veinte = parseInt(this.state.can20) * 20
+    var diez = parseInt(this.state.can10) * 10
+    var cinco = parseInt(this.state.can5) * 5
+    var dos = parseInt(this.state.can2) * 2
+    var uno = parseInt(this.state.can1) * 1
+    var punto = parseInt(this.state.can0) * 0.5
+    var sumaT = mil + quinientos + doscientos + cien + cincuenta + veinte +
+                diez + cinco + dos + uno + punto
+    this.state.total = sumaT
 
     return (
       <div className='pf-container-a' style={{ marginTop: '40px' }}>
@@ -213,13 +235,16 @@ export default class Arqueo extends Component {
                         <p className='p-mar-arqueo'>
                           <input
                             id='can1000'
+                            name='can1000'
                             required
+                            onChange={this.handleChange.bind(this)}
+                            value={this.state.can1000}
                             ref={can1000 => this.inputCan1000 = can1000}
                           />
                         </p>
                       </div>
                       <div className='title-arqueo'>
-                        <p className='p-mar-arqueo'>$</p>
+                        <p className='p-mar-arqueo'>$ {mil}</p>
                       </div>
                     </div>
                     <div className='data-arqueo-pop'>
@@ -230,13 +255,16 @@ export default class Arqueo extends Component {
                         <p className='p-mar-arqueo'>
                           <input
                             id='can500'
+                            name='can500'
                             required
+                            onChange={this.handleChange.bind(this)}
+                            value={this.state.can500}
                             ref={can500 => this.inputCan500 = can500}
                           />
                         </p>
                       </div>
                       <div className='title-arqueo'>
-                        <p className='p-mar-arqueo'>$</p>
+                        <p className='p-mar-arqueo'>$ {quinientos}</p>
                       </div>
                     </div>
                     <div className='data-arqueo-pop'>
@@ -247,13 +275,16 @@ export default class Arqueo extends Component {
                         <p className='p-mar-arqueo'>
                           <input
                             id='can200'
+                            name='can200'
                             required
+                            onChange={this.handleChange.bind(this)}
+                            value={this.state.can200}
                             ref={can200 => this.inputCan200 = can200}
                           />
                         </p>
                       </div>
                       <div className='title-arqueo'>
-                        <p className='p-mar-arqueo'>$</p>
+                        <p className='p-mar-arqueo'>$ {doscientos}</p>
                       </div>
                     </div>
                     <div className='data-arqueo-pop'>
@@ -264,13 +295,16 @@ export default class Arqueo extends Component {
                         <p className='p-mar-arqueo'>
                           <input
                             id='can100'
+                            name='can100'
                             required
+                            onChange={this.handleChange.bind(this)}
+                            value={this.state.can100}
                             ref={can100 => this.inputCan100 = can100}
                           />
                         </p>
                       </div>
                       <div className='title-arqueo'>
-                        <p className='p-mar-arqueo'>$</p>
+                        <p className='p-mar-arqueo'>$ {cien}</p>
                       </div>
                     </div>
                     <div className='data-arqueo-pop'>
@@ -281,13 +315,16 @@ export default class Arqueo extends Component {
                         <p className='p-mar-arqueo'>
                           <input
                             id='can50'
+                            name='can50'
                             required
+                            onChange={this.handleChange.bind(this)}
+                            value={this.state.can50}
                             ref={can50 => this.inputCan50 = can50}
                           />
                         </p>
                       </div>
                       <div className='title-arqueo'>
-                        <p className='p-mar-arqueo'>$</p>
+                        <p className='p-mar-arqueo'>$ {cincuenta}</p>
                       </div>
                     </div>
                     <div className='data-arqueo-pop'>
@@ -298,13 +335,16 @@ export default class Arqueo extends Component {
                         <p className='p-mar-arqueo'>
                           <input
                             id='can20'
+                            name='can20'
                             required
+                            onChange={this.handleChange.bind(this)}
+                            value={this.state.can20}
                             ref={can20 => this.inputCan20 = can20}
                           />
                         </p>
                       </div>
                       <div className='title-arqueo'>
-                        <p className='p-mar-arqueo'>$</p>
+                        <p className='p-mar-arqueo'>$ {veinte}</p>
                       </div>
                     </div>
                     <div className='data-arqueo-pop'>
@@ -315,13 +355,16 @@ export default class Arqueo extends Component {
                         <p className='p-mar-arqueo'>
                           <input
                             id='can10'
+                            name='can10'
                             required
+                            onChange={this.handleChange.bind(this)}
+                            value={this.state.can10}
                             ref={can10 => this.inputCan10 = can10}
                           />
                         </p>
                       </div>
                       <div className='title-arqueo'>
-                        <p className='p-mar-arqueo'>$</p>
+                        <p className='p-mar-arqueo'>$ {diez}</p>
                       </div>
                     </div>
                     <div className='data-arqueo-pop'>
@@ -333,13 +376,16 @@ export default class Arqueo extends Component {
                         <p className='p-mar-arqueo'>
                           <input
                             id='can5'
+                            name='can5'
                             required
+                            onChange={this.handleChange.bind(this)}
+                            value={this.state.can5}
                             ref={can5 => this.inputCan5 = can5}
                           />
                         </p>
                       </div>
                       <div className='title-arqueo'>
-                        <p className='p-mar-arqueo'>$</p>
+                        <p className='p-mar-arqueo'>$ {cinco}</p>
                       </div>
                     </div>
                     <div className='data-arqueo-pop'>
@@ -350,13 +396,16 @@ export default class Arqueo extends Component {
                         <p className='p-mar-arqueo'>
                           <input
                             id='can2'
+                            name='can2'
                             required
+                            onChange={this.handleChange.bind(this)}
+                            value={this.state.can2}
                             ref={can2 => this.inputCan2 = can2}
                           />
                         </p>
                       </div>
                       <div className='title-arqueo'>
-                        <p className='p-mar-arqueo'>$</p>
+                        <p className='p-mar-arqueo'>$ {dos}</p>
                       </div>
                     </div>
                     <div className='data-arqueo-pop'>
@@ -367,13 +416,16 @@ export default class Arqueo extends Component {
                         <p className='p-mar-arqueo'>
                           <input
                             id='can1'
+                            name='can1'
                             required
+                            onChange={this.handleChange.bind(this)}
+                            value={this.state.can1}
                             ref={can1 => this.inputCan1 = can1}
                           />
                         </p>
                       </div>
                       <div className='title-arqueo'>
-                        <p className='p-mar-arqueo'>$</p>
+                        <p className='p-mar-arqueo'>$ {uno}</p>
                       </div>
                     </div>
                     <div className='data-arqueo-pop'>
@@ -384,13 +436,16 @@ export default class Arqueo extends Component {
                         <p className='p-mar-arqueo'>
                           <input
                             id='can0'
+                            name='can0'
                             required
+                            onChange={this.handleChange.bind(this)}
+                            value={this.state.can0}
                             ref={can0 => this.inputCan0 = can0}
                           />
                         </p>
                       </div>
                       <div className='title-arqueo'>
-                        <p className='p-mar-arqueo'>$</p>
+                        <p className='p-mar-arqueo'>$ {punto}</p>
                       </div>
                     </div>
                     <div className='data-arqueo-pop'>
@@ -408,7 +463,7 @@ export default class Arqueo extends Component {
                         </p>
                       </div>
                       <div className='title-arqueo'>
-                        <p className='p-mar-arqueo'>$</p>
+                        <p className='p-mar-arqueo'>$ {sumaT}</p>
                       </div>
                     </div>
                   </div>

@@ -43,7 +43,7 @@ export default class ListAuto extends Component {
                 <TableCell className='table-v-num'><b>Reintegro</b></TableCell>
                 <TableCell className='table-v-num'><b>Concepto</b></TableCell>
                 <TableCell className='table-v-num'><b>OS</b></TableCell>
-                <TableCell className='table-v-num'><b>Area</b></TableCell>
+                <TableCell className='table-v-num'><b>Área</b></TableCell>
                 <TableCell className='table-v-num'><b>Turno</b></TableCell>
                 <TableCell className='table-v-num'><b>Facturas</b></TableCell>
                 <TableCell className='table-v-num'><b>Recibos</b></TableCell>
