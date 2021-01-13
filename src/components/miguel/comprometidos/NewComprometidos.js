@@ -39,26 +39,22 @@ export default class NewComprometidos extends Component {
       presupuesto: [
         {
           id: 1,
-          name: 'preuba',
+          name: 'prueba',
           done: false
         }
       ],
       comprometidos: [],
       search: '',
       total: '',
+      importe: '',
+      iva: '',
+      isr: '',
       contra: [],
       uuid: 'NA',
       nombre: 'NA',
       folio: 'NA',
       subtotal: 'NA'
     }
-    this.handleClick = this.handleClick.bind(this)
-  }
-
-  handleClick () {
-    this.setState(state => ({
-      open: !state.open
-    }))
   }
 
   listenForItems = (itemsRef) => {
@@ -126,7 +122,7 @@ export default class NewComprometidos extends Component {
           total: child.val().total,
           ampliacion: child.val().ampliacion,
           reduccion: child.val().reduccion,
-          trasferencia: child.val().trasferencia,
+          transferencia: child.val().transferencia,
           estatus: child.val().estatus,
           id: child.key
         })
@@ -165,6 +161,7 @@ export default class NewComprometidos extends Component {
           importe_comp: fondos.importe_comp,
           isr: fondos.isr,
           total: fondos.total,
+          iva: fondos.iva,
           fecha_comp: fondos.fecha_comp
         })
       } else {
@@ -253,7 +250,6 @@ export default class NewComprometidos extends Component {
       reader.onloadend = function () {
         var XMLParser = require('react-xml-parser')
         var xml = new XMLParser().parseFromString(reader.result)
-        console.log(xml)
         const data = {
           'total': xml.attributes['Total'],
           'subtotal': xml.attributes['SubTotal'] ? xml.attributes['SubTotal'] : 0,
@@ -282,7 +278,6 @@ export default class NewComprometidos extends Component {
 
   update = (item) => {
     let updates = {}
-    console.log(item)
     updates['presupuesto/' + item.id] = {
       año: item.año,
       rm: item.rm,
@@ -344,20 +339,21 @@ export default class NewComprometidos extends Component {
       total: item.total,
       ampliacion: item.ampliacion,
       reduccion: item.reduccion,
-      trasferencia: item.trasferencia
+      transferencia: item.transferencia
     }
-    console.log(updates)
     firebase.database().ref().update(updates)
-    console.log('ya paso del update')
-    const { municipio, area, total, fechar } = this.state
+    const { municipio, area, total, fecha, iva, isr, importe } = this.state
     const updateRef = firebase.firestore().collection('fondos').doc(this.props.match.params.id).collection('comprometidos').doc()
     updateRef.set({
       partida: item.ogasto,
       presupuestal: item.up,
-      municipio,
-      area,
-      fecha: fechar,
-      importe_comp: total,
+      municipio: municipio,
+      area: area,
+      fecha: fecha,
+      importe_comp: importe,
+      iva: iva,
+      isr: isr,
+      total: total,
       año: item.año,
       ramo: item.rm,
       ur: item.ur,
@@ -493,7 +489,6 @@ export default class NewComprometidos extends Component {
     const handleToggle = (value) => () => {
       const currentIndex = checked.indexOf(value)
       const newChecked = [...checked]
-
       if (currentIndex === -1) {
         newChecked.push(value)
       } else {
@@ -610,7 +605,7 @@ export default class NewComprometidos extends Component {
                   <ListItemText className='list-align' primary={'$ ' + value.importe} />
                   <ListItemText className='list-align' primary={'$ ' + value.iva} />
                   <ListItemText className='list-align' primary={'$ ' + value.isr} />
-                  <ListItemText className='list-align' primary={value.fecha} />
+                  <ListItemText className='list-align' primary={value.id} />
                 </ListItem>
               )
             })}
@@ -686,7 +681,10 @@ export default class NewComprometidos extends Component {
       const reducerIsr = (a, b) => a + b
       this.state.isr = totalImporteIsr.reduce(reducerIsr)
 
-      const total = parseFloat(this.state.importe) + parseFloat(this.state.iva) - parseFloat(this.state.isr)
+      const importe = parseFloat(this.state.importe)
+      const iva = parseFloat(this.state.iva)
+      const isr = parseFloat(this.state.isr)
+      const total = importe + iva - isr
       const totalcompro = total
       this.state.total = totalcompro
       this.state.contra = right
@@ -764,10 +762,10 @@ export default class NewComprometidos extends Component {
               </TableHead>
               <TableBody className='table-row-c'>
                 {this.state.presupuesto.map(item =>
-                  <div key={item.id} item={item}>
+                  <div>
                     {this.state.partida === item.ogasto && this.state.up === item.up && this.state.rubro === item.rubro ?
-                      <TableCell className='border-icon'>
-                        <IconButton size='small' className='border-des' onClick={this.update}>
+                      <TableCell className='border-icon' key={item.id} item={item}>
+                        <IconButton size='small' className='border-des' onClick={() => this.update(item)}>
                           <AddIcon />
                         </IconButton>
                       </TableCell> : null
