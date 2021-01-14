@@ -28,9 +28,13 @@ export default class ListComponent extends Component {
   }
 
   handleExcel () {
-    const vales = [['#V', '#C', 'AUTORIZADO', 'COMPOBADO', 'REEM/REIN', 'CONCEPTO', 'OFICIO S', 'AREA', 'TURNO', 'FACTURA', 'RECIBOS', 'S/C', 'FECHA', 'AUTORIZA', 'RECIBIO']]
+    const vales = [['#V', '#C', 'AUTORIZADO', 'COMPOBADO', 'REEM/REIN', 'CONCEPTO',
+      'OFICIO S', 'AREA', 'TURNO', 'FACTURA', 'RECIBOS', 'S/C', 'FECHA', 'AUTORIZA', 'RECIBIO']]
     this.state.vales.forEach((vale) => {
-      const valeArray = [vale.vale, vale.cheque, vale.cantidad, vale.cantidadc, vale.cantidadr, vale.reembolso, vale.concepto, vale.oficioS, vale.area, vale.turno, vale.sc, vale.fecha, vale.autorizo, vale.personaR, vale.recibos]
+      const valeArray = [vale.vale, vale.cheque, vale.cantidad, vale.cantidadc,
+        vale.cantidadr, vale.concepto, vale.oficioS, vale.area,
+        vale.turno, vale.factura, vale.recibos, vale.sc, vale.fecha,
+        vale.autorizo, vale.personaR]
       vales.push(valeArray)
     })
     const wb = XLSX.utils.book_new()

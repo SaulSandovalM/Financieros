@@ -32,8 +32,9 @@ export default class Arqueo extends Component {
       can0: '0',
       arqueo: [],
       fecha: '',
+      hora: '',
       search: '',
-      numCheque: ''
+      numCheque: 'NA'
     }
   }
 
@@ -54,6 +55,7 @@ export default class Arqueo extends Component {
           can1: child.val().can1,
           can0: child.val().can0,
           fecha: child.val().fecha,
+          hora: child.val().hora,
           numCheque: child.val().numCheque,
           total: child.val().total,
           done: child.val().done,
@@ -98,6 +100,7 @@ export default class Arqueo extends Component {
       can1: this.inputCan1.value,
       can0: this.inputCan0.value,
       fecha: this.inputFecha.value,
+      hora: this.state.hora,
       numCheque: this.inputCheque.value,
       total: this.state.total,
     }
@@ -140,6 +143,12 @@ export default class Arqueo extends Component {
     this.setState({ [event.target.name]: event.target.value })
   }
 
+  onChange = (e) => {
+    const state = this.state
+    state[e.target.name] = e.target.value
+    this.setState(state)
+  }
+
   render () {
     const filterData = this.state.arqueo.filter(
       (arqueo) => {
@@ -170,6 +179,8 @@ export default class Arqueo extends Component {
     var sumaT = mil + quinientos + doscientos + cien + cincuenta + veinte +
                 diez + cinco + dos + uno + punto
     this.state.total = sumaT
+    var today = new Date()
+    this.state.hora = today.getHours() + ':' + [(today.getMinutes() < 10 ? '0' : '') + today.getMinutes()]
 
     return (
       <div className='pf-container-a' style={{ marginTop: '40px' }}>
@@ -196,22 +207,16 @@ export default class Arqueo extends Component {
                 trigger={<button className='margin-buton-ar'>Actualizar</button>}
                 modal
                 closeOnDocumentClick>
-                <form onSubmit={this.sendMessage.bind(this)} ref='contactForm' style={{ display: 'flex', justifyContent: 'center', flexDirection: 'column', height: '100%' }}>
+                <form className='form-class' onSubmit={this.sendMessage.bind(this)} ref='contactForm'>
                   <div className='cen-tit'>
                     <div className='title-ar'>
                       <b>AGREGA EL NUMERO DE CHEQUE PARA REALIZAR TU ARQUEO</b>
                       <input
                         id='numCheque'
+                        name='numCheque'
+                        value={this.state.numCheque}
+                        onChange={this.onChange}
                         ref={numCheque => this.inputCheque = numCheque} />
-                    </div>
-                  </div>
-                  <div className='cen-tit' style={{display: 'none'}}>
-                    <div className='title-ar'>
-                      <b>AGREGA EL NUMERO DE CHEQUE PARA REALIZAR TU ARQUEO</b>
-                      <input
-                        id='fecha'
-                        value={today}
-                        ref={fecha => this.inputFecha = fecha} />
                     </div>
                   </div>
                   <div className='arqueo-content-pop'>

@@ -156,6 +156,14 @@ export default class ArqueoD extends Component {
     yesterday = dias[f.getUTCDay() - 1] + [f.getDate() - 1] + ' de ' + meses[f.getMonth()] + ' de ' + f.getFullYear()
     yesterday2 = f.getFullYear() + '-' + [f.getMonth() + 1] + '-' + [f.getDate() - 1]
     var yesterdayF = yesterday2.replace(/\b(\d{1})\b/g, '0$1')
+    let preDate = yesterdayF
+    let postDate = today3
+    let filteredDates = this.state.listay.filter(function(date){
+      return date.fecha === preDate && date.hora < '23:59' && date.hora > '17:00'
+    })
+    console.log(yesterdayF)
+    console.log(today3)
+    console.log(filteredDates)
 
     return (
       <div>
@@ -193,16 +201,14 @@ export default class ArqueoD extends Component {
             </div>
             <div className='tb-1'>
               {
-                this.state.listay.map(item =>
+                filteredDates.map(item =>
                   <div className='tb-n'>
-                    {item.fecha === yesterdayF && item.hora < '24:00' &&
-                      <CurrencyFormat
-                        value={item.total}
-                        displayType='text'
-                        thousandSeparator
-                        prefix='$ '
-                      />
-                    }
+                    <CurrencyFormat
+                      value={item.total}
+                      displayType='text'
+                      thousandSeparator
+                      prefix='$ '
+                    />
                   </div>
                 )
               }

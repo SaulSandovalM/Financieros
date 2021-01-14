@@ -123,6 +123,16 @@ class NavE extends Component {
                 </Link>
               </div>
             </div>}
+            <div className='navbar-left'>
+              <Link to='/Caratula' className='deco'>
+                <span className='material-icons' style={{ color: 'white', marginTop: '3px', marginRight: '15px' }}>
+                  text_snippet
+                </span>
+                <Typography className='nav-t' variant='h6' style={{ marginBottom: '15px', color: 'white' }}>
+                  Caratula
+                </Typography>
+              </Link>
+            </div>
         </div>
         <div>
           <div className='navbar-left'>

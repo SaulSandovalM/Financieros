@@ -163,3 +163,9 @@
 .ar-pad {
   padding: 80px 25px 10px 25px;
 }
+.form-class {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  height: 100%;
+}
