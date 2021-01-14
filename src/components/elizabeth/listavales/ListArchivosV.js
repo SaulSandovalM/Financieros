@@ -215,10 +215,26 @@ export default class ListArchivosV extends Component {
 
   update = (item) => {
     let updates = {}
-    updates['vales/' + item.id + '/comprobacion/'] = {
+    updates['vales/' + item.id] = {
       filexml: this.state.filexml,
       filefactura: this.state.filefactura,
-      filerecibo: this.state.filerecibo
+      filerecibo: this.state.filerecibo,
+      area: item.area,
+      autorizo: item.autorizo,
+      cantidad: item.cantidad,
+      cantidadc: item.cantidadc,
+      cantidadr: item.cantidadr,
+      cheque: item.cheque,
+      concepto: item.concepto,
+      estatus: 'PCF',
+      factura: item.factura,
+      fecha: item.fecha,
+      oficioS: item.oficioS,
+      personaR: item.personaR,
+      recibos: item.recibos,
+      sc: item.sc,
+      turno: item.turno,
+      vale: item.vale
     }
     firebase.database().ref().update(updates)
     alert('Tu solicitud fue enviada.')

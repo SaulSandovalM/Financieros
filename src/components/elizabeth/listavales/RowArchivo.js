@@ -13,7 +13,7 @@ export default class RowAuto extends Component {
     }
   }
 
-  handleUpdate = () => {
+  update = () => {
     this.props.update(this.props.item)
   }
 
@@ -57,13 +57,13 @@ export default class RowAuto extends Component {
           {this.props.item.personaR}
         </TableCell>
         <TableCell className='table-v-num2'>
-          
+          {this.props.item.estatus}
         </TableCell>
         <TableCell className='table-v-num2'>
           <Button
             variant='contained'
             color='primary'
-            onClick={this.handleUpdate}
+            onClick={this.update}
           >
             Agregar
           </Button>

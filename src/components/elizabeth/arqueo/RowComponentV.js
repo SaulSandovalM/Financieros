@@ -22,7 +22,7 @@ export default class RowComponentV extends Component {
 
     return (
       <div style={{ width: '100%' }}>
-        {today === fecha && cheque !== 'Pendiente' && estatus !== 'Pendiente' &&
+        {cheque !== 'Pendiente' && estatus === 'PCF' &&
           <div className='tabla-arq'>
             <div className='tb-1'>
               <p className='tb-nr'>{this.props.item.vale}</p>

@@ -407,7 +407,7 @@ export default class Vales extends Component {
                   name='personaR'
                   onChange={this.handleChange.bind(this)}
                   value={this.state.personaR}
-                  required
+                  requiredr
                   ref={personaR => this.inputPersona = personaR}
                 />
                 <p className='font-size-f'>Recibió</p>

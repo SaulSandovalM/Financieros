@@ -119,10 +119,10 @@
   border-bottom: 1px solid #d0d0d0;
 }
 .title-ar {
-  width: 75%;
   display: flex;
   justify-content: space-between;
   padding-top: 30px;
+  width: 75%;
 }
 .cen-tit {
   display: flex;
@@ -138,34 +138,34 @@
   flex-direction: row;
 }
 .tb-1 {
-  width: 11%;
   border: 1px solid;
+  width: 11%;
 }
 .tb-n {
+  font-size: 10px;
   font-weight: bold;
   margin: 5px;
   text-align: center;
-  font-size: 10px;
 }
 .tb-nr {
+  font-size: 12px;
   margin: 5px;
   text-align: center;
-  font-size: 12px;
 }
 .tb-2 {
-  width: 40%;
   border: 1px solid;
+  width: 40%;
 }
 .tb-3 {
-  width: 15%;
   border: 1px solid;
+  width: 15%;
 }
 .ar-pad {
   padding: 80px 25px 10px 25px;
 }
 .form-class {
   display: flex;
-  justify-content: center;
   flex-direction: column;
   height: 100%;
+  justify-content: center;
 }
