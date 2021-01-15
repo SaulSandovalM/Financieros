@@ -3,7 +3,7 @@ import './Caratula.css'
 import ReactToPrint from 'react-to-print'
 import boton from '../../../img/cua.png'
 import boton2 from '../../../img/cua2.png'
-import programa from '../../../img/logo_hgo.png'
+import programa from '../../../img/logovale.png'
 import logo2 from '../../../img/logo.jpg'
 import footer from '../../../img/footer.png'
 import firebase from '../../../Firebase'
@@ -61,7 +61,7 @@ export default class Cpdf extends Component{
         </div>
         <div ref={el => (this.holi = el)} className='page-s'>
         {this.state.comprometidos.map(comprometidos =>
-          <div style={{display: 'flex', justifyContent: 'center', flexDirection: 'column', marginTop: '50px'}}>
+          <div style={{display: 'flex', justifyContent: 'center', flexDirection: 'column', marginTop: '80px', pageBreakBefore: 'always'}}>
             <div style={{ display: 'flex', justifyContent: 'center'}}>
               <div className='cpdf-subdad-fi'>
                 <div className='fondo-procus'>
@@ -71,7 +71,7 @@ export default class Cpdf extends Component{
                 <div className='procu'>
                   <p className='text-fr'>
                     Fondo: Procuraduría General de Justicia Del Estado de Hidalgo<br />
-                    Subfondo: 09 Dirección General de Administración y Finanzas<br />
+                    Subfondo: N/A<br />
                     Unidad Administrativa: Dirección General de Administración y Finanzas<br />
                     Area Generadora: Dirección de Recursos Financieros
                   </p>
@@ -99,8 +99,8 @@ export default class Cpdf extends Component{
                     <p className='text'>Fecha de Cierre:{/* {this.state.} */}</p>
                   </div>
                   <div className='num-exp'>
-                    <p className='text-2'>Número de Expediente:{/* {this.state.} */}
-                      <br />PGJH-09.1*5C.3/  Fondo 2020
+                    <p className='text-2'>Número de Expediente:
+                      <br />PGJH-09.1*5C.3/ {/*Numero de fondo*/} 2020
                       <br />Número de hojas:
                       <input
                         className='hojas'
@@ -113,25 +113,43 @@ export default class Cpdf extends Component{
                 </div>
                 <div className='fundamento' />
                 <div className='clausula'>
-                  <p className='cons'><b className='negritas'>Fundamento legal </b>
-                    Costitución Politíca de los Estados Unidos Mexicanos, artículo 6 fracción I y II, 8° Costitución politica del
-                    Estados de Hidalgo, artículo 4 ter 89, 90 y 91. Ley Organica de Ministerio Público del Estado de Hidalgo, artículo 17 y 27 fracciones I, 36.
-                    Ley de transpariencia y Acceso a la  Información  Publica Gubernamental para el Estado de Hidalgo artículo 5 fracción X, 6, 22 fracciones XVIII y XIX.
-                    36 fracción I, Ley de Responsabilidades de los Servidores Públicos del Estado de Hidalgo, artículos 47. Ley de Archivos del Estado de Hidalgo artículos 2, 3, 4, fracción X, 9 y 31.
-                    Reglamento de la Ley de los Archivos del Estado de Hidalgo artículo 2 fracción I.
+                  <p className='cons'>
+                    <p className='negritas'>Fundamento legal</p>
+                    <br />
+                    <br />
+                    Costitución Politíca de los Estados Unidos Mexicanos, artículo
+                    6 fracción I y II, 8° Costitución politica del Estados de Hidalgo,
+                    artículo 4 ter 89, 90 y 91. Ley Organica de Ministerio Público
+                    del Estado de Hidalgo, artículo 17 y 27 fracciones I, 36.
+                    Ley de transpariencia y Acceso a la  Información  Publica
+                    Gubernamental para el Estado de Hidalgo artículo 5 fracción
+                    X, 6, 22 fracciones XVIII y XIX. 36 fracción I, Ley de
+                    Responsabilidades de los Servidores Públicos del Estado de Hidalgo,
+                    artículos 47. Ley de Archivos del Estado de Hidalgo artículos
+                    2, 3, 4, fracción X, 9 y 31. Reglamento de la Ley de los Archivos
+                    del Estado de Hidalgo artículo 2 fracción I.
                   </p>
                 </div>
                 <div className='cajas'>
                   <div className='cajas-valor1'>
                     <p className='t-cajass'>Valor Documento Primario</p>
-                    <p className='t-cajas'>Administrativo<img className='svg' src={boton2} alt='' /></p>
-                    <p className='t-cajas'>Fiscal <img className='svg' src={boton2} alt='' /></p>
-                    <p className='t-cajas'>Legal<img className='svg' src={boton2} alt='' /></p>
+                    <p className='t-cajas'>
+                      Administrativo
+                      <img className='svg' src={boton2} alt='' />
+                    </p>
+                    <p className='t-cajas'>
+                      Fiscal
+                      <img className='svg' src={boton2} alt='' />
+                    </p>
+                    <p className='t-cajas'>
+                      Legal
+                      <img className='svg' src={boton} alt='' />
+                    </p>
                   </div>
                   <div className='cajas-valor2'>
                     <p className='t-cajass'>Valor Documental Secundario</p>
                     <p className='t-cajas'>Informativo <img className='svg' src={boton2} alt='' /></p>
-                    <p className='t-cajas'>Evidencial<img className='svg' src={boton} alt='' /></p>
+                    <p className='t-cajas'>Evidencial<img className='svg' src={boton2} alt='' /></p>
                     <p className='t-cajas'>Testimonial<img className='svg' src={boton} alt='' /></p>
                   </div>
                   <div className='cajas-valor3'>
@@ -148,6 +166,7 @@ export default class Cpdf extends Component{
                       <div className='vigencia2'>
                         <p className='vig-t'>En Tramite 1 Años</p>
                         <p className='vig-t'>Concentracion 4 años</p>
+                        <p className='vig-t'>Total 5 años</p>
                       </div>
                     </div>
                     <div className='ubi'>
@@ -174,17 +193,28 @@ export default class Cpdf extends Component{
                       </p>
                       <p className='t-cajas'>
                         Muestreo
-                        <img className='svg' src={boton} alt='' />
+                        <img className='svg' src={boton2} alt='' />
                       </p>
                     </div>
                   </div>
                   <div className='fe-consulta'>
                     <div className='df'>
-                      <p className='t-caja'>Fecha(s) de Consulta</p>
+                      <p className='t-caja'>
+                        Fecha(s) de Consulta
+                        <p className='t-cajas' style={{ paddingLeft: '10px' }}>
+                          1
+                        </p>
+                        <p className='t-cajas' style={{ paddingLeft: '10px' }}>
+                          2
+                        </p>
+                        <p className='t-cajas' style={{ paddingLeft: '10px' }}>
+                          3
+                        </p>
+                      </p>
                     </div>
                   </div>
                 </div>
-                <img className='footer' src={footer} alt='' />
+                <div className='footer' />
               </div>
             </div>
           </div>

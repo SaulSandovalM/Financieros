@@ -30,3 +30,8 @@
 .page-s {
   page-break-before: always;
 }
+.ims {
+  width: auto;
+  height: 60px;
+  margin-bottom: 5px;
+}
