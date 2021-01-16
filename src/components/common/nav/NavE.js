@@ -71,6 +71,16 @@ class NavE extends Component {
             </Link>
           </div>
           <div className='navbar-left'>
+            <Link to='/Contra2' className='deco'>
+              <span className='material-icons' style={{ color: 'white', marginTop: '3px', marginRight: '15px' }}>
+                receipt
+              </span>
+              <Typography className='nav-t' variant='h6' style={{ marginBottom: '15px', color: 'white' }}>
+                Contrarecibo
+              </Typography>
+            </Link>
+          </div>
+          <div className='navbar-left'>
             <div className='deco-c' onClick={this.toggleHidden.bind(this)}>
               <span className='material-icons' style={{ color: 'white', marginTop: '3px', marginRight: '15px' }}>
                 attach_money

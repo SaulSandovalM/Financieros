@@ -353,8 +353,10 @@ select {
   padding: 5px;
   color: white;
 }
-
-
+@page {
+  size: auto;
+  top: 20%;
+}
 
 
 
@@ -412,12 +414,12 @@ select {
 
 
 .container-back123 {
-  padding: 0px 20px 0px 20px;
+  padding: 0 20px 0 20px;
   background-color: #f4f4f4;
   min-height: 100vh;
 }
 .container-back-v {
-  padding: 0px 20px 0px 20px;
+  padding: 0 20px 0 20px;
   background-color: #f4f4f4;
   min-height: 91vh;
 }
