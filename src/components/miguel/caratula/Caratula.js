@@ -5,8 +5,9 @@ import boton from '../../../img/cua.png'
 import boton2 from '../../../img/cua2.png'
 import programa from '../../../img/logovale.png'
 import logo2 from '../../../img/logo.jpg'
-import footer from '../../../img/footer.png'
 import firebase from '../../../Firebase'
+import Paper from '@material-ui/core/Paper'
+import Grid from '@material-ui/core/Grid'
 
 export default class Cpdf extends Component{
   constructor (props) {
@@ -20,6 +21,7 @@ export default class Cpdf extends Component{
           done: false
         }
       ],
+      searchF: ''
     }
   }
 
@@ -31,11 +33,11 @@ export default class Cpdf extends Component{
   onCollectionUpdate = (querySnapshot) => {
     const comprometidos = []
     querySnapshot.forEach((doc) => {
-      const { partida, presupuestal, no_proyecto, importe_comp } = doc.data()
+      const { fondo, presupuestal, no_proyecto, importe_comp } = doc.data()
       comprometidos.push({
         key: doc.id,
         doc,
-        partida,
+        fondo,
         presupuestal,
         no_proyecto,
         importe_comp,
@@ -53,6 +55,21 @@ export default class Cpdf extends Component{
   render(){
     return(
       <div className='cpdf-dad2'>
+        <Grid className='grid-w'>
+          <Grid className='grid-w2' style={{ marginButtom: '10px' }}>
+            <Paper className='paper-p'>
+              lol
+            </Paper>
+          </Grid>
+        </Grid>
+        <div style={{ marginTop: '100px' }} />
+        <input
+          style={{ width: '85%' }}
+          className='field'
+          name='searchF'
+          value={this.state.searchF}
+          onChange={this.handleChange.bind(this)}
+        />
         <div className='btm-car'>
           <ReactToPrint
             trigger={() => <buttom className='b-imp'>Imprimir</buttom>}
@@ -61,7 +78,8 @@ export default class Cpdf extends Component{
         </div>
         <div ref={el => (this.holi = el)} className='page-s'>
         {this.state.comprometidos.map(comprometidos =>
-          <div style={{display: 'flex', justifyContent: 'center', flexDirection: 'column', marginTop: '80px', pageBreakBefore: 'always'}}>
+          <div style={{ display: 'flex', justifyContent: 'center', flexDirection: 'column', pageBreakBefore: 'always'}}>
+            {parseInt(this.state.searchF, 10) === comprometidos.fondo &&
             <div style={{ display: 'flex', justifyContent: 'center'}}>
               <div className='cpdf-subdad-fi'>
                 <div className='fondo-procus'>
@@ -100,7 +118,7 @@ export default class Cpdf extends Component{
                   </div>
                   <div className='num-exp'>
                     <p className='text-2'>Número de Expediente:
-                      <br />PGJH-09.1*5C.3/ {/*Numero de fondo*/} 2020
+                      <br />PGJH-09.1*5C.{comprometidos.fondo}/2020
                       <br />Número de hojas:
                       <input
                         className='hojas'
@@ -217,6 +235,7 @@ export default class Cpdf extends Component{
                 <div className='footer' />
               </div>
             </div>
+          }
           </div>
         )}
         </div>

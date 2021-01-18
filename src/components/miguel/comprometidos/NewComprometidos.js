@@ -19,7 +19,6 @@ import ListItemIcon from '@material-ui/core/ListItemIcon'
 import CurrencyFormat from 'react-currency-format'
 import Fab from '@material-ui/core/Fab'
 import firebase from '../../../Firebase'
-import Dropzone from 'react-dropzone'
 import TextField from '@material-ui/core/TextField'
 
 export default class NewComprometidos extends Component {
@@ -509,6 +508,45 @@ export default class NewComprometidos extends Component {
       this.setState({ checked: not(checked, rightChecked) })
     }
 
+    const filterData = this.state.xml.filter(
+      (xml) => {
+        return xml.folio.indexOf(this.state.search) !== -1
+      }
+    )
+
+    const array1 = this.state.right
+
+    if (Object.keys(array1).length !== 0) {
+      const totalImporteImporte = []
+      right.map(items => (
+        totalImporteImporte.push(parseFloat(items.importe))
+      ))
+      const reducerImporte = (a, b) => a + b
+      this.state.importe = totalImporteImporte.reduce(reducerImporte)
+
+      const totalImporteIva = []
+      right.map(items => (
+        totalImporteIva.push(parseFloat(items.iva))
+      ))
+      const reducerIva = (a, b) => a + b
+      this.state.iva = totalImporteIva.reduce(reducerIva)
+
+      const totalImporteIsr = []
+      right.map(items => (
+        totalImporteIsr.push(parseFloat(items.isr))
+      ))
+      const reducerIsr = (a, b) => a + b
+      this.state.isr = totalImporteIsr.reduce(reducerIsr)
+
+      const importe = parseFloat(this.state.importe)
+      const iva = parseFloat(this.state.iva)
+      const isr = parseFloat(this.state.isr)
+      const total = importe + iva - isr
+      const totalcompro = total
+      this.state.total = totalcompro
+      this.state.contra = right
+    }
+
     const customListLeft = (title, items) => (
       <div>
         <div className='recibo-container'>
@@ -583,6 +621,7 @@ export default class NewComprometidos extends Component {
             <input
               className='input-r'
               placeholder='Fecha'
+              type='date'
               id='fecha'
               required
               ref={fecha => this.inputFecha = fecha}
@@ -650,45 +689,6 @@ export default class NewComprometidos extends Component {
         </Card>
       </div>
     )
-
-    const filterData = this.state.xml.filter(
-      (xml) => {
-        return xml.folio.indexOf(this.state.search) !== -1
-      }
-    )
-
-    const array1 = this.state.right
-
-    if (Object.keys(array1).length !== 0) {
-      const totalImporteImporte = []
-      right.map(items => (
-        totalImporteImporte.push(parseFloat(items.importe))
-      ))
-      const reducerImporte = (a, b) => a + b
-      this.state.importe = totalImporteImporte.reduce(reducerImporte)
-
-      const totalImporteIva = []
-      right.map(items => (
-        totalImporteIva.push(parseFloat(items.iva))
-      ))
-      const reducerIva = (a, b) => a + b
-      this.state.iva = totalImporteIva.reduce(reducerIva)
-
-      const totalImporteIsr = []
-      right.map(items => (
-        totalImporteIsr.push(parseFloat(items.isr))
-      ))
-      const reducerIsr = (a, b) => a + b
-      this.state.isr = totalImporteIsr.reduce(reducerIsr)
-
-      const importe = parseFloat(this.state.importe)
-      const iva = parseFloat(this.state.iva)
-      const isr = parseFloat(this.state.isr)
-      const total = importe + iva - isr
-      const totalcompro = total
-      this.state.total = totalcompro
-      this.state.contra = right
-    }
 
     return (
       <div className='div-compro-container'>

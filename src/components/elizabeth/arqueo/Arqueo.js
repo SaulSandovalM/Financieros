@@ -99,7 +99,7 @@ export default class Arqueo extends Component {
       can2: this.inputCan2.value,
       can1: this.inputCan1.value,
       can0: this.inputCan0.value,
-      fecha: this.inputFecha.value,
+      fecha: this.state.fecha,
       hora: this.state.hora,
       numCheque: this.inputCheque.value,
       total: this.state.total,
@@ -116,9 +116,10 @@ export default class Arqueo extends Component {
       can2: this.inputCan2.value,
       can1: this.inputCan1.value,
       can0: this.inputCan0.value,
-      fecha: this.inputFecha.value,
+      fecha: this.state.fecha,
+      hora: this.state.hora,
       numCheque: this.inputCheque.value,
-      total: this.inputTotal.value
+      total: this.state.total,
     })
     if (params.can1000 && params.can500 && params.can200 && params.can100 &&
       params.can50 && params.can20 && params.can10 && params.can5 &&
@@ -181,6 +182,17 @@ export default class Arqueo extends Component {
     this.state.total = sumaT
     var today = new Date()
     this.state.hora = today.getHours() + ':' + [(today.getMinutes() < 10 ? '0' : '') + today.getMinutes()]
+    var dd = today.getDate()
+    var mm = today.getMonth() + 1
+    var yyyy = today.getFullYear()
+    if (dd < 10) {
+      dd = '0' + dd
+    }
+    if (mm < 10) {
+      mm = '0' + mm
+    }
+    today = yyyy + '-' + mm + '-' + dd
+    this.state.fecha = today
 
     return (
       <div className='pf-container-a' style={{ marginTop: '40px' }}>
