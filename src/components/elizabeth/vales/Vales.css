@@ -1,6 +1,5 @@
 .margin-vale {
   margin: 40px;
-  border: 2px solid;
   display: flex;
   flex-direction: column;
 }
@@ -354,11 +353,9 @@ select {
   color: white;
 }
 @page {
-  size: auto;
-  top: 20%;
+  margin-top: 25mm;
+  size: 100%;
 }
-
-
 
 
 

@@ -193,7 +193,7 @@ export default class Vales extends Component {
       <div className='container-back-v' style={{ paddingTop: '100px' }}>
         <form onSubmit={this.sendMessage.bind(this)} ref='contactForm'>
           <div className='margin-vale' ref={el => (this.vale = el)}>
-            <div className='vale-title-container'>
+            <div className='vale-title-container' style={{ marginTop: '80px' }}>
               <div className='vale-logo-container'>
                 <img className='logovale' src={logovale} alt='' />
               </div>

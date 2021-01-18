@@ -46,6 +46,12 @@ export default class Contra2 extends Component {
   }
 
   render () {
+    const filterData = this.state.fondos.filter(
+      (fondos) => {
+        return fondos.tipo_doc.indexOf('Fondo Revolvente') !== -1
+      }
+    )
+
     return (
       <div className='contrarecibo-container'>
         <TableContainer component={Paper}>
@@ -75,7 +81,7 @@ export default class Contra2 extends Component {
                 </TableCell>
               </TableRow>
             </TableHead>
-            {this.state.fondos.map(fondos =>
+            {filterData.map(fondos =>
               <TableBody>
                 <TableCell component='th' scope='row' className='table-num-f'>
                   {fondos.fondo}
