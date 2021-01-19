@@ -420,7 +420,7 @@ export default class Vales extends Component {
               sin comprobar.
             </div>
           </div>
-          {this.state.cantidad < this.state.contadorc.storyCount ?
+          {/*this.state.cantidad < this.state.contadorc.storyCount ?*/}
             <div className='boton-v'>
               <ReactToPrint
                 trigger={() => <div className='boton-vale'>Imprimir y Guardar</div>}
@@ -428,11 +428,11 @@ export default class Vales extends Component {
                 onAfterPrint={this.sendMessage.bind(this)}
               />
             </div>
-            :
+            {/*:
             <div className='boton-v'>
               <p className='no-cant'>La cantidad es mayor a la disponible</p>
             </div>
-          }
+          */}
         </form>
       </div>
     )
