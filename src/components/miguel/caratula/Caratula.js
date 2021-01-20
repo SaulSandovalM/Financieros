@@ -55,32 +55,33 @@ export default class Cpdf extends Component{
   render(){
     return(
       <div className='cpdf-dad2'>
-        <Grid className='grid-w'>
-          <Grid className='grid-w2' style={{ marginButtom: '10px' }}>
-            <Paper className='paper-p'>
-              lol
-            </Paper>
+        <div style={{ display: 'flex', justifyContent: 'center' }}>
+          <Grid className='grid-w-c'>
+            <Grid className='grid-w2' style={{ marginTop: '100px' }}>
+              <Paper className='paper-p-c'>
+                <div>
+                  <p className='sub-c-p'>Ingrese el Numero de Fondo a buscar</p>
+                  <input
+                    style={{ width: '100%' }}
+                    className='field'
+                    name='searchF'
+                    value={this.state.searchF}
+                    onChange={this.handleChange.bind(this)}
+                  />
+                </div>
+                <ReactToPrint
+                  trigger={() => <buttom className='b-imp'>Imprimir</buttom>}
+                  content={() => this.holi}
+                />
+              </Paper>
+            </Grid>
           </Grid>
-        </Grid>
-        <div style={{ marginTop: '100px' }} />
-        <input
-          style={{ width: '85%' }}
-          className='field'
-          name='searchF'
-          value={this.state.searchF}
-          onChange={this.handleChange.bind(this)}
-        />
-        <div className='btm-car'>
-          <ReactToPrint
-            trigger={() => <buttom className='b-imp'>Imprimir</buttom>}
-            content={() => this.holi}
-          />
         </div>
         <div ref={el => (this.holi = el)} className='page-s'>
         {this.state.comprometidos.map(comprometidos =>
-          <div style={{ display: 'flex', justifyContent: 'center', flexDirection: 'column', pageBreakBefore: 'always'}}>
+          <div style={{ display: 'flex', justifyContent: 'center', flexDirection: 'column', pageBreakBefore: 'always' }}>
             {parseInt(this.state.searchF, 10) === comprometidos.fondo &&
-            <div style={{ display: 'flex', justifyContent: 'center'}}>
+            <div style={{ display: 'flex', justifyContent: 'center', marginTop: '50px' }}>
               <div className='cpdf-subdad-fi'>
                 <div className='fondo-procus'>
                   <img className='ims' src={programa} alt='' />
@@ -134,8 +135,7 @@ export default class Cpdf extends Component{
                   <p className='cons'>
                     <p className='negritas'>Fundamento legal</p>
                     <br />
-                    <br />
-                    Costitución Politíca de los Estados Unidos Mexicanos, artículo
+                    <p className='t-cara'>Costitución Politíca de los Estados Unidos Mexicanos, artículo
                     6 fracción I y II, 8° Costitución politica del Estados de Hidalgo,
                     artículo 4 ter 89, 90 y 91. Ley Organica de Ministerio Público
                     del Estado de Hidalgo, artículo 17 y 27 fracciones I, 36.
@@ -145,7 +145,7 @@ export default class Cpdf extends Component{
                     Responsabilidades de los Servidores Públicos del Estado de Hidalgo,
                     artículos 47. Ley de Archivos del Estado de Hidalgo artículos
                     2, 3, 4, fracción X, 9 y 31. Reglamento de la Ley de los Archivos
-                    del Estado de Hidalgo artículo 2 fracción I.
+                    del Estado de Hidalgo artículo 2 fracción I.</p>
                   </p>
                 </div>
                 <div className='cajas'>
