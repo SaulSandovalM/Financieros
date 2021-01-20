@@ -9,6 +9,7 @@ import TableContainer from '@material-ui/core/TableContainer'
 import TableHead from '@material-ui/core/TableHead'
 import TableRow from '@material-ui/core/TableRow'
 import Paper from '@material-ui/core/Paper'
+import Button from '@material-ui/core/Button'
 
 export default class Contra2 extends Component {
   constructor(props) {
@@ -16,7 +17,8 @@ export default class Contra2 extends Component {
     this.ref = firebase.firestore().collection('fondos').orderBy('fondo', 'desc')
     this.unsubscribe = null
     this.state = {
-      fondos: []
+      fondos: [],
+      searchF: ''
     }
   }
 
@@ -46,6 +48,10 @@ export default class Contra2 extends Component {
     this.unsubscribe = this.ref.onSnapshot(this.onCollectionUpdate)
   }
 
+  handleChange (event) {
+    this.setState({ [event.target.name]: event.target.value })
+  }
+
   render () {
     const filterData = this.state.fondos.filter(
       (fondos) => {
@@ -56,6 +62,15 @@ export default class Contra2 extends Component {
     return (
       <div className='contrarecibo-container'>
         <TableContainer component={Paper}>
+          <div style={{ padding: '20px' }}>
+            <p className='sub-c-p'>Ingrese el Numero de Cheque</p>
+            <input
+              className='field'
+              name='searchF'
+              value={this.state.searchF}
+              onChange={this.handleChange.bind(this)}
+            />
+          </div>
           <Table size='small'>
             <TableHead>
               <TableRow>
@@ -81,7 +96,7 @@ export default class Contra2 extends Component {
                   <b>Num. Cheque</b>
                 </TableCell>
                 <TableCell className='table-same'>
-                  <b>Estatus</b>
+                  <b>Actualizar</b>
                 </TableCell>
               </TableRow>
             </TableHead>
@@ -114,11 +129,13 @@ export default class Contra2 extends Component {
                   {fondos.fechaDepo}
                 </TableCell>
                 <TableCell component='th' scope='row' className='table-same'>
-                  {fondos.fechaContra &&
-                    <p style={{ margin: '0' }}>
-                      Contrarecibo Agregado
-                    </p>
-                  }
+                <Button
+                  variant='contained'
+                  color='primary'
+                  onClick={this.update}
+                >
+                  Agregar
+                </Button>
                 </TableCell>
               </TableBody>
             )}

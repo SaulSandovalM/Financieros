@@ -54,8 +54,8 @@ export default class EdicionVale extends Component {
       var lista = []
       snap.forEach((child) => {
         lista.push({
-          vale: child.val().vale.toString(),
-          cheque: child.val().cheque,
+          vales: child.val().vale,
+          cheques: child.val().cheque,
           cantidad: child.val().cantidad,
           cantidadc: child.val().cantidadc,
           cantidadr: child.val().cantidadr,
@@ -74,7 +74,6 @@ export default class EdicionVale extends Component {
           done: child.val().done,
           id: child.key
         })
-        console.log(lista)
       })
       this.setState({
         lista: lista

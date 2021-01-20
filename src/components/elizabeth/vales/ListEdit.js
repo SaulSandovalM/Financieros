@@ -33,7 +33,7 @@ export default class ListEdit extends Component {
   render () {
     const filterData = this.state.vales.filter(
       (vales) => {
-        return vales.area.indexOf(this.state.search) !== -1
+        return vales.vale.indexOf(this.state.search) !== -1
       }
     )
 
