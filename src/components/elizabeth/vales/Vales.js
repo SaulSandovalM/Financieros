@@ -317,6 +317,14 @@ export default class Vales extends Component {
                       <option id='area'>Centro de Operación Estratégica</option>
                       <option id='area'>Unidad Especializada en el Combate al Secuestro</option>
                       <option id='area'>Dirección General de Administración y Finanzas</option>
+                      <option id='area'> - Dirección de Planeacion</option>
+                      <option id='area'> - Dirección de Control y Validación</option>
+                      <option id='area'> - Dirección de Informatica, Estadistica y Telecomunicaciones</option>
+                      <option id='area'> - Dirección de Recursos Materiales</option>
+                      <option id='area'> - Dirección de Recursos Humanos</option>
+                      <option id='area'> - Dirección de Enlace FASP</option>
+                      <option id='area'> - Dirección de Cordinacion de Calidad</option>
+                      <option id='area'> - Dirección de Archivo</option>
                       <option id='area'>Fiscalía Especializada para la atención de los Delitos de Trata de Personas</option>
                       <option id='area'>Subprocuraduría de Procedimientos Penales Región Poniente</option>
                       <option id='area'>Centro de Atención Temprana Poniente</option>
