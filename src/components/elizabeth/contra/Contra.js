@@ -77,6 +77,9 @@ export default class Contra2 extends Component {
                   <b>Fecha de Pago</b>
                 </TableCell>
                 <TableCell className='table-same'>
+                  <b>Num. Cheque</b>
+                </TableCell>
+                <TableCell className='table-same'>
                   <b>Estatus</b>
                 </TableCell>
               </TableRow>

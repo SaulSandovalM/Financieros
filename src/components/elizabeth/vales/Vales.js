@@ -303,7 +303,7 @@ export default class Vales extends Component {
                     <select
                       className='input-w' required
                       ref={area => this.inputArea = area}>
-                      <option id='area'>Procuraduría General de Justicia</option>
+                      <option id='area'>Despacho del Procurador</option>
                       <option id='area'>Subprocuraduría de Procedimientos Penales Región Oriente</option>
                       <option id='area'>Fiscalía Especializada para la atención de Delitos cometidos contra la Libertad de Expresión</option>
                       <option id='area'>Periodistas y Personas defensoras de los Derechos Humanos</option>
@@ -323,8 +323,9 @@ export default class Vales extends Component {
                       <option id='area'> - Dirección de Recursos Materiales</option>
                       <option id='area'> - Dirección de Recursos Humanos</option>
                       <option id='area'> - Dirección de Enlace FASP</option>
-                      <option id='area'> - Dirección de Cordinacion de Calidad</option>
+                      <option id='area'> - Dirección de Coordinacion de Calidad</option>
                       <option id='area'> - Dirección de Archivo</option>
+                      <option id='area'> - Oficialia de Partes</option>
                       <option id='area'>Fiscalía Especializada para la atención de los Delitos de Trata de Personas</option>
                       <option id='area'>Subprocuraduría de Procedimientos Penales Región Poniente</option>
                       <option id='area'>Centro de Atención Temprana Poniente</option>

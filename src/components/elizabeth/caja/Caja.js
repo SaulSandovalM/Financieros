@@ -14,7 +14,7 @@ import Paper from '@material-ui/core/Paper';
 export default class Caja extends Component {
   constructor (props) {
     super(props)
-    this.ref = firebase.firestore().collection('caja')
+    this.ref = firebase.firestore().collection('caja').orderBy('no', 'asc')
     this.unsubscribe = null
     this.state = {
       contador: {},
@@ -126,7 +126,7 @@ export default class Caja extends Component {
                 {this.state.movimientos.map(movimientos =>
                   <TableBody>
                     {
-                      (this.state.buscador === movimientos.fecha || today === movimientos.fecha) ?
+                      (this.state.buscador === movimientos.fecha) ?
                         <TableRow>
                           <TableCell className='table-caja'>{movimientos.title} - {movimientos.no} - {movimientos.personaR}</TableCell>
                           <TableCell className='table-caja'>{movimientos.fecha}</TableCell>
