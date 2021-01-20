@@ -233,7 +233,6 @@ export default class Arqueo extends Component {
                   </div>
                   <div className='arqueo-content-pop'>
                     <div className='table-arqueo-pop'>
-
                       <div className='title-arqueo'>
                         <p className='p-mar-arqueo'><b>DENOMINACION</b></p>
                       </div>
@@ -385,7 +384,6 @@ export default class Arqueo extends Component {
                       </div>
                     </div>
                     <div className='data-arqueo-pop'>
-
                       <div className='title-arqueo'>
                         <p className='p-mar-arqueo'>5</p>
                       </div>
@@ -504,7 +502,6 @@ export default class Arqueo extends Component {
             </div>
             <div className='table-arqueo-search'>
               <div className='table-arqueo-content'>
-
                 <div className='title-arqueo-se'>
                   <p className='p-mar-arqueo'><b>1000</b></p>
                 </div>
@@ -538,7 +535,6 @@ export default class Arqueo extends Component {
                 <div className='title-arqueo-se'>
                   <p className='p-mar-arqueo'><b>0.5</b></p>
                 </div>
-
               </div>
             </div>
             {

@@ -105,6 +105,13 @@ class NavE extends Component {
                 </Link>
               </div>
               <div className='subnav'>
+                <Link to='/EdicionVale' className='deco'>
+                  <Typography className='nav-t' style={{ marginBottom: '15px', color: 'white' }}>
+                    • Editar Vales
+                  </Typography>
+                </Link>
+              </div>
+              <div className='subnav'>
                 <Link to='/ListValesA' className='deco'>
                   <Typography className='nav-t' style={{ marginBottom: '15px', color: 'white' }}>
                     • Autorizados

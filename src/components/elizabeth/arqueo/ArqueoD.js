@@ -161,9 +161,6 @@ export default class ArqueoD extends Component {
     let filteredDates = this.state.listay.filter(function(date){
       return date.fecha === preDate && date.hora < '23:59' && date.hora > '17:00'
     })
-    console.log(yesterdayF)
-    console.log(today3)
-    console.log(filteredDates)
 
     return (
       <div>
@@ -194,10 +191,10 @@ export default class ArqueoD extends Component {
           </div>
           <div className='tabla-arq'>
             <div className='tb-1'>
-              <p className='tb-n'></p>
+              <p className='tb-n' />
             </div>
             <div className='tb-1'>
-              <p className='tb-n'></p>
+              <p className='tb-n' />
             </div>
             <div className='tb-1'>
               {
@@ -214,13 +211,13 @@ export default class ArqueoD extends Component {
               }
             </div>
             <div className='tb-1'>
-              <p className='tb-n'></p>
+              <p className='tb-n' />
             </div>
             <div className='tb-2'>
               <p className='tb-n'>{yesterday}</p>
             </div>
             <div className='tb-3'>
-              <p className='tb-n'></p>
+              <p className='tb-n' />
             </div>
           </div>
           <div>
@@ -230,10 +227,10 @@ export default class ArqueoD extends Component {
           </div>
           <div className='tabla-arq'>
             <div className='tb-1'>
-              <p className='tb-n'></p>
+              <p className='tb-n' />
             </div>
             <div className='tb-1'>
-              <p className='tb-n'></p>
+              <p className='tb-n' />
             </div>
             <div className='tb-1'>
               {
@@ -252,13 +249,13 @@ export default class ArqueoD extends Component {
               }
             </div>
             <div className='tb-1'>
-              <p className='tb-n'></p>
+              <p className='tb-n' />
             </div>
             <div className='tb-2'>
               <p className='tb-n'>{today}</p>
             </div>
             <div className='tb-3'>
-              <p className='tb-n'></p>
+              <p className='tb-n' />
             </div>
           </div>
           <div className='arqueo-content'>

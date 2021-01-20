@@ -42,10 +42,9 @@ export default class ListArchivosV extends Component {
       filex: '',
       filef: '',
       filer: '',
-      filexml: '',
+      filexml: '0',
       filefactura: '',
-      filerecibo: '',
-      prueba: ''
+      filerecibo: '0'
     }
   }
 
