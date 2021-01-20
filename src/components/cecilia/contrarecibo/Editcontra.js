@@ -169,7 +169,6 @@ export default class Edit extends Component {
   }
 
   render () {
-    console.log(this.state.realizo)
     return (
       <form onSubmit={this.onSubmit} className='editcontra-container'>
         <div style={{marginTop: '60px'}}>

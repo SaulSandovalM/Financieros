@@ -32,12 +32,8 @@ export default class ListAuto extends Component {
           <Table>
             <TableHead>
               <TableRow>
-                <TableCell className='table-v-num2'>
-                  <b>Vale</b>
-                </TableCell>
-                <TableCell className='table-v-num2'>
-                  <b>Cheque</b>
-                </TableCell>
+                <TableCell className='table-v-num2'><b>Vale</b></TableCell>
+                <TableCell className='table-v-num2'><b>Cheque</b></TableCell>
                 <TableCell className='table-v-num'><b>Autorizado</b></TableCell>
                 <TableCell className='table-v-num'><b>Comprobado</b></TableCell>
                 <TableCell className='table-v-num'><b>Rein/Rem</b></TableCell>
