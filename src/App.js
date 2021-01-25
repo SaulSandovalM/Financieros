@@ -23,7 +23,7 @@ import CargaC from './components/cecilia/cargacontra/CargaC'
 import Caja from './components/elizabeth/caja/Caja'
 import Cheques from './components/elizabeth/cheques/Cheques'
 import Vales from './components/elizabeth/vales/Vales'
-import EdicionVale from './components/elizabeth/vales/EdicionVale'
+import EditVale from './components/elizabeth/vales/EditVale'
 import ListValesA from './components/elizabeth/listavales/ListValesA' // Autorizados
 import ListValesP from './components/elizabeth/listavales/ListValesP' // Vales Pendientes de Autorizacion Nayra
 import ListValesN from './components/elizabeth/listavales/ListValesN' // Pendientes de numero de cheques
@@ -176,8 +176,8 @@ function App (props) {
       />
       <ProtectedRoute
         exact
-        path='/EdicionVale'
-        component={EdicionVale}
+        path='/EditVale'
+        component={EditVale}
         isAuthenticated={isAuthenticated}
         isVerifying={isVerifying}
       />

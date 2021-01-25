@@ -114,6 +114,7 @@ export default class Vales extends Component {
   sendMessage () {
     const params = {
       vale: this.state.contador.storyCount,
+      numVale: String(this.state.contador.storyCount),
       cheque: this.inputCheque.value,
       cantidad: this.inputCantidad.value,
       cantidadc: this.inputCantidadc.value,
@@ -151,7 +152,8 @@ export default class Vales extends Component {
     if (params.vale && params.cheque && params.cantidad && params.cantidadc &&
         params.cantidadr && params.concepto && params.oficioS && params.area &&
         params.turno && params.factura && params.recibos && params.sc &&
-        params.autorizo && params.personaR && params.estatus && params.fecha) {
+        params.autorizo && params.personaR && params.estatus && params.fecha &&
+        params.numVale) {
       var f = parseInt(params.cantidadc)
       const statsRef = firebase.firestore().collection('caja').doc('--stats--')
       const increment = firebase.firestore.FieldValue.increment(-f)
