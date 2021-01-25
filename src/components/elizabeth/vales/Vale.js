@@ -1,9 +1,10 @@
-import React, { useState } from 'react'
+import React, { useState, useRef } from 'react'
 import ValeDataService from './ValeService'
 import './Vales.css'
 import logovale from '../../../img/logovale.png'
 import logoh from '../../../img/logoh.png'
 import Button from '@material-ui/core/Button'
+import { useReactToPrint } from 'react-to-print'
 
 const Vale = (props) => {
   const initialValeState = {
@@ -61,13 +62,17 @@ const Vale = (props) => {
         console.log(e)
       })
   }
+  const componentRef = useRef()
+  const handlePrint = useReactToPrint({
+    content: () => componentRef.current
+  })
 
   return (
     <div>
       {currentVale ? (
         <div className='edit-form'>
           <form>
-            <div className='margin-vale'>
+            <div className='margin-vale' ref={componentRef}>
               <div className='vale-title-container' style={{ marginTop: '80px' }}>
                 <div className='vale-logo-container'>
                   <img className='logovale' src={logovale} alt='' />
@@ -321,6 +326,14 @@ const Vale = (props) => {
               onClick={updateVale}
             >
               Actualizar
+            </Button>
+            <Button
+              type='submit'
+              variant='contained'
+              color='primary'
+              onClick={handlePrint}
+            >
+              Imprimir
             </Button>
           </div>
         </div>
