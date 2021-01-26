@@ -258,7 +258,7 @@ export default class Trans extends Component {
     return (
       <div className='pf-container'>
         <div className='p-container-fr' style={{ paddingTop: '60px' }}>
-          {/*<div className='p-margin-row'>
+          <div className='p-margin-row'>
             <p className='p-title-size'>
               - Agrega el documento de solicitud/autorización para la reducción
             </p>
@@ -277,14 +277,14 @@ export default class Trans extends Component {
                 </div>
               }
             </div>
-          </div>*/}
+          </div>
         </div>
         <div>
           <div>
             <div className='p-container-fondor'>
               <div className='p-margin-fr'>
                 <p className='p-title-size-fr'>
-                  - Ingresa los datos correspondientes para hacer la reducción
+                  - Ingresa los datos correspondientes para hacer la ampliación/reducción
                 </p>
               </div>
               <div className='cale-f'>
