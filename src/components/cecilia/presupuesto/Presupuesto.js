@@ -35,23 +35,24 @@ export default class Excel extends Component {
           const rubro = data[i][4]
           const tg = data[i][5]
           const ogasto = data[i][6]
-          const f = data[i][8]
-          const fu = data[i][9]
-          const sf = data[i][10]
-          const eje = data[i][11]
-          const s = data[i][12]
-          const prog = data[i][13]
-          const sp = data[i][14]
-          const obj = data[i][15]
-          const proy = data[i][16]
-          const est = data[i][17]
-          const obra = data[i][18]
-          const ben = data[i][19]
-          const eg = data[i][20]
-          const mi = data[i][21]
-          const pr = data[i][22]
-          const ped = data[i][23]
-          const itrans = data[i][24]
+          const f = data[i][7]
+          const fu = data[i][8]
+          const sf = data[i][9]
+          const eje = data[i][10]
+          const s = data[i][11]
+          const prog = data[i][12]
+          const sp = data[i][13]
+          const obj = data[i][14]
+          const proy = data[i][15]
+          const est = data[i][16]
+          const obra = data[i][17]
+          const ben = data[i][18]
+          const eg = data[i][19]
+          const mi = data[i][20]
+          const pr = data[i][21]
+          const pd = data[i][22]
+          const itrans = data[i][23]
+          const min = data[i][24]
           const igest = data[i][25]
           const la = data[i][26]
           const ods = data[i][27]
@@ -88,13 +89,13 @@ export default class Excel extends Component {
           const ampliacion = data[i][58]
           const reduccion = data[i][59]
           const trasferencia = data[i][60]
-          const npro = data[i][7]
+          const npro = data[i][61]
           const presupuesto = {
             'año': año, 'rm': rm, 'ur': ur, 'up': up, 'rubro': rubro, 'tg': tg,
-            'ogasto': ogasto, 'npro': npro, 'f': f, 'fu': fu, 'sf': sf, 'eje': eje,
+            'ogasto': ogasto, 'f': f, 'fu': fu, 'sf': sf, 'eje': eje,
             's': s, 'prog': prog, 'sp': sp, 'obj': obj, 'proy': proy, 'est': est,
-            'obra': obra, 'ben': ben, 'eg': eg, 'mi': mi, 'pr': pr, 'ped': ped,
-            'itrans': itrans, 'igest': igest, 'la': la, 'ods': ods, 'et': et,
+            'obra': obra, 'ben': ben, 'eg': eg, 'mi': mi, 'pr': pr, 'pd': pd,
+            'itrans': itrans, 'min': min, 'igest': igest, 'la': la, 'ods': ods, 'et': et,
             'ff': ff, 'of': of, 'np': np, 'cpa': cpa, 'ene': parseInt(ene),
             'gasene': parseInt(gasene), 'feb': parseInt(feb), 'gasfeb': parseInt(gasfeb),
             'mar': parseInt(mar), 'gasmar': parseInt(gasmar), 'abr': parseInt(abr),
@@ -104,7 +105,8 @@ export default class Excel extends Component {
             'sep': parseInt(sep), 'gassep': parseInt(gassep), 'oct': parseInt(oct),
             'gasoct': parseInt(gasoct), 'nov': parseInt(nov), 'gasnov': parseInt(gasnov),
             'dic': parseInt(dic), 'gasdic': parseInt(gasdic), 'total': parseInt(total),
-            'ampliacion': ampliacion, 'reduccion': reduccion, 'trasferencia': trasferencia
+            'ampliacion': ampliacion, 'reduccion': reduccion, 'trasferencia': trasferencia,
+            'npro': npro
           }
           userList.push(presupuesto)
           fetch('https://financieros-78cb0.firebaseio.com/presupuesto.json', {
