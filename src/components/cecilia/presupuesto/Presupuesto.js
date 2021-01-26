@@ -88,7 +88,7 @@ export default class Excel extends Component {
           const total = data[i][57]
           const ampliacion = data[i][58]
           const reduccion = data[i][59]
-          const trasferencia = data[i][60]
+          const transferencia = data[i][60]
           const npro = data[i][61]
           const presupuesto = {
             'año': año, 'rm': rm, 'ur': ur, 'up': up, 'rubro': rubro, 'tg': tg,
@@ -105,7 +105,7 @@ export default class Excel extends Component {
             'sep': parseInt(sep), 'gassep': parseInt(gassep), 'oct': parseInt(oct),
             'gasoct': parseInt(gasoct), 'nov': parseInt(nov), 'gasnov': parseInt(gasnov),
             'dic': parseInt(dic), 'gasdic': parseInt(gasdic), 'total': parseInt(total),
-            'ampliacion': ampliacion, 'reduccion': reduccion, 'trasferencia': trasferencia,
+            'ampliacion': ampliacion, 'reduccion': reduccion, 'transferencia': transferencia,
             'npro': npro
           }
           userList.push(presupuesto)
