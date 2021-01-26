@@ -82,6 +82,13 @@ class Nav extends Component {
                   </Typography>
                 </Link>
               </div>
+              <div className='subnav'>
+                <Link to='/Trans' className='deco'>
+                  <Typography className='nav-t' style={{ marginBottom: '15px', color: 'white' }}>
+                    • Transferencia Saldo
+                  </Typography>
+                </Link>
+              </div>
             </div>}
           <div className='navbar-left mb'>
             <Link to='/FondoRevolvente' className='deco'>

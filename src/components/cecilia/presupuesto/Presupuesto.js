@@ -35,7 +35,6 @@ export default class Excel extends Component {
           const rubro = data[i][4]
           const tg = data[i][5]
           const ogasto = data[i][6]
-          const npro = data[i][7]
           const f = data[i][8]
           const fu = data[i][9]
           const sf = data[i][10]
@@ -89,6 +88,7 @@ export default class Excel extends Component {
           const ampliacion = data[i][58]
           const reduccion = data[i][59]
           const trasferencia = data[i][60]
+          const npro = data[i][7]
           const presupuesto = {
             'año': año, 'rm': rm, 'ur': ur, 'up': up, 'rubro': rubro, 'tg': tg,
             'ogasto': ogasto, 'npro': npro, 'f': f, 'fu': fu, 'sf': sf, 'eje': eje,

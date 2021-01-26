@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import './Reduccion.css'
+import './Trans.css'
 import firebase from '../../../Firebase'
 import ListComponent from './ListComponent'
 import ListReduccion from './ListReduccion'
@@ -8,9 +8,8 @@ import Alert from '@material-ui/lab/Alert'
 import PropTypes from 'prop-types'
 import MaskedInput from 'react-text-mask'
 import NumberFormat from 'react-number-format'
-import CurrencyFormat from 'react-currency-format'
 
-export default class Reduccion extends Component {
+export default class Trans extends Component {
   constructor () {
     super()
     this.state = {
@@ -41,18 +40,18 @@ export default class Reduccion extends Component {
       search: '',
       search2: '',
       search3: '',
-      impoene: 0,
-      impofeb: 0,
-      impomar: 0,
-      impoabr: 0,
-      impomay: 0,
-      impojun: 0,
-      impojul: 0,
-      impoago: 0,
-      imposep: 0,
-      impooct: 0,
-      imponov: 0,
-      impodic: 0,
+      impoene: '',
+      impofeb: '',
+      impomar: '',
+      impoabr: '',
+      impomay: '',
+      impojun: '',
+      impojul: '',
+      impoago: '',
+      imposep: '',
+      impooct: '',
+      imponov: '',
+      impodic: '',
       oficio: ''
     }
   }
@@ -253,35 +252,16 @@ export default class Reduccion extends Component {
     }
     firebase.database().ref().update(updates)
     alert('Tu solicitud fue enviada.')
-    // window.location.reload(false);
   }
 
   render () {
     return (
       <div className='pf-container'>
-        <div className='p-container-fr' style={{ marginTop: '60px' }}>
-          <div className='p-margin-row'>
+        <div className='p-container-fr' style={{ paddingTop: '60px' }}>
+          {/*<div className='p-margin-row'>
             <p className='p-title-size'>
               - Agrega el documento de solicitud/autorización para la reducción
             </p>
-            <div>
-              <p className='p-banco'><b>SUMATORIA</b></p>
-              <p className='cantidad-add-banco'>
-                MXN
-                <CurrencyFormat
-                  value={
-                    parseInt(this.state.impoene) + parseInt(this.state.impofeb) +
-                    parseInt(this.state.impomar) + parseInt(this.state.impoabr) +
-                    parseInt(this.state.impomay) + parseInt(this.state.impojun) +
-                    parseInt(this.state.impojul) + parseInt(this.state.impoago) +
-                    parseInt(this.state.imposep) + parseInt(this.state.impooct) +
-                    parseInt(this.state.imponov) + parseInt(this.state.impodic)}
-                  displayType='text'
-                  thousandSeparator
-                  prefix=' $'
-                />
-              </p>
-            </div>
           </div>
           <div className='p-row'>
             <div className='p-container-ifra' style={{ marginRight: '20px' }}>
@@ -297,7 +277,7 @@ export default class Reduccion extends Component {
                 </div>
               }
             </div>
-          </div>
+          </div>*/}
         </div>
         <div>
           <div>

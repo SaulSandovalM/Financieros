@@ -644,7 +644,7 @@ export default class NewComprometidos extends Component {
                   <ListItemText className='list-align' primary={'$ ' + value.importe} />
                   <ListItemText className='list-align' primary={'$ ' + value.iva} />
                   <ListItemText className='list-align' primary={'$ ' + value.isr} />
-                  <ListItemText className='list-align' primary={value.id} />
+                  <ListItemText className='list-align' primary={value.fecha} />
                 </ListItem>
               )
             })}
@@ -730,7 +730,6 @@ export default class NewComprometidos extends Component {
             <Paper className='paper-content'>
               <TableHead>
                 <TableRow>
-                  <TableCell className='border-icon' />
                   <TableCell className='border-table2'>
                     <b>Partida</b>
                   </TableCell>

@@ -24,7 +24,7 @@ export default class Contra extends Component {
   onCollectionUpdate = (querySnapshot) => {
     const fondos = []
     querySnapshot.forEach((doc) => {
-      const { fondo, tipo_doc, importe, beneficiario, fechaContra, numContra, fechaDepo } = doc.data()
+      const { fondo, tipo_doc, importe, beneficiario, fechaContra, numContra, fechaDepo, numCheque } = doc.data()
       fondos.push({
         key: doc.id,
         doc,
@@ -34,7 +34,8 @@ export default class Contra extends Component {
         beneficiario,
         fechaContra,
         numContra,
-        fechaDepo
+        fechaDepo,
+        numCheque
       })
     })
     this.setState({
@@ -72,6 +73,9 @@ export default class Contra extends Component {
                   <b>Fecha de Pago</b>
                 </TableCell>
                 <TableCell className='table-same'>
+                  <b># Cheque</b>
+                </TableCell>
+                <TableCell className='table-same'>
                   <b>Estatus</b>
                 </TableCell>
                 <TableCell className='table-same'>
@@ -103,6 +107,9 @@ export default class Contra extends Component {
                 </TableCell>
                 <TableCell component='th' scope='row' className='table-same'>
                   {fondos.fechaDepo}
+                </TableCell>
+                <TableCell component='th' scope='row' className='table-same'>
+                  {fondos.numCheque}
                 </TableCell>
                 <TableCell component='th' scope='row' className='table-same'>
                   {fondos.fechaContra &&
