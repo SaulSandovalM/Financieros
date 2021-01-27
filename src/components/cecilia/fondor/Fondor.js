@@ -41,7 +41,31 @@ export default class Fondor extends Component {
       presupuesto: [],
       search: '',
       search2: '',
-      search3: ''
+      search3: '',
+      impoene: 0,
+      impofeb: 0,
+      impomar: 0,
+      impoabr: 0,
+      impomay: 0,
+      impojun: 0,
+      impojul: 0,
+      impoago: 0,
+      imposep: 0,
+      impooct: 0,
+      imponov: 0,
+      impodic: 0,
+      gasene: 0,
+      gasfeb: 0,
+      gasmar: 0,
+      gasabr: 0,
+      gasmay: 0,
+      gasjun: 0,
+      gasjul: 0,
+      gasago: 0,
+      gassep: 0,
+      gasoct: 0,
+      gasnov: 0,
+      gasdic: 0
     }
   }
 
@@ -190,10 +214,6 @@ export default class Fondor extends Component {
     })
   }
 
-  resetForm () {
-    this.refs.contactForm.reset()
-  }
-
   handleChange (event) {
     this.setState({ [event.target.name]: event.target.value })
   }
@@ -234,35 +254,35 @@ export default class Fondor extends Component {
       of: item.of,
       np: item.np,
       cpa: item.cpa,
-      ene: parseInt(item.ene) - parseInt(this.state.impoene),
+      ene: item.ene - parseInt(this.state.impoene),
       gasene: item.gasene,
-      feb: parseInt(item.feb) - parseInt(this.state.impofeb),
+      feb: item.feb - parseInt(this.state.impofeb),
       gasfeb: item.gasfeb,
-      mar: parseInt(item.mar) - parseInt(this.state.impomar),
+      mar: item.mar - parseInt(this.state.impomar),
       gasmar: item.gasmar,
-      abr: parseInt(item.abr) - parseInt(this.state.impoabr),
+      abr: item.abr - parseInt(this.state.impoabr),
       gasabr: item.gasabr,
-      may: parseInt(item.may) - parseInt(this.state.impomay),
+      may: item.may - parseInt(this.state.impomay),
       gasmay: item.gasmay,
-      jun: parseInt(item.jun) - parseInt(this.state.impojun),
+      jun: item.jun - parseInt(this.state.impojun),
       gasjun: item.gasjun,
-      jul: parseInt(item.jul) - parseInt(this.state.impojul),
+      jul: item.jul - parseInt(this.state.impojul),
       gasjul: item.gasjul,
-      ago: parseInt(item.ago) - parseInt(this.state.impoago),
+      ago: item.ago - parseInt(this.state.impoago),
       gasago: item.gasago,
-      sep: parseInt(item.sep) - parseInt(this.state.imposep),
+      sep: item.sep - parseInt(this.state.imposep),
       gassep: item.gassep,
-      oct: parseInt(item.oct) - parseInt(this.state.impooct),
+      oct: item.oct - parseInt(this.state.impooct),
       gasoct: item.gasoct,
-      nov: parseInt(item.nov) - parseInt(this.state.imponov),
+      nov: item.nov - parseInt(this.state.imponov),
       gasnov: item.gasnov,
-      dic: parseInt(item.dic) - parseInt(this.state.impodic),
+      dic: item.dic - parseInt(this.state.impodic),
       gasdic: item.gasdic,
       total: item.total,
       ampliacion: item.ampliacion,
       reduccion: item.reduccion,
       transferencia: item.transferencia,
-      oficio: item.oficio,
+      oficio: this.state.archivo,
       estatus: 'FR',
       numContra: this.state.numContra
     }
@@ -273,7 +293,6 @@ export default class Fondor extends Component {
       + parseInt(this.state.impojul) + parseInt(this.state.impoago) + parseInt(this.state.imposep)
       + parseInt(this.state.impooct) + parseInt(this.state.imponov) + parseInt(this.state.impodic)
     var f = sum
-    console.log(f)
     const statsRef = firebase.firestore().collection('banco').doc('--stats--')
     const increment = firebase.firestore.FieldValue.increment(f)
     const batch = firebase.firestore().batch()
@@ -338,6 +357,7 @@ export default class Fondor extends Component {
                     id='impoene'
                     name='impoene'
                     required
+                    defaultValue={this.state.gasene}
                     InputProps={{
                       inputComponent: NumberFormatCustom
                     }}
@@ -351,6 +371,7 @@ export default class Fondor extends Component {
                     id='impofeb'
                     name='impofeb'
                     required
+                    defaultValue={this.state.gasfeb}
                     InputProps={{
                       inputComponent: NumberFormatCustom
                     }}
@@ -364,6 +385,7 @@ export default class Fondor extends Component {
                     id='impomar'
                     name='impomar'
                     required
+                    defaultValue={this.state.gasmar}
                     InputProps={{
                       inputComponent: NumberFormatCustom
                     }}
@@ -377,6 +399,7 @@ export default class Fondor extends Component {
                     id='impoabr'
                     name='impoabr'
                     required
+                    defaultValue={this.state.gasabr}
                     InputProps={{
                       inputComponent: NumberFormatCustom
                     }}
@@ -390,6 +413,7 @@ export default class Fondor extends Component {
                     id='impomay'
                     name='impomay'
                     required
+                    defaultValue={this.state.gasmay}
                     InputProps={{
                       inputComponent: NumberFormatCustom
                     }}
@@ -403,6 +427,7 @@ export default class Fondor extends Component {
                     id='impojun'
                     name='impojun'
                     required
+                    defaultValue={this.state.gasjun}
                     InputProps={{
                       inputComponent: NumberFormatCustom
                     }}
@@ -416,6 +441,7 @@ export default class Fondor extends Component {
                     id='impojul'
                     name='impojul'
                     required
+                    defaultValue={this.state.gasjul}
                     InputProps={{
                       inputComponent: NumberFormatCustom
                     }}
@@ -430,6 +456,7 @@ export default class Fondor extends Component {
                     id='impoago'
                     name='impoago'
                     required
+                    defaultValue={this.state.gasago}
                     InputProps={{
                       inputComponent: NumberFormatCustom
                     }}
@@ -443,6 +470,7 @@ export default class Fondor extends Component {
                     id='imposep'
                     name='imposep'
                     required
+                    defaultValue={this.state.gassep}
                     InputProps={{
                       inputComponent: NumberFormatCustom
                     }}
@@ -456,6 +484,7 @@ export default class Fondor extends Component {
                     id='impooct'
                     name='impooct'
                     required
+                    defaultValue={this.state.gasoct}
                     InputProps={{
                       inputComponent: NumberFormatCustom
                     }}
@@ -469,6 +498,7 @@ export default class Fondor extends Component {
                     id='imponov'
                     name='imponov'
                     required
+                    defaultValue={this.state.gasnov}
                     InputProps={{
                       inputComponent: NumberFormatCustom
                     }}
@@ -482,6 +512,7 @@ export default class Fondor extends Component {
                     id='impodic'
                     name='impodic'
                     required
+                    defaultValue={this.state.gasdic}
                     InputProps={{
                       inputComponent: NumberFormatCustom
                     }}
