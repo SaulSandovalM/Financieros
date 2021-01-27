@@ -4,6 +4,9 @@ import './Vales.css'
 import ReactToPrint from 'react-to-print'
 import logovale from '../../../img/logovale.png'
 import logoh from '../../../img/logoh.png'
+import Paper from '@material-ui/core/Paper'
+import Grid from '@material-ui/core/Grid'
+import Button from '@material-ui/core/Button'
 
 export default class Vales extends Component {
   constructor (props) {
@@ -38,7 +41,9 @@ export default class Vales extends Component {
       estatus: 'Pendiente',
       contador: {},
       contadorc: {},
-      isHidden: true
+      isHidden: true,
+      searchF: '',
+      fechaP: ''
     }
   }
 
@@ -192,8 +197,36 @@ export default class Vales extends Component {
     this.state.fecha = today2
 
     return (
-      <div className='container-back-v' style={{ paddingTop: '30px' }}>
+      <div className='container-back-v'>
         <form onSubmit={this.sendMessage.bind(this)} ref='contactForm'>
+          <div style={{ display: 'flex', justifyContent: 'center' }}>
+            <Grid className='grid-w-c'>
+              <Grid className='grid-w2' style={{ marginTop: '100px' }}>
+                <Paper className='paper-p-c'>
+                  <div>
+                    <p className='sub-c-p'>Ingrese el Numero de Vale a buscar</p>
+                    <input
+                      style={{ width: '100%' }}
+                      className='field'
+                      name='searchF'
+                      value={this.state.searchF}
+                      onChange={this.handleChange.bind(this)}
+                    />
+                  </div>
+                  <div>
+                    <p className='sub-c-p'>Ingrese el Fecha de Pago</p>
+                    <input
+                      style={{ width: '100%' }}
+                      className='field'
+                      name='fechaP'
+                      value={this.state.fechaP}
+                      onChange={this.handleChange.bind(this)}
+                    />
+                  </div>
+                </Paper>
+              </Grid>
+            </Grid>
+          </div>
           <div style={{ marginTop: '80px' }} ref={el => (this.vale = el)}>
             <div className='margin-vales'>
               <div className='vale-title-container'>
@@ -396,12 +429,7 @@ export default class Vales extends Component {
               </div>
               <div className='firma-content'>
                 <div className='f-fecha'>
-                  <input
-                    className='b-fecha-i'
-                    name='fecha'
-                    value={today}
-                    required
-                  />
+                  <p className='b-fecha-i' style={{ fontSize: '15px' }}>{today}</p>
                   <p className='font-size-f'>Fecha</p>
                 </div>
                 <div className='f-fecha'>
@@ -419,7 +447,7 @@ export default class Vales extends Component {
                     name='personaR'
                     onChange={this.handleChange.bind(this)}
                     value={this.state.personaR}
-                    requiredr
+                    required
                     ref={personaR => this.inputPersona = personaR}
                   />
                   <p className='font-size-f'>Recibió</p>
@@ -436,10 +464,16 @@ export default class Vales extends Component {
           {/*this.state.cantidad < this.state.contadorc.storyCount ?*/}
             <div className='boton-v'>
               <ReactToPrint
-                trigger={() => <div className='boton-vale'>Imprimir y Guardar</div>}
+                trigger={() => <Button type='submit' variant='contained' style={{ background: 'green', color: 'white' }}>Imprimir y Guardar</Button>}
                 content={() => this.vale}
                 onAfterPrint={this.sendMessage.bind(this)}
               />
+              <Button type='submit' variant='contained' color='primary'>
+                Actualizar
+              </Button>
+              <Button type='submit' variant='contained' color='primary'>
+                Imprimir
+              </Button>
             </div>
             {/*:
             <div className='boton-v'>

@@ -23,6 +23,8 @@ const Menu = ({ open, ...props }) => {
     admin = 'ADMIN'
   } else if (email === 'cecilia@procuraduria.com') {
     admin = 'CECILIA'
+  } else if (email === 'alfredo@procuraduria.com') {
+    admin = 'ALFREDO'
   } else if (email === 'nayra@procuraduria.com') {
     admin = 'NAYRA'
   } else if (email === 'lizbeth@procuraduria.com') {
@@ -59,6 +61,7 @@ const Menu = ({ open, ...props }) => {
     <StyledMenu open={open} aria-hidden={!isHidden} {...props}>
       {admin === 'ADMIN' && <Nav />}
       {admin === 'CECILIA' && <NavC />}
+      {admin === 'ALFREDO' && <NavC />}
       {admin === 'NAYRA' && <NavN />}
       {admin === 'ELI' && <NavE />}
       {admin === 'MIGUEL' && <Nav />}

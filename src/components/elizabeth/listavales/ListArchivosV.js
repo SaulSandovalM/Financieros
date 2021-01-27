@@ -218,22 +218,22 @@ export default class ListArchivosV extends Component {
       filexml: this.state.filexml,
       filefactura: this.state.filefactura,
       filerecibo: this.state.filerecibo,
-      area: item.area,
-      autorizo: item.autorizo,
+      vale: item.vale,
+      cheque: item.cheque,
       cantidad: item.cantidad,
       cantidadc: item.cantidadc,
       cantidadr: item.cantidadr,
-      cheque: item.cheque,
       concepto: item.concepto,
-      estatus: 'Comprobado',
-      factura: item.factura,
-      fecha: item.fecha,
       oficioS: item.oficioS,
+      area: item.area,
+      turno: item.turno,
       personaR: item.personaR,
+      factura: item.factura,
       recibos: item.recibos,
       sc: item.sc,
-      turno: item.turno,
-      vale: item.vale
+      fecha: item.fecha,
+      autorizo: item.autorizo,
+      estatus: 'Comprobado'
     }
     firebase.database().ref().update(updates)
     alert('Tu solicitud fue enviada.')
