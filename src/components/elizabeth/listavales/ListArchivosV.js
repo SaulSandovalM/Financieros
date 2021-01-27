@@ -225,7 +225,7 @@ export default class ListArchivosV extends Component {
       cantidadr: item.cantidadr,
       cheque: item.cheque,
       concepto: item.concepto,
-      estatus: 'PCF',
+      estatus: 'Comprobado',
       factura: item.factura,
       fecha: item.fecha,
       oficioS: item.oficioS,

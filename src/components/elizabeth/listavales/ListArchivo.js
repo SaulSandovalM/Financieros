@@ -36,7 +36,7 @@ export default class ListArchivo extends Component {
                 <TableCell className='table-v-num'><b>Cheques</b></TableCell>
                 <TableCell className='table-v-num'><b>Autorizado</b></TableCell>
                 <TableCell className='table-v-num'><b>Comprobado</b></TableCell>
-                <TableCell className='table-v-num'><b>Rein/Rem</b></TableCell>
+                <TableCell className='table-v-num'><b>Rein/Reem</b></TableCell>
                 <TableCell className='table-v-num'><b>Concepto</b></TableCell>
                 <TableCell className='table-v-num'><b>OS</b></TableCell>
                 <TableCell className='table-v-num'><b>Área</b></TableCell>
@@ -44,6 +44,7 @@ export default class ListArchivo extends Component {
                 <TableCell className='table-v-num'><b>S/C</b></TableCell>
                 <TableCell className='table-v-num'><b>Fecha</b></TableCell>
                 <TableCell className='table-v-num'><b>Recibo</b></TableCell>
+                <TableCell className='table-v-num'><b>Realizo</b></TableCell>
                 <TableCell className='table-v-num'><b>Estatus</b></TableCell>
                 <TableCell className='table-v-num'><b>Comprobantes</b></TableCell>
               </TableRow>

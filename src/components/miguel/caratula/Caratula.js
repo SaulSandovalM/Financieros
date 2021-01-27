@@ -99,16 +99,16 @@ export default class Cpdf extends Component{
                   <div className='seccion-de'>
                     <p className='text'>
                       Sección: 5C. Recursos Financieros
-                      <br />Serie: 5C.12 Asignación y Optimización de Recuersos
+                      <br />Serie: 5C.3 Asignación y Optimización de Recuersos
                       <br />Sub-serie: No Aplica
-                      <br />Código: PGJH-09.1*5C.12
+                      <br />Código: PGJH-09.1*5C.
                     </p>
                   </div>
                   <div className='asunto-iz'>
                     <p className='text-22'>
                       Asunto:
                       <br />
-                      Creación del Fondo Revolvente
+                      Fondos Revolventes y/o Pagos Directos
                     </p>
                   </div>
                 </div>
@@ -119,7 +119,7 @@ export default class Cpdf extends Component{
                   </div>
                   <div className='num-exp'>
                     <p className='text-2'>Número de Expediente:
-                      <br />PGJH-09.1*5C.{comprometidos.fondo}/2020
+                      <br />PGJH-09.1*5C.3/{comprometidos.fondo}/2021
                       <br />Número de hojas:
                       <input
                         className='hojas'
@@ -135,15 +135,16 @@ export default class Cpdf extends Component{
                   <p className='cons'>
                     <p className='negritas'>Fundamento legal</p>
                     <br />
-                    <p className='t-cara'>Costitución Politíca de los Estados Unidos Mexicanos, artículo
-                    6 fracción I y II, 8° Costitución politica del Estados de Hidalgo,
-                    artículo 4 ter 89, 90 y 91. Ley Organica de Ministerio Público
-                    del Estado de Hidalgo, artículo 17 y 27 fracciones I, 36.
-                    Ley de transpariencia y Acceso a la  Información  Publica
-                    Gubernamental para el Estado de Hidalgo artículo 5 fracción
-                    X, 6, 22 fracciones XVIII y XIX. 36 fracción I, Ley de
-                    Responsabilidades de los Servidores Públicos del Estado de Hidalgo,
-                    artículos 47. Ley de Archivos del Estado de Hidalgo artículos
+                    <p className='t-cara'>Costitución Politíca de los Estados Unidos
+                    Mexicanos, artículos 6 fracción I y II, 8° Costitución Politica
+                    del Estados de Hidalgo, artículo 4 bis 17, 18, 19, 20, 21, 89, 90 y 91.
+                    Ley Orgánica de Ministerio Público del Estado de Hidalgo, artículo
+                    74 fracciones I, II, V, VI, IX, XIV y XXX. Ley de Transpariencia
+                    y Acceso a la Información Publica Gubernamental para el Estado de Hidalgo
+                    artículo 5 fracción X, 6, , 19, 20, 21, 22 fracción XIV, XVI, XVIII y XIX.
+                    Ley de Responsabilidades de los Servidores Públicos para el Estado de Hidalgo,
+                    artículos 42 y 47 fracción II y III. Codigo Fiscal de la federación de
+                    articulos 30, 67. Ley de Archivos del Estado de Hidalgo artículos
                     2, 3, 4, fracción X, 9 y 31. Reglamento de la Ley de los Archivos
                     del Estado de Hidalgo artículo 2 fracción I.</p>
                   </p>
@@ -179,16 +180,16 @@ export default class Cpdf extends Component{
                 </div>
                 <div className='contenedor'>
                   <div className='obser'>
+                    <div className='ubi'>
+                      <p className='ubi-t'>Ubicación Física del Expediente<br />Archivo Trámite de la Procuraduría General de Justicia, Caja No.</p>
+                    </div>
                     <div className='vigencia'>
                       <p className='vig-t'>Vigencia Documental</p>
                       <div className='vigencia2'>
-                        <p className='vig-t'>En Tramite 1 Años</p>
-                        <p className='vig-t'>Concentracion 4 años</p>
+                        <p className='vig-t'>En trámite 1 años</p>
+                        <p className='vig-t'>Concentración 4 años</p>
                         <p className='vig-t'>Total 5 años</p>
                       </div>
-                    </div>
-                    <div className='ubi'>
-                      <p className='ubi-t'>Ubicacion Fisica del Expediente<br />Archivo tramite de la Procuraduria General de Justicia</p>
                     </div>
                   </div>
                   <div className='cuadro'>

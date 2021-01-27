@@ -3,6 +3,7 @@ import './ListVales.css'
 import TableBody from '@material-ui/core/TableBody'
 import TableCell from '@material-ui/core/TableCell'
 import Button from '@material-ui/core/Button'
+import CurrencyFormat from 'react-currency-format'
 
 export default class RowAuto extends Component {
   constructor (props) {
@@ -27,13 +28,31 @@ export default class RowAuto extends Component {
           {this.props.item.cheque}
         </TableCell>
         <TableCell className='table-v-num2'>
-          {this.props.item.cantidad}
+          <CurrencyFormat
+            value={this.props.item.cantidad}
+            displayType='text'
+            prefix=' $'
+            thousandSeparator
+            decimalSeparator='.'
+          />
         </TableCell>
         <TableCell className='table-v-num2'>
-          {this.props.item.cantidadc}
+          <CurrencyFormat
+            value={this.props.item.cantidadc}
+            displayType='text'
+            prefix=' $'
+            thousandSeparator
+            decimalSeparator='.'
+          />
         </TableCell>
         <TableCell className='table-v-num2'>
-          {this.props.item.cantidadr}
+          <CurrencyFormat
+            value={this.props.item.cantidadr}
+            displayType='text'
+            prefix=' $'
+            thousandSeparator
+            decimalSeparator='.'
+          />
         </TableCell>
         <TableCell className='table-v-num2'>
           {this.props.item.concepto}
@@ -52,6 +71,9 @@ export default class RowAuto extends Component {
         </TableCell>
         <TableCell className='table-v-num2'>
           {this.props.item.fecha}
+        </TableCell>
+        <TableCell className='table-v-num2'>
+          {this.props.item.recibos}
         </TableCell>
         <TableCell className='table-v-num2'>
           {this.props.item.personaR}

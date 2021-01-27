@@ -3,13 +3,13 @@ import firebase from '../../../Firebase'
 import './Caja.css'
 import CurrencyFormat from 'react-currency-format'
 import TextField from '@material-ui/core/TextField'
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableContainer from '@material-ui/core/TableContainer';
-import TableHead from '@material-ui/core/TableHead';
-import TableRow from '@material-ui/core/TableRow';
-import Paper from '@material-ui/core/Paper';
+import Table from '@material-ui/core/Table'
+import TableBody from '@material-ui/core/TableBody'
+import TableCell from '@material-ui/core/TableCell'
+import TableContainer from '@material-ui/core/TableContainer'
+import TableHead from '@material-ui/core/TableHead'
+import TableRow from '@material-ui/core/TableRow'
+import Paper from '@material-ui/core/Paper'
 
 export default class Caja extends Component {
   constructor (props) {
@@ -75,7 +75,6 @@ export default class Caja extends Component {
     var meses = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12']
     var f = new Date()
     today = f.getFullYear() + '-' + meses[f.getMonth()] + '-' + f.getDate()
-    console.log(this.state.buscador)
 
     return (
       <div className='container-back'>

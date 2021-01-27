@@ -511,15 +511,9 @@ select {
   justify-content: flex-end;
 }
 .table-v-num {
-  width: auto;
   border-right: white;
   border-left: 0;
   border-top: 0;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  display: -webkit-box;
-  -webkit-line-clamp: 1;
-  -webkit-box-orient: vertical;
 }
 .table-v-re {
   width: 6.9%;
