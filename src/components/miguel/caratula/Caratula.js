@@ -135,13 +135,13 @@ export default class Cpdf extends Component{
                   <p className='cons'>
                     <p className='negritas'>Fundamento legal</p>
                     <br />
-                    <p className='t-cara'>Costitución Politíca de los Estados Unidos
-                    Mexicanos, artículos 6 fracción I y II, 8° Costitución Politica
+                    <p className='t-cara'>Constitución Politíca de los Estados Unidos
+                    Mexicanos, artículos 6 fracción I y II, 8°. Costitución Politica
                     del Estados de Hidalgo, artículo 4 bis 17, 18, 19, 20, 21, 89, 90 y 91.
                     Ley Orgánica de Ministerio Público del Estado de Hidalgo, artículo
                     74 fracciones I, II, V, VI, IX, XIV y XXX. Ley de Transpariencia
                     y Acceso a la Información Publica Gubernamental para el Estado de Hidalgo
-                    artículo 5 fracción X, 6, , 19, 20, 21, 22 fracción XIV, XVI, XVIII y XIX.
+                    artículo 5 fracción X, 6, , 19, 20, 21, 22 fracción XIV, XVI, XVIII y XX.
                     Ley de Responsabilidades de los Servidores Públicos para el Estado de Hidalgo,
                     artículos 42 y 47 fracción II y III. Codigo Fiscal de la federación de
                     articulos 30, 67. Ley de Archivos del Estado de Hidalgo artículos
