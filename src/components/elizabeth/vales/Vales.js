@@ -112,14 +112,9 @@ export default class Vales extends Component {
     })
   }
 
-  resetForm () {
-    this.refs.contactForm.reset()
-  }
-
   sendMessage () {
     const params = {
       vale: this.state.contador.storyCount,
-      numVale: String(this.state.contador.storyCount),
       cheque: this.inputCheque.value,
       cantidad: this.inputCantidad.value,
       cantidadc: this.inputCantidadc.value,
@@ -138,18 +133,18 @@ export default class Vales extends Component {
     }
     this.setState({
       vale: this.state.contador.storyCount,
-      cheque: this.inputCheque.value,
-      cantidad: this.inputCantidad.value,
-      cantidadc: this.inputCantidadc.value,
-      cantidadr: this.inputCantidadr.value,
-      concepto: this.inputConcepto.value,
-      oficioS: this.inputOficio.value,
-      area: this.inputArea.value,
-      turno: this.inputTurno.value,
-      personaR: this.inputPersona.value,
-      factura: this.inputFactura.value,
-      recibos: this.inputRecibos.value,
-      sc: this.inputSC.value,
+      cheque: '',
+      cantidad: '',
+      cantidadc: '',
+      cantidadr: '',
+      concepto: '',
+      oficioS: '',
+      area: '',
+      turno: '',
+      personaR: '',
+      factura: '',
+      recibos: '',
+      sc: '',
       fecha: this.state.fecha,
       autorizo: this.inputAutorizo.value,
       estatus: this.state.estatus
@@ -157,8 +152,7 @@ export default class Vales extends Component {
     if (params.vale && params.cheque && params.cantidad && params.cantidadc &&
         params.cantidadr && params.concepto && params.oficioS && params.area &&
         params.turno && params.factura && params.recibos && params.sc &&
-        params.autorizo && params.personaR && params.estatus && params.fecha &&
-        params.numVale) {
+        params.autorizo && params.personaR && params.estatus && params.fecha) {
       var f = parseInt(params.cantidadc)
       const statsRef = firebase.firestore().collection('caja').doc('--stats--')
       const increment = firebase.firestore.FieldValue.increment(-f)
@@ -179,7 +173,7 @@ export default class Vales extends Component {
       }).catch(() => {
         alert('Tu solicitud no puede ser enviada')
       })
-      this.resetForm()
+      setInterval(this.resetForm, 1000)
       setInterval(this.consumo, 1000)
     } else {
       alert('Por favor llene el formulario')
@@ -198,35 +192,35 @@ export default class Vales extends Component {
 
     return (
       <div className='container-back-v'>
-        <form onSubmit={this.sendMessage.bind(this)} ref='contactForm'>
-          <div style={{ display: 'flex', justifyContent: 'center' }}>
-            <Grid className='grid-w-c'>
-              <Grid className='grid-w2' style={{ marginTop: '100px' }}>
-                <Paper className='paper-p-c'>
-                  <div>
-                    <p className='sub-c-p'>Ingrese el Numero de Vale a buscar</p>
-                    <input
-                      style={{ width: '100%' }}
-                      className='field'
-                      name='searchF'
-                      value={this.state.searchF}
-                      onChange={this.handleChange.bind(this)}
-                    />
-                  </div>
-                  <div>
-                    <p className='sub-c-p'>Ingrese el Fecha de Pago</p>
-                    <input
-                      style={{ width: '100%' }}
-                      className='field'
-                      name='fechaP'
-                      value={this.state.fechaP}
-                      onChange={this.handleChange.bind(this)}
-                    />
-                  </div>
-                </Paper>
-              </Grid>
+        <div style={{ display: 'flex', justifyContent: 'center' }}>
+          <Grid className='grid-w-c'>
+            <Grid className='grid-w2' style={{ marginTop: '100px' }}>
+              <Paper className='paper-p-c'>
+                <div>
+                  <p className='sub-c-p'>Ingrese el Numero de Vale a buscar</p>
+                  <input
+                    style={{ width: '100%' }}
+                    className='field'
+                    name='searchF'
+                    value={this.state.searchF}
+                    onChange={this.handleChange.bind(this)}
+                  />
+                </div>
+                <div>
+                  <p className='sub-c-p'>Ingrese el Fecha de Pago</p>
+                  <input
+                    style={{ width: '100%' }}
+                    className='field'
+                    name='fechaP'
+                    value={this.state.fechaP}
+                    onChange={this.handleChange.bind(this)}
+                  />
+                </div>
+              </Paper>
             </Grid>
-          </div>
+          </Grid>
+        </div>
+        <form onSubmit={this.sendMessage.bind(this)} ref={el1 => (this.myFormRef = el1)}>
           <div style={{ marginTop: '80px' }} ref={el => (this.vale = el)}>
             <div className='margin-vales'>
               <div className='vale-title-container'>
@@ -464,14 +458,14 @@ export default class Vales extends Component {
           {/*this.state.cantidad < this.state.contadorc.storyCount ?*/}
             <div className='boton-v'>
               <ReactToPrint
-                trigger={() => <Button type='submit' variant='contained' style={{ background: 'green', color: 'white' }}>Imprimir y Guardar</Button>}
+                trigger={() => <Button variant='contained' style={{ background: 'green', color: 'white' }}>Imprimir y Guardar</Button>}
                 content={() => this.vale}
                 onAfterPrint={this.sendMessage.bind(this)}
               />
-              <Button type='submit' variant='contained' color='primary'>
+              <Button variant='contained' color='primary'>
                 Actualizar
               </Button>
-              <Button type='submit' variant='contained' color='primary'>
+              <Button variant='contained' color='primary'>
                 Imprimir
               </Button>
             </div>
