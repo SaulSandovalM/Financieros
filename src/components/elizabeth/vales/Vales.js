@@ -220,7 +220,7 @@ export default class Vales extends Component {
             </Grid>
           </Grid>
         </div>
-        <form onSubmit={this.sendMessage.bind(this)} ref={el1 => (this.myFormRef = el1)}>
+        <form onSubmit={this.sendMessage.bind(this)}>
           <div style={{ marginTop: '80px' }} ref={el => (this.vale = el)}>
             <div className='margin-vales'>
               <div className='vale-title-container'>
@@ -456,18 +456,17 @@ export default class Vales extends Component {
             </div>
           </div>
           {/*this.state.cantidad < this.state.contadorc.storyCount ?*/}
-            <div className='boton-v'>
+            <div className='boton-va'>
               <ReactToPrint
-                trigger={() => <Button variant='contained' style={{ background: 'green', color: 'white' }}>Imprimir y Guardar</Button>}
+                trigger={() => <Button variant='contained' color='primary'>Actualizar e Imprimir</Button>}
                 content={() => this.vale}
                 onAfterPrint={this.sendMessage.bind(this)}
               />
-              <Button variant='contained' color='primary'>
-                Actualizar
-              </Button>
-              <Button variant='contained' color='primary'>
-                Imprimir
-              </Button>
+              <ReactToPrint
+                trigger={() => <Button variant='contained' style={{ background: 'green', color: 'white' }}>Guardar e Imprimir</Button>}
+                content={() => this.vale}
+                onAfterPrint={this.sendMessage.bind(this)}
+              />
             </div>
             {/*:
             <div className='boton-v'>
