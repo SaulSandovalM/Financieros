@@ -13,7 +13,7 @@ export default class Vales extends Component {
     super(props)
     this.unsubscribe = null
     this.state = {
-      lista: [
+      vales: [
         {
           id: 1,
           name: 'preuba',
@@ -43,7 +43,12 @@ export default class Vales extends Component {
       contadorc: {},
       isHidden: true,
       searchF: '',
-      fechaP: ''
+      fechaP: '',
+      filexml: '',
+      filefactura: '',
+      filerecibo: '',
+      to_status: false,
+      from_status: false
     }
   }
 
@@ -57,10 +62,47 @@ export default class Vales extends Component {
     this.setState({ [event.target.name]: event.target.value })
   }
 
+  change = (e) => {
+    const { name, value } = e.target
+    this.setState({ [name]: value})
+  }
+
   componentDidMount () {
     this.unsubscribe = firebase.firestore().collection('caja').onSnapshot(this.onCollectionUpdate)
     this.consumo()
     this.consumoc()
+    const itemsRef = firebase.database().ref('vales/')
+    this.listenForItems(itemsRef)
+  }
+
+  listenForItems = (itemsRef) => {
+    itemsRef.on('value', (snap) => {
+      var vales = []
+      snap.forEach((child) => {
+        vales.push({
+          cheque: child.val().cheque,
+          vale: child.val().vale,
+          cantidad: child.val().cantidad,
+          cantidadc: child.val().cantidadc,
+          cantidadr: child.val().cantidadr,
+          concepto: child.val().concepto,
+          oficioS: child.val().oficioS,
+          area: child.val().area,
+          turno: child.val().turno,
+          factura: child.val().factura,
+          recibos: child.val().recibos,
+          sc: child.val().sc,
+          fecha: child.val().fecha,
+          autorizo: child.val().autorizo,
+          personaR: child.val().personaR,
+          estatus: child.val().estatus,
+          id: child.key
+        })
+      })
+      this.setState({
+        vales: vales
+      })
+    })
   }
 
   consumo = () => {
@@ -178,6 +220,33 @@ export default class Vales extends Component {
     } else {
       alert('Por favor llene el formulario')
     }
+  }
+
+  update = (item) => {
+    let updates = {}
+    updates['vales/' + item.id] = {
+      cheque: this.state.cheque,
+      vale: item.vale,
+      cantidad: item.cantidad,
+      cantidadc: item.cantidadc,
+      cantidadr: item.cantidadr,
+      concepto: item.concepto,
+      oficioS: item.oficioS,
+      area: item.area,
+      turno: item.turno,
+      factura: item.factura,
+      recibos: item.recibos,
+      sc: item.sc,
+      fecha: item.fecha,
+      autorizo: item.autorizo,
+      personaR: item.personaR,
+      estatus: item.estatus,
+      filexml: this.state.filexml,
+      filefactura: this.state.filefactura,
+      filerecibo: this.state.filerecibo,
+    }
+    firebase.database().ref().update(updates)
+    alert('Tu solicitud fue enviada.')
   }
 
   render () {
@@ -457,11 +526,11 @@ export default class Vales extends Component {
           </div>
           {/*this.state.cantidad < this.state.contadorc.storyCount ?*/}
             <div className='boton-va'>
-              <ReactToPrint
+              {/*<ReactToPrint
                 trigger={() => <Button variant='contained' color='primary'>Actualizar e Imprimir</Button>}
                 content={() => this.vale}
                 onAfterPrint={this.sendMessage.bind(this)}
-              />
+              />*/}
               <ReactToPrint
                 trigger={() => <Button variant='contained' style={{ background: 'green', color: 'white' }}>Guardar e Imprimir</Button>}
                 content={() => this.vale}
@@ -474,6 +543,258 @@ export default class Vales extends Component {
             </div>
           */}
         </form>
+
+        <div style={{ background: '#f4f4f4', marginTop: '-704px', zIndex: '50' }}>
+        {this.state.vales.map(item =>
+        <div>
+          {parseInt(this.state.searchF) === item.vale &&
+          <form onSubmit={this.sendMessage.bind(this)}>
+            <div style={{ marginTop: '80px' }} ref={el => (this.vale = el)}>
+              <div className='margin-vales'>
+                <div className='vale-title-container'>
+                  <div className='vale-logo-container'>
+                    <img className='logovale' src={logovale} alt='' />
+                  </div>
+                  <div className='vale-title-content'>
+                    <p className='p-vale'>PROCURADURIA GENERAL DE JUSTICIA</p>
+                    <p className='p-vale'>DIRECCION GENERAL DE ADMINISTRACION Y FINANZAS</p>
+                    <p className='p-vale'>DIRECCION DE RECURSOS FINANCIEROS</p>
+                  </div>
+                  <div className='vale-num-container'>
+                    <img className='logovale' src={logoh} alt='' />
+                  </div>
+                </div>
+                <div className='no-cv'>
+                  <div className='cv'>
+                    <p className='p-cv'>
+                      No. Cheque:
+                      <input
+                        className='input-ches'
+                        id='cheque'
+                        required
+                        name='cheque'
+                        onChange={this.handleChange.bind(this)}
+                        defaultValue={item.cheque}
+                      />
+                    </p>
+                    <p className='p-cv'>
+                      No. Vale:
+                      <input
+                        className='input-ches'
+                        id='vale'
+                        required
+                        value={item.vale}
+                      />
+                    </p>
+                  </div>
+                </div>
+                <div className='vale-pro-content'>
+                  <p className='p-vp'>VALE PROVISIONAL DE CAJA</p>
+                </div>
+                <div className='space-v' />
+                <div className='mcc-content'>
+                  <div className='v-m'>
+                    <p className='pmcc'>MOVIMIENTO</p>
+                    <p className='p-bv'>
+                      Autorizado
+                    </p>
+                    <p className='p-bv'>
+                      Comprobado
+                    </p>
+                    <p className='p-bv'>
+                      Reintegro/Reembolso
+                    </p>
+                  </div>
+                  <div className='v-c'>
+                    <p className='pmcc'>CANTIDAD</p>
+                    <input
+                      className='input-b'
+                      name='cantidad'
+                      onChange={this.handleChange.bind(this)}
+                      value={item.cantidad}
+                      required
+                    />
+                    <input
+                      className='input-b'
+                      name='cantidadc'
+                      onChange={this.handleChange.bind(this)}
+                      value={item.cantidadc}
+                      required
+                    />
+                    <input
+                      className='input-b'
+                      name='cantidadr'
+                      onChange={this.handleChange.bind(this)}
+                      value={item.cantidadr}
+                      required
+                    />
+                  </div>
+                  <div className='v-con'>
+                    <p className='pmcc'>CONCEPTO</p>
+                    <textarea
+                      className='input-b-c'
+                      name='concepto'
+                      onChange={this.handleChange.bind(this)}
+                      value={item.concepto}
+                      required
+                    />
+                    <div className='oat-content'>
+                      <div className='o-w'>
+                        <p className='p-oat'>Oficio Solicitud</p>
+                        <input
+                          className='input-w'
+                          name='oficioS'
+                          onChange={this.handleChange.bind(this)}
+                          value={item.oficioS}
+                          required
+                        />
+                      </div>
+                      <div className='a-w'>
+                        <p className='p-oat'>Área</p>
+                        <select
+                          className='input-w' required
+                          value={item.area}
+                          ref={area => this.inputArea = area}>
+                          <option id='area'>Despacho del Procurador</option>
+                          <option id='area'>Subprocuraduría de Procedimientos Penales Región Oriente</option>
+                          <option id='area'>Fiscalía Especializada para la atención de Delitos cometidos contra la Libertad de Expresión</option>
+                          <option id='area'>Periodistas y Personas defensoras de los Derechos Humanos</option>
+                          <option id='area'>Dirección General para la Atención de los Asuntos del Sistema Tradicional</option>
+                          <option id='area'>Fiscalia de Delitos Electorales</option>
+                          <option id='area'>Subprocuraduría de Derechos Humanos y Servicios a la Comunidad</option>
+                          <option id='area'>Centro de Justicia Restaurativa Penal Poniente</option>
+                          <option id='area'>Fiscalía para la Atención de Delitos de Género</option>
+                          <option id='area'>Visitaduría General</option>
+                          <option id='area'>Dirección General de Servicios Periciales</option>
+                          <option id='area'>Centro de Operación Estratégica</option>
+                          <option id='area'>Unidad Especializada en el Combate al Secuestro</option>
+                          <option id='area'>Dirección General de Administración y Finanzas</option>
+                          <option id='area'> - Dirección de Planeacion</option>
+                          <option id='area'> - Dirección de Control y Validación</option>
+                          <option id='area'> - Dirección de Informatica, Estadistica y Telecomunicaciones</option>
+                          <option id='area'> - Dirección de Recursos Materiales</option>
+                          <option id='area'> - Dirección de Recursos Humanos</option>
+                          <option id='area'> - Dirección de Enlace FASP</option>
+                          <option id='area'> - Dirección de Coordinacion de Calidad</option>
+                          <option id='area'> - Dirección de Archivo</option>
+                          <option id='area'> - Oficialia de Partes</option>
+                          <option id='area'>Fiscalía Especializada para la atención de los Delitos de Trata de Personas</option>
+                          <option id='area'>Subprocuraduría de Procedimientos Penales Región Poniente</option>
+                          <option id='area'>Centro de Atención Temprana Poniente</option>
+                          <option id='area'>Dirección General de Investigación y Litigación Poniente</option>
+                          <option id='area'>Dirección General de la Policía Investigadora</option>
+                          <option id='area'>Centro de Atención Temprana Oriente</option>
+                          <option id='area'>Centro de Justicia Restaurativa Penal Oriente</option>
+                          <option id='area'>Dirección General de Investigación y Litigación Oriente</option>
+                          <option id='area'>Dirección General de Recursos Materiales y Servicios</option>
+                          <option id='area'>Fiscalía Especializada en Delitos de Corrupción</option>
+                          <option id='area'>Fiscalía Especializada en Materia de Desaparición Forzada de Personas</option>
+                        </select>
+                      </div>
+                      <div className='t-w'>
+                        <p className='p-oat'>Turno</p>
+                        <input
+                          className='input-w'
+                          name='turno'
+                          onChange={this.handleChange.bind(this)}
+                          value={item.turno}
+                          required
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div className='frsr-end'>
+                  <div className='frsr-w'>
+                    <div className='div-4'>
+                      <div className='frsr-w-b'>
+                        <p className='p-oat'>Facturas</p>
+                        <input
+                          className='input-w'
+                          name='factura'
+                          onChange={this.handleChange.bind(this)}
+                          value={item.factura}
+                        />
+                      </div>
+                      <div className='frsr-w-b' style={{borderLeft: '0px'}}>
+                        <p className='p-oat'>Recibos</p>
+                        <input
+                          className='input-w'
+                          name='recibos'
+                          onChange={this.handleChange.bind(this)}
+                          value={item.recibos}
+                        />
+                      </div>
+                    </div>
+                    <div className='div-4'>
+                      <div className='frsr-w-b'>
+                        <p className='p-oat'>S/C</p>
+                        <input
+                          className='input-w'
+                          name='sc'
+                          onChange={this.handleChange.bind(this)}
+                          value={item.sc}
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div className='firma-content'>
+                  <div className='f-fecha'>
+                    <p className='b-fecha-i' style={{ fontSize: '15px' }}>{item.fecha}</p>
+                    <p className='font-size-f'>Fecha</p>
+                  </div>
+                  <div className='f-fecha'>
+                    <select
+                      className='b-auto'
+                      value={item.autorizo}>
+                      <option id='autorizo'>L.C Nayra Ruiz Laguna</option>
+                      <option id='autorizo'>Mtro.León Maximiliano Hernández Valdés</option>
+                    </select>
+                    <p className='font-size-f'>Autorizó</p>
+                  </div>
+                  <div className='f-fecha'>
+                    <input
+                      className='b-fecha-i'
+                      name='personaR'
+                      onChange={this.handleChange.bind(this)}
+                      value={item.personaR}
+                      required
+                    />
+                    <p className='font-size-f'>Recibió</p>
+                  </div>
+                </div>
+                <div className='last'>
+                  Me comprometo a entregar la comprobación que ampara el presente
+                  vale en un plazo no mayor  a 5 dias habiles posteriores a la fecha
+                  de recibido, de lo contrario reintegraré el recurso por la cantidad
+                  sin comprobar.
+                </div>
+              </div>
+            </div>
+            {/*this.state.cantidad < this.state.contadorc.storyCount ?*/}
+              <div className='boton-va'>
+                <ReactToPrint
+                  trigger={() => <Button variant='contained' color='primary'>Actualizar e Imprimir</Button>}
+                  content={() => this.vale}
+                  onAfterPrint={() => this.update(item)}
+                />
+                {/*<ReactToPrint
+                  trigger={() => <Button variant='contained' style={{ background: 'green', color: 'white' }}>Guardar e Imprimir</Button>}
+                  content={() => this.vale}
+                  onAfterPrint={this.sendMessage.bind(this)}
+                />*/}
+              </div>
+              {/*:
+              <div className='boton-v'>
+                <p className='no-cant'>La cantidad es mayor a la disponible</p>
+              </div>
+            */}
+          </form>
+          }
+          </div>
+        )}
+        </div>
       </div>
     )
   }

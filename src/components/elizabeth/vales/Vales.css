@@ -225,6 +225,7 @@ select {
   font-size: 14px;
   width: 100%;
   height: 18px;
+  background: #f4f4f4;
 }
 .font-size-f {
   font-size: 15px;

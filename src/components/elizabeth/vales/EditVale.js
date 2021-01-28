@@ -34,11 +34,6 @@ const EditVale = () => {
     })
     setCurrentIndex(index)
   }
-  const filterData = tutorials.filter(
-    (vales) => {
-      return vales.vale.indexOf('Fondo Revolvente') !== -1
-    }
-  )
 
   return (
     <div style={{ padding: '60px 15px 15px 15px' }}>
