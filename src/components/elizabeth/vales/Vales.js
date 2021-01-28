@@ -244,6 +244,7 @@ export default class Vales extends Component {
       filexml: this.state.filexml,
       filefactura: this.state.filefactura,
       filerecibo: this.state.filerecibo,
+      fechaP: this.state.fechaP
     }
     firebase.database().ref().update(updates)
     alert('Tu solicitud fue enviada.')
