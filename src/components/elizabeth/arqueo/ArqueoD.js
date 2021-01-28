@@ -123,6 +123,7 @@ export default class ArqueoD extends Component {
           fecha: child.val().fecha,
           concepto: child.val().concepto,
           personaR: child.val().personaR,
+          fechaP: String(child.val().fechaP),
           done: child.val().done,
           id: child.key
         })

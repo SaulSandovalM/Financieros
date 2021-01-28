@@ -279,6 +279,7 @@ export default class Vales extends Component {
                 <div>
                   <p className='sub-c-p'>Ingrese el Fecha de Pago</p>
                   <input
+                    type='date'
                     style={{ width: '100%' }}
                     className='field'
                     name='fechaP'
