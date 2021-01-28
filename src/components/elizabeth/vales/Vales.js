@@ -227,19 +227,19 @@ export default class Vales extends Component {
     updates['vales/' + item.id] = {
       cheque: this.state.cheque,
       vale: item.vale,
-      cantidad: item.cantidad,
-      cantidadc: item.cantidadc,
-      cantidadr: item.cantidadr,
-      concepto: item.concepto,
-      oficioS: item.oficioS,
-      area: item.area,
-      turno: item.turno,
-      factura: item.factura,
-      recibos: item.recibos,
-      sc: item.sc,
-      fecha: item.fecha,
-      autorizo: item.autorizo,
-      personaR: item.personaR,
+      cantidad: this.state.cantidad,
+      cantidadc: this.state.cantidadc,
+      cantidadr: this.state.cantidadr,
+      concepto: this.state.concepto,
+      oficioS: this.state.oficioS,
+      area: this.state.area,
+      turno: this.state.turno,
+      factura: this.state.factura,
+      recibos: this.state.recibos,
+      sc: this.state.sc,
+      fecha: this.state.fecha,
+      autorizo: this.state.autorizo,
+      personaR: this.state.personaR,
       estatus: item.estatus,
       filexml: this.state.filexml,
       filefactura: this.state.filefactura,
@@ -611,21 +611,23 @@ export default class Vales extends Component {
                       className='input-b'
                       name='cantidad'
                       onChange={this.handleChange.bind(this)}
-                      value={item.cantidad}
+                      defaultValue={item.cantidad}
                       required
                     />
                     <input
                       className='input-b'
+                      id='cantidadc'
                       name='cantidadc'
                       onChange={this.handleChange.bind(this)}
-                      value={item.cantidadc}
+                      defaultValue={item.cantidadc}
                       required
                     />
                     <input
                       className='input-b'
+                      id='cantidadr'
                       name='cantidadr'
                       onChange={this.handleChange.bind(this)}
-                      value={item.cantidadr}
+                      defaultValue={item.cantidadr}
                       required
                     />
                   </div>
@@ -633,9 +635,10 @@ export default class Vales extends Component {
                     <p className='pmcc'>CONCEPTO</p>
                     <textarea
                       className='input-b-c'
+                      id='concepto'
                       name='concepto'
                       onChange={this.handleChange.bind(this)}
-                      value={item.concepto}
+                      defaultValue={item.concepto}
                       required
                     />
                     <div className='oat-content'>
@@ -643,18 +646,22 @@ export default class Vales extends Component {
                         <p className='p-oat'>Oficio Solicitud</p>
                         <input
                           className='input-w'
+                          id='oficioS'
                           name='oficioS'
                           onChange={this.handleChange.bind(this)}
-                          value={item.oficioS}
+                          defaultValue={item.oficioS}
                           required
                         />
                       </div>
                       <div className='a-w'>
                         <p className='p-oat'>Área</p>
                         <select
-                          className='input-w' required
-                          value={item.area}
-                          ref={area => this.inputArea = area}>
+                          className='input-w'
+                          required
+                          defaultValue={item.area}
+                          id='area'
+                          onChange={this.handleChange.bind(this)}
+                          name='area'>
                           <option id='area'>Despacho del Procurador</option>
                           <option id='area'>Subprocuraduría de Procedimientos Penales Región Oriente</option>
                           <option id='area'>Fiscalía Especializada para la atención de Delitos cometidos contra la Libertad de Expresión</option>
@@ -695,9 +702,10 @@ export default class Vales extends Component {
                         <p className='p-oat'>Turno</p>
                         <input
                           className='input-w'
+                          id='turno'
                           name='turno'
                           onChange={this.handleChange.bind(this)}
-                          value={item.turno}
+                          defaultValue={item.turno}
                           required
                         />
                       </div>
@@ -711,18 +719,20 @@ export default class Vales extends Component {
                         <p className='p-oat'>Facturas</p>
                         <input
                           className='input-w'
+                          id='factura'
                           name='factura'
                           onChange={this.handleChange.bind(this)}
-                          value={item.factura}
+                          defaultValue={item.factura}
                         />
                       </div>
                       <div className='frsr-w-b' style={{borderLeft: '0px'}}>
                         <p className='p-oat'>Recibos</p>
                         <input
                           className='input-w'
+                          id='recibos'
                           name='recibos'
                           onChange={this.handleChange.bind(this)}
-                          value={item.recibos}
+                          defaultValue={item.recibos}
                         />
                       </div>
                     </div>
@@ -731,9 +741,10 @@ export default class Vales extends Component {
                         <p className='p-oat'>S/C</p>
                         <input
                           className='input-w'
+                          id='sc'
                           name='sc'
                           onChange={this.handleChange.bind(this)}
-                          value={item.sc}
+                          defaultValue={item.sc}
                         />
                       </div>
                     </div>
@@ -747,7 +758,10 @@ export default class Vales extends Component {
                   <div className='f-fecha'>
                     <select
                       className='b-auto'
-                      value={item.autorizo}>
+                      id='autorizo'
+                      name='autorizo'
+                      onChange={this.handleChange.bind(this)}
+                      defaultValue={item.autorizo}>
                       <option id='autorizo'>L.C Nayra Ruiz Laguna</option>
                       <option id='autorizo'>Mtro.León Maximiliano Hernández Valdés</option>
                     </select>
@@ -756,9 +770,10 @@ export default class Vales extends Component {
                   <div className='f-fecha'>
                     <input
                       className='b-fecha-i'
+                      id='personaR'
                       name='personaR'
                       onChange={this.handleChange.bind(this)}
-                      value={item.personaR}
+                      defaultValue={item.personaR}
                       required
                     />
                     <p className='font-size-f'>Recibió</p>
