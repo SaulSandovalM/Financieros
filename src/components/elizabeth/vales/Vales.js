@@ -114,8 +114,8 @@ export default class Vales extends Component {
 
   sendMessage () {
     const params = {
-      vale: this.state.contador.storyCount,
       cheque: this.inputCheque.value,
+      vale: this.state.contador.storyCount,
       cantidad: this.inputCantidad.value,
       cantidadc: this.inputCantidadc.value,
       cantidadr: this.inputCantidadr.value,
@@ -123,12 +123,12 @@ export default class Vales extends Component {
       oficioS: this.inputOficio.value,
       area: this.inputArea.value,
       turno: this.inputTurno.value,
-      personaR: this.inputPersona.value,
       factura: this.inputFactura.value,
       recibos: this.inputRecibos.value,
       sc: this.inputSC.value,
       fecha: this.state.fecha,
       autorizo: this.inputAutorizo.value,
+      personaR: this.inputPersona.value,
       estatus: this.state.estatus
     }
     this.setState({

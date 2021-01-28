@@ -111,7 +111,7 @@ class NavE extends Component {
                   </Typography>
                 </Link>
               </div>*/}
-              <div className='subnav'>
+              {/*<div className='subnav'>
                 <Link to='/ListValesA' className='deco'>
                   <Typography className='nav-t' style={{ marginBottom: '15px', color: 'white' }}>
                     • Autorizados
@@ -136,6 +136,13 @@ class NavE extends Component {
                 <Link to='/ListArchivosV' className='deco'>
                   <Typography className='nav-t' style={{ marginBottom: '15px', color: 'white' }}>
                     • Archivos Vales
+                  </Typography>
+                </Link>
+              </div>*/}
+              <div className='subnav'>
+                <Link to='/Valeslist' className='deco'>
+                  <Typography className='nav-t' style={{ marginBottom: '15px', color: 'white' }}>
+                    • Lista de Vales
                   </Typography>
                 </Link>
               </div>
