@@ -41,7 +41,6 @@ export default class Vales extends Component {
       estatus: 'Pendiente',
       contador: {},
       contadorc: {},
-      isHidden: true,
       searchF: '',
       fechaP: '',
       filexml: '',
@@ -50,12 +49,6 @@ export default class Vales extends Component {
       to_status: false,
       from_status: false
     }
-  }
-
-  toggleHidden () {
-    this.setState({
-      isHidden: !this.state.isHidden
-    })
   }
 
   handleChange (event) {
@@ -277,7 +270,7 @@ export default class Vales extends Component {
                   />
                 </div>
                 <div>
-                  <p className='sub-c-p'>Ingrese el Fecha de Pago</p>
+                  <p className='sub-c-p'>Ingrese la Fecha de Pago</p>
                   <input
                     type='date'
                     style={{ width: '100%' }}

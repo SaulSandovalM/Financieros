@@ -136,7 +136,7 @@ export default class Cpdf extends Component{
                     <p className='negritas'>Fundamento legal</p>
                     <br />
                     <p className='t-cara'>Constitución Politíca de los Estados Unidos
-                    Mexicanos, artículos 6 fracción I y II, 8°. Costitución Politica
+                    Mexicanos, artículos 6 fracción I y II, 8°. Constitución Politica
                     del Estados de Hidalgo, artículo 4 bis 17, 18, 19, 20, 21, 89, 90 y 91.
                     Ley Orgánica de Ministerio Público del Estado de Hidalgo, artículo
                     74 fracciones I, II, V, VI, IX, XIV y XXX. Ley de Transpariencia

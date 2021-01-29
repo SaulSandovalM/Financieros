@@ -44,7 +44,10 @@ export default class Valeslist extends Component {
       filer: '',
       filexml: '0',
       filefactura: '',
-      filerecibo: '0'
+      filerecibo: '0',
+      autorizados: false,
+      noautorizados: false,
+      pendientes: false,
     }
   }
 

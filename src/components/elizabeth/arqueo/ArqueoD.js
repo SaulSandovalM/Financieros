@@ -160,7 +160,7 @@ export default class ArqueoD extends Component {
     let preDate = yesterdayF
     let postDate = today3
     let filteredDates = this.state.listay.filter(function(date){
-      return date.fecha === preDate && date.hora < '23:59' && date.hora > '17:00'
+      return date.fecha === preDate && date.hora < '23:59' && date.hora > '16:00'
     })
 
     return (
@@ -237,14 +237,12 @@ export default class ArqueoD extends Component {
               {
                 this.state.lista.map(item =>
                   <div className='tb-n'>
-                    {item.fecha === today3 &&
-                      <CurrencyFormat
-                        value={item.total}
-                        displayType='text'
-                        thousandSeparator
-                        prefix='$ '
-                      />
-                    }
+                    <CurrencyFormat
+                      value={item.total}
+                      displayType='text'
+                      thousandSeparator
+                      prefix='$ '
+                    />
                   </div>
                 )
               }

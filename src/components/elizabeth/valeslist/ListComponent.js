@@ -8,12 +8,19 @@ import TableContainer from '@material-ui/core/TableContainer'
 import TableHead from '@material-ui/core/TableHead'
 import TableRow from '@material-ui/core/TableRow'
 import Paper from '@material-ui/core/Paper'
+import FormGroup from '@material-ui/core/FormGroup'
+import FormControlLabel from '@material-ui/core/FormControlLabel'
+import Checkbox from '@material-ui/core/Checkbox'
 
 export default class ListComponent extends Component {
   constructor (props) {
     super(props)
     this.state = {
-      vales: []
+      vales: [],
+      autorizados: false,
+      noautorizados: false,
+      pendientes: false,
+      auto: ''
     }
   }
 
@@ -25,9 +32,51 @@ export default class ListComponent extends Component {
     })
   }
 
+  toggleCheckAuto () {
+    this.setState({
+      autorizados: !this.state.autorizados,
+      auto: 'Autorizado'
+    })
+  }
+
+  toggleCheckNoAuto () {
+    this.setState({
+      noautorizados: !this.state.noautorizados
+    })
+  }
+
+  toggleCheckPendientes () {
+    this.setState({
+      pendientes: !this.state.pendientes
+    })
+  }
+
   render () {
+    // const filterData = this.props.lista.filter(val => {
+    //   return val.concepto.indexOf(this.state.auto) !== -1
+    // })
+    const filterData = this.state.vales.filter(
+      (vales) => {
+        return vales.concepto.indexOf(this.state.auto) !== -1
+      }
+    )
+
     return (
       <div>
+        <FormGroup row>
+          <FormControlLabel
+            control={<Checkbox checked={this.state.autorizados} onChange={this.toggleCheckAuto.bind(this)} name='autorizados' />}
+            label='autorizados'
+          />
+          <FormControlLabel
+            control={<Checkbox checked={this.state.noautorizados} onChange={this.toggleCheckNoAuto.bind(this)} name='noautorizados' />}
+            label='No Autorizados'
+          />
+          <FormControlLabel
+            control={<Checkbox checked={this.state.pendientes} onChange={this.toggleCheckPendientes.bind(this)} name='pendientes' />}
+            label='Pendientes'
+          />
+        </FormGroup>
         <TableContainer component={Paper}>
           <Table>
             <TableHead>
@@ -52,7 +101,7 @@ export default class ListComponent extends Component {
               </TableRow>
             </TableHead>
             {
-              this.props.lista.map(item =>
+              filterData.map(item =>
                 <RowComponent
                   key={item.id}
                   item={item}
