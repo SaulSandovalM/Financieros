@@ -16,7 +16,6 @@ export default class Valeslist extends Component {
         },
       ],
       alert: false,
-      alertData: {},
       vale: '',
       cheque: '',
       cantidad: '',
@@ -34,8 +33,6 @@ export default class Valeslist extends Component {
       fecha: '',
       autorizo: '',
       estatus: 'Pendiente',
-      contador: {},
-      isHidden: true,
       xml: 0,
       pdf2: 0,
       pdf3: 0,
@@ -48,6 +45,7 @@ export default class Valeslist extends Component {
       autorizados: false,
       noautorizados: false,
       pendientes: false,
+      chequea: ''
     }
   }
 
@@ -285,12 +283,20 @@ export default class Valeslist extends Component {
                       value={this.state.filerecibo} onChange={this.handleChange.bind(this)}
                     />
                   </div>
+                  <div className='p-container-ar'>
+                    <TextField
+                      label='Ingresar Num. Cheque'
+                      type='text'
+                      name='chequea'
+                      value={this.state.chequea} onChange={this.handleChange.bind(this)}
+                    />
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </form>
-        <div className='caja-w' style={{ marginTop: '40px', background: '#f4f4f4' }}>
+        <div className='caja-w' style={{ background: '#f4f4f4' }}>
           <div className='caja-col'>
             <ListComponent
               lista={this.state.lista}

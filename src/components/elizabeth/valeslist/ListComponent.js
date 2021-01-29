@@ -11,6 +11,8 @@ import Paper from '@material-ui/core/Paper'
 import FormGroup from '@material-ui/core/FormGroup'
 import FormControlLabel from '@material-ui/core/FormControlLabel'
 import Checkbox from '@material-ui/core/Checkbox'
+import Button from '@material-ui/core/Button'
+import XLSX from 'xlsx'
 
 export default class ListComponent extends Component {
   constructor (props) {
@@ -20,8 +22,13 @@ export default class ListComponent extends Component {
       autorizados: false,
       noautorizados: false,
       pendientes: false,
-      auto: ''
+      comprovado: false,
+      auto: '',
+      pend: '',
+      noauto: '',
+      comp: ''
     }
+    this.handleExcel = this.handleExcel.bind(this)
   }
 
   componentWillMount () {
@@ -32,50 +39,105 @@ export default class ListComponent extends Component {
     })
   }
 
-  toggleCheckAuto () {
+  toggleCheckAuto (event) {
     this.setState({
-      autorizados: !this.state.autorizados,
-      auto: 'Autorizado'
+      auto: event.target.name,
+      autorizados: !this.state.autorizados
     })
   }
 
-  toggleCheckNoAuto () {
+  toggleCheckNoAuto (event) {
     this.setState({
+      noauto: event.target.name,
       noautorizados: !this.state.noautorizados
     })
   }
 
-  toggleCheckPendientes () {
+  toggleCheckPendientes (event) {
     this.setState({
+      pend: event.target.name,
       pendientes: !this.state.pendientes
     })
   }
 
+  toggleCheckComprovado (event) {
+    this.setState({
+      comp: event.target.name,
+      comprovado: !this.state.comprovado
+    })
+  }
+
+  limpiar () {
+    this.setState({
+      auto: '',
+      autorizados: false,
+      pend: '',
+      pendientes: false,
+      noauto: '',
+      noautorizados: false,
+      comp: '',
+      comprovado: false
+    })
+  }
+
+  handleExcel () {
+    const vales = [['#V', '#C', 'AUTORIZADO', 'COMPOBADO', 'REEM/REIN', 'CONCEPTO',
+      'OFICIO S', 'AREA', 'TURNO', 'FACTURA', 'RECIBOS', 'S/C', 'FECHA', 'AUTORIZA', 'RECIBIO']]
+    this.state.vales.forEach((vale) => {
+      const valeArray = [vale.vale, vale.cheque, vale.cantidad, vale.cantidadc,
+        vale.cantidadr, vale.concepto, vale.oficioS, vale.area,
+        vale.turno, vale.factura, vale.recibos, vale.sc, vale.fecha,
+        vale.autorizo, vale.personaR]
+      vales.push(valeArray)
+    })
+    const wb = XLSX.utils.book_new()
+    const wsAll = XLSX.utils.aoa_to_sheet(vales)
+    XLSX.utils.book_append_sheet(wb, wsAll, 'Vales')
+    XLSX.writeFile(wb, 'Lista_Vales.xlsx')
+  }
+
   render () {
-    // const filterData = this.props.lista.filter(val => {
-    //   return val.concepto.indexOf(this.state.auto) !== -1
-    // })
-    const filterData = this.state.vales.filter(
-      (vales) => {
-        return vales.concepto.indexOf(this.state.auto) !== -1
-      }
-    )
+    const { auto, pend, noauto, comp } = this.state
+    const filteredData = this.state.vales.filter(val => {
+      return (auto.length && auto.includes(val.estatus)) ||
+        (pend.length && pend.includes(val.cheque)) ||
+        (noauto.length && noauto.includes(val.estatus)) ||
+        (comp.length && comp.includes(val.estatus))
+    })
 
     return (
       <div>
-        <FormGroup row>
+        <FormGroup row style={{ display: 'flex', justifyContent: 'space-between' }}>
           <FormControlLabel
-            control={<Checkbox checked={this.state.autorizados} onChange={this.toggleCheckAuto.bind(this)} name='autorizados' />}
-            label='autorizados'
+            control={<Checkbox checked={this.state.autorizados} onChange={this.toggleCheckAuto.bind(this)} name='Autorizado' />}
+            label='Autorizados'
           />
           <FormControlLabel
-            control={<Checkbox checked={this.state.noautorizados} onChange={this.toggleCheckNoAuto.bind(this)} name='noautorizados' />}
+            control={<Checkbox checked={this.state.noautorizados} onChange={this.toggleCheckNoAuto.bind(this)} name='Pendiente' />}
             label='No Autorizados'
           />
           <FormControlLabel
-            control={<Checkbox checked={this.state.pendientes} onChange={this.toggleCheckPendientes.bind(this)} name='pendientes' />}
+            control={<Checkbox checked={this.state.pendientes} onChange={this.toggleCheckPendientes.bind(this)} name='Pendiente' />}
             label='Pendientes'
           />
+          <FormControlLabel
+            control={<Checkbox checked={this.state.comprovado} onChange={this.toggleCheckComprovado.bind(this)} name='Comprobado' />}
+            label='Comprobados'
+          />
+          <Button
+            variant='contained'
+            color='primary'
+            onClick={this.limpiar.bind(this)}
+          >
+            Limpiar
+          </Button>
+          <Button
+            variant='contained'
+            style={{ background: 'green', color: 'white' }}
+            onClick={this.handleExcel}
+          >
+            Excel
+          </Button>
         </FormGroup>
         <TableContainer component={Paper}>
           <Table>
@@ -101,7 +163,7 @@ export default class ListComponent extends Component {
               </TableRow>
             </TableHead>
             {
-              filterData.map(item =>
+              filteredData.map(item =>
                 <RowComponent
                   key={item.id}
                   item={item}

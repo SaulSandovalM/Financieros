@@ -416,6 +416,7 @@ export default class Vales extends Component {
                         <option id='area'> - Dirección de Informatica, Estadistica y Telecomunicaciones</option>
                         <option id='area'> - Dirección de Recursos Materiales</option>
                         <option id='area'> - Dirección de Recursos Humanos</option>
+                        <option id='area'> - Dirección de Recursos Financieros</option>
                         <option id='area'> - Dirección de Enlace FASP</option>
                         <option id='area'> - Dirección de Coordinacion de Calidad</option>
                         <option id='area'> - Dirección de Archivo</option>
