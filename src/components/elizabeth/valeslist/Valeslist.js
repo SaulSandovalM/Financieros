@@ -77,7 +77,6 @@ export default class Valeslist extends Component {
       reader.onloadend = function () {
         var XMLParser = require('react-xml-parser')
         var xml = new XMLParser().parseFromString(reader.result)
-        console.log(xml)
         const data = {
           'total': xml.attributes['Total'],
           'subtotal': xml.attributes['SubTotal'] ? xml.attributes['SubTotal'] : 0,
@@ -244,38 +243,38 @@ export default class Valeslist extends Component {
 
   render () {
     return (
-      <div className='container-back' style={{ paddingTop: '60px' }}>
+      <div className='container-valeslist'>
         <form className='margin-f-a' onSubmit={this.sendMessage.bind(this)} ref='contactForm'>
-          <div className='p-container-fondor'>
-            <div className='p-margin-fr'>
-              <p className='p-title-size-fr'>
+          <div className='p-container-valeslist'>
+            <div className='p-margin-valeslist'>
+              <p className='p-title-size-valeslist'>
                 - Selecciona la carga de evidencias de tus comprobaciones
               </p>
             </div>
-            <div className='inputs-container-fr'>
-              <div className='inputs-col-ar'>
-                <div className='inputs-row-fr-2'>
-                  <div className='p-container-ar'>
+            <div className='inputs-container-valeslist'>
+              <div className='inputs-valeslist'>
+                <div className='inputs-row-valeslist'>
+                  <div className='p-container-valeslist'>
                     <TextField
                       label='Xml'
                       type='file'
                       onChange={this.handleOnChange1.bind(this)}
                     />
-                    <progress className='progress' value={this.state.xml} max='100'>
+                    <progress className='progress-valeslist' value={this.state.xml} max='100'>
                       {this.state.xml} %
                     </progress>
                   </div>
-                  <div className='p-container-ar'>
+                  <div className='p-container-valeslist'>
                     <TextField
                       label='Factura'
                       type='file'
                       onChange={this.handleOnChange2.bind(this)}
                     />
-                    <progress className='progress' value={this.state.pdf2} max='100'>
+                    <progress className='progress-valeslist' value={this.state.pdf2} max='100'>
                       {this.state.pdf2} %
                     </progress>
                   </div>
-                  <div className='p-container-ar'>
+                  <div className='p-container-valeslist'>
                     <TextField
                       label='Recibo'
                       type='number'
@@ -283,21 +282,13 @@ export default class Valeslist extends Component {
                       value={this.state.filerecibo} onChange={this.handleChange.bind(this)}
                     />
                   </div>
-                  <div className='p-container-ar'>
-                    <TextField
-                      label='Ingresar Num. Cheque'
-                      type='text'
-                      name='chequea'
-                      value={this.state.chequea} onChange={this.handleChange.bind(this)}
-                    />
-                  </div>
                 </div>
               </div>
             </div>
           </div>
         </form>
-        <div className='caja-w' style={{ background: '#f4f4f4' }}>
-          <div className='caja-col'>
+        <div className='title-tb-valeslist'>
+          <div className='caja-valeslist'>
             <ListComponent
               lista={this.state.lista}
               update={this.update}

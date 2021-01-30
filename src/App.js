@@ -24,11 +24,6 @@ import CargaC from './components/cecilia/cargacontra/CargaC'
 import Caja from './components/elizabeth/caja/Caja'
 import Cheques from './components/elizabeth/cheques/Cheques'
 import Vales from './components/elizabeth/vales/Vales'
-import EditVale from './components/elizabeth/vales/EditVale'
-import ListValesA from './components/elizabeth/listavales/ListValesA' // Autorizados
-import ListValesP from './components/elizabeth/listavales/ListValesP' // Vales Pendientes de Autorizacion Nayra
-import ListValesN from './components/elizabeth/listavales/ListValesN' // Pendientes de numero de cheques
-import ListArchivosV from './components/elizabeth/listavales/ListArchivosV'
 import Autorizacion from './components/elizabeth/autorizacion/Autorizacion'
 import Valeslist from './components/elizabeth/valeslist/Valeslist'
 import Arqueo from './components/elizabeth/arqueo/Arqueo'
@@ -180,41 +175,6 @@ function App (props) {
         exact
         path='/Vales'
         component={Vales}
-        isAuthenticated={isAuthenticated}
-        isVerifying={isVerifying}
-      />
-      <ProtectedRoute
-        exact
-        path='/EditVale'
-        component={EditVale}
-        isAuthenticated={isAuthenticated}
-        isVerifying={isVerifying}
-      />
-      <ProtectedRoute
-        exact
-        path='/ListValesP'
-        component={ListValesP}
-        isAuthenticated={isAuthenticated}
-        isVerifying={isVerifying}
-      />
-      <ProtectedRoute
-        exact
-        path='/ListValesA'
-        component={ListValesA}
-        isAuthenticated={isAuthenticated}
-        isVerifying={isVerifying}
-      />
-      <ProtectedRoute
-        exact
-        path='/ListArchivosV'
-        component={ListArchivosV}
-        isAuthenticated={isAuthenticated}
-        isVerifying={isVerifying}
-      />
-      <ProtectedRoute
-        exact
-        path='/ListValesN'
-        component={ListValesN}
         isAuthenticated={isAuthenticated}
         isVerifying={isVerifying}
       />

@@ -104,41 +104,6 @@ class NavE extends Component {
                   </Typography>
                 </Link>
               </div>
-              {/*<div className='subnav'>
-                <Link to='/EditVale' className='deco'>
-                  <Typography className='nav-t' style={{ marginBottom: '15px', color: 'white' }}>
-                    • Editar Vales
-                  </Typography>
-                </Link>
-              </div>*/}
-              {/*<div className='subnav'>
-                <Link to='/ListValesA' className='deco'>
-                  <Typography className='nav-t' style={{ marginBottom: '15px', color: 'white' }}>
-                    • Autorizados
-                  </Typography>
-                </Link>
-              </div>
-              <div className='subnav'>
-                <Link to='/ListValesP' className='deco'>
-                  <Typography className='nav-t' style={{ marginBottom: '15px', color: 'white' }}>
-                    • No Autorizados
-                  </Typography>
-                </Link>
-              </div>
-              <div className='subnav'>
-                <Link to='/ListValesN' className='deco'>
-                  <Typography className='nav-t' style={{ marginBottom: '15px', color: 'white' }}>
-                    • Pendientes
-                  </Typography>
-                </Link>
-              </div>
-              <div className='subnav'>
-                <Link to='/ListArchivosV' className='deco'>
-                  <Typography className='nav-t' style={{ marginBottom: '15px', color: 'white' }}>
-                    • Archivos Vales
-                  </Typography>
-                </Link>
-              </div>*/}
               <div className='subnav'>
                 <Link to='/Valeslist' className='deco'>
                   <Typography className='nav-t' style={{ marginBottom: '15px', color: 'white' }}>
