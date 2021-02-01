@@ -40,7 +40,7 @@ export default class Valeslist extends Component {
       filef: '',
       filer: '',
       filexml: '0',
-      filefactura: '',
+      filefactura: [],
       filerecibo: '0',
       autorizados: false,
       noautorizados: false,
@@ -66,7 +66,7 @@ export default class Valeslist extends Component {
     }, () =>  storageRef.getDownloadURL().then(url =>  {
       const record = url
       this.setState({
-        filefactura: record
+        filexml: record
       })
     }))
     const files = event.target.files
@@ -122,6 +122,7 @@ export default class Valeslist extends Component {
       this.setState({
         filefactura: record
       })
+      console.log(this.state.filefactura)
     }))
   }
 
