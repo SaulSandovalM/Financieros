@@ -84,16 +84,16 @@ export default class RowComponent extends Component {
             decimalSeparator='.'
           />
         </TableCell>
-        <TableCell className='table-v-num2' style={{ width: '150px' }}>
+        <TableCell className='table-v-num2'>
           {this.props.item.concepto}
         </TableCell>
-        {/*<TableCell className='table-v-num2'>
+        <TableCell className='table-v-num2'>
           {this.props.item.oficioS}
-        </TableCell>*/}
-        <TableCell className='table-v-num2' style={{ width: '150px' }}>
+        </TableCell>
+        <TableCell className='table-v-num2'>
           {this.props.item.area}
         </TableCell>
-        {/*<TableCell className='table-v-num2'>
+        <TableCell className='table-v-num2'>
           {this.props.item.turno}
         </TableCell>
         <TableCell className='table-v-num2'>
@@ -110,7 +110,7 @@ export default class RowComponent extends Component {
         </TableCell>
         <TableCell className='table-v-num2'>
           {this.props.item.personaR}
-        </TableCell>*/}
+        </TableCell>
         <TableCell className='table-v-num2'>
           {this.props.item.estatus}
         </TableCell>
@@ -138,7 +138,7 @@ export default class RowComponent extends Component {
                 <Typography variant="h6" gutterBottom component="div">
                   Archivos
                 </Typography>
-                <Table size="small" aria-label="purchases" style={{ borderLeft: '0px solid #fff' }}>
+                <Table size="small" aria-label="purchases">
                   <TableHead>
                     <TableRow>
                       <TableCell
@@ -183,7 +183,6 @@ export default class RowComponent extends Component {
                           borderRight: '0px solid #fff'
                         }}
                       >
-
                       </TableCell>
                     </TableRow>
                   </TableBody>

@@ -35,7 +35,7 @@ export default class Sumatoria extends Component {
               decimalSeparator='.'
             />
           </TableCell>
-          <TableCell className='table-v-num'>
+          <TableCell className='table-v-num' style={{ fontWeight: '' }}>
             <CurrencyFormat
               value={this.props.item.cantidadc}
               displayType='text'
@@ -62,15 +62,15 @@ export default class Sumatoria extends Component {
               decimalSeparator='.'
             />
           </TableCell>
-          <TableCell className='table-v-num' style={{ width: '150px' }}></TableCell>
-          {/*<TableCell className='table-v-num'><b>Oficio S</b></TableCell>*/}
-          <TableCell className='table-v-num' style={{ width: '150px' }}></TableCell>
-          {/*<TableCell className='table-v-num'><b>Turno</b></TableCell>
-          <TableCell className='table-v-num'><b>Facturas</b></TableCell>
-          <TableCell className='table-v-num'><b>Recibos</b></TableCell>
-          <TableCell className='table-v-num'><b>S/C</b></TableCell>
-          <TableCell className='table-v-num'><b>Fecha</b></TableCell>
-          <TableCell className='table-v-num'><b>Autorizo</b></TableCell>*/}
+          <TableCell className='table-v-num'></TableCell>
+          <TableCell className='table-v-num'></TableCell>
+          <TableCell className='table-v-num'></TableCell>
+          <TableCell className='table-v-num'></TableCell>
+          <TableCell className='table-v-num'></TableCell>
+          <TableCell className='table-v-num'></TableCell>
+          <TableCell className='table-v-num'></TableCell>
+          <TableCell className='table-v-num'></TableCell>
+          <TableCell className='table-v-num'></TableCell>
           <TableCell className='table-v-num'></TableCell>
           <TableCell className='table-v-num'></TableCell>
         </TableRow>

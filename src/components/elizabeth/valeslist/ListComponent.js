@@ -185,37 +185,30 @@ export default class ListComponent extends Component {
                 <TableCell className='table-v-num'><b>Comprobado</b></TableCell>
                 <TableCell className='table-v-num'><b>Reintegro</b></TableCell>
                 <TableCell className='table-v-num'><b>Reembolso</b></TableCell>
-                <TableCell className='table-v-num' style={{ width: '150px' }}><b>Concepto</b></TableCell>
-                {/*<TableCell className='table-v-num'><b>Oficio S</b></TableCell>*/}
-                <TableCell className='table-v-num' style={{ width: '150px' }}><b>Área</b></TableCell>
-                {/*<TableCell className='table-v-num'><b>Turno</b></TableCell>
+                <TableCell className='table-v-num'><b>Concepto</b></TableCell>
+                <TableCell className='table-v-num'><b>Oficio S</b></TableCell>
+                <TableCell className='table-v-num'><b>Área</b></TableCell>
+                <TableCell className='table-v-num'><b>Turno</b></TableCell>
                 <TableCell className='table-v-num'><b>Facturas</b></TableCell>
                 <TableCell className='table-v-num'><b>Recibos</b></TableCell>
                 <TableCell className='table-v-num'><b>S/C</b></TableCell>
                 <TableCell className='table-v-num'><b>Fecha</b></TableCell>
-                <TableCell className='table-v-num'><b>Autorizo</b></TableCell>*/}
+                <TableCell className='table-v-num'><b>Autorizo</b></TableCell>
                 <TableCell className='table-v-num'><b>Estatus</b></TableCell>
                 <TableCell className='table-v-num'><b>Comprobantes</b></TableCell>
               </TableRow>
             </TableHead>
-            {
-              filteredData.map(item =>
-                <RowComponent
-                  key={item.id}
-                  item={item}
-                  update={this.props.update}
-                />
-              )
-            }
-            {
-              filteredData.map(item =>
-                <Sumatoria
-                  key={item.id}
-                  item={item}
-                  update={this.props.update}
-                />
-              )
-            }
+            <div style={{ display: 'flex', flexDirection: 'column', overflowY: 'scroll', height: '54vh' }}>
+              {
+                filteredData.map(item =>
+                  <RowComponent
+                    key={item.id}
+                    item={item}
+                    update={this.props.update}
+                  />
+                )
+              }
+            </div>
           </Table>
         </TableContainer>
       </div>

@@ -284,15 +284,6 @@ export default class Valeslist extends Component {
                       onChange={this.handleChange.bind(this)}
                     />
                   </div>
-                  <div className='p-container-valeslist' style={{ marginTop: '13px' }}>
-                    <TextField
-                      label='Pasa/No Pasa'
-                      type='checkbox'
-                      name='filerecibo'
-                      value={this.state.filerecibo}
-                      onChange={this.handleChange.bind(this)}
-                    />
-                  </div>
                 </div>
               </div>
             </div>
