@@ -76,15 +76,24 @@ export default class RowComponent extends Component {
           />
         </TableCell>
         <TableCell className='table-v-num2'>
+          <CurrencyFormat
+            value={this.props.item.cantidadr}
+            displayType='text'
+            prefix=' $'
+            thousandSeparator
+            decimalSeparator='.'
+          />
+        </TableCell>
+        <TableCell className='table-v-num2' style={{ width: '150px' }}>
           {this.props.item.concepto}
         </TableCell>
-        <TableCell className='table-v-num2'>
+        {/*<TableCell className='table-v-num2'>
           {this.props.item.oficioS}
-        </TableCell>
-        <TableCell className='table-v-num2'>
+        </TableCell>*/}
+        <TableCell className='table-v-num2' style={{ width: '150px' }}>
           {this.props.item.area}
         </TableCell>
-        <TableCell className='table-v-num2'>
+        {/*<TableCell className='table-v-num2'>
           {this.props.item.turno}
         </TableCell>
         <TableCell className='table-v-num2'>
@@ -101,7 +110,7 @@ export default class RowComponent extends Component {
         </TableCell>
         <TableCell className='table-v-num2'>
           {this.props.item.personaR}
-        </TableCell>
+        </TableCell>*/}
         <TableCell className='table-v-num2'>
           {this.props.item.estatus}
         </TableCell>
@@ -115,45 +124,74 @@ export default class RowComponent extends Component {
           </Button>
         </TableCell>
         <TableRow>
-        <TableCell
-          style={{
-            paddingBottom: 0,
-            paddingTop: 0,
-            borderLeft: '0px solid #fff',
-            borderRight: '0px solid #fff'
-          }}
-          colSpan={17}
-        >
-          <Collapse in={this.state.open} timeout="auto" unmountOnExit>
-            <Box margin={1}>
-              <Typography variant="h6" gutterBottom component="div">
-                Archivos
-              </Typography>
-              <Table size="small" aria-label="purchases" style={{ borderLeft: '0px solid #fff' }}>
-                <TableHead>
-                  <TableRow>
-                    <TableCell style={{ borderLeft: '0px solid #fff', borderTop: '0px solid #fff', borderRight: '0px solid #fff' }}>Date</TableCell>
-                    <TableCell style={{ borderLeft: '0px solid #fff', borderTop: '0px solid #fff', borderRight: '0px solid #fff' }}>Customer</TableCell>
-                    <TableCell align="right" style={{ borderLeft: '0px solid #fff', borderTop: '0px solid #fff', borderRight: '0px solid #fff' }}>Amount</TableCell>
-                    <TableCell align="right" style={{ borderLeft: '0px solid #fff', borderTop: '0px solid #fff', borderRight: '0px solid #fff' }}>Total price ($)</TableCell>
-                  </TableRow>
-                </TableHead>
-                <TableBody>
-
+          <TableCell
+            style={{
+              paddingBottom: 0,
+              paddingTop: 0,
+              borderLeft: '0px solid #fff',
+              borderRight: '0px solid #fff'
+            }}
+            colSpan={17}
+          >
+            <Collapse in={this.state.open} timeout="auto" unmountOnExit>
+              <Box margin={1}>
+                <Typography variant="h6" gutterBottom component="div">
+                  Archivos
+                </Typography>
+                <Table size="small" aria-label="purchases" style={{ borderLeft: '0px solid #fff' }}>
+                  <TableHead>
                     <TableRow>
-                      <TableCell component="th" scope="row" style={{ borderLeft: '0px solid #fff', borderTop: '0px solid #fff', borderRight: '0px solid #fff' }}>
-                        Dato
+                      <TableCell
+                        style={{
+                          borderLeft: '0px solid #fff',
+                          borderTop: '0px solid #fff',
+                          borderRight: '0px solid #fff'
+                        }}
+                      >
+                        Facturas
                       </TableCell>
-                      <TableCell style={{ borderLeft: '0px solid #fff', borderTop: '0px solid #fff', borderRight: '0px solid #fff' }}>Dato 1</TableCell>
-                      <TableCell align="right" style={{ borderLeft: '0px solid #fff', borderTop: '0px solid #fff', borderRight: '0px solid #fff' }}>Dato 2</TableCell>
-                      <TableCell align="right" style={{ borderLeft: '0px solid #fff', borderTop: '0px solid #fff', borderRight: '0px solid #fff' }}>Dato 3</TableCell>
+                      <TableCell
+                        align="right"
+                        style={{
+                          borderLeft: '0px solid #fff',
+                          borderTop: '0px solid #fff',
+                          borderRight: '0px solid #fff'
+                        }}
+                      >
+                        Total ($)
+                      </TableCell>
                     </TableRow>
-                </TableBody>
-              </Table>
-            </Box>
-          </Collapse>
-        </TableCell>
-      </TableRow>
+                  </TableHead>
+                  <TableBody>
+                    <TableRow>
+                      <TableCell
+                        component="th"
+                        scope="row"
+                        style={{
+                          borderLeft: '0px solid #fff',
+                          borderTop: '0px solid #fff',
+                          borderRight: '0px solid #fff'
+                        }}
+                      >
+                        {this.props.item.filefactura}
+                      </TableCell>
+                      <TableCell
+                        align="right"
+                        style={{
+                          borderLeft: '0px solid #fff',
+                          borderTop: '0px solid #fff',
+                          borderRight: '0px solid #fff'
+                        }}
+                      >
+
+                      </TableCell>
+                    </TableRow>
+                  </TableBody>
+                </Table>
+              </Box>
+            </Collapse>
+          </TableCell>
+        </TableRow>
       </TableBody>
     )
   }

@@ -172,13 +172,13 @@ export default class Valeslist extends Component {
           filexml: child.val().filexml,
           filefactura: child.val().filefactura,
           filerecibo: child.val().filerecibo,
-          done: child.val().done,
           id: child.key
         })
       })
       this.setState({
         lista: lista
       })
+      console.log(this.state.lista)
     })
   }
 
@@ -280,7 +280,17 @@ export default class Valeslist extends Component {
                       label='Recibo'
                       type='number'
                       name='filerecibo'
-                      value={this.state.filerecibo} onChange={this.handleChange.bind(this)}
+                      value={this.state.filerecibo}
+                      onChange={this.handleChange.bind(this)}
+                    />
+                  </div>
+                  <div className='p-container-valeslist' style={{ marginTop: '13px' }}>
+                    <TextField
+                      label='Pasa/No Pasa'
+                      type='checkbox'
+                      name='filerecibo'
+                      value={this.state.filerecibo}
+                      onChange={this.handleChange.bind(this)}
                     />
                   </div>
                 </div>

@@ -13,6 +13,7 @@ import FormControlLabel from '@material-ui/core/FormControlLabel'
 import Checkbox from '@material-ui/core/Checkbox'
 import Button from '@material-ui/core/Button'
 import XLSX from 'xlsx'
+import Sumatoria from './Sumatoria'
 
 export default class ListComponent extends Component {
   constructor (props) {
@@ -98,30 +99,64 @@ export default class ListComponent extends Component {
 
   render () {
     const { auto, pend, noauto, comp } = this.state
-    const filteredData = this.state.vales.filter(val => {
-      return (auto.length && auto.includes(val.estatus)) ||
-        (pend.length && pend.includes(val.cheque)) ||
-        (noauto.length && noauto.includes(val.estatus)) ||
-        (comp.length && comp.includes(val.estatus))
+    const filteredData = this.state.vales.filter(
+      (item) => {
+        return (auto.length && auto.includes(item.estatus)) ||
+        (pend.length && pend.includes(item.cheque)) ||
+        (noauto.length && noauto.includes(item.estatus)) ||
+        (comp.length && comp.includes(item.estatus))
+      }
+    )
+
+    let i = 0
+    let total = this.state.vales.map((x, i) => {
+      let val = parseInt(x.price)
+      i += val
+      return i
+      console.log('suma ', i)
     })
 
     return (
       <div>
         <FormGroup row style={{ display: 'flex', justifyContent: 'space-between' }}>
           <FormControlLabel
-            control={<Checkbox checked={this.state.autorizados} onChange={this.toggleCheckAuto.bind(this)} name='Autorizado' />}
+            control={
+              <Checkbox
+                checked={this.state.autorizados}
+                onChange={this.toggleCheckAuto.bind(this)}
+                name='Autorizado'
+              />
+            }
             label='Autorizados'
           />
           <FormControlLabel
-            control={<Checkbox checked={this.state.noautorizados} onChange={this.toggleCheckNoAuto.bind(this)} name='Pendiente' />}
+            control={
+              <Checkbox
+                checked={this.state.noautorizados}
+                onChange={this.toggleCheckNoAuto.bind(this)}
+                name='Pendiente'
+              />
+            }
             label='No Autorizados'
           />
           <FormControlLabel
-            control={<Checkbox checked={this.state.pendientes} onChange={this.toggleCheckPendientes.bind(this)} name='Pendiente' />}
+            control={
+              <Checkbox
+                checked={this.state.pendientes}
+                onChange={this.toggleCheckPendientes.bind(this)}
+                name='Pendiente'
+              />
+            }
             label='Pendientes'
           />
           <FormControlLabel
-            control={<Checkbox checked={this.state.comprovado} onChange={this.toggleCheckComprovado.bind(this)} name='Comprobado' />}
+            control={
+              <Checkbox
+                checked={this.state.comprovado}
+                onChange={this.toggleCheckComprovado.bind(this)}
+                name='Comprobado'
+              />
+            }
             label='Comprobados'
           />
           <Button
@@ -148,16 +183,17 @@ export default class ListComponent extends Component {
                 <TableCell className='table-v-num'><b>Cheques</b></TableCell>
                 <TableCell className='table-v-num'><b>Autorizado</b></TableCell>
                 <TableCell className='table-v-num'><b>Comprobado</b></TableCell>
-                <TableCell className='table-v-num'><b>Rein/Reem</b></TableCell>
-                <TableCell className='table-v-num'><b>Concepto</b></TableCell>
-                <TableCell className='table-v-num'><b>Oficio S</b></TableCell>
-                <TableCell className='table-v-num'><b>Área</b></TableCell>
-                <TableCell className='table-v-num'><b>Turno</b></TableCell>
+                <TableCell className='table-v-num'><b>Reintegro</b></TableCell>
+                <TableCell className='table-v-num'><b>Reembolso</b></TableCell>
+                <TableCell className='table-v-num' style={{ width: '150px' }}><b>Concepto</b></TableCell>
+                {/*<TableCell className='table-v-num'><b>Oficio S</b></TableCell>*/}
+                <TableCell className='table-v-num' style={{ width: '150px' }}><b>Área</b></TableCell>
+                {/*<TableCell className='table-v-num'><b>Turno</b></TableCell>
                 <TableCell className='table-v-num'><b>Facturas</b></TableCell>
                 <TableCell className='table-v-num'><b>Recibos</b></TableCell>
                 <TableCell className='table-v-num'><b>S/C</b></TableCell>
                 <TableCell className='table-v-num'><b>Fecha</b></TableCell>
-                <TableCell className='table-v-num'><b>Autorizo</b></TableCell>
+                <TableCell className='table-v-num'><b>Autorizo</b></TableCell>*/}
                 <TableCell className='table-v-num'><b>Estatus</b></TableCell>
                 <TableCell className='table-v-num'><b>Comprobantes</b></TableCell>
               </TableRow>
@@ -165,6 +201,15 @@ export default class ListComponent extends Component {
             {
               filteredData.map(item =>
                 <RowComponent
+                  key={item.id}
+                  item={item}
+                  update={this.props.update}
+                />
+              )
+            }
+            {
+              filteredData.map(item =>
+                <Sumatoria
                   key={item.id}
                   item={item}
                   update={this.props.update}
