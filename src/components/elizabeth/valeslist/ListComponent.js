@@ -13,7 +13,7 @@ import FormControlLabel from '@material-ui/core/FormControlLabel'
 import Checkbox from '@material-ui/core/Checkbox'
 import Button from '@material-ui/core/Button'
 import XLSX from 'xlsx'
-import Sumatoria from './Sumatoria'
+import CurrencyFormat from 'react-currency-format'
 
 export default class ListComponent extends Component {
   constructor (props) {
@@ -27,7 +27,8 @@ export default class ListComponent extends Component {
       auto: '',
       pend: '',
       noauto: '',
-      comp: ''
+      comp: '',
+      tcantidad1: ''
     }
     this.handleExcel = this.handleExcel.bind(this)
   }
@@ -99,22 +100,35 @@ export default class ListComponent extends Component {
 
   render () {
     const { auto, pend, noauto, comp } = this.state
-    const filteredData = this.state.vales.filter(
-      (item) => {
-        return (auto.length && auto.includes(item.estatus)) ||
-        (pend.length && pend.includes(item.cheque)) ||
-        (noauto.length && noauto.includes(item.estatus)) ||
-        (comp.length && comp.includes(item.estatus))
+    const filteredData = this.props.lista.filter(
+      (vales) => {
+        return (auto.length && auto.includes(vales.estatus)) ||
+        (pend.length && pend.includes(vales.cheque)) ||
+        (noauto.length && noauto.includes(vales.estatus)) ||
+        (comp.length && comp.includes(vales.estatus))
       }
     )
 
-    let i = 0
-    let total = this.state.vales.map((x, i) => {
-      let val = parseInt(x.price)
-      i += val
-      return i
-      console.log('suma ', i)
-    })
+    const total1 = [0]
+    filteredData.map(items => (
+      total1.push(parseFloat(items.cantidad))
+    ))
+    const tt1 = (a, b) => a + b
+    this.state.tcantidad1 = total1.reduce(tt1)
+
+    const total2 = [0]
+    filteredData.map(items => (
+      total2.push(parseFloat(items.cantidad))
+    ))
+    const tt2 = (a, b) => a + b
+    this.state.tcantidad2 = total2.reduce(tt2)
+
+    const total3 = [0]
+    filteredData.map(items => (
+      total3.push(parseFloat(items.cantidad))
+    ))
+    const tt3 = (a, b) => a + b
+    this.state.tcantidad3 = total3.reduce(tt3)
 
     return (
       <div>
@@ -174,41 +188,101 @@ export default class ListComponent extends Component {
             Excel
           </Button>
         </FormGroup>
-        <TableContainer component={Paper}>
+        <TableContainer component={Paper} style={{ maxWidth: '100%', height: '68vh' }}>
           <Table>
             <TableHead>
-              <TableRow>
-                <TableCell className='border-icon' />
-                <TableCell className='table-v-num'><b>Vales</b></TableCell>
-                <TableCell className='table-v-num'><b>Cheques</b></TableCell>
-                <TableCell className='table-v-num'><b>Autorizado</b></TableCell>
-                <TableCell className='table-v-num'><b>Comprobado</b></TableCell>
-                <TableCell className='table-v-num'><b>Reintegro</b></TableCell>
-                <TableCell className='table-v-num'><b>Reembolso</b></TableCell>
-                <TableCell className='table-v-num'><b>Concepto</b></TableCell>
-                <TableCell className='table-v-num'><b>Oficio S</b></TableCell>
-                <TableCell className='table-v-num'><b>Área</b></TableCell>
-                <TableCell className='table-v-num'><b>Turno</b></TableCell>
-                <TableCell className='table-v-num'><b>Facturas</b></TableCell>
-                <TableCell className='table-v-num'><b>Recibos</b></TableCell>
-                <TableCell className='table-v-num'><b>S/C</b></TableCell>
-                <TableCell className='table-v-num'><b>Fecha</b></TableCell>
-                <TableCell className='table-v-num'><b>Autorizo</b></TableCell>
-                <TableCell className='table-v-num'><b>Estatus</b></TableCell>
-                <TableCell className='table-v-num'><b>Comprobantes</b></TableCell>
+              <TableRow style={{ display: 'flex', flexDirection: 'row', position: 'sticky', top: '0', background: 'white', zIndex: '3' }}>
+                <TableCell className='border-icon' style={{ width: '50px' }} />
+                <TableCell className='table-v-num' style={{ width: '100px' }}><b>Vales</b></TableCell>
+                <TableCell className='table-v-num' style={{ width: '100px' }}><b>Cheques</b></TableCell>
+                <TableCell className='table-v-num' style={{ width: '100px' }}><b>Autorizado</b></TableCell>
+                <TableCell className='table-v-num' style={{ width: '100px' }}><b>Comprobado</b></TableCell>
+                <TableCell className='table-v-num' style={{ width: '100px' }}><b>Reintegro</b></TableCell>
+                <TableCell className='table-v-num' style={{ width: '100px' }}><b>Reembolso</b></TableCell>
+                <TableCell className='table-v-num' style={{ width: '800px' }}><b>Concepto</b></TableCell>
+                <TableCell className='table-v-num' style={{ width: '800px' }}><b>Oficio S</b></TableCell>
+                <TableCell className='table-v-num' style={{ width: '800px' }}><b>Área</b></TableCell>
+                <TableCell className='table-v-num' style={{ width: '100px' }}><b>Turno</b></TableCell>
+                <TableCell className='table-v-num' style={{ width: '100px' }}><b>Facturas</b></TableCell>
+                <TableCell className='table-v-num' style={{ width: '100px' }}><b>Recibos</b></TableCell>
+                <TableCell className='table-v-num' style={{ width: '100px' }}><b>S/C</b></TableCell>
+                <TableCell className='table-v-num' style={{ width: '100px' }}><b>Fecha</b></TableCell>
+                <TableCell className='table-v-num' style={{ width: '300px' }}><b>Autorizo</b></TableCell>
+                <TableCell className='table-v-num' style={{ width: '100px' }}><b>Pasa/NoPasa</b></TableCell>
+                <TableCell className='table-v-num' style={{ width: '100px' }}><b>Estatus</b></TableCell>
+                <TableCell className='table-v-num' style={{ width: '100px' }}><b>Comprobantes</b></TableCell>
               </TableRow>
             </TableHead>
-            <div style={{ display: 'flex', flexDirection: 'column', overflowY: 'scroll', height: '54vh' }}>
-              {
-                filteredData.map(item =>
-                  <RowComponent
-                    key={item.id}
-                    item={item}
-                    update={this.props.update}
+            {
+              filteredData.map(item =>
+                <RowComponent
+                  key={item.id}
+                  item={item}
+                  update={this.props.update}
+                />
+              )
+            }
+            <TableRow style={{ display: 'flex', flexDirection: 'row', position: 'sticky', top: '0', background: 'white', zIndex: '3' }}>
+              <TableCell className='border-icon' style={{ width: '50px' }} />
+              <TableCell className='table-v-num' style={{ width: '100px' }} />
+              <TableCell className='table-v-num' style={{ width: '100px' }} />
+              <TableCell className='table-v-num' style={{ width: '100px' }}>
+                <b>
+                  <CurrencyFormat
+                    value={this.state.tcantidad1}
+                    displayType='text'
+                    prefix=' $'
+                    thousandSeparator
+                    decimalSeparator='.'
                   />
-                )
-              }
-            </div>
+                </b>
+              </TableCell>
+              <TableCell className='table-v-num' style={{ width: '100px' }}>
+                <b>
+                  <CurrencyFormat
+                    value={this.state.tcantidad2}
+                    displayType='text'
+                    prefix=' $'
+                    thousandSeparator
+                    decimalSeparator='.'
+                  />
+                </b>
+              </TableCell>
+              <TableCell className='table-v-num' style={{ width: '100px' }}>
+                <b>
+                  <CurrencyFormat
+                    value={this.state.tcantidad3}
+                    displayType='text'
+                    prefix=' $'
+                    thousandSeparator
+                    decimalSeparator='.'
+                  />
+                </b>
+              </TableCell>
+              <TableCell className='table-v-num' style={{ width: '100px' }}>
+                <b>
+                  <CurrencyFormat
+                    value={this.state.tcantidad3}
+                    displayType='text'
+                    prefix=' $'
+                    thousandSeparator
+                    decimalSeparator='.'
+                  />
+                </b>
+              </TableCell>
+              <TableCell className='table-v-num' style={{ width: '800px' }} />
+              <TableCell className='table-v-num' style={{ width: '800px' }} />
+              <TableCell className='table-v-num' style={{ width: '800px' }} />
+              <TableCell className='table-v-num' style={{ width: '100px' }} />
+              <TableCell className='table-v-num' style={{ width: '100px' }} />
+              <TableCell className='table-v-num' style={{ width: '100px' }} />
+              <TableCell className='table-v-num' style={{ width: '100px' }} />
+              <TableCell className='table-v-num' style={{ width: '100px' }} />
+              <TableCell className='table-v-num' style={{ width: '100px' }} />
+              <TableCell className='table-v-num' style={{ width: '100px' }} />
+              <TableCell className='table-v-num' style={{ width: '100px' }} />
+              <TableCell className='table-v-num' style={{ width: '100px' }} />
+            </TableRow>
           </Table>
         </TableContainer>
       </div>

@@ -618,15 +618,9 @@ select {
   -webkit-box-orient: vertical;
 }
 .table-v-num2 {
-  width: auto;
-  border-right: white;
   border-left: 0;
+  border-right: white;
   border-top: 0;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  display: -webkit-box;
-  -webkit-line-clamp: 1;
-  -webkit-box-orient: vertical;
 }
 .table-v-importe {
   width: 15%;

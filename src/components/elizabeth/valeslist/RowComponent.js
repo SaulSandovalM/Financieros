@@ -37,97 +37,103 @@ export default class RowComponent extends Component {
   render () {
     return (
       <TableBody>
-        <TableCell className='border-icon'>
-          <IconButton size='small' onClick={this.toggleOpen.bind(this)}>
-            {this.state.open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
-          </IconButton>
-        </TableCell>
-        <TableCell className='table-v-num2'>
-          {this.props.item.vale}
-        </TableCell>
-        <TableCell className='table-v-num2'>
-          {this.props.item.cheque}
-        </TableCell>
-        <TableCell className='table-v-num2'>
-          <CurrencyFormat
-            value={this.props.item.cantidad}
-            displayType='text'
-            prefix=' $'
-            thousandSeparator
-            decimalSeparator='.'
-          />
-        </TableCell>
-        <TableCell className='table-v-num2'>
-          <CurrencyFormat
-            value={this.props.item.cantidadc}
-            displayType='text'
-            prefix=' $'
-            thousandSeparator
-            decimalSeparator='.'
-          />
-        </TableCell>
-        <TableCell className='table-v-num2'>
-          <CurrencyFormat
-            value={this.props.item.cantidadr}
-            displayType='text'
-            prefix=' $'
-            thousandSeparator
-            decimalSeparator='.'
-          />
-        </TableCell>
-        <TableCell className='table-v-num2'>
-          <CurrencyFormat
-            value={this.props.item.cantidadr}
-            displayType='text'
-            prefix=' $'
-            thousandSeparator
-            decimalSeparator='.'
-          />
-        </TableCell>
-        <TableCell className='table-v-num2'>
-          {this.props.item.concepto}
-        </TableCell>
-        <TableCell className='table-v-num2'>
-          {this.props.item.oficioS}
-        </TableCell>
-        <TableCell className='table-v-num2'>
-          {this.props.item.area}
-        </TableCell>
-        <TableCell className='table-v-num2'>
-          {this.props.item.turno}
-        </TableCell>
-        <TableCell className='table-v-num2'>
-          {this.props.item.factura}
-        </TableCell>
-        <TableCell className='table-v-num2'>
-          {this.props.item.recibos}
-        </TableCell>
-        <TableCell className='table-v-num2'>
-          {this.props.item.sc}
-        </TableCell>
-        <TableCell className='table-v-num2'>
-          {this.props.item.fecha}
-        </TableCell>
-        <TableCell className='table-v-num2'>
-          {this.props.item.personaR}
-        </TableCell>
-        <TableCell className='table-v-num2'>
-          {this.props.item.estatus}
-        </TableCell>
-        <TableCell className='table-v-num2'>
-          <Button
-            variant='contained'
-            color='primary'
-            onClick={this.update}
-          >
-            Agregar
-          </Button>
-        </TableCell>
+        <div style={{ display: 'flex', flexDirection: 'row', maxWidth: '100%' }}>
+          <TableCell className='border-icon' style={{ width: '50px' }}>
+            <IconButton size='small' onClick={this.toggleOpen.bind(this)}>
+              {this.state.open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
+            </IconButton>
+          </TableCell>
+          <TableCell className='table-v-num2' style={{ width: '100px' }}>
+            {this.props.item.vale}
+          </TableCell>
+          <TableCell className='table-v-num2' style={{ width: '100px' }}>
+            {this.props.item.cheque}
+          </TableCell>
+          <TableCell className='table-v-num2' style={{ width: '100px' }}>
+            <CurrencyFormat
+              value={this.props.item.cantidad}
+              displayType='text'
+              prefix=' $'
+              thousandSeparator
+              decimalSeparator='.'
+            />
+          </TableCell>
+          <TableCell className='table-v-num2' style={{ width: '100px' }}>
+            <CurrencyFormat
+              value={this.props.item.cantidadc}
+              displayType='text'
+              prefix=' $'
+              thousandSeparator
+              decimalSeparator='.'
+            />
+          </TableCell>
+          <TableCell className='table-v-num2' style={{ width: '100px' }}>
+            <CurrencyFormat
+              value={this.props.item.cantidadr}
+              displayType='text'
+              prefix=' $'
+              thousandSeparator
+              decimalSeparator='.'
+            />
+          </TableCell>
+          <TableCell className='table-v-num2' style={{ width: '100px' }}>
+            <CurrencyFormat
+              value={this.props.item.cantidadr}
+              displayType='text'
+              prefix=' $'
+              thousandSeparator
+              decimalSeparator='.'
+            />
+          </TableCell>
+          <TableCell className='table-v-num2' style={{ width: '800px' }}>
+            {this.props.item.concepto}
+          </TableCell>
+          <TableCell className='table-v-num2' style={{ width: '800px' }}>
+            {this.props.item.oficioS}
+          </TableCell>
+          <TableCell className='table-v-num2' style={{ width: '800px' }}>
+            {this.props.item.area}
+          </TableCell>
+          <TableCell className='table-v-num2' style={{ width: '100px' }}>
+            {this.props.item.turno}
+          </TableCell>
+          <TableCell className='table-v-num2' style={{ width: '100px' }}>
+            {this.props.item.factura}
+          </TableCell>
+          <TableCell className='table-v-num2' style={{ width: '100px' }}>
+            {this.props.item.recibos}
+          </TableCell>
+          <TableCell className='table-v-num2' style={{ width: '100px' }}>
+            {this.props.item.sc}
+          </TableCell>
+          <TableCell className='table-v-num2' style={{ width: '100px' }}>
+            {this.props.item.fecha}
+          </TableCell>
+          <TableCell className='table-v-num2' style={{ width: '300px' }}>
+            {this.props.item.personaR}
+          </TableCell>
+          <TableCell className='table-v-num2' style={{ width: '100px' }}>
+            <input type='checkbox' />
+          </TableCell>
+          <TableCell className='table-v-num2' style={{ width: '100px' }}>
+            {this.props.item.estatus}
+          </TableCell>
+          <TableCell className='table-v-num2' style={{ width: '100px' }}>
+            <Button
+              variant='contained'
+              color='primary'
+              onClick={this.update}
+            >
+              Agregar
+            </Button>
+          </TableCell>
+        </div>
         <TableRow>
           <TableCell
             style={{
               paddingBottom: 0,
               paddingTop: 0,
+              borderTop: 0,
               borderLeft: '0px solid #fff',
               borderRight: '0px solid #fff'
             }}
