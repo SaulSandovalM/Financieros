@@ -105,26 +105,29 @@ export default class Valeslist extends Component {
   }
 
   handleOnChange2 (event) {
-    const file = event.target.files[0]
-    const storageRef = firebase.storage().ref(`comprobacion/${file.name}`)
-    const task = storageRef.put(file)
-    this.setState({
-      filef: `${file.name}`
-    })
-    task.on('state_changed', (snapshot) => {
-      let percentage = (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+    for (let i = 0; i < event.target.files.length; i++) {
+      const file = event.target.files[i]
+      const storageRef = firebase.storage().ref(`comprobacion/${file.name}`)
+      const task = storageRef.put(file)
       this.setState({
-        pdf2: percentage
+        filef: `${file.name}`
       })
-    }, error => {
-      console.error(error.message)
-    }, () =>  storageRef.getDownloadURL().then(url =>  {
-      const record = url
-      this.setState({
-        filefactura: record
-      })
-      console.log(this.state.filefactura)
-    }))
+      console.log(this.state.filef)
+      task.on('state_changed', (snapshot) => {
+        let percentage = (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+        this.setState({
+          pdf2: percentage
+        })
+      }, error => {
+        console.error(error.message)
+      }, () =>  storageRef.getDownloadURL().then(url =>  {
+        const record = url
+        this.setState({
+          filefactura: record
+        })
+        console.log(this.state.filefactura)
+      }))
+    }
   }
 
   handleOnChange3 (event) {
@@ -175,6 +178,7 @@ export default class Valeslist extends Component {
           filefactura: child.val().filefactura,
           filef: child.val().filef,
           filerecibo: child.val().filerecibo,
+          obs: child.val().obs,
           id: child.key
         })
       })
@@ -242,6 +246,38 @@ export default class Valeslist extends Component {
       filefactura: this.state.filefactura,
       filef: this.state.filef,
       filerecibo: this.state.filerecibo,
+      obs: this.state.obs
+    }
+    firebase.database().ref().update(updates)
+    alert('Tu solicitud fue enviada.')
+    this.resetForm()
+  }
+
+  obs = (item) => {
+    let updates = {}
+    updates['vales/' + item.id] = {
+      cheque: item.cheque,
+      vale: item.vale,
+      cantidad: item.cantidad,
+      cantidadc: item.cantidadc,
+      cantidadr: item.cantidadr,
+      concepto: item.concepto,
+      oficioS: item.oficioS,
+      area: item.area,
+      turno: item.turno,
+      factura: item.factura,
+      recibos: item.recibos,
+      sc: item.sc,
+      fecha: item.fecha,
+      autorizo: item.autorizo,
+      personaR: item.personaR,
+      estatus: 'Comprobado',
+      filexml: item.filexml,
+      filex: item.filex,
+      filefactura: item.filefactura,
+      filef: item.filef,
+      filerecibo: item.filerecibo,
+      obs: this.state.obs
     }
     firebase.database().ref().update(updates)
     alert('Tu solicitud fue enviada.')
@@ -317,6 +353,14 @@ export default class Valeslist extends Component {
                       onChange={this.handleChange.bind(this)}
                     />
                   </div>
+                  <div className='p-container-valeslist'>
+                    <TextField
+                      label='Observaciones'
+                      name='obs'
+                      value={this.state.obs}
+                      onChange={this.handleChange.bind(this)}
+                    />
+                  </div>
                 </div>
               </div>
             </div>
@@ -328,6 +372,7 @@ export default class Valeslist extends Component {
               lista={this.state.lista}
               update={this.update}
               delete={this.delete}
+              obs={this.obs}
             />
           </div>
         </div>

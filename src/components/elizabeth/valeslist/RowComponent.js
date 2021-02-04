@@ -32,6 +32,10 @@ export default class RowComponent extends Component {
     this.props.update(this.props.item)
   }
 
+  obs = () => {
+    this.props.obs(this.props.item)
+  }
+
   toggleOpen () {
     this.setState({
       open: !this.state.open
@@ -49,7 +53,7 @@ export default class RowComponent extends Component {
               {this.state.open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
             </IconButton>
           </TableCell>
-          <TableCell className='table-v-num2' style={{ width: '100px' }}>
+          <TableCell className='table-v-num2' style={{ width: '50px', left: '0px', position: 'sticky', background: 'white' }}>
             {this.props.item.vale}
           </TableCell>
           <TableCell className='table-v-num2' style={{ width: '100px' }}>
@@ -124,13 +128,20 @@ export default class RowComponent extends Component {
           <TableCell className='table-v-num2' style={{ width: '100px' }}>
             {this.props.item.estatus}
           </TableCell>
-          <TableCell className='table-v-num2' style={{ width: '100px' }}>
+          <TableCell className='table-v-num2' style={{ width: '200px', right: '0px', position: 'sticky', background: 'white', display: 'flex'  }}>
             <Button
               variant='contained'
               color='primary'
               onClick={this.update}
             >
               Agregar
+            </Button>
+            <Button
+              variant='contained'
+              color='primary'
+              onClick={this.obs}
+            >
+              Obs
             </Button>
           </TableCell>
         </div>
@@ -143,15 +154,40 @@ export default class RowComponent extends Component {
               borderLeft: '0px solid #fff',
               borderRight: '0px solid #fff'
             }}
-            colSpan={17}
           >
             <Collapse in={this.state.open} timeout="auto" unmountOnExit>
-              <Box margin={1}>
-                <Typography variant="h6" gutterBottom component="div">
+              <Box margin={1} style={{ left: '24px', position: 'sticky', background: 'white', width: '38.5%' }}>
+                <Typography variant="h6" gutterBottom component="div" >
                   Archivos
                 </Typography>
                 <Table size="small" aria-label="purchases">
                   <TableHead>
+                    <TableRow>
+                      <TableCell
+                        style={{
+                          borderLeft: '0px solid #fff',
+                          borderTop: '0px solid #fff',
+                          borderRight: '0px solid #fff',
+                        }}
+                      >
+                        Observaciones
+                      </TableCell>
+                    </TableRow>
+                  </TableHead>
+                  <TableBody>
+                    <TableRow>
+                      <TableCell
+                        style={{
+                          borderLeft: '0px solid #fff',
+                          borderTop: '0px solid #fff',
+                          borderRight: '0px solid #fff'
+                        }}
+                      >
+                        {this.props.item.obs}
+                      </TableCell>
+                    </TableRow>
+                  </TableBody>
+                  <TableBody>
                     <TableRow>
                       <TableCell
                         style={{
@@ -162,18 +198,8 @@ export default class RowComponent extends Component {
                       >
                         Facturas
                       </TableCell>
-                      <TableCell
-                        align="right"
-                        style={{
-                          borderLeft: '0px solid #fff',
-                          borderTop: '0px solid #fff',
-                          borderRight: '0px solid #fff'
-                        }}
-                      >
-                        Total ($)
-                      </TableCell>
                     </TableRow>
-                  </TableHead>
+                  </TableBody>
                   <TableBody>
                     <TableRow>
                       <TableCell
@@ -182,24 +208,18 @@ export default class RowComponent extends Component {
                         style={{
                           borderLeft: '0px solid #fff',
                           borderTop: '0px solid #fff',
-                          borderRight: '0px solid #fff'
+                          borderRight: '0px solid #fff',
+                          display: 'flex',
+                          justifyContent: 'space-between',
+                          width: '100%'
                         }}
                         className='click-arch'
                         onClick={() => window.open(filefactura, '_blank')}
                       >
                         {this.props.item.filef}
-                      </TableCell>
-                      <TableCell
-                        align="right"
-                        style={{
-                          borderLeft: '0px solid #fff',
-                          borderTop: '0px solid #fff',
-                          borderRight: '0px solid #fff'
-                        }}
-                      >
-                      <Button onClick={this.delete}>
-                        Borrar
-                      </Button>
+                        <Button onClick={this.delete} style={{ background: 'red', color: 'white' }}>
+                          Borrar
+                        </Button>
                       </TableCell>
                     </TableRow>
                   </TableBody>

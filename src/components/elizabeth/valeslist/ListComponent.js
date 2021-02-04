@@ -191,9 +191,9 @@ export default class ListComponent extends Component {
         <TableContainer component={Paper} style={{ maxWidth: '100%', height: '68vh' }}>
           <Table>
             <TableHead>
-              <TableRow style={{ display: 'flex', flexDirection: 'row', position: 'sticky', top: '0', background: 'white', zIndex: '3' }}>
+              <TableRow style={{ display: 'flex', flexDirection: 'row', top: '0', background: 'white', zIndex: '3', position: 'relative' }}>
                 <TableCell className='border-icon' style={{ width: '50px' }} />
-                <TableCell className='table-v-num' style={{ width: '100px' }}><b>Vales</b></TableCell>
+                <TableCell className='table-v-num' style={{ width: '50px', left: '0px', position: 'sticky', background: 'white' }}><b>Vales</b></TableCell>
                 <TableCell className='table-v-num' style={{ width: '100px' }}><b>Cheques</b></TableCell>
                 <TableCell className='table-v-num' style={{ width: '100px' }}><b>Autorizado</b></TableCell>
                 <TableCell className='table-v-num' style={{ width: '100px' }}><b>Comprobado</b></TableCell>
@@ -210,7 +210,7 @@ export default class ListComponent extends Component {
                 <TableCell className='table-v-num' style={{ width: '300px' }}><b>Autorizo</b></TableCell>
                 <TableCell className='table-v-num' style={{ width: '100px' }}><b>Pasa/NoPasa</b></TableCell>
                 <TableCell className='table-v-num' style={{ width: '100px' }}><b>Estatus</b></TableCell>
-                <TableCell className='table-v-num' style={{ width: '100px' }}><b>Comprobantes</b></TableCell>
+                <TableCell className='table-v-num' style={{ width: '200px', right: '0px', position: 'sticky', background: 'white' }}><b>Comprobantes</b></TableCell>
               </TableRow>
             </TableHead>
             {
@@ -220,10 +220,11 @@ export default class ListComponent extends Component {
                   item={item}
                   update={this.props.update}
                   delete={this.props.delete}
+                  obs={this.props.obs}
                 />
               )
             }
-            <TableRow style={{ display: 'flex', flexDirection: 'row', position: 'sticky', top: '0', background: 'white', zIndex: '3' }}>
+            <TableRow style={{ display: 'flex', flexDirection: 'row', position: 'relative', top: '0', background: 'white', zIndex: '3' }}>
               <TableCell className='border-icon' style={{ width: '50px' }} />
               <TableCell className='table-v-num' style={{ width: '100px' }} />
               <TableCell className='table-v-num' style={{ width: '100px' }} />

@@ -25,7 +25,7 @@
 .cv {
   display: flex;
   flex-direction: column;
-  width: 15%;
+  width: 23% !important;
 }
 .p-cv {
   margin: 3px;
@@ -47,7 +47,7 @@
 .input-ches {
   border: 0;
   font-size: 15px;
-  width: 40%;
+  width: 50%;
 }
 .p-n {
   margin: 5px;
