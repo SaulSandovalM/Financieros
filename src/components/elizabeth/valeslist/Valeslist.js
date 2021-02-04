@@ -50,28 +50,6 @@ export default class Valeslist extends Component {
     }
   }
 
-  handleUpload (event) {
-    const file = event.target.files[0]
-    const storageRef = firebase.storage().ref(`presupuesto/${file.name}`)
-    const task = storageRef.put(file)
-    this.setState({
-      filex: `${file.name}`
-    })
-    task.on('state_changed', snapshot => {
-      const percentage = (snapshot.bytesTransferred / snapshot.totalBytes) * 100
-      this.setState({
-        pdf: percentage
-      })
-    }, error => {
-      console.error(error.message)
-    }, () => storageRef.getDownloadURL().then(url => {
-      const record = url
-      this.setState({
-        filexml: record
-      })
-    }))
-  }
-
   handleOnChange1 (event) {
     const file = event.target.files[0]
     const storageRef = firebase.storage().ref(`comprobacion/${file.name}`)
@@ -288,22 +266,6 @@ export default class Valeslist extends Component {
                       type='file'
                       onChange={this.handleOnChange1.bind(this)}
                     />
-                    <Dropzone
-                      style={{
-                        position: 'relative',
-                        width: '100%',
-                        height: '30px',
-                        borderWidth: '2px',
-                        borderColor: 'rgb(102, 102, 102)',
-                        borderStyle: 'solid',
-                        borderRadius: '5px'
-                      }}
-                      accept='.pdf' onChange={this.handleUpload.bind(this)}
-                    >
-                    </Dropzone>
-                    <progress className='progress-valeslist' value={this.state.xml} max='100'>
-                      {this.state.xml} %
-                    </progress>
                   </div>
                   <div className='p-container-valeslist'>
                     <TextField

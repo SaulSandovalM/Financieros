@@ -35,6 +35,8 @@ export default class RowComponent extends Component {
   }
 
   render () {
+    var filexml = this.props.item.filexml
+
     return (
       <TableBody>
         <div style={{ display: 'flex', flexDirection: 'row', maxWidth: '100%' }}>
@@ -178,8 +180,10 @@ export default class RowComponent extends Component {
                           borderTop: '0px solid #fff',
                           borderRight: '0px solid #fff'
                         }}
+                        className='click-arch'
+                        onClick={() => window.open(filexml, '_blank')}
                       >
-                        {this.props.item.filexml}
+                        {this.props.item.filex}
                       </TableCell>
                       <TableCell
                         align="right"
