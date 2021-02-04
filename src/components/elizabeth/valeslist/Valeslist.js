@@ -173,6 +173,7 @@ export default class Valeslist extends Component {
           filex: child.val().filex,
           filexml: child.val().filexml,
           filefactura: child.val().filefactura,
+          filef: child.val().filef,
           filerecibo: child.val().filerecibo,
           id: child.key
         })
@@ -247,6 +248,36 @@ export default class Valeslist extends Component {
     this.resetForm()
   }
 
+  delete = (item) => {
+    let deletes = {}
+    deletes['vales/' + item.id] = {
+      cheque: item.cheque,
+      vale: item.vale,
+      cantidad: item.cantidad,
+      cantidadc: item.cantidadc,
+      cantidadr: item.cantidadr,
+      concepto: item.concepto,
+      oficioS: item.oficioS,
+      area: item.area,
+      turno: item.turno,
+      factura: item.factura,
+      recibos: item.recibos,
+      sc: item.sc,
+      fecha: item.fecha,
+      autorizo: item.autorizo,
+      personaR: item.personaR,
+      estatus: 'Comprobado',
+      filexml: '',
+      filex: '',
+      filefactura: '',
+      filef: '',
+      filerecibo: this.state.filerecibo,
+    }
+    firebase.database().ref().update(deletes)
+    alert('Tu solicitud fue enviada.')
+    this.resetForm()
+  }
+
   render () {
     return (
       <div className='container-valeslist'>
@@ -296,6 +327,7 @@ export default class Valeslist extends Component {
             <ListComponent
               lista={this.state.lista}
               update={this.update}
+              delete={this.delete}
             />
           </div>
         </div>

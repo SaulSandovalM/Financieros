@@ -28,6 +28,10 @@ export default class RowComponent extends Component {
     this.props.update(this.props.item)
   }
 
+  delete = () => {
+    this.props.update(this.props.item)
+  }
+
   toggleOpen () {
     this.setState({
       open: !this.state.open
@@ -35,7 +39,7 @@ export default class RowComponent extends Component {
   }
 
   render () {
-    var filexml = this.props.item.filexml
+    var filefactura = this.props.item.filefactura
 
     return (
       <TableBody>
@@ -181,9 +185,9 @@ export default class RowComponent extends Component {
                           borderRight: '0px solid #fff'
                         }}
                         className='click-arch'
-                        onClick={() => window.open(filexml, '_blank')}
+                        onClick={() => window.open(filefactura, '_blank')}
                       >
-                        {this.props.item.filex}
+                        {this.props.item.filef}
                       </TableCell>
                       <TableCell
                         align="right"
@@ -193,6 +197,9 @@ export default class RowComponent extends Component {
                           borderRight: '0px solid #fff'
                         }}
                       >
+                      <Button onClick={this.delete}>
+                        Borrar
+                      </Button>
                       </TableCell>
                     </TableRow>
                   </TableBody>
