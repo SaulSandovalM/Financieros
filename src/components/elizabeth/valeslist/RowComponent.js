@@ -170,7 +170,7 @@ export default class RowComponent extends Component {
                           borderRight: '0px solid #fff',
                         }}
                       >
-                        Observaciones
+                        <b>Observaciones</b>
                       </TableCell>
                     </TableRow>
                   </TableHead>
@@ -196,7 +196,7 @@ export default class RowComponent extends Component {
                           borderRight: '0px solid #fff'
                         }}
                       >
-                        Facturas
+                        <b>Facturas</b>
                       </TableCell>
                     </TableRow>
                   </TableBody>

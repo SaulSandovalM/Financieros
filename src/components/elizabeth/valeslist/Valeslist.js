@@ -37,16 +37,16 @@ export default class Valeslist extends Component {
       xml: 0,
       pdf2: 0,
       pdf3: 0,
-      filex: [],
-      filef: [],
+      filex: '',
+      filef: '',
       filer: '',
-      filexml: [],
-      filefactura: [],
-      filerecibo: '0',
+      filexml: '',
+      filefactura: '[]',
+      filerecibo: 0,
       autorizados: false,
       noautorizados: false,
       pendientes: false,
-      chequea: ''
+      obs: ''
     }
   }
 
@@ -107,7 +107,7 @@ export default class Valeslist extends Component {
   handleOnChange2 (event) {
     for (let i = 0; i < event.target.files.length; i++) {
       const file = event.target.files[i]
-      const storageRef = firebase.storage().ref(`comprobacion/${file.name}`)
+      const storageRef = firebase.storage().ref(`prueba/${file.name}`)
       const task = storageRef.put(file)
       this.setState({
         filef: `${file.name}`
@@ -328,19 +328,38 @@ export default class Valeslist extends Component {
               <div className='inputs-valeslist'>
                 <div className='inputs-row-valeslist'>
                   <div className='p-container-valeslist'>
-                    <TextField
-                      label='Xml'
-                      type='file'
-                      onChange={this.handleOnChange1.bind(this)}
+                    <Dropzone
+                      style={{
+                        position: 'relative',
+                        width: '100%',
+                        height: '30px',
+                        borderWidth: '2px',
+                        borderColor: 'rgb(102, 102, 102)',
+                        borderStyle: 'solid',
+                        borderRadius: '5px',
+                        marginTop: '15px'
+                      }}
+                      accept='.xml' onChange={this.handleOnChange1.bind(this)}
                     />
+                    <progress className='progress' value={this.state.xml} max='100'>
+                      {this.state.xml} %
+                    </progress>
                   </div>
                   <div className='p-container-valeslist'>
-                    <TextField
-                      label='Factura'
-                      type='file'
-                      onChange={this.handleOnChange2.bind(this)}
+                    <Dropzone
+                      style={{
+                        position: 'relative',
+                        width: '100%',
+                        height: '30px',
+                        borderWidth: '2px',
+                        borderColor: 'rgb(102, 102, 102)',
+                        borderStyle: 'solid',
+                        borderRadius: '5px',
+                        marginTop: '15px'
+                      }}
+                      accept='.pdf' onChange={this.handleOnChange2.bind(this)}
                     />
-                    <progress className='progress-valeslist' value={this.state.pdf2} max='100'>
+                    <progress className='progress' value={this.state.pdf2} max='100'>
                       {this.state.pdf2} %
                     </progress>
                   </div>
