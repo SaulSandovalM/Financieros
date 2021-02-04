@@ -207,7 +207,7 @@ export default class ListComponent extends Component {
                 <TableCell className='table-v-num' style={{ width: '100px' }}><b>Recibos</b></TableCell>
                 <TableCell className='table-v-num' style={{ width: '100px' }}><b>S/C</b></TableCell>
                 <TableCell className='table-v-num' style={{ width: '100px' }}><b>Fecha</b></TableCell>
-                <TableCell className='table-v-num' style={{ width: '300px' }}><b>Autorizo</b></TableCell>
+                <TableCell className='table-v-num' style={{ width: '300px' }}><b>Recibio</b></TableCell>
                 <TableCell className='table-v-num' style={{ width: '100px' }}><b>Pasa/NoPasa</b></TableCell>
                 <TableCell className='table-v-num' style={{ width: '100px' }}><b>Estatus</b></TableCell>
                 <TableCell className='table-v-num' style={{ width: '200px', right: '0px', position: 'sticky', background: 'white' }}><b>Comprobantes</b></TableCell>
