@@ -3,6 +3,7 @@ import firebase from '../../../Firebase'
 import ListComponent from './ListComponent'
 import './Valeslist.css'
 import TextField from '@material-ui/core/TextField'
+import Dropzone from 'react-dropzone'
 
 export default class Valeslist extends Component {
   constructor(props) {
@@ -36,10 +37,10 @@ export default class Valeslist extends Component {
       xml: 0,
       pdf2: 0,
       pdf3: 0,
-      filex: '',
-      filef: '',
+      filex: [],
+      filef: [],
       filer: '',
-      filexml: '0',
+      filexml: [],
       filefactura: [],
       filerecibo: '0',
       autorizados: false,
@@ -47,6 +48,28 @@ export default class Valeslist extends Component {
       pendientes: false,
       chequea: ''
     }
+  }
+
+  handleUpload (event) {
+    const file = event.target.files[0]
+    const storageRef = firebase.storage().ref(`presupuesto/${file.name}`)
+    const task = storageRef.put(file)
+    this.setState({
+      filex: `${file.name}`
+    })
+    task.on('state_changed', snapshot => {
+      const percentage = (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+      this.setState({
+        pdf: percentage
+      })
+    }, error => {
+      console.error(error.message)
+    }, () => storageRef.getDownloadURL().then(url => {
+      const record = url
+      this.setState({
+        filexml: record
+      })
+    }))
   }
 
   handleOnChange1 (event) {
@@ -169,6 +192,7 @@ export default class Valeslist extends Component {
           autorizo: child.val().autorizo,
           personaR: child.val().personaR,
           estatus: child.val().estatus,
+          filex: child.val().filex,
           filexml: child.val().filexml,
           filefactura: child.val().filefactura,
           filerecibo: child.val().filerecibo,
@@ -235,11 +259,14 @@ export default class Valeslist extends Component {
       personaR: item.personaR,
       estatus: 'Comprobado',
       filexml: this.state.filexml,
+      filex: this.state.filex,
       filefactura: this.state.filefactura,
+      filef: this.state.filef,
       filerecibo: this.state.filerecibo,
     }
     firebase.database().ref().update(updates)
     alert('Tu solicitud fue enviada.')
+    this.resetForm()
   }
 
   render () {
@@ -261,6 +288,19 @@ export default class Valeslist extends Component {
                       type='file'
                       onChange={this.handleOnChange1.bind(this)}
                     />
+                    <Dropzone
+                      style={{
+                        position: 'relative',
+                        width: '100%',
+                        height: '30px',
+                        borderWidth: '2px',
+                        borderColor: 'rgb(102, 102, 102)',
+                        borderStyle: 'solid',
+                        borderRadius: '5px'
+                      }}
+                      accept='.pdf' onChange={this.handleUpload.bind(this)}
+                    >
+                    </Dropzone>
                     <progress className='progress-valeslist' value={this.state.xml} max='100'>
                       {this.state.xml} %
                     </progress>

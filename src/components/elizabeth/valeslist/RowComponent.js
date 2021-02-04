@@ -179,7 +179,7 @@ export default class RowComponent extends Component {
                           borderRight: '0px solid #fff'
                         }}
                       >
-                        {this.props.item.filefactura}
+                        {this.props.item.filexml}
                       </TableCell>
                       <TableCell
                         align="right"
