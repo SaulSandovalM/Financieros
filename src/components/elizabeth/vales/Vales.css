@@ -137,7 +137,7 @@ textarea { resize: none; }
   flex-direction: row;
 }
 .o-w {
-  width: 20%;
+  width: 30% !important;
   border-right: 1px solid;
 }
 .a-w {
@@ -145,7 +145,7 @@ textarea { resize: none; }
   border-right: 1px solid;
 }
 .t-w {
-  width: 20%;
+  width: 10% !important;
 }
 .p-oat {
   margin: 0px;

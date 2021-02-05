@@ -66,6 +66,14 @@ export default class Vales extends Component {
     this.listenForItems(itemsRef)
   }
 
+  componentWillMount () {
+    firebase.database().ref('vales/').on('child_added', snapshot => {
+      this.setState({
+        vales: this.state.vales.concat(snapshot.val())
+      })
+    })
+  }
+
   listenForItems = (itemsRef) => {
     itemsRef.on('value', (snap) => {
       var vales = []
@@ -786,7 +794,7 @@ export default class Vales extends Component {
                   <ReactToPrint
                     trigger={() => <Button variant='contained' color='primary'>Actualizar e Imprimir</Button>}
                     content={() => this.vale}
-                    onAfterPrint={() => this.update(item)}
+                    onBeforePrint={() => this.update(item)}
                   />
                   {/*<ReactToPrint
                     trigger={() => <Button variant='contained' style={{ background: 'green', color: 'white' }}>Guardar e Imprimir</Button>}

@@ -119,7 +119,7 @@ export default class Cpdf extends Component{
                   </div>
                   <div className='num-exp'>
                     <p className='text-2'>Número de Expediente:
-                      <br />PGJH-09.1*5C.3/{comprometidos.fondo}/2021
+                      <br />PGJH-09*5C.3/{comprometidos.fondo}/2021
                       <br />Número de hojas:
                       <input
                         className='hojas'

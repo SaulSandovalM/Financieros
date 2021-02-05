@@ -228,9 +228,11 @@ export default class RowComponent extends Component {
                   </TableBody>
                   <TableBody>
                     <TableRow>
+                      {this.props.item.filefactura.map((item, i) => (
                         <TableCell
                           component="th"
                           scope="row"
+                          key={i}
                           style={{
                             borderLeft: '0px solid #fff',
                             borderTop: '0px solid #fff',
@@ -240,13 +242,14 @@ export default class RowComponent extends Component {
                             width: '100%'
                           }}
                           className='click-arch'
-                          onClick={() => window.open(lista, '_blank')}
+                          onClick={() => window.open(item, '_blank')}
                         >
-                          {this.props.item.filefactura}
-                          <Button onClick={this.delete} style={{ background: 'red', color: 'white' }}>
-                            Borrar
-                          </Button>
+                          { item }
+                        <Button onClick={this.delete} style={{ background: 'red', color: 'white' }}>
+                          Borrar
+                        </Button>
                         </TableCell>
+                      ))}
                     </TableRow>
                   </TableBody>
                 </Table>
