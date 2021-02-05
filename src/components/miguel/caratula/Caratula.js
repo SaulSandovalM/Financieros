@@ -101,7 +101,7 @@ export default class Cpdf extends Component{
                       Sección: 5C. Recursos Financieros
                       <br />Serie: 5C.3 Asignación y Optimización de Recuersos
                       <br />Sub-serie: No Aplica
-                      <br />Código: PGJH-09.1*5C.
+                      <br />Código: PGJH-09*5C.
                     </p>
                   </div>
                   <div className='asunto-iz'>

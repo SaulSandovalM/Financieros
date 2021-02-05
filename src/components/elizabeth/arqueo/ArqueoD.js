@@ -137,7 +137,7 @@ export default class ArqueoD extends Component {
   componentDidMount () {
     const itemsRef = firebase.database().ref('arqueo/').limitToLast(1)
     this.listenForItems(itemsRef)
-    const itemsRefy = firebase.database().ref('arqueo/')
+    const itemsRefy = firebase.database().ref('arqueo/').orderByChild('fecha').limitToLast(1)
     this.listenForItemsy(itemsRefy)
     const itemsRefVales = firebase.database().ref('vales/')
     this.listenForVales(itemsRefVales)
@@ -159,7 +159,7 @@ export default class ArqueoD extends Component {
     var yesterdayF = yesterday2.replace(/\b(\d{1})\b/g, '0$1')
     let preDate = yesterdayF
     let postDate = today3
-    let filteredDates = this.state.listay.filter(function(date){
+    let filteredDates = this.state.listay.filter(function(date) {
       return date.fecha === preDate && date.hora < '23:59' && date.hora > '16:00'
     })
 
