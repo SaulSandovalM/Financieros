@@ -162,7 +162,6 @@ export default class Valeslist extends Component {
       this.setState({
         lista: lista
       })
-      console.log(this.state.lista)
     })
   }
 
