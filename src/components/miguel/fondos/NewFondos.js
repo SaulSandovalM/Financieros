@@ -204,7 +204,7 @@ export default class Fondos extends Component {
   tipo_doc2 = ['','Fondo Revolvente', 'Pago Directo']
   tipo_doc3 = ['','Pago Directo']
   tipo_doc4 = ['','Fondo Revolvente']
-  no_proyecto = ['','AU001', 'AU002', 'AU003', 'AU004', 'AU005', 'AU007', 'AU009', 'AU010', 'AU011', 'AU012', 'AU014', 'AU015', 'AU016', 'AU017', 'AU018', 'AU019', 'AU020', 'AU021', 'AU023', 'AU024', 'AU025', 'AU026', 'AU027', 'A1D11']
+  no_proyecto = ['','AU001, Atención y seguimiento a peticiones recibidas en el despacho del procurador atendidas', 'AU002, Casos penales de la región oriente resueltas', 'AU003, Delitos cometidos en contra de la libertad de expresión, periodistas y personas defensoras de los derechos humanos investigados', 'AU004, Averiguaciones previas del sistema tradicional concluidas', 'AU005, Casos penales en materia de delitos electorales resueltos', 'AU006, Casos penales determinados, concluidos o resueltos en delitos que atenten contra la mujer y la familia', 'AU007, Acuerdos reparatorios generados a través de la aplicación de los mecanismos alternativos de solución de controversias en materia penal en la región poniente', 'AU008, Investigación y supervisión de los casos penales con motivo de feminicidio', 'AU009, Quejas y denuncias por la posible comisión de conductas indebidas en las que incurran las y los servidores públicos atendidas', 'AU010, Intervenciones periciales a autoridades de procuración de justicia para una correcta integración del expediente en casos penales entregados', 'AU011, Casos penales del delito de narcomenudeo resueltos', 'AU012, Casos penales atendidos por los delitos de secuestro y extorsión', 'AU013, Gestión administrativa de recursos humanos,financiera, materiales, de informática, de archivo, de calidad, de aportaciones federales, planeación estratégica realizada', 'AU014, Determinación y/o resolución de los casos penales de los delitos de trata de personas, lenocinio y delitos conexos', 'AU015, Casos penales de la región poniente resueltas', 'AU016, Atenciones ciudadanas en los módulos de atención temprana en la región poniente brindadas', 'AU017, Determinación en las carpetas de investigación en las unidades de investigación de la regiones poniente', 'AU018, Investigación policial ejecutada', 'AU019, Atenciones ciudadanas en los módulos de atención temprana en la región poniente brindadas', 'AU020, Acuerdos reparatorios generados a traves de la aplicación de los mecanismos alternativos de solución de controversias en materia penal en la región oriente', 'AU021, Determinación en las carpetas de investigación en las unidades de investigación de la regiones oriente', 'AU022, Delitos de corrupción resueltos', 'AU023, Casos penales determinados, concluidos o resueltos de delitos en materia de desaparición forzada de personas cometidos por particulares, delitos vinculados y de personas no localizadas realizados', 'A1D11']
 
   render() {
     var user = firebase.auth().currentUser
@@ -322,7 +322,7 @@ export default class Fondos extends Component {
                           <p style={{ margin: '6px' }}>{fondos.realizo}</p>
                         </div>
                         <div style={{ width: '14.3%' }}>
-                          <Link style={{ margin: '6px' }} to={`/fondoEditable/${fondos.key}`}>Editar</Link>
+                          <Link style={{ margin: '6px' }} to={`/FondoE/${fondos.key}`}>Editar</Link>
                         </div>
                         <div style={{ width: '14.3%' }}>
                           <Link style={{ margin: '6px' }} to={`/fondoEditable/${fondos.key}`}>Editar</Link>
@@ -602,10 +602,24 @@ export default class Fondos extends Component {
                   />
                 </div>
                 <div className='div-con'>
+                  <p className='p-label'>Agregar Beneficiario</p>
+                  <input
+                    className='field'
+                    id='beneficiario'
+                    name='beneficiario'
+                    onChange={this.onChange}
+                    required
+                    ref='beneficiario'
+                  />
+                </div>
+              </div>
+              <div className='div-f2'>
+                <div style={{ width: '100%' }}>
                   <div>
                     <FormControl style={{ width: '100%' }}>
                       <InputLabel>Proyecto</InputLabel>
                       <Select
+                        style={{ height: 'auto' }}
                         multiple
                         value={no_proyecto}
                         onChange={this.onChange}
@@ -614,7 +628,7 @@ export default class Fondos extends Component {
                         renderValue={(selected) => (
                           <div>
                             {selected.map((value) => (
-                              <Chip key={value} label={value} />
+                              <Chip key={value} label={value} style={{ display: 'flex', flexWrap: 'wrap' }}/>
                             ))}
                           </div>
                         )}
@@ -684,7 +698,7 @@ export default class Fondos extends Component {
             <Paper className='paper-pm'>
               <div className='div-con-f'>Pago CFE</div>
               <div className='div-f2'>
-                <div className='div-cfe'>
+                <div className='div-con'>
                   <p className='p-label'>Cta CFE</p>
                   <input
                     className='field'
@@ -694,7 +708,7 @@ export default class Fondos extends Component {
                     ref='cfe'
                   />
                 </div>
-                <div className='div-cfe'>
+                <div className='div-con'>
                   <p className='p-label'>Numero de Servicio CFE</p>
                   <input
                     className='field'
@@ -704,16 +718,16 @@ export default class Fondos extends Component {
                     ref='nscfe'
                   />
                 </div>
-                <div className='div-cfe'>
-                  <p className='p-label'>Observaciones</p>
-                  <input
-                    className='field'
-                    id='observaciones'
-                    name='observaciones'
-                    onChange={this.onChange}
-                    ref='observaciones'
-                  />
-                </div>
+              </div>
+              <div className='div-cfe' style={{ width: '100%' }}>
+                <p className='p-label'>Observaciones</p>
+                <textarea
+                  className='field'
+                  id='observaciones'
+                  name='observaciones'
+                  onChange={this.onChange}
+                  ref='observaciones'
+                />
               </div>
             </Paper>
           </Grid>}
