@@ -97,6 +97,11 @@ export default class Vales extends Component {
           autorizo: child.val().autorizo,
           personaR: child.val().personaR,
           estatus: child.val().estatus,
+          filexml: child.val().filexml,
+          filex: child.val().filex,
+          filefactura: child.val().filefactura,
+          filef: child.val().filef,
+          filerecibo: child.val().filerecibo,
           id: child.key
         })
       })
@@ -177,7 +182,7 @@ export default class Vales extends Component {
       filex: this.state.filex,
       filefactura: this.state.filefactura,
       filef: this.state.filef,
-      filerecibo: ''
+      filerecibo: this.state.filerecibo
     }
     this.setState({
       vale: this.state.contador.storyCount,
@@ -247,9 +252,11 @@ export default class Vales extends Component {
       autorizo: this.state.autorizo ? this.state.autorizo : item.autorizo,
       personaR: this.state.personaR ? this.state.personaR : item.personaR,
       estatus: item.estatus,
-      filexml: this.state.filexml ? item.filexml : this.state.filexml,
+      filexml: this.state.filexml ? item.filexml : this.state.filexml ,
+      filex: this.state.filex ? item.filex : this.state.filex,
       filefactura: this.state.filefactura ? item.filefactura : this.state.filefactura,
-      filerecibo: this.state.filerecibo ? item.filerecibo : this.state.filerecibo,
+      filef: this.state.filef ? item.filef : this.state.filef,
+      filerecibo: this.state.filerecibo ? item.filerecibo : this.state.filerecibo ,
       fechaP: this.state.fechaP
     }
     firebase.database().ref().update(updates)
@@ -690,6 +697,7 @@ export default class Vales extends Component {
                             <option id='area'> - Dirección de Informatica, Estadistica y Telecomunicaciones</option>
                             <option id='area'> - Dirección de Recursos Materiales</option>
                             <option id='area'> - Dirección de Recursos Humanos</option>
+                            <option id='area'> - Dirección de Recursos Financieros</option>
                             <option id='area'> - Dirección de Enlace FASP</option>
                             <option id='area'> - Dirección de Coordinacion de Calidad</option>
                             <option id='area'> - Dirección de Archivo</option>
@@ -801,7 +809,7 @@ export default class Vales extends Component {
                   <ReactToPrint
                     trigger={() => <Button variant='contained' color='primary'>Actualizar e Imprimir</Button>}
                     content={() => this.vale}
-                    onBeforePrint={() => this.update(item)}
+                    onAfterPrint={() => this.update(item)}
                   />
                   {/*<ReactToPrint
                     trigger={() => <Button variant='contained' style={{ background: 'green', color: 'white' }}>Guardar e Imprimir</Button>}

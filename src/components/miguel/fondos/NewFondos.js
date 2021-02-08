@@ -106,7 +106,8 @@ export default class Fondos extends Component {
       poliza,
       cfe,
       nscfe,
-      observaciones
+      observaciones,
+      numCompro
     } = this.state
     this.ref.add({
         fondo,
@@ -125,7 +126,8 @@ export default class Fondos extends Component {
         poliza,
         cfe,
         nscfe,
-        observaciones
+        observaciones,
+        numCompro
       }).then((docRef) => {
         this.setState({
           fondo: '',
@@ -240,6 +242,7 @@ export default class Fondos extends Component {
     } else if (email === 'omar@procuraduria.com') {
       admin = 'OMAR'
     }
+    console.log(admin)
     var today = new Date()
     var dd = today.getDate()
     var mm = today.getMonth() + 1
@@ -365,7 +368,7 @@ export default class Fondos extends Component {
               <div className='div-f2'>
                 <div className='div-con'>
                   <p className='p-label'>Tipo de Documento</p>
-                  {admin === 'ADMIN' &&
+                  {(admin === 'MIGUEL' || admin === 'ADMIN') &&
                     <select
                       className='select-f'
                       value={tipo_doc}
@@ -374,58 +377,6 @@ export default class Fondos extends Component {
                       required
                     >
                       {this.tipo_doc.map((x,y) =>
-                        <option name={y}>{x}</option>
-                      )}
-                    </select>
-                  }
-                  {admin === 'LAURA' &&
-                    <select
-                      className='select-f'
-                      value={tipo_doc}
-                      onChange={this.onChange}
-                      name='tipo_doc'
-                      required
-                    >
-                      {this.tipo_doc.map((x,y) =>
-                        <option name={y}>{x}</option>
-                      )}
-                    </select>
-                  }
-                  {admin === 'MIGUEL' &&
-                    <select
-                      className='select-f'
-                      value={tipo_doc}
-                      onChange={this.onChange}
-                      name='tipo_doc'
-                      required
-                    >
-                      {this.tipo_doc.map((x,y) =>
-                        <option name={y}>{x}</option>
-                      )}
-                    </select>
-                  }
-                  {admin === 'TERESA' &&
-                    <select
-                      className='select-f'
-                      value={tipo_doc}
-                      onChange={this.onChange}
-                      name='tipo_doc'
-                      required
-                    >
-                      {this.tipo_doc4.map((x,y) =>
-                        <option name={y}>{x}</option>
-                      )}
-                    </select>
-                  }
-                  {admin === 'MARCOS' &&
-                    <select
-                      className='select-f'
-                      value={tipo_doc}
-                      onChange={this.onChange}
-                      name='tipo_doc'
-                      required
-                    >
-                      {this.tipo_doc4.map((x,y) =>
                         <option name={y}>{x}</option>
                       )}
                     </select>
@@ -443,20 +394,7 @@ export default class Fondos extends Component {
                       )}
                     </select>
                   }
-                  {admin === 'KARINA' &&
-                    <select
-                      className='select-f'
-                      value={tipo_doc}
-                      onChange={this.onChange}
-                      name='tipo_doc'
-                      required
-                    >
-                      {this.tipo_doc3.map((x,y) =>
-                        <option name={y}>{x}</option>
-                      )}
-                    </select>
-                  }
-                  {admin === 'MARTHA' &&
+                  {(admin === 'TERESA' || admin === 'MARTHA' || admin === 'ELOY' || admin === 'MARCOS') &&
                     <select
                       className='select-f'
                       value={tipo_doc}
@@ -469,46 +407,7 @@ export default class Fondos extends Component {
                       )}
                     </select>
                   }
-                  {admin === 'LILIA' &&
-                    <select
-                      className='select-f'
-                      value={tipo_doc}
-                      onChange={this.onChange}
-                      name='tipo_doc'
-                      required
-                    >
-                      {this.tipo_doc3.map((x,y) =>
-                        <option name={y}>{x}</option>
-                      )}
-                    </select>
-                  }
-                  {admin === 'CENELY' &&
-                    <select
-                      className='select-f'
-                      value={tipo_doc}
-                      onChange={this.onChange}
-                      name='tipo_doc'
-                      required
-                    >
-                      {this.tipo_doc3.map((x,y) =>
-                        <option name={y}>{x}</option>
-                      )}
-                    </select>
-                  }
-                  {admin === 'HECTOR' &&
-                    <select
-                      className='select-f'
-                      value={tipo_doc}
-                      onChange={this.onChange}
-                      name='tipo_doc'
-                      required
-                    >
-                      {this.tipo_doc3.map((x,y) =>
-                        <option name={y}>{x}</option>
-                      )}
-                    </select>
-                  }
-                  {admin === 'OMAR' &&
+                  {(admin === 'KARINA' || admin === 'LILIA' || admin === 'CENELY' || admin === 'HECTOR' || admin === 'OMAR') &&
                     <select
                       className='select-f'
                       value={tipo_doc}
@@ -644,9 +543,24 @@ export default class Fondos extends Component {
                   </div>
                 </div>
               </div>
+              <div className='div-f2'>
+                <div style={{ width: '100%' }}>
+                  <div>
+                    <p className='p-label'>Numero de Comprobantes</p>
+                    <input
+                      className='field'
+                      id='beneficiario'
+                      name='beneficiario'
+                      onChange={this.onChange}
+                      required
+                      ref='beneficiario'
+                    />
+                  </div>
+                </div>
+              </div>
             </Paper>
           </Grid>
-          {admin === 'MIGUEL' &&
+          {(admin === 'MIGUEL' || admin === 'TERESA' || admin === 'MARCOS' || admin === 'ELOY') &&
           <Grid className='grid2-cont'>
             <Paper className='paper-p'>
               <div className='div-con-f'>Licitación</div>

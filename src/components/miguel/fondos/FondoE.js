@@ -69,6 +69,7 @@ export default class FondoE extends Component {
           desc: fondo.desc,
           beneficiario: fondo.beneficiario,
           requisicion: fondo.requisicion,
+          no_proyecto: fondo.no_proyecto,
           pedido: fondo.pedido,
           ncomprobantes: fondo.ncomprobantes,
           poliza: fondo.poliza,
@@ -188,11 +189,10 @@ export default class FondoE extends Component {
                   <p className='p-label'>Fondo</p>
                   <input
                     className='field'
-                    value={this.state.num}
+                    value={this.state.fondo}
                     name='fondo'
                     ref='fondo'
                     required
-                    onChange={this.onChange}
                   />
                 </div>
                 <div className='div-con'>
@@ -200,13 +200,14 @@ export default class FondoE extends Component {
                   <input
                     className='field'
                     required
+                    value={this.state.fecha}
                   />
                 </div>
               </div>
               <div className='div-f2'>
                 <div className='div-con'>
                   <p className='p-label'>Tipo de Documento</p>
-                  {admin === 'ADMIN' &&
+                  {(admin === 'MIGUEL' || admin === 'ADMIN') &&
                     <select
                       className='select-f'
                       value={tipo_doc}
@@ -215,58 +216,6 @@ export default class FondoE extends Component {
                       required
                     >
                       {this.tipo_doc.map((x,y) =>
-                        <option name={y}>{x}</option>
-                      )}
-                    </select>
-                  }
-                  {admin === 'LAURA' &&
-                    <select
-                      className='select-f'
-                      value={tipo_doc}
-                      onChange={this.onChange}
-                      name='tipo_doc'
-                      required
-                    >
-                      {this.tipo_doc.map((x,y) =>
-                        <option name={y}>{x}</option>
-                      )}
-                    </select>
-                  }
-                  {admin === 'MIGUEL' &&
-                    <select
-                      className='select-f'
-                      value={tipo_doc}
-                      onChange={this.onChange}
-                      name='tipo_doc'
-                      required
-                    >
-                      {this.tipo_doc.map((x,y) =>
-                        <option name={y}>{x}</option>
-                      )}
-                    </select>
-                  }
-                  {admin === 'TERESA' &&
-                    <select
-                      className='select-f'
-                      value={tipo_doc}
-                      onChange={this.onChange}
-                      name='tipo_doc'
-                      required
-                    >
-                      {this.tipo_doc4.map((x,y) =>
-                        <option name={y}>{x}</option>
-                      )}
-                    </select>
-                  }
-                  {admin === 'MARCOS' &&
-                    <select
-                      className='select-f'
-                      value={tipo_doc}
-                      onChange={this.onChange}
-                      name='tipo_doc'
-                      required
-                    >
-                      {this.tipo_doc4.map((x,y) =>
                         <option name={y}>{x}</option>
                       )}
                     </select>
@@ -284,20 +233,7 @@ export default class FondoE extends Component {
                       )}
                     </select>
                   }
-                  {admin === 'KARINA' &&
-                    <select
-                      className='select-f'
-                      value={tipo_doc}
-                      onChange={this.onChange}
-                      name='tipo_doc'
-                      required
-                    >
-                      {this.tipo_doc3.map((x,y) =>
-                        <option name={y}>{x}</option>
-                      )}
-                    </select>
-                  }
-                  {admin === 'MARTHA' &&
+                  {(admin === 'TERESA' || admin === 'MARTHA' || admin === 'ELOY' || admin === 'MARCOS') &&
                     <select
                       className='select-f'
                       value={tipo_doc}
@@ -310,46 +246,7 @@ export default class FondoE extends Component {
                       )}
                     </select>
                   }
-                  {admin === 'LILIA' &&
-                    <select
-                      className='select-f'
-                      value={tipo_doc}
-                      onChange={this.onChange}
-                      name='tipo_doc'
-                      required
-                    >
-                      {this.tipo_doc3.map((x,y) =>
-                        <option name={y}>{x}</option>
-                      )}
-                    </select>
-                  }
-                  {admin === 'CENELY' &&
-                    <select
-                      className='select-f'
-                      value={tipo_doc}
-                      onChange={this.onChange}
-                      name='tipo_doc'
-                      required
-                    >
-                      {this.tipo_doc3.map((x,y) =>
-                        <option name={y}>{x}</option>
-                      )}
-                    </select>
-                  }
-                  {admin === 'HECTOR' &&
-                    <select
-                      className='select-f'
-                      value={tipo_doc}
-                      onChange={this.onChange}
-                      name='tipo_doc'
-                      required
-                    >
-                      {this.tipo_doc3.map((x,y) =>
-                        <option name={y}>{x}</option>
-                      )}
-                    </select>
-                  }
-                  {admin === 'OMAR' &&
+                  {(admin === 'KARINA' || admin === 'LILIA' || admin === 'CENELY' || admin === 'HECTOR' || admin === 'OMAR') &&
                     <select
                       className='select-f'
                       value={tipo_doc}
@@ -387,6 +284,7 @@ export default class FondoE extends Component {
                     onChange={this.onChange}
                     required
                     ref='no_oficio'
+                    value={this.state.no_oficio}
                   />
                 </div>
                 <div className='div-con'>
@@ -420,7 +318,7 @@ export default class FondoE extends Component {
                   <p className='p-label'>Beneficiario</p>
                   <select
                     className='select-f'
-                    value={beneficiario}
+                    value={this.state.beneficiario}
                     onChange={this.onChange}
                     name='beneficiario'
                   >
@@ -439,17 +337,19 @@ export default class FondoE extends Component {
                     name='desc'
                     onChange={this.onChange}
                     required
+                    value={this.state.desc}
                     ref='desc'
                   />
                 </div>
                 <div className='div-con'>
-                  <p className='p-label'>Agregar Beneficiario</p>
+                  <p className='p-label'>Beneficiario</p>
                   <input
                     className='field'
                     id='beneficiario'
                     name='beneficiario'
                     onChange={this.onChange}
                     required
+                    value={this.state.beneficiario}
                     ref='beneficiario'
                   />
                 </div>
@@ -486,7 +386,7 @@ export default class FondoE extends Component {
               </div>
             </Paper>
           </Grid>
-          {admin === 'MIGUEL' &&
+          {(admin === 'MIGUEL' || admin === 'TERESA' || admin === 'MARCOS' || admin === 'ELOY') &&
           <Grid className='grid2-cont'>
             <Paper className='paper-p'>
               <div className='div-con-f'>Licitación</div>
@@ -499,6 +399,7 @@ export default class FondoE extends Component {
                     name='no_lici'
                     onChange={this.onChange}
                     ref='no_lici'
+                    value={this.state.no_lici}
                   />
                 </div>
                 <div className='div-con'>
@@ -509,6 +410,7 @@ export default class FondoE extends Component {
                     name='requisicion'
                     onChange={this.onChange}
                     ref='requisicion'
+                    value={this.state.requisicion}
                   />
                 </div>
               </div>
@@ -520,6 +422,7 @@ export default class FondoE extends Component {
                     id='pedido'
                     name='pedido'
                     onChange={this.onChange}
+                    value={this.state.pedido}
                     ref='pedido'
                   />
                 </div>
@@ -529,6 +432,7 @@ export default class FondoE extends Component {
                     className='field'
                     id='poliza'
                     name='poliza'
+                    value={this.state.poliza}
                     onChange={this.onChange}
                     ref='poliza'
                   />
@@ -545,6 +449,7 @@ export default class FondoE extends Component {
                     id='cfe'
                     name='cfe'
                     onChange={this.onChange}
+                    value={this.state.cfe}
                     ref='cfe'
                   />
                 </div>
@@ -554,6 +459,7 @@ export default class FondoE extends Component {
                     className='field'
                     id='nscfe'
                     name='nscfe'
+                    value={this.state.nscfe}
                     onChange={this.onChange}
                     ref='nscfe'
                   />
@@ -566,6 +472,7 @@ export default class FondoE extends Component {
                   id='observaciones'
                   name='observaciones'
                   onChange={this.onChange}
+                  value={this.state.observaciones}
                   ref='observaciones'
                 />
               </div>
@@ -573,7 +480,7 @@ export default class FondoE extends Component {
           </Grid>}
         </Grid>
         <div className='div-content-fab'>
-          <Fab color='primary' aria-label='add' style={{ background: 'green' }}>
+          <Fab color='primary' aria-label='add' style={{ background: 'green' }} type='submit'>
             <CheckIcon />
           </Fab>
         </div>
