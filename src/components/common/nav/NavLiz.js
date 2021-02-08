@@ -5,18 +5,26 @@ import { connect } from 'react-redux'
 import './Nav.css'
 import Typography from '@material-ui/core/Typography'
 import arrow from '../../../img/arrow.svg'
+import firebase from '../../../Firebase'
 
 class NavLiz extends Component {
   constructor () {
     super()
     this.state = {
-      isHidden: true
+      isHiddenV: true,
+      isHiddenP: true
     }
   }
 
-  toggleHidden () {
+  toggleHiddenP () {
     this.setState({
-      isHidden: !this.state.isHidden
+      isHiddenP: !this.state.isHiddenP
+    })
+  }
+
+  toggleHiddenV () {
+    this.setState({
+      isHiddenV: !this.state.isHiddenV
     })
   }
 
@@ -27,25 +35,71 @@ class NavLiz extends Component {
 
   render () {
     const { isLoggingOut, logoutError } = this.props
+    var user = firebase.auth().currentUser
+    var email
+
+    if (user != null) {
+      email = user.email
+    }
+
+    let admin
+    if (email === 'administrador@procu.com') {
+      admin = 'ADMIN'
+    } else if (email === 'cecilia@procuraduria.com') {
+      admin = 'CECILIA'
+    } else if (email === 'alfredo@procuraduria.com') {
+      admin = 'ALFREDO'
+    } else if (email === 'nayra@procuraduria.com') {
+      admin = 'NAYRA'
+    } else if (email === 'lizbeth@procuraduria.com') {
+      admin = 'LIZBETH'
+    } else if (email === 'miguel@procuraduria.com') {
+      admin = 'MIGUEL'
+    } else if (email === 'teresa@procuraduria.com') {
+      admin = 'TERESA'
+    } else if (email === 'marcos@procuraduria.com') {
+      admin = 'MARCOS'
+    } else if (email === 'eloy@procuraduria.com') {
+      admin = 'ELOY'
+    } else if (email === 'karina@procuraduria.com') {
+      admin = 'KARINA'
+    } else if (email === 'martha@procuraduria.com') {
+      admin = 'MARTHA'
+    } else if (email === 'lilia@procuraduria.com') {
+      admin = 'LILIA'
+    } else if (email === 'cenely@procuraduria.com') {
+      admin = 'CENELY'
+    } else if (email === 'hector@procuraduria.com') {
+      admin = 'HECTOR'
+    } else if (email === 'omar@procuraduria.com') {
+      admin = 'OMAR'
+    } else if (email === 'elizabeth@procuraduria.com') {
+      admin = 'ELI'
+    } else if (email === 'juan@procuraduria.com') {
+      admin = 'JUAN'
+    }
+
     return (
       <div className='nav-col'>
         <div style={{ display: 'flex', flexDirection: 'column'}}>
-          <div className='navbar-left' style={{ marginTop: '30px' }}>
-            <div className='deco-c' onClick={this.toggleHidden.bind(this)}>
-              <span className='material-icons' style={{ color: 'white', marginTop: '3px', marginRight: '15px' }}>
-                attach_money
-              </span>
-              <Typography variant='h6' style={{ marginBottom: '15px', color: 'white' }}>
-                Presupuesto
-              </Typography>
+          {(admin === 'CECILIA' || admin === 'LIZBETH') &&
+            <div className='navbar-left' style={{ marginTop: '30px' }}>
+              <div className='deco-c' onClick={this.toggleHiddenP.bind(this)}>
+                <span className='material-icons' style={{ color: 'white', marginTop: '3px', marginRight: '15px' }}>
+                  attach_money
+                </span>
+                <Typography variant='h6' style={{ marginBottom: '15px', color: 'white' }}>
+                  Presupuesto
+                </Typography>
+              </div>
+              <img
+                className='arrow'
+                src={arrow}
+                alt=''
+              />
             </div>
-            <img
-              className='arrow'
-              src={arrow}
-              alt=''
-            />
-          </div>
-          {!this.state.isHidden &&
+          }
+          {!this.state.isHiddenP &&
             <div>
               <div className='subnav'>
                 <Link to='/Presupuesto' className='deco'>
@@ -75,123 +129,146 @@ class NavLiz extends Component {
                   </Typography>
                 </Link>
               </div>
-            </div>}
-          <div className='navbar-left'>
-            <Link to='/FondoRevolvente' className='deco'>
-              <span className='material-icons' style={{ color: 'white', marginTop: '3px', marginRight: '15px' }}>
-                local_atm
-              </span>
-              <Typography className='nav-t' variant='h6' style={{ marginBottom: '15px', color: 'white' }}>
-                Fondo Revolvente
-              </Typography>
-            </Link>
-          </div>
-          <div className='navbar-left'>
-            <Link to='/Archivos' className='deco'>
-              <span className='material-icons' style={{ color: 'white', marginTop: '3px', marginRight: '15px' }}>
-                folder_open
-              </span>
-              <Typography className='nav-t' variant='h6' style={{ marginBottom: '15px', color: 'white' }}>
-                Archivos
-              </Typography>
-            </Link>
-          </div>
-          <div className='navbar-left'>
-            <Link to='/Registro' className='deco'>
-              <span className='material-icons' style={{ color: 'white', marginTop: '3px', marginRight: '15px' }}>
-                plagiarism
-              </span>
-              <Typography className='nav-t' variant='h6' style={{ marginBottom: '15px', color: 'white' }}>
-                Registro
-              </Typography>
-            </Link>
-          </div>
-          <div className='navbar-left'>
-            <Link to='/Disponible' className='deco'>
-              <span className='material-icons' style={{ color: 'white', marginTop: '3px', marginRight: '15px' }}>
-                playlist_add_check
-              </span>
-              <Typography className='nav-t' variant='h6' style={{ marginBottom: '15px', color: 'white' }}>
-                Disponible
-              </Typography>
-            </Link>
-          </div>
-          <div className='navbar-left'>
-            <Link to='/Contra' className='deco'>
-              <span className='material-icons' style={{ color: 'white', marginTop: '3px', marginRight: '15px' }}>
-                receipt
-              </span>
-              <Typography className='nav-t' variant='h6' style={{ marginBottom: '15px', color: 'white' }}>
-                Contrarecibo
-              </Typography>
-            </Link>
-          </div>
-          <div className='navbar-left'>
-            <Link to='/CargaC' className='deco'>
-              <span className='material-icons' style={{ color: 'white', marginTop: '3px', marginRight: '15px' }}>
-                publish
-              </span>
-              <Typography className='nav-t' variant='h6' style={{ marginBottom: '15px', color: 'white' }}>
-                Carga Contrarecibo
-              </Typography>
-            </Link>
-          </div>
-          <div className='navbar-left'>
-            <Link to='/Caja' className='deco'>
-              <span className='material-icons' style={{ color: 'white', marginTop: '3px', marginRight: '15px' }}>
-                local_atm
-              </span>
-              <Typography className='nav-t' variant='h6' style={{ marginBottom: '15px', color: 'white' }}>
-                Caja
-              </Typography>
-            </Link>
-          </div>
-          <div className='navbar-left'>
-            <Link to='/Arqueo' className='deco'>
-              <span className='material-icons' style={{ color: 'white', marginTop: '3px', marginRight: '15px' }}>
-                folder_open
-              </span>
-              <Typography className='nav-t' variant='h6' style={{ marginBottom: '15px', color: 'white' }}>
-                Arqueo
-              </Typography>
-            </Link>
-          </div>
-          <div className='navbar-left'>
-            <Link to='/ArqueoD' className='deco'>
-              <span className='material-icons' style={{ color: 'white', marginTop: '3px', marginRight: '15px' }}>
-                plagiarism
-              </span>
-              <Typography className='nav-t' variant='h6' style={{ marginBottom: '15px', color: 'white' }}>
-                Impresión de Arqueo
-              </Typography>
-            </Link>
-          </div>
-          <div className='navbar-left'>
-            <Link to='/Cheques' className='deco'>
-              <span className='material-icons' style={{ color: 'white', marginTop: '3px', marginRight: '15px' }}>
-                playlist_add_check
-              </span>
-              <Typography className='nav-t' variant='h6' style={{ marginBottom: '15px', color: 'white' }}>
-                Cheques
-              </Typography>
-            </Link>
-          </div>
-          <div className='navbar-left'>
-            <div className='deco-c' onClick={this.toggleHidden.bind(this)}>
-              <span className='material-icons' style={{ color: 'white', marginTop: '3px', marginRight: '15px' }}>
-                attach_money
-              </span>
-              <Typography variant='h6' style={{ marginBottom: '15px', color: 'white' }}>
-                Vales
-              </Typography>
             </div>
-            <img
-              className='arrow'
-              src={arrow}
-              alt=''
-            />
-          </div>
-          {!this.state.isHidden &&
+          }
+          {(admin === 'CECILIA' || admin === 'LIZBETH') &&
+            <div className='navbar-left'>
+              <Link to='/FondoRevolvente' className='deco'>
+                <span className='material-icons' style={{ color: 'white', marginTop: '3px', marginRight: '15px' }}>
+                  local_atm
+                </span>
+                <Typography className='nav-t' variant='h6' style={{ marginBottom: '15px', color: 'white' }}>
+                  Fondo Revolvente
+                </Typography>
+              </Link>
+            </div>
+          }
+          {(admin === 'CECILIA' || admin === 'LIZBETH') &&
+            <div className='navbar-left'>
+              <Link to='/Archivos' className='deco'>
+                <span className='material-icons' style={{ color: 'white', marginTop: '3px', marginRight: '15px' }}>
+                  folder_open
+                </span>
+                <Typography className='nav-t' variant='h6' style={{ marginBottom: '15px', color: 'white' }}>
+                  Archivos
+                </Typography>
+              </Link>
+            </div>
+          }
+          {(admin === 'CECILIA' || admin === 'LIZBETH') &&
+            <div className='navbar-left'>
+              <Link to='/Registro' className='deco'>
+                <span className='material-icons' style={{ color: 'white', marginTop: '3px', marginRight: '15px' }}>
+                  plagiarism
+                </span>
+                <Typography className='nav-t' variant='h6' style={{ marginBottom: '15px', color: 'white' }}>
+                  Registro
+                </Typography>
+              </Link>
+            </div>
+          }
+          {(admin === 'CECILIA' || admin === 'LIZBETH') &&
+            <div className='navbar-left'>
+              <Link to='/Disponible' className='deco'>
+                <span className='material-icons' style={{ color: 'white', marginTop: '3px', marginRight: '15px' }}>
+                  playlist_add_check
+                </span>
+                <Typography className='nav-t' variant='h6' style={{ marginBottom: '15px', color: 'white' }}>
+                  Disponible
+                </Typography>
+              </Link>
+            </div>
+          }
+          {(admin === 'CECILIA' || admin === 'LIZBETH') &&
+            <div className='navbar-left'>
+              <Link to='/Contra' className='deco'>
+                <span className='material-icons' style={{ color: 'white', marginTop: '3px', marginRight: '15px' }}>
+                  receipt
+                </span>
+                <Typography className='nav-t' variant='h6' style={{ marginBottom: '15px', color: 'white' }}>
+                  Contrarecibo
+                </Typography>
+              </Link>
+            </div>
+          }
+          {(admin === 'CECILIA' || admin === 'LIZBETH') &&
+            <div className='navbar-left'>
+              <Link to='/CargaC' className='deco'>
+                <span className='material-icons' style={{ color: 'white', marginTop: '3px', marginRight: '15px' }}>
+                  publish
+                </span>
+                <Typography className='nav-t' variant='h6' style={{ marginBottom: '15px', color: 'white' }}>
+                  Carga Contrarecibo
+                </Typography>
+              </Link>
+            </div>
+          }
+          {(admin === 'ELI' || admin === 'LIZBETH') &&
+            <div className='navbar-left'>
+              <Link to='/Caja' className='deco'>
+                <span className='material-icons' style={{ color: 'white', marginTop: '3px', marginRight: '15px' }}>
+                  local_atm
+                </span>
+                <Typography className='nav-t' variant='h6' style={{ marginBottom: '15px', color: 'white' }}>
+                  Caja
+                </Typography>
+              </Link>
+            </div>
+          }
+          {(admin === 'ELI' || admin === 'LIZBETH') &&
+            <div className='navbar-left'>
+              <Link to='/Arqueo' className='deco'>
+                <span className='material-icons' style={{ color: 'white', marginTop: '3px', marginRight: '15px' }}>
+                  folder_open
+                </span>
+                <Typography className='nav-t' variant='h6' style={{ marginBottom: '15px', color: 'white' }}>
+                  Arqueo
+                </Typography>
+              </Link>
+            </div>
+          }
+          {(admin === 'ELI' || admin === 'LIZBETH') &&
+            <div className='navbar-left'>
+              <Link to='/ArqueoD' className='deco'>
+                <span className='material-icons' style={{ color: 'white', marginTop: '3px', marginRight: '15px' }}>
+                  plagiarism
+                </span>
+                <Typography className='nav-t' variant='h6' style={{ marginBottom: '15px', color: 'white' }}>
+                  Impresión de Arqueo
+                </Typography>
+              </Link>
+            </div>
+          }
+          {(admin === 'ELI' || admin === 'LIZBETH') &&
+            <div className='navbar-left'>
+              <Link to='/Cheques' className='deco'>
+                <span className='material-icons' style={{ color: 'white', marginTop: '3px', marginRight: '15px' }}>
+                  playlist_add_check
+                </span>
+                <Typography className='nav-t' variant='h6' style={{ marginBottom: '15px', color: 'white' }}>
+                  Cheques
+                </Typography>
+              </Link>
+            </div>
+          }
+          {(admin === 'ELI' || admin === 'LIZBETH') &&
+            <div className='navbar-left'>
+              <div className='deco-c' onClick={this.toggleHiddenV.bind(this)}>
+                <span className='material-icons' style={{ color: 'white', marginTop: '3px', marginRight: '15px' }}>
+                  attach_money
+                </span>
+                <Typography variant='h6' style={{ marginBottom: '15px', color: 'white' }}>
+                  Vales
+                </Typography>
+              </div>
+              <img
+                className='arrow'
+                src={arrow}
+                alt=''
+              />
+            </div>
+          }
+          {!this.state.isHiddenV &&
             <div>
               <div className='subnav'>
                 <Link to='/Vales' className='deco'>
@@ -201,74 +278,62 @@ class NavLiz extends Component {
                 </Link>
               </div>
               <div className='subnav'>
-                <Link to='/ListValesA' className='deco'>
+                <Link to='/Valeslist' className='deco'>
                   <Typography className='nav-t' style={{ marginBottom: '15px', color: 'white' }}>
-                    • Autorizados
+                    • Lista de Vales
                   </Typography>
                 </Link>
               </div>
-              <div className='subnav'>
-                <Link to='/ListValesP' className='deco'>
-                  <Typography className='nav-t' style={{ marginBottom: '15px', color: 'white' }}>
-                    • No Autorizados
-                  </Typography>
-                </Link>
-              </div>
-              <div className='subnav'>
-                <Link to='/ListValesN' className='deco'>
-                  <Typography className='nav-t' style={{ marginBottom: '15px', color: 'white' }}>
-                    • Pendientes
-                  </Typography>
-                </Link>
-              </div>
-              <div className='subnav'>
-                <Link to='/ListArchivosV' className='deco'>
-                  <Typography className='nav-t' style={{ marginBottom: '15px', color: 'white' }}>
-                    • Archivos Vales
-                  </Typography>
-                </Link>
-              </div>
-            </div>}
-          <div className='navbar-left'>
-            <Link to='/Fondos' className='deco'>
-              <span className='material-icons' style={{ color: 'white', marginTop: '3px', marginRight: '15px' }}>
-                request_quote
-              </span>
-              <Typography className='nav-t' variant='h6' style={{ marginBottom: '15px', color: 'white' }}>
-                Fondos
-              </Typography>
-            </Link>
-          </div>
-          <div className='navbar-left'>
-            <Link to='/Caratula' className='deco'>
-              <span className='material-icons' style={{ color: 'white', marginTop: '3px', marginRight: '15px' }}>
-                text_snippet
-              </span>
-              <Typography className='nav-t' variant='h6' style={{ marginBottom: '15px', color: 'white' }}>
-                Caratula
-              </Typography>
-            </Link>
-          </div>
-          <div className='navbar-left'>
-            <Link to='/Contrarecibo' className='deco'>
-              <span className='material-icons' style={{ color: 'white', marginTop: '3px', marginRight: '15px' }}>
-                payments
-              </span>
-              <Typography className='nav-t' variant='h6' style={{ marginBottom: '15px', color: 'white' }}>
-                Contrarecibo
-              </Typography>
-            </Link>
-          </div>
-          <div className='navbar-left'>
-            <Link to='/TabularList' className='deco'>
-              <span className='material-icons' style={{ color: 'white', marginTop: '3px', marginRight: '15px' }}>
-                format_list_bulleted
-              </span>
-              <Typography className='nav-t' variant='h6' style={{ marginBottom: '15px', color: 'white' }}>
-                Tabular
-              </Typography>
-            </Link>
-          </div>
+            </div>
+          }
+          {(admin === 'MIGUEL' || admin === 'LIZBETH') &&
+            <div className='navbar-left' style={{ marginTop: '30px' }}>
+              <Link to='/Fondos' className='deco'>
+                <span className='material-icons' style={{ color: 'white', marginTop: '3px', marginRight: '15px' }}>
+                  request_quote
+                </span>
+                <Typography className='nav-t' variant='h6' style={{ marginBottom: '15px', color: 'white' }}>
+                  Fondos
+                </Typography>
+              </Link>
+            </div>
+          }
+          {(admin === 'MIGUEL' || admin === 'LIZBETH') &&
+            <div className='navbar-left'>
+              <Link to='/Caratula' className='deco'>
+                <span className='material-icons' style={{ color: 'white', marginTop: '3px', marginRight: '15px' }}>
+                  text_snippet
+                </span>
+                <Typography className='nav-t' variant='h6' style={{ marginBottom: '15px', color: 'white' }}>
+                  Caratula
+                </Typography>
+              </Link>
+            </div>
+          }
+          {(admin === 'MIGUEL' || admin === 'LIZBETH') &&
+            <div className='navbar-left'>
+              <Link to='/Contrarecibo' className='deco'>
+                <span className='material-icons' style={{ color: 'white', marginTop: '3px', marginRight: '15px' }}>
+                  payments
+                </span>
+                <Typography className='nav-t' variant='h6' style={{ marginBottom: '15px', color: 'white' }}>
+                  Contrarecibo
+                </Typography>
+              </Link>
+            </div>
+          }
+          {(admin === 'MIGUEL' || admin === 'LIZBETH') &&
+            <div className='navbar-left'>
+              <Link to='/TabularList' className='deco'>
+                <span className='material-icons' style={{ color: 'white', marginTop: '3px', marginRight: '15px' }}>
+                  format_list_bulleted
+                </span>
+                <Typography className='nav-t' variant='h6' style={{ marginBottom: '15px', color: 'white' }}>
+                  Tabular
+                </Typography>
+              </Link>
+            </div>
+          }
         </div>
         <div>
           <div className='navbar-left'>
