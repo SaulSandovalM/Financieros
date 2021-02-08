@@ -124,7 +124,6 @@ export default class Valeslist extends Component {
         })
         ruta += record + 'cb435a'
         this.state.filefactura = ruta.split('cb435a')
-        console.log(ruta)
       }))
     }
   }

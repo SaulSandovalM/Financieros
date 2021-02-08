@@ -43,8 +43,10 @@ export default class Vales extends Component {
       contadorc: {},
       searchF: '',
       fechaP: '',
-      filexml: '',
-      filefactura: '',
+      filexml: ['No hay datos cargados'],
+      filex: ['No hay datos cargados'],
+      filefactura: ['No hay datos cargados'],
+      filef: ['No hay datos cargados'],
       filerecibo: ''
     }
   }
@@ -170,7 +172,12 @@ export default class Vales extends Component {
       fecha: this.state.fecha,
       autorizo: this.inputAutorizo.value,
       personaR: this.inputPersona.value,
-      estatus: this.state.estatus
+      estatus: this.state.estatus,
+      filexml: this.state.filexml,
+      filex: this.state.filex,
+      filefactura: this.state.filefactura,
+      filef: this.state.filef,
+      filerecibo: ''
     }
     this.setState({
       vale: this.state.contador.storyCount,
