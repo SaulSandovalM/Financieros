@@ -1,11 +1,6 @@
 import React from 'react'
 import { bool } from 'prop-types'
 import Nav from './Nav'
-import NavC from './NavC'
-import NavE from './NavE'
-import NavN from './NavN'
-import NavLiz from './NavLiz'
-import NavJ from './NavJ'
 import NavArchivos from './NavArchivos'
 import { StyledMenu } from './Menu.styled'
 import firebase from '../../../Firebase'
@@ -59,11 +54,10 @@ const Menu = ({ open, ...props }) => {
 
   return (
     <StyledMenu open={open} aria-hidden={!isHidden} {...props}>
-      {admin === 'ADMIN' && <Nav />}
-      {admin === 'CECILIA' && <NavC />}
-      {admin === 'ALFREDO' && <NavC />}
-      {admin === 'NAYRA' && <NavN />}
-      {admin === 'ELI' && <NavE />}
+      {admin === 'CECILIA' && <Nav />}
+      {admin === 'ALFREDO' && <Nav />}
+      {admin === 'NAYRA' && <Nav />}
+      {admin === 'ELI' && <Nav />}
       {admin === 'MIGUEL' && <Nav />}
       {admin === 'OMAR' && <Nav />}
       {admin === 'LILIA' && <Nav />}
@@ -74,9 +68,9 @@ const Menu = ({ open, ...props }) => {
       {admin === 'TERESA' && <Nav />}
       {admin === 'MARCOS' && <Nav />}
       {admin === 'MARTHA' && <Nav />}
-      {admin === 'JUAN' && <NavArchivos />}
-      {admin === 'LIZBETH' && <NavLiz />}
-      {admin === 'JUAN' && <NavJ />}
+      {admin === 'JUAN' && <Nav />}
+      {admin === 'LIZBETH' && <Nav />}
+      {admin === 'JUAN' && <Nav />}
     </StyledMenu>
   )
 }

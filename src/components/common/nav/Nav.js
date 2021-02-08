@@ -78,6 +78,7 @@ class NavLiz extends Component {
     } else if (email === 'juan@procuraduria.com') {
       admin = 'JUAN'
     }
+    console.log(admin)
 
     return (
       <div className='nav-col'>
@@ -203,8 +204,8 @@ class NavLiz extends Component {
               </Link>
             </div>
           }
-          {(admin === 'ELI' || admin === 'LIZBETH') &&
-            <div className='navbar-left'>
+          {(admin === 'ELI' || admin === 'LIZBETH' || admin === 'JUAN') &&
+            <div className='navbar-left' style={{ marginTop: '30px' }}>
               <Link to='/Caja' className='deco'>
                 <span className='material-icons' style={{ color: 'white', marginTop: '3px', marginRight: '15px' }}>
                   local_atm
@@ -215,7 +216,7 @@ class NavLiz extends Component {
               </Link>
             </div>
           }
-          {(admin === 'ELI' || admin === 'LIZBETH') &&
+          {(admin === 'ELI' || admin === 'LIZBETH' || admin === 'JUAN') &&
             <div className='navbar-left'>
               <Link to='/Arqueo' className='deco'>
                 <span className='material-icons' style={{ color: 'white', marginTop: '3px', marginRight: '15px' }}>
@@ -227,7 +228,7 @@ class NavLiz extends Component {
               </Link>
             </div>
           }
-          {(admin === 'ELI' || admin === 'LIZBETH') &&
+          {(admin === 'ELI' || admin === 'LIZBETH' || admin === 'JUAN') &&
             <div className='navbar-left'>
               <Link to='/ArqueoD' className='deco'>
                 <span className='material-icons' style={{ color: 'white', marginTop: '3px', marginRight: '15px' }}>
@@ -239,7 +240,7 @@ class NavLiz extends Component {
               </Link>
             </div>
           }
-          {(admin === 'ELI' || admin === 'LIZBETH') &&
+          {(admin === 'ELI' || admin === 'LIZBETH' || admin === 'JUAN') &&
             <div className='navbar-left'>
               <Link to='/Cheques' className='deco'>
                 <span className='material-icons' style={{ color: 'white', marginTop: '3px', marginRight: '15px' }}>
@@ -251,7 +252,7 @@ class NavLiz extends Component {
               </Link>
             </div>
           }
-          {(admin === 'ELI' || admin === 'LIZBETH') &&
+          {(admin === 'ELI' || admin === 'LIZBETH' || admin === 'JUAN') &&
             <div className='navbar-left'>
               <div className='deco-c' onClick={this.toggleHiddenV.bind(this)}>
                 <span className='material-icons' style={{ color: 'white', marginTop: '3px', marginRight: '15px' }}>
@@ -286,7 +287,7 @@ class NavLiz extends Component {
               </div>
             </div>
           }
-          {(admin === 'MIGUEL' || admin === 'LIZBETH') &&
+          {(admin === 'MIGUEL' || admin === 'LIZBETH' || admin === 'TERESA' || admin === 'ELOY' || admin === 'MARTHA') &&
             <div className='navbar-left' style={{ marginTop: '30px' }}>
               <Link to='/Fondos' className='deco'>
                 <span className='material-icons' style={{ color: 'white', marginTop: '3px', marginRight: '15px' }}>
@@ -298,7 +299,7 @@ class NavLiz extends Component {
               </Link>
             </div>
           }
-          {(admin === 'MIGUEL' || admin === 'LIZBETH') &&
+          {(admin === 'MIGUEL' || admin === 'LIZBETH' || admin === 'TERESA' || admin === 'ELOY' || admin === 'MARTHA') &&
             <div className='navbar-left'>
               <Link to='/Caratula' className='deco'>
                 <span className='material-icons' style={{ color: 'white', marginTop: '3px', marginRight: '15px' }}>
@@ -310,7 +311,7 @@ class NavLiz extends Component {
               </Link>
             </div>
           }
-          {(admin === 'MIGUEL' || admin === 'LIZBETH') &&
+          {(admin === 'MIGUEL' || admin === 'LIZBETH' || admin === 'TERESA' || admin === 'ELOY' || admin === 'MARTHA') &&
             <div className='navbar-left'>
               <Link to='/Contrarecibo' className='deco'>
                 <span className='material-icons' style={{ color: 'white', marginTop: '3px', marginRight: '15px' }}>
@@ -322,7 +323,7 @@ class NavLiz extends Component {
               </Link>
             </div>
           }
-          {(admin === 'MIGUEL' || admin === 'LIZBETH') &&
+          {(admin === 'MIGUEL' || admin === 'LIZBETH' || admin === 'TERESA' || admin === 'ELOY' || admin === 'MARTHA') &&
             <div className='navbar-left'>
               <Link to='/TabularList' className='deco'>
                 <span className='material-icons' style={{ color: 'white', marginTop: '3px', marginRight: '15px' }}>
