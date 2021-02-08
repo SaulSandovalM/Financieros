@@ -328,7 +328,7 @@ export default class Fondos extends Component {
                           <Link style={{ margin: '6px' }} to={`/FondoE/${fondos.key}`}>Editar</Link>
                         </div>
                         <div style={{ width: '14.3%' }}>
-                          <Link style={{ margin: '6px' }} to={`/fondoEditable/${fondos.key}`}>Editar</Link>
+                          <Link style={{ margin: '6px' }} to={`/Comprometidos/${fondos.key}`}>Editar</Link>
                         </div>
                         <div style={{ width: '14.3%' }}>
                           <Link style={{ margin: '6px' }} to={`/fondoEditable/${fondos.key}`}>Imprimir</Link>
@@ -544,10 +544,11 @@ export default class Fondos extends Component {
                 </div>
               </div>
               <div className='div-f2'>
-                <div style={{ width: '100%' }}>
+                <div style={{ width: '99%' }}>
                   <div>
                     <p className='p-label'>Numero de Comprobantes</p>
                     <input
+                      style={{ width: '100%' }}
                       className='field'
                       id='beneficiario'
                       name='beneficiario'
