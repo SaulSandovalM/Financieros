@@ -330,7 +330,6 @@ export default class Cheques extends Component {
                         style={{ background: 'green' }}
                         variant='contained'
                         color='primary'
-                        onClick={this.handleUpdate}
                         type='submit'
                       >
                         Guardar
