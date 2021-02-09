@@ -44,33 +44,6 @@ export default class RowComponent extends Component {
   }
 
   render () {
-    const lista = this.props.item.filefactura
-    // console.log(typeof(this.props.item.filefactura))
-    // const pr = Object.values(this.props.item.filefactura)
-    // console.log(typeof(pr))
-    //
-    // // var obj = {"0":'Prueba',"1":'url2',"2":'url3',}
-    // var result = Object.keys(lista).map((key) => (Number(key), lista[key]))
-    // console.log(result)
-    // //
-    // const lol = result.map(item => <p>{item.props.children.toString()}</p>)
-    // console.log(lol)
-
-    //
-    // function dividirCadena(cadenaADividir,separador) {
-    //   var arrayDeCadenas = cadenaADividir.split(separador)
-    //   console.log('<p>La cadena original es: "' + cadenaADividir + '"')
-    //   console.log('<br>El separador es: "' + separador + '"')
-    //   console.log("<br>El array tiene " + arrayDeCadenas.length + " elementos: ")
-    //   for (var i=0; i < arrayDeCadenas.length; i++) {
-    //     console.log(arrayDeCadenas[i] + " / ")
-    //   }
-    // }
-    //
-    // var espacio = " "
-    //
-    // dividirCadena(pr, espacio)
-
     return (
       <TableBody>
         <div style={{ display: 'flex', flexDirection: 'row', maxWidth: '100%' }}>

@@ -252,10 +252,10 @@ export default class Vales extends Component {
       autorizo: this.state.autorizo ? this.state.autorizo : item.autorizo,
       personaR: this.state.personaR ? this.state.personaR : item.personaR,
       estatus: item.estatus,
-      filexml: this.state.filexml ? item.filexml : this.state.filexml ,
-      filex: this.state.filex ? item.filex : this.state.filex,
+      filexml: this.state.filexml ? item.filexml : this.state.filexml,
+      filex: this.state.filex ? this.state.filex : item.filex,
       filefactura: this.state.filefactura ? item.filefactura : this.state.filefactura,
-      filef: this.state.filef ? item.filef : this.state.filef,
+      filef: this.state.filef ? this.state.filef : item.filef ,
       filerecibo: this.state.filerecibo ? item.filerecibo : this.state.filerecibo ,
       fechaP: this.state.fechaP
     }

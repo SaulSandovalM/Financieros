@@ -61,7 +61,7 @@
   border-right: 0;
   border-top: 0;
   padding: 10px;
-  width: 98%;
+  width: 90%;
 }
 .list-align {
   width: 20%;
@@ -75,11 +75,12 @@
   border-left: 0;
   border-right: 0;
   border-top: 0;
-  width: 18%;
+  width: 15.6%;
 }
 .recibo-container {
   display: flex;
   flex-direction: column;
+  width: 100%;
 }
 .recibo-btn {
   background: white;
@@ -87,7 +88,7 @@
   border-right: 0;
   border-top: 0;
   border-bottom: 1px solid grey;
-  width: 8%;
+  width: 5%;
   font-size: 22px;
 }
 .MuiCard-root {

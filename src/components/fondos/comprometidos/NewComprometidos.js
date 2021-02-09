@@ -20,6 +20,8 @@ import CurrencyFormat from 'react-currency-format'
 import Fab from '@material-ui/core/Fab'
 import firebase from '../../../Firebase'
 import TextField from '@material-ui/core/TextField'
+import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown'
+import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp'
 
 export default class NewComprometidos extends Component {
   constructor (props) {
@@ -52,7 +54,12 @@ export default class NewComprometidos extends Component {
       uuid: 'NA',
       nombre: 'NA',
       folio: 'NA',
-      subtotal: 'NA'
+      subtotal: 'NA',
+      // recibo
+      importer: 0,
+      ivar: 0,
+      isrr: 0,
+      show: true
     }
   }
 
@@ -84,7 +91,7 @@ export default class NewComprometidos extends Component {
           eg: child.val().eg,
           mi: child.val().mi,
           pr: child.val().pr,
-          ped: child.val().ped,
+          pd: child.val().pd,
           itrans: child.val().itrans,
           igest: child.val().igest,
           la: child.val().la,
@@ -173,6 +180,10 @@ export default class NewComprometidos extends Component {
     const state = this.state
     state[e.target.name] = e.target.value
     this.setState(state)
+  }
+
+  handleChange (event) {
+    this.setState({ [event.target.name]: event.target.value })
   }
 
   upsearch (event) {
@@ -293,6 +304,7 @@ export default class NewComprometidos extends Component {
       s: item.s,
       prog: item.prog,
       sp: item.sp,
+      min: item.min,
       obj: item.obj,
       proy: item.proy,
       est: item.est,
@@ -301,7 +313,7 @@ export default class NewComprometidos extends Component {
       eg: item.eg,
       mi: item.mi,
       pr: item.pr,
-      ped: item.ped,
+      pd: item.pd,
       itrans: item.itrans,
       igest: item.igest,
       la: item.la,
@@ -391,14 +403,26 @@ export default class NewComprometidos extends Component {
     this.props.history.push(`/Oficios/${this.state.idP}`)
   }
 
-  partida = ['','211001','211002','212001','212002','214001','214002','215001','216001','217001','221001','221002','246001','251001','253001','254001','255001','261001','271001','272001','291001','292001','311001','313001','318001','323002','334001','338001','341001','351001','352001','353001','355001','357001','358001','361002','372001','375001','381001','392006','394001','218002','312001','371001','247001','249001','359001','336001','275001','211003','541001','515001','339001']
-  rubro = ['','1501010','4302010','4303010','4303020','4306030','4501010','5106050','5106110','6106010','6106020','6901010','8103010','8402060']
+  partida = ['','211001','211002','212001','212002','214001','215001','216001','217001','221001','221002','246001','246002','247001','249001','251001','253001','254001','255001','256001','261001','271001','272001','275001','291001','292001','311001','312001','313001','317001','318001','323002','334001','336001','336002','338001','351001','352001','355001','357001','358001','359001','361002','372001','375001','392006','394001']
+  rubro = ['','1501010','3101010','4301050']
   up = ['','01','02','03','04','05','06','07','08','09','10','11','12','13','14','15','16','17','18','20','21','22','23','24']
   municipio = ['','Acatlán','Acaxochitlán','Actopan','Agua Blanca de Iturbide','Ajacuba','Alfajayucan','Almoloya','Apan','El Arenal','Atitalaquia','Atlapexco','Atotonilco el Grande','Atotonilco de Tula','Calnali','Cardonal','Cuautepec de Hinojosa','Chapantongo','Chapulhuacán','Chilcuautla','Eloxochitlán','Emiliano Zapata','Epazoyucan','Franciso I. Madero','Huasca de Ocampo','Huautla','Huazalingo','Huehuetla','Huejutla de Reyes','Huichapan','Ixmiquilpan','Jacala de Ledezma','Jaltocán','Juárez Hidalgo','Lolotla','Metepec','San Agustín Metzquititlán','Metztitlán','Mineral del Chico','Mineral del Monte','La Misión','Mixquiahuala de Juárez','Molango de Escamilla','Nicolás Flores','Nopala de Villagrán','Omitlán de Juárez','San Felipe Orizatlán','Pacula','Pachuca de Soto','Pisaflores','Progreso de Obregón','Mineral de la Reforma','San Agustín Tlaxiaca','San Bartolo Tutotepec','San Salvador','Santiago de Anaya','Santiago Tulantepec de Lugo Guerrero','Singuilucan','Tasquillo','Tecozautla','Tenango de Doria','Tepeapulco','Tepehuacán de Guerrero','Tepeji del Río de Ocampo','Tepetitlán','Tetepango','Villa de Tezontepec','Tezontepec de Aldama','Tianguistengo','Tizayuca','Tlahuelilpan','Tlahuiltepa','Tlanalapa','Tlanchinol','Tlaxcoapan','Tolcayuca','Tula de Allende','Tulancingo de Bravo','Xochiatipan','Xochicoatlán','Yahualica','Zacualtipán de Ángeles','Zapotlán de Juárez','Zempoala','Zimapán']
   area = ['','Procuraduría General de Justicia','Subprocuraduría de Procedimientos Penales Región Oriente','Fiscalía Especializada para la atención de Delitos cometidos contra la Libertad de Expresión', 'Periodistas y Personas defensoras de los Derechos Humanos','Dirección General para la Atención de los Asuntos del Sistema Tradicional','Fiscalia de Delitos Electorales','Subprocuraduría de Derechos Humanos y Servicios a la Comunidad','Centro de Justicia Restaurativa Penal Poniente','Fiscalía para la Atención de Delitos de Género','Visitaduría General','Dirección General de Servicios Periciales','Centro de Operación Estratégica','Unidad Especializada en el Combate al Secuestro','Dirección General de Administración y Finanzas','Fiscalía Especializada para la atención de los Delitos de Trata de Personas','Subprocuraduría de Procedimientos Penales Región Poniente','Centro de Atención Temprana Poniente','Dirección General de Investigación y Litigación Poniente','Dirección General de la Policía Investigadora','Centro de Atención Temprana Oriente','Centro de Justicia Restaurativa Penal Oriente','Dirección General de Investigación y Litigación Oriente','Dirección General de Recursos Materiales y Servicios','Fiscalía Especializada en Delitos de Corrupción','Fiscalía Especializada en Materia de Desaparición Forzada de Personas',]
 
   resetForm () {
     this.refs.contactForm.reset()
+  }
+
+  toggleOpen () {
+    this.setState({
+      open: !this.state.open
+    })
+  }
+
+  toggleShow () {
+    this.setState({
+      show: !this.state.show
+    })
   }
 
   sendRecibo (e) {
@@ -412,7 +436,7 @@ export default class NewComprometidos extends Component {
       uuid: this.state.uuid,
       subtotal: this.state.subtotal,
       folio: this.state.folio,
-      nombre: this.state.nombre
+      nombre: this.inputNombre.value
     }
     this.setState({
       importe: this.inputImporte.value,
@@ -423,7 +447,7 @@ export default class NewComprometidos extends Component {
       uuid: this.state.uuid,
       subtotal: this.state.subtotal,
       folio: this.state.folio,
-      nombre: this.state.nombre
+      nombre: this.inputNombre.value
     })
     if (params.importe && params.iva && params.isr && params.total && params.fecha) {
       firebase.database().ref('xml').push(params).then(() => {
@@ -549,15 +573,36 @@ export default class NewComprometidos extends Component {
 
     const customListLeft = (title, items) => (
       <div>
-        <div className='recibo-container'>
-          Buscador
-          <input
-            className='input-compro'
-            value={this.state.search}
-            onChange={this.upsearch.bind(this)}
-            placeholder='Ingresa el folio a buscar'
-          />
-        </div>
+        {this.state.show ?
+          <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+            <div className='recibo-container'>
+              Buscador
+              <input
+                className='input-compro'
+                value={this.state.search}
+                onChange={this.upsearch.bind(this)}
+                placeholder='Ingresa el folio a buscar'
+              />
+            </div>
+            <div style={{ marginTop: '28px' }}>
+              <button style={{ height: '25px' }} onClick={this.toggleShow.bind(this)}> Cambiar </button>
+            </div>
+          </div>
+          :
+          <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+            <div className='recibo-container'>
+              Agregar tus XML
+              <TextField
+                type='file'
+                onChange={this.handleOnChange1.bind(this)}
+                style={{ background: 'white' }}
+              />
+            </div>
+            <div>
+              <button style={{ height: '25px' }}  onClick={this.toggleShow.bind(this)}> Cambiar </button>
+            </div>
+          </div>
+        }
         <Card className='card-compro'>
           <List dense component='div' role='list'>
             {filterData.map((value) => {
@@ -593,30 +638,44 @@ export default class NewComprometidos extends Component {
             <input
               className='input-r'
               placeholder='Importe'
-              id='importe'
+              name='importer'
               required
-              ref={importe => this.inputImporte = importe}
+              type='number'
+              value={this.state.importer}
+              onChange={this.handleChange.bind(this)}
             />
             <input
               className='input-r'
               placeholder='Iva'
-              id='iva'
               required
-              ref={iva => this.inputIva = iva}
+              type='number'
+              name='ivar'
+              value={this.state.ivar}
+              onChange={this.handleChange.bind(this)}
             />
             <input
               className='input-r'
               placeholder='Isr'
-              id='isr'
               required
-              ref={isr => this.inputIsr = isr}
+              type='number'
+              name='isrr'
+              value={this.state.isrr}
+              onChange={this.handleChange.bind(this)}
             />
             <input
               className='input-r'
               placeholder='Total'
               id='total'
               required
+              value={parseFloat(this.state.importer) + parseFloat(this.state.ivar) + parseFloat(this.state.isrr)}
               ref={total => this.inputTotal = total}
+            />
+            <input
+              className='input-r'
+              placeholder='Nombre'
+              id='nombre'
+              required
+              ref={nombre => this.inputNombre = nombre}
             />
             <input
               className='input-r'
@@ -654,49 +713,48 @@ export default class NewComprometidos extends Component {
       </div>
     )
 
-    const customListPago = (title, items) => (
-      <div>
-        <div className='recibo-container'>
-          Agregar tus XML
-          <TextField
-            type='file'
-            onChange={this.handleOnChange1.bind(this)}
-            style={{ background: 'white' }}
-          />
-        </div>
-        <Card className='card-compro'>
-          <List dense component='div' role='list'>
-            {items.map((value) => {
-              return (
-                <ListItem key={value.name} button onClick={handleToggle(value)}>
-                  <ListItemIcon>
-                    <Checkbox
-                      checked={checked.indexOf(value) !== -1}
-                      tabIndex={-1}
-                      disableRipple
-                    />
-                  </ListItemIcon>
-                  <ListItemText className='list-align' primary={value.folio} />
-                  <ListItemText className='list-align' primary={'$ ' + value.importe} />
-                  <ListItemText className='list-align' primary={'$ ' + value.iva} />
-                  <ListItemText className='list-align' primary={'$ ' + value.isr} />
-                  <ListItemText className='list-align' primary={value.fecha} />
-                </ListItem>
-              )
-            })}
-            <ListItem />
-          </List>
-        </Card>
-      </div>
-    )
+    // const customListPago = (title, items) => (
+    //   <div>
+    //     <div className='recibo-container'>
+    //       Agregar tus XML
+    //       <TextField
+    //         type='file'
+    //         onChange={this.handleOnChange1.bind(this)}
+    //         style={{ background: 'white' }}
+    //       />
+    //     </div>
+    //     <Card className='card-compro'>
+    //       <List dense component='div' role='list'>
+    //         {items.map((value) => {
+    //           return (
+    //             <ListItem key={value.name} button onClick={handleToggle(value)}>
+    //               <ListItemIcon>
+    //                 <Checkbox
+    //                   checked={checked.indexOf(value) !== -1}
+    //                   tabIndex={-1}
+    //                   disableRipple
+    //                 />
+    //               </ListItemIcon>
+    //               <ListItemText className='list-align' primary={value.folio} />
+    //               <ListItemText className='list-align' primary={'$ ' + value.importe} />
+    //               <ListItemText className='list-align' primary={'$ ' + value.iva} />
+    //               <ListItemText className='list-align' primary={'$ ' + value.isr} />
+    //               <ListItemText className='list-align' primary={value.fecha} />
+    //             </ListItem>
+    //           )
+    //         })}
+    //         <ListItem />
+    //       </List>
+    //     </Card>
+    //   </div>
+    // )
 
     return (
       <div className='div-compro-container'>
         <div>
           <Grid container spacing={3} justify='center' alignItems='center'>
             <Grid item xs>
-              {admin === 'OMAR' || admin === 'MARCOS' || admin === 'KARINA' ?
-                customListPago('Choices', left) :
+              {admin === 'OMAR' || admin === 'MARCOS' || admin === 'KARINA' || admin === 'MIGUEL' &&
                 customListLeft('Choices', left)
               }
             </Grid>
@@ -730,6 +788,7 @@ export default class NewComprometidos extends Component {
             <Paper className='paper-content'>
               <TableHead>
                 <TableRow>
+                  <TableCell className='border-icon' />
                   <TableCell className='border-table2'>
                     <b>Partida</b>
                   </TableCell>
@@ -916,8 +975,12 @@ export default class NewComprometidos extends Component {
               {this.state.comprometidos.map(comprometidos =>
                 <TableRow key={comprometidos.name} className='table-row-c'>
                   <TableCell className='border-icon'>
-                    <IconButton size='small' className='border-des'>
-                      <CheckIcon style={{ color: 'green', cursor: 'auto' }} />
+                    <IconButton size='small' className='border-des' onClick={this.toggleOpen.bind(this)}>
+                      {this.state.open ?
+                        <KeyboardArrowUpIcon style={{ color: 'green', cursor: 'auto' }}/>
+                        :
+                        <KeyboardArrowDownIcon style={{ color: 'green', cursor: 'auto' }}/>
+                      }
                     </IconButton>
                   </TableCell>
                   <TableCell className='border-table2'>
