@@ -552,16 +552,30 @@ export default class Fondos extends Component {
                   />
                 </div>
                 {admin === 'MIGUEL' &&
-                  <div className='div-con'>
-                    <p className='p-label'>Agregar Beneficiario</p>
-                    <input
-                      className='field'
-                      id='nombre'
-                      name='nombre'
-                      onChange={this.onChange}
-                      value={this.state.nombre}
-                    />
-                    <button onClick={this.sendName.bind(this)}>+</button>
+                  <div style={{ display: 'flex', width: '48%' }}>
+                    <div style={{ display: 'flex', flexDirection: 'column', width: '97%' }}>
+                      <p className='p-label'>Agregar Beneficiario</p>
+                      <input
+                        className='field'
+                        id='nombre'
+                        name='nombre'
+                        onChange={this.onChange}
+                        value={this.state.nombre}
+                      />
+                    </div>
+                    <button
+                      style={{
+                        width: '3%',
+                        display: 'flex',
+                        justifyContent: 'center',
+                        paddingTop: '20px',
+                        fontWeight: 'bold',
+                        background: 'white',
+                        border: 0
+                      }}
+                      onClick={this.sendName.bind(this)}>
+                        +
+                    </button>
                   </div>
                 }
               </div>
