@@ -84,12 +84,12 @@
 }
 .recibo-btn {
   background: white;
+  border-bottom: 1px solid grey;
   border-left: 0;
   border-right: 0;
   border-top: 0;
-  border-bottom: 1px solid grey;
-  width: 5%;
   font-size: 22px;
+  width: 5%;
 }
 .MuiCard-root {
   overflow: scroll !important;

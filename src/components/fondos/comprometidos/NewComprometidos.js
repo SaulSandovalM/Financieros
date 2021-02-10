@@ -495,8 +495,6 @@ export default class NewComprometidos extends Component {
     } else if (email === 'omar@procuraduria.com') {
       admin = 'OMAR'
     }
-    const { checked, right } = this.state
-    const left = this.state.xml
 
     function not (a, b) {
       return a.filter((value) => b.indexOf(value) === -1)
@@ -505,6 +503,9 @@ export default class NewComprometidos extends Component {
     function intersection (a, b) {
       return a.filter((value) => b.indexOf(value) !== -1)
     }
+
+    const { checked, right } = this.state
+    const left = this.state.xml
 
     const leftChecked = intersection(checked, left)
     const rightChecked = intersection(checked, right)
@@ -598,16 +599,16 @@ export default class NewComprometidos extends Component {
                 style={{ background: 'white' }}
               />
             </div>
-            <div>
-              <button style={{ height: '25px' }}  onClick={this.toggleShow.bind(this)}> Cambiar </button>
+            <div style={{ marginTop: '28px' }}>
+              <button style={{ height: '25px' }} onClick={this.toggleShow.bind(this)}> Cambiar </button>
             </div>
           </div>
         }
         <Card className='card-compro'>
           <List dense component='div' role='list'>
-            {filterData.map((value) => {
+            {items.map((value) => {
               return (
-                <ListItem key={value.name} button onClick={handleToggle(value)} style={{ overFlow: 'scroll' }}>
+                <ListItem key={value} button onClick={handleToggle(value)} style={{ overFlow: 'scroll' }}>
                   <ListItemIcon>
                     <Checkbox
                       checked={checked.indexOf(value) !== -1}
@@ -691,6 +692,42 @@ export default class NewComprometidos extends Component {
           <List dense component='div' role='list'>
             {items.map((value) => {
               return (
+                <ListItem key={value} role='listitem' button onClick={handleToggle(value)}>
+                  <ListItemIcon>
+                    <Checkbox
+                      checked={checked.indexOf(value) !== -1}
+                      tabIndex={-1}
+                      disableRipple
+                    />
+                  </ListItemIcon>
+                  <ListItemText className='list-align' primary={value.folio} />
+                  <ListItemText className='list-align' primary={'$ ' + value.importe} />
+                  <ListItemText className='list-align' primary={'$ ' + value.iva} />
+                  <ListItemText className='list-align' primary={'$ ' + value.isr} />
+                  <ListItemText className='list-align' primary={value.fecha} />
+                </ListItem>
+              )
+            })}
+            <ListItem />
+          </List>
+        </Card>
+      </div>
+    )
+
+    const customListPago = (title, items) => (
+      <div>
+        <div className='recibo-container'>
+          Agregar tus XML
+          <TextField
+            type='file'
+            onChange={this.handleOnChange1.bind(this)}
+            style={{ background: 'white' }}
+          />
+        </div>
+        <Card className='card-compro'>
+          <List dense component='div' role='list'>
+            {items.map((value) => {
+              return (
                 <ListItem key={value.name} button onClick={handleToggle(value)}>
                   <ListItemIcon>
                     <Checkbox
@@ -713,49 +750,14 @@ export default class NewComprometidos extends Component {
       </div>
     )
 
-    // const customListPago = (title, items) => (
-    //   <div>
-    //     <div className='recibo-container'>
-    //       Agregar tus XML
-    //       <TextField
-    //         type='file'
-    //         onChange={this.handleOnChange1.bind(this)}
-    //         style={{ background: 'white' }}
-    //       />
-    //     </div>
-    //     <Card className='card-compro'>
-    //       <List dense component='div' role='list'>
-    //         {items.map((value) => {
-    //           return (
-    //             <ListItem key={value.name} button onClick={handleToggle(value)}>
-    //               <ListItemIcon>
-    //                 <Checkbox
-    //                   checked={checked.indexOf(value) !== -1}
-    //                   tabIndex={-1}
-    //                   disableRipple
-    //                 />
-    //               </ListItemIcon>
-    //               <ListItemText className='list-align' primary={value.folio} />
-    //               <ListItemText className='list-align' primary={'$ ' + value.importe} />
-    //               <ListItemText className='list-align' primary={'$ ' + value.iva} />
-    //               <ListItemText className='list-align' primary={'$ ' + value.isr} />
-    //               <ListItemText className='list-align' primary={value.fecha} />
-    //             </ListItem>
-    //           )
-    //         })}
-    //         <ListItem />
-    //       </List>
-    //     </Card>
-    //   </div>
-    // )
-
     return (
       <div className='div-compro-container'>
         <div>
           <Grid container spacing={3} justify='center' alignItems='center'>
             <Grid item xs>
-              {admin === 'OMAR' || admin === 'MARCOS' || admin === 'KARINA' || admin === 'MIGUEL' &&
-                customListLeft('Choices', left)
+              {(admin === 'OMAR' || admin === 'MARCOS' || admin === 'KARINA' || admin === 'MIGUEL') ?
+                customListLeft('Choices', left) :
+                customListPago('Choices', left)
               }
             </Grid>
             <Grid item>
@@ -779,7 +781,7 @@ export default class NewComprometidos extends Component {
               </Grid>
             </Grid>
             <Grid item xs>
-              {customListRight('Choices', right)}
+              {customListLeft('Choices', right)}
             </Grid>
           </Grid>
         </div>
@@ -977,8 +979,7 @@ export default class NewComprometidos extends Component {
                   <TableCell className='border-icon'>
                     <IconButton size='small' className='border-des' onClick={this.toggleOpen.bind(this)}>
                       {this.state.open ?
-                        <KeyboardArrowUpIcon style={{ color: 'green', cursor: 'auto' }}/>
-                        :
+                        <KeyboardArrowUpIcon style={{ color: 'green', cursor: 'auto' }}/> :
                         <KeyboardArrowDownIcon style={{ color: 'green', cursor: 'auto' }}/>
                       }
                     </IconButton>
