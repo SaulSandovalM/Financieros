@@ -963,16 +963,40 @@ export default class NewComprometidos extends Component {
                     {comprometidos.area}
                   </TableCell>
                   <TableCell className='border-table2'>
-                    {' $ ' + comprometidos.importe_comp}
+                    <CurrencyFormat
+                      value={comprometidos.importe_comp}
+                      displayType='text'
+                      prefix=' $ '
+                      thousandSeparator
+                      decimalSeparator='.'
+                    />
                   </TableCell>
                   <TableCell className='border-table2'>
-                    {' $ ' + comprometidos.iva}
+                    <CurrencyFormat
+                      value={comprometidos.iva}
+                      displayType='text'
+                      prefix=' $ '
+                      thousandSeparator
+                      decimalSeparator='.'
+                    />
                   </TableCell>
                   <TableCell className='border-table2'>
-                    {' $ ' + comprometidos.isr}
+                    <CurrencyFormat
+                      value={comprometidos.isr}
+                      displayType='text'
+                      prefix=' $ '
+                      thousandSeparator
+                      decimalSeparator='.'
+                    />
                   </TableCell>
                   <TableCell className='border-table2'>
-                    {' $ ' + (comprometidos.importe_comp + comprometidos.iva + comprometidos.isr)}
+                    <CurrencyFormat
+                      value={(comprometidos.importe_comp + comprometidos.iva + comprometidos.isr)}
+                      displayType='text'
+                      prefix=' $ '
+                      thousandSeparator
+                      decimalSeparator='.'
+                    />
                   </TableCell>
                 </TableRow>
               )}
