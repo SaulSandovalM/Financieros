@@ -29,10 +29,6 @@ export default class RowComponent extends Component {
     this.props.update(this.props.item)
   }
 
-  delete = () => {
-    this.props.update(this.props.item)
-  }
-
   obs = () => {
     this.props.obs(this.props.item)
   }
@@ -218,9 +214,6 @@ export default class RowComponent extends Component {
                           onClick={() => window.open(item, '_blank')}
                         >
                           { item }
-                        <Button onClick={this.delete} style={{ background: 'red', color: 'white' }}>
-                          Borrar
-                        </Button>
                         </TableCell>
                       ))}
                     </TableRow>

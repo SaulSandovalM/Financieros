@@ -219,7 +219,6 @@ export default class ListComponent extends Component {
                   key={item.id}
                   item={item}
                   update={this.props.update}
-                  delete={this.props.delete}
                   obs={this.props.obs}
                 />
               )

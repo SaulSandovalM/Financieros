@@ -84,7 +84,7 @@ export default class Cpdf extends Component{
             <div style={{ display: 'flex', justifyContent: 'center', marginTop: '50px' }}>
               <div className='cpdf-subdad-fi'>
                 <div className='fondo-procus'>
-                  <img className='ims' src={programa} alt='' />
+                  <img className='ims-last' src={programa} alt='' />
                   <img className='im' src={logo2} alt='' />
                 </div>
                 <div className='procu'>

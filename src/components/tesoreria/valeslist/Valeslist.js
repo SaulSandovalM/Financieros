@@ -108,7 +108,7 @@ export default class Valeslist extends Component {
     let ruta = this.state.filefactura
     for (let i = 0; i < event.target.files.length; i++) {
       const file = event.target.files[i]
-      const storageRef = firebase.storage().ref(`prueba/${file.name}`)
+      const storageRef = firebase.storage().ref(`comprobacion/${file.name}`)
       const task = storageRef.put(file)
       task.on('state_changed', (snapshot) => {
         let percentage = (snapshot.bytesTransferred / snapshot.totalBytes) * 100
@@ -259,36 +259,6 @@ export default class Valeslist extends Component {
     this.resetForm()
   }
 
-  delete = (item) => {
-    let deletes = {}
-    deletes['vales/' + item.id] = {
-      cheque: item.cheque,
-      vale: item.vale,
-      cantidad: item.cantidad,
-      cantidadc: item.cantidadc,
-      cantidadr: item.cantidadr,
-      concepto: item.concepto,
-      oficioS: item.oficioS,
-      area: item.area,
-      turno: item.turno,
-      factura: item.factura,
-      recibos: item.recibos,
-      sc: item.sc,
-      fecha: item.fecha,
-      autorizo: item.autorizo,
-      personaR: item.personaR,
-      estatus: 'Comprobado',
-      filexml: '',
-      filex: '',
-      filefactura: '',
-      filef: '',
-      filerecibo: this.state.filerecibo,
-    }
-    firebase.database().ref().update(deletes)
-    alert('Tu solicitud fue enviada.')
-    this.resetForm()
-  }
-
   render () {
     return (
       <div className='container-valeslist'>
@@ -303,6 +273,7 @@ export default class Valeslist extends Component {
               <div className='inputs-valeslist'>
                 <div className='inputs-row-valeslist'>
                   <div className='p-container-valeslist'>
+                    <p style={{ margin: '0px', color: 'grey', fontSize: '12px' }}>Agregar xml</p>
                     <Dropzone
                       style={{
                         position: 'relative',
@@ -311,8 +282,7 @@ export default class Valeslist extends Component {
                         borderWidth: '2px',
                         borderColor: 'rgb(102, 102, 102)',
                         borderStyle: 'solid',
-                        borderRadius: '5px',
-                        marginTop: '15px'
+                        borderRadius: '5px'
                       }}
                       accept='.xml' onChange={this.handleOnChange1.bind(this)}
                     />
@@ -321,6 +291,7 @@ export default class Valeslist extends Component {
                     </progress>
                   </div>
                   <div className='p-container-valeslist'>
+                    <p style={{ margin: '0px', color: 'grey', fontSize: '12px' }}>Agregar Pdf</p>
                     <Dropzone
                       style={{
                         position: 'relative',
@@ -329,8 +300,7 @@ export default class Valeslist extends Component {
                         borderWidth: '2px',
                         borderColor: 'rgb(102, 102, 102)',
                         borderStyle: 'solid',
-                        borderRadius: '5px',
-                        marginTop: '15px'
+                        borderRadius: '5px'
                       }}
                       accept='.pdf' onChange={this.handleOnChange2.bind(this)}
                     />
@@ -364,7 +334,6 @@ export default class Valeslist extends Component {
             <ListComponent
               lista={this.state.lista}
               update={this.update}
-              delete={this.delete}
               obs={this.obs}
             />
           </div>
