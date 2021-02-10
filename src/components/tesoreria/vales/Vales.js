@@ -259,6 +259,42 @@ export default class Vales extends Component {
       filerecibo: this.state.filerecibo ? item.filerecibo : this.state.filerecibo ,
       fechaP: this.state.fechaP
     }
+    this.setState({
+      fechaP: ''
+    })
+    firebase.database().ref().update(updates)
+    alert('Tu solicitud fue enviada.')
+  }
+
+  cancel = (item) => {
+    let updates = {}
+    updates['vales/' + item.id] = {
+      cheque: 'Cancelado',
+      vale: item.vale,
+      cantidad: 0,
+      cantidadc: 0,
+      cantidadr: 0,
+      concepto: '',
+      oficioS: '',
+      area: '',
+      turno: '',
+      factura: '',
+      recibos: '',
+      sc: '',
+      fecha: this.state.fecha ? this.state.fecha : item.fecha,
+      autorizo: this.state.autorizo ? this.state.autorizo : item.autorizo,
+      personaR: this.state.personaR ? this.state.personaR : item.personaR,
+      estatus: 'Cancelado',
+      filexml: '',
+      filex: '',
+      filefactura: '',
+      filef: '',
+      filerecibo: '',
+      fechaP: ''
+    }
+    this.setState({
+      fechaP: ''
+    })
     firebase.database().ref().update(updates)
     alert('Tu solicitud fue enviada.')
   }
@@ -272,8 +308,6 @@ export default class Vales extends Component {
     today = f.getDate() + '-' + meses[f.getMonth()] + '-' + f.getFullYear()
     today2 = f.getFullYear() + '-' + meses2[f.getMonth()] + '-' + f.getDate()
     this.state.fecha = today2
-
-    console.log(this.state.cheque)
 
     return (
       <div className='container-back-v'>
@@ -811,6 +845,12 @@ export default class Vales extends Component {
                     content={() => this.vale}
                     onAfterPrint={() => this.update(item)}
                   />
+                  <Button
+                    variant='contained'
+                    color='primary'
+                    style={{ background: 'red', color: 'white' }}
+                    onClick={() => this.cancel(item)}
+                  >Cancelar</Button>
                   {/*<ReactToPrint
                     trigger={() => <Button variant='contained' style={{ background: 'green', color: 'white' }}>Guardar e Imprimir</Button>}
                     content={() => this.vale}

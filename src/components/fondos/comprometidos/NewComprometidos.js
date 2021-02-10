@@ -663,7 +663,7 @@ export default class NewComprometidos extends Component {
                   </div>
                 </div>
               }
-              {(admin === 'OMAR' || admin === 'MARCOS' || admin === 'KARINA' || admin === 'MIGUEL') &&
+              {(admin === 'OMAR' || admin === 'MARCOS' || admin === 'KARINA' || admin === 'MIGUEL' || admin === 'TERESA') &&
                 customListLeft('Choices', left)
               }
             </Grid>

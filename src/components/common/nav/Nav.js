@@ -323,7 +323,7 @@ class NavLiz extends Component {
               </Link>
             </div>
           }
-          {(admin === 'MIGUEL' || admin === 'LIZBETH' || admin === 'ELI') &&
+          {(admin === 'MIGUEL' || admin === 'LIZBETH' || admin === 'ELI' || admin === 'TERESA') &&
             <div className='navbar-left'>
               <Link to='/Caratula' className='deco'>
                 <span className='material-icons' style={{ color: 'white', marginTop: '3px', marginRight: '15px' }}>
