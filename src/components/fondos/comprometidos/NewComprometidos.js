@@ -574,39 +574,9 @@ export default class NewComprometidos extends Component {
 
     const customListLeft = (title, items) => (
       <div>
-        {this.state.show ?
-          <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-            <div className='recibo-container'>
-              Buscador
-              <input
-                className='input-compro'
-                value={this.state.search}
-                onChange={this.upsearch.bind(this)}
-                placeholder='Ingresa el folio a buscar'
-              />
-            </div>
-            <div style={{ marginTop: '28px' }}>
-              <button style={{ height: '25px' }} onClick={this.toggleShow.bind(this)}> Cambiar </button>
-            </div>
-          </div>
-          :
-          <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-            <div className='recibo-container'>
-              Agregar tus XML
-              <TextField
-                type='file'
-                onChange={this.handleOnChange1.bind(this)}
-                style={{ background: 'white' }}
-              />
-            </div>
-            <div style={{ marginTop: '28px' }}>
-              <button style={{ height: '25px' }} onClick={this.toggleShow.bind(this)}> Cambiar </button>
-            </div>
-          </div>
-        }
         <Card className='card-compro'>
           <List dense component='div' role='list'>
-            {items.map((value) => {
+            {filterData.map((value) => {
               return (
                 <ListItem key={value} button onClick={handleToggle(value)} style={{ overFlow: 'scroll' }}>
                   <ListItemIcon>
@@ -632,62 +602,6 @@ export default class NewComprometidos extends Component {
 
     const customListRight = (title, items) => (
       <div>
-        <div className='recibo-container'>
-          Agrega un Recibo
-          <form className='recibo-content' onSubmit={this.sendRecibo.bind(this)} ref='contactForm'>
-            <button className='recibo-btn' type='submit'> + </button>
-            <input
-              className='input-r'
-              placeholder='Importe'
-              name='importer'
-              required
-              type='number'
-              value={this.state.importer}
-              onChange={this.handleChange.bind(this)}
-            />
-            <input
-              className='input-r'
-              placeholder='Iva'
-              required
-              type='number'
-              name='ivar'
-              value={this.state.ivar}
-              onChange={this.handleChange.bind(this)}
-            />
-            <input
-              className='input-r'
-              placeholder='Isr'
-              required
-              type='number'
-              name='isrr'
-              value={this.state.isrr}
-              onChange={this.handleChange.bind(this)}
-            />
-            <input
-              className='input-r'
-              placeholder='Total'
-              id='total'
-              required
-              value={parseFloat(this.state.importer) + parseFloat(this.state.ivar) + parseFloat(this.state.isrr)}
-              ref={total => this.inputTotal = total}
-            />
-            <input
-              className='input-r'
-              placeholder='Nombre'
-              id='nombre'
-              required
-              ref={nombre => this.inputNombre = nombre}
-            />
-            <input
-              className='input-r'
-              placeholder='Fecha'
-              type='date'
-              id='fecha'
-              required
-              ref={fecha => this.inputFecha = fecha}
-            />
-          </form>
-        </div>
         <Card className='card-compro'>
           <List dense component='div' role='list'>
             {items.map((value) => {
@@ -714,50 +628,43 @@ export default class NewComprometidos extends Component {
       </div>
     )
 
-    const customListPago = (title, items) => (
-      <div>
-        <div className='recibo-container'>
-          Agregar tus XML
-          <TextField
-            type='file'
-            onChange={this.handleOnChange1.bind(this)}
-            style={{ background: 'white' }}
-          />
-        </div>
-        <Card className='card-compro'>
-          <List dense component='div' role='list'>
-            {items.map((value) => {
-              return (
-                <ListItem key={value.name} button onClick={handleToggle(value)}>
-                  <ListItemIcon>
-                    <Checkbox
-                      checked={checked.indexOf(value) !== -1}
-                      tabIndex={-1}
-                      disableRipple
-                    />
-                  </ListItemIcon>
-                  <ListItemText className='list-align' primary={value.folio} />
-                  <ListItemText className='list-align' primary={'$ ' + value.importe} />
-                  <ListItemText className='list-align' primary={'$ ' + value.iva} />
-                  <ListItemText className='list-align' primary={'$ ' + value.isr} />
-                  <ListItemText className='list-align' primary={value.fecha} />
-                </ListItem>
-              )
-            })}
-            <ListItem />
-          </List>
-        </Card>
-      </div>
-    )
-
     return (
       <div className='div-compro-container'>
         <div>
           <Grid container spacing={3} justify='center' alignItems='center'>
             <Grid item xs>
-              {(admin === 'OMAR' || admin === 'MARCOS' || admin === 'KARINA' || admin === 'MIGUEL') ?
-                customListLeft('Choices', left) :
-                customListPago('Choices', left)
+              {this.state.show ?
+                <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                  <div className='recibo-container'>
+                    Buscador
+                    <input
+                      className='input-compro'
+                      value={this.state.search}
+                      onChange={this.upsearch.bind(this)}
+                      placeholder='Ingresa el folio a buscar'
+                    />
+                  </div>
+                  <div style={{ marginTop: '28px' }}>
+                    <button style={{ height: '25px' }} onClick={this.toggleShow.bind(this)}> Cambiar </button>
+                  </div>
+                </div>
+                :
+                <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                  <div className='recibo-container'>
+                    Agregar tus XML
+                    <TextField
+                      type='file'
+                      onChange={this.handleOnChange1.bind(this)}
+                      style={{ background: 'white' }}
+                    />
+                  </div>
+                  <div style={{ marginTop: '28px' }}>
+                    <button style={{ height: '25px' }} onClick={this.toggleShow.bind(this)}> Cambiar </button>
+                  </div>
+                </div>
+              }
+              {(admin === 'OMAR' || admin === 'MARCOS' || admin === 'KARINA' || admin === 'MIGUEL') &&
+                customListLeft('Choices', left)
               }
             </Grid>
             <Grid item>
@@ -781,7 +688,63 @@ export default class NewComprometidos extends Component {
               </Grid>
             </Grid>
             <Grid item xs>
-              {customListLeft('Choices', right)}
+              <div className='recibo-container'>
+                Agrega un Recibo
+                <form className='recibo-content' onSubmit={this.sendRecibo.bind(this)} ref='contactForm'>
+                  <button className='recibo-btn' type='submit'> + </button>
+                  <input
+                    className='input-r'
+                    placeholder='Importe'
+                    name='importer'
+                    required
+                    type='number'
+                    value={this.state.importer}
+                    onChange={this.handleChange.bind(this)}
+                  />
+                  <input
+                    className='input-r'
+                    placeholder='Iva'
+                    required
+                    type='number'
+                    name='ivar'
+                    value={this.state.ivar}
+                    onChange={this.handleChange.bind(this)}
+                  />
+                  <input
+                    className='input-r'
+                    placeholder='Isr'
+                    required
+                    type='number'
+                    name='isrr'
+                    value={this.state.isrr}
+                    onChange={this.handleChange.bind(this)}
+                  />
+                  <input
+                    className='input-r'
+                    placeholder='Total'
+                    id='total'
+                    required
+                    value={parseFloat(this.state.importer) + parseFloat(this.state.ivar) + parseFloat(this.state.isrr)}
+                    ref={total => this.inputTotal = total}
+                  />
+                  <input
+                    className='input-r'
+                    placeholder='Nombre'
+                    id='nombre'
+                    required
+                    ref={nombre => this.inputNombre = nombre}
+                  />
+                  <input
+                    className='input-r'
+                    placeholder='Fecha'
+                    type='date'
+                    id='fecha'
+                    required
+                    ref={fecha => this.inputFecha = fecha}
+                  />
+                </form>
+              </div>
+              {customListRight('Choices', right)}
             </Grid>
           </Grid>
         </div>
