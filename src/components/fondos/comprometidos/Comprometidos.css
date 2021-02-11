@@ -101,5 +101,5 @@
   overflow: scroll !important;
 }
 .MuiTableCell-root  {
-  text-align: center !important; 
+  text-align: center; 
 }

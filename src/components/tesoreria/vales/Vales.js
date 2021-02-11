@@ -102,6 +102,7 @@ export default class Vales extends Component {
           filefactura: child.val().filefactura,
           filef: child.val().filef,
           filerecibo: child.val().filerecibo,
+          fechaP: child.val().fechaP,
           id: child.key
         })
       })
@@ -326,15 +327,24 @@ export default class Vales extends Component {
                   />
                 </div>
                 <div>
-                  <p className='sub-c-p'>Ingrese la Fecha de Pago</p>
-                  <input
-                    type='date'
-                    style={{ width: '100%' }}
-                    className='field'
-                    name='fechaP'
-                    value={this.state.fechaP}
-                    onChange={this.handleChange.bind(this)}
-                  />
+                {this.state.vales.map(item =>
+                  <div>
+                    {parseInt(this.state.searchF) === item.vale &&
+                      <div>
+                        <p className='sub-c-p'>Ingrese la Fecha de Pago</p>
+                        <input
+                          type='date'
+                          style={{ width: '100%' }}
+                          id='fechaP'
+                          className='field'
+                          name='fechaP'
+                          onChange={this.handleChange.bind(this)}
+                          defaultValue={item.fechaP}
+                        />
+                      </div>
+                    }
+                  </div>
+                )}
                 </div>
               </Paper>
             </Grid>

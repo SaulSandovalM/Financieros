@@ -5,6 +5,8 @@ import ListComponent from './ListComponent'
 import ListComponentV from './ListComponentV'
 import ReactToPrint from 'react-to-print'
 import CurrencyFormat from 'react-currency-format'
+import Paper from '@material-ui/core/Paper'
+import Grid from '@material-ui/core/Grid'
 
 export default class ArqueoD extends Component {
   constructor (props) {
@@ -48,7 +50,8 @@ export default class ArqueoD extends Component {
       arqueo: [],
       fecha: '',
       search: '',
-      numCheque: ''
+      numCheque: '',
+      searchF: ''
     }
   }
 
@@ -137,10 +140,14 @@ export default class ArqueoD extends Component {
   componentDidMount () {
     const itemsRef = firebase.database().ref('arqueo/').limitToLast(1)
     this.listenForItems(itemsRef)
-    const itemsRefy = firebase.database().ref('arqueo/').orderByChild('fecha').limitToLast(1)
+    const itemsRefy = firebase.database().ref('arqueo/').orderByChild('fecha')
     this.listenForItemsy(itemsRefy)
     const itemsRefVales = firebase.database().ref('vales/')
     this.listenForVales(itemsRefVales)
+  }
+
+  handleChange (event) {
+    this.setState({ [event.target.name]: event.target.value })
   }
 
   render () {
@@ -162,9 +169,32 @@ export default class ArqueoD extends Component {
     let filteredDates = this.state.listay.filter(function(date) {
       return date.fecha === preDate && date.hora < '23:59' && date.hora > '16:00'
     })
+    console.log(filteredDates)
 
     return (
       <div>
+        <div style={{ display: 'flex', justifyContent: 'center' }}>
+          <Grid className='grid-w-c'>
+            <Grid className='grid-w2' style={{ marginTop: '100px' }}>
+              <Paper className='paper-p-c'>
+                <div>
+                  <p className='sub-c-p'>Ingrese el Numero de Fondo a buscar</p>
+                  <input
+                    style={{ width: '100%' }}
+                    className='field'
+                    name='searchF'
+                    value={this.state.searchF}
+                    onChange={this.handleChange.bind(this)}
+                  />
+                </div>
+                <ReactToPrint
+                  trigger={() => <buttom className='b-imp'>Imprimir</buttom>}
+                  content={() => this.arqueo}
+                />
+              </Paper>
+            </Grid>
+          </Grid>
+        </div>
         <div className='ar-pad' ref={el => (this.arqueo = el)}>
           <p>Dirección General de Administración y Finanzas</p>
           <div className='arqueoI'>
@@ -275,12 +305,6 @@ export default class ArqueoD extends Component {
               />
             </div>
           </div>
-        </div>
-        <div className='boton-v'>
-          <ReactToPrint
-            trigger={() => <div className='boton-vale'>Imprimir</div>}
-            content={() => this.arqueo}
-          />
         </div>
       </div>
     )

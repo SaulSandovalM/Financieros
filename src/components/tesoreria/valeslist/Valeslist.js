@@ -51,28 +51,19 @@ export default class Valeslist extends Component {
   }
 
   handleOnChange1 (event) {
-    const file = event.target.files[0]
-    const storageRef = firebase.storage().ref(`comprobacion/${file.name}`)
-    const task = storageRef.put(file)
-    this.setState({
-      filex: `${file.name}`
-    })
-    task.on('state_changed', (snapshot) => {
-      let percentage = (snapshot.bytesTransferred / snapshot.totalBytes) * 100
-      this.setState({
-        xml: percentage
-      })
-    }, error => {
-      console.error(error.message)
-    }, () =>  storageRef.getDownloadURL().then(url =>  {
-      const record = url
-      this.setState({
-        filexml: record
-      })
-    }))
     const files = event.target.files
-    for (var i = 0; i < files.length; i++) {
+    for (let i = 0; i < files.length; i++) {
       const file = files[i]
+      const storageRef = firebase.storage().ref(`prueba/${file.name}`)
+      const task = storageRef.put(file)
+      task.on('state_changed', (snapshot) => {
+        let percentage = (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+        this.setState({
+          xml: percentage
+        })
+      }, error => {
+        alert('Error')
+      })
       var xml = file
       var reader = new FileReader()
       reader.onloadend = function () {
@@ -82,7 +73,7 @@ export default class Valeslist extends Component {
           'total': xml.attributes['Total'],
           'subtotal': xml.attributes['SubTotal'] ? xml.attributes['SubTotal'] : 0,
           'folio': xml.attributes['Folio'] ? xml.attributes['Folio'] : '0',
-          'Nombre': xml.children['0'].attributes['Nombre'],
+          'nombre': xml.children['0'].attributes['Nombre'],
           'importe': xml.children['2'].children['0'].attributes['Importe'],
           'iva': xml.children['3'].attributes['TotalImpuestosTrasladados'],
           'isr': xml.children['3'].attributes['TotalImpuestosRetenidos'] ? xml.children['3'].attributes['TotalImpuestosRetenidos'] : 0,
