@@ -19,7 +19,7 @@ export default class RowComponentV extends Component {
 
     return (
       <div style={{ width: '100%' }}>
-        {this.props.item.fechaP === today &&
+        {this.props.item.fechaP === today && this.props.item.cheque !== 'Cancelado' &&
           <div className='tabla-arq'>
             <div className='tb-1'>
               <p className='tb-nr'>{this.props.item.vale}</p>
