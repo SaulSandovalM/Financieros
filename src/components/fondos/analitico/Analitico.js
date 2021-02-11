@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import './Comprometidos.css'
+import './Analitico.css'
 import Grid from '@material-ui/core/Grid'
 import Paper from '@material-ui/core/Paper'
 import TableCell from '@material-ui/core/TableCell'
@@ -23,7 +23,7 @@ import TextField from '@material-ui/core/TextField'
 import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown'
 import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp'
 
-export default class NewComprometidos extends Component {
+export default class Analitico extends Component {
   constructor (props) {
     super(props)
     this.unsubscribe = null
@@ -578,7 +578,7 @@ export default class NewComprometidos extends Component {
           <List dense component='div' role='list'>
             {filterData.map((value) => {
               return (
-                <ListItem key={value} button onClick={handleToggle(value)}>
+                <ListItem key={value} button onClick={handleToggle(value)} style={{ overFlow: 'scroll' }}>
                   <ListItemIcon>
                     <Checkbox
                       checked={checked.indexOf(value) !== -1}
@@ -634,7 +634,7 @@ export default class NewComprometidos extends Component {
           <Grid container spacing={3} justify='center' alignItems='center'>
             <Grid item xs>
               {this.state.show ?
-                <div className='div-into-data'>
+                <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                   <div className='recibo-container'>
                     Buscador
                     <input
@@ -644,28 +644,22 @@ export default class NewComprometidos extends Component {
                       placeholder='Ingresa el folio a buscar'
                     />
                   </div>
-                  <div className='div-btn-comp'>
-                    <button className='btn-comp' onClick={this.toggleShow.bind(this)}>
-                      Cambiar
-                    </button>
+                  <div style={{ marginTop: '28px' }}>
+                    <button style={{ height: '25px' }} onClick={this.toggleShow.bind(this)}> Cambiar </button>
                   </div>
                 </div>
                 :
-                <div className='div-into-data'>
+                <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                   <div className='recibo-container'>
                     Agregar tus XML
                     <TextField
-                      className='input-xml'
                       type='file'
                       onChange={this.handleOnChange1.bind(this)}
+                      style={{ background: 'white' }}
                     />
                   </div>
-                  <div className='div-btn-comp'>
-                    <button
-                      className='btn-comp'
-                      onClick={this.toggleShow.bind(this)}>
-                        Cambiar
-                    </button>
+                  <div style={{ marginTop: '28px' }}>
+                    <button style={{ height: '25px' }} onClick={this.toggleShow.bind(this)}> Cambiar </button>
                   </div>
                 </div>
               }
@@ -761,25 +755,31 @@ export default class NewComprometidos extends Component {
                 <TableRow>
                   <TableCell className='border-icon' />
                   <TableCell className='border-table2'>
-                    <b className='font-tb'>Partida</b>
+                    <b>Partida</b>
                   </TableCell>
                   <TableCell className='border-table2'>
-                    <b className='font-tb'>Up</b>
+                    <b>Up</b>
                   </TableCell>
                   <TableCell className='border-table2'>
-                    <b className='font-tb'>Rubro</b>
+                    <b>Rubro</b>
+                  </TableCell>
+                  <TableCell className='border-table3'>
+                    <b>Municipio</b>
+                  </TableCell>
+                  <TableCell className='border-table'>
+                    <b>Area</b>
                   </TableCell>
                   <TableCell className='border-table2'>
-                    <b className='font-tb'>Importe</b>
+                    <b>Importe</b>
                   </TableCell>
                   <TableCell className='border-table2'>
-                    <b className='font-tb'>Iva</b>
+                    <b>Iva</b>
                   </TableCell>
                   <TableCell className='border-table2'>
-                    <b className='font-tb'>Isr</b>
+                    <b>Isr</b>
                   </TableCell>
                   <TableCell className='border-table2'>
-                    <b className='font-tb'>Total</b>
+                    <b>Total</b>
                   </TableCell>
                 </TableRow>
               </TableHead>
@@ -800,9 +800,9 @@ export default class NewComprometidos extends Component {
                     className='select-compro'
                     name='partida'
                     ref='partida'
+                    value={this.state.partida}
                     onChange={this.updateSearch.bind(this)}
                     required
-                    value={this.state.partida}
                   >
                     {this.partida.map((x,y) =>
                       <option name={y}>{x}</option>
@@ -814,9 +814,9 @@ export default class NewComprometidos extends Component {
                     className='select-compro'
                     name='presupuestal'
                     ref='presupuestal'
+                    value={this.state.up}
                     onChange={this.updateSearch2.bind(this)}
                     required
-                    value={this.state.up}
                   >
                     {this.up.map((x,y) =>
                       <option name={y}>{x}</option>
@@ -828,11 +828,39 @@ export default class NewComprometidos extends Component {
                     className='select-compro'
                     name='rubro'
                     ref='rubro'
+                    value={this.state.rubro}
                     onChange={this.updateSearch3.bind(this)}
                     required
-                    value={this.state.rubro}
                   >
                     {this.rubro.map((x,y) =>
+                      <option name={y}>{x}</option>
+                    )}
+                  </select>
+                </TableCell>
+                <TableCell className='border-table3'>
+                  <select
+                    className='select-compro'
+                    name='municipio'
+                    ref='municipio'
+                    value={this.state.municipio}
+                    onChange={this.updateSearch4.bind(this)}
+                    required
+                  >
+                    {this.municipio.map((x,y) =>
+                      <option name={y}>{x}</option>
+                    )}
+                  </select>
+                </TableCell>
+                <TableCell className='border-table'>
+                  <select
+                    className='select-compro'
+                    name='area'
+                    ref='area'
+                    value={this.state.area}
+                    onChange={this.updateSearch5.bind(this)}
+                    required
+                  >
+                    {this.area.map((x,y) =>
                       <option name={y}>{x}</option>
                     )}
                   </select>
@@ -840,79 +868,71 @@ export default class NewComprometidos extends Component {
                 <TableCell className='border-table2'>
                   {this.state.importe ?
                     <CurrencyFormat
-                      className='font-tb'
-                      displayType='text'
-                      prefix=' $ '
-                      thousandSeparator
-                      decimalSeparator='.'
                       value={this.state.importe}
-                    /> :
-                    <CurrencyFormat
-                      className='font-tb'
                       displayType='text'
                       prefix=' $ '
                       thousandSeparator
                       decimalSeparator='.'
+                    /> :
+                    <CurrencyFormat
                       value={0}
-                    />
-                  }
+                      displayType='text'
+                      prefix=' $ '
+                      thousandSeparator
+                      decimalSeparator='.'
+                    />}
                 </TableCell>
                 <TableCell className='border-table2'>
                   {this.state.importe ?
                     <CurrencyFormat
-                      className='font-tb'
-                      displayType='text'
-                      prefix=' $ '
-                      thousandSeparator
-                      decimalSeparator='.'
                       value={this.state.iva}
-                    /> :
-                    <CurrencyFormat
                       displayType='text'
                       prefix=' $ '
                       thousandSeparator
                       decimalSeparator='.'
+                    /> :
+                    <CurrencyFormat
                       value={0}
+                      displayType='text'
+                      prefix=' $ '
+                      thousandSeparator
+                      decimalSeparator='.'
                     />
                   }
                 </TableCell>
                 <TableCell className='border-table2'>
                   {this.state.importe ?
                     <CurrencyFormat
-                      className='font-tb'
-                      displayType='text'
-                      prefix=' $ '
-                      thousandSeparator
-                      decimalSeparator='.'
                       value={this.state.isr}
-                    /> :
-                    <CurrencyFormat
-                      className='font-tb'
                       displayType='text'
                       prefix=' $ '
                       thousandSeparator
                       decimalSeparator='.'
+                    /> :
+                    <CurrencyFormat
                       value={0}
+                      displayType='text'
+                      prefix=' $ '
+                      thousandSeparator
+                      decimalSeparator='.'
                     />
                   }
                 </TableCell>
                 <TableCell className='border-table2'>
                   {this.state.importe ?
                     <CurrencyFormat
-                      className='font-tb'
+                      value={this.state.total}
                       displayType='text'
                       prefix=' $ '
                       thousandSeparator
                       decimalSeparator='.'
-                      value={this.state.total}
                     /> :
                     <CurrencyFormat
-                      className='font-tb'
+                      value={0}
                       displayType='text'
                       prefix=' $ '
                       thousandSeparator
                       decimalSeparator='.'
-                      value={0}
                     />
                   }
                 </TableCell>
@@ -922,65 +942,60 @@ export default class NewComprometidos extends Component {
                   <TableCell className='border-icon'>
                     <IconButton size='small' className='border-des' onClick={this.toggleOpen.bind(this)}>
                       {this.state.open ?
-                        <KeyboardArrowUpIcon className='key-style' /> :
-                        <KeyboardArrowDownIcon className='key-style' />
+                        <KeyboardArrowUpIcon style={{ color: 'green', cursor: 'auto' }}/> :
+                        <KeyboardArrowDownIcon style={{ color: 'green', cursor: 'auto' }}/>
                       }
                     </IconButton>
                   </TableCell>
                   <TableCell className='border-table2'>
-                    <div className='font-tb'>
-                      {comprometidos.partida}
-                    </div>
+                    {comprometidos.partida}
                   </TableCell>
                   <TableCell className='border-table2'>
-                    <div className='font-tb'>
-                      {comprometidos.presupuestal}
-                    </div>
+                    {comprometidos.presupuestal}
                   </TableCell>
                   <TableCell className='border-table2'>
-                    <div className='font-tb'>
-                      {comprometidos.rubro}
-                    </div>
+                    {comprometidos.rubro}
+                  </TableCell>
+                  <TableCell className='border-table3'>
+                    {comprometidos.municipio}
+                  </TableCell>
+                  <TableCell className='border-table'>
+                    {comprometidos.area}
                   </TableCell>
                   <TableCell className='border-table2'>
                     <CurrencyFormat
-                      className='font-tb'
-                      displayType='text'
-                      prefix=' $ '
-                      thousandSeparator
-                      decimalSeparator='.'
                       value={comprometidos.importe_comp}
-                    />
-                  </TableCell>
-                  <TableCell className='border-table2'>
-                    <CurrencyFormat
-                      className='font-tb'
                       displayType='text'
                       prefix=' $ '
                       thousandSeparator
                       decimalSeparator='.'
+                    />
+                  </TableCell>
+                  <TableCell className='border-table2'>
+                    <CurrencyFormat
                       value={comprometidos.iva}
-                    />
-                  </TableCell>
-                  <TableCell className='border-table2'>
-                    <CurrencyFormat
-                      className='font-tb'
                       displayType='text'
                       prefix=' $ '
                       thousandSeparator
                       decimalSeparator='.'
+                    />
+                  </TableCell>
+                  <TableCell className='border-table2'>
+                    <CurrencyFormat
                       value={comprometidos.isr}
-                    />
-                  </TableCell>
-                  <TableCell className='border-table2'>
-                    <CurrencyFormat
-                      className='font-tb'
-                      style={{ textAlign: 'center' }}
                       displayType='text'
                       prefix=' $ '
                       thousandSeparator
                       decimalSeparator='.'
+                    />
+                  </TableCell>
+                  <TableCell className='border-table2'>
+                    <CurrencyFormat
                       value={(comprometidos.importe_comp + comprometidos.iva + comprometidos.isr)}
+                      displayType='text'
+                      prefix=' $ '
+                      thousandSeparator
+                      decimalSeparator='.'
                     />
                   </TableCell>
                 </TableRow>

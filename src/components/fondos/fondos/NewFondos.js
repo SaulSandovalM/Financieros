@@ -324,9 +324,6 @@ export default class Fondos extends Component {
                   <p style={{ margin: '6px', fontSize: '12px', color: 'grey' }}>Importe</p>
                 </div>
                 <div style={{ width: '12.5%' }}>
-                  <p style={{ margin: '6px', fontSize: '12px', color: 'grey' }}>Fecha</p>
-                </div>
-                <div style={{ width: '12.5%' }}>
                   <p style={{ margin: '6px', fontSize: '12px', color: 'grey' }}>Nompre R.</p>
                 </div>
                 <div style={{ width: '12.5%' }}>
@@ -334,6 +331,9 @@ export default class Fondos extends Component {
                 </div>
                 <div style={{ width: '12.5%' }}>
                   <p style={{ margin: '6px', fontSize: '12px', color: 'grey' }}>Editar C.</p>
+                </div>
+                <div style={{ width: '12.5%' }}>
+                  <p style={{ margin: '6px', fontSize: '12px', color: 'grey' }}>Editar A.</p>
                 </div>
                 <div style={{ width: '12.5%' }}>
                   <p style={{ margin: '6px', fontSize: '12px', color: 'grey' }}>Oficios</p>
@@ -367,9 +367,6 @@ export default class Fondos extends Component {
                           />
                         </div>
                         <div style={{ width: '14.3%' }}>
-                          <p style={{ margin: '6px' }}>{fondos.fecha}</p>
-                        </div>
-                        <div style={{ width: '14.3%' }}>
                           <p style={{ margin: '6px' }}>{fondos.realizo}</p>
                         </div>
                         <div style={{ width: '14.3%' }}>
@@ -377,6 +374,9 @@ export default class Fondos extends Component {
                         </div>
                         <div style={{ width: '14.3%' }}>
                           <Link style={{ margin: '6px' }} to={`/Comprometidos/${fondos.key}`}>Editar</Link>
+                        </div>
+                        <div style={{ width: '14.3%' }}>
+                          <Link style={{ margin: '6px' }} to={`/Analitico/${fondos.key}`}>Editar</Link>
                         </div>
                         <div style={{ width: '14.3%' }}>
                           <Link style={{ margin: '6px' }} to={`/fondoEditable/${fondos.key}`}>Imprimir</Link>
