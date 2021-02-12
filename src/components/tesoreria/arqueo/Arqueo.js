@@ -103,6 +103,7 @@ export default class Arqueo extends Component {
       hora: this.state.hora,
       numCheque: this.inputCheque.value,
       total: this.state.total,
+      totalA: this.state.totalA
     }
     this.setState({
       can1000: this.inputCan1000.value,
@@ -193,6 +194,13 @@ export default class Arqueo extends Component {
     }
     today = yyyy + '-' + mm + '-' + dd
     this.state.fecha = today
+
+    var ayer = this.state.lista.map(item =>
+      <div>{item.total}</div>
+    )
+    this.state.totalA = ayer
+
+    console.log(ayer)
 
     return (
       <div className='pf-container-a' style={{ marginTop: '40px' }}>

@@ -140,7 +140,7 @@ export default class ArqueoD extends Component {
   componentDidMount () {
     const itemsRef = firebase.database().ref('arqueo/').limitToLast(1)
     this.listenForItems(itemsRef)
-    const itemsRefy = firebase.database().ref('arqueo/').orderByChild('fecha')
+    const itemsRefy = firebase.database().ref('arqueo/')
     this.listenForItemsy(itemsRefy)
     const itemsRefVales = firebase.database().ref('vales/')
     this.listenForVales(itemsRefVales)
@@ -170,6 +170,9 @@ export default class ArqueoD extends Component {
       return date.fecha === preDate && date.hora < '23:59' && date.hora > '16:00'
     })
 
+    console.log(this.state.listay)
+    console.log(this.state.searchF)
+
     return (
       <div>
         <div style={{ display: 'flex', justifyContent: 'center' }}>
@@ -177,9 +180,10 @@ export default class ArqueoD extends Component {
             <Grid className='grid-w2' style={{ marginTop: '100px' }}>
               <Paper className='paper-p-c'>
                 <div>
-                  <p className='sub-c-p'>Ingrese el Numero de Fondo a buscar</p>
+                  <p className='sub-c-p'>Ingrese la Fechas a Buscar</p>
                   <input
                     style={{ width: '100%' }}
+                    type='date'
                     className='field'
                     name='searchF'
                     value={this.state.searchF}
@@ -187,7 +191,7 @@ export default class ArqueoD extends Component {
                   />
                 </div>
                 <ReactToPrint
-                  trigger={() => <buttom className='b-imp'>Imprimir</buttom>}
+                  trigger={() => <buttom className='arqueo-imp'>Imprimir</buttom>}
                   content={() => this.arqueo}
                 />
               </Paper>
@@ -195,116 +199,362 @@ export default class ArqueoD extends Component {
           </Grid>
         </div>
         {this.state.searchF ?
-          <div className='ar-pad' ref={el => (this.arqueo = el)}>
-            <p>Dirección General de Administración y Finanzas</p>
-            <div className='arqueoI'>
-              <p className='tb-n'>ARQUEO DE CAJA CHICA</p>
-            </div>
-            <div className='tabla-arq'>
-              <div className='tb-1'>
-                <p className='tb-n'>VALE</p>
-              </div>
-              <div className='tb-1'>
-                <p className='tb-n'>ESTATUS DE PAGO</p>
-              </div>
-              <div className='tb-1'>
-                <p className='tb-n'>PAGO REAL</p>
-              </div>
-              <div className='tb-1'>
-                <p className='tb-n'>FECHA</p>
-              </div>
-              <div className='tb-2'>
-                <p className='tb-n'>DESCRIPCIÓN</p>
-              </div>
-              <div className='tb-3'>
-                <p className='tb-n'>BENEFICIARIO</p>
-              </div>
-            </div>
-            <div className='tabla-arq'>
-              <div className='tb-1'>
-                <p className='tb-n' />
-              </div>
-              <div className='tb-1'>
-                <p className='tb-n' />
-              </div>
-              <div className='tb-1'>
-                {
-                  filteredDates.map(item =>
-                    <div className='tb-n'>
-                      <CurrencyFormat
-                        value={item.total}
-                        displayType='text'
-                        thousandSeparator
-                        prefix='$ '
-                      />
-                    </div>
-                  )
-                }
-              </div>
-              <div className='tb-1'>
-                <p className='tb-n' />
-              </div>
-              <div className='tb-2'>
-                <p className='tb-n'>{yesterday}</p>
-              </div>
-              <div className='tb-3'>
-                <p className='tb-n' />
-              </div>
-            </div>
-            <div>
-              <ListComponentV
-                listaVales={this.state.listaVales}
-              />
-            </div>
-            <div className='tabla-arq'>
-              <div className='tb-1'>
-                <p className='tb-n' />
-              </div>
-              <div className='tb-1'>
-                <p className='tb-n' />
-              </div>
-              <div className='tb-1'>
-                {
-                  this.state.lista.map(item =>
-                    <div className='tb-n'>
-                      <CurrencyFormat
-                        value={item.total}
-                        displayType='text'
-                        thousandSeparator
-                        prefix='$ '
-                      />
-                    </div>
-                  )
-                }
-              </div>
-              <div className='tb-1'>
-                <p className='tb-n' />
-              </div>
-              <div className='tb-2'>
-                <p className='tb-n'>{today}</p>
-              </div>
-              <div className='tb-3'>
-                <p className='tb-n' />
-              </div>
-            </div>
-            <div className='arqueo-content'>
-              <div className='table-arqueo'>
-                <div className='title-arqueo'>
-                  <p className='p-mar-arqueo'><b>Denominación</b></p>
-                </div>
-                <div className='title-arqueo'>
-                  <p className='p-mar-arqueo'><b>Cantidad</b></p>
-                </div>
-                <div className='title-arqueo'>
-                  <p className='p-mar-arqueo'><b>Total</b></p>
-                </div>
-              </div>
+          <div>
+            {this.state.listay.map(item =>
               <div>
-                <ListComponent
-                  lista={this.state.lista}
-                />
+                {this.state.searchF === item.fecha &&
+                  <div className='ar-pad' ref={el => (this.arqueo = el)}>
+                    <p>Dirección General de Administración y Finanzas</p>
+                    <div className='arqueoI'>
+                      <p className='tb-n'>ARQUEO DE CAJA CHICA</p>
+                    </div>
+                    <div className='tabla-arq'>
+                      <div className='tb-1'>
+                        <p className='tb-n'>VALE</p>
+                      </div>
+                      <div className='tb-1'>
+                        <p className='tb-n'>ESTATUS DE PAGO</p>
+                      </div>
+                      <div className='tb-1'>
+                        <p className='tb-n'>PAGO REAL</p>
+                      </div>
+                      <div className='tb-1'>
+                        <p className='tb-n'>FECHA</p>
+                      </div>
+                      <div className='tb-2'>
+                        <p className='tb-n'>DESCRIPCIÓN</p>
+                      </div>
+                      <div className='tb-3'>
+                        <p className='tb-n'>BENEFICIARIO</p>
+                      </div>
+                    </div>
+                    <div className='tabla-arq'>
+                      <div className='tb-1'>
+                        <p className='tb-n' />
+                      </div>
+                      <div className='tb-1'>
+                        <p className='tb-n' />
+                      </div>
+                      <div className='tb-1'>
+                      {/* Fecha Anterios */}
+                        {
+                          filteredDates.map(item =>
+                            <div className='tb-n'>
+                              <CurrencyFormat
+                                value={item.total}
+                                displayType='text'
+                                thousandSeparator
+                                prefix='$ '
+                              />
+                            </div>
+                          )
+                        }
+                      </div>
+                      <div className='tb-1'>
+                        <p className='tb-n' />
+                      </div>
+                      <div className='tb-2'>
+                        <p className='tb-n'>{yesterday}</p>
+                      </div>
+                      <div className='tb-3'>
+                        <p className='tb-n' />
+                      </div>
+                    </div>
+                    <div>
+                      <ListComponentV
+                        listaVales={this.state.listaVales}
+                      />
+                    </div>
+                    <div className='tabla-arq'>
+                      <div className='tb-1'>
+                        <p className='tb-n' />
+                      </div>
+                      <div className='tb-1'>
+                        <p className='tb-n' />
+                      </div>
+                      <div className='tb-1'>
+                        <div className='tb-n'>
+                          <CurrencyFormat
+                            value={
+                              parseInt(item.can1000) * 1000 +
+                              parseInt(item.can500) * 500 +
+                              parseInt(item.can200) * 200 +
+                              parseInt(item.can100) * 100 +
+                              parseInt(item.can50) * 50 +
+                              parseInt(item.can20) * 20 +
+                              parseInt(item.can10) * 10 +
+                              parseInt(item.can5) * 5 +
+                              parseInt(item.can2) * 2 +
+                              parseInt(item.can1) * 1 +
+                              parseInt(item.can0) * .5
+                            }
+                            displayType='text'
+                            thousandSeparator
+                            prefix='$ '
+                          />
+                        </div>
+                      </div>
+                      <div className='tb-1'>
+                        <p className='tb-n' />
+                      </div>
+                      <div className='tb-2'>
+                        <p className='tb-n'>{today}</p>
+                      </div>
+                      <div className='tb-3'>
+                        <p className='tb-n' />
+                      </div>
+                    </div>
+                    <div className='arqueo-content'>
+                      <div className='table-arqueo'>
+                        <div className='title-arqueo'>
+                          <p className='p-mar-arqueo'><b>Denominación</b></p>
+                        </div>
+                        <div className='title-arqueo'>
+                          <p className='p-mar-arqueo'><b>Cantidad</b></p>
+                        </div>
+                        <div className='title-arqueo'>
+                          <p className='p-mar-arqueo'><b>Total</b></p>
+                        </div>
+                      </div>
+                      <div>
+                        <div style={{ width: '100%' }}>
+                          <div className='data-arqueo'>
+                            <div className='title-arqueo'>
+                              <p className='p-mar-arqueo'>1000</p>
+                            </div>
+                            <div className='title-arqueo'>
+                              <p className='p-mar-arqueo'>{item.can1000}</p>
+                            </div>
+                            <div className='title-arqueo'>
+                              <CurrencyFormat
+                                className='p-mar-arqueo'
+                                value={parseInt(item.can1000) * 1000}
+                                displayType='text'
+                                thousandSeparator
+                                prefix='$ '
+                              />
+                            </div>
+                          </div>
+                          <div className='data-arqueo'>
+                            <div className='title-arqueo'>
+                              <p className='p-mar-arqueo'>500</p>
+                            </div>
+                            <div className='title-arqueo'>
+                              <p className='p-mar-arqueo'>{item.can500}</p>
+                            </div>
+                            <div className='title-arqueo'>
+                              <CurrencyFormat
+                                className='p-mar-arqueo'
+                                value={parseInt(item.can500) * 500}
+                                displayType='text'
+                                thousandSeparator
+                                prefix='$ '
+                              />
+                            </div>
+                          </div>
+                          <div className='data-arqueo'>
+                            <div className='title-arqueo'>
+                              <p className='p-mar-arqueo'>200</p>
+                            </div>
+                            <div className='title-arqueo'>
+                              <p className='p-mar-arqueo'>{item.can200}</p>
+                            </div>
+                            <div className='title-arqueo'>
+                              <CurrencyFormat
+                                className='p-mar-arqueo'
+                                value={parseInt(item.can500) * 200}
+                                displayType='text'
+                                thousandSeparator
+                                prefix='$ '
+                              />
+                            </div>
+                          </div>
+                          <div className='data-arqueo'>
+                            <div className='title-arqueo'>
+                              <p className='p-mar-arqueo'>100</p>
+                            </div>
+                            <div className='title-arqueo'>
+                              <p className='p-mar-arqueo'>{item.can100}</p>
+                            </div>
+                            <div className='title-arqueo'>
+                              <CurrencyFormat
+                                className='p-mar-arqueo'
+                                value={parseInt(item.can500) * 100}
+                                displayType='text'
+                                thousandSeparator
+                                prefix='$ '
+                              />
+                            </div>
+                          </div>
+                          <div className='data-arqueo'>
+                            <div className='title-arqueo'>
+                              <p className='p-mar-arqueo'>50</p>
+                            </div>
+                            <div className='title-arqueo'>
+                              <p className='p-mar-arqueo'>{item.can50}</p>
+                            </div>
+                            <div className='title-arqueo'>
+                              <CurrencyFormat
+                                className='p-mar-arqueo'
+                                value={parseInt(item.can50) * 50}
+                                displayType='text'
+                                thousandSeparator
+                                prefix='$ '
+                              />
+                            </div>
+                          </div>
+                          <div className='data-arqueo'>
+                            <div className='title-arqueo'>
+                              <p className='p-mar-arqueo'>20</p>
+                            </div>
+                            <div className='title-arqueo'>
+                              <p className='p-mar-arqueo'>{item.can20}</p>
+                            </div>
+                            <div className='title-arqueo'>
+                              <CurrencyFormat
+                                className='p-mar-arqueo'
+                                value={parseInt(item.can20) * 20}
+                                displayType='text'
+                                thousandSeparator
+                                prefix='$ '
+                              />
+                            </div>
+                          </div>
+                          <div className='data-arqueo'>
+                            <div className='title-arqueo'>
+                              <p className='p-mar-arqueo'>10</p>
+                            </div>
+                            <div className='title-arqueo'>
+                              <p className='p-mar-arqueo'>{item.can10}</p>
+                            </div>
+                            <div className='title-arqueo'>
+                              <CurrencyFormat
+                                className='p-mar-arqueo'
+                                value={parseInt(item.can10) * 10}
+                                displayType='text'
+                                thousandSeparator
+                                prefix='$ '
+                              />
+                            </div>
+                          </div>
+                          <div className='data-arqueo'>
+                            <div className='title-arqueo'>
+                              <p className='p-mar-arqueo'>5</p>
+                            </div>
+                            <div className='title-arqueo'>
+                              <p className='p-mar-arqueo'>{item.can5}</p>
+                            </div>
+                            <div className='title-arqueo'>
+                              <CurrencyFormat
+                                className='p-mar-arqueo'
+                                value={parseInt(item.can5) * 5}
+                                displayType='text'
+                                thousandSeparator
+                                prefix='$ '
+                              />
+                            </div>
+                          </div>
+                          <div className='data-arqueo'>
+                            <div className='title-arqueo'>
+                              <p className='p-mar-arqueo'>2</p>
+                            </div>
+                            <div className='title-arqueo'>
+                              <p className='p-mar-arqueo'>{item.can2}</p>
+                            </div>
+                            <div className='title-arqueo'>
+                              <CurrencyFormat
+                                className='p-mar-arqueo'
+                                value={parseInt(item.can500) * 2}
+                                displayType='text'
+                                thousandSeparator
+                                prefix='$ '
+                              />
+                            </div>
+                          </div>
+                          <div className='data-arqueo'>
+                            <div className='title-arqueo'>
+                              <p className='p-mar-arqueo'>1</p>
+                            </div>
+                            <div className='title-arqueo'>
+                              <p className='p-mar-arqueo'>{item.can1}</p>
+                            </div>
+                            <div className='title-arqueo'>
+                              <CurrencyFormat
+                                className='p-mar-arqueo'
+                                value={parseInt(item.can500) * 1}
+                                displayType='text'
+                                thousandSeparator
+                                prefix='$ '
+                              />
+                            </div>
+                          </div>
+                          <div className='data-arqueo'>
+                            <div className='title-arqueo'>
+                              <p className='p-mar-arqueo'>0.5</p>
+                            </div>
+                            <div className='title-arqueo'>
+                              <p className='p-mar-arqueo'>{item.can0}</p>
+                            </div>
+                            <div className='title-arqueo'>
+                              <CurrencyFormat
+                                className='p-mar-arqueo'
+                                value={parseInt(item.can500) * .5}
+                                displayType='text'
+                                thousandSeparator
+                                prefix='$ '
+                              />
+                            </div>
+                          </div>
+                          <div className='data-arqueo'>
+                            <div className='title-arqueo'>
+                              <b className='p-mar-arqueo'>Total</b>
+                            </div>
+                            <div className='title-arqueo'>
+                              <p className='p-mar-arqueo'>
+                                {
+                                  parseInt(item.can1000) +
+                                  parseInt(item.can500) +
+                                  parseInt(item.can200) +
+                                  parseInt(item.can100) +
+                                  parseInt(item.can50) +
+                                  parseInt(item.can20) +
+                                  parseInt(item.can10) +
+                                  parseInt(item.can5) +
+                                  parseInt(item.can2) +
+                                  parseInt(item.can1) +
+                                  parseInt(item.can0)
+                                }
+                              </p>
+                            </div>
+                            <div className='title-arqueo'>
+                              <CurrencyFormat
+                                className='p-mar-arqueo'
+                                value={
+                                  parseInt(item.can1000) * 1000 +
+                                  parseInt(item.can500) * 500 +
+                                  parseInt(item.can200) * 200 +
+                                  parseInt(item.can100) * 100 +
+                                  parseInt(item.can50) * 50 +
+                                  parseInt(item.can20) * 20 +
+                                  parseInt(item.can10) * 10 +
+                                  parseInt(item.can5) * 5 +
+                                  parseInt(item.can2) * 2 +
+                                  parseInt(item.can1) * 1 +
+                                  parseInt(item.can0) * .5
+                                }
+                                displayType='text'
+                                thousandSeparator
+                                prefix='$ '
+                              />
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                }
               </div>
-            </div>
+            )}
           </div>
           :
           <div className='ar-pad' ref={el => (this.arqueo = el)}>
