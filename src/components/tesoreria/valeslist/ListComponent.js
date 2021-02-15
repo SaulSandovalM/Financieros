@@ -113,19 +113,20 @@ export default class ListComponent extends Component {
     filteredData.map(items => (
       total1.push(parseFloat(items.cantidad))
     ))
+    console.log(filteredData)
     const tt1 = (a, b) => a + b
     this.state.tcantidad1 = total1.reduce(tt1)
 
     const total2 = [0]
     filteredData.map(items => (
-      total2.push(parseFloat(items.cantidad))
+      total2.push(parseFloat(items.cantidadc))
     ))
     const tt2 = (a, b) => a + b
     this.state.tcantidad2 = total2.reduce(tt2)
 
     const total3 = [0]
     filteredData.map(items => (
-      total3.push(parseFloat(items.cantidad))
+      total3.push(parseFloat(items.cantidadr))
     ))
     const tt3 = (a, b) => a + b
     this.state.tcantidad3 = total3.reduce(tt3)
@@ -225,7 +226,7 @@ export default class ListComponent extends Component {
             }
             <TableRow style={{ display: 'flex', flexDirection: 'row', position: 'relative', top: '0', background: 'white', zIndex: '3' }}>
               <TableCell className='border-icon' style={{ width: '50px' }} />
-              <TableCell className='table-v-num' style={{ width: '100px' }} />
+              <TableCell className='table-v-num' style={{ width: '50px', left: '0px', position: 'sticky', background: 'white' }} />
               <TableCell className='table-v-num' style={{ width: '100px' }} />
               <TableCell className='table-v-num' style={{ width: '100px' }}>
                 <b>

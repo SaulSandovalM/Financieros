@@ -43,6 +43,7 @@ export default class Vales extends Component {
       contadorc: {},
       searchF: '',
       fechaP: '',
+      fechaF: '',
       filexml: ['No hay datos cargados'],
       filex: ['No hay datos cargados'],
       filefactura: ['No hay datos cargados'],
@@ -308,6 +309,7 @@ export default class Vales extends Component {
     var f = new Date()
     today = f.getDate() + '-' + meses[f.getMonth()] + '-' + f.getFullYear()
     today2 = f.getFullYear() + '-' + meses2[f.getMonth()] + '-' + f.getDate()
+    this.state.fechaF = today
     this.state.fecha = today2
 
     return (
@@ -415,6 +417,7 @@ export default class Vales extends Component {
                     <input
                       className='input-b'
                       name='cantidad'
+                      type='number'
                       onChange={this.handleChange.bind(this)}
                       value={this.state.cantidad}
                       required
@@ -423,6 +426,7 @@ export default class Vales extends Component {
                     <input
                       className='input-b'
                       name='cantidadc'
+                      type='number'
                       onChange={this.handleChange.bind(this)}
                       value={this.state.cantidadc}
                       required
@@ -431,6 +435,7 @@ export default class Vales extends Component {
                     <input
                       className='input-b'
                       name='cantidadr'
+                      type='number'
                       onChange={this.handleChange.bind(this)}
                       value={this.state.cantidadr}
                       required
@@ -464,8 +469,13 @@ export default class Vales extends Component {
                         <select
                           className='input-w'
                           required
+                          name='area'
+                          id='area'
+                          defaultValue={this.state.area}
+                          onChange={this.handleChange.bind(this)}
                           ref={area => this.inputArea = area}
                         >
+                          <option id='area'>{this.state.area}</option>
                           <option id='area'>Despacho del Procurador</option>
                           <option id='area'>Subprocuraduría de Procedimientos Penales Región Oriente</option>
                           <option id='area'>Fiscalía Especializada para la atención de Delitos cometidos contra la Libertad de Expresión</option>
@@ -670,6 +680,7 @@ export default class Vales extends Component {
                       <input
                         className='input-b'
                         name='cantidad'
+                        type='number'
                         onChange={this.handleChange.bind(this)}
                         defaultValue={item.cantidad}
                         required
@@ -677,6 +688,7 @@ export default class Vales extends Component {
                       <input
                         className='input-b'
                         id='cantidadc'
+                        type='number'
                         name='cantidadc'
                         onChange={this.handleChange.bind(this)}
                         defaultValue={item.cantidadc}
@@ -685,6 +697,7 @@ export default class Vales extends Component {
                       <input
                         className='input-b'
                         id='cantidadr'
+                        type='number'
                         name='cantidadr'
                         onChange={this.handleChange.bind(this)}
                         defaultValue={item.cantidadr}
@@ -721,7 +734,8 @@ export default class Vales extends Component {
                             defaultValue={item.area}
                             id='area'
                             onChange={this.handleChange.bind(this)}
-                            name='area'>
+                            name='area'
+                          >
                             <option id='area'>Despacho del Procurador</option>
                             <option id='area'>Subprocuraduría de Procedimientos Penales Región Oriente</option>
                             <option id='area'>Fiscalía Especializada para la atención de Delitos cometidos contra la Libertad de Expresión</option>
