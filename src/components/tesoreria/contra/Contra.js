@@ -52,7 +52,7 @@ export default class Contra2 extends Component {
     )
 
     return (
-      <div className='contrarecibo-container'>
+      <div className='contra-container'>
         <FechaContraList />
       </div>
     )

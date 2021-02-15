@@ -9,7 +9,6 @@ import TableBody from '@material-ui/core/TableBody'
 import TableRow from '@material-ui/core/TableRow'
 import Paper from '@material-ui/core/Paper'
 import CurrencyFormat from 'react-currency-format'
-import Button from '@material-ui/core/Button'
 
 export default class FechaContraList extends Component {
   constructor (props) {
@@ -42,11 +41,15 @@ export default class FechaContraList extends Component {
         fondo: data.fondo,
         fecha: data.fecha,
         tipo_doc: data.tipo_doc,
+        oficio_aut: data.oficio_aut,
+        no_oficio: data.no_oficio,
+        importe: data.importe,
         beneficiario: data.beneficiario,
-        importe: data.importe
+        desc: data.desc,
+        no_proyecto: data.no_proyecto,
+        realizo: data.realizo
       })
     })
-
     this.setState({
       fondos: fondos
     })
@@ -68,93 +71,61 @@ export default class FechaContraList extends Component {
     const { fondos, currentFondos } = this.state
 
     return (
-      <div>
-        <TableContainer component={Paper}>
-          <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-            <Table size='small' style={{ width: '53%' }}>
-              <TableHead>
-                <TableRow>
-                  <TableCell className='table-num-f'>
-                    <b># Fondo</b>
-                  </TableCell>
-                  <TableCell className='table-tipo'>
-                    <b>Tipo de Fondo</b>
-                  </TableCell>
-                  <TableCell className='table-bene'>
-                    <b>Beneficiario</b>
-                  </TableCell>
-                  <TableCell className='table-same'>
-                    <b>Importe</b>
-                  </TableCell>
-                  {/* <TableCell className='table-same'>
-                    <b>CR</b>
-                  </TableCell>
-                  <TableCell className='table-same'>
-                    <b>Fecha de Pago</b>
-                  </TableCell>
-                  <TableCell className='table-same'>
-                    <b>Num. Cheque</b>
-                  </TableCell> */}
-                  <TableCell className='table-same'>
-                    <b>Actualizar</b>
-                  </TableCell>
-                </TableRow>
-              </TableHead>
-              {fondos.map((fondo, index) => (
-                <TableBody key={index}>
-                  <TableCell component='th' scope='row' className='table-num-f'>
-                    {fondo.fondo}
-                  </TableCell>
-                  <TableCell component='th' scope='row' className='table-tipo'>
-                    {fondo.tipo_doc}
-                  </TableCell>
-                  <TableCell component='th' scope='row' className='table-bene'>
-                    {fondo.beneficiario}
-                  </TableCell>
-                  <TableCell component='th' scope='row' className='table-same'>
-                    <CurrencyFormat
-                      value={fondo.importe}
-                      displayType='text'
-                      thousandSeparator
-                      prefix=' $ '
-                    />
-                  </TableCell>
-                  {/* <TableCell component='th' scope='row' className='table-same'>
-                    {fondos.numContra}
-                  </TableCell>
-                  <TableCell component='th' scope='row' className='table-same'>
-                    {fondos.fechaDepo}
-                  </TableCell>
-                  <TableCell component='th' scope='row' className='table-same'>
-                    {fondos.fechaDepo}
-                  </TableCell> */}
-                  <TableCell component='th' scope='row' className='table-same'>
-                    <Button
-                      variant='contained'
-                      color='primary'
-                      onClick={() => this.setActiveFondo(fondo, index)}
-                    >
-                      Agregar
-                    </Button>
-                  </TableCell>
-                </TableBody>
-              ))}
-            </Table>
-            <div style={{ padding: '15px', width: '45%' }}>
-              {currentFondos ? (
-                <FondosComponent
-                  fondo={currentFondos}
-                  refreshList={this.refreshList}
-                />
-              ) : (
-                <div style={{ height: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'center', width: '100%' }}>
-                  <p style={{ textAlign: 'center' }}>Por favor selecciona el fondo... </p>
-                </div>
-              )}
-            </div>
+      <TableContainer component={Paper}>
+        <div className='div-hide'>
+          <div className='div-con-compo'>
+            {currentFondos ? (
+              <FondosComponent
+                fondo={currentFondos}
+                refreshList={this.refreshList}
+              />
+            ) : (
+              <div className='div-mesage'>
+                <p className='tc'>Por favor selecciona el fondo... </p>
+              </div>
+            )}
           </div>
-        </TableContainer>
-      </div>
+          <Table size='small' className='wt'>
+            <TableHead>
+              <TableRow>
+                <TableCell className='table-num-fc'>
+                  <b># Fondo</b>
+                </TableCell>
+                <TableCell className='table-tipo-c'>
+                  <b>Tipo de Fondo</b>
+                </TableCell>
+                <TableCell className='table-bene-c'>
+                  <b>Beneficiario</b>
+                </TableCell>
+                <TableCell className='table-importe-c'>
+                  <b>Importe</b>
+                </TableCell>
+              </TableRow>
+            </TableHead>
+            {fondos.map((fondo, index) => (
+              <TableBody key={index} onClick={() => this.setActiveFondo(fondo, index)}>
+                <TableCell component='th' scope='row' className='table-num-fc'>
+                  {fondo.fondo}
+                </TableCell>
+                <TableCell component='th' scope='row' className='table-tipo-c'>
+                  {fondo.tipo_doc}
+                </TableCell>
+                <TableCell component='th' scope='row' className='table-bene-c'>
+                  {fondo.beneficiario}
+                </TableCell>
+                <TableCell component='th' scope='row' className='table-importe-c'>
+                  <CurrencyFormat
+                    value={fondo.importe}
+                    displayType='text'
+                    thousandSeparator
+                    prefix=' $ '
+                  />
+                </TableCell>
+              </TableBody>
+            ))}
+          </Table>
+        </div>
+      </TableContainer>
     )
   }
 }

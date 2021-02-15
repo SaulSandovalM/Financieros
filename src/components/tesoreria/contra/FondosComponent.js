@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import FondosDataService from './Service'
 import TextField from '@material-ui/core/TextField'
+import Button from '@material-ui/core/Button'
+import Alert from '@material-ui/lab/Alert'
 
 export default class FondosComponent extends Component {
   constructor (props) {
@@ -55,8 +57,7 @@ export default class FondosComponent extends Component {
           currentFondos: {
             ...prevState.currentFondos,
             published: status
-          },
-          message: 'Se ha publicado!'
+          }
         }))
       })
       .catch((e) => {
@@ -81,29 +82,96 @@ export default class FondosComponent extends Component {
     const { currentFondos } = this.state
 
     return (
-      <div style={{ height: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'center', width: '100%' }}>
+      <div className='fondos-cont-contra'>
         {currentFondos ? (
           <div>
             <form>
               <TextField
                 id='numCheque'
-                onChange={this.onChangeCheque}
                 value={currentFondos.numCheque}
+                onChange={this.onChangeCheque}
                 label='Numero de Cheque'
               />
+              <h4>Información de Fondo</h4>
+              <div className='div-textf'>
+                <TextField
+                  style={{ width: '46%' }}
+                  value={currentFondos.fondo}
+                  label='Fondo'
+                />
+                <TextField
+                  style={{ width: '46%' }}
+                  value={currentFondos.fecha}
+                  label='Fecha'
+                />
+              </div>
+              <div className='div-textf'>
+                <TextField
+                  style={{ width: '46%' }}
+                  value={currentFondos.tipo_doc}
+                  label='Tipo de Documento'
+                />
+                <TextField
+                  style={{ width: '46%' }}
+                  value={currentFondos.oficio_aut}
+                  label='Oficio de Autorización'
+                />
+              </div>
+              <div className='div-textf'>
+                <TextField
+                  style={{ width: '46%' }}
+                  value={currentFondos.no_oficio}
+                  label='No. de Oficio'
+                />
+                <TextField
+                  style={{ width: '46%' }}
+                  value={currentFondos.importe}
+                  label='Importe'
+                />
+              </div>
+              <div className='div-textf'>
+                <TextField
+                  style={{ width: '46%' }}
+                  value={currentFondos.beneficiario}
+                  label='Beneficiario'
+                />
+                <TextField
+                  style={{ width: '46%' }}
+                  value={currentFondos.desc}
+                  label='Descripción'
+                />
+              </div>
+              <div className='div-textf'>
+                <TextField
+                  style={{ width: '46%' }}
+                  value={currentFondos.no_proyecto}
+                  label='No. de Proyecto'
+                />
+                <TextField
+                  style={{ width: '46%' }}
+                  value={currentFondos.realizo}
+                  label='Realizo'
+                />
+              </div>
             </form>
-            <button
-              type='submit'
-              className='badge badge-success'
-              onClick={this.updateFondo}
-            >
-              Asignar Vale
-            </button>
-            <p>{this.state.message}</p>
+            <div className='div-btn-c'>
+              <Button
+                type='submit'
+                color='primary'
+                variant='contained'
+                style={{ backgroud: 'green' }}
+                onClick={this.updateFondo}
+              >
+                Asignar Vale
+              </Button>
+            </div>
+            <div className='alert-cont'>
+              <Alert severity='success' variant='filled'>Su ha asignado el Cheque!</Alert>
+            </div>
           </div>
         ) : (
-          <div>
-            <p>Por favor seleccione un fondo ... </p>
+          <div className='alert-cont'>
+            <Alert severity='error' variant='filled'>Error al cargar!</Alert>
           </div>
         )}
       </div>
