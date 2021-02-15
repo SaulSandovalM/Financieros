@@ -40,7 +40,7 @@ export default class Valeslist extends Component {
       filer: '',
       filexml: ['No hay datos cargados'],
       filex: ['No hay datos cargados'],
-      filefactura: ['No hay datos cargados'],
+      filefactura: [],
       filef: ['No hay datos cargados'],
       filerecibo: 0,
       autorizados: false,
