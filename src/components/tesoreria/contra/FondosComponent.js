@@ -165,13 +165,15 @@ export default class FondosComponent extends Component {
                 Asignar Vale
               </Button>
             </div>
-            <div className='alert-cont'>
-              <Alert severity='success' variant='filled'>Su ha asignado el Cheque!</Alert>
-            </div>
+            {this.state.message &&
+              <div className='alert-cont'>
+                <Alert severity='success' variant='filled'>Se ha guardado</Alert>
+              </div>
+            }
           </div>
         ) : (
           <div className='alert-cont'>
-            <Alert severity='error' variant='filled'>Error al cargar!</Alert>
+            <Alert severity='error' variant='filled'>Error!</Alert>
           </div>
         )}
       </div>
