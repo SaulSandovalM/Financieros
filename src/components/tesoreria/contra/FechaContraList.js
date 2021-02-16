@@ -18,7 +18,8 @@ export default class FechaContraList extends Component {
     this.onDataChange = this.onDataChange.bind(this)
     this.state = {
       fondos: [],
-      currentFondos: null
+      currentFondos: null,
+      currentIndex: -1
     }
     this.unsubscribe = undefined
   }
@@ -57,18 +58,20 @@ export default class FechaContraList extends Component {
 
   refreshList () {
     this.setState({
-      currentFondos: null
+      currentFondos: null,
+      currentIndex: -1
     })
   }
 
   setActiveFondo (fondo, index) {
     this.setState({
-      currentFondos: fondo
+      currentFondos: fondo,
+      currentIndex: index
     })
   }
 
   render () {
-    const { fondos, currentFondos } = this.state
+    const { fondos, currentFondos, currentIndex } = this.state
 
     return (
       <TableContainer component={Paper}>
@@ -103,7 +106,11 @@ export default class FechaContraList extends Component {
               </TableRow>
             </TableHead>
             {fondos.map((fondo, index) => (
-              <TableBody key={index} onClick={() => this.setActiveFondo(fondo, index)}>
+              <TableBody
+                key={index}
+                onClick={() => this.setActiveFondo(fondo, index)}
+                className={'tocuh-style' + (index === currentIndex ? 'active' : '')}
+              >
                 <TableCell component='th' scope='row' className='table-num-fc'>
                   {fondo.fondo}
                 </TableCell>
