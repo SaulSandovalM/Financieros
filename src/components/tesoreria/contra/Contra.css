@@ -66,5 +66,7 @@
   margin-top: 20px;
 }
 .tocuh-style {
-  background: grey;
+  background: #e0e0e0;
+  color: grey;
+  overflow: scroll;
 }

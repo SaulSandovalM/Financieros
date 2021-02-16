@@ -9,6 +9,7 @@ import TableBody from '@material-ui/core/TableBody'
 import TableRow from '@material-ui/core/TableRow'
 import Paper from '@material-ui/core/Paper'
 import CurrencyFormat from 'react-currency-format'
+import TextField from '@material-ui/core/TextField'
 
 export default class FechaContraList extends Component {
   constructor (props) {
@@ -19,7 +20,8 @@ export default class FechaContraList extends Component {
     this.state = {
       fondos: [],
       currentFondos: null,
-      currentIndex: -1
+      currentIndex: -1,
+      search: ''
     }
     this.unsubscribe = undefined
   }
@@ -40,6 +42,7 @@ export default class FechaContraList extends Component {
       fondos.push({
         id: id,
         fondo: data.fondo,
+        numfondo: data.numfondo,
         fecha: data.fecha,
         tipo_doc: data.tipo_doc,
         oficio_aut: data.oficio_aut,
@@ -70,11 +73,27 @@ export default class FechaContraList extends Component {
     })
   }
 
+  updateSearch (event) {
+    this.setState({ search: event.target.value.substr(0, 20) })
+  }
+
   render () {
     const { fondos, currentFondos, currentIndex } = this.state
+    const filterData = fondos.filter(
+      (fondos) => {
+        return fondos.numfondo.indexOf(this.state.search) !== -1
+      }
+    )
+    console.log(filterData)
 
     return (
       <TableContainer component={Paper}>
+        <TextField
+          style={{ width: '250px', margin: '15px' }}
+          label='Ingresa un numero de fondo'
+          value={this.state.search}
+          onChange={this.updateSearch.bind(this)}
+        />
         <div className='div-hide'>
           <div className='div-con-compo'>
             {currentFondos ? (
@@ -105,7 +124,7 @@ export default class FechaContraList extends Component {
                 </TableCell>
               </TableRow>
             </TableHead>
-            {fondos.map((fondo, index) => (
+            {filterData.map((fondo, index) => (
               <TableBody
                 key={index}
                 onClick={() => this.setActiveFondo(fondo, index)}
