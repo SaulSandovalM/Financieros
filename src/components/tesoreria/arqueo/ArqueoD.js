@@ -167,7 +167,7 @@ export default class ArqueoD extends Component {
     let preDate = yesterdayF
     let postDate = today3
     let filteredDates = this.state.listay.filter(function(date) {
-      return date.fecha === preDate && date.hora < '23:59' && date.hora > '16:00'
+      return date.fecha === preDate // && date.hora < '23:59' && date.hora > '16:00'
     })
 
     console.log(this.state.listay)
