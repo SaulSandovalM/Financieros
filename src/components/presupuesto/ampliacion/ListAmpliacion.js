@@ -29,12 +29,6 @@ export default class ListComponent extends Component {
   }
 
   render () {
-    // const filterData = this.props.listaB.filter(
-    //   (presupuesto) => {
-    //     return presupuesto.up.indexOf(this.state.search) !== -1
-    //   }
-    // )
-
     return (
       <div style={{ margin: '30px' }}>
         <TableContainer component={Paper}>

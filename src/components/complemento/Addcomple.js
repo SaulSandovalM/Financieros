@@ -1,11 +1,11 @@
-import React, { Component } from 'react';
-import firebase from '../../Firebase';
-import './Complemento.css';
+import React, { Component } from 'react'
+import firebase from '../../Firebase'
+import './Complemento.css'
 
 class Addcomple extends Component {
   constructor(props) {
-    super(props);
-    this.unsubscribe = null;
+    super(props)
+    this.unsubscribe = null
     this.state = {
       key: '',
       fondo: '',
@@ -21,16 +21,16 @@ class Addcomple extends Component {
       fecha_deposito: '',
       mes_pago: '',
       complemento: []
-    };
+    }
   }
 
   onCollectionUpdate = (querySnapshot) => {
-    const complemento = [];
+    const complemento = []
     querySnapshot.forEach((doc) => {
-      const { fecha_actual, folio_ing, contrarecibo, fecha_contra, poliza, fecha_deposito, mes_pago } = doc.data();
+      const { fecha_actual, folio_ing, contrarecibo, fecha_contra, poliza, fecha_deposito, mes_pago } = doc.data()
       complemento.push({
         key: doc.id,
-        doc, // DocumentSnapshot
+        doc,
         fecha_actual,
         folio_ing,
         contrarecibo,
@@ -38,20 +38,20 @@ class Addcomple extends Component {
         poliza,
         fecha_deposito,
         mes_pago
-      });
-    });
+      })
+    })
     this.setState({
       complemento
-   });
+   })
   }
 
   componentDidMount() {
-    const ref = firebase.firestore().collection('fondos').doc(this.props.match.params.id);
-    const updateRef = firebase.firestore().collection('fondos').doc(this.props.match.params.id).collection('complemento');
-    this.unsubscribe = updateRef.onSnapshot(this.onCollectionUpdate);
+    const ref = firebase.firestore().collection('fondos').doc(this.props.match.params.id)
+    const updateRef = firebase.firestore().collection('fondos').doc(this.props.match.params.id).collection('complemento')
+    this.unsubscribe = updateRef.onSnapshot(this.onCollectionUpdate)
     ref.get().then((doc) => {
       if (doc.exists) {
-        const fondos = doc.data();
+        const fondos = doc.data()
         this.setState({
           key: doc.id,
           fondo: fondos.fondo,
@@ -66,25 +66,25 @@ class Addcomple extends Component {
           poliza: fondos.poliza,
           fecha_deposito: fondos.fecha_deposito,
           mes_pago: fondos.mes_pago
-        });
+        })
       } else {
-        console.log("No se encuentra documento");
+        console.log("No se encuentra documento")
       }
-    });
+    })
   }
 
   onChange = (e) => {
     const state = this.state
-    state[e.target.name] = e.target.value;
-    this.setState({fondos:state});
+    state[e.target.name] = e.target.value
+    this.setState({fondos:state})
   }
 
   onSubmit = (e) => {
-    e.preventDefault();
+    e.preventDefault()
 
-    const { fecha_actual, folio_ing, contrarecibo, fecha_contra, poliza, fecha_deposito, mes_pago } = this.state;
+    const { fecha_actual, folio_ing, contrarecibo, fecha_contra, poliza, fecha_deposito, mes_pago } = this.state
 
-    const updateRef = firebase.firestore().collection('fondos').doc(this.props.match.params.id).collection('complemento').doc();
+    const updateRef = firebase.firestore().collection('fondos').doc(this.props.match.params.id).collection('complemento').doc()
     updateRef.set({
       fecha_actual,
       folio_ing,
@@ -102,28 +102,28 @@ class Addcomple extends Component {
         poliza: '',
         fecha_deposito: '',
         mes_pago: ''
-      });
+      })
     })
     .catch((error) => {
-      console.error("Error adding document: ", error);
-    });
+      console.error("Error adding document: ", error)
+    })
   }
 
   render() {
 
-    var today = new Date();
-    var dd = today.getDate();
-    var mm = today.getMonth()+1;
-    var yyyy = today.getFullYear();
+    var today = new Date()
+    var dd = today.getDate()
+    var mm = today.getMonth()+1
+    var yyyy = today.getFullYear()
     if ( dd < 10 ){
       dd = '0' + dd
     }
     if ( mm < 10 ){
       mm = '0' + mm
     }
-    today = yyyy + '-' + mm + '-' + dd;
+    today = yyyy + '-' + mm + '-' + dd
 
-    const { fecha_actual, folio_ing, contrarecibo, fecha_contra, poliza, fecha_deposito } = this.state;
+    const { fecha_actual, folio_ing, contrarecibo, fecha_contra, poliza, fecha_deposito } = this.state
 
     return (
       <div class="container-edit" style={{marginTop: '50px'}}>
@@ -265,8 +265,8 @@ class Addcomple extends Component {
           </div>
         </div>
       </div>
-    );
+    )
   }
 }
 
-export default Addcomple;
+export default Addcomple
