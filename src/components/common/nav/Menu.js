@@ -1,7 +1,6 @@
 import React from 'react'
 import { bool } from 'prop-types'
 import Nav from './Nav'
-import NavArchivos from './NavArchivos'
 import { StyledMenu } from './Menu.styled'
 import firebase from '../../../Firebase'
 

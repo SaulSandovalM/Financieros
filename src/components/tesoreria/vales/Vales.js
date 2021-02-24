@@ -58,7 +58,7 @@ export default class Vales extends Component {
 
   change = (e) => {
     const { name, value } = e.target
-    this.setState({ [name]: value})
+    this.setState({ [name]: value })
   }
 
   componentDidMount () {
@@ -67,6 +67,19 @@ export default class Vales extends Component {
     this.consumoc()
     const itemsRef = firebase.database().ref('vales/')
     this.listenForItems(itemsRef)
+    var today = new Date()
+    var today2 = new Date()
+    var meses = ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic']
+    var meses2 = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12']
+    var f = new Date()
+    today = f.getDate() + '-' + meses[f.getMonth()] + '-' + f.getFullYear()
+    today2 = f.getFullYear() + '-' + meses2[f.getMonth()] + '-' + f.getDate()
+    this.setState({
+      fechaF: today
+    })
+    this.setState({
+      fecha: today2
+    })
   }
 
   componentWillMount () {
@@ -302,16 +315,6 @@ export default class Vales extends Component {
   }
 
   render () {
-    var today = new Date()
-    var today2 = new Date()
-    var meses = ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic']
-    var meses2 = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12']
-    var f = new Date()
-    today = f.getDate() + '-' + meses[f.getMonth()] + '-' + f.getFullYear()
-    today2 = f.getFullYear() + '-' + meses2[f.getMonth()] + '-' + f.getDate()
-    this.state.fechaF = today
-    this.state.fecha = today2
-
     return (
       <div className='container-back-v'>
         <div style={{ display: 'flex', justifyContent: 'center' }}>
@@ -567,7 +570,7 @@ export default class Vales extends Component {
                 </div>
                 <div className='firma-content'>
                   <div className='f-fecha'>
-                    <p className='b-fecha-i' style={{ fontSize: '15px' }}>{today}</p>
+                    <p className='b-fecha-i' style={{ fontSize: '15px' }}>{this.state.fechaF}</p>
                     <p className='font-size-f'>Fecha</p>
                   </div>
                   <div className='f-fecha'>

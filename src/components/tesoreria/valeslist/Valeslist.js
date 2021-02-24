@@ -51,29 +51,18 @@ export default class Valeslist extends Component {
   }
 
   handleOnChange1 (event) {
-    const files = event.target.files
-    for (let i = 0; i < files.length; i++) {
-      const file = files[i]
-      const storageRef = firebase.storage().ref(`prueba/${file.name}`)
-      const task = storageRef.put(file)
-      task.on('state_changed', (snapshot) => {
-        let percentage = (snapshot.bytesTransferred / snapshot.totalBytes) * 100
-        this.setState({
-          xml: percentage
-        })
-      }, error => {
-        alert('Error')
-      })
+    for (var i = 0; i < event.target.files.length; i++) {
+      const file = event.target.files[0]
       var xml = file
       var reader = new FileReader()
-      reader.onloadend = function () {
+      reader.onload = function (event) {
         var XMLParser = require('react-xml-parser')
-        var xml = new XMLParser().parseFromString(reader.result)
+        var xml = new XMLParser().parseFromString(event.target.result)
         const data = {
           'total': xml.attributes['Total'],
           'subtotal': xml.attributes['SubTotal'] ? xml.attributes['SubTotal'] : 0,
           'folio': xml.attributes['Folio'] ? xml.attributes['Folio'] : '0',
-          'nombre': xml.children['0'].attributes['Nombre'],
+          'Nombre': xml.children['0'].attributes['Nombre'],
           'importe': xml.children['2'].children['0'].attributes['Importe'],
           'iva': xml.children['3'].attributes['TotalImpuestosTrasladados'],
           'isr': xml.children['3'].attributes['TotalImpuestosRetenidos'] ? xml.children['3'].attributes['TotalImpuestosRetenidos'] : 0,
@@ -96,7 +85,6 @@ export default class Valeslist extends Component {
   }
 
   handleOnChange2 (event) {
-    let ruta = this.state.filefactura
     for (let i = 0; i < event.target.files.length; i++) {
       const file = event.target.files[i]
       const storageRef = firebase.storage().ref(`comprobacion/${file.name}`)
@@ -108,13 +96,13 @@ export default class Valeslist extends Component {
         })
       }, error => {
         console.error(error.message)
-      }, () =>  storageRef.getDownloadURL().then(url =>  {
+      }, () => storageRef.getDownloadURL().then(url =>  {
+        let ruta = this.state.filefactura
         const record = url
+        ruta += record + ','
         this.setState({
-          filefactura: record
+          filefactura: ruta.split(',')
         })
-        ruta += record + 'cb435a'
-        this.state.filefactura = ruta.split('cb435a')
       }))
     }
   }

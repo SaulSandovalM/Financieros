@@ -44,19 +44,19 @@ class Login extends Component {
                   <div className='border-form-login'>
                     <div className='input-cen-log'>
                       <TextField
+                        className='correo'
                         label='Correo'
                         id='email'
                         onChange={ this.handleEmailChange }
-                        className='correo'
                       />
                     </div>
                     <div className='input-cen-log'>
                       <TextField
+                        className='contraseña'
                         label='Contraseña'
                         id='password'
                         type='password'
                         onChange={ this.handlePasswordChange }
-                        className='contraseña'
                       />
                     </div>
                     { loginError && (

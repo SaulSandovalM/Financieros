@@ -7,7 +7,7 @@ import Typography from '@material-ui/core/Typography'
 import arrow from '../../../img/arrow.svg'
 import firebase from '../../../Firebase'
 
-class NavLiz extends Component {
+class Nav extends Component {
   constructor () {
     super()
     this.state = {
@@ -78,18 +78,17 @@ class NavLiz extends Component {
     } else if (email === 'juan@procuraduria.com') {
       admin = 'JUAN'
     }
-    console.log(admin)
 
     return (
       <div className='nav-col'>
-        <div style={{ display: 'flex', flexDirection: 'column'}}>
+        <div className='nav-cont'>
           {(admin === 'CECILIA' || admin === 'LIZBETH') &&
             <div className='navbar-left' style={{ marginTop: '30px' }}>
               <div className='deco-c' onClick={this.toggleHiddenP.bind(this)}>
-                <span className='material-icons' style={{ color: 'white', marginTop: '3px', marginRight: '15px' }}>
+                <span className='material-icons'>
                   attach_money
                 </span>
-                <Typography variant='h6' style={{ marginBottom: '15px', color: 'white' }}>
+                <Typography variant='h6' className='typo-sty'>
                   Presupuesto
                 </Typography>
               </div>
@@ -104,28 +103,28 @@ class NavLiz extends Component {
             <div>
               <div className='subnav'>
                 <Link to='/Presupuesto' className='deco'>
-                  <Typography className='nav-t' style={{ marginBottom: '15px', color: 'white' }}>
+                  <Typography className='nav-t'>
                     • Inicial
                   </Typography>
                 </Link>
               </div>
               <div className='subnav'>
                 <Link to='/Ampliacion' className='deco'>
-                  <Typography className='nav-t' style={{ marginBottom: '15px', color: 'white' }}>
+                  <Typography className='nav-t'>
                     • Ampliacion
                   </Typography>
                 </Link>
               </div>
               <div className='subnav'>
                 <Link to='/Reduccion' className='deco'>
-                  <Typography className='nav-t' style={{ marginBottom: '15px', color: 'white' }}>
+                  <Typography className='nav-t'>
                     • Reduccion
                   </Typography>
                 </Link>
               </div>
               <div className='subnav'>
                 <Link to='/Transferencia' className='deco'>
-                  <Typography className='nav-t' style={{ marginBottom: '15px', color: 'white' }}>
+                  <Typography className='nav-t'>
                     • Transferencia
                   </Typography>
                 </Link>
@@ -135,10 +134,10 @@ class NavLiz extends Component {
           {(admin === 'CECILIA' || admin === 'LIZBETH') &&
             <div className='navbar-left'>
               <Link to='/FondoRevolvente' className='deco'>
-                <span className='material-icons' style={{ color: 'white', marginTop: '3px', marginRight: '15px' }}>
+                <span className='material-icons'>
                   local_atm
                 </span>
-                <Typography className='nav-t' variant='h6' style={{ marginBottom: '15px', color: 'white' }}>
+                <Typography className='nav-t' variant='h6'>
                   Fondo Revolvente
                 </Typography>
               </Link>
@@ -147,10 +146,10 @@ class NavLiz extends Component {
           {(admin === 'CECILIA' || admin === 'LIZBETH') &&
             <div className='navbar-left'>
               <Link to='/Archivos' className='deco'>
-                <span className='material-icons' style={{ color: 'white', marginTop: '3px', marginRight: '15px' }}>
+                <span className='material-icons'>
                   folder_open
                 </span>
-                <Typography className='nav-t' variant='h6' style={{ marginBottom: '15px', color: 'white' }}>
+                <Typography className='nav-t' variant='h6'>
                   Archivos
                 </Typography>
               </Link>
@@ -159,10 +158,10 @@ class NavLiz extends Component {
           {(admin === 'CECILIA' || admin === 'LIZBETH') &&
             <div className='navbar-left'>
               <Link to='/Registro' className='deco'>
-                <span className='material-icons' style={{ color: 'white', marginTop: '3px', marginRight: '15px' }}>
+                <span className='material-icons'>
                   plagiarism
                 </span>
-                <Typography className='nav-t' variant='h6' style={{ marginBottom: '15px', color: 'white' }}>
+                <Typography className='nav-t' variant='h6'>
                   Registro
                 </Typography>
               </Link>
@@ -171,10 +170,10 @@ class NavLiz extends Component {
           {(admin === 'CECILIA' || admin === 'LIZBETH') &&
             <div className='navbar-left'>
               <Link to='/Disponible' className='deco'>
-                <span className='material-icons' style={{ color: 'white', marginTop: '3px', marginRight: '15px' }}>
+                <span className='material-icons'>
                   playlist_add_check
                 </span>
-                <Typography className='nav-t' variant='h6' style={{ marginBottom: '15px', color: 'white' }}>
+                <Typography className='nav-t' variant='h6'>
                   Disponible
                 </Typography>
               </Link>
@@ -183,10 +182,10 @@ class NavLiz extends Component {
           {(admin === 'CECILIA' || admin === 'LIZBETH') &&
             <div className='navbar-left'>
               <Link to='/Contra' className='deco'>
-                <span className='material-icons' style={{ color: 'white', marginTop: '3px', marginRight: '15px' }}>
+                <span className='material-icons'>
                   receipt
                 </span>
-                <Typography className='nav-t' variant='h6' style={{ marginBottom: '15px', color: 'white' }}>
+                <Typography className='nav-t' variant='h6'>
                   Contrarecibo
                 </Typography>
               </Link>
@@ -195,10 +194,10 @@ class NavLiz extends Component {
           {(admin === 'CECILIA' || admin === 'LIZBETH') &&
             <div className='navbar-left'>
               <Link to='/CargaC' className='deco'>
-                <span className='material-icons' style={{ color: 'white', marginTop: '3px', marginRight: '15px' }}>
+                <span className='material-icons'>
                   publish
                 </span>
-                <Typography className='nav-t' variant='h6' style={{ marginBottom: '15px', color: 'white' }}>
+                <Typography className='nav-t' variant='h6'>
                   Carga Contrarecibo
                 </Typography>
               </Link>
@@ -207,10 +206,10 @@ class NavLiz extends Component {
           {(admin === 'ELI' || admin === 'LIZBETH' || admin === 'JUAN') &&
             <div className='navbar-left' style={{ marginTop: '30px' }}>
               <Link to='/Caja' className='deco'>
-                <span className='material-icons' style={{ color: 'white', marginTop: '3px', marginRight: '15px' }}>
+                <span className='material-icons'>
                   local_atm
                 </span>
-                <Typography className='nav-t' variant='h6' style={{ marginBottom: '15px', color: 'white' }}>
+                <Typography className='nav-t' variant='h6'>
                   Caja
                 </Typography>
               </Link>
@@ -219,10 +218,10 @@ class NavLiz extends Component {
           {(admin === 'ELI' || admin === 'LIZBETH' || admin === 'JUAN') &&
             <div className='navbar-left'>
               <Link to='/Arqueo' className='deco'>
-                <span className='material-icons' style={{ color: 'white', marginTop: '3px', marginRight: '15px' }}>
+                <span className='material-icons'>
                   folder_open
                 </span>
-                <Typography className='nav-t' variant='h6' style={{ marginBottom: '15px', color: 'white' }}>
+                <Typography className='nav-t' variant='h6'>
                   Arqueo
                 </Typography>
               </Link>
@@ -231,10 +230,10 @@ class NavLiz extends Component {
           {(admin === 'ELI' || admin === 'LIZBETH' || admin === 'JUAN') &&
             <div className='navbar-left'>
               <Link to='/ArqueoD' className='deco'>
-                <span className='material-icons' style={{ color: 'white', marginTop: '3px', marginRight: '15px' }}>
+                <span className='material-icons'>
                   plagiarism
                 </span>
-                <Typography className='nav-t' variant='h6' style={{ marginBottom: '15px', color: 'white' }}>
+                <Typography className='nav-t' variant='h6'>
                   Impresión de Arqueo
                 </Typography>
               </Link>
@@ -243,10 +242,10 @@ class NavLiz extends Component {
           {(admin === 'ELI' || admin === 'LIZBETH' || admin === 'JUAN') &&
             <div className='navbar-left'>
               <Link to='/Cheques' className='deco'>
-                <span className='material-icons' style={{ color: 'white', marginTop: '3px', marginRight: '15px' }}>
+                <span className='material-icons'>
                   playlist_add_check
                 </span>
-                <Typography className='nav-t' variant='h6' style={{ marginBottom: '15px', color: 'white' }}>
+                <Typography className='nav-t' variant='h6'>
                   Cheques
                 </Typography>
               </Link>
@@ -255,10 +254,10 @@ class NavLiz extends Component {
           {(admin === 'ELI' || admin === 'LIZBETH' || admin === 'JUAN') &&
             <div className='navbar-left'>
               <Link to='/Contra2' className='deco'>
-                <span className='material-icons' style={{ color: 'white', marginTop: '3px', marginRight: '15px' }}>
+                <span className='material-icons'>
                   receipt
                 </span>
-                <Typography className='nav-t' variant='h6' style={{ marginBottom: '15px', color: 'white' }}>
+                <Typography className='nav-t' variant='h6'>
                   Contrarecibo
                 </Typography>
               </Link>
@@ -267,10 +266,10 @@ class NavLiz extends Component {
           {(admin === 'ELI' || admin === 'LIZBETH' || admin === 'JUAN') &&
             <div className='navbar-left'>
               <div className='deco-c' onClick={this.toggleHiddenV.bind(this)}>
-                <span className='material-icons' style={{ color: 'white', marginTop: '3px', marginRight: '15px' }}>
+                <span className='material-icons'>
                   attach_money
                 </span>
-                <Typography variant='h6' style={{ marginBottom: '15px', color: 'white' }}>
+                <Typography variant='h6' className='nav-t'>
                   Vales
                 </Typography>
               </div>
@@ -285,14 +284,14 @@ class NavLiz extends Component {
             <div>
               <div className='subnav'>
                 <Link to='/Vales' className='deco'>
-                  <Typography className='nav-t' style={{ marginBottom: '15px', color: 'white' }}>
+                  <Typography className='nav-t'>
                     • Vale
                   </Typography>
                 </Link>
               </div>
               <div className='subnav'>
                 <Link to='/Valeslist' className='deco'>
-                  <Typography className='nav-t' style={{ marginBottom: '15px', color: 'white' }}>
+                  <Typography className='nav-t'>
                     • Lista de Vales
                   </Typography>
                 </Link>
@@ -302,10 +301,10 @@ class NavLiz extends Component {
           {(admin === 'MIGUEL' || admin === 'LIZBETH' || admin === 'TERESA' || admin === 'ELOY' || admin === 'MARTHA') &&
             <div className='navbar-left' style={{ marginTop: '30px' }}>
               <Link to='/Fondos' className='deco'>
-                <span className='material-icons' style={{ color: 'white', marginTop: '3px', marginRight: '15px' }}>
+                <span className='material-icons'>
                   request_quote
                 </span>
-                <Typography className='nav-t' variant='h6' style={{ marginBottom: '15px', color: 'white' }}>
+                <Typography className='nav-t' variant='h6'>
                   Fondos
                 </Typography>
               </Link>
@@ -314,10 +313,10 @@ class NavLiz extends Component {
           {(admin === 'MIGUEL' || admin === 'LIZBETH' || admin === 'TERESA' || admin === 'ELOY' || admin === 'MARTHA') &&
             <div className='navbar-left'>
               <Link to='/Contrarecibo' className='deco'>
-                <span className='material-icons' style={{ color: 'white', marginTop: '3px', marginRight: '15px' }}>
+                <span className='material-icons'>
                   payments
                 </span>
-                <Typography className='nav-t' variant='h6' style={{ marginBottom: '15px', color: 'white' }}>
+                <Typography className='nav-t' variant='h6'>
                   Contrarecibo
                 </Typography>
               </Link>
@@ -326,10 +325,10 @@ class NavLiz extends Component {
           {(admin === 'MIGUEL' || admin === 'LIZBETH' || admin === 'ELI' || admin === 'TERESA') &&
             <div className='navbar-left'>
               <Link to='/Caratula' className='deco'>
-                <span className='material-icons' style={{ color: 'white', marginTop: '3px', marginRight: '15px' }}>
+                <span className='material-icons'>
                   text_snippet
                 </span>
-                <Typography className='nav-t' variant='h6' style={{ marginBottom: '15px', color: 'white' }}>
+                <Typography className='nav-t' variant='h6'>
                   Caratula
                 </Typography>
               </Link>
@@ -338,11 +337,23 @@ class NavLiz extends Component {
           {(admin === 'MIGUEL' || admin === 'LIZBETH' || admin === 'TERESA' || admin === 'ELOY' || admin === 'MARTHA') &&
             <div className='navbar-left'>
               <Link to='/TabularList' className='deco'>
-                <span className='material-icons' style={{ color: 'white', marginTop: '3px', marginRight: '15px' }}>
+                <span className='material-icons'>
                   format_list_bulleted
                 </span>
-                <Typography className='nav-t' variant='h6' style={{ marginBottom: '15px', color: 'white' }}>
+                <Typography className='nav-t' variant='h6'>
                   Tabular
+                </Typography>
+              </Link>
+            </div>
+          }
+          {admin === 'NAYRA' &&
+            <div className='navbar-left' style={{ marginTop: '40px' }}>
+              <Link to='/Autorizacion' className='deco'>
+                <span className='material-icons'>
+                  done_all
+                </span>
+                <Typography className='nav-t' variant='h6'>
+                  Autorización
                 </Typography>
               </Link>
             </div>
@@ -351,13 +362,11 @@ class NavLiz extends Component {
         <div>
           <div className='navbar-left'>
             <div className='deco'>
-              <button
-                onClick={this.handleLogout}
-                style={{ background: '#092432', border: 'none', display: 'flex' }}>
-                <span className='material-icons' style={{ color: 'white', marginTop: '3px', marginRight: '15px' }}>
+              <button className='btn-nav' onClick={this.handleLogout}>
+                <span className='material-icons'>
                   person
                 </span>
-                <Typography className='nav-t' variant='h6' style={{ marginBottom: '15px', color: 'white' }}>
+                <Typography className='nav-t' variant='h6'>
                   Cerrar Sesión
                 </Typography>
               </button>
@@ -378,4 +387,4 @@ function mapStateToProps (state) {
   }
 }
 
-export default connect(mapStateToProps)(NavLiz)
+export default connect(mapStateToProps)(Nav)

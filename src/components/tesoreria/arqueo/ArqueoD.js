@@ -152,22 +152,22 @@ export default class ArqueoD extends Component {
 
   render () {
     var today = new Date()
-    var today2 = new Date()
+    // var today2 = new Date()
     var yesterday = new Date()
     var yesterday2 = new Date()
     var meses = ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre']
     var dias = ['domingo, ', 'lunes, ', 'martes, ', 'miercoles, ', 'jueves, ', 'viernes, ', 'sabado, ']
     var f = new Date()
     today = dias[f.getUTCDay()] + f.getDate() + ' de ' + meses[f.getMonth()] + ' de ' + f.getFullYear()
-    today2 = f.getFullYear() + '-' + [f.getMonth() + 1] + '-' + f.getDate()
-    var today3 = today2.replace(/\b(\d{1})\b/g, '0$1')
+    // today2 = f.getFullYear() + '-' + [f.getMonth() + 1] + '-' + f.getDate()
+    // var today3 = today2.replace(/\b(\d{1})\b/g, '0$1')
     yesterday = dias[f.getUTCDay() - 1] + [f.getDate() - 1] + ' de ' + meses[f.getMonth()] + ' de ' + f.getFullYear()
     yesterday2 = f.getFullYear() + '-' + [f.getMonth() + 1] + '-' + [f.getDate() - 1]
     var yesterdayF = yesterday2.replace(/\b(\d{1})\b/g, '0$1')
     let preDate = yesterdayF
-    let postDate = today3
+    // let postDate = today3
     let filteredDates = this.state.listay.filter(function(date) {
-      return date.fecha === preDate // && date.hora < '23:59' && date.hora > '16:00'
+      return date.fecha === preDate && date.hora < '23:59' && date.hora > '16:00'
     })
 
     console.log(this.state.listay)

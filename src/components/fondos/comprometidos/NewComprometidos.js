@@ -59,7 +59,8 @@ export default class NewComprometidos extends Component {
       importer: 0,
       ivar: 0,
       isrr: 0,
-      show: true
+      show: true,
+      idP: ''
     }
   }
 
@@ -154,7 +155,9 @@ export default class NewComprometidos extends Component {
       if (doc.exists) {
         const fondos = doc.data()
         const idP = doc.id
-        this.state.idP = idP
+        this.setState({
+          idP: idP
+        })
         this.setState({
           key: doc.id,
           fondo: fondos.fondo,
@@ -233,33 +236,13 @@ export default class NewComprometidos extends Component {
   }
 
   handleOnChange1 (event) {
-    const file = event.target.files[0]
-    const storageRef = firebase.storage().ref(`comprobacion/${file.name}`)
-    const task = storageRef.put(file)
-    this.setState({
-      filex: `${file.name}`
-    })
-    task.on('state_changed', (snapshot) => {
-      let percentage = (snapshot.bytesTransferred / snapshot.totalBytes) * 100
-      this.setState({
-        xml: percentage
-      })
-    }, error => {
-      console.error(error.message)
-    }, () =>  storageRef.getDownloadURL().then(url =>  {
-      const record = url
-      this.setState({
-        filefactura: record
-      })
-    }))
-    const files = event.target.files
-    for (var i = 0; i < files.length; i++) {
-      const file = files[i]
+    for (var i = 0; i < event.target.files.length; i++) {
+      const file = event.target.files[0]
       var xml = file
       var reader = new FileReader()
-      reader.onloadend = function () {
+      reader.onload = function (event) {
         var XMLParser = require('react-xml-parser')
-        var xml = new XMLParser().parseFromString(reader.result)
+        var xml = new XMLParser().parseFromString(event.target.result)
         const data = {
           'total': xml.attributes['Total'],
           'subtotal': xml.attributes['SubTotal'] ? xml.attributes['SubTotal'] : 0,
@@ -567,8 +550,7 @@ export default class NewComprometidos extends Component {
       const iva = parseFloat(this.state.iva)
       const isr = parseFloat(this.state.isr)
       const total = importe + iva - isr
-      const totalcompro = total
-      this.state.total = totalcompro
+      this.state.total = total
       this.state.contra = right
     }
 

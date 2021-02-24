@@ -45,12 +45,6 @@ export default class Contra2 extends Component {
   }
 
   render () {
-    const filterData = this.state.fondos.filter(
-      (fondos) => {
-        return fondos.tipo_doc.indexOf('Fondo Revolvente') !== -1
-      }
-    )
-
     return (
       <div className='contra-container'>
         <FechaContraList />

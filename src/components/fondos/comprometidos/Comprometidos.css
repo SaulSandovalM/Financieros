@@ -62,12 +62,11 @@
   border-left: 0;
   border-right-color: white;
   border-top: 0;
-  width: 14%;
   text-align: center;
+  width: 14%;
 }
 .font-tb {
   font-size: 16px;
-  text-align: center;
 }
 .select-compro {
   background: white;
@@ -75,7 +74,7 @@
   color: black;
   font-size: 16px !important;
   height: 30px;
-  text-align: center !important;
+  text-align-last: left !important;
   width: 100%;
 }
 .table-row-c {
@@ -101,5 +100,5 @@
   overflow: scroll !important;
 }
 .MuiTableCell-root  {
-  text-align: center; 
+  text-align: center;
 }

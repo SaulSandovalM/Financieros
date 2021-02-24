@@ -102,8 +102,7 @@ export default class Arqueo extends Component {
       fecha: this.state.fecha,
       hora: this.state.hora,
       numCheque: this.inputCheque.value,
-      total: this.state.total,
-      totalA: this.state.totalA
+      total: this.state.total
     }
     this.setState({
       can1000: this.inputCan1000.value,
@@ -162,11 +161,11 @@ export default class Arqueo extends Component {
     var today = new Date()
     today = today.getFullYear() + '-' + meses[today.getMonth()] + '-' + today.getDate()
     var total = parseInt(this.state.can1000) + parseInt(this.state.can500) +
-                parseInt(this.state.can200) + parseInt(this.state.can100) +
-                parseInt(this.state.can50) + parseInt(this.state.can20) +
-                parseInt(this.state.can10) + parseInt(this.state.can5) +
-                parseInt(this.state.can2) + parseInt(this.state.can1) +
-                parseInt(this.state.can0)
+      parseInt(this.state.can200) + parseInt(this.state.can100) +
+      parseInt(this.state.can50) + parseInt(this.state.can20) +
+      parseInt(this.state.can10) + parseInt(this.state.can5) +
+      parseInt(this.state.can2) + parseInt(this.state.can1) +
+      parseInt(this.state.can0)
     var mil = parseInt(this.state.can1000) * 1000
     var quinientos = parseInt(this.state.can500) * 500
     var doscientos = parseInt(this.state.can200) * 200
@@ -179,9 +178,9 @@ export default class Arqueo extends Component {
     var uno = parseInt(this.state.can1) * 1
     var punto = parseInt(this.state.can0) * 0.5
     var sumaT = mil + quinientos + doscientos + cien + cincuenta + veinte +
-                diez + cinco + dos + uno + punto
+      diez + cinco + dos + uno + punto 
     this.state.total = sumaT
-    var today = new Date()
+    today = new Date()
     this.state.hora = today.getHours() + ':' + [(today.getMinutes() < 10 ? '0' : '') + today.getMinutes()]
     var dd = today.getDate()
     var mm = today.getMonth() + 1
@@ -194,13 +193,6 @@ export default class Arqueo extends Component {
     }
     today = yyyy + '-' + mm + '-' + dd
     this.state.fecha = today
-
-    var ayer = this.state.lista.map(item =>
-      <div>{item.total}</div>
-    )
-    this.state.totalA = ayer
-
-    console.log(ayer)
 
     return (
       <div className='pf-container-a' style={{ marginTop: '40px' }}>
@@ -226,6 +218,7 @@ export default class Arqueo extends Component {
               <Popup
                 trigger={<button className='margin-buton-ar'>Actualizar</button>}
                 modal
+                style={{ overFlow: 'hidden' }}
                 closeOnDocumentClick>
                 <form className='form-class' onSubmit={this.sendMessage.bind(this)} ref='contactForm'>
                   <div className='cen-tit'>

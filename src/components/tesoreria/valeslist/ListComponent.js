@@ -27,8 +27,7 @@ export default class ListComponent extends Component {
       auto: '',
       pend: '',
       noauto: '',
-      comp: '',
-      tcantidad1: ''
+      comp: ''
     }
     this.handleExcel = this.handleExcel.bind(this)
   }
@@ -113,23 +112,22 @@ export default class ListComponent extends Component {
     filteredData.map(items => (
       total1.push(parseFloat(items.cantidad))
     ))
-    console.log(filteredData)
     const tt1 = (a, b) => a + b
-    this.state.tcantidad1 = total1.reduce(tt1)
+    var tcantidad1 = total1.reduce(tt1)
 
     const total2 = [0]
     filteredData.map(items => (
       total2.push(parseFloat(items.cantidadc))
     ))
     const tt2 = (a, b) => a + b
-    this.state.tcantidad2 = total2.reduce(tt2)
+    var tcantidad2 = total2.reduce(tt2)
 
     const total3 = [0]
     filteredData.map(items => (
       total3.push(parseFloat(items.cantidadr))
     ))
     const tt3 = (a, b) => a + b
-    this.state.tcantidad3 = total3.reduce(tt3)
+    var tcantidad3 = total3.reduce(tt3)
 
     return (
       <div>
@@ -231,7 +229,7 @@ export default class ListComponent extends Component {
               <TableCell className='table-v-num' style={{ width: '100px' }}>
                 <b>
                   <CurrencyFormat
-                    value={this.state.tcantidad1}
+                    value={tcantidad1}
                     displayType='text'
                     prefix=' $'
                     thousandSeparator
@@ -242,7 +240,7 @@ export default class ListComponent extends Component {
               <TableCell className='table-v-num' style={{ width: '100px' }}>
                 <b>
                   <CurrencyFormat
-                    value={this.state.tcantidad2}
+                    value={tcantidad2}
                     displayType='text'
                     prefix=' $'
                     thousandSeparator
@@ -253,7 +251,7 @@ export default class ListComponent extends Component {
               <TableCell className='table-v-num' style={{ width: '100px' }}>
                 <b>
                   <CurrencyFormat
-                    value={this.state.tcantidad3}
+                    value={tcantidad3}
                     displayType='text'
                     prefix=' $'
                     thousandSeparator
@@ -264,7 +262,7 @@ export default class ListComponent extends Component {
               <TableCell className='table-v-num' style={{ width: '100px' }}>
                 <b>
                   <CurrencyFormat
-                    value={this.state.tcantidad3}
+                    value={tcantidad3}
                     displayType='text'
                     prefix=' $'
                     thousandSeparator
