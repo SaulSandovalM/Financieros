@@ -88,7 +88,7 @@ export default class FondosComponent extends Component {
             <form>
               <TextField
                 id='numCheque'
-                value={currentFondos.numCheque}
+                value={currentFondos.numCheque ? currentFondos.numCheque : 'Agrege el Cheque'}
                 onChange={this.onChangeCheque}
                 label='Numero de Cheque'
               />
@@ -162,7 +162,7 @@ export default class FondosComponent extends Component {
                 style={{ backgroud: 'green' }}
                 onClick={this.updateFondo}
               >
-                Asignar Vale
+                Asignar Cheque
               </Button>
             </div>
             {this.state.message &&

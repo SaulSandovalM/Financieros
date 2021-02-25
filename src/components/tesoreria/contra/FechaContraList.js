@@ -51,7 +51,8 @@ export default class FechaContraList extends Component {
         beneficiario: data.beneficiario,
         desc: data.desc,
         no_proyecto: data.no_proyecto,
-        realizo: data.realizo
+        realizo: data.realizo,
+        numCheque: data.numCheque
       })
     })
     this.setState({
@@ -84,7 +85,6 @@ export default class FechaContraList extends Component {
         return fondos.numfondo.indexOf(this.state.search) !== -1
       }
     )
-    console.log(filterData)
 
     return (
       <TableContainer component={Paper}>
@@ -95,18 +95,6 @@ export default class FechaContraList extends Component {
           onChange={this.updateSearch.bind(this)}
         />
         <div className='div-hide'>
-          <div className='div-con-compo'>
-            {currentFondos ? (
-              <FondosComponent
-                fondo={currentFondos}
-                refreshList={this.refreshList}
-              />
-            ) : (
-              <div className='div-mesage'>
-                <p className='tc'>Por favor selecciona el fondo... </p>
-              </div>
-            )}
-          </div>
           <Table size='small' className='wt'>
             <TableHead>
               <TableRow>
@@ -150,6 +138,18 @@ export default class FechaContraList extends Component {
               </TableBody>
             ))}
           </Table>
+          <div className='div-con-compo'>
+            {currentFondos ? (
+              <FondosComponent
+                fondo={currentFondos}
+                refreshList={this.refreshList}
+              />
+            ) : (
+              <div className='div-mesage'>
+                <p className='tc'>Por favor selecciona el fondo... </p>
+              </div>
+            )}
+          </div>
         </div>
       </TableContainer>
     )
