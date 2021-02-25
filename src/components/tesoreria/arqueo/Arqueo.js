@@ -178,7 +178,7 @@ export default class Arqueo extends Component {
     var uno = parseInt(this.state.can1) * 1
     var punto = parseInt(this.state.can0) * 0.5
     var sumaT = mil + quinientos + doscientos + cien + cincuenta + veinte +
-      diez + cinco + dos + uno + punto 
+      diez + cinco + dos + uno + punto
     this.state.total = sumaT
     today = new Date()
     this.state.hora = today.getHours() + ':' + [(today.getMinutes() < 10 ? '0' : '') + today.getMinutes()]
@@ -218,7 +218,6 @@ export default class Arqueo extends Component {
               <Popup
                 trigger={<button className='margin-buton-ar'>Actualizar</button>}
                 modal
-                style={{ overFlow: 'hidden' }}
                 closeOnDocumentClick>
                 <form className='form-class' onSubmit={this.sendMessage.bind(this)} ref='contactForm'>
                   <div className='cen-tit'>

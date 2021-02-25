@@ -51,7 +51,8 @@ export default class ArqueoD extends Component {
       fecha: '',
       search: '',
       numCheque: '',
-      searchF: ''
+      searchF: '',
+      lasrResult: ''
     }
   }
 
@@ -74,7 +75,6 @@ export default class ArqueoD extends Component {
           fecha: child.val().fecha,
           numCheque: child.val().numCheque,
           total: child.val().total,
-          done: child.val().done,
           id: child.key
         })
       })
@@ -104,7 +104,6 @@ export default class ArqueoD extends Component {
           hora: child.val().hora,
           numCheque: child.val().numCheque,
           total: child.val().total,
-          done: child.val().done,
           id: child.key
         })
       })
@@ -152,26 +151,38 @@ export default class ArqueoD extends Component {
 
   render () {
     var today = new Date()
-    // var today2 = new Date()
     var yesterday = new Date()
-    var yesterday2 = new Date()
     var meses = ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre']
     var dias = ['domingo, ', 'lunes, ', 'martes, ', 'miercoles, ', 'jueves, ', 'viernes, ', 'sabado, ']
     var f = new Date()
     today = dias[f.getUTCDay()] + f.getDate() + ' de ' + meses[f.getMonth()] + ' de ' + f.getFullYear()
-    // today2 = f.getFullYear() + '-' + [f.getMonth() + 1] + '-' + f.getDate()
-    // var today3 = today2.replace(/\b(\d{1})\b/g, '0$1')
     yesterday = dias[f.getUTCDay() - 1] + [f.getDate() - 1] + ' de ' + meses[f.getMonth()] + ' de ' + f.getFullYear()
-    yesterday2 = f.getFullYear() + '-' + [f.getMonth() + 1] + '-' + [f.getDate() - 1]
-    var yesterdayF = yesterday2.replace(/\b(\d{1})\b/g, '0$1')
-    let preDate = yesterdayF
-    // let postDate = today3
+    const fechab = new Date(this.state.searchF)
+    const fechaAnterior = fechab.getFullYear() + '-' + ('0' + (fechab.getMonth() + 1)).slice(-2) + '-' + ('0' + fechab.getDate()).slice(-2)
     let filteredDates = this.state.listay.filter(function(date) {
-      return date.fecha === preDate && date.hora < '23:59' && date.hora > '16:00'
+      return date.fecha === fechaAnterior
     })
-
-    console.log(this.state.listay)
-    console.log(this.state.searchF)
+    const len = filteredDates.length
+    filteredDates.map((rank, i) => {
+      if (len === i + 1) {
+        // console.log(rank.total)
+        this.state.lasrResult = rank.total
+        // console.log(rank.fecha)
+        const pp = new Date(rank.fecha)
+        let after = dias[pp.getUTCDay()] + [pp.getDate() + 1] + ' de ' + meses[pp.getMonth()] + ' de ' + pp.getFullYear()
+        this.state.textFecha = after
+      }
+    })
+    var aa = new Date(this.state.searchF)
+    let before = dias[aa.getUTCDay()] + [aa.getDate() + 1] + ' de ' + meses[aa.getMonth()] + ' de ' + aa.getFullYear()
+    // console.log(before)
+    const lol = this.state.listay.length
+    this.state.listay.map((fil, i) => {
+      if (lol === i + 1) {
+        // console.log(fil)
+        this.state.lol = fil
+      }
+    })
 
     return (
       <div>
@@ -236,25 +247,20 @@ export default class ArqueoD extends Component {
                         <p className='tb-n' />
                       </div>
                       <div className='tb-1'>
-                      {/* Fecha Anterios */}
-                        {
-                          filteredDates.map(item =>
-                            <div className='tb-n'>
-                              <CurrencyFormat
-                                value={item.total}
-                                displayType='text'
-                                thousandSeparator
-                                prefix='$ '
-                              />
-                            </div>
-                          )
-                        }
+                        <div className='tb-n'>
+                          <CurrencyFormat
+                            value={this.state.lasrResult}
+                            displayType='text'
+                            thousandSeparator
+                            prefix='$ '
+                          />
+                        </div>
                       </div>
                       <div className='tb-1'>
                         <p className='tb-n' />
                       </div>
                       <div className='tb-2'>
-                        <p className='tb-n'>{yesterday}</p>
+                        <p className='tb-n'>{this.state.textFecha}</p>
                       </div>
                       <div className='tb-3'>
                         <p className='tb-n' />
@@ -298,7 +304,7 @@ export default class ArqueoD extends Component {
                         <p className='tb-n' />
                       </div>
                       <div className='tb-2'>
-                        <p className='tb-n'>{today}</p>
+                        <p className='tb-n'>{before}</p>
                       </div>
                       <div className='tb-3'>
                         <p className='tb-n' />
