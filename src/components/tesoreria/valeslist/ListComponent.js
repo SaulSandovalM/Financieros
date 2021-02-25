@@ -68,19 +68,6 @@ export default class ListComponent extends Component {
     })
   }
 
-  limpiar () {
-    this.setState({
-      auto: '',
-      autorizados: false,
-      pend: '',
-      pendientes: false,
-      noauto: '',
-      noautorizados: false,
-      comp: '',
-      comprovado: false
-    })
-  }
-
   handleExcel () {
     const vales = [['#V', '#C', 'AUTORIZADO', 'COMPOBADO', 'REEM/REIN', 'CONCEPTO',
       'OFICIO S', 'AREA', 'TURNO', 'FACTURA', 'RECIBOS', 'S/C', 'FECHA', 'AUTORIZA', 'RECIBIO']]
@@ -101,10 +88,10 @@ export default class ListComponent extends Component {
     const { auto, pend, noauto, comp } = this.state
     const filteredData = this.props.lista.filter(
       (vales) => {
-        return (auto.length && auto.includes(vales.estatus)) ||
-        (pend.length && pend.includes(vales.cheque)) ||
-        (noauto.length && noauto.includes(vales.estatus)) ||
-        (comp.length && comp.includes(vales.estatus))
+        return (auto.length && auto.includes(vales.estatus) && this.state.autorizados) ||
+        (pend.length && pend.includes(vales.cheque) && this.state.pendientes) ||
+        (noauto.length && noauto.includes(vales.estatus) && this.state.noautorizados) ||
+        (comp.length && comp.includes(vales.estatus) && this.state.comprovado)
       }
     )
 
@@ -128,7 +115,6 @@ export default class ListComponent extends Component {
     ))
     const tt3 = (a, b) => a + b
     var tcantidad3 = total3.reduce(tt3)
-
     return (
       <div>
         <FormGroup row style={{ display: 'flex', justifyContent: 'space-between' }}>
@@ -172,13 +158,6 @@ export default class ListComponent extends Component {
             }
             label='Comprobados'
           />
-          <Button
-            variant='contained'
-            color='primary'
-            onClick={this.limpiar.bind(this)}
-          >
-            Limpiar
-          </Button>
           <Button
             variant='contained'
             style={{ background: 'green', color: 'white' }}
