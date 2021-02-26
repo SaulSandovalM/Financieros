@@ -40,8 +40,8 @@ export default class Valeslist extends Component {
       filer: '',
       filexml: ['No hay datos cargados'],
       filex: ['No hay datos cargados'],
-      filefactura: [],
-      filef: ['No hay datos cargados'],
+      filefactura: [{ url: '', nombre: '' }],
+      filef: [{ url: '', nombre: '' }],
       recibosList: [{ folio: '', nombre: '', importe: '', iva: '', isr: '', fecha: '' }],
       autorizados: false,
       noautorizados: false,
@@ -98,6 +98,7 @@ export default class Valeslist extends Component {
       const file = event.target.files[i]
       const storageRef = firebase.storage().ref(`comprobacion/${file.name}`)
       const task = storageRef.put(file)
+      console.log(this.state.filef)
       task.on('state_changed', (snapshot) => {
         let percentage = (snapshot.bytesTransferred / snapshot.totalBytes) * 100
         this.setState({
@@ -110,7 +111,7 @@ export default class Valeslist extends Component {
         const record = url
         ruta += record + ','
         this.setState({
-          filefactura: ruta.split(',')
+          filefactura: [...this.state.filefactura, { url: url, nombre: file.name }],
         })
       }))
     }
@@ -271,6 +272,7 @@ export default class Valeslist extends Component {
   }
 
   render () {
+    console.log(this.state.filefactura)
     return (
       <div className='container-valeslist'>
         <form className='margin-f-a' onSubmit={this.sendMessage.bind(this)} ref='contactForm'>

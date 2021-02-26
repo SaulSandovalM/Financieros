@@ -221,27 +221,7 @@ export default class RowComponent extends Component {
                             width: '100%'
                           }}
                           className='click-arch'
-                          onClick={() => window.open(item, '_blank')}
-                        >
-                          { item }
-                        </TableCell>
-                      ))}
-                    </TableRow>
-                    <TableRow>
-                      {this.props.item.recibosList.map((item, i) => (
-                        <TableCell
-                          component="th"
-                          scope="row"
-                          key={i}
-                          style={{
-                            borderLeft: '0px solid #fff',
-                            borderTop: '0px solid #fff',
-                            borderRight: '0px solid #fff',
-                            display: 'flex',
-                            justifyContent: 'space-between',
-                            width: '100%'
-                          }}
-                          className='click-arch'
+                          onClick={() => window.open(item.url, '_blank')}
                         >
                           { item.nombre }
                         </TableCell>
