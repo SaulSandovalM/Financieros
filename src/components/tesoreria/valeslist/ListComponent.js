@@ -89,9 +89,9 @@ export default class ListComponent extends Component {
     const filteredData = this.props.lista.filter(
       (vales) => {
         return (auto.length && auto.includes(vales.estatus) && this.state.autorizados) ||
-        (pend.length && pend.includes(vales.cheque) && this.state.pendientes) ||
-        (noauto.length && noauto.includes(vales.estatus) && this.state.noautorizados) ||
-        (comp.length && comp.includes(vales.estatus) && this.state.comprovado)
+          (pend.length && pend.includes(vales.cheque) && this.state.pendientes) ||
+          (noauto.length && noauto.includes(vales.estatus) && this.state.noautorizados) ||
+          (comp.length && comp.includes(vales.estatus) && this.state.comprovado)
       }
     )
 
@@ -249,18 +249,7 @@ export default class ListComponent extends Component {
                   />
                 </b>
               </TableCell>
-              <TableCell className='table-v-num' style={{ width: '800px' }} />
-              <TableCell className='table-v-num' style={{ width: '800px' }} />
-              <TableCell className='table-v-num' style={{ width: '800px' }} />
-              <TableCell className='table-v-num' style={{ width: '100px' }} />
-              <TableCell className='table-v-num' style={{ width: '100px' }} />
-              <TableCell className='table-v-num' style={{ width: '100px' }} />
-              <TableCell className='table-v-num' style={{ width: '100px' }} />
-              <TableCell className='table-v-num' style={{ width: '100px' }} />
-              <TableCell className='table-v-num' style={{ width: '100px' }} />
-              <TableCell className='table-v-num' style={{ width: '100px' }} />
-              <TableCell className='table-v-num' style={{ width: '100px' }} />
-              <TableCell className='table-v-num' style={{ width: '100px' }} />
+              <TableCell className='table-v-num' style={{ width: '3300px' }} />
             </TableRow>
           </Table>
         </TableContainer>

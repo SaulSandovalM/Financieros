@@ -1,6 +1,7 @@
-import React, { Component } from 'react'
+import React, { Component, useState } from 'react'
 import firebase from '../../../Firebase'
 import ListComponent from './ListComponent'
+import ReciboForm from './ReciboForm'
 import './Valeslist.css'
 import TextField from '@material-ui/core/TextField'
 import Dropzone from 'react-dropzone'
@@ -42,7 +43,7 @@ export default class Valeslist extends Component {
       filex: ['No hay datos cargados'],
       filefactura: [],
       filef: ['No hay datos cargados'],
-      filerecibo: 0,
+      recibosList: [{ folio: '', nombre: '', importe: '', iva: '', isr: '', fecha: '' }],
       autorizados: false,
       noautorizados: false,
       pendientes: false,
@@ -132,7 +133,7 @@ export default class Valeslist extends Component {
           filexml: child.val().filexml,
           filefactura: child.val().filefactura,
           filef: child.val().filef,
-          filerecibo: child.val().filerecibo,
+          recibosList: child.val().recibosList,
           obs: child.val().obs,
           id: child.key
         })
@@ -199,7 +200,7 @@ export default class Valeslist extends Component {
       filex: this.state.filex ? this.state.filex : [0],
       filefactura: this.state.filefactura ? this.state.filefactura : [0],
       filef: this.state.filef ? this.state.filef : [0],
-      filerecibo: this.state.filerecibo ? this.state.filerecibo : [0],
+      recibosList: this.state.recibosList ? this.state.recibosList : [0],
       obs: this.state.obs
     }
     firebase.database().ref().update(updates)
@@ -225,12 +226,12 @@ export default class Valeslist extends Component {
       fecha: item.fecha,
       autorizo: item.autorizo,
       personaR: item.personaR,
-      estatus: 'Comprobado',
+      estatus: 'Pendiente',
       filexml: item.filexml,
       filex: item.filex,
       filefactura: item.filefactura,
       filef: item.filef,
-      filerecibo: item.filerecibo,
+      recibosList: item.recibosList,
       obs: this.state.obs
     }
     firebase.database().ref().update(updates)
@@ -238,7 +239,31 @@ export default class Valeslist extends Component {
     this.resetForm()
   }
 
+  handleInputChange = (e, index) => {
+    const { name, value } = e.target
+    const list = [...this.state.recibosList]
+    list[index][name] = value
+    this.setState({
+      recibosList: list
+    })
+  }
+
+  handleRemoveClick = (index) => {
+    const list = [...this.state.recibosList]
+    list.splice(index, 1)
+    this.setState({
+      recibosList: list
+    })
+  }
+
+  handleAddClick = () => {
+    this.setState({
+      recibosList: [...this.state.recibosList, { folio: '', nombre: '', importe: '', iva: '', isr: '', fecha: '' }]
+    })
+  }
+
   render () {
+    console.log(this.state.recibosList)
     return (
       <div className='container-valeslist'>
         <form className='margin-f-a' onSubmit={this.sendMessage.bind(this)} ref='contactForm'>
@@ -291,9 +316,10 @@ export default class Valeslist extends Component {
                     <TextField
                       label='Recibo'
                       type='number'
-                      name='filerecibo'
+                      name='recibosList'
                       onChange={this.handleChange.bind(this)}
                     />
+                    <button>+</button>
                   </div>
                   <div className='p-container-valeslist'>
                     <TextField
@@ -308,6 +334,65 @@ export default class Valeslist extends Component {
             </div>
           </div>
         </form>
+        <div className='box-modal'>
+          <h3>Agregar Recibos</h3>
+          <div>
+            {this.state.recibosList.map((x, i) =>
+              <form key={i} style={{ display: 'flex', justifyContent: 'center', marginBottom: '20px' }}>
+                <TextField
+                  label='Numero de Recibo'
+                  name='folio'
+                  value={x.folio}
+                  onChange={e => this.handleInputChange(e, i)}
+                  style={{ width: '15%', marginRight: '1%' }}
+                />
+                <TextField
+                  label='Nombre'
+                  name='nombre'
+                  value={x.nombre}
+                  onChange={e => this.handleInputChange(e, i)}
+                  style={{ width: '15%', marginRight: '1%' }}
+                />
+                <TextField
+                  label='Importe'
+                  name='importe'
+                  value={x.importe}
+                  onChange={e => this.handleInputChange(e, i)}
+                  style={{ width: '15%', marginRight: '1%' }}
+                />
+                <TextField
+                  label='Iva'
+                  name='iva'
+                  value={x.iva}
+                  onChange={e => this.handleInputChange(e, i)}
+                  style={{ width: '15%', marginRight: '1%' }}
+                />
+                <TextField
+                  label='Isr'
+                  name='isr'
+                  value={x.isr}
+                  onChange={e => this.handleInputChange(e, i)}
+                  style={{ width: '15%', marginRight: '1%' }}
+                />
+                <TextField
+                  label='Fecha'
+                  type='date'
+                  name='fecha'
+                  InputLabelProps={{
+                    shrink: true,
+                  }}
+                  value={x.fecha}
+                  onChange={e => this.handleInputChange(e, i)}
+                  style={{ width: '15%', marginRight: '1%' }}
+                />
+                <div>
+                  {this.state.recibosList.length !== 1 && <button onClick={() => this.handleRemoveClick(i)}>Quitar</button>}
+                  {this.state.recibosList.length - 1 === i && <button onClick={this.handleAddClick}>Agregar</button>}
+                </div>
+              </form>
+            )}
+          </div>
+        </div>
         <div className='title-tb-valeslist'>
           <div className='caja-valeslist'>
             <ListComponent

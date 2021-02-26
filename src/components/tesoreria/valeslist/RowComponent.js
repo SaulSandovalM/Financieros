@@ -123,11 +123,21 @@ export default class RowComponent extends Component {
           <TableCell className='table-v-num2' style={{ width: '100px' }}>
             {this.props.item.estatus}
           </TableCell>
-          <TableCell className='table-v-num2' style={{ width: '200px', right: '0px', position: 'sticky', background: 'white', display: 'flex'  }}>
+          <TableCell
+            className='table-v-num2'
+            style={{
+              width: '200px',
+              right: '0px',
+              position: 'sticky',
+              background: 'white',
+              display: 'flex'
+            }}
+          >
             <Button
               variant='contained'
               color='primary'
               onClick={this.update}
+              style={{ marginRight: '5px' }}
             >
               Agregar
             </Button>
