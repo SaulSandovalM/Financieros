@@ -115,6 +115,7 @@ export default class ListComponent extends Component {
     ))
     const tt3 = (a, b) => a + b
     var tcantidad3 = total3.reduce(tt3)
+    
     return (
       <div>
         <FormGroup row style={{ display: 'flex', justifyContent: 'space-between' }}>

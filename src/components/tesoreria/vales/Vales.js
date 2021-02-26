@@ -48,7 +48,7 @@ export default class Vales extends Component {
       filex: ['No hay datos cargados'],
       filefactura: ['No hay datos cargados'],
       filef: ['No hay datos cargados'],
-      filerecibo: ''
+      recibosList: ['No hay datos cargados']
     }
   }
 
@@ -115,7 +115,7 @@ export default class Vales extends Component {
           filex: child.val().filex,
           filefactura: child.val().filefactura,
           filef: child.val().filef,
-          filerecibo: child.val().filerecibo,
+          recibosList: child.val().recibosList,
           fechaP: child.val().fechaP,
           id: child.key
         })
@@ -197,7 +197,7 @@ export default class Vales extends Component {
       filex: this.state.filex,
       filefactura: this.state.filefactura,
       filef: this.state.filef,
-      filerecibo: this.state.filerecibo
+      recibosList: this.state.recibosList
     }
     this.setState({
       vale: this.state.contador.storyCount,
@@ -271,7 +271,7 @@ export default class Vales extends Component {
       filex: this.state.filex ? this.state.filex : item.filex,
       filefactura: this.state.filefactura ? item.filefactura : this.state.filefactura,
       filef: this.state.filef ? this.state.filef : item.filef ,
-      filerecibo: this.state.filerecibo ? item.filerecibo : this.state.filerecibo ,
+      recibosList: this.state.recibosList ? item.recibosList : this.state.recibosList ,
       fechaP: this.state.fechaP
     }
     this.setState({
@@ -304,7 +304,7 @@ export default class Vales extends Component {
       filex: '',
       filefactura: '',
       filef: '',
-      filerecibo: '',
+      recibosList: '',
       fechaP: ''
     }
     this.setState({

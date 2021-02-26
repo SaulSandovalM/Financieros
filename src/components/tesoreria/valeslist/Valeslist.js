@@ -46,8 +46,17 @@ export default class Valeslist extends Component {
       autorizados: false,
       noautorizados: false,
       pendientes: false,
-      obs: ''
+      obs: '',
+      opened: false
     }
+    this.toggleBox = this.toggleBox.bind(this)
+  }
+
+  toggleBox() {
+    const { opened } = this.state;
+    this.setState({
+      opened: !opened,
+    });
   }
 
   handleOnChange1 (event) {
@@ -317,7 +326,6 @@ export default class Valeslist extends Component {
                       name='recibosList'
                       onChange={this.handleChange.bind(this)}
                     />
-                    <button>+</button>
                   </div>
                   <div className='p-container-valeslist'>
                     <TextField
@@ -332,79 +340,83 @@ export default class Valeslist extends Component {
             </div>
           </div>
         </form>
-        <div className='content-fixed'>
-          <div className='box-modal'>
-            <h3>Agregar Recibos</h3>
-            <div>
-              {this.state.recibosList.map((x, i) =>
-                <form key={i} style={{ display: 'flex', justifyContent: 'center', marginBottom: '20px' }}>
-                  <TextField
-                    label='Numero de Recibo'
-                    name='folio'
-                    value={x.folio}
-                    onChange={e => this.handleInputChange(e, i)}
-                    style={{ width: '15%', marginRight: '1%' }}
-                  />
-                  <TextField
-                    label='Nombre'
-                    name='nombre'
-                    value={x.nombre}
-                    onChange={e => this.handleInputChange(e, i)}
-                    style={{ width: '15%', marginRight: '1%' }}
-                  />
-                  <TextField
-                    label='Importe'
-                    name='importe'
-                    value={x.importe}
-                    onChange={e => this.handleInputChange(e, i)}
-                    style={{ width: '15%', marginRight: '1%' }}
-                  />
-                  <TextField
-                    label='Iva'
-                    name='iva'
-                    value={x.iva}
-                    onChange={e => this.handleInputChange(e, i)}
-                    style={{ width: '15%', marginRight: '1%' }}
-                  />
-                  <TextField
-                    label='Isr'
-                    name='isr'
-                    value={x.isr}
-                    onChange={e => this.handleInputChange(e, i)}
-                    style={{ width: '15%', marginRight: '1%' }}
-                  />
-                  <TextField
-                    label='Fecha'
-                    type='date'
-                    name='fecha'
-                    InputLabelProps={{
-                      shrink: true,
-                    }}
-                    value={x.fecha}
-                    onChange={e => this.handleInputChange(e, i)}
-                    style={{ width: '15%', marginRight: '1%' }}
-                  />
-                  <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
-                    {this.state.recibosList.length !== 1 &&
-                      <button
-                        className='btn-remove-r'
-                        onClick={() => this.handleRemoveClick(i)}>
-                        -
-                      </button>
-                    }
-                    {this.state.recibosList.length - 1 === i &&
-                      <button
-                        className='btn-add-r'
-                        onClick={this.handleAddClick}>
-                        +
-                      </button>
-                    }
+        <button onClick={this.toggleBox}>+</button>
+        {this.state.opened &&
+          <div className='content-fixed'>
+            <div className='box-modal'>
+              <h3>Agregar Recibos</h3>
+              <button onClick={this.toggleBox}>-</button>
+              <div>
+                {this.state.recibosList.map((x, i) =>
+                  <div key={i} style={{ display: 'flex', justifyContent: 'center', marginBottom: '20px' }}>
+                    <TextField
+                      label='Numero de Recibo'
+                      name='folio'
+                      value={x.folio}
+                      onChange={e => this.handleInputChange(e, i)}
+                      style={{ width: '15%', marginRight: '1%' }}
+                    />
+                    <TextField
+                      label='Nombre'
+                      name='nombre'
+                      value={x.nombre}
+                      onChange={e => this.handleInputChange(e, i)}
+                      style={{ width: '15%', marginRight: '1%' }}
+                    />
+                    <TextField
+                      label='Importe'
+                      name='importe'
+                      value={x.importe}
+                      onChange={e => this.handleInputChange(e, i)}
+                      style={{ width: '15%', marginRight: '1%' }}
+                    />
+                    <TextField
+                      label='Iva'
+                      name='iva'
+                      value={x.iva}
+                      onChange={e => this.handleInputChange(e, i)}
+                      style={{ width: '15%', marginRight: '1%' }}
+                    />
+                    <TextField
+                      label='Isr'
+                      name='isr'
+                      value={x.isr}
+                      onChange={e => this.handleInputChange(e, i)}
+                      style={{ width: '15%', marginRight: '1%' }}
+                    />
+                    <TextField
+                      label='Fecha'
+                      type='date'
+                      name='fecha'
+                      InputLabelProps={{
+                        shrink: true,
+                      }}
+                      value={x.fecha}
+                      onChange={e => this.handleInputChange(e, i)}
+                      style={{ width: '15%', marginRight: '1%' }}
+                    />
+                    <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+                      {this.state.recibosList.length !== 1 &&
+                        <button
+                          className='btn-remove-r'
+                          onClick={() => this.handleRemoveClick(i)}>
+                          -
+                        </button>
+                      }
+                      {this.state.recibosList.length - 1 === i &&
+                        <button
+                          className='btn-add-r'
+                          onClick={this.handleAddClick}>
+                          +
+                        </button>
+                      }
+                    </div>
                   </div>
-                </form>
-              )}
+                )}
+              </div>
             </div>
           </div>
-        </div>
+        }
         <div className='title-tb-valeslist'>
           <div className='caja-valeslist'>
             <ListComponent
