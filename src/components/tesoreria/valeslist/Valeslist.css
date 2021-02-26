@@ -7,11 +7,6 @@
 .margin-f-a {
   margin-top: 20px;
 }
-.p-container-valeslist {
-  display: flex;
-  flex-direction: column;
-  padding-bottom: 10px;
-}
 .p-margin-valeslist {
   width: 100%;
 }
@@ -36,7 +31,7 @@
   display: flex;
   flex-direction: column;
   margin-right: 15px;
-  width: 100%;
+  width: 50%;
 }
 .progress-valeslist {
   width: 100%;
@@ -71,7 +66,7 @@
     0 41.8px 33.4px rgba(0, 0, 0, 0.086),
     0 100px 80px rgba(0, 0, 0, 0.12)
   ;
-  height: 90vh;
+  height: 92vh;
   margin-top: -198px;
   overflow: scroll;
   padding: 15px;

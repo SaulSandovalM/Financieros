@@ -321,14 +321,6 @@ export default class Valeslist extends Component {
                   </div>
                   <div className='p-container-valeslist'>
                     <TextField
-                      label='Recibo'
-                      type='number'
-                      name='recibosList'
-                      onChange={this.handleChange.bind(this)}
-                    />
-                  </div>
-                  <div className='p-container-valeslist'>
-                    <TextField
                       label='Observaciones'
                       name='obs'
                       value={this.state.obs}
