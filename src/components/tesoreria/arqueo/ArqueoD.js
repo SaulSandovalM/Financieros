@@ -174,6 +174,7 @@ export default class ArqueoD extends Component {
       }
     })
     var aa = new Date(this.state.searchF)
+    var selectF = this.state.searchF
     let before = dias[aa.getUTCDay()] + [aa.getDate() + 1] + ' de ' + meses[aa.getMonth()] + ' de ' + aa.getFullYear()
     // console.log(before)
     const lol = this.state.listay.length
@@ -268,6 +269,7 @@ export default class ArqueoD extends Component {
                     </div>
                     <div>
                       <ListComponentV
+                        fechaSelect={selectF}
                         listaVales={this.state.listaVales}
                       />
                     </div>

@@ -12,14 +12,10 @@ export default class RowComponentV extends Component {
   }
 
   render () {
-    var today = new Date()
-    var meses = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12']
-    var f = new Date()
-    today = f.getFullYear() + '-' + meses[f.getMonth()] + '-' + f.getDate()
-
+    var fechaSelect = this.props.fechaSelect
     return (
       <div style={{ width: '100%' }}>
-        {this.props.item.fechaP === today && this.props.item.cheque !== 'Cancelado' &&
+        {this.props.item.fechaP === fechaSelect && this.props.item.cheque !== 'Cancelado' &&
           <div className='tabla-arq'>
             <div className='tb-1'>
               <p className='tb-nr'>{this.props.item.vale}</p>

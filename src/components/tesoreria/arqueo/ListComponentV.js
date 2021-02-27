@@ -20,6 +20,8 @@ export default class ListComponent extends Component {
   }
 
   render () {
+    var fechaSelect = this.props.fechaSelect
+    
     return (
       <div>
         {
@@ -27,6 +29,7 @@ export default class ListComponent extends Component {
             <RowComponentV
               key={item.id}
               item={item}
+              fechaSelect={fechaSelect}
             />
           )
         }
