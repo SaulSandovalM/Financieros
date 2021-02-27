@@ -121,7 +121,7 @@ export default class ArqueoD extends Component {
           cheque: child.val().cheque,
           vale: child.val().vale,
           estatus: child.val().estatus,
-          cantidad: child.val().cantidad,
+          cantidadr: child.val().cantidadr,
           fecha: child.val().fecha,
           concepto: child.val().concepto,
           personaR: child.val().personaR,

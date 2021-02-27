@@ -25,7 +25,7 @@ export default class RowComponentV extends Component {
             </div>
             <div className='tb-1'>
               <CurrencyFormat
-                value={this.props.item.cantidad}
+                value={this.props.item.cantidadr}
                 style={{
                   display: 'flex',
                   justifyContent: 'center',
@@ -38,7 +38,7 @@ export default class RowComponentV extends Component {
               />
             </div>
             <div className='tb-1'>
-              <p className='tb-nr'>{this.props.item.fecha}</p>
+              <p className='tb-nr'>{this.props.item.fechaP}</p>
             </div>
             <div className='tb-2'>
               <p className='tb-nr'>{this.props.item.concepto}</p>
