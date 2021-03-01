@@ -86,12 +86,13 @@ export default class ListComponent extends Component {
 
   render () {
     const { auto, pend, noauto, comp } = this.state
+    var fechah = new Date().getMonth() + 1
     const filteredData = this.props.lista.filter(
       (vales) => {
-        return (auto.length && auto.includes(vales.estatus) && this.state.autorizados) ||
-          (pend.length && pend.includes(vales.cheque) && this.state.pendientes) ||
-          (noauto.length && noauto.includes(vales.estatus) && this.state.noautorizados) ||
-          (comp.length && comp.includes(vales.estatus) && this.state.comprovado)
+        return (auto.length && auto.includes(vales.estatus) && this.state.autorizados && new Date(vales.fecha).getMonth() + 1 === fechah) ||
+          (pend.length && pend.includes(vales.cheque) && this.state.pendientes && new Date(vales.fecha).getMonth() + 1 === fechah) ||
+          (noauto.length && noauto.includes(vales.estatus) && this.state.noautorizados && new Date(vales.fecha).getMonth() + 1 === fechah) ||
+          (comp.length && comp.includes(vales.estatus) && this.state.comprovado && new Date(vales.fecha).getMonth() + 1 === fechah)
       }
     )
 
@@ -115,7 +116,7 @@ export default class ListComponent extends Component {
     ))
     const tt3 = (a, b) => a + b
     var tcantidad3 = total3.reduce(tt3)
-    
+
     return (
       <div>
         <FormGroup row style={{ display: 'flex', justifyContent: 'space-between' }}>
