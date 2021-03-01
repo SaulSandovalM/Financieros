@@ -315,6 +315,7 @@ export default class Vales extends Component {
   }
 
   render () {
+    console.log(this.state.fecha)
     return (
       <div className='container-back-v'>
         <div style={{ display: 'flex', justifyContent: 'center' }}>

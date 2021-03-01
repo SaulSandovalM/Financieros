@@ -227,6 +227,26 @@ export default class RowComponent extends Component {
                         </TableCell>
                       ))}
                     </TableRow>
+                    <TableRow>
+                      {this.props.item.recibosList.map((item, i) => (
+                        <TableCell
+                          component="th"
+                          scope="row"
+                          key={i}
+                          style={{
+                            borderLeft: '0px solid #fff',
+                            borderTop: '0px solid #fff',
+                            borderRight: '0px solid #fff',
+                            display: 'flex',
+                            justifyContent: 'space-between',
+                            width: '100%'
+                          }}
+                          className='click-arch'
+                        >
+                          { item.nombre }
+                        </TableCell>
+                      ))}
+                    </TableRow>
                   </TableBody>
                 </Table>
               </Box>
