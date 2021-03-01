@@ -107,9 +107,6 @@ export default class Valeslist extends Component {
       }, error => {
         console.error(error.message)
       }, () => storageRef.getDownloadURL().then(url =>  {
-        let ruta = this.state.filefactura
-        const record = url
-        ruta += record + ','
         this.setState({
           filefactura: [...this.state.filefactura, { url: url, nombre: file.name }],
         })
@@ -272,10 +269,9 @@ export default class Valeslist extends Component {
   }
 
   render () {
-    console.log(this.state.filefactura)
     return (
       <div className='container-valeslist'>
-        <form className='margin-f-a' onSubmit={this.sendMessage.bind(this)} ref='contactForm'>
+        <div className='margin-f-a'>
           <div className='p-container-valeslist'>
             <div className='p-margin-valeslist'>
               <p className='p-title-size-valeslist'>
@@ -285,56 +281,62 @@ export default class Valeslist extends Component {
             <div className='inputs-container-valeslist'>
               <div className='inputs-valeslist'>
                 <div className='inputs-row-valeslist'>
-                  <div className='p-container-valeslist'>
-                    <p style={{ margin: '0px', color: 'grey', fontSize: '12px' }}>Agregar xml</p>
-                    <Dropzone
-                      style={{
-                        position: 'relative',
-                        width: '100%',
-                        height: '30px',
-                        borderWidth: '2px',
-                        borderColor: 'rgb(102, 102, 102)',
-                        borderStyle: 'solid',
-                        borderRadius: '5px'
-                      }}
-                      accept='.xml' onChange={this.handleOnChange1.bind(this)}
-                    />
-                    <progress className='progress' value={this.state.xml} max='100'>
-                      {this.state.xml} %
-                    </progress>
-                  </div>
-                  <div className='p-container-valeslist'>
-                    <p style={{ margin: '0px', color: 'grey', fontSize: '12px' }}>Agregar Pdf</p>
-                    <Dropzone
-                      style={{
-                        position: 'relative',
-                        width: '100%',
-                        height: '30px',
-                        borderWidth: '2px',
-                        borderColor: 'rgb(102, 102, 102)',
-                        borderStyle: 'solid',
-                        borderRadius: '5px'
-                      }}
-                      accept='.pdf' onChange={this.handleOnChange2.bind(this)}
-                    />
-                    <progress className='progress' value={this.state.pdf2} max='100'>
-                      {this.state.pdf2} %
-                    </progress>
-                  </div>
-                  <div className='p-container-valeslist'>
-                    <TextField
-                      label='Observaciones'
-                      name='obs'
-                      value={this.state.obs}
-                      onChange={this.handleChange.bind(this)}
-                    />
+                  <form style={{ display: 'flex', width: '100%' }} onSubmit={this.sendMessage.bind(this)} ref='contactForm'>
+                    <div className='p-container-valeslist'>
+                      <p style={{ margin: '0px', color: 'grey', fontSize: '12px' }}>Agregar xml</p>
+                      <Dropzone
+                        style={{
+                          position: 'relative',
+                          width: '100%',
+                          height: '30px',
+                          borderWidth: '2px',
+                          borderColor: 'rgb(102, 102, 102)',
+                          borderStyle: 'solid',
+                          borderRadius: '5px'
+                        }}
+                        accept='.xml' onChange={this.handleOnChange1.bind(this)}
+                      />
+                      <progress className='progress' value={this.state.xml} max='100'>
+                        {this.state.xml} %
+                      </progress>
+                    </div>
+                    <div className='p-container-valeslist'>
+                      <p style={{ margin: '0px', color: 'grey', fontSize: '12px' }}>Agregar Pdf</p>
+                      <Dropzone
+                        style={{
+                          position: 'relative',
+                          width: '100%',
+                          height: '30px',
+                          borderWidth: '2px',
+                          borderColor: 'rgb(102, 102, 102)',
+                          borderStyle: 'solid',
+                          borderRadius: '5px'
+                        }}
+                        accept='.pdf' onChange={this.handleOnChange2.bind(this)}
+                      />
+                      <progress className='progress' value={this.state.pdf2} max='100'>
+                        {this.state.pdf2} %
+                      </progress>
+                    </div>
+                    <div className='p-container-valeslist'>
+                      <TextField
+                        label='Observaciones'
+                        name='obs'
+                        value={this.state.obs}
+                        onChange={this.handleChange.bind(this)}
+                      />
+                    </div>
+                  </form>
+                  <div style={{ display: 'flex', justifyContent: 'center', flexDirection: 'column' }}>
+                    <div style={{ display: 'flex', width: '300px' }}>
+                      <button style={{ height: '25px' }} onClick={this.toggleBox}>+</button>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-        </form>
-        <button onClick={this.toggleBox}>+</button>
+        </div>
         {this.state.opened &&
           <div className='content-fixed'>
             <div className='box-modal'>

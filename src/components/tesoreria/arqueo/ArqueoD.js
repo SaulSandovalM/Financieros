@@ -165,9 +165,7 @@ export default class ArqueoD extends Component {
     const len = filteredDates.length
     filteredDates.map((rank, i) => {
       if (len === i + 1) {
-        // console.log(rank.total)
         this.state.lasrResult = rank.total
-        // console.log(rank.fecha)
         const pp = new Date(rank.fecha)
         let after = dias[pp.getUTCDay()] + [pp.getDate() + 1] + ' de ' + meses[pp.getMonth()] + ' de ' + pp.getFullYear()
         this.state.textFecha = after
@@ -176,11 +174,9 @@ export default class ArqueoD extends Component {
     var aa = new Date(this.state.searchF)
     var selectF = this.state.searchF
     let before = dias[aa.getUTCDay()] + [aa.getDate() + 1] + ' de ' + meses[aa.getMonth()] + ' de ' + aa.getFullYear()
-    // console.log(before)
     const lol = this.state.listay.length
     this.state.listay.map((fil, i) => {
       if (lol === i + 1) {
-        // console.log(fil)
         this.state.lol = fil
       }
     })

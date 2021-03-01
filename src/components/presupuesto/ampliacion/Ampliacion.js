@@ -285,7 +285,8 @@ export default class Ampliacion extends Component {
                     parseInt(this.state.impomay) + parseInt(this.state.impojun) +
                     parseInt(this.state.impojul) + parseInt(this.state.impoago) +
                     parseInt(this.state.imposep) + parseInt(this.state.impooct) +
-                    parseInt(this.state.imponov) + parseInt(this.state.impodic)}
+                    parseInt(this.state.imponov) + parseInt(this.state.impodic)
+                  }
                   displayType='text'
                   thousandSeparator
                   prefix=' $'
