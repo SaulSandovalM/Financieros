@@ -52,7 +52,8 @@ export default class FechaContraList extends Component {
         desc: data.desc,
         no_proyecto: data.no_proyecto,
         realizo: data.realizo,
-        numCheque: data.numCheque
+        numCheque: data.numCheque,
+        estatus: data.estatus
       })
     })
     this.setState({
@@ -126,6 +127,9 @@ export default class FechaContraList extends Component {
                 </TableCell>
                 <TableCell component='th' scope='row' className='table-bene-c'>
                   {fondo.beneficiario}
+                </TableCell>
+                <TableCell component='th' scope='row' className='table-num-fc'>
+                  {fondo.estatus}
                 </TableCell>
                 <TableCell component='th' scope='row' className='table-importe-c'>
                   <CurrencyFormat
