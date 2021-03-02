@@ -4,6 +4,8 @@ import ListComponent from './ListComponent'
 import './Valeslist.css'
 import TextField from '@material-ui/core/TextField'
 import Dropzone from 'react-dropzone'
+import IconButton from '@material-ui/core/IconButton'
+import AddIcon from '@material-ui/icons/Add'
 
 export default class Valeslist extends Component {
   constructor(props) {
@@ -323,7 +325,9 @@ export default class Valeslist extends Component {
                   </form>
                   <div style={{ display: 'flex', justifyContent: 'center', flexDirection: 'column' }}>
                     <div style={{ display: 'flex', width: '300px' }}>
-                      <button style={{ height: '25px' }} onClick={this.toggleBox}>+</button>
+                      <IconButton aria-label='recibo' onClick={this.toggleBox}>
+                        <AddIcon />
+                      </IconButton>
                     </div>
                   </div>
                 </div>
@@ -357,20 +361,6 @@ export default class Valeslist extends Component {
                       label='Importe'
                       name='importe'
                       value={x.importe}
-                      onChange={e => this.handleInputChange(e, i)}
-                      style={{ width: '15%', marginRight: '1%' }}
-                    />
-                    <TextField
-                      label='Iva'
-                      name='iva'
-                      value={x.iva}
-                      onChange={e => this.handleInputChange(e, i)}
-                      style={{ width: '15%', marginRight: '1%' }}
-                    />
-                    <TextField
-                      label='Isr'
-                      name='isr'
-                      value={x.isr}
                       onChange={e => this.handleInputChange(e, i)}
                       style={{ width: '15%', marginRight: '1%' }}
                     />

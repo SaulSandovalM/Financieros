@@ -109,6 +109,7 @@ export default class Vales extends Component {
           recibos: child.val().recibos,
           sc: child.val().sc,
           fecha: child.val().fecha,
+          fechaF: child.val().fechaF,
           autorizo: child.val().autorizo,
           personaR: child.val().personaR,
           estatus: child.val().estatus,
@@ -189,6 +190,7 @@ export default class Vales extends Component {
       recibos: this.inputRecibos.value,
       sc: this.inputSC.value,
       fecha: this.state.fecha,
+      fechaF: this.state.fechaF,
       autorizo: this.inputAutorizo.value,
       personaR: this.inputPersona.value,
       estatus: this.state.estatus,
@@ -211,13 +213,14 @@ export default class Vales extends Component {
       recibos: '',
       sc: '',
       fecha: this.state.fecha,
+      fechaF: this.state.fechaF,
       autorizo: this.inputAutorizo.value,
       estatus: this.state.estatus
     })
     if (params.vale && params.cheque && params.cantidad && params.cantidadc &&
         params.cantidadr && params.concepto && params.oficioS && params.area &&
         params.turno && params.factura && params.recibos && params.sc &&
-        params.autorizo && params.personaR && params.estatus && params.fecha) {
+        params.autorizo && params.personaR && params.estatus && params.fecha && params.fechaF) {
       var f = parseInt(params.cantidadc)
       const statsRef = firebase.firestore().collection('caja').doc('--stats--')
       const increment = firebase.firestore.FieldValue.increment(-f)
@@ -260,7 +263,8 @@ export default class Vales extends Component {
       factura: this.state.factura ? this.state.factura : item.factura,
       recibos: this.state.recibos ? this.state.recibos : item.recibos,
       sc: this.state.sc ? this.state.sc : item.sc,
-      fecha: this.state.fecha ? this.state.fecha : item.fecha,
+      fecha: item.fecha,
+      fechaF: item.fechaF,
       autorizo: this.state.autorizo ? this.state.autorizo : item.autorizo,
       personaR: this.state.personaR ? this.state.personaR : item.personaR,
       estatus: item.estatus,
@@ -292,7 +296,8 @@ export default class Vales extends Component {
       factura: '',
       recibos: '',
       sc: '',
-      fecha: this.state.fecha ? this.state.fecha : item.fecha,
+      fecha: item.fecha,
+      fechaF: item.fechaF,
       autorizo: this.state.autorizo ? this.state.autorizo : item.autorizo,
       personaR: this.state.personaR ? this.state.personaR : item.personaR,
       estatus: 'Cancelado',
@@ -307,7 +312,7 @@ export default class Vales extends Component {
       fechaP: ''
     })
     firebase.database().ref().update(updates)
-    alert('Tu solicitud fue enviada.')
+    alert('El cheque fue cancelado.')
   }
 
   render () {
@@ -840,7 +845,7 @@ export default class Vales extends Component {
                   </div>
                   <div className='firma-content'>
                     <div className='f-fecha'>
-                      <p className='b-fecha-i' style={{ fontSize: '15px' }}>{item.fecha}</p>
+                      <p className='b-fecha-i' style={{ fontSize: '15px' }}>{item.fechaF}</p>
                       <p className='font-size-f'>Fecha</p>
                     </div>
                     <div className='f-fecha'>
