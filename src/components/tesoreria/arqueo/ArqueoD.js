@@ -126,6 +126,7 @@ export default class ArqueoD extends Component {
           concepto: child.val().concepto,
           personaR: child.val().personaR,
           fechaP: String(child.val().fechaP),
+          fechaF: String(child.val().fechaF),
           done: child.val().done,
           id: child.key
         })
@@ -180,7 +181,6 @@ export default class ArqueoD extends Component {
       }
     })
     var selectF = this.state.searchF
-    console.log(this.state.searchF)
 
     return (
       <div>

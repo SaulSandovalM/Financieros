@@ -39,6 +39,7 @@ export default class Vales extends Component {
       fecha: '',
       autorizo: '',
       estatus: 'Pendiente',
+      estatusC: 'No Comprobado',
       contador: {},
       contadorc: {},
       searchF: '',
@@ -113,6 +114,7 @@ export default class Vales extends Component {
           autorizo: child.val().autorizo,
           personaR: child.val().personaR,
           estatus: child.val().estatus,
+          estatusC: child.val().estatusC,
           filefactura: child.val().filefactura,
           filef: child.val().filef,
           recibosList: child.val().recibosList,
@@ -194,6 +196,7 @@ export default class Vales extends Component {
       autorizo: this.inputAutorizo.value,
       personaR: this.inputPersona.value,
       estatus: this.state.estatus,
+      estatusC: this.state.estatusC,
       filefactura: this.state.filefactura,
       filef: this.state.filef,
       recibosList: this.state.recibosList
@@ -220,7 +223,8 @@ export default class Vales extends Component {
     if (params.vale && params.cheque && params.cantidad && params.cantidadc &&
         params.cantidadr && params.concepto && params.oficioS && params.area &&
         params.turno && params.factura && params.recibos && params.sc &&
-        params.autorizo && params.personaR && params.estatus && params.fecha && params.fechaF) {
+        params.autorizo && params.personaR && params.estatus && params.fecha &&
+        params.fechaF && params.estatusC) {
       var f = parseInt(params.cantidadc)
       const statsRef = firebase.firestore().collection('caja').doc('--stats--')
       const increment = firebase.firestore.FieldValue.increment(-f)
@@ -268,6 +272,7 @@ export default class Vales extends Component {
       autorizo: this.state.autorizo ? this.state.autorizo : item.autorizo,
       personaR: this.state.personaR ? this.state.personaR : item.personaR,
       estatus: item.estatus,
+      estatusC: item.estatusC,
       filefactura: this.state.filefactura ? item.filefactura : this.state.filefactura,
       filef: this.state.filef ? this.state.filef : item.filef ,
       recibosList: this.state.recibosList ? item.recibosList : this.state.recibosList ,
@@ -301,6 +306,7 @@ export default class Vales extends Component {
       autorizo: this.state.autorizo ? this.state.autorizo : item.autorizo,
       personaR: this.state.personaR ? this.state.personaR : item.personaR,
       estatus: 'Cancelado',
+      estatusC: item.estatusC,
       filexml: '',
       filex: '',
       filefactura: '',

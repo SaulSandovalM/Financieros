@@ -6,6 +6,8 @@ import TextField from '@material-ui/core/TextField'
 import Dropzone from 'react-dropzone'
 import IconButton from '@material-ui/core/IconButton'
 import AddIcon from '@material-ui/icons/Add'
+import RemoveIcon from '@material-ui/icons/Remove'
+import Button from '@material-ui/core/Button'
 
 export default class Valeslist extends Component {
   constructor(props) {
@@ -137,6 +139,7 @@ export default class Valeslist extends Component {
           autorizo: child.val().autorizo,
           personaR: child.val().personaR,
           estatus: child.val().estatus,
+          estatusC: child.val().estatusC,
           filefactura: child.val().filefactura,
           filef: child.val().filef,
           recibosList: child.val().recibosList,
@@ -201,7 +204,8 @@ export default class Valeslist extends Component {
       fecha: item.fecha,
       autorizo: item.autorizo,
       personaR: item.personaR,
-      estatus: 'Comprobado',
+      estatus: item.estatus,
+      estatusC: 'Comprobado',
       filefactura: this.state.filefactura ? this.state.filefactura : [0],
       filef: this.state.filef ? this.state.filef : [0],
       recibosList: this.state.recibosList ? this.state.recibosList : [0],
@@ -230,7 +234,8 @@ export default class Valeslist extends Component {
       fecha: item.fecha,
       autorizo: item.autorizo,
       personaR: item.personaR,
-      estatus: 'Pendiente',
+      estatus: item.estatus,
+      estatusC: item.estatusC,
       filefactura: item.filefactura,
       filef: item.filef,
       recibosList: item.recibosList,
@@ -325,9 +330,14 @@ export default class Valeslist extends Component {
                   </form>
                   <div style={{ display: 'flex', justifyContent: 'center', flexDirection: 'column' }}>
                     <div style={{ display: 'flex', width: '300px' }}>
-                      <IconButton aria-label='recibo' onClick={this.toggleBox}>
-                        <AddIcon />
-                      </IconButton>
+                      <Button
+                        variant='contained'
+                        color='primary'
+                        onClick={this.toggleBox}
+                        startIcon={<AddIcon />}
+                      >
+                        Agregar Recibos
+                      </Button>
                     </div>
                   </div>
                 </div>
@@ -338,11 +348,12 @@ export default class Valeslist extends Component {
         {this.state.opened &&
           <div className='content-fixed'>
             <div className='box-modal'>
-              <h3>Agregar Recibos</h3>
-              <button onClick={this.toggleBox}>-</button>
+              <div style={{ display: 'flex', justifyContent: 'space-between',  paddingTop: '20px' }}>
+                <h3>Agregar Recibos</h3>
+              </div>
               <div>
                 {this.state.recibosList.map((x, i) =>
-                  <div key={i} style={{ display: 'flex', justifyContent: 'center', marginBottom: '20px' }}>
+                  <div key={i} style={{ display: 'flex', justifyContent: 'center' }}>
                     <TextField
                       label='Numero de Recibo'
                       name='folio'
@@ -393,6 +404,16 @@ export default class Valeslist extends Component {
                     </div>
                   </div>
                 )}
+              </div>
+              <div style={{ display: 'flex', justifyContent: 'center', marginTop: '30px' }}>
+                <Button
+                  variant='contained'
+                  color='secondary'
+                  onClick={this.toggleBox}
+                  startIcon={<RemoveIcon />}
+                >
+                  Salir
+                </Button>
               </div>
             </div>
           </div>

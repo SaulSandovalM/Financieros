@@ -23,7 +23,7 @@ export default class ListComponent extends Component {
       autorizados: false,
       noautorizados: false,
       pendientes: false,
-      comprovado: false,
+      comprobado: false,
       auto: '',
       pend: '',
       noauto: '',
@@ -64,7 +64,7 @@ export default class ListComponent extends Component {
   toggleCheckComprovado (event) {
     this.setState({
       comp: event.target.name,
-      comprovado: !this.state.comprovado
+      comprobado: !this.state.comprobado
     })
   }
 
@@ -92,7 +92,7 @@ export default class ListComponent extends Component {
         return (auto.length && auto.includes(vales.estatus) && this.state.autorizados && new Date(vales.fecha).getMonth() + 1 === fechah) ||
           (pend.length && pend.includes(vales.cheque) && this.state.pendientes && new Date(vales.fecha).getMonth() + 1 === fechah) ||
           (noauto.length && noauto.includes(vales.estatus) && this.state.noautorizados && new Date(vales.fecha).getMonth() + 1 === fechah) ||
-          (comp.length && comp.includes(vales.estatus) && this.state.comprovado && new Date(vales.fecha).getMonth() + 1 === fechah)
+          (comp.length && comp.includes(vales.estatusC) && this.state.comprobado && new Date(vales.fecha).getMonth() + 1 === fechah)
       }
     )
 
@@ -153,7 +153,7 @@ export default class ListComponent extends Component {
           <FormControlLabel
             control={
               <Checkbox
-                checked={this.state.comprovado}
+                checked={this.state.comprobado}
                 onChange={this.toggleCheckComprovado.bind(this)}
                 name='Comprobado'
               />
@@ -168,7 +168,7 @@ export default class ListComponent extends Component {
             Excel
           </Button>
         </FormGroup>
-        <TableContainer component={Paper} style={{ maxWidth: '100%', height: '68vh' }}>
+        <TableContainer component={Paper} style={{ maxWidth: '100%', height: '69vh' }}>
           <Table>
             <TableHead>
               <TableRow style={{ display: 'flex', flexDirection: 'row', top: '0', background: 'white', zIndex: '3', position: 'relative' }}>
