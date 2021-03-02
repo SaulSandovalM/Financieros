@@ -180,6 +180,7 @@ export default class ArqueoD extends Component {
       }
     })
     var selectF = this.state.searchF
+    console.log(this.state.searchF)
 
     return (
       <div>

@@ -272,7 +272,8 @@ export default class Vales extends Component {
       filefactura: this.state.filefactura ? item.filefactura : this.state.filefactura,
       filef: this.state.filef ? this.state.filef : item.filef ,
       recibosList: this.state.recibosList ? item.recibosList : this.state.recibosList ,
-      fechaP: this.state.fechaP
+      fechaP: this.state.fechaP,
+      rein: this.state.rein
     }
     this.setState({
       fechaP: ''
@@ -337,16 +338,30 @@ export default class Vales extends Component {
                   <div>
                     {parseInt(this.state.searchF) === item.vale &&
                       <div>
-                        <p className='sub-c-p'>Ingrese la Fecha de Pago</p>
-                        <input
-                          type='date'
-                          style={{ width: '100%' }}
-                          id='fechaP'
-                          className='field'
-                          name='fechaP'
-                          onChange={this.handleChange.bind(this)}
-                          defaultValue={item.fechaP}
-                        />
+                        <div>
+                          <p className='sub-c-p'>Ingrese la Fecha de Rein/Reem</p>
+                          <input
+                            type='date'
+                            style={{ width: '100%' }}
+                            id='rein'
+                            className='field'
+                            name='rein'
+                            onChange={this.handleChange.bind(this)}
+                            defaultValue={item.rein}
+                          />
+                        </div>
+                        <div>
+                          <p className='sub-c-p'>Ingrese la Fecha de Pago</p>
+                          <input
+                            type='date'
+                            style={{ width: '100%' }}
+                            id='fechaP'
+                            className='field'
+                            name='fechaP'
+                            onChange={this.handleChange.bind(this)}
+                            defaultValue={item.fechaP}
+                          />
+                        </div>
                       </div>
                     }
                   </div>

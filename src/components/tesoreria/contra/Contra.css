@@ -9,7 +9,7 @@
 }
 .div-con-compo {
   padding: 15px;
-  width: 47%;
+  width: 32%;
 }
 .div-mesage {
   display: flex;
@@ -22,7 +22,7 @@
   text-align: center;
 }
 .wt {
-  width: 50% !important;
+  width: 65% !important;
 }
 .table-num-fc {
   border-left: 0;
