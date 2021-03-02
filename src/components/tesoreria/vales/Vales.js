@@ -48,7 +48,8 @@ export default class Vales extends Component {
       filex: ['No hay datos cargados'],
       filefactura: ['No hay datos cargados'],
       filef: ['No hay datos cargados'],
-      recibosList: ['No hay datos cargados']
+      recibosList: ['No hay datos cargados'],
+      rein: ''
     }
   }
 
@@ -73,7 +74,7 @@ export default class Vales extends Component {
     var meses2 = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12']
     var f = new Date()
     today = f.getDate() + '-' + meses[f.getMonth()] + '-' + f.getFullYear()
-    today2 = f.getFullYear() + '-' + meses2[f.getMonth()] + '-' + f.getDate()
+    today2 = f.getFullYear() + '-' + meses2[f.getMonth()] + '-' + ('0' + f.getDate()).slice(-2)
     this.setState({
       fechaF: today
     })
@@ -111,8 +112,6 @@ export default class Vales extends Component {
           autorizo: child.val().autorizo,
           personaR: child.val().personaR,
           estatus: child.val().estatus,
-          filexml: child.val().filexml,
-          filex: child.val().filex,
           filefactura: child.val().filefactura,
           filef: child.val().filef,
           recibosList: child.val().recibosList,
@@ -193,8 +192,6 @@ export default class Vales extends Component {
       autorizo: this.inputAutorizo.value,
       personaR: this.inputPersona.value,
       estatus: this.state.estatus,
-      filexml: this.state.filexml,
-      filex: this.state.filex,
       filefactura: this.state.filefactura,
       filef: this.state.filef,
       recibosList: this.state.recibosList
@@ -267,8 +264,6 @@ export default class Vales extends Component {
       autorizo: this.state.autorizo ? this.state.autorizo : item.autorizo,
       personaR: this.state.personaR ? this.state.personaR : item.personaR,
       estatus: item.estatus,
-      filexml: this.state.filexml ? item.filexml : this.state.filexml,
-      filex: this.state.filex ? this.state.filex : item.filex,
       filefactura: this.state.filefactura ? item.filefactura : this.state.filefactura,
       filef: this.state.filef ? this.state.filef : item.filef ,
       recibosList: this.state.recibosList ? item.recibosList : this.state.recibosList ,
@@ -316,7 +311,6 @@ export default class Vales extends Component {
   }
 
   render () {
-    console.log(this.state.fecha)
     return (
       <div className='container-back-v'>
         <div style={{ display: 'flex', justifyContent: 'center' }}>
@@ -333,12 +327,12 @@ export default class Vales extends Component {
                     onChange={this.handleChange.bind(this)}
                   />
                 </div>
-                <div>
+                <div style={{ width: '50%' }}>
                 {this.state.vales.map(item =>
-                  <div>
+                  <div style={{ width: '100%' }}>
                     {parseInt(this.state.searchF) === item.vale &&
-                      <div>
-                        <div>
+                      <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                        <div style={{ width: '46%' }}>
                           <p className='sub-c-p'>Ingrese la Fecha de Rein/Reem</p>
                           <input
                             type='date'
@@ -350,7 +344,7 @@ export default class Vales extends Component {
                             defaultValue={item.rein}
                           />
                         </div>
-                        <div>
+                        <div style={{ width: '46%' }}>
                           <p className='sub-c-p'>Ingrese la Fecha de Pago</p>
                           <input
                             type='date'
