@@ -393,34 +393,34 @@ export default class Fondos extends Component {
       <div>
       <form className='form-fondo' onSubmit={this.onSubmit}>
         <Grid className='grid-w'>
-          <Grid className='grid-w2' style={{ marginButtom: '10px' }}>
+          <Grid className='grid-w2'>
             <Paper className='paper-p'>
               <div className='div-con-f'>Buscador de Fondos</div>
-              <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                <div style={{ width: '14.2%' }}>
-                  <p style={{ margin: '6px', fontSize: '12px', color: 'grey' }}>Num. Fondo</p>
+              <div className='head-search'>
+                <div className='inp-sea-cont'>
+                  <p className='inp-p-t'>Num. Fondo</p>
                 </div>
-                <div style={{ width: '14.2%' }}>
-                  <p style={{ margin: '6px', fontSize: '12px', color: 'grey' }}>Tipo de Doc.</p>
+                <div className='inp-sea-cont'>
+                  <p className='inp-p-t'>Tipo de Doc.</p>
                 </div>
-                <div style={{ width: '14.2%' }}>
-                  <p style={{ margin: '6px', fontSize: '12px', color: 'grey' }}>Importe</p>
+                <div className='inp-sea-cont'>
+                  <p className='inp-p-t'>Importe</p>
                 </div>
-                <div style={{ width: '14.2%' }}>
-                  <p style={{ margin: '6px', fontSize: '12px', color: 'grey' }}>Nompre R.</p>
+                <div className='inp-sea-cont'>
+                  <p className='inp-p-t'>Nompre R.</p>
                 </div>
-                <div style={{ width: '14.2%' }}>
-                  <p style={{ margin: '6px', fontSize: '12px', color: 'grey' }}>Editar F.</p>
+                <div className='inp-sea-cont'>
+                  <p className='inp-p-t'>Editar F.</p>
                 </div>
-                <div style={{ width: '14.2%' }}>
-                  <p style={{ margin: '6px', fontSize: '12px', color: 'grey' }}>Editar C.</p>
+                <div className='inp-sea-cont'>
+                  <p className='inp-p-t'>Editar C.</p>
                 </div>
-                <div style={{ width: '14.2%' }}>
-                  <p style={{ margin: '6px', fontSize: '12px', color: 'grey' }}>Oficios</p>
+                <div className='inp-sea-cont'>
+                  <p className='inp-p-t'>Oficios</p>
                 </div>
               </div>
-              <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                <div style={{ width: '14.2%' }}>
+              <div className='head-search'>
+                <div className='inp-sea-cont'>
                   <input
                     style={{ width: '85%' }}
                     className='field'
@@ -429,36 +429,36 @@ export default class Fondos extends Component {
                     onChange={this.handleChange.bind(this)}
                   />
                 </div>
-                <div style={{ width: '85.8%' }}>
+                <div className='cont-w-data'>
                   {this.state.fondos.map(fondos =>
-                    <div style={{ display: 'flex', width: '100%' }}>
+                    <div className='cont-map-fondo'>
                       {parseInt(this.state.searchF, 10) === fondos.fondo &&
-                      <div style={{ display: 'flex', justifyContent: 'space-between', width: '100%' }}>
-                        <div style={{ width: '16.6%' }}>
-                          <p style={{ margin: '6px' }}>{fondos.tipo_doc}</p>
+                        <div className='cont-map-data'>
+                          <div className='data-w-search'>
+                            <p className='data-m-f'>{fondos.tipo_doc}</p>
+                          </div>
+                          <div className='editar-option'>
+                            <CurrencyFormat
+                              value={fondos.importe}
+                              displayType='text'
+                              prefix=' $ '
+                              thousandSeparator
+                              decimalSeparator='.'
+                            />
+                          </div>
+                          <div className='data-w-search'>
+                            <p className='data-m-f'>{fondos.realizo}</p>
+                          </div>
+                          <div className='data-w-search'>
+                            <Link className='data-m-f' to={`/FondoE/${fondos.key}`}>Editar</Link>
+                          </div>
+                          <div className='data-w-search'>
+                            <Link className='data-m-f' to={`/Comprometidos/${fondos.key}`}>Editar</Link>
+                          </div>
+                          <div className='data-w-search'>
+                            <Link className='data-m-f' to={`/fondoEditable/${fondos.key}`}>Imprimir</Link>
+                          </div>
                         </div>
-                        <div className='editar-option'>
-                          <CurrencyFormat
-                            value={fondos.importe}
-                            displayType='text'
-                            prefix=' $ '
-                            thousandSeparator
-                            decimalSeparator='.'
-                          />
-                        </div>
-                        <div style={{ width: '16.6%' }}>
-                          <p style={{ margin: '6px' }}>{fondos.realizo}</p>
-                        </div>
-                        <div style={{ width: '16.6%' }}>
-                          <Link style={{ margin: '6px' }} to={`/FondoE/${fondos.key}`}>Editar</Link>
-                        </div>
-                        <div style={{ width: '16.6%' }}>
-                          <Link style={{ margin: '6px' }} to={`/Comprometidos/${fondos.key}`}>Editar</Link>
-                        </div>
-                        <div style={{ width: '16.6%' }}>
-                          <Link style={{ margin: '6px' }} to={`/fondoEditable/${fondos.key}`}>Imprimir</Link>
-                        </div>
-                      </div>
                       }
                     </div>
                   )}
@@ -493,7 +493,7 @@ export default class Fondos extends Component {
               <div className='div-f2'>
                 <div className='div-con'>
                   <p className='p-label'>Tipo de Documento</p>
-                  {(realizo === 'ADMIN' || realizo === 'MIGUEL' || realizo === 'ELOY' || realizo === 'TERESA' || realizo === 'MARTHA') &&
+                  {(realizo === 'MIGUEL' || realizo === 'ELOY' || realizo === 'TERESA' || realizo === 'MARTHA') &&
                     <select
                       className='select-f'
                       value={tipo_doc}
@@ -629,8 +629,8 @@ export default class Fondos extends Component {
                   />
                 </div>
                 {realizo === 'MIGUEL' &&
-                  <div style={{ display: 'flex', width: '48%' }}>
-                    <div style={{ display: 'flex', flexDirection: 'column', width: '97%' }}>
+                  <div className='add-bene'>
+                    <div className='content-bf'>
                       <p className='p-label'>Agregar Beneficiario</p>
                       <input
                         className='field'
@@ -640,26 +640,16 @@ export default class Fondos extends Component {
                         value={this.state.nombre}
                       />
                     </div>
-                    <button
-                      style={{
-                        width: '3%',
-                        display: 'flex',
-                        justifyContent: 'center',
-                        paddingTop: '20px',
-                        fontWeight: 'bold',
-                        background: 'white',
-                        border: 0
-                      }}
-                      onClick={this.sendName.bind(this)}>
+                    <button className='btn-add-bf' onClick={this.sendName.bind(this)}>
                         +
                     </button>
                   </div>
                 }
               </div>
               <div className='div-f2'>
-                <div style={{ width: '100%' }}>
+                <div className='fondo-w-c'>
                   <div>
-                    <FormControl style={{ width: '100%' }}>
+                    <FormControl className='fondo-w-c'>
                       <InputLabel>Proyecto</InputLabel>
                       <Select
                         style={{ height: 'auto' }}
@@ -778,7 +768,7 @@ export default class Fondos extends Component {
                   />
                 </div>
               </div>
-              <div className='div-cfe' style={{ width: '100%' }}>
+              <div className='div-cfe' className='fondo-w-c'>
                 <p className='p-label'>Observaciones</p>
                 <textarea
                   className='field'

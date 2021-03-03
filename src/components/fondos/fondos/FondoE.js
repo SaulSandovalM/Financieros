@@ -20,10 +20,56 @@ import Chip from '@material-ui/core/Chip'
 export default class FondoE extends Component {
   constructor(props) {
     super(props)
+    var user = firebase.auth().currentUser
+    var email
+    if (user != null) {
+      email = user.email
+    }
+    let admin
+    if (email === 'administrador@procu.com') {
+      admin = 'ADMIN'
+    } else if (email === 'nayra@procuraduria.com') {
+      admin = 'NAYRA'
+    } else if (email === 'laura@procuraduria.com') {
+      admin = 'LAURA'
+    } else if (email === 'miguel@procuraduria.com') {
+      admin = 'MIGUEL'
+    } else if (email === 'teresa@procuraduria.com') {
+      admin = 'TERESA'
+    } else if (email === 'marcos@procuraduria.com') {
+      admin = 'MARCOS'
+    } else if (email === 'eloy@procuraduria.com') {
+      admin = 'ELOY'
+    } else if (email === 'karina@procuraduria.com') {
+      admin = 'KARINA'
+    } else if (email === 'martha@procuraduria.com') {
+      admin = 'MARTHA'
+    } else if (email === 'lilia@procuraduria.com') {
+      admin = 'LILIA'
+    } else if (email === 'cenely@procuraduria.com') {
+      admin = 'CENELY'
+    } else if (email === 'hector@procuraduria.com') {
+      admin = 'HECTOR'
+    } else if (email === 'omar@procuraduria.com') {
+      admin = 'OMAR'
+    }
+    var today = new Date()
+    var dd = today.getDate()
+    var mm = today.getMonth() + 1
+    var yyyy = today.getFullYear()
+    if (dd < 10) {
+      dd = '0' + dd
+    }
+    if (mm < 10) {
+      mm = '0' + mm
+    }
+    today = dd + '/' + mm + '/' + yyyy
+    this.ref = firebase.firestore().collection('fondos')
+    this.unsubscribe = null
     this.state = {
-      key: '',
       fondo: '',
-      fecha: '',
+      numfondo: '',
+      fecha: today,
       tipo_doc: '',
       oficio_aut: '',
       no_oficio: '',
@@ -31,15 +77,32 @@ export default class FondoE extends Component {
       importe: '',
       desc: '',
       beneficiario: '',
+      realizo: admin,
       requisicion: '',
       pedido: '',
-      ncomprobantes: '',
+      no_proyecto: [],
       poliza: '',
       cfe: '',
       nscfe: '',
       observaciones: '',
-      numCompro: '',
-      allowCustom: true,
+      numProy: '',
+      fondos: [],
+      numFondo: [],
+      value: '',
+      key: '',
+      contador: {},
+      f: '',
+      personName: [],
+      searchF: '',
+      nombre: '',
+      oficio: [],
+      baneficiarioc: [
+        {
+          id: 1,
+          name: 'prueba',
+          done: false
+        }
+      ],
     }
   }
 
@@ -166,40 +229,17 @@ export default class FondoE extends Component {
   }
 
   render() {
-    var user = firebase.auth().currentUser
-    var email
-    if (user != null) {
-      email = user.email
-    }
-    let admin
-    if (email === 'administrador@procu.com') {
-      admin = 'ADMIN'
-    } else if (email === 'nayra@procuraduria.com') {
-      admin = 'NAYRA'
-    } else if (email === 'laura@procuraduria.com') {
-      admin = 'LAURA'
-    } else if (email === 'miguel@procuraduria.com') {
-      admin = 'MIGUEL'
-    } else if (email === 'teresa@procuraduria.com') {
-      admin = 'TERESA'
-    } else if (email === 'marcos@procuraduria.com') {
-      admin = 'MARCOS'
-    } else if (email === 'eloy@procuraduria.com') {
-      admin = 'ELOY'
-    } else if (email === 'karina@procuraduria.com') {
-      admin = 'KARINA'
-    } else if (email === 'martha@procuraduria.com') {
-      admin = 'MARTHA'
-    } else if (email === 'lilia@procuraduria.com') {
-      admin = 'LILIA'
-    } else if (email === 'cenely@procuraduria.com') {
-      admin = 'CENELY'
-    } else if (email === 'hector@procuraduria.com') {
-      admin = 'HECTOR'
-    } else if (email === 'omar@procuraduria.com') {
-      admin = 'OMAR'
-    }
-    const { tipo_doc, oficio_aut, importe, no_proyecto } = this.state
+    const { tipo_doc, oficio_aut, importe, beneficiario, no_proyecto, realizo, fecha } = this.state
+    const newArray = ['']
+    const myObj = {}
+
+    this.state.oficio.forEach(el => {
+      if (!(el in myObj)) {
+        myObj[el] = true
+        newArray.push(el)
+      }
+    })
+    this.state.numfondo = String(this.state.fondo)
 
     return (
       <form className='form-fondo' onSubmit={this.onSubmit}>
@@ -230,7 +270,7 @@ export default class FondoE extends Component {
               <div className='div-f2'>
                 <div className='div-con'>
                   <p className='p-label'>Tipo de Documento</p>
-                  {(admin === 'MIGUEL' || admin === 'ADMIN') &&
+                  {(realizo === 'MIGUEL' || realizo === 'ADMIN') &&
                     <select
                       className='select-f'
                       value={tipo_doc}
@@ -243,7 +283,7 @@ export default class FondoE extends Component {
                       )}
                     </select>
                   }
-                  {admin === 'ELOY' &&
+                  {realizo === 'ELOY' &&
                     <select
                       className='select-f'
                       value={tipo_doc}
@@ -256,7 +296,7 @@ export default class FondoE extends Component {
                       )}
                     </select>
                   }
-                  {(admin === 'TERESA' || admin === 'MARTHA' || admin === 'ELOY' || admin === 'MARCOS') &&
+                  {(realizo === 'TERESA' || realizo === 'MARTHA' || realizo === 'ELOY' || realizo === 'MARCOS') &&
                     <select
                       className='select-f'
                       value={tipo_doc}
@@ -269,7 +309,7 @@ export default class FondoE extends Component {
                       )}
                     </select>
                   }
-                  {(admin === 'KARINA' || admin === 'LILIA' || admin === 'CENELY' || admin === 'HECTOR' || admin === 'OMAR') &&
+                  {(realizo === 'KARINA' || realizo === 'LILIA' || realizo === 'CENELY' || realizo === 'HECTOR' || realizo === 'OMAR') &&
                     <select
                       className='select-f'
                       value={tipo_doc}
@@ -409,7 +449,7 @@ export default class FondoE extends Component {
               </div>
             </Paper>
           </Grid>
-          {(admin === 'MIGUEL' || admin === 'TERESA' || admin === 'MARCOS' || admin === 'ELOY') &&
+          {(realizo === 'MIGUEL' || realizo === 'TERESA' || realizo === 'MARCOS' || realizo === 'ELOY') &&
           <Grid className='grid2-cont'>
             <Paper className='paper-p'>
               <div className='div-con-f'>Licitación</div>
