@@ -92,9 +92,16 @@
 .card-compro {
   height: 250px;
   overflow-y: scroll;
+  background: white;
 }
 .list-align {
-  width: 20%;
+  width: 15%;
+}
+.list-align-i {
+  width: 8%;
+}
+.list-align2 {
+  width: 50%;
 }
 .MuiCard-root {
   overflow: scroll !important;

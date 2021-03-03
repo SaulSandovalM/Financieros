@@ -19,9 +19,10 @@ import ListItemIcon from '@material-ui/core/ListItemIcon'
 import CurrencyFormat from 'react-currency-format'
 import Fab from '@material-ui/core/Fab'
 import firebase from '../../../Firebase'
-import TextField from '@material-ui/core/TextField'
 import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown'
 import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp'
+import Dropzone from 'react-dropzone'
+import AutorenewIcon from '@material-ui/icons/Autorenew'
 
 export default class NewComprometidos extends Component {
   constructor (props) {
@@ -389,8 +390,35 @@ export default class NewComprometidos extends Component {
   partida = ['','211001','211002','212001','212002','214001','215001','216001','217001','221001','221002','246001','246002','247001','249001','251001','253001','254001','255001','256001','261001','271001','272001','275001','291001','292001','311001','312001','313001','317001','318001','323002','334001','336001','336002','338001','351001','352001','355001','357001','358001','359001','361002','372001','375001','392006','394001']
   rubro = ['','1501010','3101010','4301050']
   up = ['','01','02','03','04','05','06','07','08','09','10','11','12','13','14','15','16','17','18','20','21','22','23','24']
-  municipio = ['','Acatlán','Acaxochitlán','Actopan','Agua Blanca de Iturbide','Ajacuba','Alfajayucan','Almoloya','Apan','El Arenal','Atitalaquia','Atlapexco','Atotonilco el Grande','Atotonilco de Tula','Calnali','Cardonal','Cuautepec de Hinojosa','Chapantongo','Chapulhuacán','Chilcuautla','Eloxochitlán','Emiliano Zapata','Epazoyucan','Franciso I. Madero','Huasca de Ocampo','Huautla','Huazalingo','Huehuetla','Huejutla de Reyes','Huichapan','Ixmiquilpan','Jacala de Ledezma','Jaltocán','Juárez Hidalgo','Lolotla','Metepec','San Agustín Metzquititlán','Metztitlán','Mineral del Chico','Mineral del Monte','La Misión','Mixquiahuala de Juárez','Molango de Escamilla','Nicolás Flores','Nopala de Villagrán','Omitlán de Juárez','San Felipe Orizatlán','Pacula','Pachuca de Soto','Pisaflores','Progreso de Obregón','Mineral de la Reforma','San Agustín Tlaxiaca','San Bartolo Tutotepec','San Salvador','Santiago de Anaya','Santiago Tulantepec de Lugo Guerrero','Singuilucan','Tasquillo','Tecozautla','Tenango de Doria','Tepeapulco','Tepehuacán de Guerrero','Tepeji del Río de Ocampo','Tepetitlán','Tetepango','Villa de Tezontepec','Tezontepec de Aldama','Tianguistengo','Tizayuca','Tlahuelilpan','Tlahuiltepa','Tlanalapa','Tlanchinol','Tlaxcoapan','Tolcayuca','Tula de Allende','Tulancingo de Bravo','Xochiatipan','Xochicoatlán','Yahualica','Zacualtipán de Ángeles','Zapotlán de Juárez','Zempoala','Zimapán']
-  area = ['','Procuraduría General de Justicia','Subprocuraduría de Procedimientos Penales Región Oriente','Fiscalía Especializada para la atención de Delitos cometidos contra la Libertad de Expresión', 'Periodistas y Personas defensoras de los Derechos Humanos','Dirección General para la Atención de los Asuntos del Sistema Tradicional','Fiscalia de Delitos Electorales','Subprocuraduría de Derechos Humanos y Servicios a la Comunidad','Centro de Justicia Restaurativa Penal Poniente','Fiscalía para la Atención de Delitos de Género','Visitaduría General','Dirección General de Servicios Periciales','Centro de Operación Estratégica','Unidad Especializada en el Combate al Secuestro','Dirección General de Administración y Finanzas','Fiscalía Especializada para la atención de los Delitos de Trata de Personas','Subprocuraduría de Procedimientos Penales Región Poniente','Centro de Atención Temprana Poniente','Dirección General de Investigación y Litigación Poniente','Dirección General de la Policía Investigadora','Centro de Atención Temprana Oriente','Centro de Justicia Restaurativa Penal Oriente','Dirección General de Investigación y Litigación Oriente','Dirección General de Recursos Materiales y Servicios','Fiscalía Especializada en Delitos de Corrupción','Fiscalía Especializada en Materia de Desaparición Forzada de Personas',]
+  // municipio = ['','Acatlán','Acaxochitlán','Actopan','Agua Blanca de Iturbide','Ajacuba','Alfajayucan','Almoloya','Apan','El Arenal','Atitalaquia','Atlapexco','Atotonilco el Grande','Atotonilco de Tula','Calnali','Cardonal','Cuautepec de Hinojosa','Chapantongo','Chapulhuacán','Chilcuautla','Eloxochitlán','Emiliano Zapata','Epazoyucan','Franciso I. Madero','Huasca de Ocampo','Huautla','Huazalingo','Huehuetla','Huejutla de Reyes','Huichapan','Ixmiquilpan','Jacala de Ledezma','Jaltocán','Juárez Hidalgo','Lolotla','Metepec','San Agustín Metzquititlán','Metztitlán','Mineral del Chico','Mineral del Monte','La Misión','Mixquiahuala de Juárez','Molango de Escamilla','Nicolás Flores','Nopala de Villagrán','Omitlán de Juárez','San Felipe Orizatlán','Pacula','Pachuca de Soto','Pisaflores','Progreso de Obregón','Mineral de la Reforma','San Agustín Tlaxiaca','San Bartolo Tutotepec','San Salvador','Santiago de Anaya','Santiago Tulantepec de Lugo Guerrero','Singuilucan','Tasquillo','Tecozautla','Tenango de Doria','Tepeapulco','Tepehuacán de Guerrero','Tepeji del Río de Ocampo','Tepetitlán','Tetepango','Villa de Tezontepec','Tezontepec de Aldama','Tianguistengo','Tizayuca','Tlahuelilpan','Tlahuiltepa','Tlanalapa','Tlanchinol','Tlaxcoapan','Tolcayuca','Tula de Allende','Tulancingo de Bravo','Xochiatipan','Xochicoatlán','Yahualica','Zacualtipán de Ángeles','Zapotlán de Juárez','Zempoala','Zimapán']
+  area = [
+    '',
+    'Procuraduría General de Justicia',
+    'Subprocuraduría de Procedimientos Penales Región Oriente',
+    'Fiscalía Especializada para la atención de Delitos cometidos contra la Libertad de Expresión',
+    'Periodistas y Personas defensoras de los Derechos Humanos',
+    'Dirección General para la Atención de los Asuntos del Sistema Tradicional',
+    'Fiscalia de Delitos Electorales',
+    'Subprocuraduría de Derechos Humanos y Servicios a la Comunidad',
+    'Centro de Justicia Restaurativa Penal Poniente',
+    'Fiscalía para la Atención de Delitos de Género',
+    'Visitaduría General',
+    'Dirección General de Servicios Periciales',
+    'Centro de Operación Estratégica',
+    'Unidad Especializada en el Combate al Secuestro',
+    'Dirección General de Administración y Finanzas',
+    'Fiscalía Especializada para la atención de los Delitos de Trata de Personas',
+    'Subprocuraduría de Procedimientos Penales Región Poniente',
+    'Centro de Atención Temprana Poniente',
+    'Dirección General de Investigación y Litigación Poniente',
+    'Dirección General de la Policía Investigadora',
+    'Centro de Atención Temprana Oriente',
+    'Centro de Justicia Restaurativa Penal Oriente',
+    'Dirección General de Investigación y Litigación Oriente',
+    'Dirección General de Recursos Materiales y Servicios',
+    'Fiscalía Especializada en Delitos de Corrupción',
+    'Fiscalía Especializada en Materia de Desaparición Forzada de Personas'
+  ]
 
   resetForm () {
     this.refs.contactForm.reset()
@@ -557,7 +585,16 @@ export default class NewComprometidos extends Component {
     const customListLeft = (title, items) => (
       <div>
         <Card className='card-compro'>
-          <List dense component='div' role='list'>
+          <List dense component='div' role='list' style={{ display: 'flex', flexDirection: 'column', position: 'relative', top: '0', background: 'white' }}>
+            <ListItem style={{ position: 'sticky', top: '0px', background: 'white', zIndex: '3' }}>
+              <ListItemIcon />
+              <ListItemText className='list-align-i'><b>Folio</b></ListItemText>
+              <ListItemText className='list-align-i'><b>Importe</b></ListItemText>
+              <ListItemText className='list-align-i'><b>Iva</b></ListItemText>
+              <ListItemText className='list-align-i'><b>Isr</b></ListItemText>
+              <ListItemText className='list-align'><b>Fecha</b></ListItemText>
+              <ListItemText className='list-align2'><b>Nombre</b></ListItemText>
+            </ListItem>
             {filterData.map((value) => {
               return (
                 <ListItem key={value} button onClick={handleToggle(value)}>
@@ -568,15 +605,15 @@ export default class NewComprometidos extends Component {
                       disableRipple
                     />
                   </ListItemIcon>
-                  <ListItemText className='list-align' primary={value.folio} />
-                  <ListItemText className='list-align' primary={'$ ' + value.importe} />
-                  <ListItemText className='list-align' primary={'$ ' + value.iva} />
-                  <ListItemText className='list-align' primary={'$ ' + value.isr} />
+                  <ListItemText className='list-align-i' primary={value.folio} />
+                  <ListItemText className='list-align-i' primary={'$ ' + value.importe} />
+                  <ListItemText className='list-align-i' primary={'$ ' + value.iva} />
+                  <ListItemText className='list-align-i' primary={'$ ' + value.isr} />
                   <ListItemText className='list-align' primary={value.fecha} />
+                  <ListItemText className='list-align2' primary={value.Nombre} />
                 </ListItem>
               )
             })}
-            <ListItem />
           </List>
         </Card>
       </div>
@@ -585,7 +622,16 @@ export default class NewComprometidos extends Component {
     const customListRight = (title, items) => (
       <div>
         <Card className='card-compro'>
-          <List dense component='div' role='list'>
+          <List dense component='div' role='list' style={{ display: 'flex', flexDirection: 'column', position: 'relative', top: '0', background: 'white' }}>
+            <ListItem style={{ position: 'sticky', top: '0px', background: 'white', zIndex: '3' }}>
+              <ListItemIcon />
+              <ListItemText className='list-align-i'><b>Folio</b></ListItemText>
+              <ListItemText className='list-align-i'><b>Importe</b></ListItemText>
+              <ListItemText className='list-align-i'><b>Iva</b></ListItemText>
+              <ListItemText className='list-align-i'><b>Isr</b></ListItemText>
+              <ListItemText className='list-align'><b>Fecha</b></ListItemText>
+              <ListItemText className='list-align2'><b>Nombre</b></ListItemText>
+            </ListItem>
             {items.map((value) => {
               return (
                 <ListItem key={value} role='listitem' button onClick={handleToggle(value)}>
@@ -596,15 +642,15 @@ export default class NewComprometidos extends Component {
                       disableRipple
                     />
                   </ListItemIcon>
-                  <ListItemText className='list-align' primary={value.folio} />
-                  <ListItemText className='list-align' primary={'$ ' + value.importe} />
-                  <ListItemText className='list-align' primary={'$ ' + value.iva} />
-                  <ListItemText className='list-align' primary={'$ ' + value.isr} />
+                  <ListItemText className='list-align-i' primary={value.folio} />
+                  <ListItemText className='list-align-i' primary={'$ ' + value.importe} />
+                  <ListItemText className='list-align-i' primary={'$ ' + value.iva} />
+                  <ListItemText className='list-align-i' primary={'$ ' + value.isr} />
                   <ListItemText className='list-align' primary={value.fecha} />
+                  <ListItemText className='list-align2' primary={value.Nombre} />
                 </ListItem>
               )
             })}
-            <ListItem />
           </List>
         </Card>
       </div>
@@ -613,9 +659,9 @@ export default class NewComprometidos extends Component {
     return (
       <div className='div-compro-container'>
         <div>
-          <Grid container spacing={3} justify='center' alignItems='center'>
-            <Grid item xs>
-              {this.state.show ?
+          <Grid container spacing={1} justify='center' alignItems='center' style={{ display: 'flex', flexDirection: 'column', width: '100%' }}>
+            <Grid item xs style={{ width: '100%' }}>
+              {/* this.state.show ?
                 <div className='div-into-data'>
                   <div className='recibo-container'>
                     Buscador
@@ -627,43 +673,60 @@ export default class NewComprometidos extends Component {
                     />
                   </div>
                   <div className='div-btn-comp'>
-                    <button className='btn-comp' onClick={this.toggleShow.bind(this)}>
+                    <Button
+                      variant="contained"
+                      color="primary"
+                      size="small"
+                      startIcon={<AutorenewIcon />}
+                      onClick={this.toggleShow.bind(this)}
+                    >
                       Cambiar
-                    </button>
+                    </Button>
                   </div>
                 </div>
                 :
                 <div className='div-into-data'>
                   <div className='recibo-container'>
                     Agregar tus XML
-                    <TextField
-                      className='input-xml'
-                      type='file'
-                      onChange={this.handleOnChange1.bind(this)}
+                    <Dropzone
+                      style={{
+                        position: 'relative',
+                        width: '99%',
+                        height: '30px',
+                        borderWidth: '2px',
+                        borderColor: 'rgb(102, 102, 102)',
+                        borderStyle: 'solid',
+                        borderRadius: '5px'
+                      }}
+                      accept='.xml' onChange={this.handleOnChange1.bind(this)}
                     />
                   </div>
                   <div className='div-btn-comp'>
-                    <button
-                      className='btn-comp'
-                      onClick={this.toggleShow.bind(this)}>
-                        Cambiar
-                    </button>
+                    <Button
+                      variant="contained"
+                      color="primary"
+                      size="small"
+                      startIcon={<AutorenewIcon />}
+                      onClick={this.toggleShow.bind(this)}
+                    >
+                      Cambiar
+                    </Button>
                   </div>
                 </div>
-              }
+              */}
               {(admin === 'OMAR' || admin === 'MARCOS' || admin === 'KARINA' || admin === 'MIGUEL' || admin === 'TERESA') &&
                 customListLeft('Choices', left)
               }
             </Grid>
             <Grid item>
-              <Grid container direction='column' alignItems='center'>
+              <Grid container direction='row' alignItems='center'>
                 <Button
                   variant='outlined'
                   size='small'
                   onClick={handleCheckedRight}
                   disabled={leftChecked.length === 0}
                 >
-                  &gt;
+                  &#5167;
                 </Button>
                 <Button
                   variant='outlined'
@@ -671,67 +734,11 @@ export default class NewComprometidos extends Component {
                   onClick={handleCheckedLeft}
                   disabled={rightChecked.length === 0}
                 >
-                  &lt;
+                  &#5169;
                 </Button>
               </Grid>
             </Grid>
-            <Grid item xs>
-              <div className='recibo-container'>
-                Agrega un Recibo
-                <form className='recibo-content' onSubmit={this.sendRecibo.bind(this)} ref='contactForm'>
-                  <button className='recibo-btn' type='submit'> + </button>
-                  <input
-                    className='input-r'
-                    placeholder='Importe'
-                    name='importer'
-                    required
-                    type='number'
-                    value={this.state.importer}
-                    onChange={this.handleChange.bind(this)}
-                  />
-                  <input
-                    className='input-r'
-                    placeholder='Iva'
-                    required
-                    type='number'
-                    name='ivar'
-                    value={this.state.ivar}
-                    onChange={this.handleChange.bind(this)}
-                  />
-                  <input
-                    className='input-r'
-                    placeholder='Isr'
-                    required
-                    type='number'
-                    name='isrr'
-                    value={this.state.isrr}
-                    onChange={this.handleChange.bind(this)}
-                  />
-                  <input
-                    className='input-r'
-                    placeholder='Total'
-                    id='total'
-                    required
-                    value={parseFloat(this.state.importer) + parseFloat(this.state.ivar) + parseFloat(this.state.isrr)}
-                    ref={total => this.inputTotal = total}
-                  />
-                  <input
-                    className='input-r'
-                    placeholder='Nombre'
-                    id='nombre'
-                    required
-                    ref={nombre => this.inputNombre = nombre}
-                  />
-                  <input
-                    className='input-r'
-                    placeholder='Fecha'
-                    type='date'
-                    id='fecha'
-                    required
-                    ref={fecha => this.inputFecha = fecha}
-                  />
-                </form>
-              </div>
+            <Grid item xs style={{ width: '100%' }}>
               {customListRight('Choices', right)}
             </Grid>
           </Grid>
