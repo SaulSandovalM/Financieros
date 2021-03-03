@@ -391,402 +391,401 @@ export default class Fondos extends Component {
 
     return (
       <div>
-      <form className='form-fondo' onSubmit={this.onSubmit}>
-        <Grid className='grid-w'>
-          <Grid className='grid-w2'>
-            <Paper className='paper-p'>
-              <div className='div-con-f'>Buscador de Fondos</div>
-              <div className='head-search'>
-                <div className='inp-sea-cont'>
-                  <p className='inp-p-t'>Num. Fondo</p>
-                </div>
-                <div className='inp-sea-cont'>
-                  <p className='inp-p-t'>Tipo de Doc.</p>
-                </div>
-                <div className='inp-sea-cont'>
-                  <p className='inp-p-t'>Importe</p>
-                </div>
-                <div className='inp-sea-cont'>
-                  <p className='inp-p-t'>Nompre R.</p>
-                </div>
-                <div className='inp-sea-cont'>
-                  <p className='inp-p-t'>Editar F.</p>
-                </div>
-                <div className='inp-sea-cont'>
-                  <p className='inp-p-t'>Editar C.</p>
-                </div>
-                <div className='inp-sea-cont'>
-                  <p className='inp-p-t'>Oficios</p>
-                </div>
-              </div>
-              <div className='head-search'>
-                <div className='inp-sea-cont'>
-                  <input
-                    style={{ width: '85%' }}
-                    className='field'
-                    name='searchF'
-                    value={this.state.searchF}
-                    onChange={this.handleChange.bind(this)}
-                  />
-                </div>
-                <div className='cont-w-data'>
-                  {this.state.fondos.map(fondos =>
-                    <div className='cont-map-fondo'>
-                      {parseInt(this.state.searchF, 10) === fondos.fondo &&
-                        <div className='cont-map-data'>
-                          <div className='data-w-search'>
-                            <p className='data-m-f'>{fondos.tipo_doc}</p>
-                          </div>
-                          <div className='editar-option'>
-                            <CurrencyFormat
-                              value={fondos.importe}
-                              displayType='text'
-                              prefix=' $ '
-                              thousandSeparator
-                              decimalSeparator='.'
-                            />
-                          </div>
-                          <div className='data-w-search'>
-                            <p className='data-m-f'>{fondos.realizo}</p>
-                          </div>
-                          <div className='data-w-search'>
-                            <Link className='data-m-f' to={`/FondoE/${fondos.key}`}>Editar</Link>
-                          </div>
-                          <div className='data-w-search'>
-                            <Link className='data-m-f' to={`/Comprometidos/${fondos.key}`}>Editar</Link>
-                          </div>
-                          <div className='data-w-search'>
-                            <Link className='data-m-f' to={`/fondoEditable/${fondos.key}`}>Imprimir</Link>
-                          </div>
-                        </div>
-                      }
-                    </div>
-                  )}
-                </div>
-              </div>
-            </Paper>
-          </Grid>
-          <Grid className='grid-w2'>
-            <Paper className='paper-pm'>
-              <div className='div-con-f'>Fondos</div>
-              <div className='div-f2'>
-                <div className='div-con'>
-                  <p className='p-label'>Fondo</p>
-                  <input
-                    className='field'
-                    value={this.state.fondo}
-                    name='fondo'
-                    ref='fondo'
-                    required
-                    onChange={this.onChange}
-                  />
-                </div>
-                <div className='div-con'>
-                  <p className='p-label'>Fecha</p>
-                  <input
-                    className='field'
-                    required
-                    value={fecha}
-                  />
-                </div>
-              </div>
-              <div className='div-f2'>
-                <div className='div-con'>
-                  <p className='p-label'>Tipo de Documento</p>
-                  {(realizo === 'MIGUEL' || realizo === 'ELOY' || realizo === 'TERESA' || realizo === 'MARTHA') &&
-                    <select
-                      className='select-f'
-                      value={tipo_doc}
-                      onChange={this.onChange}
-                      name='tipo_doc'
-                      required
-                    >
-                      {this.tipo_doc.map((x,y) =>
-                        <option name={y}>{x}</option>
-                      )}
-                    </select>
-                  }
-                  {(realizo === 'MARCOS') &&
-                    <select
-                      className='select-f'
-                      value={tipo_doc}
-                      onChange={this.onChange}
-                      name='tipo_doc'
-                      required
-                    >
-                      {this.tipo_doc4.map((x,y) =>
-                        <option name={y}>{x}</option>
-                      )}
-                    </select>
-                  }
-                  {(realizo === 'KARINA' || realizo === 'LILIA' || realizo === 'CENELY' || realizo === 'HECTOR' || realizo === 'OMAR') &&
-                    <select
-                      className='select-f'
-                      value={tipo_doc}
-                      onChange={this.onChange}
-                      name='tipo_doc'
-                      required
-                    >
-                      {this.tipo_doc3.map((x,y) =>
-                        <option name={y}>{x}</option>
-                      )}
-                    </select>
-                  }
-                </div>
-                <div className='div-con'>
-                  <p className='p-label'>Oficio de Autorización</p>
-                  <select
-                    className='select-f'
-                    value={oficio_aut}
-                    onChange={this.onChange}
-                    name='oficio_aut'
-                    required
-                  >
-                  {newArray.map(data =>
-                    <option name={data}>{data.of}</option>
-                  )}
-                  </select>
-                </div>
-              </div>
-              <div className='div-f2'>
-                <div className='div-con'>
-                  <p className='p-label'>Numero de Oficio</p>
-                  <input
-                    className='field'
-                    name='no_oficio'
-                    onChange={this.onChange}
-                    required
-                    ref='no_oficio'
-                  />
-                </div>
-                <div className='div-con'>
-                  <TextField
-                    label='Importe'
-                    value={importe}
-                    onChange={this.onChange}
-                    id='importe'
-                    name='importe'
-                    InputProps={{
-                      inputComponent: NumberFormatCustom
-                    }}
-                    required
-                    ref={importe => this.inputImporte = importe}
-                  />
-                </div>
-              </div>
-              <div className='div-f2'>
-                <div className='div-con'>
-                  <p className='p-label'>Importe Letra</p>
-                  <input
-                    className='field'
-                    name='no_oficio'
-                    onChange={this.onChange}
-                    value={(NumberAsString(importe))}
-                    required
-                    ref='no_oficio'
-                  />
-                </div>
-                {tipo_doc === 'Fondo Revolvente' ?
-                  <div className='div-con'>
-                    <p className='p-label'>Beneficiario</p>
-                    <select
-                      className='select-f'
-                      value={beneficiario}
-                      onChange={this.onChange}
-                      name='beneficiario'
-                    >
-                      {this.beneficiario2.map((x,y) =>
-                        <option name={y}>{x}</option>
-                      )}
-                    </select>
+        <form className='form-fondo' onSubmit={this.onSubmit}>
+          <Grid className='grid-w'>
+            <Grid className='grid-w2'>
+              <Paper className='paper-p'>
+                <div className='div-con-f'>Buscador de Fondos</div>
+                <div className='head-search'>
+                  <div className='inp-sea-cont'>
+                    <p className='inp-p-t'>Num. Fondo</p>
                   </div>
-                  :
-                  <div className='div-con'>
-                    <p className='p-label'>Beneficiario</p>
-                    <select
-                      className='select-f'
-                      value={beneficiario}
-                      onChange={this.onChange}
-                      name='beneficiario'
-                    >
-                      {this.state.baneficiarioc.map(data =>
-                        <option name={data}>{data.nombre}</option>
-                      )}
-                    </select>
+                  <div className='inp-sea-cont'>
+                    <p className='inp-p-t'>Tipo de Doc.</p>
                   </div>
-                }
-              </div>
-              <div className='div-f2'>
-                <div className='div-con'>
-                  <p className='p-label'>Descripción</p>
-                  <input
-                    className='field'
-                    id='desc'
-                    name='desc'
-                    onChange={this.onChange}
-                    required
-                    ref='desc'
-                  />
-                </div>
-                {realizo === 'MIGUEL' &&
-                  <div className='add-bene'>
-                    <div className='content-bf'>
-                      <p className='p-label'>Agregar Beneficiario</p>
-                      <input
-                        className='field'
-                        id='nombre'
-                        name='nombre'
-                        onChange={this.onChange}
-                        value={this.state.nombre}
-                      />
-                    </div>
-                    <button className='btn-add-bf' onClick={this.sendName.bind(this)}>
-                        +
-                    </button>
+                  <div className='inp-sea-cont'>
+                    <p className='inp-p-t'>Importe</p>
                   </div>
-                }
-              </div>
-              <div className='div-f2'>
-                <div className='fondo-w-c'>
-                  <div>
-                    <FormControl className='fondo-w-c'>
-                      <InputLabel>Proyecto</InputLabel>
-                      <Select
-                        style={{ height: 'auto' }}
-                        multiple
-                        value={no_proyecto}
-                        onChange={this.onChange}
-                        name='no_proyecto'
-                        input={<Input id='select-multiple-chip' />}
-                        renderValue={(selected) => (
-                          <div>
-                            {selected.map((value) => (
-                              <Chip key={value} label={value} style={{ display: 'flex', flexWrap: 'wrap' }}/>
-                            ))}
-                          </div>
-                        )}
-                        MenuProps={MenuProps}
-                      >
-                        {this.no_proyecto.map((name) => (
-                          <MenuItem key={name} value={name}>
-                            {name}
-                          </MenuItem>
-                        ))}
-                      </Select>
-                    </FormControl>
+                  <div className='inp-sea-cont'>
+                    <p className='inp-p-t'>Nompre R.</p>
+                  </div>
+                  <div className='inp-sea-cont'>
+                    <p className='inp-p-t'>Editar F.</p>
+                  </div>
+                  <div className='inp-sea-cont'>
+                    <p className='inp-p-t'>Editar C.</p>
+                  </div>
+                  <div className='inp-sea-cont'>
+                    <p className='inp-p-t'>Oficios</p>
                   </div>
                 </div>
-              </div>
-              <div className='div-f2'>
-                <div style={{ width: '99%' }}>
-                  <div>
-                    <p className='p-label'>Numero de Comprobantes</p>
+                <div className='head-search'>
+                  <div className='inp-sea-cont'>
                     <input
-                      style={{ width: '100%' }}
+                      style={{ width: '85%' }}
                       className='field'
-                      id='numCompro'
-                      name='numCompro'
-                      onChange={this.onChange}
+                      name='searchF'
+                      value={this.state.searchF}
+                      onChange={this.handleChange.bind(this)}
+                    />
+                  </div>
+                  <div className='cont-w-data'>
+                    {this.state.fondos.map(fondos =>
+                      <div className='cont-map-fondo'>
+                        {parseInt(this.state.searchF, 10) === fondos.fondo &&
+                          <div className='cont-map-data'>
+                            <div className='data-w-search'>
+                              <p className='data-m-f'>{fondos.tipo_doc}</p>
+                            </div>
+                            <div className='editar-option'>
+                              <CurrencyFormat
+                                value={fondos.importe}
+                                displayType='text'
+                                prefix=' $ '
+                                thousandSeparator
+                                decimalSeparator='.'
+                              />
+                            </div>
+                            <div className='data-w-search'>
+                              <p className='data-m-f'>{fondos.realizo}</p>
+                            </div>
+                            <div className='data-w-search'>
+                              <Link className='data-m-f' to={`/FondoE/${fondos.key}`}>Editar</Link>
+                            </div>
+                            <div className='data-w-search'>
+                              <Link className='data-m-f' to={`/Comprometidos/${fondos.key}`}>Editar</Link>
+                            </div>
+                            <div className='data-w-search'>
+                              <Link className='data-m-f' to={`/fondoEditable/${fondos.key}`}>Imprimir</Link>
+                            </div>
+                          </div>
+                        }
+                      </div>
+                    )}
+                  </div>
+                </div>
+              </Paper>
+            </Grid>
+            <Grid className='grid-w2'>
+              <Paper className='paper-pm'>
+                <div className='div-con-f'>Fondos</div>
+                <div className='div-f2'>
+                  <div className='div-con'>
+                    <p className='p-label'>Fondo</p>
+                    <input
+                      className='field'
+                      value={this.state.fondo}
+                      name='fondo'
+                      ref='fondo'
                       required
-                      ref='numCompro'
+                    />
+                  </div>
+                  <div className='div-con'>
+                    <p className='p-label'>Fecha</p>
+                    <input
+                      className='field'
+                      required
+                      value={fecha}
                     />
                   </div>
                 </div>
-              </div>
-            </Paper>
+                <div className='div-f2'>
+                  <div className='div-con'>
+                    <p className='p-label'>Tipo de Documento</p>
+                    {(realizo === 'MIGUEL' || realizo === 'ELOY' || realizo === 'TERESA' || realizo === 'MARTHA') &&
+                      <select
+                        className='select-f'
+                        value={tipo_doc}
+                        onChange={this.onChange}
+                        name='tipo_doc'
+                        required
+                      >
+                        {this.tipo_doc.map((x,y) =>
+                          <option name={y}>{x}</option>
+                        )}
+                      </select>
+                    }
+                    {(realizo === 'MARCOS') &&
+                      <select
+                        className='select-f'
+                        value={tipo_doc}
+                        onChange={this.onChange}
+                        name='tipo_doc'
+                        required
+                      >
+                        {this.tipo_doc4.map((x,y) =>
+                          <option name={y}>{x}</option>
+                        )}
+                      </select>
+                    }
+                    {(realizo === 'KARINA' || realizo === 'LILIA' || realizo === 'CENELY' || realizo === 'HECTOR' || realizo === 'OMAR') &&
+                      <select
+                        className='select-f'
+                        value={tipo_doc}
+                        onChange={this.onChange}
+                        name='tipo_doc'
+                        required
+                      >
+                        {this.tipo_doc3.map((x,y) =>
+                          <option name={y}>{x}</option>
+                        )}
+                      </select>
+                    }
+                  </div>
+                  <div className='div-con'>
+                    <p className='p-label'>Oficio de Autorización</p>
+                    <select
+                      className='select-f'
+                      value={oficio_aut}
+                      onChange={this.onChange}
+                      name='oficio_aut'
+                      required
+                    >
+                    {newArray.map(data =>
+                      <option name={data}>{data.of}</option>
+                    )}
+                    </select>
+                  </div>
+                </div>
+                <div className='div-f2'>
+                  <div className='div-con'>
+                    <p className='p-label'>Numero de Oficio</p>
+                    <input
+                      className='field'
+                      name='no_oficio'
+                      onChange={this.onChange}
+                      required
+                      ref='no_oficio'
+                    />
+                  </div>
+                  <div className='div-con'>
+                    <TextField
+                      label='Importe'
+                      value={importe}
+                      onChange={this.onChange}
+                      id='importe'
+                      name='importe'
+                      InputProps={{
+                        inputComponent: NumberFormatCustom
+                      }}
+                      required
+                      ref={importe => this.inputImporte = importe}
+                    />
+                  </div>
+                </div>
+                <div className='div-f2'>
+                  <div className='div-con'>
+                    <p className='p-label'>Importe Letra</p>
+                    <input
+                      className='field'
+                      name='no_oficio'
+                      onChange={this.onChange}
+                      value={(NumberAsString(importe))}
+                      required
+                      ref='no_oficio'
+                    />
+                  </div>
+                  {tipo_doc === 'Fondo Revolvente' ?
+                    <div className='div-con'>
+                      <p className='p-label'>Beneficiario</p>
+                      <select
+                        className='select-f'
+                        value={beneficiario}
+                        onChange={this.onChange}
+                        name='beneficiario'
+                      >
+                        {this.beneficiario2.map((x,y) =>
+                          <option name={y}>{x}</option>
+                        )}
+                      </select>
+                    </div>
+                    :
+                    <div className='div-con'>
+                      <p className='p-label'>Beneficiario</p>
+                      <select
+                        className='select-f'
+                        value={beneficiario}
+                        onChange={this.onChange}
+                        name='beneficiario'
+                      >
+                        {this.state.baneficiarioc.map(data =>
+                          <option name={data}>{data.nombre}</option>
+                        )}
+                      </select>
+                    </div>
+                  }
+                </div>
+                <div className='div-f2'>
+                  <div className='div-con'>
+                    <p className='p-label'>Descripción</p>
+                    <input
+                      className='field'
+                      id='desc'
+                      name='desc'
+                      onChange={this.onChange}
+                      required
+                      ref='desc'
+                    />
+                  </div>
+                  {realizo === 'MIGUEL' &&
+                    <div className='add-bene'>
+                      <div className='content-bf'>
+                        <p className='p-label'>Agregar Beneficiario</p>
+                        <input
+                          className='field'
+                          id='nombre'
+                          name='nombre'
+                          onChange={this.onChange}
+                          value={this.state.nombre}
+                        />
+                      </div>
+                      <button className='btn-add-bf' onClick={this.sendName.bind(this)}>
+                          +
+                      </button>
+                    </div>
+                  }
+                </div>
+                <div className='div-f2'>
+                  <div className='fondo-w-c'>
+                    <div>
+                      <FormControl className='fondo-w-c'>
+                        <InputLabel>Proyecto</InputLabel>
+                        <Select
+                          style={{ height: 'auto' }}
+                          multiple
+                          value={no_proyecto}
+                          onChange={this.onChange}
+                          name='no_proyecto'
+                          input={<Input id='select-multiple-chip' />}
+                          renderValue={(selected) => (
+                            <div>
+                              {selected.map((value) => (
+                                <Chip key={value} label={value} style={{ display: 'flex', flexWrap: 'wrap' }}/>
+                              ))}
+                            </div>
+                          )}
+                          MenuProps={MenuProps}
+                        >
+                          {this.no_proyecto.map((name) => (
+                            <MenuItem key={name} value={name}>
+                              {name}
+                            </MenuItem>
+                          ))}
+                        </Select>
+                      </FormControl>
+                    </div>
+                  </div>
+                </div>
+                <div className='div-f2'>
+                  <div style={{ width: '99%' }}>
+                    <div>
+                      <p className='p-label'>Numero de Comprobantes</p>
+                      <input
+                        style={{ width: '100%' }}
+                        className='field'
+                        id='numCompro'
+                        name='numCompro'
+                        onChange={this.onChange}
+                        required
+                        ref='numCompro'
+                      />
+                    </div>
+                  </div>
+                </div>
+              </Paper>
+            </Grid>
+            {(realizo === 'MIGUEL' || realizo === 'TERESA' || realizo === 'MARCOS' || realizo === 'ELOY' || realizo === 'MARTHA') &&
+            <Grid className='grid2-cont'>
+              <Paper className='paper-p'>
+                <div className='div-con-f'>Licitación</div>
+                <div className='div-f2'>
+                  <div className='div-con'>
+                    <p className='p-label'>Numero de Licitación</p>
+                    <input
+                      className='field'
+                      id='no_lici'
+                      name='no_lici'
+                      onChange={this.onChange}
+                      ref='no_lici'
+                    />
+                  </div>
+                  <div className='div-con'>
+                    <p className='p-label'>Requisición</p>
+                    <input
+                      className='field'
+                      id='requisicion'
+                      name='requisicion'
+                      onChange={this.onChange}
+                      ref='requisicion'
+                    />
+                  </div>
+                </div>
+                <div className='div-f2'>
+                  <div className='div-con'>
+                    <p className='p-label'>Pedido</p>
+                    <input
+                      className='field'
+                      id='pedido'
+                      name='pedido'
+                      onChange={this.onChange}
+                      ref='pedido'
+                    />
+                  </div>
+                  <div className='div-con'>
+                    <p className='p-label'>Poliza</p>
+                    <input
+                      className='field'
+                      id='poliza'
+                      name='poliza'
+                      onChange={this.onChange}
+                      ref='poliza'
+                    />
+                  </div>
+                </div>
+              </Paper>
+              <Paper className='paper-pm'>
+                <div className='div-con-f'>Pago CFE</div>
+                <div className='div-f2'>
+                  <div className='div-con'>
+                    <p className='p-label'>Cta CFE</p>
+                    <input
+                      className='field'
+                      id='cfe'
+                      name='cfe'
+                      onChange={this.onChange}
+                      ref='cfe'
+                    />
+                  </div>
+                  <div className='div-con'>
+                    <p className='p-label'>Numero de Servicio CFE</p>
+                    <input
+                      className='field'
+                      id='nscfe'
+                      name='nscfe'
+                      onChange={this.onChange}
+                      ref='nscfe'
+                    />
+                  </div>
+                </div>
+                <div className='div-cfe' style={{ width: '100%' }}>
+                  <p className='p-label'>Observaciones</p>
+                  <textarea
+                    className='field'
+                    id='observaciones'
+                    name='observaciones'
+                    onChange={this.onChange}
+                    ref='observaciones'
+                  />
+                </div>
+              </Paper>
+            </Grid>}
           </Grid>
-          {(realizo === 'MIGUEL' || realizo === 'TERESA' || realizo === 'MARCOS' || realizo === 'ELOY' || realizo === 'MARTHA') &&
-          <Grid className='grid2-cont'>
-            <Paper className='paper-p'>
-              <div className='div-con-f'>Licitación</div>
-              <div className='div-f2'>
-                <div className='div-con'>
-                  <p className='p-label'>Numero de Licitación</p>
-                  <input
-                    className='field'
-                    id='no_lici'
-                    name='no_lici'
-                    onChange={this.onChange}
-                    ref='no_lici'
-                  />
-                </div>
-                <div className='div-con'>
-                  <p className='p-label'>Requisición</p>
-                  <input
-                    className='field'
-                    id='requisicion'
-                    name='requisicion'
-                    onChange={this.onChange}
-                    ref='requisicion'
-                  />
-                </div>
-              </div>
-              <div className='div-f2'>
-                <div className='div-con'>
-                  <p className='p-label'>Pedido</p>
-                  <input
-                    className='field'
-                    id='pedido'
-                    name='pedido'
-                    onChange={this.onChange}
-                    ref='pedido'
-                  />
-                </div>
-                <div className='div-con'>
-                  <p className='p-label'>Poliza</p>
-                  <input
-                    className='field'
-                    id='poliza'
-                    name='poliza'
-                    onChange={this.onChange}
-                    ref='poliza'
-                  />
-                </div>
-              </div>
-            </Paper>
-            <Paper className='paper-pm'>
-              <div className='div-con-f'>Pago CFE</div>
-              <div className='div-f2'>
-                <div className='div-con'>
-                  <p className='p-label'>Cta CFE</p>
-                  <input
-                    className='field'
-                    id='cfe'
-                    name='cfe'
-                    onChange={this.onChange}
-                    ref='cfe'
-                  />
-                </div>
-                <div className='div-con'>
-                  <p className='p-label'>Numero de Servicio CFE</p>
-                  <input
-                    className='field'
-                    id='nscfe'
-                    name='nscfe'
-                    onChange={this.onChange}
-                    ref='nscfe'
-                  />
-                </div>
-              </div>
-              <div className='div-cfe' className='fondo-w-c'>
-                <p className='p-label'>Observaciones</p>
-                <textarea
-                  className='field'
-                  id='observaciones'
-                  name='observaciones'
-                  onChange={this.onChange}
-                  ref='observaciones'
-                />
-              </div>
-            </Paper>
-          </Grid>}
-        </Grid>
-        <div className='div-content-fab'>
-          <Fab color='primary' aria-label='add' style={{ background: 'green' }} type='submit'>
-            <CheckIcon />
-          </Fab>
-        </div>
-      </form>
+          <div className='div-content-fab'>
+            <Fab color='primary' aria-label='add' style={{ background: 'green' }} type='submit'>
+              <CheckIcon />
+            </Fab>
+          </div>
+        </form>
       </div>
     )
   }
@@ -794,7 +793,6 @@ export default class Fondos extends Component {
 
 function TextMaskCustom(props) {
   const { inputRef, ...other } = props
-
   return (
     <MaskedInput
       {...other}
@@ -814,7 +812,6 @@ TextMaskCustom.propTypes = {
 
 function NumberFormatCustom(props) {
   const { inputRef, onChange, ...other } = props
-
   return (
     <NumberFormat
       {...other}

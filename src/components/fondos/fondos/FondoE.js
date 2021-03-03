@@ -102,7 +102,7 @@ export default class FondoE extends Component {
           name: 'prueba',
           done: false
         }
-      ],
+      ]
     }
   }
 
@@ -139,6 +139,36 @@ export default class FondoE extends Component {
     'A1D11, Centralizada'
   ]
 
+  listenForItems = (itemsRef) => {
+    itemsRef.on('value', (snap) => {
+      var baneficiarioc = []
+      snap.forEach((child) => {
+        baneficiarioc.push({
+          nombre: child.val().nombre,
+          id: child.key
+        })
+      })
+      this.setState({
+        baneficiarioc: baneficiarioc
+      })
+    })
+  }
+
+  listenForItemsP = (itemsRefPre) => {
+    itemsRefPre.on('value', (snap) => {
+      var oficio = []
+      snap.forEach((child) => {
+        oficio.push({
+          of: child.val().of,
+          id: child.key
+        })
+      })
+      this.setState({
+        oficio: oficio
+      })
+    })
+  }
+
   componentDidMount() {
     const ref = firebase.firestore().collection('fondos').doc(this.props.match.params.id)
     ref.get().then((doc) => {
@@ -169,6 +199,10 @@ export default class FondoE extends Component {
         console.log('No such document!')
       }
     })
+    const itemsRef = firebase.database().ref('beneficiario/')
+    this.listenForItems(itemsRef)
+    const itemsRefPre = firebase.database().ref('presupuesto/')
+    this.listenForItemsP(itemsRefPre)
   }
 
   onChange = (e) => {
@@ -229,7 +263,7 @@ export default class FondoE extends Component {
   }
 
   render() {
-    const { tipo_doc, oficio_aut, importe, beneficiario, no_proyecto, realizo, fecha } = this.state
+    const { tipo_doc, oficio_aut, importe, beneficiario, no_proyecto, realizo, fecha, no_oficio, desc, numCompro } = this.state
     const newArray = ['']
     const myObj = {}
 
@@ -242,312 +276,333 @@ export default class FondoE extends Component {
     this.state.numfondo = String(this.state.fondo)
 
     return (
-      <form className='form-fondo' onSubmit={this.onSubmit}>
-        <Grid className='grid-w'>
-          <Grid className='grid-w2'>
-            <Paper className='paper-pm'>
-              <div className='div-con-f'>Fondos</div>
-              <div className='div-f2'>
-                <div className='div-con'>
-                  <p className='p-label'>Fondo</p>
-                  <input
-                    className='field'
-                    value={this.state.fondo}
-                    name='fondo'
-                    ref='fondo'
-                    required
-                  />
-                </div>
-                <div className='div-con'>
-                  <p className='p-label'>Fecha</p>
-                  <input
-                    className='field'
-                    required
-                    value={this.state.fecha}
-                  />
-                </div>
-              </div>
-              <div className='div-f2'>
-                <div className='div-con'>
-                  <p className='p-label'>Tipo de Documento</p>
-                  {(realizo === 'MIGUEL' || realizo === 'ADMIN') &&
-                    <select
-                      className='select-f'
-                      value={tipo_doc}
-                      onChange={this.onChange}
-                      name='tipo_doc'
+      <div>
+        <form className='form-fondo' onSubmit={this.onSubmit}>
+          <Grid className='grid-w'>
+            <Grid className='grid-w2'>
+              <Paper className='paper-pm'>
+                <div className='div-con-f'>Fondos</div>
+                <div className='div-f2'>
+                  <div className='div-con'>
+                    <p className='p-label'>Fondo</p>
+                    <input
+                      className='field'
+                      value={this.state.fondo}
+                      name='fondo'
+                      ref='fondo'
                       required
-                    >
-                      {this.tipo_doc.map((x,y) =>
-                        <option name={y}>{x}</option>
-                      )}
-                    </select>
-                  }
-                  {realizo === 'ELOY' &&
-                    <select
-                      className='select-f'
-                      value={tipo_doc}
-                      onChange={this.onChange}
-                      name='tipo_doc'
+                    />
+                  </div>
+                  <div className='div-con'>
+                    <p className='p-label'>Fecha</p>
+                    <input
+                      className='field'
                       required
-                    >
-                      {this.tipo_doc2.map((x,y) =>
-                        <option name={y}>{x}</option>
-                      )}
-                    </select>
-                  }
-                  {(realizo === 'TERESA' || realizo === 'MARTHA' || realizo === 'ELOY' || realizo === 'MARCOS') &&
-                    <select
-                      className='select-f'
-                      value={tipo_doc}
-                      onChange={this.onChange}
-                      name='tipo_doc'
-                      required
-                    >
-                      {this.tipo_doc4.map((x,y) =>
-                        <option name={y}>{x}</option>
-                      )}
-                    </select>
-                  }
-                  {(realizo === 'KARINA' || realizo === 'LILIA' || realizo === 'CENELY' || realizo === 'HECTOR' || realizo === 'OMAR') &&
-                    <select
-                      className='select-f'
-                      value={tipo_doc}
-                      onChange={this.onChange}
-                      name='tipo_doc'
-                      required
-                    >
-                      {this.tipo_doc3.map((x,y) =>
-                        <option name={y}>{x}</option>
-                      )}
-                    </select>
-                  }
-                </div>
-                <div className='div-con'>
-                  <p className='p-label'>Oficio de Autorización</p>
-                  <select
-                    className='select-f'
-                    value={oficio_aut}
-                    onChange={this.onChange}
-                    name='oficio_aut'
-                    required
-                  >
-                    {this.oficio_aut.map((x,y) =>
-                      <option name={y}>{x}</option>
-                    )}
-                  </select>
-                </div>
-              </div>
-              <div className='div-f2'>
-                <div className='div-con'>
-                  <p className='p-label'>Numero de Oficio</p>
-                  <input
-                    className='field'
-                    name='no_oficio'
-                    onChange={this.onChange}
-                    required
-                    ref='no_oficio'
-                    value={this.state.no_oficio}
-                  />
-                </div>
-                <div className='div-con'>
-                  <TextField
-                    label='Importe'
-                    value={importe}
-                    onChange={this.onChange}
-                    id='importe'
-                    name='importe'
-                    InputProps={{
-                      inputComponent: NumberFormatCustom
-                    }}
-                    required
-                    ref={importe => this.inputImporte = importe}
-                  />
-                </div>
-              </div>
-              <div className='div-f2'>
-                <div className='div-con'>
-                  <p className='p-label'>Importe Letra</p>
-                  <input
-                    className='field'
-                    name='no_oficio'
-                    onChange={this.onChange}
-                    value={(NumberAsString(importe))}
-                    required
-                    ref='no_oficio'
-                  />
-                </div>
-                <div className='div-con'>
-                  <p className='p-label'>Beneficiario</p>
-                  <select
-                    className='select-f'
-                    value={this.state.beneficiario}
-                    onChange={this.onChange}
-                    name='beneficiario'
-                  >
-                    {this.beneficiario.map((x,y) =>
-                      <option name={y}>{x}</option>
-                    )}
-                  </select>
-                </div>
-              </div>
-              <div className='div-f2'>
-                <div className='div-con'>
-                  <p className='p-label'>Descripción</p>
-                  <input
-                    className='field'
-                    id='desc'
-                    name='desc'
-                    onChange={this.onChange}
-                    required
-                    value={this.state.desc}
-                    ref='desc'
-                  />
-                </div>
-                <div className='div-con'>
-                  <p className='p-label'>Beneficiario</p>
-                  <input
-                    className='field'
-                    id='beneficiario'
-                    name='beneficiario'
-                    onChange={this.onChange}
-                    required
-                    value={this.state.beneficiario}
-                    ref='beneficiario'
-                  />
-                </div>
-              </div>
-              <div className='div-f2'>
-                <div style={{ width: '100%' }}>
-                  <div>
-                    <FormControl style={{ width: '100%' }}>
-                      <InputLabel>Proyecto</InputLabel>
-                      <Select
-                        style={{ height: 'auto' }}
-                        value={no_proyecto}
-                        onChange={this.onChange}
-                        name='no_proyecto'
-                        input={<Input id='select-multiple-chip' />}
-                        renderValue={(selected) => (
-                          <div>
-                            {selected.map((value) => (
-                              <Chip key={value} label={value} style={{ display: 'flex', flexWrap: 'wrap' }}/>
-                            ))}
-                          </div>
-                        )}
-                        MenuProps={MenuProps}
-                      >
-                        {this.no_proyecto.map((name) => (
-                          <MenuItem key={name} value={name}>
-                            {name}
-                          </MenuItem>
-                        ))}
-                      </Select>
-                    </FormControl>
+                      value={fecha}
+                    />
                   </div>
                 </div>
-              </div>
-            </Paper>
+                <div className='div-f2'>
+                  <div className='div-con'>
+                    <p className='p-label'>Tipo de Documento</p>
+                    {(realizo === 'MIGUEL' || realizo === 'ELOY' || realizo === 'TERESA' || realizo === 'MARTHA') &&
+                      <select
+                        className='select-f'
+                        value={tipo_doc}
+                        onChange={this.onChange}
+                        name='tipo_doc'
+                        required
+                      >
+                        {this.tipo_doc.map((x,y) =>
+                          <option name={y}>{x}</option>
+                        )}
+                      </select>
+                    }
+                    {(realizo === 'MARCOS') &&
+                      <select
+                        className='select-f'
+                        value={tipo_doc}
+                        onChange={this.onChange}
+                        name='tipo_doc'
+                        required
+                      >
+                        {this.tipo_doc4.map((x,y) =>
+                          <option name={y}>{x}</option>
+                        )}
+                      </select>
+                    }
+                    {(realizo === 'KARINA' || realizo === 'LILIA' || realizo === 'CENELY' || realizo === 'HECTOR' || realizo === 'OMAR') &&
+                      <select
+                        className='select-f'
+                        value={tipo_doc}
+                        onChange={this.onChange}
+                        name='tipo_doc'
+                        required
+                      >
+                        {this.tipo_doc3.map((x,y) =>
+                          <option name={y}>{x}</option>
+                        )}
+                      </select>
+                    }
+                  </div>
+                  <div className='div-con'>
+                    <p className='p-label'>Oficio de Autorización</p>
+                    <select
+                      className='select-f'
+                      value={oficio_aut}
+                      onChange={this.onChange}
+                      name='oficio_aut'
+                      required
+                    >
+                    {newArray.map(data =>
+                      <option name={data}>{data.of}</option>
+                    )}
+                    </select>
+                  </div>
+                </div>
+                <div className='div-f2'>
+                  <div className='div-con'>
+                    <p className='p-label'>Numero de Oficio</p>
+                    <input
+                      className='field'
+                      name='no_oficio'
+                      onChange={this.onChange}
+                      required
+                      value={no_oficio}
+                      ref='no_oficio'
+                    />
+                  </div>
+                  <div className='div-con'>
+                    <TextField
+                      label='Importe'
+                      value={importe}
+                      onChange={this.onChange}
+                      id='importe'
+                      name='importe'
+                      InputProps={{
+                        inputComponent: NumberFormatCustom
+                      }}
+                      required
+                      ref={importe => this.inputImporte = importe}
+                    />
+                  </div>
+                </div>
+                <div className='div-f2'>
+                  <div className='div-con'>
+                    <p className='p-label'>Importe Letra</p>
+                    <input
+                      className='field'
+                      name='no_oficio'
+                      onChange={this.onChange}
+                      value={(NumberAsString(importe))}
+                      required
+                      ref='no_oficio'
+                    />
+                  </div>
+                  {tipo_doc === 'Fondo Revolvente' ?
+                    <div className='div-con'>
+                      <p className='p-label'>Beneficiario</p>
+                      <select
+                        className='select-f'
+                        value={beneficiario}
+                        onChange={this.onChange}
+                        name='beneficiario'
+                      >
+                        {this.beneficiario2.map((x,y) =>
+                          <option name={y}>{x}</option>
+                        )}
+                      </select>
+                    </div>
+                    :
+                    <div className='div-con'>
+                      <p className='p-label'>Beneficiario</p>
+                      <select
+                        className='select-f'
+                        value={beneficiario}
+                        onChange={this.onChange}
+                        name='beneficiario'
+                      >
+                        {this.state.baneficiarioc.map(data =>
+                          <option name={data}>{data.nombre}</option>
+                        )}
+                      </select>
+                    </div>
+                  }
+                </div>
+                <div className='div-f2'>
+                  <div className='div-con'>
+                    <p className='p-label'>Descripción</p>
+                    <input
+                      className='field'
+                      id='desc'
+                      name='desc'
+                      onChange={this.onChange}
+                      required
+                      ref='desc'
+                      value={desc}
+                    />
+                  </div>
+                  {/*realizo === 'MIGUEL' &&
+                    <div className='add-bene'>
+                      <div className='content-bf'>
+                        <p className='p-label'>Agregar Beneficiario</p>
+                        <input
+                          className='field'
+                          id='nombre'
+                          name='nombre'
+                          onChange={this.onChange}
+                          value={this.state.nombre}
+                        />
+                      </div>
+                      <button className='btn-add-bf' onClick={this.sendName.bind(this)}>
+                          +
+                      </button>
+                    </div>
+                  */}
+                </div>
+                <div className='div-f2'>
+                  <div className='fondo-w-c'>
+                    <div>
+                      <FormControl className='fondo-w-c'>
+                        <InputLabel>Proyecto</InputLabel>
+                        <Select
+                          style={{ height: 'auto' }}
+                          multiple
+                          value={no_proyecto}
+                          onChange={this.onChange}
+                          name='no_proyecto'
+                          input={<Input id='select-multiple-chip' />}
+                          renderValue={(selected) => (
+                            <div>
+                              {selected.map((value) => (
+                                <Chip key={value} label={value} style={{ display: 'flex', flexWrap: 'wrap' }}/>
+                              ))}
+                            </div>
+                          )}
+                          MenuProps={MenuProps}
+                        >
+                          {this.no_proyecto.map((name) => (
+                            <MenuItem key={name} value={name}>
+                              {name}
+                            </MenuItem>
+                          ))}
+                        </Select>
+                      </FormControl>
+                    </div>
+                  </div>
+                </div>
+                <div className='div-f2'>
+                  <div style={{ width: '99%' }}>
+                    <div>
+                      <p className='p-label'>Numero de Comprobantes</p>
+                      <input
+                        style={{ width: '100%' }}
+                        className='field'
+                        id='numCompro'
+                        name='numCompro'
+                        onChange={this.onChange}
+                        required
+                        value={numCompro}
+                        ref='numCompro'
+                      />
+                    </div>
+                  </div>
+                </div>
+              </Paper>
+            </Grid>
+            {(realizo === 'MIGUEL' || realizo === 'TERESA' || realizo === 'MARCOS' || realizo === 'ELOY' || realizo === 'MARTHA') &&
+            <Grid className='grid2-cont'>
+              <Paper className='paper-p'>
+                <div className='div-con-f'>Licitación</div>
+                <div className='div-f2'>
+                  <div className='div-con'>
+                    <p className='p-label'>Numero de Licitación</p>
+                    <input
+                      className='field'
+                      id='no_lici'
+                      name='no_lici'
+                      onChange={this.onChange}
+                      ref='no_lici'
+                    />
+                  </div>
+                  <div className='div-con'>
+                    <p className='p-label'>Requisición</p>
+                    <input
+                      className='field'
+                      id='requisicion'
+                      name='requisicion'
+                      onChange={this.onChange}
+                      ref='requisicion'
+                    />
+                  </div>
+                </div>
+                <div className='div-f2'>
+                  <div className='div-con'>
+                    <p className='p-label'>Pedido</p>
+                    <input
+                      className='field'
+                      id='pedido'
+                      name='pedido'
+                      onChange={this.onChange}
+                      ref='pedido'
+                    />
+                  </div>
+                  <div className='div-con'>
+                    <p className='p-label'>Poliza</p>
+                    <input
+                      className='field'
+                      id='poliza'
+                      name='poliza'
+                      onChange={this.onChange}
+                      ref='poliza'
+                    />
+                  </div>
+                </div>
+              </Paper>
+              <Paper className='paper-pm'>
+                <div className='div-con-f'>Pago CFE</div>
+                <div className='div-f2'>
+                  <div className='div-con'>
+                    <p className='p-label'>Cta CFE</p>
+                    <input
+                      className='field'
+                      id='cfe'
+                      name='cfe'
+                      onChange={this.onChange}
+                      ref='cfe'
+                    />
+                  </div>
+                  <div className='div-con'>
+                    <p className='p-label'>Numero de Servicio CFE</p>
+                    <input
+                      className='field'
+                      id='nscfe'
+                      name='nscfe'
+                      onChange={this.onChange}
+                      ref='nscfe'
+                    />
+                  </div>
+                </div>
+                <div className='div-cfe' style={{ width: '100%' }}>
+                  <p className='p-label'>Observaciones</p>
+                  <textarea
+                    className='field'
+                    id='observaciones'
+                    name='observaciones'
+                    onChange={this.onChange}
+                    ref='observaciones'
+                  />
+                </div>
+              </Paper>
+            </Grid>}
           </Grid>
-          {(realizo === 'MIGUEL' || realizo === 'TERESA' || realizo === 'MARCOS' || realizo === 'ELOY') &&
-          <Grid className='grid2-cont'>
-            <Paper className='paper-p'>
-              <div className='div-con-f'>Licitación</div>
-              <div className='div-f2'>
-                <div className='div-con'>
-                  <p className='p-label'>Numero de Licitación</p>
-                  <input
-                    className='field'
-                    id='no_lici'
-                    name='no_lici'
-                    onChange={this.onChange}
-                    ref='no_lici'
-                    value={this.state.no_lici}
-                  />
-                </div>
-                <div className='div-con'>
-                  <p className='p-label'>Requisición</p>
-                  <input
-                    className='field'
-                    id='requisicion'
-                    name='requisicion'
-                    onChange={this.onChange}
-                    ref='requisicion'
-                    value={this.state.requisicion}
-                  />
-                </div>
-              </div>
-              <div className='div-f2'>
-                <div className='div-con'>
-                  <p className='p-label'>Pedido</p>
-                  <input
-                    className='field'
-                    id='pedido'
-                    name='pedido'
-                    onChange={this.onChange}
-                    value={this.state.pedido}
-                    ref='pedido'
-                  />
-                </div>
-                <div className='div-con'>
-                  <p className='p-label'>Poliza</p>
-                  <input
-                    className='field'
-                    id='poliza'
-                    name='poliza'
-                    value={this.state.poliza}
-                    onChange={this.onChange}
-                    ref='poliza'
-                  />
-                </div>
-              </div>
-            </Paper>
-            <Paper className='paper-pm'>
-              <div className='div-con-f'>Pago CFE</div>
-              <div className='div-f2'>
-                <div className='div-con'>
-                  <p className='p-label'>Cta CFE</p>
-                  <input
-                    className='field'
-                    id='cfe'
-                    name='cfe'
-                    onChange={this.onChange}
-                    value={this.state.cfe}
-                    ref='cfe'
-                  />
-                </div>
-                <div className='div-con'>
-                  <p className='p-label'>Numero de Servicio CFE</p>
-                  <input
-                    className='field'
-                    id='nscfe'
-                    name='nscfe'
-                    value={this.state.nscfe}
-                    onChange={this.onChange}
-                    ref='nscfe'
-                  />
-                </div>
-              </div>
-              <div className='div-cfe' style={{ width: '100%' }}>
-                <p className='p-label'>Observaciones</p>
-                <textarea
-                  className='field'
-                  id='observaciones'
-                  name='observaciones'
-                  onChange={this.onChange}
-                  value={this.state.observaciones}
-                  ref='observaciones'
-                />
-              </div>
-            </Paper>
-          </Grid>}
-        </Grid>
-        <div className='div-content-fab'>
-          <Fab color='primary' aria-label='add' style={{ background: 'green' }} type='submit'>
-            <CheckIcon />
-          </Fab>
-        </div>
-      </form>
+          <div className='div-content-fab'>
+            <Fab color='primary' aria-label='add' style={{ background: 'green' }} type='submit'>
+              <CheckIcon />
+            </Fab>
+          </div>
+        </form>
+      </div>
     )
   }
 }
