@@ -61,7 +61,8 @@ export default class NewComprometidos extends Component {
       ivar: 0,
       isrr: 0,
       show: true,
-      idP: ''
+      idP: '',
+      ids: ''
     }
   }
 
@@ -85,6 +86,7 @@ export default class NewComprometidos extends Component {
           s: child.val().s,
           prog: child.val().prog,
           sp: child.val().sp,
+          min: child.val().min,
           obj: child.val().obj,
           proy: child.val().proy,
           est: child.val().est,
@@ -141,12 +143,32 @@ export default class NewComprometidos extends Component {
     })
   }
 
-  componentDidMount () {
-    firebase.database().ref('xml/').on('child_added', snapshot => {
+  listenForXml = (itemsRefXml) => {
+    itemsRefXml.on('value', (snap) => {
+      var xml = []
+      snap.forEach((child) => {
+        xml.push({
+          nombre: child.val().nombre,
+          fecha: child.val().fecha,
+          folio: child.val().folio,
+          importe: child.val().importe,
+          isr: child.val().isr,
+          iva: child.val().iva,
+          subtotal: child.val().subtotal,
+          total: child.val().total,
+          uuid: child.val().uuid,
+          id: child.key
+        })
+      })
       this.setState({
-        xml: this.state.xml.concat(snapshot.val())
+        xml: xml
       })
     })
+  }
+
+  componentDidMount () {
+    const itemsRefXml = firebase.database().ref('xml/')
+    this.listenForXml(itemsRefXml)
     const itemsRef = firebase.database().ref('presupuesto/')
     this.listenForItems(itemsRef)
     const ref = firebase.firestore().collection('fondos').doc(this.props.match.params.id)
@@ -337,12 +359,11 @@ export default class NewComprometidos extends Component {
       transferencia: item.transferencia
     }
     firebase.database().ref().update(updates)
-    const { municipio, area, total, fecha, iva, isr, importe } = this.state
+    const { area, total, fecha, iva, isr, importe } = this.state
     const updateRef = firebase.firestore().collection('fondos').doc(this.props.match.params.id).collection('comprometidos').doc()
     updateRef.set({
       partida: item.ogasto,
       presupuestal: item.up,
-      municipio: municipio,
       area: area,
       fecha: fecha,
       importe_comp: importe,
@@ -367,16 +388,37 @@ export default class NewComprometidos extends Component {
       proy: item.proy,
       est: item.est,
       ben: item.ben,
-      eg: item.eg
+      eg: item.eg,
+      comprobantes: this.state.contra
     }).then((docRef) => {
       this.setState({
         partida: '',
+        up: '',
+        rubro: '',
         presupuestal: '',
         municipio: '',
         area: '',
         importe_comp: ''
       })
     })
+    var changes = this.state.contra
+    var prueba = {}
+    changes.forEach((change) => {
+      prueba[change.id] =
+        {
+          nombre: change.nombre,
+          fecha: change.fecha,
+          folio: change.folio,
+          importe: change.importe,
+          isr: change.isr,
+          iva: change.iva,
+          subtotal: change.subtotal,
+          total: change.total,
+          uuid: change.uuid,
+          estatus: 'asignado'
+        }
+    })
+    firebase.database().ref('xml').update(prueba)
     .catch((error) => {
       console.error('Error: ', error)
     })
@@ -434,42 +476,6 @@ export default class NewComprometidos extends Component {
     this.setState({
       show: !this.state.show
     })
-  }
-
-  sendRecibo (e) {
-    e.preventDefault()
-    const params = {
-      importe: this.inputImporte.value,
-      iva: this.inputIva.value,
-      isr: this.inputIsr.value,
-      total: this.inputTotal.value,
-      fecha: this.inputFecha.value,
-      uuid: this.state.uuid,
-      subtotal: this.state.subtotal,
-      folio: this.state.folio,
-      nombre: this.inputNombre.value
-    }
-    this.setState({
-      importe: this.inputImporte.value,
-      iva: this.inputIva.value,
-      isr: this.inputIsr.value,
-      total: this.inputTotal.value,
-      fecha: this.inputFecha.value,
-      uuid: this.state.uuid,
-      subtotal: this.state.subtotal,
-      folio: this.state.folio,
-      nombre: this.inputNombre.value
-    })
-    if (params.importe && params.iva && params.isr && params.total && params.fecha) {
-      firebase.database().ref('xml').push(params).then(() => {
-        alert('Se ha agregado tu recibo')
-      }).catch(() => {
-        alert('Tu solicitud no puede ser enviada')
-      })
-      this.resetForm()
-    } else {
-      alert('Por favor llene el formulario')
-    }
   }
 
   render () {
@@ -610,7 +616,7 @@ export default class NewComprometidos extends Component {
                   <ListItemText className='list-align-i' primary={'$ ' + value.iva} />
                   <ListItemText className='list-align-i' primary={'$ ' + value.isr} />
                   <ListItemText className='list-align' primary={value.fecha} />
-                  <ListItemText className='list-align2' primary={value.Nombre} />
+                  <ListItemText className='list-align2' primary={value.nombre} />
                 </ListItem>
               )
             })}
@@ -647,7 +653,7 @@ export default class NewComprometidos extends Component {
                   <ListItemText className='list-align-i' primary={'$ ' + value.iva} />
                   <ListItemText className='list-align-i' primary={'$ ' + value.isr} />
                   <ListItemText className='list-align' primary={value.fecha} />
-                  <ListItemText className='list-align2' primary={value.Nombre} />
+                  <ListItemText className='list-align2' primary={value.nombre} />
                 </ListItem>
               )
             })}
@@ -659,7 +665,13 @@ export default class NewComprometidos extends Component {
     return (
       <div className='div-compro-container'>
         <div>
-          <Grid container spacing={1} justify='center' alignItems='center' style={{ display: 'flex', flexDirection: 'column', width: '100%' }}>
+          <Grid
+            container
+            spacing={1}
+            justify='center'
+            alignItems='center'
+            style={{ display: 'flex', flexDirection: 'column', width: '100%' }}
+          >
             <Grid item xs style={{ width: '100%' }}>
               {/* this.state.show ?
                 <div className='div-into-data'>
@@ -758,6 +770,9 @@ export default class NewComprometidos extends Component {
                   <TableCell className='border-table2'>
                     <b className='font-tb'>Rubro</b>
                   </TableCell>
+                  <TableCell className='border-table-area'>
+                    <b className='font-tb'>Area</b>
+                  </TableCell>
                   <TableCell className='border-table2'>
                     <b className='font-tb'>Importe</b>
                   </TableCell>
@@ -822,6 +837,20 @@ export default class NewComprometidos extends Component {
                     value={this.state.rubro}
                   >
                     {this.rubro.map((x,y) =>
+                      <option name={y}>{x}</option>
+                    )}
+                  </select>
+                </TableCell>
+                <TableCell className='border-table-area'>
+                  <select
+                    className='select-compro'
+                    name='area'
+                    ref='area'
+                    value={this.state.area}
+                    onChange={this.updateSearch5.bind(this)}
+                    required
+                  >
+                    {this.area.map((x,y) =>
                       <option name={y}>{x}</option>
                     )}
                   </select>
@@ -929,6 +958,11 @@ export default class NewComprometidos extends Component {
                   <TableCell className='border-table2'>
                     <div className='font-tb'>
                       {comprometidos.rubro}
+                    </div>
+                  </TableCell>
+                  <TableCell className='border-table-area'>
+                    <div className='font-tb'>
+                      {comprometidos.area}
                     </div>
                   </TableCell>
                   <TableCell className='border-table2'>

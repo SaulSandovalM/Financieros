@@ -63,10 +63,17 @@
   border-right-color: white;
   border-top: 0;
   text-align: center;
-  width: 14%;
+  width: 8%;
+}
+.border-table-area {
+  border-left: 0;
+  border-right-color: white;
+  border-top: 0;
+  text-align: center;
+  width: 42%;
 }
 .font-tb {
-  font-size: 16px;
+  font-size: 14px;
 }
 .select-compro {
   background: white;
@@ -90,9 +97,9 @@
   cursor: auto;
 }
 .card-compro {
+  background: white;
   height: 250px;
   overflow-y: scroll;
-  background: white;
 }
 .list-align {
   width: 15%;

@@ -74,12 +74,13 @@ export default class Valeslist extends Component {
           'total': xml.attributes['Total'],
           'subtotal': xml.attributes['SubTotal'] ? xml.attributes['SubTotal'] : 0,
           'folio': xml.attributes['Folio'] ? xml.attributes['Folio'] : '0',
-          'Nombre': xml.children['0'].attributes['Nombre'],
+          'nombre': xml.children['0'].attributes['Nombre'],
           'importe': xml.children['2'].children['0'].attributes['Importe'],
           'iva': xml.children['3'].attributes['TotalImpuestosTrasladados'],
           'isr': xml.children['3'].attributes['TotalImpuestosRetenidos'] ? xml.children['3'].attributes['TotalImpuestosRetenidos'] : 0,
           'fecha': xml.children['4'].children['0'].attributes['FechaTimbrado'],
           'uuid': xml.children['4'].children['0'].attributes['UUID'],
+          'estatus': 'sin asignar'
         }
         fetch(xml).then(res => res.text()).then(xml => {
           fetch('https://financieros-78cb0.firebaseio.com/xml.json', {
