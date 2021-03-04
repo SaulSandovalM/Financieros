@@ -157,6 +157,7 @@ export default class NewComprometidos extends Component {
           subtotal: child.val().subtotal,
           total: child.val().total,
           uuid: child.val().uuid,
+          estatus: child.val().estatus,
           id: child.key
         })
       })
@@ -552,7 +553,7 @@ export default class NewComprometidos extends Component {
 
     const filterData = this.state.xml.filter(
       (xml) => {
-        return xml.folio.indexOf(this.state.search) !== -1
+        return xml.folio.indexOf(this.state.search) !== -1 && xml.estatus !== 'asignado'
       }
     )
 
@@ -760,7 +761,6 @@ export default class NewComprometidos extends Component {
             <Paper className='paper-content'>
               <TableHead>
                 <TableRow>
-                  <TableCell className='border-icon' />
                   <TableCell className='border-table2'>
                     <b className='font-tb'>Partida</b>
                   </TableCell>
@@ -785,20 +785,10 @@ export default class NewComprometidos extends Component {
                   <TableCell className='border-table2'>
                     <b className='font-tb'>Total</b>
                   </TableCell>
+                  <TableCell className='border-icon' />
                 </TableRow>
               </TableHead>
               <TableBody className='table-row-c'>
-                {this.state.presupuesto.map(item =>
-                  <div>
-                    {this.state.partida === item.ogasto && this.state.up === item.up && this.state.rubro === item.rubro ?
-                      <TableCell className='border-icon' key={item.id} item={item}>
-                        <IconButton size='small' className='border-des' onClick={() => this.update(item)}>
-                          <AddIcon />
-                        </IconButton>
-                      </TableCell> : null
-                    }
-                  </div>
-                )}
                 <TableCell className='border-table2'>
                   <select
                     className='select-compro'
@@ -934,17 +924,20 @@ export default class NewComprometidos extends Component {
                     />
                   }
                 </TableCell>
+                {this.state.presupuesto.map(item =>
+                  <div>
+                    {this.state.partida === item.ogasto && this.state.up === item.up && this.state.rubro === item.rubro ?
+                      <TableCell className='border-icon' key={item.id} item={item}>
+                        <IconButton size='small' className='border-des' onClick={() => this.update(item)}>
+                          <AddIcon />
+                        </IconButton>
+                      </TableCell> : null
+                    }
+                  </div>
+                )}
               </TableBody>
               {this.state.comprometidos.map(comprometidos =>
                 <TableRow key={comprometidos.name} className='table-row-c'>
-                  <TableCell className='border-icon'>
-                    <IconButton size='small' className='border-des' onClick={this.toggleOpen.bind(this)}>
-                      {this.state.open ?
-                        <KeyboardArrowUpIcon className='key-style' /> :
-                        <KeyboardArrowDownIcon className='key-style' />
-                      }
-                    </IconButton>
-                  </TableCell>
                   <TableCell className='border-table2'>
                     <div className='font-tb'>
                       {comprometidos.partida}
@@ -1006,6 +999,14 @@ export default class NewComprometidos extends Component {
                       value={(comprometidos.importe_comp + comprometidos.iva + comprometidos.isr)}
                     />
                   </TableCell>
+                  <TableCell className='border-icon'>
+                    <IconButton size='small' className='border-des' onClick={this.toggleOpen.bind(this)}>
+                      {this.state.open ?
+                        <KeyboardArrowUpIcon className='key-style' /> :
+                        <KeyboardArrowDownIcon className='key-style' />
+                      }
+                    </IconButton>
+                  </TableCell>
                 </TableRow>
               )}
             </Paper>
@@ -1014,11 +1015,12 @@ export default class NewComprometidos extends Component {
         <div className='div-content-fab'>
           <Fab
             color='primary'
-            aria-label='add'
             style={{ background: 'green' }}
             onClick={this.cambio}
+            variant='extended'
           >
-            <CheckIcon />
+            <CheckIcon style={{ marginRight: '6px' }} />
+            Finalizar
           </Fab>
         </div>
       </div>
