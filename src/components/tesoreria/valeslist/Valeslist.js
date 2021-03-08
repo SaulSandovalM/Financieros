@@ -45,7 +45,7 @@ export default class Valeslist extends Component {
       filex: ['No hay datos cargados'],
       filefactura: [{ url: '', nombre: '' }],
       filef: [{ url: '', nombre: '' }],
-      recibosList: [{ folio: '', nombre: '', importe: '', iva: '', isr: '', fecha: '' }],
+      recibosList: [{ folio: '', nombre: '', importe: '', iva: '', isr: '', fecha: '', estatus: '' }],
       autorizados: false,
       noautorizados: false,
       pendientes: false,
@@ -212,6 +212,9 @@ export default class Valeslist extends Component {
       obs: this.state.obs
     }
     firebase.database().ref().update(updates)
+    let recibos = Object({}, this.state.recibosList)
+    this.state.recibosList.forEach(element => firebase.database().ref('xml').push(element))
+    //
     alert('Tu solicitud fue enviada.')
     this.resetForm()
   }
@@ -265,7 +268,7 @@ export default class Valeslist extends Component {
 
   handleAddClick = () => {
     this.setState({
-      recibosList: [...this.state.recibosList, { folio: '', nombre: '', importe: '', iva: '', isr: '', fecha: '' }]
+      recibosList: [...this.state.recibosList, { folio: '', nombre: '', importe: '', iva: '', isr: '', fecha: '', estatus: '' }]
     })
   }
 
