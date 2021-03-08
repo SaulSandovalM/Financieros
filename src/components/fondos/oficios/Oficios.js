@@ -18,7 +18,7 @@ export default class Oficios extends Component {
       comprometidos: [
         {
           id: 1,
-          name: 'preuba',
+          name: 'prueba',
           done: false
         }
       ],
@@ -151,9 +151,10 @@ export default class Oficios extends Component {
       totalImporte.push(comprometidos.importe_total)
     ))
     const reducer = (a, b) => a + b
+
     return (
       <div>
-        <div style={{ zIndex: '3', background: '#f4f4f4', width: '100%', position: 'absolute', height: '100vh' }}>
+        <div style={{ zIndex: '3', background: '#f4f4f4', width: '100%', position: 'fixed', height: '100vh' }}>
           {this.state.tipo_doc === 'Fondo Revolvente' &&
             <div className='m-f'>
               <div className='fr-con'>

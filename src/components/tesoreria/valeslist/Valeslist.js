@@ -212,9 +212,7 @@ export default class Valeslist extends Component {
       obs: this.state.obs
     }
     firebase.database().ref().update(updates)
-    let recibos = Object({}, this.state.recibosList)
     this.state.recibosList.forEach(element => firebase.database().ref('xml').push(element))
-    //
     alert('Tu solicitud fue enviada.')
     this.resetForm()
   }

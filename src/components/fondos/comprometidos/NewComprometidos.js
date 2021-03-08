@@ -556,7 +556,10 @@ export default class NewComprometidos extends Component {
 
     const filterData = this.state.xml.filter(
       (xml) => {
-        return xml.folio.indexOf(this.state.search) !== -1 && xml.estatus !== 'asignado'
+        return ( ( (xml.folio.indexOf(this.state.search) !== -1) ||
+          (xml.nombre.indexOf(this.state.search) !== -1) ||
+          (xml.fecha.indexOf(this.state.search) !== -1) ) &&
+          xml.estatus !== 'asignado')
       }
     )
 
@@ -677,7 +680,7 @@ export default class NewComprometidos extends Component {
             style={{ display: 'flex', flexDirection: 'column', width: '100%' }}
           >
             <Grid item xs style={{ width: '100%' }}>
-              {/* this.state.show ?
+              {this.state.show ?
                 <div className='div-into-data'>
                   <div className='recibo-container'>
                     Buscador
@@ -685,7 +688,7 @@ export default class NewComprometidos extends Component {
                       className='input-compro'
                       value={this.state.search}
                       onChange={this.upsearch.bind(this)}
-                      placeholder='Ingresa el folio a buscar'
+                      placeholder='Ingresa el Folio / Nombre / Fecha a buscar'
                     />
                   </div>
                   <div className='div-btn-comp'>
@@ -729,7 +732,7 @@ export default class NewComprometidos extends Component {
                     </Button>
                   </div>
                 </div>
-              */}
+              }
               {(admin === 'OMAR' || admin === 'MARCOS' || admin === 'KARINA' || admin === 'MIGUEL' || admin === 'TERESA') &&
                 customListLeft('Choices', left)
               }

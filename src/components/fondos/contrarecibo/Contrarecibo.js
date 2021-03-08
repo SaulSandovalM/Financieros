@@ -64,7 +64,7 @@ export default class Contra extends Component {
                   <b>Importe</b>
                 </TableCell>
                 <TableCell className='table-same'>
-                  <b>Fecha Deposito / Fecha Contrarecibo</b>
+                  <b>Fecha D / Fecha C</b>
                 </TableCell>
                 <TableCell className='table-same'>
                   <b>Estatus</b>
