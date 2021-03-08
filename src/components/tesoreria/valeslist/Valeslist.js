@@ -45,7 +45,7 @@ export default class Valeslist extends Component {
       filex: ['No hay datos cargados'],
       filefactura: [{ url: '', nombre: '' }],
       filef: [{ url: '', nombre: '' }],
-      recibosList: [{ folio: '', nombre: '', importe: '', iva: '', isr: '', fecha: '', estatus: '' }],
+      recibosList: [{ folio: 'Recibo', nombre: '', importe: '', iva: '0', isr: '0', fecha: '', estatus: '', subtotal: '0', total: '0', uuid: 'Recibo' }],
       autorizados: false,
       noautorizados: false,
       pendientes: false,
@@ -268,7 +268,7 @@ export default class Valeslist extends Component {
 
   handleAddClick = () => {
     this.setState({
-      recibosList: [...this.state.recibosList, { folio: '', nombre: '', importe: '', iva: '', isr: '', fecha: '', estatus: '' }]
+      recibosList: [...this.state.recibosList, { folio: 'Recibo', nombre: '', importe: '', iva: '0', isr: '0', fecha: '', estatus: '', subtotal: '0', total: '0', uuid: 'Recibo' }]
     })
   }
 

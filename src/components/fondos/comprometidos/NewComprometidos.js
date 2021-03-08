@@ -423,6 +423,9 @@ export default class NewComprometidos extends Component {
     .catch((error) => {
       console.error('Error: ', error)
     })
+    this.setState({
+      right: []
+    })
     alert('Tu solicitud fue enviada.')
   }
 
