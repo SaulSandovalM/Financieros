@@ -158,7 +158,6 @@ export const NumberAsString = (num, centavos = true, currency) => {
   }
 
   if (data.centavos >= 0) {
-    console.log(data.centavos)
     // let centavos = data.centavos === 1 ? Millones(data.centavos) + ' ' + data.letrasMonedaCentavoSingular : Millones(data.centavos) + ' ' + data.letrasMonedaCentavoPlural
     data.letrasCentavos = '' + data.centavos + '/100 M.N.'
   }

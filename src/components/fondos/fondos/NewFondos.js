@@ -456,7 +456,7 @@ export default class Fondos extends Component {
                               <Link className='data-m-f' to={`/Comprometidos/${fondos.key}`}>Editar</Link>
                             </div>
                             <div className='data-w-search'>
-                              <Link className='data-m-f' to={`/fondoEditable/${fondos.key}`}>Imprimir</Link>
+                              <Link className='data-m-f' to={`/Oficios/${fondos.key}`}>Imprimir</Link>
                             </div>
                           </div>
                         }

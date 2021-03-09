@@ -31,12 +31,13 @@ export default class Oficios extends Component {
       cfdi: '',
       up: '',
       perro: '',
-      desc: ''
+      desc: '',
+      hojas: 'Hola'
     }
   }
 
   componentDidMount () {
-    const updateRef = firebase.firestore().collection('fondos').doc(this.props.match.params.id).collection('comprometidos')
+    const updateRef = firebase.firestore().collection('fondos').doc(this.props.match.params.id).collection('comprometidos').orderBy('up', 'asc')
     this.unsubscribe = updateRef.onSnapshot(this.onCollectionUpdate)
     const ref = firebase.firestore().collection('fondos').doc(this.props.match.params.id)
     ref.get().then((doc) => {
@@ -64,11 +65,13 @@ export default class Oficios extends Component {
           ben: fondos.ben,
           eg: fondos.eg,
           importe_comp: fondos.importe_comp,
-          importe_total: fondos.importe_total,
+          total: fondos.total,
           // fecha: fondos.fecha cambiar el valor
           numCompro: fondos.numCompro,
           importe: fondos.importe,
           no_oficio: fondos.no_oficio,
+          oficio_aut: fondos.oficio_aut,
+          no_proyecto: fondos.no_proyecto,
           cfdi: fondos.cfdi,
           desc: fondos.desc,
           beneficiario: fondos.beneficiario,
@@ -101,7 +104,7 @@ export default class Oficios extends Component {
     const comprometidos = []
     querySnapshot.forEach((doc) => {
       const { año, ramo, up, rubro, tg, partida, npro, f, fu, sf, eje, s, prog,
-              obj, proy, est, ben, eg, importe_comp, ur, importe_total, no_proyecto,
+              obj, proy, est, ben, eg, importe_comp, ur, total, no_proyecto,
               num_factura } = doc.data()
       comprometidos.push({
         key: doc.id,
@@ -125,7 +128,7 @@ export default class Oficios extends Component {
         ben,
         eg,
         importe_comp,
-        importe_total,
+        total,
         ur,
         no_proyecto,
         num_factura
@@ -148,9 +151,35 @@ export default class Oficios extends Component {
     today = diasSemana[f.getDay()] + ', ' + f.getDate() + ' de ' + meses[f.getMonth()] + ' de ' + f.getFullYear()
     const totalImporte = []
     this.state.comprometidos.map(comprometidos => (
-      totalImporte.push(comprometidos.importe_total)
+      totalImporte.push(comprometidos.total)
     ))
     const reducer = (a, b) => a + b
+
+    const myListComprometidos = this.state.comprometidos.reduce((acumulador, valorActual) => {
+      const elementoYaExiste = acumulador.find(elemento => elemento.up === valorActual.up)
+      if (elementoYaExiste) {
+        return acumulador.map((elemento) => {
+          if (elemento.up === valorActual.up) {
+            return {
+              ...elemento,
+              total: elemento.total + valorActual.total
+            }
+          }
+          return elemento
+        });
+      }
+      return [...acumulador, valorActual]
+    }, [])
+
+    var cad = []
+    var proyectof = []
+    let noProyect = this.state.no_proyecto
+    for (var i in noProyect) {
+      cad.push( String(noProyect[i]) )
+      let proyect = String(cad[i])
+      var proy = proyect.split(' ')[0]
+      proyectof.push(proy)
+    }
 
     return (
       <div>
@@ -163,28 +192,28 @@ export default class Oficios extends Component {
               <div className='fcc-i'>
                 <p className='fimpre'>Solicitud Programatica</p>
                 <ReactToPrint
-                  trigger={() => <buttom className='b-imp'>Imprimir</buttom>}
+                  trigger={() => <buttom className='btn-imp-of'>Imprimir</buttom>}
                   content={() => this.ogfr}
                 />
               </div>
               <div className='fcc-i'>
                 <p className='fimpre'>Reembolso de FR</p>
                 <ReactToPrint
-                  trigger={() => <buttom className='b-imp'>Imprimir</buttom>}
+                  trigger={() => <buttom className='btn-imp-of'>Imprimir</buttom>}
                   content={() => this.rfr}
                 />
               </div>
               <div className='fcc-i'>
                 <p className='fimpre'>Recibo Global</p>
                 <ReactToPrint
-                  trigger={() => <buttom className='b-imp'>Imprimir</buttom>}
+                  trigger={() => <buttom className='btn-imp-of'>Imprimir</buttom>}
                   content={() => this.rec}
                 />
               </div>
               <div className='fcc-i'>
                 <p className='fimpre'>Leyenda Alusivas</p>
                 <Popup
-                  trigger={<buttom className='b-imp'>Imprimir</buttom>}
+                  trigger={<buttom className='btn-imp-of'>Imprimir</buttom>}
                   modal
                   closeOnDocumentClick>
                   <div ref={el => (this.gas = el)} style={{ zIndex: '2', width: '100%' }}>
@@ -267,10 +296,18 @@ export default class Oficios extends Component {
                           </tr>
                           <tr>
                             <td className='all-tab-f'>{comprometidos.num_factura}</td>
-                            <td className='all-tab-f'>{comprometidos.importe_total}</td>
+                            <td className='all-tab-f'>
+                              <CurrencyFormat
+                                value={comprometidos.total}
+                                displayType='text'
+                                thousandSeparator
+                                prefix=' $ '
+                              />
+                            </td>
                             <td className='all-tab-f td'>
                               <textarea
                                 className='all-tab-l'
+                                id='hojas'
                                 name='hojas'
                                 onChange={this.handleChange.bind(this)}
                                 value={this.state.hojas}
@@ -290,7 +327,7 @@ export default class Oficios extends Component {
                   <ReactToPrint
                     trigger={() =>
                       <div className='c-b-i'>
-                        <buttom className='b-imp'>Imprimir</buttom>
+                        <buttom className='btn-imp-of'>Imprimir</buttom>
                       </div>
                       }
                     content={() => this.gas}
@@ -307,21 +344,21 @@ export default class Oficios extends Component {
               <div className='fcc-i'>
                 <p className='fimpre'>Solicitud Programatica</p>
                 <ReactToPrint
-                  trigger={() => <buttom className='b-imp'>Imprimir</buttom>}
+                  trigger={() => <buttom className='btn-imp-of'>Imprimir</buttom>}
                   content={() => this.sol}
                 />
               </div>
               <div className='fcc-i'>
                 <p className='fimpre'>Solicitud de PPR</p>
                 <ReactToPrint
-                  trigger={() => <buttom className='b-imp'>Imprimir</buttom>}
+                  trigger={() => <buttom className='btn-imp-of'>Imprimir</buttom>}
                   content={() => this.ofi}
                 />
               </div>
               <div className='fcc-i'>
                 <p className='fimpre'>Leyenda Alusivas</p>
                 <Popup
-                  trigger={<buttom className='b-imp'>Imprimir</buttom>}
+                  trigger={<buttom className='btn-imp-of'>Imprimir</buttom>}
                   modal
                   closeOnDocumentClick>
                   <div ref={el => (this.gasto = el)} style={{ zIndex: '2', width: '100%' }}>
@@ -408,7 +445,14 @@ export default class Oficios extends Component {
                           </tr>
                           <tr>
                             <td className='all-tab-f'>{comprometidos.num_factura}</td>
-                            <td className='all-tab-f'>{comprometidos.importe_total}</td>
+                            <td className='all-tab-f'>
+                              <CurrencyFormat
+                                value={comprometidos.total}
+                                displayType='text'
+                                thousandSeparator
+                                prefix=' $ '
+                              />
+                            </td>
                             <td className='all-tab-f td'>
                               <textarea
                                 className='all-tab-l'
@@ -430,7 +474,7 @@ export default class Oficios extends Component {
                   <ReactToPrint
                     trigger={() =>
                       <div className='c-b-i'>
-                        <buttom className='b-imp'>Imprimir</buttom>
+                        <buttom className='btn-imp-of'>Imprimir</buttom>
                       </div>
                     }
                     content={() => this.gasto}
@@ -448,133 +492,214 @@ export default class Oficios extends Component {
               <div className='fcc-i'>
                 <p className='fimpre'>Oficio Pago Proveedor</p>
                 <ReactToPrint
-                  trigger={() => <buttom className='b-imp'>Imprimir</buttom>}
+                  trigger={() => <buttom className='btn-imp-of'>Imprimir</buttom>}
                   content={() => this.opp}
                 />
               </div>
               <div className='fcc-i'>
                 <p className='fimpre'>Solicitud Programatica</p>
                 <ReactToPrint
-                  trigger={() => <buttom className='b-imp'>Imprimir</buttom>}
+                  trigger={() => <buttom className='btn-imp-of'>Imprimir</buttom>}
                   content={() => this.sp}
                 />
               </div>
               <div className='fcc-i'>
                 <p className='fimpre'>Leyendas Alusivas</p>
                 <Popup
-                  trigger={<buttom className='b-imp'>Imprimir</buttom>}
+                  trigger={<buttom className='btn-imp-of'>Imprimir</buttom>}
                   modal
                   closeOnDocumentClick>
-                  <div ref={el => (this.la = el)} style={{ zIndex: '2', width: '100%' }}>
-                  {this.state.comprometidos.map(comprometidos =>
-                  <div className='lll'>
-                    <div style={{ width: '100%' }}>
-                      <div className='title-ga'>
-                        <div>
-                          <img className='pgjh' src={lpgjh} alt='' />
+                  <div style={{ height: '100%', overflow: 'scroll' }}>
+                    <ReactToPrint
+                      trigger={() =>
+                        <div className='c-b-i'>
+                          <buttom className='btn-imp-of'>Imprimir</buttom>
+                        </div>
+                        }
+                      content={() => this.la}
+                    />
+                    <div ref={el => (this.la = el)} style={{ zIndex: '2', width: '100%', height: '100%' }}>
+                    {myListComprometidos.map(comprometidos =>
+                      <div className='lll'>
+                        <div style={{ width: '100%' }}>
+                          <div className='title-ga'>
+                            <div>
+                              <img className='pgjh' src={lpgjh} alt='' />
+                            </div>
+                            <div>
+                              <p className='text-titulo-ga'>PROCURADURÍA GENERAL DE JUSTICA DE HIDALGO</p>
+                                <p className='text-titulo-ga'>
+                                  {(comprometidos.up === '01' &&
+                                    'Atención y seguimiento a peticiones recibidas en el despacho del procurador atendidas')
+                                    ||
+                                    (comprometidos.up === '02' &&
+                                    'Casos penales de la región oriente resueltas')
+                                    ||
+                                    (comprometidos.up === '03' &&
+                                    'Delitos cometidos en contra de la libertad de expresión, periodistas y personas defensoras de los derechos humanos investigados')
+                                    ||
+                                    (comprometidos.up === '04' &&
+                                    'Averiguaciones previas del sistema tradicional concluidas')
+                                    ||
+                                    (comprometidos.up === '05' &&
+                                    'Casos penales en materia de delitos electorales resueltos')
+                                    ||
+                                    (comprometidos.up === '06' &&
+                                    'Casos penales determinados, concluidos o resueltos en delitos que atenten contra la mujer y la familia')
+                                    ||
+                                    (comprometidos.up === '07' &&
+                                    'Acuerdos reparatorios generados a través de la aplicación de los mecanismos alternativos de solución de controversias en materia penal en la región poniente')
+                                    ||
+                                    (comprometidos.up === '08' &&
+                                    'Investigación y supervisión de los casos penales con motivo de feminicidio')
+                                    ||
+                                    (comprometidos.up === '09' &&
+                                    'Quejas y denuncias por la posible comisión de conductas indebidas en las que incurran las y los servidores públicos atendidas')
+                                    ||
+                                    (comprometidos.up === '10' &&
+                                    'Intervenciones periciales a autoridades de procuración de justicia para una correcta integración del expediente en casos penales entregados')
+                                    ||
+                                    (comprometidos.up === '11' &&
+                                    'Casos penales del delito de narcomenudeo resueltos')
+                                    ||
+                                    (comprometidos.up === '12' &&
+                                    'Casos penales atendidos por los delistos de secuentro y extorsión')
+                                    ||
+                                    (comprometidos.up === '13' &&
+                                    'Gestión administrativa de recursos humanos,financiera, materiales, de informática, de archivo, de calidad, de aportaciones federales, planeación estratégica realizada')
+                                    ||
+                                    (comprometidos.up === '14' &&
+                                    'Determinación y/o resolución de los casos penales de los delitos de trata de personas, lenocinio y delitos conexos')
+                                    ||
+                                    (comprometidos.up === '15' &&
+                                    'Casos penales de la región poniente resueltas')
+                                    ||
+                                    (comprometidos.up === '16' &&
+                                    'Atenciones ciudadanas en los módulos de atención temprana en la región poniente brindadas')
+                                    ||
+                                    (comprometidos.up === '17' &&
+                                    'Determinación en las carpetas de investigación en las unidades de investigación de la regiones poniente')
+                                    ||
+                                    (comprometidos.up === '18' &&
+                                    'Investigación policial ejecutada')
+                                    ||
+                                    (comprometidos.up === '20' &&
+                                    'Atenciones ciudadanas en los módulos de atención temprana en la región poniente brindadas')
+                                    ||
+                                    (comprometidos.up === '21' &&
+                                    'Acuerdos reparatorios generados a traves de la aplicación de los mecanismos alternativos de solución de controversias en materia penal en la región oriente')
+                                    ||
+                                    (comprometidos.up === '22' &&
+                                    'Determinación en las carpetas de investigación en las unidades de investigación de la regiones oriente')
+                                    ||
+                                    (comprometidos.up === '23' &&
+                                    'Delitos de corrupción resueltos')
+                                    ||
+                                    (comprometidos.up === '24' &&
+                                    'Casos penales determinados, concluidos o resueltos de delitos en materia de desaparición forzada de personas cometidos por particulares, delitos vinculados y de personas no localizadas realizados')
+                                  }
+                                </p>
+                              <p className='text-titulo-ga'>{comprometidos.partida}</p>
+                            </div>
+                            <div>
+                              <img className='ims' src={logo2} alt='' />
+                            </div>
+                          </div>
+                        </div>
+                        <div className='faderinpo'>
+                          <div className='contenedor-ga'>
+                            <div className='contenedor-1 '>
+                              <div className='interno-ga2'>
+                                <p className='text-gai'>Gasto a Comprobar</p>
+                                <input className='input-gai' type='checkbox' disabled />
+                              </div>
+                              <div className='interno-ga2'>
+                                <p className='text-gai'>Comprobacion de Gastos</p>
+                                <input className='input-gai' type='checkbox' disabled />
+                              </div>
+                            </div>
+                            <div className='contenedor-1'>
+                              <div className='interno-ga2'>
+                                <p className='text-gai'>Creación de Fondo Revolvente</p>
+                                <input className='input-gai' type='checkbox' disabled />
+                              </div>
+                              <div className='interno-ga2'>
+                                <p className='text-gai'>Fondo Revolvente</p>
+                                <input className='input-gai' type='checkbox' disabled />
+                              </div>
+                              <div className='interno-ga2'>
+                                <p className='text-gai'>Cancelacion de Fondo Revolvente</p>
+                                <input className='input-gai' type='checkbox' disabled />
+                              </div>
+                            </div>
+                            <div className='contenedor-1'>
+                              <div className='interno-ga2'>
+                                <p className='text-gai'>Viaticos Anticipados</p>
+                                <input className='input-gai' type='checkbox' disabled />
+                              </div>
+                              <div className='interno-ga2'>
+                                <p className='text-gai'>Viaticos Devengados</p>
+                                <input className='input-gai' type='checkbox' disabled />
+                              </div>
+                              <div className='interno-ga2'>
+                                <p className='text-gai'>Comprobación de Viáticos</p>
+                                <input className='input-gai' type='checkbox' disabled />
+                              </div>
+                            </div>
+                            <div className='contenedor-1'>
+                              <div className='interno-ga2'>
+                                <p className='text-gai'>Pago a Proveedores</p>
+                                <input className='input-gai' type='checkbox' checked />
+                              </div>
+                              <div className='interno-ga2'>
+                                <p className='text-gai'>Pago a Proveedore por Requisición</p>
+                                <input className='input-gai' type='checkbox' disabled />
+                              </div>
+                              <div className='interno-ga2'>
+                                <p className='text-gai'>Transferencias</p>
+                                <input className='input-gai' type='checkbox' disabled />
+                              </div>
+                            </div>
+                          </div>
                         </div>
                         <div>
-                          <p className='text-titulo-ga'>PROCURADURÍA GENERAL DE JUSTICA DE HIDALGO</p>
-                          <p className='text-titulo-ga'>{comprometidos.up}</p>
-                          <p className='text-titulo-ga'>{comprometidos.dataF}</p>
-                        </div>
-                        <div>
-                          <img className='ims' src={logo2} alt='' />
+                          <div className='tabla-ga'>
+                            <table className='tablagas'>
+                              <tr>
+                                <td className='alltabla-ga'>FOLIO DE LA FACTURA</td>
+                                <td className='alltabla-ga'>IMPORTE</td>
+                                <td className='alltabla-ga'>LEYENDA ALUSIVA AL GASTO</td>
+                              </tr>
+                              <tr>
+                                <td className='all-tab-f'>{comprometidos.num_factura}</td>
+                                <td className='all-tab-f'>
+                                  <CurrencyFormat
+                                    value={comprometidos.total}
+                                    displayType='text'
+                                    thousandSeparator
+                                    prefix=' $ '
+                                  />
+                                </td>
+                                <td className='all-tab-f td'>
+                                  <textarea
+                                    className='all-tab-l'
+                                    type='text'
+                                    name='hojas'
+                                    onChange={this.handleChange.bind(this)}
+                                    value={this.state.hojas}
+                                  />
+                                </td>
+                              </tr>
+                              <tr>
+                                <td className='text-total-ga'>TOTAL</td>
+                                <td />
+                              </tr>
+                            </table>
+                          </div>
                         </div>
                       </div>
+                    )}
                     </div>
-                    <div className='faderinpo'>
-                      <div className='contenedor-ga'>
-                        <div className='contenedor-1 '>
-                          <div className='interno-ga2'>
-                            <p className='text-gai'>Gasto a Comprobar</p>
-                            <input className='input-gai' type='checkbox' disabled />
-                          </div>
-                          <div className='interno-ga2'>
-                            <p className='text-gai'>Comprobacion de Gastos</p>
-                            <input className='input-gai' type='checkbox' disabled />
-                          </div>
-                        </div>
-                        <div className='contenedor-1'>
-                          <div className='interno-ga2'>
-                            <p className='text-gai'>Creación de Fondo Revolvente</p>
-                            <input className='input-gai' type='checkbox' disabled />
-                          </div>
-                          <div className='interno-ga2'>
-                            <p className='text-gai'>Fondo Revolvente</p>
-                            <input className='input-gai' type='checkbox' disabled />
-                          </div>
-                          <div className='interno-ga2'>
-                            <p className='text-gai'>Cancelacion de Fondo Revolvente</p>
-                            <input className='input-gai' type='checkbox' disabled />
-                          </div>
-                        </div>
-                        <div className='contenedor-1'>
-                          <div className='interno-ga2'>
-                            <p className='text-gai'>Viaticos Anticipados</p>
-                            <input className='input-gai' type='checkbox' disabled />
-                          </div>
-                          <div className='interno-ga2'>
-                            <p className='text-gai'>Viaticos Devengados</p>
-                            <input className='input-gai' type='checkbox' disabled />
-                          </div>
-                          <div className='interno-ga2'>
-                            <p className='text-gai'>Comprobación de Viáticos</p>
-                            <input className='input-gai' type='checkbox' disabled />
-                          </div>
-                        </div>
-                        <div className='contenedor-1'>
-                          <div className='interno-ga2'>
-                            <p className='text-gai'>Pago a Proveedores</p>
-                            <input className='input-gai' type='checkbox' checked />
-                          </div>
-                          <div className='interno-ga2'>
-                            <p className='text-gai'>Pago a Proveedore por Requisición</p>
-                            <input className='input-gai' type='checkbox' disabled />
-                          </div>
-                          <div className='interno-ga2'>
-                            <p className='text-gai'>Transferencias</p>
-                            <input className='input-gai' type='checkbox' disabled />
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div>
-                      <div className='tabla-ga'>
-                        <table className='tablagas'>
-                          <tr>
-                            <td className='alltabla-ga'>FOLIO DE LA FACTURA</td>
-                            <td className='alltabla-ga'>IMPORTE</td>
-                            <td className='alltabla-ga'>LEYENDA ALUSIVA AL GASTO</td>
-                          </tr>
-                          <tr>
-                            <td className='all-tab-f'>{comprometidos.num_factura}</td>
-                            <td className='all-tab-f'>{comprometidos.importe_total}</td>
-                            <td className='all-tab-f td'>
-                              <textarea
-                                className='all-tab-l'
-                                type='text'
-                                onKeyUp={this.handleChange.bind(this)}
-                              />
-                            </td>
-                          </tr>
-                          <tr>
-                            <td className='text-total-ga'>TOTAL</td>
-                            <td />
-                          </tr>
-                        </table>
-                      </div>
-                    </div>
-                  </div>
-                  )}
-                  <ReactToPrint
-                    trigger={() =>
-                      <div className='c-b-i'>
-                        <buttom className='b-imp'>Imprimir</buttom>
-                      </div>
-                      }
-                    content={() => this.la}
-                  />
                   </div>
                 </Popup>
               </div>
@@ -588,21 +713,21 @@ export default class Oficios extends Component {
             <div className='fcc-i'>
               <p className='fimpre'>Comprobacion de Gasto a Comprobar</p>
               <ReactToPrint
-                trigger={() => <buttom className='b-imp'>Imprimir</buttom>}
+                trigger={() => <buttom className='btn-imp-of'>Imprimir</buttom>}
                 content={() => this.cgc}
               />
             </div>
             <div className='fcc-i'>
               <p className='fimpre'>Solicitud Programatica</p>
               <ReactToPrint
-                trigger={() => <buttom className='b-imp'>Imprimir</buttom>}
+                trigger={() => <buttom className='btn-imp-of'>Imprimir</buttom>}
                 content={() => this.spd}
               />
             </div>
             <div className='fcc-i'>
               <p className='fimpre'>Leyendas Alusivas</p>
               <Popup
-                trigger={<buttom className='b-imp'>Imprimir</buttom>}
+                trigger={<buttom className='btn-imp-of'>Imprimir</buttom>}
                 modal
                 closeOnDocumentClick>
                 <div ref={el => (this.lap = el)} style={{ zIndex: '2', width: '100%' }}>
@@ -689,7 +814,7 @@ export default class Oficios extends Component {
                         </tr>
                         <tr>
                           <td className='all-tab-f'>{comprometidos.num_factura}</td>
-                          <td className='all-tab-f'>{comprometidos.importe_total}</td>
+                          <td className='all-tab-f'>{comprometidos.total}</td>
                           <td className='all-tab-f td'>
                             <input
                               className='all-tab-l'
@@ -710,7 +835,7 @@ export default class Oficios extends Component {
                 <ReactToPrint
                   trigger={() =>
                     <div className='c-b-i'>
-                      <buttom className='b-imp'>Imprimir</buttom>
+                      <buttom className='btn-imp-of'>Imprimir</buttom>
                     </div>
                     }
                   content={() => this.gas}
@@ -900,7 +1025,12 @@ export default class Oficios extends Component {
                         {comprometidos.npro}
                       </td>
                       <td className='all-tablai'>
-                        $ {comprometidos.importe_total}
+                        <CurrencyFormat
+                          value={comprometidos.total}
+                          displayType='text'
+                          thousandSeparator
+                          prefix=' $ '
+                        />
                       </td>
                     </tr>
                   )}
@@ -1409,7 +1539,12 @@ export default class Oficios extends Component {
                     <td className='all-tablai border-color' />
                     <td className='all-tablai border-color text-rete'>Total</td>
                     <td className='all-tablai'>
-                      $ {(totalImporte.reduce(reducer))}
+                      <CurrencyFormat
+                        value={(totalImporte.reduce(reducer))}
+                        displayType='text'
+                        thousandSeparator
+                        prefix=' $ '
+                      />
                     </td>
                   </tr>
                 </table>
@@ -1504,7 +1639,7 @@ export default class Oficios extends Component {
                 value={this.state.importe}
                 displayType='text'
                 thousandSeparator
-                prefix=' $'
+                prefix=' $ '
               />
             </p>
           </div>
@@ -1516,7 +1651,7 @@ export default class Oficios extends Component {
                 value={this.state.importe}
                 displayType='text'
                 thousandSeparator
-                prefix=' $'
+                prefix=' $ '
               />
               ({(NumberAsString(this.state.importe))})
               por concepto de Reposición de Fondo Revolvente, que se aplicarán
@@ -1837,7 +1972,12 @@ export default class Oficios extends Component {
                         {comprometidos.npro}
                       </td>
                       <td className='all-tablai'>
-                        $ {comprometidos.importe_total}
+                        <CurrencyFormat
+                          value={comprometidos.total}
+                          displayType='text'
+                          thousandSeparator
+                          prefix=' $ '
+                        />
                       </td>
                     </tr>
                   )}
@@ -2346,7 +2486,12 @@ export default class Oficios extends Component {
                     <td className='all-tablai border-color' />
                     <td className='all-tablai border-color text-rete'>Total</td>
                     <td className='all-tablai'>
-                      $ {(totalImporte.reduce(reducer))}
+                      <CurrencyFormat
+                        value={(totalImporte.reduce(reducer))}
+                        displayType='text'
+                        thousandSeparator
+                        prefix=' $ '
+                      />
                     </td>
                   </tr>
                 </table>
@@ -2556,7 +2701,7 @@ export default class Oficios extends Component {
           </div>
           <div className='no-oficio'>
             <p>
-              <b>Oficio No:</b> PGI/DGAyF/ {this.state.no_oficio}
+              <b>Oficio No:</b> PGI/DGAyF/{this.state.no_oficio}
               <br /> Pachuca de Soto, Hidalgo a {today}
               <br /><b>Asunto </b>Pago a Proveedor
             </p>
@@ -2582,13 +2727,18 @@ export default class Oficios extends Component {
           </div>
           <div className='texto-ofi_ppp'>
             <p>
-              Por este medio me permito enviar a Usted documentación por un importe
-              total de $ {this.state.importe}.00 ({(NumberAsString(this.state.importe))}),
+              Por este medio me permito enviar a Usted documentación por un importe total de
+              <CurrencyFormat
+                value={this.state.importe}
+                displayType='text'
+                thousandSeparator
+                prefix=' $ '
+              /> ({(NumberAsString(this.state.importe))}),
               cantidad amparada con los CFDI No. {this.state.cfdi},
               para el trámite de pago a favor del proveedor {this.state.beneficiario},
               por la compra o prestación de  servicios {this.state.desc},
-              con cargo al proyecto {this.state.no_proyecto} y {this.state.no_proyec}
-              y a los recursos otorgados con el oficio de autorización {this.state.no_oficio},
+              con cargo al proyecto {proyectof} y {this.state.no_proyec}
+              y a los recursos otorgados con el oficio de autorización {this.state.oficio_aut},
               a la Procuraduria General de Justicia del Estado de Hidalgo.
             </p>
             <p>Sin otro particular por el momento, reciba un cordial saludo</p>
@@ -2610,7 +2760,7 @@ export default class Oficios extends Component {
               <p className='text'>C.C.P...- Expedien<br />Minutario<br />LMHV/NRL/macht</p>
             </div>
             <div>
-              <p align='right'> {this.state.fondo.fondo}</p>
+              <p align='right'> {this.state.fondo2}</p>
             </div>
           </div>
         </div>
@@ -2697,8 +2847,81 @@ export default class Oficios extends Component {
             </div>
             <div className='internos'>
               <p className='text-intei'>Unidad Presupuestal:</p>
-              {this.state.comprometidos.map(comprometidos =>
-                <p className='bene-i'>{comprometidos.up}</p>
+              {myListComprometidos.map(comprometidos =>
+                <p className='bene-i'>
+                  {myListComprometidos.length <= 1 ?
+                    (comprometidos.up === '01' &&
+                    'Atención y seguimiento a peticiones recibidas en el despacho del procurador atendidas')
+                    ||
+                    (comprometidos.up === '02' &&
+                    'Casos penales de la región oriente resueltas')
+                    ||
+                    (comprometidos.up === '03' &&
+                    'Delitos cometidos en contra de la libertad de expresión, periodistas y personas defensoras de los derechos humanos investigados')
+                    ||
+                    (comprometidos.up === '04' &&
+                    'Averiguaciones previas del sistema tradicional concluidas')
+                    ||
+                    (comprometidos.up === '05' &&
+                    'Casos penales en materia de delitos electorales resueltos')
+                    ||
+                    (comprometidos.up === '06' &&
+                    'Casos penales determinados, concluidos o resueltos en delitos que atenten contra la mujer y la familia')
+                    ||
+                    (comprometidos.up === '07' &&
+                    'Acuerdos reparatorios generados a través de la aplicación de los mecanismos alternativos de solución de controversias en materia penal en la región poniente')
+                    ||
+                    (comprometidos.up === '08' &&
+                    'Investigación y supervisión de los casos penales con motivo de feminicidio')
+                    ||
+                    (comprometidos.up === '09' &&
+                    'Quejas y denuncias por la posible comisión de conductas indebidas en las que incurran las y los servidores públicos atendidas')
+                    ||
+                    (comprometidos.up === '10' &&
+                    'Intervenciones periciales a autoridades de procuración de justicia para una correcta integración del expediente en casos penales entregados')
+                    ||
+                    (comprometidos.up === '11' &&
+                    'Casos penales del delito de narcomenudeo resueltos')
+                    ||
+                    (comprometidos.up === '12' &&
+                    'Casos penales atendidos por los delistos de secuentro y extorsión')
+                    ||
+                    (comprometidos.up === '13' &&
+                    'Gestión administrativa de recursos humanos,financiera, materiales, de informática, de archivo, de calidad, de aportaciones federales, planeación estratégica realizada')
+                    ||
+                    (comprometidos.up === '14' &&
+                    'Determinación y/o resolución de los casos penales de los delitos de trata de personas, lenocinio y delitos conexos')
+                    ||
+                    (comprometidos.up === '15' &&
+                    'Casos penales de la región poniente resueltas')
+                    ||
+                    (comprometidos.up === '16' &&
+                    'Atenciones ciudadanas en los módulos de atención temprana en la región poniente brindadas')
+                    ||
+                    (comprometidos.up === '17' &&
+                    'Determinación en las carpetas de investigación en las unidades de investigación de la regiones poniente')
+                    ||
+                    (comprometidos.up === '18' &&
+                    'Investigación policial ejecutada')
+                    ||
+                    (comprometidos.up === '20' &&
+                    'Atenciones ciudadanas en los módulos de atención temprana en la región poniente brindadas')
+                    ||
+                    (comprometidos.up === '21' &&
+                    'Acuerdos reparatorios generados a traves de la aplicación de los mecanismos alternativos de solución de controversias en materia penal en la región oriente')
+                    ||
+                    (comprometidos.up === '22' &&
+                    'Determinación en las carpetas de investigación en las unidades de investigación de la regiones oriente')
+                    ||
+                    (comprometidos.up === '23' &&
+                    'Delitos de corrupción resueltos')
+                    ||
+                    (comprometidos.up === '24' &&
+                    'Casos penales determinados, concluidos o resueltos de delitos en materia de desaparición forzada de personas cometidos por particulares, delitos vinculados y de personas no localizadas realizados')
+                    :
+                    ''
+                  }
+                </p>
               )}
             </div>
           </div>
@@ -2730,10 +2953,12 @@ export default class Oficios extends Component {
                   <td className='all-tablai'>Ext</td>
                   <td className='all-tablai'>Ben</td>
                   <td className='all-tablai'>E Geo</td>
-                  <td className='dg-tabla all-tablai'>Descripcion del objeto de Gasto</td>
+                  <td className='dg-tabla all-tablai' style={{ textAlign: 'left' }}>
+                    Descripcion del objeto de Gasto
+                  </td>
                   <td className='monto-tabla all-tablai'>Monto</td>
                 </tr>
-                {this.state.comprometidos.map(comprometidos =>
+                {myListComprometidos.map(comprometidos =>
                   <tr>
                     <td className='all-tablai'>
                       {comprometidos.ramo}
@@ -2789,11 +3014,16 @@ export default class Oficios extends Component {
                     <td className='all-tablai'>
                       {comprometidos.eg}
                     </td>
-                    <td className='all-tablai'>
+                    <td className='all-tablai' style={{ textAlign: 'left' }}>
                       {comprometidos.npro}
                     </td>
                     <td className='all-tablai'>
-                      $ {comprometidos.importe_total}
+                      <CurrencyFormat
+                        value={comprometidos.total}
+                        displayType='text'
+                        thousandSeparator
+                        prefix=' $ '
+                      />
                     </td>
                   </tr>
                 )}
@@ -3302,7 +3532,12 @@ export default class Oficios extends Component {
                   <td className='all-tablai border-color' />
                   <td className='all-tablai border-color text-rete'>Total</td>
                   <td className='all-tablai'>
-                    $ {(totalImporte.reduce(reducer))}
+                    <CurrencyFormat
+                      value={(totalImporte.reduce(reducer))}
+                      displayType='text'
+                      thousandSeparator
+                      prefix=' $ '
+                    />
                   </td>
                 </tr>
               </table>
@@ -3314,7 +3549,7 @@ export default class Oficios extends Component {
             <p className='text-osb'>Observaciones</p>
             <div className='input-obs' />
             <div className='obs-so2'>
-              <p className='text-osb'> No. De Solicitud</p>
+              <p className='text-osb'>No. De Solicitud</p>
               <input />
             </div>
           </div>
@@ -3329,7 +3564,7 @@ export default class Oficios extends Component {
         </div>
         </div>
 
-        <div ref={el => (this.la = el)} style={{ zIndex: '2', position: 'absolute', width: '100%' }}>
+        {/*<div ref={el => (this.la = el)} style={{ zIndex: '2', position: 'absolute', width: '100%' }}>
           {this.state.comprometidos.map(comprometidos =>
           <div style={{ height: '100vh', zIndex: '2', position: 'absolute', width: '100%' }}>
             <div style={{ width: '100%' }}>
@@ -3339,7 +3574,82 @@ export default class Oficios extends Component {
                 </div>
                 <div>
                   <p className='text-titulo-ga'>PROCURADURÍA GENERAL DE JUSTICA DE HIDALGO</p>
-                  <p className='text-titulo-ga'>{comprometidos.up}</p>
+                  {myListComprometidos.map(comprometidos =>
+                    <p className='text-titulo-ga'>
+                      {myListComprometidos.length <= 1 ?
+                        (comprometidos.up === '01' &&
+                        'Atención y seguimiento a peticiones recibidas en el despacho del procurador atendidas')
+                        ||
+                        (comprometidos.up === '02' &&
+                        'Casos penales de la región oriente resueltas')
+                        ||
+                        (comprometidos.up === '03' &&
+                        'Delitos cometidos en contra de la libertad de expresión, periodistas y personas defensoras de los derechos humanos investigados')
+                        ||
+                        (comprometidos.up === '04' &&
+                        'Averiguaciones previas del sistema tradicional concluidas')
+                        ||
+                        (comprometidos.up === '05' &&
+                        'Casos penales en materia de delitos electorales resueltos')
+                        ||
+                        (comprometidos.up === '06' &&
+                        'Casos penales determinados, concluidos o resueltos en delitos que atenten contra la mujer y la familia')
+                        ||
+                        (comprometidos.up === '07' &&
+                        'Acuerdos reparatorios generados a través de la aplicación de los mecanismos alternativos de solución de controversias en materia penal en la región poniente')
+                        ||
+                        (comprometidos.up === '08' &&
+                        'Investigación y supervisión de los casos penales con motivo de feminicidio')
+                        ||
+                        (comprometidos.up === '09' &&
+                        'Quejas y denuncias por la posible comisión de conductas indebidas en las que incurran las y los servidores públicos atendidas')
+                        ||
+                        (comprometidos.up === '10' &&
+                        'Intervenciones periciales a autoridades de procuración de justicia para una correcta integración del expediente en casos penales entregados')
+                        ||
+                        (comprometidos.up === '11' &&
+                        'Casos penales del delito de narcomenudeo resueltos')
+                        ||
+                        (comprometidos.up === '12' &&
+                        'Casos penales atendidos por los delistos de secuentro y extorsión')
+                        ||
+                        (comprometidos.up === '13' &&
+                        'Gestión administrativa de recursos humanos,financiera, materiales, de informática, de archivo, de calidad, de aportaciones federales, planeación estratégica realizada')
+                        ||
+                        (comprometidos.up === '14' &&
+                        'Determinación y/o resolución de los casos penales de los delitos de trata de personas, lenocinio y delitos conexos')
+                        ||
+                        (comprometidos.up === '15' &&
+                        'Casos penales de la región poniente resueltas')
+                        ||
+                        (comprometidos.up === '16' &&
+                        'Atenciones ciudadanas en los módulos de atención temprana en la región poniente brindadas')
+                        ||
+                        (comprometidos.up === '17' &&
+                        'Determinación en las carpetas de investigación en las unidades de investigación de la regiones poniente')
+                        ||
+                        (comprometidos.up === '18' &&
+                        'Investigación policial ejecutada')
+                        ||
+                        (comprometidos.up === '20' &&
+                        'Atenciones ciudadanas en los módulos de atención temprana en la región poniente brindadas')
+                        ||
+                        (comprometidos.up === '21' &&
+                        'Acuerdos reparatorios generados a traves de la aplicación de los mecanismos alternativos de solución de controversias en materia penal en la región oriente')
+                        ||
+                        (comprometidos.up === '22' &&
+                        'Determinación en las carpetas de investigación en las unidades de investigación de la regiones oriente')
+                        ||
+                        (comprometidos.up === '23' &&
+                        'Delitos de corrupción resueltos')
+                        ||
+                        (comprometidos.up === '24' &&
+                        'Casos penales determinados, concluidos o resueltos de delitos en materia de desaparición forzada de personas cometidos por particulares, delitos vinculados y de personas no localizadas realizados')
+                        :
+                        ''
+                      }
+                    </p>
+                  )}
                   <p className='text-titulo-ga'>{comprometidos.partida}</p>
                 </div>
                 <div>
@@ -3441,7 +3751,7 @@ export default class Oficios extends Component {
             </div>
           </div>
           )}
-        </div>
+        </div>*/}
 
         {/* Diciembre */}
         <div className='pppdf-subdad' ref={el => (this.cgc = el)} style={{ zIndex: '2', position: 'absolute' }}>
@@ -3687,7 +3997,12 @@ export default class Oficios extends Component {
                       {comprometidos.npro}
                     </td>
                     <td className='all-tablai'>
-                      $ {comprometidos.importe_total}
+                      <CurrencyFormat
+                        value={comprometidos.total}
+                        displayType='text'
+                        thousandSeparator
+                        prefix=' $ '
+                      />
                     </td>
                   </tr>
                 )}
@@ -4196,7 +4511,12 @@ export default class Oficios extends Component {
                   <td className='all-tablai border-color' />
                   <td className='all-tablai border-color text-rete'>Total</td>
                   <td className='all-tablai'>
-                    $ {(totalImporte.reduce(reducer))}
+                    <CurrencyFormat
+                      value={(totalImporte.reduce(reducer))}
+                      displayType='text'
+                      thousandSeparator
+                      prefix=' $ '
+                    />
                   </td>
                 </tr>
               </table>
