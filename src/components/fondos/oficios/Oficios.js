@@ -32,7 +32,15 @@ export default class Oficios extends Component {
       up: '',
       perro: '',
       desc: '',
-      hojas: 'Hola'
+      hojas: 'Hola',
+      comprobantes: [
+        {
+          id: 1,
+          name: 'prueba',
+          done: false
+        }
+      ],
+      compro: []
     }
   }
 
@@ -105,7 +113,7 @@ export default class Oficios extends Component {
     querySnapshot.forEach((doc) => {
       const { año, ramo, up, rubro, tg, partida, npro, f, fu, sf, eje, s, prog,
               obj, proy, est, ben, eg, importe_comp, ur, total, no_proyecto,
-              num_factura } = doc.data()
+              comprobantes } = doc.data()
       comprometidos.push({
         key: doc.id,
         doc,
@@ -131,7 +139,7 @@ export default class Oficios extends Component {
         total,
         ur,
         no_proyecto,
-        num_factura
+        comprobantes
       })
     })
     this.setState({
@@ -154,22 +162,6 @@ export default class Oficios extends Component {
       totalImporte.push(comprometidos.total)
     ))
     const reducer = (a, b) => a + b
-
-    const myListComprometidos = this.state.comprometidos.reduce((acumulador, valorActual) => {
-      const elementoYaExiste = acumulador.find(elemento => elemento.up === valorActual.up)
-      if (elementoYaExiste) {
-        return acumulador.map((elemento) => {
-          if (elemento.up === valorActual.up) {
-            return {
-              ...elemento,
-              total: elemento.total + valorActual.total
-            }
-          }
-          return elemento
-        });
-      }
-      return [...acumulador, valorActual]
-    }, [])
 
     var cad = []
     var proyectof = []
@@ -298,6 +290,7 @@ export default class Oficios extends Component {
                             <td className='all-tab-f'>{comprometidos.num_factura}</td>
                             <td className='all-tab-f'>
                               <CurrencyFormat
+                                style={{ fontSize: '12px' }}
                                 value={comprometidos.total}
                                 displayType='text'
                                 thousandSeparator
@@ -518,8 +511,8 @@ export default class Oficios extends Component {
                         }
                       content={() => this.la}
                     />
-                    <div ref={el => (this.la = el)} style={{ zIndex: '2', width: '100%', height: '100%' }}>
-                    {myListComprometidos.map(comprometidos =>
+                    <div ref={el => (this.la = el)} style={{ zIndex: '2', width: '100%', height: '100%'}}>
+                    {this.state.comprometidos.map(comprometidos =>
                       <div className='lll'>
                         <div style={{ width: '100%' }}>
                           <div className='title-ga'>
@@ -664,37 +657,134 @@ export default class Oficios extends Component {
                         </div>
                         <div>
                           <div className='tabla-ga'>
-                            <table className='tablagas'>
-                              <tr>
-                                <td className='alltabla-ga'>FOLIO DE LA FACTURA</td>
-                                <td className='alltabla-ga'>IMPORTE</td>
-                                <td className='alltabla-ga'>LEYENDA ALUSIVA AL GASTO</td>
-                              </tr>
-                              <tr>
-                                <td className='all-tab-f'>{comprometidos.num_factura}</td>
-                                <td className='all-tab-f'>
+                            <div className='tablagas'>
+                              <div style={{ display: 'flex', width: '100%' }}>
+                                <div
+                                  className='alltabla-ga'
+                                  style={{ width: '35%', textAlign: 'center', display: 'flex', justifyContent: 'center', flexDirection: 'column' }}>
+                                  Folio de factura
+                                </div>
+                                <div
+                                  className='alltabla-ga'
+                                  style={{ width: '10%', textAlign: 'center', display: 'flex', justifyContent: 'center', flexDirection: 'column' }}>
+                                  Importe
+                                </div>
+                                <div
+                                  className='alltabla-ga'
+                                  style={{ width: '55%', textAlign: 'center', display: 'flex', justifyContent: 'center', flexDirection: 'column' }}>
+                                  Leyenda alusiva al gasto
+                                </div>
+                              </div>
+
+                              {/*comprometidos.comprobantes.map(item =>
+                                <div style={{ width: '100%' }}>
+                                    <div style={{ width: '100%', display: 'flex' }}>
+                                      <div
+                                        className='all-tab-f'
+                                        style={{
+                                          width: '35%',
+                                          textAlign: 'center',
+                                          display: 'flex',
+                                          justifyContent: 'center',
+                                          flexDirection: 'column',
+                                          borderLeft: '1px solid black',
+                                          borderRight: '1px solid black',
+                                          borderBottom: '1px solid black'
+                                        }}>
+                                        {item.uuid}
+                                      </div>
+                                      <div
+                                        className='all-tab-f'
+                                        style={{
+                                          width: '10%',
+                                          textAlign: 'center',
+                                          display: 'flex',
+                                          justifyContent: 'center',
+                                          flexDirection: 'column',
+                                          borderRight: '1px solid black',
+                                          borderBottom: '1px solid black'
+                                        }}>
+                                        <CurrencyFormat
+                                          style={{ fontSize: '12px' }}
+                                          value={item.total}
+                                          displayType='text'
+                                          thousandSeparator
+                                          prefix=' $ '
+                                        />
+                                      </div>
+                                      <div
+                                        className='all-tab-f div'
+                                        style={{
+                                          width: '55%',
+                                          textAlign: 'center',
+                                          display: 'flex',
+                                          justifyContent: 'center',
+                                          flexDirection: 'column',
+                                          borderRight: '1px solid black',
+                                          borderBottom: '1px solid black'
+                                        }}>
+                                        <textarea
+                                          className='all-tab-l'
+                                          type='text'
+                                          onKeyUp={this.handleChange.bind(this)}
+                                        />
+                                      </div>
+                                    </div>
+                                </div>
+                              )*/}
+                              <div style={{ width: '100%', display: 'flex', height: '30px' }}>
+                                <div
+                                  className='all-tab-f2'
+                                  style={{
+                                    width: '35%',
+                                    textAlign: 'right',
+                                    display: 'flex',
+                                    justifyContent: 'center',
+                                    flexDirection: 'column',
+                                    borderLeft: '1px solid black',
+                                    borderRight: '1px solid black',
+                                    borderBottom: '1px solid black'
+                                  }}>
+                                  TOTAL:
+                                </div>
+                                <div
+                                  className='all-tab-f2'
+                                  style={{
+                                    width: '10%',
+                                    textAlign: 'center',
+                                    display: 'flex',
+                                    justifyContent: 'center',
+                                    flexDirection: 'column',
+                                    borderRight: '1px solid black',
+                                    borderBottom: '1px solid black'
+                                  }}>
                                   <CurrencyFormat
+                                    style={{ fontSize: '12px' }}
                                     value={comprometidos.total}
                                     displayType='text'
                                     thousandSeparator
                                     prefix=' $ '
                                   />
-                                </td>
-                                <td className='all-tab-f td'>
+                                </div>
+                                <div
+                                  className='all-tab-f2 div'
+                                  style={{
+                                    width: '55%',
+                                    textAlign: 'center',
+                                    display: 'flex',
+                                    justifyContent: 'center',
+                                    flexDirection: 'column',
+                                    borderRight: '1px solid white',
+                                    borderBottom: '1px solid white'
+                                  }}>
                                   <textarea
                                     className='all-tab-l'
                                     type='text'
-                                    name='hojas'
-                                    onChange={this.handleChange.bind(this)}
-                                    value={this.state.hojas}
+                                    onKeyUp={this.handleChange.bind(this)}
                                   />
-                                </td>
-                              </tr>
-                              <tr>
-                                <td className='text-total-ga'>TOTAL</td>
-                                <td />
-                              </tr>
-                            </table>
+                                </div>
+                              </div>
+                            </div>
                           </div>
                         </div>
                       </div>
@@ -2847,9 +2937,9 @@ export default class Oficios extends Component {
             </div>
             <div className='internos'>
               <p className='text-intei'>Unidad Presupuestal:</p>
-              {myListComprometidos.map(comprometidos =>
+              {this.state.comprometidos.map(comprometidos =>
                 <p className='bene-i'>
-                  {myListComprometidos.length <= 1 ?
+                  {this.state.comprometidos.length <= 1 ?
                     (comprometidos.up === '01' &&
                     'Atención y seguimiento a peticiones recibidas en el despacho del procurador atendidas')
                     ||
@@ -2958,7 +3048,7 @@ export default class Oficios extends Component {
                   </td>
                   <td className='monto-tabla all-tablai'>Monto</td>
                 </tr>
-                {myListComprometidos.map(comprometidos =>
+                {this.state.comprometidos.map(comprometidos =>
                   <tr>
                     <td className='all-tablai'>
                       {comprometidos.ramo}
@@ -3574,9 +3664,9 @@ export default class Oficios extends Component {
                 </div>
                 <div>
                   <p className='text-titulo-ga'>PROCURADURÍA GENERAL DE JUSTICA DE HIDALGO</p>
-                  {myListComprometidos.map(comprometidos =>
+                  {this.state.comprometidos.map(comprometidos =>
                     <p className='text-titulo-ga'>
-                      {myListComprometidos.length <= 1 ?
+                      {this.state.comprometidos.length <= 1 ?
                         (comprometidos.up === '01' &&
                         'Atención y seguimiento a peticiones recibidas en el despacho del procurador atendidas')
                         ||
