@@ -32,15 +32,7 @@ export default class Oficios extends Component {
       up: '',
       perro: '',
       desc: '',
-      hojas: 'Hola',
-      comprobantes: [
-        {
-          id: 1,
-          name: 'prueba',
-          done: false
-        }
-      ],
-      compro: []
+      hojas: ''
     }
   }
 
@@ -109,11 +101,10 @@ export default class Oficios extends Component {
   }
 
   onCollectionUpdate = (querySnapshot) => {
-    const comprometidos = []
+    let comprometidos = []
     querySnapshot.forEach((doc) => {
       const { año, ramo, up, rubro, tg, partida, npro, f, fu, sf, eje, s, prog,
-              obj, proy, est, ben, eg, importe_comp, ur, total, no_proyecto,
-              comprobantes } = doc.data()
+        obj, proy, est, ben, eg, importe_comp, ur, total } = doc.data()
       comprometidos.push({
         key: doc.id,
         doc,
@@ -138,8 +129,17 @@ export default class Oficios extends Component {
         importe_comp,
         total,
         ur,
-        no_proyecto,
-        comprobantes
+        comprobantes: []
+      })
+      firebase.firestore().collection('fondos').doc(this.props.match.params.id).collection('comprometidos').get().then(comprometidosSnapshot => {
+        console.log(this.state.comprometidos)
+        for (let i = 0; i < comprometidosSnapshot.size; i++) {
+          if (comprometidosSnapshot.docs[i].exists) {
+            console.log(comprometidosSnapshot.docs[i].data().comprobantes)
+            console.log(comprometidos[i].comprobantes.push({perro: 'perro'})) // .comprobantes.push(comprometidosSnapshot.docs[i].data().comprobantes)
+            console.log(comprometidos)
+          }
+        }
       })
     })
     this.setState({
@@ -152,6 +152,7 @@ export default class Oficios extends Component {
   }
 
   render () {
+    console.log(this.state.comprometidos)
     var today = new Date()
     var meses = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre']
     var diasSemana = ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado']
@@ -355,7 +356,7 @@ export default class Oficios extends Component {
                   modal
                   closeOnDocumentClick>
                   <div ref={el => (this.gasto = el)} style={{ zIndex: '2', width: '100%' }}>
-                  {this.state.comprometidos.map((comprometidos, i) =>
+                  {this.state.comprometidos.map(comprometidos =>
                   <div className='lll'>
                     <div style={{ width: '100%' }}>
                       <div className='title-ga'>

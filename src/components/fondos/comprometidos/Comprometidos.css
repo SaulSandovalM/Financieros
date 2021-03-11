@@ -64,6 +64,9 @@
   border-top: 0;
   width: 8%;
 }
+.MuiTableCell-root {
+  padding: 10px !important;
+}
 .border-table-area {
   border-left: 0;
   border-right-color: white;
@@ -100,10 +103,10 @@
   overflow-y: scroll;
 }
 .list-align {
-  width: 15%;
+  width: 20%;
 }
 .list-align-i {
-  width: 8%;
+  width: 10%;
 }
 .list-align2 {
   width: 50%;

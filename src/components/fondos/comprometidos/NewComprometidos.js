@@ -598,13 +598,13 @@ export default class NewComprometidos extends Component {
     const customListLeft = (title, items) => (
       <div>
         <Card className='card-compro'>
-          <List dense component='div' role='list' style={{ display: 'flex', flexDirection: 'column', position: 'relative', top: '0', background: 'white' }}>
+          <List dense component='div' role='list'
+            style={{ display: 'flex', flexDirection: 'column', position: 'relative', top: '0', background: 'white' }}
+          >
             <ListItem style={{ position: 'sticky', top: '0px', background: 'white', zIndex: '3' }}>
               <ListItemIcon />
               <ListItemText className='list-align-i'><b>Folio</b></ListItemText>
-              <ListItemText className='list-align-i'><b>Importe</b></ListItemText>
-              <ListItemText className='list-align-i'><b>Iva</b></ListItemText>
-              <ListItemText className='list-align-i'><b>Isr</b></ListItemText>
+              <ListItemText className='list-align-i'><b>Total</b></ListItemText>
               <ListItemText className='list-align'><b>Fecha</b></ListItemText>
               <ListItemText className='list-align2'><b>Nombre</b></ListItemText>
             </ListItem>
@@ -619,9 +619,7 @@ export default class NewComprometidos extends Component {
                     />
                   </ListItemIcon>
                   <ListItemText className='list-align-i' primary={value.folio} />
-                  <ListItemText className='list-align-i' primary={'$ ' + value.importe} />
-                  <ListItemText className='list-align-i' primary={'$ ' + value.iva} />
-                  <ListItemText className='list-align-i' primary={'$ ' + value.isr} />
+                  <ListItemText className='list-align-i' primary={'$ ' + value.total} />
                   <ListItemText className='list-align' primary={value.fecha} />
                   <ListItemText className='list-align2' primary={value.nombre} />
                 </ListItem>
@@ -639,9 +637,7 @@ export default class NewComprometidos extends Component {
             <ListItem style={{ position: 'sticky', top: '0px', background: 'white', zIndex: '3' }}>
               <ListItemIcon />
               <ListItemText className='list-align-i'><b>Folio</b></ListItemText>
-              <ListItemText className='list-align-i'><b>Importe</b></ListItemText>
-              <ListItemText className='list-align-i'><b>Iva</b></ListItemText>
-              <ListItemText className='list-align-i'><b>Isr</b></ListItemText>
+              <ListItemText className='list-align-i'><b>Total</b></ListItemText>
               <ListItemText className='list-align'><b>Fecha</b></ListItemText>
               <ListItemText className='list-align2'><b>Nombre</b></ListItemText>
             </ListItem>
@@ -656,9 +652,7 @@ export default class NewComprometidos extends Component {
                     />
                   </ListItemIcon>
                   <ListItemText className='list-align-i' primary={value.folio} />
-                  <ListItemText className='list-align-i' primary={'$ ' + value.importe} />
-                  <ListItemText className='list-align-i' primary={'$ ' + value.iva} />
-                  <ListItemText className='list-align-i' primary={'$ ' + value.isr} />
+                  <ListItemText className='list-align-i' primary={'$ ' + value.total} />
                   <ListItemText className='list-align' primary={value.fecha} />
                   <ListItemText className='list-align2' primary={value.nombre} />
                 </ListItem>
@@ -677,9 +671,9 @@ export default class NewComprometidos extends Component {
             spacing={1}
             justify='center'
             alignItems='center'
-            style={{ display: 'flex', flexDirection: 'column', width: '100%' }}
+            style={{ display: 'flex', flexDirection: 'row', width: '100%' }}
           >
-            <Grid item xs style={{ width: '100%' }}>
+            <Grid item xs style={{ width: '50%' }}>
               {this.state.show ?
                 <div className='div-into-data'>
                   <div className='recibo-container'>
@@ -738,14 +732,14 @@ export default class NewComprometidos extends Component {
               }
             </Grid>
             <Grid item>
-              <Grid container direction='row' alignItems='center'>
+              <Grid container direction='column' alignItems='center'>
                 <Button
                   variant='outlined'
                   size='small'
                   onClick={handleCheckedRight}
                   disabled={leftChecked.length === 0}
                 >
-                  &#5167;
+                  &gt;
                 </Button>
                 <Button
                   variant='outlined'
@@ -753,11 +747,11 @@ export default class NewComprometidos extends Component {
                   onClick={handleCheckedLeft}
                   disabled={rightChecked.length === 0}
                 >
-                  &#5169;
+                  &lt;
                 </Button>
               </Grid>
             </Grid>
-            <Grid item xs style={{ width: '100%' }}>
+            <Grid item xs style={{ width: '50%' }}>
               {customListRight('Choices', right)}
             </Grid>
           </Grid>
@@ -852,7 +846,7 @@ export default class NewComprometidos extends Component {
                   </select>
                 </TableCell>
                 <TableCell className='border-table2'>
-                  {this.state.importe ?
+                  {this.state.right.length > 0 ?
                     <CurrencyFormat
                       className='font-tb'
                       displayType='text'
@@ -872,7 +866,7 @@ export default class NewComprometidos extends Component {
                   }
                 </TableCell>
                 <TableCell className='border-table2'>
-                  {this.state.importe ?
+                  {this.state.right.length > 0 ?
                     <CurrencyFormat
                       className='font-tb'
                       displayType='text'
@@ -891,7 +885,7 @@ export default class NewComprometidos extends Component {
                   }
                 </TableCell>
                 <TableCell className='border-table2'>
-                  {this.state.importe ?
+                  {this.state.right.length > 0 ?
                     <CurrencyFormat
                       className='font-tb'
                       displayType='text'
@@ -911,7 +905,7 @@ export default class NewComprometidos extends Component {
                   }
                 </TableCell>
                 <TableCell className='border-table2'>
-                  {this.state.importe ?
+                  {this.state.right.length > 0 ?
                     <CurrencyFormat
                       className='font-tb'
                       displayType='text'
