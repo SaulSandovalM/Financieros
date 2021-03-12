@@ -39,7 +39,6 @@ export default class Valeslist extends Component {
       estatus: 'Pendiente',
       xml: 0,
       pdf2: 0,
-      pdf3: 0,
       filer: '',
       filexml: ['No hay datos cargados'],
       filex: ['No hay datos cargados'],
@@ -136,6 +135,7 @@ export default class Valeslist extends Component {
           recibos: child.val().recibos,
           sc: child.val().sc,
           fecha: child.val().fecha,
+          fechaF: child.val().fechaF,
           autorizo: child.val().autorizo,
           personaR: child.val().personaR,
           estatus: child.val().estatus,
@@ -144,6 +144,8 @@ export default class Valeslist extends Component {
           filef: child.val().filef,
           recibosList: child.val().recibosList,
           obs: child.val().obs,
+          fechaP: child.val().fechaP,
+          rein: child.val().rein,
           id: child.key
         })
       })
@@ -202,6 +204,7 @@ export default class Valeslist extends Component {
       recibos: item.recibos,
       sc: item.sc,
       fecha: item.fecha,
+      fechaF: item.fechaF,
       autorizo: item.autorizo,
       personaR: item.personaR,
       estatus: item.estatus,
@@ -209,12 +212,22 @@ export default class Valeslist extends Component {
       filefactura: this.state.filefactura ? this.state.filefactura : [0],
       filef: this.state.filef ? this.state.filef : [0],
       recibosList: this.state.recibosList ? this.state.recibosList : [0],
-      obs: this.state.obs
+      obs: item.obs,
+      fechaP: item.fechaP,
+      rein: item.rein
     }
     firebase.database().ref().update(updates)
     this.state.recibosList.forEach(element => firebase.database().ref('xml').push(element))
     alert('Tu solicitud fue enviada.')
-    this.resetForm()
+    this.setState({
+      filexml: ['No hay datos cargados'],
+      filex: ['No hay datos cargados'],
+      filefactura: [{ url: '', nombre: '' }],
+      filef: [{ url: '', nombre: '' }],
+      recibosList: [{ folio: 'Recibo', nombre: '', importe: '', iva: '0', isr: '0', fecha: '', estatus: '', subtotal: '0', total: '0', uuid: 'Recibo' }],
+      obs: '',
+      pdf2: 0
+    })
   }
 
   obs = (item) => {
@@ -233,6 +246,7 @@ export default class Valeslist extends Component {
       recibos: item.recibos,
       sc: item.sc,
       fecha: item.fecha,
+      fechaF: item.fechaF,
       autorizo: item.autorizo,
       personaR: item.personaR,
       estatus: item.estatus,
@@ -240,7 +254,9 @@ export default class Valeslist extends Component {
       filefactura: item.filefactura,
       filef: item.filef,
       recibosList: item.recibosList,
-      obs: this.state.obs
+      obs: this.state.obs,
+      fechaP: item.fechaP,
+      rein: item.rein
     }
     firebase.database().ref().update(updates)
     alert('Tu solicitud fue enviada.')
@@ -271,6 +287,7 @@ export default class Valeslist extends Component {
   }
 
   render () {
+    console.log(this.state.filefactura)
     return (
       <div className='container-valeslist'>
         <div className='margin-f-a'>

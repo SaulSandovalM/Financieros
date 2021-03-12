@@ -43,14 +43,15 @@ export default class Vales extends Component {
       contador: {},
       contadorc: {},
       searchF: '',
-      fechaP: '',
       fechaF: '',
       filexml: ['No hay datos cargados'],
       filex: ['No hay datos cargados'],
       filefactura: ['No hay datos cargados'],
       filef: ['No hay datos cargados'],
       recibosList: ['No hay datos cargados'],
-      rein: ''
+      obs: ' ',
+      fechaP: ' ',
+      rein: ' ',
     }
   }
 
@@ -118,7 +119,9 @@ export default class Vales extends Component {
           filefactura: child.val().filefactura,
           filef: child.val().filef,
           recibosList: child.val().recibosList,
+          obs: child.val().obs,
           fechaP: child.val().fechaP,
+          rein: child.val().rein,
           id: child.key
         })
       })
@@ -199,7 +202,10 @@ export default class Vales extends Component {
       estatusC: this.state.estatusC,
       filefactura: this.state.filefactura,
       filef: this.state.filef,
-      recibosList: this.state.recibosList
+      recibosList: this.state.recibosList,
+      obs: this.state.obs,
+      fechaP: this.state.fechaP,
+      rein: this.state.rein,
     }
     this.setState({
       vale: this.state.contador.storyCount,
@@ -218,13 +224,17 @@ export default class Vales extends Component {
       fecha: this.state.fecha,
       fechaF: this.state.fechaF,
       autorizo: this.inputAutorizo.value,
-      estatus: this.state.estatus
+      estatus: this.state.estatus,
+      obs: this.state.obs,
+      fechaP: this.state.fechaP,
+      rein: this.state.rein,
     })
     if (params.vale && params.cheque && params.cantidad && params.cantidadc &&
         params.cantidadr && params.concepto && params.oficioS && params.area &&
         params.turno && params.factura && params.recibos && params.sc &&
         params.autorizo && params.personaR && params.estatus && params.fecha &&
-        params.fechaF && params.estatusC) {
+        params.fechaF && params.estatusC && params.filefactura && params.filef &&
+        params.recibosList && params.obs && params.fechaP && params.rein) {
       var f = parseInt(params.cantidadc)
       const statsRef = firebase.firestore().collection('caja').doc('--stats--')
       const increment = firebase.firestore.FieldValue.increment(-f)
@@ -275,7 +285,8 @@ export default class Vales extends Component {
       estatusC: item.estatusC,
       filefactura: this.state.filefactura ? item.filefactura : this.state.filefactura,
       filef: this.state.filef ? this.state.filef : item.filef ,
-      recibosList: this.state.recibosList ? item.recibosList : this.state.recibosList ,
+      recibosList: this.state.recibosList ? item.recibosList : this.state.recibosList,
+      obs: item.obs,
       fechaP: this.state.fechaP,
       rein: this.state.rein
     }

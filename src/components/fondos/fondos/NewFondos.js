@@ -70,7 +70,6 @@ export default class Fondos extends Component {
     this.unsubscribe = null
     this.state = {
       fondo: '',
-      numfondo: '',
       fecha: today,
       tipo_doc: '',
       oficio_aut: '',
@@ -89,7 +88,6 @@ export default class Fondos extends Component {
       observaciones: '',
       numProy: '',
       fondos: [],
-      numFondo: [],
       value: '',
       key: '',
       contador: {},
@@ -113,7 +111,6 @@ export default class Fondos extends Component {
     querySnapshot.forEach((doc) => {
       const {
         fondo,
-        numfondo,
         tipo_doc,
         importe,
         fecha,
@@ -124,7 +121,6 @@ export default class Fondos extends Component {
         key: doc.id,
         doc,
         fondo,
-        numfondo,
         tipo_doc,
         importe,
         realizo,
@@ -142,7 +138,6 @@ export default class Fondos extends Component {
     querySnapshot.forEach((doc) => {
       const {
         fondo,
-        numfondo,
         tipo_doc,
         importe,
         fecha,
@@ -153,7 +148,6 @@ export default class Fondos extends Component {
         key: doc.id,
         doc,
         fondo,
-        numfondo,
         tipo_doc,
         importe,
         realizo,
@@ -176,7 +170,6 @@ export default class Fondos extends Component {
     e.preventDefault()
     const {
       fondo,
-      numfondo,
       fecha,
       tipo_doc,
       oficio_aut,
@@ -197,7 +190,6 @@ export default class Fondos extends Component {
     } = this.state
     this.ref.add({
         fondo,
-        numfondo,
         fecha,
         tipo_doc,
         oficio_aut,
@@ -218,7 +210,6 @@ export default class Fondos extends Component {
       }).then((docRef) => {
         this.setState({
           fondo: '',
-          numfondo: '',
           fecha: '',
           tipo_doc: '',
           oficio_aut: '',
@@ -387,7 +378,6 @@ export default class Fondos extends Component {
         newArray.push(el)
       }
     })
-    this.state.numfondo = String(this.state.fondo)
 
     return (
       <div>

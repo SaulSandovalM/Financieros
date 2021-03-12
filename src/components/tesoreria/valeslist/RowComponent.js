@@ -40,6 +40,7 @@ export default class RowComponent extends Component {
   }
 
   render () {
+
     return (
       <TableBody>
         <div style={{ display: 'flex', flexDirection: 'row', maxWidth: '100%' }}>
@@ -80,6 +81,7 @@ export default class RowComponent extends Component {
               thousandSeparator
               decimalSeparator='.'
             />
+            / {this.props.item.fechaP}
           </TableCell>
           <TableCell className='table-v-num2' style={{ width: '100px' }}>
             <CurrencyFormat
@@ -89,6 +91,7 @@ export default class RowComponent extends Component {
               thousandSeparator
               decimalSeparator='.'
             />
+            / {this.props.item.fechaP}
           </TableCell>
           <TableCell className='table-v-num2' style={{ width: '800px' }}>
             {this.props.item.concepto}
@@ -243,7 +246,7 @@ export default class RowComponent extends Component {
                           }}
                           className='click-arch'
                         >
-                          { item.nombre }
+                          Nombre: { item.nombre } Importe: ${ item.importe } Fecha: { item.fecha }
                         </TableCell>
                       ))}
                     </TableRow>

@@ -27,9 +27,14 @@ export default class ListComponent extends Component {
       auto: '',
       pend: '',
       noauto: '',
-      comp: ''
+      comp: '',
+      prueba: ''
     }
     this.handleExcel = this.handleExcel.bind(this)
+  }
+
+  handleChange (event) {
+    this.setState({ [event.target.name]: event.target.value })
   }
 
   componentWillMount () {
@@ -86,7 +91,8 @@ export default class ListComponent extends Component {
 
   render () {
     const { auto, pend, noauto, comp } = this.state
-    var fechah = new Date().getMonth() + 1
+    console.log(this.state.prueba)
+    var fechah = new Date(this.state.prueba).getMonth() + 1
     const filteredData = this.props.lista.filter(
       (vales) => {
         return (auto.length && auto.includes(vales.estatus) && this.state.autorizados && new Date(vales.fecha).getMonth() + 1 === fechah) ||
@@ -120,6 +126,14 @@ export default class ListComponent extends Component {
     return (
       <div>
         <FormGroup row style={{ display: 'flex', justifyContent: 'space-between' }}>
+          <input
+            style={{ border: 'none', background: 'transparent' }}
+            label='Observaciones'
+            name='prueba'
+            type='date'
+            value={this.state.prueba}
+            onChange={this.handleChange.bind(this)}
+          />
           <FormControlLabel
             control={
               <Checkbox

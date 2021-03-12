@@ -68,7 +68,6 @@ export default class FondoE extends Component {
     this.unsubscribe = null
     this.state = {
       fondo: '',
-      numfondo: '',
       fecha: today,
       tipo_doc: '',
       oficio_aut: '',
@@ -87,7 +86,6 @@ export default class FondoE extends Component {
       observaciones: '',
       numProy: '',
       fondos: [],
-      numFondo: [],
       value: '',
       key: '',
       contador: {},
@@ -273,7 +271,6 @@ export default class FondoE extends Component {
         newArray.push(el)
       }
     })
-    this.state.numfondo = String(this.state.fondo)
 
     return (
       <div>
