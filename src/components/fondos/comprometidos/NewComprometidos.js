@@ -995,7 +995,6 @@ export default class NewComprometidos extends Component {
           <Fab
             color='primary'
             style={{ background: '#3f51b5' }}
-            onClick={this.cambio}
             variant='extended'
           >
             <AddIcon style={{ marginRight: '6px' }} />
