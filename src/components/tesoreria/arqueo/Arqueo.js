@@ -99,10 +99,9 @@ export default class Arqueo extends Component {
       can2: this.inputCan2.value,
       can1: this.inputCan1.value,
       can0: this.inputCan0.value,
-      fecha: this.state.fecha,
-      hora: this.state.hora,
+      fecha: this.inputFecha.value,
       numCheque: this.inputCheque.value,
-      total: this.state.total
+      total: this.inputSumat.value
     }
     this.setState({
       can1000: this.inputCan1000.value,
@@ -116,15 +115,13 @@ export default class Arqueo extends Component {
       can2: this.inputCan2.value,
       can1: this.inputCan1.value,
       can0: this.inputCan0.value,
-      fecha: this.state.fecha,
-      hora: this.state.hora,
+      fecha: this.inputFecha.value,
       numCheque: this.inputCheque.value,
       total: this.state.total,
     })
     if (params.can1000 && params.can500 && params.can200 && params.can100 &&
-      params.can50 && params.can20 && params.can10 && params.can5 &&
-      params.can2 && params.can1 && params.can0 && params.fecha
-      && params.numCheque && params.total) {
+      params.can50 && params.can20 && params.can10 && params.can5 && params.can2 &&
+      params.can1 && params.can0 && params.fecha && params.numCheque && params.total) {
       firebase.database().ref('arqueo').push(params).then(() => {
         alert('Tu solicitud fue enviada.')
       }).catch(() => {
@@ -179,9 +176,7 @@ export default class Arqueo extends Component {
     var punto = parseInt(this.state.can0) * 0.5
     var sumaT = mil + quinientos + doscientos + cien + cincuenta + veinte +
       diez + cinco + dos + uno + punto
-    this.state.total = sumaT
     today = new Date()
-    this.state.hora = today.getHours() + ':' + [(today.getMinutes() < 10 ? '0' : '') + today.getMinutes()]
     var dd = today.getDate()
     var mm = today.getMonth() + 1
     var yyyy = today.getFullYear()
@@ -192,7 +187,6 @@ export default class Arqueo extends Component {
       mm = '0' + mm
     }
     today = yyyy + '-' + mm + '-' + dd
-    this.state.fecha = today
 
     return (
       <div className='pf-container-a' style={{ marginTop: '40px' }}>
@@ -221,6 +215,14 @@ export default class Arqueo extends Component {
                 closeOnDocumentClick>
                 <form className='form-class' onSubmit={this.sendMessage.bind(this)} ref='contactForm'>
                   <div className='cen-tit'>
+                    <input
+                      style={{ display: 'none' }}
+                      id='fecha'
+                      name='fecha'
+                      value={today}
+                      onChange={this.onChange}
+                      ref={fecha => this.inputFecha = fecha}
+                    />
                     <div className='title-ar'>
                       <b>AGREGA EL NUMERO DE CHEQUE PARA REALIZAR TU ARQUEO</b>
                       <input
@@ -228,7 +230,8 @@ export default class Arqueo extends Component {
                         name='numCheque'
                         value={this.state.numCheque}
                         onChange={this.onChange}
-                        ref={numCheque => this.inputCheque = numCheque} />
+                        ref={numCheque => this.inputCheque = numCheque}
+                      />
                     </div>
                   </div>
                   <div className='arqueo-content-pop'>
@@ -477,8 +480,14 @@ export default class Arqueo extends Component {
                           />
                         </p>
                       </div>
-                      <div className='title-arqueo'>
-                        <p className='p-mar-arqueo'>$ {sumaT}</p>
+                      <div className='title-arqueo' style={{ flexDirection: 'row' }}>
+                        <input
+                          className='input-sumt'
+                          id='sumaT'
+                          required
+                          value={sumaT}
+                          ref={sumaT => this.inputSumat = sumaT}
+                        />
                       </div>
                     </div>
                   </div>

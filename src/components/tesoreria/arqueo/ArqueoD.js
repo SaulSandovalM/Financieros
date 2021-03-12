@@ -101,7 +101,6 @@ export default class ArqueoD extends Component {
           can1: child.val().can1,
           can0: child.val().can0,
           fecha: child.val().fecha,
-          hora: child.val().hora,
           numCheque: child.val().numCheque,
           total: child.val().total,
           id: child.key
@@ -163,7 +162,7 @@ export default class ArqueoD extends Component {
     let filteredDates = this.state.listay.filter(function(date) {
       return date.fecha === fechaAnterior
     })
-    const len = filteredDates.length
+    var len = filteredDates.length
     filteredDates.map((rank, i) => {
       if (len === i + 1) {
         this.state.lasrResult = rank.total

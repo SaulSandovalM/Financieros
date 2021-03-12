@@ -18,7 +18,8 @@
   border-right: 0;
   border-top: 0;
   padding: 10px;
-  width: 90%;
+  width: 96%;
+  text-transform: uppercase;
 }
 .div-btn-comp {
   margin-top: 28px;
@@ -63,9 +64,6 @@
   border-right-color: white;
   border-top: 0;
   width: 8%;
-}
-.MuiTableCell-root {
-  padding: 10px !important;
 }
 .border-table-area {
   border-left: 0;
@@ -116,4 +114,13 @@
 }
 .MuiTableCell-root  {
   text-align: center;
+}
+.div-content-fab-com {
+  bottom: 0;
+  margin: 30px;
+  position: fixed;
+  right: 0;
+  display: flex;
+  justify-content: space-between;
+  width: 97%;
 }

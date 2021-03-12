@@ -176,3 +176,8 @@
   height: 18px;
   cursor: pointer;
 }
+.input-sumt {
+  background: transparent;
+  border: none;
+  text-align: center;
+}

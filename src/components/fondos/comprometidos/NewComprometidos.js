@@ -685,17 +685,6 @@ export default class NewComprometidos extends Component {
                       placeholder='Ingresa el Folio / Nombre / Fecha a buscar'
                     />
                   </div>
-                  <div className='div-btn-comp'>
-                    <Button
-                      variant="contained"
-                      color="primary"
-                      size="small"
-                      startIcon={<AutorenewIcon />}
-                      onClick={this.toggleShow.bind(this)}
-                    >
-                      Cambiar
-                    </Button>
-                  </div>
                 </div>
                 :
                 <div className='div-into-data'>
@@ -713,17 +702,6 @@ export default class NewComprometidos extends Component {
                       }}
                       accept='.xml' onChange={this.handleOnChange1.bind(this)}
                     />
-                  </div>
-                  <div className='div-btn-comp'>
-                    <Button
-                      variant="contained"
-                      color="primary"
-                      size="small"
-                      startIcon={<AutorenewIcon />}
-                      onClick={this.toggleShow.bind(this)}
-                    >
-                      Cambiar
-                    </Button>
                   </div>
                 </div>
               }
@@ -752,6 +730,7 @@ export default class NewComprometidos extends Component {
               </Grid>
             </Grid>
             <Grid item xs style={{ width: '50%' }}>
+              <div style={{ height: '54px' }}/>
               {customListRight('Choices', right)}
             </Grid>
           </Grid>
@@ -1012,7 +991,16 @@ export default class NewComprometidos extends Component {
             </Paper>
           </Grid>
         </Grid>
-        <div className='div-content-fab'>
+        <div className='div-content-fab-com'>
+          <Fab
+            color='primary'
+            style={{ background: '#3f51b5' }}
+            onClick={this.cambio}
+            variant='extended'
+          >
+            <AddIcon style={{ marginRight: '6px' }} />
+            Agregar xml
+          </Fab>
           <Fab
             color='primary'
             style={{ background: 'green' }}
