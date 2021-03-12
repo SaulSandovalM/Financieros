@@ -231,6 +231,17 @@ export default class RowComponent extends Component {
                       ))}
                     </TableRow>
                     <TableRow>
+                      <TableCell
+                        style={{
+                          borderLeft: '0px solid #fff',
+                          borderTop: '0px solid #fff',
+                          borderRight: '0px solid #fff'
+                        }}
+                      >
+                        <b>Recibos</b>
+                      </TableCell>
+                    </TableRow>
+                    <TableRow>
                       {this.props.item.recibosList.map((item, i) => (
                         <TableCell
                           component="th"

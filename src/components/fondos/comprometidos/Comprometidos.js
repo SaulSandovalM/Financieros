@@ -22,7 +22,6 @@ import firebase from '../../../Firebase'
 import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown'
 import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp'
 import Dropzone from 'react-dropzone'
-import AutorenewIcon from '@material-ui/icons/Autorenew'
 
 export default class NewComprometidos extends Component {
   constructor (props) {

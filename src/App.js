@@ -33,7 +33,7 @@ import Caratula from './components/tesoreria/caratula/Caratula'
 // Parte de Fondos
 import Fondos from './components/fondos/fondos/Fondos'
 import FondoE from './components/fondos/fondos/FondoE'
-import Comprometidos from './components/fondos/comprometidos/NewComprometidos'
+import Comprometidos from './components/fondos/comprometidos/Comprometidos'
 import Oficios from './components/fondos/oficios/Oficios'
 import Consulta from './components/fondos/consulta/Consulta'
 import Cpdf from './components/fondos/consulta/Cpdf'
