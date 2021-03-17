@@ -373,7 +373,7 @@ export default class Valeslist extends Component {
                 {this.state.recibosList.map((x, i) =>
                   <div key={i} style={{ display: 'flex', justifyContent: 'center' }}>
                     <TextField
-                      label='Numero de Recibo'
+                      label='Recibo'
                       name='folio'
                       value={x.folio}
                       onChange={e => this.handleInputChange(e, i)}
