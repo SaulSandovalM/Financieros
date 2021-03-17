@@ -3,6 +3,7 @@
   display: flex;
   flex-direction: column;
   margin: 30px 20px 20px 20px;
+  background: white;
 }
 .vale-title-container {
   display: flex;
@@ -158,6 +159,7 @@ textarea { resize: none; }
   text-align: center;
   width: 100%;
   -webkit-appearance: none;
+  background: white;
 }
 .space-c {
   height: 50px;
@@ -208,6 +210,7 @@ textarea { resize: none; }
   border-bottom: 2px solid;
   margin: 0;
   -webkit-appearance: none;
+  background: #fff;
 }
 select {
   border: 0;
@@ -215,7 +218,7 @@ select {
   width: 100%;
 }
 .b-fecha-i {
-  background: #f4f4f4;
+  background: #fff;
   border: 0 solid;
   border-bottom: 2px solid;
   font-size: 14px;
