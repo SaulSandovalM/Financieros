@@ -126,6 +126,7 @@ export default class ArqueoD extends Component {
           personaR: child.val().personaR,
           fechaP: String(child.val().fechaP),
           fechaF: String(child.val().fechaF),
+          rein: String(child.val().rein),
           done: child.val().done,
           id: child.key
         })
@@ -180,6 +181,7 @@ export default class ArqueoD extends Component {
       }
     })
     var selectF = this.state.searchF
+    console.log(selectF)
 
     return (
       <div>
@@ -279,19 +281,7 @@ export default class ArqueoD extends Component {
                       <div className='tb-1'>
                         <div className='tb-n'>
                           <CurrencyFormat
-                            value={
-                              parseInt(item.can1000) * 1000 +
-                              parseInt(item.can500) * 500 +
-                              parseInt(item.can200) * 200 +
-                              parseInt(item.can100) * 100 +
-                              parseInt(item.can50) * 50 +
-                              parseInt(item.can20) * 20 +
-                              parseInt(item.can10) * 10 +
-                              parseInt(item.can5) * 5 +
-                              parseInt(item.can2) * 2 +
-                              parseInt(item.can1) * 1 +
-                              parseInt(item.can0) * .5
-                            }
+                            value={this.state.lasrResult} // aqui
                             displayType='text'
                             thousandSeparator
                             prefix='$ '
@@ -635,7 +625,7 @@ export default class ArqueoD extends Component {
                   this.state.lista.map(item =>
                     <div className='tb-n'>
                       <CurrencyFormat
-                        value={item.total}
+                        value={0}  // es aqui item.total
                         displayType='text'
                         thousandSeparator
                         prefix='$ '
@@ -678,3 +668,15 @@ export default class ArqueoD extends Component {
     )
   }
 }
+  //
+  // parseInt(item.can1000) * 1000 +
+  // parseInt(item.can500) * 500 +
+  // parseInt(item.can200) * 200 +
+  // parseInt(item.can100) * 100 +
+  // parseInt(item.can50) * 50 +
+  // parseInt(item.can20) * 20 +
+  // parseInt(item.can10) * 10 +
+  // parseInt(item.can5) * 5 +
+  // parseInt(item.can2) * 2 +
+  // parseInt(item.can1) * 1 +
+  // parseInt(item.can0) * .5
