@@ -112,6 +112,9 @@ export default class FechaContraList extends Component {
                 <TableCell className='table-importe-c'>
                   <b>Fecha Contra</b>
                 </TableCell>
+                <TableCell className='table-importe-c'>
+                  <b>Fecha Contra</b>
+                </TableCell>
                 <TableCell component='th' scope='row' className='table-importe-c'>
                   <b>Importe</b>
                 </TableCell>
@@ -131,6 +134,9 @@ export default class FechaContraList extends Component {
                 </TableCell>
                 <TableCell component='th' scope='row' className='table-bene-c'>
                   {fondo.beneficiario}
+                </TableCell>
+                <TableCell component='th' scope='row' className='table-num-fc'>
+                  {fondo.fechaContra}
                 </TableCell>
                 <TableCell component='th' scope='row' className='table-num-fc'>
                   {fondo.numContra}

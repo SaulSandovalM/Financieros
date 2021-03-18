@@ -10,7 +10,7 @@ export default class FondosComponent extends Component {
     this.handleChangeCheque = this.handleChangeCheque.bind(this)
     this.handleChangeContra = this.handleChangeContra.bind(this)
     this.updatePublished = this.updatePublished.bind(this)
-    this.handleupdateFondo = this.handleupdateFondo.bind(this)
+    this.handleUpdateFondo = this.handleUpdateFondo.bind(this)
     this.state = {
       currentFondos: {
         id: null,
@@ -76,7 +76,7 @@ export default class FondosComponent extends Component {
       })
   }
 
-  handleupdateFondo () {
+  handleUpdateFondo () {
     const data = {
       numCheque: this.state.currentFondos.numCheque,
       numContra: this.state.currentFondos.numContra
@@ -113,7 +113,7 @@ export default class FondosComponent extends Component {
                   type='date'
                   value={currentFondos.numContra ? currentFondos.numContra : ''}
                   onChange={this.handleChangeContra}
-                  label='Fecha de Contrarecibo'
+                  label='Fecha de Pago Contrarecibo'
                   InputLabelProps={{
                     shrink: true
                   }}
@@ -187,7 +187,7 @@ export default class FondosComponent extends Component {
                 color='primary'
                 variant='contained'
                 style={{ backgroud: 'green' }}
-                onClick={this.handleupdateFondo}
+                onClick={this.handleUpdateFondo}
               >
                 Asignar Cheque
               </Button>
