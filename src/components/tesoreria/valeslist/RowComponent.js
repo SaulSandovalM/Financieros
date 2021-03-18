@@ -74,25 +74,6 @@ export default class RowComponent extends Component {
             />
           </TableCell>
           <TableCell className='table-v-num2' style={{ width: '100px' }}>
-            {this.props.item.cantidadr > 0 ?
-              <CurrencyFormat
-                value={this.props.item.cantidadr}
-                displayType='text'
-                prefix=' $'
-                thousandSeparator
-                decimalSeparator='.'
-              /> :
-              <CurrencyFormat
-                value={0}
-                displayType='text'
-                prefix=' $'
-                thousandSeparator
-                decimalSeparator='.'
-              />
-            }
-            / {this.props.item.fechaP}
-          </TableCell>
-          <TableCell className='table-v-num2' style={{ width: '100px' }}>
             {this.props.item.cantidadr < 0 ?
               <CurrencyFormat
                 value={this.props.item.cantidadr}
@@ -109,7 +90,34 @@ export default class RowComponent extends Component {
                 decimalSeparator='.'
               />
             }
-            / {this.props.item.fechaP}
+            {this.props.item.cantidadr < 0 ?
+              ' / ' + this.props.item.fechaP
+              :
+              ''
+            }
+          </TableCell>
+          <TableCell className='table-v-num2' style={{ width: '100px' }}>
+            {this.props.item.cantidadr > 0 ?
+              <CurrencyFormat
+                value={this.props.item.cantidadr}
+                displayType='text'
+                prefix=' $'
+                thousandSeparator
+                decimalSeparator='.'
+              /> :
+              <CurrencyFormat
+                value={0}
+                displayType='text'
+                prefix=' $'
+                thousandSeparator
+                decimalSeparator='.'
+              />
+            }
+            {this.props.item.cantidadr > 0 ?
+              ' / ' + this.props.item.fechaP
+              :
+              ''
+            }
           </TableCell>
           <TableCell className='table-v-num2' style={{ width: '800px' }}>
             {this.props.item.concepto}

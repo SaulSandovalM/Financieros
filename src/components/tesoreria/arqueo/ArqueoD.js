@@ -181,7 +181,7 @@ export default class ArqueoD extends Component {
       }
     })
     var selectF = this.state.searchF
-    console.log(selectF)
+    var diaAnterior = this.state.lasrResult
 
     return (
       <div>
@@ -268,6 +268,7 @@ export default class ArqueoD extends Component {
                     <div>
                       <ListComponentV
                         fechaSelect={selectF}
+                        diaAnterior={diaAnterior}
                         listaVales={this.state.listaVales}
                       />
                     </div>

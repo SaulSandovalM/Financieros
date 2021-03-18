@@ -16,14 +16,13 @@ export default class RowComponentV extends Component {
     // var meses = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12']
     // var f = new Date()
     // today = f.getFullYear() + '-' + meses[f.getMonth()] + '-' + f.getDate()
-    // 718F148D-1C97-4F52-A53D-8837DD7CD4D3
-    // 8998939D-BB45-4AE7-A119-B887963E4273
-    // Investigacion y litigación
-    // IL
-    // contacts
-    // 1
-    // https://172.16.62.11:4441
     var fechaSelect = this.props.fechaSelect
+    var diaAnterior = this.props.diaAnterior
+    if (this.props.item.rein === fechaSelect && this.props.item.cheque !== 'Cancelado') {
+      console.log('entra')
+      var actual = diaAnterior - this.props.item.cantidadr
+      console.log(actual)
+    }
 
     return (
       <div style={{ width: '100%' }}>
@@ -33,7 +32,7 @@ export default class RowComponentV extends Component {
               <p className='tb-nr'>{this.props.item.vale}</p>
             </div>
             <div className='tb-1'>
-              <p className='tb-nr'>{this.props.item.estatus}</p>
+              <p className='tb-nr'>{this.props.item.cheque}</p>
             </div>
             <div className='tb-1'>
               <CurrencyFormat

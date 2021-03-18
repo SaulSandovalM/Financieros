@@ -21,6 +21,7 @@ export default class ListComponent extends Component {
 
   render () {
     var fechaSelect = this.props.fechaSelect
+    var diaAnterior = this.props.diaAnterior
 
     return (
       <div>
@@ -30,6 +31,7 @@ export default class ListComponent extends Component {
               key={item.id}
               item={item}
               fechaSelect={fechaSelect}
+              diaAnterior={diaAnterior}
             />
           )
         }
