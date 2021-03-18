@@ -104,7 +104,7 @@ export default class Oficios extends Component {
     let comprometidos = []
     querySnapshot.forEach((doc) => {
       const { año, ramo, up, rubro, tg, partida, npro, f, fu, sf, eje, s, prog,
-        obj, proy, est, ben, eg, importe_comp, ur, total } = doc.data()
+        obj, proy, est, ben, eg, importe_comp, ur, total, comprobantes } = doc.data()
       comprometidos.push({
         key: doc.id,
         doc,
@@ -129,17 +129,7 @@ export default class Oficios extends Component {
         importe_comp,
         total,
         ur,
-        comprobantes: []
-      })
-      firebase.firestore().collection('fondos').doc(this.props.match.params.id).collection('comprometidos').get().then(comprometidosSnapshot => {
-        console.log(this.state.comprometidos)
-        for (let i = 0; i < comprometidosSnapshot.size; i++) {
-          if (comprometidosSnapshot.docs[i].exists) {
-            console.log(comprometidosSnapshot.docs[i].data().comprobantes)
-            console.log(comprometidos[i].comprobantes.push({perro: 'perro'})) // .comprobantes.push(comprometidosSnapshot.docs[i].data().comprobantes)
-            console.log(comprometidos)
-          }
-        }
+        comprobantes
       })
     })
     this.setState({
@@ -152,7 +142,6 @@ export default class Oficios extends Component {
   }
 
   render () {
-    console.log(this.state.comprometidos)
     var today = new Date()
     var meses = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre']
     var diasSemana = ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado']
@@ -173,6 +162,19 @@ export default class Oficios extends Component {
       var proy = proyect.split(' ')[0]
       proyectof.push(proy)
     }
+
+    for (i = 0; i < this.state.comprometidos.length; i++) {
+      console.log(this.state.comprometidos[i])
+      console.log(this.state.comprometidos[i].comprobantes)
+      // for (var j = 0; j < this.state.comprometidos[i].comprobantes.length; j++) {
+      //   console.log(this.state.comprometidos[i].comprobantes[j])
+      // }
+    }
+
+
+
+
+
 
     return (
       <div>
@@ -676,7 +678,6 @@ export default class Oficios extends Component {
                                   Leyenda alusiva al gasto
                                 </div>
                               </div>
-
                               {/*comprometidos.comprobantes.map(item =>
                                 <div style={{ width: '100%' }}>
                                     <div style={{ width: '100%', display: 'flex' }}>
@@ -4752,3 +4753,18 @@ export default class Oficios extends Component {
     )
   }
 }
+
+
+
+// firebase.firestore().collection('fondos').doc(doc.id).collection('comprometidos').get().then(comprometidosSnapshot => {
+  // console.log(comprometidos)
+  // console.log(comprometidos[0].comprobantes.push({perro: 'perro'}))
+  // for (let i = 0; i < comprometidosSnapshot.size; i++) {
+      // console.log(comprometidosSnapshot.docs[i].data().comprobantes)
+      // console.log(comprometidosSnapshot.size)
+      // console.log(comprometidos)
+      // console.log(i)
+      // console.log(comprometidos[i].comprobantes.push({perro: 'perro'})) // .comprobantes.push(comprometidosSnapshot.docs[i].data().comprobantes)
+  // }
+// }
+// )

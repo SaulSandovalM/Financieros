@@ -4,7 +4,7 @@
 .m-f {
   background: #f4f4f4;
   margin: 0;
-  padding: 70px 20px 0px 20px;
+  padding: 70px 20px 0 20px;
 }
 .title-so-o {
   display: flex;
@@ -40,26 +40,26 @@
   margin-top: 5px;
 }
 .text-gai {
-  margin: 3px;
   font-size: 12px;
+  margin: 3px;
 }
 .bene-i {
-  margin: 0;
   font-size: 12px;
+  margin: 0;
 }
 .fs-if {
-  margin-top: 18px;
   font-size: 12px;
   margin-left: 5px;
+  margin-top: 18px;
 }
 .pass {
   height: 100vh;
   z-index: 2;
 }
 .nopass {
-  z-index: 2;
   position: absolute;
   width: 100%;
+  z-index: 2;
 }
 .text-intei {
   font-size: 12px;
@@ -71,26 +71,26 @@
   height: 15px;
 }
 .text-osb {
-  margin-top: 7px;
   font-size: 12px;
+  margin-top: 7px;
   width: 60px;
 }
 .text-soi {
-  margin: 3px;
   font-size: 12px;
+  margin: 3px;
 }
 .contenedor-soi {
-  padding: 10px;
-  width: 1050px;
   border: 1px solid;
   border-radius: 20px;
   display: flex;
   justify-content: space-between;
+  padding: 10px;
+  width: 1050px;
 }
 .lll {
   min-height: 100vh;
-  z-index: 2;
   page-break-before: auto;
+  z-index: 2;
 }
 .popup-content {
   height: 100%;
@@ -105,20 +105,20 @@
   padding: 0;
 }
 .all-tab-l {
-  height: 100%;
-  width: 99%;
-  padding: 0;
-  border: 0;
-  text-align: center;
   background: transparent;
+  border: 0;
+  height: 100%;
+  padding: 0;
+  text-align: center;
+  width: 99%;
 }
 .all-tab-f {
-  height: 50px;
   font-size: 12px;
+  height: 50px;
 }
 .all-tab-f2 {
-  height: 30px;
   font-size: 12px;
+  height: 30px;
 }
 .pgjh {
   height: 50px;
@@ -131,57 +131,57 @@
   width: 100%;
 }
 .hojas {
-  border: 0px;
+  border: 0;
   width: 30px;
 }
 .cpdf-subdad2 {
-  padding-top: 50px;
-  padding-left: 10%;
-  width: 80%;
   height: 100%;
+  padding-left: 10%;
+  padding-top: 50px;
+  width: 80%;
 }
 .fader-1{
-  padding-top: 100px;
   padding-left: 100px;
   padding-right: 100px;
+  padding-top: 100px;
 }
 .titulos-p{
-  padding-top: 10px;
   display: flex;
   justify-content: space-between;
   padding-bottom: 30px;
+  padding-top: 10px;
 }
 .sub-1{
   border: black 1px solid;
-  width: 1080px;
   border-radius: 10px;
+  width: 1080px;
 }
 .combo-1{
-  padding-top: 10px;
   display: flex;
   justify-content: flex-start;
+  padding-top: 10px;
 }
 .uno{
   padding-left: 5px;
   padding-right: 10px;
 }
 .input-1{
+  display: flex;
   height: 5px;
   width: 5px;
-  display: flex;
 }
 .texto-1{
-  padding-top: 20px;
   display: flex;
   justify-content: space-between;
+  padding-top: 20px;
 }
 .texto-2{
-  padding-top: 10px;
-  padding-bottom: 10px;
   border: black 1px solid;
   height: 20px;
-  width: 90px;
+  padding-bottom: 10px;
   padding-right: 60px;
+  padding-top: 10px;
+  width: 90px;
 }
 table {
    width: 100%;

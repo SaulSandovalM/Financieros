@@ -7,9 +7,10 @@ import Alert from '@material-ui/lab/Alert'
 export default class FondosComponent extends Component {
   constructor (props) {
     super(props)
-    this.onChangeCheque = this.onChangeCheque.bind(this)
+    this.handleChangeCheque = this.handleChangeCheque.bind(this)
+    this.handleChangeContra = this.handleChangeContra.bind(this)
     this.updatePublished = this.updatePublished.bind(this)
-    this.updateFondo = this.updateFondo.bind(this)
+    this.handleupdateFondo = this.handleupdateFondo.bind(this)
     this.state = {
       currentFondos: {
         id: null,
@@ -38,12 +39,22 @@ export default class FondosComponent extends Component {
     })
   }
 
-  onChangeCheque (e) {
+  handleChangeCheque (e) {
     const numCheque = e.target.value
     this.setState((prevState) => ({
       currentFondos: {
         ...prevState.currentFondos,
         numCheque: numCheque
+      }
+    }))
+  }
+
+  handleChangeContra (e) {
+    const numContra = e.target.value
+    this.setState((prevState) => ({
+      currentFondos: {
+        ...prevState.currentFondos,
+        numContra: numContra
       }
     }))
   }
@@ -65,9 +76,10 @@ export default class FondosComponent extends Component {
       })
   }
 
-  updateFondo () {
+  handleupdateFondo () {
     const data = {
-      numCheque: this.state.currentFondos.numCheque
+      numCheque: this.state.currentFondos.numCheque,
+      numContra: this.state.currentFondos.numContra
     }
     FondosDataService.update(this.state.currentFondos.id, data).then(() => {
       this.setState({
@@ -80,18 +92,33 @@ export default class FondosComponent extends Component {
 
   render () {
     const { currentFondos } = this.state
+    console.log(currentFondos)
 
     return (
       <div className='fondos-cont-contra'>
         {currentFondos ? (
           <div>
             <form>
-              <TextField
-                id='numCheque'
-                value={currentFondos.numCheque ? currentFondos.numCheque : 'Agrege el Cheque'}
-                onChange={this.onChangeCheque}
-                label='Numero de Cheque'
-              />
+              <div className='div-textf'>
+                <TextField
+                  style={{ width: '46%' }}
+                  id='numCheque'
+                  value={currentFondos.numCheque ? currentFondos.numCheque : 'Agrege el Cheque'}
+                  onChange={this.handleChangeCheque}
+                  label='Numero de Cheque'
+                />
+                <TextField
+                  style={{ width: '46%' }}
+                  id='numContra'
+                  type='date'
+                  value={currentFondos.numContra ? currentFondos.numContra : ''}
+                  onChange={this.handleChangeContra}
+                  label='Fecha de Contrarecibo'
+                  InputLabelProps={{
+                    shrink: true
+                  }}
+                />
+              </div>
               <h4>Información de Fondo</h4>
               <div className='div-textf'>
                 <TextField
@@ -160,7 +187,7 @@ export default class FondosComponent extends Component {
                 color='primary'
                 variant='contained'
                 style={{ backgroud: 'green' }}
-                onClick={this.updateFondo}
+                onClick={this.handleupdateFondo}
               >
                 Asignar Cheque
               </Button>
