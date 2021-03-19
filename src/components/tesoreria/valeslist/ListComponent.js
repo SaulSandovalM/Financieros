@@ -118,11 +118,17 @@ export default class ListComponent extends Component {
 
     const total3 = [0]
     filteredData.map(items => (
-      total3.push(parseFloat(items.cantidadr))
+      items.cantidadr < 0 ? total3.push(parseFloat(items.cantidadr)) : null
     ))
     const tt3 = (a, b) => a + b
     var tcantidad3 = total3.reduce(tt3)
-    console.log(fechah)
+
+    const total4 = [0]
+    filteredData.map(items => (
+      items.cantidadr > 0 ? total4.push(parseFloat(items.cantidadr)) : null
+    ))
+    const tt4 = (a, b) => a + b
+    var tcantidad4 = total4.reduce(tt4)
 
     return (
       <div>
@@ -192,8 +198,8 @@ export default class ListComponent extends Component {
                 <TableCell className='table-v-num' style={{ width: '100px' }}><b>Cheques</b></TableCell>
                 <TableCell className='table-v-num' style={{ width: '100px' }}><b>Autorizado</b></TableCell>
                 <TableCell className='table-v-num' style={{ width: '100px' }}><b>Comprobado</b></TableCell>
-                <TableCell className='table-v-num' style={{ width: '100px' }}><b>Reintegro</b></TableCell>
-                <TableCell className='table-v-num' style={{ width: '100px' }}><b>Reembolso</b></TableCell>
+                <TableCell className='table-v-num' style={{ width: '150px' }}><b>Reintegro</b></TableCell>
+                <TableCell className='table-v-num' style={{ width: '150px' }}><b>Reembolso</b></TableCell>
                 <TableCell className='table-v-num' style={{ width: '800px' }}><b>Concepto</b></TableCell>
                 <TableCell className='table-v-num' style={{ width: '800px' }}><b>Oficio S</b></TableCell>
                 <TableCell className='table-v-num' style={{ width: '800px' }}><b>Área</b></TableCell>
@@ -244,7 +250,7 @@ export default class ListComponent extends Component {
                   />
                 </b>
               </TableCell>
-              <TableCell className='table-v-num' style={{ width: '100px' }}>
+              <TableCell className='table-v-num' style={{ width: '150px' }}>
                 <b>
                   <CurrencyFormat
                     value={tcantidad3}
@@ -255,10 +261,10 @@ export default class ListComponent extends Component {
                   />
                 </b>
               </TableCell>
-              <TableCell className='table-v-num' style={{ width: '100px' }}>
+              <TableCell className='table-v-num' style={{ width: '150px' }}>
                 <b>
                   <CurrencyFormat
-                    value={tcantidad3}
+                    value={tcantidad4}
                     displayType='text'
                     prefix=' $'
                     thousandSeparator

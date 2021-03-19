@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import './Arqueo.css'
 import firebase from '../../../Firebase'
-import ListComponent from './ListComponent'
 import ListComponentV from './ListComponentV'
 import ReactToPrint from 'react-to-print'
 import CurrencyFormat from 'react-currency-format'
@@ -151,13 +150,13 @@ export default class ArqueoD extends Component {
   }
 
   render () {
-    var today = new Date()
-    var yesterday = new Date()
+    // var today = new Date()
+    // var yesterday = new Date()
     var meses = ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre']
     var dias = ['domingo, ', 'lunes, ', 'martes, ', 'miercoles, ', 'jueves, ', 'viernes, ', 'sabado, ']
-    var f = new Date()
-    today = dias[f.getUTCDay()] + f.getDate() + ' de ' + meses[f.getMonth()] + ' de ' + f.getFullYear()
-    yesterday = dias[f.getUTCDay() - 1] + [f.getDate() - 1] + ' de ' + meses[f.getMonth()] + ' de ' + f.getFullYear()
+    // var f = new Date()
+    // today = dias[f.getUTCDay()] + f.getDate() + ' de ' + meses[f.getMonth()] + ' de ' + f.getFullYear()
+    // yesterday = dias[f.getUTCDay() - 1] + [f.getDate() - 1] + ' de ' + meses[f.getMonth()] + ' de ' + f.getFullYear()
     const fechab = new Date(this.state.searchF)
     const fechaAnterior = fechab.getFullYear() + '-' + ('0' + (fechab.getMonth() + 1)).slice(-2) + '-' + ('0' + fechab.getDate()).slice(-2)
     let filteredDates = this.state.listay.filter(function(date) {
@@ -279,33 +278,6 @@ export default class ArqueoD extends Component {
                         listaVales={this.state.listaVales}
                       />
                     </div>
-                    {/* <div className='tabla-arq'>
-                      <div className='tb-1'>
-                        <p className='tb-n' />
-                      </div>
-                      <div className='tb-1'>
-                        <p className='tb-n' />
-                      </div>
-                      <div className='tb-1'>
-                        <div className='tb-n'>
-                          <CurrencyFormat
-                            value={this.state.lasrResult} // aqui
-                            displayType='text'
-                            thousandSeparator
-                            prefix='$ '
-                          />
-                        </div>
-                      </div>
-                      <div className='tb-1'>
-                        <p className='tb-n' />
-                      </div>
-                      <div className='tb-2'>
-                        <p className='tb-n'>{before}</p>
-                      </div>
-                      <div className='tb-3'>
-                        <p className='tb-n' />
-                      </div>
-                    </div> */}
                     <div className='arqueo-content'>
                       <div className='table-arqueo'>
                         <div className='title-arqueo'>
@@ -565,15 +537,3 @@ export default class ArqueoD extends Component {
     )
   }
 }
-  //
-  // parseInt(item.can1000) * 1000 +
-  // parseInt(item.can500) * 500 +
-  // parseInt(item.can200) * 200 +
-  // parseInt(item.can100) * 100 +
-  // parseInt(item.can50) * 50 +
-  // parseInt(item.can20) * 20 +
-  // parseInt(item.can10) * 10 +
-  // parseInt(item.can5) * 5 +
-  // parseInt(item.can2) * 2 +
-  // parseInt(item.can1) * 1 +
-  // parseInt(item.can0) * .5

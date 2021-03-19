@@ -73,7 +73,7 @@ export default class RowComponent extends Component {
               decimalSeparator='.'
             />
           </TableCell>
-          <TableCell className='table-v-num2' style={{ width: '100px' }}>
+          <TableCell className='table-v-num2' style={{ width: '150px' }}>
             {this.props.item.cantidadr < 0 ?
               <CurrencyFormat
                 value={this.props.item.cantidadr}
@@ -96,7 +96,7 @@ export default class RowComponent extends Component {
               ''
             }
           </TableCell>
-          <TableCell className='table-v-num2' style={{ width: '100px' }}>
+          <TableCell className='table-v-num2' style={{ width: '150px' }}>
             {this.props.item.cantidadr > 0 ?
               <CurrencyFormat
                 value={this.props.item.cantidadr}
@@ -281,7 +281,6 @@ export default class RowComponent extends Component {
                             justifyContent: 'space-between',
                             width: '100%'
                           }}
-                          className='click-arch'
                         >
                           Nombre: { item.nombre } Importe: ${ item.importe } Fecha: { item.fecha }
                         </TableCell>

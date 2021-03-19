@@ -7,6 +7,8 @@ import Dropzone from 'react-dropzone'
 import AddIcon from '@material-ui/icons/Add'
 import RemoveIcon from '@material-ui/icons/Remove'
 import Button from '@material-ui/core/Button'
+import AttachMoneyIcon from '@material-ui/icons/AttachMoney'
+import InputAdornment from '@material-ui/core/InputAdornment'
 
 export default class Valeslist extends Component {
   constructor(props) {
@@ -376,6 +378,7 @@ export default class Valeslist extends Component {
                       label='Recibo'
                       name='folio'
                       value={x.folio}
+                      disabled
                       onChange={e => this.handleInputChange(e, i)}
                       style={{ width: '15%', marginRight: '1%' }}
                     />
@@ -389,9 +392,17 @@ export default class Valeslist extends Component {
                     <TextField
                       label='Importe'
                       name='importe'
+                      type='number'
                       value={x.importe}
                       onChange={e => this.handleInputChange(e, i)}
                       style={{ width: '15%', marginRight: '1%' }}
+                      InputProps={{
+                        startAdornment: (
+                          <InputAdornment position="start">
+                            <AttachMoneyIcon />
+                          </InputAdornment>
+                        ),
+                      }}
                     />
                     <TextField
                       label='Fecha'
