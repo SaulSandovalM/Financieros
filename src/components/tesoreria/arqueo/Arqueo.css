@@ -142,7 +142,7 @@
   width: 11%;
 }
 .tb-n {
-  font-size: 10px;
+  font-size: 11px;
   font-weight: bold;
   margin: 5px;
   text-align: center;
@@ -172,9 +172,9 @@
 .arqueo-imp {
   background: green;
   color: white;
-  padding: 6px;
-  height: 18px;
   cursor: pointer;
+  height: 18px;
+  padding: 6px;
 }
 .input-sumt {
   background: transparent;

@@ -249,6 +249,12 @@ export default class ArqueoD extends Component {
                         <div className='tb-n'>
                           <CurrencyFormat
                             value={this.state.lasrResult}
+                            style={{
+                              display: 'flex',
+                              justifyContent: 'center',
+                              marginTop: '5px',
+                              fontSize: '12px'
+                            }}
                             displayType='text'
                             thousandSeparator
                             prefix='$ '
@@ -269,10 +275,11 @@ export default class ArqueoD extends Component {
                       <ListComponentV
                         fechaSelect={selectF}
                         diaAnterior={diaAnterior}
+                        before={before}
                         listaVales={this.state.listaVales}
                       />
                     </div>
-                    <div className='tabla-arq'>
+                    {/* <div className='tabla-arq'>
                       <div className='tb-1'>
                         <p className='tb-n' />
                       </div>
@@ -298,7 +305,7 @@ export default class ArqueoD extends Component {
                       <div className='tb-3'>
                         <p className='tb-n' />
                       </div>
-                    </div>
+                    </div> */}
                     <div className='arqueo-content'>
                       <div className='table-arqueo'>
                         <div className='title-arqueo'>
@@ -552,118 +559,7 @@ export default class ArqueoD extends Component {
             )}
           </div>
           :
-          <div className='ar-pad' ref={el => (this.arqueo = el)}>
-            <p>Dirección General de Administración y Finanzas</p>
-            <div className='arqueoI'>
-              <p className='tb-n'>ARQUEO DE CAJA CHICA</p>
-            </div>
-            <div className='tabla-arq'>
-              <div className='tb-1'>
-                <p className='tb-n'>VALE</p>
-              </div>
-              <div className='tb-1'>
-                <p className='tb-n'>ESTATUS DE PAGO</p>
-              </div>
-              <div className='tb-1'>
-                <p className='tb-n'>PAGO REAL</p>
-              </div>
-              <div className='tb-1'>
-                <p className='tb-n'>FECHA</p>
-              </div>
-              <div className='tb-2'>
-                <p className='tb-n'>DESCRIPCIÓN</p>
-              </div>
-              <div className='tb-3'>
-                <p className='tb-n'>BENEFICIARIO</p>
-              </div>
-            </div>
-            <div className='tabla-arq'>
-              <div className='tb-1'>
-                <p className='tb-n' />
-              </div>
-              <div className='tb-1'>
-                <p className='tb-n' />
-              </div>
-              <div className='tb-1'>
-                {
-                  filteredDates.map(item =>
-                    <div className='tb-n'>
-                      <CurrencyFormat
-                        value={item.total}
-                        displayType='text'
-                        thousandSeparator
-                        prefix='$ '
-                      />
-                    </div>
-                  )
-                }
-              </div>
-              <div className='tb-1'>
-                <p className='tb-n' />
-              </div>
-              <div className='tb-2'>
-                <p className='tb-n'>{yesterday}</p>
-              </div>
-              <div className='tb-3'>
-                <p className='tb-n' />
-              </div>
-            </div>
-            <div>
-              <ListComponentV
-                fechaSelect={selectF}
-                listaVales={this.state.listaVales}
-              />
-            </div>
-            <div className='tabla-arq'>
-              <div className='tb-1'>
-                <p className='tb-n' />
-              </div>
-              <div className='tb-1'>
-                <p className='tb-n' />
-              </div>
-              <div className='tb-1'>
-                {
-                  this.state.lista.map(item =>
-                    <div className='tb-n'>
-                      <CurrencyFormat
-                        value={0}  // es aqui item.total
-                        displayType='text'
-                        thousandSeparator
-                        prefix='$ '
-                      />
-                    </div>
-                  )
-                }
-              </div>
-              <div className='tb-1'>
-                <p className='tb-n' />
-              </div>
-              <div className='tb-2'>
-                <p className='tb-n'>{today}</p>
-              </div>
-              <div className='tb-3'>
-                <p className='tb-n' />
-              </div>
-            </div>
-            <div className='arqueo-content'>
-              <div className='table-arqueo'>
-                <div className='title-arqueo'>
-                  <p className='p-mar-arqueo'><b>Denominación</b></p>
-                </div>
-                <div className='title-arqueo'>
-                  <p className='p-mar-arqueo'><b>Cantidad</b></p>
-                </div>
-                <div className='title-arqueo'>
-                  <p className='p-mar-arqueo'><b>Total</b></p>
-                </div>
-              </div>
-              <div>
-                <ListComponent
-                  lista={this.state.lista}
-                />
-              </div>
-            </div>
-          </div>
+          <h1>Selecciona una fecha</h1>
         }
       </div>
     )
