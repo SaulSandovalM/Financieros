@@ -22,6 +22,7 @@ import firebase from '../../../Firebase'
 import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown'
 import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp'
 import Dropzone from 'react-dropzone'
+import history from '../../../history'
 
 export default class NewComprometidos extends Component {
   constructor (props) {
@@ -61,7 +62,8 @@ export default class NewComprometidos extends Component {
       isrr: 0,
       show: true,
       idP: '',
-      ids: ''
+      ids: '',
+      actualizar: ''
     }
   }
 
@@ -171,6 +173,15 @@ export default class NewComprometidos extends Component {
     this.listenForXml(itemsRefXml)
     const itemsRef = firebase.database().ref('presupuesto/')
     this.listenForItems(itemsRef)
+
+
+
+
+
+
+
+
+
     const ref = firebase.firestore().collection('fondos').doc(this.props.match.params.id)
     const updateRef = firebase.firestore().collection('fondos').doc(this.props.match.params.id).collection('comprometidos')
     this.unsubscribe = updateRef.onSnapshot(this.onCollectionUpdate)
@@ -270,7 +281,7 @@ export default class NewComprometidos extends Component {
           'total': xml.attributes['Total'],
           'subtotal': xml.attributes['SubTotal'] ? xml.attributes['SubTotal'] : 0,
           'folio': xml.attributes['Folio'] ? xml.attributes['Folio'] : '0',
-          'Nombre': xml.children['0'].attributes['Nombre'],
+          'nombre': xml.children['0'].attributes['Nombre'],
           'importe': xml.children['2'].children['0'].attributes['Importe'],
           'iva': xml.children['3'].attributes['TotalImpuestosTrasladados'],
           'isr': xml.children['3'].attributes['TotalImpuestosRetenidos'] ? xml.children['3'].attributes['TotalImpuestosRetenidos'] : 0,
@@ -359,48 +370,110 @@ export default class NewComprometidos extends Component {
       transferencia: item.transferencia
     }
     firebase.database().ref().update(updates)
-    const { area, total, fecha, iva, isr, importe } = this.state
-    const updateRef = firebase.firestore().collection('fondos').doc(this.props.match.params.id).collection('comprometidos').doc()
-    updateRef.set({
-      partida: item.ogasto,
-      presupuestal: item.up,
-      area: area,
-      fecha: fecha,
-      importe_comp: importe,
-      iva: iva,
-      isr: isr,
-      total: total,
-      año: item.año,
-      ramo: item.rm,
-      ur: item.ur,
-      up: item.up,
-      rubro: item.rubro,
-      tg: item.tg,
-      npro: item.npro,
-      f: item.f,
-      fu: item.fu,
-      sf: item.sf,
-      eje: item.eje,
-      s: item.s,
-      prog: item.prog,
-      sp: item.sp,
-      obj: item.obj,
-      proy: item.proy,
-      est: item.est,
-      ben: item.ben,
-      eg: item.eg,
-      comprobantes: this.state.contra
-    }).then((docRef) => {
-      this.setState({
-        partida: '',
-        up: '',
-        rubro: '',
-        presupuestal: '',
-        municipio: '',
-        area: '',
-        importe_comp: ''
-      })
+    //
+    //
+    // let comprometido = {}
+    var dir = history.location.pathname.slice(15)
+    const wishRef = firebase.database().ref(`fondos/${dir}`)
+    wishRef.once('value').then(snapshot => {
+      var updatedWish = snapshot.val()
+      // this.setState({
+      //   prue: [...updatedWish.comprometido, {folio: 'ppp'}]
+      // })
+      wishRef.update(updatedWish)
     })
+
+
+
+
+    // var direc = history.location.pathname.slice(15)
+    // const { area, total, fecha, iva, isr, importe } = this.state
+    // let perro = 'fondos' + direc
+    // perro.child('comprometido').update({
+    //   partida: item.ogasto,
+      // presupuestal: item.up,
+      // area: area,
+      // fecha: fecha,
+      // importe_comp: importe,
+      // iva: iva,
+      // isr: isr,
+      // total: total,
+      // año: item.año,
+      // ramo: item.rm,
+      // ur: item.ur,
+      // up: item.up,
+      // rubro: item.rubro,
+      // tg: item.tg,
+      // npro: item.npro,
+      // f: item.f,
+      // fu: item.fu,
+      // sf: item.sf,
+      // eje: item.eje,
+      // s: item.s,
+      // prog: item.prog,
+      // sp: item.sp,
+      // obj: item.obj,
+      // proy: item.proy,
+      // est: item.est,
+      // ben: item.ben,
+      // eg: item.eg,
+      // comprobantes: this.state.contra
+    // })
+    // comprometido['fondos/' + direc] = {
+    //   fondo: direc.fondo,
+    //   fecha: direc.fecha,
+    //   tipo_doc: direc.tipo_doc,
+    //   oficio_aut: direc.oficio_aut,
+    //   no_oficio: direc.no_oficio,
+    //   importe: direc.importe,
+    //   beneficiario: direc.beneficiario,
+    //   desc: direc.desc,
+    //   no_proyecto: direc.no_proyecto,
+    //   numCompro: direc.numCompro,
+    //   realizo: direc.realizo,
+    //   no_lici: direc.no_lici,
+    //   requisicion: direc.requisicion,
+    //   pedido: direc.pedido,
+    //   poliza: direc.poliza,
+    //   cfe: direc.cfe,
+    //   nscfe: direc.nscfe,
+    //   observaciones: direc.observaciones,
+    //   comprometido: [
+    //     {
+    //       partida: item.ogasto,
+    //       presupuestal: item.up,
+    //       area: area,
+    //       fecha: fecha,
+    //       importe_comp: importe,
+    //       iva: iva,
+    //       isr: isr,
+    //       total: total,
+    //       año: item.año,
+    //       ramo: item.rm,
+    //       ur: item.ur,
+    //       up: item.up,
+    //       rubro: item.rubro,
+    //       tg: item.tg,
+    //       npro: item.npro,
+    //       f: item.f,
+    //       fu: item.fu,
+    //       sf: item.sf,
+    //       eje: item.eje,
+    //       s: item.s,
+    //       prog: item.prog,
+    //       sp: item.sp,
+    //       obj: item.obj,
+    //       proy: item.proy,
+    //       est: item.est,
+    //       ben: item.ben,
+    //       eg: item.eg,
+    //       comprobantes: this.state.contra
+    //     }
+    //   ]
+    // }
+    // firebase.database().ref().update(comprometido)
+    //
+    //
     var changes = this.state.contra
     var prueba = {}
     changes.forEach((change) => {
@@ -661,6 +734,7 @@ export default class NewComprometidos extends Component {
         </Card>
       </div>
     )
+    var lol = history.location.pathname.slice(15)
 
     return (
       <div className='div-compro-container'>
@@ -673,37 +747,17 @@ export default class NewComprometidos extends Component {
             style={{ display: 'flex', flexDirection: 'row', width: '100%' }}
           >
             <Grid item xs style={{ width: '50%' }}>
-              {this.state.show ?
-                <div className='div-into-data'>
-                  <div className='recibo-container'>
-                    Buscador
-                    <input
-                      className='input-compro'
-                      value={this.state.search}
-                      onChange={this.upsearch.bind(this)}
-                      placeholder='Ingresa el Folio / Nombre / Fecha a buscar'
-                    />
-                  </div>
+              <div className='div-into-data'>
+                <div className='recibo-container'>
+                  Buscador
+                  <input
+                    className='input-compro'
+                    value={this.state.search}
+                    onChange={this.upsearch.bind(this)}
+                    placeholder='Ingresa el Folio / Nombre'
+                  />
                 </div>
-                :
-                <div className='div-into-data'>
-                  <div className='recibo-container'>
-                    Agregar tus XML
-                    <Dropzone
-                      style={{
-                        position: 'relative',
-                        width: '99%',
-                        height: '30px',
-                        borderWidth: '2px',
-                        borderColor: 'rgb(102, 102, 102)',
-                        borderStyle: 'solid',
-                        borderRadius: '5px'
-                      }}
-                      accept='.xml' onChange={this.handleOnChange1.bind(this)}
-                    />
-                  </div>
-                </div>
-              }
+              </div>
               {(admin === 'OMAR' || admin === 'MARCOS' || admin === 'KARINA' || admin === 'MIGUEL' || admin === 'TERESA') &&
                 customListLeft('Choices', left)
               }
@@ -997,7 +1051,15 @@ export default class NewComprometidos extends Component {
             variant='extended'
           >
             <AddIcon style={{ marginRight: '6px' }} />
-            Agregar xml
+            <Dropzone
+              style={{
+                width: '100%',
+                height: '100%',
+              }}
+              accept='.xml' onChange={this.handleOnChange1.bind(this)}
+            >
+              Agregar XML
+            </Dropzone>
           </Fab>
           <Fab
             color='primary'

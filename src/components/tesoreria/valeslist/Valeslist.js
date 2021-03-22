@@ -289,7 +289,6 @@ export default class Valeslist extends Component {
   }
 
   render () {
-    console.log(this.state.filefactura)
     return (
       <div className='container-valeslist'>
         <div className='margin-f-a'>
