@@ -18,9 +18,10 @@ import Select from '@material-ui/core/Select'
 import Chip from '@material-ui/core/Chip'
 import CurrencyFormat from 'react-currency-format'
 import { Link } from 'react-router-dom'
+import history from '../../../history'
 
 export default class Fondos extends Component {
-  constructor(props) {
+  constructor (props) {
     super(props)
     var user = firebase.auth().currentUser
     var email
@@ -74,25 +75,23 @@ export default class Fondos extends Component {
       tipo_doc: '',
       oficio_aut: '',
       no_oficio: '',
-      no_lici: '',
+      no_lici: ' ',
       importe: '',
       desc: '',
       beneficiario: '',
       realizo: admin,
-      requisicion: '',
-      pedido: '',
+      requisicion: ' ',
+      pedido: ' ',
       no_proyecto: [],
-      poliza: '',
-      cfe: '',
-      nscfe: '',
-      observaciones: '',
-      numProy: '',
+      poliza: ' ',
+      cfe: ' ',
+      nscfe: ' ',
+      observaciones: ' ',
       fondos: [],
       value: '',
       key: '',
       contador: {},
       f: '',
-      personName: [],
       searchF: '',
       nombre: '',
       oficio: [],
@@ -102,62 +101,96 @@ export default class Fondos extends Component {
           name: 'prueba',
           done: false
         }
-      ],
+      ]
     }
   }
 
-  onCollectionUpdate = (querySnapshot) => {
-    const fondos = []
-    querySnapshot.forEach((doc) => {
-      const {
-        fondo,
-        tipo_doc,
-        importe,
-        fecha,
-        realizo,
-        contrarecibo
-      } = doc.data()
-      fondos.push({
-        key: doc.id,
-        doc,
-        fondo,
-        tipo_doc,
-        importe,
-        realizo,
-        fecha,
-        contrarecibo
+  componentDidMount () {
+    const itemsRef = firebase.database().ref('fondos/')
+    this.listenForItems(itemsRef)
+    const itemsRefBeneficiario = firebase.database().ref('beneficiario/')
+    this.listenBeneficiario(itemsRefBeneficiario)
+    var wishRef = firebase.database().ref('fondo/3q4t5w63q4fw3563')
+    wishRef.on('value', (snapshot) => {
+      let updatedWish = snapshot.val()
+      this.setState({
+        fondo: updatedWish.num
       })
+      wishRef.set(updatedWish)
     })
-    this.setState({
-      fondos
+    const itemsRefPre = firebase.database().ref('presupuesto/')
+    this.listenForItemsP(itemsRefPre)
+  }
+
+  listenForItems = (itemsRef) => {
+    itemsRef.on('value', (snap) => {
+      var fondos = []
+      snap.forEach((child) => {
+        fondos.push({
+          fondo: child.val().fondo,
+          fecha: child.val().fecha,
+          tipo_doc: child.val().tiṕo_doc,
+          oficio_aut: child.val().oficio_aut,
+          no_oficio: child.val().no_oficio,
+          no_lici: child.val().no_lici,
+          importe: child.val().importe,
+          desc: child.val().desc,
+          beneficiario: child.val().beneficiario,
+          realizo: child.val().realizo,
+          requisicion: child.val().requisicion,
+          pedido: child.val().pedido,
+          no_proyecto: child.val().no_proyecto,
+          poliza: child.val().poliza,
+          cfe: child.val().cfe,
+          nscfe: child.val().nscfe,
+          observaciones: child.val().observaciones,
+          numCompro: child.val().numCompro,
+          id: child.key
+        })
+      })
+      this.setState({
+        fondos: fondos
+      })
     })
   }
 
-  onCollectionGet = (querySnapshot) => {
-    const fondos = []
-    querySnapshot.forEach((doc) => {
-      const {
-        fondo,
-        tipo_doc,
-        importe,
-        fecha,
-        realizo,
-        contrarecibo
-      } = doc.data()
-      fondos.push({
-        key: doc.id,
-        doc,
-        fondo,
-        tipo_doc,
-        importe,
-        realizo,
-        fecha,
-        contrarecibo
+  crearFondo (e) {
+    e.preventDefault()
+    const params = {
+      fondo: this.inputFondo.value,
+      fecha: this.inputFecha.value,
+      tipo_doc: this.inputTipoDoc.value,
+      oficio_aut: this.inputOficioAut.value,
+      no_oficio: this.inputNoOficio.value,
+      importe: this.state.importe,
+      beneficiario: this.inputBeneficiario.value,
+      desc: this.inputDesc.value,
+      no_proyecto: this.state.no_proyecto,
+      numCompro: this.inputNumCompro.value,
+      realizo: this.state.realizo,
+      no_lici: this.inputNoLici.value,
+      requisicion: this.inputRequisicion.value,
+      pedido: this.inputPedido.value,
+      poliza: this.inputPoliza.value,
+      cfe: this.inputCfe.value,
+      nscfe: this.inputNscfe.value,
+      observaciones: this.inputObservaciones.value,
+    }
+    if (params.fondo && params.fecha && params.tipo_doc && params.oficio_aut &&
+      params.no_oficio && params.importe && params.desc && params.beneficiario &&
+      params.no_proyecto && params.numCompro && params.realizo && params.no_lici &&
+      params.requisicion && params.pedido && params.poliza && params.cfe &&
+      params.nscfe && params.observaciones) {
+      firebase.database().ref('fondos').push(params).then(() => {
+        alert('Tu solicitud fue enviada.')
+      }).catch(() => {
+        alert('Tu solicitud no puede ser enviada')
       })
-    })
-    this.setState({
-      fondos
-    })
+      this.incrementFondo()
+      this.order()
+    } else {
+      alert('Por favor llene el formulario')
+    }
   }
 
   onChange = (e) => {
@@ -166,78 +199,63 @@ export default class Fondos extends Component {
     this.setState(state)
   }
 
-  onSubmit = (e) => {
-    e.preventDefault()
-    const {
-      fondo,
-      fecha,
-      tipo_doc,
-      oficio_aut,
-      no_oficio,
-      no_lici,
-      importe,
-      desc,
-      beneficiario,
-      realizo,
-      requisicion,
-      pedido,
-      no_proyecto,
-      poliza,
-      cfe,
-      nscfe,
-      observaciones,
-      numCompro
-    } = this.state
-    this.ref.add({
-        fondo,
-        fecha,
-        tipo_doc,
-        oficio_aut,
-        no_oficio,
-        no_lici,
-        importe,
-        desc,
-        beneficiario,
-        realizo,
-        requisicion,
-        pedido,
-        no_proyecto,
-        poliza,
-        cfe,
-        nscfe,
-        observaciones,
-        numCompro
-      }).then((docRef) => {
-        this.setState({
-          fondo: '',
-          fecha: '',
-          tipo_doc: '',
-          oficio_aut: '',
-          no_oficio: '',
-          no_lici: '',
-          importe: '',
-          desc: '',
-          beneficiario: '',
-          realizo: '',
-          requisicion: '',
-          pedido: '',
-          no_proyecto: [],
-          poliza: '',
-          cfe: '',
-          nscfe: '',
-          observaciones: '',
-          numCompro: ''
-        })
-        this.incrementFondo()
-        this.order()
-      })
-      .catch((error) => {
-        console.error('Error al guardar: ', error)
-      })
-  }
+  // onCollectionUpdate = (querySnapshot) => {
+  //   const fondos = []
+  //   querySnapshot.forEach((doc) => {
+  //     const {
+  //       fondo,
+  //       tipo_doc,
+  //       importe,
+  //       fecha,
+  //       realizo,
+  //       contrarecibo
+  //     } = doc.data()
+  //     fondos.push({
+  //       key: doc.id,
+  //       doc,
+  //       fondo,
+  //       tipo_doc,
+  //       importe,
+  //       realizo,
+  //       fecha,
+  //       contrarecibo
+  //     })
+  //   })
+  //   this.setState({
+  //     fondos
+  //   })
+  // }
+  //
+  // onCollectionGet = (querySnapshot) => {
+  //   const fondos = []
+  //   querySnapshot.forEach((doc) => {
+  //     const {
+  //       fondo,
+  //       tipo_doc,
+  //       importe,
+  //       fecha,
+  //       realizo,
+  //       contrarecibo
+  //     } = doc.data()
+  //     fondos.push({
+  //       key: doc.id,
+  //       doc,
+  //       fondo,
+  //       tipo_doc,
+  //       importe,
+  //       realizo,
+  //       fecha,
+  //       contrarecibo
+  //     })
+  //   })
+  //   this.setState({
+  //     fondos
+  //   })
+  // }
+  //
 
-  listenForItems = (itemsRef) => {
-    itemsRef.on('value', (snap) => {
+  listenBeneficiario = (itemsRefBeneficiario) => {
+    itemsRefBeneficiario.on('value', (snap) => {
       var baneficiarioc = []
       snap.forEach((child) => {
         baneficiarioc.push({
@@ -266,23 +284,6 @@ export default class Fondos extends Component {
     })
   }
 
-  componentDidMount() {
-    this.unsubscribe = this.ref.onSnapshot(this.onCollectionUpdate)
-    var wishRef = firebase.database().ref('fondo/3q4t5w63q4fw3563')
-    wishRef.on('value', (snapshot) => {
-      let updatedWish = snapshot.val()
-      this.setState({
-        fondo: updatedWish.num
-      })
-      wishRef.set(updatedWish)
-    })
-    const itemsRef = firebase.database().ref('beneficiario/')
-    this.listenForItems(itemsRef)
-    // Consumo de Oficios
-    const itemsRefPre = firebase.database().ref('presupuesto/')
-    this.listenForItemsP(itemsRefPre)
-  }
-
   incrementFondo = () => {
     const wishRef = firebase.database().ref('fondo/3q4t5w63q4fw3563')
     wishRef.once('value').then(snapshot => {
@@ -296,26 +297,13 @@ export default class Fondos extends Component {
   }
 
   order = () => {
-    firebase.firestore().collection('fondos').orderBy('fondo', 'desc').limit(1).get()
-      .then(snapshot => {
-        snapshot.forEach(doc => {
-          this.setState({
-            f: doc.id
-          })
-          console.log(this.state.f)
-          this.props.history.push(`/Comprometidos/${this.state.f}`)
-        })
-      })
-      .catch(err => {
-        console.log('Error getting documents', err)
-      })
+    firebase.database().ref('fondos').limitToLast(1).on('child_added', function(childSnapshot) {
+      var snap = childSnapshot.key
+      history.push(`/Comprometidos/${snap}`)
+    })
   }
 
-  handleChange (event) {
-    this.setState({ [event.target.name]: event.target.value })
-  }
-
-  sendName (e) {
+  crearBeneficiario (e) {
     e.preventDefault()
     const params = {
       nombre: this.state.nombre
@@ -336,9 +324,8 @@ export default class Fondos extends Component {
 
   beneficiario2 = ['', 'Mtro.León Maximiliano Hernández Valdés']
   tipo_doc = ['','Pago Directo', 'Fondo Revolvente', 'Gasto a Comprobar', 'Cancelado', 'Licitación']
-  tipo_doc2 = ['','Fondo Revolvente', 'Pago Directo']
-  tipo_doc3 = ['','Pago Directo']
-  tipo_doc4 = ['','Fondo Revolvente']
+  tipo_doc2 = ['','Pago Directo']
+  tipo_doc3 = ['','Fondo Revolvente']
   no_proyecto = [
     '',
     'AU001, Atención y seguimiento a peticiones recibidas en el despacho del procurador atendidas, up: 01',
@@ -367,8 +354,10 @@ export default class Fondos extends Component {
     'A1D11, Centralizada'
   ]
 
-  render() {
-    const { tipo_doc, oficio_aut, importe, beneficiario, no_proyecto, realizo, fecha } = this.state
+  render () {
+    const { fondo, fecha, tipo_doc, oficio_aut, no_oficio, no_lici, importe, desc,
+      beneficiario, realizo, requisicion, pedido, no_proyecto, poliza, cfe, nscfe,
+      observaciones, numCompro } = this.state
     const newArray = ['']
     const myObj = {}
 
@@ -381,9 +370,9 @@ export default class Fondos extends Component {
 
     return (
       <div>
-        <form className='form-fondo' onSubmit={this.onSubmit}>
+        <form className='form-fondo' onSubmit={this.crearFondo.bind(this)}>
           <Grid className='grid-w'>
-            <Grid className='grid-w2'>
+            {/* <Grid className='grid-w2'>
               <Paper className='paper-p'>
                 <div className='div-con-f'>Buscador de Fondos</div>
                 <div className='head-search'>
@@ -455,7 +444,7 @@ export default class Fondos extends Component {
                   </div>
                 </div>
               </Paper>
-            </Grid>
+            </Grid> */}
             <Grid className='grid-w2'>
               <Paper className='paper-pm'>
                 <div className='div-con-f'>Fondos</div>
@@ -464,9 +453,11 @@ export default class Fondos extends Component {
                     <p className='p-label'>Fondo</p>
                     <input
                       className='field'
-                      value={this.state.fondo}
+                      id='fondo'
                       name='fondo'
-                      ref='fondo'
+                      value={fondo}
+                      onChange={this.onChange}
+                      ref={fondo => this.inputFondo = fondo}
                       required
                     />
                   </div>
@@ -474,8 +465,12 @@ export default class Fondos extends Component {
                     <p className='p-label'>Fecha</p>
                     <input
                       className='field'
-                      required
+                      id='fecha'
+                      name='fecha'
                       value={fecha}
+                      onChange={this.onChange}
+                      ref={fecha => this.inputFecha = fecha}
+                      required
                     />
                   </div>
                 </div>
@@ -485,9 +480,11 @@ export default class Fondos extends Component {
                     {(realizo === 'MIGUEL' || realizo === 'ELOY' || realizo === 'TERESA' || realizo === 'MARTHA') &&
                       <select
                         className='select-f'
+                        id='tipo_doc'
+                        name='tipo_doc'
                         value={tipo_doc}
                         onChange={this.onChange}
-                        name='tipo_doc'
+                        ref={tipo_doc => this.inputTipoDoc = tipo_doc}
                         required
                       >
                         {this.tipo_doc.map((x,y) =>
@@ -498,12 +495,14 @@ export default class Fondos extends Component {
                     {(realizo === 'MARCOS') &&
                       <select
                         className='select-f'
+                        id='tipo_doc'
+                        name='tipo_doc'
                         value={tipo_doc}
                         onChange={this.onChange}
-                        name='tipo_doc'
+                        ref={tipo_doc => this.inputTipoDoc = tipo_doc}
                         required
                       >
-                        {this.tipo_doc4.map((x,y) =>
+                        {this.tipo_doc3.map((x,y) =>
                           <option name={y}>{x}</option>
                         )}
                       </select>
@@ -511,12 +510,14 @@ export default class Fondos extends Component {
                     {(realizo === 'KARINA' || realizo === 'LILIA' || realizo === 'CENELY' || realizo === 'HECTOR' || realizo === 'OMAR') &&
                       <select
                         className='select-f'
+                        id='tipo_doc'
+                        name='tipo_doc'
                         value={tipo_doc}
                         onChange={this.onChange}
-                        name='tipo_doc'
+                        ref={tipo_doc => this.inputTipoDoc = tipo_doc}
                         required
                       >
-                        {this.tipo_doc3.map((x,y) =>
+                        {this.tipo_doc2.map((x,y) =>
                           <option name={y}>{x}</option>
                         )}
                       </select>
@@ -526,9 +527,11 @@ export default class Fondos extends Component {
                     <p className='p-label'>Oficio de Autorización</p>
                     <select
                       className='select-f'
+                      id='oficio_aut'
+                      name='oficio_aut'
                       value={oficio_aut}
                       onChange={this.onChange}
-                      name='oficio_aut'
+                      ref={oficio_aut => this.inputOficioAut = oficio_aut}
                       required
                     >
                     {newArray.map(data =>
@@ -542,24 +545,26 @@ export default class Fondos extends Component {
                     <p className='p-label'>Numero de Oficio</p>
                     <input
                       className='field'
+                      id='no_oficio'
                       name='no_oficio'
+                      value={no_oficio}
                       onChange={this.onChange}
+                      ref={no_oficio => this.inputNoOficio = no_oficio}
                       required
-                      ref='no_oficio'
                     />
                   </div>
                   <div className='div-con'>
                     <TextField
                       label='Importe'
-                      value={importe}
-                      onChange={this.onChange}
                       id='importe'
                       name='importe'
+                      value={importe}
+                      onChange={this.onChange}
+                      ref={importe => this.inputImporte = importe}
+                      required
                       InputProps={{
                         inputComponent: NumberFormatCustom
                       }}
-                      required
-                      ref={importe => this.inputImporte = importe}
                     />
                   </div>
                 </div>
@@ -568,11 +573,9 @@ export default class Fondos extends Component {
                     <p className='p-label'>Importe Letra</p>
                     <input
                       className='field'
-                      name='no_oficio'
                       onChange={this.onChange}
                       value={(NumberAsString(importe))}
                       required
-                      ref='no_oficio'
                     />
                   </div>
                   {tipo_doc === 'Fondo Revolvente' ?
@@ -580,9 +583,12 @@ export default class Fondos extends Component {
                       <p className='p-label'>Beneficiario</p>
                       <select
                         className='select-f'
+                        id='beneficiario'
+                        name='beneficiario'
                         value={beneficiario}
                         onChange={this.onChange}
-                        name='beneficiario'
+                        ref={beneficiario => this.inputBeneficiario = beneficiario}
+                        required
                       >
                         {this.beneficiario2.map((x,y) =>
                           <option name={y}>{x}</option>
@@ -594,9 +600,12 @@ export default class Fondos extends Component {
                       <p className='p-label'>Beneficiario</p>
                       <select
                         className='select-f'
+                        id='beneficiario'
+                        name='beneficiario'
                         value={beneficiario}
                         onChange={this.onChange}
-                        name='beneficiario'
+                        ref={beneficiario => this.inputBeneficiario = beneficiario}
+                        required
                       >
                         {this.state.baneficiarioc.map(data =>
                           <option name={data}>{data.nombre}</option>
@@ -612,9 +621,10 @@ export default class Fondos extends Component {
                       className='field'
                       id='desc'
                       name='desc'
+                      value={desc}
                       onChange={this.onChange}
+                      ref={desc => this.inputDesc = desc}
                       required
-                      ref='desc'
                     />
                   </div>
                   {realizo === 'MIGUEL' &&
@@ -629,7 +639,7 @@ export default class Fondos extends Component {
                           value={this.state.nombre}
                         />
                       </div>
-                      <button className='btn-add-bf' onClick={this.sendName.bind(this)}>
+                      <button className='btn-add-bf' onClick={this.crearBeneficiario.bind(this)}>
                           +
                       </button>
                     </div>
@@ -643,9 +653,12 @@ export default class Fondos extends Component {
                         <Select
                           style={{ height: 'auto' }}
                           multiple
+                          id='no_proyecto'
+                          name='no_proyecto'
                           value={no_proyecto}
                           onChange={this.onChange}
-                          name='no_proyecto'
+                          ref={no_proyecto => this.inputNoProyecto = no_proyecto}
+                          required
                           input={<Input id='select-multiple-chip' />}
                           renderValue={(selected) => (
                             <div>
@@ -675,9 +688,10 @@ export default class Fondos extends Component {
                         className='field'
                         id='numCompro'
                         name='numCompro'
+                        value={numCompro}
                         onChange={this.onChange}
+                        ref={numCompro => this.inputNumCompro = numCompro}
                         required
-                        ref='numCompro'
                       />
                     </div>
                   </div>
@@ -695,8 +709,9 @@ export default class Fondos extends Component {
                       className='field'
                       id='no_lici'
                       name='no_lici'
+                      value={no_lici}
                       onChange={this.onChange}
-                      ref='no_lici'
+                      ref={no_lici => this.inputNoLici = no_lici}
                     />
                   </div>
                   <div className='div-con'>
@@ -705,8 +720,9 @@ export default class Fondos extends Component {
                       className='field'
                       id='requisicion'
                       name='requisicion'
+                      value={requisicion}
                       onChange={this.onChange}
-                      ref='requisicion'
+                      ref={requisicion => this.inputRequisicion = requisicion}
                     />
                   </div>
                 </div>
@@ -717,8 +733,9 @@ export default class Fondos extends Component {
                       className='field'
                       id='pedido'
                       name='pedido'
+                      value={pedido}
                       onChange={this.onChange}
-                      ref='pedido'
+                      ref={pedido => this.inputPedido = pedido}
                     />
                   </div>
                   <div className='div-con'>
@@ -727,8 +744,9 @@ export default class Fondos extends Component {
                       className='field'
                       id='poliza'
                       name='poliza'
+                      value={poliza}
                       onChange={this.onChange}
-                      ref='poliza'
+                      ref={poliza => this.inputPoliza = poliza}
                     />
                   </div>
                 </div>
@@ -742,8 +760,9 @@ export default class Fondos extends Component {
                       className='field'
                       id='cfe'
                       name='cfe'
+                      value={cfe}
                       onChange={this.onChange}
-                      ref='cfe'
+                      ref={cfe => this.inputCfe = cfe}
                     />
                   </div>
                   <div className='div-con'>
@@ -752,8 +771,9 @@ export default class Fondos extends Component {
                       className='field'
                       id='nscfe'
                       name='nscfe'
+                      value={nscfe}
                       onChange={this.onChange}
-                      ref='nscfe'
+                      ref={nscfe => this.inputNscfe = nscfe}
                     />
                   </div>
                 </div>
@@ -763,8 +783,9 @@ export default class Fondos extends Component {
                     className='field'
                     id='observaciones'
                     name='observaciones'
+                    value={observaciones}
                     onChange={this.onChange}
-                    ref='observaciones'
+                    ref={observaciones => this.inputObservaciones = observaciones}
                   />
                 </div>
               </Paper>
