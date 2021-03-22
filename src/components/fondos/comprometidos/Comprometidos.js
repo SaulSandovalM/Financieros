@@ -173,15 +173,6 @@ export default class NewComprometidos extends Component {
     this.listenForXml(itemsRefXml)
     const itemsRef = firebase.database().ref('presupuesto/')
     this.listenForItems(itemsRef)
-
-
-
-
-
-
-
-
-
     const ref = firebase.firestore().collection('fondos').doc(this.props.match.params.id)
     const updateRef = firebase.firestore().collection('fondos').doc(this.props.match.params.id).collection('comprometidos')
     this.unsubscribe = updateRef.onSnapshot(this.onCollectionUpdate)
@@ -377,9 +368,7 @@ export default class NewComprometidos extends Component {
     const wishRef = firebase.database().ref(`fondos/${dir}`)
     wishRef.once('value').then(snapshot => {
       var updatedWish = snapshot.val()
-      // this.setState({
-      //   prue: [...updatedWish.comprometido, {folio: 'ppp'}]
-      // })
+      updatedWish.comprometido.push({folio: 0}) // pasar los datos reales
       wishRef.update(updatedWish)
     })
 
