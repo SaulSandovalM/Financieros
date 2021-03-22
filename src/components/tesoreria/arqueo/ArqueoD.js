@@ -152,33 +152,41 @@ export default class ArqueoD extends Component {
   render () {
     // var today = new Date()
     // var yesterday = new Date()
-    var meses = ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre']
-    var dias = ['domingo, ', 'lunes, ', 'martes, ', 'miercoles, ', 'jueves, ', 'viernes, ', 'sabado, ']
     // var f = new Date()
     // today = dias[f.getUTCDay()] + f.getDate() + ' de ' + meses[f.getMonth()] + ' de ' + f.getFullYear()
     // yesterday = dias[f.getUTCDay() - 1] + [f.getDate() - 1] + ' de ' + meses[f.getMonth()] + ' de ' + f.getFullYear()
+    var meses = ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre']
+    var dias = ['domingo, ', 'lunes, ', 'martes, ', 'miercoles, ', 'jueves, ', 'viernes, ', 'sabado, ']
     const fechab = new Date(this.state.searchF)
+    console.log(fechab)
     const fechaAnterior = fechab.getFullYear() + '-' + ('0' + (fechab.getMonth() + 1)).slice(-2) + '-' + ('0' + fechab.getDate()).slice(-2)
+    console.log(fechaAnterior)
     let filteredDates = this.state.listay.filter(function(date) {
       return date.fecha === fechaAnterior
     })
+    console.log(filteredDates)
     var len = filteredDates.length
+    console.log(len)
     filteredDates.map((rank, i) => {
+      console.log(len === i + 1)
       if (len === i + 1) {
         this.state.lasrResult = rank.total
+        console.log(rank.total)
         const pp = new Date(rank.fecha)
+        console.log(pp)
         let after = dias[pp.getUTCDay()] + [pp.getDate() + 1] + ' de ' + meses[pp.getMonth()] + ' de ' + pp.getFullYear()
         this.state.textFecha = after
+        console.log(after)
       }
     })
     var aa = new Date(this.state.searchF)
     let before = dias[aa.getUTCDay()] + [aa.getDate() + 1] + ' de ' + meses[aa.getMonth()] + ' de ' + aa.getFullYear()
-    const lol = this.state.listay.length
-    this.state.listay.map((fil, i) => {
-      if (lol === i + 1) {
-        this.state.lol = fil
-      }
-    })
+    // const lol = this.state.listay.length
+    // this.state.listay.map((fil, i) => {
+    //   if (lol === i + 1) {
+    //     this.state.lol = fil
+    //   }
+    // })
     var selectF = this.state.searchF
     var diaAnterior = this.state.lasrResult
 

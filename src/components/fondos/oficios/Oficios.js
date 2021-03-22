@@ -4,7 +4,7 @@ import ReactToPrint from 'react-to-print'
 import firebase from '../../../Firebase'
 import { NumberAsString } from '../fondos/NumerosLetras'
 import logo2 from '../../../img/logo.jpg'
-import lpgjh from '../../../img/logo_hgo.png'
+import lpgjh from '../../../img/logo-PGJH.jpg'
 import CurrencyFormat from 'react-currency-format'
 import Popup from 'reactjs-popup'
 
@@ -2869,7 +2869,7 @@ export default class Oficios extends Component {
               <div className='interno'>
                 <p className='text-soi'>Gasto a Comprobar</p>
                 <input className='input-so' type='checkbox' />
-              </div>
+              </div> 
               <div className='interno'>
                 <p className='text-soi'>Comprobación de gasto</p>
                 <input className='input-so' type='checkbox' />
@@ -3027,8 +3027,8 @@ export default class Oficios extends Component {
             <div className='tabla-so'>
               <table>
                 <tr>
-                  <td className='all-tablai'>Ramo</td>
                   <td className='all-tablai'>Año</td>
+                  <td className='all-tablai'>Ramo</td>
                   <td className='all-tablai'>OS</td>
                   <td className='all-tablai'>UP</td>
                   <td className='all-tablai'>Rubro de Ingreso</td>
@@ -3053,10 +3053,10 @@ export default class Oficios extends Component {
                 {this.state.comprometidos.map(comprometidos =>
                   <tr>
                     <td className='all-tablai'>
-                      {comprometidos.ramo}
+                      {comprometidos.año}
                     </td>
                     <td className='all-tablai'>
-                      {comprometidos.año}
+                      {comprometidos.ramo}
                     </td>
                     <td className='all-tablai'>
                       {comprometidos.ur}

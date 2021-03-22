@@ -124,7 +124,7 @@
   height: 50px;
   padding-left: 25px;
   padding-right:50px;
-  width: 50px;
+  width: 150px;
 }
 .cpdf-dad2 {
   max-height: 100vh;
@@ -233,11 +233,11 @@ th {
   padding-left: 25px;
   padding-right:50px;
   height: 50px;
-  width: 50px;
+  width: 150px;
 }
 .ims{
   height: 50px;
-  width: 50px;
+  width: 150px;
 }
 .title-so{
   margin-top:20px;
@@ -255,9 +255,9 @@ th {
   display: flex;
   justify-content: center;
 }
-.text-so{
-  margin:3px;
+.text-so {
   font-size: 10px;
+  margin:3px;
 }
 .contenedor-so{
   padding-top:10px;
@@ -572,11 +572,11 @@ th {
   padding-left: 25px;
   padding-right:50px;
   height: 50px;
-  width: 50px;
+  width: 150px;
 }
-.ims{
+.ims {
   height: 50px;
-  width: 50px;
+  width: 150px;
 }
 .title-so{
   margin-top:20px;
