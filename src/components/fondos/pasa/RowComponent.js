@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import './Valeslist.css'
+import './Pasa.css'
 import TableBody from '@material-ui/core/TableBody'
 import TableCell from '@material-ui/core/TableCell'
 import Button from '@material-ui/core/Button'
@@ -26,12 +26,8 @@ export default class RowComponent extends Component {
     }
   }
 
-  update = () => {
-    this.props.update(this.props.item)
-  }
-
-  obs = () => {
-    this.props.obs(this.props.item)
+  pasa = () => {
+    this.props.pasa(this.props.item)
   }
 
   toggleOpen () {
@@ -170,17 +166,9 @@ export default class RowComponent extends Component {
             <Button
               variant='contained'
               color='primary'
-              onClick={this.update}
-              style={{ marginRight: '5px' }}
+              onClick={this.pasa}
             >
-              Agregar
-            </Button>
-            <Button
-              variant='contained'
-              color='primary'
-              onClick={this.obs}
-            >
-              Obs
+              Pasa
             </Button>
           </TableCell>
         </div>

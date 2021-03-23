@@ -218,27 +218,27 @@ export default class Comprometidos extends Component {
     this.setState({ area: event.target.value })
   }
 
-  onCollectionUpdate = (querySnapshot) => {
-    const comprometidos = []
-    querySnapshot.forEach((doc) => {
-      const { partida, presupuestal, importe_comp, rubro, municipio, area, isr, iva } = doc.data()
-      comprometidos.push({
-        key: doc.id,
-        doc,
-        partida,
-        presupuestal,
-        importe_comp,
-        rubro,
-        municipio,
-        area,
-        isr,
-        iva
-      })
-    })
-    this.setState({
-      comprometidos
-   })
-  }
+  // onCollectionUpdate = (querySnapshot) => {
+  //   const comprometidos = []
+  //   querySnapshot.forEach((doc) => {
+  //     const { partida, presupuestal, importe_comp, rubro, municipio, area, isr, iva } = doc.data()
+  //     comprometidos.push({
+  //       key: doc.id,
+  //       doc,
+  //       partida,
+  //       presupuestal,
+  //       importe_comp,
+  //       rubro,
+  //       municipio,
+  //       area,
+  //       isr,
+  //       iva
+  //     })
+  //   })
+  //   this.setState({
+  //     comprometidos
+  //  })
+  // }
 
   handleOnChange1 (event) {
     for (var i = 0; i < event.target.files.length; i++) {
@@ -410,7 +410,8 @@ export default class Comprometidos extends Component {
   }
 
   cambio = () => {
-    this.props.history.push(`/Oficios/${this.state.idP}`)
+    var dir = history.location.pathname.slice(15)
+    this.props.history.push(`/Oficios/${dir}`)
   }
 
   partida = ['','211001','211002','212001','212002','214001','215001','216001','217001','221001','221002','246001','246002','247001','249001','251001','253001','254001','255001','256001','261001','271001','272001','275001','291001','292001','311001','312001','313001','317001','318001','323002','334001','336001','336002','338001','351001','352001','355001','357001','358001','359001','361002','372001','375001','392006','394001']
@@ -453,6 +454,7 @@ export default class Comprometidos extends Component {
   }
 
   render () {
+    console.log(this.state.comprometidos)
     var user = firebase.auth().currentUser
     var email
     if (user != null) {

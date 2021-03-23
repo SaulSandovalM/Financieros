@@ -44,6 +44,7 @@ import Contrarecibo from './components/fondos/contrarecibo/Contrarecibo'
 import Tabular from './components/fondos/Todospdf/Tabular/Tabular'
 import TabularList from './components/fondos/Todospdf/Tabular/TabularList'
 import TabularIndi from './components/fondos/Todospdf/Tabular/TabularIndi'
+import Pasa from './components/fondos/pasa/Pasa'
 
 function App (props) {
   const { isAuthenticated, isVerifying } = props
@@ -295,6 +296,13 @@ function App (props) {
         exact
         path='/Contrarecibo'
         component={Contrarecibo}
+        isAuthenticated={isAuthenticated}
+        isVerifying={isVerifying}
+      />
+      <ProtectedRoute
+        exact
+        path='/Pasa'
+        component={Pasa}
         isAuthenticated={isAuthenticated}
         isVerifying={isVerifying}
       />

@@ -206,6 +206,7 @@ export default class Vales extends Component {
       obs: this.state.obs,
       fechaP: this.state.fechaP,
       rein: this.state.rein,
+      pasa: false
     }
     this.setState({
       vale: this.state.contador.storyCount,
@@ -228,13 +229,14 @@ export default class Vales extends Component {
       obs: this.state.obs,
       fechaP: this.state.fechaP,
       rein: this.state.rein,
+      pasa: false
     })
     if (params.vale && params.cheque && params.cantidad && params.cantidadc &&
         params.cantidadr && params.concepto && params.oficioS && params.area &&
         params.turno && params.factura && params.recibos && params.sc &&
         params.autorizo && params.personaR && params.estatus && params.fecha &&
         params.fechaF && params.estatusC && params.filefactura && params.filef &&
-        params.recibosList && params.obs && params.fechaP && params.rein) {
+        params.recibosList && params.obs && params.fechaP && params.rein && params.pasa) {
       var f = parseInt(params.cantidadc)
       const statsRef = firebase.firestore().collection('caja').doc('--stats--')
       const increment = firebase.firestore.FieldValue.increment(-f)

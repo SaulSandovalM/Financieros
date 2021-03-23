@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import firebase from '../../../Firebase'
 import ListComponent from './ListComponent'
-import './Valeslist.css'
+import './Pasa.css'
 import TextField from '@material-ui/core/TextField'
 import Dropzone from 'react-dropzone'
 import AddIcon from '@material-ui/icons/Add'
@@ -9,8 +9,9 @@ import RemoveIcon from '@material-ui/icons/Remove'
 import Button from '@material-ui/core/Button'
 import AttachMoneyIcon from '@material-ui/icons/AttachMoney'
 import InputAdornment from '@material-ui/core/InputAdornment'
+import Checkbox from '@material-ui/core/Checkbox'
 
-export default class Valeslist extends Component {
+export default class Pasa extends Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -51,7 +52,8 @@ export default class Valeslist extends Component {
       noautorizados: false,
       pendientes: false,
       obs: '',
-      opened: false
+      opened: false,
+      pasa: false
     }
     this.toggleBox = this.toggleBox.bind(this)
   }
@@ -191,50 +193,7 @@ export default class Valeslist extends Component {
     }
   }
 
-  update = (item) => {
-    let updates = {}
-    updates['vales/' + item.id] = {
-      cheque: item.cheque,
-      vale: item.vale,
-      cantidad: item.cantidad,
-      cantidadc: item.cantidadc,
-      cantidadr: item.cantidadr,
-      concepto: item.concepto,
-      oficioS: item.oficioS,
-      area: item.area,
-      turno: item.turno,
-      factura: item.factura,
-      recibos: item.recibos,
-      sc: item.sc,
-      fecha: item.fecha,
-      fechaF: item.fechaF,
-      autorizo: item.autorizo,
-      personaR: item.personaR,
-      estatus: item.estatus,
-      estatusC: 'Comprobado',
-      filefactura: this.state.filefactura ? this.state.filefactura : [0],
-      filef: this.state.filef ? this.state.filef : [0],
-      recibosList: this.state.recibosList ? this.state.recibosList : [0],
-      obs: item.obs,
-      fechaP: item.fechaP,
-      rein: item.rein,
-      pasa: item.pasa
-    }
-    firebase.database().ref().update(updates)
-    this.state.recibosList.forEach(element => firebase.database().ref('xml').push(element))
-    alert('Tu solicitud fue enviada.')
-    this.setState({
-      filexml: ['No hay datos cargados'],
-      filex: ['No hay datos cargados'],
-      filefactura: [{ url: '', nombre: '' }],
-      filef: [{ url: '', nombre: '' }],
-      recibosList: [{ folio: 'Recibo', nombre: '', importe: '', iva: '0', isr: '0', fecha: '', estatus: '', subtotal: '0', total: '0', uuid: 'Recibo' }],
-      obs: '',
-      pdf2: 0
-    })
-  }
-
-  obs = (item) => {
+  pasa = (item) => {
     let updates = {}
     updates['vales/' + item.id] = {
       cheque: item.cheque,
@@ -261,7 +220,7 @@ export default class Valeslist extends Component {
       obs: this.state.obs,
       fechaP: item.fechaP,
       rein: item.rein,
-      pasa: item.pasa
+      pasa: this.state.pasa ? this.state.pasa : this.state.cantidad
     }
     firebase.database().ref().update(updates)
     alert('Tu solicitud fue enviada.')
@@ -291,6 +250,12 @@ export default class Valeslist extends Component {
     })
   }
 
+  toggleCheckAuto (event) {
+    this.setState({
+      pasa: !this.state.pasa
+    })
+  }
+
   render () {
     return (
       <div className='container-valeslist'>
@@ -306,155 +271,31 @@ export default class Valeslist extends Component {
                 <div className='inputs-row-valeslist'>
                   <form style={{ display: 'flex', width: '100%' }} onSubmit={this.sendMessage.bind(this)} ref='contactForm'>
                     <div className='p-container-valeslist'>
-                      <p style={{ margin: '0px', color: 'grey', fontSize: '12px' }}>Agregar xml</p>
-                      <Dropzone
-                        style={{
-                          position: 'relative',
-                          width: '100%',
-                          height: '30px',
-                          borderWidth: '2px',
-                          borderColor: 'rgb(102, 102, 102)',
-                          borderStyle: 'solid',
-                          borderRadius: '5px'
-                        }}
-                        accept='.xml' onChange={this.handleOnChange1.bind(this)}
-                      />
-                      <progress className='progress' value={this.state.xml} max='100'>
-                        {this.state.xml} %
-                      </progress>
-                    </div>
-                    <div className='p-container-valeslist'>
-                      <p style={{ margin: '0px', color: 'grey', fontSize: '12px' }}>Agregar Pdf</p>
-                      <Dropzone
-                        style={{
-                          position: 'relative',
-                          width: '100%',
-                          height: '30px',
-                          borderWidth: '2px',
-                          borderColor: 'rgb(102, 102, 102)',
-                          borderStyle: 'solid',
-                          borderRadius: '5px'
-                        }}
-                        accept='.pdf' onChange={this.handleOnChange2.bind(this)}
-                      />
-                      <progress className='progress' value={this.state.pdf2} max='100'>
-                        {this.state.pdf2} %
-                      </progress>
-                    </div>
-                    <div className='p-container-valeslist'>
                       <TextField
-                        label='Observaciones'
-                        name='obs'
-                        value={this.state.obs}
+                        label='Cantidad'
+                        name='cantidad'
+                        value={this.state.cantidad}
                         onChange={this.handleChange.bind(this)}
                       />
                     </div>
-                  </form>
-                  <div style={{ display: 'flex', justifyContent: 'center', flexDirection: 'column' }}>
-                    <div style={{ display: 'flex', width: '300px' }}>
-                      <Button
-                        variant='contained'
-                        color='primary'
-                        onClick={this.toggleBox}
-                        startIcon={<AddIcon />}
-                      >
-                        Agregar Recibos
-                      </Button>
+                    <div className='p-container-valeslist'>
+                    <Checkbox
+                      name='pasa'
+                      checked={this.state.pasa}
+                      onChange={this.toggleCheckAuto.bind(this)}
+                    />
                     </div>
-                  </div>
+                  </form>
                 </div>
               </div>
             </div>
           </div>
         </div>
-        {this.state.opened &&
-          <div className='content-fixed'>
-            <div className='box-modal'>
-              <div style={{ display: 'flex', justifyContent: 'space-between',  paddingTop: '20px' }}>
-                <h3>Agregar Recibos</h3>
-              </div>
-              <div>
-                {this.state.recibosList.map((x, i) =>
-                  <div key={i} style={{ display: 'flex', justifyContent: 'center' }}>
-                    <TextField
-                      label='Recibo'
-                      name='folio'
-                      value={x.folio}
-                      disabled
-                      onChange={e => this.handleInputChange(e, i)}
-                      style={{ width: '15%', marginRight: '1%' }}
-                    />
-                    <TextField
-                      label='Nombre'
-                      name='nombre'
-                      value={x.nombre}
-                      onChange={e => this.handleInputChange(e, i)}
-                      style={{ width: '15%', marginRight: '1%' }}
-                    />
-                    <TextField
-                      label='Importe'
-                      name='importe'
-                      type='number'
-                      value={x.importe}
-                      onChange={e => this.handleInputChange(e, i)}
-                      style={{ width: '15%', marginRight: '1%' }}
-                      InputProps={{
-                        startAdornment: (
-                          <InputAdornment position="start">
-                            <AttachMoneyIcon />
-                          </InputAdornment>
-                        ),
-                      }}
-                    />
-                    <TextField
-                      label='Fecha'
-                      type='date'
-                      name='fecha'
-                      InputLabelProps={{
-                        shrink: true,
-                      }}
-                      value={x.fecha}
-                      onChange={e => this.handleInputChange(e, i)}
-                      style={{ width: '15%', marginRight: '1%' }}
-                    />
-                    <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
-                      {this.state.recibosList.length !== 1 &&
-                        <button
-                          className='btn-remove-r'
-                          onClick={() => this.handleRemoveClick(i)}>
-                          -
-                        </button>
-                      }
-                      {this.state.recibosList.length - 1 === i &&
-                        <button
-                          className='btn-add-r'
-                          onClick={this.handleAddClick}>
-                          +
-                        </button>
-                      }
-                    </div>
-                  </div>
-                )}
-              </div>
-              <div style={{ display: 'flex', justifyContent: 'center', marginTop: '30px' }}>
-                <Button
-                  variant='contained'
-                  color='secondary'
-                  onClick={this.toggleBox}
-                  startIcon={<RemoveIcon />}
-                >
-                  Salir
-                </Button>
-              </div>
-            </div>
-          </div>
-        }
         <div className='title-tb-valeslist'>
           <div className='caja-valeslist'>
             <ListComponent
               lista={this.state.lista}
-              update={this.update}
-              obs={this.obs}
+              pasa={this.pasa}
             />
           </div>
         </div>
