@@ -191,9 +191,12 @@ export default class Oficios extends Component {
     for (i = 0; i < this.state.comprometidos.length; i++) {
       console.log(this.state.comprometidos[i])
       console.log(this.state.comprometidos[i].comprobantes)
-      // for (var j = 0; j < this.state.comprometidos[i].comprobantes.length; j++) {
+      var arra = new Array(this.state.comprometidos[i].comprobantes)
+      var lol = arra.length
+      for (var j = 0; j < lol; j++) {
         // console.log(this.state.comprometidos[i].comprobantes[j])
-      // }
+        // console.log(this.state.comprometidos[i].comprobantes[j].importe)
+      }
     }
 
     // console.log(this.state.comprometidos.comprobantes)

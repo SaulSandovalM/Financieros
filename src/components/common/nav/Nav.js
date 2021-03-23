@@ -129,6 +129,25 @@ class Nav extends Component {
                   </Typography>
                 </Link>
               </div>
+              <div className='subnav'>
+                <Link to='/Trans' className='deco'>
+                  <Typography className='nav-t'>
+                    • Saldos
+                  </Typography>
+                </Link>
+              </div>
+            </div>
+          }
+          {(admin === 'CECILIA' || admin === 'LIZBETH') &&
+            <div className='navbar-left'>
+              <Link to='/Saldos' className='deco'>
+                <span className='material-icons'>
+                  account_balance
+                </span>
+                <Typography className='nav-t' variant='h6'>
+                  Saldos
+                </Typography>
+              </Link>
             </div>
           }
           {(admin === 'CECILIA' || admin === 'LIZBETH') &&

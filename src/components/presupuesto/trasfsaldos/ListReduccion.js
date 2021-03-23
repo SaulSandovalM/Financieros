@@ -38,12 +38,12 @@ export default class ListComponent extends Component {
     return (
       <div style={{ margin: '30px' }}>
         <TableContainer component={Paper}>
-          <TextField
+          {/* <TextField
             style={{ width: '100%' }}
             label='Ingresa el numero de Oficio'
             value={this.state.search}
             onChange={this.updateSeacrh.bind(this)}
-          />
+          /> */}
           <Table size='small'>
             {
               this.props.listaB.map(item =>
