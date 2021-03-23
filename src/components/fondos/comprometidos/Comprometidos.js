@@ -24,13 +24,12 @@ import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp'
 import Dropzone from 'react-dropzone'
 import history from '../../../history'
 
-export default class NewComprometidos extends Component {
+export default class Comprometidos extends Component {
   constructor (props) {
     super(props)
     this.unsubscribe = null
     this.state = {
       open: false,
-      allowCustom: true,
       checked: [],
       right: [],
       empty: [0],
@@ -60,10 +59,8 @@ export default class NewComprometidos extends Component {
       importer: 0,
       ivar: 0,
       isrr: 0,
-      show: true,
       idP: '',
-      ids: '',
-      actualizar: ''
+      ids: ''
     }
   }
 
@@ -168,40 +165,23 @@ export default class NewComprometidos extends Component {
     })
   }
 
+  listenFondos = (itemsRefComprometidos) => {
+    itemsRefComprometidos.on('value', (snap) => {
+      const firebasedata = snap.val()
+      this.setState({
+        comprometidos: firebasedata.comprometido
+      })
+    })
+  }
+
   componentDidMount () {
     const itemsRefXml = firebase.database().ref('xml/')
     this.listenForXml(itemsRefXml)
     const itemsRef = firebase.database().ref('presupuesto/')
     this.listenForItems(itemsRef)
-    const ref = firebase.firestore().collection('fondos').doc(this.props.match.params.id)
-    const updateRef = firebase.firestore().collection('fondos').doc(this.props.match.params.id).collection('comprometidos')
-    this.unsubscribe = updateRef.onSnapshot(this.onCollectionUpdate)
-    ref.get().then((doc) => {
-      if (doc.exists) {
-        const fondos = doc.data()
-        const idP = doc.id
-        this.setState({
-          idP: idP
-        })
-        this.setState({
-          key: doc.id,
-          fondo: fondos.fondo,
-          fecha: fondos.fecha,
-          realizo: fondos.realizo,
-          tipo_doc: fondos.tipo_doc,
-          importe: fondos.importe,
-          partida: fondos.partida,
-          presupuestal: fondos.presupuestal,
-          importe_comp: fondos.importe_comp,
-          isr: fondos.isr,
-          total: fondos.total,
-          iva: fondos.iva,
-          fecha_comp: fondos.fecha_comp
-        })
-      } else {
-        console.log('No se encuentra documento')
-      }
-    })
+    var dir = history.location.pathname.slice(15)
+    const itemsRefComprometidos = firebase.database().ref(`fondos/${dir}`)
+    this.listenFondos(itemsRefComprometidos)
   }
 
   onChange = (e) => {
@@ -361,108 +341,47 @@ export default class NewComprometidos extends Component {
       transferencia: item.transferencia
     }
     firebase.database().ref().update(updates)
-    //
-    //
-    // let comprometido = {}
+    // sacar el id
+    const { area, total, iva, isr, importe } = this.state
     var dir = history.location.pathname.slice(15)
     const wishRef = firebase.database().ref(`fondos/${dir}`)
     wishRef.once('value').then(snapshot => {
       var updatedWish = snapshot.val()
-      updatedWish.comprometido.push({folio: 0}) // pasar los datos reales
+      updatedWish.comprometido.push(
+        {
+          partida: item.ogasto,
+          presupuestal: item.up,
+          area: area,
+          fecha: updatedWish.fecha,
+          importe_comp: importe,
+          iva: iva,
+          isr: isr,
+          total: total,
+          año: item.año,
+          ramo: item.rm,
+          ur: item.ur,
+          up: item.up,
+          rubro: item.rubro,
+          tg: item.tg,
+          npro: item.npro,
+          f: item.f,
+          fu: item.fu,
+          sf: item.sf,
+          eje: item.eje,
+          s: item.s,
+          prog: item.prog,
+          sp: item.sp,
+          obj: item.obj,
+          proy: item.proy,
+          est: item.est,
+          ben: item.ben,
+          eg: item.eg,
+          comprobantes: this.state.contra
+        }
+      )
       wishRef.update(updatedWish)
     })
-
-
-
-
-    // var direc = history.location.pathname.slice(15)
-    // const { area, total, fecha, iva, isr, importe } = this.state
-    // let perro = 'fondos' + direc
-    // perro.child('comprometido').update({
-    //   partida: item.ogasto,
-      // presupuestal: item.up,
-      // area: area,
-      // fecha: fecha,
-      // importe_comp: importe,
-      // iva: iva,
-      // isr: isr,
-      // total: total,
-      // año: item.año,
-      // ramo: item.rm,
-      // ur: item.ur,
-      // up: item.up,
-      // rubro: item.rubro,
-      // tg: item.tg,
-      // npro: item.npro,
-      // f: item.f,
-      // fu: item.fu,
-      // sf: item.sf,
-      // eje: item.eje,
-      // s: item.s,
-      // prog: item.prog,
-      // sp: item.sp,
-      // obj: item.obj,
-      // proy: item.proy,
-      // est: item.est,
-      // ben: item.ben,
-      // eg: item.eg,
-      // comprobantes: this.state.contra
-    // })
-    // comprometido['fondos/' + direc] = {
-    //   fondo: direc.fondo,
-    //   fecha: direc.fecha,
-    //   tipo_doc: direc.tipo_doc,
-    //   oficio_aut: direc.oficio_aut,
-    //   no_oficio: direc.no_oficio,
-    //   importe: direc.importe,
-    //   beneficiario: direc.beneficiario,
-    //   desc: direc.desc,
-    //   no_proyecto: direc.no_proyecto,
-    //   numCompro: direc.numCompro,
-    //   realizo: direc.realizo,
-    //   no_lici: direc.no_lici,
-    //   requisicion: direc.requisicion,
-    //   pedido: direc.pedido,
-    //   poliza: direc.poliza,
-    //   cfe: direc.cfe,
-    //   nscfe: direc.nscfe,
-    //   observaciones: direc.observaciones,
-    //   comprometido: [
-    //     {
-    //       partida: item.ogasto,
-    //       presupuestal: item.up,
-    //       area: area,
-    //       fecha: fecha,
-    //       importe_comp: importe,
-    //       iva: iva,
-    //       isr: isr,
-    //       total: total,
-    //       año: item.año,
-    //       ramo: item.rm,
-    //       ur: item.ur,
-    //       up: item.up,
-    //       rubro: item.rubro,
-    //       tg: item.tg,
-    //       npro: item.npro,
-    //       f: item.f,
-    //       fu: item.fu,
-    //       sf: item.sf,
-    //       eje: item.eje,
-    //       s: item.s,
-    //       prog: item.prog,
-    //       sp: item.sp,
-    //       obj: item.obj,
-    //       proy: item.proy,
-    //       est: item.est,
-    //       ben: item.ben,
-    //       eg: item.eg,
-    //       comprobantes: this.state.contra
-    //     }
-    //   ]
-    // }
-    // firebase.database().ref().update(comprometido)
-    //
-    //
+    // cambiar el estatus del xml/recibo
     var changes = this.state.contra
     var prueba = {}
     changes.forEach((change) => {
@@ -527,19 +446,9 @@ export default class NewComprometidos extends Component {
     'Fiscalía Especializada en Materia de Desaparición Forzada de Personas'
   ]
 
-  resetForm () {
-    this.refs.contactForm.reset()
-  }
-
   toggleOpen () {
     this.setState({
       open: !this.state.open
-    })
-  }
-
-  toggleShow () {
-    this.setState({
-      show: !this.state.show
     })
   }
 

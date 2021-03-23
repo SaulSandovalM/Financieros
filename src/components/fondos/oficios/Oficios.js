@@ -7,6 +7,7 @@ import logo2 from '../../../img/logo.jpg'
 import lpgjh from '../../../img/logo-PGJH.jpg'
 import CurrencyFormat from 'react-currency-format'
 import Popup from 'reactjs-popup'
+import history from '../../../history'
 
 export default class Oficios extends Component {
   constructor (props) {
@@ -36,9 +37,22 @@ export default class Oficios extends Component {
     }
   }
 
+  listenFondos = (itemsRefComprometidos) => {
+    itemsRefComprometidos.on('value', (snap) => {
+      const firebasedata = snap.val()
+      this.setState({
+        comprometidos: firebasedata.comprometido
+      })
+    })
+  }
+
   componentDidMount () {
-    const updateRef = firebase.firestore().collection('fondos').doc(this.props.match.params.id).collection('comprometidos').orderBy('up', 'asc')
-    this.unsubscribe = updateRef.onSnapshot(this.onCollectionUpdate)
+    var dir = history.location.pathname.slice(15)
+    const itemsRefComprometidos = firebase.database().ref(`fondos/${dir}`)
+    this.listenFondos(itemsRefComprometidos)
+
+    const   = firebase.firestore().collection('fondos').doc(this.props.match.params.id).collection('comprometidos').orderBy('up', 'asc')
+    // this.unsubscribe = updateRef.onSnapshot(this.onCollectionUpdate)
     const ref = firebase.firestore().collection('fondos').doc(this.props.match.params.id)
     ref.get().then((doc) => {
       if (doc.exists) {
@@ -100,42 +114,42 @@ export default class Oficios extends Component {
     })
   }
 
-  onCollectionUpdate = (querySnapshot) => {
-    let comprometidos = []
-    querySnapshot.forEach((doc) => {
-      const { año, ramo, up, rubro, tg, partida, npro, f, fu, sf, eje, s, prog,
-        obj, proy, est, ben, eg, importe_comp, ur, total, comprobantes } = doc.data()
-      comprometidos.push({
-        key: doc.id,
-        doc,
-        año,
-        ramo,
-        up,
-        rubro,
-        tg,
-        partida,
-        npro,
-        f,
-        fu,
-        sf,
-        eje,
-        s,
-        prog,
-        obj,
-        proy,
-        est,
-        ben,
-        eg,
-        importe_comp,
-        total,
-        ur,
-        comprobantes
-      })
-    })
-    this.setState({
-      comprometidos
-    })
-  }
+  // onCollectionUpdate = (querySnapshot) => {
+  //   let comprometidos = []
+  //   querySnapshot.forEach((doc) => {
+  //     const { año, ramo, up, rubro, tg, partida, npro, f, fu, sf, eje, s, prog,
+  //       obj, proy, est, ben, eg, importe_comp, ur, total, comprobantes } = doc.data()
+  //     comprometidos.push({
+  //       key: doc.id,
+  //       doc,
+  //       año,
+  //       ramo,
+  //       up,
+  //       rubro,
+  //       tg,
+  //       partida,
+  //       npro,
+  //       f,
+  //       fu,
+  //       sf,
+  //       eje,
+  //       s,
+  //       prog,
+  //       obj,
+  //       proy,
+  //       est,
+  //       ben,
+  //       eg,
+  //       importe_comp,
+  //       total,
+  //       ur,
+  //       comprobantes
+  //     })
+  //   })
+  //   this.setState({
+  //     comprometidos
+  //   })
+  // }
 
   handleChange (event) {
     this.setState({ [event.target.name]: event.target.value })
@@ -171,7 +185,7 @@ export default class Oficios extends Component {
       // }
     }
 
-
+    console.log(this.state.comprometidos)
 
 
 
@@ -2869,7 +2883,7 @@ export default class Oficios extends Component {
               <div className='interno'>
                 <p className='text-soi'>Gasto a Comprobar</p>
                 <input className='input-so' type='checkbox' />
-              </div> 
+              </div>
               <div className='interno'>
                 <p className='text-soi'>Comprobación de gasto</p>
                 <input className='input-so' type='checkbox' />
