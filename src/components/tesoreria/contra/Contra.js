@@ -26,17 +26,17 @@ export default class Contra2 extends Component {
   }
 
   handleExcel () {
-    const fondos = [[
-      'fondo', 'fecha', 'tipo_doc', 'oficio_aut', 'no_oficio', 'importe',
-      'beneficiario', 'desc', 'no_proyecto', 'numCompro', 'realizo',
-      'no_lici', 'requisicion', 'pedido', 'poliza', 'cfe', 'nscfe',
-      'observaciones', 'comprometido'
-    ]]
+    const fondos = [[ 'Fondo', 'Fecha', 'Tipo de Documento', 'Oficio de Autorizacion',
+      'Numero de Oficio', 'Numero de Licitacion', 'Importe', 'Descripcion',
+      'Beneficiario', 'Realizo', 'Requisicion', 'Pedido', 'Numero de Proyecto',
+      'Poliza', 'CFE', 'Numero de Servicio de CFE', 'Observaciones', 'Numero de Contrarecibo',
+      'Comprometidos', 'Numero de Cheque', 'Fecha de Contrarecibo']]
     this.state.lista.forEach((fondo) => {
       const fondoArray = [fondo.fondo, fondo.fecha, fondo.tipo_doc, fondo.oficio_aut,
-        fondo.no_oficio, fondo.importe, fondo.beneficiario, fondo.desc, fondo.no_proyecto,
-        fondo.numCompro, fondo.realizo, fondo.no_lici, fondo.requisicion, fondo.pedido,
-        fondo.poliza, fondo.cfe, fondo.nscfe, fondo.observaciones, fondo.comprometido]
+        fondo.no_oficio, fondo.no_lici, fondo.importe, fondo.desc,fondo.beneficiario,
+        fondo.realizo, fondo.requisicion, fondo.pedido, fondo.no_proyecto,
+        fondo.poliza, fondo.cfe, fondo.nscfe, fondo.observaciones, fondo.numCompro,
+        fondo.comprometido, fondo.numCheque, fondo.fechaContra]
       fondos.push(fondoArray)
     })
     const wb = XLSX.utils.book_new()

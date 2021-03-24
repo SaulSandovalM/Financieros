@@ -40,6 +40,7 @@ export default class Valeslist extends Component {
       autorizo: '',
       estatus: 'Pendiente',
       xml: 0,
+      xmlL: 0,
       pdf2: 0,
       filer: '',
       filexml: ['No hay datos cargados'],
@@ -90,7 +91,7 @@ export default class Valeslist extends Component {
               'Accept': 'application/json',
               'Content-Type': 'application/json',
             },
-              body: JSON.stringify(data),
+            body: JSON.stringify(data),
           })
         })
       }
@@ -103,7 +104,6 @@ export default class Valeslist extends Component {
       const file = event.target.files[i]
       const storageRef = firebase.storage().ref(`comprobacion/${file.name}`)
       const task = storageRef.put(file)
-      console.log(this.state.filef)
       task.on('state_changed', (snapshot) => {
         let percentage = (snapshot.bytesTransferred / snapshot.totalBytes) * 100
         this.setState({
@@ -234,6 +234,7 @@ export default class Valeslist extends Component {
     })
   }
 
+
   obs = (item) => {
     let updates = {}
     updates['vales/' + item.id] = {
@@ -319,8 +320,8 @@ export default class Valeslist extends Component {
                         }}
                         accept='.xml' onChange={this.handleOnChange1.bind(this)}
                       />
-                      <progress className='progress' value={this.state.xml} max='100'>
-                        {this.state.xml} %
+                      <progress className='progress' value={this.state.xmlL} max='100'>
+                        {this.state.xmlL} %
                       </progress>
                     </div>
                     <div className='p-container-valeslist'>
