@@ -16,8 +16,8 @@ import MenuItem from '@material-ui/core/MenuItem'
 import FormControl from '@material-ui/core/FormControl'
 import Select from '@material-ui/core/Select'
 import Chip from '@material-ui/core/Chip'
-import CurrencyFormat from 'react-currency-format'
-import { Link } from 'react-router-dom'
+// import CurrencyFormat from 'react-currency-format'
+// import { Link } from 'react-router-dom'
 import history from '../../../history'
 
 export default class Fondos extends Component {

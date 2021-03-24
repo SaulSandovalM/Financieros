@@ -3,12 +3,6 @@ import firebase from '../../../Firebase'
 import ListComponent from './ListComponent'
 import './Pasa.css'
 import TextField from '@material-ui/core/TextField'
-import Dropzone from 'react-dropzone'
-import AddIcon from '@material-ui/icons/Add'
-import RemoveIcon from '@material-ui/icons/Remove'
-import Button from '@material-ui/core/Button'
-import AttachMoneyIcon from '@material-ui/icons/AttachMoney'
-import InputAdornment from '@material-ui/core/InputAdornment'
 import Checkbox from '@material-ui/core/Checkbox'
 
 export default class Pasa extends Component {
@@ -53,7 +47,7 @@ export default class Pasa extends Component {
       pendientes: false,
       obs: '',
       opened: false,
-      pasa: false
+      pasa: true
     }
     this.toggleBox = this.toggleBox.bind(this)
   }

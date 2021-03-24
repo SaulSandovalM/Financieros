@@ -76,7 +76,7 @@ export default class ListComponent extends Component {
   handleExcel () {
     const vales = [['#V', '#C', 'AUTORIZADO', 'COMPOBADO', 'REEM/REIN', 'CONCEPTO',
       'OFICIO S', 'AREA', 'TURNO', 'FACTURA', 'RECIBOS', 'S/C', 'FECHA', 'AUTORIZA', 'RECIBIO']]
-    this.state.vales.forEach((vale) => {
+    this.props.lista.forEach((vale) => {
       const valeArray = [vale.vale, vale.cheque, vale.cantidad, vale.cantidadc,
         vale.cantidadr, vale.concepto, vale.oficioS, vale.area,
         vale.turno, vale.factura, vale.recibos, vale.sc, vale.fecha,
@@ -91,7 +91,6 @@ export default class ListComponent extends Component {
 
   render () {
     const { auto, pend, noauto, comp } = this.state
-    console.log(this.state.prueba)
     var fechah = new Date(this.state.prueba).getMonth() + 2
     const filteredData = this.props.lista.filter(
       (vales) => {

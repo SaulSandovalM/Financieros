@@ -52,6 +52,7 @@ export default class Vales extends Component {
       obs: ' ',
       fechaP: ' ',
       rein: ' ',
+      pasa: ''
     }
   }
 
@@ -122,6 +123,7 @@ export default class Vales extends Component {
           obs: child.val().obs,
           fechaP: child.val().fechaP,
           rein: child.val().rein,
+          pasa: child.val().pasa,
           id: child.key
         })
       })
@@ -206,7 +208,7 @@ export default class Vales extends Component {
       obs: this.state.obs,
       fechaP: this.state.fechaP,
       rein: this.state.rein,
-      pasa: false
+      pasa: this.state.pasa
     }
     this.setState({
       vale: this.state.contador.storyCount,
@@ -229,7 +231,7 @@ export default class Vales extends Component {
       obs: this.state.obs,
       fechaP: this.state.fechaP,
       rein: this.state.rein,
-      pasa: false
+      pasa: this.state.pasa
     })
     if (params.vale && params.cheque && params.cantidad && params.cantidadc &&
         params.cantidadr && params.concepto && params.oficioS && params.area &&
@@ -290,7 +292,8 @@ export default class Vales extends Component {
       recibosList: this.state.recibosList ? item.recibosList : this.state.recibosList,
       obs: item.obs,
       fechaP: this.state.fechaP,
-      rein: this.state.rein
+      rein: this.state.rein,
+      pasa: this.state.pasa
     }
     this.setState({
       fechaP: ''
@@ -325,7 +328,8 @@ export default class Vales extends Component {
       filefactura: '',
       filef: '',
       recibosList: '',
-      fechaP: ''
+      fechaP: '',
+      pasa: item.pasa
     }
     this.setState({
       fechaP: ''

@@ -634,7 +634,6 @@ export default class Comprometidos extends Component {
         </Card>
       </div>
     )
-    var lol = history.location.pathname.slice(15)
 
     return (
       <div className='div-compro-container'>
