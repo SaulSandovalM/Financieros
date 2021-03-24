@@ -45,6 +45,9 @@ export default class Edit extends Component {
     itemsRefFondos.on('value', (snapshot) => {
       let updatedWish = snapshot.val()
       this.setState({
+        ppp: updatedWish.cpa
+      })
+      this.setState({
         fondo: updatedWish.fondo,
         fecha: updatedWish.fecha,
         tipo_doc: updatedWish.tipo_doc,
@@ -70,7 +73,8 @@ export default class Edit extends Component {
         numContra: updatedWish.numContra,
         cuentaPagar: updatedWish.cuentaPagar,
         cuentaPagarPara: updatedWish.cuentaPagarPara,
-        sujetoContable: updatedWish.sujetoContable
+        sujetoContable: updatedWish.sujetoContable,
+        cpa: updatedWish.cpa
       })
     })
   }
@@ -104,7 +108,8 @@ export default class Edit extends Component {
       numContra: this.state.numContra,
       cuentaPagar: this.state.cuentaPagar,
       cuentaPagarPara: this.state.cuentaPagarPara,
-      sujetoContable: this.state.sujetoContable
+      sujetoContable: this.state.sujetoContable,
+      cpa: this.state.cpa
     }
     firebase.database().ref().update(updates)
     alert('Tu solicitud fue enviada.')
@@ -247,7 +252,13 @@ export default class Edit extends Component {
             <Paper style={{ padding: '20px' }}>
               <div style={{ marginBottom: '15px' }}><b>Clave Presupuestal Armonizada</b></div>
               <div style={{ display: 'flex', flexDirection: 'column' }}>
-                <div>2021-26-30-01-1501010-01-221002-1-02-02-403-P5-E0018-01-003-AU001-000-B07-85000-00-00-E1-00-R001-00-00-EB-03-01</div>
+                {this.state.cpa !== undefined ?
+                  <div>
+                    {this.state.cpa.map(item =>
+                      <p>Clave Presupuestal: {item.cpa} / Cantidad Afectada: $ {item.cantidad}</p>
+                    )}
+                  </div> : null
+                }
               </div>
             </Paper>
           </Grid>
