@@ -49,10 +49,10 @@ export default class Vales extends Component {
       filefactura: ['No hay datos cargados'],
       filef: ['No hay datos cargados'],
       recibosList: ['No hay datos cargados'],
-      obs: ' ',
+      obs: 'No hay observaciones',
       fechaP: ' ',
       rein: ' ',
-      pasa: ''
+      pasa: ' '
     }
   }
 
