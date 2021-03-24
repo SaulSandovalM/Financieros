@@ -204,6 +204,7 @@ export default class Contra2 extends Component {
                 </TableRow>
               </TableHead>
               {filterData.map(item => (
+                item.tipo_doc === 'Fondo Revolvente' ?
                   <TableBody>
                     <TableCell component='th' scope='row' className='table-num-fc'>
                       {item.fondo}
@@ -244,7 +245,7 @@ export default class Contra2 extends Component {
                         Asignar Cheque
                       </Button>
                     </TableCell>
-                  </TableBody>
+                  </TableBody> : null
               ))}
             </Table>
           </div>
