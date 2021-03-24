@@ -16,7 +16,8 @@ export default class Contra extends Component {
     this.ref = firebase.firestore().collection('fondos').orderBy('fondo', 'desc')
     this.unsubscribe = null
     this.state = {
-      fondos: []
+      fondos: [],
+      lista: []
     }
   }
 
@@ -42,6 +43,44 @@ export default class Contra extends Component {
 
   componentDidMount() {
     this.unsubscribe = this.ref.onSnapshot(this.onCollectionUpdate)
+    const itemsRefFondos = firebase.database().ref('fondos/').orderByChild('fondo')
+    this.listenFondos(itemsRefFondos)
+  }
+
+  listenFondos = (itemsRefFondos) => {
+    itemsRefFondos.on('value', (snap) => {
+      var lista = []
+      snap.forEach((child) => {
+        lista.push({
+          fondo: child.val().fondo,
+          fecha: child.val().fecha,
+          tipo_doc: child.val().tipo_doc,
+          oficio_aut: child.val().oficio_aut,
+          no_oficio: child.val().no_oficio,
+          no_lici: child.val().no_lici,
+          importe: child.val().importe,
+          desc: child.val().desc,
+          beneficiario: child.val().beneficiario,
+          realizo: child.val().realizo,
+          requisicion: child.val().requisicion,
+          pedido: child.val().pedido,
+          no_proyecto: child.val().no_proyecto,
+          poliza: child.val().poliza,
+          cfe: child.val().cfe,
+          nscfe: child.val().nscfe,
+          observaciones: child.val().observaciones,
+          numCompro: child.val().numCompro,
+          comprometido: child.val().comprometido,
+          numCheque: child.val().numCheque,
+          fechaContra: child.val().fechaContra,
+          fechaDepo: child.val().fechaDepo,
+          id: child.key
+        })
+      })
+      this.setState({
+        lista: lista
+      })
+    })
   }
 
   render () {
@@ -71,7 +110,7 @@ export default class Contra extends Component {
                 </TableCell>
               </TableRow>
             </TableHead>
-            {this.state.fondos.map(fondos =>
+            {this.state.lista.map(fondos =>
               <TableBody>
                 <TableCell component='th' scope='row' className='table-num-f'>
                   {fondos.fondo}
@@ -87,6 +126,7 @@ export default class Contra extends Component {
                     value={fondos.importe}
                     displayType='text'
                     thousandSeparator
+                    fixedDecimalScale
                     prefix=' $ '
                   />
                 </TableCell>

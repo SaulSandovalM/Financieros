@@ -76,7 +76,7 @@ export default class ListComponent extends Component {
   handleExcel () {
     const vales = [['#V', '#C', 'AUTORIZADO', 'COMPOBADO', 'REEM/REIN', 'CONCEPTO',
       'OFICIO S', 'AREA', 'TURNO', 'FACTURA', 'RECIBOS', 'S/C', 'FECHA', 'AUTORIZA', 'RECIBIO']]
-    this.props.lista.forEach((vale) => {
+    this.state.pp.forEach((vale) => {
       const valeArray = [vale.vale, vale.cheque, vale.cantidad, vale.cantidadc,
         vale.cantidadr, vale.concepto, vale.oficioS, vale.area,
         vale.turno, vale.factura, vale.recibos, vale.sc, vale.fecha,
@@ -100,6 +100,9 @@ export default class ListComponent extends Component {
           (comp.length && comp.includes(vales.estatusC) && this.state.comprobado && new Date(vales.fecha).getMonth() + 1 === fechah)
       }
     )
+
+    // No cambiar el state directamente cambiar
+    this.state.pp = filteredData
 
     const total1 = [0]
     filteredData.map(items => (

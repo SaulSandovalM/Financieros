@@ -5,6 +5,7 @@ import CheckIcon from '@material-ui/icons/Check'
 import Paper from '@material-ui/core/Paper'
 import TextField from '@material-ui/core/TextField'
 import Grid from '@material-ui/core/Grid'
+import history from '../../../history'
 
 export default class Edit extends Component {
   constructor (props) {
@@ -38,7 +39,46 @@ export default class Edit extends Component {
     }
   }
 
+  listenFondos = (itemsRefFondos) => {
+    itemsRefFondos.on('value', (snap) => {
+      var lista = []
+      snap.forEach((child) => {
+        lista.push({
+          fondo: child.val().fondo,
+          fecha: child.val().fecha,
+          tipo_doc: child.val().tipo_doc,
+          oficio_aut: child.val().oficio_aut,
+          no_oficio: child.val().no_oficio,
+          no_lici: child.val().no_lici,
+          importe: child.val().importe,
+          desc: child.val().desc,
+          beneficiario: child.val().beneficiario,
+          realizo: child.val().realizo,
+          requisicion: child.val().requisicion,
+          pedido: child.val().pedido,
+          no_proyecto: child.val().no_proyecto,
+          poliza: child.val().poliza,
+          cfe: child.val().cfe,
+          nscfe: child.val().nscfe,
+          observaciones: child.val().observaciones,
+          numCompro: child.val().numCompro,
+          comprometido: child.val().comprometido,
+          numCheque: child.val().numCheque,
+          fechaContra: child.val().fechaContra,
+          fechaDepo: child.val().fechaDepo,
+          id: child.key
+        })
+      })
+      this.setState({
+        lista: lista
+      })
+    })
+  }
+
   componentDidMount() {
+    var dir = history.location.pathname.slice(15)
+    const itemsRefFondos = firebase.database().ref(`fondos/${dir}`).orderByChild('fondo')
+    this.listenFondos(itemsRefFondos)
     const ref = firebase.firestore().collection('fondos').doc(this.props.match.params.id);
     ref.get().then((doc) => {
       if (doc.exists) {

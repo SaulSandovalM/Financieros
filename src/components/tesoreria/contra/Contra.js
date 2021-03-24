@@ -76,6 +76,7 @@ export default class Contra2 extends Component {
           comprometido: child.val().comprometido,
           numCheque: child.val().numCheque,
           fechaContra: child.val().fechaContra,
+          fechaDepo: child.val().fechaDepo,
           id: child.key
         })
       })
@@ -108,7 +109,8 @@ export default class Contra2 extends Component {
       numCompro: item.numCompro,
       comprometido: item.comprometido,
       numCheque: this.state.numCheque,
-      fechaContra: this.state.fechaContra
+      fechaContra: item.fechaContra,
+      fechaDepo: this.state.fechaDepo
     }
     this.setState({
       numCheque: '',
@@ -151,10 +153,10 @@ export default class Contra2 extends Component {
             />
             <TextField
               type='date'
-              name='fechaContra'
+              name='fechaDepo'
               style={{ width: '250px', margin: '15px' }}
-              label='Fecha de Pago Contrarecibo'
-              value={this.state.fechaContra}
+              label='Fecha de Deposito'
+              value={this.state.fechaDepo}
               onChange={this.onChange.bind(this)}
               InputLabelProps={{
                 shrink: true
@@ -216,10 +218,10 @@ export default class Contra2 extends Component {
                       {item.beneficiario}
                     </TableCell>
                     <TableCell component='th' scope='row' className='table-num-fc'>
-                      {item.fechaContra}
+                      {item.fechaDepo}
                     </TableCell>
                     <TableCell component='th' scope='row' className='table-num-fc'>
-                      {item.fechaDepo}
+                      {item.fechaContra}
                     </TableCell>
                     <TableCell component='th' scope='row' className='table-num-fc'>
                       {item.numCheque}
