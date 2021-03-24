@@ -11,6 +11,7 @@ import CurrencyFormat from 'react-currency-format'
 import TextField from '@material-ui/core/TextField'
 import firebase from '../../../Firebase'
 import Button from '@material-ui/core/Button'
+import XLSX from 'xlsx'
 
 export default class Contra2 extends Component {
   constructor (props) {
@@ -21,6 +22,27 @@ export default class Contra2 extends Component {
       numCheque: '',
       fechaContra: ''
     }
+    this.handleExcel = this.handleExcel.bind(this)
+  }
+
+  handleExcel () {
+    const fondos = [[
+      'fondo', 'fecha', 'tipo_doc', 'oficio_aut', 'no_oficio', 'importe',
+      'beneficiario', 'desc', 'no_proyecto', 'numCompro', 'realizo',
+      'no_lici', 'requisicion', 'pedido', 'poliza', 'cfe', 'nscfe',
+      'observaciones', 'comprometido'
+    ]]
+    this.state.lista.forEach((fondo) => {
+      const fondoArray = [fondo.fondo, fondo.fecha, fondo.tipo_doc, fondo.oficio_aut,
+        fondo.no_oficio, fondo.importe, fondo.beneficiario, fondo.desc, fondo.no_proyecto,
+        fondo.numCompro, fondo.realizo, fondo.no_lici, fondo.requisicion, fondo.pedido,
+        fondo.poliza, fondo.cfe, fondo.nscfe, fondo.observaciones, fondo.comprometido]
+      fondos.push(fondoArray)
+    })
+    const wb = XLSX.utils.book_new()
+    const wsAll = XLSX.utils.aoa_to_sheet(fondos)
+    XLSX.utils.book_append_sheet(wb, wsAll, 'Fondos')
+    XLSX.writeFile(wb, 'Lista_Fondos.xlsx')
   }
 
   componentDidMount () {
@@ -112,31 +134,42 @@ export default class Contra2 extends Component {
     return (
       <div className='contrar-container'>
         <TableContainer component={Paper}>
-          <TextField
-            name='search'
-            style={{ width: '250px', margin: '15px' }}
-            label='Ingresa un numero de fondo'
-            value={this.state.search}
-            onChange={this.onChange.bind(this)}
-          />
-          <TextField
-            name='numCheque'
-            style={{ width: '250px', margin: '15px' }}
-            label='Numero de Cheque'
-            value={this.state.numCheque}
-            onChange={this.onChange.bind(this)}
-          />
-          <TextField
-            type='date'
-            name='fechaContra'
-            style={{ width: '250px', margin: '15px' }}
-            label='Fecha de Pago Contrarecibo'
-            value={this.state.fechaContra}
-            onChange={this.onChange.bind(this)}
-            InputLabelProps={{
-              shrink: true
-            }}
-          />
+          <div style={{ display: 'flex', width: '100%' }}>
+            <TextField
+              name='search'
+              style={{ width: '250px', margin: '15px' }}
+              label='Ingresa un numero de fondo'
+              value={this.state.search}
+              onChange={this.onChange.bind(this)}
+            />
+            <TextField
+              name='numCheque'
+              style={{ width: '250px', margin: '15px' }}
+              label='Numero de Cheque'
+              value={this.state.numCheque}
+              onChange={this.onChange.bind(this)}
+            />
+            <TextField
+              type='date'
+              name='fechaContra'
+              style={{ width: '250px', margin: '15px' }}
+              label='Fecha de Pago Contrarecibo'
+              value={this.state.fechaContra}
+              onChange={this.onChange.bind(this)}
+              InputLabelProps={{
+                shrink: true
+              }}
+            />
+            <div style={{ display: 'flex', justifyContent: 'center', flexDirection: 'column', width: '60px' }}>
+              <Button
+                variant='contained'
+                style={{ background: 'green', color: 'white' }}
+                onClick={this.handleExcel}
+              >
+                Excel
+              </Button>
+            </div>
+          </div>
           <div className='div-hide'>
             <Table size='small' className='wt'>
               <TableHead>
