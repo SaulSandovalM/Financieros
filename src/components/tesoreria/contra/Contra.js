@@ -184,10 +184,10 @@ export default class Contra2 extends Component {
                     <b>Beneficiario</b>
                   </TableCell>
                   <TableCell className='table-importe-c'>
-                    <b>Fecha Contra</b>
+                    <b>Fecha de Deposito</b>
                   </TableCell>
                   <TableCell className='table-importe-c'>
-                    <b>Fecha de Deposito</b>
+                    <b>Fecha de Autorizacion</b>
                   </TableCell>
                   <TableCell className='table-importe-c'>
                     <b>Numero de Cheque</b>
@@ -215,10 +215,10 @@ export default class Contra2 extends Component {
                     {item.beneficiario}
                   </TableCell>
                   <TableCell component='th' scope='row' className='table-num-fc'>
-                    {item.fechaContra}
+                    {item.fechaDepo}
                   </TableCell>
                   <TableCell component='th' scope='row' className='table-num-fc'>
-                    {item.fechaDepo}
+                    {item.fechaContra}
                   </TableCell>
                   <TableCell component='th' scope='row' className='table-num-fc'>
                     {item.numCheque}
