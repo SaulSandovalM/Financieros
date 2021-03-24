@@ -176,13 +176,21 @@ export default class Fondos extends Component {
       nscfe: this.inputNscfe.value,
       observaciones: this.inputObservaciones.value,
       comprometido: [''],
-      fechaContra: ' '
+      numCheque: ' ',
+      fechaContra: ' ',
+      numContra: ' ',
+      fechaDepo: ' ',
+      cuentaPagar: ' ',
+      cuentaPagarPara: ' ',
+      sujetoContable: ' '
     }
     if (params.fondo && params.fecha && params.tipo_doc && params.oficio_aut &&
       params.no_oficio && params.importe && params.desc && params.beneficiario &&
       params.no_proyecto && params.numCompro && params.realizo && params.no_lici &&
       params.requisicion && params.pedido && params.poliza && params.cfe &&
-      params.nscfe && params.observaciones && params.comprometido && params.fechaContra) {
+      params.nscfe && params.observaciones && params.comprometido &&
+      params.fechaContra && params.numContra && params.fechaDepo &&
+      params.cuentaPagar && params.cuentaPagarPara && params.sujetoContable) {
       firebase.database().ref('fondos').push(params).then(() => {
         alert('Tu solicitud fue enviada.')
       }).catch(() => {

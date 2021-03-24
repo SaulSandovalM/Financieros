@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import './Contra.css'
 import firebase from '../../../Firebase'
-import { Link } from 'react-router-dom'
 import CurrencyFormat from 'react-currency-format'
 import Table from '@material-ui/core/Table'
 import TableBody from '@material-ui/core/TableBody'
@@ -31,27 +30,15 @@ export default class Contra extends Component {
       snap.forEach((child) => {
         lista.push({
           fondo: child.val().fondo,
-          fecha: child.val().fecha,
           tipo_doc: child.val().tipo_doc,
-          oficio_aut: child.val().oficio_aut,
-          no_oficio: child.val().no_oficio,
           no_lici: child.val().no_lici,
           importe: child.val().importe,
-          desc: child.val().desc,
           beneficiario: child.val().beneficiario,
           realizo: child.val().realizo,
-          requisicion: child.val().requisicion,
-          pedido: child.val().pedido,
-          no_proyecto: child.val().no_proyecto,
-          poliza: child.val().poliza,
-          cfe: child.val().cfe,
-          nscfe: child.val().nscfe,
-          observaciones: child.val().observaciones,
-          numCompro: child.val().numCompro,
-          comprometido: child.val().comprometido,
           numCheque: child.val().numCheque,
           fechaContra: child.val().fechaContra,
           fechaDepo: child.val().fechaDepo,
+          numContra: child.val().numContra,
           id: child.key
         })
       })
@@ -62,7 +49,6 @@ export default class Contra extends Component {
   }
 
   render () {
-    console.log(this.state.lista)
     return (
       <div className='contrarecibo-container'>
         <TableContainer component={Paper}>
@@ -134,7 +120,7 @@ export default class Contra extends Component {
                   }
                 </TableCell>
                 <TableCell component='th' scope='row' className='table-same'>
-                  <div className='link-edit' onClick={() => history.push(`/Editcontra/${fondos.id}`)}> {/* to={`/Editcontra/${fondos.id}`} */}
+                  <div className='link-edit' onClick={() => history.push(`/Editcontra/${fondos.id}`)}>
                     Agregar Contrarecibo
                   </div>
                 </TableCell>

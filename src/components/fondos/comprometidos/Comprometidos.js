@@ -218,28 +218,6 @@ export default class Comprometidos extends Component {
     this.setState({ area: event.target.value })
   }
 
-  // onCollectionUpdate = (querySnapshot) => {
-  //   const comprometidos = []
-  //   querySnapshot.forEach((doc) => {
-  //     const { partida, presupuestal, importe_comp, rubro, municipio, area, isr, iva } = doc.data()
-  //     comprometidos.push({
-  //       key: doc.id,
-  //       doc,
-  //       partida,
-  //       presupuestal,
-  //       importe_comp,
-  //       rubro,
-  //       municipio,
-  //       area,
-  //       isr,
-  //       iva
-  //     })
-  //   })
-  //   this.setState({
-  //     comprometidos
-  //  })
-  // }
-
   handleOnChange1 (event) {
     for (var i = 0; i < event.target.files.length; i++) {
       const file = event.target.files[0]

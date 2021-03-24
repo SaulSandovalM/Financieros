@@ -39,80 +39,75 @@ export default class Edit extends Component {
     }
   }
 
-  listenFondos = (itemsRefFondos) => {
-    itemsRefFondos.on('value', (snap) => {
-      var lista = []
-      snap.forEach((child) => {
-        lista.push({
-          fondo: child.val().fondo,
-          fecha: child.val().fecha,
-          tipo_doc: child.val().tipo_doc,
-          oficio_aut: child.val().oficio_aut,
-          no_oficio: child.val().no_oficio,
-          no_lici: child.val().no_lici,
-          importe: child.val().importe,
-          desc: child.val().desc,
-          beneficiario: child.val().beneficiario,
-          realizo: child.val().realizo,
-          requisicion: child.val().requisicion,
-          pedido: child.val().pedido,
-          no_proyecto: child.val().no_proyecto,
-          poliza: child.val().poliza,
-          cfe: child.val().cfe,
-          nscfe: child.val().nscfe,
-          observaciones: child.val().observaciones,
-          numCompro: child.val().numCompro,
-          comprometido: child.val().comprometido,
-          numCheque: child.val().numCheque,
-          fechaContra: child.val().fechaContra,
-          fechaDepo: child.val().fechaDepo,
-          id: child.key
-        })
-      })
+  componentDidMount() {
+    var dir = history.location.pathname.slice(12)
+    const itemsRefFondos = firebase.database().ref(`fondos/${dir}`).orderByChild('fondo')
+    itemsRefFondos.on('value', (snapshot) => {
+      let updatedWish = snapshot.val()
       this.setState({
-        lista: lista
+        fondo: updatedWish.fondo,
+        fecha: updatedWish.fecha,
+        tipo_doc: updatedWish.tipo_doc,
+        oficio_aut: updatedWish.oficio_aut,
+        no_oficio: updatedWish.no_oficio,
+        no_lici: updatedWish.no_lici,
+        importe: updatedWish.importe,
+        desc: updatedWish.desc,
+        beneficiario: updatedWish.beneficiario,
+        realizo: updatedWish.realizo,
+        requisicion: updatedWish.requisicion,
+        pedido: updatedWish.pedido,
+        no_proyecto: updatedWish.no_proyecto,
+        poliza: updatedWish.poliza,
+        cfe: updatedWish.cfe,
+        nscfe: updatedWish.nscfe,
+        observaciones: updatedWish.observaciones,
+        numCompro: updatedWish.numCompro,
+        comprometido: updatedWish.comprometido,
+        numCheque: updatedWish.numCheque,
+        fechaContra: updatedWish.fechaContra,
+        fechaDepo: updatedWish.fechaDepo,
+        numContra: updatedWish.numContra,
+        cuentaPagar: updatedWish.cuentaPagar,
+        cuentaPagarPara: updatedWish.cuentaPagarPara,
+        sujetoContable: updatedWish.sujetoContable
       })
     })
   }
 
-  componentDidMount() {
-    var dir = history.location.pathname.slice(15)
-    const itemsRefFondos = firebase.database().ref(`fondos/${dir}`).orderByChild('fondo')
-    this.listenFondos(itemsRefFondos)
-    const ref = firebase.firestore().collection('fondos').doc(this.props.match.params.id);
-    ref.get().then((doc) => {
-      if (doc.exists) {
-        const fondoD = doc.data();
-        this.setState({
-          key: doc.id,
-          fondo: fondoD.fondo,
-          fecha: fondoD.fecha,
-          tipo_doc: fondoD.tipo_doc,
-          oficio_aut: fondoD.oficio_aut,
-          no_oficio: fondoD.no_oficio,
-          importe: fondoD.importe,
-          beneficiario: fondoD.beneficiario,
-          desc: fondoD.desc,
-          no_proyecto: fondoD.no_proyecto,
-          realizo: fondoD.realizo,
-          no_lici: fondoD.no_lici,
-          requisicion: fondoD.requisicion,
-          pedido: fondoD.pedido,
-          poliza: fondoD.poliza,
-          cfe: fondoD.cfe,
-          nscfe: fondoD.nscfe,
-          observaciones: fondoD.observaciones,
-          fechaContra: fondoD.fechaContra,
-          numContra: fondoD.numContra,
-          fechaDepo: fondoD.fechaDepo,
-          cuentaPagar: fondoD.cuentaPagar,
-          cuentaPagarPara: fondoD.cuentaPagarPara,
-          sujetoContable: fondoD.sujetoContable
-        });
-      } else {
-        console.log('No hay documento!');
-      }
-    });
+  update () {
+    let updates = {}
+    var dir = history.location.pathname.slice(12)
+    updates[`fondos/${dir}`] = {
+      fondo: this.state.fondo,
+      fecha: this.state.fecha,
+      tipo_doc: this.state.tipo_doc,
+      oficio_aut: this.state.oficio_aut,
+      no_oficio: this.state.no_oficio,
+      no_lici: this.state.no_lici,
+      importe: this.state.importe,
+      desc: this.state.desc,
+      beneficiario: this.state.beneficiario,
+      realizo: this.state.realizo,
+      requisicion: this.state.requisicion,
+      pedido: this.state.pedido,
+      no_proyecto: this.state.no_proyecto,
+      poliza: this.state.poliza,
+      cfe: this.state.cfe,
+      nscfe: this.state.nscfe,
+      observaciones: this.state.observaciones,
+      numCompro: this.state.numCompro,
+      comprometido: this.state.comprometido,
+      numCheque: this.state.numCheque,
+      fechaContra: this.state.fechaContra,
+      fechaDepo: this.state.fechaDepo,
+      numContra: this.state.numContra,
+      cuentaPagar: this.state.cuentaPagar,
+      cuentaPagarPara: this.state.cuentaPagarPara,
+      sujetoContable: this.state.sujetoContable
+    }
+    firebase.database().ref().update(updates)
+    alert('Tu solicitud fue enviada.')
   }
 
   onChange = (e) => {
@@ -121,96 +116,9 @@ export default class Edit extends Component {
    this.setState({ fondoD: state });
  }
 
-  onSubmit = (e) => {
-    e.preventDefault()
-    const {
-      fondo,
-      fecha,
-      tipo_doc,
-      oficio_aut,
-      no_oficio,
-      importe,
-      beneficiario,
-      desc,
-      no_proyecto,
-      realizo,
-      no_lici,
-      requisicion,
-      pedido,
-      poliza,
-      cfe,
-      nscfe,
-      observaciones,
-      fechaContra,
-      numContra,
-      fechaDepo,
-      cuentaPagar,
-      cuentaPagarPara,
-      sujetoContable
-    } = this.state
-    const updateRef = firebase.firestore().collection('fondos').doc(this.state.key)
-    updateRef.set({
-      fondo,
-      fecha,
-      tipo_doc,
-      oficio_aut,
-      no_oficio,
-      importe,
-      beneficiario,
-      desc,
-      no_proyecto,
-      realizo,
-      no_lici,
-      requisicion,
-      pedido,
-      poliza,
-      cfe,
-      nscfe,
-      observaciones,
-      fechaContra,
-      numContra,
-      fechaDepo,
-      cuentaPagar,
-      cuentaPagarPara,
-      sujetoContable,
-      estatus: 'Contrarecibo'
-    }).then((docRef) => {
-      this.setState({
-        fondo: '',
-        fecha: '',
-        tipo_doc: '',
-        oficio_aut: '',
-        no_oficio: '',
-        importe: '',
-        beneficiario: '',
-        desc: '',
-        no_proyecto: '',
-        realizo: '',
-        no_lici: '',
-        requisicion: '',
-        pedido: '',
-        poliza: '',
-        cfe: '',
-        nscfe: '',
-        observaciones: '',
-        fechaContra: '',
-        numContra: '',
-        fechaDepo: '',
-        cuentaPagar: '',
-        cuentaPagarPara: '',
-        sujetoContable: ''
-      })
-    })
-    .catch((error) => {
-      console.error('Error: ', error)
-    })
-    alert('Se ha agregado el contrarecibo.')
-    this.props.history.push('/Contra')
-  }
-
   render () {
     return (
-      <form onSubmit={this.onSubmit} className='editcontra-container'>
+      <form className='editcontra-container'>
         <div style={{marginTop: '60px'}}>
           <Grid container spacing={3}>
             <Grid item xs={12}>
@@ -337,15 +245,26 @@ export default class Edit extends Component {
           </Grid>
           <Grid item xs={12} style={{ marginTop: '20px' }}>
             <Paper style={{ padding: '20px' }}>
-              <div style={{ marginBottom: '15px' }}>Agregar Contrarecibo</div>
+              <div style={{ marginBottom: '15px' }}><b>Clave Presupuestal Armonizada</b></div>
+              <div style={{ display: 'flex', flexDirection: 'column' }}>
+                <div>2021-26-30-01-1501010-01-221002-1-02-02-403-P5-E0018-01-003-AU001-000-B07-85000-00-00-E1-00-R001-00-00-EB-03-01</div>
+              </div>
+            </Paper>
+          </Grid>
+          <Grid item xs={12} style={{ marginTop: '20px' }}>
+            <Paper style={{ padding: '20px' }}>
+              <div style={{ marginBottom: '15px' }}><b>Agregar Contrarecibo</b></div>
               <div style={{ display: 'flex', flexDirection: 'column' }}>
                 <TextField
                   style={{ marginBottom: '15px' }}
+                  type='date'
                   label='Fecha de Contrarecibo'
                   name='fechaContra'
                   onChange={this.onChange}
                   value={this.state.fechaContra}
-                  required
+                  InputLabelProps={{
+                    shrink: true,
+                  }}
                 />
                 <TextField
                   style={{ marginBottom: '15px' }}
@@ -353,15 +272,17 @@ export default class Edit extends Component {
                   name='numContra'
                   onChange={this.onChange}
                   value={this.state.numContra}
-                  required
                 />
                 <TextField
                   style={{ marginBottom: '15px' }}
+                  type='date'
                   label='Fecha de Deposito'
                   name='fechaDepo'
                   onChange={this.onChange}
                   value={this.state.fechaDepo}
-                  required
+                  InputLabelProps={{
+                    shrink: true,
+                  }}
                 />
                 <TextField
                   style={{ marginBottom: '15px' }}
@@ -369,7 +290,6 @@ export default class Edit extends Component {
                   name='cuentaPagar'
                   onChange={this.onChange}
                   value={this.state.cuentaPagar}
-                  required
                 />
                 <TextField
                   style={{ marginBottom: '15px' }}
@@ -377,7 +297,6 @@ export default class Edit extends Component {
                   name='cuentaPagarPara'
                   onChange={this.onChange}
                   value={this.state.cuentaPagarPara}
-                  required
                 />
                 <TextField
                   style={{ marginBottom: '15px' }}
@@ -385,7 +304,6 @@ export default class Edit extends Component {
                   name='sujetoContable'
                   onChange={this.onChange}
                   value={this.state.sujetoContable}
-                  required
                 />
               </div>
             </Paper>
@@ -395,7 +313,7 @@ export default class Edit extends Component {
               color='primary'
               aria-label='add'
               style={{ background: 'green' }}
-              type='submit'
+              onClick={() => this.update()}
             >
               <CheckIcon />
             </Fab>
