@@ -204,47 +204,47 @@ export default class Contra2 extends Component {
                 </TableRow>
               </TableHead>
               {filterData.map(item => (
-                <TableBody>
-                  <TableCell component='th' scope='row' className='table-num-fc'>
-                    {item.fondo}
-                  </TableCell>
-                  <TableCell component='th' scope='row' className='table-tipo-c'>
-                    {item.tipo_doc}
-                  </TableCell>
-                  <TableCell component='th' scope='row' className='table-bene-c'>
-                    {item.beneficiario}
-                  </TableCell>
-                  <TableCell component='th' scope='row' className='table-num-fc'>
-                    {item.fechaDepo}
-                  </TableCell>
-                  <TableCell component='th' scope='row' className='table-num-fc'>
-                    {item.fechaContra}
-                  </TableCell>
-                  <TableCell component='th' scope='row' className='table-num-fc'>
-                    {item.numCheque}
-                  </TableCell>
-                  <TableCell component='th' scope='row' className='table-num-fc'>
-                    {item.realizo}
-                  </TableCell>
-                  <TableCell component='th' scope='row' className='table-importe-c'>
-                    <CurrencyFormat
-                      value={item.importe}
-                      displayType='text'
-                      thousandSeparator
-                      prefix=' $ '
-                    />
-                  </TableCell>
-                  <TableCell component='th' scope='row' className='table-num-fc'>
-                    <Button
-                      type='submit'
-                      color='primary'
-                      variant='contained'
-                      onClick={() => this.update(item)}
-                    >
-                      Asignar Cheque
-                    </Button>
-                  </TableCell>
-                </TableBody>
+                  <TableBody>
+                    <TableCell component='th' scope='row' className='table-num-fc'>
+                      {item.fondo}
+                    </TableCell>
+                    <TableCell component='th' scope='row' className='table-tipo-c'>
+                      {item.tipo_doc}
+                    </TableCell>
+                    <TableCell component='th' scope='row' className='table-bene-c'>
+                      {item.beneficiario}
+                    </TableCell>
+                    <TableCell component='th' scope='row' className='table-num-fc'>
+                      {item.fechaContra}
+                    </TableCell>
+                    <TableCell component='th' scope='row' className='table-num-fc'>
+                      {item.fechaDepo}
+                    </TableCell>
+                    <TableCell component='th' scope='row' className='table-num-fc'>
+                      {item.numCheque}
+                    </TableCell>
+                    <TableCell component='th' scope='row' className='table-num-fc'>
+                      {item.realizo}
+                    </TableCell>
+                    <TableCell component='th' scope='row' className='table-importe-c'>
+                      <CurrencyFormat
+                        value={item.importe}
+                        displayType='text'
+                        thousandSeparator
+                        prefix=' $ '
+                      />
+                    </TableCell>
+                    <TableCell component='th' scope='row' className='table-num-fc'>
+                      <Button
+                        type='submit'
+                        color='primary'
+                        variant='contained'
+                        onClick={() => this.update(item)}
+                      >
+                        Asignar Cheque
+                      </Button>
+                    </TableCell>
+                  </TableBody>
               ))}
             </Table>
           </div>
