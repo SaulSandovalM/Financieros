@@ -61,106 +61,7 @@ export default class Oficios extends Component {
     this.listenFondo(itemsRefFondo)
     const itemsRefComprometidos = firebase.database().ref(`fondos/${dir}/comprometido`)
     this.listenComprometidos(itemsRefComprometidos)
-
-    // const lol = firebase.firestore().collection('fondos').doc(this.props.match.params.id).collection('comprometidos').orderBy('up', 'asc')
-    // this.unsubscribe = updateRef.onSnapshot(this.onCollectionUpdate)
-    // const ref = firebase.firestore().collection('fondos').doc(this.props.match.params.id)
-    // ref.get().then((doc) => {
-    //   if (doc.exists) {
-    //     const fondos = doc.data()     bami.martin byme.cavi  7721115317 Ixmiquilpan
-    //     this.setState({
-    //       key: doc.id,
-    //       año: fondos.año,
-    //       ur: fondos.ur,
-    //       ramo: fondos.ramo,
-    //       os: fondos.os,
-    //       up: fondos.up,
-    //       rubro: fondos.rubro,
-    //       tg: fondos.tg,
-    //       ogasto: fondos.ogasto,
-    //       f: fondos.f,
-    //       fu: fondos.fu,
-    //       sf: fondos.sf,
-    //       eje: fondos.eje,
-    //       s: fondos.s,
-    //       prog: fondos.prog,
-    //       obj: fondos.obj,
-    //       proy: fondos.proy,
-    //       est: fondos.est,
-    //       ben: fondos.ben,
-    //       eg: fondos.eg,
-    //       importe_comp: fondos.importe_comp,
-    //       total: fondos.total,
-    //       // fecha: fondos.fecha cambiar el valor
-    //       numCompro: fondos.numCompro,
-    //       importe: fondos.importe,
-    //       no_oficio: fondos.no_oficio,
-    //       oficio_aut: fondos.oficio_aut,
-    //       no_proyecto: fondos.no_proyecto,
-    //       cfdi: fondos.cfdi,
-    //       desc: fondos.desc,
-    //       beneficiario: fondos.beneficiario,
-    //       requisicion: fondos.requisicion,
-    //       pedido: fondos.pedido,
-    //       fondo2: fondos.fondo,
-    //       tipo_doc: fondos.tipo_doc,
-    //       no_lici: fondos.no_lici
-    //     })
-    //   } else {
-    //     console.log('No se encuentra documento')
-    //   }
-    // })
-    // const refC = firebase.firestore().collection('fondos').doc(this.props.match.params.id).collection('comprometidos')
-    // refC.get().then((doc) => {
-    //   if (doc.exists) {
-    //     const comprometidos = doc.data()
-    //     this.setState({
-    //       key: doc.id,
-    //       proy: comprometidos.proy,
-    //       np: comprometidos.np
-    //     })
-    //   } else {
-    //     console.log('No se encuentra documento')
-    //   }
-    // })
   }
-
-  // onCollectionUpdate = (querySnapshot) => {
-  //   let comprometidos = []
-  //   querySnapshot.forEach((doc) => {
-  //     const { año, ramo, up, rubro, tg, partida, npro, f, fu, sf, eje, s, prog,
-  //       obj, proy, est, ben, eg, importe_comp, ur, total, comprobantes } = doc.data()
-  //     comprometidos.push({
-  //       key: doc.id,
-  //       doc,
-  //       año,
-  //       ramo,
-  //       up,
-  //       rubro,
-  //       tg,
-  //       partida,
-  //       npro,
-  //       f,
-  //       fu,
-  //       sf,
-  //       eje,
-  //       s,
-  //       prog,
-  //       obj,
-  //       proy,
-  //       est,
-  //       ben,
-  //       eg,
-  //       importe_comp,
-  //       total,
-  //       ur,
-  //       comprobantes
-  //     })
-  //   })
-  //   this.setState({
-  //     comprometidos
-  //   })
-  // }
 
   handleChange (event) {
     this.setState({ [event.target.name]: event.target.value })
@@ -713,62 +614,66 @@ export default class Oficios extends Component {
                                     Leyenda alusiva al gasto
                                   </div>
                                 </div>
-                                {/*comprometidos.comprobantes.map(item =>
-                                  <div style={{ width: '100%' }}>
-                                      <div style={{ width: '100%', display: 'flex' }}>
-                                        <div
-                                          className='all-tab-f'
-                                          style={{
-                                            width: '35%',
-                                            textAlign: 'center',
-                                            display: 'flex',
-                                            justifyContent: 'center',
-                                            flexDirection: 'column',
-                                            borderLeft: '1px solid black',
-                                            borderRight: '1px solid black',
-                                            borderBottom: '1px solid black'
-                                          }}>
-                                          {item.uuid}
+                                {comprometidos.comprobantes !== undefined ?
+                                <div>
+                                  {comprometidos.comprobantes.map(item =>
+                                    <div style={{ width: '100%' }}>
+                                        <div style={{ width: '100%', display: 'flex' }}>
+                                          <div
+                                            className='all-tab-f'
+                                            style={{
+                                              width: '35%',
+                                              textAlign: 'center',
+                                              display: 'flex',
+                                              justifyContent: 'center',
+                                              flexDirection: 'column',
+                                              borderLeft: '1px solid black',
+                                              borderRight: '1px solid black',
+                                              borderBottom: '1px solid black'
+                                            }}>
+                                            {item.uuid}
+                                          </div>
+                                          <div
+                                            className='all-tab-f'
+                                            style={{
+                                              width: '10%',
+                                              textAlign: 'center',
+                                              display: 'flex',
+                                              justifyContent: 'center',
+                                              flexDirection: 'column',
+                                              borderRight: '1px solid black',
+                                              borderBottom: '1px solid black'
+                                            }}>
+                                            <CurrencyFormat
+                                              style={{ fontSize: '12px' }}
+                                              value={item.total}
+                                              displayType='text'
+                                              thousandSeparator
+                                              prefix=' $ '
+                                            />
+                                          </div>
+                                          <div
+                                            className='all-tab-f div'
+                                            style={{
+                                              width: '55%',
+                                              textAlign: 'center',
+                                              display: 'flex',
+                                              justifyContent: 'center',
+                                              flexDirection: 'column',
+                                              borderRight: '1px solid black',
+                                              borderBottom: '1px solid black'
+                                            }}>
+                                            <textarea
+                                              className='all-tab-l'
+                                              type='text'
+                                              onKeyUp={this.handleChange.bind(this)}
+                                            />
+                                          </div>
                                         </div>
-                                        <div
-                                          className='all-tab-f'
-                                          style={{
-                                            width: '10%',
-                                            textAlign: 'center',
-                                            display: 'flex',
-                                            justifyContent: 'center',
-                                            flexDirection: 'column',
-                                            borderRight: '1px solid black',
-                                            borderBottom: '1px solid black'
-                                          }}>
-                                          <CurrencyFormat
-                                            style={{ fontSize: '12px' }}
-                                            value={item.total}
-                                            displayType='text'
-                                            thousandSeparator
-                                            prefix=' $ '
-                                          />
-                                        </div>
-                                        <div
-                                          className='all-tab-f div'
-                                          style={{
-                                            width: '55%',
-                                            textAlign: 'center',
-                                            display: 'flex',
-                                            justifyContent: 'center',
-                                            flexDirection: 'column',
-                                            borderRight: '1px solid black',
-                                            borderBottom: '1px solid black'
-                                          }}>
-                                          <textarea
-                                            className='all-tab-l'
-                                            type='text'
-                                            onKeyUp={this.handleChange.bind(this)}
-                                          />
-                                        </div>
-                                      </div>
-                                  </div>
-                                )*/}
+                                    </div>
+                                  )}
+                                </div>
+                                : null}
                                 <div style={{ width: '100%', display: 'flex', height: '30px' }}>
                                   <div
                                     className='all-tab-f2'

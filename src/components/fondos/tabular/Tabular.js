@@ -9,6 +9,7 @@ import TableRow from '@material-ui/core/TableRow'
 import Paper from '@material-ui/core/Paper'
 import TableBody from '@material-ui/core/TableBody'
 import history from '../../../history'
+import CurrencyFormat from 'react-currency-format'
 
 export default class Tabular extends Component {
   constructor() {
@@ -105,7 +106,13 @@ export default class Tabular extends Component {
                     </div>
                   </TableCell>
                   <TableCell className='table-tab'>
-                    $ {fondos.importe}
+                    <CurrencyFormat
+                      style={{ fontSize: '12px' }}
+                      value={fondos.importe}
+                      displayType='text'
+                      thousandSeparator
+                      prefix=' $ '
+                    />
                   </TableCell>
                   <TableCell className='table-tab'>
                     <div onClick={() => history.push(`/TabularGlobal/${fondos.id}`)}>Ver</div>

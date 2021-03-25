@@ -209,61 +209,6 @@ export default class Fondos extends Component {
     this.setState(state)
   }
 
-  // onCollectionUpdate = (querySnapshot) => {
-  //   const fondos = []
-  //   querySnapshot.forEach((doc) => {
-  //     const {
-  //       fondo,
-  //       tipo_doc,
-  //       importe,
-  //       fecha,
-  //       realizo,
-  //       contrarecibo
-  //     } = doc.data()
-  //     fondos.push({
-  //       key: doc.id,
-  //       doc,
-  //       fondo,
-  //       tipo_doc,
-  //       importe,
-  //       realizo,
-  //       fecha,
-  //       contrarecibo
-  //     })
-  //   })
-  //   this.setState({
-  //     fondos
-  //   })
-  // }
-  //
-  // onCollectionGet = (querySnapshot) => {
-  //   const fondos = []
-  //   querySnapshot.forEach((doc) => {
-  //     const {
-  //       fondo,
-  //       tipo_doc,
-  //       importe,
-  //       fecha,
-  //       realizo,
-  //       contrarecibo
-  //     } = doc.data()
-  //     fondos.push({
-  //       key: doc.id,
-  //       doc,
-  //       fondo,
-  //       tipo_doc,
-  //       importe,
-  //       realizo,
-  //       fecha,
-  //       contrarecibo
-  //     })
-  //   })
-  //   this.setState({
-  //     fondos
-  //   })
-  // }
-  //
-
   listenBeneficiario = (itemsRefBeneficiario) => {
     itemsRefBeneficiario.on('value', (snap) => {
       var baneficiarioc = []
