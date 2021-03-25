@@ -89,28 +89,10 @@ export default class Oficios extends Component {
       proyectof.push(proy)
     }
 
-    for (i = 0; i < this.state.comprometidos.length; i++) {
-      console.log(this.state.comprometidos[i])
-      console.log(this.state.comprometidos[i].comprobantes)
-      var arra = new Array(this.state.comprometidos[i].comprobantes)
-      var lol = arra.length
-      for (var j = 0; j < lol; j++) {
-        // console.log(this.state.comprometidos[i].comprobantes[j])
-        // console.log(this.state.comprometidos[i].comprobantes[j].importe)
-      }
-    }
+    console.log(this.state.comprometidos.map(item => (
+      <div>{item.proy}</div>
+    )))
 
-    // console.log(this.state.comprometidos.comprobantes)
-
-
-
-    // comprometido
-    // console.log(this.state.comprometidos)
-    this.state.comprometidos.forEach(element => console.log(element.importe))
-
-    //comprobantes
-    // console.log(this.state.comprometidos)
-    // this.state.comprometidos.map(element => console.log(element.comprobantes))
 
     return (
       <div>
@@ -1609,7 +1591,7 @@ export default class Oficios extends Component {
             </div>
             <div className='no-oficio'>
               <p>
-                <b>Oficio No:</b> PGI/DGAyF/{this.state.no_oficio}/2020
+                <b>Oficio No:</b> PGI/DGAyF/{this.state.no_oficio}/2021
                 <br /> Pachuca de Soto, Hidalgo a {today}
                 <br /><b>Asunto </b>  Reembolso de Fondo Revolvente
               </p>
@@ -2556,7 +2538,7 @@ export default class Oficios extends Component {
             </div>
             <div className='no-oficio'>
               <p>
-                <b>Oficio No:</b>PGI/DGAyF/{this.state.no_oficio}/2020
+                <b>Oficio No:</b>PGI/DGAyF/{this.state.no_oficio}/2021
                 <br /> Pachuca de Soto, Hidalgo a {today}
                 <br /><b>Asunto </b>Solicitud de Pago Proveedor por Requisicón
               </p>
@@ -2733,7 +2715,7 @@ export default class Oficios extends Component {
             </div>
             <div className='no-oficio'>
               <p>
-                <b>Oficio No:</b> PGI/DGAyF/{this.state.no_oficio}
+                <b>Oficio No:</b> PGI/DGAyF/{this.state.fondo.no_oficio}/2021
                 <br /> Pachuca de Soto, Hidalgo a {today}
                 <br /><b>Asunto </b>Pago a Proveedor
               </p>
@@ -2765,13 +2747,21 @@ export default class Oficios extends Component {
                   displayType='text'
                   thousandSeparator
                   prefix=' $ '
-                /> ({(NumberAsString(this.state.fondo.importe))}),
-                cantidad amparada con los CFDI No. {this.state.fondo.cfdi},
-                para el trámite de pago a favor del proveedor {this.state.fondo.beneficiario},
-                por la compra o prestación de  servicios {this.state.fondo.desc},
-                con cargo al proyecto {proyectof} y {this.state.fondo.no_proyec}
-                y a los recursos otorgados con el oficio de autorización {this.state.fondo.oficio_aut},
-                a la Procuraduria General de Justicia del Estado de Hidalgo.
+                />
+                ({(NumberAsString(this.state.fondo.importe))}),
+                cantidad amparada con los comprobantes No
+                {this.state.comprometidos.map(comprometidos =>
+                  comprometidos.comprobantes !== undefined ?
+                    comprometidos.comprobantes.map(item =>
+                      ', ' + item.uuid.slice(24)
+                    )
+                  : null
+                )}, para el trámite de pago a favor del proveedor {this.state.fondo.beneficiario}, por
+                la/el servicio {this.state.fondo.desc}, con
+                cargo al proyecto{this.state.comprometidos.map(item => ', ' + item.proy)}
+                {this.state.comprometidos.map(item => ', ' + item.npro)} y
+                a los recursos otorgados con el oficio de autorización {this.state.fondo.oficio_aut}, a
+                la Procuraduria General de Justicia del Estado de Hidalgo.
               </p>
               <p>Sin otro particular por el momento, reciba un cordial saludo</p>
             </div>
@@ -3793,7 +3783,7 @@ export default class Oficios extends Component {
             <div className='no-oficio'>
               <p>
                 <b>Oficio No: </b>
-                PGI/DGAyF/ {this.state.no_oficio}<br />
+                PGI/DGAyF/{this.state.no_oficio}/2021<br />
                 Pachuca de Soto, Hidalgo a {today}<br />
                 <b>Asunto </b>
                 Solicitud de Pago Proveedor por Requisicón

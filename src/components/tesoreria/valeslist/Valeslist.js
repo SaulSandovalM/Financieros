@@ -47,7 +47,7 @@ export default class Valeslist extends Component {
       filex: ['No hay datos cargados'],
       filefactura: [{ url: '', nombre: '' }],
       filef: [{ url: '', nombre: '' }],
-      recibosList: [{ folio: 'Recibo', nombre: '', importe: '', iva: '0', isr: '0', fecha: '', estatus: '', subtotal: '0', total: '0', uuid: 'Recibo' }],
+      recibosList: [{ folio: 'Recibo', nombre: '', importe: '0', iva: '0', isr: '0', fecha: '', estatus: '', subtotal: '0', total: '0', uuid: 'Recibo' }],
       autorizados: false,
       noautorizados: false,
       pendientes: false,

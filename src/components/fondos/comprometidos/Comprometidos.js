@@ -252,6 +252,40 @@ export default class Comprometidos extends Component {
     }
   }
 
+  handleOnChange2 (event) {
+    for (var i = 0; i < event.target.files.length; i++) {
+      const file = event.target.files[0]
+      var xml = file
+      var reader = new FileReader()
+      reader.onload = function (event) {
+        var XMLParser = require('react-xml-parser')
+        var xml = new XMLParser().parseFromString(event.target.result)
+        const data = {
+          'total': xml.attributes['Total'],
+          'subtotal': xml.attributes['SubTotal'] ? xml.attributes['SubTotal'] : 0,
+          'folio': xml.attributes['Folio'] ? xml.attributes['Folio'] : '0',
+          'nombre': xml.children['0'].attributes['Nombre'],
+          'importe': xml.children['2'].children['0'].attributes['Importe'],
+          'iva': xml.children['3'].attributes['TotalImpuestosTrasladados'],
+          'isr': xml.children['3'].attributes['TotalImpuestosRetenidos'] ? xml.children['3'].attributes['TotalImpuestosRetenidos'] : 0,
+          'fecha': xml.children['4'].children['0'].attributes['FechaTimbrado'],
+          'uuid': xml.children['4'].children['0'].attributes['UUID']
+        }
+        fetch(xml).then(res => res.text()).then(xml => {
+          fetch('https://financieros-78cb0.firebaseio.com/xml.json', {
+            method: 'POST',
+            headers: {
+              'Accept': 'application/json',
+              'Content-Type': 'application/json',
+            },
+              body: JSON.stringify(data),
+          })
+        })
+      }
+      reader.readAsText(xml)
+    }
+  }
+
   update = (item) => {
     let updates = {}
     updates['presupuesto/' + item.id] = {
@@ -358,6 +392,13 @@ export default class Comprometidos extends Component {
         }
       )
       wishRef.update(updatedWish)
+      updatedWish.cpa.push(
+        {
+          cantidad: total,
+          presupuestal: item.cpa,
+        }
+      )
+      wishRef.update(updatedWish)
     })
     // cambiar el estatus del xml/recibo
     var changes = this.state.contra
@@ -432,14 +473,13 @@ export default class Comprometidos extends Component {
   }
 
   render () {
-    console.log(this.state.comprometidos)
     var user = firebase.auth().currentUser
     var email
     if (user != null) {
       email = user.email
     }
     let admin
-    if (email === 'administrador@procuraduria.com') {
+    if (email === 'administrador@procu.com') {
       admin = 'ADMIN'
     } else if (email === 'nayra@procuraduria.com') {
       admin = 'NAYRA'
@@ -509,7 +549,16 @@ export default class Comprometidos extends Component {
         return ( ( (xml.folio.indexOf(this.state.search) !== -1) ||
           (xml.nombre.indexOf(this.state.search) !== -1) ||
           (xml.fecha.indexOf(this.state.search) !== -1) ) &&
-          xml.estatus !== 'asignado')
+          xml.estatus !== 'asignado' && xml.area !== 'Pago Directo')
+      }
+    )
+
+    const filterData2 = this.state.xml.filter(
+      (xml) => {
+        return ( ( (xml.folio.indexOf(this.state.search) !== -1) ||
+          (xml.nombre.indexOf(this.state.search) !== -1) ||
+          (xml.fecha.indexOf(this.state.search) !== -1) ) &&
+          xml.estatus !== 'asignado' && xml.area === 'Pago Directo')
       }
     )
 
@@ -521,27 +570,27 @@ export default class Comprometidos extends Component {
         totalImporteImporte.push(parseFloat(items.importe))
       ))
       const reducerImporte = (a, b) => a + b
-      this.state.importe = totalImporteImporte.reduce(reducerImporte)
+      this.state.importe = totalImporteImporte.reduce(reducerImporte).toFixed(2)
 
       const totalImporteIva = []
       right.map(items => (
         totalImporteIva.push(parseFloat(items.iva))
       ))
       const reducerIva = (a, b) => a + b
-      this.state.iva = totalImporteIva.reduce(reducerIva)
+      this.state.iva = totalImporteIva.reduce(reducerIva).toFixed(2)
 
       const totalImporteIsr = []
       right.map(items => (
         totalImporteIsr.push(parseFloat(items.isr))
       ))
       const reducerIsr = (a, b) => a + b
-      this.state.isr = totalImporteIsr.reduce(reducerIsr)
+      this.state.isr = totalImporteIsr.reduce(reducerIsr).toFixed(2)
 
       const importe = parseFloat(this.state.importe)
       const iva = parseFloat(this.state.iva)
       const isr = parseFloat(this.state.isr)
       const total = importe + iva - isr
-      this.state.total = total
+      this.state.total = total.toFixed(2)
       this.state.contra = right
     }
 
@@ -558,7 +607,8 @@ export default class Comprometidos extends Component {
               <ListItemText className='list-align'><b>Fecha</b></ListItemText>
               <ListItemText className='list-align2'><b>Nombre</b></ListItemText>
             </ListItem>
-            {filterData.map((value) => {
+            {admin === 'MIGUEL' ?
+            filterData.map((value) => {
               return (
                 <ListItem key={value} button onClick={handleToggle(value)}>
                   <ListItemIcon>
@@ -569,12 +619,38 @@ export default class Comprometidos extends Component {
                     />
                   </ListItemIcon>
                   <ListItemText className='list-align-i' primary={value.folio} />
-                  <ListItemText className='list-align-i' primary={'$ ' + value.total} />
+                  {value.folio === 'Recibo' ?
+                    <ListItemText className='list-align-i' primary={'$ ' + value.importe} />
+                    :
+                    <ListItemText className='list-align-i' primary={'$ ' + value.total} />
+                  }
                   <ListItemText className='list-align' primary={value.fecha} />
                   <ListItemText className='list-align2' primary={value.nombre} />
                 </ListItem>
               )
-            })}
+            }) : null}
+            {admin === 'ADMIN' ?
+            filterData2.map((value) => {
+              return (
+                <ListItem key={value} button onClick={handleToggle(value)}>
+                  <ListItemIcon>
+                    <Checkbox
+                      checked={checked.indexOf(value) !== -1}
+                      tabIndex={-1}
+                      disableRipple
+                    />
+                  </ListItemIcon>
+                  <ListItemText className='list-align-i' primary={value.folio} />
+                  {value.folio === 'Recibo' ?
+                    <ListItemText className='list-align-i' primary={'$ ' + value.importe} />
+                    :
+                    <ListItemText className='list-align-i' primary={'$ ' + value.total} />
+                  }
+                  <ListItemText className='list-align' primary={value.fecha} />
+                  <ListItemText className='list-align2' primary={value.nombre} />
+                </ListItem>
+              )
+            }) : null}
           </List>
         </Card>
       </div>
@@ -602,7 +678,11 @@ export default class Comprometidos extends Component {
                     />
                   </ListItemIcon>
                   <ListItemText className='list-align-i' primary={value.folio} />
-                  <ListItemText className='list-align-i' primary={'$ ' + value.total} />
+                  {value.folio === 'Recibo' ?
+                    <ListItemText className='list-align-i' primary={'$ ' + value.importe} />
+                    :
+                    <ListItemText className='list-align-i' primary={'$ ' + value.total} />
+                  }
                   <ListItemText className='list-align' primary={value.fecha} />
                   <ListItemText className='list-align2' primary={value.nombre} />
                 </ListItem>
@@ -635,7 +715,7 @@ export default class Comprometidos extends Component {
                   />
                 </div>
               </div>
-              {(admin === 'OMAR' || admin === 'MARCOS' || admin === 'KARINA' || admin === 'MIGUEL' || admin === 'TERESA') &&
+              {(admin === 'OMAR' || admin === 'MARCOS' || admin === 'KARINA' || admin === 'MIGUEL' || admin === 'TERESA' || admin === 'ADMIN') &&
                 customListLeft('Choices', left)
               }
             </Grid>
@@ -845,7 +925,8 @@ export default class Comprometidos extends Component {
                   </div>
                 )}
               </TableBody>
-              {this.state.comprometidos.map(comprometidos =>
+              {this.state.compormetidos !== undefined ?
+                this.state.comprometidos.map(comprometidos =>
                 <TableRow key={comprometidos.name} className='table-row-c'>
                   <TableCell className='border-table2'>
                     <div className='font-tb'>
@@ -917,7 +998,7 @@ export default class Comprometidos extends Component {
                     </IconButton>
                   </TableCell>
                 </TableRow>
-              )}
+              ): null}
             </Paper>
           </Grid>
         </Grid>
@@ -928,15 +1009,28 @@ export default class Comprometidos extends Component {
             variant='extended'
           >
             <AddIcon style={{ marginRight: '6px' }} />
-            <Dropzone
-              style={{
-                width: '100%',
-                height: '100%',
-              }}
-              accept='.xml' onChange={this.handleOnChange1.bind(this)}
-            >
-              Agregar XML
-            </Dropzone>
+            {(admin === 'MIGUEL') &&
+              <Dropzone
+                style={{
+                  width: '100%',
+                  height: '100%',
+                }}
+                accept='.xml' onChange={this.handleOnChange1.bind(this)}
+              >
+                Agregar XML
+              </Dropzone>
+            }
+            {(admin === 'ADMIN') &&
+              <Dropzone
+                style={{
+                  width: '100%',
+                  height: '100%',
+                }}
+                accept='.xml' onChange={this.handleOnChange2.bind(this)}
+              >
+                Agregar XML
+              </Dropzone>
+            }
           </Fab>
           <Fab
             color='primary'
