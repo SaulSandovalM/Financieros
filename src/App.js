@@ -41,9 +41,9 @@ import ControlP from './components/controlp/ControlP'
 import Add from './components/controlp/Add'
 import Complemento from './components/complemento/Complemento'
 import Contrarecibo from './components/fondos/contrarecibo/Contrarecibo'
-import Tabular from './components/fondos/Todospdf/Tabular/Tabular'
-import TabularList from './components/fondos/Todospdf/Tabular/TabularList'
-import TabularIndi from './components/fondos/Todospdf/Tabular/TabularIndi'
+import TabularList from './components/fondos/tabular/Tabular'
+import TabularGlobal from './components/fondos/tabular/TabularGlobal'
+import TabularIndividual from './components/fondos/tabular/TabularIndividual'
 import Pasa from './components/fondos/pasa/Pasa'
 
 function App (props) {
@@ -280,15 +280,15 @@ function App (props) {
       />
       <ProtectedRoute
         exact
-        path='/Tabular/:id'
-        component={Tabular}
+        path='/TabularGlobal/:id'
+        component={TabularGlobal}
         isAuthenticated={isAuthenticated}
         isVerifying={isVerifying}
       />
       <ProtectedRoute
         exact
-        path='/TabularIndi/:id'
-        component={TabularIndi}
+        path='/TabularIndividual/:id'
+        component={TabularIndividual}
         isAuthenticated={isAuthenticated}
         isVerifying={isVerifying}
       />
