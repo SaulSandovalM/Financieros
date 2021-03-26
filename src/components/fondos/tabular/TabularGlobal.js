@@ -35,9 +35,11 @@ export default class Tabular extends Component {
 
   render () {
     const totalImporte = []
-    this.state.comprometidos.map(comprometidos => (
-      totalImporte.push(comprometidos.importe_comp)
-    ))
+    this.state.comprometidos.map(comprometidos =>
+      comprometidos ?
+        totalImporte.push(parseFloat(comprometidos.importe_comp))
+      : null
+    )
     const reducer = (a, b) => a + b
 
     return (
@@ -74,6 +76,7 @@ export default class Tabular extends Component {
                   </div>
                   <div>
                     {this.state.comprometidos.map(comprometidos =>
+                      comprometidos.up ?
                       <div key='' className='tab-tabular'>
                         <div className='tab-pui-content'>
                           <div className='tab-pui'>
@@ -87,7 +90,7 @@ export default class Tabular extends Component {
                             <p className='tab-p-m'>{comprometidos.importe_comp}</p>
                           </div>
                         </div>
-                      </div>
+                      </div> : null
                     )}
                   </div>
                 </div>
@@ -99,7 +102,7 @@ export default class Tabular extends Component {
                     <div className='tab-pui' />
                     <div className='tab-pui-border'>
                       <p className='tab-p-m'>$</p>
-                      <p className='tab-p-m'>{(totalImporte.reduce(reducer))}</p>
+                      <p className='tab-p-m'>{(totalImporte.reduce(reducer)).toFixed(2)}</p>
                     </div>
                   </div>
                 </div>

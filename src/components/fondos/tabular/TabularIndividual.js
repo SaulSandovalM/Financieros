@@ -36,7 +36,6 @@ export default class TabularIndi extends Component {
   }
 
   render () {
-
     return (
       <div style={{margin: '80px'}}>
         <ReactToPrint
@@ -45,6 +44,7 @@ export default class TabularIndi extends Component {
         />
         <div ref={el => (this.componentRef = el)}>
         {this.state.comprometidos.map(comprometidos =>
+          comprometidos.up ?
           <div className='tab-container'>
             <div className='tab-content'>
               <div className='tab-border'>
@@ -102,7 +102,7 @@ export default class TabularIndi extends Component {
                 </div>
               </div>
             </div>
-          </div>
+          </div> : null
         )}
         </div>
       </div>

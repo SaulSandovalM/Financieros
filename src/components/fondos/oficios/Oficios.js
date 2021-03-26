@@ -75,7 +75,9 @@ export default class Oficios extends Component {
     today = diasSemana[f.getDay()] + ', ' + f.getDate() + ' de ' + meses[f.getMonth()] + ' de ' + f.getFullYear()
     const totalImporte = []
     this.state.comprometidos.map(comprometidos => (
-      totalImporte.push(comprometidos.total)
+      comprometidos ?
+        totalImporte.push(parseFloat(comprometidos.total))
+      : null
     ))
     const reducer = (a, b) => a + b
 
@@ -88,8 +90,6 @@ export default class Oficios extends Component {
       var proy = proyect.split(' ')[0]
       proyectof.push(proy)
     }
-
-    this.state.comprometidos.map(comprometidos => console.log(comprometidos.area ? comprometidos : null))
 
     return (
       <div>
@@ -1554,7 +1554,7 @@ export default class Oficios extends Component {
                       <td className='all-tablai border-color text-rete'>Total</td>
                       <td className='all-tablai'>
                         <CurrencyFormat
-                          value={(totalImporte.reduce(reducer))}
+                          value={(totalImporte.reduce(reducer)).toFixed(2)}
                           displayType='text'
                           thousandSeparator
                           prefix=' $ '
@@ -2501,7 +2501,7 @@ export default class Oficios extends Component {
                       <td className='all-tablai border-color text-rete'>Total</td>
                       <td className='all-tablai'>
                         <CurrencyFormat
-                          value={(totalImporte.reduce(reducer))}
+                          value={(totalImporte.reduce(reducer)).toFixed(2)}
                           displayType='text'
                           thousandSeparator
                           prefix=' $ '
@@ -3564,7 +3564,7 @@ export default class Oficios extends Component {
                     <td className='all-tablai border-color text-rete'>Total</td>
                     <td className='all-tablai'>
                       <CurrencyFormat
-                        value={(totalImporte.reduce(reducer))}
+                        value={(totalImporte.reduce(reducer)).toFixed(2)}
                         displayType='text'
                         thousandSeparator
                         prefix=' $ '
@@ -4543,7 +4543,7 @@ export default class Oficios extends Component {
                     <td className='all-tablai border-color text-rete'>Total</td>
                     <td className='all-tablai'>
                       <CurrencyFormat
-                        value={(totalImporte.reduce(reducer))}
+                        value={(totalImporte.reduce(reducer)).toFixed(2)}
                         displayType='text'
                         thousandSeparator
                         prefix=' $ '

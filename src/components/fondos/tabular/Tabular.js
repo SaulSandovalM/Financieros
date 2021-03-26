@@ -20,7 +20,7 @@ export default class Tabular extends Component {
   }
 
   componentDidMount() {
-    const itemsRefFondos = firebase.database().ref('fondos/').orderByChild('fondo')
+    const itemsRefFondos = firebase.database().ref('fondos/').orderByChild('fecha')
     this.listenFondos(itemsRefFondos)
   }
 
