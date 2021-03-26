@@ -473,6 +473,7 @@ export default class Comprometidos extends Component {
   }
 
   render () {
+    console.log(this.state.comprometidos)
     var user = firebase.auth().currentUser
     var email
     if (user != null) {
@@ -925,8 +926,8 @@ export default class Comprometidos extends Component {
                   </div>
                 )}
               </TableBody>
-              {this.state.compormetidos !== undefined ?
-                this.state.comprometidos.map(comprometidos =>
+              {this.state.comprometidos.map(comprometidos =>
+                comprometidos.partida ?
                 <TableRow key={comprometidos.name} className='table-row-c'>
                   <TableCell className='border-table2'>
                     <div className='font-tb'>
@@ -954,7 +955,6 @@ export default class Comprometidos extends Component {
                       displayType='text'
                       prefix=' $ '
                       thousandSeparator
-                      decimalSeparator='.'
                       value={comprometidos.importe_comp}
                     />
                   </TableCell>
@@ -964,7 +964,6 @@ export default class Comprometidos extends Component {
                       displayType='text'
                       prefix=' $ '
                       thousandSeparator
-                      decimalSeparator='.'
                       value={comprometidos.iva}
                     />
                   </TableCell>
@@ -974,7 +973,6 @@ export default class Comprometidos extends Component {
                       displayType='text'
                       prefix=' $ '
                       thousandSeparator
-                      decimalSeparator='.'
                       value={comprometidos.isr}
                     />
                   </TableCell>
@@ -985,8 +983,7 @@ export default class Comprometidos extends Component {
                       displayType='text'
                       prefix=' $ '
                       thousandSeparator
-                      decimalSeparator='.'
-                      value={(comprometidos.importe_comp + comprometidos.iva + comprometidos.isr)}
+                      value={(parseInt(comprometidos.importe_comp) + parseInt(comprometidos.iva) - parseInt(comprometidos.isr))}
                     />
                   </TableCell>
                   <TableCell className='border-icon'>
@@ -997,8 +994,8 @@ export default class Comprometidos extends Component {
                       }
                     </IconButton>
                   </TableCell>
-                </TableRow>
-              ): null}
+                </TableRow> : null
+              )}
             </Paper>
           </Grid>
         </Grid>

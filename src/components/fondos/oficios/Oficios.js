@@ -89,10 +89,7 @@ export default class Oficios extends Component {
       proyectof.push(proy)
     }
 
-    console.log(this.state.comprometidos.map(item => (
-      <div>{item.proy}</div>
-    )))
-
+    this.state.comprometidos.map(comprometidos => console.log(comprometidos.area ? comprometidos : null))
 
     return (
       <div>
@@ -434,13 +431,14 @@ export default class Oficios extends Component {
                       />
                       <div ref={el => (this.la = el)} style={{ zIndex: '2', width: '100%', height: '100%'}}>
                       {this.state.comprometidos.map(comprometidos =>
+                        comprometidos.up ?
                         <div className='lll'>
                           <div style={{ width: '100%' }}>
                             <div className='title-ga'>
-                              <div>
-                                <img className='pgjh' src={lpgjh} alt='' style={{ width: '50px' }} />
+                              <div style={{ width: '15%' }}>
+                                <img className='pgjh' src={lpgjh} alt='' style={{ width: '100%' }} />
                               </div>
-                              <div>
+                              <div style={{ width: '70%' }}>
                                 <p className='text-titulo-ga'>PROCURADURÍA GENERAL DE JUSTICA DE HIDALGO</p>
                                   <p className='text-titulo-ga'>
                                     {(comprometidos.up === '01' &&
@@ -515,8 +513,10 @@ export default class Oficios extends Component {
                                   </p>
                                 <p className='text-titulo-ga'>{comprometidos.partida}</p>
                               </div>
-                              <div>
-                                <img className='ims' src={logo2} alt='' />
+                              <div style={{ width: '15%', display: 'flex', justifyCOntent: 'center', flexDirection: 'column' }}>
+                                <div style={{ display: 'flex', justifyContent: 'flex-end', height: '100%' }}>
+                                  <img className='ims' src={logo2} alt='' style={{ height: '100%' }} />
+                                </div>
                               </div>
                             </div>
                           </div>
@@ -711,7 +711,7 @@ export default class Oficios extends Component {
                               </div>
                             </div>
                           </div>
-                        </div>
+                        </div> : null
                       )}
                       </div>
                     </div>
@@ -2710,32 +2710,38 @@ export default class Oficios extends Component {
 
           {/* Pago Provedor */}
           <div className='pppdf-subdad' ref={el => (this.opp = el)} style={{ zIndex: '2', position: 'absolute' }}>
-            <div className='fondo-procu'>
+            <div className='fondo-procu' style={{ display: 'flex', justifyContent: 'space-between', marginTop: '20px' }}>
+              <div style={{ display: 'flex', justifyContent: 'center', flexDirection: 'column' }}>
+                <img className='pgjh' style={{ marginLeft: '-20px', width: 'auto' }} src={lpgjh} alt='' />
+              </div>
               <img className='ime' src={logo2} alt='' />
+            </div>
+            <div>
+              <p>Dirección General de Administracción y Finanzas</p>
             </div>
             <div className='no-oficio'>
               <p>
-                <b>Oficio No:</b> PGI/DGAyF/{this.state.fondo.no_oficio}/2021
-                <br /> Pachuca de Soto, Hidalgo a {today}
-                <br /><b>Asunto </b>Pago a Proveedor
+                Oficio No: PGI/DGAyF/{this.state.fondo.no_oficio}/2021
+                <br />Pachuca de Soto, Hidalgo a {today}
+                <br />Asunto Pago a Proveedor
               </p>
             </div>
             <div className='prensente'>
               <p>
                 <b>
-                  Lic. César Alberto González López
-                  <br />Subsecretario de Egresos de la
-                  <br /> Secretaría de Finanzas Públicas
-                  <br />Presente
+                  L.A.E. CÉSAR ALBERTO GONZÁLEZ LÓPEZ
+                  <br />SUBSECRETARIO DE EGRESOS DE LA
+                  <br />SECRETARÍA DE FINANZAS PÚBLICAS
+                  <br />PRESENTE
                 </b>
               </p>
             </div>
             <div className='añadido'>
               <p>
                 <b>
-                  AT'N: L.C.P. Karina Barrios Velázquez
-                  <br />Directora General de Contbilidad
-                  <br />Gubernamental
+                  AT´N.: L.C.P. KARINA BARRIOS VELÁZQUEZ
+                  <br />DIRECTORA GENERAL DE CONTABILIDAD
+                  <br />GUBERNAMENTAL
                 </b>
               </p>
             </div>
@@ -2758,31 +2764,31 @@ export default class Oficios extends Component {
                   : null
                 )}, para el trámite de pago a favor del proveedor {this.state.fondo.beneficiario}, por
                 la/el servicio {this.state.fondo.desc}, con
-                cargo al proyecto{this.state.comprometidos.map(item => ', ' + item.proy)}
-                {this.state.comprometidos.map(item => ', ' + item.npro)} y
-                a los recursos otorgados con el oficio de autorización {this.state.fondo.oficio_aut}, a
-                la Procuraduria General de Justicia del Estado de Hidalgo.
+                cargo al proyecto{this.state.comprometidos.map(item => item.proy ? ', ' + item.proy : null)}
+                {this.state.comprometidos.map(item => item.npro ? ', ' + item.npro : null)} y {/*necesito solo un resultado*/}
+                a los recursos otorgados con el oficio de autorización {this.state.fondo.oficio_aut}, del
+                Ejercicio 2021 a la Procuraduria General de Justicia del Estado de Hidalgo.
               </p>
-              <p>Sin otro particular por el momento, reciba un cordial saludo</p>
+              <p>Sin otro particular, le envio un cordial y afectuoso saludo.</p>
             </div>
             <div>
-              <div className='atte'>
-                <p>
-                  Atentamente<br />Director General
+              <div style={{ display: 'flex', justifyContent: 'center' }}>
+                <p style={{ textAlign: 'center' }}>
+                  <b>ATENTAMENTE<br />EL DIRECTOR GENERAL</b>
                 </p>
               </div>
-              <div className='firma-dad'>
+              <div className='firma-dad' style={{ display: 'flex', justifyContent: 'center' }}>
                 <div className='firma-raya'>
-                  <p className='mtro'>MTRO. LEÓN MAXIMILIANO HERNÁNDEZ VALDÉS</p>
+                  <p className='mtro'><b>MTRO. LEÓN MAXIMILIANO HERNÁNDEZ VALDÉS</b></p>
                 </div>
               </div>
             </div>
             <div className='pie'>
               <div className='ccp'>
-                <p className='text'>C.C.P...- Expedien<br />Minutario<br />LMHV/NRL/macht</p>
+                <p className='text'>C.C.P...- Expediente<br />Minutario<br />LMHV/NRL/macht</p>
               </div>
               <div>
-                <p align='right'> {this.state.fondo2}</p>
+                <p align='right' style={{ fontSize: '12px' }}>No. de Fondo {this.state.fondo.fondo}</p>
               </div>
             </div>
           </div>
@@ -2871,7 +2877,8 @@ export default class Oficios extends Component {
                 <p className='text-intei'>Unidad Presupuestal:</p>
                 {this.state.comprometidos.map(comprometidos =>
                   <p className='bene-i'>
-                    {this.state.comprometidos.length <= 1 ?
+                    {comprometidos.area ?
+                      this.state.comprometidos.length <= 2 ?
                       (comprometidos.up === '01' &&
                       'Atención y seguimiento a peticiones recibidas en el despacho del procurador atendidas')
                       ||
@@ -2942,7 +2949,8 @@ export default class Oficios extends Component {
                       'Casos penales determinados, concluidos o resueltos de delitos en materia de desaparición forzada de personas cometidos por particulares, delitos vinculados y de personas no localizadas realizados')
                       :
                       ''
-                    }
+                     : null
+                  }
                   </p>
                 )}
               </div>
@@ -2981,6 +2989,7 @@ export default class Oficios extends Component {
                     <td className='monto-tabla all-tablai'>Monto</td>
                   </tr>
                   {this.state.comprometidos.map(comprometidos =>
+                    comprometidos.area ?
                     <tr>
                       <td className='all-tablai'>
                         {comprometidos.año}
@@ -3047,7 +3056,7 @@ export default class Oficios extends Component {
                           prefix=' $ '
                         />
                       </td>
-                    </tr>
+                    </tr> : null
                   )}
                   <tr>
                     <td className='all-tablai' />

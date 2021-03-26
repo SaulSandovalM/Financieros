@@ -63,7 +63,7 @@
 }
 .text-intei {
   font-size: 12px;
-  margin-top: 0;
+  margin: 3px;
   width: 120px;
 }
 .all-tablai {
@@ -122,8 +122,6 @@
 }
 .pgjh {
   height: 50px;
-  padding-left: 25px;
-  padding-right:50px;
   width: 150px;
 }
 .cpdf-dad2 {
@@ -229,12 +227,6 @@ th {
   width: 250px;
 }
 /* Todos los Pdf*/
-.pgjh{
-  padding-left: 25px;
-  padding-right:50px;
-  height: 50px;
-  width: 150px;
-}
 .ims{
   height: 50px;
   width: 150px;
@@ -419,11 +411,11 @@ th {
   text-align: center;
   display: flex;
   padding-bottom: 10px;
-  padding-right: 50px;
-  padding-left: 30px;
+  height: 60px;
 }
 .text-titulo-ga{
   font-weight: bold;
+  margin: 2px;
 }
 .faderinp{
   padding-bottom: 0px;
@@ -568,16 +560,6 @@ th {
   width: 250px;
 }
 /* Todos los Pdf*/
-.pgjh{
-  padding-left: 25px;
-  padding-right:50px;
-  height: 50px;
-  width: 150px;
-}
-.ims {
-  height: 50px;
-  width: 150px;
-}
 .title-so{
   margin-top:20px;
   text-align: center;
@@ -717,10 +699,6 @@ th {
 .obs-so{
   display: flex;
 }
-.obs-so2{
-  padding-left: 280px;
-  display: flex;
-}
 .input-obs{
   font-size:8px;
   width:500px;
@@ -751,19 +729,6 @@ th {
   font-size: 10px;
 }
 /*Pdf gastp*/
-.title-ga{
-  display: flex;
-  justify-content: space-between;
-  margin-top:20px;
-  text-align: center;
-  display: flex;
-  padding-bottom: 10px;
-  padding-right: 50px;
-  padding-left: 30px;
-}
-.text-titulo-ga{
-  font-weight: bold;
-}
 .faderinp{
   padding-bottom: 0px;
   padding-left: 100px;

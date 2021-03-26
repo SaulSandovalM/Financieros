@@ -176,6 +176,7 @@ export default class Fondos extends Component {
       nscfe: this.inputNscfe.value,
       observaciones: this.inputObservaciones.value,
       comprometido: [''],
+      cpa: [''],
       numCheque: ' ',
       fechaContra: ' ',
       numContra: ' ',
@@ -189,7 +190,8 @@ export default class Fondos extends Component {
       params.no_proyecto && params.numCompro && params.realizo && params.no_lici &&
       params.requisicion && params.pedido && params.poliza && params.cfe &&
       params.nscfe && params.observaciones && params.fechaContra && params.numContra &&
-      params.fechaDepo && params.cuentaPagar && params.cuentaPagarPara && params.sujetoContable) {
+      params.fechaDepo && params.cuentaPagar && params.cuentaPagarPara &&
+      params.sujetoContable && params.comprometido && params.cpa) {
       firebase.database().ref('fondos').push(params).then(() => {
         alert('Tu solicitud fue enviada.')
       }).catch(() => {
