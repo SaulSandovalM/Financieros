@@ -80,6 +80,7 @@ export default class Oficios extends Component {
       : null
     ))
     const reducer = (a, b) => a + b
+    console.log(this.state.fondo)
 
     var cad = []
     var proyectof = []
@@ -94,7 +95,7 @@ export default class Oficios extends Component {
     return (
       <div>
           <div style={{ zIndex: '3', background: '#f4f4f4', width: '100%', position: 'fixed', height: '100vh' }}>
-            {this.state.tipo_doc === 'Fondo Revolvente' &&
+            {this.state.fondo.tipo_doc === 'Fondo Revolvente' &&
               <div className='m-f'>
                 <div className='fr-con'>
                   <p className='fr-b'><b>Fondo Revolvente</b></p>
@@ -103,7 +104,7 @@ export default class Oficios extends Component {
                   <p className='fimpre'>Solicitud Programatica</p>
                   <ReactToPrint
                     trigger={() => <buttom className='btn-imp-of'>Imprimir</buttom>}
-                    content={() => this.ogfr}
+                    content={() => this.sp}
                   />
                 </div>
                 <div className='fcc-i'>
@@ -1589,37 +1590,42 @@ export default class Oficios extends Component {
             <div className='fondo-procu'>
               <img className='ime' src={logo2} alt='' />
             </div>
+            <div>
+              Dirección General de Administración y Finanzas
+            </div>
             <div className='no-oficio'>
               <p>
-                <b>Oficio No:</b> PGI/DGAyF/{this.state.no_oficio}/2021
-                <br /> Pachuca de Soto, Hidalgo a {today}
-                <br /><b>Asunto </b>  Reembolso de Fondo Revolvente
+                Oficio No: PGJ/DGAyF/{this.state.fondo.no_oficio}/2021
+                <br />Pachuca, Hgo., a {today}
+                <br />Asunto: Reembolso de Fondo Revolvente
               </p>
             </div>
             <div className='prensente'>
               <p>
                 <b>
-                  Lic. César Alberto González López
-                  <br />Subsecretario de Egresos de la
-                  <br /> Secretaría de Finanzas Públicas
-                  <br />Presente
+                  L.A.E CÉSAR ALBERTO GONZÁLEZ LÓPEZ
+                  <br />SUBSECRETARIO DE EGRESOS DE LA
+                  <br />SECRETARÍA DE FINANZAS PÚBLICAS
+                  <br />P R E S E N T E
                 </b>
               </p>
             </div>
             <div className='añadido'>
               <p>
                 <b>
-                  AT'N: L.C.P. Karina Barrios Velázquez
-                  <br />Directora General de Contabilidad
-                  <br />Gubernamental
+                  AT´N: L.C.P. KARINA BARRIOS VELÁZQUEZ
+                  <br />DIRECTORA GENERAL DE CONTABILIDAD
+                  <br />GUBERNAMENTAL
                 </b>
               </p>
             </div>
             <div className='texto-ofi_ppp'>
               <p style={{display: 'flex', flexDirection: 'row', }}>
-                Por medio de presente me permito enviar a Usted documentación amparada
-                con {this.state.numCompro} de comprobantes por un total
-                de $ {this.state.importe} ({(NumberAsString(this.state.importe))}),
+                Por medio de presente me permito enviar a usted documentación amparada
+                con {this.state.fondo.numCompro} comprobantes, por un total de
+                $ {this.state.fondo.importe} ({(NumberAsString(this.state.fondo.importe))}),
+                a nombre de {this.state.fondo.beneficiario} para el trámite de
+                Reembolso de Fondo Revolvente, con cargo al proyecto {this.state.fondo.proy}
                 para el trámite de Reembolso de Fondo Revolvente, con cargo al
                 proyecto {this.state.proy} {this.state.comprometidos.slice(0, 1).map(comprometidos =>
                   <div style={{margin: '0', whiteSpace: 'nowrap', display: 'flex'}}>
@@ -2721,7 +2727,7 @@ export default class Oficios extends Component {
             </div>
             <div className='no-oficio'>
               <p>
-                Oficio No: PGI/DGAyF/{this.state.fondo.no_oficio}/2021
+                Oficio No: PGJ/DGAyF/{this.state.fondo.no_oficio}/2021
                 <br />Pachuca de Soto, Hidalgo a {today}
                 <br />Asunto Pago a Proveedor
               </p>
@@ -2818,7 +2824,10 @@ export default class Oficios extends Component {
                 </div>
                 <div className='interno'>
                   <p className='text-soi'>Fondo Revolvente</p>
-                  <input className='input-so' type='checkbox' checked/>
+                  {this.state.fondo.tipo_doc === 'Fondo Revolvente' ?
+                    <input className='input-so' type='checkbox' checked /> :
+                    <input className='input-so' type='checkbox' />
+                  }
                 </div>
                 <div className='interno'>
                   <p className='text-soi'>Cancelacion de Fondo Revolvente</p>
