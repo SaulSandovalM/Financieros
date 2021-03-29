@@ -80,8 +80,6 @@ export default class Oficios extends Component {
       : null
     ))
     const reducer = (a, b) => a + b
-    console.log(this.state.fondo)
-
     var cad = []
     var proyectof = []
     let noProyect = this.state.no_proyecto
@@ -750,7 +748,7 @@ export default class Oficios extends Component {
                 </div>
               </div>
             }
-            {this.state.fondo.tipo_doc === 'Pago Directo' && this.state.no_lici === ' ' &&
+            {this.state.fondo.tipo_doc === 'Pago Directo' && this.state.fondo.no_lici === ' ' &&
               <div className='m-f'>
                 <div className='fr-con'>
                   <p className='fr-b'><b>Pago Proveedor</b></p>
