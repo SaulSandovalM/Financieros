@@ -95,7 +95,7 @@ export default class Oficios extends Component {
     return (
       <div>
           <div style={{ zIndex: '3', background: '#f4f4f4', width: '100%', position: 'fixed', height: '100vh' }}>
-            {this.state.fondo.tipo_doc === 'Fondo Revolvente' &&
+            {this.state.fondo.tipo_doc === 'Fondo Revolvente' && this.state.fondo.no_lici === ' ' &&
               <div className='m-f'>
                 <div className='fr-con'>
                   <p className='fr-b'><b>Fondo Revolvente</b></p>
@@ -122,133 +122,311 @@ export default class Oficios extends Component {
                   />
                 </div>
                 <div className='fcc-i'>
-                  <p className='fimpre'>Leyenda Alusivas</p>
+                  <p className='fimpre'>Leyendas Alusivas</p>
                   <Popup
                     trigger={<buttom className='btn-imp-of'>Imprimir</buttom>}
                     modal
                     closeOnDocumentClick>
-                    <div ref={el => (this.gas = el)} style={{ zIndex: '2', width: '100%' }}>
-                    {this.state.comprometidos.map(comprometidos =>
-                    <div className='lll'>
-                      <div style={{ width: '100%' }}>
-                        <div className='title-ga'>
-                          <div>
-                            <img className='pgjh' src={lpgjh} alt='' />
+                    <div style={{ height: '100%', overflow: 'scroll' }}>
+                      <ReactToPrint
+                        trigger={() =>
+                          <div className='c-b-i'>
+                            <buttom className='btn-imp-of'>Imprimir</buttom>
+                          </div>
+                          }
+                        content={() => this.la}
+                      />
+                      <div ref={el => (this.la = el)} style={{ zIndex: '2', width: '100%', height: '100%'}}>
+                      {this.state.comprometidos.map(comprometidos =>
+                        comprometidos.up ?
+                        <div className='lll'>
+                          <div style={{ width: '100%' }}>
+                            <div className='title-ga'>
+                              <div style={{ width: '15%' }}>
+                                <img className='pgjh' src={lpgjh} alt='' style={{ width: '100%' }} />
+                              </div>
+                              <div style={{ width: '70%' }}>
+                                <p className='text-titulo-ga'>PROCURADURÍA GENERAL DE JUSTICA DE HIDALGO</p>
+                                  <p className='text-titulo-ga'>
+                                    {(comprometidos.up === '01' &&
+                                      'Atención y seguimiento a peticiones recibidas en el despacho del procurador atendidas')
+                                      ||
+                                      (comprometidos.up === '02' &&
+                                      'Casos penales de la región oriente resueltas')
+                                      ||
+                                      (comprometidos.up === '03' &&
+                                      'Delitos cometidos en contra de la libertad de expresión, periodistas y personas defensoras de los derechos humanos investigados')
+                                      ||
+                                      (comprometidos.up === '04' &&
+                                      'Averiguaciones previas del sistema tradicional concluidas')
+                                      ||
+                                      (comprometidos.up === '05' &&
+                                      'Casos penales en materia de delitos electorales resueltos')
+                                      ||
+                                      (comprometidos.up === '06' &&
+                                      'Casos penales determinados, concluidos o resueltos en delitos que atenten contra la mujer y la familia')
+                                      ||
+                                      (comprometidos.up === '07' &&
+                                      'Acuerdos reparatorios generados a través de la aplicación de los mecanismos alternativos de solución de controversias en materia penal en la región poniente')
+                                      ||
+                                      (comprometidos.up === '08' &&
+                                      'Investigación y supervisión de los casos penales con motivo de feminicidio')
+                                      ||
+                                      (comprometidos.up === '09' &&
+                                      'Quejas y denuncias por la posible comisión de conductas indebidas en las que incurran las y los servidores públicos atendidas')
+                                      ||
+                                      (comprometidos.up === '10' &&
+                                      'Intervenciones periciales a autoridades de procuración de justicia para una correcta integración del expediente en casos penales entregados')
+                                      ||
+                                      (comprometidos.up === '11' &&
+                                      'Casos penales del delito de narcomenudeo resueltos')
+                                      ||
+                                      (comprometidos.up === '12' &&
+                                      'Casos penales atendidos por los delistos de secuentro y extorsión')
+                                      ||
+                                      (comprometidos.up === '13' &&
+                                      'Gestión administrativa de recursos humanos,financiera, materiales, de informática, de archivo, de calidad, de aportaciones federales, planeación estratégica realizada')
+                                      ||
+                                      (comprometidos.up === '14' &&
+                                      'Determinación y/o resolución de los casos penales de los delitos de trata de personas, lenocinio y delitos conexos')
+                                      ||
+                                      (comprometidos.up === '15' &&
+                                      'Casos penales de la región poniente resueltas')
+                                      ||
+                                      (comprometidos.up === '16' &&
+                                      'Atenciones ciudadanas en los módulos de atención temprana en la región poniente brindadas')
+                                      ||
+                                      (comprometidos.up === '17' &&
+                                      'Determinación en las carpetas de investigación en las unidades de investigación de la regiones poniente')
+                                      ||
+                                      (comprometidos.up === '18' &&
+                                      'Investigación policial ejecutada')
+                                      ||
+                                      (comprometidos.up === '20' &&
+                                      'Atenciones ciudadanas en los módulos de atención temprana en la región poniente brindadas')
+                                      ||
+                                      (comprometidos.up === '21' &&
+                                      'Acuerdos reparatorios generados a traves de la aplicación de los mecanismos alternativos de solución de controversias en materia penal en la región oriente')
+                                      ||
+                                      (comprometidos.up === '22' &&
+                                      'Determinación en las carpetas de investigación en las unidades de investigación de la regiones oriente')
+                                      ||
+                                      (comprometidos.up === '23' &&
+                                      'Delitos de corrupción resueltos')
+                                      ||
+                                      (comprometidos.up === '24' &&
+                                      'Casos penales determinados, concluidos o resueltos de delitos en materia de desaparición forzada de personas cometidos por particulares, delitos vinculados y de personas no localizadas realizados')
+                                    }
+                                  </p>
+                                <p className='text-titulo-ga'>{comprometidos.partida}</p>
+                              </div>
+                              <div style={{ width: '15%', display: 'flex', justifyCOntent: 'center', flexDirection: 'column' }}>
+                                <div style={{ display: 'flex', justifyContent: 'flex-end', height: '100%' }}>
+                                  <img className='ims' src={logo2} alt='' style={{ height: '100%' }} />
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <div className='faderinpo'>
+                            <div className='contenedor-ga'>
+                              <div className='contenedor-1 '>
+                                <div className='interno-ga2'>
+                                  <p className='text-gai'>Gasto a Comprobar</p>
+                                  <input className='input-gai' type='checkbox' disabled />
+                                </div>
+                                <div className='interno-ga2'>
+                                  <p className='text-gai'>Comprobacion de Gastos</p>
+                                  <input className='input-gai' type='checkbox' disabled />
+                                </div>
+                              </div>
+                              <div className='contenedor-1'>
+                                <div className='interno-ga2'>
+                                  <p className='text-gai'>Creación de Fondo Revolvente</p>
+                                  <input className='input-gai' type='checkbox' disabled />
+                                </div>
+                                <div className='interno-ga2'>
+                                  <p className='text-gai'>Fondo Revolvente</p>
+                                  <input className='input-gai' type='checkbox' checked />
+                                </div>
+                                <div className='interno-ga2'>
+                                  <p className='text-gai'>Cancelacion de Fondo Revolvente</p>
+                                  <input className='input-gai' type='checkbox' disabled />
+                                </div>
+                              </div>
+                              <div className='contenedor-1'>
+                                <div className='interno-ga2'>
+                                  <p className='text-gai'>Viaticos Anticipados</p>
+                                  <input className='input-gai' type='checkbox' disabled />
+                                </div>
+                                <div className='interno-ga2'>
+                                  <p className='text-gai'>Viaticos Devengados</p>
+                                  <input className='input-gai' type='checkbox' disabled />
+                                </div>
+                                <div className='interno-ga2'>
+                                  <p className='text-gai'>Comprobación de Viáticos</p>
+                                  <input className='input-gai' type='checkbox' disabled />
+                                </div>
+                              </div>
+                              <div className='contenedor-1'>
+                                <div className='interno-ga2'>
+                                  <p className='text-gai'>Pago a Proveedores</p>
+                                  <input className='input-gai' type='checkbox' disabled />
+                                </div>
+                                <div className='interno-ga2'>
+                                  <p className='text-gai'>Pago a Proveedore por Requisición</p>
+                                  <input className='input-gai' type='checkbox' disabled />
+                                </div>
+                                <div className='interno-ga2'>
+                                  <p className='text-gai'>Transferencias</p>
+                                  <input className='input-gai' type='checkbox' disabled />
+                                </div>
+                              </div>
+                            </div>
                           </div>
                           <div>
-                            <p className='text-titulo-ga'>PROCURADURÍA GENERAL DE JUSTICA DE HIDALGO</p>
-                            <p className='text-titulo-ga'>{comprometidos.up}</p>
-                            <p className='text-titulo-ga'>{comprometidos.partida}</p>
+                            <div className='tabla-ga'>
+                              <div className='tablagas'>
+                                <div style={{ display: 'flex', width: '100%' }}>
+                                  <div
+                                    className='alltabla-ga'
+                                    style={{ width: '35%', textAlign: 'center', display: 'flex', justifyContent: 'center', flexDirection: 'column' }}>
+                                    Folio de factura
+                                  </div>
+                                  <div
+                                    className='alltabla-ga'
+                                    style={{ width: '10%', textAlign: 'center', display: 'flex', justifyContent: 'center', flexDirection: 'column' }}>
+                                    Importe
+                                  </div>
+                                  <div
+                                    className='alltabla-ga'
+                                    style={{ width: '55%', textAlign: 'center', display: 'flex', justifyContent: 'center', flexDirection: 'column' }}>
+                                    Leyenda alusiva al gasto
+                                  </div>
+                                </div>
+                                {comprometidos.comprobantes !== undefined ?
+                                <div>
+                                  {comprometidos.comprobantes.map(item =>
+                                    <div style={{ width: '100%' }}>
+                                        <div style={{ width: '100%', display: 'flex' }}>
+                                          <div
+                                            className='all-tab-f'
+                                            style={{
+                                              width: '35%',
+                                              textAlign: 'center',
+                                              display: 'flex',
+                                              justifyContent: 'center',
+                                              flexDirection: 'column',
+                                              borderLeft: '1px solid black',
+                                              borderRight: '1px solid black',
+                                              borderBottom: '1px solid black'
+                                            }}>
+                                            {item.uuid}
+                                          </div>
+                                          <div
+                                            className='all-tab-f'
+                                            style={{
+                                              width: '10%',
+                                              textAlign: 'center',
+                                              display: 'flex',
+                                              justifyContent: 'center',
+                                              flexDirection: 'column',
+                                              borderRight: '1px solid black',
+                                              borderBottom: '1px solid black'
+                                            }}>
+                                            <CurrencyFormat
+                                              style={{ fontSize: '12px' }}
+                                              value={item.total}
+                                              displayType='text'
+                                              thousandSeparator
+                                              prefix=' $ '
+                                            />
+                                          </div>
+                                          <div
+                                            className='all-tab-f div'
+                                            style={{
+                                              width: '55%',
+                                              textAlign: 'center',
+                                              display: 'flex',
+                                              justifyContent: 'center',
+                                              flexDirection: 'column',
+                                              borderRight: '1px solid black',
+                                              borderBottom: '1px solid black'
+                                            }}>
+                                            <textarea
+                                              className='all-tab-l'
+                                              type='text'
+                                              onKeyUp={this.handleChange.bind(this)}
+                                            />
+                                          </div>
+                                        </div>
+                                    </div>
+                                  )}
+                                </div>
+                                : null}
+                                <div style={{ width: '100%', display: 'flex', height: '30px' }}>
+                                  <div
+                                    className='all-tab-f2'
+                                    style={{
+                                      width: '35%',
+                                      textAlign: 'right',
+                                      display: 'flex',
+                                      justifyContent: 'center',
+                                      flexDirection: 'column',
+                                      borderLeft: '1px solid black',
+                                      borderRight: '1px solid black',
+                                      borderBottom: '1px solid black'
+                                    }}>
+                                    TOTAL:
+                                  </div>
+                                  <div
+                                    className='all-tab-f2'
+                                    style={{
+                                      width: '10%',
+                                      textAlign: 'center',
+                                      display: 'flex',
+                                      justifyContent: 'center',
+                                      flexDirection: 'column',
+                                      borderRight: '1px solid black',
+                                      borderBottom: '1px solid black'
+                                    }}>
+                                    <CurrencyFormat
+                                      style={{ fontSize: '12px' }}
+                                      value={comprometidos.total}
+                                      displayType='text'
+                                      thousandSeparator
+                                      prefix=' $ '
+                                    />
+                                  </div>
+                                  <div
+                                    className='all-tab-f2 div'
+                                    style={{
+                                      width: '55%',
+                                      textAlign: 'center',
+                                      display: 'flex',
+                                      justifyContent: 'center',
+                                      flexDirection: 'column',
+                                      borderRight: '1px solid white',
+                                      borderBottom: '1px solid white'
+                                    }}>
+                                    <textarea
+                                      className='all-tab-l'
+                                      type='text'
+                                      onKeyUp={this.handleChange.bind(this)}
+                                    />
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
                           </div>
-                          <div>
-                            <img className='ims' src={logo2} alt='' />
-                          </div>
-                        </div>
-                      </div>
-                      <div className='faderinpo'>
-                        <div className='contenedor-ga'>
-                          <div className='contenedor-1 '>
-                            <div className='interno-ga2'>
-                              <p className='text-gai'>Gasto a Comprobar</p>
-                              <input className='input-gai' type='checkbox' disabled />
-                            </div>
-                            <div className='interno-ga2'>
-                              <p className='text-gai'>Comprobacion de Gastos</p>
-                              <input className='input-gai' type='checkbox' disabled />
-                            </div>
-                          </div>
-                          <div className='contenedor-1'>
-                            <div className='interno-ga2'>
-                              <p className='text-gai'>Creación de Fondo Revolvente</p>
-                              <input className='input-gai' type='checkbox' disabled />
-                            </div>
-                            <div className='interno-ga2'>
-                              <p className='text-gai'>Fondo Revolvente</p>
-                              <input className='input-gai' type='checkbox' checked />
-                            </div>
-                            <div className='interno-ga2'>
-                              <p className='text-gai'>Cancelacion de Fondo Revolvente</p>
-                              <input className='input-gai' type='checkbox' disabled />
-                            </div>
-                          </div>
-                          <div className='contenedor-1'>
-                            <div className='interno-ga2'>
-                              <p className='text-gai'>Viaticos Anticipados</p>
-                              <input className='input-gai' type='checkbox' disabled />
-                            </div>
-                            <div className='interno-ga2'>
-                              <p className='text-gai'>Viaticos Devengados</p>
-                              <input className='input-gai' type='checkbox' disabled />
-                            </div>
-                            <div className='interno-ga2'>
-                              <p className='text-gai'>Comprobación de Viáticos</p>
-                              <input className='input-gai' type='checkbox' disabled />
-                            </div>
-                          </div>
-                          <div className='contenedor-1'>
-                            <div className='interno-ga2'>
-                              <p className='text-gai'>Pago a Proveedores</p>
-                              <input className='input-gai' type='checkbox' disabled />
-                            </div>
-                            <div className='interno-ga2'>
-                              <p className='text-gai'>Transferencias</p>
-                              <input className='input-gai' type='checkbox' disabled />
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <div>
-                        <div className='tabla-ga'>
-                          <table className='tablagas'>
-                            <tr>
-                              <td className='alltabla-ga'>FOLIO DE LA FACTURA</td>
-                              <td className='alltabla-ga'>IMPORTE</td>
-                              <td className='alltabla-ga'>LEYENDA ALUSIVA AL GASTO</td>
-                            </tr>
-                            <tr>
-                              <td className='all-tab-f'>{comprometidos.num_factura}</td>
-                              <td className='all-tab-f'>
-                                <CurrencyFormat
-                                  style={{ fontSize: '12px' }}
-                                  value={comprometidos.total}
-                                  displayType='text'
-                                  thousandSeparator
-                                  prefix=' $ '
-                                />
-                              </td>
-                              <td className='all-tab-f td'>
-                                <textarea
-                                  className='all-tab-l'
-                                  id='hojas'
-                                  name='hojas'
-                                  onChange={this.handleChange.bind(this)}
-                                  value={this.state.hojas}
-                                />
-                              </td>
-                            </tr>
-                            <tr>
-                              <td className='text-total-ga'>TOTAL</td>
-                              <td />
-                            </tr>
-                          </table>
-                        </div>
+                        </div> : null
+                      )}
                       </div>
                     </div>
-                    )}
-                    </div>
-                    <ReactToPrint
-                      trigger={() =>
-                        <div className='c-b-i'>
-                          <buttom className='btn-imp-of'>Imprimir</buttom>
-                        </div>
-                        }
-                      content={() => this.gas}
-                    />
                   </Popup>
                 </div>
               </div>
             }
-            {this.state.no_lici &&
+            {this.state.fondo.no_lici !== ' ' &&
               <div className='m-f'>
                 <div className='fr-con'>
                   <p className='fr-b'><b>Pago Provedor por Requisición</b></p>
@@ -273,130 +451,306 @@ export default class Oficios extends Component {
                     trigger={<buttom className='btn-imp-of'>Imprimir</buttom>}
                     modal
                     closeOnDocumentClick>
-                    <div ref={el => (this.gasto = el)} style={{ zIndex: '2', width: '100%' }}>
-                    {this.state.comprometidos.map(comprometidos =>
-                    <div className='lll'>
-                      <div style={{ width: '100%' }}>
-                        <div className='title-ga'>
-                          <div>
-                            <img className='pgjh' src={lpgjh} alt='' />
+                    <div style={{ height: '100%', overflow: 'scroll' }}>
+                      <ReactToPrint
+                        trigger={() =>
+                          <div className='c-b-i'>
+                            <buttom className='btn-imp-of'>Imprimir</buttom>
+                          </div>
+                          }
+                        content={() => this.la}
+                      />
+                      <div ref={el => (this.la = el)} style={{ zIndex: '2', width: '100%', height: '100%'}}>
+                      {this.state.comprometidos.map(comprometidos =>
+                        comprometidos.up ?
+                        <div className='lll'>
+                          <div style={{ width: '100%' }}>
+                            <div className='title-ga'>
+                              <div style={{ width: '15%' }}>
+                                <img className='pgjh' src={lpgjh} alt='' style={{ width: '100%' }} />
+                              </div>
+                              <div style={{ width: '70%' }}>
+                                <p className='text-titulo-ga'>PROCURADURÍA GENERAL DE JUSTICA DE HIDALGO</p>
+                                  <p className='text-titulo-ga'>
+                                    {(comprometidos.up === '01' &&
+                                      'Atención y seguimiento a peticiones recibidas en el despacho del procurador atendidas')
+                                      ||
+                                      (comprometidos.up === '02' &&
+                                      'Casos penales de la región oriente resueltas')
+                                      ||
+                                      (comprometidos.up === '03' &&
+                                      'Delitos cometidos en contra de la libertad de expresión, periodistas y personas defensoras de los derechos humanos investigados')
+                                      ||
+                                      (comprometidos.up === '04' &&
+                                      'Averiguaciones previas del sistema tradicional concluidas')
+                                      ||
+                                      (comprometidos.up === '05' &&
+                                      'Casos penales en materia de delitos electorales resueltos')
+                                      ||
+                                      (comprometidos.up === '06' &&
+                                      'Casos penales determinados, concluidos o resueltos en delitos que atenten contra la mujer y la familia')
+                                      ||
+                                      (comprometidos.up === '07' &&
+                                      'Acuerdos reparatorios generados a través de la aplicación de los mecanismos alternativos de solución de controversias en materia penal en la región poniente')
+                                      ||
+                                      (comprometidos.up === '08' &&
+                                      'Investigación y supervisión de los casos penales con motivo de feminicidio')
+                                      ||
+                                      (comprometidos.up === '09' &&
+                                      'Quejas y denuncias por la posible comisión de conductas indebidas en las que incurran las y los servidores públicos atendidas')
+                                      ||
+                                      (comprometidos.up === '10' &&
+                                      'Intervenciones periciales a autoridades de procuración de justicia para una correcta integración del expediente en casos penales entregados')
+                                      ||
+                                      (comprometidos.up === '11' &&
+                                      'Casos penales del delito de narcomenudeo resueltos')
+                                      ||
+                                      (comprometidos.up === '12' &&
+                                      'Casos penales atendidos por los delistos de secuentro y extorsión')
+                                      ||
+                                      (comprometidos.up === '13' &&
+                                      'Gestión administrativa de recursos humanos,financiera, materiales, de informática, de archivo, de calidad, de aportaciones federales, planeación estratégica realizada')
+                                      ||
+                                      (comprometidos.up === '14' &&
+                                      'Determinación y/o resolución de los casos penales de los delitos de trata de personas, lenocinio y delitos conexos')
+                                      ||
+                                      (comprometidos.up === '15' &&
+                                      'Casos penales de la región poniente resueltas')
+                                      ||
+                                      (comprometidos.up === '16' &&
+                                      'Atenciones ciudadanas en los módulos de atención temprana en la región poniente brindadas')
+                                      ||
+                                      (comprometidos.up === '17' &&
+                                      'Determinación en las carpetas de investigación en las unidades de investigación de la regiones poniente')
+                                      ||
+                                      (comprometidos.up === '18' &&
+                                      'Investigación policial ejecutada')
+                                      ||
+                                      (comprometidos.up === '20' &&
+                                      'Atenciones ciudadanas en los módulos de atención temprana en la región poniente brindadas')
+                                      ||
+                                      (comprometidos.up === '21' &&
+                                      'Acuerdos reparatorios generados a traves de la aplicación de los mecanismos alternativos de solución de controversias en materia penal en la región oriente')
+                                      ||
+                                      (comprometidos.up === '22' &&
+                                      'Determinación en las carpetas de investigación en las unidades de investigación de la regiones oriente')
+                                      ||
+                                      (comprometidos.up === '23' &&
+                                      'Delitos de corrupción resueltos')
+                                      ||
+                                      (comprometidos.up === '24' &&
+                                      'Casos penales determinados, concluidos o resueltos de delitos en materia de desaparición forzada de personas cometidos por particulares, delitos vinculados y de personas no localizadas realizados')
+                                    }
+                                  </p>
+                                <p className='text-titulo-ga'>{comprometidos.partida}</p>
+                              </div>
+                              <div style={{ width: '15%', display: 'flex', justifyCOntent: 'center', flexDirection: 'column' }}>
+                                <div style={{ display: 'flex', justifyContent: 'flex-end', height: '100%' }}>
+                                  <img className='ims' src={logo2} alt='' style={{ height: '100%' }} />
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <div className='faderinpo'>
+                            <div className='contenedor-ga'>
+                              <div className='contenedor-1 '>
+                                <div className='interno-ga2'>
+                                  <p className='text-gai'>Gasto a Comprobar</p>
+                                  <input className='input-gai' type='checkbox' disabled />
+                                </div>
+                                <div className='interno-ga2'>
+                                  <p className='text-gai'>Comprobacion de Gastos</p>
+                                  <input className='input-gai' type='checkbox' disabled />
+                                </div>
+                              </div>
+                              <div className='contenedor-1'>
+                                <div className='interno-ga2'>
+                                  <p className='text-gai'>Creación de Fondo Revolvente</p>
+                                  <input className='input-gai' type='checkbox' disabled />
+                                </div>
+                                <div className='interno-ga2'>
+                                  <p className='text-gai'>Fondo Revolvente</p>
+                                  <input className='input-gai' type='checkbox' disabled />
+                                </div>
+                                <div className='interno-ga2'>
+                                  <p className='text-gai'>Cancelacion de Fondo Revolvente</p>
+                                  <input className='input-gai' type='checkbox' disabled />
+                                </div>
+                              </div>
+                              <div className='contenedor-1'>
+                                <div className='interno-ga2'>
+                                  <p className='text-gai'>Viaticos Anticipados</p>
+                                  <input className='input-gai' type='checkbox' disabled />
+                                </div>
+                                <div className='interno-ga2'>
+                                  <p className='text-gai'>Viaticos Devengados</p>
+                                  <input className='input-gai' type='checkbox' disabled />
+                                </div>
+                                <div className='interno-ga2'>
+                                  <p className='text-gai'>Comprobación de Viáticos</p>
+                                  <input className='input-gai' type='checkbox' disabled />
+                                </div>
+                              </div>
+                              <div className='contenedor-1'>
+                                <div className='interno-ga2'>
+                                  <p className='text-gai'>Pago a Proveedores</p>
+                                  <input className='input-gai' type='checkbox' checked />
+                                </div>
+                                <div className='interno-ga2'>
+                                  <p className='text-gai'>Pago a Proveedore por Requisición</p>
+                                  <input className='input-gai' type='checkbox' disabled />
+                                </div>
+                                <div className='interno-ga2'>
+                                  <p className='text-gai'>Transferencias</p>
+                                  <input className='input-gai' type='checkbox' disabled />
+                                </div>
+                              </div>
+                            </div>
                           </div>
                           <div>
-                            <p className='text-titulo-ga'>PROCURADURÍA GENERAL DE JUSTICA DE HIDALGO</p>
-                            <p className='text-titulo-ga'>{comprometidos.up}</p>
-                            <p className='text-titulo-ga'>{comprometidos.partida}</p>
+                            <div className='tabla-ga'>
+                              <div className='tablagas'>
+                                <div style={{ display: 'flex', width: '100%' }}>
+                                  <div
+                                    className='alltabla-ga'
+                                    style={{ width: '35%', textAlign: 'center', display: 'flex', justifyContent: 'center', flexDirection: 'column' }}>
+                                    Folio de factura
+                                  </div>
+                                  <div
+                                    className='alltabla-ga'
+                                    style={{ width: '10%', textAlign: 'center', display: 'flex', justifyContent: 'center', flexDirection: 'column' }}>
+                                    Importe
+                                  </div>
+                                  <div
+                                    className='alltabla-ga'
+                                    style={{ width: '55%', textAlign: 'center', display: 'flex', justifyContent: 'center', flexDirection: 'column' }}>
+                                    Leyenda alusiva al gasto
+                                  </div>
+                                </div>
+                                {comprometidos.comprobantes !== undefined ?
+                                <div>
+                                  {comprometidos.comprobantes.map(item =>
+                                    <div style={{ width: '100%' }}>
+                                        <div style={{ width: '100%', display: 'flex' }}>
+                                          <div
+                                            className='all-tab-f'
+                                            style={{
+                                              width: '35%',
+                                              textAlign: 'center',
+                                              display: 'flex',
+                                              justifyContent: 'center',
+                                              flexDirection: 'column',
+                                              borderLeft: '1px solid black',
+                                              borderRight: '1px solid black',
+                                              borderBottom: '1px solid black'
+                                            }}>
+                                            {item.uuid}
+                                          </div>
+                                          <div
+                                            className='all-tab-f'
+                                            style={{
+                                              width: '10%',
+                                              textAlign: 'center',
+                                              display: 'flex',
+                                              justifyContent: 'center',
+                                              flexDirection: 'column',
+                                              borderRight: '1px solid black',
+                                              borderBottom: '1px solid black'
+                                            }}>
+                                            <CurrencyFormat
+                                              style={{ fontSize: '12px' }}
+                                              value={item.total}
+                                              displayType='text'
+                                              thousandSeparator
+                                              prefix=' $ '
+                                            />
+                                          </div>
+                                          <div
+                                            className='all-tab-f div'
+                                            style={{
+                                              width: '55%',
+                                              textAlign: 'center',
+                                              display: 'flex',
+                                              justifyContent: 'center',
+                                              flexDirection: 'column',
+                                              borderRight: '1px solid black',
+                                              borderBottom: '1px solid black'
+                                            }}>
+                                            <textarea
+                                              className='all-tab-l'
+                                              type='text'
+                                              onKeyUp={this.handleChange.bind(this)}
+                                            />
+                                          </div>
+                                        </div>
+                                    </div>
+                                  )}
+                                </div>
+                                : null}
+                                <div style={{ width: '100%', display: 'flex', height: '30px' }}>
+                                  <div
+                                    className='all-tab-f2'
+                                    style={{
+                                      width: '35%',
+                                      textAlign: 'right',
+                                      display: 'flex',
+                                      justifyContent: 'center',
+                                      flexDirection: 'column',
+                                      borderLeft: '1px solid black',
+                                      borderRight: '1px solid black',
+                                      borderBottom: '1px solid black'
+                                    }}>
+                                    TOTAL:
+                                  </div>
+                                  <div
+                                    className='all-tab-f2'
+                                    style={{
+                                      width: '10%',
+                                      textAlign: 'center',
+                                      display: 'flex',
+                                      justifyContent: 'center',
+                                      flexDirection: 'column',
+                                      borderRight: '1px solid black',
+                                      borderBottom: '1px solid black'
+                                    }}>
+                                    <CurrencyFormat
+                                      style={{ fontSize: '12px' }}
+                                      value={comprometidos.total}
+                                      displayType='text'
+                                      thousandSeparator
+                                      prefix=' $ '
+                                    />
+                                  </div>
+                                  <div
+                                    className='all-tab-f2 div'
+                                    style={{
+                                      width: '55%',
+                                      textAlign: 'center',
+                                      display: 'flex',
+                                      justifyContent: 'center',
+                                      flexDirection: 'column',
+                                      borderRight: '1px solid white',
+                                      borderBottom: '1px solid white'
+                                    }}>
+                                    <textarea
+                                      className='all-tab-l'
+                                      type='text'
+                                      onKeyUp={this.handleChange.bind(this)}
+                                    />
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
                           </div>
-                          <div>
-                            <img className='ims' src={logo2} alt='' />
-                          </div>
-                        </div>
+                        </div> : null
+                      )}
                       </div>
-                      <div className='faderinpo'>
-                        <div className='contenedor-ga'>
-                          <div className='contenedor-1 '>
-                            <div className='interno-ga2'>
-                              <p className='text-gai'>Gasto a Comprobar</p>
-                              <input className='input-gai' type='checkbox' disabled />
-                            </div>
-                            <div className='interno-ga2'>
-                              <p className='text-gai'>Comprobacion de Gastos</p>
-                              <input className='input-gai' type='checkbox' disabled />
-                            </div>
-                          </div>
-                          <div className='contenedor-1'>
-                            <div className='interno-ga2'>
-                              <p className='text-gai'>Creación de Fondo Revolvente</p>
-                              <input className='input-gai' type='checkbox' disabled />
-                            </div>
-                            <div className='interno-ga2'>
-                              <p className='text-gai'>Fondo Revolvente</p>
-                              <input className='input-gai' type='checkbox' disabled />
-                            </div>
-                            <div className='interno-ga2'>
-                              <p className='text-gai'>Cancelacion de Fondo Revolvente</p>
-                              <input className='input-gai' type='checkbox' disabled />
-                            </div>
-                          </div>
-                          <div className='contenedor-1'>
-                            <div className='interno-ga2'>
-                              <p className='text-gai'>Viaticos Anticipados</p>
-                              <input className='input-gai' type='checkbox' disabled />
-                            </div>
-                            <div className='interno-ga2'>
-                              <p className='text-gai'>Viaticos Devengados</p>
-                              <input className='input-gai' type='checkbox' disabled />
-                            </div>
-                            <div className='interno-ga2'>
-                              <p className='text-gai'>Comprobación de Viáticos</p>
-                              <input className='input-gai' type='checkbox' disabled />
-                            </div>
-                          </div>
-                          <div className='contenedor-1'>
-                            <div className='interno-ga2'>
-                              <p className='text-gai'>Pago a Proveedores</p>
-                              <input className='input-gai' type='checkbox' disabled />
-                            </div>
-                            <div className='interno-ga2'>
-                              <p className='text-gai'>Pago a Proveedore por Requisición</p>
-                              <input className='input-gai' type='checkbox' checked />
-                            </div>
-                            <div className='interno-ga2'>
-                              <p className='text-gai'>Transferencias</p>
-                              <input className='input-gai' type='checkbox' disabled />
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <div>
-                        <div className='tabla-ga'>
-                          <table className='tablagas'>
-                            <tr>
-                              <td className='alltabla-ga'>FOLIO DE LA FACTURA</td>
-                              <td className='alltabla-ga'>IMPORTE</td>
-                              <td className='alltabla-ga'>LEYENDA ALUSIVA AL GASTO</td>
-                            </tr>
-                            <tr>
-                              <td className='all-tab-f'>{comprometidos.num_factura}</td>
-                              <td className='all-tab-f'>
-                                <CurrencyFormat
-                                  value={comprometidos.total}
-                                  displayType='text'
-                                  thousandSeparator
-                                  prefix=' $ '
-                                />
-                              </td>
-                              <td className='all-tab-f td'>
-                                <textarea
-                                  className='all-tab-l'
-                                  name={i}
-                                  onChange={this.handleChange.bind(this)}
-                                  value={this.state.i}
-                                />
-                              </td>
-                            </tr>
-                            <tr>
-                              <td className='text-total-ga'>TOTAL</td>
-                              <td />
-                            </tr>
-                          </table>
-                        </div>
-                      </div>
-                    </div>
-                    )}
-                    <ReactToPrint
-                      trigger={() =>
-                        <div className='c-b-i'>
-                          <buttom className='btn-imp-of'>Imprimir</buttom>
-                        </div>
-                      }
-                      content={() => this.gasto}
-                    />
                     </div>
                   </Popup>
                 </div>
               </div>
             }
-            {!this.state.no_lici &&
+            {this.state.fondo.tipo_doc === 'Pago Directo' && this.state.no_lici === ' ' &&
               <div className='m-f'>
                 <div className='fr-con'>
                   <p className='fr-b'><b>Pago Proveedor</b></p>
@@ -720,7 +1074,6 @@ export default class Oficios extends Component {
                 </div>
               </div>
             }
-
             {/*<div className='m-f'>
               <div className='fr-con'>
                 <p className='fr-b'><b>Diciembre</b></p>
@@ -1587,7 +1940,10 @@ export default class Oficios extends Component {
           </div>
 
           <div className='pppdf-subdad' style={{ zIndex: '2', position: 'absolute' }} ref={el => (this.rfr = el)}>
-            <div className='fondo-procu'>
+            <div className='fondo-procu' style={{ display: 'flex', justifyContent: 'space-between', marginTop: '20px' }}>
+              <div style={{ display: 'flex', justifyContent: 'center', flexDirection: 'column' }}>
+                <img className='pgjh' style={{ marginLeft: '-20px', width: 'auto' }} src={lpgjh} alt='' />
+              </div>
               <img className='ime' src={logo2} alt='' />
             </div>
             <div>
@@ -1603,7 +1959,7 @@ export default class Oficios extends Component {
             <div className='prensente'>
               <p>
                 <b>
-                  L.A.E CÉSAR ALBERTO GONZÁLEZ LÓPEZ
+                  L.A.E. CÉSAR ALBERTO GONZÁLEZ LÓPEZ
                   <br />SUBSECRETARIO DE EGRESOS DE LA
                   <br />SECRETARÍA DE FINANZAS PÚBLICAS
                   <br />P R E S E N T E
@@ -1621,33 +1977,34 @@ export default class Oficios extends Component {
             </div>
             <div className='texto-ofi_ppp'>
               <p style={{display: 'flex', flexDirection: 'row', }}>
-                Por medio de presente me permito enviar a usted documentación amparada
+                Por medio del presente me permito enviar a usted, documentación amparada
                 con {this.state.fondo.numCompro} comprobantes, por un total de
                 $ {this.state.fondo.importe} ({(NumberAsString(this.state.fondo.importe))}),
                 a nombre de {this.state.fondo.beneficiario} para el trámite de
-                Reembolso de Fondo Revolvente, con cargo al proyecto {this.state.fondo.proy}
-                para el trámite de Reembolso de Fondo Revolvente, con cargo al
-                proyecto {this.state.proy} {this.state.comprometidos.slice(0, 1).map(comprometidos =>
-                  <div style={{margin: '0', whiteSpace: 'nowrap', display: 'flex'}}>
-                    {comprometidos.no_proyecto}
-                  </div>
-                )}otorgado en el oficio de autorización {this.state.no_oficio} a la
-                Procuraduría General de Justicia del Estado de Hidalgo.
+                Reembolso de Fondo Revolvente, con cargo al
+                proyecto{this.state.comprometidos.map(item => item.proy ? ', ' + item.proy : null)} para {/* falta confirmar */}
+                otorgado en el oficio de autorización {this.state.fondo.oficio_aut} del
+                Ejercicio 2021, a la Procuraduria General de Justicia del estado de Hidalgo.
               </p>
-              <p>Sin otro particular por el momento, reciba un cordial saludo</p>
+              <p>Sin otro particular, le envío un cordial y afectuoso saludo.</p>
             </div>
-            <div className='atte'>
-              <p>
-                Atentamente <br />Director General
-              </p>
-            </div>
-            <div className='firma-dad'>
-              <div className='firma-raya'>
-                <p className='mtro'>MTRO. LEÓN MAXIMILIANO HERNÁNDEZ VALDÉS</p>
+            <div>
+              <div style={{ display: 'flex', justifyContent: 'center' }}>
+                <p style={{ textAlign: 'center' }}>
+                  <b>ATENTAMENTE<br />EL DIRECTOR GENERAL</b>
+                </p>
+              </div>
+              <div className='firma-dad' style={{ display: 'flex', justifyContent: 'center' }}>
+                <div className='firma-raya'>
+                  <p className='mtro'><b>MTRO. LEÓN MAXIMILIANO HERNÁNDEZ VALDÉS</b></p>
+                </div>
               </div>
             </div>
             <div className='ccp'>
-              <p className='text'>C.C.P...- Expedien<br />Minutario<br />LMHV/NRL/macht</p>
+              <p className='text'>C.C.P...- Expediente<br />Minutario<br />LMHV/NRL/macht</p>
+            </div>
+            <div>
+              <p align='right' style={{ fontSize: '12px' }}>No. de Fondo {this.state.fondo.fondo}</p>
             </div>
           </div>
 
@@ -1815,788 +2172,903 @@ export default class Oficios extends Component {
 
           {/* Pago Provedor por Requisición */}
           <div ref={el => (this.sol = el)} style={{ zIndex: '2', position: 'absolute' }}>
-            <div className='title-so-o'>
-              <img className='pgjh' src={lpgjh} alt='' />
-              <p>SOLICITUD PROGRAMÁTICA DEL GASTO</p>
-              <img className='ims' src={logo2} alt='' />
-            </div>
-            <div className='fadera'>
-              <div className='contenedor-soi'>
-                <div className='contenedor-1'>
-                  <div className='interno'>
-                    <p className='text-soi'>Gasto a Comprobar</p>
-                    <input className='input-so' type='checkbox' />
-                  </div>
-                  <div className='interno'>
-                    <p className='text-soi'>Comprobación de gasto</p>
-                    <input className='input-so' type='checkbox' />
-                  </div>
+          <div className='title-so-o'>
+            <img className='pgjh' src={lpgjh} alt='' />
+            <p>SOLICITUD PROGRAMÁTICA DEL GASTO</p>
+            <img className='ims' src={logo2} alt='' />
+          </div>
+          <div className='fadera'>
+            <div className='contenedor-soi'>
+              <div className='contenedor-1'>
+                <div className='interno'>
+                  <p className='text-soi'>Gasto a Comprobar</p>
+                  <input className='input-so' type='checkbox' />
                 </div>
-                <div className='contenedor-1'>
-                  <div className='interno'>
-                    <p className='text-soi'>Creación de fondo Revolvente</p>
-                    <input className='input-so' type='checkbox' />
-                  </div>
-                  <div className='interno'>
-                    <p className='text-soi'>Fondo Revolvente</p>
-                    <input className='input-so' type='checkbox' />
-                  </div>
-                  <div className='interno'>
-                    <p className='text-soi'>Cancelacion de Fondo Revolvente</p>
-                    <input className='input-so' type='checkbox'/>
-                  </div>
+                <div className='interno'>
+                  <p className='text-soi'>Comprobación de gasto</p>
+                  <input className='input-so' type='checkbox' />
                 </div>
-                <div className='contenedor-1'>
-                  <div className='interno'>
-                    <p className='text-soi'>Viaticos Anticipados</p>
-                    <input className='input-so' type='checkbox'/>
-                  </div>
-                  <div className='interno'>
-                    <p className='text-soi'>Viaticos Denegados</p>
-                    <input className='input-so' type='checkbox'/>
-                  </div>
-                  <div className='interno'>
-                    <p className='text-soi'>Comprobación de viaticos</p>
-                    <input className='input-so' type='checkbox'/>
-                  </div>
-                  <div className='interno'>
-                    <p className='text-soi'>Viaticos al Extrangero</p>
-                    <input className='input-so' type='checkbox'/>
-                  </div>
+              </div>
+              <div className='contenedor-1'>
+                <div className='interno'>
+                  <p className='text-soi'>Creación de fondo Revolvente</p>
+                  <input className='input-so' type='checkbox' />
                 </div>
-                <div className='contenedor-1'>
-                  <div className='interno'>
-                    <p className='text-soi'>Validación de Objeto del gasto</p>
-                    <input className='input-so' type='checkbox'/>
-                  </div>
-                  <div className='interno'>
-                    <p className='text-soi'>Pago a Proveedores</p>
-                    <input className='input-so' type='checkbox'/>
-                  </div>
-                  <div className='interno'>
-                    <p className='text-soi'>Pago a Proveedores por Requisición</p>
-                    <input className='input-so' type='checkbox' checked/>
-                  </div>
-                  <div className='interno'>
-                    <p className='text-soi'>Transferencias</p>
-                    <input className='input-so' type='checkbox'/>
-                  </div>
+                <div className='interno'>
+                  <p className='text-soi'>Fondo Revolvente</p>
+                  {this.state.fondo.tipo_doc === 'Fondo Revolvente' ?
+                    <input className='input-so' type='checkbox' checked /> :
+                    <input className='input-so' type='checkbox' />
+                  }
+                </div>
+                <div className='interno'>
+                  <p className='text-soi'>Cancelacion de Fondo Revolvente</p>
+                  <input className='input-so' type='checkbox'/>
+                </div>
+              </div>
+              <div className='contenedor-1'>
+                <div className='interno'>
+                  <p className='text-soi'>Viaticos Anticipados</p>
+                  <input className='input-so' type='checkbox'/>
+                </div>
+                <div className='interno'>
+                  <p className='text-soi'>Viaticos Denegados</p>
+                  <input className='input-so' type='checkbox'/>
+                </div>
+                <div className='interno'>
+                  <p className='text-soi'>Comprobación de viaticos</p>
+                  <input className='input-so' type='checkbox'/>
+                </div>
+                <div className='interno'>
+                  <p className='text-soi'>Viaticos al Extrangero</p>
+                  <input className='input-so' type='checkbox'/>
+                </div>
+              </div>
+              <div className='contenedor-1'>
+                <div className='interno'>
+                  <p className='text-soi'>Validación de Objeto del gasto</p>
+                  <input className='input-so' type='checkbox'/>
+                </div>
+                <div className='interno'>
+                  <p className='text-soi'>Pago a Proveedores</p>
+                  <input className='input-so' type='checkbox'/>
+                </div>
+                <div className='interno'>
+                  <p className='text-soi'>Pago a Proveedores por Requisición</p>
+                  <input className='input-so' type='checkbox'/>
+                </div>
+                <div className='interno'>
+                  <p className='text-soi'>Transferencias</p>
+                  <input className='input-so' type='checkbox'/>
                 </div>
               </div>
             </div>
-            <div className='padre-lineas'>
-              <div className='lineas-so'>
-                <div className='internos'>
-                  <p className='text-intei'>Beneficiario:</p>
-                  <p className='bene-i'>{this.state.beneficiario}</p>
-                </div>
-                <div className='internos'>
-                  <p className='text-intei'>Organo Superior:</p>
-                  <p className='bene-i'>Procuraduria General de Justicia del Estado</p>
-                </div>
-                <div className='internos'>
-                  <p className='text-intei'>Unidad Presupuestal:</p>
+          </div>
+          <div className='padre-lineas'>
+            <div className='lineas-so'>
+              <div className='internos'>
+                <p className='text-intei'>Beneficiario:</p>
+                <p className='bene-i'>{this.state.fondo.beneficiario}</p>
+              </div>
+              <div className='internos'>
+                <p className='text-intei'>Organo Superior:</p>
+                <p className='bene-i'>Procuraduria General de Justicia del Estado</p>
+              </div>
+              <div className='internos'>
+                <p className='text-intei'>Unidad Presupuestal:</p>
+                {this.state.comprometidos.map(comprometidos =>
+                  <p className='bene-i'>
+                    {comprometidos.area ?
+                      this.state.comprometidos.length <= 2 ?
+                      (comprometidos.up === '01' &&
+                      'Atención y seguimiento a peticiones recibidas en el despacho del procurador atendidas')
+                      ||
+                      (comprometidos.up === '02' &&
+                      'Casos penales de la región oriente resueltas')
+                      ||
+                      (comprometidos.up === '03' &&
+                      'Delitos cometidos en contra de la libertad de expresión, periodistas y personas defensoras de los derechos humanos investigados')
+                      ||
+                      (comprometidos.up === '04' &&
+                      'Averiguaciones previas del sistema tradicional concluidas')
+                      ||
+                      (comprometidos.up === '05' &&
+                      'Casos penales en materia de delitos electorales resueltos')
+                      ||
+                      (comprometidos.up === '06' &&
+                      'Casos penales determinados, concluidos o resueltos en delitos que atenten contra la mujer y la familia')
+                      ||
+                      (comprometidos.up === '07' &&
+                      'Acuerdos reparatorios generados a través de la aplicación de los mecanismos alternativos de solución de controversias en materia penal en la región poniente')
+                      ||
+                      (comprometidos.up === '08' &&
+                      'Investigación y supervisión de los casos penales con motivo de feminicidio')
+                      ||
+                      (comprometidos.up === '09' &&
+                      'Quejas y denuncias por la posible comisión de conductas indebidas en las que incurran las y los servidores públicos atendidas')
+                      ||
+                      (comprometidos.up === '10' &&
+                      'Intervenciones periciales a autoridades de procuración de justicia para una correcta integración del expediente en casos penales entregados')
+                      ||
+                      (comprometidos.up === '11' &&
+                      'Casos penales del delito de narcomenudeo resueltos')
+                      ||
+                      (comprometidos.up === '12' &&
+                      'Casos penales atendidos por los delistos de secuentro y extorsión')
+                      ||
+                      (comprometidos.up === '13' &&
+                      'Gestión administrativa de recursos humanos,financiera, materiales, de informática, de archivo, de calidad, de aportaciones federales, planeación estratégica realizada')
+                      ||
+                      (comprometidos.up === '14' &&
+                      'Determinación y/o resolución de los casos penales de los delitos de trata de personas, lenocinio y delitos conexos')
+                      ||
+                      (comprometidos.up === '15' &&
+                      'Casos penales de la región poniente resueltas')
+                      ||
+                      (comprometidos.up === '16' &&
+                      'Atenciones ciudadanas en los módulos de atención temprana en la región poniente brindadas')
+                      ||
+                      (comprometidos.up === '17' &&
+                      'Determinación en las carpetas de investigación en las unidades de investigación de la regiones poniente')
+                      ||
+                      (comprometidos.up === '18' &&
+                      'Investigación policial ejecutada')
+                      ||
+                      (comprometidos.up === '20' &&
+                      'Atenciones ciudadanas en los módulos de atención temprana en la región poniente brindadas')
+                      ||
+                      (comprometidos.up === '21' &&
+                      'Acuerdos reparatorios generados a traves de la aplicación de los mecanismos alternativos de solución de controversias en materia penal en la región oriente')
+                      ||
+                      (comprometidos.up === '22' &&
+                      'Determinación en las carpetas de investigación en las unidades de investigación de la regiones oriente')
+                      ||
+                      (comprometidos.up === '23' &&
+                      'Delitos de corrupción resueltos')
+                      ||
+                      (comprometidos.up === '24' &&
+                      'Casos penales determinados, concluidos o resueltos de delitos en materia de desaparición forzada de personas cometidos por particulares, delitos vinculados y de personas no localizadas realizados')
+                      :
+                      ''
+                     : null
+                  }
+                  </p>
+                )}
+              </div>
+            </div>
+            <div className='folio'>
+              <p className='text-folio'>No. Folio</p>
+              <p className='fs-if'>{this.state.fondo2}</p>
+            </div>
+          </div>
+          <div style={{ height: '60vh'}}>
+            <div>
+              <div className='tabla-so'>
+                <table>
+                  <tr>
+                    <td className='all-tablai'>Año</td>
+                    <td className='all-tablai'>Ramo</td>
+                    <td className='all-tablai'>OS</td>
+                    <td className='all-tablai'>UP</td>
+                    <td className='all-tablai'>Rubro de Ingreso</td>
+                    <td className='all-tablai'>TG</td>
+                    <td className='all-tablai'>Objeto de un Gasto</td>
+                    <td className='all-tablai'>Finalidad</td>
+                    <td className='all-tablai'>Funcion</td>
+                    <td className='all-tablai'>Subfunción</td>
+                    <td className='all-tablai'>Eje</td>
+                    <td className='all-tablai'>Sect</td>
+                    <td className='all-tablai'>Prog</td>
+                    <td className='all-tablai'>Obj</td>
+                    <td className='all-tablai'>Proyecto</td>
+                    <td className='all-tablai'>Ext</td>
+                    <td className='all-tablai'>Ben</td>
+                    <td className='all-tablai'>E Geo</td>
+                    <td className='dg-tabla all-tablai' style={{ textAlign: 'left' }}>
+                      Descripcion del objeto de Gasto
+                    </td>
+                    <td className='monto-tabla all-tablai'>Monto</td>
+                  </tr>
                   {this.state.comprometidos.map(comprometidos =>
-                    <p className='bene-i'>{comprometidos.up}</p>
-                  )}
-                </div>
-              </div>
-              <div className='folio'>
-                <p className='text-folio'>No. Folio</p>
-                <p className='fs-if'>{this.state.fondo2}</p>
-              </div>
-            </div>
-            <div style={{ height: '60vh'}}>
-              <div>
-                <div className='tabla-so'>
-                  <table>
+                    comprometidos.area ?
                     <tr>
-                      <td className='all-tablai' style={{ transform: 'rotate(90deg)', height: '170px'}}>Ramo</td>
-                      <td className='all-tablai' style={{ transform: 'rotate(90deg)', height: '170px'}}>Año</td>
-                      <td className='all-tablai' style={{ transform: 'rotate(90deg)', height: '170px'}}>OS</td>
-                      <td className='all-tablai' style={{ transform: 'rotate(90deg)', height: '170px'}}>UP</td>
-                      <td className='all-tablai' style={{ transform: 'rotate(90deg)', height: '170px'}}>Rubro de Ingreso</td>
-                      <td className='all-tablai' style={{ transform: 'rotate(90deg)', height: '170px'}}>TG</td>
-                      <td className='all-tablai' style={{ transform: 'rotate(90deg)', height: '170px'}}>Objeto de un Gasto</td>
-                      <td className='all-tablai' style={{ transform: 'rotate(90deg)', height: '170px'}}>Finalidad</td>
-                      <td className='all-tablai' style={{ transform: 'rotate(90deg)', height: '170px'}}>Funcion</td>
-                      <td className='all-tablai' style={{ transform: 'rotate(90deg)', height: '170px'}}>Subfunción</td>
-                      <td className='all-tablai' style={{ transform: 'rotate(90deg)', height: '170px'}}>Eje</td>
-                      <td className='all-tablai' style={{ transform: 'rotate(90deg)', height: '170px'}}>Sect</td>
-                      <td className='all-tablai' style={{ transform: 'rotate(90deg)', height: '170px'}}>Prog</td>
-                      <td className='all-tablai' style={{ transform: 'rotate(90deg)', height: '170px'}}>Obj</td>
-                      <td className='all-tablai' style={{ transform: 'rotate(90deg)', height: '170px'}}>Proyecto</td>
-                      <td className='all-tablai' style={{ transform: 'rotate(90deg)', height: '170px'}}>Ext</td>
-                      <td className='all-tablai' style={{ transform: 'rotate(90deg)', height: '170px'}}>Ben</td>
-                      <td className='all-tablai' style={{ transform: 'rotate(90deg)', height: '170px'}}>E Geo</td>
-                      <td className='dg-tabla all-tablai' style={{ transform: 'rotate(90deg)', height: '170px'}}>Descripcion del objeto de Gasto</td>
-                      <td className='monto-tabla all-tablai' style={{ transform: 'rotate(90deg)', height: '170px'}}>Monto</td>
-                    </tr>
-                    {this.state.comprometidos.map(comprometidos =>
-                      <tr>
-                        <td className='all-tablai'>
-                          {comprometidos.ramo}
-                        </td>
-                        <td className='all-tablai'>
-                          {comprometidos.año}
-                        </td>
-                        <td className='all-tablai'>
-                          {comprometidos.ur}
-                        </td>
-                        <td className='all-tablai'>
-                          {comprometidos.up}
-                        </td>
-                        <td className='all-tablai'>
-                          {comprometidos.rubro}
-                        </td>
-                        <td className='all-tablai'>
-                          {comprometidos.tg}
-                        </td>
-                        <td className='all-tablai'>
-                          {comprometidos.partida}
-                        </td>
-                        <td className='all-tablai'>
-                          {comprometidos.f}
-                        </td>
-                        <td className='all-tablai'>
-                          {comprometidos.fu}
-                        </td>
-                        <td className='all-tablai'>
-                          {comprometidos.sf}
-                        </td>
-                        <td className='all-tablai'>
-                          {comprometidos.eje}
-                        </td>
-                        <td className='all-tablai'>
-                          {comprometidos.s}
-                        </td>
-                        <td className='all-tablai'>
-                          {comprometidos.prog}
-                        </td>
-                        <td className='all-tablai'>
-                          {comprometidos.obj}
-                        </td>
-                        <td className='all-tablai'>
-                          {comprometidos.proy}
-                        </td>
-                        <td className='all-tablai'>
-                          {comprometidos.est}
-                        </td>
-                        <td className='all-tablai'>
-                          {comprometidos.ben}
-                        </td>
-                        <td className='all-tablai'>
-                          {comprometidos.eg}
-                        </td>
-                        <td className='all-tablai'>
-                          {comprometidos.npro}
-                        </td>
-                        <td className='all-tablai'>
-                          <CurrencyFormat
-                            value={comprometidos.total}
-                            displayType='text'
-                            thousandSeparator
-                            prefix=' $ '
-                          />
-                        </td>
-                      </tr>
-                    )}
-                    <tr>
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                    </tr>
-                    <tr>
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                    </tr>
-                    <tr>
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                    </tr>
-                    <tr>
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                    </tr>
-                    <tr>
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                    </tr>
-                    <tr>
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                    </tr>
-                    <tr>
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                    </tr>
-                    <tr>
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                    </tr>
-                    <tr>
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                    </tr>
-                    <tr>
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                    </tr>
-                    <tr>
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                    </tr>
-                    <tr>
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                    </tr>
-                    <tr>
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                    </tr>
-                    <tr>
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                    </tr>
-                    <tr>
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                    </tr>
-                    <tr>
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                    </tr>
-                    <tr>
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                    </tr>
-                    <tr>
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                    </tr>
-                    <tr>
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                    </tr>
-                    <tr>
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                    </tr>
-                    <tr>
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                    </tr>
-                    <tr>
-                      <td className='all-tablai border-color' />
-                      <td className='all-tablai border-color' />
-                      <td className='all-tablai border-color' />
-                      <td className='all-tablai border-color' />
-                      <td className='all-tablai border-color' />
-                      <td className='all-tablai border-color' />
-                      <td className='all-tablai border-color' />
-                      <td className='all-tablai border-color' />
-                      <td className='all-tablai border-color' />
-                      <td className='all-tablai border-color' />
-                      <td className='all-tablai border-color' />
-                      <td className='all-tablai border-color' />
-                      <td className='all-tablai border-color' />
-                      <td className='all-tablai  border-color' />
-                      <td className='all-tablai  border-color' />
-                      <td className='all-tablai  border-color' />
-                      <td className='all-tablai  border-color' />
-                      <td className='all-tablai  border-color' />
-                      <td className='all-tablai border-color2 text-rete'>RETENCION</td>
-                      <td className='all-tablai' />
-                    </tr>
-                    <tr>
-                      <td className='all-tablai border-color' />
-                      <td className='all-tablai border-color' />
-                      <td className='all-tablai border-color' />
-                      <td className='all-tablai border-color' />
-                      <td className='all-tablai border-color' />
-                      <td className='all-tablai border-color' />
-                      <td className='all-tablai border-color' />
-                      <td className='all-tablai border-color' />
-                      <td className='all-tablai border-color' />
-                      <td className='all-tablai border-color' />
-                      <td className='all-tablai border-color' />
-                      <td className='all-tablai border-color' />
-                      <td className='all-tablai border-color' />
-                      <td className='all-tablai border-color' />
-                      <td className='all-tablai border-color' />
-                      <td className='all-tablai border-color' />
-                      <td className='all-tablai border-color' />
-                      <td className='all-tablai border-color' />
-                      <td className='all-tablai border-color text-rete'>Total</td>
+                      <td className='all-tablai'>
+                        {comprometidos.año}
+                      </td>
+                      <td className='all-tablai'>
+                        {comprometidos.ramo}
+                      </td>
+                      <td className='all-tablai'>
+                        {comprometidos.ur}
+                      </td>
+                      <td className='all-tablai'>
+                        {comprometidos.up}
+                      </td>
+                      <td className='all-tablai'>
+                        {comprometidos.rubro}
+                      </td>
+                      <td className='all-tablai'>
+                        {comprometidos.tg}
+                      </td>
+                      <td className='all-tablai'>
+                        {comprometidos.partida}
+                      </td>
+                      <td className='all-tablai'>
+                        {comprometidos.f}
+                      </td>
+                      <td className='all-tablai'>
+                        {comprometidos.fu}
+                      </td>
+                      <td className='all-tablai'>
+                        {comprometidos.sf}
+                      </td>
+                      <td className='all-tablai'>
+                        {comprometidos.eje}
+                      </td>
+                      <td className='all-tablai'>
+                        {comprometidos.s}
+                      </td>
+                      <td className='all-tablai'>
+                        {comprometidos.prog}
+                      </td>
+                      <td className='all-tablai'>
+                        {comprometidos.obj}
+                      </td>
+                      <td className='all-tablai'>
+                        {comprometidos.proy}
+                      </td>
+                      <td className='all-tablai'>
+                        {comprometidos.est}
+                      </td>
+                      <td className='all-tablai'>
+                        {comprometidos.ben}
+                      </td>
+                      <td className='all-tablai'>
+                        {comprometidos.eg}
+                      </td>
+                      <td className='all-tablai' style={{ textAlign: 'left' }}>
+                        {comprometidos.npro}
+                      </td>
                       <td className='all-tablai'>
                         <CurrencyFormat
-                          value={(totalImporte.reduce(reducer)).toFixed(2)}
+                          value={comprometidos.total}
                           displayType='text'
                           thousandSeparator
                           prefix=' $ '
                         />
                       </td>
-                    </tr>
-                  </table>
-                </div>
-              </div>
-            </div>
-            <div className='obs-sopadre'>
-              <div className='obs-so'>
-                <p className='text-osb'>Observaciones</p>
-                <div className='input-obs' />
-                <div className='obs-so2'>
-                  <p className='text-osb'> No. De Solicitud</p>
-                  <input />
-                </div>
-              </div>
-            </div>
-            <div className='padre-firmas'>
-              <div className='firmas'>
-                <p className='text-firmas'>Elaboro</p>
-              </div>
-              <div className='firmas'>
-                <p className='text-firmas'>Reviso</p>
+                    </tr> : null
+                  )}
+                  <tr>
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                  </tr>
+                  <tr>
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                  </tr>
+                  <tr>
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                  </tr>
+                  <tr>
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                  </tr>
+                  <tr>
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                  </tr>
+                  <tr>
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                  </tr>
+                  <tr>
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                  </tr>
+                  <tr>
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                  </tr>
+                  <tr>
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                  </tr>
+                  <tr>
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                  </tr>
+                  <tr>
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                  </tr>
+                  <tr>
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                  </tr>
+                  <tr>
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                  </tr>
+                  <tr>
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                  </tr>
+                  <tr>
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                  </tr>
+                  <tr>
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                  </tr>
+                  <tr>
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                  </tr>
+                  <tr>
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                  </tr>
+                  <tr>
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                  </tr>
+                  <tr>
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                  </tr>
+                  <tr>
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                  </tr>
+                  <tr>
+                    <td className='all-tablai border-color' />
+                    <td className='all-tablai border-color' />
+                    <td className='all-tablai border-color' />
+                    <td className='all-tablai border-color' />
+                    <td className='all-tablai border-color' />
+                    <td className='all-tablai border-color' />
+                    <td className='all-tablai border-color' />
+                    <td className='all-tablai border-color' />
+                    <td className='all-tablai border-color' />
+                    <td className='all-tablai border-color' />
+                    <td className='all-tablai border-color' />
+                    <td className='all-tablai border-color' />
+                    <td className='all-tablai border-color' />
+                    <td className='all-tablai  border-color' />
+                    <td className='all-tablai  border-color' />
+                    <td className='all-tablai  border-color' />
+                    <td className='all-tablai  border-color' />
+                    <td className='all-tablai  border-color' />
+                    <td className='all-tablai border-color2 text-rete'>RETENCION</td>
+                    <td className='all-tablai' />
+                  </tr>
+                  <tr>
+                    <td className='all-tablai border-color' />
+                    <td className='all-tablai border-color' />
+                    <td className='all-tablai border-color' />
+                    <td className='all-tablai border-color' />
+                    <td className='all-tablai border-color' />
+                    <td className='all-tablai border-color' />
+                    <td className='all-tablai border-color' />
+                    <td className='all-tablai border-color' />
+                    <td className='all-tablai border-color' />
+                    <td className='all-tablai border-color' />
+                    <td className='all-tablai border-color' />
+                    <td className='all-tablai border-color' />
+                    <td className='all-tablai border-color' />
+                    <td className='all-tablai border-color' />
+                    <td className='all-tablai border-color' />
+                    <td className='all-tablai border-color' />
+                    <td className='all-tablai border-color' />
+                    <td className='all-tablai border-color' />
+                    <td className='all-tablai border-color text-rete'>Total</td>
+                    <td className='all-tablai'>
+                      <CurrencyFormat
+                        value={(totalImporte.reduce(reducer)).toFixed(2)}
+                        displayType='text'
+                        thousandSeparator
+                        prefix=' $ '
+                      />
+                    </td>
+                  </tr>
+                </table>
               </div>
             </div>
           </div>
+          <div className='obs-sopadre'>
+            <div className='obs-so'>
+              <p className='text-osb'>Observaciones</p>
+              <div className='input-obs' />
+              <div className='obs-so2'>
+                <p className='text-osb'>No. De Solicitud</p>
+                <input />
+              </div>
+            </div>
+          </div>
+          <div className='padre-firmas'>
+            <div className='firmas'>
+              <p className='text-firmas'>Elaboro</p>
+            </div>
+            <div className='firmas'>
+              <p className='text-firmas'>Reviso</p>
+            </div>
+          </div>
+          </div>
 
           <div className='pppdf-subdad' ref={el => (this.ofi = el)} style={{ zIndex: '2', position: 'absolute' }}>
-            <div className='fondo-procu'>
+            <div className='fondo-procu' style={{ display: 'flex', justifyContent: 'space-between', marginTop: '20px' }}>
+              <div style={{ display: 'flex', justifyContent: 'center', flexDirection: 'column' }}>
+                <img className='pgjh' style={{ marginLeft: '-20px', width: 'auto' }} src={lpgjh} alt='' />
+              </div>
               <img className='ime' src={logo2} alt='' />
+            </div>
+            <div>
+              <p>Dirección General de Administracción y Finanzas</p>
             </div>
             <div className='no-oficio'>
               <p>
-                <b>Oficio No:</b>PGI/DGAyF/{this.state.no_oficio}/2021
-                <br /> Pachuca de Soto, Hidalgo a {today}
-                <br /><b>Asunto </b>Solicitud de Pago Proveedor por Requisicón
+                Oficio No: PGJ/DGAyF/{this.state.fondo.no_oficio}/2021
+                <br />Pachuca de Soto, Hidalgo a {today}
+                <br />Asunto Pago a Proveedor
               </p>
             </div>
             <div className='prensente'>
               <p>
                 <b>
-                  Lic. César Alberto González López
-                  <br />Subsecretario de Egresos de la
-                  <br /> Secretaría de Finanzas Públicas
-                  <br />Presente
+                  L.A.E. CÉSAR ALBERTO GONZÁLEZ LÓPEZ
+                  <br />SUBSECRETARIO DE EGRESOS DE LA
+                  <br />SECRETARÍA DE FINANZAS PÚBLICAS
+                  <br />PRESENTE
                 </b>
               </p>
             </div>
             <div className='añadido'>
               <p>
                 <b>
-                  AT'N: L.C.P. Karina Barrios Velázquez
-                  <br />Directora General de Contabilidad
-                  <br />Gubernamental
+                  AT´N.: L.C.P. KARINA BARRIOS VELÁZQUEZ
+                  <br />DIRECTORA GENERAL DE CONTABILIDAD
+                  <br />GUBERNAMENTAL
                 </b>
               </p>
             </div>
             <div className='texto-ofi_ppp'>
               <p>
                 Por medio de presente me permito enviar a Usted documentación por
-                un importe total de $ {this.state.importe} ({(NumberAsString(this.state.importe))}),
-                cantidad amparada con CFDI No {this.state.cfdi},
-                número de requisición {this.state.requisicion} pedido/contrato {this.state.pedido},
+                un importe total de <CurrencyFormat
+                  value={this.state.fondo.importe}
+                  displayType='text'
+                  thousandSeparator
+                  prefix=' $ '
+                />
+                ({(NumberAsString(this.state.fondo.importe))}),
+                cantidad amparada con CFDI No
+                {this.state.comprometidos.map(comprometidos =>
+                  comprometidos.comprobantes !== undefined ?
+                    comprometidos.comprobantes.map(item =>
+                      ', ' + item.uuid.slice(31)
+                    )
+                  : null
+                )},
+                número de requisición {this.state.fondo.requisicion}
                 asi como la poliza de afectacion presupuestal al momento del comprometido
-                núm. {this.state.no_lici} que se emite la Direccion General de Compras Públicas;
-                para que se efectúe el trámite de pago  a favor del proveedor {this.state.beneficiario},
-                por la compra o presentacion de servicios, con cargo
-                al proyecto (clave y nombre del proyecto) y de los recursos otorgados
-                con el oficio de autorización {this.state.no_oficio}, a la a la
-                Procuraduría General de Justicia del Estado de Hidalgo.
+                num {this.state.fondo.poliza} que emita la Dirección
+                General de Compras Publicas; para que se efectue el tramite de pago
+                a favor del proveedor
+                {this.state.comprometidos.map(comprometidos =>
+                  comprometidos.comprobantes !== undefined ?
+                    comprometidos.comprobantes.map(item =>
+                      ', ' + item.nombre
+                    )
+                  : null
+                )},
+                para la compra y/o prestación de servicios
+                {/* preguntar */}
+                con cargo al proyecto {this.state.comprometidos.proy} y a los
+                recursos otorgados con oficio de autorización {this.state.fondo.oficio_aut}
+                del Ejercicio 2021, a la Procuraduria General de Justicia del Estado.
               </p>
-              <p>Sin otro particular por el momento, reciba un cordial saludo</p>
+              <p>Sin otro particular, le envio un cordial y afectuoso saludo.</p>
             </div>
-            <div className='atte'>
-              <p>
-                Atentamente
-                <br />Director General
-              </p>
-            </div>
-            <div class='firma-dad'>
-              <div class='firma-raya'>
-                <p class='mtro'>MTRO. LEÓN MAXIMILIANO HERNÁNDEZ VALDÉS</p>
+            <div>
+              <div style={{ display: 'flex', justifyContent: 'center' }}>
+                <p style={{ textAlign: 'center' }}>
+                  <b>ATENTAMENTE<br />EL DIRECTOR GENERAL</b>
+                </p>
+              </div>
+              <div className='firma-dad' style={{ display: 'flex', justifyContent: 'center' }}>
+                <div className='firma-raya'>
+                  <p className='mtro'><b>MTRO. LEÓN MAXIMILIANO HERNÁNDEZ VALDÉS</b></p>
+                </div>
               </div>
             </div>
-            <div class='ccp'>
-              <p class='text'>C.C.P...- Expedien<br />Minutario<br />LMHV/NRL/macht</p>
+            <div className='pie'>
+              <div className='ccp'>
+                <p className='text'>C.C.P...- Expediente<br />Minutario<br />LMHV/NRL/macht</p>
+              </div>
+              <div>
+                <p align='right' style={{ fontSize: '12px' }}>No. de Fondo {this.state.fondo.fondo}</p>
+              </div>
             </div>
           </div>
 
@@ -2765,7 +3237,7 @@ export default class Oficios extends Component {
                 {this.state.comprometidos.map(comprometidos =>
                   comprometidos.comprobantes !== undefined ?
                     comprometidos.comprobantes.map(item =>
-                      ', ' + item.uuid.slice(24)
+                      ', ' + item.uuid.slice(31)
                     )
                   : null
                 )}, para el trámite de pago a favor del proveedor {this.state.fondo.beneficiario}, por
