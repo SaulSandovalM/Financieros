@@ -236,6 +236,7 @@ export default class Comprometidos extends Component {
           'isr': xml.children['3'].attributes['TotalImpuestosRetenidos'] ? xml.children['3'].attributes['TotalImpuestosRetenidos'] : 0,
           'fecha': xml.children['4'].children['0'].attributes['FechaTimbrado'],
           'uuid': xml.children['4'].children['0'].attributes['UUID'],
+          'estatus': 'sin asignar'
         }
         fetch(xml).then(res => res.text()).then(xml => {
           fetch('https://financieros-78cb0.firebaseio.com/xml.json', {

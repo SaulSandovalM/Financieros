@@ -84,6 +84,7 @@ export default class Valeslist extends Component {
           'uuid': xml.children['4'].children['0'].attributes['UUID'],
           'estatus': 'sin asignar'
         }
+        console.log(data)
         fetch(xml).then(res => res.text()).then(xml => {
           fetch('https://financieros-78cb0.firebaseio.com/xml.json', {
             method: 'POST',
