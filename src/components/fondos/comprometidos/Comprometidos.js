@@ -631,7 +631,7 @@ export default class Comprometidos extends Component {
                 </ListItem>
               )
             }) : null}
-            {admin === 'ADMIN' ?
+            {(admin === 'ADMIN' || admin === 'LILIA') ?
             filterData2.map((value) => {
               return (
                 <ListItem key={value} button onClick={handleToggle(value)}>
