@@ -474,7 +474,6 @@ export default class Comprometidos extends Component {
   }
 
   render () {
-    console.log(this.state.comprometidos)
     var user = firebase.auth().currentUser
     var email
     if (user != null) {
@@ -609,7 +608,7 @@ export default class Comprometidos extends Component {
               <ListItemText className='list-align'><b>Fecha</b></ListItemText>
               <ListItemText className='list-align2'><b>Nombre</b></ListItemText>
             </ListItem>
-            {admin === 'MIGUEL' ?
+            {(admin === 'MIGUEL' || admin === 'LILIA') ?
             filterData.map((value) => {
               return (
                 <ListItem key={value} button onClick={handleToggle(value)}>
@@ -631,7 +630,7 @@ export default class Comprometidos extends Component {
                 </ListItem>
               )
             }) : null}
-            {(admin === 'ADMIN' || admin === 'LILIA') ?
+            {admin === 'ADMIN' ?
             filterData2.map((value) => {
               return (
                 <ListItem key={value} button onClick={handleToggle(value)}>
@@ -695,6 +694,8 @@ export default class Comprometidos extends Component {
       </div>
     )
 
+    console.log(admin)
+
     return (
       <div className='div-compro-container'>
         <div>
@@ -717,7 +718,7 @@ export default class Comprometidos extends Component {
                   />
                 </div>
               </div>
-              {(admin === 'OMAR' || admin === 'MARCOS' || admin === 'KARINA' || admin === 'MIGUEL' || admin === 'TERESA' || admin === 'ADMIN') &&
+              {(admin === 'OMAR' || admin === 'MARCOS' || admin === 'KARINA' || admin === 'MIGUEL' || admin === 'TERESA' || admin === 'ADMIN' || admin === 'LILIA') &&
                 customListLeft('Choices', left)
               }
             </Grid>
