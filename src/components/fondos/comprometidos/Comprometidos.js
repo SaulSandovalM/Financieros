@@ -376,7 +376,7 @@ export default class Comprometidos extends Component {
           up: item.up,
           rubro: item.rubro,
           tg: item.tg,
-          npro: item.npro,
+          np: item.np,
           f: item.f,
           fu: item.fu,
           sf: item.sf,
