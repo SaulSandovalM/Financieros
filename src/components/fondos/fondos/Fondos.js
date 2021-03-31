@@ -661,14 +661,26 @@ export default class Fondos extends Component {
                 <div className='div-f2'>
                   <div className='div-con'>
                     <p className='p-label'>Numero de Licitación</p>
-                    <input
-                      className='field'
-                      id='no_lici'
-                      name='no_lici'
-                      value={no_lici}
-                      onChange={this.onChange}
-                      ref={no_lici => this.inputNoLici = no_lici}
-                    />
+                    {realizo === 'KARINA' || realizo === 'HECTOR' ?
+                      <input
+                        className='field'
+                        id='no_lici'
+                        name='no_lici'
+                        value={no_lici}
+                        onChange={this.onChange}
+                        disabled
+                        ref={no_lici => this.inputNoLici = no_lici}
+                      />
+                      :
+                      <input
+                        className='field'
+                        id='no_lici'
+                        name='no_lici'
+                        value={no_lici}
+                        onChange={this.onChange}
+                        ref={no_lici => this.inputNoLici = no_lici}
+                      />
+                    }
                   </div>
                   <div className='div-con'>
                     <p className='p-label'>Requisición</p>
