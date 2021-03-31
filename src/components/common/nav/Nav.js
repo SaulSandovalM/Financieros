@@ -317,7 +317,7 @@ class Nav extends Component {
               </div>
             </div>
           }
-          {(admin === 'MIGUEL' || admin === 'LIZBETH' || admin === 'TERESA' || admin === 'ELOY' || admin === 'MARTHA' || admin === 'KARINA' || admin === 'HECTOR') &&
+          {(admin === 'MIGUEL' || admin === 'LIZBETH' || admin === 'TERESA' || admin === 'ELOY' || admin === 'MARTHA' || admin === 'KARINA' || admin === 'HECTOR' || admin ==== 'CENELY') &&
             <div className='navbar-left' style={{ marginTop: '30px' }}>
               <Link to='/Fondos' className='deco'>
                 <span className='material-icons'>
@@ -329,7 +329,7 @@ class Nav extends Component {
               </Link>
             </div>
           }
-          {(admin === 'MIGUEL' || admin === 'LIZBETH' || admin === 'TERESA' || admin === 'ELOY' || admin === 'MARTHA' || admin === 'KARINA' || admin === 'HECTOR') &&
+          {(admin === 'MIGUEL' || admin === 'LIZBETH' || admin === 'TERESA' || admin === 'ELOY' || admin === 'MARTHA' || admin === 'KARINA' || admin === 'HECTOR' || admin ==== 'CENELY') &&
             <div className='navbar-left'>
               <Link to='/Contrarecibo' className='deco'>
                 <span className='material-icons'>
@@ -353,7 +353,7 @@ class Nav extends Component {
               </Link>
             </div>
           }
-          {(admin === 'MIGUEL' || admin === 'LIZBETH' || admin === 'TERESA' || admin === 'ELOY' || admin === 'MARTHA' || admin === 'KARINA' || admin === 'HECTOR') &&
+          {(admin === 'MIGUEL' || admin === 'LIZBETH' || admin === 'TERESA' || admin === 'ELOY' || admin === 'MARTHA' || admin === 'KARINA' || admin === 'HECTOR' || admin ==== 'CENELY') &&
             <div className='navbar-left'>
               <Link to='/TabularList' className='deco'>
                 <span className='material-icons'>
