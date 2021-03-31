@@ -654,7 +654,7 @@ export default class Fondos extends Component {
                 </div>
               </Paper>
             </Grid>
-            {(realizo === 'MIGUEL' || realizo === 'TERESA' || realizo === 'MARCOS' || realizo === 'ELOY' || realizo === 'MARTHA' || realizo === 'KARINA') &&
+            {(realizo === 'MIGUEL' || realizo === 'TERESA' || realizo === 'MARCOS' || realizo === 'ELOY' || realizo === 'MARTHA' || realizo === 'KARINA' || realizo === 'HECTOR') &&
             <Grid className='grid2-cont'>
               <Paper className='paper-p'>
                 <div className='div-con-f'>Licitación</div>
