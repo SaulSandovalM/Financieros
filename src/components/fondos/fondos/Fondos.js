@@ -168,13 +168,13 @@ export default class Fondos extends Component {
       no_proyecto: this.state.no_proyecto,
       numCompro: this.inputNumCompro.value,
       realizo: this.state.realizo,
-      no_lici: this.inputNoLici.value ? this.inputNoLici.value : this.state.no_lici,
-      requisicion: this.inputRequisicion.value ? this.inputRequisicion.value : this.state.requisicion,
-      pedido: this.inputPedido.value ? this.inputPedido.value : this.state.pedido,
-      poliza: this.inputPoliza.value ? this.inputPoliza.value : this.state.poliza,
-      cfe: this.inputCfe.value ? this.inputCfe.value : this.state.cfe,
-      nscfe: this.inputNscfe.value ? this.inputNscfe.value : this.state.nscfe,
-      observaciones: this.inputObservaciones.value ? this.inputObservaciones.value : this.state.observaciones,
+      no_lici: this.inputNoLici.value,
+      requisicion: this.inputRequisicion.value,
+      pedido: this.inputPedido.value,
+      poliza: this.inputPoliza.value,
+      cfe: this.inputCfe.value,
+      nscfe: this.inputNscfe.value,
+      observaciones: this.inputObservaciones.value,
       comprometido: [''],
       cpa: [''],
       numCheque: ' ',
@@ -654,7 +654,7 @@ export default class Fondos extends Component {
                 </div>
               </Paper>
             </Grid>
-            {(realizo === 'MIGUEL' || realizo === 'TERESA' || realizo === 'MARCOS' || realizo === 'ELOY' || realizo === 'MARTHA') &&
+            {(realizo === 'MIGUEL' || realizo === 'TERESA' || realizo === 'MARCOS' || realizo === 'ELOY' || realizo === 'MARTHA' || realizo === 'KARINA') &&
             <Grid className='grid2-cont'>
               <Paper className='paper-p'>
                 <div className='div-con-f'>Licitación</div>
