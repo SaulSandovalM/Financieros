@@ -684,38 +684,74 @@ export default class Fondos extends Component {
                   </div>
                   <div className='div-con'>
                     <p className='p-label'>Requisición</p>
-                    <input
-                      className='field'
-                      id='requisicion'
-                      name='requisicion'
-                      value={requisicion}
-                      onChange={this.onChange}
-                      ref={requisicion => this.inputRequisicion = requisicion}
-                    />
+                    {realizo === 'KARINA' || realizo === 'HECTOR' ?
+                      <input
+                        className='field'
+                        id='requisicion'
+                        name='requisicion'
+                        value={requisicion}
+                        onChange={this.onChange}
+                        disabled
+                        ref={requisicion => this.inputRequisicion = requisicion}
+                      />
+                      :
+                      <input
+                        className='field'
+                        id='requisicion'
+                        name='requisicion'
+                        value={requisicion}
+                        onChange={this.onChange}
+                        ref={requisicion => this.inputRequisicion = requisicion}
+                      />
+                    }
                   </div>
                 </div>
                 <div className='div-f2'>
                   <div className='div-con'>
                     <p className='p-label'>Pedido</p>
-                    <input
-                      className='field'
-                      id='pedido'
-                      name='pedido'
-                      value={pedido}
-                      onChange={this.onChange}
-                      ref={pedido => this.inputPedido = pedido}
-                    />
+                    {realizo === 'KARINA' || realizo === 'HECTOR' ?
+                      <input
+                        className='field'
+                        id='pedido'
+                        name='pedido'
+                        value={pedido}
+                        onChange={this.onChange}
+                        disabled
+                        ref={pedido => this.inputPedido = pedido}
+                      />
+                      :
+                      <input
+                        className='field'
+                        id='pedido'
+                        name='pedido'
+                        value={pedido}
+                        onChange={this.onChange}
+                        ref={pedido => this.inputPedido = pedido}
+                      />
+                    }
                   </div>
                   <div className='div-con'>
                     <p className='p-label'>Poliza</p>
-                    <input
-                      className='field'
-                      id='poliza'
-                      name='poliza'
-                      value={poliza}
-                      onChange={this.onChange}
-                      ref={poliza => this.inputPoliza = poliza}
-                    />
+                    {realizo === 'KARINA' || realizo === 'HECTOR' ?
+                      <input
+                        className='field'
+                        id='poliza'
+                        name='poliza'
+                        value={poliza}
+                        onChange={this.onChange}
+                        disabled
+                        ref={poliza => this.inputPoliza = poliza}
+                      />
+                      :
+                      <input
+                        className='field'
+                        id='poliza'
+                        name='poliza'
+                        value={poliza}
+                        onChange={this.onChange}
+                        ref={poliza => this.inputPoliza = poliza}
+                      />
+                    }
                   </div>
                 </div>
               </Paper>
@@ -724,37 +760,73 @@ export default class Fondos extends Component {
                 <div className='div-f2'>
                   <div className='div-con'>
                     <p className='p-label'>Cta CFE</p>
-                    <input
-                      className='field'
-                      id='cfe'
-                      name='cfe'
-                      value={cfe}
-                      onChange={this.onChange}
-                      ref={cfe => this.inputCfe = cfe}
-                    />
+                    {realizo === 'KARINA' || realizo === 'HECTOR' ?
+                      <input
+                        className='field'
+                        id='cfe'
+                        name='cfe'
+                        value={cfe}
+                        onChange={this.onChange}
+                        disabled
+                        ref={cfe => this.inputCfe = cfe}
+                      />
+                      :
+                      <input
+                        className='field'
+                        id='cfe'
+                        name='cfe'
+                        value={cfe}
+                        onChange={this.onChange}
+                        ref={cfe => this.inputCfe = cfe}
+                      />
+                    }
                   </div>
                   <div className='div-con'>
                     <p className='p-label'>Numero de Servicio CFE</p>
-                    <input
-                      className='field'
-                      id='nscfe'
-                      name='nscfe'
-                      value={nscfe}
-                      onChange={this.onChange}
-                      ref={nscfe => this.inputNscfe = nscfe}
-                    />
+                    {realizo === 'KARINA' || realizo === 'HECTOR' ?
+                      <input
+                        className='field'
+                        id='nscfe'
+                        name='nscfe'
+                        value={nscfe}
+                        onChange={this.onChange}
+                        disabled
+                        ref={nscfe => this.inputNscfe = nscfe}
+                      />
+                      :
+                      <input
+                        className='field'
+                        id='nscfe'
+                        name='nscfe'
+                        value={nscfe}
+                        onChange={this.onChange}
+                        ref={nscfe => this.inputNscfe = nscfe}
+                      />
+                    }
                   </div>
                 </div>
                 <div className='div-cfe' style={{ width: '100%' }}>
                   <p className='p-label'>Observaciones</p>
-                  <textarea
-                    className='field'
-                    id='observaciones'
-                    name='observaciones'
-                    value={observaciones}
-                    onChange={this.onChange}
-                    ref={observaciones => this.inputObservaciones = observaciones}
-                  />
+                  {realizo === 'KARINA' || realizo === 'HECTOR' ?
+                    <textarea
+                      className='field'
+                      id='observaciones'
+                      name='observaciones'
+                      value={observaciones}
+                      onChange={this.onChange}
+                      disabled
+                      ref={observaciones => this.inputObservaciones = observaciones}
+                    />
+                    :
+                    <textarea
+                      className='field'
+                      id='observaciones'
+                      name='observaciones'
+                      value={observaciones}
+                      onChange={this.onChange}
+                      ref={observaciones => this.inputObservaciones = observaciones}
+                    />
+                  }
                 </div>
               </Paper>
             </Grid>}
