@@ -474,6 +474,7 @@ export default class Comprometidos extends Component {
   }
 
   render () {
+    console.log(this.state.comprometidos)
     var user = firebase.auth().currentUser
     var email
     if (user != null) {
@@ -608,7 +609,8 @@ export default class Comprometidos extends Component {
               <ListItemText className='list-align'><b>Fecha</b></ListItemText>
               <ListItemText className='list-align2'><b>Nombre</b></ListItemText>
             </ListItem>
-            {filterData.map((value) => {
+            {admin === 'MIGUEL' ?
+            filterData.map((value) => {
               return (
                 <ListItem key={value} button onClick={handleToggle(value)}>
                   <ListItemIcon>
@@ -628,7 +630,7 @@ export default class Comprometidos extends Component {
                   <ListItemText className='list-align2' primary={value.nombre} />
                 </ListItem>
               )
-            })}
+            }) : null}
             {admin === 'ADMIN' ?
             filterData2.map((value) => {
               return (
@@ -693,8 +695,6 @@ export default class Comprometidos extends Component {
       </div>
     )
 
-    console.log(admin)
-
     return (
       <div className='div-compro-container'>
         <div>
@@ -717,7 +717,7 @@ export default class Comprometidos extends Component {
                   />
                 </div>
               </div>
-              {(admin === 'OMAR' || admin === 'MARCOS' || admin === 'KARINA' || admin === 'MIGUEL' || admin === 'TERESA' || admin === 'ADMIN' || admin === 'LILIA') &&
+              {(admin === 'OMAR' || admin === 'MARCOS' || admin === 'KARINA' || admin === 'MIGUEL' || admin === 'TERESA' || admin === 'ADMIN') &&
                 customListLeft('Choices', left)
               }
             </Grid>
@@ -1007,6 +1007,7 @@ export default class Comprometidos extends Component {
             variant='extended'
           >
             <AddIcon style={{ marginRight: '6px' }} />
+            {(admin === 'MIGUEL') &&
               <Dropzone
                 style={{
                   width: '100%',
@@ -1016,6 +1017,7 @@ export default class Comprometidos extends Component {
               >
                 Agregar XML
               </Dropzone>
+            }
             {(admin === 'ADMIN') &&
               <Dropzone
                 style={{

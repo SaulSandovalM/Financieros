@@ -311,7 +311,6 @@ export default class Fondos extends Component {
   ]
 
   render () {
-    console.log(this.state.no_lici)
     const { fondo, fecha, tipo_doc, oficio_aut, no_oficio, no_lici, importe, desc,
       beneficiario, realizo, requisicion, pedido, no_proyecto, poliza, cfe, nscfe,
       observaciones, numCompro } = this.state
@@ -655,7 +654,7 @@ export default class Fondos extends Component {
                 </div>
               </Paper>
             </Grid>
-
+            {(realizo === 'MIGUEL' || realizo === 'TERESA' || realizo === 'MARCOS' || realizo === 'ELOY' || realizo === 'MARTHA') &&
             <Grid className='grid2-cont'>
               <Paper className='paper-p'>
                 <div className='div-con-f'>Licitación</div>
@@ -746,7 +745,7 @@ export default class Fondos extends Component {
                   />
                 </div>
               </Paper>
-            </Grid>
+            </Grid>}
           </Grid>
           <div className='div-content-fab'>
             <Fab color='primary' aria-label='add' style={{ background: 'green' }} type='submit'>
