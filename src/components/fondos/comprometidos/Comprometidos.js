@@ -1007,7 +1007,7 @@ export default class Comprometidos extends Component {
             variant='extended'
           >
             <AddIcon style={{ marginRight: '6px' }} />
-            {(admin === 'MIGUEL' || admin === 'KARINA' || admin === 'HECTOR') &&
+            {(admin === 'MIGUEL' || admin === 'KARINA' || admin === 'HECTOR' || admin === 'OMAR' || admin === 'CENELY' || admin === 'LILIA') &&
               <Dropzone
                 style={{
                   width: '100%',

@@ -3153,7 +3153,7 @@ export default class Oficios extends Component {
                 </b>
               </p>
             </div>
-            <div className='texto-ofi_ppp' style={{ marginTop: '-50px' }}>
+            <div className='texto-ofi_ppp' style={{ marginTop: '-45px' }}>
               <p>
                 Por este medio me permito enviar a Usted documentación por un importe total de
                 <CurrencyFormat
