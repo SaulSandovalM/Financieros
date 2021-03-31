@@ -794,75 +794,7 @@ export default class Oficios extends Component {
                               <div style={{ width: '70%' }}>
                                 <p className='text-titulo-ga'>PROCURADURÍA GENERAL DE JUSTICA DE HIDALGO</p>
                                   <p className='text-titulo-ga'>
-                                    {(comprometidos.up === '01' &&
-                                      'Atención y seguimiento a peticiones recibidas en el despacho del procurador atendidas')
-                                      ||
-                                      (comprometidos.up === '02' &&
-                                      'Casos penales de la región oriente resueltas')
-                                      ||
-                                      (comprometidos.up === '03' &&
-                                      'Delitos cometidos en contra de la libertad de expresión, periodistas y personas defensoras de los derechos humanos investigados')
-                                      ||
-                                      (comprometidos.up === '04' &&
-                                      'Averiguaciones previas del sistema tradicional concluidas')
-                                      ||
-                                      (comprometidos.up === '05' &&
-                                      'Casos penales en materia de delitos electorales resueltos')
-                                      ||
-                                      (comprometidos.up === '06' &&
-                                      'Casos penales determinados, concluidos o resueltos en delitos que atenten contra la mujer y la familia')
-                                      ||
-                                      (comprometidos.up === '07' &&
-                                      'Acuerdos reparatorios generados a través de la aplicación de los mecanismos alternativos de solución de controversias en materia penal en la región poniente')
-                                      ||
-                                      (comprometidos.up === '08' &&
-                                      'Investigación y supervisión de los casos penales con motivo de feminicidio')
-                                      ||
-                                      (comprometidos.up === '09' &&
-                                      'Quejas y denuncias por la posible comisión de conductas indebidas en las que incurran las y los servidores públicos atendidas')
-                                      ||
-                                      (comprometidos.up === '10' &&
-                                      'Intervenciones periciales a autoridades de procuración de justicia para una correcta integración del expediente en casos penales entregados')
-                                      ||
-                                      (comprometidos.up === '11' &&
-                                      'Casos penales del delito de narcomenudeo resueltos')
-                                      ||
-                                      (comprometidos.up === '12' &&
-                                      'Casos penales atendidos por los delistos de secuentro y extorsión')
-                                      ||
-                                      (comprometidos.up === '13' &&
-                                      'Gestión administrativa de recursos humanos,financiera, materiales, de informática, de archivo, de calidad, de aportaciones federales, planeación estratégica realizada')
-                                      ||
-                                      (comprometidos.up === '14' &&
-                                      'Determinación y/o resolución de los casos penales de los delitos de trata de personas, lenocinio y delitos conexos')
-                                      ||
-                                      (comprometidos.up === '15' &&
-                                      'Casos penales de la región poniente resueltas')
-                                      ||
-                                      (comprometidos.up === '16' &&
-                                      'Atenciones ciudadanas en los módulos de atención temprana en la región poniente brindadas')
-                                      ||
-                                      (comprometidos.up === '17' &&
-                                      'Determinación en las carpetas de investigación en las unidades de investigación de la regiones poniente')
-                                      ||
-                                      (comprometidos.up === '18' &&
-                                      'Investigación policial ejecutada')
-                                      ||
-                                      (comprometidos.up === '20' &&
-                                      'Atenciones ciudadanas en los módulos de atención temprana en la región poniente brindadas')
-                                      ||
-                                      (comprometidos.up === '21' &&
-                                      'Acuerdos reparatorios generados a traves de la aplicación de los mecanismos alternativos de solución de controversias en materia penal en la región oriente')
-                                      ||
-                                      (comprometidos.up === '22' &&
-                                      'Determinación en las carpetas de investigación en las unidades de investigación de la regiones oriente')
-                                      ||
-                                      (comprometidos.up === '23' &&
-                                      'Delitos de corrupción resueltos')
-                                      ||
-                                      (comprometidos.up === '24' &&
-                                      'Casos penales determinados, concluidos o resueltos de delitos en materia de desaparición forzada de personas cometidos por particulares, delitos vinculados y de personas no localizadas realizados')
-                                    }
+                                    {comprometidos.area}
                                   </p>
                                 <p className='text-titulo-ga'>{comprometidos.partida}</p>
                               </div>
@@ -3241,7 +3173,7 @@ export default class Oficios extends Component {
                 )}, para el trámite de pago a favor del proveedor {this.state.fondo.beneficiario}, por
                 la/el servicio {this.state.fondo.desc}, con
                 cargo al proyecto{this.state.comprometidos.map(item => item.proy ? ', ' + item.proy : null)}
-                {this.state.comprometidos.map(item => item.npro ? ', ' + item.npro : null)} y {/*necesito solo un resultado*/}
+                {this.state.comprometidos.map(item => item.npro ? ', ' + item.npro : null)} y {/* traer el np no el npro */}
                 a los recursos otorgados con el oficio de autorización {this.state.fondo.oficio_aut}, del
                 Ejercicio 2021 a la Procuraduria General de Justicia del Estado de Hidalgo.
               </p>
@@ -3329,7 +3261,10 @@ export default class Oficios extends Component {
                 </div>
                 <div className='interno'>
                   <p className='text-soi'>Pago a Proveedores</p>
-                  <input className='input-so' type='checkbox'/>
+                  {this.state.fondo.tipo_doc === 'Pago Directo' ?
+                    <input className='input-so' type='checkbox' checked /> :
+                    <input className='input-so' type='checkbox' />
+                  }
                 </div>
                 <div className='interno'>
                   <p className='text-soi'>Pago a Proveedores por Requisición</p>
@@ -3386,7 +3321,7 @@ export default class Oficios extends Component {
                       'Quejas y denuncias por la posible comisión de conductas indebidas en las que incurran las y los servidores públicos atendidas')
                       ||
                       (comprometidos.up === '10' &&
-                      'Intervenciones periciales a autoridades de procuración de justicia para una correcta integración del expediente en casos penales entregados')
+                      'Dirección General de Servicios Periciales')
                       ||
                       (comprometidos.up === '11' &&
                       'Casos penales del delito de narcomenudeo resueltos')
@@ -3436,7 +3371,7 @@ export default class Oficios extends Component {
             </div>
             <div className='folio'>
               <p className='text-folio'>No. Folio</p>
-              <p className='fs-if'>{this.state.fondo2}</p>
+              <p className='fs-if'>{this.state.fondo.fondo}</p>
             </div>
           </div>
           <div style={{ height: '60vh'}}>
