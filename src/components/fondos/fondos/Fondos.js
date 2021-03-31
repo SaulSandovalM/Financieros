@@ -654,14 +654,14 @@ export default class Fondos extends Component {
                 </div>
               </Paper>
             </Grid>
-            {(realizo === 'MIGUEL' || realizo === 'TERESA' || realizo === 'MARCOS' || realizo === 'ELOY' || realizo === 'MARTHA' || realizo === 'KARINA' || realizo === 'HECTOR') &&
+            {(realizo === 'MIGUEL' || realizo === 'TERESA' || realizo === 'MARCOS' || realizo === 'ELOY' || realizo === 'MARTHA' || realizo === 'KARINA' || realizo === 'HECTOR' || realizo === 'LILIA' || realizo === 'CENELY' || realizo === 'OMAR') &&
             <Grid className='grid2-cont'>
               <Paper className='paper-p'>
                 <div className='div-con-f'>Licitación</div>
                 <div className='div-f2'>
                   <div className='div-con'>
                     <p className='p-label'>Numero de Licitación</p>
-                    {realizo === 'KARINA' || realizo === 'HECTOR' ?
+                    {(realizo === 'KARINA' || realizo === 'LILIA' || realizo === 'CENELY' || realizo === 'HECTOR' || realizo === 'OMAR') ?
                       <input
                         className='field'
                         id='no_lici'
@@ -684,7 +684,7 @@ export default class Fondos extends Component {
                   </div>
                   <div className='div-con'>
                     <p className='p-label'>Requisición</p>
-                    {realizo === 'KARINA' || realizo === 'HECTOR' ?
+                    {(realizo === 'KARINA' || realizo === 'LILIA' || realizo === 'CENELY' || realizo === 'HECTOR' || realizo === 'OMAR') ?
                       <input
                         className='field'
                         id='requisicion'
@@ -709,7 +709,7 @@ export default class Fondos extends Component {
                 <div className='div-f2'>
                   <div className='div-con'>
                     <p className='p-label'>Pedido</p>
-                    {realizo === 'KARINA' || realizo === 'HECTOR' ?
+                    {(realizo === 'KARINA' || realizo === 'LILIA' || realizo === 'CENELY' || realizo === 'HECTOR' || realizo === 'OMAR') ?
                       <input
                         className='field'
                         id='pedido'
@@ -732,7 +732,7 @@ export default class Fondos extends Component {
                   </div>
                   <div className='div-con'>
                     <p className='p-label'>Poliza</p>
-                    {realizo === 'KARINA' || realizo === 'HECTOR' ?
+                    {(realizo === 'KARINA' || realizo === 'LILIA' || realizo === 'CENELY' || realizo === 'HECTOR' || realizo === 'OMAR') ?
                       <input
                         className='field'
                         id='poliza'
@@ -760,7 +760,7 @@ export default class Fondos extends Component {
                 <div className='div-f2'>
                   <div className='div-con'>
                     <p className='p-label'>Cta CFE</p>
-                    {realizo === 'KARINA' || realizo === 'HECTOR' ?
+                    {(realizo === 'KARINA' || realizo === 'LILIA' || realizo === 'CENELY' || realizo === 'HECTOR' || realizo === 'OMAR') ?
                       <input
                         className='field'
                         id='cfe'
@@ -783,7 +783,7 @@ export default class Fondos extends Component {
                   </div>
                   <div className='div-con'>
                     <p className='p-label'>Numero de Servicio CFE</p>
-                    {realizo === 'KARINA' || realizo === 'HECTOR' ?
+                    {(realizo === 'KARINA' || realizo === 'LILIA' || realizo === 'CENELY' || realizo === 'HECTOR' || realizo === 'OMAR') ?
                       <input
                         className='field'
                         id='nscfe'
@@ -807,7 +807,7 @@ export default class Fondos extends Component {
                 </div>
                 <div className='div-cfe' style={{ width: '100%' }}>
                   <p className='p-label'>Observaciones</p>
-                  {realizo === 'KARINA' || realizo === 'HECTOR' ?
+                  {(realizo === 'KARINA' || realizo === 'LILIA' || realizo === 'CENELY' || realizo === 'HECTOR' || realizo === 'OMAR') ?
                     <textarea
                       className='field'
                       id='observaciones'

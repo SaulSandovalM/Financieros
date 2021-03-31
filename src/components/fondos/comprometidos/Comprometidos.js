@@ -609,7 +609,7 @@ export default class Comprometidos extends Component {
               <ListItemText className='list-align'><b>Fecha</b></ListItemText>
               <ListItemText className='list-align2'><b>Nombre</b></ListItemText>
             </ListItem>
-            {admin === 'MIGUEL' || admin === 'KARINA' || admin === 'HECTOR'?
+            {admin === 'MIGUEL' || admin === 'KARINA' || admin === 'HECTOR' || admin === 'LILIA' || admin === 'CENELY' || admin === 'OMAR' ?
             filterData.map((value) => {
               return (
                 <ListItem key={value} button onClick={handleToggle(value)}>
@@ -717,7 +717,7 @@ export default class Comprometidos extends Component {
                   />
                 </div>
               </div>
-              {(admin === 'OMAR' || admin === 'MARCOS' || admin === 'KARINA' || admin === 'MIGUEL' || admin === 'TERESA' || admin === 'HECTOR') &&
+              {(admin === 'OMAR' || admin === 'MARCOS' || admin === 'KARINA' || admin === 'MIGUEL' || admin === 'TERESA' || admin === 'HECTOR' || admin === 'LILIA' || admin === 'CENELY' || admin === 'OMAR') &&
                 customListLeft('Choices', left)
               }
             </Grid>
