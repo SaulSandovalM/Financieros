@@ -609,7 +609,7 @@ export default class Comprometidos extends Component {
               <ListItemText className='list-align'><b>Fecha</b></ListItemText>
               <ListItemText className='list-align2'><b>Nombre</b></ListItemText>
             </ListItem>
-            {admin === 'MIGUEL' || admin === 'KARINA' ?
+            {admin === 'MIGUEL' || admin === 'KARINA' || admin === 'HECTOR'?
             filterData.map((value) => {
               return (
                 <ListItem key={value} button onClick={handleToggle(value)}>
@@ -717,7 +717,7 @@ export default class Comprometidos extends Component {
                   />
                 </div>
               </div>
-              {(admin === 'OMAR' || admin === 'MARCOS' || admin === 'KARINA' || admin === 'MIGUEL' || admin === 'TERESA' || admin === 'ADMIN') &&
+              {(admin === 'OMAR' || admin === 'MARCOS' || admin === 'KARINA' || admin === 'MIGUEL' || admin === 'TERESA' || admin === 'HECTOR') &&
                 customListLeft('Choices', left)
               }
             </Grid>
@@ -1007,7 +1007,7 @@ export default class Comprometidos extends Component {
             variant='extended'
           >
             <AddIcon style={{ marginRight: '6px' }} />
-            {(admin === 'MIGUEL' || admin === 'KARINA') &&
+            {(admin === 'MIGUEL' || admin === 'KARINA' || admin === 'HECTOR') &&
               <Dropzone
                 style={{
                   width: '100%',
