@@ -220,13 +220,13 @@ export default class Comprometidos extends Component {
 
   handleOnChange1 (event) {
     for (var i = 0; i < event.target.files.length; i++) {
-      const file = event.target.files[0]
+      const file = event.target.files[i]
       var xml = file
       var reader = new FileReader()
       reader.onload = function (event) {
         var XMLParser = require('react-xml-parser')
         var xml = new XMLParser().parseFromString(event.target.result)
-        const data = {
+        let data = {
           'total': xml.attributes['Total'],
           'subtotal': xml.attributes['SubTotal'] ? xml.attributes['SubTotal'] : 0,
           'folio': xml.attributes['Folio'] ? xml.attributes['Folio'] : '0',
@@ -474,7 +474,6 @@ export default class Comprometidos extends Component {
   }
 
   render () {
-    console.log(this.state.comprometidos)
     var user = firebase.auth().currentUser
     var email
     if (user != null) {
@@ -984,7 +983,7 @@ export default class Comprometidos extends Component {
                       displayType='text'
                       prefix=' $ '
                       thousandSeparator
-                      value={(parseInt(comprometidos.importe_comp) + parseInt(comprometidos.iva) - parseInt(comprometidos.isr))}
+                      value={(parseInt(comprometidos.importe_comp) + parseInt(comprometidos.iva) - parseInt(comprometidos.isr)).toFixed(2)}
                     />
                   </TableCell>
                   <TableCell className='border-icon'>
@@ -1000,6 +999,7 @@ export default class Comprometidos extends Component {
             </Paper>
           </Grid>
         </Grid>
+        <div style={{ height: '80px' }} />
         <div className='div-content-fab-com'>
           <Fab
             color='primary'
