@@ -474,6 +474,7 @@ export default class Comprometidos extends Component {
   }
 
   render () {
+    window.location.hash = 'no-back-button'
     var user = firebase.auth().currentUser
     var email
     if (user != null) {

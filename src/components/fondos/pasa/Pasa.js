@@ -251,6 +251,7 @@ export default class Pasa extends Component {
   }
 
   render () {
+    window.location.hash = 'no-back-button'
     return (
       <div className='container-valeslist'>
         <div className='margin-f-a'>
