@@ -664,10 +664,6 @@ th {
 .monto-tabla{
   width: 150px;
 }
-.tabla-so{
-  padding-left: 20px;
-  padding-right: 20px;
-}
 .tablas-solas{
   padding-left: 100px;
 }
@@ -776,4 +772,10 @@ th {
   padding: 6px;
   height: 18px;
   cursor: pointer;
+}
+.pru-over {
+  overflow:hidden;
+  max-width:300px;
+  position:relative;
+  white-space: nowrap;
 }

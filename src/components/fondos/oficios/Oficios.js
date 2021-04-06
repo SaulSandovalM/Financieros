@@ -3460,8 +3460,10 @@ export default class Oficios extends Component {
                       <td className='all-tablai'>
                         {comprometidos.eg}
                       </td>
-                      <td className='all-tablai' style={{ textAlign: 'left' }}>
-                        {comprometidos.npro}
+                      <td className='all-tablai' style={{ textAlign: 'left', width: '100px' }}>
+                        <div className='pru-over'>
+                          {comprometidos.np}
+                        </div>
                       </td>
                       <td className='all-tablai'>
                         <CurrencyFormat
