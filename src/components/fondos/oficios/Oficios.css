@@ -9,7 +9,7 @@
 .title-so-o {
   display: flex;
   justify-content: space-between;
-  margin-top: 0;
+  margin-top: 30px;
   padding-bottom: 10px;
   padding-left: 30px;
   padding-right: 50px;
@@ -73,7 +73,7 @@
 .text-osb {
   font-size: 12px;
   margin-top: 7px;
-  width: 60px;
+  width: 100px;
 }
 .text-soi {
   font-size: 12px;
@@ -349,7 +349,7 @@ th {
   border-top: white 1px;
 }
 .text-rete{
-  font-size: 8px;
+  font-size: 12px;
   text-align:left;
 }
 /*retencion*/
@@ -379,11 +379,6 @@ th {
   width:500px;
   height:15px;
 }
-.text-osb{
-  margin-top: 7px;
-  font-size: 8px;
-  width: 60px;
-}
 /*firmas*/
 .padre-firmas{
   padding-left: 20px;
@@ -400,8 +395,8 @@ th {
 }
 .text-firmas{
   text-align: center;
-  margin-top:0px;
-  font-size: 10px;
+  margin-top: 0px;
+  font-size: 12px;
 }
 /*Pdf gastp*/
 .title-ga{
@@ -677,10 +672,6 @@ th {
   border-bottom: white 1px;
   border-top: white 1px;
 }
-.text-rete{
-  font-size: 8px;
-  text-align:left;
-}
 /*retencion*/
 .padre-retencion{
   margin:1px;
@@ -704,11 +695,6 @@ th {
   width:500px;
   height:15px;
 }
-.text-osb{
-  margin-top: 7px;
-  font-size: 8px;
-  width: 60px;
-}
 /*firmas*/
 .padre-firmas{
   padding-left: 20px;
@@ -722,11 +708,6 @@ th {
   border-radius: 10px;
   width: 200px;
   height: 50px;
-}
-.text-firmas{
-  text-align: center;
-  margin-top:0px;
-  font-size: 10px;
 }
 /*Pdf gastp*/
 .faderinp{
