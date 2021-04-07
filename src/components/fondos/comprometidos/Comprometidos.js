@@ -569,7 +569,7 @@ export default class Comprometidos extends Component {
     if (Object.keys(array1).length !== 0) {
       const totalImporteImporte = []
       right.map(items => (
-        totalImporteImporte.push(parseFloat(items.importe))
+        totalImporteImporte.push(parseFloat(items.subtotal))
       ))
       const reducerImporte = (a, b) => a + b
       this.state.importe = totalImporteImporte.reduce(reducerImporte).toFixed(2)
