@@ -726,7 +726,7 @@ th {
 }
 /*Pdf gastp*/
 .faderinp{
-  padding-bottom: 0px;
+  padding-bottom: 0;
   padding-left: 100px;
   padding-right: 100px;
   display: flex;
@@ -744,8 +744,7 @@ th {
   width: 10px;
 }
 .text-ga{
-  /*margin:0px;*/
-  margin:3px;
+  margin: 3px;
   font-size: 15px;
 }
 .contenedor-ga{
@@ -758,7 +757,6 @@ th {
   display: flex;
   justify-content: space-between;
 }
-/* tabla*/
 .fader-tabla{
   padding-left: 100px;
   padding-right: 100px;

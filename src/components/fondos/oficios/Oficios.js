@@ -3393,6 +3393,7 @@ export default class Oficios extends Component {
                     <td className='all-tablai'>Eje</td>
                     <td className='all-tablai'>Sect</td>
                     <td className='all-tablai'>Prog</td>
+                    <td className='all-tablai'>Subp</td>
                     <td className='all-tablai'>Obj</td>
                     <td className='all-tablai'>Proyecto</td>
                     <td className='all-tablai'>Ext</td>
@@ -3444,6 +3445,9 @@ export default class Oficios extends Component {
                       </td>
                       <td className='all-tablai'>
                         {comprometidos.prog}
+                      </td>
+                      <td className='all-tablai'>
+                        {comprometidos.sp}
                       </td>
                       <td className='all-tablai'>
                         {comprometidos.obj}
