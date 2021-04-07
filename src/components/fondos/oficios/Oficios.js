@@ -3466,7 +3466,7 @@ export default class Oficios extends Component {
                       </td>
                       <td className='all-tablai' style={{ textAlign: 'left', width: '100px' }}>
                         <div className='pru-over'>
-                          {comprometidos.np}
+                          {comprometidos.npro}
                         </div>
                       </td>
                       <td className='all-tablai' style={{ textAlign: 'right' }}>
