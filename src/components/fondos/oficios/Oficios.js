@@ -3340,7 +3340,7 @@ export default class Oficios extends Component {
                       'Subprocuraduría de Procedimientos Penales Región Poniente')
                       ||
                       (comprometidos.up === '16' &&
-                      Centro de Atención Temprana Poniente')
+                      'Centro de Atención Temprana Poniente')
                       ||
                       (comprometidos.up === '17' &&
                       'Dirección General de Investigación y Litigación Poniente')
