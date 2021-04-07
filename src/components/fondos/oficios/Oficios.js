@@ -3501,54 +3501,10 @@ export default class Oficios extends Component {
                     <td className='all-tablai' />
                     <td className='all-tablai' />
                     <td className='all-tablai' />
-                  </tr>
-                  <tr>
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
                     <td className='all-tablai' />
                   </tr>
                   <tr>
                     <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                  </tr>
-                  <tr>
                     <td className='all-tablai' />
                     <td className='all-tablai' />
                     <td className='all-tablai' />
@@ -3593,54 +3549,10 @@ export default class Oficios extends Component {
                     <td className='all-tablai' />
                     <td className='all-tablai' />
                     <td className='all-tablai' />
-                  </tr>
-                  <tr>
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
                     <td className='all-tablai' />
                   </tr>
                   <tr>
                     <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                  </tr>
-                  <tr>
                     <td className='all-tablai' />
                     <td className='all-tablai' />
                     <td className='all-tablai' />
@@ -3685,54 +3597,10 @@ export default class Oficios extends Component {
                     <td className='all-tablai' />
                     <td className='all-tablai' />
                     <td className='all-tablai' />
-                  </tr>
-                  <tr>
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
                     <td className='all-tablai' />
                   </tr>
                   <tr>
                     <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                  </tr>
-                  <tr>
                     <td className='all-tablai' />
                     <td className='all-tablai' />
                     <td className='all-tablai' />
@@ -3777,54 +3645,10 @@ export default class Oficios extends Component {
                     <td className='all-tablai' />
                     <td className='all-tablai' />
                     <td className='all-tablai' />
-                  </tr>
-                  <tr>
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
                     <td className='all-tablai' />
                   </tr>
                   <tr>
                     <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                  </tr>
-                  <tr>
                     <td className='all-tablai' />
                     <td className='all-tablai' />
                     <td className='all-tablai' />
@@ -3869,54 +3693,10 @@ export default class Oficios extends Component {
                     <td className='all-tablai' />
                     <td className='all-tablai' />
                     <td className='all-tablai' />
-                  </tr>
-                  <tr>
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
                     <td className='all-tablai' />
                   </tr>
                   <tr>
                     <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                  </tr>
-                  <tr>
                     <td className='all-tablai' />
                     <td className='all-tablai' />
                     <td className='all-tablai' />
@@ -3961,8 +3741,250 @@ export default class Oficios extends Component {
                     <td className='all-tablai' />
                     <td className='all-tablai' />
                     <td className='all-tablai' />
+                    <td className='all-tablai' />
                   </tr>
                   <tr>
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                  </tr>
+                  <tr>
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                  </tr>
+                  <tr>
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                  </tr>
+                  <tr>
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                  </tr>
+                  <tr>
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                  </tr>
+                  <tr>
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                  </tr>
+                  <tr>
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                  </tr>
+                  <tr>
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                  </tr>
+                  <tr>
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                  </tr>
+                  <tr>
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                  </tr>
+                  <tr>
+                    <td className='all-tablai border-color' />
                     <td className='all-tablai border-color' />
                     <td className='all-tablai border-color' />
                     <td className='all-tablai border-color' />
@@ -3986,6 +4008,7 @@ export default class Oficios extends Component {
                     <td className='all-tablai' />
                   </tr>
                   <tr>
+                    <td className='all-tablai border-color' />
                     <td className='all-tablai border-color' />
                     <td className='all-tablai border-color' />
                     <td className='all-tablai border-color' />
