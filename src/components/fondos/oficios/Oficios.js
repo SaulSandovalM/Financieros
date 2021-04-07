@@ -68,7 +68,6 @@ export default class Oficios extends Component {
   }
 
   render () {
-    window.location.hash = 'no-back-button'
     var today = new Date()
     var meses = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre']
     var diasSemana = ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado']
