@@ -3174,7 +3174,7 @@ export default class Oficios extends Component {
                 )}, para el trámite de pago a favor del proveedor {this.state.fondo.beneficiario}, por
                 la/el servicio {this.state.fondo.desc}, con
                 cargo al proyecto{this.state.comprometidos.map(item => item.proy ? ', ' + item.proy : null)}
-                {this.state.comprometidos.slice(0, 2).map(item => item.np ? ', ' + item.np : null)} y
+                {this.state.comprometidos.slice(0, 2).map(item => item.npro ? ', ' + item.npro : null)} y
                 a los recursos otorgados con el oficio de autorización {this.state.fondo.oficio_aut}, del
                 Ejercicio 2021 a la Procuraduria General de Justicia del Estado de Hidalgo.
               </p>
