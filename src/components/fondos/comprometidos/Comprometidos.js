@@ -589,11 +589,17 @@ export default class Comprometidos extends Component {
       this.state.isr = totalImporteIsr.reduce(reducerIsr).toFixed(2)
 
       const importe = parseFloat(this.state.importe)
+      console.log(importe)
       const iva = parseFloat(this.state.iva)
+      console.log(iva)
       const isr = parseFloat(this.state.isr)
+      console.log(isr)
       const total = importe + iva - isr
+      console.log('Este es el total: ' + total)
       this.state.total = total.toFixed(2)
+      console.log('Este es el total con ceros: ' + this.state.total)
       this.state.contra = right
+      console.log(this.state.contra)
     }
 
     const customListLeft = (title, items) => (
