@@ -22,7 +22,6 @@ import firebase from '../../../Firebase'
 import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown'
 import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp'
 import Dropzone from 'react-dropzone'
-import history from '../../../history'
 
 export default class Comprometidos extends Component {
   constructor (props) {
@@ -179,8 +178,8 @@ export default class Comprometidos extends Component {
     this.listenForXml(itemsRefXml)
     const itemsRef = firebase.database().ref('presupuesto/')
     this.listenForItems(itemsRef)
-    var dir = history.location.pathname.slice(15)
-    const itemsRefComprometidos = firebase.database().ref(`fondos/${dir}`)
+    //var dir = history.location.pathname.slice(15)
+    const itemsRefComprometidos = firebase.database().ref(`fondos/flata`) // ${dir}
     this.listenFondos(itemsRefComprometidos)
   }
 
@@ -359,8 +358,8 @@ export default class Comprometidos extends Component {
     firebase.database().ref().update(updates)
     // sacar el id
     const { area, total, iva, isr, importe } = this.state
-    var dir = history.location.pathname.slice(15)
-    const wishRef = firebase.database().ref(`fondos/${dir}`)
+    //var dir = history.location.pathname.slice(15)
+    const wishRef = firebase.database().ref(`fondos/flata `) // ${dir}
     wishRef.once('value').then(snapshot => {
       var updatedWish = snapshot.val()
       updatedWish.comprometido.push(
@@ -434,8 +433,8 @@ export default class Comprometidos extends Component {
   }
 
   cambio = () => {
-    var dir = history.location.pathname.slice(15)
-    this.props.history.push(`/Oficios/${dir}`)
+    //var dir = history.location.pathname.slice(15)
+    //this.props.history.push(`/Oficios/${dir}`)
   }
 
   partida = ['','211001','211002','212001','212002','214001','215001','216001','217001','221001','221002','246001','246002','247001','249001','251001','253001','254001','255001','256001','261001','271001','272001','275001','291001','292001','311001','312001','313001','317001','318001','323002','334001','336001','336002','338001','351001','352001','355001','357001','358001','359001','361002','372001','375001','392006','394001']

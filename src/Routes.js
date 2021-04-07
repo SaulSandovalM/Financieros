@@ -7,7 +7,6 @@ import { useOnClickOutside } from './hooks'
 import FocusLock from 'react-focus-lock'
 import Burger from './components/common/nav/Burger'
 import Menu from './components/common/nav/Menu'
-import history from './history'
 
 const store = configureStore()
 
@@ -20,7 +19,7 @@ function Routes () {
   return (
     <div>
       <Provider store={store}>
-        <Router history={history}>
+        <Router>
           <div ref={node}>
             <FocusLock disabled={!open}>
               <Burger open={open} setOpen={setOpen} aria-controls={menuId} />

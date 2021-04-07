@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import './Tabular.css'
 import ReactToPrint from 'react-to-print'
 import firebase from '../../../Firebase'
-import history from '../../../history'
 
 export default class Tabular extends Component {
   constructor (props) {
@@ -19,8 +18,8 @@ export default class Tabular extends Component {
   }
 
   componentDidMount () {
-    var dir = history.location.pathname.slice(15)
-    const itemsRefComprometidos = firebase.database().ref(`fondos/${dir}/comprometido`)
+    //var dir = history.location.pathname.slice(15)
+    const itemsRefComprometidos = firebase.database().ref(`fondos/falta/comprometido`) // ${dir}
     this.listenComprometidos(itemsRefComprometidos)
   }
 

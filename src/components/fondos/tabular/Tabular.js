@@ -8,7 +8,6 @@ import TableHead from '@material-ui/core/TableHead'
 import TableRow from '@material-ui/core/TableRow'
 import Paper from '@material-ui/core/Paper'
 import TableBody from '@material-ui/core/TableBody'
-import history from '../../../history'
 import CurrencyFormat from 'react-currency-format'
 
 export default class Tabular extends Component {
@@ -61,7 +60,6 @@ export default class Tabular extends Component {
   }
 
   render() {
-    window.location.hash = 'no-back-button'
     return (
       <div className='cent-compro'>
         <TableContainer component={Paper}>
@@ -116,10 +114,10 @@ export default class Tabular extends Component {
                     />
                   </TableCell>
                   <TableCell className='table-tab'>
-                    <div onClick={() => history.push(`/TabularGlobal/${fondos.id}`)}>Ver</div>
+                    <div onClick={() => {/* history.push(`/TabularGlobal/${fondos.id}`) */}}>Ver</div>
                   </TableCell>
                   <TableCell className='table-tab'>
-                    <div onClick={() => history.push(`/TabularIndividual/${fondos.id}`)}>Ver</div>
+                    <div onClick={() => {/* history.push(`/TabularIndividual/${fondos.id}`)*/ }}>Ver</div>
                   </TableCell>
                 </TableRow>
               )}

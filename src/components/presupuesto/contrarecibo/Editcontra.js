@@ -5,7 +5,6 @@ import CheckIcon from '@material-ui/icons/Check'
 import Paper from '@material-ui/core/Paper'
 import TextField from '@material-ui/core/TextField'
 import Grid from '@material-ui/core/Grid'
-import history from '../../../history'
 
 export default class Edit extends Component {
   constructor (props) {
@@ -40,8 +39,8 @@ export default class Edit extends Component {
   }
 
   componentDidMount() {
-    var dir = history.location.pathname.slice(12)
-    const itemsRefFondos = firebase.database().ref(`fondos/${dir}`).orderByChild('fondo')
+    //var dir = history.location.pathname.slice(12)
+    const itemsRefFondos = firebase.database().ref(`fondos/`).orderByChild('fondo') // ${dir}
     itemsRefFondos.on('value', (snapshot) => {
       let updatedWish = snapshot.val()
       this.setState({
@@ -81,8 +80,8 @@ export default class Edit extends Component {
 
   update () {
     let updates = {}
-    var dir = history.location.pathname.slice(12)
-    updates[`fondos/${dir}`] = {
+    //var dir = history.location.pathname.slice(12)
+    updates[`fondos/`] = {  // ${dir}
       fondo: this.state.fondo,
       fecha: this.state.fecha,
       tipo_doc: this.state.tipo_doc,

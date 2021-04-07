@@ -18,12 +18,10 @@ import Select from '@material-ui/core/Select'
 import Chip from '@material-ui/core/Chip'
 // import CurrencyFormat from 'react-currency-format'
 // import { Link } from 'react-router-dom'
-import history from '../../../history'
 
 export default class Fondos extends Component {
   constructor (props) {
     super(props)
-    window.location.hash = 'no-back-button'
     var user = firebase.auth().currentUser
     var email
     if (user != null) {
@@ -256,7 +254,7 @@ export default class Fondos extends Component {
   order = () => {
     firebase.database().ref('fondos').limitToLast(1).on('child_added', function(childSnapshot) {
       var snap = childSnapshot.key
-      history.push(`/Comprometidos/${snap}`)
+      //history.push(`/Comprometidos/${snap}`)
     })
   }
 

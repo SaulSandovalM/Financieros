@@ -7,7 +7,6 @@ import logo2 from '../../../img/logo.jpg'
 import lpgjh from '../../../img/logo-PGJH.jpg'
 import CurrencyFormat from 'react-currency-format'
 import Popup from 'reactjs-popup'
-import history from '../../../history'
 
 export default class Oficios extends Component {
   constructor (props) {
@@ -56,10 +55,10 @@ export default class Oficios extends Component {
   }
 
   componentDidMount () {
-    var dir = history.location.pathname.slice(9)
-    const itemsRefFondo = firebase.database().ref(`fondos/${dir}`)
+    //var dir = history.location.pathname.slice(9)
+    const itemsRefFondo = firebase.database().ref(`fondos/falta`) // ${dir}
     this.listenFondo(itemsRefFondo)
-    const itemsRefComprometidos = firebase.database().ref(`fondos/${dir}/comprometido`)
+    const itemsRefComprometidos = firebase.database().ref(`fondos/falta/comprometido`) // ${dir}
     this.listenComprometidos(itemsRefComprometidos)
   }
 
