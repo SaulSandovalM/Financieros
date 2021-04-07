@@ -23,6 +23,7 @@ import history from '../../../history'
 export default class Fondos extends Component {
   constructor (props) {
     super(props)
+    window.location.hash = 'no-back-button'
     var user = firebase.auth().currentUser
     var email
     if (user != null) {

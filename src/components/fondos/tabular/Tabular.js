@@ -61,6 +61,7 @@ export default class Tabular extends Component {
   }
 
   render() {
+    window.location.hash = 'no-back-button'
     return (
       <div className='cent-compro'>
         <TableContainer component={Paper}>

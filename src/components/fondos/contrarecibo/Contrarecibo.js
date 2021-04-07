@@ -84,6 +84,7 @@ export default class Contra extends Component {
   }
 
   render () {
+    window.location.hash = 'no-back-button'
     return (
       <div className='contrarecibo-container'>
         <TableContainer component={Paper}>
