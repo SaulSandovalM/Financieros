@@ -228,7 +228,7 @@ export default class Comprometidos extends Component {
         var xml = new XMLParser().parseFromString(event.target.result)
         let data = {
           'total': xml.attributes['Total'],
-          'subtotal': xml.attributes['SubTotal'] ? xml.attributes['SubTotal'] : 0,
+          'subtotal': xml.attributes['SubTotal'],
           'folio': xml.attributes['Folio'] ? xml.attributes['Folio'] : '0',
           'nombre': xml.children['0'].attributes['Nombre'],
           'importe': xml.children['2'].children['0'].attributes['Importe'],
