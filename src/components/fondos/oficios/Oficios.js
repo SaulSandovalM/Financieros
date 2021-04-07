@@ -3295,73 +3295,73 @@ export default class Oficios extends Component {
                     {comprometidos.area ?
                       this.state.comprometidos.length <= 2 ?
                       (comprometidos.up === '01' &&
-                      'Atención y seguimiento a peticiones recibidas en el despacho del procurador atendidas')
+                      'Procuraduría General de Justicia')
                       ||
                       (comprometidos.up === '02' &&
-                      'Casos penales de la región oriente resueltas')
+                      'Subprocuraduría de Procedimientos Penales Región Oriente')
                       ||
                       (comprometidos.up === '03' &&
-                      'Delitos cometidos en contra de la libertad de expresión, periodistas y personas defensoras de los derechos humanos investigados')
+                      'Fiscalía Especializada para la atención de Delitos cometidos contra la Libertad de Expresión, Periodistas y Personas defensoras de los Derechos Humanos')
                       ||
                       (comprometidos.up === '04' &&
-                      'Averiguaciones previas del sistema tradicional concluidas')
+                      'Dirección General para la Atención de los Asuntos del Sistema Tradicional')
                       ||
                       (comprometidos.up === '05' &&
-                      'Casos penales en materia de delitos electorales resueltos')
+                      'Fiscalía Especializada en Delitos Electorales')
                       ||
                       (comprometidos.up === '06' &&
-                      'Casos penales determinados, concluidos o resueltos en delitos que atenten contra la mujer y la familia')
+                      'Subprocuraduría de Derechos Humanos y Servicios a la Comunidad')
                       ||
                       (comprometidos.up === '07' &&
-                      'Acuerdos reparatorios generados a través de la aplicación de los mecanismos alternativos de solución de controversias en materia penal en la región poniente')
+                      'Centro de Justicia Restaurativa Penal Poniente')
                       ||
                       (comprometidos.up === '08' &&
-                      'Investigación y supervisión de los casos penales con motivo de feminicidio')
+                      'Fiscalía para la Atención de Delitos de Género')
                       ||
                       (comprometidos.up === '09' &&
-                      'Quejas y denuncias por la posible comisión de conductas indebidas en las que incurran las y los servidores públicos atendidas')
+                      'Visitaduría General')
                       ||
                       (comprometidos.up === '10' &&
                       'Dirección General de Servicios Periciales')
                       ||
                       (comprometidos.up === '11' &&
-                      'Casos penales del delito de narcomenudeo resueltos')
+                      'Centro de Operación Estratégica')
                       ||
                       (comprometidos.up === '12' &&
-                      'Casos penales atendidos por los delistos de secuentro y extorsión')
+                      'Unidad Especializada en el Combate al Secuestro')
                       ||
                       (comprometidos.up === '13' &&
-                      'Gestión administrativa de recursos humanos,financiera, materiales, de informática, de archivo, de calidad, de aportaciones federales, planeación estratégica realizada')
+                      'Dirección General de Administración y Finanzas')
                       ||
                       (comprometidos.up === '14' &&
-                      'Determinación y/o resolución de los casos penales de los delitos de trata de personas, lenocinio y delitos conexos')
+                      'Fiscalía Especializada para la atención de los Delitos de Trata de Personas')
                       ||
                       (comprometidos.up === '15' &&
-                      'Casos penales de la región poniente resueltas')
+                      'Subprocuraduría de Procedimientos Penales Región Poniente')
                       ||
                       (comprometidos.up === '16' &&
-                      'Atenciones ciudadanas en los módulos de atención temprana en la región poniente brindadas')
+                      Centro de Atención Temprana Poniente')
                       ||
                       (comprometidos.up === '17' &&
-                      'Determinación en las carpetas de investigación en las unidades de investigación de la regiones poniente')
+                      'Dirección General de Investigación y Litigación Poniente')
                       ||
                       (comprometidos.up === '18' &&
-                      'Investigación policial ejecutada')
+                      'Dirección General de la Policía Investigadora')
                       ||
                       (comprometidos.up === '20' &&
-                      'Atenciones ciudadanas en los módulos de atención temprana en la región poniente brindadas')
+                      'Centro de Atención Temprana Oriente')
                       ||
                       (comprometidos.up === '21' &&
-                      'Acuerdos reparatorios generados a traves de la aplicación de los mecanismos alternativos de solución de controversias en materia penal en la región oriente')
+                      'Centro de Justicia Restaurativa Penal Oriente')
                       ||
                       (comprometidos.up === '22' &&
-                      'Determinación en las carpetas de investigación en las unidades de investigación de la regiones oriente')
+                      'Dirección General de Investigación y Litigación Oriente')
                       ||
                       (comprometidos.up === '23' &&
-                      'Delitos de corrupción resueltos')
+                      'Fiscalía Especializada en Delitos de Corrupción')
                       ||
                       (comprometidos.up === '24' &&
-                      'Casos penales determinados, concluidos o resueltos de delitos en materia de desaparición forzada de personas cometidos por particulares, delitos vinculados y de personas no localizadas realizados')
+                      'Fiscalía de Desaparición Forzada y Desaparición por Terceros')
                       :
                       ''
                      : null
