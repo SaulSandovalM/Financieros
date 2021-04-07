@@ -331,7 +331,9 @@ class Nav extends Component {
               </Link>
             </div>
           }
-          {(admin === 'MIGUEL' || admin === 'LIZBETH' || admin === 'TERESA' || admin === 'ELOY' || admin === 'MARTHA' || admin === 'KARINA' || admin === 'HECTOR' || admin === 'CENELY' || admin === 'OMAR') &&
+          {(admin === 'MIGUEL' || admin === 'LIZBETH' || admin === 'TERESA' || admin === 'ELOY' ||
+            admin === 'MARTHA' || admin === 'KARINA' || admin === 'HECTOR' || admin === 'CENELY' ||
+            admin === 'OMAR' || admin === 'LILIA') &&
             <div className='navbar-left'>
               <Link to='/Contrarecibo' className='deco'>
                 <span className='material-icons'>
@@ -355,7 +357,9 @@ class Nav extends Component {
               </Link>
             </div>
           }
-          {(admin === 'MIGUEL' || admin === 'LIZBETH' || admin === 'TERESA' || admin === 'ELOY' || admin === 'MARTHA' || admin === 'KARINA' || admin === 'HECTOR' || admin === 'CENELY' || admin === 'OMAR') &&
+          {(admin === 'MIGUEL' || admin === 'LIZBETH' || admin === 'TERESA' || admin === 'ELOY' ||
+            admin === 'MARTHA' || admin === 'KARINA' || admin === 'HECTOR' || admin === 'CENELY' ||
+            admin === 'OMAR' || admin === 'LILIA') &&
             <div className='navbar-left'>
               <Link to='/TabularList' className='deco'>
                 <span className='material-icons'>
