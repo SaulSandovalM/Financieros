@@ -179,7 +179,7 @@ export default class Comprometidos extends Component {
     const itemsRef = firebase.database().ref('presupuesto/')
     this.listenForItems(itemsRef)
     //var dir = history.location.pathname.slice(15)
-    const itemsRefComprometidos = firebase.database().ref(`fondos/flata`) // ${dir}
+    const itemsRefComprometidos = firebase.database().ref(`fondos/${this.state.urlfire}`) // ${dir}
     this.listenFondos(itemsRefComprometidos)
   }
 
@@ -359,7 +359,7 @@ export default class Comprometidos extends Component {
     // sacar el id
     const { area, total, iva, isr, importe } = this.state
     //var dir = history.location.pathname.slice(15)
-    const wishRef = firebase.database().ref(`fondos/flata `) // ${dir}
+    const wishRef = firebase.database().ref(`fondos/${this.state.urlfire}`) // ${dir}
     wishRef.once('value').then(snapshot => {
       var updatedWish = snapshot.val()
       updatedWish.comprometido.push(
@@ -477,6 +477,9 @@ export default class Comprometidos extends Component {
   }
 
   render () {
+    var URLactual = window.location
+    console.log(String(URLactual).slice(36))
+    this.state.urlfire = String(URLactual).slice(36)
     var user = firebase.auth().currentUser
     var email
     if (user != null) {

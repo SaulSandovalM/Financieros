@@ -16,8 +16,8 @@ import MenuItem from '@material-ui/core/MenuItem'
 import FormControl from '@material-ui/core/FormControl'
 import Select from '@material-ui/core/Select'
 import Chip from '@material-ui/core/Chip'
-// import CurrencyFormat from 'react-currency-format'
-// import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom'
+  // import CurrencyFormat from 'react-currency-format'
 
 export default class Fondos extends Component {
   constructor (props) {
@@ -67,7 +67,6 @@ export default class Fondos extends Component {
     }
     today = dd + '/' + mm + '/' + yyyy
     this.ref = firebase.firestore().collection('fondos')
-    this.unsubscribe = null
     this.state = {
       fondo: '',
       fecha: today,
@@ -100,7 +99,8 @@ export default class Fondos extends Component {
           name: 'prueba',
           done: false
         }
-      ]
+      ],
+      comprometidosp: ''
     }
   }
 
@@ -193,11 +193,11 @@ export default class Fondos extends Component {
       params.sujetoContable && params.comprometido && params.cpa) {
       firebase.database().ref('fondos').push(params).then(() => {
         alert('Tu solicitud fue enviada.')
+        this.incrementFondo()
+        this.order()
       }).catch(() => {
         alert('Tu solicitud no puede ser enviada')
       })
-      this.incrementFondo()
-      this.order()
     } else {
       alert('Por favor llene el formulario')
     }
@@ -252,9 +252,12 @@ export default class Fondos extends Component {
   }
 
   order = () => {
+    var prueba
     firebase.database().ref('fondos').limitToLast(1).on('child_added', function(childSnapshot) {
-      var snap = childSnapshot.key
-      //history.push(`/Comprometidos/${snap}`)
+      prueba = childSnapshot.key
+    })
+    this.setState({
+      comprometidosp: prueba
     })
   }
 
@@ -322,6 +325,8 @@ export default class Fondos extends Component {
         newArray.push(el)
       }
     })
+
+    console.log(this.state.comprometidosp)
 
     return (
       <div>
@@ -834,6 +839,9 @@ export default class Fondos extends Component {
             <Fab color='primary' aria-label='add' style={{ background: 'green' }} type='submit'>
               <CheckIcon />
             </Fab>
+            <Link to={`/Comprometidos/${this.state.comprometidosp}`}>
+              prueba
+            </Link>
           </div>
         </form>
       </div>

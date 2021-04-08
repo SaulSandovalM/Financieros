@@ -1,6 +1,6 @@
 import React, { useState, useRef } from 'react'
 import { Provider } from 'react-redux'
-import { Router } from 'react-router-dom'
+import { BrowserRouter as Router } from 'react-router-dom'
 import App from './App'
 import configureStore from './store/configureStore'
 import { useOnClickOutside } from './hooks'
