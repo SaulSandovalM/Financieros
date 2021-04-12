@@ -149,7 +149,7 @@ export const NumberAsString = (num, centavos = true, currency) => {
   const data = {
     numero: num,
     enteros: Math.floor(num),
-    centavos: centavos ? (((Math.round(num * 100)) - (Math.floor(num) * 100))) : 0,
+    centavos: (((Math.round(num * 100)) - (Math.floor(num) * 100))),
     letrasCentavos: '',
     letrasMonedaPlural: currency.plural || 'PESOS',
     letrasMonedaSingular: currency.singular || 'PESO',
@@ -157,10 +157,12 @@ export const NumberAsString = (num, centavos = true, currency) => {
     letrasMonedaCentavoSingular: currency.centSingular || '/100 M.N.'
   }
 
-  if (data.centavos <= 0) {
-    data.letrasCentavos = '0' + data.centavos + '/100 M.N.'
+  console.log(data.centavos)
+
+  if (data.centavos < 10) {
+    console.log(data.letrasCentavos = '0' + data.centavos + '/100 M.N.')
   } else {
-    data.letrasCentavos = '' + data.centavos + '/100 M.N.'
+    console.log(data.letrasCentavos = '' + data.centavos + '/100 M.N.')
   }
 
   if (data.enteros === 0) {

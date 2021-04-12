@@ -18,7 +18,7 @@ import Select from '@material-ui/core/Select'
 import Chip from '@material-ui/core/Chip'
 
 export default class FondoE extends Component {
-  constructor(props) {
+  constructor (props) {
     super(props)
     var user = firebase.auth().currentUser
     var email
@@ -26,9 +26,7 @@ export default class FondoE extends Component {
       email = user.email
     }
     let admin
-    if (email === 'administrador@procu.com') {
-      admin = 'ADMIN'
-    } else if (email === 'nayra@procuraduria.com') {
+    if (email === 'nayra@procuraduria.com') {
       admin = 'NAYRA'
     } else if (email === 'laura@procuraduria.com') {
       admin = 'LAURA'
@@ -65,32 +63,29 @@ export default class FondoE extends Component {
     }
     today = dd + '/' + mm + '/' + yyyy
     this.ref = firebase.firestore().collection('fondos')
-    this.unsubscribe = null
     this.state = {
       fondo: '',
       fecha: today,
       tipo_doc: '',
       oficio_aut: '',
       no_oficio: '',
-      no_lici: '',
+      no_lici: ' ',
       importe: '',
       desc: '',
       beneficiario: '',
       realizo: admin,
-      requisicion: '',
-      pedido: '',
+      requisicion: ' ',
+      pedido: ' ',
       no_proyecto: [],
-      poliza: '',
-      cfe: '',
-      nscfe: '',
-      observaciones: '',
-      numProy: '',
+      poliza: ' ',
+      cfe: ' ',
+      nscfe: ' ',
+      observaciones: ' ',
       fondos: [],
       value: '',
       key: '',
       contador: {},
       f: '',
-      personName: [],
       searchF: '',
       nombre: '',
       oficio: [],
@@ -100,8 +95,95 @@ export default class FondoE extends Component {
           name: 'prueba',
           done: false
         }
-      ]
+      ],
+      comprometidosp: ''
     }
+  }
+
+  componentDidMount () {
+    const itemsRef = firebase.database().ref(`/fondos/${this.state.urlfire}`)
+    this.listenForItems(itemsRef)
+    const itemsRefBeneficiario = firebase.database().ref('beneficiario/')
+    this.listenBeneficiario(itemsRefBeneficiario)
+    var wishRef = firebase.database().ref('fondo/3q4t5w63q4fw3563')
+    wishRef.on('value', (snapshot) => {
+      let updatedWish = snapshot.val()
+      this.setState({
+        fondo: updatedWish.num
+      })
+      wishRef.set(updatedWish)
+    })
+    const itemsRefPre = firebase.database().ref('presupuesto/')
+    this.listenForItemsP(itemsRefPre)
+  }
+
+  listenForItems = (itemsRef) => {
+    itemsRef.on('value', (snap) => {
+      var fondos = []
+      fondos.push({
+        fondo: snap.val().fondo,
+        fecha: snap.val().fecha,
+        tipo_doc: snap.val().tipo_doc,
+        oficio_aut: snap.val().oficio_aut,
+        no_oficio: snap.val().no_oficio,
+        importe: snap.val().importe,
+        beneficiario: snap.val().beneficiario,
+        desc: snap.val().desc,
+        no_proyecto: snap.val().no_proyecto,
+        numCompro: snap.val().numCompro,
+        realizo: snap.val().realizo,
+        no_lici: snap.val().no_lici,
+        requisicion: snap.val().requisicion,
+        pedido: snap.val().pedido,
+        poliza: snap.val().poliza,
+        cfe: snap.val().cfe,
+        nscfe: snap.val().nscfe,
+        observaciones: snap.val().observaciones,
+        comprometido: snap.val().comprometido,
+        cpa: snap.val().cpa,
+        numCheque: snap.val().numCheque,
+        fechaContra: snap.val().fechaContra,
+        numContra: snap.val().numContra,
+        fechaDepo: snap.val().fechaDepo,
+        cuentaPagar: snap.val().cuentaPagar,
+        cuentaPagarPara: snap.val().cuentaPagarPara,
+        sujetoContable: snap.val().sujetoContable,
+        id: snap.key
+      })
+      this.setState({
+        fondos: fondos
+      })
+    })
+  }
+
+  listenBeneficiario = (itemsRefBeneficiario) => {
+    itemsRefBeneficiario.on('value', (snap) => {
+      var baneficiarioc = []
+      snap.forEach((child) => {
+        baneficiarioc.push({
+          nombre: child.val().nombre,
+          id: child.key
+        })
+      })
+      this.setState({
+        baneficiarioc: baneficiarioc
+      })
+    })
+  }
+
+  listenForItemsP = (itemsRefPre) => {
+    itemsRefPre.on('value', (snap) => {
+      var oficio = []
+      snap.forEach((child) => {
+        oficio.push({
+          of: child.val().of,
+          id: child.key
+        })
+      })
+      this.setState({
+        oficio: oficio
+      })
+    })
   }
 
   beneficiario2 = ['', 'Mtro. León Maximiliano Hernández Valdés']
@@ -137,131 +219,53 @@ export default class FondoE extends Component {
     'A1D11, Centralizada'
   ]
 
-  listenForItems = (itemsRef) => {
-    itemsRef.on('value', (snap) => {
-      var baneficiarioc = []
-      snap.forEach((child) => {
-        baneficiarioc.push({
-          nombre: child.val().nombre,
-          id: child.key
-        })
-      })
-      this.setState({
-        baneficiarioc: baneficiarioc
-      })
-    })
-  }
-
-  listenForItemsP = (itemsRefPre) => {
-    itemsRefPre.on('value', (snap) => {
-      var oficio = []
-      snap.forEach((child) => {
-        oficio.push({
-          of: child.val().of,
-          id: child.key
-        })
-      })
-      this.setState({
-        oficio: oficio
-      })
-    })
-  }
-
-  componentDidMount() {
-    const ref = firebase.firestore().collection('fondos').doc(this.props.match.params.id)
-    ref.get().then((doc) => {
-      if (doc.exists) {
-        const fondo = doc.data()
-        this.setState({
-          key: doc.id,
-          fondo: fondo.fondo,
-          fecha: fondo.fecha,
-          tipo_doc: fondo.tipo_doc,
-          oficio_aut: fondo.oficio_aut,
-          no_oficio: fondo.no_oficio,
-          no_lici: fondo.no_lici,
-          importe: fondo.importe,
-          desc: fondo.desc,
-          beneficiario: fondo.beneficiario,
-          requisicion: fondo.requisicion,
-          no_proyecto: fondo.no_proyecto,
-          pedido: fondo.pedido,
-          ncomprobantes: fondo.ncomprobantes,
-          poliza: fondo.poliza,
-          cfe: fondo.cfe,
-          nscfe: fondo.nscfe,
-          observaciones: fondo.observaciones,
-          numCompro: fondo.numCompro
-        })
-      } else {
-        console.log('No such document!')
-      }
-    })
-    const itemsRef = firebase.database().ref('beneficiario/')
-    this.listenForItems(itemsRef)
-    const itemsRefPre = firebase.database().ref('presupuesto/')
-    this.listenForItemsP(itemsRefPre)
-  }
-
   onChange = (e) => {
     const state = this.state
     state[e.target.name] = e.target.value
-    this.setState({board:state})
+    this.setState(state)
   }
 
-  onSubmit = (e) => {
-    e.preventDefault()
-    const { fondo, fecha, tipo_doc, oficio_aut, no_oficio, no_lici, importe, desc,
-            beneficiario, requisicion, pedido, ncomprobantes, poliza, cfe, nscfe,
-            observaciones, numCompro } = this.state
-    const updateRef = firebase.firestore().collection('fondos').doc(this.state.key)
-    updateRef.set({
-      fondo,
-      fecha,
-      tipo_doc,
-      oficio_aut,
-      no_oficio,
-      no_lici,
-      importe,
-      desc,
-      beneficiario,
-      requisicion,
-      pedido,
-      ncomprobantes,
-      poliza,
-      cfe,
-      nscfe,
-      observaciones,
-      numCompro
-    }).then((docRef) => {
-      this.setState({
-        fondo: '',
-        fecha: '',
-        tipo_doc: '',
-        oficio_aut: '',
-        no_oficio: '',
-        no_lici: '',
-        importe: '',
-        desc: '',
-        beneficiario: '',
-        requisicion: '',
-        pedido: '',
-        ncomprobantes: '',
-        poliza: '',
-        cfe: '',
-        nscfe: '',
-        observaciones: '',
-        numCompro: ''
-      })
-      this.props.history.push('/Fondos')
-    })
-    .catch((error) => {
-      console.error('Error al agregar documento: ', error)
-    })
+  update = () => {
+    let updates = {}
+    let item = this.state.urlfire
+    updates['fondos/' + item] = {
+      fondo: this.state.fondos[0].fondo,
+      fecha: this.state.fondos[0].fecha,
+      tipo_doc: this.state.tipo_doc ? this.state.tipo_doc : this.state.fondos[0].tipo_doc,
+      oficio_aut: this.state.oficio_aut ? this.state.oficio_aut : this.state.fondos[0].oficio_aut,
+      no_oficio: this.state.no_oficio ? this.state.no_oficio : this.state.fondos[0].no_oficio,
+      importe: this.state.importe ? this.state.importe : this.state.fondos[0].importe,
+      beneficiario: this.state.beneficiario ? this.state.beneficiario :this.state.fondos[0].beneficiario,
+      desc: this.state.desc ? this.state.desc : this.state.fondos[0].desc,
+      no_proyecto: this.state.no_proyecto.length === 0 ? this.state.fondos[0].no_proyecto : this.state.no_proyecto,
+      numCompro: this.state.numCompro ? this.state.numCompro : this.state.fondos[0].numCompro,
+      realizo: this.state.fondos[0].realizo,
+      no_lici: this.state.no_lici ? this.state.no_lici : this.state.fondos[0].no_lici,
+      requisicion: this.state.requisicion ? this.state.requisicion : this.state.fondos[0].requisicion,
+      pedido: this.state.pedido ? this.state.pedido : this.state.fondos[0].pedido,
+      poliza: this.state.poliza ? this.state.poliza : this.state.fondos[0].poliza,
+      cfe: this.state.cfe ? this.state.cfe : this.state.fondos[0].cfe,
+      nscfe: this.state.nscfe ? this.state.nscfe : this.state.fondos[0].nscfe,
+      observaciones: this.state.observaciones ? this.state.observaciones : this.state.fondos[0].observaciones,
+      comprometido: this.state.fondos[0].comprometido,
+      cpa: this.state.fondos[0].cpa,
+      numCheque: this.state.numCheque ? this.state.numCheque : this.state.fondos[0].numCheque,
+      fechaContra: this.state.fechaContra ? this.state.fechaContra : this.state.fondos[0].fechaContra,
+      numContra: this.state.numContra ? this.state.numContra : this.state.fondos[0].numContra,
+      fechaDepo: this.state.fechaDepo ? this.state.fechaDepo : this.state.fondos[0].fechaDepo,
+      cuentaPagar: this.state.cuentaPagar ? this.state.cuentaPagar : this.state.fondos[0].cuentaPagar,
+      cuentaPagarPara: this.state.cuentaPagarPara ? this.state.cuentaPagarPara : this.state.fondos[0].cuentaPagarPara,
+      sujetoContable: this.state.sujetoContable ? this.state.sujetoContable : this.state.fondos[0].sujetoContable,
+    }
+    firebase.database().ref().update(updates)
+    alert('Se ha actualizado el fondo')
   }
 
   render() {
-    const { tipo_doc, oficio_aut, importe, beneficiario, no_proyecto, realizo, fecha, no_oficio, desc, numCompro } = this.state
+    var URLactual = window.location
+    console.log(String(URLactual).slice(29))
+    this.state.urlfire = String(URLactual).slice(29)
+    const { tipo_doc, realizo } = this.state
     const newArray = ['']
     const myObj = {}
 
@@ -274,331 +278,421 @@ export default class FondoE extends Component {
 
     return (
       <div>
-        <form className='form-fondo' onSubmit={this.onSubmit}>
-          <Grid className='grid-w'>
-            <Grid className='grid-w2'>
-              <Paper className='paper-pm'>
-                <div className='div-con-f'>Fondos</div>
-                <div className='div-f2'>
-                  <div className='div-con'>
-                    <p className='p-label'>Fondo</p>
-                    <input
-                      className='field'
-                      value={this.state.fondo}
-                      name='fondo'
-                      ref='fondo'
-                      required
-                    />
-                  </div>
-                  <div className='div-con'>
-                    <p className='p-label'>Fecha</p>
-                    <input
-                      className='field'
-                      required
-                      value={fecha}
-                    />
-                  </div>
-                </div>
-                <div className='div-f2'>
-                  <div className='div-con'>
-                    <p className='p-label'>Tipo de Documento</p>
-                    {(realizo === 'MIGUEL' || realizo === 'ELOY' || realizo === 'TERESA' || realizo === 'MARTHA') &&
-                      <select
-                        className='select-f'
-                        value={tipo_doc}
-                        onChange={this.onChange}
-                        name='tipo_doc'
-                        required
-                      >
-                        {this.tipo_doc.map((x,y) =>
-                          <option name={y}>{x}</option>
-                        )}
-                      </select>
-                    }
-                    {(realizo === 'MARCOS') &&
-                      <select
-                        className='select-f'
-                        value={tipo_doc}
-                        onChange={this.onChange}
-                        name='tipo_doc'
-                        required
-                      >
-                        {this.tipo_doc4.map((x,y) =>
-                          <option name={y}>{x}</option>
-                        )}
-                      </select>
-                    }
-                    {(realizo === 'KARINA' || realizo === 'LILIA' || realizo === 'CENELY' || realizo === 'HECTOR' || realizo === 'OMAR') &&
-                      <select
-                        className='select-f'
-                        value={tipo_doc}
-                        onChange={this.onChange}
-                        name='tipo_doc'
-                        required
-                      >
-                        {this.tipo_doc3.map((x,y) =>
-                          <option name={y}>{x}</option>
-                        )}
-                      </select>
-                    }
-                  </div>
-                  <div className='div-con'>
-                    <p className='p-label'>Oficio de Autorización</p>
-                    <select
-                      className='select-f'
-                      value={oficio_aut}
-                      onChange={this.onChange}
-                      name='oficio_aut'
-                      required
-                    >
-                    {newArray.map(data =>
-                      <option name={data}>{data.of}</option>
-                    )}
-                    </select>
-                  </div>
-                </div>
-                <div className='div-f2'>
-                  <div className='div-con'>
-                    <p className='p-label'>Numero de Oficio</p>
-                    <input
-                      className='field'
-                      name='no_oficio'
-                      onChange={this.onChange}
-                      required
-                      value={no_oficio}
-                      ref='no_oficio'
-                    />
-                  </div>
-                  <div className='div-con'>
-                    <TextField
-                      label='Importe'
-                      value={importe}
-                      onChange={this.onChange}
-                      id='importe'
-                      name='importe'
-                      InputProps={{
-                        inputComponent: NumberFormatCustom
-                      }}
-                      required
-                      ref={importe => this.inputImporte = importe}
-                    />
-                  </div>
-                </div>
-                <div className='div-f2'>
-                  <div className='div-con'>
-                    <p className='p-label'>Importe Letra</p>
-                    <input
-                      className='field'
-                      name='no_oficio'
-                      onChange={this.onChange}
-                      value={(NumberAsString(importe))}
-                      required
-                      ref='no_oficio'
-                    />
-                  </div>
-                  {tipo_doc === 'Fondo Revolvente' ?
+        {this.state.fondo &&
+          <form className='form-fondo'>
+            <Grid className='grid-w'>
+              <Grid className='grid-w2'>
+                <Paper className='paper-pm'>
+                  <div className='div-con-f'>Fondo</div>
+                  <div className='div-f2'>
                     <div className='div-con'>
-                      <p className='p-label'>Beneficiario</p>
-                      <select
-                        className='select-f'
-                        value={beneficiario}
-                        onChange={this.onChange}
-                        name='beneficiario'
-                      >
-                        {this.beneficiario2.map((x,y) =>
-                          <option name={y}>{x}</option>
-                        )}
-                      </select>
-                    </div>
-                    :
-                    <div className='div-con'>
-                      <p className='p-label'>Beneficiario</p>
-                      <select
-                        className='select-f'
-                        value={beneficiario}
-                        onChange={this.onChange}
-                        name='beneficiario'
-                      >
-                        {this.state.baneficiarioc.map(data =>
-                          <option name={data}>{data.nombre}</option>
-                        )}
-                      </select>
-                    </div>
-                  }
-                </div>
-                <div className='div-f2'>
-                  <div className='div-con'>
-                    <p className='p-label'>Descripción</p>
-                    <input
-                      className='field'
-                      id='desc'
-                      name='desc'
-                      onChange={this.onChange}
-                      required
-                      ref='desc'
-                      value={desc}
-                    />
-                  </div>
-                  {/*realizo === 'MIGUEL' &&
-                    <div className='add-bene'>
-                      <div className='content-bf'>
-                        <p className='p-label'>Agregar Beneficiario</p>
-                        <input
-                          className='field'
-                          id='nombre'
-                          name='nombre'
-                          onChange={this.onChange}
-                          value={this.state.nombre}
-                        />
-                      </div>
-                      <button className='btn-add-bf' onClick={this.sendName.bind(this)}>
-                          +
-                      </button>
-                    </div>
-                  */}
-                </div>
-                <div className='div-f2'>
-                  <div className='fondo-w-c'>
-                    <div>
-                      <FormControl className='fondo-w-c'>
-                        <InputLabel>Proyecto</InputLabel>
-                        <Select
-                          style={{ height: 'auto' }}
-                          multiple
-                          value={no_proyecto}
-                          onChange={this.onChange}
-                          name='no_proyecto'
-                          input={<Input id='select-multiple-chip' />}
-                          renderValue={(selected) => (
-                            <div>
-                              {selected.map((value) => (
-                                <Chip key={value} label={value} style={{ display: 'flex', flexWrap: 'wrap' }}/>
-                              ))}
-                            </div>
-                          )}
-                          MenuProps={MenuProps}
-                        >
-                          {this.no_proyecto.map((name) => (
-                            <MenuItem key={name} value={name}>
-                              {name}
-                            </MenuItem>
-                          ))}
-                        </Select>
-                      </FormControl>
-                    </div>
-                  </div>
-                </div>
-                <div className='div-f2'>
-                  <div style={{ width: '99%' }}>
-                    <div>
-                      <p className='p-label'>Numero de Comprobantes</p>
+                      <p className='p-label'>Fondo</p>
                       <input
-                        style={{ width: '100%' }}
                         className='field'
-                        id='numCompro'
-                        name='numCompro'
-                        onChange={this.onChange}
+                        value={this.state.fondos[0].fondo}
+                        name='fondo'
+                        ref='fondo'
                         required
-                        value={numCompro}
-                        ref='numCompro'
+                      />
+                    </div>
+                    <div className='div-con'>
+                      <p className='p-label'>Fecha</p>
+                      <input
+                        className='field'
+                        required
+                        value={this.state.fondos[0].fecha}
                       />
                     </div>
                   </div>
-                </div>
-              </Paper>
+                  <div className='div-f2'>
+                    <div className='div-con'>
+                      <p className='p-label'>Tipo de Documento</p>
+                      {(realizo === 'MIGUEL' || realizo === 'ELOY' || realizo === 'TERESA' || realizo === 'MARTHA') &&
+                        <select
+                          className='select-f'
+                          value={
+                            (this.state.fondos[0].tipo_doc && this.state.tipo_doc === '') ?
+                              this.state.fondos[0].tipo_doc
+                            :
+                              this.state.tipo_doc
+                          }
+                          onChange={this.onChange}
+                          name='tipo_doc'
+                          required
+                        >
+                          {this.tipo_doc.map((x,y) =>
+                            <option name={y}>{x}</option>
+                          )}
+                        </select>
+                      }
+                      {(realizo === 'MARCOS') &&
+                        <select
+                          className='select-f'
+                          value={
+                            (this.state.fondos[0].tipo_doc && this.state.tipo_doc === '') ?
+                              this.state.fondos[0].tipo_doc
+                            :
+                              this.state.tipo_doc
+                          }
+                          onChange={this.onChange}
+                          name='tipo_doc'
+                          required
+                        >
+                          {this.tipo_doc4.map((x,y) =>
+                            <option name={y}>{x}</option>
+                          )}
+                        </select>
+                      }
+                      {(realizo === 'KARINA' || realizo === 'LILIA' || realizo === 'CENELY' || realizo === 'HECTOR' || realizo === 'OMAR') &&
+                        <select
+                          className='select-f'
+                          value={
+                            (this.state.fondos[0].tipo_doc && this.state.tipo_doc === '') ?
+                              this.state.fondos[0].tipo_doc
+                            :
+                              this.state.tipo_doc
+                          }
+                          onChange={this.onChange}
+                          name='tipo_doc'
+                          required
+                        >
+                          {this.tipo_doc3.map((x,y) =>
+                            <option name={y}>{x}</option>
+                          )}
+                        </select>
+                      }
+                    </div>
+                    <div className='div-con'>
+                      <p className='p-label'>Oficio de Autorización</p>
+                      <select
+                        className='select-f'
+                        value={this.state.oficio_aut ? this.state.oficio_aut : this.state.fondos[0].oficio_aut}
+                        onChange={this.onChange}
+                        name='oficio_aut'
+                        required
+                      >
+                      {newArray.map(data =>
+                        <option name={data}>{data.of}</option>
+                      )}
+                      </select>
+                    </div>
+                  </div>
+                  <div className='div-f2'>
+                    <div className='div-con'>
+                      <p className='p-label'>Numero de Oficio</p>
+                      <input
+                        className='field'
+                        name='no_oficio'
+                        required
+                        value={this.state.no_oficio ? this.state.no_oficio : this.state.fondos[0].no_oficio}
+                        onChange={this.onChange}
+                        ref='no_oficio'
+                      />
+                    </div>
+                    <div className='div-con'>
+                      <TextField
+                        label='Importe'
+                        value={this.state.importe ? this.state.importe : this.state.fondos[0].importe}
+                        onChange={this.onChange}
+                        id='importe'
+                        name='importe'
+                        InputProps={{
+                          inputComponent: NumberFormatCustom
+                        }}
+                        required
+                        ref={importe => this.inputImporte = importe}
+                      />
+                    </div>
+                  </div>
+                  <div className='div-f2'>
+                    <div className='div-con'>
+                      <p className='p-label'>Importe Letra</p>
+                      <input
+                        className='field'
+                        name='no_oficio'
+                        onChange={this.onChange}
+                        value={(NumberAsString(this.state.importe ? this.state.importe : this.state.fondos[0].importe))}
+                        required
+                        ref='no_oficio'
+                      />
+                    </div>
+                    {tipo_doc === 'Fondo Revolvente' ?
+                      <div className='div-con'>
+                        <p className='p-label'>Beneficiario</p>
+                        <select
+                          className='select-f'
+                          value={this.state.beneficiario ? this.state.beneficiario : this.state.fondos[0].beneficiario}
+                          onChange={this.onChange}
+                          name='beneficiario'
+                        >
+                          {this.beneficiario2.map((x,y) =>
+                            <option name={y}>{x}</option>
+                          )}
+                        </select>
+                      </div>
+                      :
+                      <div className='div-con'>
+                        <p className='p-label'>Beneficiario</p>
+                        <select
+                          className='select-f'
+                          value={this.state.beneficiario ? this.state.beneficiario : this.state.fondos[0].beneficiario}
+                          onChange={this.onChange}
+                          name='beneficiario'
+                        >
+                          {this.state.baneficiarioc.map(data =>
+                            <option name={data}>{data.nombre}</option>
+                          )}
+                        </select>
+                      </div>
+                    }
+                  </div>
+                  <div className='div-f2'>
+                    <div className='div-con'>
+                      <p className='p-label'>Descripción</p>
+                      <input
+                        className='field'
+                        id='desc'
+                        name='desc'
+                        onChange={this.onChange}
+                        required
+                        ref='desc'
+                        value={this.state.desc ? this.state.desc : this.state.fondos[0].desc}
+                      />
+                    </div>
+                  </div>
+                  <div className='div-f2'>
+                    <div className='fondo-w-c'>
+                      <div>
+                        <FormControl className='fondo-w-c'>
+                          <InputLabel>Proyecto</InputLabel>
+                          <Select
+                            style={{ height: 'auto' }}
+                            multiple
+                            value={this.state.no_proyecto}
+                            onChange={this.onChange}
+                            name='no_proyecto'
+                            input={<Input id='select-multiple-chip' />}
+                            renderValue={(selected) => (
+                              <div>
+                                {selected.map((value) => (
+                                  <Chip key={value} label={value} style={{ display: 'flex', flexWrap: 'wrap' }}/>
+                                ))}
+                              </div>
+                            )}
+                            MenuProps={MenuProps}
+                          >
+                            {this.no_proyecto.map((name) => (
+                              <MenuItem key={name} value={name}>
+                                {name}
+                              </MenuItem>
+                            ))}
+                          </Select>
+                        </FormControl>
+                      </div>
+                    </div>
+                  </div>
+                  <div className='div-f2'>
+                    <div style={{ width: '99%' }}>
+                      <div>
+                        <p className='p-label'>Numero de Comprobantes</p>
+                        <input
+                          style={{ width: '100%' }}
+                          className='field'
+                          id='numCompro'
+                          name='numCompro'
+                          onChange={this.onChange}
+                          required
+                          value={this.state.numCompro ? this.state.numCompro : this.state.fondos[0].numCompro}
+                          ref='numCompro'
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </Paper>
+              </Grid>
+              <Grid className='grid2-cont'>
+                <Paper className='paper-p'>
+                  <div className='div-con-f'>Licitación</div>
+                  <div className='div-f2'>
+                    <div className='div-con'>
+                      <p className='p-label'>Numero de Licitación</p>
+                      {(realizo === 'KARINA' || realizo === 'LILIA' || realizo === 'CENELY' || realizo === 'HECTOR' || realizo === 'OMAR') ?
+                        <input
+                          className='field'
+                          id='no_lici'
+                          name='no_lici'
+                          value={this.state.no_lici ? this.state.no_lici : this.state.fondos[0].no_lici}
+                          onChange={this.onChange}
+                          disabled
+                          ref={no_lici => this.inputNoLici = no_lici}
+                        />
+                        :
+                        <input
+                          className='field'
+                          id='no_lici'
+                          name='no_lici'
+                          value={this.state.no_lici ? this.state.no_lici : this.state.fondos[0].no_lici}
+                          onChange={this.onChange}
+                          ref={no_lici => this.inputNoLici = no_lici}
+                        />
+                      }
+                    </div>
+                    <div className='div-con'>
+                      <p className='p-label'>Requisición</p>
+                      {(realizo === 'KARINA' || realizo === 'LILIA' || realizo === 'CENELY' || realizo === 'HECTOR' || realizo === 'OMAR') ?
+                        <input
+                          className='field'
+                          id='requisicion'
+                          name='requisicion'
+                          value={this.state.requisicion ? this.state.requisicion : this.state.fondos[0].requisicion}
+                          onChange={this.onChange}
+                          disabled
+                          ref={requisicion => this.inputRequisicion = requisicion}
+                        />
+                        :
+                        <input
+                          className='field'
+                          id='requisicion'
+                          name='requisicion'
+                          value={this.state.requisicion ? this.state.requisicion : this.state.fondos[0].requisicion}
+                          onChange={this.onChange}
+                          ref={requisicion => this.inputRequisicion = requisicion}
+                        />
+                      }
+                    </div>
+                  </div>
+                  <div className='div-f2'>
+                    <div className='div-con'>
+                      <p className='p-label'>Pedido</p>
+                      {(realizo === 'KARINA' || realizo === 'LILIA' || realizo === 'CENELY' || realizo === 'HECTOR' || realizo === 'OMAR') ?
+                        <input
+                          className='field'
+                          id='pedido'
+                          name='pedido'
+                          value={this.state.pedido ? this.state.pedido : this.state.fondos[0].pedido}
+                          onChange={this.onChange}
+                          disabled
+                          ref={pedido => this.inputPedido = pedido}
+                        />
+                        :
+                        <input
+                          className='field'
+                          id='pedido'
+                          name='pedido'
+                          value={this.state.pedido ? this.state.pedido : this.state.fondos[0].pedido}
+                          onChange={this.onChange}
+                          ref={pedido => this.inputPedido = pedido}
+                        />
+                      }
+                    </div>
+                    <div className='div-con'>
+                      <p className='p-label'>Poliza</p>
+                      {(realizo === 'KARINA' || realizo === 'LILIA' || realizo === 'CENELY' || realizo === 'HECTOR' || realizo === 'OMAR') ?
+                        <input
+                          className='field'
+                          id='poliza'
+                          name='poliza'
+                          value={this.state.poliza ? this.state.poliza : this.state.fondos[0].poliza}
+                          onChange={this.onChange}
+                          disabled
+                          ref={poliza => this.inputPoliza = poliza}
+                        />
+                        :
+                        <input
+                          className='field'
+                          id='poliza'
+                          name='poliza'
+                          value={this.state.poliza ? this.state.poliza : this.state.fondos[0].poliza}
+                          onChange={this.onChange}
+                          ref={poliza => this.inputPoliza = poliza}
+                        />
+                      }
+                    </div>
+                  </div>
+                </Paper>
+                <Paper className='paper-pm'>
+                  <div className='div-con-f'>Pago CFE</div>
+                  <div className='div-f2'>
+                    <div className='div-con'>
+                      <p className='p-label'>Cta CFE</p>
+                      {(realizo === 'KARINA' || realizo === 'LILIA' || realizo === 'CENELY' || realizo === 'HECTOR' || realizo === 'OMAR') ?
+                        <input
+                          className='field'
+                          id='cfe'
+                          name='cfe'
+                          value={this.state.cfe ? this.state.cfe : this.state.fondos[0].cfe}
+                          onChange={this.onChange}
+                          disabled
+                          ref={cfe => this.inputCfe = cfe}
+                        />
+                        :
+                        <input
+                          className='field'
+                          id='cfe'
+                          name='cfe'
+                          value={this.state.cfe ? this.state.cfe : this.state.fondos[0].cfe}
+                          onChange={this.onChange}
+                          ref={cfe => this.inputCfe = cfe}
+                        />
+                      }
+                    </div>
+                    <div className='div-con'>
+                      <p className='p-label'>Numero de Servicio CFE</p>
+                      {(realizo === 'KARINA' || realizo === 'LILIA' || realizo === 'CENELY' || realizo === 'HECTOR' || realizo === 'OMAR') ?
+                        <input
+                          className='field'
+                          id='nscfe'
+                          name='nscfe'
+                          value={this.state.nscfe ? this.state.nscfe : this.state.fondos[0].nscfe}
+                          onChange={this.onChange}
+                          disabled
+                          ref={nscfe => this.inputNscfe = nscfe}
+                        />
+                        :
+                        <input
+                          className='field'
+                          id='nscfe'
+                          name='nscfe'
+                          value={this.state.nscfe ? this.state.nscfe : this.state.fondos[0].nscfe}
+                          onChange={this.onChange}
+                          ref={nscfe => this.inputNscfe = nscfe}
+                        />
+                      }
+                    </div>
+                  </div>
+                  <div className='div-cfe' style={{ width: '100%' }}>
+                    <p className='p-label'>Observaciones</p>
+                    {(realizo === 'KARINA' || realizo === 'LILIA' || realizo === 'CENELY' || realizo === 'HECTOR' || realizo === 'OMAR') ?
+                      <textarea
+                        className='field'
+                        id='observaciones'
+                        name='observaciones'
+                        value={this.state.observaciones ? this.state.observaciones : this.state.fondos[0].observaciones}
+                        onChange={this.onChange}
+                        disabled
+                        ref={observaciones => this.inputObservaciones = observaciones}
+                      />
+                      :
+                      <textarea
+                        className='field'
+                        id='observaciones'
+                        name='observaciones'
+                        value={this.state.observaciones ? this.state.observaciones : this.state.fondos[0].observaciones}
+                        onChange={this.onChange}
+                        ref={observaciones => this.inputObservaciones = observaciones}
+                      />
+                    }
+                  </div>
+                </Paper>
+              </Grid>
             </Grid>
-            {(realizo === 'MIGUEL' || realizo === 'TERESA' || realizo === 'MARCOS' || realizo === 'ELOY' || realizo === 'MARTHA') &&
-            <Grid className='grid2-cont'>
-              <Paper className='paper-p'>
-                <div className='div-con-f'>Licitación</div>
-                <div className='div-f2'>
-                  <div className='div-con'>
-                    <p className='p-label'>Numero de Licitación</p>
-                    <input
-                      className='field'
-                      id='no_lici'
-                      name='no_lici'
-                      onChange={this.onChange}
-                      ref='no_lici'
-                    />
-                  </div>
-                  <div className='div-con'>
-                    <p className='p-label'>Requisición</p>
-                    <input
-                      className='field'
-                      id='requisicion'
-                      name='requisicion'
-                      onChange={this.onChange}
-                      ref='requisicion'
-                    />
-                  </div>
-                </div>
-                <div className='div-f2'>
-                  <div className='div-con'>
-                    <p className='p-label'>Pedido</p>
-                    <input
-                      className='field'
-                      id='pedido'
-                      name='pedido'
-                      onChange={this.onChange}
-                      ref='pedido'
-                    />
-                  </div>
-                  <div className='div-con'>
-                    <p className='p-label'>Poliza</p>
-                    <input
-                      className='field'
-                      id='poliza'
-                      name='poliza'
-                      onChange={this.onChange}
-                      ref='poliza'
-                    />
-                  </div>
-                </div>
-              </Paper>
-              <Paper className='paper-pm'>
-                <div className='div-con-f'>Pago CFE</div>
-                <div className='div-f2'>
-                  <div className='div-con'>
-                    <p className='p-label'>Cta CFE</p>
-                    <input
-                      className='field'
-                      id='cfe'
-                      name='cfe'
-                      onChange={this.onChange}
-                      ref='cfe'
-                    />
-                  </div>
-                  <div className='div-con'>
-                    <p className='p-label'>Numero de Servicio CFE</p>
-                    <input
-                      className='field'
-                      id='nscfe'
-                      name='nscfe'
-                      onChange={this.onChange}
-                      ref='nscfe'
-                    />
-                  </div>
-                </div>
-                <div className='div-cfe' style={{ width: '100%' }}>
-                  <p className='p-label'>Observaciones</p>
-                  <textarea
-                    className='field'
-                    id='observaciones'
-                    name='observaciones'
-                    onChange={this.onChange}
-                    ref='observaciones'
-                  />
-                </div>
-              </Paper>
-            </Grid>}
-          </Grid>
-          <div className='div-content-fab'>
-            <Fab color='primary' aria-label='add' style={{ background: 'green' }} type='submit'>
-              <CheckIcon />
-            </Fab>
-          </div>
-        </form>
+            <div className='div-content-fab'>
+              <Fab color='primary' aria-label='add' style={{ background: 'green' }} onClick={this.update}>
+                <CheckIcon />
+              </Fab>
+            </div>
+          </form>
+        }
       </div>
     )
   }

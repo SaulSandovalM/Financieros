@@ -3,6 +3,7 @@ import firebase from '../../../Firebase'
 import { NumberAsString } from './NumerosLetras'
 import Fab from '@material-ui/core/Fab'
 import CheckIcon from '@material-ui/icons/Check'
+import SaveIcon from '@material-ui/icons/Save'
 import Paper from '@material-ui/core/Paper'
 import Grid from '@material-ui/core/Grid'
 import TextField from '@material-ui/core/TextField'
@@ -17,7 +18,7 @@ import FormControl from '@material-ui/core/FormControl'
 import Select from '@material-ui/core/Select'
 import Chip from '@material-ui/core/Chip'
 import { Link } from 'react-router-dom'
-  // import CurrencyFormat from 'react-currency-format'
+import CurrencyFormat from 'react-currency-format'
 
 export default class Fondos extends Component {
   constructor (props) {
@@ -28,9 +29,7 @@ export default class Fondos extends Component {
       email = user.email
     }
     let admin
-    if (email === 'administrador@procu.com') {
-      admin = 'ADMIN'
-    } else if (email === 'nayra@procuraduria.com') {
+    if (email === 'nayra@procuraduria.com') {
       admin = 'NAYRA'
     } else if (email === 'laura@procuraduria.com') {
       admin = 'LAURA'
@@ -127,23 +126,9 @@ export default class Fondos extends Component {
       snap.forEach((child) => {
         fondos.push({
           fondo: child.val().fondo,
-          fecha: child.val().fecha,
-          tipo_doc: child.val().tiṕo_doc,
-          oficio_aut: child.val().oficio_aut,
-          no_oficio: child.val().no_oficio,
-          no_lici: child.val().no_lici,
+          tipo_doc: child.val().tipo_doc,
           importe: child.val().importe,
-          desc: child.val().desc,
-          beneficiario: child.val().beneficiario,
           realizo: child.val().realizo,
-          requisicion: child.val().requisicion,
-          pedido: child.val().pedido,
-          no_proyecto: child.val().no_proyecto,
-          poliza: child.val().poliza,
-          cfe: child.val().cfe,
-          nscfe: child.val().nscfe,
-          observaciones: child.val().observaciones,
-          numCompro: child.val().numCompro,
           id: child.key
         })
       })
@@ -312,6 +297,12 @@ export default class Fondos extends Component {
     'A1D11, Centralizada'
   ]
 
+  onChange = (e) => {
+    const state = this.state
+    state[e.target.name] = e.target.value
+    this.setState(state)
+  }
+
   render () {
     const { fondo, fecha, tipo_doc, oficio_aut, no_oficio, no_lici, importe, desc,
       beneficiario, realizo, requisicion, pedido, no_proyecto, poliza, cfe, nscfe,
@@ -326,13 +317,11 @@ export default class Fondos extends Component {
       }
     })
 
-    console.log(this.state.comprometidosp)
-
     return (
       <div>
         <form className='form-fondo' onSubmit={this.crearFondo.bind(this)}>
           <Grid className='grid-w'>
-            {/* <Grid className='grid-w2'>
+            <Grid className='grid-w2'>
               <Paper className='paper-p'>
                 <div className='div-con-f'>Buscador de Fondos</div>
                 <div className='head-search'>
@@ -346,7 +335,7 @@ export default class Fondos extends Component {
                     <p className='inp-p-t'>Importe</p>
                   </div>
                   <div className='inp-sea-cont'>
-                    <p className='inp-p-t'>Nompre R.</p>
+                    <p className='inp-p-t'>Nombre R.</p>
                   </div>
                   <div className='inp-sea-cont'>
                     <p className='inp-p-t'>Editar F.</p>
@@ -365,13 +354,13 @@ export default class Fondos extends Component {
                       className='field'
                       name='searchF'
                       value={this.state.searchF}
-                      onChange={this.handleChange.bind(this)}
+                      onChange={this.onChange}
                     />
                   </div>
                   <div className='cont-w-data'>
                     {this.state.fondos.map(fondos =>
                       <div className='cont-map-fondo'>
-                        {parseInt(this.state.searchF, 10) === fondos.fondo &&
+                        {this.state.searchF === fondos.fondo &&
                           <div className='cont-map-data'>
                             <div className='data-w-search'>
                               <p className='data-m-f'>{fondos.tipo_doc}</p>
@@ -389,13 +378,13 @@ export default class Fondos extends Component {
                               <p className='data-m-f'>{fondos.realizo}</p>
                             </div>
                             <div className='data-w-search'>
-                              <Link className='data-m-f' to={`/FondoE/${fondos.key}`}>Editar</Link>
+                              <Link className='data-m-f' to={`/FondoE/${fondos.id}`}>Editar</Link>
                             </div>
                             <div className='data-w-search'>
-                              <Link className='data-m-f' to={`/Comprometidos/${fondos.key}`}>Editar</Link>
+                              <Link className='data-m-f' to={`/Comprometidos/${fondos.id}`}>Editar</Link>
                             </div>
                             <div className='data-w-search'>
-                              <Link className='data-m-f' to={`/Oficios/${fondos.key}`}>Imprimir</Link>
+                              <Link className='data-m-f' to={`/Oficios/${fondos.id}`}>Imprimir</Link>
                             </div>
                           </div>
                         }
@@ -404,7 +393,7 @@ export default class Fondos extends Component {
                   </div>
                 </div>
               </Paper>
-            </Grid> */}
+            </Grid>
             <Grid className='grid-w2'>
               <Paper className='paper-pm'>
                 <div className='div-con-f'>Fondos</div>
@@ -658,7 +647,6 @@ export default class Fondos extends Component {
                 </div>
               </Paper>
             </Grid>
-            {(realizo === 'MIGUEL' || realizo === 'TERESA' || realizo === 'MARCOS' || realizo === 'ELOY' || realizo === 'MARTHA' || realizo === 'KARINA' || realizo === 'HECTOR' || realizo === 'LILIA' || realizo === 'CENELY' || realizo === 'OMAR') &&
             <Grid className='grid2-cont'>
               <Paper className='paper-p'>
                 <div className='div-con-f'>Licitación</div>
@@ -833,15 +821,21 @@ export default class Fondos extends Component {
                   }
                 </div>
               </Paper>
-            </Grid>}
+            </Grid>
           </Grid>
           <div className='div-content-fab'>
-            <Fab color='primary' aria-label='add' style={{ background: 'green' }} type='submit'>
-              <CheckIcon />
-            </Fab>
-            <Link to={`/Comprometidos/${this.state.comprometidosp}`}>
-              prueba
-            </Link>
+            {!this.state.comprometidosp &&
+              <Fab color='primary' aria-label='add' type='submit'>
+                <SaveIcon />
+              </Fab>
+            }
+            {this.state.comprometidosp &&
+              <Link to={`/Comprometidos/${this.state.comprometidosp}`}>
+                <Fab color='primary' aria-label='add' style={{ background: '#00BB2D' }}>
+                  <CheckIcon />
+                </Fab>
+              </Link>
+            }
           </div>
         </form>
       </div>
