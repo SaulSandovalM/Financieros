@@ -478,8 +478,8 @@ export default class Comprometidos extends Component {
 
   render () {
     var URLactual = window.location
-    console.log(String(URLactual).slice(36))
-    this.state.urlfire = String(URLactual).slice(36)
+    console.log(String(URLactual).substr(-20))
+    this.state.urlfire = String(URLactual).slice(20)
     var user = firebase.auth().currentUser
     var email
     if (user != null) {

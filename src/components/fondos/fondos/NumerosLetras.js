@@ -157,12 +157,10 @@ export const NumberAsString = (num, centavos = true, currency) => {
     letrasMonedaCentavoSingular: currency.centSingular || '/100 M.N.'
   }
 
-  console.log(data.centavos)
-
   if (data.centavos < 10) {
-    console.log(data.letrasCentavos = '0' + data.centavos + '/100 M.N.')
+    data.letrasCentavos = '0' + data.centavos + '/100 M.N.'
   } else {
-    console.log(data.letrasCentavos = '' + data.centavos + '/100 M.N.')
+    data.letrasCentavos = '' + data.centavos + '/100 M.N.'
   }
 
   if (data.enteros === 0) {
