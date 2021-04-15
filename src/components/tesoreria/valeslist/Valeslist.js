@@ -74,15 +74,16 @@ export default class Valeslist extends Component {
         var xml = new XMLParser().parseFromString(event.target.result)
         const data = {
           'total': xml.attributes['Total'],
-          'subtotal': xml.attributes['SubTotal'] ? xml.attributes['SubTotal'] : 0,
+          'subtotal': xml.attributes['SubTotal'] ? xml.attributes['SubTotal'] : (parseFloat(xml.attributes['Total']) + parseFloat(xml.children['3'].attributes['TotalImpuestosRetenidos'])) - parseFloat(xml.children['3'].attributes['TotalImpuestosTrasladados']),
           'folio': xml.attributes['Folio'] ? xml.attributes['Folio'] : '0',
           'nombre': xml.children['0'].attributes['Nombre'],
-          'importe': xml.children['2'].children['0'].attributes['Importe'],
+          'importe': xml.attributes['SubTotal'] ? xml.attributes['SubTotal'] : (parseFloat(xml.attributes['Total']) + parseFloat(xml.children['3'].attributes['TotalImpuestosRetenidos'])) - parseFloat(xml.children['3'].attributes['TotalImpuestosTrasladados']),
           'iva': xml.children['3'].attributes['TotalImpuestosTrasladados'],
           'isr': xml.children['3'].attributes['TotalImpuestosRetenidos'] ? xml.children['3'].attributes['TotalImpuestosRetenidos'] : 0,
           'fecha': xml.children['4'].children['0'].attributes['FechaTimbrado'],
           'uuid': xml.children['4'].children['0'].attributes['UUID'],
-          'estatus': 'sin asignar'
+          'estatus': 'sin asignar',
+          'tipo': 'revolvente'
         }
         console.log(data)
         fetch(xml).then(res => res.text()).then(xml => {

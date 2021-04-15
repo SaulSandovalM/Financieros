@@ -22,6 +22,7 @@ import firebase from '../../../Firebase'
 import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown'
 import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp'
 import Dropzone from 'react-dropzone'
+import { Link } from 'react-router-dom'
 
 export default class Comprometidos extends Component {
   constructor (props) {
@@ -140,7 +141,7 @@ export default class Comprometidos extends Component {
     })
   }
 
-  listenForXml = (itemsRefXml) => {
+  listenForXmlR = (itemsRefXml) => {
     itemsRefXml.on('value', (snap) => {
       var xml = []
       snap.forEach((child) => {
@@ -155,6 +156,7 @@ export default class Comprometidos extends Component {
           total: child.val().total,
           uuid: child.val().uuid,
           estatus: child.val().estatus,
+          tipo: child.val().tipo,
           id: child.key
         })
       })
@@ -164,53 +166,72 @@ export default class Comprometidos extends Component {
     })
   }
 
-  listenFondos = (itemsRefComprometidos) => {
-    itemsRefComprometidos.on('value', (snap) => {
-      const firebasedata = snap.val()
+  listenFondos = (itemsRefFondos) => {
+    itemsRefFondos.on('value', (snap) => {
+      var comprometidosAgregados = []
+      snap.forEach((child) => {
+        comprometidosAgregados.push({
+          partida: child.val().partida,
+          presupuestal: child.val().presupuestal,
+          area: child.val().area,
+          fecha: child.val().fecha,
+          importe_comp: child.val().importe_comp,
+          iva: child.val().iva,
+          isr: child.val().isr,
+          total: child.val().total,
+          año: child.val().año,
+          ramo: child.val().rm,
+          ur: child.val().ur,
+          up: child.val().up,
+          rubro: child.val().rubro,
+          tg: child.val().tg,
+          npro: child.val().npro,
+          np: child.val().np,
+          f: child.val().f,
+          fu: child.val().fu,
+          sf: child.val().sf,
+          eje: child.val().eje,
+          s: child.val().s,
+          prog: child.val().prog,
+          sp: child.val().sp,
+          obj: child.val().obj,
+          proy: child.val().proy,
+          est: child.val().est,
+          ben: child.val().ben,
+          eg: child.val().eg,
+          comprobantes: child.val().comprobantes
+        })
+      })
       this.setState({
-        comprometidos: firebasedata.comprometido
+        comprometidosDos: comprometidosAgregados
       })
     })
   }
 
   componentDidMount () {
     const itemsRefXml = firebase.database().ref('xml/')
-    this.listenForXml(itemsRefXml)
+    this.listenForXmlR(itemsRefXml)
     const itemsRef = firebase.database().ref('presupuesto/')
     this.listenForItems(itemsRef)
-    //var dir = history.location.pathname.slice(15)
-    const itemsRefComprometidos = firebase.database().ref(`fondos/${this.state.urlfire}`) // ${dir}
-    this.listenFondos(itemsRefComprometidos)
-  }
-
-  onChange = (e) => {
-    const state = this.state
-    state[e.target.name] = e.target.value
-    this.setState(state)
-  }
-
-  handleChange (event) {
-    this.setState({ [event.target.name]: event.target.value })
+    const itemsRefFondos = firebase.database().ref(`fondos/${this.state.urlfire}/comprometido`)
+    console.log(itemsRefFondos)
+    this.listenFondos(itemsRefFondos)
   }
 
   upsearch (event) {
-    this.setState({ search: event.target.value.substr(0, 20) })
+    this.setState({ search: event.target.value })
   }
 
   updateSearch (event) {
-    this.setState({ partida: event.target.value.substr(0, 20) })
+    this.setState({ partida: event.target.value })
   }
 
   updateSearch2 (event) {
-    this.setState({ up: event.target.value.substr(0, 7) })
+    this.setState({ up: event.target.value })
   }
 
   updateSearch3 (event) {
-    this.setState({ rubro: event.target.value.substr(0, 7) })
-  }
-
-  updateSearch4 (event) {
-    this.setState({ municipio: event.target.value })
+    this.setState({ rubro: event.target.value })
   }
 
   updateSearch5 (event) {
@@ -221,25 +242,23 @@ export default class Comprometidos extends Component {
     for (var i = 0; i < event.target.files.length; i++) {
       const file = event.target.files[i]
       var xml = file
-      console.log(xml)
       var reader = new FileReader()
       reader.onload = function (event) {
         var XMLParser = require('react-xml-parser')
         var xml = new XMLParser().parseFromString(event.target.result)
-        console.log(xml)
         let data = {
           'total': xml.attributes['Total'],
-          'subtotal': xml.attributes['SubTotal'] ? 0 : parseFloat(xml.attributes['Total']) - parseFloat(xml.children['3'].attributes['TotalImpuestosTrasladados']),
+          'subtotal': xml.attributes['SubTotal'] ? xml.attributes['SubTotal'] : (parseFloat(xml.attributes['Total']) + parseFloat(xml.children['3'].attributes['TotalImpuestosRetenidos'])) - parseFloat(xml.children['3'].attributes['TotalImpuestosTrasladados']),
           'folio': xml.attributes['Folio'] ? xml.attributes['Folio'] : '0',
           'nombre': xml.children['0'].attributes['Nombre'],
-          'importe': xml.children['2'].children['0'].attributes['Importe'],
+          'importe': xml.attributes['SubTotal'] ? xml.attributes['SubTotal'] : (parseFloat(xml.attributes['Total']) + parseFloat(xml.children['3'].attributes['TotalImpuestosRetenidos'])) - parseFloat(xml.children['3'].attributes['TotalImpuestosTrasladados']),
           'iva': xml.children['3'].attributes['TotalImpuestosTrasladados'],
           'isr': xml.children['3'].attributes['TotalImpuestosRetenidos'] ? xml.children['3'].attributes['TotalImpuestosRetenidos'] : 0,
           'fecha': xml.children['4'].children['0'].attributes['FechaTimbrado'],
           'uuid': xml.children['4'].children['0'].attributes['UUID'],
-          'estatus': 'sin asignar'
+          'estatus': 'sin asignar',
+          'tipo': 'revolvente'
         }
-        console.log(data)
         fetch(xml).then(res => res.text()).then(xml => {
           fetch('https://financieros-78cb0.firebaseio.com/xml.json', {
             method: 'POST',
@@ -257,22 +276,24 @@ export default class Comprometidos extends Component {
 
   handleOnChange2 (event) {
     for (var i = 0; i < event.target.files.length; i++) {
-      const file = event.target.files[0]
+      const file = event.target.files[i]
       var xml = file
       var reader = new FileReader()
       reader.onload = function (event) {
         var XMLParser = require('react-xml-parser')
         var xml = new XMLParser().parseFromString(event.target.result)
-        const data = {
+        let data = {
           'total': xml.attributes['Total'],
-          'subtotal': xml.attributes['SubTotal'] ? xml.attributes['SubTotal'] : 0,
+          'subtotal': xml.attributes['SubTotal'] ? xml.attributes['SubTotal'] : (parseFloat(xml.attributes['Total']) + parseFloat(xml.children['3'].attributes['TotalImpuestosRetenidos'])) - parseFloat(xml.children['3'].attributes['TotalImpuestosTrasladados']),
           'folio': xml.attributes['Folio'] ? xml.attributes['Folio'] : '0',
           'nombre': xml.children['0'].attributes['Nombre'],
           'importe': xml.children['2'].children['0'].attributes['Importe'],
           'iva': xml.children['3'].attributes['TotalImpuestosTrasladados'],
           'isr': xml.children['3'].attributes['TotalImpuestosRetenidos'] ? xml.children['3'].attributes['TotalImpuestosRetenidos'] : 0,
           'fecha': xml.children['4'].children['0'].attributes['FechaTimbrado'],
-          'uuid': xml.children['4'].children['0'].attributes['UUID']
+          'uuid': xml.children['4'].children['0'].attributes['UUID'],
+          'estatus': 'sin asignar',
+          'tipo': 'directo'
         }
         fetch(xml).then(res => res.text()).then(xml => {
           fetch('https://financieros-78cb0.firebaseio.com/xml.json', {
@@ -360,6 +381,7 @@ export default class Comprometidos extends Component {
     const { area, total, iva, isr, importe } = this.state
     //var dir = history.location.pathname.slice(15)
     const wishRef = firebase.database().ref(`fondos/${this.state.urlfire}`) // ${dir}
+    console.log(wishRef)
     wishRef.once('value').then(snapshot => {
       var updatedWish = snapshot.val()
       updatedWish.comprometido.push(
@@ -419,7 +441,8 @@ export default class Comprometidos extends Component {
           subtotal: change.subtotal,
           total: change.total,
           uuid: change.uuid,
-          estatus: 'asignado'
+          estatus: 'asignado',
+          tipo: change.tipo
         }
     })
     firebase.database().ref('xml').update(prueba)
@@ -430,11 +453,6 @@ export default class Comprometidos extends Component {
       right: []
     })
     alert('Tu solicitud fue enviada.')
-  }
-
-  cambio = () => {
-    //var dir = history.location.pathname.slice(15)
-    //this.props.history.push(`/Oficios/${dir}`)
   }
 
   partida = ['','211001','211002','212001','212002','214001','215001','216001','217001','221001','221002','246001','246002','247001','249001','251001','253001','254001','255001','256001','261001','271001','272001','275001','291001','292001','311001','312001','313001','317001','318001','323002','334001','336001','336002','338001','351001','352001','355001','357001','358001','359001','361002','372001','375001','392006','394001']
@@ -478,21 +496,14 @@ export default class Comprometidos extends Component {
 
   render () {
     var URLactual = window.location
-    console.log(String(URLactual).substr(-20))
-    this.state.urlfire = String(URLactual).slice(20)
+    this.state.urlfire = String(URLactual).substr(-20)
     var user = firebase.auth().currentUser
     var email
     if (user != null) {
       email = user.email
     }
     let admin
-    if (email === 'administrador@procu.com') {
-      admin = 'ADMIN'
-    } else if (email === 'nayra@procuraduria.com') {
-      admin = 'NAYRA'
-    } else if (email === 'laura@procuraduria.com') {
-      admin = 'LAURA'
-    } else if (email === 'miguel@procuraduria.com') {
+    if (email === 'miguel@procuraduria.com') {
       admin = 'MIGUEL'
     } else if (email === 'teresa@procuraduria.com') {
       admin = 'TERESA'
@@ -556,7 +567,7 @@ export default class Comprometidos extends Component {
         return ( ( (xml.folio.indexOf(this.state.search) !== -1) ||
           (xml.nombre.indexOf(this.state.search) !== -1) ||
           (xml.fecha.indexOf(this.state.search) !== -1) ) &&
-          xml.estatus !== 'asignado' && xml.area !== 'Pago Directo')
+          xml.estatus !== 'asignado' && xml.tipo === 'revolvente')
       }
     )
 
@@ -565,7 +576,7 @@ export default class Comprometidos extends Component {
         return ( ( (xml.folio.indexOf(this.state.search) !== -1) ||
           (xml.nombre.indexOf(this.state.search) !== -1) ||
           (xml.fecha.indexOf(this.state.search) !== -1) ) &&
-          xml.estatus !== 'asignado' && xml.area === 'Pago Directo')
+          xml.estatus !== 'asignado' && xml.tipo === 'directo')
       }
     )
 
@@ -594,17 +605,11 @@ export default class Comprometidos extends Component {
       this.state.isr = totalImporteIsr.reduce(reducerIsr).toFixed(2)
 
       const importe = parseFloat(this.state.importe)
-      console.log(importe)
       const iva = parseFloat(this.state.iva)
-      console.log(iva)
       const isr = parseFloat(this.state.isr)
-      console.log(isr)
       const total = importe + iva - isr
-      console.log('Este es el total: ' + total)
       this.state.total = total.toFixed(2)
-      console.log('Este es el total con ceros: ' + this.state.total)
       this.state.contra = right
-      console.log(this.state.contra)
     }
 
     const customListLeft = (title, items) => (
@@ -620,7 +625,7 @@ export default class Comprometidos extends Component {
               <ListItemText className='list-align'><b>Fecha</b></ListItemText>
               <ListItemText className='list-align2'><b>Nombre</b></ListItemText>
             </ListItem>
-            {admin === 'MIGUEL' || admin === 'KARINA' || admin === 'HECTOR' || admin === 'LILIA' || admin === 'CENELY' || admin === 'OMAR' ?
+            {admin === 'MIGUEL' || admin === 'TERESA' || admin === 'ELOY' || admin === 'MARTHA' || admin === 'MARCOS' ?
             filterData.map((value) => {
               return (
                 <ListItem key={value} button onClick={handleToggle(value)}>
@@ -637,12 +642,12 @@ export default class Comprometidos extends Component {
                     :
                     <ListItemText className='list-align-i' primary={'$ ' + value.total} />
                   }
-                  <ListItemText className='list-align' primary={value.fecha} />
+                  <ListItemText className='list-align' primary={String(value.fecha).substr(0, 10)} />
                   <ListItemText className='list-align2' primary={value.nombre} />
                 </ListItem>
               )
             }) : null}
-            {admin === 'ADMIN' ?
+            {admin === 'KARINA' || admin === 'OMAR' || admin === 'LILIA' || admin === 'HECTOR' || admin === 'CENELY' ?
             filterData2.map((value) => {
               return (
                 <ListItem key={value} button onClick={handleToggle(value)}>
@@ -659,7 +664,7 @@ export default class Comprometidos extends Component {
                     :
                     <ListItemText className='list-align-i' primary={'$ ' + value.total} />
                   }
-                  <ListItemText className='list-align' primary={value.fecha} />
+                  <ListItemText className='list-align' primary={value.fecha.substr(0, 10)} />
                   <ListItemText className='list-align2' primary={value.nombre} />
                 </ListItem>
               )
@@ -696,7 +701,7 @@ export default class Comprometidos extends Component {
                     :
                     <ListItemText className='list-align-i' primary={'$ ' + value.total} />
                   }
-                  <ListItemText className='list-align' primary={value.fecha} />
+                  <ListItemText className='list-align' primary={value.fecha.substr(0, 10)} />
                   <ListItemText className='list-align2' primary={value.nombre} />
                 </ListItem>
               )
@@ -763,6 +768,7 @@ export default class Comprometidos extends Component {
             <Paper className='paper-content'>
               <TableHead>
                 <TableRow>
+                  <TableCell className='border-icon' />
                   <TableCell className='border-table2'>
                     <b className='font-tb'>Partida</b>
                   </TableCell>
@@ -791,6 +797,7 @@ export default class Comprometidos extends Component {
                 </TableRow>
               </TableHead>
               <TableBody className='table-row-c'>
+                <TableCell className='border-icon' />
                 <TableCell className='border-table2'>
                   <select
                     className='select-compro'
@@ -938,27 +945,32 @@ export default class Comprometidos extends Component {
                   </div>
                 )}
               </TableBody>
-              {this.state.comprometidos.map(comprometidos =>
-                comprometidos.partida ?
-                <TableRow key={comprometidos.name} className='table-row-c'>
+              { this.state.comprometidosDos !== undefined ? this.state.comprometidosDos.map(comprometido =>
+                comprometido.partida ?
+                <TableRow key={comprometido.name} className='table-row-c'>
+                  <TableCell className='border-icon'>
+                    <IconButton size='small' className='border-des'>
+                      <KeyboardArrowDownIcon />
+                    </IconButton>
+                  </TableCell>
                   <TableCell className='border-table2'>
                     <div className='font-tb'>
-                      {comprometidos.partida}
+                      {comprometido.partida}
                     </div>
                   </TableCell>
                   <TableCell className='border-table2'>
                     <div className='font-tb'>
-                      {comprometidos.presupuestal}
+                      {comprometido.presupuestal}
                     </div>
                   </TableCell>
                   <TableCell className='border-table2'>
                     <div className='font-tb'>
-                      {comprometidos.rubro}
+                      {comprometido.rubro}
                     </div>
                   </TableCell>
                   <TableCell className='border-table-area'>
                     <div className='font-tb'>
-                      {comprometidos.area}
+                      {comprometido.area}
                     </div>
                   </TableCell>
                   <TableCell className='border-table2'>
@@ -967,7 +979,7 @@ export default class Comprometidos extends Component {
                       displayType='text'
                       prefix=' $ '
                       thousandSeparator
-                      value={comprometidos.importe_comp}
+                      value={comprometido.importe_comp}
                     />
                   </TableCell>
                   <TableCell className='border-table2'>
@@ -976,7 +988,7 @@ export default class Comprometidos extends Component {
                       displayType='text'
                       prefix=' $ '
                       thousandSeparator
-                      value={comprometidos.iva}
+                      value={comprometido.iva}
                     />
                   </TableCell>
                   <TableCell className='border-table2'>
@@ -985,7 +997,7 @@ export default class Comprometidos extends Component {
                       displayType='text'
                       prefix=' $ '
                       thousandSeparator
-                      value={comprometidos.isr}
+                      value={comprometido.isr}
                     />
                   </TableCell>
                   <TableCell className='border-table2'>
@@ -995,7 +1007,7 @@ export default class Comprometidos extends Component {
                       displayType='text'
                       prefix=' $ '
                       thousandSeparator
-                      value={(parseInt(comprometidos.importe_comp) + parseInt(comprometidos.iva) - parseInt(comprometidos.isr)).toFixed(2)}
+                      value={(parseInt(comprometido.importe_comp) + parseInt(comprometido.iva) - parseInt(comprometido.isr)).toFixed(2)}
                     />
                   </TableCell>
                   <TableCell className='border-icon'>
@@ -1007,7 +1019,7 @@ export default class Comprometidos extends Component {
                     </IconButton>
                   </TableCell>
                 </TableRow> : null
-              )}
+              ): null }
             </Paper>
           </Grid>
         </Grid>
@@ -1019,7 +1031,7 @@ export default class Comprometidos extends Component {
             variant='extended'
           >
             <AddIcon style={{ marginRight: '6px' }} />
-            {(admin === 'MIGUEL' || admin === 'KARINA' || admin === 'HECTOR' || admin === 'OMAR' || admin === 'CENELY' || admin === 'LILIA') &&
+            {(admin === 'MIGUEL' || admin === 'OMAR') &&
               <Dropzone
                 style={{
                   width: '100%',
@@ -1030,7 +1042,7 @@ export default class Comprometidos extends Component {
                 Agregar XML
               </Dropzone>
             }
-            {(admin === 'ADMIN') &&
+            {(admin === 'KARINA' || admin === 'HECTOR' || admin === 'OMAR' || admin === 'CENELY' || admin === 'LILIA') &&
               <Dropzone
                 style={{
                   width: '100%',
@@ -1042,15 +1054,16 @@ export default class Comprometidos extends Component {
               </Dropzone>
             }
           </Fab>
-          <Fab
-            color='primary'
-            style={{ background: 'green' }}
-            onClick={this.cambio}
-            variant='extended'
-          >
-            <CheckIcon style={{ marginRight: '6px' }} />
-            Finalizar
-          </Fab>
+          <Link to={`/Oficios/${this.state.urlfire}`} style={{ textDecoration: 'none' }}>
+            <Fab
+              color='primary'
+              style={{ background: 'green' }}
+              variant='extended'
+            >
+              <CheckIcon style={{ marginRight: '6px' }} />
+              Finalizar
+            </Fab>
+          </Link>
         </div>
       </div>
     )
