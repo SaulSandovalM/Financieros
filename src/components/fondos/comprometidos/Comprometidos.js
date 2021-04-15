@@ -259,6 +259,7 @@ export default class Comprometidos extends Component {
           'estatus': 'sin asignar',
           'tipo': 'revolvente'
         }
+        console.log(xml)
         fetch(xml).then(res => res.text()).then(xml => {
           fetch('https://financieros-78cb0.firebaseio.com/xml.json', {
             method: 'POST',

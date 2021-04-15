@@ -55,10 +55,9 @@ export default class Oficios extends Component {
   }
 
   componentDidMount () {
-    //var dir = history.location.pathname.slice(9)
-    const itemsRefFondo = firebase.database().ref(`fondos/falta`) // ${dir}
+    const itemsRefFondo = firebase.database().ref(`fondos/${this.state.urlfire}`)
     this.listenFondo(itemsRefFondo)
-    const itemsRefComprometidos = firebase.database().ref(`fondos/falta/comprometido`) // ${dir}
+    const itemsRefComprometidos = firebase.database().ref(`fondos/${this.state.urlfire}/comprometido`)
     this.listenComprometidos(itemsRefComprometidos)
   }
 
@@ -67,6 +66,9 @@ export default class Oficios extends Component {
   }
 
   render () {
+    var numeroTablas = 23 - parseInt(this.state.comprometidos.length)
+    var URLactual = window.location
+    this.state.urlfire = String(URLactual).substr(-20)
     var today = new Date()
     var meses = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre']
     var diasSemana = ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado']
@@ -87,6 +89,33 @@ export default class Oficios extends Component {
       let proyect = String(cad[i])
       var proy = proyect.split(' ')[0]
       proyectof.push(proy)
+    }
+
+    for (let i = parseInt(this.state.comprometidos.length); i < 23; i++) {
+      var column =
+        <tr>
+          <td className='all-tablai' />
+          <td className='all-tablai' />
+          <td className='all-tablai' />
+          <td className='all-tablai' />
+          <td className='all-tablai' />
+          <td className='all-tablai' />
+          <td className='all-tablai' />
+          <td className='all-tablai' />
+          <td className='all-tablai' />
+          <td className='all-tablai' />
+          <td className='all-tablai' />
+          <td className='all-tablai' />
+          <td className='all-tablai' />
+          <td className='all-tablai' />
+          <td className='all-tablai' />
+          <td className='all-tablai' />
+          <td className='all-tablai' />
+          <td className='all-tablai' />
+          <td className='all-tablai' />
+          <td className='all-tablai' />
+          <td className='all-tablai' />
+        </tr>
     }
 
     return (
@@ -3477,489 +3506,31 @@ export default class Oficios extends Component {
                       </td>
                     </tr> : null
                   )}
-                  <tr>
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                  </tr>
-                  <tr>
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                  </tr>
-                  <tr>
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                  </tr>
-                  <tr>
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                  </tr>
-                  <tr>
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                  </tr>
-                  <tr>
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                  </tr>
-                  <tr>
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                  </tr>
-                  <tr>
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                  </tr>
-                  <tr>
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                  </tr>
-                  <tr>
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                  </tr>
-                  <tr>
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                  </tr>
-                  <tr>
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                  </tr>
-                  <tr>
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                  </tr>
-                  <tr>
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                  </tr>
-                  <tr>
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                  </tr>
-                  <tr>
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                  </tr>
-                  <tr>
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                  </tr>
-                  <tr>
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                  </tr>
-                  <tr>
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                  </tr>
-                  <tr>
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                  </tr>
-                  <tr>
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                    <td className='all-tablai' />
-                  </tr>
+                  {column.props.children.map(item =>
+                    <tr>
+                      <td className='all-tablai' />
+                      <td className='all-tablai' />
+                      <td className='all-tablai' />
+                      <td className='all-tablai' />
+                      <td className='all-tablai' />
+                      <td className='all-tablai' />
+                      <td className='all-tablai' />
+                      <td className='all-tablai' />
+                      <td className='all-tablai' />
+                      <td className='all-tablai' />
+                      <td className='all-tablai' />
+                      <td className='all-tablai' />
+                      <td className='all-tablai' />
+                      <td className='all-tablai' />
+                      <td className='all-tablai' />
+                      <td className='all-tablai' />
+                      <td className='all-tablai' />
+                      <td className='all-tablai' />
+                      <td className='all-tablai' />
+                      <td className='all-tablai' />
+                      <td className='all-tablai' />
+                    </tr>
+                  )}
                   <tr>
                     <td className='all-tablai border-color' />
                     <td className='all-tablai border-color' />
