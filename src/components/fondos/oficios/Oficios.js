@@ -66,7 +66,6 @@ export default class Oficios extends Component {
   }
 
   render () {
-    var numeroTablas = 23 - parseInt(this.state.comprometidos.length)
     var URLactual = window.location
     this.state.urlfire = String(URLactual).substr(-20)
     var today = new Date()
@@ -91,31 +90,10 @@ export default class Oficios extends Component {
       proyectof.push(proy)
     }
 
+    var prueba = new Array(23)
     for (let i = parseInt(this.state.comprometidos.length); i < 23; i++) {
-      var column =
-        <tr>
-          <td className='all-tablai' />
-          <td className='all-tablai' />
-          <td className='all-tablai' />
-          <td className='all-tablai' />
-          <td className='all-tablai' />
-          <td className='all-tablai' />
-          <td className='all-tablai' />
-          <td className='all-tablai' />
-          <td className='all-tablai' />
-          <td className='all-tablai' />
-          <td className='all-tablai' />
-          <td className='all-tablai' />
-          <td className='all-tablai' />
-          <td className='all-tablai' />
-          <td className='all-tablai' />
-          <td className='all-tablai' />
-          <td className='all-tablai' />
-          <td className='all-tablai' />
-          <td className='all-tablai' />
-          <td className='all-tablai' />
-          <td className='all-tablai' />
-        </tr>
+      console.log(i)
+      prueba[i] = i
     }
 
     return (
@@ -1898,13 +1876,15 @@ export default class Oficios extends Component {
           </div>
 
           <div className='pppdf-subdad' style={{ zIndex: '2', position: 'absolute' }} ref={el => (this.rfr = el)}>
-            <div className='fondo-procu' style={{ display: 'flex', justifyContent: 'space-between', marginTop: '20px' }}>
-              <div style={{ display: 'flex', justifyContent: 'center', flexDirection: 'column' }}>
-                <img className='pgjh' style={{ marginLeft: '-20px', width: 'auto' }} src={lpgjh} alt='' />
+            <div className='header-ofi'>
+              <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                <div style={{ display: 'flex', justifyContent: 'center', flexDirection: 'column' }}>
+                  <img className='pgjh' style={{ marginLeft: '-20px', width: 'auto' }} src={lpgjh} alt='' />
+                </div>
+                <img className='ime' src={logo2} alt='' />
               </div>
-              <img className='ime' src={logo2} alt='' />
             </div>
-            <div>
+            <div style={{ paddingTop: '90px' }}>
               Dirección General de Administración y Finanzas
             </div>
             <div className='no-oficio'>
@@ -1940,7 +1920,8 @@ export default class Oficios extends Component {
                 $ {this.state.fondo.importe} ({(NumberAsString(this.state.fondo.importe))}),
                 a nombre de {this.state.fondo.beneficiario} para el trámite de
                 Reembolso de Fondo Revolvente, con cargo al
-                proyecto{this.state.comprometidos.map(item => item.proy ? ', ' + item.proy : null)} para {/* falta confirmar */}
+                proyecto{this.state.comprometidos.map(item => item.proy ? ', ' + item.proy : null)}
+                {this.state.comprometidos.slice(0, 2).map(item => item.np ? ', ' + item.np : null)} para
                 otorgado en el oficio de autorización {this.state.fondo.oficio_aut} del
                 Ejercicio 2021, a la Procuraduria General de Justicia del estado de Hidalgo.
               </p>
@@ -1958,56 +1939,71 @@ export default class Oficios extends Component {
                 </div>
               </div>
             </div>
-            <div className='ccp'>
-              <p className='text'>C.C.P...- Expediente<br />Minutario<br />LMHV/NRL/macht</p>
-            </div>
-            <div>
-              <p align='right' style={{ fontSize: '12px' }}>No. de Fondo {this.state.fondo.fondo}</p>
+            <div style={{ bottom: '0', position: 'fixed', height: '100px', width: '80%' }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', flexDirection: 'row' }}>
+                <div>
+                  <p style={{ color: 'black', fontSize: '12px' }}>C.C.P...- Expediente<br />Minutario<br />LMHV/NRL/macht</p>
+                </div>
+                <div style={{ display: 'flex', justifyContent: 'flex-end', flexDirection: 'column' }}>
+                  <p style={{ fontSize: '12px' }}>No. de Fondo {this.state.fondo.fondo}</p>
+                </div>
+              </div>
             </div>
           </div>
 
-          <div className='subdad' ref={el => (this.rec = el)} style={{ zIndex: '2', position: 'absolute' }}>
-            <div className='bueno'>
-              <p className='texto-de-pdf'>
-                Bueno por:
-                <CurrencyFormat
-                  value={this.state.importe}
-                  displayType='text'
-                  thousandSeparator
-                  prefix=' $ '
-                />
-              </p>
-            </div>
-            <div className='recibi'>
-              <p className='texto-de-pdf' style={{ textAlign: 'justify' }}>
-                Recibí de la Secretaría de Finanzas Públicas del Gobierno del Estado
-                de Hidalgo la cantidad de
-                <CurrencyFormat
-                  value={this.state.importe}
-                  displayType='text'
-                  thousandSeparator
-                  prefix=' $ '
-                />
-                ({(NumberAsString(this.state.importe))})
-                por concepto de Reposición de Fondo Revolvente, que se aplicarán
-                en {this.state.desc}
-              </p>
-            </div>
-            <div className='fecha'>
-              <p className='texto-de-pdf'>
-                Pachuca de Soto, Hidalgo a {today}
-              </p>
-            </div>
-            <div className='refe'>
-              <p className='texto-de-pdf'>
-                DIRECTOR GENERAL DE<br />ADMINISTRACIÓN Y FINANZAS
-              </p>
-            </div>
-            <div className='firma-dad-r'>
-              <div className='firma-raya-r'>
-                <p className='texto-de-pdf' style={{ textAlign: 'center' }}>
-                  MTRO. LEÓN MAXIMILIANO HERNÁNDEZ VALDÉS<br />R.F.C.: HEVL-750104
-                </p>
+          <div className='subdad' ref={el => (this.rec = el)} style={{ zIndex: '2', position: 'absolute', height: '100%' }}>
+            <div style={{ height: '100%', display: 'flex', justifyContent: 'center', flexDirection: 'column' }}>
+              <div style={{ height: '60%' }}>
+                <div className='bueno'  style= {{ paddingTop: '0' }}>
+                  <p className='texto-de-pdf'>
+                    Bueno por:
+                    <CurrencyFormat
+                      value={this.state.fondo.importe}
+                      displayType='text'
+                      thousandSeparator
+                      prefix=' $ '
+                    />
+                  </p>
+                </div>
+                <div style={{ paddingTop: '50px' }}>
+                  <p className='texto-de-pdf' style={{ textAlign: 'justify', lineHeight: '35px' }}>
+                    Recibí de la Secretaría de Finanzas Públicas del Gobierno del Estado
+                    de Hidalgo la cantidad de
+                    <CurrencyFormat
+                      value={this.state.fondo.importe}
+                      displayType='text'
+                      thousandSeparator
+                      prefix=' $ '
+                    /> ({( NumberAsString(this.state.fondo.importe) )})
+                    por concepto de Reposición de Fondo Revolvente, que se aplicarán
+                    en {this.state.desc}
+                  </p>
+                </div>
+                <div className='fecha'>
+                  <p className='texto-de-pdf'>
+                    Pachuca de Soto, Hidalgo a {today}
+                  </p>
+                </div>
+                <div className='refe'>
+                  <p className='texto-de-pdf'>
+                    DIRECTOR GENERAL DE<br />ADMINISTRACIÓN Y FINANZAS
+                  </p>
+                </div>
+                <div className='firma-dad-r'>
+                  <div className='firma-raya-r'>
+                    <p className='texto-de-pdf' style={{ textAlign: 'center' }}>
+                      MTRO. LEÓN MAXIMILIANO HERNÁNDEZ VALDÉS<br />R.F.C.: HEVL-750104
+                    </p>
+                  </div>
+                </div>
+                <div style={{ bottom: '0', position: 'fixed', height: '100px', width: '80%' }}>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', flexDirection: 'row' }}>
+                    <p style={{ color: 'black', fontSize: '12px' }} />
+                    <div style={{ display: 'flex', justifyContent: 'flex-end', flexDirection: 'column' }}>
+                      <p style={{ fontSize: '12px' }}>No. de Fondo {this.state.fondo.fondo}</p>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -3146,13 +3142,15 @@ export default class Oficios extends Component {
 
           {/* Pago Provedor */}
           <div className='pppdf-subdad' ref={el => (this.opp = el)} style={{ zIndex: '2', position: 'absolute' }}>
-            <div className='fondo-procu' style={{ display: 'flex', justifyContent: 'space-between', marginTop: '20px' }}>
-              <div style={{ display: 'flex', justifyContent: 'center', flexDirection: 'column' }}>
-                <img className='pgjh' style={{ marginLeft: '-20px', width: 'auto' }} src={lpgjh} alt='' />
+            <div className='header-ofi'>
+              <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                <div style={{ display: 'flex', justifyContent: 'center', flexDirection: 'column' }}>
+                  <img className='pgjh' style={{ marginLeft: '-20px', width: 'auto' }} src={lpgjh} alt='' />
+                </div>
+                <img className='ime' src={logo2} alt='' />
               </div>
-              <img className='ime' src={logo2} alt='' />
             </div>
-            <div>
+            <div style={{ marginTop: '90px' }}>
               <p>Dirección General de Administracción y Finanzas</p>
             </div>
             <div className='no-oficio'>
@@ -3181,7 +3179,7 @@ export default class Oficios extends Component {
                 </b>
               </p>
             </div>
-            <div className='texto-ofi_ppp' style={{ marginTop: '-45px' }}>
+            <div className='texto-ofi_ppp' style={{ marginTop: '-30px' }}>
               <p>
                 Por este medio me permito enviar a Usted documentación por un importe total de
                 <CurrencyFormat
@@ -3219,22 +3217,26 @@ export default class Oficios extends Component {
                 </div>
               </div>
             </div>
-            <div className='pie'>
-              <div className='ccp'>
-                <p className='text'>C.C.P...- Expediente<br />Minutario<br />LMHV/NRL/macht</p>
-              </div>
-              <div>
-                <p align='right' style={{ fontSize: '12px' }}>No. de Fondo {this.state.fondo.fondo}</p>
+            <div style={{ bottom: '0', position: 'fixed', height: '100px', width: '80%' }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', flexDirection: 'row' }}>
+                <div>
+                  <p style={{ color: 'black', fontSize: '12px' }}>C.C.P...- Expediente<br />Minutario<br />LMHV/NRL/macht</p>
+                </div>
+                <div style={{ display: 'flex', justifyContent: 'flex-end', flexDirection: 'column' }}>
+                  <p style={{ fontSize: '12px' }}>No. de Fondo {this.state.fondo.fondo}</p>
+                </div>
               </div>
             </div>
           </div>
 
           <div ref={el => (this.sp = el)} style={{ zIndex: '2', position: 'absolute' }}>
-          <div className='title-so-o'>
-            <img className='pgjh' src={lpgjh} alt='' />
-            <p>SOLICITUD PROGRAMÁTICA DEL GASTO</p>
-            <img className='ims' src={logo2} alt='' />
-          </div>
+            <div style={{ width: '100%', height: '100px', position: 'fixed', top: 0 }}>
+              <div className='title-so-o'>
+                <img className='pgjh' src={lpgjh} alt='' />
+                <p>SOLICITUD PROGRAMÁTICA DEL GASTO</p>
+                <img className='ims' src={logo2} alt='' />
+              </div>
+            </div>
           <div className='fadera'>
             <div className='contenedor-soi'>
               <div className='contenedor-1'>
@@ -3506,7 +3508,7 @@ export default class Oficios extends Component {
                       </td>
                     </tr> : null
                   )}
-                  {column.props.children.map(item =>
+                  {prueba.map(item =>
                     <tr>
                       <td className='all-tablai' />
                       <td className='all-tablai' />
@@ -3588,24 +3590,26 @@ export default class Oficios extends Component {
               </div>
             </div>
           </div>
-          <div className='obs-sopadre'>
-            <div className='obs-so'>
-              <p className='text-osb'>Observaciones</p>
-              <div className='input-obs' />
-              <div className='obs-so2'>
-                <p className='text-osb'>No. De Solicitud</p>
-                <input style={{borderTop: '0', borderLeft: '0', borderRight: '0', borderBottom: '2px solid #000'}} />
+          <div style={{ bottom: '0', position: 'fixed', width: '100%' }}>
+            <div className='obs-sopadre'>
+              <div className='obs-so'>
+                <p className='text-osb'>Observaciones</p>
+                <div className='input-obs' />
+                <div className='obs-so2'>
+                  <p className='text-osb'>No. De Solicitud</p>
+                  <input style={{ borderTop: '0', borderLeft: '0', borderRight: '0', borderBottom: '1px solid #000' }} />
+                </div>
               </div>
             </div>
-          </div>
-          <div className='padre-firmas'>
-            <div className='firmas'>
-              <p className='text-firmas'>Elaboro</p>
+            <div className='padre-firmas'>
+              <div className='firmas'>
+                <p className='text-firmas'>Elaboro</p>
+              </div>
+              <div className='firmas'>
+                <p className='text-firmas'>Reviso</p>
+              </div>
             </div>
-            <div className='firmas'>
-              <p className='text-firmas'>Reviso</p>
             </div>
-          </div>
           </div>
 
           {/*<div ref={el => (this.la = el)} style={{ zIndex: '2', position: 'absolute', width: '100%' }}>
@@ -4700,23 +4704,7 @@ export default class Oficios extends Component {
               </div>
             )}
           </div>
-
         </div>
     )
   }
 }
-
-
-
-// firebase.firestore().collection('fondos').doc(doc.id).collection('comprometidos').get().then(comprometidosSnapshot => {
-  // console.log(comprometidos)
-  // console.log(comprometidos[0].comprobantes.push({perro: 'perro'}))
-  // for (let i = 0; i < comprometidosSnapshot.size; i++) {
-      // console.log(comprometidosSnapshot.docs[i].data().comprobantes)
-      // console.log(comprometidosSnapshot.size)
-      // console.log(comprometidos)
-      // console.log(i)
-      // console.log(comprometidos[i].comprobantes.push({perro: 'perro'})) // .comprobantes.push(comprometidosSnapshot.docs[i].data().comprobantes)
-  // }
-// }
-// )

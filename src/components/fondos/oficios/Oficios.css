@@ -1,3 +1,10 @@
+/* Estilos de oficio */
+.header-ofi {
+  height: 100px;
+  position: fixed;
+  top: 0;
+  width: 80%;
+}
 .site-pf-of {
   padding-left: 80px;
 }
@@ -241,11 +248,12 @@ th {
   padding-left: 30px;
 }
 .fadera{
-  padding-bottom: 0px;
-  padding-left: 100px;
-  padding-right: 100px;
   display: flex;
   justify-content: center;
+  margin-top: 100px;
+  padding-bottom: 0;
+  padding-left: 100px;
+  padding-right: 100px;
 }
 .text-so {
   font-size: 10px;
@@ -563,13 +571,6 @@ th {
   padding-bottom: 10px;
   padding-right: 50px;
   padding-left: 30px;
-}
-.fadera{
-  padding-bottom: 0px;
-  padding-left: 100px;
-  padding-right: 100px;
-  display: flex;
-  justify-content: center;
 }
 .text-so{
   margin:3px;
