@@ -246,15 +246,15 @@ export default class Comprometidos extends Component {
         var XMLParser = require('react-xml-parser')
         var xml = new XMLParser().parseFromString(event.target.result)
         let data = {
-          'total': xml.attributes['Total'],
+          'total': xml.attributes['Total'] ? xml.attributes['Total'] : 'No encuentra total',
           'subtotal': xml.attributes['SubTotal'] ? xml.attributes['SubTotal'] : (parseFloat(xml.attributes['Total']) + parseFloat(xml.children['3'].attributes['TotalImpuestosRetenidos'])) - parseFloat(xml.children['3'].attributes['TotalImpuestosTrasladados']),
           'folio': xml.attributes['Folio'] ? xml.attributes['Folio'] : '0',
-          'nombre': xml.children['0'].attributes['Nombre'],
+          'nombre': xml.children['0'].attributes['Nombre'] ? xml.children['0'].attributes['Nombre'] : 'No encuentra Nombre',
           'importe': xml.attributes['SubTotal'] ? xml.attributes['SubTotal'] : (parseFloat(xml.attributes['Total']) + parseFloat(xml.children['3'].attributes['TotalImpuestosRetenidos'])) - parseFloat(xml.children['3'].attributes['TotalImpuestosTrasladados']),
-          'iva': xml.children['3'].attributes['TotalImpuestosTrasladados'],
+          'iva': xml.children['3'].attributes['TotalImpuestosTrasladados'] ? xml.children['3'].attributes['TotalImpuestosTrasladados'] : 'No encuentra IVA',
           'isr': xml.children['3'].attributes['TotalImpuestosRetenidos'] ? xml.children['3'].attributes['TotalImpuestosRetenidos'] : 0,
-          'fecha': xml.children['4'].children['0'].attributes['FechaTimbrado'],
-          'uuid': xml.children['4'].children['0'].attributes['UUID'],
+          'fecha': xml.children['4'].children['0'].attributes['FechaTimbrado'] ? xml.children['4'].children['0'].attributes['FechaTimbrado'] : 'No encuentra Fecha',
+          'uuid': xml.children['4'].children['0'].attributes['UUID'] ? xml.children['4'].children['0'].attributes['UUID'] : 'No encuentra UUID',
           'estatus': 'sin asignar',
           'tipo': 'revolvente'
         }
@@ -284,15 +284,15 @@ export default class Comprometidos extends Component {
         var xml = new XMLParser().parseFromString(event.target.result)
         console.log(xml)
         let data = {
-          'total': xml.attributes['Total'],
+          'total': xml.attributes['Total'] ? xml.attributes['Total'] : 'No encuentra total',
           'subtotal': xml.attributes['SubTotal'] ? xml.attributes['SubTotal'] : (parseFloat(xml.attributes['Total']) + parseFloat(xml.children['3'].attributes['TotalImpuestosRetenidos'])) - parseFloat(xml.children['3'].attributes['TotalImpuestosTrasladados']),
           'folio': xml.attributes['Folio'] ? xml.attributes['Folio'] : '0',
-          'nombre': xml.children['0'].attributes['Nombre'],
-          'importe': xml.children['2'].children['0'].attributes['Importe'],
-          'iva': xml.children['3'].attributes['TotalImpuestosTrasladados'],
+          'nombre': xml.children['0'].attributes['Nombre'] ? xml.children['0'].attributes['Nombre'] : 'No encuentra Nombre',
+          'importe': xml.attributes['SubTotal'] ? xml.attributes['SubTotal'] : (parseFloat(xml.attributes['Total']) + parseFloat(xml.children['3'].attributes['TotalImpuestosRetenidos'])) - parseFloat(xml.children['3'].attributes['TotalImpuestosTrasladados']),
+          'iva': xml.children['3'].attributes['TotalImpuestosTrasladados'] ? xml.children['3'].attributes['TotalImpuestosTrasladados'] : 'No encuentra IVA',
           'isr': xml.children['3'].attributes['TotalImpuestosRetenidos'] ? xml.children['3'].attributes['TotalImpuestosRetenidos'] : 0,
-          'fecha': xml.children['4'].children['0'].attributes['FechaTimbrado'],
-          'uuid': xml.children['4'].children['0'].attributes['UUID'],
+          'fecha': xml.children['4'].children['0'].attributes['FechaTimbrado'] ? xml.children['4'].children['0'].attributes['FechaTimbrado'] : 'No encuentra Fecha',
+          'uuid': xml.children['4'].children['0'].attributes['UUID'] ? xml.children['4'].children['0'].attributes['UUID'] : 'No encuentra UUID',
           'estatus': 'sin asignar',
           'tipo': 'directo'
         }
