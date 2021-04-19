@@ -19,8 +19,7 @@ export default class TabularIndi extends Component {
   }
 
   componentDidMount () {
-    //var dir = history.location.pathname.slice(19)
-    const itemsRefComprometidos = firebase.database().ref(`fondos/falta/comprometido`) // ${dir}
+    const itemsRefComprometidos = firebase.database().ref(`fondos/${this.state.urlfire}/comprometido`)
     this.listenComprometidos(itemsRefComprometidos)
   }
 
@@ -34,6 +33,8 @@ export default class TabularIndi extends Component {
   }
 
   render () {
+    var URLactual = window.location
+    this.state.urlfire = String(URLactual).substr(-20)
     return (
       <div style={{margin: '80px'}}>
         <ReactToPrint

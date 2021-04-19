@@ -84,7 +84,6 @@ export default class Contra extends Component {
   }
 
   render () {
-    window.location.hash = 'no-back-button'
     return (
       <div className='contrarecibo-container'>
         <TableContainer component={Paper}>
@@ -135,9 +134,13 @@ export default class Contra extends Component {
                   {fondos.fechaDepo} - {fondos.fechaContra}
                 </TableCell>
                 <TableCell component='th' scope='row' className='table-same'>
-                  {fondos.fechaContra &&
-                    <p style={{margin: '0'}}>
+                  {fondos.fechaContra !== ' ' ?
+                    <p style={{ margin: '0', color: 'green' }}>
                       Contrarecibo Agregado
+                    </p>
+                    :
+                    <p style={{ margin: '0', color: 'red' }}>
+                      Sin Contrarecibo
                     </p>
                   }
                 </TableCell>

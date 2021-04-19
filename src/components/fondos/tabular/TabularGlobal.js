@@ -18,8 +18,7 @@ export default class Tabular extends Component {
   }
 
   componentDidMount () {
-    //var dir = history.location.pathname.slice(15)
-    const itemsRefComprometidos = firebase.database().ref(`fondos/falta/comprometido`) // ${dir}
+    const itemsRefComprometidos = firebase.database().ref(`fondos/${this.state.urlfire}/comprometido`)
     this.listenComprometidos(itemsRefComprometidos)
   }
 
@@ -33,6 +32,8 @@ export default class Tabular extends Component {
   }
 
   render () {
+    var URLactual = window.location
+    this.state.urlfire = String(URLactual).substr(-20)
     const totalImporte = []
     this.state.comprometidos.map(comprometidos =>
       comprometidos ?

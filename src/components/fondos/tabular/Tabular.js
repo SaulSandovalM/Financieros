@@ -9,6 +9,7 @@ import TableRow from '@material-ui/core/TableRow'
 import Paper from '@material-ui/core/Paper'
 import TableBody from '@material-ui/core/TableBody'
 import CurrencyFormat from 'react-currency-format'
+import { Link } from 'react-router-dom'
 
 export default class Tabular extends Component {
   constructor() {
@@ -114,10 +115,10 @@ export default class Tabular extends Component {
                     />
                   </TableCell>
                   <TableCell className='table-tab'>
-                    <div onClick={() => {/* history.push(`/TabularGlobal/${fondos.id}`) */}}>Ver</div>
+                    <Link to={`/TabularGlobal/${fondos.id}`}>Ver</Link>
                   </TableCell>
                   <TableCell className='table-tab'>
-                    <div onClick={() => {/* history.push(`/TabularIndividual/${fondos.id}`)*/ }}>Ver</div>
+                    <Link to={`/TabularIndividual/${fondos.id}`}>Ver</Link>
                   </TableCell>
                 </TableRow>
               )}
