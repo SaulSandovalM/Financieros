@@ -735,7 +735,7 @@ export default class Comprometidos extends Component {
                   />
                 </div>
               </div>
-              {(admin === 'OMAR' || admin === 'MARCOS' || admin === 'KARINA' || admin === 'MIGUEL' || admin === 'TERESA' || admin === 'HECTOR' || admin === 'LILIA' || admin === 'CENELY' || admin === 'OMAR') &&
+              {(admin === 'OMAR' || admin === 'MARCOS' || admin === 'KARINA' || admin === 'MIGUEL' || admin === 'TERESA' || admin === 'HECTOR' || admin === 'LILIA' || admin === 'CENELY') &&
                 customListLeft('Choices', left)
               }
             </Grid>
@@ -1033,7 +1033,7 @@ export default class Comprometidos extends Component {
             variant='extended'
           >
             <AddIcon style={{ marginRight: '6px' }} />
-            {(admin === 'MIGUEL') &&
+            {(admin === 'MIGUEL' || admin === 'MARTHA' || admin === 'ELOY' || admin === 'TERESA' || admin === 'MARCOS') &&
               <Dropzone
                 style={{
                   width: '100%',
