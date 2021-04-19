@@ -1570,378 +1570,378 @@ export default class Oficios extends Component {
                 <img className='ims' src={logo2} alt='' />
               </div>
             </div>
-          <div className='fadera'>
-            <div className='contenedor-soi'>
-              <div className='contenedor-1'>
-                <div className='interno'>
-                  <p className='text-soi'>Gasto a Comprobar</p>
-                  <input className='input-so' type='checkbox' />
-                </div>
-                <div className='interno'>
-                  <p className='text-soi'>Comprobación de gasto</p>
-                  <input className='input-so' type='checkbox' />
-                </div>
-              </div>
-              <div className='contenedor-1'>
-                <div className='interno'>
-                  <p className='text-soi'>Creación de fondo Revolvente</p>
-                  <input className='input-so' type='checkbox' />
-                </div>
-                <div className='interno'>
-                  <p className='text-soi'>Fondo Revolvente</p>
-                  {this.state.fondo.tipo_doc === 'Fondo Revolvente' ?
-                    <input className='input-so' type='checkbox' checked /> :
+            <div className='fadera'>
+              <div className='contenedor-soi'>
+                <div className='contenedor-1'>
+                  <div className='interno'>
+                    <p className='text-soi'>Gasto a Comprobar</p>
                     <input className='input-so' type='checkbox' />
-                  }
-                </div>
-                <div className='interno'>
-                  <p className='text-soi'>Cancelacion de Fondo Revolvente</p>
-                  <input className='input-so' type='checkbox'/>
-                </div>
-              </div>
-              <div className='contenedor-1'>
-                <div className='interno'>
-                  <p className='text-soi'>Viaticos Anticipados</p>
-                  <input className='input-so' type='checkbox'/>
-                </div>
-                <div className='interno'>
-                  <p className='text-soi'>Viaticos Denegados</p>
-                  <input className='input-so' type='checkbox'/>
-                </div>
-                <div className='interno'>
-                  <p className='text-soi'>Comprobación de viaticos</p>
-                  <input className='input-so' type='checkbox'/>
-                </div>
-                <div className='interno'>
-                  <p className='text-soi'>Viaticos al Extrangero</p>
-                  <input className='input-so' type='checkbox'/>
-                </div>
-              </div>
-              <div className='contenedor-1'>
-                <div className='interno'>
-                  <p className='text-soi'>Validación de Objeto del gasto</p>
-                  <input className='input-so' type='checkbox'/>
-                </div>
-                <div className='interno'>
-                  <p className='text-soi'>Pago a Proveedores</p>
-                  {this.state.fondo.tipo_doc === 'Pago Directo' ?
-                    <input className='input-so' type='checkbox' checked /> :
+                  </div>
+                  <div className='interno'>
+                    <p className='text-soi'>Comprobación de gasto</p>
                     <input className='input-so' type='checkbox' />
-                  }
+                  </div>
                 </div>
-                <div className='interno'>
-                  <p className='text-soi'>Pago a Proveedores por Requisición</p>
-                  <input className='input-so' type='checkbox'/>
+                <div className='contenedor-1'>
+                  <div className='interno'>
+                    <p className='text-soi'>Creación de fondo Revolvente</p>
+                    <input className='input-so' type='checkbox' />
+                  </div>
+                  <div className='interno'>
+                    <p className='text-soi'>Fondo Revolvente</p>
+                    {this.state.fondo.tipo_doc === 'Fondo Revolvente' ?
+                      <input className='input-so' type='checkbox' checked /> :
+                      <input className='input-so' type='checkbox' />
+                    }
+                  </div>
+                  <div className='interno'>
+                    <p className='text-soi'>Cancelacion de Fondo Revolvente</p>
+                    <input className='input-so' type='checkbox'/>
+                  </div>
                 </div>
-                <div className='interno'>
-                  <p className='text-soi'>Transferencias</p>
-                  <input className='input-so' type='checkbox'/>
+                <div className='contenedor-1'>
+                  <div className='interno'>
+                    <p className='text-soi'>Viaticos Anticipados</p>
+                    <input className='input-so' type='checkbox'/>
+                  </div>
+                  <div className='interno'>
+                    <p className='text-soi'>Viaticos Denegados</p>
+                    <input className='input-so' type='checkbox'/>
+                  </div>
+                  <div className='interno'>
+                    <p className='text-soi'>Comprobación de viaticos</p>
+                    <input className='input-so' type='checkbox'/>
+                  </div>
+                  <div className='interno'>
+                    <p className='text-soi'>Viaticos al Extrangero</p>
+                    <input className='input-so' type='checkbox'/>
+                  </div>
+                </div>
+                <div className='contenedor-1'>
+                  <div className='interno'>
+                    <p className='text-soi'>Validación de Objeto del gasto</p>
+                    <input className='input-so' type='checkbox'/>
+                  </div>
+                  <div className='interno'>
+                    <p className='text-soi'>Pago a Proveedores</p>
+                    {this.state.fondo.tipo_doc === 'Pago Directo' ?
+                      <input className='input-so' type='checkbox' checked /> :
+                      <input className='input-so' type='checkbox' />
+                    }
+                  </div>
+                  <div className='interno'>
+                    <p className='text-soi'>Pago a Proveedores por Requisición</p>
+                    <input className='input-so' type='checkbox'/>
+                  </div>
+                  <div className='interno'>
+                    <p className='text-soi'>Transferencias</p>
+                    <input className='input-so' type='checkbox'/>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-          <div className='padre-lineas'>
-            <div className='lineas-so'>
-              <div className='internos'>
-                <p className='text-intei'>Beneficiario:</p>
-                <p className='bene-i'>{this.state.fondo.beneficiario}</p>
-              </div>
-              <div className='internos'>
-                <p className='text-intei'>Organo Superior:</p>
-                <p className='bene-i'>Procuraduria General de Justicia del Estado</p>
-              </div>
-              <div className='internos'>
-                <p className='text-intei'>Unidad Presupuestal:</p>
-                {this.state.comprometidos.map(comprometidos =>
-                  <p className='bene-i'>
-                    {comprometidos.area ?
-                      this.state.comprometidos.length <= 2 ?
-                      (comprometidos.up === '01' &&
-                      'Procuraduría General de Justicia')
-                      ||
-                      (comprometidos.up === '02' &&
-                      'Subprocuraduría de Procedimientos Penales Región Oriente')
-                      ||
-                      (comprometidos.up === '03' &&
-                      'Fiscalía Especializada para la atención de Delitos cometidos contra la Libertad de Expresión, Periodistas y Personas defensoras de los Derechos Humanos')
-                      ||
-                      (comprometidos.up === '04' &&
-                      'Dirección General para la Atención de los Asuntos del Sistema Tradicional')
-                      ||
-                      (comprometidos.up === '05' &&
-                      'Fiscalía Especializada en Delitos Electorales')
-                      ||
-                      (comprometidos.up === '06' &&
-                      'Subprocuraduría de Derechos Humanos y Servicios a la Comunidad')
-                      ||
-                      (comprometidos.up === '07' &&
-                      'Centro de Justicia Restaurativa Penal Poniente')
-                      ||
-                      (comprometidos.up === '08' &&
-                      'Fiscalía para la Atención de Delitos de Género')
-                      ||
-                      (comprometidos.up === '09' &&
-                      'Visitaduría General')
-                      ||
-                      (comprometidos.up === '10' &&
-                      'Dirección General de Servicios Periciales')
-                      ||
-                      (comprometidos.up === '11' &&
-                      'Centro de Operación Estratégica')
-                      ||
-                      (comprometidos.up === '12' &&
-                      'Unidad Especializada en el Combate al Secuestro')
-                      ||
-                      (comprometidos.up === '13' &&
-                      'Dirección General de Administración y Finanzas')
-                      ||
-                      (comprometidos.up === '14' &&
-                      'Fiscalía Especializada para la atención de los Delitos de Trata de Personas')
-                      ||
-                      (comprometidos.up === '15' &&
-                      'Subprocuraduría de Procedimientos Penales Región Poniente')
-                      ||
-                      (comprometidos.up === '16' &&
-                      'Centro de Atención Temprana Poniente')
-                      ||
-                      (comprometidos.up === '17' &&
-                      'Dirección General de Investigación y Litigación Poniente')
-                      ||
-                      (comprometidos.up === '18' &&
-                      'Dirección General de la Policía Investigadora')
-                      ||
-                      (comprometidos.up === '20' &&
-                      'Centro de Atención Temprana Oriente')
-                      ||
-                      (comprometidos.up === '21' &&
-                      'Centro de Justicia Restaurativa Penal Oriente')
-                      ||
-                      (comprometidos.up === '22' &&
-                      'Dirección General de Investigación y Litigación Oriente')
-                      ||
-                      (comprometidos.up === '23' &&
-                      'Fiscalía Especializada en Delitos de Corrupción')
-                      ||
-                      (comprometidos.up === '24' &&
-                      'Fiscalía de Desaparición Forzada y Desaparición por Terceros')
-                      :
-                      ''
-                     : null
-                  }
-                  </p>
-                )}
-              </div>
-            </div>
-            <div className='folio'>
-              <p className='text-folio'>No. Folio</p>
-              <p className='fs-if'>{this.state.fondo.fondo}</p>
-            </div>
-          </div>
-          <div style={{ height: '60vh'}}>
-            <div>
-              <div className='tabla-so'>
-                <table>
-                  <tr>
-                    <td className='all-tablai'>Año</td>
-                    <td className='all-tablai'>Ramo</td>
-                    <td className='all-tablai'>OS</td>
-                    <td className='all-tablai'>UP</td>
-                    <td className='all-tablai'>Rubro de Ingreso</td>
-                    <td className='all-tablai'>TG</td>
-                    <td className='all-tablai'>Objeto de un Gasto</td>
-                    <td className='all-tablai'>Finalidad</td>
-                    <td className='all-tablai'>Funcion</td>
-                    <td className='all-tablai'>Subfunción</td>
-                    <td className='all-tablai'>Eje</td>
-                    <td className='all-tablai'>Sect</td>
-                    <td className='all-tablai'>Prog</td>
-                    <td className='all-tablai'>Subp</td>
-                    <td className='all-tablai'>Obj</td>
-                    <td className='all-tablai'>Proyecto</td>
-                    <td className='all-tablai'>Ext</td>
-                    <td className='all-tablai'>Ben</td>
-                    <td className='all-tablai'>E Geo</td>
-                    <td className='dg-tabla all-tablai' style={{ textAlign: 'left' }}>
-                      Descripcion del objeto de Gasto
-                    </td>
-                    <td className='monto-tabla all-tablai'>Monto</td>
-                  </tr>
+            <div className='padre-lineas'>
+              <div className='lineas-so'>
+                <div className='internos'>
+                  <p className='text-intei'>Beneficiario:</p>
+                  <p className='bene-i'>{this.state.fondo.beneficiario}</p>
+                </div>
+                <div className='internos'>
+                  <p className='text-intei'>Organo Superior:</p>
+                  <p className='bene-i'>Procuraduria General de Justicia del Estado</p>
+                </div>
+                <div className='internos'>
+                  <p className='text-intei'>Unidad Presupuestal:</p>
                   {this.state.comprometidos.map(comprometidos =>
-                    comprometidos.area ?
+                    <p className='bene-i'>
+                      {comprometidos.area ?
+                        this.state.comprometidos.length <= 2 ?
+                        (comprometidos.up === '01' &&
+                        'Procuraduría General de Justicia')
+                        ||
+                        (comprometidos.up === '02' &&
+                        'Subprocuraduría de Procedimientos Penales Región Oriente')
+                        ||
+                        (comprometidos.up === '03' &&
+                        'Fiscalía Especializada para la atención de Delitos cometidos contra la Libertad de Expresión, Periodistas y Personas defensoras de los Derechos Humanos')
+                        ||
+                        (comprometidos.up === '04' &&
+                        'Dirección General para la Atención de los Asuntos del Sistema Tradicional')
+                        ||
+                        (comprometidos.up === '05' &&
+                        'Fiscalía Especializada en Delitos Electorales')
+                        ||
+                        (comprometidos.up === '06' &&
+                        'Subprocuraduría de Derechos Humanos y Servicios a la Comunidad')
+                        ||
+                        (comprometidos.up === '07' &&
+                        'Centro de Justicia Restaurativa Penal Poniente')
+                        ||
+                        (comprometidos.up === '08' &&
+                        'Fiscalía para la Atención de Delitos de Género')
+                        ||
+                        (comprometidos.up === '09' &&
+                        'Visitaduría General')
+                        ||
+                        (comprometidos.up === '10' &&
+                        'Dirección General de Servicios Periciales')
+                        ||
+                        (comprometidos.up === '11' &&
+                        'Centro de Operación Estratégica')
+                        ||
+                        (comprometidos.up === '12' &&
+                        'Unidad Especializada en el Combate al Secuestro')
+                        ||
+                        (comprometidos.up === '13' &&
+                        'Dirección General de Administración y Finanzas')
+                        ||
+                        (comprometidos.up === '14' &&
+                        'Fiscalía Especializada para la atención de los Delitos de Trata de Personas')
+                        ||
+                        (comprometidos.up === '15' &&
+                        'Subprocuraduría de Procedimientos Penales Región Poniente')
+                        ||
+                        (comprometidos.up === '16' &&
+                        'Centro de Atención Temprana Poniente')
+                        ||
+                        (comprometidos.up === '17' &&
+                        'Dirección General de Investigación y Litigación Poniente')
+                        ||
+                        (comprometidos.up === '18' &&
+                        'Dirección General de la Policía Investigadora')
+                        ||
+                        (comprometidos.up === '20' &&
+                        'Centro de Atención Temprana Oriente')
+                        ||
+                        (comprometidos.up === '21' &&
+                        'Centro de Justicia Restaurativa Penal Oriente')
+                        ||
+                        (comprometidos.up === '22' &&
+                        'Dirección General de Investigación y Litigación Oriente')
+                        ||
+                        (comprometidos.up === '23' &&
+                        'Fiscalía Especializada en Delitos de Corrupción')
+                        ||
+                        (comprometidos.up === '24' &&
+                        'Fiscalía de Desaparición Forzada y Desaparición por Terceros')
+                        :
+                        ''
+                       : null
+                    }
+                    </p>
+                  )}
+                </div>
+              </div>
+              <div className='folio'>
+                <p className='text-folio'>No. Folio</p>
+                <p className='fs-if'>{this.state.fondo.fondo}</p>
+              </div>
+            </div>
+            <div style={{ height: '60vh'}}>
+              <div>
+                <div className='tabla-so'>
+                  <table>
                     <tr>
-                      <td className='all-tablai'>
-                        {comprometidos.año}
+                      <td className='all-tablai'>Año</td>
+                      <td className='all-tablai'>Ramo</td>
+                      <td className='all-tablai'>OS</td>
+                      <td className='all-tablai'>UP</td>
+                      <td className='all-tablai'>Rubro de Ingreso</td>
+                      <td className='all-tablai'>TG</td>
+                      <td className='all-tablai'>Objeto de un Gasto</td>
+                      <td className='all-tablai'>Finalidad</td>
+                      <td className='all-tablai'>Funcion</td>
+                      <td className='all-tablai'>Subfunción</td>
+                      <td className='all-tablai'>Eje</td>
+                      <td className='all-tablai'>Sect</td>
+                      <td className='all-tablai'>Prog</td>
+                      <td className='all-tablai'>Subp</td>
+                      <td className='all-tablai'>Obj</td>
+                      <td className='all-tablai'>Proyecto</td>
+                      <td className='all-tablai'>Ext</td>
+                      <td className='all-tablai'>Ben</td>
+                      <td className='all-tablai'>E Geo</td>
+                      <td className='dg-tabla all-tablai' style={{ textAlign: 'left' }}>
+                        Descripcion del objeto de Gasto
                       </td>
-                      <td className='all-tablai'>
-                        {comprometidos.ramo}
-                      </td>
-                      <td className='all-tablai'>
-                        {comprometidos.ur}
-                      </td>
-                      <td className='all-tablai'>
-                        {comprometidos.up}
-                      </td>
-                      <td className='all-tablai'>
-                        {comprometidos.rubro}
-                      </td>
-                      <td className='all-tablai'>
-                        {comprometidos.tg}
-                      </td>
-                      <td className='all-tablai'>
-                        {comprometidos.partida}
-                      </td>
-                      <td className='all-tablai'>
-                        {comprometidos.f}
-                      </td>
-                      <td className='all-tablai'>
-                        {comprometidos.fu}
-                      </td>
-                      <td className='all-tablai'>
-                        {comprometidos.sf}
-                      </td>
-                      <td className='all-tablai'>
-                        {comprometidos.eje}
-                      </td>
-                      <td className='all-tablai'>
-                        {comprometidos.s}
-                      </td>
-                      <td className='all-tablai'>
-                        {comprometidos.prog}
-                      </td>
-                      <td className='all-tablai'>
-                        {comprometidos.sp}
-                      </td>
-                      <td className='all-tablai'>
-                        {comprometidos.obj}
-                      </td>
-                      <td className='all-tablai'>
-                        {comprometidos.proy}
-                      </td>
-                      <td className='all-tablai'>
-                        {comprometidos.est}
-                      </td>
-                      <td className='all-tablai'>
-                        {comprometidos.ben}
-                      </td>
-                      <td className='all-tablai'>
-                        {comprometidos.eg}
-                      </td>
-                      <td className='all-tablai' style={{ textAlign: 'left', width: '100px' }}>
-                        <div className='pru-over'>
-                          {comprometidos.npro}
-                        </div>
-                      </td>
+                      <td className='monto-tabla all-tablai'>Monto</td>
+                    </tr>
+                    {this.state.comprometidos.map(comprometidos =>
+                      comprometidos.area ?
+                      <tr>
+                        <td className='all-tablai'>
+                          {comprometidos.año}
+                        </td>
+                        <td className='all-tablai'>
+                          {comprometidos.ramo}
+                        </td>
+                        <td className='all-tablai'>
+                          {comprometidos.ur}
+                        </td>
+                        <td className='all-tablai'>
+                          {comprometidos.up}
+                        </td>
+                        <td className='all-tablai'>
+                          {comprometidos.rubro}
+                        </td>
+                        <td className='all-tablai'>
+                          {comprometidos.tg}
+                        </td>
+                        <td className='all-tablai'>
+                          {comprometidos.partida}
+                        </td>
+                        <td className='all-tablai'>
+                          {comprometidos.f}
+                        </td>
+                        <td className='all-tablai'>
+                          {comprometidos.fu}
+                        </td>
+                        <td className='all-tablai'>
+                          {comprometidos.sf}
+                        </td>
+                        <td className='all-tablai'>
+                          {comprometidos.eje}
+                        </td>
+                        <td className='all-tablai'>
+                          {comprometidos.s}
+                        </td>
+                        <td className='all-tablai'>
+                          {comprometidos.prog}
+                        </td>
+                        <td className='all-tablai'>
+                          {comprometidos.sp}
+                        </td>
+                        <td className='all-tablai'>
+                          {comprometidos.obj}
+                        </td>
+                        <td className='all-tablai'>
+                          {comprometidos.proy}
+                        </td>
+                        <td className='all-tablai'>
+                          {comprometidos.est}
+                        </td>
+                        <td className='all-tablai'>
+                          {comprometidos.ben}
+                        </td>
+                        <td className='all-tablai'>
+                          {comprometidos.eg}
+                        </td>
+                        <td className='all-tablai' style={{ textAlign: 'left', width: '100px' }}>
+                          <div className='pru-over'>
+                            {comprometidos.npro}
+                          </div>
+                        </td>
+                        <td className='all-tablai' style={{ textAlign: 'right' }}>
+                          <CurrencyFormat
+                            value={parseFloat(comprometidos.total) + parseFloat(comprometidos.isr)}
+                            displayType='text'
+                            thousandSeparator
+                            prefix=' $ '
+                          />
+                        </td>
+                      </tr> : null
+                    )}
+                    {prueba.map(item =>
+                      <tr>
+                        <td className='all-tablai' />
+                        <td className='all-tablai' />
+                        <td className='all-tablai' />
+                        <td className='all-tablai' />
+                        <td className='all-tablai' />
+                        <td className='all-tablai' />
+                        <td className='all-tablai' />
+                        <td className='all-tablai' />
+                        <td className='all-tablai' />
+                        <td className='all-tablai' />
+                        <td className='all-tablai' />
+                        <td className='all-tablai' />
+                        <td className='all-tablai' />
+                        <td className='all-tablai' />
+                        <td className='all-tablai' />
+                        <td className='all-tablai' />
+                        <td className='all-tablai' />
+                        <td className='all-tablai' />
+                        <td className='all-tablai' />
+                        <td className='all-tablai' />
+                        <td className='all-tablai' />
+                      </tr>
+                    )}
+                    <tr>
+                      <td className='all-tablai border-color' />
+                      <td className='all-tablai border-color' />
+                      <td className='all-tablai border-color' />
+                      <td className='all-tablai border-color' />
+                      <td className='all-tablai border-color' />
+                      <td className='all-tablai border-color' />
+                      <td className='all-tablai border-color' />
+                      <td className='all-tablai border-color' />
+                      <td className='all-tablai border-color' />
+                      <td className='all-tablai border-color' />
+                      <td className='all-tablai border-color' />
+                      <td className='all-tablai border-color' />
+                      <td className='all-tablai border-color' />
+                      <td className='all-tablai border-color' />
+                      <td className='all-tablai border-color' />
+                      <td className='all-tablai  border-color' />
+                      <td className='all-tablai  border-color' />
+                      <td className='all-tablai  border-color' />
+                      <td className='all-tablai  border-color' />
+                      <td className='all-tablai border-color2 text-rete'>RETENCION</td>
+                      <td className='all-tablai' />
+                    </tr>
+                    <tr>
+                      <td className='all-tablai border-color' />
+                      <td className='all-tablai border-color' />
+                      <td className='all-tablai border-color' />
+                      <td className='all-tablai border-color' />
+                      <td className='all-tablai border-color' />
+                      <td className='all-tablai border-color' />
+                      <td className='all-tablai border-color' />
+                      <td className='all-tablai border-color' />
+                      <td className='all-tablai border-color' />
+                      <td className='all-tablai border-color' />
+                      <td className='all-tablai border-color' />
+                      <td className='all-tablai border-color' />
+                      <td className='all-tablai border-color' />
+                      <td className='all-tablai border-color' />
+                      <td className='all-tablai border-color' />
+                      <td className='all-tablai border-color' />
+                      <td className='all-tablai border-color' />
+                      <td className='all-tablai border-color' />
+                      <td className='all-tablai border-color' />
+                      <td className='all-tablai border-color text-rete'>TOTAL</td>
                       <td className='all-tablai' style={{ textAlign: 'right' }}>
                         <CurrencyFormat
-                          value={comprometidos.total}
+                          value={(totalImporte.reduce(reducer)).toFixed(2)}
                           displayType='text'
                           thousandSeparator
                           prefix=' $ '
                         />
                       </td>
-                    </tr> : null
-                  )}
-                  {prueba.map(item =>
-                    <tr>
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
                     </tr>
-                  )}
-                  <tr>
-                    <td className='all-tablai border-color' />
-                    <td className='all-tablai border-color' />
-                    <td className='all-tablai border-color' />
-                    <td className='all-tablai border-color' />
-                    <td className='all-tablai border-color' />
-                    <td className='all-tablai border-color' />
-                    <td className='all-tablai border-color' />
-                    <td className='all-tablai border-color' />
-                    <td className='all-tablai border-color' />
-                    <td className='all-tablai border-color' />
-                    <td className='all-tablai border-color' />
-                    <td className='all-tablai border-color' />
-                    <td className='all-tablai border-color' />
-                    <td className='all-tablai border-color' />
-                    <td className='all-tablai border-color' />
-                    <td className='all-tablai  border-color' />
-                    <td className='all-tablai  border-color' />
-                    <td className='all-tablai  border-color' />
-                    <td className='all-tablai  border-color' />
-                    <td className='all-tablai border-color2 text-rete'>RETENCION</td>
-                    <td className='all-tablai' />
-                  </tr>
-                  <tr>
-                    <td className='all-tablai border-color' />
-                    <td className='all-tablai border-color' />
-                    <td className='all-tablai border-color' />
-                    <td className='all-tablai border-color' />
-                    <td className='all-tablai border-color' />
-                    <td className='all-tablai border-color' />
-                    <td className='all-tablai border-color' />
-                    <td className='all-tablai border-color' />
-                    <td className='all-tablai border-color' />
-                    <td className='all-tablai border-color' />
-                    <td className='all-tablai border-color' />
-                    <td className='all-tablai border-color' />
-                    <td className='all-tablai border-color' />
-                    <td className='all-tablai border-color' />
-                    <td className='all-tablai border-color' />
-                    <td className='all-tablai border-color' />
-                    <td className='all-tablai border-color' />
-                    <td className='all-tablai border-color' />
-                    <td className='all-tablai border-color' />
-                    <td className='all-tablai border-color text-rete'>TOTAL</td>
-                    <td className='all-tablai' style={{ textAlign: 'right' }}>
-                      <CurrencyFormat
-                        value={(totalImporte.reduce(reducer)).toFixed(2)}
-                        displayType='text'
-                        thousandSeparator
-                        prefix=' $ '
-                      />
-                    </td>
-                  </tr>
-                </table>
-              </div>
-            </div>
-          </div>
-          <div style={{ bottom: '0', position: 'fixed', width: '100%' }}>
-            <div className='obs-sopadre'>
-              <div className='obs-so'>
-                <p className='text-osb'>Observaciones</p>
-                <div className='input-obs' />
-                <div className='obs-so2'>
-                  <p className='text-osb'>No. De Solicitud</p>
-                  <input style={{ borderTop: '0', borderLeft: '0', borderRight: '0', borderBottom: '1px solid #000' }} />
+                  </table>
                 </div>
               </div>
             </div>
-            <div className='padre-firmas'>
-              <div className='firmas'>
-                <p className='text-firmas'>Elaboro</p>
+            <div style={{ bottom: 0, position: 'fixed', width: '100%', height: 'auto' }}>
+              <div className='obs-sopadre'>
+                <div className='obs-so'>
+                  <p className='text-osb'>Observaciones</p>
+                  <div className='input-obs' />
+                  <div className='obs-so2'>
+                    <p className='text-osb'>No. De Solicitud</p>
+                    <input style={{ borderTop: '0', borderLeft: '0', borderRight: '0', borderBottom: '1px solid #000' }} />
+                  </div>
+                </div>
               </div>
-              <div className='firmas'>
-                <p className='text-firmas'>Reviso</p>
+              <div className='padre-firmas'>
+                <div className='firmas'>
+                  <p className='text-firmas'>Elaboro</p>
+                </div>
+                <div className='firmas'>
+                  <p className='text-firmas'>Reviso</p>
+                </div>
               </div>
-            </div>
             </div>
           </div>
 
