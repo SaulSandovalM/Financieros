@@ -67,21 +67,21 @@ export default class Valeslist extends Component {
   handleOnChange1 (event) {
     for (var i = 0; i < event.target.files.length; i++) {
       const file = event.target.files[0]
-      var xml = file
+      const xmlp = file
       var reader = new FileReader()
       reader.onload = function (event) {
         var XMLParser = require('react-xml-parser')
         var xml = new XMLParser().parseFromString(event.target.result)
         const data = {
-          'total': xml.attributes['Total'],
-          'subtotal': xml.attributes['SubTotal'] ? xml.attributes['SubTotal'] : (parseFloat(xml.attributes['Total']) + parseFloat(xml.children['3'].attributes['TotalImpuestosRetenidos'])) - parseFloat(xml.children['3'].attributes['TotalImpuestosTrasladados']),
+          'total': xml.attributes['Total'] ? xml.attributes['Total'] : 'No encuentra total',
+          'subtotal': xml.attributes['SubTotal'] ? xml.attributes['SubTotal'] : (parseFloat(xml.attributes['Total']) + (xml.children['3'].attributes['TotalImpuestosRetenidos'] ? xml.children['3'].attributes['TotalImpuestosRetenidos'] : 0)) - parseFloat(xml.children['3'].attributes['TotalImpuestosTrasladados']),
           'folio': xml.attributes['Folio'] ? xml.attributes['Folio'] : '0',
-          'nombre': xml.children['0'].attributes['Nombre'],
-          'importe': xml.attributes['SubTotal'] ? xml.attributes['SubTotal'] : (parseFloat(xml.attributes['Total']) + parseFloat(xml.children['3'].attributes['TotalImpuestosRetenidos'])) - parseFloat(xml.children['3'].attributes['TotalImpuestosTrasladados']),
-          'iva': xml.children['3'].attributes['TotalImpuestosTrasladados'],
+          'nombre': xml.children['0'].attributes['Nombre'] ? xml.children['0'].attributes['Nombre'] : 'No encuentra Nombre',
+          'importe': xml.attributes['SubTotal'] ? xml.attributes['SubTotal'] : (parseFloat(xml.attributes['Total']) + (xml.children['3'].attributes['TotalImpuestosRetenidos'] ? xml.children['3'].attributes['TotalImpuestosRetenidos'] : 0)) - parseFloat(xml.children['3'].attributes['TotalImpuestosTrasladados']),
+          'iva': xml.children['3'].attributes['TotalImpuestosTrasladados'] ? xml.children['3'].attributes['TotalImpuestosTrasladados'] : 0,
           'isr': xml.children['3'].attributes['TotalImpuestosRetenidos'] ? xml.children['3'].attributes['TotalImpuestosRetenidos'] : 0,
-          'fecha': xml.children['4'].children['0'].attributes['FechaTimbrado'],
-          'uuid': xml.children['4'].children['0'].attributes['UUID'],
+          'fecha': xml.getElementsByTagName('tfd:TimbreFiscalDigital')[0].attributes['FechaTimbrado'],
+          'uuid': xml.getElementsByTagName('tfd:TimbreFiscalDigital')[0].attributes['UUID'] ? xml.getElementsByTagName('tfd:TimbreFiscalDigital')[0].attributes['UUID'] : xmlp.name.slice(0, -4),
           'estatus': 'sin asignar',
           'tipo': 'revolvente'
         }
@@ -97,7 +97,7 @@ export default class Valeslist extends Component {
           })
         })
       }
-      reader.readAsText(xml)
+      reader.readAsText(xmlp)
     }
   }
 
