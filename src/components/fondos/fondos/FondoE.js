@@ -263,8 +263,7 @@ export default class FondoE extends Component {
 
   render() {
     var URLactual = window.location
-    console.log(String(URLactual).slice(29))
-    this.state.urlfire = String(URLactual).slice(29)
+    this.state.urlfire = String(URLactual).substr(-20)
     const { tipo_doc, realizo } = this.state
     const newArray = ['']
     const myObj = {}
