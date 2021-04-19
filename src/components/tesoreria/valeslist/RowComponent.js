@@ -41,7 +41,6 @@ export default class RowComponent extends Component {
   }
 
   render () {
-
     return (
       <TableBody>
         <div style={{ display: 'flex', flexDirection: 'row', maxWidth: '100%' }}>
