@@ -214,7 +214,6 @@ export default class Comprometidos extends Component {
     const itemsRef = firebase.database().ref('presupuesto/')
     this.listenForItems(itemsRef)
     const itemsRefFondos = firebase.database().ref(`fondos/${this.state.urlfire}/comprometido`)
-    console.log(itemsRefFondos)
     this.listenFondos(itemsRefFondos)
   }
 
@@ -283,6 +282,7 @@ export default class Comprometidos extends Component {
       reader.onload = function (event) {
         var XMLParser = require('react-xml-parser')
         var xml = new XMLParser().parseFromString(event.target.result)
+        console.log(xml)
         let data = {
           'total': xml.attributes['Total'],
           'subtotal': xml.attributes['SubTotal'] ? xml.attributes['SubTotal'] : (parseFloat(xml.attributes['Total']) + parseFloat(xml.children['3'].attributes['TotalImpuestosRetenidos'])) - parseFloat(xml.children['3'].attributes['TotalImpuestosTrasladados']),
@@ -296,6 +296,7 @@ export default class Comprometidos extends Component {
           'estatus': 'sin asignar',
           'tipo': 'directo'
         }
+        console.log(data)
         fetch(xml).then(res => res.text()).then(xml => {
           fetch('https://financieros-78cb0.firebaseio.com/xml.json', {
             method: 'POST',
@@ -950,7 +951,7 @@ export default class Comprometidos extends Component {
                 comprometido.partida ?
                 <TableRow key={comprometido.name} className='table-row-c'>
                   <TableCell className='border-icon'>
-                    <IconButton size='small' className='border-des'>
+                    <IconButton size='small' className='border-des' onClick={this.toggleOpen.bind(this)}>
                       <KeyboardArrowDownIcon />
                     </IconButton>
                   </TableCell>
@@ -1032,7 +1033,7 @@ export default class Comprometidos extends Component {
             variant='extended'
           >
             <AddIcon style={{ marginRight: '6px' }} />
-            {(admin === 'MIGUEL' || admin === 'OMAR') &&
+            {(admin === 'MIGUEL') &&
               <Dropzone
                 style={{
                   width: '100%',
