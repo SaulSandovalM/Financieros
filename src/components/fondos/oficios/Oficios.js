@@ -79,6 +79,12 @@ export default class Oficios extends Component {
         totalImporte.push(parseFloat(comprometidos.total))
       : null
     ))
+    const totalRetencion = []
+    this.state.comprometidos.map(comprometidos => (
+      comprometidos ?
+        totalRetencion.push(parseFloat(comprometidos.isr))
+      : null
+    ))
     const reducer = (a, b) => a + b
     var cad = []
     var proyectof = []
@@ -90,8 +96,8 @@ export default class Oficios extends Component {
       proyectof.push(proy)
     }
 
-    var prueba = new Array(23)
-    for (let i = parseInt(this.state.comprometidos.length); i < 23; i++) {
+    var prueba = new Array(22)
+    for (let i = parseInt(this.state.comprometidos.length); i < 22; i++) {
       console.log(i)
       prueba[i] = i
     }
@@ -1833,7 +1839,7 @@ export default class Oficios extends Component {
                         </td>
                         <td className='all-tablai' style={{ textAlign: 'right' }}>
                           <CurrencyFormat
-                            value={parseFloat(comprometidos.total) + parseFloat(comprometidos.isr)}
+                            value={(parseFloat(comprometidos.total) + parseFloat(comprometidos.isr)).toFixed(2)}
                             displayType='text'
                             thousandSeparator
                             prefix=' $ '
@@ -1866,6 +1872,40 @@ export default class Oficios extends Component {
                         <td className='all-tablai' />
                       </tr>
                     )}
+                    {this.state.comprometidos.map(comprometidos =>
+                      comprometidos.isr !== '0.00' && comprometidos.isr ?
+                      <tr>
+                        <td className='all-tablai' />
+                        <td className='all-tablai' />
+                        <td className='all-tablai' />
+                        <td className='all-tablai' />
+                        <td className='all-tablai' />
+                        <td className='all-tablai' />
+                        <td className='all-tablai' />
+                        <td className='all-tablai' />
+                        <td className='all-tablai' />
+                        <td className='all-tablai' />
+                        <td className='all-tablai' />
+                        <td className='all-tablai' />
+                        <td className='all-tablai' />
+                        <td className='all-tablai' />
+                        <td className='all-tablai' />
+                        <td className='all-tablai' />
+                        <td className='all-tablai' />
+                        <td className='all-tablai' />
+                        <td className='all-tablai' />
+                        <td className='all-tablai' style={{ textAlign: 'left' }}>SUBTOTAL</td>
+                        <td className='all-tablai' style={{ textAlign: 'right' }}>
+                          <CurrencyFormat
+                            value={(parseFloat(totalImporte) + parseFloat(totalRetencion)).toFixed(2)}
+                            displayType='text'
+                            thousandSeparator
+                            prefix=' $ '
+                          />
+                        </td>
+                      </tr>
+                      : null
+                    )}
                     <tr>
                       <td className='all-tablai border-color' />
                       <td className='all-tablai border-color' />
@@ -1887,7 +1927,14 @@ export default class Oficios extends Component {
                       <td className='all-tablai  border-color' />
                       <td className='all-tablai  border-color' />
                       <td className='all-tablai border-color2 text-rete'>RETENCION</td>
-                      <td className='all-tablai' />
+                      <td className='all-tablai' style={{ textAlign: 'right' }}>
+                        <CurrencyFormat
+                          value={(totalRetencion.reduce(reducer)).toFixed(2)}
+                          displayType='text'
+                          thousandSeparator
+                          prefix=' $ '
+                        />
+                      </td>
                     </tr>
                     <tr>
                       <td className='all-tablai border-color' />
