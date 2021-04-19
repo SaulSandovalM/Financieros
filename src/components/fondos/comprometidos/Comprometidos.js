@@ -240,7 +240,7 @@ export default class Comprometidos extends Component {
   handleOnChange1 (event) {
     for (var i = 0; i < event.target.files.length; i++) {
       const file = event.target.files[i]
-      var xml = file
+      const xmlp = file
       var reader = new FileReader()
       reader.onload = function (event) {
         var XMLParser = require('react-xml-parser')
@@ -253,8 +253,8 @@ export default class Comprometidos extends Component {
           'importe': xml.attributes['SubTotal'] ? xml.attributes['SubTotal'] : (parseFloat(xml.attributes['Total']) + parseFloat(xml.children['3'].attributes['TotalImpuestosRetenidos'])) - parseFloat(xml.children['3'].attributes['TotalImpuestosTrasladados']),
           'iva': xml.children['3'].attributes['TotalImpuestosTrasladados'] ? xml.children['3'].attributes['TotalImpuestosTrasladados'] : 0,
           'isr': xml.children['3'].attributes['TotalImpuestosRetenidos'] ? xml.children['3'].attributes['TotalImpuestosRetenidos'] : 0,
-          'fecha': xml.children['4'].children['0'].attributes['FechaTimbrado'] ? xml.children['4'].children['0'].attributes['FechaTimbrado'] : 'No encuentra Fecha',
-          'uuid': xml.children['4'].children['0'].attributes['UUID'] ? xml.children['4'].children['0'].attributes['UUID'] : 'No encuentra UUID',
+          'fecha': xml.getElementsByTagName('tfd:TimbreFiscalDigital')[0].attributes['FechaTimbrado'],
+          'uuid': xml.getElementsByTagName('tfd:TimbreFiscalDigital')[0].attributes['UUID'] ? xml.getElementsByTagName('tfd:TimbreFiscalDigital')[0].attributes['UUID'] : xmlp.name.slice(0, -4),
           'estatus': 'sin asignar',
           'tipo': 'revolvente'
         }
@@ -270,7 +270,7 @@ export default class Comprometidos extends Component {
           })
         })
       }
-      reader.readAsText(xml)
+      reader.readAsText(xmlp)
     }
   }
 
