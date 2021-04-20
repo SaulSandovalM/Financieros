@@ -67,10 +67,16 @@ export default class Vales extends Component {
 
   componentDidMount () {
     this.unsubscribe = firebase.firestore().collection('caja').onSnapshot(this.onCollectionUpdate)
-    this.consumo()
-    this.consumoc()
     const itemsRef = firebase.database().ref('vales/')
     this.listenForItems(itemsRef)
+    var wishRef = firebase.database().ref('vale/valenum')
+    wishRef.on('value', (snapshot) => {
+      let updatedWish = snapshot.val()
+      this.setState({
+        vale: updatedWish.num
+      })
+      wishRef.set(updatedWish)
+    })
     var today = new Date()
     var today2 = new Date()
     var meses = ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic']
@@ -83,6 +89,18 @@ export default class Vales extends Component {
     })
     this.setState({
       fecha: today2
+    })
+  }
+
+  incrementVale = () => {
+    const wishRef = firebase.database().ref('vale/valenum')
+    wishRef.once('value').then(snapshot => {
+      let updatedWish = snapshot.val()
+      this.setState({
+        vale: updatedWish.num
+      })
+      updatedWish.num = updatedWish.num + 1
+      wishRef.set(updatedWish)
     })
   }
 
@@ -133,21 +151,6 @@ export default class Vales extends Component {
     })
   }
 
-  consumo = () => {
-    const ref = firebase.firestore().collection('vales').doc('--stats--')
-    ref.get().then((doc) => {
-      if (doc.exists) {
-        this.setState({
-          contador: doc.data(),
-          key: doc.id,
-          isLoading: false
-        })
-      } else {
-        console.log('No hay Documento')
-      }
-    })
-  }
-
   onCollectionUpdate = (querySnapshot) => {
     const movimientos = []
     querySnapshot.forEach((doc) => {
@@ -167,25 +170,10 @@ export default class Vales extends Component {
    })
   }
 
-  consumoc = () => {
-    const ref = firebase.firestore().collection('caja').doc('--stats--')
-    ref.get().then((doc) => {
-      if (doc.exists) {
-        this.setState({
-          contadorc: doc.data(),
-          key: doc.id,
-          isLoading: false
-        })
-      } else {
-        console.log('No hay nada!')
-      }
-    })
-  }
-
   sendMessage () {
     const params = {
       cheque: this.inputCheque.value,
-      vale: this.state.contador.storyCount,
+      vale: this.state.vale,
       cantidad: this.inputCantidad.value,
       cantidadc: this.inputCantidadc.value,
       cantidadr: this.inputCantidadr.value,
@@ -256,6 +244,7 @@ export default class Vales extends Component {
       batchs.commit()
       firebase.database().ref('vales').push(params).then(() => {
         alert('Tu solicitud fue enviada.')
+        this.incrementVale()
       }).catch(() => {
         alert('Tu solicitud no puede ser enviada')
       })
@@ -431,7 +420,7 @@ export default class Vales extends Component {
                         id='vale'
                         required
                         ref={vale => this.inputVale = vale}
-                        value={this.state.contador.storyCount}
+                        value={this.state.vale}
                       />
                     </p>
                   </div>

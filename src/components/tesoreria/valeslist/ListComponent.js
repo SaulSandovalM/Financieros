@@ -28,7 +28,8 @@ export default class ListComponent extends Component {
       pend: '',
       noauto: '',
       comp: '',
-      prueba: ''
+      prueba: '',
+      filteredData: ''
     }
     this.handleExcel = this.handleExcel.bind(this)
   }
@@ -76,7 +77,7 @@ export default class ListComponent extends Component {
   handleExcel () {
     const vales = [['#V', '#C', 'AUTORIZADO', 'COMPOBADO', 'REEM/REIN', 'CONCEPTO',
       'OFICIO S', 'AREA', 'TURNO', 'FACTURA', 'RECIBOS', 'S/C', 'FECHA', 'AUTORIZA', 'RECIBIO']]
-    this.state.pp.forEach((vale) => {
+    this.state.filteredData.forEach((vale) => {
       const valeArray = [vale.vale, vale.cheque, vale.cantidad, vale.cantidadc,
         vale.cantidadr, vale.concepto, vale.oficioS, vale.area,
         vale.turno, vale.factura, vale.recibos, vale.sc, vale.fecha,
@@ -90,9 +91,9 @@ export default class ListComponent extends Component {
   }
 
   render () {
-    const { auto, pend, noauto, comp } = this.state
-    var fechah = new Date(this.state.prueba).getMonth() + 2
-    const filteredData = this.props.lista.filter(
+    var { auto, pend, noauto, comp, filteredData } = this.state
+    var fechah = new Date(this.state.prueba).getMonth() + 1
+    filteredData = this.props.lista.filter(
       (vales) => {
         return (auto.length && auto.includes(vales.estatus) && this.state.autorizados && new Date(vales.fecha).getMonth() + 1 === fechah) ||
           (pend.length && pend.includes(vales.cheque) && this.state.pendientes && new Date(vales.fecha).getMonth() + 1 === fechah) ||
@@ -100,9 +101,6 @@ export default class ListComponent extends Component {
           (comp.length && comp.includes(vales.estatusC) && this.state.comprobado && new Date(vales.fecha).getMonth() + 1 === fechah)
       }
     )
-
-    // No cambiar el state directamente cambiar
-    this.state.pp = filteredData
 
     const total1 = [0]
     filteredData.map(items => (
@@ -139,7 +137,7 @@ export default class ListComponent extends Component {
             style={{ border: 'none', background: 'transparent' }}
             label='Observaciones'
             name='prueba'
-            type='month'
+            type='date'
             value={this.state.prueba}
             onChange={this.handleChange.bind(this)}
           />

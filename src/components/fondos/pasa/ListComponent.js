@@ -92,7 +92,7 @@ export default class ListComponent extends Component {
   render () {
     const { auto, pend, noauto, comp } = this.state
     console.log(this.state.prueba)
-    var fechah = new Date(this.state.prueba).getMonth() + 2
+    var fechah = new Date(this.state.prueba).getMonth() + 1
     const filteredData = this.props.lista.filter(
       (vales) => {
         return (auto.length && auto.includes(vales.estatus) && this.state.autorizados && new Date(vales.fecha).getMonth() + 1 === fechah) ||
@@ -137,7 +137,7 @@ export default class ListComponent extends Component {
             style={{ border: 'none', background: 'transparent' }}
             label='Observaciones'
             name='prueba'
-            type='month'
+            type='date'
             value={this.state.prueba}
             onChange={this.handleChange.bind(this)}
           />

@@ -20,6 +20,7 @@ import Chip from '@material-ui/core/Chip'
 export default class FondoE extends Component {
   constructor (props) {
     super(props)
+    var URLactual = window.location
     var user = firebase.auth().currentUser
     var email
     if (user != null) {
@@ -96,7 +97,8 @@ export default class FondoE extends Component {
           done: false
         }
       ],
-      comprometidosp: ''
+      comprometidosp: '',
+      urlfire: String(URLactual).substr(-20)
     }
   }
 
@@ -262,8 +264,7 @@ export default class FondoE extends Component {
   }
 
   render() {
-    var URLactual = window.location
-    this.state.urlfire = String(URLactual).substr(-20)
+
     const { tipo_doc, realizo } = this.state
     const newArray = ['']
     const myObj = {}

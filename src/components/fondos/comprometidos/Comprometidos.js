@@ -8,11 +8,15 @@ import TableBody from '@material-ui/core/TableBody'
 import TableRow from '@material-ui/core/TableRow'
 import IconButton from '@material-ui/core/IconButton'
 import CheckIcon from '@material-ui/icons/Check'
+import Collapse from '@material-ui/core/Collapse'
 import AddIcon from '@material-ui/icons/Add'
 import Button from '@material-ui/core/Button'
 import Card from '@material-ui/core/Card'
+import Table from '@material-ui/core/Table'
 import Checkbox from '@material-ui/core/Checkbox'
+import Box from '@material-ui/core/Box'
 import List from '@material-ui/core/List'
+import Typography from '@material-ui/core/Typography'
 import ListItem from '@material-ui/core/ListItem'
 import ListItemText from '@material-ui/core/ListItemText'
 import ListItemIcon from '@material-ui/core/ListItemIcon'
@@ -27,6 +31,7 @@ import { Link } from 'react-router-dom'
 export default class Comprometidos extends Component {
   constructor (props) {
     super(props)
+    var URLactual = window.location
     this.unsubscribe = null
     this.state = {
       open: false,
@@ -60,7 +65,8 @@ export default class Comprometidos extends Component {
       ivar: 0,
       isrr: 0,
       idP: '',
-      ids: ''
+      ids: '',
+      urlfire: String(URLactual).substr(-20)
     }
   }
 
@@ -199,7 +205,8 @@ export default class Comprometidos extends Component {
           est: child.val().est,
           ben: child.val().ben,
           eg: child.val().eg,
-          comprobantes: child.val().comprobantes
+          comprobantes: child.val().comprobantes,
+          id: child.key
         })
       })
       this.setState({
@@ -455,10 +462,14 @@ export default class Comprometidos extends Component {
     alert('Tu solicitud fue enviada.')
   }
 
-  partida = ['','211001','211002','212001','212002','214001','215001','216001','217001','221001','221002','246001','246002','247001','249001','251001','253001','254001','255001','256001','261001','271001','272001','275001','291001','292001','311001','312001','313001','317001','318001','323002','334001','336001','336002','338001','351001','352001','355001','357001','358001','359001','361002','372001','375001','392006','394001']
+  partida = ['','211001','211002','212001','212002','214001','215001','216001',
+    '217001','221001','221002','246001','246002','247001','249001','251001','253001',
+    '254001','255001','256001','261001','271001','272001','275001','291001','292001',
+    '311001','312001','313001','317001','318001','323002','334001','336001','336002',
+    '338001','351001','352001','355001','357001','358001','359001','361002','372001',
+    '375001','392006','394001']
   rubro = ['','1501010','3101010','4301050']
   up = ['','01','02','03','04','05','06','07','08','09','10','11','12','13','14','15','16','17','18','20','21','22','23','24']
-  // municipio = ['','Acatlán','Acaxochitlán','Actopan','Agua Blanca de Iturbide','Ajacuba','Alfajayucan','Almoloya','Apan','El Arenal','Atitalaquia','Atlapexco','Atotonilco el Grande','Atotonilco de Tula','Calnali','Cardonal','Cuautepec de Hinojosa','Chapantongo','Chapulhuacán','Chilcuautla','Eloxochitlán','Emiliano Zapata','Epazoyucan','Franciso I. Madero','Huasca de Ocampo','Huautla','Huazalingo','Huehuetla','Huejutla de Reyes','Huichapan','Ixmiquilpan','Jacala de Ledezma','Jaltocán','Juárez Hidalgo','Lolotla','Metepec','San Agustín Metzquititlán','Metztitlán','Mineral del Chico','Mineral del Monte','La Misión','Mixquiahuala de Juárez','Molango de Escamilla','Nicolás Flores','Nopala de Villagrán','Omitlán de Juárez','San Felipe Orizatlán','Pacula','Pachuca de Soto','Pisaflores','Progreso de Obregón','Mineral de la Reforma','San Agustín Tlaxiaca','San Bartolo Tutotepec','San Salvador','Santiago de Anaya','Santiago Tulantepec de Lugo Guerrero','Singuilucan','Tasquillo','Tecozautla','Tenango de Doria','Tepeapulco','Tepehuacán de Guerrero','Tepeji del Río de Ocampo','Tepetitlán','Tetepango','Villa de Tezontepec','Tezontepec de Aldama','Tianguistengo','Tizayuca','Tlahuelilpan','Tlahuiltepa','Tlanalapa','Tlanchinol','Tlaxcoapan','Tolcayuca','Tula de Allende','Tulancingo de Bravo','Xochiatipan','Xochicoatlán','Yahualica','Zacualtipán de Ángeles','Zapotlán de Juárez','Zempoala','Zimapán']
   area = [
     '',
     'Procuraduría General de Justicia',
@@ -495,8 +506,6 @@ export default class Comprometidos extends Component {
   }
 
   render () {
-    var URLactual = window.location
-    this.state.urlfire = String(URLactual).substr(-20)
     var user = firebase.auth().currentUser
     var email
     if (user != null) {
@@ -733,9 +742,7 @@ export default class Comprometidos extends Component {
                   />
                 </div>
               </div>
-              {(admin === 'OMAR' || admin === 'MARCOS' || admin === 'KARINA' || admin === 'MIGUEL' || admin === 'TERESA' || admin === 'HECTOR' || admin === 'LILIA' || admin === 'CENELY') &&
-                customListLeft('Choices', left)
-              }
+                {customListLeft('Choices', left)}
             </Grid>
             <Grid item>
               <Grid container direction='column' alignItems='center'>
@@ -945,80 +952,157 @@ export default class Comprometidos extends Component {
                   </div>
                 )}
               </TableBody>
-              { this.state.comprometidosDos !== undefined ? this.state.comprometidosDos.map(comprometido =>
+              {this.state.comprometidosDos !== undefined ? this.state.comprometidosDos.map(comprometido =>
                 comprometido.partida ?
-                <TableRow key={comprometido.name} className='table-row-c'>
-                  <TableCell className='border-icon'>
-                    <IconButton size='small' className='border-des' onClick={this.toggleOpen.bind(this)}>
-                      <KeyboardArrowDownIcon />
-                    </IconButton>
-                  </TableCell>
-                  <TableCell className='border-table2'>
-                    <div className='font-tb'>
-                      {comprometido.partida}
-                    </div>
-                  </TableCell>
-                  <TableCell className='border-table2'>
-                    <div className='font-tb'>
-                      {comprometido.presupuestal}
-                    </div>
-                  </TableCell>
-                  <TableCell className='border-table2'>
-                    <div className='font-tb'>
-                      {comprometido.rubro}
-                    </div>
-                  </TableCell>
-                  <TableCell className='border-table-area'>
-                    <div className='font-tb'>
-                      {comprometido.area}
-                    </div>
-                  </TableCell>
-                  <TableCell className='border-table2'>
-                    <CurrencyFormat
-                      className='font-tb'
-                      displayType='text'
-                      prefix=' $ '
-                      thousandSeparator
-                      value={comprometido.importe_comp}
-                    />
-                  </TableCell>
-                  <TableCell className='border-table2'>
-                    <CurrencyFormat
-                      className='font-tb'
-                      displayType='text'
-                      prefix=' $ '
-                      thousandSeparator
-                      value={comprometido.iva}
-                    />
-                  </TableCell>
-                  <TableCell className='border-table2'>
-                    <CurrencyFormat
-                      className='font-tb'
-                      displayType='text'
-                      prefix=' $ '
-                      thousandSeparator
-                      value={comprometido.isr}
-                    />
-                  </TableCell>
-                  <TableCell className='border-table2'>
-                    <CurrencyFormat
-                      className='font-tb'
-                      style={{ textAlign: 'center' }}
-                      displayType='text'
-                      prefix=' $ '
-                      thousandSeparator
-                      value={(parseInt(comprometido.importe_comp) + parseInt(comprometido.iva) - parseInt(comprometido.isr)).toFixed(2)}
-                    />
-                  </TableCell>
-                  <TableCell className='border-icon'>
-                    <IconButton size='small' className='border-des' onClick={this.toggleOpen.bind(this)}>
-                      {this.state.open ?
-                        <KeyboardArrowUpIcon className='key-style' /> :
-                        <KeyboardArrowDownIcon className='key-style' />
-                      }
-                    </IconButton>
-                  </TableCell>
-                </TableRow> : null
+                <TableBody key={comprometido.id}>
+                  <TableRow className='table-row-c'>
+                    <TableCell className='border-icon'>
+                      <IconButton aria-label='expand row' size='small' className='border-des' onClick={this.toggleOpen.bind(this)}>
+                        {this.state.open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
+                      </IconButton>
+                    </TableCell>
+                    <TableCell className='border-table2'>
+                      <div className='font-tb'>
+                        {comprometido.partida}
+                      </div>
+                    </TableCell>
+                    <TableCell className='border-table2'>
+                      <div className='font-tb'>
+                        {comprometido.presupuestal}
+                      </div>
+                    </TableCell>
+                    <TableCell className='border-table2'>
+                      <div className='font-tb'>
+                        {comprometido.rubro}
+                      </div>
+                    </TableCell>
+                    <TableCell className='border-table-area'>
+                      <div className='font-tb'>
+                        {comprometido.area}
+                      </div>
+                    </TableCell>
+                    <TableCell className='border-table2'>
+                      <CurrencyFormat
+                        className='font-tb'
+                        displayType='text'
+                        prefix=' $ '
+                        thousandSeparator
+                        value={comprometido.importe_comp}
+                      />
+                    </TableCell>
+                    <TableCell className='border-table2'>
+                      <CurrencyFormat
+                        className='font-tb'
+                        displayType='text'
+                        prefix=' $ '
+                        thousandSeparator
+                        value={comprometido.iva}
+                      />
+                    </TableCell>
+                    <TableCell className='border-table2'>
+                      <CurrencyFormat
+                        className='font-tb'
+                        displayType='text'
+                        prefix=' $ '
+                        thousandSeparator
+                        value={comprometido.isr}
+                      />
+                    </TableCell>
+                    <TableCell className='border-table2'>
+                      <CurrencyFormat
+                        className='font-tb'
+                        style={{ textAlign: 'center' }}
+                        displayType='text'
+                        prefix=' $ '
+                        thousandSeparator
+                        value={(parseInt(comprometido.importe_comp) + parseInt(comprometido.iva) - parseInt(comprometido.isr)).toFixed(2)}
+                      />
+                    </TableCell>
+                    <TableCell className='border-icon'>
+                      <IconButton size='small' className='border-des'>
+                        <KeyboardArrowUpIcon className='key-style' />
+                      </IconButton>
+                    </TableCell>
+                  </TableRow>
+                  {/* <TableRow>
+                    <TableCell
+                      style={{
+                        paddingBottom: 0,
+                        paddingTop: 0,
+                        borderTop: 0,
+                        borderLeft: '0px solid #fff',
+                        borderRight: '0px solid #fff'
+                      }}
+                    >
+                      <Collapse in={this.state.open} timeout='auto' unmountOnExit>
+                        <Box margin={1} style={{ left: '24px', position: 'sticky', background: 'white', width: '38.5%' }}>
+                          <Typography variant="h6" gutterBottom component="div" >
+                            Archivos
+                          </Typography>
+                          <Table size="small" aria-label="purchases">
+                            <TableHead>
+                              <TableRow>
+                                <TableCell
+                                  style={{
+                                    borderLeft: '0px solid #fff',
+                                    borderTop: '0px solid #fff',
+                                    borderRight: '0px solid #fff',
+                                  }}
+                                >
+                                  <b>Observaciones</b>
+                                </TableCell>
+                              </TableRow>
+                            </TableHead>
+                            <TableBody>
+                              <TableRow>
+                                <TableCell
+                                  style={{
+                                    borderLeft: '0px solid #fff',
+                                    borderTop: '0px solid #fff',
+                                    borderRight: '0px solid #fff'
+                                  }}
+                                >
+                                </TableCell>
+                              </TableRow>
+                            </TableBody>
+                            <TableBody>
+                              <TableRow>
+                                <TableCell
+                                  style={{
+                                    borderLeft: '0px solid #fff',
+                                    borderTop: '0px solid #fff',
+                                    borderRight: '0px solid #fff'
+                                  }}
+                                >
+                                  <b>Facturas</b>
+                                </TableCell>
+                              </TableRow>
+                            </TableBody>
+                            <TableBody>
+                              <TableRow>
+
+                              </TableRow>
+                              <TableRow>
+                                <TableCell
+                                  style={{
+                                    borderLeft: '0px solid #fff',
+                                    borderTop: '0px solid #fff',
+                                    borderRight: '0px solid #fff'
+                                  }}
+                                >
+                                  <b>Recibos</b>
+                                </TableCell>
+                              </TableRow>
+                              <TableRow>
+
+                              </TableRow>
+                            </TableBody>
+                          </Table>
+                        </Box>
+                      </Collapse>
+                    </TableCell>
+                  </TableRow> */}
+                </TableBody> : null
               ): null }
             </Paper>
           </Grid>
