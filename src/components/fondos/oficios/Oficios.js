@@ -133,7 +133,7 @@ export default class Oficios extends Component {
                 </div>
                 <div className='fcc-i'>
                   <p className='fimpre'>Leyendas Alusivas</p>
-                  <Popup
+                  {/* <Popup
                     trigger={<buttom className='btn-imp-of'>Imprimir</buttom>}
                     modal
                     closeOnDocumentClick>
@@ -432,7 +432,7 @@ export default class Oficios extends Component {
                       )}
                       </div>
                     </div>
-                  </Popup>
+                  </Popup> */}
                 </div>
               </div>
             }
@@ -457,7 +457,7 @@ export default class Oficios extends Component {
                 </div>
                 <div className='fcc-i'>
                   <p className='fimpre'>Leyenda Alusivas</p>
-                  <Popup
+                  {/* <Popup
                     trigger={<buttom className='btn-imp-of'>Imprimir</buttom>}
                     modal
                     closeOnDocumentClick>
@@ -756,7 +756,7 @@ export default class Oficios extends Component {
                       )}
                       </div>
                     </div>
-                  </Popup>
+                  </Popup> */}
                 </div>
               </div>
             }
@@ -781,7 +781,7 @@ export default class Oficios extends Component {
                 </div>
                 <div className='fcc-i'>
                   <p className='fimpre'>Leyendas Alusivas</p>
-                  <Popup
+                  {/* <Popup
                     trigger={<buttom className='btn-imp-of'>Imprimir</buttom>}
                     modal
                     closeOnDocumentClick>
@@ -1012,7 +1012,7 @@ export default class Oficios extends Component {
                       )}
                       </div>
                     </div>
-                  </Popup>
+                  </Popup> */}
                 </div>
               </div>
             }

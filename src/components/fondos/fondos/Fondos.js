@@ -297,12 +297,6 @@ export default class Fondos extends Component {
     'A1D11, Centralizada'
   ]
 
-  onChange = (e) => {
-    const state = this.state
-    state[e.target.name] = e.target.value
-    this.setState(state)
-  }
-
   render () {
     const { fondo, fecha, tipo_doc, oficio_aut, no_oficio, no_lici, importe, desc,
       beneficiario, realizo, requisicion, pedido, no_proyecto, poliza, cfe, nscfe,
@@ -360,7 +354,7 @@ export default class Fondos extends Component {
                   <div className='cont-w-data'>
                     {this.state.fondos.map(fondos =>
                       <div className='cont-map-fondo'>
-                        {this.state.searchF === fondos.fondo &&
+                        {(this.state.searchF === fondos.fondo && (fondos.realizo === this.state.realizo || this.state.realizo === 'MIGUEL')) &&
                           <div className='cont-map-data'>
                             <div className='data-w-search'>
                               <p className='data-m-f'>{fondos.tipo_doc}</p>
