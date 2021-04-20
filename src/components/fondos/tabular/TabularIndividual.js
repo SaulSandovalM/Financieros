@@ -6,6 +6,7 @@ import firebase from '../../../Firebase'
 export default class TabularIndi extends Component {
   constructor (props) {
     super(props)
+    var URLactual = window.location
     this.unsubscribe = null
     this.state = {
       comprometidos: [
@@ -15,6 +16,7 @@ export default class TabularIndi extends Component {
           done: false
         }
       ],
+      urlfire: String(URLactual).substr(-20)
     }
   }
 
@@ -33,8 +35,6 @@ export default class TabularIndi extends Component {
   }
 
   render () {
-    var URLactual = window.location
-    this.state.urlfire = String(URLactual).substr(-20)
     var comprobantes = this.state.comprometido
     comprobantes.map(item => item.comprobantes)
     console.log(comprobantes.map(item => item.comprobantes))

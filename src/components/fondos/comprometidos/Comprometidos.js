@@ -27,6 +27,7 @@ import { Link } from 'react-router-dom'
 export default class Comprometidos extends Component {
   constructor (props) {
     super(props)
+    var URLactual = window.location
     this.unsubscribe = null
     this.state = {
       open: false,
@@ -60,7 +61,8 @@ export default class Comprometidos extends Component {
       ivar: 0,
       isrr: 0,
       idP: '',
-      ids: ''
+      ids: '',
+      urlfire: String(URLactual).substr(-20)
     }
   }
 
@@ -495,8 +497,6 @@ export default class Comprometidos extends Component {
   }
 
   render () {
-    var URLactual = window.location
-    this.state.urlfire = String(URLactual).substr(-20)
     var user = firebase.auth().currentUser
     var email
     if (user != null) {

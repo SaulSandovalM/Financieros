@@ -4,7 +4,7 @@ import ReactToPrint from 'react-to-print'
 import firebase from '../../../Firebase'
 import { NumberAsString } from '../fondos/NumerosLetras'
 import logo2 from '../../../img/logo.jpg'
-import lpgjh from '../../../img/logo-PGJH.jpg'
+// import lpgjh from '../../../img/logo-PGJH.jpg'
 import sus from '../../../img/sus.jpg'
 import CurrencyFormat from 'react-currency-format'
 import Popup from 'reactjs-popup'
@@ -12,6 +12,7 @@ import Popup from 'reactjs-popup'
 export default class Oficios extends Component {
   constructor (props) {
     super(props)
+    var URLactual = window.location
     this.unsubscribe = null
     this.state = {
       fondo: {},
@@ -33,7 +34,8 @@ export default class Oficios extends Component {
       up: '',
       perro: '',
       desc: '',
-      hojas: ''
+      hojas: '',
+      urlfire: String(URLactual).substr(-20)
     }
   }
 
@@ -67,8 +69,6 @@ export default class Oficios extends Component {
   }
 
   render () {
-    var URLactual = window.location
-    this.state.urlfire = String(URLactual).substr(-20)
     var today = new Date()
     var meses = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre']
     var diasSemana = ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado']

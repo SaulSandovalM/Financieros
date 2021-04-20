@@ -6,6 +6,7 @@ import firebase from '../../../Firebase'
 export default class Tabular extends Component {
   constructor (props) {
     super(props)
+    var URLactual = window.location
     this.state = {
       comprometidos: [
         {
@@ -13,7 +14,8 @@ export default class Tabular extends Component {
           name: 'Cargando ...',
           done: false
         }
-      ]
+      ],
+      urlfire: String(URLactual).substr(-20)
     }
   }
 
@@ -32,8 +34,6 @@ export default class Tabular extends Component {
   }
 
   render () {
-    var URLactual = window.location
-    this.state.urlfire = String(URLactual).substr(-20)
     const totalImporte = []
     this.state.comprometidos.map(comprometidos =>
       comprometidos ?
