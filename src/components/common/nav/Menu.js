@@ -69,7 +69,6 @@ const Menu = ({ open, ...props }) => {
       {admin === 'MARTHA' && <Nav />}
       {admin === 'JUAN' && <Nav />}
       {admin === 'LIZBETH' && <Nav />}
-      {admin === 'JUAN' && <Nav />}
     </StyledMenu>
   )
 }
