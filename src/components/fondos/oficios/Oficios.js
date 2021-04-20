@@ -5,6 +5,7 @@ import firebase from '../../../Firebase'
 import { NumberAsString } from '../fondos/NumerosLetras'
 import logo2 from '../../../img/logo.jpg'
 import lpgjh from '../../../img/logo-PGJH.jpg'
+import sus from '../../../img/sus.jpg'
 import CurrencyFormat from 'react-currency-format'
 import Popup from 'reactjs-popup'
 
@@ -153,7 +154,7 @@ export default class Oficios extends Component {
                           <div style={{ width: '100%' }}>
                             <div className='title-ga'>
                               <div style={{ width: '15%' }}>
-                                <img className='pgjh' src={lpgjh} alt='' style={{ width: '100%' }} />
+                                <img className='pgjh' src={sus} alt='' style={{ width: '100%' }} />
                               </div>
                               <div style={{ width: '70%' }}>
                                 <p className='text-titulo-ga'>PROCURADURÍA GENERAL DE JUSTICA DE HIDALGO</p>
@@ -477,7 +478,7 @@ export default class Oficios extends Component {
                           <div style={{ width: '100%' }}>
                             <div className='title-ga'>
                               <div style={{ width: '15%' }}>
-                                <img className='pgjh' src={lpgjh} alt='' style={{ width: '100%' }} />
+                                <img className='pgjh' src={sus} alt='' style={{ width: '100%' }} />
                               </div>
                               <div style={{ width: '70%' }}>
                                 <p className='text-titulo-ga'>PROCURADURÍA GENERAL DE JUSTICA DE HIDALGO</p>
@@ -801,7 +802,7 @@ export default class Oficios extends Component {
                           <div style={{ width: '100%' }}>
                             <div className='title-ga'>
                               <div style={{ width: '15%' }}>
-                                <img className='pgjh' src={lpgjh} alt='' style={{ width: '100%' }} />
+                                <img className='pgjh' src={sus} alt='' style={{ width: '100%' }} />
                               </div>
                               <div style={{ width: '70%' }}>
                                 <p className='text-titulo-ga'>PROCURADURÍA GENERAL DE JUSTICA DE HIDALGO</p>
@@ -1023,7 +1024,7 @@ export default class Oficios extends Component {
             <div className='header-ofi'>
               <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                 <div style={{ display: 'flex', justifyContent: 'center', flexDirection: 'column' }}>
-                  <img className='pgjh' style={{ marginLeft: '-20px', width: 'auto' }} src={lpgjh} alt='' />
+                  <img className='pgjh' style={{ marginLeft: '-20px', width: 'auto' }} src={sus} alt='' />
                 </div>
                 <img className='ime' src={logo2} alt='' />
               </div>
@@ -1159,7 +1160,7 @@ export default class Oficios extends Component {
               <div style={{ width: '100%' }}>
                 <div className='title-ga'>
                   <div>
-                    <img className='pgjh' src={lpgjh} alt='' />
+                    <img className='pgjh' src={sus} alt='' />
                   </div>
                   <div>
                     <p className='text-titulo-ga'>PROCURADURÍA GENERAL DE JUSTICA DE HIDALGO</p>
@@ -1272,7 +1273,7 @@ export default class Oficios extends Component {
           <div className='pppdf-subdad' ref={el => (this.ofi = el)} style={{ zIndex: '2', position: 'absolute' }}>
             <div className='fondo-procu' style={{ display: 'flex', justifyContent: 'space-between', marginTop: '20px' }}>
               <div style={{ display: 'flex', justifyContent: 'center', flexDirection: 'column' }}>
-                <img className='pgjh' style={{ marginLeft: '-20px', width: 'auto' }} src={lpgjh} alt='' />
+                <img className='pgjh' style={{ marginLeft: '-20px', width: 'auto' }} src={sus} alt='' />
               </div>
               <img className='ime' src={logo2} alt='' />
             </div>
@@ -1371,7 +1372,7 @@ export default class Oficios extends Component {
               <div style={{ width: '100%' }}>
                 <div className='title-ga'>
                   <div>
-                    <img className='pgjh' src={lpgjh} alt='' />
+                    <img className='pgjh' src={sus} alt='' />
                   </div>
                   <div>
                     <p className='text-titulo-ga'>PROCURADURÍA GENERAL DE JUSTICA DE HIDALGO</p>
@@ -1484,7 +1485,7 @@ export default class Oficios extends Component {
             <div className='header-ofi'>
               <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                 <div style={{ display: 'flex', justifyContent: 'center', flexDirection: 'column' }}>
-                  <img className='pgjh' style={{ marginLeft: '-20px', width: 'auto' }} src={lpgjh} alt='' />
+                  <img className='pgjh' style={{ marginLeft: '-20px', width: 'auto' }} src={sus} alt='' />
                 </div>
                 <img className='ime' src={logo2} alt='' />
               </div>
@@ -1570,7 +1571,7 @@ export default class Oficios extends Component {
           <div ref={el => (this.sp = el)} style={{ zIndex: '2', position: 'absolute' }}>
             <div style={{ width: '100%', height: '100px', position: 'fixed', top: 0 }}>
               <div className='title-so-o'>
-                <img className='pgjh' src={lpgjh} alt='' />
+                <img className='pgjh' src={sus} alt='' />
                 <p>SOLICITUD PROGRAMÁTICA DEL GASTO</p>
                 <img className='ims' src={logo2} alt='' />
               </div>
@@ -2063,7 +2064,7 @@ export default class Oficios extends Component {
                 <div style={{ width: '100%' }}>
                   <div className='title-ga'>
                     <div>
-                      <img className='pgjh' src={lpgjh} alt='' />
+                      <img className='pgjh' src={sus} alt='' />
                     </div>
                     <div>
                       <p className='text-titulo-ga'>PROCURADURÍA GENERAL DE JUSTICA DE HIDALGO</p>
