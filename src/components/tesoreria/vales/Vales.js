@@ -197,7 +197,7 @@ export default class Vales extends Component {
       recibos: this.inputRecibos.value,
       sc: this.inputSC.value,
       fecha: this.state.fecha,
-      fechaF: this.state.fechaF,
+      fechaF: this.inputFechaF.value,
       autorizo: this.inputAutorizo.value,
       personaR: this.inputPersona.value,
       estatus: this.state.estatus,
@@ -281,8 +281,8 @@ export default class Vales extends Component {
       factura: this.state.factura ? this.state.factura : item.factura,
       recibos: this.state.recibos ? this.state.recibos : item.recibos,
       sc: this.state.sc !== ' ' ? this.state.sc : item.sc,
-      fecha: this.state.fecha ? this.state.fecha : item.fecha,
-      fechaF: this.state.fecha ? this.state.fecha : item.fechaF,
+      fecha: item.fecha,
+      fechaF: item.fechaF,
       autorizo: this.state.autorizo ? this.state.autorizo : item.autorizo,
       personaR: this.state.personaR ? this.state.personaR : item.personaR,
       estatus: item.estatus,
@@ -339,9 +339,6 @@ export default class Vales extends Component {
   }
 
   render () {
-    var actuFecha = this.state.fecha
-    
-
     return (
       <div className='container-back-v'>
         <div style={{ display: 'flex', justifyContent: 'center' }}>
@@ -358,12 +355,12 @@ export default class Vales extends Component {
                     onChange={this.handleChange.bind(this)}
                   />
                 </div>
-                <div style={{ width: '60%' }}>
+                <div style={{ width: '50%' }}>
                 {this.state.vales.map(item =>
                   <div style={{ width: '100%' }}>
                     {parseInt(this.state.searchF) === item.vale &&
                       <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                        <div style={{ width: '33%' }}>
+                        <div style={{ width: '46%' }}>
                           <p className='sub-c-p'>Ingrese la Fecha de Rein/Reem</p>
                           <input
                             type='date'
@@ -375,7 +372,7 @@ export default class Vales extends Component {
                             defaultValue={item.rein}
                           />
                         </div>
-                        <div style={{ width: '33%' }}>
+                        <div style={{ width: '46%' }}>
                           <p className='sub-c-p'>Ingrese la Fecha de Pago</p>
                           <input
                             type='date'
@@ -385,18 +382,6 @@ export default class Vales extends Component {
                             name='fechaP'
                             onChange={this.handleChange.bind(this)}
                             defaultValue={item.fechaP}
-                          />
-                        </div>
-                        <div style={{ width: '33%' }}>
-                          <p className='sub-c-p'>Actualizar Fecha</p>
-                          <input
-                            type='date'
-                            style={{ width: '100%' }}
-                            id='fecha'
-                            className='field'
-                            name='fecha'
-                            onChange={this.handleChange.bind(this)}
-                            defaultValue={item.fecha}
                           />
                         </div>
                       </div>
@@ -623,7 +608,14 @@ export default class Vales extends Component {
                 </div>
                 <div className='firma-content'>
                   <div className='f-fecha'>
-                    <p className='b-fecha-i' style={{ fontSize: '15px' }}>{this.state.fechaF}</p>
+                    <input
+                      className='b-fecha-i'
+                      style={{ fontSize: '15px' }}
+                      name='fechaF'
+                      onChange={this.handleChange.bind(this)}
+                      value={this.state.fechaF}
+                      ref={fechaF => this.inputFechaF = fechaF}
+                    />
                     <p className='font-size-f'>Fecha</p>
                   </div>
                   <div className='f-fecha'>
