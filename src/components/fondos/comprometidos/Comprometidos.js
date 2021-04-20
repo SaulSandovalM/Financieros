@@ -379,10 +379,8 @@ export default class Comprometidos extends Component {
       transferencia: item.transferencia
     }
     firebase.database().ref().update(updates)
-    // sacar el id
     const { area, total, iva, isr, importe } = this.state
-    //var dir = history.location.pathname.slice(15)
-    const wishRef = firebase.database().ref(`fondos/${this.state.urlfire}`) // ${dir}
+    const wishRef = firebase.database().ref(`fondos/${this.state.urlfire}`)
     console.log(wishRef)
     wishRef.once('value').then(snapshot => {
       var updatedWish = snapshot.val()
@@ -610,7 +608,7 @@ export default class Comprometidos extends Component {
       const iva = parseFloat(this.state.iva)
       const isr = parseFloat(this.state.isr)
       const total = importe + iva - isr
-      this.state.total = total.toFixed(2)
+      this.state.total = parseFloat(total).toFixed(2)
       this.state.contra = right
     }
 
