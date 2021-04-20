@@ -37,7 +37,7 @@ export default class Tabular extends Component {
     const totalImporte = []
     this.state.comprometidos.map(comprometidos =>
       comprometidos ?
-        totalImporte.push(parseFloat(comprometidos.importe_comp))
+        totalImporte.push(parseFloat(comprometidos.total))
       : null
     )
     const reducer = (a, b) => a + b
@@ -87,7 +87,7 @@ export default class Tabular extends Component {
                           </div>
                           <div className='tab-pui-border'>
                             <p className='tab-p-m'>$</p>
-                            <p className='tab-p-m'>{comprometidos.importe_comp}</p>
+                            <p className='tab-p-m'>{comprometidos.total}</p>
                           </div>
                         </div>
                       </div> : null

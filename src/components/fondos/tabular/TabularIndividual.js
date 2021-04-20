@@ -35,10 +35,6 @@ export default class TabularIndi extends Component {
   }
 
   render () {
-    var comprobantes = this.state.comprometido
-    comprobantes.map(item => item.comprobantes)
-    console.log(comprobantes.map(item => item.comprobantes))
-
     return (
       <div style={{margin: '80px'}}>
         <ReactToPrint
@@ -82,10 +78,16 @@ export default class TabularIndi extends Component {
                           <div className='tab-pui'>
                             <p className='tab-p-m'>{comprometidos.presupuestal}</p>
                           </div>
-                            <div className='tab-pui-border'>
-                              <p className='tab-p-m'>$</p>
-                              <p className='tab-p-m'>{comprometidos.total}</p>
-                            </div>
+                          <div style={{ display: 'flex', flexDirection: 'column', width: '30%' }}>
+                            {comprometidos.comprobantes !== undefined ?
+                              comprometidos.comprobantes.map(item =>
+                                <div className='tab-pui-border' style={{ width: '100%' }}>
+                                  <p className='tab-p-m'>$</p>
+                                  <p className='tab-p-m'>{item.total}</p>
+                                </div>
+                              ) : null
+                            }
+                          </div>
                         </div>
                       </div>
 

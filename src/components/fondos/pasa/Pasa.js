@@ -59,62 +59,6 @@ export default class Pasa extends Component {
     });
   }
 
-  handleOnChange1 (event) {
-    for (var i = 0; i < event.target.files.length; i++) {
-      const file = event.target.files[0]
-      var xml = file
-      var reader = new FileReader()
-      reader.onload = function (event) {
-        var XMLParser = require('react-xml-parser')
-        var xml = new XMLParser().parseFromString(event.target.result)
-        const data = {
-          'total': xml.attributes['Total'],
-          'subtotal': xml.attributes['SubTotal'] ? xml.attributes['SubTotal'] : 0,
-          'folio': xml.attributes['Folio'] ? xml.attributes['Folio'] : '0',
-          'nombre': xml.children['0'].attributes['Nombre'],
-          'importe': xml.children['2'].children['0'].attributes['Importe'],
-          'iva': xml.children['3'].attributes['TotalImpuestosTrasladados'],
-          'isr': xml.children['3'].attributes['TotalImpuestosRetenidos'] ? xml.children['3'].attributes['TotalImpuestosRetenidos'] : 0,
-          'fecha': xml.children['4'].children['0'].attributes['FechaTimbrado'],
-          'uuid': xml.children['4'].children['0'].attributes['UUID'],
-          'estatus': 'sin asignar'
-        }
-        fetch(xml).then(res => res.text()).then(xml => {
-          fetch('https://financieros-78cb0.firebaseio.com/xml.json', {
-            method: 'POST',
-            headers: {
-              'Accept': 'application/json',
-              'Content-Type': 'application/json',
-            },
-              body: JSON.stringify(data),
-          })
-        })
-      }
-      reader.readAsText(xml)
-    }
-  }
-
-  handleOnChange2 (event) {
-    for (let i = 0; i < event.target.files.length; i++) {
-      const file = event.target.files[i]
-      const storageRef = firebase.storage().ref(`comprobacion/${file.name}`)
-      const task = storageRef.put(file)
-      console.log(this.state.filef)
-      task.on('state_changed', (snapshot) => {
-        let percentage = (snapshot.bytesTransferred / snapshot.totalBytes) * 100
-        this.setState({
-          pdf2: percentage
-        })
-      }, error => {
-        console.error(error.message)
-      }, () => storageRef.getDownloadURL().then(url =>  {
-        this.setState({
-          filefactura: [...this.state.filefactura, { url: url, nombre: file.name }],
-        })
-      }))
-    }
-  }
-
   listenForItems = (itemsRef) => {
     itemsRef.on('value', (snap) => {
       var lista = []
@@ -251,7 +195,6 @@ export default class Pasa extends Component {
   }
 
   render () {
-    window.location.hash = 'no-back-button'
     return (
       <div className='container-valeslist'>
         <div className='margin-f-a'>

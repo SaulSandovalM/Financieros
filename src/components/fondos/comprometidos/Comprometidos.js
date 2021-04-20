@@ -733,9 +733,7 @@ export default class Comprometidos extends Component {
                   />
                 </div>
               </div>
-              {(admin === 'OMAR' || admin === 'MARCOS' || admin === 'KARINA' || admin === 'MIGUEL' || admin === 'TERESA' || admin === 'HECTOR' || admin === 'LILIA' || admin === 'CENELY') &&
-                customListLeft('Choices', left)
-              }
+                {customListLeft('Choices', left)}
             </Grid>
             <Grid item>
               <Grid container direction='column' alignItems='center'>
