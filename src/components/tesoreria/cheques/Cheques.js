@@ -251,9 +251,11 @@ export default class Cheques extends Component {
                   <input
                     className='input-sc-cheque'
                     id='numCheque'
+                    name='numCheque'
                     required
                     ref={numCheque => this.inputCheque = numCheque}
-                    value={this.state.contadorCheques.storyCount}
+                    value={this.state.numCheque}
+                    onChange={this.handleChange.bind(this)}
                   />
                 </div>
                 <div className='input-row-cheque'>

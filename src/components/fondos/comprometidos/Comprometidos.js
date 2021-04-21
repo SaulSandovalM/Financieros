@@ -8,25 +8,20 @@ import TableBody from '@material-ui/core/TableBody'
 import TableRow from '@material-ui/core/TableRow'
 import IconButton from '@material-ui/core/IconButton'
 import CheckIcon from '@material-ui/icons/Check'
-import Collapse from '@material-ui/core/Collapse'
 import AddIcon from '@material-ui/icons/Add'
 import Button from '@material-ui/core/Button'
 import Card from '@material-ui/core/Card'
-import Table from '@material-ui/core/Table'
 import Checkbox from '@material-ui/core/Checkbox'
-import Box from '@material-ui/core/Box'
 import List from '@material-ui/core/List'
-import Typography from '@material-ui/core/Typography'
 import ListItem from '@material-ui/core/ListItem'
 import ListItemText from '@material-ui/core/ListItemText'
 import ListItemIcon from '@material-ui/core/ListItemIcon'
 import CurrencyFormat from 'react-currency-format'
 import Fab from '@material-ui/core/Fab'
 import firebase from '../../../Firebase'
-import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown'
-import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp'
 import Dropzone from 'react-dropzone'
 import { Link } from 'react-router-dom'
+import ListComponent from './ListComponent'
 
 export default class Comprometidos extends Component {
   constructor (props) {
@@ -499,12 +494,6 @@ export default class Comprometidos extends Component {
     'Fiscalía Especializada en Materia de Desaparición Forzada de Personas'
   ]
 
-  toggleOpen () {
-    this.setState({
-      open: !this.state.open
-    })
-  }
-
   render () {
     var user = firebase.auth().currentUser
     var email
@@ -954,155 +943,8 @@ export default class Comprometidos extends Component {
               </TableBody>
               {this.state.comprometidosDos !== undefined ? this.state.comprometidosDos.map(comprometido =>
                 comprometido.partida ?
-                <TableBody key={comprometido.id}>
-                  <TableRow className='table-row-c'>
-                    <TableCell className='border-icon'>
-                      <IconButton aria-label='expand row' size='small' className='border-des' onClick={this.toggleOpen.bind(this)}>
-                        {this.state.open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
-                      </IconButton>
-                    </TableCell>
-                    <TableCell className='border-table2'>
-                      <div className='font-tb'>
-                        {comprometido.partida}
-                      </div>
-                    </TableCell>
-                    <TableCell className='border-table2'>
-                      <div className='font-tb'>
-                        {comprometido.presupuestal}
-                      </div>
-                    </TableCell>
-                    <TableCell className='border-table2'>
-                      <div className='font-tb'>
-                        {comprometido.rubro}
-                      </div>
-                    </TableCell>
-                    <TableCell className='border-table-area'>
-                      <div className='font-tb'>
-                        {comprometido.area}
-                      </div>
-                    </TableCell>
-                    <TableCell className='border-table2'>
-                      <CurrencyFormat
-                        className='font-tb'
-                        displayType='text'
-                        prefix=' $ '
-                        thousandSeparator
-                        value={comprometido.importe_comp}
-                      />
-                    </TableCell>
-                    <TableCell className='border-table2'>
-                      <CurrencyFormat
-                        className='font-tb'
-                        displayType='text'
-                        prefix=' $ '
-                        thousandSeparator
-                        value={comprometido.iva}
-                      />
-                    </TableCell>
-                    <TableCell className='border-table2'>
-                      <CurrencyFormat
-                        className='font-tb'
-                        displayType='text'
-                        prefix=' $ '
-                        thousandSeparator
-                        value={comprometido.isr}
-                      />
-                    </TableCell>
-                    <TableCell className='border-table2'>
-                      <CurrencyFormat
-                        className='font-tb'
-                        style={{ textAlign: 'center' }}
-                        displayType='text'
-                        prefix=' $ '
-                        thousandSeparator
-                        value={(parseInt(comprometido.importe_comp) + parseInt(comprometido.iva) - parseInt(comprometido.isr)).toFixed(2)}
-                      />
-                    </TableCell>
-                    <TableCell className='border-icon'>
-                      <IconButton size='small' className='border-des'>
-                        <KeyboardArrowUpIcon className='key-style' />
-                      </IconButton>
-                    </TableCell>
-                  </TableRow>
-                  {/* <TableRow>
-                    <TableCell
-                      style={{
-                        paddingBottom: 0,
-                        paddingTop: 0,
-                        borderTop: 0,
-                        borderLeft: '0px solid #fff',
-                        borderRight: '0px solid #fff'
-                      }}
-                    >
-                      <Collapse in={this.state.open} timeout='auto' unmountOnExit>
-                        <Box margin={1} style={{ left: '24px', position: 'sticky', background: 'white', width: '38.5%' }}>
-                          <Typography variant="h6" gutterBottom component="div" >
-                            Archivos
-                          </Typography>
-                          <Table size="small" aria-label="purchases">
-                            <TableHead>
-                              <TableRow>
-                                <TableCell
-                                  style={{
-                                    borderLeft: '0px solid #fff',
-                                    borderTop: '0px solid #fff',
-                                    borderRight: '0px solid #fff',
-                                  }}
-                                >
-                                  <b>Observaciones</b>
-                                </TableCell>
-                              </TableRow>
-                            </TableHead>
-                            <TableBody>
-                              <TableRow>
-                                <TableCell
-                                  style={{
-                                    borderLeft: '0px solid #fff',
-                                    borderTop: '0px solid #fff',
-                                    borderRight: '0px solid #fff'
-                                  }}
-                                >
-                                </TableCell>
-                              </TableRow>
-                            </TableBody>
-                            <TableBody>
-                              <TableRow>
-                                <TableCell
-                                  style={{
-                                    borderLeft: '0px solid #fff',
-                                    borderTop: '0px solid #fff',
-                                    borderRight: '0px solid #fff'
-                                  }}
-                                >
-                                  <b>Facturas</b>
-                                </TableCell>
-                              </TableRow>
-                            </TableBody>
-                            <TableBody>
-                              <TableRow>
-
-                              </TableRow>
-                              <TableRow>
-                                <TableCell
-                                  style={{
-                                    borderLeft: '0px solid #fff',
-                                    borderTop: '0px solid #fff',
-                                    borderRight: '0px solid #fff'
-                                  }}
-                                >
-                                  <b>Recibos</b>
-                                </TableCell>
-                              </TableRow>
-                              <TableRow>
-
-                              </TableRow>
-                            </TableBody>
-                          </Table>
-                        </Box>
-                      </Collapse>
-                    </TableCell>
-                  </TableRow> */}
-                </TableBody> : null
+                  <ListComponent key={comprometido.id} comprometido={comprometido} />
+                : null
               ): null }
             </Paper>
           </Grid>

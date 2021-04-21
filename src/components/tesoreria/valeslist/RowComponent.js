@@ -57,7 +57,7 @@ export default class RowComponent extends Component {
           </TableCell>
           <TableCell className='table-v-num2' style={{ width: '100px' }}>
             <CurrencyFormat
-              value={this.props.item.cantidad}
+              value={parseFloat(this.props.item.cantidad).toFixed(2)}
               displayType='text'
               prefix=' $'
               thousandSeparator
@@ -66,7 +66,7 @@ export default class RowComponent extends Component {
           </TableCell>
           <TableCell className='table-v-num2' style={{ width: '100px' }}>
             <CurrencyFormat
-              value={this.props.item.cantidadc}
+              value={parseFloat(this.props.item.cantidadc).toFixed(2)}
               displayType='text'
               prefix=' $'
               thousandSeparator
@@ -76,7 +76,7 @@ export default class RowComponent extends Component {
           <TableCell className='table-v-num2' style={{ width: '150px' }}>
             {this.props.item.cantidadr < 0 ?
               <CurrencyFormat
-                value={this.props.item.cantidadr}
+                value={parseFloat(this.props.item.cantidadr).toFixed(2)}
                 displayType='text'
                 prefix=' $'
                 thousandSeparator
@@ -99,7 +99,7 @@ export default class RowComponent extends Component {
           <TableCell className='table-v-num2' style={{ width: '150px' }}>
             {this.props.item.cantidadr > 0 ?
               <CurrencyFormat
-                value={this.props.item.cantidadr}
+                value={parseFloat(this.props.item.cantidadr).toFixed(2)}
                 displayType='text'
                 prefix=' $'
                 thousandSeparator

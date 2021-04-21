@@ -231,7 +231,7 @@ export default class ListComponent extends Component {
               <TableCell className='table-v-num' style={{ width: '100px' }}>
                 <b>
                   <CurrencyFormat
-                    value={tcantidad1}
+                    value={parseFloat(tcantidad1).toFixed(2)}
                     displayType='text'
                     prefix=' $'
                     thousandSeparator
@@ -242,7 +242,7 @@ export default class ListComponent extends Component {
               <TableCell className='table-v-num' style={{ width: '100px' }}>
                 <b>
                   <CurrencyFormat
-                    value={tcantidad2}
+                    value={parseFloat(tcantidad2).toFixed(2)}
                     displayType='text'
                     prefix=' $'
                     thousandSeparator
@@ -253,7 +253,7 @@ export default class ListComponent extends Component {
               <TableCell className='table-v-num' style={{ width: '150px' }}>
                 <b>
                   <CurrencyFormat
-                    value={tcantidad3}
+                    value={parseFloat(tcantidad3).toFixed(2)}
                     displayType='text'
                     prefix=' $'
                     thousandSeparator
@@ -264,7 +264,7 @@ export default class ListComponent extends Component {
               <TableCell className='table-v-num' style={{ width: '150px' }}>
                 <b>
                   <CurrencyFormat
-                    value={tcantidad4}
+                    value={parseFloat(tcantidad4).toFixed(2)}
                     displayType='text'
                     prefix=' $'
                     thousandSeparator
