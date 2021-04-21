@@ -53,6 +53,8 @@ export default class Fondos extends Component {
       admin = 'HECTOR'
     } else if (email === 'omar@procuraduria.com') {
       admin = 'OMAR'
+    } else if (email === 'lizbeth@procuraduria.com') {
+      admin = 'LIZBETH'
     }
     var today = new Date()
     var dd = today.getDate()
@@ -420,7 +422,7 @@ export default class Fondos extends Component {
                 <div className='div-f2'>
                   <div className='div-con'>
                     <p className='p-label'>Tipo de Documento</p>
-                    {(realizo === 'MIGUEL' || realizo === 'ELOY' || realizo === 'TERESA' || realizo === 'MARTHA') &&
+                    {(realizo === 'MIGUEL' || realizo === 'ELOY' || realizo === 'TERESA' || realizo === 'MARTHA' || realizo === 'LIZBETH') &&
                       <select
                         className='select-f'
                         id='tipo_doc'
