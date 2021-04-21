@@ -521,6 +521,8 @@ export default class Comprometidos extends Component {
       admin = 'HECTOR'
     } else if (email === 'omar@procuraduria.com') {
       admin = 'OMAR'
+    } else if (email === 'lizbeth@procuraduria.com') {
+      admin = 'LIZBETH'
     }
 
     function not (a, b) {
@@ -623,7 +625,7 @@ export default class Comprometidos extends Component {
               <ListItemText className='list-align'><b>Fecha</b></ListItemText>
               <ListItemText className='list-align2'><b>Nombre</b></ListItemText>
             </ListItem>
-            {admin === 'MIGUEL' || admin === 'TERESA' || admin === 'ELOY' || admin === 'MARTHA' || admin === 'MARCOS' ?
+            {admin === 'MIGUEL' || admin === 'TERESA' || admin === 'ELOY' || admin === 'MARTHA' || admin === 'MARCOS' || admin === 'LIZBETH' ?
             filterData.map((value) => {
               return (
                 <ListItem key={value} button onClick={handleToggle(value)}>
