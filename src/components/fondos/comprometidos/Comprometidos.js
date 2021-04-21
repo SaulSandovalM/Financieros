@@ -279,12 +279,10 @@ export default class Comprometidos extends Component {
     for (var i = 0; i < event.target.files.length; i++) {
       const file = event.target.files[i]
       const xmlp = file
-      console.log(xmlp)
       var reader = new FileReader()
       reader.onload = function (event) {
         var XMLParser = require('react-xml-parser')
         var xml = new XMLParser().parseFromString(event.target.result)
-        console.log(xml)
         let data = {
           'total': xml.attributes['Total'] ? xml.attributes['Total'] : 'No encuentra total',
           'subtotal': xml.attributes['SubTotal'] ? xml.attributes['SubTotal'] : (parseFloat(xml.attributes['Total']) + parseFloat(xml.children['3'].attributes['TotalImpuestosRetenidos'] ? xml.children['3'].attributes['TotalImpuestosRetenidos'] : 0)) - parseFloat(xml.children['3'].attributes['TotalImpuestosTrasladados']),
@@ -298,7 +296,6 @@ export default class Comprometidos extends Component {
           'estatus': 'sin asignar',
           'tipo': 'directo'
         }
-        console.log(data)
         fetch(xml).then(res => res.text()).then(xml => {
           fetch('https://financieros-78cb0.firebaseio.com/xml.json', {
             method: 'POST',

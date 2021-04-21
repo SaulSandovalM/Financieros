@@ -7,7 +7,10 @@ import IconButton from '@material-ui/core/IconButton'
 import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown'
 import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp'
 import CurrencyFormat from 'react-currency-format'
+import Box from '@material-ui/core/Box'
 import Collapse from '@material-ui/core/Collapse'
+import Typography from '@material-ui/core/Typography'
+import TableHead from '@material-ui/core/TableHead'
 
 export default class ListComponent extends Component {
   constructor (props) {
@@ -86,7 +89,7 @@ export default class ListComponent extends Component {
               displayType='text'
               prefix=' $ '
               thousandSeparator
-              value={(parseInt(this.props.comprometido.importe_comp) + parseInt(this.props.comprometido.iva) - parseInt(this.props.comprometido.isr)).toFixed(2)}
+              value={this.props.comprometido.total}
             />
           </TableCell>
           <TableCell className='border-icon'>
@@ -106,73 +109,124 @@ export default class ListComponent extends Component {
             }}
             colSpan={12}
           >
-            {this.props.comprometido.comprobantes.map(item =>
-              <Collapse key={item} in={this.state.open} timeout='auto' unmountOnExit>
-                <TableCell className='border-icon'>
-                  <IconButton aria-label='expand row' size='small' className='border-des' />
-                </TableCell>
-                <TableCell className='border-table2'>
-                  <div className='font-tb'>
-                    {item.folio}
-                  </div>
-                </TableCell>
-                <TableCell className='border-table2'>
-                  <div className='font-tb'>
-                    {item.fecha.substr(0, 10)}
-                  </div>
-                </TableCell>
-                <TableCell className='border-table2'>
-                  <div className='font-tb'>
-                    {item.uuid.substr(0, 8)}
-                  </div>
-                </TableCell>
-                <TableCell className='border-table-area'>
-                  <div className='font-tb'>
-                    {item.nombre}
-                  </div>
-                </TableCell>
-                <TableCell className='border-table2'>
-                  <CurrencyFormat
-                    className='font-tb'
-                    displayType='text'
-                    prefix=' $ '
-                    thousandSeparator
-                    value={parseFloat(item.subtotal).toFixed(2)}
-                  />
-                </TableCell>
-                <TableCell className='border-table2'>
-                  <CurrencyFormat
-                    className='font-tb'
-                    displayType='text'
-                    prefix=' $ '
-                    thousandSeparator
-                    value={parseFloat(item.iva).toFixed(2)}
-                  />
-                </TableCell>
-                <TableCell className='border-table2'>
-                  <CurrencyFormat
-                    className='font-tb'
-                    displayType='text'
-                    prefix=' $ '
-                    thousandSeparator
-                    value={parseFloat(item.isr).toFixed(2)}
-                  />
-                </TableCell>
-                <TableCell className='border-table2'>
-                  <CurrencyFormat
-                    className='font-tb'
-                    style={{ textAlign: 'center' }}
-                    displayType='text'
-                    prefix=' $ '
-                    thousandSeparator
-                    value={parseFloat(item.total).toFixed(2)}
-                  />
-                </TableCell>
-                <TableCell className='border-icon'>
-                  <IconButton size='small' className='border-des' />
-                </TableCell>
-              </Collapse>
-            )}
+            <Collapse in={this.state.open} timeout='auto' unmountOnExit>
+              <Box margin={1}>
+                <Typography variant='h6' gutterBottom component='div'>
+                  <div style={{ fontWeight: 'bold' }}>Facturas</div>
+                </Typography>
+                <TableHead>
+                  <TableRow>
+                    <TableCell className='border-icon'>
+                      <IconButton aria-label='expand row' size='small' className='border-des' />
+                    </TableCell>
+                    <TableCell className='border-table2'>
+                      <div className='font-tb'>
+                        <div style={{ fontWeight: 'bold' }}>Folio</div>
+                      </div>
+                    </TableCell>
+                    <TableCell className='border-table2'>
+                      <div className='font-tb'>
+                        <div style={{ fontWeight: 'bold' }}>Fecha</div>
+                      </div>
+                    </TableCell>
+                    <TableCell className='border-table2'>
+                      <div className='font-tb'>
+                        <div style={{ fontWeight: 'bold' }}>Uid</div>
+                      </div>
+                    </TableCell>
+                    <TableCell className='border-table-area'>
+                      <div className='font-tb'>
+                        <div style={{ fontWeight: 'bold' }}>Nombre</div>
+                      </div>
+                    </TableCell>
+                    <TableCell className='border-table2'>
+                      <div style={{ fontWeight: 'bold' }}>Importe</div>
+                    </TableCell>
+                    <TableCell className='border-table2'>
+                      <div style={{ fontWeight: 'bold' }}>Iva</div>
+                    </TableCell>
+                    <TableCell className='border-table2'>
+                      <div style={{ fontWeight: 'bold' }}>Isr</div>
+                    </TableCell>
+                    <TableCell className='border-table2'>
+                      <div style={{ fontWeight: 'bold' }}>Total</div>
+                    </TableCell>
+                    <TableCell className='border-icon'>
+                      <IconButton size='small' className='border-des' />
+                    </TableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {this.props.comprometido.comprobantes.map(item =>
+                    <TableRow key={item}>
+                      <TableCell className='border-icon'>
+                        <IconButton aria-label='expand row' size='small' className='border-des' />
+                      </TableCell>
+                      <TableCell className='border-table2'>
+                        <div className='font-tb'>
+                          {item.folio}
+                        </div>
+                      </TableCell>
+                      <TableCell className='border-table2'>
+                        <div className='font-tb'>
+                          {item.fecha.substr(0, 10)}
+                        </div>
+                      </TableCell>
+                      <TableCell className='border-table2'>
+                        <div className='font-tb'>
+                          {item.uuid.substr(0, 8)}
+                        </div>
+                      </TableCell>
+                      <TableCell className='border-table-area'>
+                        <div className='font-tb'>
+                          {item.nombre}
+                        </div>
+                      </TableCell>
+                      <TableCell className='border-table2'>
+                        <CurrencyFormat
+                          className='font-tb'
+                          displayType='text'
+                          prefix=' $ '
+                          thousandSeparator
+                          value={parseFloat(item.subtotal).toFixed(2)}
+                        />
+                      </TableCell>
+                      <TableCell className='border-table2'>
+                        <CurrencyFormat
+                          className='font-tb'
+                          displayType='text'
+                          prefix=' $ '
+                          thousandSeparator
+                          value={parseFloat(item.iva).toFixed(2)}
+                        />
+                      </TableCell>
+                      <TableCell className='border-table2'>
+                        <CurrencyFormat
+                          className='font-tb'
+                          displayType='text'
+                          prefix=' $ '
+                          thousandSeparator
+                          value={parseFloat(item.isr).toFixed(2)}
+                        />
+                      </TableCell>
+                      <TableCell className='border-table2'>
+                        <CurrencyFormat
+                          className='font-tb'
+                          style={{ textAlign: 'center' }}
+                          displayType='text'
+                          prefix=' $ '
+                          thousandSeparator
+                          value={parseFloat(item.total).toFixed(2)}
+                        />
+                      </TableCell>
+                      <TableCell className='border-icon'>
+                        <IconButton size='small' className='border-des' />
+                      </TableCell>
+                    </TableRow>
+                  )}
+                </TableBody>
+              </Box>
+            </Collapse>
           </TableCell>
         </TableRow>
       </TableBody>
