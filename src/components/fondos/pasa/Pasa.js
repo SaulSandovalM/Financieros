@@ -182,12 +182,6 @@ export default class Pasa extends Component {
     })
   }
 
-  handleAddClick = () => {
-    this.setState({
-      recibosList: [...this.state.recibosList, { folio: 'Recibo', nombre: '', importe: '', iva: '0', isr: '0', fecha: '', estatus: '', subtotal: '0', total: '0', uuid: 'Recibo' }]
-    })
-  }
-
   toggleCheckAuto (event) {
     this.setState({
       pasa: !this.state.pasa
