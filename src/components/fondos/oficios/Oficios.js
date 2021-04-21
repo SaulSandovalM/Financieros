@@ -1532,7 +1532,7 @@ export default class Oficios extends Component {
                 {this.state.comprometidos.map(comprometidos =>
                   comprometidos.comprobantes !== undefined ?
                     comprometidos.comprobantes.map(item =>
-                      ', ' + item.uuid.slice(31)
+                      ', ' + item.uuid.substr(0, 8)
                     )
                   : null
                 )}, para el trámite de pago a favor del proveedor {this.state.fondo.beneficiario}, por

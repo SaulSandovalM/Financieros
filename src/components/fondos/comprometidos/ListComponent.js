@@ -7,11 +7,7 @@ import IconButton from '@material-ui/core/IconButton'
 import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown'
 import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp'
 import CurrencyFormat from 'react-currency-format'
-import Table from '@material-ui/core/Table'
 import Collapse from '@material-ui/core/Collapse'
-import Box from '@material-ui/core/Box'
-import Typography from '@material-ui/core/Typography'
-import TableHead from '@material-ui/core/TableHead'
 
 export default class ListComponent extends Component {
   constructor (props) {
@@ -30,7 +26,7 @@ export default class ListComponent extends Component {
   render () {
     return (
       <TableBody>
-        <TableRow className='table-row-c'>
+        <TableRow>
           <TableCell className='border-icon'>
             <IconButton aria-label='expand row' size='small' className='border-des' onClick={this.toggleOpen.bind(this)}>
               {this.state.open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
@@ -108,155 +104,78 @@ export default class ListComponent extends Component {
               borderLeft: '0px solid #fff',
               borderRight: '0px solid #fff'
             }}
+            colSpan={12}
           >
-            <Collapse in={this.state.open} timeout='auto' unmountOnExit>
-              <Box margin={1} style={{ left: '24px', position: 'sticky', background: 'white', width: '38.5%' }}>
-                <Typography variant="h6" gutterBottom component="div" >
-                  Archivos
-                </Typography>
-                <Table size="small" aria-label="purchases">
-                  <TableHead>
-                    <TableRow>
-                      <TableCell
-                        style={{
-                          borderLeft: '0px solid #fff',
-                          borderTop: '0px solid #fff',
-                          borderRight: '0px solid #fff',
-                        }}
-                      >
-                        <b>Observaciones</b>
-                      </TableCell>
-                    </TableRow>
-                  </TableHead>
-                  <TableBody>
-                    <TableRow>
-                      <TableCell
-                        style={{
-                          borderLeft: '0px solid #fff',
-                          borderTop: '0px solid #fff',
-                          borderRight: '0px solid #fff'
-                        }}
-                      >
-                      </TableCell>
-                    </TableRow>
-                  </TableBody>
-                  <TableBody>
-                    <TableRow>
-                      <TableCell
-                        style={{
-                          borderLeft: '0px solid #fff',
-                          borderTop: '0px solid #fff',
-                          borderRight: '0px solid #fff'
-                        }}
-                      >
-                        <b>Facturas</b>
-                      </TableCell>
-                    </TableRow>
-                  </TableBody>
-                  <TableBody>
-                    <TableRow>
-
-                    </TableRow>
-                    <TableRow>
-                      <TableCell
-                        style={{
-                          borderLeft: '0px solid #fff',
-                          borderTop: '0px solid #fff',
-                          borderRight: '0px solid #fff'
-                        }}
-                      >
-                        <b>Recibos</b>
-                      </TableCell>
-                    </TableRow>
-                    <TableRow>
-
-                    </TableRow>
-                  </TableBody>
-                </Table>
-              </Box>
-            </Collapse>
+            {this.props.comprometido.comprobantes.map(item =>
+              <Collapse key={item} in={this.state.open} timeout='auto' unmountOnExit>
+                <TableCell className='border-icon'>
+                  <IconButton aria-label='expand row' size='small' className='border-des' />
+                </TableCell>
+                <TableCell className='border-table2'>
+                  <div className='font-tb'>
+                    {item.folio}
+                  </div>
+                </TableCell>
+                <TableCell className='border-table2'>
+                  <div className='font-tb'>
+                    {item.fecha.substr(0, 10)}
+                  </div>
+                </TableCell>
+                <TableCell className='border-table2'>
+                  <div className='font-tb'>
+                    {item.uuid.substr(0, 8)}
+                  </div>
+                </TableCell>
+                <TableCell className='border-table-area'>
+                  <div className='font-tb'>
+                    {item.nombre}
+                  </div>
+                </TableCell>
+                <TableCell className='border-table2'>
+                  <CurrencyFormat
+                    className='font-tb'
+                    displayType='text'
+                    prefix=' $ '
+                    thousandSeparator
+                    value={parseFloat(item.subtotal).toFixed(2)}
+                  />
+                </TableCell>
+                <TableCell className='border-table2'>
+                  <CurrencyFormat
+                    className='font-tb'
+                    displayType='text'
+                    prefix=' $ '
+                    thousandSeparator
+                    value={parseFloat(item.iva).toFixed(2)}
+                  />
+                </TableCell>
+                <TableCell className='border-table2'>
+                  <CurrencyFormat
+                    className='font-tb'
+                    displayType='text'
+                    prefix=' $ '
+                    thousandSeparator
+                    value={parseFloat(item.isr).toFixed(2)}
+                  />
+                </TableCell>
+                <TableCell className='border-table2'>
+                  <CurrencyFormat
+                    className='font-tb'
+                    style={{ textAlign: 'center' }}
+                    displayType='text'
+                    prefix=' $ '
+                    thousandSeparator
+                    value={parseFloat(item.total).toFixed(2)}
+                  />
+                </TableCell>
+                <TableCell className='border-icon'>
+                  <IconButton size='small' className='border-des' />
+                </TableCell>
+              </Collapse>
+            )}
           </TableCell>
         </TableRow>
       </TableBody>
     )
   }
 }
-
-{/* <TableRow>
-  <TableCell
-    style={{
-      paddingBottom: 0,
-      paddingTop: 0,
-      borderTop: 0,
-      borderLeft: '0px solid #fff',
-      borderRight: '0px solid #fff'
-    }}
-  >
-    <Collapse in={this.state.open} timeout='auto' unmountOnExit>
-      <Box margin={1} style={{ left: '24px', position: 'sticky', background: 'white', width: '38.5%' }}>
-        <Typography variant="h6" gutterBottom component="div" >
-          Archivos
-        </Typography>
-        <Table size="small" aria-label="purchases">
-          <TableHead>
-            <TableRow>
-              <TableCell
-                style={{
-                  borderLeft: '0px solid #fff',
-                  borderTop: '0px solid #fff',
-                  borderRight: '0px solid #fff',
-                }}
-              >
-                <b>Observaciones</b>
-              </TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            <TableRow>
-              <TableCell
-                style={{
-                  borderLeft: '0px solid #fff',
-                  borderTop: '0px solid #fff',
-                  borderRight: '0px solid #fff'
-                }}
-              >
-              </TableCell>
-            </TableRow>
-          </TableBody>
-          <TableBody>
-            <TableRow>
-              <TableCell
-                style={{
-                  borderLeft: '0px solid #fff',
-                  borderTop: '0px solid #fff',
-                  borderRight: '0px solid #fff'
-                }}
-              >
-                <b>Facturas</b>
-              </TableCell>
-            </TableRow>
-          </TableBody>
-          <TableBody>
-            <TableRow>
-
-            </TableRow>
-            <TableRow>
-              <TableCell
-                style={{
-                  borderLeft: '0px solid #fff',
-                  borderTop: '0px solid #fff',
-                  borderRight: '0px solid #fff'
-                }}
-              >
-                <b>Recibos</b>
-              </TableCell>
-            </TableRow>
-            <TableRow>
-
-            </TableRow>
-          </TableBody>
-        </Table>
-      </Box>
-    </Collapse>
-  </TableCell>
-</TableRow> */}
