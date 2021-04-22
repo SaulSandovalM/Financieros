@@ -99,9 +99,17 @@ export default class Oficios extends Component {
     }
 
     var nombreDesa = this.state.comprometidos.map(comprometidos => comprometidos.up)
+    // console.log(nombreDesa)
+    //
+    // var indicePartida = this.state.comprometidos.map((comprometidos, index) => index)
+    // console.log(indicePartida)
+    //
+    // var prueba2 = this.state.comprometidos.map(comprometidos => comprometidos.up ? (comprometidos.comprobantes !== undefined ? comprometidos.comprobantes.map(item => item) : null) : null )
+    // // console.log(prueba2)
+    //
+    // const pruebafirebase = firebase.database().ref(`fondos/${this.state.urlfire}/comprometido`)
 
-    var prueba2 = this.state.comprometidos.map(comprometidos => comprometidos.up ? (comprometidos.comprobantes !== undefined ? comprometidos.comprobantes.map(item => item) : null) : null )
-    console.log(prueba2)
+    // firebase.database().ref(`fondos/${this.state.urlfire}/comprometido/${indice}/comprobantes/${indice}`)
 
     return (
       <div style={{ width: '100%', height: '100%', overflow: 'hidden', position: 'absolute' }}>
@@ -197,10 +205,10 @@ export default class Oficios extends Component {
               </div>
             </div>
           }
-          <button
+          {/* <button
             onClick={() => this.handleMostrar()}>
               Flex Quote
-            </button>
+            </button> */}
         </div>
 
         {this.state.mostrar ?
@@ -379,9 +387,9 @@ export default class Oficios extends Component {
                                       <textarea
                                         className='all-tab-l'
                                         type='text'
-                                        key={index}
-                                        value={item}
-                                        onChange={this.handleChange.bind(this)}
+                                        name={index}
+                                        value={item.descripcion}
+                                        onKeyUp={this.handleChange.bind(this)}
                                       />
                                     </div>
                                   </div>
@@ -437,6 +445,7 @@ export default class Oficios extends Component {
                               <textarea
                                 className='all-tab-l'
                                 type='text'
+                                disabled
                                 onKeyUp={this.handleChange.bind(this)}
                               />
                             </div>
@@ -570,7 +579,7 @@ export default class Oficios extends Component {
                         </div>
                         {comprometidos.comprobantes !== undefined ?
                           <div>
-                            {comprometidos.comprobantes.map((item, index) =>
+                            {comprometidos.comprobantes.map(item =>
                               <div style={{ width: '100%' }}>
                                 <div style={{ width: '100%', display: 'flex' }}>
                                   <div
@@ -617,12 +626,9 @@ export default class Oficios extends Component {
                                       borderRight: '1px solid black',
                                       borderBottom: '1px solid black'
                                     }}>
-                                    <textarea
-                                      className='all-tab-l'
-                                      type='text'
-                                      key={index}
-                                      onChange={this.handleChange.bind(this)}
-                                    />
+                                    <div>
+                                      {item.descripcion}
+                                    </div>
                                   </div>
                                 </div>
                               </div>
