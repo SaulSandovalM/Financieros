@@ -11,7 +11,7 @@ import Box from '@material-ui/core/Box'
 import Collapse from '@material-ui/core/Collapse'
 import Typography from '@material-ui/core/Typography'
 import TableHead from '@material-ui/core/TableHead'
-import DeleteIcon from '@material-ui/icons/Delete'
+// import DeleteIcon from '@material-ui/icons/Delete'
 
 export default class ListComponent extends Component {
   constructor (props) {
@@ -94,9 +94,7 @@ export default class ListComponent extends Component {
             />
           </TableCell>
           <TableCell className='border-icon'>
-            <IconButton size='small' className='border-des'>
-              <KeyboardArrowUpIcon className='key-style' />
-            </IconButton>
+            <IconButton size='small' className='border-des' />
           </TableCell>
         </TableRow>
         <TableRow>
@@ -221,9 +219,7 @@ export default class ListComponent extends Component {
                         />
                       </TableCell>
                       <TableCell className='border-icon'>
-                        <IconButton size='small' className='border-des'>
-                          <DeleteIcon style={{ color: 'red' }} />
-                        </IconButton>
+                        <IconButton size='small' className='border-des' />
                       </TableCell>
                     </TableRow>
                   )}

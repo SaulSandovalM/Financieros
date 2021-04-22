@@ -103,6 +103,8 @@ export default class Oficios extends Component {
       prueba[i] = i
     }
 
+    var nombreDesa = this.state.comprometidos.map(comprometidos => comprometidos.up)
+
     return (
       <div>
           <div style={{ zIndex: '3', background: '#f4f4f4', width: '100%', position: 'fixed', height: '100vh' }}>
@@ -1732,7 +1734,75 @@ export default class Oficios extends Component {
                         'Fiscalía de Desaparición Forzada y Desaparición por Terceros')
                         :
                         ''
-                       : null
+                       :
+                       (nombreDesa[1] === '01' &&
+                       'Procuraduría General de Justicia')
+                       ||
+                       (nombreDesa[1] === '02' &&
+                       'Subprocuraduría de Procedimientos Penales Región Oriente')
+                       ||
+                       (nombreDesa[1] === '03' &&
+                       'Fiscalía Especializada para la atención de Delitos cometidos contra la Libertad de Expresión, Periodistas y Personas defensoras de los Derechos Humanos')
+                       ||
+                       (nombreDesa[1] === '04' &&
+                       'Dirección General para la Atención de los Asuntos del Sistema Tradicional')
+                       ||
+                       (nombreDesa[1] === '05' &&
+                       'Fiscalía Especializada en Delitos Electorales')
+                       ||
+                       (nombreDesa[1] === '06' &&
+                       'Subprocuraduría de Derechos Humanos y Servicios a la Comunidad')
+                       ||
+                       (nombreDesa[1] === '07' &&
+                       'Centro de Justicia Restaurativa Penal Poniente')
+                       ||
+                       (nombreDesa[1] === '08' &&
+                       'Fiscalía para la Atención de Delitos de Género')
+                       ||
+                       (nombreDesa[1] === '09' &&
+                       'Visitaduría General')
+                       ||
+                       (nombreDesa[1] === '10' &&
+                       'Dirección General de Servicios Periciales')
+                       ||
+                       (nombreDesa[1] === '11' &&
+                       'Centro de Operación Estratégica')
+                       ||
+                       (nombreDesa[1] === '12' &&
+                       'Unidad Especializada en el Combate al Secuestro')
+                       ||
+                       (nombreDesa[1] === '13' &&
+                       'Dirección General de Administración y Finanzas')
+                       ||
+                       (nombreDesa[1] === '14' &&
+                       'Fiscalía Especializada para la atención de los Delitos de Trata de Personas')
+                       ||
+                       (nombreDesa[1] === '15' &&
+                       'Subprocuraduría de Procedimientos Penales Región Poniente')
+                       ||
+                       (nombreDesa[1] === '16' &&
+                       'Centro de Atención Temprana Poniente')
+                       ||
+                       (nombreDesa[1] === '17' &&
+                       'Dirección General de Investigación y Litigación Poniente')
+                       ||
+                       (nombreDesa[1] === '18' &&
+                       'Dirección General de la Policía Investigadora')
+                       ||
+                       (nombreDesa[1] === '20' &&
+                       'Centro de Atención Temprana Oriente')
+                       ||
+                       (nombreDesa[1] === '21' &&
+                       'Centro de Justicia Restaurativa Penal Oriente')
+                       ||
+                       (nombreDesa[1] === '22' &&
+                       'Dirección General de Investigación y Litigación Oriente')
+                       ||
+                       (nombreDesa[1] === '23' &&
+                       'Fiscalía Especializada en Delitos de Corrupción')
+                       ||
+                       (nombreDesa[1] === '24' &&
+                       'Fiscalía de Desaparición Forzada y Desaparición por Terceros')
                     }
                     </p>
                   )}
