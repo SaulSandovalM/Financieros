@@ -7,7 +7,6 @@ import logo2 from '../../../img/logo.jpg'
 // import lpgjh from '../../../img/logo-PGJH.jpg'
 import sus from '../../../img/sus.jpg'
 import CurrencyFormat from 'react-currency-format'
-import Popup from 'reactjs-popup'
 
 export default class Oficios extends Component {
   constructor (props) {
@@ -106,7 +105,7 @@ export default class Oficios extends Component {
     var nombreDesa = this.state.comprometidos.map(comprometidos => comprometidos.up)
 
     return (
-      <div>
+      <div style={{ width: '100%', height: '100%', overflow: 'hidden', position: 'absolute' }}>
           <div style={{ zIndex: '3', background: '#f4f4f4', width: '100%', position: 'fixed', height: '100vh' }}>
             {this.state.fondo.tipo_doc === 'Fondo Revolvente' && this.state.fondo.no_lici === ' ' &&
               <div className='m-f'>
@@ -136,306 +135,10 @@ export default class Oficios extends Component {
                 </div>
                 <div className='fcc-i'>
                   <p className='fimpre'>Leyendas Alusivas</p>
-                  <Popup
-                    trigger={<buttom className='btn-imp-of'>Imprimir</buttom>}
-                    modal
-                    closeOnDocumentClick>
-                    <div style={{ height: '100%', overflow: 'scroll' }}>
-                      <ReactToPrint
-                        trigger={() =>
-                          <div className='c-b-i'>
-                            <buttom className='btn-imp-of'>Imprimir</buttom>
-                          </div>
-                          }
-                        content={() => this.la}
-                      />
-                      <div ref={el => (this.la = el)} style={{ zIndex: '2', width: '100%', height: '100%'}}>
-                      {this.state.comprometidos.map(comprometidos =>
-                        comprometidos.up ?
-                        <div className='lll'>
-                          <div style={{ width: '100%' }}>
-                            <div className='title-ga'>
-                              <div style={{ width: '15%' }}>
-                                <img className='pgjh' src={sus} alt='' style={{ width: '100%' }} />
-                              </div>
-                              <div style={{ width: '70%' }}>
-                                <p className='text-titulo-ga'>PROCURADURÍA GENERAL DE JUSTICA DE HIDALGO</p>
-                                  <p className='text-titulo-ga'>
-                                    {(comprometidos.up === '01' &&
-                                      'Atención y seguimiento a peticiones recibidas en el despacho del procurador atendidas')
-                                      ||
-                                      (comprometidos.up === '02' &&
-                                      'Casos penales de la región oriente resueltas')
-                                      ||
-                                      (comprometidos.up === '03' &&
-                                      'Delitos cometidos en contra de la libertad de expresión, periodistas y personas defensoras de los derechos humanos investigados')
-                                      ||
-                                      (comprometidos.up === '04' &&
-                                      'Averiguaciones previas del sistema tradicional concluidas')
-                                      ||
-                                      (comprometidos.up === '05' &&
-                                      'Casos penales en materia de delitos electorales resueltos')
-                                      ||
-                                      (comprometidos.up === '06' &&
-                                      'Casos penales determinados, concluidos o resueltos en delitos que atenten contra la mujer y la familia')
-                                      ||
-                                      (comprometidos.up === '07' &&
-                                      'Acuerdos reparatorios generados a través de la aplicación de los mecanismos alternativos de solución de controversias en materia penal en la región poniente')
-                                      ||
-                                      (comprometidos.up === '08' &&
-                                      'Investigación y supervisión de los casos penales con motivo de feminicidio')
-                                      ||
-                                      (comprometidos.up === '09' &&
-                                      'Quejas y denuncias por la posible comisión de conductas indebidas en las que incurran las y los servidores públicos atendidas')
-                                      ||
-                                      (comprometidos.up === '10' &&
-                                      'Intervenciones periciales a autoridades de procuración de justicia para una correcta integración del expediente en casos penales entregados')
-                                      ||
-                                      (comprometidos.up === '11' &&
-                                      'Casos penales del delito de narcomenudeo resueltos')
-                                      ||
-                                      (comprometidos.up === '12' &&
-                                      'Casos penales atendidos por los delistos de secuentro y extorsión')
-                                      ||
-                                      (comprometidos.up === '13' &&
-                                      'Gestión administrativa de recursos humanos,financiera, materiales, de informática, de archivo, de calidad, de aportaciones federales, planeación estratégica realizada')
-                                      ||
-                                      (comprometidos.up === '14' &&
-                                      'Determinación y/o resolución de los casos penales de los delitos de trata de personas, lenocinio y delitos conexos')
-                                      ||
-                                      (comprometidos.up === '15' &&
-                                      'Casos penales de la región poniente resueltas')
-                                      ||
-                                      (comprometidos.up === '16' &&
-                                      'Atenciones ciudadanas en los módulos de atención temprana en la región poniente brindadas')
-                                      ||
-                                      (comprometidos.up === '17' &&
-                                      'Determinación en las carpetas de investigación en las unidades de investigación de la regiones poniente')
-                                      ||
-                                      (comprometidos.up === '18' &&
-                                      'Investigación policial ejecutada')
-                                      ||
-                                      (comprometidos.up === '20' &&
-                                      'Atenciones ciudadanas en los módulos de atención temprana en la región poniente brindadas')
-                                      ||
-                                      (comprometidos.up === '21' &&
-                                      'Acuerdos reparatorios generados a traves de la aplicación de los mecanismos alternativos de solución de controversias en materia penal en la región oriente')
-                                      ||
-                                      (comprometidos.up === '22' &&
-                                      'Determinación en las carpetas de investigación en las unidades de investigación de la regiones oriente')
-                                      ||
-                                      (comprometidos.up === '23' &&
-                                      'Delitos de corrupción resueltos')
-                                      ||
-                                      (comprometidos.up === '24' &&
-                                      'Casos penales determinados, concluidos o resueltos de delitos en materia de desaparición forzada de personas cometidos por particulares, delitos vinculados y de personas no localizadas realizados')
-                                    }
-                                  </p>
-                                <p className='text-titulo-ga'>{comprometidos.partida}</p>
-                              </div>
-                              <div style={{ width: '15%', display: 'flex', justifyCOntent: 'center', flexDirection: 'column' }}>
-                                <div style={{ display: 'flex', justifyContent: 'flex-end', height: '100%' }}>
-                                  <img className='ims' src={logo2} alt='' style={{ height: '100%' }} />
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                          <div className='faderinpo'>
-                            <div className='contenedor-ga'>
-                              <div className='contenedor-1 '>
-                                <div className='interno-ga2'>
-                                  <p className='text-gai'>Gasto a Comprobar</p>
-                                  <input className='input-gai' type='checkbox' disabled />
-                                </div>
-                                <div className='interno-ga2'>
-                                  <p className='text-gai'>Comprobacion de Gastos</p>
-                                  <input className='input-gai' type='checkbox' disabled />
-                                </div>
-                              </div>
-                              <div className='contenedor-1'>
-                                <div className='interno-ga2'>
-                                  <p className='text-gai'>Creación de Fondo Revolvente</p>
-                                  <input className='input-gai' type='checkbox' disabled />
-                                </div>
-                                <div className='interno-ga2'>
-                                  <p className='text-gai'>Fondo Revolvente</p>
-                                  <input className='input-gai' type='checkbox' checked />
-                                </div>
-                                <div className='interno-ga2'>
-                                  <p className='text-gai'>Cancelacion de Fondo Revolvente</p>
-                                  <input className='input-gai' type='checkbox' disabled />
-                                </div>
-                              </div>
-                              <div className='contenedor-1'>
-                                <div className='interno-ga2'>
-                                  <p className='text-gai'>Viaticos Anticipados</p>
-                                  <input className='input-gai' type='checkbox' disabled />
-                                </div>
-                                <div className='interno-ga2'>
-                                  <p className='text-gai'>Viaticos Devengados</p>
-                                  <input className='input-gai' type='checkbox' disabled />
-                                </div>
-                                <div className='interno-ga2'>
-                                  <p className='text-gai'>Comprobación de Viáticos</p>
-                                  <input className='input-gai' type='checkbox' disabled />
-                                </div>
-                              </div>
-                              <div className='contenedor-1'>
-                                <div className='interno-ga2'>
-                                  <p className='text-gai'>Pago a Proveedores</p>
-                                  <input className='input-gai' type='checkbox' disabled />
-                                </div>
-                                <div className='interno-ga2'>
-                                  <p className='text-gai'>Pago a Proveedore por Requisición</p>
-                                  <input className='input-gai' type='checkbox' disabled />
-                                </div>
-                                <div className='interno-ga2'>
-                                  <p className='text-gai'>Transferencias</p>
-                                  <input className='input-gai' type='checkbox' disabled />
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                          <div>
-                            <div className='tabla-ga'>
-                              <div className='tablagas'>
-                                <div style={{ display: 'flex', width: '100%' }}>
-                                  <div
-                                    className='alltabla-ga'
-                                    style={{ width: '35%', textAlign: 'center', display: 'flex', justifyContent: 'center', flexDirection: 'column' }}>
-                                    Folio de factura
-                                  </div>
-                                  <div
-                                    className='alltabla-ga'
-                                    style={{ width: '10%', textAlign: 'center', display: 'flex', justifyContent: 'center', flexDirection: 'column' }}>
-                                    Importe
-                                  </div>
-                                  <div
-                                    className='alltabla-ga'
-                                    style={{ width: '55%', textAlign: 'center', display: 'flex', justifyContent: 'center', flexDirection: 'column' }}>
-                                    Leyenda alusiva al gasto
-                                  </div>
-                                </div>
-                                {comprometidos.comprobantes !== undefined ?
-                                <div>
-                                  {comprometidos.comprobantes.map(item =>
-                                    <div style={{ width: '100%' }}>
-                                        <div style={{ width: '100%', display: 'flex' }}>
-                                          <div
-                                            className='all-tab-f'
-                                            style={{
-                                              width: '35%',
-                                              textAlign: 'center',
-                                              display: 'flex',
-                                              justifyContent: 'center',
-                                              flexDirection: 'column',
-                                              borderLeft: '1px solid black',
-                                              borderRight: '1px solid black',
-                                              borderBottom: '1px solid black'
-                                            }}>
-                                            {item.uuid}
-                                          </div>
-                                          <div
-                                            className='all-tab-f'
-                                            style={{
-                                              width: '10%',
-                                              textAlign: 'center',
-                                              display: 'flex',
-                                              justifyContent: 'center',
-                                              flexDirection: 'column',
-                                              borderRight: '1px solid black',
-                                              borderBottom: '1px solid black'
-                                            }}>
-                                            <CurrencyFormat
-                                              style={{ fontSize: '12px' }}
-                                              value={item.total}
-                                              displayType='text'
-                                              thousandSeparator
-                                              prefix=' $ '
-                                            />
-                                          </div>
-                                          <div
-                                            className='all-tab-f div'
-                                            style={{
-                                              width: '55%',
-                                              textAlign: 'center',
-                                              display: 'flex',
-                                              justifyContent: 'center',
-                                              flexDirection: 'column',
-                                              borderRight: '1px solid black',
-                                              borderBottom: '1px solid black'
-                                            }}>
-                                            <textarea
-                                              className='all-tab-l'
-                                              type='text'
-                                              onKeyUp={this.handleChange.bind(this)}
-                                            />
-                                          </div>
-                                        </div>
-                                    </div>
-                                  )}
-                                </div>
-                                : null}
-                                <div style={{ width: '100%', display: 'flex', height: '30px' }}>
-                                  <div
-                                    className='all-tab-f2'
-                                    style={{
-                                      width: '35%',
-                                      textAlign: 'right',
-                                      display: 'flex',
-                                      justifyContent: 'center',
-                                      flexDirection: 'column',
-                                      borderLeft: '1px solid black',
-                                      borderRight: '1px solid black',
-                                      borderBottom: '1px solid black'
-                                    }}>
-                                    TOTAL:
-                                  </div>
-                                  <div
-                                    className='all-tab-f2'
-                                    style={{
-                                      width: '10%',
-                                      textAlign: 'center',
-                                      display: 'flex',
-                                      justifyContent: 'center',
-                                      flexDirection: 'column',
-                                      borderRight: '1px solid black',
-                                      borderBottom: '1px solid black'
-                                    }}>
-                                    <CurrencyFormat
-                                      style={{ fontSize: '12px' }}
-                                      value={comprometidos.total}
-                                      displayType='text'
-                                      thousandSeparator
-                                      prefix=' $ '
-                                    />
-                                  </div>
-                                  <div
-                                    className='all-tab-f2 div'
-                                    style={{
-                                      width: '55%',
-                                      textAlign: 'center',
-                                      display: 'flex',
-                                      justifyContent: 'center',
-                                      flexDirection: 'column',
-                                      borderRight: '1px solid white',
-                                      borderBottom: '1px solid white'
-                                    }}>
-                                    <textarea
-                                      className='all-tab-l'
-                                      type='text'
-                                      onKeyUp={this.handleChange.bind(this)}
-                                    />
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div> : null
-                      )}
-                      </div>
-                    </div>
-                  </Popup>
+                  <ReactToPrint
+                    trigger={() => <buttom className='btn-imp-of'>Prueba Imprimir</buttom>}
+                    content={() => this.la}
+                  />
                 </div>
               </div>
             }
@@ -460,306 +163,10 @@ export default class Oficios extends Component {
                 </div>
                 <div className='fcc-i'>
                   <p className='fimpre'>Leyenda Alusivas</p>
-                  <Popup
-                    trigger={<buttom className='btn-imp-of'>Imprimir</buttom>}
-                    modal
-                    closeOnDocumentClick>
-                    <div style={{ height: '100%', overflow: 'scroll' }}>
-                      <ReactToPrint
-                        trigger={() =>
-                          <div className='c-b-i'>
-                            <buttom className='btn-imp-of'>Imprimir</buttom>
-                          </div>
-                          }
-                        content={() => this.la}
-                      />
-                      <div ref={el => (this.la = el)} style={{ zIndex: '2', width: '100%', height: '100%'}}>
-                      {this.state.comprometidos.map(comprometidos =>
-                        comprometidos.up ?
-                        <div className='lll'>
-                          <div style={{ width: '100%' }}>
-                            <div className='title-ga'>
-                              <div style={{ width: '15%' }}>
-                                <img className='pgjh' src={sus} alt='' style={{ width: '100%' }} />
-                              </div>
-                              <div style={{ width: '70%' }}>
-                                <p className='text-titulo-ga'>PROCURADURÍA GENERAL DE JUSTICA DE HIDALGO</p>
-                                  <p className='text-titulo-ga'>
-                                    {(comprometidos.up === '01' &&
-                                      'Atención y seguimiento a peticiones recibidas en el despacho del procurador atendidas')
-                                      ||
-                                      (comprometidos.up === '02' &&
-                                      'Casos penales de la región oriente resueltas')
-                                      ||
-                                      (comprometidos.up === '03' &&
-                                      'Delitos cometidos en contra de la libertad de expresión, periodistas y personas defensoras de los derechos humanos investigados')
-                                      ||
-                                      (comprometidos.up === '04' &&
-                                      'Averiguaciones previas del sistema tradicional concluidas')
-                                      ||
-                                      (comprometidos.up === '05' &&
-                                      'Casos penales en materia de delitos electorales resueltos')
-                                      ||
-                                      (comprometidos.up === '06' &&
-                                      'Casos penales determinados, concluidos o resueltos en delitos que atenten contra la mujer y la familia')
-                                      ||
-                                      (comprometidos.up === '07' &&
-                                      'Acuerdos reparatorios generados a través de la aplicación de los mecanismos alternativos de solución de controversias en materia penal en la región poniente')
-                                      ||
-                                      (comprometidos.up === '08' &&
-                                      'Investigación y supervisión de los casos penales con motivo de feminicidio')
-                                      ||
-                                      (comprometidos.up === '09' &&
-                                      'Quejas y denuncias por la posible comisión de conductas indebidas en las que incurran las y los servidores públicos atendidas')
-                                      ||
-                                      (comprometidos.up === '10' &&
-                                      'Intervenciones periciales a autoridades de procuración de justicia para una correcta integración del expediente en casos penales entregados')
-                                      ||
-                                      (comprometidos.up === '11' &&
-                                      'Casos penales del delito de narcomenudeo resueltos')
-                                      ||
-                                      (comprometidos.up === '12' &&
-                                      'Casos penales atendidos por los delistos de secuentro y extorsión')
-                                      ||
-                                      (comprometidos.up === '13' &&
-                                      'Gestión administrativa de recursos humanos,financiera, materiales, de informática, de archivo, de calidad, de aportaciones federales, planeación estratégica realizada')
-                                      ||
-                                      (comprometidos.up === '14' &&
-                                      'Determinación y/o resolución de los casos penales de los delitos de trata de personas, lenocinio y delitos conexos')
-                                      ||
-                                      (comprometidos.up === '15' &&
-                                      'Casos penales de la región poniente resueltas')
-                                      ||
-                                      (comprometidos.up === '16' &&
-                                      'Atenciones ciudadanas en los módulos de atención temprana en la región poniente brindadas')
-                                      ||
-                                      (comprometidos.up === '17' &&
-                                      'Determinación en las carpetas de investigación en las unidades de investigación de la regiones poniente')
-                                      ||
-                                      (comprometidos.up === '18' &&
-                                      'Investigación policial ejecutada')
-                                      ||
-                                      (comprometidos.up === '20' &&
-                                      'Atenciones ciudadanas en los módulos de atención temprana en la región poniente brindadas')
-                                      ||
-                                      (comprometidos.up === '21' &&
-                                      'Acuerdos reparatorios generados a traves de la aplicación de los mecanismos alternativos de solución de controversias en materia penal en la región oriente')
-                                      ||
-                                      (comprometidos.up === '22' &&
-                                      'Determinación en las carpetas de investigación en las unidades de investigación de la regiones oriente')
-                                      ||
-                                      (comprometidos.up === '23' &&
-                                      'Delitos de corrupción resueltos')
-                                      ||
-                                      (comprometidos.up === '24' &&
-                                      'Casos penales determinados, concluidos o resueltos de delitos en materia de desaparición forzada de personas cometidos por particulares, delitos vinculados y de personas no localizadas realizados')
-                                    }
-                                  </p>
-                                <p className='text-titulo-ga'>{comprometidos.partida}</p>
-                              </div>
-                              <div style={{ width: '15%', display: 'flex', justifyCOntent: 'center', flexDirection: 'column' }}>
-                                <div style={{ display: 'flex', justifyContent: 'flex-end', height: '100%' }}>
-                                  <img className='ims' src={logo2} alt='' style={{ height: '100%' }} />
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                          <div className='faderinpo'>
-                            <div className='contenedor-ga'>
-                              <div className='contenedor-1 '>
-                                <div className='interno-ga2'>
-                                  <p className='text-gai'>Gasto a Comprobar</p>
-                                  <input className='input-gai' type='checkbox' disabled />
-                                </div>
-                                <div className='interno-ga2'>
-                                  <p className='text-gai'>Comprobacion de Gastos</p>
-                                  <input className='input-gai' type='checkbox' disabled />
-                                </div>
-                              </div>
-                              <div className='contenedor-1'>
-                                <div className='interno-ga2'>
-                                  <p className='text-gai'>Creación de Fondo Revolvente</p>
-                                  <input className='input-gai' type='checkbox' disabled />
-                                </div>
-                                <div className='interno-ga2'>
-                                  <p className='text-gai'>Fondo Revolvente</p>
-                                  <input className='input-gai' type='checkbox' disabled />
-                                </div>
-                                <div className='interno-ga2'>
-                                  <p className='text-gai'>Cancelacion de Fondo Revolvente</p>
-                                  <input className='input-gai' type='checkbox' disabled />
-                                </div>
-                              </div>
-                              <div className='contenedor-1'>
-                                <div className='interno-ga2'>
-                                  <p className='text-gai'>Viaticos Anticipados</p>
-                                  <input className='input-gai' type='checkbox' disabled />
-                                </div>
-                                <div className='interno-ga2'>
-                                  <p className='text-gai'>Viaticos Devengados</p>
-                                  <input className='input-gai' type='checkbox' disabled />
-                                </div>
-                                <div className='interno-ga2'>
-                                  <p className='text-gai'>Comprobación de Viáticos</p>
-                                  <input className='input-gai' type='checkbox' disabled />
-                                </div>
-                              </div>
-                              <div className='contenedor-1'>
-                                <div className='interno-ga2'>
-                                  <p className='text-gai'>Pago a Proveedores</p>
-                                  <input className='input-gai' type='checkbox' checked />
-                                </div>
-                                <div className='interno-ga2'>
-                                  <p className='text-gai'>Pago a Proveedore por Requisición</p>
-                                  <input className='input-gai' type='checkbox' disabled />
-                                </div>
-                                <div className='interno-ga2'>
-                                  <p className='text-gai'>Transferencias</p>
-                                  <input className='input-gai' type='checkbox' disabled />
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                          <div>
-                            <div className='tabla-ga'>
-                              <div className='tablagas'>
-                                <div style={{ display: 'flex', width: '100%' }}>
-                                  <div
-                                    className='alltabla-ga'
-                                    style={{ width: '35%', textAlign: 'center', display: 'flex', justifyContent: 'center', flexDirection: 'column' }}>
-                                    Folio de factura
-                                  </div>
-                                  <div
-                                    className='alltabla-ga'
-                                    style={{ width: '10%', textAlign: 'center', display: 'flex', justifyContent: 'center', flexDirection: 'column' }}>
-                                    Importe
-                                  </div>
-                                  <div
-                                    className='alltabla-ga'
-                                    style={{ width: '55%', textAlign: 'center', display: 'flex', justifyContent: 'center', flexDirection: 'column' }}>
-                                    Leyenda alusiva al gasto
-                                  </div>
-                                </div>
-                                {comprometidos.comprobantes !== undefined ?
-                                <div>
-                                  {comprometidos.comprobantes.map(item =>
-                                    <div style={{ width: '100%' }}>
-                                        <div style={{ width: '100%', display: 'flex' }}>
-                                          <div
-                                            className='all-tab-f'
-                                            style={{
-                                              width: '35%',
-                                              textAlign: 'center',
-                                              display: 'flex',
-                                              justifyContent: 'center',
-                                              flexDirection: 'column',
-                                              borderLeft: '1px solid black',
-                                              borderRight: '1px solid black',
-                                              borderBottom: '1px solid black'
-                                            }}>
-                                            {item.uuid}
-                                          </div>
-                                          <div
-                                            className='all-tab-f'
-                                            style={{
-                                              width: '10%',
-                                              textAlign: 'center',
-                                              display: 'flex',
-                                              justifyContent: 'center',
-                                              flexDirection: 'column',
-                                              borderRight: '1px solid black',
-                                              borderBottom: '1px solid black'
-                                            }}>
-                                            <CurrencyFormat
-                                              style={{ fontSize: '12px' }}
-                                              value={item.total}
-                                              displayType='text'
-                                              thousandSeparator
-                                              prefix=' $ '
-                                            />
-                                          </div>
-                                          <div
-                                            className='all-tab-f div'
-                                            style={{
-                                              width: '55%',
-                                              textAlign: 'center',
-                                              display: 'flex',
-                                              justifyContent: 'center',
-                                              flexDirection: 'column',
-                                              borderRight: '1px solid black',
-                                              borderBottom: '1px solid black'
-                                            }}>
-                                            <textarea
-                                              className='all-tab-l'
-                                              type='text'
-                                              onKeyUp={this.handleChange.bind(this)}
-                                            />
-                                          </div>
-                                        </div>
-                                    </div>
-                                  )}
-                                </div>
-                                : null}
-                                <div style={{ width: '100%', display: 'flex', height: '30px' }}>
-                                  <div
-                                    className='all-tab-f2'
-                                    style={{
-                                      width: '35%',
-                                      textAlign: 'right',
-                                      display: 'flex',
-                                      justifyContent: 'center',
-                                      flexDirection: 'column',
-                                      borderLeft: '1px solid black',
-                                      borderRight: '1px solid black',
-                                      borderBottom: '1px solid black'
-                                    }}>
-                                    TOTAL:
-                                  </div>
-                                  <div
-                                    className='all-tab-f2'
-                                    style={{
-                                      width: '10%',
-                                      textAlign: 'center',
-                                      display: 'flex',
-                                      justifyContent: 'center',
-                                      flexDirection: 'column',
-                                      borderRight: '1px solid black',
-                                      borderBottom: '1px solid black'
-                                    }}>
-                                    <CurrencyFormat
-                                      style={{ fontSize: '12px' }}
-                                      value={comprometidos.total}
-                                      displayType='text'
-                                      thousandSeparator
-                                      prefix=' $ '
-                                    />
-                                  </div>
-                                  <div
-                                    className='all-tab-f2 div'
-                                    style={{
-                                      width: '55%',
-                                      textAlign: 'center',
-                                      display: 'flex',
-                                      justifyContent: 'center',
-                                      flexDirection: 'column',
-                                      borderRight: '1px solid white',
-                                      borderBottom: '1px solid white'
-                                    }}>
-                                    <textarea
-                                      className='all-tab-l'
-                                      type='text'
-                                      onKeyUp={this.handleChange.bind(this)}
-                                    />
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div> : null
-                      )}
-                      </div>
-                    </div>
-                  </Popup>
+                  <ReactToPrint
+                    trigger={() => <buttom className='btn-imp-of'>Prueba Imprimir</buttom>}
+                    content={() => this.la}
+                  />
                 </div>
               </div>
             }
@@ -784,241 +191,234 @@ export default class Oficios extends Component {
                 </div>
                 <div className='fcc-i'>
                   <p className='fimpre'>Leyendas Alusivas</p>
-                  <Popup
-                    trigger={<buttom className='btn-imp-of'>Imprimir</buttom>}
-                    modal
-                    closeOnDocumentClick>
-                    <div style={{ height: '100%', overflow: 'scroll' }}>
-                      <ReactToPrint
-                        trigger={() =>
-                          <div className='c-b-i'>
-                            <buttom className='btn-imp-of'>Imprimir</buttom>
-                          </div>
-                          }
-                        content={() => this.la}
-                      />
-                      <div ref={el => (this.la = el)} style={{ zIndex: '2', width: '100%', height: '100%'}}>
-                      {this.state.comprometidos.map(comprometidos =>
-                        comprometidos.up ?
-                        <div className='lll'>
-                          <div style={{ width: '100%' }}>
-                            <div className='title-ga'>
-                              <div style={{ width: '15%' }}>
-                                <img className='pgjh' src={sus} alt='' style={{ width: '100%' }} />
-                              </div>
-                              <div style={{ width: '70%' }}>
-                                <p className='text-titulo-ga'>PROCURADURÍA GENERAL DE JUSTICA DE HIDALGO</p>
-                                  <p className='text-titulo-ga'>
-                                    {comprometidos.area}
-                                  </p>
-                                <p className='text-titulo-ga'>{comprometidos.partida}</p>
-                              </div>
-                              <div style={{ width: '15%', display: 'flex', justifyCOntent: 'center', flexDirection: 'column' }}>
-                                <div style={{ display: 'flex', justifyContent: 'flex-end', height: '100%' }}>
-                                  <img className='ims' src={logo2} alt='' style={{ height: '100%' }} />
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                          <div className='faderinpo'>
-                            <div className='contenedor-ga'>
-                              <div className='contenedor-1 '>
-                                <div className='interno-ga2'>
-                                  <p className='text-gai'>Gasto a Comprobar</p>
-                                  <input className='input-gai' type='checkbox' disabled />
-                                </div>
-                                <div className='interno-ga2'>
-                                  <p className='text-gai'>Comprobacion de Gastos</p>
-                                  <input className='input-gai' type='checkbox' disabled />
-                                </div>
-                              </div>
-                              <div className='contenedor-1'>
-                                <div className='interno-ga2'>
-                                  <p className='text-gai'>Creación de Fondo Revolvente</p>
-                                  <input className='input-gai' type='checkbox' disabled />
-                                </div>
-                                <div className='interno-ga2'>
-                                  <p className='text-gai'>Fondo Revolvente</p>
-                                  <input className='input-gai' type='checkbox' disabled />
-                                </div>
-                                <div className='interno-ga2'>
-                                  <p className='text-gai'>Cancelacion de Fondo Revolvente</p>
-                                  <input className='input-gai' type='checkbox' disabled />
-                                </div>
-                              </div>
-                              <div className='contenedor-1'>
-                                <div className='interno-ga2'>
-                                  <p className='text-gai'>Viaticos Anticipados</p>
-                                  <input className='input-gai' type='checkbox' disabled />
-                                </div>
-                                <div className='interno-ga2'>
-                                  <p className='text-gai'>Viaticos Devengados</p>
-                                  <input className='input-gai' type='checkbox' disabled />
-                                </div>
-                                <div className='interno-ga2'>
-                                  <p className='text-gai'>Comprobación de Viáticos</p>
-                                  <input className='input-gai' type='checkbox' disabled />
-                                </div>
-                              </div>
-                              <div className='contenedor-1'>
-                                <div className='interno-ga2'>
-                                  <p className='text-gai'>Pago a Proveedores</p>
-                                  <input className='input-gai' type='checkbox' checked />
-                                </div>
-                                <div className='interno-ga2'>
-                                  <p className='text-gai'>Pago a Proveedore por Requisición</p>
-                                  <input className='input-gai' type='checkbox' disabled />
-                                </div>
-                                <div className='interno-ga2'>
-                                  <p className='text-gai'>Transferencias</p>
-                                  <input className='input-gai' type='checkbox' disabled />
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                          <div>
-                            <div className='tabla-ga'>
-                              <div className='tablagas'>
-                                <div style={{ display: 'flex', width: '100%' }}>
-                                  <div
-                                    className='alltabla-ga'
-                                    style={{ width: '35%', textAlign: 'center', display: 'flex', justifyContent: 'center', flexDirection: 'column' }}>
-                                    Folio de factura
-                                  </div>
-                                  <div
-                                    className='alltabla-ga'
-                                    style={{ width: '10%', textAlign: 'center', display: 'flex', justifyContent: 'center', flexDirection: 'column' }}>
-                                    Importe
-                                  </div>
-                                  <div
-                                    className='alltabla-ga'
-                                    style={{ width: '55%', textAlign: 'center', display: 'flex', justifyContent: 'center', flexDirection: 'column' }}>
-                                    Leyenda alusiva al gasto
-                                  </div>
-                                </div>
-                                {comprometidos.comprobantes !== undefined ?
-                                <div>
-                                  {comprometidos.comprobantes.map(item =>
-                                    <div style={{ width: '100%' }}>
-                                        <div style={{ width: '100%', display: 'flex' }}>
-                                          <div
-                                            className='all-tab-f'
-                                            style={{
-                                              width: '35%',
-                                              textAlign: 'center',
-                                              display: 'flex',
-                                              justifyContent: 'center',
-                                              flexDirection: 'column',
-                                              borderLeft: '1px solid black',
-                                              borderRight: '1px solid black',
-                                              borderBottom: '1px solid black'
-                                            }}>
-                                            {item.uuid}
-                                          </div>
-                                          <div
-                                            className='all-tab-f'
-                                            style={{
-                                              width: '10%',
-                                              textAlign: 'center',
-                                              display: 'flex',
-                                              justifyContent: 'center',
-                                              flexDirection: 'column',
-                                              borderRight: '1px solid black',
-                                              borderBottom: '1px solid black'
-                                            }}>
-                                            <CurrencyFormat
-                                              style={{ fontSize: '12px' }}
-                                              value={item.total}
-                                              displayType='text'
-                                              thousandSeparator
-                                              prefix=' $ '
-                                            />
-                                          </div>
-                                          <div
-                                            className='all-tab-f div'
-                                            style={{
-                                              width: '55%',
-                                              textAlign: 'center',
-                                              display: 'flex',
-                                              justifyContent: 'center',
-                                              flexDirection: 'column',
-                                              borderRight: '1px solid black',
-                                              borderBottom: '1px solid black'
-                                            }}>
-                                            <textarea
-                                              className='all-tab-l'
-                                              type='text'
-                                              onKeyUp={this.handleChange.bind(this)}
-                                            />
-                                          </div>
-                                        </div>
-                                    </div>
-                                  )}
-                                </div>
-                                : null}
-                                <div style={{ width: '100%', display: 'flex', height: '30px' }}>
-                                  <div
-                                    className='all-tab-f2'
-                                    style={{
-                                      width: '35%',
-                                      textAlign: 'right',
-                                      display: 'flex',
-                                      justifyContent: 'center',
-                                      flexDirection: 'column',
-                                      borderLeft: '1px solid black',
-                                      borderRight: '1px solid black',
-                                      borderBottom: '1px solid black'
-                                    }}>
-                                    TOTAL:
-                                  </div>
-                                  <div
-                                    className='all-tab-f2'
-                                    style={{
-                                      width: '10%',
-                                      textAlign: 'center',
-                                      display: 'flex',
-                                      justifyContent: 'center',
-                                      flexDirection: 'column',
-                                      borderRight: '1px solid black',
-                                      borderBottom: '1px solid black'
-                                    }}>
-                                    <CurrencyFormat
-                                      style={{ fontSize: '12px' }}
-                                      value={comprometidos.total}
-                                      displayType='text'
-                                      thousandSeparator
-                                      prefix=' $ '
-                                    />
-                                  </div>
-                                  <div
-                                    className='all-tab-f2 div'
-                                    style={{
-                                      width: '55%',
-                                      textAlign: 'center',
-                                      display: 'flex',
-                                      justifyContent: 'center',
-                                      flexDirection: 'column',
-                                      borderRight: '1px solid white',
-                                      borderBottom: '1px solid white'
-                                    }}>
-                                    <textarea
-                                      className='all-tab-l'
-                                      type='text'
-                                      onKeyUp={this.handleChange.bind(this)}
-                                    />
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div> : null
-                      )}
-                      </div>
-                    </div>
-                  </Popup>
+                  <ReactToPrint
+                    trigger={() => <buttom className='btn-imp-of'>Prueba Imprimir</buttom>}
+                    content={() => this.la}
+                  />
                 </div>
               </div>
             }
+          </div>
+
+          {/* Leyendas Alusivas */}
+          <div ref={el => (this.la = el)} style={{ zIndex: '2', position: 'relative', background: 'white' }}>
+          {this.state.comprometidos.map(comprometidos =>
+            comprometidos.up ?
+            <div className='lll' style={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
+              <div style={{ width: '98%' }}>
+                <div style={{ width: '100%' }}>
+                  <div className='title-ga'>
+                    <div style={{ width: '15%' }}>
+                      <img className='pgjh' src={sus} alt='' style={{ width: '100%' }} />
+                    </div>
+                    <div style={{ width: '70%' }}>
+                      <p className='text-titulo-ga'>PROCURADURÍA GENERAL DE JUSTICA DE HIDALGO</p>
+                        <p className='text-titulo-ga'>
+                          {comprometidos.area}
+                        </p>
+                      <p className='text-titulo-ga'>{comprometidos.partida}</p>
+                    </div>
+                    <div style={{ width: '15%', display: 'flex', justifyCOntent: 'center', flexDirection: 'column' }}>
+                      <div style={{ display: 'flex', justifyContent: 'flex-end', height: '100%' }}>
+                        <img className='ims' src={logo2} alt='' style={{ height: '100%' }} />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div className='faderinpo'>
+                  <div className='contenedor-ga'>
+                    <div className='contenedor-1 '>
+                      <div className='interno-ga2'>
+                        <p className='text-gai'>Gasto a Comprobar</p>
+                        <input className='input-gai' type='checkbox' disabled />
+                      </div>
+                      <div className='interno-ga2'>
+                        <p className='text-gai'>Comprobacion de Gastos</p>
+                        <input className='input-gai' type='checkbox' disabled />
+                      </div>
+                    </div>
+                    <div className='contenedor-1'>
+                      <div className='interno-ga2'>
+                        <p className='text-gai'>Creación de Fondo Revolvente</p>
+                        <input className='input-gai' type='checkbox' disabled />
+                      </div>
+                      <div className='interno-ga2'>
+                        <p className='text-gai'>Fondo Revolvente</p>
+                        <input className='input-gai' type='checkbox' disabled />
+                      </div>
+                      <div className='interno-ga2'>
+                        <p className='text-gai'>Cancelacion de Fondo Revolvente</p>
+                        <input className='input-gai' type='checkbox' disabled />
+                      </div>
+                    </div>
+                    <div className='contenedor-1'>
+                      <div className='interno-ga2'>
+                        <p className='text-gai'>Viaticos Anticipados</p>
+                        <input className='input-gai' type='checkbox' disabled />
+                      </div>
+                      <div className='interno-ga2'>
+                        <p className='text-gai'>Viaticos Devengados</p>
+                        <input className='input-gai' type='checkbox' disabled />
+                      </div>
+                      <div className='interno-ga2'>
+                        <p className='text-gai'>Comprobación de Viáticos</p>
+                        <input className='input-gai' type='checkbox' disabled />
+                      </div>
+                    </div>
+                    <div className='contenedor-1'>
+                      <div className='interno-ga2'>
+                        <p className='text-gai'>Pago a Proveedores</p>
+                        <input className='input-gai' type='checkbox' checked />
+                      </div>
+                      <div className='interno-ga2'>
+                        <p className='text-gai'>Pago a Proveedore por Requisición</p>
+                        <input className='input-gai' type='checkbox' disabled />
+                      </div>
+                      <div className='interno-ga2'>
+                        <p className='text-gai'>Transferencias</p>
+                        <input className='input-gai' type='checkbox' disabled />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div>
+                  <div className='tabla-ga'>
+                    <div className='tablagas'>
+                      <div style={{ display: 'flex', width: '100%' }}>
+                        <div
+                          className='alltabla-ga'
+                          style={{ width: '35%', textAlign: 'center', display: 'flex', justifyContent: 'center', flexDirection: 'column' }}>
+                          Folio de factura
+                        </div>
+                        <div
+                          className='alltabla-ga'
+                          style={{ width: '10%', textAlign: 'center', display: 'flex', justifyContent: 'center', flexDirection: 'column' }}>
+                          Importe
+                        </div>
+                        <div
+                          className='alltabla-ga'
+                          style={{ width: '55%', textAlign: 'center', display: 'flex', justifyContent: 'center', flexDirection: 'column' }}>
+                          Leyenda alusiva al gasto
+                        </div>
+                      </div>
+                      {comprometidos.comprobantes !== undefined ?
+                      <div>
+                        {comprometidos.comprobantes.map(item =>
+                          <div style={{ width: '100%' }}>
+                              <div style={{ width: '100%', display: 'flex' }}>
+                                <div
+                                  className='all-tab-f'
+                                  style={{
+                                    width: '35%',
+                                    textAlign: 'center',
+                                    display: 'flex',
+                                    justifyContent: 'center',
+                                    flexDirection: 'column',
+                                    borderLeft: '1px solid black',
+                                    borderRight: '1px solid black',
+                                    borderBottom: '1px solid black'
+                                  }}>
+                                  {item.uuid}
+                                </div>
+                                <div
+                                  className='all-tab-f'
+                                  style={{
+                                    width: '10%',
+                                    textAlign: 'center',
+                                    display: 'flex',
+                                    justifyContent: 'center',
+                                    flexDirection: 'column',
+                                    borderRight: '1px solid black',
+                                    borderBottom: '1px solid black'
+                                  }}>
+                                  <CurrencyFormat
+                                    style={{ fontSize: '12px' }}
+                                    value={item.total}
+                                    displayType='text'
+                                    thousandSeparator
+                                    prefix=' $ '
+                                  />
+                                </div>
+                                <div
+                                  className='all-tab-f div'
+                                  style={{
+                                    width: '55%',
+                                    textAlign: 'center',
+                                    display: 'flex',
+                                    justifyContent: 'center',
+                                    flexDirection: 'column',
+                                    borderRight: '1px solid black',
+                                    borderBottom: '1px solid black'
+                                  }}>
+                                  <textarea
+                                    className='all-tab-l'
+                                    type='text'
+                                    onKeyUp={this.handleChange.bind(this)}
+                                  />
+                                </div>
+                              </div>
+                          </div>
+                        )}
+                      </div>
+                      : null}
+                      <div style={{ width: '100%', display: 'flex', height: '30px' }}>
+                        <div
+                          className='all-tab-f2'
+                          style={{
+                            width: '35%',
+                            textAlign: 'right',
+                            display: 'flex',
+                            justifyContent: 'center',
+                            flexDirection: 'column',
+                            borderLeft: '1px solid black',
+                            borderRight: '1px solid black',
+                            borderBottom: '1px solid black'
+                          }}>
+                          TOTAL:
+                        </div>
+                        <div
+                          className='all-tab-f2'
+                          style={{
+                            width: '10%',
+                            textAlign: 'center',
+                            display: 'flex',
+                            justifyContent: 'center',
+                            flexDirection: 'column',
+                            borderRight: '1px solid black',
+                            borderBottom: '1px solid black'
+                          }}>
+                          <CurrencyFormat
+                            style={{ fontSize: '12px' }}
+                            value={comprometidos.total}
+                            displayType='text'
+                            thousandSeparator
+                            prefix=' $ '
+                          />
+                        </div>
+                        <div
+                          className='all-tab-f2 div'
+                          style={{
+                            width: '55%',
+                            textAlign: 'center',
+                            display: 'flex',
+                            justifyContent: 'center',
+                            flexDirection: 'column',
+                            borderRight: '1px solid white',
+                            borderBottom: '1px solid white'
+                          }}>
+                          <textarea
+                            className='all-tab-l'
+                            type='text'
+                            onKeyUp={this.handleChange.bind(this)}
+                          />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>: null
+          )}
           </div>
 
           {/* fondo revolvente */}

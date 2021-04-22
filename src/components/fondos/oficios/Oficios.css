@@ -96,7 +96,7 @@
 }
 .lll {
   min-height: 100vh;
-  page-break-before: auto;
+  page-break-after: auto;
   z-index: 2;
 }
 .popup-content {
@@ -420,14 +420,14 @@ th {
   font-weight: bold;
   margin: 2px;
 }
-.faderinp{
+.faderinp {
   padding-bottom: 0px;
   padding-left: 100px;
   padding-right: 100px;
   display: flex;
   justify-content: center;
 }
-.interno-ga{
+.interno-ga {
   display:flex;
   justify-content: space-between;
   padding-right:10px;
