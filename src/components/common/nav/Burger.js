@@ -18,6 +18,7 @@ const Burger = ({ open, setOpen, ...props }) => {
             aria-expanded={isExpanded}
             open={open}
             onClick={() => setOpen(!open)} {...props}
+            aria-label='burger'
           >
             <MenuIcon />
           </IconButton>

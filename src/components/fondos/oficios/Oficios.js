@@ -15,7 +15,6 @@ export default class Oficios extends Component {
     this.unsubscribe = null
     this.state = {
       fondo: {},
-      key: '',
       comprometidos: [
         {
           id: 1,
@@ -23,18 +22,12 @@ export default class Oficios extends Component {
           done: false
         }
       ],
-      total: '',
-      fecha: '',
       importe: '',
       no_oficio: '',
-      pressStatus: true,
-      text: '',
-      cfdi: '',
       up: '',
-      perro: '',
       desc: '',
-      hojas: '',
-      urlfire: String(URLactual).substr(-20)
+      urlfire: String(URLactual).substr(-20),
+      mostrar: false
     }
   }
 
@@ -65,6 +58,10 @@ export default class Oficios extends Component {
 
   handleChange (event) {
     this.setState({ [event.target.name]: event.target.value })
+  }
+
+  handleMostrar () {
+    this.setState({ mostrar: !this.state.mostrar });
   }
 
   render () {
@@ -98,11 +95,13 @@ export default class Oficios extends Component {
 
     var prueba = new Array(22)
     for (let i = parseInt(this.state.comprometidos.length); i < 22; i++) {
-      console.log(i)
       prueba[i] = i
     }
 
     var nombreDesa = this.state.comprometidos.map(comprometidos => comprometidos.up)
+
+    var prueba2 = this.state.comprometidos.map(comprometidos => comprometidos.up ? (comprometidos.comprobantes !== undefined ? comprometidos.comprobantes.map(item => item) : null) : null )
+    console.log(prueba2)
 
     return (
       <div style={{ width: '100%', height: '100%', overflow: 'hidden', position: 'absolute' }}>
@@ -198,7 +197,259 @@ export default class Oficios extends Component {
               </div>
             </div>
           }
+          <button
+            onClick={() => this.handleMostrar()}>
+              Flex Quote
+            </button>
         </div>
+
+        {this.state.mostrar ?
+          <div style={{ background: 'white', width: '100%', height: '100%', zIndex: '4', position: 'relative', overflow: 'scroll' }}>
+            <button onClick={() => this.handleMostrar()} style={{ marginTop: '100px' }}>
+              Flex Quote
+            </button>
+            <ReactToPrint
+              trigger={() => <buttom className='btn-imp-of'>Prueba Imprimir</buttom>}
+              content={() => this.la}
+            />
+            {this.state.comprometidos.map(comprometidos =>
+              comprometidos.up ?
+                <div className='lll' style={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
+                  <div style={{ width: '98%' }}>
+                    <div style={{ width: '100%' }}>
+                      <div className='title-ga'>
+                        <div style={{ width: '15%' }}>
+                          <img className='pgjh' src={sus} alt='' style={{ width: '100%' }} />
+                        </div>
+                        <div style={{ width: '70%' }}>
+                          <p className='text-titulo-ga'>PROCURADURÍA GENERAL DE JUSTICA DE HIDALGO</p>
+                          <p className='text-titulo-ga'>{comprometidos.area}</p>
+                          <p className='text-titulo-ga'>{comprometidos.partida}</p>
+                        </div>
+                        <div style={{ width: '15%', display: 'flex', justifyCOntent: 'center', flexDirection: 'column' }}>
+                          <div style={{ display: 'flex', justifyContent: 'flex-end', height: '100%' }}>
+                            <img src={logo2} alt='' style={{ height: '100%' }} />
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div className='faderinpo'>
+                      <div className='contenedor-ga'>
+                        <div className='contenedor-1'>
+                          <div className='interno-ga2'>
+                            <p className='text-gai'>Gasto a Comprobar</p>
+                            <input className='input-gai' type='checkbox' disabled />
+                          </div>
+                          <div className='interno-ga2'>
+                            <p className='text-gai'>Comprobacion de Gastos</p>
+                            <input className='input-gai' type='checkbox' disabled />
+                          </div>
+                        </div>
+                        <div className='contenedor-1'>
+                          <div className='interno-ga2'>
+                            <p className='text-gai'>Creación de Fondo Revolvente</p>
+                            <input className='input-gai' type='checkbox' disabled />
+                          </div>
+                          <div className='interno-ga2'>
+                            <p className='text-gai'>Fondo Revolvente</p>
+                            <input className='input-gai' type='checkbox' disabled />
+                          </div>
+                          <div className='interno-ga2'>
+                            <p className='text-gai'>Cancelacion de Fondo Revolvente</p>
+                            <input className='input-gai' type='checkbox' disabled />
+                          </div>
+                        </div>
+                        <div className='contenedor-1'>
+                          <div className='interno-ga2'>
+                            <p className='text-gai'>Viaticos Anticipados</p>
+                            <input className='input-gai' type='checkbox' disabled />
+                          </div>
+                          <div className='interno-ga2'>
+                            <p className='text-gai'>Viaticos Devengados</p>
+                            <input className='input-gai' type='checkbox' disabled />
+                          </div>
+                          <div className='interno-ga2'>
+                            <p className='text-gai'>Comprobación de Viáticos</p>
+                            <input className='input-gai' type='checkbox' disabled />
+                          </div>
+                        </div>
+                        <div className='contenedor-1'>
+                          <div className='interno-ga2'>
+                            <p className='text-gai'>Pago a Proveedores</p>
+                            <input className='input-gai' type='checkbox' checked />
+                          </div>
+                          <div className='interno-ga2'>
+                            <p className='text-gai'>Pago a Proveedore por Requisición</p>
+                            <input className='input-gai' type='checkbox' disabled />
+                          </div>
+                          <div className='interno-ga2'>
+                            <p className='text-gai'>Transferencias</p>
+                            <input className='input-gai' type='checkbox' disabled />
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div>
+                      <div className='tabla-ga'>
+                        <div className='tablagas'>
+                          <div style={{ display: 'flex', width: '100%' }}>
+                            <div
+                              className='alltabla-ga'
+                              style={{
+                                width: '35%',
+                                textAlign: 'center',
+                                display: 'flex',
+                                justifyContent: 'center',
+                                flexDirection: 'column'
+                              }}>
+                              Folio de factura
+                            </div>
+                            <div
+                              className='alltabla-ga'
+                              style={{
+                                width: '10%',
+                                textAlign: 'center',
+                                display: 'flex',
+                                justifyContent: 'center',
+                                flexDirection: 'column'
+                              }}>
+                              Importe
+                            </div>
+                            <div
+                              className='alltabla-ga'
+                              style={{
+                                width: '55%',
+                                textAlign: 'center',
+                                display: 'flex',
+                                justifyContent: 'center',
+                                flexDirection: 'column'
+                              }}>
+                              Leyenda alusiva al gasto
+                            </div>
+                          </div>
+                          {comprometidos.comprobantes !== undefined ?
+                            <div>
+                              {comprometidos.comprobantes.map((item, index)=>
+                                <div style={{ width: '100%' }}>
+                                  <div style={{ width: '100%', display: 'flex' }}>
+                                    <div
+                                      className='all-tab-f'
+                                      style={{
+                                        width: '35%',
+                                        textAlign: 'center',
+                                        display: 'flex',
+                                        justifyContent: 'center',
+                                        flexDirection: 'column',
+                                        borderLeft: '1px solid black',
+                                        borderRight: '1px solid black',
+                                        borderBottom: '1px solid black'
+                                      }}>
+                                      {item.uuid}
+                                    </div>
+                                    <div
+                                      className='all-tab-f'
+                                      style={{
+                                        width: '10%',
+                                        textAlign: 'center',
+                                        display: 'flex',
+                                        justifyContent: 'center',
+                                        flexDirection: 'column',
+                                        borderRight: '1px solid black',
+                                        borderBottom: '1px solid black'
+                                      }}>
+                                      <CurrencyFormat
+                                        style={{ fontSize: '12px' }}
+                                        value={item.total}
+                                        displayType='text'
+                                        thousandSeparator
+                                        prefix=' $ '
+                                      />
+                                    </div>
+                                    <div
+                                      className='all-tab-f div'
+                                      style={{
+                                        width: '55%',
+                                        textAlign: 'center',
+                                        display: 'flex',
+                                        justifyContent: 'center',
+                                        flexDirection: 'column',
+                                        borderRight: '1px solid black',
+                                        borderBottom: '1px solid black'
+                                      }}>
+                                      <textarea
+                                        className='all-tab-l'
+                                        type='text'
+                                        key={index}
+                                        value={item}
+                                        onChange={this.handleChange.bind(this)}
+                                      />
+                                    </div>
+                                  </div>
+                                </div>
+                              )}
+                            </div>
+                          : null}
+                          <div style={{ width: '100%', display: 'flex', height: '30px' }}>
+                            <div
+                              className='all-tab-f2'
+                              style={{
+                                width: '35%',
+                                textAlign: 'right',
+                                display: 'flex',
+                                justifyContent: 'center',
+                                flexDirection: 'column',
+                                borderLeft: '1px solid black',
+                                borderRight: '1px solid black',
+                                borderBottom: '1px solid black'
+                              }}>
+                              TOTAL:
+                            </div>
+                            <div
+                              className='all-tab-f2'
+                              style={{
+                                width: '10%',
+                                textAlign: 'center',
+                                display: 'flex',
+                                justifyContent: 'center',
+                                flexDirection: 'column',
+                                borderRight: '1px solid black',
+                                borderBottom: '1px solid black'
+                              }}>
+                              <CurrencyFormat
+                                style={{ fontSize: '12px' }}
+                                value={comprometidos.total}
+                                displayType='text'
+                                thousandSeparator
+                                prefix=' $ '
+                              />
+                            </div>
+                            <div
+                              className='all-tab-f2 div'
+                              style={{
+                                width: '55%',
+                                textAlign: 'center',
+                                display: 'flex',
+                                justifyContent: 'center',
+                                flexDirection: 'column',
+                                borderRight: '1px solid white',
+                                borderBottom: '1px solid white'
+                              }}>
+                              <textarea
+                                className='all-tab-l'
+                                type='text'
+                                onKeyUp={this.handleChange.bind(this)}
+                              />
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              : null
+            )}
+          </div> : null
+        }
 
         {/* Leyendas Alusivas */}
         <div ref={el => (this.la = el)} style={{ zIndex: '2', position: 'relative', background: 'white' }}>
@@ -218,7 +469,7 @@ export default class Oficios extends Component {
                       </div>
                       <div style={{ width: '15%', display: 'flex', justifyCOntent: 'center', flexDirection: 'column' }}>
                         <div style={{ display: 'flex', justifyContent: 'flex-end', height: '100%' }}>
-                          <img className='ims' src={logo2} alt='' style={{ height: '100%' }} />
+                          <img src={logo2} alt='' style={{ height: '100%' }} />
                         </div>
                       </div>
                     </div>
@@ -319,7 +570,7 @@ export default class Oficios extends Component {
                         </div>
                         {comprometidos.comprobantes !== undefined ?
                           <div>
-                            {comprometidos.comprobantes.map(item =>
+                            {comprometidos.comprobantes.map((item, index) =>
                               <div style={{ width: '100%' }}>
                                 <div style={{ width: '100%', display: 'flex' }}>
                                   <div
@@ -369,7 +620,8 @@ export default class Oficios extends Component {
                                     <textarea
                                       className='all-tab-l'
                                       type='text'
-                                      onKeyUp={this.handleChange.bind(this)}
+                                      key={index}
+                                      onChange={this.handleChange.bind(this)}
                                     />
                                   </div>
                                 </div>
