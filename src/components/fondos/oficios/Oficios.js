@@ -61,7 +61,7 @@ export default class Oficios extends Component {
   }
 
   handleMostrar () {
-    this.setState({ mostrar: !this.state.mostrar });
+    this.setState({ mostrar: !this.state.mostrar })
   }
 
   render () {
@@ -130,7 +130,7 @@ export default class Oficios extends Component {
                 />
               </div>
               <div className='fcc-i'>
-                <p className='fimpre'>Leyendas Alusivas</p>
+                <p className='fimpre'>Formato E</p>
                 <ReactToPrint
                   trigger={() => <buttom className='btn-imp-of'>Imprimir</buttom>}
                   content={() => this.la}
@@ -158,7 +158,7 @@ export default class Oficios extends Component {
                 />
               </div>
               <div className='fcc-i'>
-                <p className='fimpre'>Leyenda Alusivas</p>
+                <p className='fimpre'>Formato E</p>
                 <ReactToPrint
                   trigger={() => <buttom className='btn-imp-of'>Imprimir</buttom>}
                   content={() => this.la}
@@ -186,7 +186,7 @@ export default class Oficios extends Component {
                 />
               </div>
               <div className='fcc-i'>
-                <p className='fimpre'>Leyendas Alusivas</p>
+                <p className='fimpre'>Formato E</p>
                 <ReactToPrint
                   trigger={() => <buttom className='btn-imp-of'>Imprimir</buttom>}
                   content={() => this.la}
@@ -196,7 +196,7 @@ export default class Oficios extends Component {
           }
         </div>
 
-        {/* Leyendas Alusivas */}
+        {/* Formato E */}
         <div ref={el => (this.la = el)} style={{ zIndex: '2', position: 'relative', background: 'white' }}>
           {this.state.comprometidos.map(comprometidos =>
             comprometidos.up ?
@@ -404,6 +404,16 @@ export default class Oficios extends Component {
                               thousandSeparator
                               prefix=' $ '
                             />
+                            {comprometidos.isr !== '0.00' && comprometidos.isr ?
+                              <CurrencyFormat
+                                style={{ fontSize: '12px' }}
+                                value={(parseFloat(totalImporte) + parseFloat(totalRetencion)).toFixed(2)}
+                                displayType='text'
+                                thousandSeparator
+                                prefix=' $ '
+                              />
+                              : null
+                            }
                           </div>
                           <div
                             className='all-tab-f2 div'
