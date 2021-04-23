@@ -576,26 +576,26 @@ export default class Oficios extends Component {
         </div>
 
         {/* Pago Provedor */}
-        <div className='pppdf-subdad' ref={el => (this.opp = el)} style={{ zIndex: '2', position: 'absolute' }}>
+        <div className='pppdf-subdad' ref={el => (this.opp = el)}>
           <div className='header-ofi'>
-            <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-              <div style={{ display: 'flex', justifyContent: 'center', flexDirection: 'column' }}>
-                <img className='pgjh' style={{ marginLeft: '-20px', width: 'auto' }} src={sus} alt='' />
+            <div className='header-ofi-cont'>
+              <div className='sp-cont'>
+                <img className='pgjh comple' src={sus} alt='' />
               </div>
-              <img className='ime' src={logo2} alt='' />
+              <img className='img-sp' src={logo2} alt='' />
             </div>
           </div>
-          <div style={{ marginTop: '90px' }}>
+          <div className='sp-direc'>
             <p>Dirección General de Administracción y Finanzas</p>
           </div>
-          <div className='no-oficio'>
+          <div className='no-oficio-sp'>
             <p>
               Oficio No: PGJ/DGAyF/{this.state.fondo.no_oficio}/2021
               <br />Pachuca de Soto, Hidalgo a {today}
               <br />Asunto Pago a Proveedor
             </p>
           </div>
-          <div className='prensente'>
+          <div className='prensente-sp'>
             <p>
               <b>
                 L.A.E. CÉSAR ALBERTO GONZÁLEZ LÓPEZ
@@ -605,7 +605,7 @@ export default class Oficios extends Component {
               </b>
             </p>
           </div>
-          <div className='añadido'>
+          <div className='añadido-sp'>
             <p>
               <b>
                 AT´N.: L.C.P. KARINA BARRIOS VELÁZQUEZ
@@ -614,7 +614,7 @@ export default class Oficios extends Component {
               </b>
             </p>
           </div>
-          <div className='texto-ofi_ppp' style={{ marginTop: '-30px' }}>
+          <div className='texto-ofi-sp'>
             <p>
               Por este medio me permito enviar a Usted documentación por un importe total de
               <CurrencyFormat
@@ -640,24 +640,24 @@ export default class Oficios extends Component {
             <p>Sin otro particular, le envio un cordial y afectuoso saludo.</p>
           </div>
           <div>
-            <div style={{ display: 'flex', justifyContent: 'center' }}>
-              <p style={{ textAlign: 'center' }}>
+            <div className='atte-sp'>
+              <p className='atte-text-sp'>
                 <b>ATENTAMENTE<br />EL DIRECTOR GENERAL</b>
               </p>
             </div>
-            <div className='firma-dad' style={{ display: 'flex', justifyContent: 'center' }}>
-              <div className='firma-raya'>
-                <p className='mtro'><b>MTRO. LEÓN MAXIMILIANO HERNÁNDEZ VALDÉS</b></p>
+            <div className='firma-sp'>
+              <div className='firma-raya-sp'>
+                <p><b>MTRO. LEÓN MAXIMILIANO HERNÁNDEZ VALDÉS</b></p>
               </div>
             </div>
           </div>
-          <div style={{ bottom: '0', position: 'fixed', height: '100px', width: '80%' }}>
-            <div style={{ display: 'flex', justifyContent: 'space-between', flexDirection: 'row' }}>
+          <div className='footer-sp'>
+            <div className='footer-content-sp'>
               <div>
-                <p style={{ color: 'black', fontSize: '12px' }}>C.C.P...- Expediente<br />Minutario<br />LMHV/NRL/macht</p>
+                <p className='foot-text'>C.C.P...- Expediente<br />Minutario<br />LMHV/NRL/macht</p>
               </div>
-              <div style={{ display: 'flex', justifyContent: 'flex-end', flexDirection: 'column' }}>
-                <p style={{ fontSize: '12px' }}>No. de Fondo {this.state.fondo.fondo}</p>
+              <div className='foot-num'>
+                <p className='foot-num-t'>No. de Fondo {this.state.fondo.fondo}</p>
               </div>
             </div>
           </div>
@@ -907,241 +907,239 @@ export default class Oficios extends Component {
               <p className='fs-if'>{this.state.fondo.fondo}</p>
             </div>
           </div>
-          <div style={{ height: '60vh'}}>
-            <div>
-              <div className='tabla-so'>
-                <table>
+          <div className='sp-table-cont'>
+            <div className='tabla-so'>
+              <table>
+                <tr>
+                  <td className='all-tablai'>Año</td>
+                  <td className='all-tablai'>Ramo</td>
+                  <td className='all-tablai'>OS</td>
+                  <td className='all-tablai'>UP</td>
+                  <td className='all-tablai'>Rubro de Ingreso</td>
+                  <td className='all-tablai'>TG</td>
+                  <td className='all-tablai'>Objeto de un Gasto</td>
+                  <td className='all-tablai'>Finalidad</td>
+                  <td className='all-tablai'>Funcion</td>
+                  <td className='all-tablai'>Subfunción</td>
+                  <td className='all-tablai'>Eje</td>
+                  <td className='all-tablai'>Sect</td>
+                  <td className='all-tablai'>Prog</td>
+                  <td className='all-tablai'>Subp</td>
+                  <td className='all-tablai'>Obj</td>
+                  <td className='all-tablai'>Proyecto</td>
+                  <td className='all-tablai'>Ext</td>
+                  <td className='all-tablai'>Ben</td>
+                  <td className='all-tablai'>E Geo</td>
+                  <td className='dg-tabla all-tablai' style={{ textAlign: 'left' }}>
+                    Descripcion del objeto de Gasto
+                  </td>
+                  <td className='monto-tabla all-tablai'>Monto</td>
+                </tr>
+                {this.state.comprometidos.map(comprometidos =>
+                  comprometidos.area ?
                   <tr>
-                    <td className='all-tablai'>Año</td>
-                    <td className='all-tablai'>Ramo</td>
-                    <td className='all-tablai'>OS</td>
-                    <td className='all-tablai'>UP</td>
-                    <td className='all-tablai'>Rubro de Ingreso</td>
-                    <td className='all-tablai'>TG</td>
-                    <td className='all-tablai'>Objeto de un Gasto</td>
-                    <td className='all-tablai'>Finalidad</td>
-                    <td className='all-tablai'>Funcion</td>
-                    <td className='all-tablai'>Subfunción</td>
-                    <td className='all-tablai'>Eje</td>
-                    <td className='all-tablai'>Sect</td>
-                    <td className='all-tablai'>Prog</td>
-                    <td className='all-tablai'>Subp</td>
-                    <td className='all-tablai'>Obj</td>
-                    <td className='all-tablai'>Proyecto</td>
-                    <td className='all-tablai'>Ext</td>
-                    <td className='all-tablai'>Ben</td>
-                    <td className='all-tablai'>E Geo</td>
-                    <td className='dg-tabla all-tablai' style={{ textAlign: 'left' }}>
-                      Descripcion del objeto de Gasto
+                    <td className='all-tablai'>
+                      {comprometidos.año}
                     </td>
-                    <td className='monto-tabla all-tablai'>Monto</td>
-                  </tr>
-                  {this.state.comprometidos.map(comprometidos =>
-                    comprometidos.area ?
-                    <tr>
-                      <td className='all-tablai'>
-                        {comprometidos.año}
-                      </td>
-                      <td className='all-tablai'>
-                        {comprometidos.ramo}
-                      </td>
-                      <td className='all-tablai'>
-                        {comprometidos.ur}
-                      </td>
-                      <td className='all-tablai'>
-                        {comprometidos.up}
-                      </td>
-                      <td className='all-tablai'>
-                        {comprometidos.rubro}
-                      </td>
-                      <td className='all-tablai'>
-                        {comprometidos.tg}
-                      </td>
-                      <td className='all-tablai'>
-                        {comprometidos.partida}
-                      </td>
-                      <td className='all-tablai'>
-                        {comprometidos.f}
-                      </td>
-                      <td className='all-tablai'>
-                        {comprometidos.fu}
-                      </td>
-                      <td className='all-tablai'>
-                        {comprometidos.sf}
-                      </td>
-                      <td className='all-tablai'>
-                        {comprometidos.eje}
-                      </td>
-                      <td className='all-tablai'>
-                        {comprometidos.s}
-                      </td>
-                      <td className='all-tablai'>
-                        {comprometidos.prog}
-                      </td>
-                      <td className='all-tablai'>
-                        {comprometidos.sp}
-                      </td>
-                      <td className='all-tablai'>
-                        {comprometidos.obj}
-                      </td>
-                      <td className='all-tablai'>
-                        {comprometidos.proy}
-                      </td>
-                      <td className='all-tablai'>
-                        {comprometidos.est}
-                      </td>
-                      <td className='all-tablai'>
-                        {comprometidos.ben}
-                      </td>
-                      <td className='all-tablai'>
-                        {comprometidos.eg}
-                      </td>
-                      <td className='all-tablai' style={{ textAlign: 'left', width: '100px' }}>
-                        <div className='pru-over'>
-                          {comprometidos.npro}
-                        </div>
-                      </td>
-                      <td className='all-tablai' style={{ textAlign: 'right' }}>
-                        <CurrencyFormat
-                          value={(parseFloat(comprometidos.total) + parseFloat(comprometidos.isr)).toFixed(2)}
-                          displayType='text'
-                          thousandSeparator
-                          prefix=' $ '
-                        />
-                      </td>
-                    </tr> : null
-                  )}
-                  {prueba.map(item =>
-                    <tr>
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                    </tr>
-                  )}
-                  {this.state.comprometidos.map(comprometidos =>
-                    comprometidos.isr !== '0.00' && comprometidos.isr ?
-                    <tr>
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' />
-                      <td className='all-tablai' style={{ textAlign: 'left' }}>SUBTOTAL</td>
-                      <td className='all-tablai' style={{ textAlign: 'right' }}>
-                        <CurrencyFormat
-                          value={(parseFloat(totalImporte) + parseFloat(totalRetencion)).toFixed(2)}
-                          displayType='text'
-                          thousandSeparator
-                          prefix=' $ '
-                        />
-                      </td>
-                    </tr>
-                    : null
-                  )}
-                  <tr>
-                    <td className='all-tablai border-color' />
-                    <td className='all-tablai border-color' />
-                    <td className='all-tablai border-color' />
-                    <td className='all-tablai border-color' />
-                    <td className='all-tablai border-color' />
-                    <td className='all-tablai border-color' />
-                    <td className='all-tablai border-color' />
-                    <td className='all-tablai border-color' />
-                    <td className='all-tablai border-color' />
-                    <td className='all-tablai border-color' />
-                    <td className='all-tablai border-color' />
-                    <td className='all-tablai border-color' />
-                    <td className='all-tablai border-color' />
-                    <td className='all-tablai border-color' />
-                    <td className='all-tablai border-color' />
-                    <td className='all-tablai  border-color' />
-                    <td className='all-tablai  border-color' />
-                    <td className='all-tablai  border-color' />
-                    <td className='all-tablai  border-color' />
-                    <td className='all-tablai border-color2 text-rete'>RETENCION</td>
+                    <td className='all-tablai'>
+                      {comprometidos.ramo}
+                    </td>
+                    <td className='all-tablai'>
+                      {comprometidos.ur}
+                    </td>
+                    <td className='all-tablai'>
+                      {comprometidos.up}
+                    </td>
+                    <td className='all-tablai'>
+                      {comprometidos.rubro}
+                    </td>
+                    <td className='all-tablai'>
+                      {comprometidos.tg}
+                    </td>
+                    <td className='all-tablai'>
+                      {comprometidos.partida}
+                    </td>
+                    <td className='all-tablai'>
+                      {comprometidos.f}
+                    </td>
+                    <td className='all-tablai'>
+                      {comprometidos.fu}
+                    </td>
+                    <td className='all-tablai'>
+                      {comprometidos.sf}
+                    </td>
+                    <td className='all-tablai'>
+                      {comprometidos.eje}
+                    </td>
+                    <td className='all-tablai'>
+                      {comprometidos.s}
+                    </td>
+                    <td className='all-tablai'>
+                      {comprometidos.prog}
+                    </td>
+                    <td className='all-tablai'>
+                      {comprometidos.sp}
+                    </td>
+                    <td className='all-tablai'>
+                      {comprometidos.obj}
+                    </td>
+                    <td className='all-tablai'>
+                      {comprometidos.proy}
+                    </td>
+                    <td className='all-tablai'>
+                      {comprometidos.est}
+                    </td>
+                    <td className='all-tablai'>
+                      {comprometidos.ben}
+                    </td>
+                    <td className='all-tablai'>
+                      {comprometidos.eg}
+                    </td>
+                    <td className='all-tablai' style={{ textAlign: 'left', width: '100px' }}>
+                      <div className='pru-over'>
+                        {comprometidos.npro}
+                      </div>
+                    </td>
                     <td className='all-tablai' style={{ textAlign: 'right' }}>
                       <CurrencyFormat
-                        value={(totalRetencion.reduce(reducer)).toFixed(2)}
+                        value={(parseFloat(comprometidos.total) + parseFloat(comprometidos.isr)).toFixed(2)}
+                        displayType='text'
+                        thousandSeparator
+                        prefix=' $ '
+                      />
+                    </td>
+                  </tr> : null
+                )}
+                {prueba.map(item =>
+                  <tr>
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                  </tr>
+                )}
+                {this.state.comprometidos.map(comprometidos =>
+                  comprometidos.isr !== '0.00' && comprometidos.isr ?
+                  <tr>
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' />
+                    <td className='all-tablai' style={{ textAlign: 'left' }}>SUBTOTAL</td>
+                    <td className='all-tablai' style={{ textAlign: 'right' }}>
+                      <CurrencyFormat
+                        value={(parseFloat(totalImporte) + parseFloat(totalRetencion)).toFixed(2)}
                         displayType='text'
                         thousandSeparator
                         prefix=' $ '
                       />
                     </td>
                   </tr>
-                  <tr>
-                    <td className='all-tablai border-color' />
-                    <td className='all-tablai border-color' />
-                    <td className='all-tablai border-color' />
-                    <td className='all-tablai border-color' />
-                    <td className='all-tablai border-color' />
-                    <td className='all-tablai border-color' />
-                    <td className='all-tablai border-color' />
-                    <td className='all-tablai border-color' />
-                    <td className='all-tablai border-color' />
-                    <td className='all-tablai border-color' />
-                    <td className='all-tablai border-color' />
-                    <td className='all-tablai border-color' />
-                    <td className='all-tablai border-color' />
-                    <td className='all-tablai border-color' />
-                    <td className='all-tablai border-color' />
-                    <td className='all-tablai border-color' />
-                    <td className='all-tablai border-color' />
-                    <td className='all-tablai border-color' />
-                    <td className='all-tablai border-color' />
-                    <td className='all-tablai border-color text-rete'>TOTAL</td>
-                    <td className='all-tablai' style={{ textAlign: 'right' }}>
-                      <CurrencyFormat
-                        value={(totalImporte.reduce(reducer)).toFixed(2)}
-                        displayType='text'
-                        thousandSeparator
-                        prefix=' $ '
-                      />
-                    </td>
-                  </tr>
-                </table>
-              </div>
+                  : null
+                )}
+                <tr>
+                  <td className='all-tablai border-color' />
+                  <td className='all-tablai border-color' />
+                  <td className='all-tablai border-color' />
+                  <td className='all-tablai border-color' />
+                  <td className='all-tablai border-color' />
+                  <td className='all-tablai border-color' />
+                  <td className='all-tablai border-color' />
+                  <td className='all-tablai border-color' />
+                  <td className='all-tablai border-color' />
+                  <td className='all-tablai border-color' />
+                  <td className='all-tablai border-color' />
+                  <td className='all-tablai border-color' />
+                  <td className='all-tablai border-color' />
+                  <td className='all-tablai border-color' />
+                  <td className='all-tablai border-color' />
+                  <td className='all-tablai border-color' />
+                  <td className='all-tablai border-color' />
+                  <td className='all-tablai border-color' />
+                  <td className='all-tablai border-color' />
+                  <td className='all-tablai text-rete'>RETENCION</td>
+                  <td className='all-tablai' style={{ textAlign: 'right' }}>
+                    <CurrencyFormat
+                      value={(totalRetencion.reduce(reducer)).toFixed(2)}
+                      displayType='text'
+                      thousandSeparator
+                      prefix=' $ '
+                    />
+                  </td>
+                </tr>
+                <tr>
+                  <td className='all-tablai border-color' />
+                  <td className='all-tablai border-color' />
+                  <td className='all-tablai border-color' />
+                  <td className='all-tablai border-color' />
+                  <td className='all-tablai border-color' />
+                  <td className='all-tablai border-color' />
+                  <td className='all-tablai border-color' />
+                  <td className='all-tablai border-color' />
+                  <td className='all-tablai border-color' />
+                  <td className='all-tablai border-color' />
+                  <td className='all-tablai border-color' />
+                  <td className='all-tablai border-color' />
+                  <td className='all-tablai border-color' />
+                  <td className='all-tablai border-color' />
+                  <td className='all-tablai border-color' />
+                  <td className='all-tablai border-color' />
+                  <td className='all-tablai border-color' />
+                  <td className='all-tablai border-color' />
+                  <td className='all-tablai border-color' />
+                  <td className='all-tablai border-color text-rete'>TOTAL</td>
+                  <td className='all-tablai' style={{ textAlign: 'right' }}>
+                    <CurrencyFormat
+                      value={(totalImporte.reduce(reducer)).toFixed(2)}
+                      displayType='text'
+                      thousandSeparator
+                      prefix=' $ '
+                    />
+                  </td>
+                </tr>
+              </table>
             </div>
           </div>
-          <div style={{ bottom: 0, position: 'fixed', width: '100%', height: 'auto' }}>
+          <div className='sp-footer'>
             <div className='obs-sopadre'>
               <div className='obs-so'>
                 <p className='text-osb'>Observaciones</p>
                 <div className='input-obs' />
                 <div className='obs-so2'>
                   <p className='text-osb'>No. De Solicitud</p>
-                  <input style={{ borderTop: '0', borderLeft: '0', borderRight: '0', borderBottom: '1px solid #000' }} />
+                  <input className='obs-input' />
                 </div>
               </div>
             </div>

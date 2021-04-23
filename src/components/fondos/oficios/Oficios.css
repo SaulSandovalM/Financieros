@@ -249,61 +249,129 @@
   height: 10px;
   width: 10px;
 }
+.padre-lineas{
+  display: flex;
+  height: 80px;
+  justify-content: center;
+  padding-top: 10px;
+}
+.lineas-so {
+  width: 780px;
+}
+.internos {
+  display: flex;
+}
+.text-intei {
+  font-size: 12px;
+  margin: 3px;
+  width: 120px;
+}
+.bene-i {
+  font-size: 12px;
+  margin: 0;
+}
+.folio {
+  border: 1px solid;
+  border-radius:10px;
+  display: flex;
+  height: 50px;
+  padding-left: 30px;
+  padding-right: 30px;
+}
+.text-folio {
+  font-size: 11px;
+  padding-top: 8px;
+}
+.fs-if {
+  font-size: 12px;
+  margin-left: 5px;
+  margin-top: 18px;
+}
+.sp-table-cont {
+  height: 60vh;
+}
+.tabla-so {
+  padding-left: 20px;
+  padding-right: 20px;
+}
+.all-tablai {
+  font-size: 11px;
+  height: 15px;
+}
+.dg-tabla {
+  height: 20px;
+  width: 300px;
+}
+.monto-tabla{
+  width: 150px;
+}
+.border-color {
+  border-bottom: white 1px;
+  border-left: white 1px;
+  border-right: white 1px;
+  border-top: white 1px;
+}
+.text-rete {
+  font-size: 12px;
+  text-align: left;
+}
+.sp-footer {
+  bottom: 0;
+  height: auto;
+  position: fixed;
+  width: 100%;
+}
+.obs-sopadre {
+  display: flex;
+  justify-content: center;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+.obs-so{
+  display: flex;
+}
+.text-osb {
+  font-size: 12px;
+  margin-top: 7px;
+  width: 100px;
+}
+.input-obs {
+  font-size: 8px;
+  height: 15px;
+  width: 500px;
+}
+.obs-so2{
+  display: flex;
+  padding-left: 280px;
+}
+.obs-input {
+  border-bottom: 1px solid #000;
+  border-left: 0;
+  border-right: 0;
+  border-top: 0;
+}
+.padre-firmas{
+  display: flex;
+  justify-content: space-between;
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-top: 30px;
+}
+.firmas{
+  border: solid 1px;
+  border-radius: 10px;
+  height: 50px;
+  width: 200px;
+}
+.text-firmas{
+  font-size: 12px;
+  margin-top: 0;
+  text-align: center;
+}
 
 /* Finaliza Solicitud Programatica */
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+/* Empieza Pago Proveedor */
 
 .pppdf-subdad {
   background: white;
@@ -311,6 +379,150 @@
   width: 90%;
   z-index: 2;
 }
+.header-ofi {
+  height: 100px;
+  position: fixed;
+  top: 0;
+  width: 80%;
+}
+.header-ofi-cont {
+  display: flex;
+  justify-content: space-between;
+}
+.sp-cont {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.comple {
+  margin-left: -20px;
+  width: auto;
+}
+.img-sp {
+  height: 70px;
+  justify-content: space-between;
+  margin-bottom: 5px;
+  width: 70px;
+}
+.sp-direc {
+  margin-top: 90px;
+}
+.no-oficio-sp {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  padding-top: 0;
+  text-align: right;
+}
+.prensente-sp {
+  padding-left: 0;
+  padding-top: 48px;
+}
+.añadido-sp {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  padding-top: 15px;
+}
+.texto-ofi-sp {
+  margin-top: -30px;
+  padding-top: 32px;
+  text-align: justify;
+}
+.atte-sp {
+  display: flex;
+  justify-content: center;
+}
+.atte-text-sp {
+  text-align: center;
+}
+.firma-sp {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  padding-top: 80px;
+  width: 100%;
+}
+.firma-raya-sp {
+  border-top: 1px solid black;
+  text-align: left;
+  width: 58%;
+}
+.footer-sp {
+  bottom: 0;
+  height: 100px;
+  position: fixed;
+  width: 80%;
+}
+.footer-content-sp {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.foot-text {
+  color: black;
+  font-size: 12px;
+}
+.foot-num {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+.foot-num-t {
+  font-size: 12px;
+}
+
+/* Termina Pago Proveedor */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -369,12 +581,7 @@
 
 
 /* Estilos de oficio */
-.header-ofi {
-  height: 100px;
-  position: fixed;
-  top: 0;
-  width: 80%;
-}
+
 .site-pf-of {
   padding-left: 80px;
 }
@@ -386,15 +593,8 @@
 
 
 
-.bene-i {
-  font-size: 12px;
-  margin: 0;
-}
-.fs-if {
-  font-size: 12px;
-  margin-left: 5px;
-  margin-top: 18px;
-}
+
+
 .pass {
   height: 100vh;
   z-index: 2;
@@ -404,20 +604,9 @@
   width: 100%;
   z-index: 2;
 }
-.text-intei {
-  font-size: 12px;
-  margin: 3px;
-  width: 120px;
-}
-.all-tablai {
-  font-size: 11px;
-  height: 15px;
-}
-.text-osb {
-  font-size: 12px;
-  margin-top: 7px;
-  width: 100px;
-}
+
+
+
 
 
 
@@ -576,18 +765,9 @@ th {
 
 
 /*Fase 3 So*/
-.padre-lineas{
-  display:flex;
-  justify-content: center;
-  height: 80px;
-  padding-top: 10px;
-}
-.lineas-so{
-  width: 780px;
-}
-.internos{
-  display: flex;
-}
+
+
+
 .text-inte{
   width: 50px;
   margin-right: 72px;
@@ -610,52 +790,23 @@ th {
   width: 500px;
 }
 /* folio, en lineas*/
-.folio{
-  height: 50px;
-  border: 1px solid;
-  border-radius:10px;
-  padding-left: 30px;
-  padding-right: 30px;
-  display: flex;
-}
+
 .input-so3{
   margin-top: 15px;
   height: 15px;
   width: 50px;
 }
-.text-folio{
-  padding-top: 8px;
-  font-size: 11px;
-}
+
 /* Tabla*/
 .all-tabla{
   font-size: 8px;
   height: 10px;
 }
-.dg-tabla{
-  width: 300px;
-  height: 20px;
-}
-.monto-tabla{
-  width: 150px;
-}
-.tabla-so{
-  padding-left: 20px;
-  padding-right: 20px;
-}
+
 .tablas-solas{
   padding-left: 100px;
 }
-.border-color{
-  border-left: white 1px;
-  border-right: white 1px ;
-  border-bottom: white 1px;
-  border-top: white 1px;
-}
-.text-rete{
-  font-size: 12px;
-  text-align:left;
-}
+
 /*retencion*/
 .padre-retencion{
   margin:1px;
@@ -665,43 +816,10 @@ th {
   border: solid 1px;
 }
 /* Observaciones*/
-.obs-sopadre {
-  padding-left: 20px;
-  padding-right: 20px;
-  display: flex;
-  justify-content:center;
-}
-.obs-so{
-  display: flex;
-}
-.obs-so2{
-  padding-left: 280px;
-  display: flex;
-}
-.input-obs{
-  font-size:8px;
-  width:500px;
-  height:15px;
-}
+
+
 /*firmas*/
-.padre-firmas{
-  padding-left: 20px;
-  padding-right: 20px;
-  display: flex;
-  justify-content: space-between;
-  padding-top: 30px;
-}
-.firmas{
-  border:solid 1px;
-  border-radius: 10px;
-  width: 200px;
-  height: 50px;
-}
-.text-firmas{
-  text-align: center;
-  margin-top: 0px;
-  font-size: 12px;
-}
+
 /*Pdf gastp*/
 
 
@@ -857,18 +975,6 @@ th {
 }
 
 /*Fase 3 So*/
-.padre-lineas {
-  display:flex;
-  justify-content: center;
-  height: 80px;
-  padding-top: 10px;
-}
-.lineas-so {
-  width: 780px;
-}
-.internos{
-  display: flex;
-}
 .text-inte {
   width: 50px;
   margin-right: 72px;
@@ -891,43 +997,19 @@ th {
   width: 500px;
 }
 /* folio, en lineas*/
-.folio{
-  height: 50px;
-  border: 1px solid;
-  border-radius:10px;
-  padding-left: 30px;
-  padding-right: 30px;
-  display: flex;
-}
 .input-so3{
   margin-top: 15px;
   height: 15px;
   width: 50px;
-}
-.text-folio{
-  padding-top: 8px;
-  font-size: 11px;
 }
 /* Tabla*/
 .all-tabla{
   font-size: 8px;
   height: 10px;
 }
-.dg-tabla{
-  width: 300px;
-  height: 20px;
-}
-.monto-tabla{
-  width: 150px;
-}
+
 .tablas-solas{
   padding-left: 100px;
-}
-.border-color{
-  border-left: white 1px;
-  border-right: white 1px ;
-  border-bottom: white 1px;
-  border-top: white 1px;
 }
 /*retencion*/
 .padre-retencion{
@@ -938,28 +1020,7 @@ th {
   border: solid 1px;
 }
 /* Observaciones*/
-.obs-so{
-  display: flex;
-}
-.input-obs{
-  font-size:8px;
-  width:500px;
-  height:15px;
-}
 /*firmas*/
-.padre-firmas{
-  padding-left: 20px;
-  padding-right: 20px;
-  display: flex;
-  justify-content: space-between;
-  padding-top: 30px;
-}
-.firmas{
-  border:solid 1px;
-  border-radius: 10px;
-  width: 200px;
-  height: 50px;
-}
 /*Pdf gastp*/
 .faderinp{
   padding-bottom: 0;
