@@ -101,36 +101,34 @@ export default class Oficios extends Component {
     var nombreDesa = this.state.comprometidos.map(comprometidos => comprometidos.up)
 
     return (
-      <div style={{ width: '100%', height: '100%', overflow: 'hidden', position: 'absolute' }}>
-        <div style={{ zIndex: '3', background: '#f4f4f4', width: '100%', position: 'fixed', height: '100vh' }}>
+      <div className='oficios-container'>
+        <div className='oficios-section-content'>
           {this.state.fondo.tipo_doc === 'Fondo Revolvente' && this.state.fondo.no_lici === ' ' &&
             <div className='m-f'>
-              <div className='fr-con'>
-                <p className='fr-b'><b>Fondo Revolvente</b></p>
-              </div>
-              <div className='fcc-i'>
-                <p className='fimpre'>Solicitud Programatica</p>
+              <p><b>Fondo Revolvente</b></p>
+              <div>
+                <p>Solicitud Programatica</p>
                 <ReactToPrint
                   trigger={() => <buttom className='btn-imp-of'>Imprimir</buttom>}
                   content={() => this.sp}
                 />
               </div>
-              <div className='fcc-i'>
-                <p className='fimpre'>Reembolso de FR</p>
+              <div>
+                <p>Reembolso de FR</p>
                 <ReactToPrint
                   trigger={() => <buttom className='btn-imp-of'>Imprimir</buttom>}
                   content={() => this.rfr}
                 />
               </div>
-              <div className='fcc-i'>
-                <p className='fimpre'>Recibo Global</p>
+              <div>
+                <p>Recibo Global</p>
                 <ReactToPrint
                   trigger={() => <buttom className='btn-imp-of'>Imprimir</buttom>}
                   content={() => this.rec}
                 />
               </div>
-              <div className='fcc-i'>
-                <p className='fimpre'>Formato E</p>
+              <div>
+                <p>Formato E</p>
                 <ReactToPrint
                   trigger={() => <buttom className='btn-imp-of'>Imprimir</buttom>}
                   content={() => this.la}
@@ -140,25 +138,23 @@ export default class Oficios extends Component {
           }
           {this.state.fondo.no_lici !== ' ' &&
             <div className='m-f'>
-              <div className='fr-con'>
-                <p className='fr-b'><b>Pago Provedor por Requisición</b></p>
-              </div>
-              <div className='fcc-i'>
-                <p className='fimpre'>Solicitud Programatica</p>
+              <p><b>Pago Provedor por Requisición</b></p>
+              <div>
+                <p>Solicitud Programatica</p>
                 <ReactToPrint
                   trigger={() => <buttom className='btn-imp-of'>Imprimir</buttom>}
                   content={() => this.sp}
                 />
               </div>
-              <div className='fcc-i'>
-                <p className='fimpre'>Solicitud de PPR</p>
+              <div>
+                <p>Solicitud de PPR</p>
                 <ReactToPrint
                   trigger={() => <buttom className='btn-imp-of'>Imprimir</buttom>}
                   content={() => this.ofi}
                 />
               </div>
-              <div className='fcc-i'>
-                <p className='fimpre'>Formato E</p>
+              <div>
+                <p>Formato E</p>
                 <ReactToPrint
                   trigger={() => <buttom className='btn-imp-of'>Imprimir</buttom>}
                   content={() => this.la}
@@ -168,25 +164,23 @@ export default class Oficios extends Component {
           }
           {this.state.fondo.tipo_doc === 'Pago Directo' && this.state.fondo.no_lici === ' ' &&
             <div className='m-f'>
-              <div className='fr-con'>
-                <p className='fr-b'><b>Pago Proveedor</b></p>
-              </div>
-              <div className='fcc-i'>
-                <p className='fimpre'>Oficio Pago Proveedor</p>
+              <p><b>Pago Proveedor</b></p>
+              <div>
+                <p>Oficio Pago Proveedor</p>
                 <ReactToPrint
                   trigger={() => <buttom className='btn-imp-of'>Imprimir</buttom>}
                   content={() => this.opp}
                 />
               </div>
-              <div className='fcc-i'>
-                <p className='fimpre'>Solicitud Programatica</p>
+              <div>
+                <p>Solicitud Programatica</p>
                 <ReactToPrint
                   trigger={() => <buttom className='btn-imp-of'>Imprimir</buttom>}
                   content={() => this.sp}
                 />
               </div>
-              <div className='fcc-i'>
-                <p className='fimpre'>Formato E</p>
+              <div>
+                <p>Formato E</p>
                 <ReactToPrint
                   trigger={() => <buttom className='btn-imp-of'>Imprimir</buttom>}
                   content={() => this.la}
@@ -197,25 +191,23 @@ export default class Oficios extends Component {
         </div>
 
         {/* Formato E */}
-        <div ref={el => (this.la = el)} style={{ zIndex: '2', position: 'relative', background: 'white' }}>
+        <div className='formatoe-container' ref={el => (this.la = el)}>
           {this.state.comprometidos.map(comprometidos =>
             comprometidos.up ?
-              <div className='lll' style={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
-                <div style={{ width: '98%' }}>
-                  <div style={{ width: '100%' }}>
-                    <div className='title-ga'>
-                      <div style={{ width: '15%' }}>
-                        <img className='pgjh' src={sus} alt='' style={{ width: '100%' }} />
-                      </div>
-                      <div style={{ width: '70%' }}>
-                        <p className='text-titulo-ga'>PROCURADURÍA GENERAL DE JUSTICA DE HIDALGO</p>
-                        <p className='text-titulo-ga'>{comprometidos.area}</p>
-                        <p className='text-titulo-ga'>{comprometidos.partida}</p>
-                      </div>
-                      <div style={{ width: '15%', display: 'flex', justifyCOntent: 'center', flexDirection: 'column' }}>
-                        <div style={{ display: 'flex', justifyContent: 'flex-end', height: '100%' }}>
-                          <img src={logo2} alt='' style={{ height: '100%' }} />
-                        </div>
+              <div className='lll'>
+                <div className='lll-content'>
+                  <div className='title-ga'>
+                    <div className='ofie-img1'>
+                      <img className='pgjh' src={sus} alt='' />
+                    </div>
+                    <div className='ofie-text'>
+                      <p className='text-titulo-ga'>PROCURADURÍA GENERAL DE JUSTICA DE HIDALGO</p>
+                      <p className='text-titulo-ga'>{comprometidos.area}</p>
+                      <p className='text-titulo-ga'>{comprometidos.partida}</p>
+                    </div>
+                    <div className='ofie-img-cont'>
+                      <div className='ofie-img2'>
+                        <img className='img2' src={logo2} alt='' />
                       </div>
                     </div>
                   </div>
@@ -276,163 +268,72 @@ export default class Oficios extends Component {
                     </div>
                   </div>
                   <div>
-                    <div className='tabla-ga'>
-                      <div className='tablagas'>
-                        <div style={{ display: 'flex', width: '100%' }}>
-                          <div
-                            className='alltabla-ga'
-                            style={{
-                              width: '35%',
-                              textAlign: 'center',
-                              display: 'flex',
-                              justifyContent: 'center',
-                              flexDirection: 'column'
-                            }}>
-                            Folio de factura
-                          </div>
-                          <div
-                            className='alltabla-ga'
-                            style={{
-                              width: '10%',
-                              textAlign: 'center',
-                              display: 'flex',
-                              justifyContent: 'center',
-                              flexDirection: 'column'
-                            }}>
-                            Importe
-                          </div>
-                          <div
-                            className='alltabla-ga'
-                            style={{
-                              width: '55%',
-                              textAlign: 'center',
-                              display: 'flex',
-                              justifyContent: 'center',
-                              flexDirection: 'column'
-                            }}>
-                            Leyenda alusiva al gasto
-                          </div>
+                    <div>
+                      <div className='ofie-header-blue'>
+                        <div className='alltabla-ga ga1'>
+                          Folio de factura
                         </div>
-                        {comprometidos.comprobantes !== undefined ?
-                          <div>
-                            {comprometidos.comprobantes.map(item =>
-                              <div style={{ width: '100%' }}>
-                                <div style={{ width: '100%', display: 'flex' }}>
-                                  <div
-                                    className='all-tab-f'
-                                    style={{
-                                      width: '35%',
-                                      textAlign: 'center',
-                                      display: 'flex',
-                                      justifyContent: 'center',
-                                      flexDirection: 'column',
-                                      borderLeft: '1px solid black',
-                                      borderRight: '1px solid black',
-                                      borderBottom: '1px solid black'
-                                    }}>
-                                    {item.uuid}
-                                  </div>
-                                  <div
-                                    className='all-tab-f'
-                                    style={{
-                                      width: '10%',
-                                      textAlign: 'center',
-                                      display: 'flex',
-                                      justifyContent: 'center',
-                                      flexDirection: 'column',
-                                      borderRight: '1px solid black',
-                                      borderBottom: '1px solid black'
-                                    }}>
-                                    <CurrencyFormat
-                                      style={{ fontSize: '12px' }}
-                                      value={item.total}
-                                      displayType='text'
-                                      thousandSeparator
-                                      prefix=' $ '
-                                    />
-                                  </div>
-                                  <div
-                                    className='all-tab-f div'
-                                    style={{
-                                      width: '55%',
-                                      textAlign: 'center',
-                                      display: 'flex',
-                                      justifyContent: 'center',
-                                      flexDirection: 'column',
-                                      borderRight: '1px solid black',
-                                      borderBottom: '1px solid black'
-                                    }}>
-                                    <div>
-                                      {item.descripcion}
-                                    </div>
-                                  </div>
+                        <div className='alltabla-ga ga2'>
+                          Importe
+                        </div>
+                        <div className='alltabla-ga ga3'>
+                          Leyenda alusiva al gasto
+                        </div>
+                      </div>
+                      {comprometidos.comprobantes !== undefined ?
+                        <div>
+                          {comprometidos.comprobantes.map(item =>
+                            <div className='ofie-comprobantes-conta'>
+                              <div className='ofie-header-blue'>
+                                <div className='all-tab-f all-tab-of1'>
+                                  {item.uuid}
+                                </div>
+                                <div className='all-tab-f all-tab-of2'>
+                                  <CurrencyFormat
+                                    style={{ fontSize: '12px' }}
+                                    value={item.total}
+                                    displayType='text'
+                                    thousandSeparator
+                                    prefix=' $ '
+                                  />
+                                </div>
+                                <div className='all-tab-f all-tab-of3'>
+                                  {item.descripcion}
                                 </div>
                               </div>
-                            )}
-                          </div>
-                        : null}
-                        <div style={{ width: '100%', display: 'flex', height: '30px' }}>
-                          <div
-                            className='all-tab-f2'
-                            style={{
-                              width: '35%',
-                              textAlign: 'right',
-                              display: 'flex',
-                              justifyContent: 'center',
-                              flexDirection: 'column',
-                              borderLeft: '1px solid black',
-                              borderRight: '1px solid black',
-                              borderBottom: '1px solid black'
-                            }}>
-                            TOTAL:
-                          </div>
-                          <div
-                            className='all-tab-f2'
-                            style={{
-                              width: '10%',
-                              textAlign: 'center',
-                              display: 'flex',
-                              justifyContent: 'center',
-                              flexDirection: 'column',
-                              borderRight: '1px solid black',
-                              borderBottom: '1px solid black'
-                            }}>
+                            </div>
+                          )}
+                        </div>
+                      : null}
+                      <div className='ofie-total-cont'>
+                        <div className='all-tab-f2 all-tab-of1' style={{ textAlign: 'right' }}>
+                          TOTAL:
+                        </div>
+                        <div className='all-tab-f2 all-tab-of2'>
+                          <CurrencyFormat
+                            style={{ fontSize: '12px' }}
+                            value={comprometidos.total}
+                            displayType='text'
+                            thousandSeparator
+                            prefix=' $ '
+                          />
+                          {comprometidos.isr !== '0.00' && comprometidos.isr ?
                             <CurrencyFormat
                               style={{ fontSize: '12px' }}
-                              value={comprometidos.total}
+                              value={(parseFloat(totalImporte) + parseFloat(totalRetencion)).toFixed(2)}
                               displayType='text'
                               thousandSeparator
                               prefix=' $ '
                             />
-                            {comprometidos.isr !== '0.00' && comprometidos.isr ?
-                              <CurrencyFormat
-                                style={{ fontSize: '12px' }}
-                                value={(parseFloat(totalImporte) + parseFloat(totalRetencion)).toFixed(2)}
-                                displayType='text'
-                                thousandSeparator
-                                prefix=' $ '
-                              />
-                              : null
-                            }
-                          </div>
-                          <div
-                            className='all-tab-f2 div'
-                            style={{
-                              width: '55%',
-                              textAlign: 'center',
-                              display: 'flex',
-                              justifyContent: 'center',
-                              flexDirection: 'column',
-                              borderRight: '1px solid white',
-                              borderBottom: '1px solid white'
-                            }}>
-                            <textarea
-                              className='all-tab-l'
-                              type='text'
-                              onKeyUp={this.handleChange.bind(this)}
-                            />
-                          </div>
+                            : null
+                          }
                         </div>
+                        <div className='all-tab-f2 all-tab-of3'
+                          style={{
+                            borderRight: '1px solid white',
+                            borderBottom: '1px solid white'
+                          }}
+                        />
                       </div>
                     </div>
                   </div>
@@ -763,8 +664,8 @@ export default class Oficios extends Component {
         </div>
 
         {/* Solicitud Programatica */}
-        <div ref={el => (this.sp = el)} style={{ zIndex: '2', position: 'absolute' }}>
-          <div style={{ width: '100%', height: '100px', position: 'fixed', top: 0 }}>
+        <div className='sp-container' ref={el => (this.sp = el)}>
+          <div className='sp-imgs'>
             <div className='title-so-o'>
               <img className='pgjh' src={sus} alt='' />
               <p>SOLICITUD PROGRAMÁTICA DEL GASTO</p>

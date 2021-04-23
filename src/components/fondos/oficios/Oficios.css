@@ -1,35 +1,97 @@
-/* Estilos de oficio */
-.header-ofi {
-  height: 100px;
-  position: fixed;
-  top: 0;
-  width: 80%;
+.oficios-container {
+  height: 100%;
+  overflow: hidden;
+  position: absolute;
+  width: 100%;
 }
-.site-pf-of {
-  padding-left: 80px;
+.oficios-section-content {
+  background: #f4f4f4;
+  height: 100vh;
+  position: fixed;
+  width: 100%;
+  z-index: 3;
 }
 .m-f {
   background: #f4f4f4;
   margin: 0;
   padding: 70px 20px 0 20px;
 }
-.title-so-o {
+.btn-imp-of {
+  background: green;
+  color: white;
+  cursor: pointer;
+  height: 18px;
+  padding: 6px;
+}
+
+/* Empieza Formato E */
+
+.formatoe-container {
+  background: white;
+  position: relative;
+  z-index: 2;
+}
+.lll {
   display: flex;
+  justify-content: center;
+  min-height: 100vh;
+  page-break-after: auto;
+  width: 100%;
+}
+.lll-content {
+  margin-top: 10px;
+  width: 98%;
+}
+.title-ga{
+  display: flex;
+  height: 60px;
   justify-content: space-between;
-  margin-top: 30px;
+  margin-top:20px;
   padding-bottom: 10px;
-  padding-left: 30px;
-  padding-right: 50px;
   text-align: center;
 }
-.text-b {
-  font-size: 9px;
-  padding-top: 100px;
+.ofie-img1 {
+  width: 15%;
+}
+.pgjh {
+  height: 50px;
+  width: 150px;
+}
+.ofie-text {
+  width: 70%;
+}
+.text-titulo-ga {
+  font-weight: bold;
+  margin: 2px;
+}
+.ofie-img-cont {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 15%;
+}
+.ofie-img2 {
+  display: flex;
+  height: 100%;
+  justify-content: flex-end;
+}
+.img2 {
+  height: 100%;
 }
 .faderinpo {
   display: flex;
   justify-content: center;
   padding-bottom: 0;
+}
+.contenedor-ga {
+  border: 1px solid;
+  display: flex;
+  height: 100px;
+  justify-content: space-between;
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-top: 10px;
+  width: 1700px;
 }
 .contenedor-1 {
   display: flex;
@@ -43,13 +105,287 @@
   justify-content: space-between;
   padding-bottom: 10px;
 }
-.input-gai {
-  margin-top: 5px;
-}
 .text-gai {
   font-size: 12px;
   margin: 3px;
 }
+.input-gai {
+  margin-top: 5px;
+}
+.ofie-header-blue {
+  display: flex;
+  width: 100%;
+}
+.alltabla-ga {
+  background: blue;
+  color: white;
+  font-size: 12px;
+  font-weight: bold;
+  height: 30px;
+}
+.ga1 {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  width: 35%;
+}
+.ga2 {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  width: 10%;
+}
+.ga3 {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  width: 55%;
+}
+.ofie-comprobantes-conta {
+  width: 100%;
+}
+.all-tab-f {
+  font-size: 12px;
+  height: 50px;
+}
+.all-tab-of1 {
+  border-bottom: 1px solid black;
+  border-left: 1px solid black;
+  border-right: 1px solid black;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  width: 35%;
+}
+.all-tab-of2 {
+  border-bottom: 1px solid black;
+  border-right: 1px solid black;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  width: 10%;
+}
+.all-tab-of3 {
+  border-bottom: 1px solid black;
+  border-right: 1px solid black;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  width: 55%;
+}
+.ofie-total-cont {
+  display: flex;
+  height: 30px;
+  width: 100%;
+}
+.all-tab-f2 {
+  font-size: 12px;
+  height: 30px;
+}
+
+/* Finaliza Formato E */
+
+/* Empieza Solicitud Programatica */
+
+.sp-container {
+  position: absolute;
+  z-index: 2
+}
+.sp-imgs {
+  height: 100%;
+  position: fixed;
+  top: 0;
+  width: 100%;
+}
+.title-so-o {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 30px;
+  padding-bottom: 10px;
+  padding-left: 30px;
+  padding-right: 50px;
+  text-align: center;
+}
+.ims {
+  height: 50px;
+  width: 150px;
+}
+.fadera {
+  display: flex;
+  justify-content: center;
+  margin-top: 100px;
+  padding-bottom: 0;
+  padding-left: 100px;
+  padding-right: 100px;
+}
+.contenedor-soi {
+  border: 1px solid;
+  border-radius: 20px;
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+  width: 1050px;
+}
+.interno {
+  display:flex;
+  justify-content: space-between;
+  padding-right:10px;
+}
+.text-soi {
+  font-size: 12px;
+  margin: 3px;
+}
+.text-soi {
+  font-size: 12px;
+  margin: 3px;
+}
+.input-so{
+  height: 10px;
+  width: 10px;
+}
+
+/* Finaliza Solicitud Programatica */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.pppdf-subdad {
+  background: white;
+  position: relative;
+  width: 90%;
+  z-index: 2;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Estilos de oficio */
+.header-ofi {
+  height: 100px;
+  position: fixed;
+  top: 0;
+  width: 80%;
+}
+.site-pf-of {
+  padding-left: 80px;
+}
+
+.text-b {
+  font-size: 9px;
+  padding-top: 100px;
+}
+
+
+
 .bene-i {
   font-size: 12px;
   margin: 0;
@@ -82,23 +418,9 @@
   margin-top: 7px;
   width: 100px;
 }
-.text-soi {
-  font-size: 12px;
-  margin: 3px;
-}
-.contenedor-soi {
-  border: 1px solid;
-  border-radius: 20px;
-  display: flex;
-  justify-content: space-between;
-  padding: 10px;
-  width: 1050px;
-}
-.lll {
-  min-height: 100vh;
-  page-break-after: auto;
-  z-index: 2;
-}
+
+
+
 .popup-content {
   height: 100%;
   overflow: scroll;
@@ -119,18 +441,9 @@
   text-align: center;
   width: 99%;
 }
-.all-tab-f {
-  font-size: 12px;
-  height: 50px;
-}
-.all-tab-f2 {
-  font-size: 12px;
-  height: 30px;
-}
-.pgjh {
-  height: 50px;
-  width: 150px;
-}
+
+
+
 .cpdf-dad2 {
   max-height: 100vh;
   width: 100%;
@@ -234,10 +547,7 @@ th {
   width: 250px;
 }
 /* Todos los Pdf*/
-.ims{
-  height: 50px;
-  width: 150px;
-}
+
 .title-so{
   margin-top:20px;
   text-align: center;
@@ -247,14 +557,7 @@ th {
   padding-right: 50px;
   padding-left: 30px;
 }
-.fadera{
-  display: flex;
-  justify-content: center;
-  margin-top: 100px;
-  padding-bottom: 0;
-  padding-left: 100px;
-  padding-right: 100px;
-}
+
 .text-so {
   font-size: 10px;
   margin:3px;
@@ -270,15 +573,8 @@ th {
   display: flex;
   justify-content: space-between;
 }
-.interno{
-  display:flex;
-  justify-content: space-between;
-  padding-right:10px;
-}
-.input-so{
-  height: 10px;
-  width: 10px;
-}
+
+
 /*Fase 3 So*/
 .padre-lineas{
   display:flex;
@@ -407,19 +703,8 @@ th {
   font-size: 12px;
 }
 /*Pdf gastp*/
-.title-ga{
-  display: flex;
-  justify-content: space-between;
-  margin-top:20px;
-  text-align: center;
-  display: flex;
-  padding-bottom: 10px;
-  height: 60px;
-}
-.text-titulo-ga{
-  font-weight: bold;
-  margin: 2px;
-}
+
+
 .faderinp {
   padding-bottom: 0px;
   padding-left: 100px;
@@ -443,16 +728,6 @@ th {
   margin:3px;
   font-size: 15px;
 }
-.contenedor-ga{
-  padding-top:10px;
-  padding-left:20px;
-  padding-right:20px;
-  height: 100px;
-  width: 1700px;
-  border: 1px solid;
-  display: flex;
-  justify-content: space-between;
-}
 /* tabla*/
 .fader-tabla{
   padding-left: 100px;
@@ -460,13 +735,6 @@ th {
 }
 .all-tab{
   height:30px;
-}
-.alltabla-ga{
-  height: 30px;
-  font-size: 12px;
-  font-weight: bold;
-  color: white;
-  background: blue;
 }
 .text-total-ga{
   text-align: right;
@@ -587,15 +855,7 @@ th {
   display: flex;
   justify-content: space-between;
 }
-.interno{
-  display:flex;
-  justify-content: space-between;
-  padding-right:10px;
-}
-.input-so{
-  height: 10px;
-  width: 10px;
-}
+
 /*Fase 3 So*/
 .padre-lineas {
   display:flex;
@@ -723,16 +983,6 @@ th {
   margin: 3px;
   font-size: 15px;
 }
-.contenedor-ga{
-  padding-top:10px;
-  padding-left:20px;
-  padding-right:20px;
-  height: 100px;
-  width: 1700px;
-  border: 1px solid;
-  display: flex;
-  justify-content: space-between;
-}
 .fader-tabla{
   padding-left: 100px;
   padding-right: 100px;
@@ -740,13 +990,7 @@ th {
 .all-tab{
   height:30px;
 }
-.btn-imp-of {
-  background: green;
-  color: white;
-  padding: 6px;
-  height: 18px;
-  cursor: pointer;
-}
+
 .pru-over {
   overflow:hidden;
   max-width:300px;
