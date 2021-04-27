@@ -291,7 +291,7 @@ export default class Oficios extends Component {
                                 <div className='all-tab-f all-tab-of2'>
                                   <CurrencyFormat
                                     style={{ fontSize: '12px' }}
-                                    value={item.total}
+                                    value={(parseFloat(item.total) + parseFloat(item.isr)).toFixed(2)}
                                     displayType='text'
                                     thousandSeparator
                                     prefix=' $ '
@@ -310,13 +310,16 @@ export default class Oficios extends Component {
                           TOTAL:
                         </div>
                         <div className='all-tab-f2 all-tab-of2'>
-                          <CurrencyFormat
-                            style={{ fontSize: '12px' }}
-                            value={comprometidos.total}
-                            displayType='text'
-                            thousandSeparator
-                            prefix=' $ '
-                          />
+                          {comprometidos.isr === '0.00' ?
+                            <CurrencyFormat
+                              style={{ fontSize: '12px' }}
+                              value={comprometidos.total}
+                              displayType='text'
+                              thousandSeparator
+                              prefix=' $ '
+                            />
+                            : null
+                          }
                           {comprometidos.isr !== '0.00' && comprometidos.isr ?
                             <CurrencyFormat
                               style={{ fontSize: '12px' }}
@@ -757,7 +760,7 @@ export default class Oficios extends Component {
                 {this.state.comprometidos.map(comprometidos =>
                   <p className='bene-i'>
                     {comprometidos.area ?
-                      this.state.comprometidos.length <= 2 ?
+                      this.state.comprometidos.length === 1 ?
                       (comprometidos.up === '01' &&
                       'Procuraduría General de Justicia')
                       ||
