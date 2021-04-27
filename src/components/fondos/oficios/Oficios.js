@@ -349,44 +349,44 @@ export default class Oficios extends Component {
         {/* fondo revolvente */}
         <div className='pppdf-subdad' style={{ zIndex: '2', position: 'absolute' }} ref={el => (this.rfr = el)}>
           <div className='header-ofi'>
-            <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-              <div style={{ display: 'flex', justifyContent: 'center', flexDirection: 'column' }}>
-                <img className='pgjh' style={{ marginLeft: '-20px', width: 'auto' }} src={sus} alt='' />
+            <div className='header-ofi-cont'>
+              <div className='sp-cont'>
+                <img className='pgjh comple' src={sus} alt='' />
               </div>
-              <img className='ime' src={logo2} alt='' />
+              <img className='img-sp' src={logo2} alt='' />
             </div>
           </div>
-          <div style={{ paddingTop: '90px' }}>
-            Dirección General de Administración y Finanzas
+          <div className='sp-direc'>
+            <p>Dirección General de Administracción y Finanzas</p>
           </div>
-          <div className='no-oficio'>
+          <div className='no-oficio-sp'>
             <p>
               Oficio No: PGJ/DGAyF/{this.state.fondo.no_oficio}/2021
-              <br />Pachuca, Hgo., a {today}
-              <br />Asunto: Reembolso de Fondo Revolvente
+              <br />Pachuca de Soto, Hidalgo a {today}
+              <br />Asunto Pago a Proveedor
             </p>
           </div>
-          <div className='prensente'>
+          <div className='prensente-sp'>
             <p>
               <b>
                 L.A.E. CÉSAR ALBERTO GONZÁLEZ LÓPEZ
                 <br />SUBSECRETARIO DE EGRESOS DE LA
                 <br />SECRETARÍA DE FINANZAS PÚBLICAS
-                <br />P R E S E N T E
+                <br />PRESENTE
               </b>
             </p>
           </div>
-          <div className='añadido'>
+          <div className='añadido-sp'>
             <p>
               <b>
-                AT´N: L.C.P. KARINA BARRIOS VELÁZQUEZ
+                AT´N.: L.C.P. KARINA BARRIOS VELÁZQUEZ
                 <br />DIRECTORA GENERAL DE CONTABILIDAD
                 <br />GUBERNAMENTAL
               </b>
             </p>
           </div>
-          <div className='texto-ofi_ppp'>
-            <p style={{display: 'flex', flexDirection: 'row', }}>
+          <div className='texto-ofi-sp'>
+            <p>
               Por medio del presente me permito enviar a usted, documentación amparada
               con {this.state.fondo.numCompro} comprobantes, por un total de
               $ {this.state.fondo.importe} ({(NumberAsString(this.state.fondo.importe))}),
@@ -400,24 +400,24 @@ export default class Oficios extends Component {
             <p>Sin otro particular, le envío un cordial y afectuoso saludo.</p>
           </div>
           <div>
-            <div style={{ display: 'flex', justifyContent: 'center' }}>
-              <p style={{ textAlign: 'center' }}>
+            <div className='atte-sp'>
+              <p className='atte-text-sp'>
                 <b>ATENTAMENTE<br />EL DIRECTOR GENERAL</b>
               </p>
             </div>
-            <div className='firma-dad' style={{ display: 'flex', justifyContent: 'center' }}>
-              <div className='firma-raya'>
-                <p className='mtro'><b>MTRO. LEÓN MAXIMILIANO HERNÁNDEZ VALDÉS</b></p>
+            <div className='firma-sp'>
+              <div className='firma-raya-sp'>
+                <p><b>MTRO. LEÓN MAXIMILIANO HERNÁNDEZ VALDÉS</b></p>
               </div>
             </div>
           </div>
-          <div style={{ bottom: '0', position: 'fixed', height: '100px', width: '80%' }}>
-            <div style={{ display: 'flex', justifyContent: 'space-between', flexDirection: 'row' }}>
+          <div className='footer-sp'>
+            <div className='footer-content-sp'>
               <div>
-                <p style={{ color: 'black', fontSize: '12px' }}>C.C.P...- Expediente<br />Minutario<br />LMHV/NRL/macht</p>
+                <p className='foot-text'>C.C.P...- Expediente<br />Minutario<br />LMHV/NRL/macht</p>
               </div>
-              <div style={{ display: 'flex', justifyContent: 'flex-end', flexDirection: 'column' }}>
-                <p style={{ fontSize: '12px' }}>No. de Fondo {this.state.fondo.fondo}</p>
+              <div className='foot-num'>
+                <p className='foot-num-t'>No. de Fondo {this.state.fondo.fondo}</p>
               </div>
             </div>
           </div>
@@ -482,24 +482,26 @@ export default class Oficios extends Component {
         </div>
 
         {/* Pago Provedor por Requisición */}
-        <div className='pppdf-subdad' ref={el => (this.ofi = el)} style={{ zIndex: '2', position: 'absolute' }}>
-          <div className='fondo-procu' style={{ display: 'flex', justifyContent: 'space-between', marginTop: '20px' }}>
-            <div style={{ display: 'flex', justifyContent: 'center', flexDirection: 'column' }}>
-              <img className='pgjh' style={{ marginLeft: '-20px', width: 'auto' }} src={sus} alt='' />
+        <div className='pppdf-subdad' ref={el => (this.ofi = el)}>
+          <div className='header-ofi'>
+            <div className='header-ofi-cont'>
+              <div className='sp-cont'>
+                <img className='pgjh comple' src={sus} alt='' />
+              </div>
+              <img className='img-sp' src={logo2} alt='' />
             </div>
-            <img className='ime' src={logo2} alt='' />
           </div>
-          <div>
+          <div className='sp-direc'>
             <p>Dirección General de Administracción y Finanzas</p>
           </div>
-          <div className='no-oficio'>
+          <div className='no-oficio-sp'>
             <p>
               Oficio No: PGJ/DGAyF/{this.state.fondo.no_oficio}/2021
               <br />Pachuca de Soto, Hidalgo a {today}
               <br />Asunto Pago a Proveedor
             </p>
           </div>
-          <div className='prensente'>
+          <div className='prensente-sp'>
             <p>
               <b>
                 L.A.E. CÉSAR ALBERTO GONZÁLEZ LÓPEZ
@@ -509,7 +511,7 @@ export default class Oficios extends Component {
               </b>
             </p>
           </div>
-          <div className='añadido'>
+          <div className='añadido-sp'>
             <p>
               <b>
                 AT´N.: L.C.P. KARINA BARRIOS VELÁZQUEZ
@@ -518,7 +520,7 @@ export default class Oficios extends Component {
               </b>
             </p>
           </div>
-          <div className='texto-ofi_ppp'>
+          <div className='texto-ofi-sp'>
             <p>
               Por medio de presente me permito enviar a Usted documentación por
               un importe total de <CurrencyFormat
@@ -526,8 +528,7 @@ export default class Oficios extends Component {
                 displayType='text'
                 thousandSeparator
                 prefix=' $ '
-              />
-              ({(NumberAsString(this.state.fondo.importe))}),
+              /> ({(NumberAsString(this.state.fondo.importe))}),
               cantidad amparada con CFDI No
               {this.state.comprometidos.map(comprometidos =>
                 comprometidos.comprobantes !== undefined ?
@@ -540,40 +541,35 @@ export default class Oficios extends Component {
               asi como la poliza de afectacion presupuestal al momento del comprometido
               num {this.state.fondo.poliza} que emita la Dirección
               General de Compras Publicas; para que se efectue el tramite de pago
-              a favor del proveedor
-              {this.state.comprometidos.map(comprometidos =>
-                comprometidos.comprobantes !== undefined ?
-                  comprometidos.comprobantes.map(item =>
-                    ', ' + item.nombre
-                  )
-                : null
-              )},
-              para la compra y/o prestación de servicios
+              a favor del proveedor {this.state.fondo.beneficiario} para la compra
+              y/o prestación de servicios
               {/* preguntar */}
-              con cargo al proyecto {this.state.comprometidos.proy} y a los
-              recursos otorgados con oficio de autorización {this.state.fondo.oficio_aut}
+              con cargo al proyecto {this.state.comprometidos.map(item => item.proy ? ', ' + item.proy : null)} y
+              a los recursos otorgados con oficio de autorización {this.state.fondo.oficio_aut}
               del Ejercicio 2021, a la Procuraduria General de Justicia del Estado.
             </p>
             <p>Sin otro particular, le envio un cordial y afectuoso saludo.</p>
           </div>
           <div>
-            <div style={{ display: 'flex', justifyContent: 'center' }}>
-              <p style={{ textAlign: 'center' }}>
+            <div className='atte-sp'>
+              <p className='atte-text-sp'>
                 <b>ATENTAMENTE<br />EL DIRECTOR GENERAL</b>
               </p>
             </div>
-            <div className='firma-dad' style={{ display: 'flex', justifyContent: 'center' }}>
-              <div className='firma-raya'>
-                <p className='mtro'><b>MTRO. LEÓN MAXIMILIANO HERNÁNDEZ VALDÉS</b></p>
+            <div className='firma-sp'>
+              <div className='firma-raya-sp'>
+                <p><b>MTRO. LEÓN MAXIMILIANO HERNÁNDEZ VALDÉS</b></p>
               </div>
             </div>
           </div>
-          <div className='pie'>
-            <div className='ccp'>
-              <p className='text'>C.C.P...- Expediente<br />Minutario<br />LMHV/NRL/macht</p>
-            </div>
-            <div>
-              <p align='right' style={{ fontSize: '12px' }}>No. de Fondo {this.state.fondo.fondo}</p>
+          <div className='footer-sp'>
+            <div className='footer-content-sp'>
+              <div>
+                <p className='foot-text'>C.C.P...- Expediente<br />Minutario<br />LMHV/NRL/macht</p>
+              </div>
+              <div className='foot-num'>
+                <p className='foot-num-t'>No. de Fondo {this.state.fondo.fondo}</p>
+              </div>
             </div>
           </div>
         </div>

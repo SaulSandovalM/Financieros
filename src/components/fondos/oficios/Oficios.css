@@ -35,7 +35,7 @@
   display: flex;
   justify-content: center;
   min-height: 100vh;
-  page-break-after: auto;
+  page-break-before: always;
   width: 100%;
 }
 .lll-content {
@@ -474,10 +474,48 @@
 
 /* Termina Pago Proveedor */
 
+/* Empieza Pago Requisicion */
 
+.fondo-requi {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+  padding-top: 0;
+}
+.img-requi {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.pgjh-requi {
+  height: 50px;
+  margin-left: -20px;
+  width: auto;
+}
+.ime-requi {
+  height: 70px;
+  justify-content: space-between;
+  margin-bottom: 5px;
+  width: 70px;
+}
+.no-oficio-requi {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  padding-top: 0;
+  text-align: right;
+}
+.añadido-requi {
+  display: flex;
+  justify-content: flex-end;
+  padding-top: 15px;
+}
+.ofi-text-requi {
+  padding-top: 32px;
+  text-align: justify;
+}
 
-
-
+/* Termina Pago Requisicion */
 
 
 
