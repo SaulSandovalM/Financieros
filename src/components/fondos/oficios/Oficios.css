@@ -86,11 +86,10 @@
 .contenedor-ga {
   border: 1px solid;
   display: flex;
-  height: 100px;
-  justify-content: space-between;
+  height: 150px;
+  justify-content: space-around;
   padding-left: 20px;
   padding-right: 20px;
-  padding-top: 10px;
   width: 1700px;
 }
 .contenedor-1 {
@@ -103,7 +102,7 @@
 .interno-ga2 {
   display: flex;
   justify-content: space-between;
-  padding-bottom: 10px;
+  padding-bottom: 0;
 }
 .text-gai {
   font-size: 12px;
@@ -233,21 +232,19 @@
   width: 1050px;
 }
 .interno {
-  display:flex;
+  display: flex;
   justify-content: space-between;
-  padding-right:10px;
+  padding-right: 10px;
+  width: 100%;
 }
 .text-soi {
   font-size: 12px;
   margin: 3px;
+  width: 80%;
 }
-.text-soi {
-  font-size: 12px;
-  margin: 3px;
-}
-.input-so{
-  height: 10px;
-  width: 10px;
+.input-so {
+  height: 15px;
+  width: 15px;
 }
 .padre-lineas{
   display: flex;
@@ -323,7 +320,12 @@
 }
 .obs-sopadre {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+.obs-sopadre2 {
+  display: flex;
   padding-left: 20px;
   padding-right: 20px;
 }
@@ -333,6 +335,11 @@
 .text-osb {
   font-size: 12px;
   margin-top: 7px;
+  width: 100px;
+}
+.input-cfe {
+  font-size: 8px;
+  height: 15px;
   width: 100px;
 }
 .input-obs {
@@ -345,7 +352,7 @@
   padding-left: 280px;
 }
 .obs-input {
-  border-bottom: 1px solid #000;
+  border-bottom: 0;
   border-left: 0;
   border-right: 0;
   border-top: 0;
@@ -355,7 +362,7 @@
   justify-content: space-between;
   padding-left: 20px;
   padding-right: 20px;
-  padding-top: 30px;
+  padding-top: 15px;
 }
 .firmas{
   border: solid 1px;

@@ -93,8 +93,8 @@ export default class Oficios extends Component {
       proyectof.push(proy)
     }
 
-    var prueba = new Array(22)
-    for (let i = parseInt(this.state.comprometidos.length); i < 22; i++) {
+    var prueba = new Array(20)
+    for (let i = parseInt(this.state.comprometidos.length); i < 20; i++) {
       prueba[i] = i
     }
 
@@ -134,6 +134,13 @@ export default class Oficios extends Component {
                   content={() => this.la}
                 />
               </div>
+              <div>
+                <p>Anexo F</p>
+                <ReactToPrint
+                  trigger={() => <buttom className='btn-imp-of'>Imprimir</buttom>}
+                  content={() => this.anex}
+                />
+              </div>
             </div>
           }
           {this.state.fondo.no_lici !== ' ' &&
@@ -160,6 +167,13 @@ export default class Oficios extends Component {
                   content={() => this.la}
                 />
               </div>
+              <div>
+                <p>Anexo F</p>
+                <ReactToPrint
+                  trigger={() => <buttom className='btn-imp-of'>Imprimir</buttom>}
+                  content={() => this.anex}
+                />
+              </div>
             </div>
           }
           {this.state.fondo.tipo_doc === 'Pago Directo' && this.state.fondo.no_lici === ' ' &&
@@ -184,6 +198,13 @@ export default class Oficios extends Component {
                 <ReactToPrint
                   trigger={() => <buttom className='btn-imp-of'>Imprimir</buttom>}
                   content={() => this.la}
+                />
+              </div>
+              <div>
+                <p>Anexo F</p>
+                <ReactToPrint
+                  trigger={() => <buttom className='btn-imp-of'>Imprimir</buttom>}
+                  content={() => this.anex}
                 />
               </div>
             </div>
@@ -222,6 +243,14 @@ export default class Oficios extends Component {
                           <p className='text-gai'>Comprobacion de Gastos</p>
                           <input className='input-gai' type='checkbox' disabled />
                         </div>
+                        <div className='interno-ga2'>
+                          <p className='text-gai'>Validación de Objeto de Gastos</p>
+                          <input className='input-gai' type='checkbox' disabled />
+                        </div>
+                        <div className='interno-ga2'>
+                          <p className='text-gai'>Transferencia</p>
+                          <input className='input-gai' type='checkbox' disabled />
+                        </div>
                       </div>
                       <div className='contenedor-1'>
                         <div className='interno-ga2'>
@@ -247,21 +276,37 @@ export default class Oficios extends Component {
                           <input className='input-gai' type='checkbox' disabled />
                         </div>
                         <div className='interno-ga2'>
+                          <p className='text-gai'>Viaticos al Extranjero</p>
+                          <input className='input-gai' type='checkbox' disabled />
+                        </div>
+                        <div className='interno-ga2'>
                           <p className='text-gai'>Comprobación de Viáticos</p>
                           <input className='input-gai' type='checkbox' disabled />
                         </div>
                       </div>
                       <div className='contenedor-1'>
                         <div className='interno-ga2'>
-                          <p className='text-gai'>Pago a Proveedores</p>
-                          <input className='input-gai' type='checkbox' checked />
-                        </div>
-                        <div className='interno-ga2'>
-                          <p className='text-gai'>Pago a Proveedore por Requisición</p>
+                          <p className='text-gai'>Anticipo a Proveedor</p>
                           <input className='input-gai' type='checkbox' disabled />
                         </div>
                         <div className='interno-ga2'>
-                          <p className='text-gai'>Transferencias</p>
+                          <p className='text-gai'>Remanente de Pago a Proveedor</p>
+                          <input className='input-gai' type='checkbox' disabled />
+                        </div>
+                        <div className='interno-ga2'>
+                          <p className='text-gai'>Pago a Proveedor</p>
+                          <input className='input-gai' type='checkbox' checked />
+                        </div>
+                        <div className='interno-ga2'>
+                          <p className='text-gai'>Anticipo de Pago a Proveedor por Requisición</p>
+                          <input className='input-gai' type='checkbox' disabled />
+                        </div>
+                        <div className='interno-ga2'>
+                          <p className='text-gai'>Remanente de Pago a Proveedor por Requisición</p>
+                          <input className='input-gai' type='checkbox' disabled />
+                        </div>
+                        <div className='interno-ga2'>
+                          <p className='text-gai'>Proveedor por Requisición</p>
                           <input className='input-gai' type='checkbox' disabled />
                         </div>
                       </div>
@@ -347,7 +392,7 @@ export default class Oficios extends Component {
         </div>
 
         {/* fondo revolvente */}
-        <div className='pppdf-subdad' style={{ zIndex: '2', position: 'absolute' }} ref={el => (this.rfr = el)}>
+        <div className='pppdf-subdad' ref={el => (this.rfr = el)}>
           <div className='header-ofi'>
             <div className='header-ofi-cont'>
               <div className='sp-cont'>
@@ -359,55 +404,59 @@ export default class Oficios extends Component {
           <div className='sp-direc'>
             <p>Dirección General de Administracción y Finanzas</p>
           </div>
-          <div className='no-oficio-sp'>
-            <p>
-              Oficio No: PGJ/DGAyF/{this.state.fondo.no_oficio}/2021
-              <br />Pachuca de Soto, Hidalgo a {today}
-              <br />Asunto Pago a Proveedor
-            </p>
-          </div>
-          <div className='prensente-sp'>
-            <p>
-              <b>
-                L.A.E. CÉSAR ALBERTO GONZÁLEZ LÓPEZ
-                <br />SUBSECRETARIO DE EGRESOS DE LA
-                <br />SECRETARÍA DE FINANZAS PÚBLICAS
-                <br />PRESENTE
-              </b>
-            </p>
-          </div>
-          <div className='añadido-sp'>
-            <p>
-              <b>
-                AT´N.: L.C.P. KARINA BARRIOS VELÁZQUEZ
-                <br />DIRECTORA GENERAL DE CONTABILIDAD
-                <br />GUBERNAMENTAL
-              </b>
-            </p>
-          </div>
-          <div className='texto-ofi-sp'>
-            <p>
-              Por medio del presente me permito enviar a usted, documentación amparada
-              con {this.state.fondo.numCompro} comprobantes, por un total de
-              $ {this.state.fondo.importe} ({(NumberAsString(this.state.fondo.importe))}),
-              a nombre de {this.state.fondo.beneficiario} para el trámite de
-              Reembolso de Fondo Revolvente, con cargo al
-              proyecto{this.state.comprometidos.map(item => item.proy ? ', ' + item.proy : null)}
-              {this.state.comprometidos.slice(0, 2).map(item => item.np ? ', ' + item.np : null)} para
-              otorgado en el oficio de autorización {this.state.fondo.oficio_aut} del
-              Ejercicio 2021, a la Procuraduria General de Justicia del estado de Hidalgo.
-            </p>
-            <p>Sin otro particular, le envío un cordial y afectuoso saludo.</p>
-          </div>
-          <div>
-            <div className='atte-sp'>
-              <p className='atte-text-sp'>
-                <b>ATENTAMENTE<br />EL DIRECTOR GENERAL</b>
-              </p>
+          <div style={{ display: 'flex', justifyContent: 'space-between', flexDirection: 'column', width: '100%', height: '75%' }}>
+            <div>
+              <div className='no-oficio-sp'>
+                <p>
+                  Oficio No: PGJ/DGAyF/{this.state.fondo.no_oficio}/2021
+                  <br />Pachuca de Soto, Hidalgo a {today}
+                  <br />Asunto Pago a Proveedor
+                </p>
+              </div>
+              <div className='prensente-sp'>
+                <p>
+                  <b>
+                    L.A.E. CÉSAR ALBERTO GONZÁLEZ LÓPEZ
+                    <br />SUBSECRETARIO DE EGRESOS DE LA
+                    <br />SECRETARÍA DE FINANZAS PÚBLICAS
+                    <br />PRESENTE
+                  </b>
+                </p>
+              </div>
+              <div className='añadido-sp'>
+                <p>
+                  <b>
+                    AT´N.: L.C.P. KARINA BARRIOS VELÁZQUEZ
+                    <br />DIRECTORA GENERAL DE CONTABILIDAD
+                    <br />GUBERNAMENTAL
+                  </b>
+                </p>
+              </div>
+              <div className='texto-ofi-sp'>
+                <p>
+                  Por medio del presente me permito enviar a usted, documentación amparada
+                  con {this.state.fondo.numCompro} comprobantes, por un total de
+                  $ {this.state.fondo.importe} ({(NumberAsString(this.state.fondo.importe))}),
+                  a nombre de {this.state.fondo.beneficiario} para el trámite de
+                  Reembolso de Fondo Revolvente, con cargo al
+                  proyecto{this.state.comprometidos.map(item => item.proy ? ', ' + item.proy : null)}
+                  {this.state.comprometidos.slice(0, 2).map(item => item.np ? ', ' + item.np : null)} para
+                  otorgado en el oficio de autorización {this.state.fondo.oficio_aut} del
+                  Ejercicio 2021, a la Procuraduria General de Justicia del estado de Hidalgo.
+                </p>
+                <p>Sin otro particular, le envío un cordial y afectuoso saludo.</p>
+              </div>
             </div>
-            <div className='firma-sp'>
-              <div className='firma-raya-sp'>
-                <p><b>MTRO. LEÓN MAXIMILIANO HERNÁNDEZ VALDÉS</b></p>
+            <div>
+              <div className='atte-sp'>
+                <p className='atte-text-sp'>
+                  <b>ATENTAMENTE<br />EL DIRECTOR GENERAL</b>
+                </p>
+              </div>
+              <div className='firma-sp'>
+                <div className='firma-raya-sp'>
+                  <p><b>MTRO. LEÓN MAXIMILIANO HERNÁNDEZ VALDÉS</b></p>
+                </div>
               </div>
             </div>
           </div>
@@ -424,10 +473,24 @@ export default class Oficios extends Component {
         </div>
 
         {/* Recibo */}
-        <div className='subdad' ref={el => (this.rec = el)} style={{ zIndex: '2', position: 'absolute', height: '100%' }}>
-          <div style={{ height: '100%', display: 'flex', justifyContent: 'center', flexDirection: 'column' }}>
-            <div style={{ height: '60%' }}>
-              <div className='bueno'  style= {{ paddingTop: '0' }}>
+        <div className='pppdf-subdad' ref={el => (this.rec = el)}>
+          <div className='header-ofi'>
+            <div className='header-ofi-cont'>
+              <div className='sp-cont'>
+                <img className='pgjh comple' src={sus} alt='' />
+              </div>
+              <img className='img-sp' src={logo2} alt='' />
+            </div>
+          </div>
+          <div className='sp-direc'>
+            <p>Dirección General de Administracción y Finanzas</p>
+          </div>
+          <div style={{ height: '75%', display: 'flex', flexDirection: 'column' }}>
+            <div style={{ height: '100%', display: 'flex', justifyContent: 'space-between', flexDirection: 'column' }}>
+              <div style={{ display: 'flex', justifyContent: 'center' }}>
+                <p>RECIBO</p>
+              </div>
+              <div className='bueno' style={{ paddingTop: '0' }}>
                 <p className='texto-de-pdf'>
                   Bueno por:
                   <CurrencyFormat
@@ -438,7 +501,7 @@ export default class Oficios extends Component {
                   />
                 </p>
               </div>
-              <div style={{ paddingTop: '50px' }}>
+              <div>
                 <p className='texto-de-pdf' style={{ textAlign: 'justify', lineHeight: '35px' }}>
                   Recibí de la Secretaría de Finanzas Públicas del Gobierno del Estado
                   de Hidalgo la cantidad de
@@ -449,7 +512,7 @@ export default class Oficios extends Component {
                     prefix=' $ '
                   /> ({( NumberAsString(this.state.fondo.importe) )})
                   por concepto de Reposición de Fondo Revolvente, que se aplicarán
-                  en {this.state.desc}
+                  en {this.state.fondo.desc}
                 </p>
               </div>
               <div className='fecha'>
@@ -457,16 +520,20 @@ export default class Oficios extends Component {
                   Pachuca de Soto, Hidalgo a {today}
                 </p>
               </div>
-              <div className='refe'>
-                <p className='texto-de-pdf'>
-                  DIRECTOR GENERAL DE<br />ADMINISTRACIÓN Y FINANZAS
-                </p>
-              </div>
-              <div className='firma-dad-r'>
-                <div className='firma-raya-r'>
-                  <p className='texto-de-pdf' style={{ textAlign: 'center' }}>
-                    MTRO. LEÓN MAXIMILIANO HERNÁNDEZ VALDÉS<br />R.F.C.: HEVL-750104
-                  </p>
+              <div style={{ display: 'flex', flexDirection: 'column' }}>
+                <div style={{ bottom: '0' }}>
+                  <div className='refe'>
+                    <p className='texto-de-pdf'>
+                      DIRECTOR GENERAL DE<br />ADMINISTRACIÓN Y FINANZAS
+                    </p>
+                  </div>
+                  <div className='firma-dad-r'>
+                    <div className='firma-raya-r'>
+                      <p className='texto-de-pdf' style={{ textAlign: 'center' }}>
+                        MTRO. LEÓN MAXIMILIANO HERNÁNDEZ VALDÉS<br />R.F.C.: HEVL-750104
+                      </p>
+                    </div>
+                  </div>
                 </div>
               </div>
               <div style={{ bottom: '0', position: 'fixed', height: '100px', width: '80%' }}>
@@ -494,71 +561,75 @@ export default class Oficios extends Component {
           <div className='sp-direc'>
             <p>Dirección General de Administracción y Finanzas</p>
           </div>
-          <div className='no-oficio-sp'>
-            <p>
-              Oficio No: PGJ/DGAyF/{this.state.fondo.no_oficio}/2021
-              <br />Pachuca de Soto, Hidalgo a {today}
-              <br />Asunto Pago a Proveedor
-            </p>
-          </div>
-          <div className='prensente-sp'>
-            <p>
-              <b>
-                L.A.E. CÉSAR ALBERTO GONZÁLEZ LÓPEZ
-                <br />SUBSECRETARIO DE EGRESOS DE LA
-                <br />SECRETARÍA DE FINANZAS PÚBLICAS
-                <br />PRESENTE
-              </b>
-            </p>
-          </div>
-          <div className='añadido-sp'>
-            <p>
-              <b>
-                AT´N.: L.C.P. KARINA BARRIOS VELÁZQUEZ
-                <br />DIRECTORA GENERAL DE CONTABILIDAD
-                <br />GUBERNAMENTAL
-              </b>
-            </p>
-          </div>
-          <div className='texto-ofi-sp'>
-            <p>
-              Por medio de presente me permito enviar a Usted documentación por
-              un importe total de <CurrencyFormat
-                value={this.state.fondo.importe}
-                displayType='text'
-                thousandSeparator
-                prefix=' $ '
-              /> ({(NumberAsString(this.state.fondo.importe))}),
-              cantidad amparada con CFDI No
-              {this.state.comprometidos.map(comprometidos =>
-                comprometidos.comprobantes !== undefined ?
-                  comprometidos.comprobantes.map(item =>
-                    ', ' + item.uuid.slice(31)
-                  )
-                : null
-              )},
-              número de requisición {this.state.fondo.requisicion}
-              asi como la poliza de afectacion presupuestal al momento del comprometido
-              num {this.state.fondo.poliza} que emita la Dirección
-              General de Compras Publicas; para que se efectue el tramite de pago
-              a favor del proveedor {this.state.fondo.beneficiario} para la compra
-              y/o prestación de servicios
-              {/* preguntar */}
-              con cargo al proyecto {this.state.comprometidos.map(item => item.proy ? ', ' + item.proy : null)} y
-              a los recursos otorgados con oficio de autorización {this.state.fondo.oficio_aut}
-              del Ejercicio 2021, a la Procuraduria General de Justicia del Estado.
-            </p>
-            <p>Sin otro particular, le envio un cordial y afectuoso saludo.</p>
-          </div>
-          <div>
-            <div className='atte-sp'>
-              <p className='atte-text-sp'>
-                <b>ATENTAMENTE<br />EL DIRECTOR GENERAL</b>
-              </p>
+          <div style={{ display: 'flex', justifyContent: 'space-between', flexDirection: 'column', width: '100%', height: '75%' }}>
+            <div>
+              <div className='no-oficio-sp'>
+                <p>
+                  Oficio No: PGJ/DGAyF/{this.state.fondo.no_oficio}/2021
+                  <br />Pachuca de Soto, Hidalgo a {today}
+                  <br />Asunto Pago a Proveedor
+                </p>
+              </div>
+              <div className='prensente-sp'>
+                <p>
+                  <b>
+                    L.A.E. CÉSAR ALBERTO GONZÁLEZ LÓPEZ
+                    <br />SUBSECRETARIO DE EGRESOS DE LA
+                    <br />SECRETARÍA DE FINANZAS PÚBLICAS
+                    <br />PRESENTE
+                  </b>
+                </p>
+              </div>
+              <div className='añadido-sp'>
+                <p>
+                  <b>
+                    AT´N.: L.C.P. KARINA BARRIOS VELÁZQUEZ
+                    <br />DIRECTORA GENERAL DE CONTABILIDAD
+                    <br />GUBERNAMENTAL
+                  </b>
+                </p>
+              </div>
+              <div className='texto-ofi-sp'>
+                <p>
+                  Por medio de presente me permito enviar a Usted documentación por
+                  un importe total de <CurrencyFormat
+                    value={this.state.fondo.importe}
+                    displayType='text'
+                    thousandSeparator
+                    prefix=' $ '
+                  /> ({(NumberAsString(this.state.fondo.importe))}),
+                  cantidad amparada con CFDI No
+                  {this.state.comprometidos.map(comprometidos =>
+                    comprometidos.comprobantes !== undefined ?
+                      comprometidos.comprobantes.map(item =>
+                        ', ' + item.uuid.slice(31)
+                      )
+                    : null
+                  )},
+                  número de requisición {this.state.fondo.requisicion}
+                  asi como la poliza de afectacion presupuestal al momento del comprometido
+                  num {this.state.fondo.poliza} que emita la Dirección
+                  General de Compras Publicas; para que se efectue el tramite de pago
+                  a favor del proveedor {this.state.fondo.beneficiario} para la compra
+                  y/o prestación de servicios
+                  {/* preguntar */}
+                  con cargo al proyecto {this.state.comprometidos.map(item => item.proy ? ', ' + item.proy : null)} y
+                  a los recursos otorgados con oficio de autorización {this.state.fondo.oficio_aut}
+                  del Ejercicio 2021, a la Procuraduria General de Justicia del Estado.
+                </p>
+                <p>Sin otro particular, le envio un cordial y afectuoso saludo.</p>
+              </div>
             </div>
-            <div className='firma-sp'>
-              <div className='firma-raya-sp'>
-                <p><b>MTRO. LEÓN MAXIMILIANO HERNÁNDEZ VALDÉS</b></p>
+            <div>
+              <div className='atte-sp'>
+                <p className='atte-text-sp'>
+                  <b>ATENTAMENTE<br />EL DIRECTOR GENERAL</b>
+                </p>
+              </div>
+              <div className='firma-sp'>
+                <div className='firma-raya-sp'>
+                  <p><b>MTRO. LEÓN MAXIMILIANO HERNÁNDEZ VALDÉS</b></p>
+                </div>
               </div>
             </div>
           </div>
@@ -587,66 +658,70 @@ export default class Oficios extends Component {
           <div className='sp-direc'>
             <p>Dirección General de Administracción y Finanzas</p>
           </div>
-          <div className='no-oficio-sp'>
-            <p>
-              Oficio No: PGJ/DGAyF/{this.state.fondo.no_oficio}/2021
-              <br />Pachuca de Soto, Hidalgo a {today}
-              <br />Asunto Pago a Proveedor
-            </p>
-          </div>
-          <div className='prensente-sp'>
-            <p>
-              <b>
-                L.A.E. CÉSAR ALBERTO GONZÁLEZ LÓPEZ
-                <br />SUBSECRETARIO DE EGRESOS DE LA
-                <br />SECRETARÍA DE FINANZAS PÚBLICAS
-                <br />PRESENTE
-              </b>
-            </p>
-          </div>
-          <div className='añadido-sp'>
-            <p>
-              <b>
-                AT´N.: L.C.P. KARINA BARRIOS VELÁZQUEZ
-                <br />DIRECTORA GENERAL DE CONTABILIDAD
-                <br />GUBERNAMENTAL
-              </b>
-            </p>
-          </div>
-          <div className='texto-ofi-sp'>
-            <p>
-              Por este medio me permito enviar a Usted documentación por un importe total de
-              <CurrencyFormat
-                value={parseFloat(this.state.fondo.importe).toFixed(2)}
-                displayType='text'
-                thousandSeparator
-                prefix=' $ '
-              /> ({(NumberAsString(this.state.fondo.importe))}),
-              cantidad amparada con los comprobantes No
-              {this.state.comprometidos.map(comprometidos =>
-                comprometidos.comprobantes !== undefined ?
-                  comprometidos.comprobantes.map(item =>
-                    ', ' + item.uuid.substr(0, 8)
-                  )
-                : null
-              )}, para el trámite de pago a favor del proveedor {this.state.fondo.beneficiario}, por
-              la/el servicio {this.state.fondo.desc}, con
-              cargo al proyecto{this.state.comprometidos.map(item => item.proy ? ', ' + item.proy : null)}
-              {this.state.comprometidos.slice(0, 2).map(item => item.np ? ', ' + item.np : null)} y
-              a los recursos otorgados con el oficio de autorización {this.state.fondo.oficio_aut}, del
-              Ejercicio 2021 a la Procuraduria General de Justicia del Estado de Hidalgo.
-            </p>
-            <p>Sin otro particular, le envio un cordial y afectuoso saludo.</p>
-          </div>
-          <div>
-            <div className='atte-sp'>
-              <p className='atte-text-sp'>
-                <b>ATENTAMENTE<br />EL DIRECTOR GENERAL</b>
-              </p>
+          <div style={{ display: 'flex', justifyContent: 'space-between', flexDirection: 'column', width: '100%', height: '75%' }}>
+            <div>
+              <div className='no-oficio-sp'>
+                <p>
+                  Oficio No: PGJ/DGAyF/{this.state.fondo.no_oficio}/2021
+                  <br />Pachuca de Soto, Hidalgo a {today}
+                  <br />Asunto Pago a Proveedor
+                </p>
+              </div>
+              <div className='prensente-sp'>
+                <p>
+                  <b>
+                    L.A.E. CÉSAR ALBERTO GONZÁLEZ LÓPEZ
+                    <br />SUBSECRETARIO DE EGRESOS DE LA
+                    <br />SECRETARÍA DE FINANZAS PÚBLICAS
+                    <br />PRESENTE
+                  </b>
+                </p>
+              </div>
+              <div className='añadido-sp'>
+                <p>
+                  <b>
+                    AT´N.: L.C.P. KARINA BARRIOS VELÁZQUEZ
+                    <br />DIRECTORA GENERAL DE CONTABILIDAD
+                    <br />GUBERNAMENTAL
+                  </b>
+                </p>
+              </div>
+              <div className='texto-ofi-sp'>
+                <p>
+                  Por este medio me permito enviar a Usted documentación por un importe total de
+                  <CurrencyFormat
+                    value={parseFloat(this.state.fondo.importe).toFixed(2)}
+                    displayType='text'
+                    thousandSeparator
+                    prefix=' $ '
+                  /> ({(NumberAsString(this.state.fondo.importe))}),
+                  cantidad amparada con los comprobantes No
+                  {this.state.comprometidos.map(comprometidos =>
+                    comprometidos.comprobantes !== undefined ?
+                      comprometidos.comprobantes.map(item =>
+                        ', ' + item.uuid.substr(0, 8)
+                      )
+                    : null
+                  )}, para el trámite de pago a favor del proveedor {this.state.fondo.beneficiario}, por
+                  la/el servicio {this.state.fondo.desc}, con
+                  cargo al proyecto{this.state.comprometidos.map(item => item.proy ? ', ' + item.proy : null)}
+                  {this.state.comprometidos.slice(0, 2).map(item => item.np ? ', ' + item.np : null)} y
+                  a los recursos otorgados con el oficio de autorización {this.state.fondo.oficio_aut}, del
+                  Ejercicio 2021 a la Procuraduria General de Justicia del Estado de Hidalgo.
+                </p>
+                <p>Sin otro particular, le envio un cordial y afectuoso saludo.</p>
+              </div>
             </div>
-            <div className='firma-sp'>
-              <div className='firma-raya-sp'>
-                <p><b>MTRO. LEÓN MAXIMILIANO HERNÁNDEZ VALDÉS</b></p>
+            <div>
+              <div className='atte-sp'>
+                <p className='atte-text-sp'>
+                  <b>ATENTAMENTE<br />EL DIRECTOR GENERAL</b>
+                </p>
+              </div>
+              <div className='firma-sp'>
+                <div className='firma-raya-sp'>
+                  <p><b>MTRO. LEÓN MAXIMILIANO HERNÁNDEZ VALDÉS</b></p>
+                </div>
               </div>
             </div>
           </div>
@@ -675,17 +750,25 @@ export default class Oficios extends Component {
             <div className='contenedor-soi'>
               <div className='contenedor-1'>
                 <div className='interno'>
-                  <p className='text-soi'>Gasto a Comprobar</p>
+                  <p className='text-soi'>Gastos a Comprobar</p>
                   <input className='input-so' type='checkbox' />
                 </div>
                 <div className='interno'>
-                  <p className='text-soi'>Comprobación de gasto</p>
+                  <p className='text-soi'>Comprobación de Gastos</p>
+                  <input className='input-so' type='checkbox' />
+                </div>
+                <div className='interno'>
+                  <p className='text-soi'>Validación del Objeto del Gasto</p>
+                  <input className='input-so' type='checkbox' />
+                </div>
+                <div className='interno'>
+                  <p className='text-soi'>Transferencias</p>
                   <input className='input-so' type='checkbox' />
                 </div>
               </div>
               <div className='contenedor-1'>
                 <div className='interno'>
-                  <p className='text-soi'>Creación de fondo Revolvente</p>
+                  <p className='text-soi'>Creación de Fondo Revolvente</p>
                   <input className='input-so' type='checkbox' />
                 </div>
                 <div className='interno'>
@@ -697,46 +780,56 @@ export default class Oficios extends Component {
                 </div>
                 <div className='interno'>
                   <p className='text-soi'>Cancelacion de Fondo Revolvente</p>
-                  <input className='input-so' type='checkbox'/>
+                  <input className='input-so' type='checkbox' />
                 </div>
               </div>
               <div className='contenedor-1'>
                 <div className='interno'>
                   <p className='text-soi'>Viaticos Anticipados</p>
-                  <input className='input-so' type='checkbox'/>
+                  <input className='input-so' type='checkbox' />
                 </div>
                 <div className='interno'>
                   <p className='text-soi'>Viaticos Denegados</p>
                   <input className='input-so' type='checkbox'/>
                 </div>
                 <div className='interno'>
-                  <p className='text-soi'>Comprobación de viaticos</p>
+                  <p className='text-soi'>Viaticos al Extrangero</p>
                   <input className='input-so' type='checkbox'/>
                 </div>
                 <div className='interno'>
-                  <p className='text-soi'>Viaticos al Extrangero</p>
-                  <input className='input-so' type='checkbox'/>
+                  <p className='text-soi'>Comprobación de Viaticos</p>
+                  <input className='input-so' type='checkbox' />
                 </div>
               </div>
               <div className='contenedor-1'>
                 <div className='interno'>
-                  <p className='text-soi'>Validación de Objeto del gasto</p>
-                  <input className='input-so' type='checkbox'/>
+                  <p className='text-soi'>Anticipo a Proveedor</p>
+                  <input className='input-so' type='checkbox' />
                 </div>
                 <div className='interno'>
-                  <p className='text-soi'>Pago a Proveedores</p>
+                  <p className='text-soi'>Remanente de Pago a Proveedor</p>
+                  <input className='input-so' type='checkbox' />
+                </div>
+                <div className='interno'>
+                  <p className='text-soi'>Pago a Proveedor</p>
                   {this.state.fondo.tipo_doc === 'Pago Directo' ?
                     <input className='input-so' type='checkbox' checked /> :
                     <input className='input-so' type='checkbox' />
                   }
                 </div>
+              </div>
+              <div className='contenedor-1'>
                 <div className='interno'>
-                  <p className='text-soi'>Pago a Proveedores por Requisición</p>
-                  <input className='input-so' type='checkbox'/>
+                  <p className='text-soi'>Anticipo a pago a Proveedor por Requisición</p>
+                  <input className='input-so' type='checkbox' />
                 </div>
                 <div className='interno'>
-                  <p className='text-soi'>Transferencias</p>
-                  <input className='input-so' type='checkbox'/>
+                  <p className='text-soi'>Remanente de pago a Proveedor por Requisición</p>
+                  <input className='input-so' type='checkbox' />
+                </div>
+                <div className='interno'>
+                  <p className='text-soi'>Pago a Proveedor por Requisición</p>
+                  <input className='input-so' type='checkbox' />
                 </div>
               </div>
             </div>
@@ -1132,12 +1225,22 @@ export default class Oficios extends Component {
             </div>
           </div>
           <div className='sp-footer'>
+            <div className='obs-sopadre2'>
+              <div className='obs-so'>
+                <p className='text-osb'>Cuenta CFE</p>
+                <div className='input-cfe' />
+                <div style={{ display: 'flex'}}>
+                  <p className='text-osb'>No servicio CFE</p>
+                  <div className='input-cfe' />
+                </div>
+              </div>
+            </div>
             <div className='obs-sopadre'>
               <div className='obs-so'>
                 <p className='text-osb'>Observaciones</p>
                 <div className='input-obs' />
                 <div className='obs-so2'>
-                  <p className='text-osb'>No. De Solicitud</p>
+                  <p className='text-osb'>Solicitud</p>
                   <input className='obs-input' />
                 </div>
               </div>
@@ -1148,6 +1251,87 @@ export default class Oficios extends Component {
               </div>
               <div className='firmas'>
                 <p className='text-firmas'>Reviso</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Anexo F */}
+        <div className='pppdf-subdad' ref={el => (this.anex = el)}>
+          <div className='header-ofi'>
+            <div className='header-ofi-cont'>
+              <div className='sp-cont'>
+                <img className='pgjh comple' src={sus} alt='' />
+              </div>
+              <img className='img-sp' src={logo2} alt='' />
+            </div>
+          </div>
+          <div className='sp-direc'>
+            <p>Dirección General de Administracción y Finanzas</p>
+          </div>
+          <div style={{ display: 'flex', justifyContent: 'space-between', flexDirection: 'column', width: '100%', height: '75%' }}>
+            <div>
+              <div className='no-oficio-sp'>
+                <p>
+                  Oficio No: PGJ/DGAyF/{this.state.fondo.anexof}/2021
+                  <br />Pachuca de Soto, Hidalgo a {today}
+                  <br />Asunto: Constancia de entera satisfación de bienes o servicios
+                </p>
+              </div>
+              <div className='prensente-sp'>
+                <p>
+                  <b>
+                    L.A.E. CÉSAR ALBERTO GONZÁLEZ LÓPEZ
+                    <br />SUBSECRETARIO DE EGRESOS DE LA
+                    <br />SECRETARÍA DE FINANZAS PÚBLICAS
+                    <br />PRESENTE
+                  </b>
+                </p>
+              </div>
+              <div className='añadido-sp'>
+                <p>
+                  <b>
+                    AT´N.: L.C.P. KARINA BARRIOS VELÁZQUEZ
+                    <br />DIRECTORA GENERAL DE CONTABILIDAD
+                    <br />GUBERNAMENTAL
+                  </b>
+                </p>
+              </div>
+              <div className='texto-ofi-sp'>
+                <p>
+                  Por medio del presente informo a USted, que se ha concluido el contrato
+                  por la prestación de servicios  con el proveedor {this.state.fondo.beneficiario},
+                  de los recuersos autorizados al proyecto{this.state.comprometidos.map(item => item.proy ? ', ' + item.proy : null)},
+                  asignado a la Unidad Presupuestal{this.state.comprometidos.map(item => item.up ? ', ' + item.up : null)};
+                  por lo que hago constar que he recibido el(los) entregable(s) a mi
+                  entera satisfacción, el (los) cual(es) es susceptible de ser medible
+                  y verificable, además de que cumple con los requerimientos pactados,
+                  en el contrato en cuanto a objeto, precio y tiempo de entrega; quedando
+                  bajo mi resguardo para cualquier aclaración o presentación ante los
+                  órganos fiscalizadores.
+                </p>
+              </div>
+            </div>
+            <div>
+              <div className='atte-sp'>
+                <p className='atte-text-sp'>
+                  <b>ATENTAMENTE<br />EL DIRECTOR GENERAL</b>
+                </p>
+              </div>
+              <div className='firma-sp'>
+                <div className='firma-raya-sp'>
+                  <p><b>MTRO. LEÓN MAXIMILIANO HERNÁNDEZ VALDÉS</b></p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className='footer-sp'>
+            <div className='footer-content-sp'>
+              <div>
+                <p className='foot-text'>C.C.P...- Expediente<br />Minutario<br />LMHV/NRL/macht</p>
+              </div>
+              <div className='foot-num'>
+                <p className='foot-num-t'>No. de Fondo {this.state.fondo.fondo}</p>
               </div>
             </div>
           </div>
