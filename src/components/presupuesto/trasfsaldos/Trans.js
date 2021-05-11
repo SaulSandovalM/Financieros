@@ -235,7 +235,7 @@ export default class Trans extends Component {
       ene: item.ene - parseInt(this.state.impoene),
       gasene: item.gasene,
       feb: item.feb - parseInt(this.state.impofeb),
-      gasfeb: item.gasfeb,
+      gasfeb: item.gasfeb, 
       mar: item.mar - parseInt(this.state.impomar),
       gasmar: item.gasmar,
       abr: item.abr - parseInt(this.state.impoabr),
