@@ -17,7 +17,7 @@ export default class RowComponent extends Component {
   render () {
     return (
       <TableBody>
-        {this.props.item.reduccion === 'Reduccion' &&
+        {this.props.item.saldo === 'Saldo' &&
           <TableRow>
             <TableCell className='table-up-p-frn-a'>
               <i>{this.props.item.up}</i>
