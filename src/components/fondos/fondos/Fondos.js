@@ -1,3 +1,4 @@
+// importaciones necesarias
 import React, { Component } from 'react'
 import firebase from '../../../Firebase'
 import { NumberAsString } from './NumerosLetras'
@@ -154,6 +155,8 @@ export default class Fondos extends Component {
       no_proyecto: this.state.no_proyecto,
       numCompro: this.inputNumCompro.value,
       realizo: this.state.realizo,
+      anexof: this.inputAnexof.value,
+      // datos no obligatorios
       no_lici: this.inputNoLici.value,
       requisicion: this.inputRequisicion.value,
       pedido: this.inputPedido.value,
@@ -177,7 +180,7 @@ export default class Fondos extends Component {
       params.requisicion && params.pedido && params.poliza && params.cfe &&
       params.nscfe && params.observaciones && params.fechaContra && params.numContra &&
       params.fechaDepo && params.cuentaPagar && params.cuentaPagarPara &&
-      params.sujetoContable && params.comprometido && params.cpa) {
+      params.sujetoContable && params.comprometido && params.cpa && params.anexof) {
       firebase.database().ref('fondos').push(params).then(() => {
         alert('Tu solicitud fue enviada.')
         this.incrementFondo()
@@ -302,7 +305,7 @@ export default class Fondos extends Component {
   render () {
     const { fondo, fecha, tipo_doc, oficio_aut, no_oficio, no_lici, importe, desc,
       beneficiario, realizo, requisicion, pedido, no_proyecto, poliza, cfe, nscfe,
-      observaciones, numCompro } = this.state
+      observaciones, numCompro, anexof } = this.state
     const newArray = ['']
     const myObj = {}
 
@@ -636,6 +639,23 @@ export default class Fondos extends Component {
                         value={numCompro}
                         onChange={this.onChange}
                         ref={numCompro => this.inputNumCompro = numCompro}
+                        required
+                      />
+                    </div>
+                  </div>
+                </div>
+                <div className='div-f2'>
+                  <div style={{ width: '99%' }}>
+                    <div>
+                      <p className='p-label'>Oficio Anexo F</p>
+                      <input
+                        style={{ width: '100%' }}
+                        className='field'
+                        id='anexof'
+                        name='anexof'
+                        value={anexof}
+                        onChange={this.onChange}
+                        ref={anexof => this.inputAnexof = anexof}
                         required
                       />
                     </div>

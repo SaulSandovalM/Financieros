@@ -339,6 +339,7 @@ export default class Vales extends Component {
                   <input
                     style={{ width: '100%' }}
                     className='field'
+                    type='text'
                     name='searchF'
                     value={this.state.searchF}
                     onChange={this.handleChange.bind(this)}
