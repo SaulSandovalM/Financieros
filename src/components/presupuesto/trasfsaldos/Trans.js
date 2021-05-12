@@ -182,6 +182,7 @@ export default class Trans extends Component {
           reduccion: child.val().reduccion,
           transferencia: child.val().transferencia,
           oficio: child.val().oficio,
+          saldo: child.val().saldo,
           done: child.val().done,
           id: child.key
         })
@@ -235,7 +236,7 @@ export default class Trans extends Component {
       ene: item.ene - parseInt(this.state.impoene),
       gasene: item.gasene,
       feb: item.feb - parseInt(this.state.impofeb),
-      gasfeb: item.gasfeb, 
+      gasfeb: item.gasfeb,
       mar: item.mar - parseInt(this.state.impomar),
       gasmar: item.gasmar,
       abr: item.abr - parseInt(this.state.impoabr),
@@ -258,10 +259,11 @@ export default class Trans extends Component {
       gasdic: item.gasdic,
       total: item.total,
       ampliacion: item.ampliacion,
-      reduccion: item.reduccion,
+      reduccion: 'Reduccion',
       transferencia: item.transferencia,
       saldo: 'Saldo',
-      oficio: this.state.archivo
+      oficioA: this.state.oficio,
+      archivo: this.state.archivo
     }
     firebase.database().ref().update(updates)
     alert('Tu solicitud fue enviada.')

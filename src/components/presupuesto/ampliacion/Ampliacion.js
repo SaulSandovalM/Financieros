@@ -260,7 +260,8 @@ export default class Ampliacion extends Component {
       ampliacion: 'Ampliacion',
       reduccion: item.reduccion,
       transferencia: item.transferencia,
-      oficio: this.state.archivo
+      oficioA: this.state.oficio,
+      archivo: this.state.archivo
     }
     firebase.database().ref().update(updates)
     alert('Tu solicitud fue enviada.')

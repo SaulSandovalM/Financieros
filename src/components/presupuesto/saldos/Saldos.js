@@ -36,6 +36,7 @@ export default class Saldos extends Component {
               </TableHead>
               <TableBody>
                 <TableRow>
+                  {/* <TableCell className='table-data-s'>abc</TableCell>
                   <TableCell className='table-data-s'>abc</TableCell>
                   <TableCell className='table-data-s'>abc</TableCell>
                   <TableCell className='table-data-s'>abc</TableCell>
@@ -49,8 +50,7 @@ export default class Saldos extends Component {
                   <TableCell className='table-data-s'>abc</TableCell>
                   <TableCell className='table-data-s'>abc</TableCell>
                   <TableCell className='table-data-s'>abc</TableCell>
-                  <TableCell className='table-data-s'>abc</TableCell>
-                  <TableCell className='table-data-s'>abc</TableCell>
+                  <TableCell className='table-data-s'>abc</TableCell> */}
                 </TableRow>
               </TableBody>
             </Table>

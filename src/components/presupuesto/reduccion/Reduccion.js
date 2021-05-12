@@ -261,7 +261,8 @@ export default class Reduccion extends Component {
       ampliacion: item.ampliacion,
       reduccion: 'Reduccion',
       transferencia: item.transferencia,
-      oficio: this.state.archivo
+      oficioA: this.state.oficio,
+      archivo: this.state.archivo
     }
     firebase.database().ref().update(updates)
     alert('Tu solicitud fue enviada.')
