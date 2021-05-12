@@ -4,6 +4,7 @@ import ReactToPrint from 'react-to-print'
 import boton from '../../../img/cua.png'
 import boton2 from '../../../img/cua2.png'
 import programa from '../../../img/logovale.png'
+import sus from '../../../img/veda.png'
 import logo2 from '../../../img/logo.jpg'
 import firebase from '../../../Firebase'
 import Paper from '@material-ui/core/Paper'
@@ -84,7 +85,7 @@ export default class Cpdf extends Component{
             <div style={{ display: 'flex', justifyContent: 'center', marginTop: '50px' }}>
               <div className='cpdf-subdad-fi'>
                 <div className='fondo-procus'>
-                  <img className='ims-last' src={programa} alt='' />
+                  <img className='ims-last' src={sus} alt='' />
                   <img className='im' src={logo2} alt='' />
                 </div>
                 <div className='procu'>

@@ -5,7 +5,7 @@ import firebase from '../../../Firebase'
 import { NumberAsString } from '../fondos/NumerosLetras'
 import logo2 from '../../../img/logo.jpg'
 // import lpgjh from '../../../img/logo-PGJH.jpg'
-import sus from '../../../img/sus.jpg'
+import sus from '../../../img/veda.png'
 import CurrencyFormat from 'react-currency-format'
 
 export default class Oficios extends Component {
@@ -219,7 +219,7 @@ export default class Oficios extends Component {
                 <div className='lll-content'>
                   <div className='title-ga'>
                     <div className='ofie-img1'>
-                      <img className='pgjh' src={sus} alt='' />
+                      <img className='pgjh' src={sus} alt='' style={{ width: 'auto' }} />
                     </div>
                     <div className='ofie-text'>
                       <p className='text-titulo-ga'>PROCURADURÍA GENERAL DE JUSTICA DE HIDALGO</p>
@@ -741,7 +741,7 @@ export default class Oficios extends Component {
         <div className='sp-container' ref={el => (this.sp = el)}>
           <div className='sp-imgs'>
             <div className='title-so-o'>
-              <img className='pgjh' src={sus} alt='' />
+              <img className='pgjh' src={sus} alt='' style={{ width: 'auto' }} />
               <p>SOLICITUD PROGRAMÁTICA DEL GASTO</p>
               <img className='ims' src={logo2} alt='' />
             </div>

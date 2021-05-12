@@ -86,7 +86,7 @@
 .contenedor-ga {
   border: 1px solid;
   display: flex;
-  height: 150px;
+  height: auto;
   justify-content: space-around;
   padding-left: 20px;
   padding-right: 20px;
