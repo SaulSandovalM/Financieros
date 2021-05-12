@@ -417,9 +417,9 @@ export default class Oficios extends Component {
                 <p>
                   <b>
                     L.A.E. CÉSAR ALBERTO GONZÁLEZ LÓPEZ
-                    <br />SUBSECRETARIO DE EGRESOS DE LA
-                    <br />SECRETARÍA DE FINANZAS PÚBLICAS
-                    <br />PRESENTE
+                    <br />Subsecretario de Egresos de la
+                    <br />Secretaría de Finanzas Públicas
+                    <br />Presente
                   </b>
                 </p>
               </div>
@@ -427,8 +427,8 @@ export default class Oficios extends Component {
                 <p>
                   <b>
                     AT´N.: L.C.P. KARINA BARRIOS VELÁZQUEZ
-                    <br />DIRECTORA GENERAL DE CONTABILIDAD
-                    <br />GUBERNAMENTAL
+                    <br />Directora General de Contabilidad
+                    <br />Gubernamental
                   </b>
                 </p>
               </div>
@@ -574,9 +574,9 @@ export default class Oficios extends Component {
                 <p>
                   <b>
                     L.A.E. CÉSAR ALBERTO GONZÁLEZ LÓPEZ
-                    <br />SUBSECRETARIO DE EGRESOS DE LA
-                    <br />SECRETARÍA DE FINANZAS PÚBLICAS
-                    <br />PRESENTE
+                    <br />Subsecretario de Egresos de la
+                    <br />Secretaría de Finanzas Públicas
+                    <br />Presente
                   </b>
                 </p>
               </div>
@@ -584,8 +584,8 @@ export default class Oficios extends Component {
                 <p>
                   <b>
                     AT´N.: L.C.P. KARINA BARRIOS VELÁZQUEZ
-                    <br />DIRECTORA GENERAL DE CONTABILIDAD
-                    <br />GUBERNAMENTAL
+                    <br />Directora Genral de Contabilidad
+                    <br />Gubernamental
                   </b>
                 </p>
               </div>
@@ -671,9 +671,9 @@ export default class Oficios extends Component {
                 <p>
                   <b>
                     L.A.E. CÉSAR ALBERTO GONZÁLEZ LÓPEZ
-                    <br />SUBSECRETARIO DE EGRESOS DE LA
-                    <br />SECRETARÍA DE FINANZAS PÚBLICAS
-                    <br />PRESENTE
+                    <br />Subsecretario de Egresos de la
+                    <br />Secretaría de Fianzas Públicas
+                    <br />Presente
                   </b>
                 </p>
               </div>
@@ -681,8 +681,8 @@ export default class Oficios extends Component {
                 <p>
                   <b>
                     AT´N.: L.C.P. KARINA BARRIOS VELÁZQUEZ
-                    <br />DIRECTORA GENERAL DE CONTABILIDAD
-                    <br />GUBERNAMENTAL
+                    <br />Directora General de Contabilidad
+                    <br />Gubernamental
                   </b>
                 </p>
               </div>
@@ -1282,9 +1282,9 @@ export default class Oficios extends Component {
                 <p>
                   <b>
                     L.A.E. CÉSAR ALBERTO GONZÁLEZ LÓPEZ
-                    <br />SUBSECRETARIO DE EGRESOS DE LA
-                    <br />SECRETARÍA DE FINANZAS PÚBLICAS
-                    <br />PRESENTE
+                    <br />Subsecretario de Egresos de la
+                    <br />Secretaría de Fianzas Públicas
+                    <br />Presente
                   </b>
                 </p>
               </div>
@@ -1292,14 +1292,14 @@ export default class Oficios extends Component {
                 <p>
                   <b>
                     AT´N.: L.C.P. KARINA BARRIOS VELÁZQUEZ
-                    <br />DIRECTORA GENERAL DE CONTABILIDAD
-                    <br />GUBERNAMENTAL
+                    <br />DIrectora General de Contabilidad
+                    <br />Gubernamental
                   </b>
                 </p>
               </div>
               <div className='texto-ofi-sp'>
                 <p>
-                  Por medio del presente informo a USted, que se ha concluido el contrato
+                  Por medio del presente informo a Usted, que se ha concluido el contrato
                   por la prestación de servicios  con el proveedor {this.state.fondo.beneficiario},
                   de los recuersos autorizados al proyecto{this.state.comprometidos.map(item => item.proy ? ', ' + item.proy : null)},
                   asignado a la Unidad Presupuestal {this.state.comprometidos.map(comprometidos =>

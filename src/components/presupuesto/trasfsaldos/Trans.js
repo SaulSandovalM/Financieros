@@ -197,7 +197,7 @@ export default class Trans extends Component {
     this.setState({ [event.target.name]: event.target.value })
   }
 
-  update = (item) => {
+  updateR = (item) => {
     let updates = {}
     updates['presupuesto/' + item.id] = {
       año: item.año,
@@ -256,6 +256,78 @@ export default class Trans extends Component {
       nov: item.nov - parseInt(this.state.imponov),
       gasnov: item.gasnov,
       dic: item.dic - parseInt(this.state.impodic),
+      gasdic: item.gasdic,
+      total: item.total,
+      ampliacion: item.ampliacion,
+      reduccion: 'Reduccion',
+      transferencia: item.transferencia,
+      saldo: 'Saldo',
+      oficioA: this.state.oficio,
+      archivo: this.state.archivo
+    }
+    firebase.database().ref().update(updates)
+    alert('Tu solicitud fue enviada.')
+  }
+
+  updateA = (item) => {
+    let updates = {}
+    updates['presupuesto/' + item.id] = {
+      año: item.año,
+      rm: item.rm,
+      ur: item.ur,
+      up: item.up,
+      rubro: item.rubro,
+      tg: item.tg,
+      ogasto: item.ogasto,
+      npro: item.npro,
+      f: item.f,
+      fu: item.fu,
+      sf: item.sf,
+      eje: item.eje,
+      s: item.s,
+      prog: item.prog,
+      sp: item.sp,
+      obj: item.obj,
+      proy: item.proy,
+      est: item.est,
+      obra: item.obra,
+      ben: item.ben,
+      eg: item.eg,
+      mi: item.mi,
+      pr: item.pr,
+      pd: item.pd,
+      itrans: item.itrans,
+      igest: item.igest,
+      la: item.la,
+      ods: item.ods,
+      et: item.et,
+      ff: item.ff,
+      of: item.of,
+      np: item.np,
+      cpa: item.cpa,
+      ene: item.ene + parseInt(this.state.impoene),
+      gasene: item.gasene,
+      feb: item.feb + parseInt(this.state.impofeb),
+      gasfeb: item.gasfeb,
+      mar: item.mar + parseInt(this.state.impomar),
+      gasmar: item.gasmar,
+      abr: item.abr + parseInt(this.state.impoabr),
+      gasabr: item.gasabr,
+      may: item.may + parseInt(this.state.impomay),
+      gasmay: item.gasmay,
+      jun: item.jun + parseInt(this.state.impojun),
+      gasjun: item.gasjun,
+      jul: item.jul + parseInt(this.state.impojul),
+      gasjul: item.gasjul,
+      ago: item.ago + parseInt(this.state.impoago),
+      gasago: item.gasago,
+      sep: item.sep + parseInt(this.state.imposep),
+      gassep: item.gassep,
+      oct: item.oct + parseInt(this.state.impooct),
+      gasoct: item.gasoct,
+      nov: item.nov + parseInt(this.state.imponov),
+      gasnov: item.gasnov,
+      dic: item.dic + parseInt(this.state.impodic),
       gasdic: item.gasdic,
       total: item.total,
       ampliacion: item.ampliacion,
@@ -485,7 +557,8 @@ export default class Trans extends Component {
         <div className='space-table-am'>
           <ListComponent
             listaB={this.state.listaB}
-            update={this.update}
+            updateR={this.updateR}
+            updateA={this.updateA}
           />
         </div>
         <div className='space-table2-am'>

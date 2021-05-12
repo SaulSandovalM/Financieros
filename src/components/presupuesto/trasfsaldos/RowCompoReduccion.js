@@ -15,8 +15,12 @@ export default class RowComponent extends Component {
     }
   }
 
-  update = () => {
-    this.props.update(this.props.item)
+  updateR = () => {
+    this.props.updateR(this.props.item)
+  }
+
+  updateA = () => {
+    this.props.updateA(this.props.item)
   }
 
   render () {
@@ -157,7 +161,8 @@ export default class RowComponent extends Component {
           </i>
         </TableCell>
         <TableCell className='mes-t'>
-          <button onClick={this.update}>Reducir</button>
+          <button onClick={this.updateR}>Reducir</button>
+          <button onClick={this.updateA}>Ampliar</button>
         </TableCell>
       </TableRow>
     }

@@ -438,15 +438,15 @@
 }
 .atte-sp {
   display: flex;
-  justify-content: center;
+  justify-content: left;
 }
 .atte-text-sp {
-  text-align: center;
+  text-align: left;
 }
 .firma-sp {
   display: flex;
   flex-direction: row;
-  justify-content: center;
+  justify-content: left;
   padding-top: 80px;
   width: 100%;
 }

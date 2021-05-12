@@ -4,6 +4,7 @@
   flex-direction: column;
   margin: 30px 20px 20px 20px;
   background: white;
+  font-size: 14px !important;
 }
 .vale-title-container {
   display: flex;
@@ -160,6 +161,7 @@ textarea { resize: none; }
   width: 100%;
   -webkit-appearance: none;
   background: white;
+  font-size: 14px;
 }
 .space-c {
   height: 50px;
@@ -211,6 +213,7 @@ textarea { resize: none; }
   margin: 0;
   -webkit-appearance: none;
   background: #fff;
+  font-size: 14px;
 }
 select {
   border: 0;

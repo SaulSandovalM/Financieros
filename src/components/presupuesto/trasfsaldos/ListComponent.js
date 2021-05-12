@@ -148,7 +148,8 @@ export default class ListComponent extends Component {
                   <RowCompoReduccion
                     key={item.id}
                     item={item}
-                    update={this.props.update}
+                    updateR={this.props.updateR}
+                    updateA={this.props.updateA}
                     search={this.state.search}
                     search2={this.state.search2}
                     search3={this.state.search3}

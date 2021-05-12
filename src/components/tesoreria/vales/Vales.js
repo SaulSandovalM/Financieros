@@ -185,7 +185,7 @@ export default class Vales extends Component {
       recibos: this.inputRecibos.value,
       sc: this.inputSC.value,
       fecha: this.state.fecha,
-      fechaF: this.inputFechaF.value,
+      fechaF: this.state.fechaF,
       autorizo: this.inputAutorizo.value,
       personaR: this.inputPersona.value,
       estatus: this.state.estatus,
@@ -600,9 +600,8 @@ export default class Vales extends Component {
                   <div className='f-fecha'>
                     <input
                       className='b-fecha-i'
-                      style={{ fontSize: '15px' }}
+                      style={{ fontSize: '14px' }}
                       name='fechaF'
-                      onChange={this.handleChange.bind(this)}
                       value={this.state.fechaF}
                       ref={fechaF => this.inputFechaF = fechaF}
                     />
