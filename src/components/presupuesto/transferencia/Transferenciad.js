@@ -208,7 +208,7 @@ export default class Transferencia extends Component {
       eg: item.eg,
       mi: item.mi,
       pr: item.pr,
-      ped: item.ped,
+      pd: item.pd,
       itrans: item.itrans,
       igest: item.igest,
       la: item.la,
