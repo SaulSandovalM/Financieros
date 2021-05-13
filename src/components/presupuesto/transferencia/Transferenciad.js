@@ -129,7 +129,7 @@ export default class Transferencia extends Component {
           eg: child.val().eg,
           mi: child.val().mi,
           pr: child.val().pr,
-          ped: child.val().ped,
+          pd: child.val().pd,
           itrans: child.val().itrans,
           igest: child.val().igest,
           la: child.val().la,
