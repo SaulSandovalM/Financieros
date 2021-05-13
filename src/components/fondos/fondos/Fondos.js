@@ -657,7 +657,7 @@ export default class Fondos extends Component {
                         value={anexof}
                         onChange={this.onChange}
                         ref={anexof => this.inputAnexof = anexof}
-                        required
+
                       />
                     </div>
                   </div>
