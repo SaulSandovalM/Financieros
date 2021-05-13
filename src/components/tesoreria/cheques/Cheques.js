@@ -325,9 +325,9 @@ export default class Cheques extends Component {
               <div className='disponible-cheque'>
                 <div>
                   <div className='input-row-2-cheque'>
-                    {this.state.contador.storyCount < this.state.importe ?
+                    {/* this.state.contador.storyCount < this.state.importe ?
                       <p>El importe pasa la cantidad disponible</p>
-                      :
+                      : */}
                       <Button
                         style={{ background: 'green' }}
                         variant='contained'
@@ -336,7 +336,6 @@ export default class Cheques extends Component {
                       >
                         Guardar
                       </Button>
-                    }
                   </div>
                 </div>
               </div>
