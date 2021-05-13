@@ -44,7 +44,12 @@ export default class RowComponent extends Component {
             />
           </TableCell>
           <TableCell className='table-c-fechae'>
-            {this.props.item.fileUpdate}
+          <div
+            className='click-arch'
+            onClick={() => window.open(this.props.item.archivo, '_blank')}
+          >
+          {this.props.item.fileUpdate}
+          </div>
           </TableCell>
           <TableCell className='table-c-fechae' align='right'>
             <Button
