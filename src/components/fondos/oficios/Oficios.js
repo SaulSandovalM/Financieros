@@ -812,7 +812,7 @@ export default class Oficios extends Component {
                 </div>
                 <div className='interno'>
                   <p className='text-soi'>Pago a Proveedor</p>
-                  {this.state.fondo.tipo_doc === 'Pago Directo' ?
+                  {this.state.fondo.tipo_doc === 'Pago Directo' && this.state.fondo.no_lici === ' ' ?
                     <input className='input-so' type='checkbox' checked /> :
                     <input className='input-so' type='checkbox' />
                   }
@@ -829,7 +829,10 @@ export default class Oficios extends Component {
                 </div>
                 <div className='interno'>
                   <p className='text-soi'>Pago a Proveedor por Requisición</p>
-                  <input className='input-so' type='checkbox' />
+                  {this.state.fondo.tipo_doc === 'Pago Directo' && this.state.fondo.no_lici !== ' ' ?
+                    <input className='input-so' type='checkbox' checked /> :
+                    <input className='input-so' type='checkbox' />
+                  }
                 </div>
               </div>
             </div>

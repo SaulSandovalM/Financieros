@@ -211,7 +211,7 @@ export default class Vales extends Component {
       personaR: '',
       factura: '',
       recibos: '',
-      sc: '',
+      sc: ' ',
       fecha: this.state.fecha,
       fechaF: this.state.fechaF,
       autorizo: this.inputAutorizo.value,
@@ -305,7 +305,7 @@ export default class Vales extends Component {
       turno: '',
       factura: '',
       recibos: '',
-      sc: '',
+      sc: ' ',
       fecha: item.fecha,
       fechaF: item.fechaF,
       autorizo: this.state.autorizo ? this.state.autorizo : item.autorizo,
@@ -328,6 +328,9 @@ export default class Vales extends Component {
   }
 
   render () {
+    console.log(this.state.sc)
+    console.log(this.state.cantidadc)
+    console.log(this.state.cantidadr)
     return (
       <div className='container-back-v'>
         <div style={{ display: 'flex', justifyContent: 'center' }}>
