@@ -27,6 +27,8 @@ export default class RowComponent extends Component {
     const nov = parseInt(this.props.item.nov)
     const dic = parseInt(this.props.item.dic)
 
+    console.log(this.props.item.ene)
+
     return (
       <TableBody>
         <TableCell className='table-num-dup'>

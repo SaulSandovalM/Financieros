@@ -138,7 +138,7 @@ class Nav extends Component {
               </div>
             </div>
           }
-          {(admin === 'CECILIA' || admin === 'LIZBETH') &&
+          {/* (admin === 'CECILIA' || admin === 'LIZBETH') &&
             <div className='navbar-left'>
               <Link to='/Saldos' className='deco'>
                 <span className='material-icons'>
@@ -149,7 +149,7 @@ class Nav extends Component {
                 </Typography>
               </Link>
             </div>
-          }
+          */ }
           {(admin === 'CECILIA' || admin === 'LIZBETH') &&
             <div className='navbar-left'>
               <Link to='/FondoRevolvente' className='deco'>
