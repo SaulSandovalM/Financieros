@@ -182,7 +182,7 @@ export default class Reduccion extends Component {
           ampliacion: child.val().ampliacion,
           reduccion: child.val().reduccion,
           transferencia: child.val().transferencia,
-          oficio: child.val().oficio,
+          oficioA: child.val().oficio,
           done: child.val().done,
           id: child.key
         })

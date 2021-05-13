@@ -331,7 +331,7 @@ export default class Trans extends Component {
       gasdic: item.gasdic,
       total: item.total,
       ampliacion: item.ampliacion,
-      reduccion: 'Reduccion',
+      reduccion: 'Ampliacion',
       transferencia: item.transferencia,
       saldo: 'Saldo',
       oficioA: this.state.oficio,

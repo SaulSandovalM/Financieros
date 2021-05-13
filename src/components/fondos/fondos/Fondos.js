@@ -102,7 +102,8 @@ export default class Fondos extends Component {
           done: false
         }
       ],
-      comprometidosp: ''
+      comprometidosp: '',
+      oficios: ''
     }
   }
 
@@ -119,7 +120,7 @@ export default class Fondos extends Component {
       })
       wishRef.set(updatedWish)
     })
-    const itemsRefPre = firebase.database().ref('presupuesto/')
+    const itemsRefPre = firebase.database().ref('oficios/')
     this.listenForItemsP(itemsRefPre)
   }
 
@@ -219,7 +220,7 @@ export default class Fondos extends Component {
       var oficio = []
       snap.forEach((child) => {
         oficio.push({
-          of: child.val().of,
+          oficio: child.val().oficio,
           id: child.key
         })
       })
@@ -311,7 +312,7 @@ export default class Fondos extends Component {
 
     this.state.oficio.forEach(el => {
       if (!(el in myObj)) {
-        myObj[el] = true
+        myObj[el + 1] = true
         newArray.push(el)
       }
     })
@@ -483,7 +484,7 @@ export default class Fondos extends Component {
                       required
                     >
                     {newArray.map(data =>
-                      <option name={data}>{data.of}</option>
+                      <option name={data}>{data.oficio}</option>
                     )}
                     </select>
                   </div>
