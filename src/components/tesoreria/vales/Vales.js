@@ -328,9 +328,6 @@ export default class Vales extends Component {
   }
 
   render () {
-    console.log(this.state.sc)
-    console.log(this.state.cantidadc)
-    console.log(this.state.cantidadr)
     return (
       <div className='container-back-v'>
         <div style={{ display: 'flex', justifyContent: 'center' }}>
@@ -422,7 +419,7 @@ export default class Vales extends Component {
                       <input
                         className='input-ches'
                         id='vale'
-                        name='vale' 
+                        name='vale'
                         required
                         onChange={this.handleChange.bind(this)}
                         ref={vale => this.inputVale = vale}

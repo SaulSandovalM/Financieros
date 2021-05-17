@@ -161,7 +161,7 @@ export default class Valeslist extends Component {
   }
 
   componentDidMount () {
-    const itemsRef = firebase.database().ref('vales/')
+    const itemsRef = firebase.database().ref('vales/').orderByChild('vale')
     this.listenForItems(itemsRef)
   }
 
