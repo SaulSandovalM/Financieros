@@ -194,7 +194,7 @@ export default class ListComponent extends Component {
         <TableContainer component={Paper} style={{ maxWidth: '100%', height: '69vh' }}>
           <Table>
             <TableHead>
-              <TableRow style={{ display: 'flex', flexDirection: 'row', top: '0', background: 'white', zIndex: '3', position: 'relative' }}>
+              <TableRow style={{ display: 'flex', flexDirection: 'row', top: '0', background: 'white', zIndex: '3', position: 'sticky' }}>
                 <TableCell className='border-icon' style={{ width: '50px' }} />
                 <TableCell className='table-v-num' style={{ width: '50px', left: '0px', position: 'sticky', background: 'white' }}><b>Vales</b></TableCell>
                 <TableCell className='table-v-num' style={{ width: '100px' }}><b>Cheques</b></TableCell>
