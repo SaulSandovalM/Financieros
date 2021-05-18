@@ -46,13 +46,15 @@ export default class Valeslist extends Component {
       filexml: ['No hay datos cargados'],
       filex: ['No hay datos cargados'],
       filefactura: [{ url: '', nombre: '' }],
+      xmlC: [{ url: '', nombre: '' }],
       filef: [{ url: '', nombre: '' }],
       recibosList: [{ folio: 'Recibo', nombre: '', importe: '0', iva: '0', isr: '0', fecha: '', estatus: '', subtotal: '0', total: '0', uuid: 'Recibo' }],
       autorizados: false,
       noautorizados: false,
       pendientes: false,
       obs: '',
-      opened: false
+      opened: false,
+      xmlLoading: 0
     }
     this.toggleBox = this.toggleBox.bind(this)
   }
@@ -66,7 +68,7 @@ export default class Valeslist extends Component {
 
   handleOnChange1 (event) {
     for (var i = 0; i < event.target.files.length; i++) {
-      const file = event.target.files[0]
+      const file = event.target.files[i]
       const xmlp = file
       var reader = new FileReader()
       reader.onload = function (event) {
@@ -85,7 +87,6 @@ export default class Valeslist extends Component {
           'estatus': 'sin asignar',
           'tipo': 'revolvente'
         }
-        console.log(data)
         fetch(xml).then(res => res.text()).then(xml => {
           fetch('https://financieros-78cb0.firebaseio.com/xml.json', {
             method: 'POST',
@@ -98,6 +99,20 @@ export default class Valeslist extends Component {
         })
       }
       reader.readAsText(xmlp)
+      const storageRef = firebase.storage().ref(`xml/${file.name}`)
+      const task = storageRef.put(file)
+      task.on('state_changed', (snapshot) => {
+        let percentage = (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+        this.setState({
+          xmlLoading: percentage
+        })
+      }, error => {
+        console.error(error.message)
+      }, () => storageRef.getDownloadURL().then(url =>  {
+        this.setState({
+          xmlC: [...this.state.xmlC, { url: url, nombre: file.name }],
+        })
+      }))
     }
   }
 
@@ -147,6 +162,7 @@ export default class Valeslist extends Component {
           filefactura: child.val().filefactura,
           filef: child.val().filef,
           recibosList: child.val().recibosList,
+          xmlC: child.val().xmlC ? child.val().xmlC : [{ url: '', nombre: '' }],
           obs: child.val().obs,
           fechaP: child.val().fechaP,
           rein: child.val().rein,
@@ -217,6 +233,7 @@ export default class Valeslist extends Component {
       filefactura: this.state.filefactura ? this.state.filefactura : [0],
       filef: this.state.filef ? this.state.filef : [0],
       recibosList: this.state.recibosList ? this.state.recibosList : [0],
+      xmlC: this.state.xmlC ? this.state.xmlC : [0],
       obs: item.obs,
       fechaP: item.fechaP,
       rein: item.rein,
@@ -229,6 +246,7 @@ export default class Valeslist extends Component {
       filexml: ['No hay datos cargados'],
       filex: ['No hay datos cargados'],
       filefactura: [{ url: '', nombre: '' }],
+      xmlC:  [{ url: '', nombre: '' }],
       filef: [{ url: '', nombre: '' }],
       recibosList: [{ folio: 'Recibo', nombre: '', importe: '', iva: '0', isr: '0', fecha: '', estatus: '', subtotal: '0', total: '0', uuid: 'Recibo' }],
       obs: '',
@@ -261,6 +279,7 @@ export default class Valeslist extends Component {
       filefactura: item.filefactura,
       filef: item.filef,
       recibosList: item.recibosList,
+      xmlC: item.xmlC,
       obs: this.state.obs,
       fechaP: item.fechaP,
       rein: item.rein,
@@ -324,8 +343,8 @@ export default class Valeslist extends Component {
                         }}
                         accept='.xml' onChange={this.handleOnChange1.bind(this)}
                       />
-                      <progress className='progress' value={this.state.xmlL} max='100'>
-                        {this.state.xmlL} %
+                      <progress className='progress' value={this.state.xmlLoading} max='100'>
+                        {this.state.xmlLoading} %
                       </progress>
                     </div>
                     <div className='p-container-valeslist'>
