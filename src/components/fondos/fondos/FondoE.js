@@ -1,3 +1,4 @@
+// importaciones necesarias
 import React, { Component } from 'react'
 import firebase from '../../../Firebase'
 import { NumberAsString } from './NumerosLetras'
@@ -16,8 +17,8 @@ import MenuItem from '@material-ui/core/MenuItem'
 import FormControl from '@material-ui/core/FormControl'
 import Select from '@material-ui/core/Select'
 import Chip from '@material-ui/core/Chip'
-import CurrencyFormat from 'react-currency-format'
 import { Link } from 'react-router-dom'
+import CurrencyFormat from 'react-currency-format'
 
 export default class FondoE extends Component {
   constructor (props) {
@@ -103,7 +104,8 @@ export default class FondoE extends Component {
       ],
       comprometidosp: '',
       urlfire: String(URLactual).substr(-20),
-      anexof: ' '
+      anexof: '',
+      oficios: '',
     }
   }
 
@@ -155,6 +157,7 @@ export default class FondoE extends Component {
         cuentaPagar: snap.val().cuentaPagar,
         cuentaPagarPara: snap.val().cuentaPagarPara,
         sujetoContable: snap.val().sujetoContable,
+        anexof: snap.val().anexof,
         id: snap.key
       })
       this.setState({
@@ -183,7 +186,7 @@ export default class FondoE extends Component {
       var oficio = []
       snap.forEach((child) => {
         oficio.push({
-          of: child.val().of,
+          oficio: child.val().oficio,
           id: child.key
         })
       })
@@ -270,14 +273,13 @@ export default class FondoE extends Component {
   }
 
   render() {
-
     const { tipo_doc, realizo } = this.state
     const newArray = ['']
     const myObj = {}
 
     this.state.oficio.forEach(el => {
       if (!(el in myObj)) {
-        myObj[el] = true
+        myObj[el + 1] = true
         newArray.push(el)
       }
     })
@@ -452,7 +454,7 @@ export default class FondoE extends Component {
                         required
                       >
                       {newArray.map(data =>
-                        <option name={data}>{data.of}</option>
+                        <option name={data}>{data.oficio}</option>
                       )}
                       </select>
                     </div>
@@ -601,7 +603,6 @@ export default class FondoE extends Component {
                           required
                           value={this.state.anexof ? this.state.anexof : this.state.fondos[0].anexof}
                           ref='anexof'
-
                         />
                       </div>
                     </div>
