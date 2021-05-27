@@ -380,7 +380,6 @@ export default class Comprometidos extends Component {
     firebase.database().ref().update(updates)
     const { area, total, iva, isr, importe } = this.state
     const wishRef = firebase.database().ref(`fondos/${this.state.urlfire}`)
-    console.log(wishRef)
     wishRef.once('value').then(snapshot => {
       var updatedWish = snapshot.val()
       updatedWish.comprometido.push(

@@ -16,6 +16,8 @@ import MenuItem from '@material-ui/core/MenuItem'
 import FormControl from '@material-ui/core/FormControl'
 import Select from '@material-ui/core/Select'
 import Chip from '@material-ui/core/Chip'
+import CurrencyFormat from 'react-currency-format'
+import { Link } from 'react-router-dom'
 
 export default class FondoE extends Component {
   constructor (props) {
@@ -100,7 +102,8 @@ export default class FondoE extends Component {
         }
       ],
       comprometidosp: '',
-      urlfire: String(URLactual).substr(-20)
+      urlfire: String(URLactual).substr(-20),
+      anexof: ' '
     }
   }
 
@@ -260,6 +263,7 @@ export default class FondoE extends Component {
       cuentaPagar: this.state.cuentaPagar ? this.state.cuentaPagar : this.state.fondos[0].cuentaPagar,
       cuentaPagarPara: this.state.cuentaPagarPara ? this.state.cuentaPagarPara : this.state.fondos[0].cuentaPagarPara,
       sujetoContable: this.state.sujetoContable ? this.state.sujetoContable : this.state.fondos[0].sujetoContable,
+      anexof: this.state.anexof ? this.state.anexof : this.state.anexof[0].anexof
     }
     firebase.database().ref().update(updates)
     alert('Se ha actualizado el fondo')
@@ -282,7 +286,81 @@ export default class FondoE extends Component {
       <div>
         {this.state.fondo &&
           <form className='form-fondo'>
-            <Grid className='grid-w'>
+            <div className='grid-w'>
+            <Grid className='grid-w2'>
+              <Paper className='paper-p'>
+                <div className='div-con-f'>Buscador de Fondos</div>
+                <div className='head-search'>
+                  <div className='inp-sea-cont'>
+                    <p className='inp-p-t'>Num. Fondo</p>
+                  </div>
+                  <div className='inp-sea-cont'>
+                    <p className='inp-p-t'>Tipo de Doc.</p>
+                  </div>
+                  <div className='inp-sea-cont'>
+                    <p className='inp-p-t'>Importe</p>
+                  </div>
+                  <div className='inp-sea-cont'>
+                    <p className='inp-p-t'>Nombre R.</p>
+                  </div>
+                  <div className='inp-sea-cont'>
+                    <p className='inp-p-t'>Editar F.</p>
+                  </div>
+                  <div className='inp-sea-cont'>
+                    <p className='inp-p-t'>Editar C.</p>
+                  </div>
+                  <div className='inp-sea-cont'>
+                    <p className='inp-p-t'>Oficios</p>
+                  </div>
+                </div>
+                <div className='head-search'>
+                  <div className='inp-sea-cont'>
+                    <input
+                      style={{ width: '85%' }}
+                      className='field'
+                      name='searchF'
+                      value={this.state.searchF}
+                      onChange={this.onChange}
+                    />
+                  </div>
+                  <div className='cont-w-data'>
+                    {this.state.fondos.map(fondos =>
+                      <div className='cont-map-fondo'>
+                        {(this.state.searchF === fondos.fondo && (fondos.realizo === this.state.realizo || this.state.realizo === 'MIGUEL')) &&
+                          <div className='cont-map-data'>
+                            <div className='data-w-search'>
+                              <p className='data-m-f'>{fondos.tipo_doc}</p>
+                            </div>
+                            <div className='editar-option'>
+                              <CurrencyFormat
+                                value={fondos.importe}
+                                displayType='text'
+                                prefix=' $ '
+                                thousandSeparator
+                                decimalSeparator='.'
+                              />
+                            </div>
+                            <div className='data-w-search'>
+                              <p className='data-m-f'>{fondos.realizo}</p>
+                            </div>
+                            <div className='data-w-search'>
+                              <Link className='data-m-f' to={`/FondoE/${fondos.id}`}>Editar</Link>
+                            </div>
+                            <div className='data-w-search'>
+                              <Link className='data-m-f' to={`/Comprometidos/${fondos.id}`}>Editar</Link>
+                            </div>
+                            <div className='data-w-search'>
+                              <Link className='data-m-f' to={`/Oficios/${fondos.id}`}>Imprimir</Link>
+                            </div>
+                          </div>
+                        }
+                      </div>
+                    )}
+                  </div>
+                </div>
+              </Paper>
+            </Grid>
+
               <Grid className='grid-w2'>
                 <Paper className='paper-pm'>
                   <div className='div-con-f'>Fondo</div>
@@ -510,6 +588,24 @@ export default class FondoE extends Component {
                       </div>
                     </div>
                   </div>
+                  <div className='div-f2'>
+                    <div style={{ width: '99%' }}>
+                      <div>
+                        <p className='p-label'>Oficio Anexo F</p>
+                        <input
+                          style={{ width: '100%' }}
+                          className='field'
+                          id='anexof'
+                          name='anexof'
+                          onChange={this.onChange}
+                          required
+                          value={this.state.anexof ? this.state.anexof : this.state.fondos[0].anexof}
+                          ref='anexof'
+
+                        />
+                      </div>
+                    </div>
+                  </div>
                 </Paper>
               </Grid>
               <Grid className='grid2-cont'>
@@ -687,11 +783,11 @@ export default class FondoE extends Component {
                   </div>
                 </Paper>
               </Grid>
-            </Grid>
             <div className='div-content-fab'>
               <Fab color='primary' aria-label='add' style={{ background: 'green' }} onClick={this.update}>
                 <CheckIcon />
               </Fab>
+            </div>
             </div>
           </form>
         }

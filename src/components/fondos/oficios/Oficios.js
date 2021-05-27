@@ -7,6 +7,9 @@ import logo2 from '../../../img/logo.jpg'
 // import lpgjh from '../../../img/logo-PGJH.jpg'
 import sus from '../../../img/veda.png'
 import CurrencyFormat from 'react-currency-format'
+import { Link } from 'react-router-dom'
+import Paper from '@material-ui/core/Paper'
+import Grid from '@material-ui/core/Grid'
 
 export default class Oficios extends Component {
   constructor (props) {
@@ -27,7 +30,8 @@ export default class Oficios extends Component {
       up: '',
       desc: '',
       urlfire: String(URLactual).substr(-20),
-      mostrar: false
+      mostrar: false,
+      fondos: [],
     }
   }
 
@@ -54,6 +58,8 @@ export default class Oficios extends Component {
     this.listenFondo(itemsRefFondo)
     const itemsRefComprometidos = firebase.database().ref(`fondos/${this.state.urlfire}/comprometido`)
     this.listenComprometidos(itemsRefComprometidos)
+    const itemsRef = firebase.database().ref(`/fondos/${this.state.urlfire}`)
+    this.listenForItems(itemsRef)
   }
 
   handleChange (event) {
@@ -63,6 +69,46 @@ export default class Oficios extends Component {
   handleMostrar () {
     this.setState({ mostrar: !this.state.mostrar })
   }
+
+
+    listenForItems = (itemsRef) => {
+      itemsRef.on('value', (snap) => {
+        var fondos = []
+        fondos.push({
+          fondo: snap.val().fondo,
+          fecha: snap.val().fecha,
+          tipo_doc: snap.val().tipo_doc,
+          oficio_aut: snap.val().oficio_aut,
+          no_oficio: snap.val().no_oficio,
+          importe: snap.val().importe,
+          beneficiario: snap.val().beneficiario,
+          desc: snap.val().desc,
+          no_proyecto: snap.val().no_proyecto,
+          numCompro: snap.val().numCompro,
+          realizo: snap.val().realizo,
+          no_lici: snap.val().no_lici,
+          requisicion: snap.val().requisicion,
+          pedido: snap.val().pedido,
+          poliza: snap.val().poliza,
+          cfe: snap.val().cfe,
+          nscfe: snap.val().nscfe,
+          observaciones: snap.val().observaciones,
+          comprometido: snap.val().comprometido,
+          cpa: snap.val().cpa,
+          numCheque: snap.val().numCheque,
+          fechaContra: snap.val().fechaContra,
+          numContra: snap.val().numContra,
+          fechaDepo: snap.val().fechaDepo,
+          cuentaPagar: snap.val().cuentaPagar,
+          cuentaPagarPara: snap.val().cuentaPagarPara,
+          sujetoContable: snap.val().sujetoContable,
+          id: snap.key
+        })
+        this.setState({
+          fondos: fondos
+        })
+      })
+    }
 
   render () {
     var today = new Date()

@@ -119,6 +119,7 @@ export default class ContainerT extends Component {
           s: child.val().s,
           prog: child.val().prog,
           sp: child.val().sp,
+          min: child.val().min,
           obj: child.val().obj,
           proy: child.val().proy,
           est: child.val().est,

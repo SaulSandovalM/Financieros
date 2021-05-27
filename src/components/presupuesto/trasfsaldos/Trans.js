@@ -134,6 +134,7 @@ export default class Trans extends Component {
           eje: child.val().eje,
           s: child.val().s,
           prog: child.val().prog,
+          min: child.val().min,
           sp: child.val().sp,
           obj: child.val().obj,
           proy: child.val().proy,
@@ -215,6 +216,7 @@ export default class Trans extends Component {
       s: item.s,
       prog: item.prog,
       sp: item.sp,
+      min: item.min,
       obj: item.obj,
       proy: item.proy,
       est: item.est,
@@ -287,6 +289,7 @@ export default class Trans extends Component {
       s: item.s,
       prog: item.prog,
       sp: item.sp,
+      min: item.min,
       obj: item.obj,
       proy: item.proy,
       est: item.est,
@@ -342,9 +345,6 @@ export default class Trans extends Component {
   }
 
   render () {
-
-    console.log(!parseInt(this.state.impoene) ? 0 : parseInt(this.state.impoene))
-
     return (
       <div className='pf-container'>
         <div className='p-container-fr' style={{ paddingTop: '60px' }}>
