@@ -34,6 +34,7 @@ import Caratula from './components/tesoreria/caratula/Caratula'
 import Fondos from './components/fondos/fondos/Fondos'
 import FondoE from './components/fondos/fondos/FondoE'
 import Comprometidos from './components/fondos/comprometidos/Comprometidos'
+import ComprometidoE from './components/fondos/comprometidos/ComprometidoE'
 import Oficios from './components/fondos/oficios/Oficios'
 import Consulta from './components/fondos/consulta/Consulta'
 import Cpdf from './components/fondos/consulta/Cpdf'
@@ -226,6 +227,13 @@ function App (props) {
         exact
         path='/Comprometidos/:id'
         component={Comprometidos}
+        isAuthenticated={isAuthenticated}
+        isVerifying={isVerifying}
+      />
+      <ProtectedRoute
+        exact
+        path='/ComprometidoE/:id'
+        component={ComprometidoE}
         isAuthenticated={isAuthenticated}
         isVerifying={isVerifying}
       />

@@ -7,9 +7,6 @@ import logo2 from '../../../img/logo.jpg'
 // import lpgjh from '../../../img/logo-PGJH.jpg'
 import sus from '../../../img/veda.png'
 import CurrencyFormat from 'react-currency-format'
-import { Link } from 'react-router-dom'
-import Paper from '@material-ui/core/Paper'
-import Grid from '@material-ui/core/Grid'
 
 export default class Oficios extends Component {
   constructor (props) {

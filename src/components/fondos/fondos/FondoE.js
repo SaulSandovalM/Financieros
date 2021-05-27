@@ -122,7 +122,7 @@ export default class FondoE extends Component {
       })
       wishRef.set(updatedWish)
     })
-    const itemsRefPre = firebase.database().ref('presupuesto/')
+    const itemsRefPre = firebase.database().ref('oficios/')
     this.listenForItemsP(itemsRefPre)
   }
 

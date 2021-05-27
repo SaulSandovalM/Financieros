@@ -382,7 +382,7 @@ export default class Fondos extends Component {
                               <Link className='data-m-f' to={`/FondoE/${fondos.id}`}>Editar</Link>
                             </div>
                             <div className='data-w-search'>
-                              <Link className='data-m-f' to={`/Comprometidos/${fondos.id}`}>Editar</Link>
+                              <Link className='data-m-f' to={`/ComprometidoE/${fondos.id}`}>Editar</Link>
                             </div>
                             <div className='data-w-search'>
                               <Link className='data-m-f' to={`/Oficios/${fondos.id}`}>Imprimir</Link>
