@@ -97,7 +97,12 @@ export default class ComprometidoE extends Component {
       ids: '',
       urlfire: String(URLactual).substr(-20),
       fondos: [],
-      searchF: ''
+      searchF: '',
+      actualizarComprometidos: [],
+      presupuestoConsumo: [],
+      menu: false,
+      mes: '',
+      guardar: false
     }
   }
 
@@ -237,6 +242,7 @@ export default class ComprometidoE extends Component {
           ben: child.val().ben,
           eg: child.val().eg,
           comprobantes: child.val().comprobantes,
+          presupuestoid: child.val().presupuestoid,
           id: child.key
         })
       })
@@ -299,6 +305,10 @@ export default class ComprometidoE extends Component {
 
   updateSearch5 (event) {
     this.setState({ area: event.target.value })
+  }
+
+  updateSearch6 (event) {
+    this.setState({ mes: event.target.value })
   }
 
   handleOnChange1 (event) {
@@ -552,10 +562,217 @@ export default class ComprometidoE extends Component {
     'Fiscalía Especializada en Delitos de Corrupción',
     'Fiscalía Especializada en Materia de Desaparición Forzada de Personas'
   ]
+  mes = [
+    '',
+    'Enero',
+    'Febrero',
+    'Marzo',
+    'Abril',
+    'Mayo',
+    'Junio',
+    'Julio',
+    'Agosto',
+    'Septiembre',
+    'Octubre',
+    'Noviembre',
+    'Diciembre'
+  ]
 
-  removeComprometido = (id) => {
-    console.log('Entra con el id: ' + id)
-    firebase.database().ref(`fondos/${this.state.urlfire}/comprometido/${id}`).remove()
+  removeComprometido = (id, item) => {
+    //consumo comprometido total
+    const totalRef = firebase.database().ref(`fondos/${this.state.urlfire}/comprometido/`)
+    totalRef.on('value', (snap) => {
+      var consumoComprometidos = []
+      snap.forEach((child) => {
+        consumoComprometidos.push({
+          partida: child.val().partida,
+          presupuestal: child.val().presupuestal,
+          area: child.val().area,
+          fecha: child.val().fecha,
+          importe_comp: child.val().importe_comp,
+          iva: child.val().iva,
+          isr: child.val().isr,
+          total: child.val().total,
+          año: child.val().año,
+          ramo: child.val().rm,
+          ur: child.val().ur,
+          up: child.val().up,
+          rubro: child.val().rubro,
+          tg: child.val().tg,
+          npro: child.val().npro,
+          np: child.val().np,
+          f: child.val().f,
+          fu: child.val().fu,
+          sf: child.val().sf,
+          eje: child.val().eje,
+          s: child.val().s,
+          prog: child.val().prog,
+          sp: child.val().sp,
+          obj: child.val().obj,
+          proy: child.val().proy,
+          est: child.val().est,
+          ben: child.val().ben,
+          eg: child.val().eg,
+          comprobantes: child.val().comprobantes,
+          presupuestoid: child.val().presupuestoid,
+          id: child.key
+        })
+      })
+      this.setState({
+        actualizarComprometidos: consumoComprometidos[id].total
+      })
+    })
+    // consumo de presupuesto
+    const presupuestoRef = firebase.database().ref(`presupuesto/`)
+    presupuestoRef.on('value', (snap) => {
+      var presupuesto = []
+      snap.forEach((child) => {
+        if (item.presupuestoid === child.key) {
+          presupuesto.push({
+            año: child.val().año,
+            rm: child.val().rm,
+            ur: child.val().ur,
+            up: child.val().up,
+            rubro: child.val().rubro,
+            tg: child.val().tg,
+            ogasto: child.val().ogasto,
+            npro: child.val().npro,
+            f: child.val().f,
+            fu: child.val().fu,
+            sf: child.val().sf,
+            eje: child.val().eje,
+            s: child.val().s,
+            prog: child.val().prog,
+            sp: child.val().sp,
+            min: child.val().min,
+            obj: child.val().obj,
+            proy: child.val().proy,
+            est: child.val().est,
+            obra: child.val().obra,
+            ben: child.val().ben,
+            eg: child.val().eg,
+            mi: child.val().mi,
+            pr: child.val().pr,
+            pd: child.val().pd,
+            itrans: child.val().itrans,
+            igest: child.val().igest,
+            la: child.val().la,
+            ods: child.val().ods,
+            et: child.val().et,
+            ff: child.val().ff,
+            of: child.val().of,
+            np: child.val().np,
+            cpa: child.val().cpa,
+            ene: child.val().ene,
+            gasene: child.val().gasene,
+            feb: child.val().feb,
+            gasfeb: child.val().gasfeb,
+            mar: child.val().mar,
+            gasmar: child.val().gasmar,
+            abr: child.val().abr,
+            gasabr: child.val().gasabr,
+            may: child.val().may,
+            gasmay: child.val().gasmay,
+            jun: child.val().jun,
+            gasjun: child.val().gasjun,
+            jul: child.val().jul,
+            gasjul: child.val().gasjul,
+            ago: child.val().ago,
+            gasago: child.val().gasago,
+            sep: child.val().sep,
+            gassep: child.val().gassep,
+            oct: child.val().oct,
+            gasoct: child.val().gasoct,
+            nov: child.val().nov,
+            gasnov: child.val().gasnov,
+            dic: child.val().dic,
+            gasdic: child.val().gasdic,
+            total: child.val().total,
+            ampliacion: child.val().ampliacion,
+            reduccion: child.val().reduccion,
+            transferencia: child.val().transferencia,
+            estatus: child.val().estatus,
+            id: child.key
+          })
+        }
+      })
+      this.setState({
+        presupuestoConsumo: presupuesto
+      })
+    })
+    console.log(this.state.mes)
+    if (this.state.presupuestoConsumo.length === 1) {
+      var pruebaIndice = this.state.presupuestoConsumo[0]
+      let updates = {}
+      updates['presupuesto/' + item.presupuestoid] = {
+        año: pruebaIndice.año,
+        rm: pruebaIndice.rm,
+        ur: pruebaIndice.ur,
+        up: pruebaIndice.up,
+        rubro: pruebaIndice.rubro,
+        tg: pruebaIndice.tg,
+        ogasto: pruebaIndice.ogasto,
+        npro: pruebaIndice.npro,
+        f: pruebaIndice.f,
+        fu: pruebaIndice.fu,
+        sf: pruebaIndice.sf,
+        eje: pruebaIndice.eje,
+        s: pruebaIndice.s,
+        prog: pruebaIndice.prog,
+        sp: pruebaIndice.sp,
+        min: pruebaIndice.min,
+        obj: pruebaIndice.obj,
+        proy: pruebaIndice.proy,
+        est: pruebaIndice.est,
+        obra: pruebaIndice.obra,
+        ben: pruebaIndice.ben,
+        eg: pruebaIndice.eg,
+        mi: pruebaIndice.mi,
+        pr: pruebaIndice.pr,
+        pd: pruebaIndice.pd,
+        itrans: pruebaIndice.itrans,
+        igest: pruebaIndice.igest,
+        la: pruebaIndice.la,
+        ods: pruebaIndice.ods,
+        et: pruebaIndice.et,
+        ff: pruebaIndice.ff,
+        of: pruebaIndice.of,
+        np: pruebaIndice.np,
+        cpa: pruebaIndice.cpa,
+        ene: this.state.mes === 'Enero' ? pruebaIndice.ene + parseFloat(this.state.actualizarComprometidos) : pruebaIndice.ene,
+        gasene: this.state.mes === 'Enero' ? pruebaIndice.gasene - parseFloat(this.state.actualizarComprometidos) : pruebaIndice.gasene,
+        feb: this.state.mes === 'Febrero' ? pruebaIndice.feb + parseFloat(this.state.actualizarComprometidos) : pruebaIndice.feb,
+        gasfeb: this.state.mes === 'Febrero' ? pruebaIndice.gasfeb - parseFloat(this.state.actualizarComprometidos) : pruebaIndice.gasfeb,
+        mar: this.state.mes === 'Marzo' ? pruebaIndice.mar + parseFloat(this.state.actualizarComprometidos) : pruebaIndice.mar,
+        gasmar: this.state.mes === 'Marzo' ? pruebaIndice.gasmar - parseFloat(this.state.actualizarComprometidos) : pruebaIndice.gasmar,
+        abr: this.state.mes === 'Abril' ? pruebaIndice.abr + parseFloat(this.state.actualizarComprometidos) : pruebaIndice.abr,
+        gasabr: this.state.mes === 'Abril' ? pruebaIndice.gasabr - parseFloat(this.state.actualizarComprometidos) : pruebaIndice.gasabr,
+        may: this.state.mes === 'Mayo' ? pruebaIndice.may + parseFloat(this.state.actualizarComprometidos) : pruebaIndice.may,
+        gasmay: this.state.mes === 'Mayo' ? pruebaIndice.gasmay - parseFloat(this.state.actualizarComprometidos) : pruebaIndice.gasmay,
+        jun: this.state.mes === 'Junio' ? pruebaIndice.jun + parseFloat(this.state.actualizarComprometidos) : pruebaIndice.jun,
+        gasjun: this.state.mes === 'Junio' ? pruebaIndice.gasjun - parseFloat(this.state.actualizarComprometidos) : pruebaIndice.gasjun,
+        jul: this.state.mes === 'Julio' ? pruebaIndice.jul + parseFloat(this.state.actualizarComprometidos) : pruebaIndice.jul,
+        gasjul: this.state.mes === 'Julio' ? pruebaIndice.gasjul - parseFloat(this.state.actualizarComprometidos) : pruebaIndice.gasjul,
+        ago: this.state.mes === 'Agosto' ? pruebaIndice.ago + parseFloat(this.state.actualizarComprometidos) : pruebaIndice.ago,
+        gasago: this.state.mes === 'Agosto' ? pruebaIndice.gasago - parseFloat(this.state.actualizarComprometidos) : pruebaIndice.gasago,
+        sep: this.state.mes === 'Septiembre' ? pruebaIndice.sep + parseFloat(this.state.actualizarComprometidos) : pruebaIndice.sep,
+        gassep: this.state.mes === 'Septiembre' ? pruebaIndice.gassep - parseFloat(this.state.actualizarComprometidos) : pruebaIndice.gassep,
+        oct: this.state.mes === 'Octubre' ? pruebaIndice.oct + parseFloat(this.state.actualizarComprometidos) : pruebaIndice.oct,
+        gasoct: this.state.mes === 'Octubre' ? pruebaIndice.gasoct - parseFloat(this.state.actualizarComprometidos) : pruebaIndice.gasoct,
+        nov: this.state.mes === 'Noviembre' ? pruebaIndice.nov + parseFloat(this.state.actualizarComprometidos) : pruebaIndice.nov,
+        gasnov: this.state.mes === 'Noviembre' ? pruebaIndice.gasnov - parseFloat(this.state.actualizarComprometidos) : pruebaIndice.gasnov,
+        dic: this.state.mes === 'Diciembre' ? pruebaIndice.dic + parseFloat(this.state.actualizarComprometidos) : pruebaIndice.dic,
+        gasdic: this.state.mes === 'Diciembre' ? pruebaIndice.gasdic - parseFloat(this.state.actualizarComprometidos) : pruebaIndice.gasdic,
+        total: pruebaIndice.total,
+        ampliacion: pruebaIndice.ampliacion,
+        reduccion: pruebaIndice.reduccion,
+        transferencia: pruebaIndice.transferencia
+      }
+      alert('Se ha actualizado el presupuesto')
+      firebase.database().ref().update(updates)
+      alert('Se ha borrado la afectacion de la partida')
+      firebase.database().ref(`fondos/${this.state.urlfire}/comprometido/${id}`).remove()
+    }
   }
 
   render () {
@@ -777,6 +994,32 @@ export default class ComprometidoE extends Component {
 
     return (
       <div className='div-compro-container'>
+
+        {/*  <div style={{ width: '50%', height: '50vh', background: 'red', position: 'fixed', zIndex: '5', display: 'flex', justifyContent: 'center', top: 0, left: 0 }}>
+            <div style={{ display: 'flex', justifyContent: 'center', flexDirection: 'column', width: '100%', height: '100%' }}>
+              <div style={{ display: 'flex', justifyContent: 'center', height: '30%' }}>
+                <div style={{ display: 'flex', justifyContent: 'center', background: 'white', flexDirection: 'column' }}>
+                  <p>Selecciona el mes en que se afectara el presupuesto</p>
+                  <br />
+                  <select
+                    style={{ width: 'auto', height: 'auto' }}
+                    id='mes'
+                    name='mes'
+                    value={this.state.mes}
+                    onChange={this.updateSearch6.bind(this)}
+                    required
+                  >
+                    {this.mes.map((x,y) =>
+                      <option name={y}>{x}</option>
+                    )}
+                  </select>
+                  <button onClick={this.guardar}>Guardar</button>
+                </div>
+              </div>
+            </div>
+          </div> */}
+
+
         <div>
           <Grid
             container
@@ -785,79 +1028,79 @@ export default class ComprometidoE extends Component {
             alignItems='center'
             style={{ display: 'flex', flexDirection: 'row', width: '100%' }}
           >
-          <Grid className='grid-w2'>
-            <Paper className='paper-p'>
-              <div className='div-con-f'>Buscador de Fondos</div>
-              <div className='head-search'>
-                <div className='inp-sea-cont'>
-                  <p className='inp-p-t'>Num. Fondo</p>
+            {/* <Grid className='grid-w2'>
+              <Paper className='paper-p'>
+                <div className='div-con-f'>Buscador de Fondos</div>
+                <div className='head-search'>
+                  <div className='inp-sea-cont'>
+                    <p className='inp-p-t'>Num. Fondo</p>
+                  </div>
+                  <div className='inp-sea-cont'>
+                    <p className='inp-p-t'>Tipo de Doc.</p>
+                  </div>
+                  <div className='inp-sea-cont'>
+                    <p className='inp-p-t'>Importe</p>
+                  </div>
+                  <div className='inp-sea-cont'>
+                    <p className='inp-p-t'>Nombre R.</p>
+                  </div>
+                  <div className='inp-sea-cont'>
+                    <p className='inp-p-t'>Editar F.</p>
+                  </div>
+                  <div className='inp-sea-cont'>
+                    <p className='inp-p-t'>Editar C.</p>
+                  </div>
+                  <div className='inp-sea-cont'>
+                    <p className='inp-p-t'>Oficios</p>
+                  </div>
                 </div>
-                <div className='inp-sea-cont'>
-                  <p className='inp-p-t'>Tipo de Doc.</p>
-                </div>
-                <div className='inp-sea-cont'>
-                  <p className='inp-p-t'>Importe</p>
-                </div>
-                <div className='inp-sea-cont'>
-                  <p className='inp-p-t'>Nombre R.</p>
-                </div>
-                <div className='inp-sea-cont'>
-                  <p className='inp-p-t'>Editar F.</p>
-                </div>
-                <div className='inp-sea-cont'>
-                  <p className='inp-p-t'>Editar C.</p>
-                </div>
-                <div className='inp-sea-cont'>
-                  <p className='inp-p-t'>Oficios</p>
-                </div>
-              </div>
-              <div className='head-search'>
-                <div className='inp-sea-cont'>
-                  <input
-                    style={{ width: '85%' }}
-                    className='field'
-                    name='searchF'
-                    value={this.state.searchF}
-                    onChange={this.onChange}
-                  />
-                </div>
-                <div className='cont-w-data'>
-                  {this.state.fondos.map(fondos =>
-                    <div className='cont-map-fondo'>
-                      {(this.state.searchF === fondos.fondo && (fondos.realizo === this.state.realizo || this.state.realizo === 'MIGUEL')) &&
-                        <div className='cont-map-data'>
-                          <div className='data-w-search'>
-                            <p className='data-m-f'>{fondos.tipo_doc}</p>
+                <div className='head-search'>
+                  <div className='inp-sea-cont'>
+                    <input
+                      style={{ width: '85%' }}
+                      className='field'
+                      name='searchF'
+                      value={this.state.searchF}
+                      onChange={this.onChange}
+                    />
+                  </div>
+                  <div className='cont-w-data'>
+                    {this.state.fondos.map(fondos =>
+                      <div className='cont-map-fondo'>
+                        {(this.state.searchF === fondos.fondo && (fondos.realizo === this.state.realizo || this.state.realizo === 'MIGUEL')) &&
+                          <div className='cont-map-data'>
+                            <div className='data-w-search'>
+                              <p className='data-m-f'>{fondos.tipo_doc}</p>
+                            </div>
+                            <div className='editar-option'>
+                              <CurrencyFormat
+                                value={fondos.importe}
+                                displayType='text'
+                                prefix=' $ '
+                                thousandSeparator
+                                decimalSeparator='.'
+                              />
+                            </div>
+                            <div className='data-w-search'>
+                              <p className='data-m-f'>{fondos.realizo}</p>
+                            </div>
+                            <div className='data-w-search'>
+                              <Link className='data-m-f' to={`/FondoE/${fondos.id}`}>Editar</Link>
+                            </div>
+                            <div className='data-w-search'>
+                              <Link className='data-m-f' to={`/ComprometidoE/${fondos.id}`}>Editar</Link>
+                            </div>
+                            <div className='data-w-search'>
+                              <Link className='data-m-f' to={`/Oficios/${fondos.id}`}>Imprimir</Link>
+                            </div>
                           </div>
-                          <div className='editar-option'>
-                            <CurrencyFormat
-                              value={fondos.importe}
-                              displayType='text'
-                              prefix=' $ '
-                              thousandSeparator
-                              decimalSeparator='.'
-                            />
-                          </div>
-                          <div className='data-w-search'>
-                            <p className='data-m-f'>{fondos.realizo}</p>
-                          </div>
-                          <div className='data-w-search'>
-                            <Link className='data-m-f' to={`/FondoE/${fondos.id}`}>Editar</Link>
-                          </div>
-                          <div className='data-w-search'>
-                            <Link className='data-m-f' to={`/ComprometidoE/${fondos.id}`}>Editar</Link>
-                          </div>
-                          <div className='data-w-search'>
-                            <Link className='data-m-f' to={`/Oficios/${fondos.id}`}>Imprimir</Link>
-                          </div>
-                        </div>
-                      }
-                    </div>
-                  )}
+                        }
+                      </div>
+                    )}
+                  </div>
                 </div>
-              </div>
-            </Paper>
-          </Grid>
+              </Paper>
+            </Grid> */}
             <Grid item xs style={{ width: '50%' }}>
               <div className='div-into-data'>
                 <div className='recibo-container'>
@@ -898,6 +1141,21 @@ export default class ComprometidoE extends Component {
             </Grid>
           </Grid>
         </div>
+
+        <p>Selecciona el mes a afectar</p>
+        <select
+          style={{ width: 'auto', height: '30px', marginBottom: '15px' }}
+          id='mes'
+          name='mes'
+          value={this.state.mes}
+          onChange={this.updateSearch6.bind(this)}
+          required
+        >
+          {this.mes.map((x,y) =>
+            <option name={y}>{x}</option>
+          )}
+        </select>
+
         <Grid container spacing={3}>
           <Grid item xs={12}>
             <Paper className='paper-content'>
@@ -1081,7 +1339,7 @@ export default class ComprometidoE extends Component {
                 )}
               </TableBody>
               {this.state.comprometidosDos !== undefined ? this.state.comprometidosDos.map(comprometido =>
-                comprometido.partida ?
+                comprometido.partida && this.state.mes ?
                   <ListComponentE
                     key={comprometido.id}
                     comprometido={comprometido}
