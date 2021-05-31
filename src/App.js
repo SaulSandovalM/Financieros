@@ -5,7 +5,7 @@ import ProtectedRoute from './ProtectedRoute'
 // Direcciones compartidas
 import Login from './components/common/login/Login'
 import Common from './components/common/home/Common'
-// Parte de Presupuesto
+// Rutas de Presupuesto
 import Presupuesto from './components/presupuesto/presupuesto/Presupuesto'
 import Ampliacion from './components/presupuesto/ampliacion/Ampliacion'
 import Reduccion from './components/presupuesto/reduccion/Reduccion'
@@ -30,7 +30,7 @@ import Arqueo from './components/tesoreria/arqueo/Arqueo'
 import ArqueoD from './components/tesoreria/arqueo/ArqueoD'
 import Contra2 from './components/tesoreria/contra/Contra'
 import Caratula from './components/tesoreria/caratula/Caratula'
-// Parte de Fondos
+// Rutas de Fondos
 import Fondos from './components/fondos/fondos/Fondos'
 import FondoE from './components/fondos/fondos/FondoE'
 import Comprometidos from './components/fondos/comprometidos/Comprometidos'
@@ -46,6 +46,8 @@ import TabularList from './components/fondos/tabular/Tabular'
 import TabularGlobal from './components/fondos/tabular/TabularGlobal'
 import TabularIndividual from './components/fondos/tabular/TabularIndividual'
 import Pasa from './components/fondos/pasa/Pasa'
+// Rutas Validacion
+import ArchivoPago from './components/validacion/archivospago/ArchivosPago'
 
 function App (props) {
   const { isAuthenticated, isVerifying } = props
@@ -311,6 +313,14 @@ function App (props) {
         exact
         path='/Pasa'
         component={Pasa}
+        isAuthenticated={isAuthenticated}
+        isVerifying={isVerifying}
+      />
+      {/* Validacion */}
+      <ProtectedRoute
+        exact
+        path='/ArchivoPago'
+        component={ArchivoPago}
         isAuthenticated={isAuthenticated}
         isVerifying={isVerifying}
       />

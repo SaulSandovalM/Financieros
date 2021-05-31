@@ -562,21 +562,8 @@ export default class ComprometidoE extends Component {
     'Fiscalía Especializada en Delitos de Corrupción',
     'Fiscalía Especializada en Materia de Desaparición Forzada de Personas'
   ]
-  mes = [
-    '',
-    'Enero',
-    'Febrero',
-    'Marzo',
-    'Abril',
-    'Mayo',
-    'Junio',
-    'Julio',
-    'Agosto',
-    'Septiembre',
-    'Octubre',
-    'Noviembre',
-    'Diciembre'
-  ]
+  mes = ['', 'Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto',
+    'Septiembre', 'Octubre', 'Noviembre', 'Diciembre']
 
   removeComprometido = (id, item) => {
     //consumo comprometido total
@@ -994,32 +981,6 @@ export default class ComprometidoE extends Component {
 
     return (
       <div className='div-compro-container'>
-
-        {/*  <div style={{ width: '50%', height: '50vh', background: 'red', position: 'fixed', zIndex: '5', display: 'flex', justifyContent: 'center', top: 0, left: 0 }}>
-            <div style={{ display: 'flex', justifyContent: 'center', flexDirection: 'column', width: '100%', height: '100%' }}>
-              <div style={{ display: 'flex', justifyContent: 'center', height: '30%' }}>
-                <div style={{ display: 'flex', justifyContent: 'center', background: 'white', flexDirection: 'column' }}>
-                  <p>Selecciona el mes en que se afectara el presupuesto</p>
-                  <br />
-                  <select
-                    style={{ width: 'auto', height: 'auto' }}
-                    id='mes'
-                    name='mes'
-                    value={this.state.mes}
-                    onChange={this.updateSearch6.bind(this)}
-                    required
-                  >
-                    {this.mes.map((x,y) =>
-                      <option name={y}>{x}</option>
-                    )}
-                  </select>
-                  <button onClick={this.guardar}>Guardar</button>
-                </div>
-              </div>
-            </div>
-          </div> */}
-
-
         <div>
           <Grid
             container
