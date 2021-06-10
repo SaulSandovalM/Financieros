@@ -47,6 +47,8 @@ const Menu = ({ open, ...props }) => {
     admin = 'ELI'
   } else if (email === 'juan@procuraduria.com') {
     admin = 'JUAN'
+  } else if (email === 'validacion@procuraduria.com') {
+    admin = 'VALIDACION'
   }
 
   const isHidden = open !== false
@@ -69,6 +71,7 @@ const Menu = ({ open, ...props }) => {
       {admin === 'MARTHA' && <Nav />}
       {admin === 'JUAN' && <Nav />}
       {admin === 'LIZBETH' && <Nav />}
+      {admin === 'VALIDACION' && <Nav />}
     </StyledMenu>
   )
 }

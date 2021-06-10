@@ -34,6 +34,7 @@ export default class Comprometidos extends Component {
       right: [],
       empty: [0],
       xml: [],
+      xmlP: [],
       partida: '',
       rubro: '',
       up: '',
@@ -167,6 +168,31 @@ export default class Comprometidos extends Component {
     })
   }
 
+  listenForXmlPago = (itemsRefXmlPago) => {
+    itemsRefXmlPago.on('value', (snap) => {
+      var xml = []
+      snap.forEach((child) => {
+        xml.push({
+          nombre: child.val().nombre,
+          fecha: child.val().fecha,
+          folio: child.val().folio,
+          importe: child.val().importe,
+          isr: child.val().isr,
+          iva: child.val().iva,
+          subtotal: child.val().subtotal,
+          total: child.val().total,
+          uuid: child.val().uuid,
+          estatus: child.val().estatus,
+          tipo: child.val().tipo,
+          id: child.key
+        })
+      })
+      this.setState({
+        xmlP: xml
+      })
+    })
+  }
+
   listenFondos = (itemsRefFondos) => {
     itemsRefFondos.on('value', (snap) => {
       var comprometidosAgregados = []
@@ -213,6 +239,8 @@ export default class Comprometidos extends Component {
   componentDidMount () {
     const itemsRefXml = firebase.database().ref('xml/')
     this.listenForXmlR(itemsRefXml)
+    const itemsRefXmlPago = firebase.database().ref('xmlPago/')
+    this.listenForXmlPago(itemsRefXmlPago)
     const itemsRef = firebase.database().ref('presupuesto/')
     this.listenForItems(itemsRef)
     const itemsRefFondos = firebase.database().ref(`fondos/${this.state.urlfire}/comprometido`)
@@ -251,7 +279,7 @@ export default class Comprometidos extends Component {
           'total': xml.attributes['Total'] ? xml.attributes['Total'] : 'No encuentra total',
           'subtotal': xml.attributes['SubTotal'] ? xml.attributes['SubTotal'] : (parseFloat(xml.attributes['Total']) + parseFloat(xml.children['3'].attributes['TotalImpuestosRetenidos'] ? xml.children['3'].attributes['TotalImpuestosRetenidos'] : 0)) - parseFloat(xml.children['3'].attributes['TotalImpuestosTrasladados']),
           'folio': xml.attributes['Folio'] ? xml.attributes['Folio'] : '0',
-          'nombre': xml.children['0'].attributes['Nombre'] ? xml.children['0'].attributes['Nombre'] : 'No encuentra Nombre',
+          'nombre': xml.children['1'].attributes['Nombre'] ? xml.children['1'].attributes['Nombre'] : 'No encuentra Nombre',
           'importe': xml.attributes['SubTotal'] ? xml.attributes['SubTotal'] : (parseFloat(xml.attributes['Total']) + (xml.children['3'].attributes['TotalImpuestosRetenidos'] ? xml.children['3'].attributes['TotalImpuestosRetenidos'] : 0)) - parseFloat(xml.children['3'].attributes['TotalImpuestosTrasladados']),
           'iva': xml.children['3'].attributes['TotalImpuestosTrasladados'] ? xml.children['3'].attributes['TotalImpuestosTrasladados'] : 0,
           'isr': xml.children['3'].attributes['TotalImpuestosRetenidos'] ? xml.children['3'].attributes['TotalImpuestosRetenidos'] : 0,
@@ -287,7 +315,7 @@ export default class Comprometidos extends Component {
           'total': xml.attributes['Total'] ? xml.attributes['Total'] : 'No encuentra total',
           'subtotal': xml.attributes['SubTotal'] ? xml.attributes['SubTotal'] : (parseFloat(xml.attributes['Total']) + parseFloat(xml.children['3'].attributes['TotalImpuestosRetenidos'] ? xml.children['3'].attributes['TotalImpuestosRetenidos'] : 0)) - parseFloat(xml.children['3'].attributes['TotalImpuestosTrasladados']),
           'folio': xml.attributes['Folio'] ? xml.attributes['Folio'] : '0',
-          'nombre': xml.children['0'].attributes['Nombre'] ? xml.children['0'].attributes['Nombre'] : 'No encuentra Nombre',
+          'nombre': xml.children['1'].attributes['Nombre'] ? xml.children['1'].attributes['Nombre'] : 'No encuentra Nombre',
           'importe': xml.attributes['SubTotal'] ? xml.attributes['SubTotal'] : (parseFloat(xml.attributes['Total']) + (xml.children['3'].attributes['TotalImpuestosRetenidos'] ? xml.children['3'].attributes['TotalImpuestosRetenidos'] : 0)) - parseFloat(xml.children['3'].attributes['TotalImpuestosTrasladados']),
           'iva': xml.children['3'].attributes['TotalImpuestosTrasladados'] ? xml.children['3'].attributes['TotalImpuestosTrasladados'] : 0,
           'isr': xml.children['3'].attributes['TotalImpuestosRetenidos'] ? xml.children['3'].attributes['TotalImpuestosRetenidos'] : 0,
@@ -567,7 +595,7 @@ export default class Comprometidos extends Component {
       }
     )
 
-    const filterData2 = this.state.xml.filter(
+    const filterData2 = this.state.xmlP.filter(
       (xml) => {
         return ( ( (xml.folio.indexOf(this.state.search) !== -1) ||
           (xml.nombre.indexOf(this.state.search) !== -1) ||

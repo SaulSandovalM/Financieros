@@ -13,28 +13,14 @@ export default class ListComponent extends Component {
   constructor (props) {
     super(props)
     this.state = {
-      vales: [],
-      autorizados: false,
-      noautorizados: false,
-      pendientes: false,
-      comprobado: false,
-      auto: '',
-      pend: '',
-      noauto: '',
-      comp: '',
-      prueba: '',
-      filteredData: ''
+      xmlPagoDirecto: []
     }
   }
 
-  handleChange (event) {
-    this.setState({ [event.target.name]: event.target.value })
-  }
-
   componentWillMount () {
-    firebase.database().ref('vales/').on('child_added', snapshot => {
+    firebase.database().ref('xmlPagoDirecto/').on('child_added', snapshot => {
       this.setState({
-        vales: this.state.vales.concat(snapshot.val())
+        xmlPagoDirecto: this.state.xmlPagoDirecto.concat(snapshot.val())
       })
     })
   }
@@ -51,12 +37,10 @@ export default class ListComponent extends Component {
               </TableRow>
             </TableHead>
             {
-              this.state.vales.map(item =>
+              this.state.xmlPagoDirecto.map(item =>
                 <RowComponent
                   key={item.id}
                   item={item}
-                  update={this.props.update}
-                  obs={this.props.obs}
                 />
               )
             }

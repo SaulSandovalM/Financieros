@@ -16,38 +16,11 @@ export default class ArchivosPago extends Component {
         },
       ],
       alert: false,
-      vale: '',
-      cheque: '',
-      cantidad: '',
-      cantidadc: '',
-      cantidadr: '',
-      reembolso: '',
-      concepto: '',
-      oficioS: '',
-      area: '',
-      turno: '',
-      personaR: '',
-      factura: '',
-      recibos: '',
-      sc: '',
-      fecha: '',
-      autorizo: '',
-      estatus: 'Pendiente',
       xml: 0,
       xmlL: 0,
       pdf2: 0,
-      filer: '',
-      filexml: ['No hay datos cargados'],
-      filex: ['No hay datos cargados'],
-      filefactura: [{ url: '', nombre: '' }],
-      xmlC: [{ url: '', nombre: '' }],
-      filef: [{ url: '', nombre: '' }],
-      recibosList: [{ folio: 'Recibo', nombre: '', importe: '0', iva: '0', isr: '0', fecha: '', estatus: '', subtotal: '0', total: '0', uuid: 'Recibo' }],
-      autorizados: false,
-      noautorizados: false,
-      pendientes: false,
-      obs: '',
-      opened: false,
+      filefactura: [],
+      xmlC: [],
       xmlLoading: 0
     }
   }
@@ -60,21 +33,22 @@ export default class ArchivosPago extends Component {
       reader.onload = function (event) {
         var XMLParser = require('react-xml-parser')
         var xml = new XMLParser().parseFromString(event.target.result)
+        console.log(xml)
         const data = {
           'total': xml.attributes['Total'] ? xml.attributes['Total'] : 'No encuentra total',
           'subtotal': xml.attributes['SubTotal'] ? xml.attributes['SubTotal'] : (parseFloat(xml.attributes['Total']) + parseFloat(xml.children['3'].attributes['TotalImpuestosRetenidos'] ? xml.children['3'].attributes['TotalImpuestosRetenidos'] : 0)) - parseFloat(xml.children['3'].attributes['TotalImpuestosTrasladados']),
           'folio': xml.attributes['Folio'] ? xml.attributes['Folio'] : '0',
-          'nombre': xml.children['0'].attributes['Nombre'] ? xml.children['0'].attributes['Nombre'] : 'No encuentra Nombre',
+          'nombre': xml.children['1'].attributes['Nombre'] ? xml.children['1'].attributes['Nombre'] : 'No encuentra Nombre',
           'importe': xml.attributes['SubTotal'] ? xml.attributes['SubTotal'] : (parseFloat(xml.attributes['Total']) + (xml.children['3'].attributes['TotalImpuestosRetenidos'] ? xml.children['3'].attributes['TotalImpuestosRetenidos'] : 0)) - parseFloat(xml.children['3'].attributes['TotalImpuestosTrasladados']),
           'iva': xml.children['3'].attributes['TotalImpuestosTrasladados'] ? xml.children['3'].attributes['TotalImpuestosTrasladados'] : 0,
           'isr': xml.children['3'].attributes['TotalImpuestosRetenidos'] ? xml.children['3'].attributes['TotalImpuestosRetenidos'] : 0,
           'fecha': xml.getElementsByTagName('tfd:TimbreFiscalDigital')[0].attributes['FechaTimbrado'],
           'uuid': xml.getElementsByTagName('tfd:TimbreFiscalDigital')[0].attributes['UUID'] ? xml.getElementsByTagName('tfd:TimbreFiscalDigital')[0].attributes['UUID'] : xmlp.name.slice(0, -4),
           'estatus': 'sin asignar',
-          'tipo': 'directo'
+          'tipo': 'directo',
         }
         fetch(xml).then(res => res.text()).then(xml => {
-          fetch('https://financieros-78cb0.firebaseio.com/xml.json', {
+          fetch('https://financieros-78cb0.firebaseio.com/xmlPago.json', {
             method: 'POST',
             headers: {
               'Accept': 'application/json',
@@ -127,8 +101,8 @@ export default class ArchivosPago extends Component {
       var lista = []
       snap.forEach((child) => {
         lista.push({
-          xmlValidacion: child.val().xmlValidacion,
-          pdfValidacion: child.val().pdfValidacion,
+          xmlC: child.val().xmlC,
+          filefactura: child.val().filefactura,
           id: child.key
         })
       })
@@ -139,7 +113,7 @@ export default class ArchivosPago extends Component {
   }
 
   componentDidMount () {
-    const itemsRef = firebase.database().ref('vales/').orderByChild('vale')
+    const itemsRef = firebase.database().ref('xmlPagoDirecto/')
     this.listenForItems(itemsRef)
   }
 
@@ -147,20 +121,18 @@ export default class ArchivosPago extends Component {
     this.refs.contactForm.reset()
   }
 
-  handleChange (event) {
-    this.setState({ [event.target.name]: event.target.value })
-  }
-
   sendMessage (e) {
     e.preventDefault()
     const params = {
-      xml: this.inputXml.value
+      xmlC: this.state.xmlC,
+      filefactura: this.state.filefactura
     }
     this.setState({
-      xml: this.inputXml.value
+      xmlC: [{ url: '', nombre: '' }],
+      filefactura: [{ url: '', nombre: '' }],
     })
-    if (params.xml) {
-      firebase.database().ref('xml').push(params).then(() => {
+    if (params.xmlC && params.filefactura) {
+      firebase.database().ref('xmlPagoDirecto').push(params).then(() => {
         alert('Tu solicitud fue enviada.')
       }).catch(() => {
         alert('Tu solicitud no puede ser enviada')
@@ -221,6 +193,7 @@ export default class ArchivosPago extends Component {
                         {this.state.pdf2}
                       </progress>
                     </div>
+                    <button>Guardar</button>
                   </form>
                 </div>
               </div>

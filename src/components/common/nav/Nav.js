@@ -77,11 +77,25 @@ class Nav extends Component {
       admin = 'ELI'
     } else if (email === 'juan@procuraduria.com') {
       admin = 'JUAN'
+    } else if (email === 'validacion@procuraduria.com') {
+      admin = 'VALIDACION' // hkV4l1d4c10n
     }
 
     return (
       <div className='nav-col'>
         <div className='nav-cont'>
+          {(admin === 'VALIDACION') &&
+            <div className='navbar-left' style={{ marginTop: '30px' }}>
+              <Link to='/ArchivoPago' className='deco'>
+                <span className='material-icons'>
+                  local_atm
+                </span>
+                <Typography className='nav-t' variant='h6'>
+                  Archivos
+                </Typography>
+              </Link>
+            </div>
+          }
           {(admin === 'CECILIA' || admin === 'LIZBETH') &&
             <div className='navbar-left' style={{ marginTop: '30px' }}>
               <div className='deco-c' onClick={this.toggleHiddenP.bind(this)}>
