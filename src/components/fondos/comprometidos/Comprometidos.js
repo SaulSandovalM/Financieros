@@ -595,7 +595,7 @@ export default class Comprometidos extends Component {
       }
     )
 
-    const filterData2 = this.state.xmlP.filter(
+    const filterData2 = this.state.xml.filter(
       (xml) => {
         return ( ( (xml.folio.indexOf(this.state.search) !== -1) ||
           (xml.nombre.indexOf(this.state.search) !== -1) ||

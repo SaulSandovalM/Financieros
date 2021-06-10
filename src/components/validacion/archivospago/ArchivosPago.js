@@ -48,7 +48,7 @@ export default class ArchivosPago extends Component {
           'tipo': 'directo',
         }
         fetch(xml).then(res => res.text()).then(xml => {
-          fetch('https://financieros-78cb0.firebaseio.com/xmlPago.json', {
+          fetch('https://financieros-78cb0.firebaseio.com/xml.json', {
             method: 'POST',
             headers: {
               'Accept': 'application/json',
