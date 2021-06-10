@@ -291,6 +291,7 @@ export default class FondoE extends Component {
         {this.state.fondo &&
           <form className='form-fondo'>
             <div className='grid-w'>
+            {this.state.fondos.map(fondos =>
             <Grid className='grid-w2'>
               <Paper className='paper-p'>
                 <div className='div-con-f'>Buscador de Fondos</div>
@@ -323,14 +324,13 @@ export default class FondoE extends Component {
                       style={{ width: '85%' }}
                       className='field'
                       name='searchF'
-                      value={this.state.searchF}
+                      value={fondos.fondo}
                       onChange={this.onChange}
                     />
                   </div>
                   <div className='cont-w-data'>
-                    {this.state.fondos.map(fondos =>
                       <div className='cont-map-fondo'>
-                        {(this.state.searchF === fondos.fondo && (fondos.realizo === this.state.realizo || this.state.realizo === 'MIGUEL')) &&
+                        {(fondos.fondo && (fondos.realizo === this.state.realizo || this.state.realizo === 'MIGUEL')) &&
                           <div className='cont-map-data'>
                             <div className='data-w-search'>
                               <p className='data-m-f'>{fondos.tipo_doc}</p>
@@ -359,12 +359,12 @@ export default class FondoE extends Component {
                           </div>
                         }
                       </div>
-                    )}
+
                   </div>
                 </div>
               </Paper>
             </Grid>
-
+            )}
               <Grid className='grid-w2'>
                 <Paper className='paper-pm'>
                   <div className='div-con-f'>Fondo</div>
