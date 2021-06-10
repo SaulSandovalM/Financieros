@@ -119,6 +119,17 @@ export default class RowComponent extends Component {
               ''
             }
           </TableCell>
+          <TableCell className='table-v-num2' style={{ width: '150px' }}>
+            {this.props.item.cantidadr &&
+              <CurrencyFormat
+                value={(parseFloat(this.props.item.cantidad) - parseFloat(this.props.item.cantidadr) + parseFloat(this.props.item.cantidadr)).toFixed(2)}
+                displayType='text'
+                prefix=' $'
+                thousandSeparator
+                decimalSeparator='.'
+              />
+            }
+          </TableCell>
           <TableCell className='table-v-num2' style={{ width: '800px' }}>
             {this.props.item.concepto}
           </TableCell>

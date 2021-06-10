@@ -132,6 +132,13 @@ export default class ListComponent extends Component {
     const tt4 = (a, b) => a + b
     var tcantidad4 = total4.reduce(tt4)
 
+    const total5 = [0]
+    filteredData.map(items => (
+      items.cantidadr > 0 ? total5.push((parseFloat(items.cantidad) - parseFloat(items.cantidadr)) + parseFloat(items.cantidadr)) : null
+    ))
+    const tt5 = (a, b) => a + b
+    var tcantidad5 = total5.reduce(tt5)
+
     return (
       <div>
         <FormGroup row style={{ display: 'flex', justifyContent: 'space-between' }}>
@@ -202,6 +209,7 @@ export default class ListComponent extends Component {
                 <TableCell className='table-v-num' style={{ width: '100px' }}><b>Comprobado</b></TableCell>
                 <TableCell className='table-v-num' style={{ width: '150px' }}><b>Reintegro</b></TableCell>
                 <TableCell className='table-v-num' style={{ width: '150px' }}><b>Reembolso</b></TableCell>
+                <TableCell className='table-v-num' style={{ width: '150px' }}><b>Pago Real</b></TableCell>
                 <TableCell className='table-v-num' style={{ width: '800px' }}><b>Concepto</b></TableCell>
                 <TableCell className='table-v-num' style={{ width: '800px' }}><b>Oficio S</b></TableCell>
                 <TableCell className='table-v-num' style={{ width: '800px' }}><b>Área</b></TableCell>
@@ -274,6 +282,7 @@ export default class ListComponent extends Component {
                   />
                 </b>
               </TableCell>
+              <TableCell className='table-v-num' style={{ width: '150px' }} />
               <TableCell className='table-v-num' style={{ width: '3300px' }} />
             </TableRow>
           </Table>
