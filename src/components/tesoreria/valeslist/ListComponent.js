@@ -133,7 +133,6 @@ export default class ListComponent extends Component {
     var tcantidad4 = total4.reduce(tt4)
 
     var real = tcantidad1 - tcantidad3 + tcantidad4
-    console.log(real)
 
     return (
       <div>

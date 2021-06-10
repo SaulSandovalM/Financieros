@@ -111,7 +111,7 @@ export default class Fondos extends Component {
   componentDidMount () {
     const itemsRef = firebase.database().ref('fondos/')
     this.listenForItems(itemsRef)
-    const itemsRefBeneficiario = firebase.database().ref('beneficiario/')
+    const itemsRefBeneficiario = firebase.database().ref('beneficiario/').orderByChild('nombre')
     this.listenBeneficiario(itemsRefBeneficiario)
     var wishRef = firebase.database().ref('fondo/3q4t5w63q4fw3563')
     wishRef.on('value', (snapshot) => {

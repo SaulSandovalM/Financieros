@@ -193,7 +193,21 @@ export default class ArchivosPago extends Component {
                         {this.state.pdf2}
                       </progress>
                     </div>
-                    <button>Guardar</button>
+                    <div className='p-container-valeslist'>
+                      <p style={{ margin: '0px', color: 'grey', fontSize: '12px' }}>Partida</p>
+                      <select style={{ width: '100%', height: '34px', background: '#f4f4f4', border: '2px solid rgb(102, 102, 102)', borderRadius: '5px' }}>
+                        <option>Perro</option>
+                        <option>Gato</option>
+                      </select>
+                    </div>
+                    <div className='p-container-valeslist'>
+                      <p style={{ margin: '0px', color: 'grey', fontSize: '12px' }}>Up</p>
+                      <select style={{ width: '100%', height: '30px' }}>
+                        <option>Perro</option>
+                        <option>Gato</option>
+                      </select>
+                    </div>
+                    <button style={{ height: '30px', marginTop: '14px' }}>Guardar</button>
                   </form>
                 </div>
               </div>

@@ -266,7 +266,7 @@ export default class FondoE extends Component {
       cuentaPagar: this.state.cuentaPagar ? this.state.cuentaPagar : this.state.fondos[0].cuentaPagar,
       cuentaPagarPara: this.state.cuentaPagarPara ? this.state.cuentaPagarPara : this.state.fondos[0].cuentaPagarPara,
       sujetoContable: this.state.sujetoContable ? this.state.sujetoContable : this.state.fondos[0].sujetoContable,
-      anexof: this.state.anexof ? this.state.anexof : this.state.anexof[0].anexof
+      anexof: this.state.anexof ? this.state.anexof : this.state.fondos[0].anexof
     }
     firebase.database().ref().update(updates)
     alert('Se ha actualizado el fondo')
@@ -283,6 +283,8 @@ export default class FondoE extends Component {
         newArray.push(el)
       }
     })
+
+    console.log(this.state.fondo ? this.state.fondos[0].no_proyecto : null)
 
     return (
       <div>
@@ -550,7 +552,8 @@ export default class FondoE extends Component {
                           <Select
                             style={{ height: 'auto' }}
                             multiple
-                            value={this.state.no_proyecto}
+                            id='no_proyecto'
+                            value={this.state.no_proyecto.length !== 0 ? this.state.no_proyecto : this.state.fondos[0].no_proyecto}
                             onChange={this.onChange}
                             name='no_proyecto'
                             input={<Input id='select-multiple-chip' />}
