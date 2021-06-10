@@ -132,12 +132,8 @@ export default class ListComponent extends Component {
     const tt4 = (a, b) => a + b
     var tcantidad4 = total4.reduce(tt4)
 
-    const total5 = [0]
-    filteredData.map(items => (
-      items.cantidadr > 0 ? total5.push((parseFloat(items.cantidad) - parseFloat(items.cantidadr)) + parseFloat(items.cantidadr)) : null
-    ))
-    const tt5 = (a, b) => a + b
-    var tcantidad5 = total5.reduce(tt5)
+    var real = tcantidad1 - tcantidad3 + tcantidad4
+    console.log(real)
 
     return (
       <div>
@@ -205,11 +201,11 @@ export default class ListComponent extends Component {
                 <TableCell className='border-icon' style={{ width: '50px' }} />
                 <TableCell className='table-v-num' style={{ width: '50px', left: '0px', position: 'sticky', background: 'white' }}><b>Vales</b></TableCell>
                 <TableCell className='table-v-num' style={{ width: '100px' }}><b>Cheques</b></TableCell>
+                <TableCell className='table-v-num' style={{ width: '150px' }}><b>Pago Real</b></TableCell>
                 <TableCell className='table-v-num' style={{ width: '100px' }}><b>Autorizado</b></TableCell>
                 <TableCell className='table-v-num' style={{ width: '100px' }}><b>Comprobado</b></TableCell>
                 <TableCell className='table-v-num' style={{ width: '150px' }}><b>Reintegro</b></TableCell>
                 <TableCell className='table-v-num' style={{ width: '150px' }}><b>Reembolso</b></TableCell>
-                <TableCell className='table-v-num' style={{ width: '150px' }}><b>Pago Real</b></TableCell>
                 <TableCell className='table-v-num' style={{ width: '800px' }}><b>Concepto</b></TableCell>
                 <TableCell className='table-v-num' style={{ width: '800px' }}><b>Oficio S</b></TableCell>
                 <TableCell className='table-v-num' style={{ width: '800px' }}><b>Área</b></TableCell>
@@ -238,6 +234,17 @@ export default class ListComponent extends Component {
               <TableCell className='border-icon' style={{ width: '50px' }} />
               <TableCell className='table-v-num' style={{ width: '50px', left: '0px', position: 'sticky', background: 'white' }} />
               <TableCell className='table-v-num' style={{ width: '100px' }} />
+              <TableCell className='table-v-num' style={{ width: '150px' }}>
+                <b>
+                  <CurrencyFormat
+                    value={real.toFixed(2)}
+                    displayType='text'
+                    prefix=' $'
+                    thousandSeparator
+                    decimalSeparator='.'
+                  />
+                </b>
+              </TableCell>
               <TableCell className='table-v-num' style={{ width: '100px' }}>
                 <b>
                   <CurrencyFormat

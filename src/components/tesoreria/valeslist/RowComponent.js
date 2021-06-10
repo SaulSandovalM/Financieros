@@ -55,6 +55,17 @@ export default class RowComponent extends Component {
           <TableCell className='table-v-num2' style={{ width: '100px' }}>
             {this.props.item.cheque}
           </TableCell>
+          <TableCell className='table-v-num2' style={{ width: '150px' }}>
+            {this.props.item.cantidadr &&
+              <CurrencyFormat
+                value={(parseFloat(this.props.item.cantidad) - parseFloat(this.props.item.cantidadr) + parseFloat(this.props.item.cantidadr)).toFixed(2)}
+                displayType='text'
+                prefix=' $'
+                thousandSeparator
+                decimalSeparator='.'
+              />
+            }
+          </TableCell>
           <TableCell className='table-v-num2' style={{ width: '100px' }}>
             <CurrencyFormat
               value={parseFloat(this.props.item.cantidad).toFixed(2)}
@@ -117,17 +128,6 @@ export default class RowComponent extends Component {
               ' / ' + this.props.item.fechaP
               :
               ''
-            }
-          </TableCell>
-          <TableCell className='table-v-num2' style={{ width: '150px' }}>
-            {this.props.item.cantidadr &&
-              <CurrencyFormat
-                value={(parseFloat(this.props.item.cantidad) - parseFloat(this.props.item.cantidadr) + parseFloat(this.props.item.cantidadr)).toFixed(2)}
-                displayType='text'
-                prefix=' $'
-                thousandSeparator
-                decimalSeparator='.'
-              />
             }
           </TableCell>
           <TableCell className='table-v-num2' style={{ width: '800px' }}>
