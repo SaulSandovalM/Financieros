@@ -19,7 +19,6 @@ import ListItemIcon from '@material-ui/core/ListItemIcon'
 import CurrencyFormat from 'react-currency-format'
 import Fab from '@material-ui/core/Fab'
 import firebase from '../../../Firebase'
-import Dropzone from 'react-dropzone'
 import { Link } from 'react-router-dom'
 import ListComponent from './ListComponent'
 
@@ -267,77 +266,77 @@ export default class Comprometidos extends Component {
     this.setState({ area: event.target.value })
   }
 
-  handleOnChange1 (event) {
-    for (var i = 0; i < event.target.files.length; i++) {
-      const file = event.target.files[i]
-      const xmlp = file
-      var reader = new FileReader()
-      reader.onload = function (event) {
-        var XMLParser = require('react-xml-parser')
-        var xml = new XMLParser().parseFromString(event.target.result)
-        let data = {
-          'total': xml.attributes['Total'] ? xml.attributes['Total'] : 'No encuentra total',
-          'subtotal': xml.attributes['SubTotal'] ? xml.attributes['SubTotal'] : (parseFloat(xml.attributes['Total']) + parseFloat(xml.children['3'].attributes['TotalImpuestosRetenidos'] ? xml.children['3'].attributes['TotalImpuestosRetenidos'] : 0)) - parseFloat(xml.children['3'].attributes['TotalImpuestosTrasladados']),
-          'folio': xml.attributes['Folio'] ? xml.attributes['Folio'] : '0',
-          'nombre': xml.children['1'].attributes['Nombre'] ? xml.children['1'].attributes['Nombre'] : 'No encuentra Nombre',
-          'importe': xml.attributes['SubTotal'] ? xml.attributes['SubTotal'] : (parseFloat(xml.attributes['Total']) + (xml.children['3'].attributes['TotalImpuestosRetenidos'] ? xml.children['3'].attributes['TotalImpuestosRetenidos'] : 0)) - parseFloat(xml.children['3'].attributes['TotalImpuestosTrasladados']),
-          'iva': xml.children['3'].attributes['TotalImpuestosTrasladados'] ? xml.children['3'].attributes['TotalImpuestosTrasladados'] : 0,
-          'isr': xml.children['3'].attributes['TotalImpuestosRetenidos'] ? xml.children['3'].attributes['TotalImpuestosRetenidos'] : 0,
-          'fecha': xml.getElementsByTagName('tfd:TimbreFiscalDigital')[0].attributes['FechaTimbrado'],
-          'uuid': xml.getElementsByTagName('tfd:TimbreFiscalDigital')[0].attributes['UUID'] ? xml.getElementsByTagName('tfd:TimbreFiscalDigital')[0].attributes['UUID'] : xmlp.name.slice(0, -4),
-          'estatus': 'sin asignar',
-          'tipo': 'revolvente'
-        }
-        fetch(xml).then(res => res.text()).then(xml => {
-          fetch('https://financieros-78cb0.firebaseio.com/xml.json', {
-            method: 'POST',
-            headers: {
-              'Accept': 'application/json',
-              'Content-Type': 'application/json',
-            },
-              body: JSON.stringify(data),
-          })
-        })
-      }
-      reader.readAsText(xmlp)
-    }
-  }
-
-  handleOnChange2 (event) {
-    for (var i = 0; i < event.target.files.length; i++) {
-      const file = event.target.files[i]
-      const xmlp = file
-      var reader = new FileReader()
-      reader.onload = function (event) {
-        var XMLParser = require('react-xml-parser')
-        var xml = new XMLParser().parseFromString(event.target.result)
-        let data = {
-          'total': xml.attributes['Total'] ? xml.attributes['Total'] : 'No encuentra total',
-          'subtotal': xml.attributes['SubTotal'] ? xml.attributes['SubTotal'] : (parseFloat(xml.attributes['Total']) + parseFloat(xml.children['3'].attributes['TotalImpuestosRetenidos'] ? xml.children['3'].attributes['TotalImpuestosRetenidos'] : 0)) - parseFloat(xml.children['3'].attributes['TotalImpuestosTrasladados']),
-          'folio': xml.attributes['Folio'] ? xml.attributes['Folio'] : '0',
-          'nombre': xml.children['1'].attributes['Nombre'] ? xml.children['1'].attributes['Nombre'] : 'No encuentra Nombre',
-          'importe': xml.attributes['SubTotal'] ? xml.attributes['SubTotal'] : (parseFloat(xml.attributes['Total']) + (xml.children['3'].attributes['TotalImpuestosRetenidos'] ? xml.children['3'].attributes['TotalImpuestosRetenidos'] : 0)) - parseFloat(xml.children['3'].attributes['TotalImpuestosTrasladados']),
-          'iva': xml.children['3'].attributes['TotalImpuestosTrasladados'] ? xml.children['3'].attributes['TotalImpuestosTrasladados'] : 0,
-          'isr': xml.children['3'].attributes['TotalImpuestosRetenidos'] ? xml.children['3'].attributes['TotalImpuestosRetenidos'] : 0,
-          'fecha': xml.getElementsByTagName('tfd:TimbreFiscalDigital')[0].attributes['FechaTimbrado'],
-          'uuid': xml.getElementsByTagName('tfd:TimbreFiscalDigital')[0].attributes['UUID'] ? xml.getElementsByTagName('tfd:TimbreFiscalDigital')[0].attributes['UUID'] : xmlp.name.slice(0, -4),
-          'estatus': 'sin asignar',
-          'tipo': 'directo'
-        }
-        fetch(xml).then(res => res.text()).then(xml => {
-          fetch('https://financieros-78cb0.firebaseio.com/xml.json', {
-            method: 'POST',
-            headers: {
-              'Accept': 'application/json',
-              'Content-Type': 'application/json',
-            },
-              body: JSON.stringify(data),
-          })
-        })
-      }
-      reader.readAsText(xmlp)
-    }
-  }
+  // handleOnChange1 (event) {
+  //   for (var i = 0; i < event.target.files.length; i++) {
+  //     const file = event.target.files[i]
+  //     const xmlp = file
+  //     var reader = new FileReader()
+  //     reader.onload = function (event) {
+  //       var XMLParser = require('react-xml-parser')
+  //       var xml = new XMLParser().parseFromString(event.target.result)
+  //       let data = {
+  //         'total': xml.attributes['Total'] ? xml.attributes['Total'] : 'No encuentra total',
+  //         'subtotal': xml.attributes['SubTotal'] ? xml.attributes['SubTotal'] : (parseFloat(xml.attributes['Total']) + parseFloat(xml.children['3'].attributes['TotalImpuestosRetenidos'] ? xml.children['3'].attributes['TotalImpuestosRetenidos'] : 0)) - parseFloat(xml.children['3'].attributes['TotalImpuestosTrasladados']),
+  //         'folio': xml.attributes['Folio'] ? xml.attributes['Folio'] : '0',
+  //         'nombre': xml.children['1'].attributes['Nombre'] ? xml.children['1'].attributes['Nombre'] : 'No encuentra Nombre',
+  //         'importe': xml.attributes['SubTotal'] ? xml.attributes['SubTotal'] : (parseFloat(xml.attributes['Total']) + (xml.children['3'].attributes['TotalImpuestosRetenidos'] ? xml.children['3'].attributes['TotalImpuestosRetenidos'] : 0)) - parseFloat(xml.children['3'].attributes['TotalImpuestosTrasladados']),
+  //         'iva': xml.children['3'].attributes['TotalImpuestosTrasladados'] ? xml.children['3'].attributes['TotalImpuestosTrasladados'] : 0,
+  //         'isr': xml.children['3'].attributes['TotalImpuestosRetenidos'] ? xml.children['3'].attributes['TotalImpuestosRetenidos'] : 0,
+  //         'fecha': xml.getElementsByTagName('tfd:TimbreFiscalDigital')[0].attributes['FechaTimbrado'],
+  //         'uuid': xml.getElementsByTagName('tfd:TimbreFiscalDigital')[0].attributes['UUID'] ? xml.getElementsByTagName('tfd:TimbreFiscalDigital')[0].attributes['UUID'] : xmlp.name.slice(0, -4),
+  //         'estatus': 'sin asignar',
+  //         'tipo': 'revolvente'
+  //       }
+  //       fetch(xml).then(res => res.text()).then(xml => {
+  //         fetch('https://financieros-78cb0.firebaseio.com/xml.json', {
+  //           method: 'POST',
+  //           headers: {
+  //             'Accept': 'application/json',
+  //             'Content-Type': 'application/json',
+  //           },
+  //             body: JSON.stringify(data),
+  //         })
+  //       })
+  //     }
+  //     reader.readAsText(xmlp)
+  //   }
+  // }
+  //
+  // handleOnChange2 (event) {
+  //   for (var i = 0; i < event.target.files.length; i++) {
+  //     const file = event.target.files[i]
+  //     const xmlp = file
+  //     var reader = new FileReader()
+  //     reader.onload = function (event) {
+  //       var XMLParser = require('react-xml-parser')
+  //       var xml = new XMLParser().parseFromString(event.target.result)
+  //       let data = {
+  //         'total': xml.attributes['Total'] ? xml.attributes['Total'] : 'No encuentra total',
+  //         'subtotal': xml.attributes['SubTotal'] ? xml.attributes['SubTotal'] : (parseFloat(xml.attributes['Total']) + parseFloat(xml.children['3'].attributes['TotalImpuestosRetenidos'] ? xml.children['3'].attributes['TotalImpuestosRetenidos'] : 0)) - parseFloat(xml.children['3'].attributes['TotalImpuestosTrasladados']),
+  //         'folio': xml.attributes['Folio'] ? xml.attributes['Folio'] : '0',
+  //         'nombre': xml.children['1'].attributes['Nombre'] ? xml.children['1'].attributes['Nombre'] : 'No encuentra Nombre',
+  //         'importe': xml.attributes['SubTotal'] ? xml.attributes['SubTotal'] : (parseFloat(xml.attributes['Total']) + (xml.children['3'].attributes['TotalImpuestosRetenidos'] ? xml.children['3'].attributes['TotalImpuestosRetenidos'] : 0)) - parseFloat(xml.children['3'].attributes['TotalImpuestosTrasladados']),
+  //         'iva': xml.children['3'].attributes['TotalImpuestosTrasladados'] ? xml.children['3'].attributes['TotalImpuestosTrasladados'] : 0,
+  //         'isr': xml.children['3'].attributes['TotalImpuestosRetenidos'] ? xml.children['3'].attributes['TotalImpuestosRetenidos'] : 0,
+  //         'fecha': xml.getElementsByTagName('tfd:TimbreFiscalDigital')[0].attributes['FechaTimbrado'],
+  //         'uuid': xml.getElementsByTagName('tfd:TimbreFiscalDigital')[0].attributes['UUID'] ? xml.getElementsByTagName('tfd:TimbreFiscalDigital')[0].attributes['UUID'] : xmlp.name.slice(0, -4),
+  //         'estatus': 'sin asignar',
+  //         'tipo': 'directo'
+  //       }
+  //       fetch(xml).then(res => res.text()).then(xml => {
+  //         fetch('https://financieros-78cb0.firebaseio.com/xml.json', {
+  //           method: 'POST',
+  //           headers: {
+  //             'Accept': 'application/json',
+  //             'Content-Type': 'application/json',
+  //           },
+  //             body: JSON.stringify(data),
+  //         })
+  //       })
+  //     }
+  //     reader.readAsText(xmlp)
+  //   }
+  // }
 
   update = (item) => {
     let updates = {}
@@ -410,6 +409,8 @@ export default class Comprometidos extends Component {
     const wishRef = firebase.database().ref(`fondos/${this.state.urlfire}`)
     wishRef.once('value').then(snapshot => {
       var updatedWish = snapshot.val()
+      updatedWish.beneficiario = this.state.contra[0].nombre
+      updatedWish.importe = total
       updatedWish.comprometido.push(
         {
           partida: item.ogasto,
@@ -481,14 +482,6 @@ export default class Comprometidos extends Component {
     alert('Tu solicitud fue enviada.')
   }
 
-  partida = ['','211001','211002','212001','212002','214001','215001','216001',
-    '217001','221001','221002','246001','246002','247001','249001','251001','253001',
-    '254001','255001','256001','261001','271001','272001','275001','291001','292001',
-    '311001','312001','313001','317001','318001','323002','334001','336001','336002',
-    '338001','351001','352001','355001','357001','358001','359001','361002','372001',
-    '375001','392006','394001']
-  rubro = ['','1501010','3101010','4301050']
-  up = ['','01','02','03','04','05','06','07','08','09','10','11','12','13','14','15','16','17','18','20','21','22','23','24']
   area = [
     '',
     'Procuraduría General de Justicia',
@@ -648,6 +641,7 @@ export default class Comprometidos extends Component {
               <ListItemText className='list-align-i'><b>Total</b></ListItemText>
               <ListItemText className='list-align'><b>Fecha</b></ListItemText>
               <ListItemText className='list-align2'><b>Nombre</b></ListItemText>
+
             </ListItem>
             {admin === 'MIGUEL' || admin === 'TERESA' || admin === 'ELOY' || admin === 'MARTHA' || admin === 'MARCOS' || admin === 'LIZBETH' ?
             filterData.map((value) => {
@@ -734,6 +728,25 @@ export default class Comprometidos extends Component {
         </Card>
       </div>
     )
+
+    let presupuestop = this.state.presupuesto.map(item => {
+      return item.ogasto
+    })
+    let resultp = presupuestop.filter((item, index) => {
+      return presupuestop.indexOf(item) === index
+    })
+    let presupuestou = this.state.presupuesto.map(item => {
+      return (this.state.partida === item.ogasto) && item.up
+    })
+    let resultu = presupuestou.filter((item, index) => {
+      return presupuestou.indexOf(item) === index
+    })
+    let presupuestor = this.state.presupuesto.map(item => {
+      return (this.state.partida === item.ogasto && this.state.up === item.up) && item.rubro
+    })
+    let resultr = presupuestor.filter((item, index) => {
+      return presupuestor.indexOf(item) === index
+    })
 
     return (
       <div className='div-compro-container'>
@@ -829,7 +842,7 @@ export default class Comprometidos extends Component {
                     required
                     value={this.state.partida}
                   >
-                    {this.partida.map((x,y) =>
+                    {resultp.map((x,y) =>
                       <option name={y}>{x}</option>
                     )}
                   </select>
@@ -843,7 +856,7 @@ export default class Comprometidos extends Component {
                     required
                     value={this.state.up}
                   >
-                    {this.up.map((x,y) =>
+                    {resultu.map((x,y) =>
                       <option name={y}>{x}</option>
                     )}
                   </select>
@@ -857,7 +870,7 @@ export default class Comprometidos extends Component {
                     required
                     value={this.state.rubro}
                   >
-                    {this.rubro.map((x,y) =>
+                    {resultr.map((x,y) =>
                       <option name={y}>{x}</option>
                     )}
                   </select>
@@ -977,11 +990,7 @@ export default class Comprometidos extends Component {
         </Grid>
         <div style={{ height: '80px' }} />
         <div className='div-content-fab-com'>
-          <Fab
-            color='primary'
-            style={{ background: '#3f51b5' }}
-            variant='extended'
-          >
+          {/* <Fab color='primary' style={{ background: '#3f51b5' }} variant='extended'>
             <AddIcon style={{ marginRight: '6px' }} />
             {(admin === 'MIGUEL' || admin === 'MARTHA' || admin === 'ELOY' || admin === 'TERESA' || admin === 'MARCOS' || admin === 'LIZBETH') &&
               <Dropzone
@@ -1005,17 +1014,15 @@ export default class Comprometidos extends Component {
                 Agregar XML
               </Dropzone>
             }
-          </Fab>
-          <Link to={`/Oficios/${this.state.urlfire}`} style={{ textDecoration: 'none' }}>
-            <Fab
-              color='primary'
-              style={{ background: 'green' }}
-              variant='extended'
-            >
-              <CheckIcon style={{ marginRight: '6px' }} />
-              Finalizar
-            </Fab>
-          </Link>
+          </Fab> */}
+          {this.state.comprometidosDos !== undefined && this.state.comprometidosDos.length >= 2 ?
+            <Link to={`/Oficios/${this.state.urlfire}`} style={{ textDecoration: 'none' }}>
+              <Fab color='primary' style={{ background: 'green' }} variant='extended'>
+                <CheckIcon style={{ marginRight: '6px' }} />
+                Finalizar
+              </Fab>
+            </Link> : ''
+          }
         </div>
       </div>
     )

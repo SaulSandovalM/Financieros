@@ -4,9 +4,10 @@ import ReactToPrint from 'react-to-print'
 import firebase from '../../../Firebase'
 import { NumberAsString } from '../fondos/NumerosLetras'
 import logo2 from '../../../img/logo.jpg'
-// import lpgjh from '../../../img/logo-PGJH.jpg'
-import sus from '../../../img/veda.png'
+import lpgjh from '../../../img/logo-PGJH.jpg'
+// import sus from '../../../img/veda.png'
 import CurrencyFormat from 'react-currency-format'
+import Popup from 'reactjs-popup'
 
 export default class Oficios extends Component {
   constructor (props) {
@@ -29,6 +30,7 @@ export default class Oficios extends Component {
       urlfire: String(URLactual).substr(-20),
       mostrar: false,
       fondos: [],
+      nombre: ''
     }
   }
 
@@ -59,53 +61,44 @@ export default class Oficios extends Component {
     this.listenForItems(itemsRef)
   }
 
-  handleChange (event) {
-    this.setState({ [event.target.name]: event.target.value })
-  }
-
-  handleMostrar () {
-    this.setState({ mostrar: !this.state.mostrar })
-  }
-
-
-    listenForItems = (itemsRef) => {
-      itemsRef.on('value', (snap) => {
-        var fondos = []
-        fondos.push({
-          fondo: snap.val().fondo,
-          fecha: snap.val().fecha,
-          tipo_doc: snap.val().tipo_doc,
-          oficio_aut: snap.val().oficio_aut,
-          no_oficio: snap.val().no_oficio,
-          importe: snap.val().importe,
-          beneficiario: snap.val().beneficiario,
-          desc: snap.val().desc,
-          no_proyecto: snap.val().no_proyecto,
-          numCompro: snap.val().numCompro,
-          realizo: snap.val().realizo,
-          no_lici: snap.val().no_lici,
-          requisicion: snap.val().requisicion,
-          pedido: snap.val().pedido,
-          poliza: snap.val().poliza,
-          cfe: snap.val().cfe,
-          nscfe: snap.val().nscfe,
-          observaciones: snap.val().observaciones,
-          comprometido: snap.val().comprometido,
-          cpa: snap.val().cpa,
-          numCheque: snap.val().numCheque,
-          fechaContra: snap.val().fechaContra,
-          numContra: snap.val().numContra,
-          fechaDepo: snap.val().fechaDepo,
-          cuentaPagar: snap.val().cuentaPagar,
-          cuentaPagarPara: snap.val().cuentaPagarPara,
-          sujetoContable: snap.val().sujetoContable,
-          id: snap.key
-        })
-        this.setState({
-          fondos: fondos
-        })
+  listenForItems = (itemsRef) => {
+    itemsRef.on('value', (snap) => {
+      var fondos = []
+      fondos.push({
+        fondo: snap.val().fondo,
+        fecha: snap.val().fecha,
+        tipo_doc: snap.val().tipo_doc,
+        oficio_aut: snap.val().oficio_aut,
+        no_oficio: snap.val().no_oficio,
+        importe: snap.val().importe,
+        beneficiario: snap.val().beneficiario,
+        desc: snap.val().desc,
+        no_proyecto: snap.val().no_proyecto,
+        numCompro: snap.val().numCompro,
+        realizo: snap.val().realizo,
+        no_lici: snap.val().no_lici,
+        requisicion: snap.val().requisicion,
+        pedido: snap.val().pedido,
+        poliza: snap.val().poliza,
+        cfe: snap.val().cfe,
+        nscfe: snap.val().nscfe,
+        observaciones: snap.val().observaciones,
+        comprometido: snap.val().comprometido,
+        cpa: snap.val().cpa,
+        numCheque: snap.val().numCheque,
+        fechaContra: snap.val().fechaContra,
+        numContra: snap.val().numContra,
+        fechaDepo: snap.val().fechaDepo,
+        cuentaPagar: snap.val().cuentaPagar,
+        cuentaPagarPara: snap.val().cuentaPagarPara,
+        sujetoContable: snap.val().sujetoContable,
+        id: snap.key
       })
-    }
+      this.setState({
+        fondos: fondos
+      })
+    })
+  }
 
   render () {
     var today = new Date()
@@ -142,6 +135,15 @@ export default class Oficios extends Component {
     }
 
     var nombreDesa = this.state.comprometidos.map(comprometidos => comprometidos.up)
+
+    const total1 = [0]
+    this.state.comprometidos.map(item =>
+      item.total !== undefined ?
+        total1.push(parseFloat(item.total))
+      : null
+    )
+    const tt = (a, b) => a + b
+    var ttotal = total1.reduce(tt)
 
     return (
       <div className='oficios-container'>
@@ -242,6 +244,202 @@ export default class Oficios extends Component {
                   trigger={() => <buttom className='btn-imp-of'>Imprimir</buttom>}
                   content={() => this.la}
                 />
+                <Popup
+                    trigger={<buttom className='btn-imp-of'>Imprimir</buttom>}
+                    modal
+                    style={{ height: '500px' }}
+                    closeOnDocumentClick>
+                    <div style={{ height: '100%', overflow: 'scroll' }}>
+                      <ReactToPrint
+                        trigger={() =>
+                          <div className='c-b-i'>
+                            <buttom className='btn-imp-of'>Imprimir</buttom>
+                          </div>
+                          }
+                        content={() => this.la}
+                      />
+                      <div className='formatoe-container' ref={el => (this.la = el)}>
+                        {this.state.comprometidos.map(comprometidos =>
+                          comprometidos.up ?
+                            <div className='lll'>
+                              <div className='lll-content'>
+                                <div className='title-ga'>
+                                  <div className='ofie-img1'>
+                                    <img className='pgjh' src={lpgjh} alt='' style={{ width: 'auto' }} />
+                                  </div>
+                                  <div className='ofie-text'>
+                                    <p className='text-titulo-ga'>PROCURADURÍA GENERAL DE JUSTICA DE HIDALGO</p>
+                                    <p className='text-titulo-ga'>{comprometidos.area}</p>
+                                    <p className='text-titulo-ga'>{comprometidos.partida}</p>
+                                  </div>
+                                  <div className='ofie-img-cont'>
+                                    <div className='ofie-img2'>
+                                      <img className='img2' src={logo2} alt='' />
+                                    </div>
+                                  </div>
+                                </div>
+                                <div className='faderinpo'>
+                                  <div className='contenedor-ga'>
+                                    <div className='contenedor-1'>
+                                      <div className='interno-ga2'>
+                                        <p className='text-gai'>Gasto a Comprobar</p>
+                                        <input className='input-gai' type='checkbox' disabled />
+                                      </div>
+                                      <div className='interno-ga2'>
+                                        <p className='text-gai'>Comprobacion de Gastos</p>
+                                        <input className='input-gai' type='checkbox' disabled />
+                                      </div>
+                                      <div className='interno-ga2'>
+                                        <p className='text-gai'>Validación de Objeto de Gastos</p>
+                                        <input className='input-gai' type='checkbox' disabled />
+                                      </div>
+                                      <div className='interno-ga2'>
+                                        <p className='text-gai'>Transferencia</p>
+                                        <input className='input-gai' type='checkbox' disabled />
+                                      </div>
+                                    </div>
+                                    <div className='contenedor-1'>
+                                      <div className='interno-ga2'>
+                                        <p className='text-gai'>Creación de Fondo Revolvente</p>
+                                        <input className='input-gai' type='checkbox' disabled />
+                                      </div>
+                                      <div className='interno-ga2'>
+                                        <p className='text-gai'>Fondo Revolvente</p>
+                                        <input className='input-gai' type='checkbox' disabled />
+                                      </div>
+                                      <div className='interno-ga2'>
+                                        <p className='text-gai'>Cancelacion de Fondo Revolvente</p>
+                                        <input className='input-gai' type='checkbox' disabled />
+                                      </div>
+                                    </div>
+                                    <div className='contenedor-1'>
+                                      <div className='interno-ga2'>
+                                        <p className='text-gai'>Viaticos Anticipados</p>
+                                        <input className='input-gai' type='checkbox' disabled />
+                                      </div>
+                                      <div className='interno-ga2'>
+                                        <p className='text-gai'>Viaticos Devengados</p>
+                                        <input className='input-gai' type='checkbox' disabled />
+                                      </div>
+                                      <div className='interno-ga2'>
+                                        <p className='text-gai'>Viaticos al Extranjero</p>
+                                        <input className='input-gai' type='checkbox' disabled />
+                                      </div>
+                                      <div className='interno-ga2'>
+                                        <p className='text-gai'>Comprobación de Viáticos</p>
+                                        <input className='input-gai' type='checkbox' disabled />
+                                      </div>
+                                    </div>
+                                    <div className='contenedor-1'>
+                                      <div className='interno-ga2'>
+                                        <p className='text-gai'>Anticipo a Proveedor</p>
+                                        <input className='input-gai' type='checkbox' disabled />
+                                      </div>
+                                      <div className='interno-ga2'>
+                                        <p className='text-gai'>Remanente de Pago a Proveedor</p>
+                                        <input className='input-gai' type='checkbox' disabled />
+                                      </div>
+                                      <div className='interno-ga2'>
+                                        <p className='text-gai'>Pago a Proveedor</p>
+                                        <input className='input-gai' type='checkbox' checked />
+                                      </div>
+                                      <div className='interno-ga2'>
+                                        <p className='text-gai'>Anticipo de Pago a Proveedor por Requisición</p>
+                                        <input className='input-gai' type='checkbox' disabled />
+                                      </div>
+                                      <div className='interno-ga2'>
+                                        <p className='text-gai'>Remanente de Pago a Proveedor por Requisición</p>
+                                        <input className='input-gai' type='checkbox' disabled />
+                                      </div>
+                                      <div className='interno-ga2'>
+                                        <p className='text-gai'>Proveedor por Requisición</p>
+                                        <input className='input-gai' type='checkbox' disabled />
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div>
+                                  <div>
+                                    <div className='ofie-header-blue'>
+                                      <div className='alltabla-ga ga1'>
+                                        Folio de factura
+                                      </div>
+                                      <div className='alltabla-ga ga2'>
+                                        Importe
+                                      </div>
+                                      <div className='alltabla-ga ga3'>
+                                        Leyenda alusiva al gasto
+                                      </div>
+                                    </div>
+                                    {comprometidos.comprobantes !== undefined ?
+                                      <div>
+                                        {comprometidos.comprobantes.map(item =>
+                                          <div className='ofie-comprobantes-conta'>
+                                            <div className='ofie-header-blue'>
+                                              <div className='all-tab-f all-tab-of1'>
+                                                {item.uuid}
+                                              </div>
+                                              <div className='all-tab-f all-tab-of2'>
+                                                <CurrencyFormat
+                                                  style={{ fontSize: '12px' }}
+                                                  value={(parseFloat(item.total) + parseFloat(item.isr)).toFixed(2)}
+                                                  displayType='text'
+                                                  thousandSeparator
+                                                  prefix=' $ '
+                                                />
+                                              </div>
+                                                <input
+                                                  className='all-tab-f all-tab-of3'
+                                                  name='descripcion'
+                                                  value='perro'
+                                                />
+                                            </div>
+                                          </div>
+                                        )}
+                                      </div>
+                                    : null}
+                                    <div className='ofie-total-cont'>
+                                      <div className='all-tab-f2 all-tab-of1' style={{ textAlign: 'right' }}>
+                                        TOTAL:
+                                      </div>
+                                      <div className='all-tab-f2 all-tab-of2'>
+                                        {comprometidos.isr === '0.00' ?
+                                          <CurrencyFormat
+                                            style={{ fontSize: '12px' }}
+                                            value={comprometidos.total}
+                                            displayType='text'
+                                            thousandSeparator
+                                            prefix=' $ '
+                                          />
+                                          : null
+                                        }
+                                        {comprometidos.isr !== '0.00' && comprometidos.isr ?
+                                          <CurrencyFormat
+                                            style={{ fontSize: '12px' }}
+                                            value={(parseFloat(totalImporte) + parseFloat(totalRetencion)).toFixed(2)}
+                                            displayType='text'
+                                            thousandSeparator
+                                            prefix=' $ '
+                                          />
+                                          : null
+                                        }
+                                      </div>
+                                      <div className='all-tab-f2 all-tab-of3'
+                                        style={{
+                                          borderRight: '1px solid white',
+                                          borderBottom: '1px solid white'
+                                        }}
+                                      />
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          : null
+                        )}
+                      </div>
+                    </div>
+                  </Popup>
               </div>
               <div>
                 <p>Anexo F</p>
@@ -255,14 +453,14 @@ export default class Oficios extends Component {
         </div>
 
         {/* Formato E */}
-        <div className='formatoe-container' ref={el => (this.la = el)}>
+        {/* <div className='formatoe-container' ref={el => (this.la = el)}>
           {this.state.comprometidos.map(comprometidos =>
             comprometidos.up ?
               <div className='lll'>
                 <div className='lll-content'>
                   <div className='title-ga'>
                     <div className='ofie-img1'>
-                      <img className='pgjh' src={sus} alt='' style={{ width: 'auto' }} />
+                      <img className='pgjh' src={lpgjh} alt='' style={{ width: 'auto' }} />
                     </div>
                     <div className='ofie-text'>
                       <p className='text-titulo-ga'>PROCURADURÍA GENERAL DE JUSTICA DE HIDALGO</p>
@@ -432,14 +630,14 @@ export default class Oficios extends Component {
               </div>
             : null
           )}
-        </div>
+        </div> */}
 
         {/* fondo revolvente */}
         <div className='pppdf-subdad' ref={el => (this.rfr = el)}>
           <div className='header-ofi'>
             <div className='header-ofi-cont'>
               <div className='sp-cont'>
-                <img className='pgjh comple' src={sus} alt='' />
+                <img className='pgjh comple' src={lpgjh} alt='' />
               </div>
               <img className='img-sp' src={logo2} alt='' />
             </div>
@@ -453,16 +651,16 @@ export default class Oficios extends Component {
                 <p>
                   Oficio No: PGJ/DGAyF/{this.state.fondo.no_oficio}/2021
                   <br />Pachuca de Soto, Hidalgo a {today}
-                  <br />Asunto Pago a Proveedor
+                  <br />Asunto: Reembolso de Fondo Revolvente
                 </p>
               </div>
               <div className='prensente-sp'>
                 <p>
                   <b>
                     L.A.E. CÉSAR ALBERTO GONZÁLEZ LÓPEZ
-                    <br />Subsecretario de Egresos de la
-                    <br />Secretaría de Finanzas Públicas
-                    <br />Presente
+                    <br />SUBSECRETARIO DE EGRESOS DE LA
+                    <br />SECRETARÍA DE FIANAZAS PÚBLICAS
+                    <br />PRESENTE
                   </b>
                 </p>
               </div>
@@ -470,8 +668,8 @@ export default class Oficios extends Component {
                 <p>
                   <b>
                     AT´N.: L.C.P. KARINA BARRIOS VELÁZQUEZ
-                    <br />Directora General de Contabilidad
-                    <br />Gubernamental
+                    <br />DIRECTORA GENERAL DE CONTABILIDAD
+                    <br />GUBERNAMENTAL
                   </b>
                 </p>
               </div>
@@ -479,12 +677,13 @@ export default class Oficios extends Component {
                 <p>
                   Por medio del presente me permito enviar a usted, documentación amparada
                   con {this.state.fondo.numCompro} comprobantes, por un total de
-                  $ {this.state.fondo.importe} ({(NumberAsString(this.state.fondo.importe))}),
-                  a nombre de {this.state.fondo.beneficiario} para el trámite de
-                  Reembolso de Fondo Revolvente, con cargo al
+                  <CurrencyFormat value={ttotal} displayType='text' thousandSeparator prefix=' $ ' /> ({(NumberAsString(ttotal))}),
+                  con una retención por <CurrencyFormat value={(totalRetencion.reduce(reducer)).toFixed(2)} displayType='text' thousandSeparator prefix=' $ ' /> para
+                  un importe total a pagar de <CurrencyFormat value={parseFloat(ttotal) - (totalRetencion.reduce(reducer)).toFixed(2)} displayType='text' thousandSeparator prefix=' $ ' /> para
+                  el trámite de Reembolso de Fondo Revolvente, con cargo al
                   proyecto{this.state.comprometidos.map(item => item.proy ? ', ' + item.proy : null)}
-                  {this.state.comprometidos.slice(0, 2).map(item => item.np ? ', ' + item.np : null)} para
-                  otorgado en el oficio de autorización {this.state.fondo.oficio_aut} del
+                  {this.state.comprometidos.map(item => item.np ? ', ' + item.np : null)} otorgado
+                  en el oficio de autorización {this.state.fondo.oficio_aut} del
                   Ejercicio 2021, a la Procuraduria General de Justicia del estado de Hidalgo.
                 </p>
                 <p>Sin otro particular, le envío un cordial y afectuoso saludo.</p>
@@ -520,7 +719,7 @@ export default class Oficios extends Component {
           <div className='header-ofi'>
             <div className='header-ofi-cont'>
               <div className='sp-cont'>
-                <img className='pgjh comple' src={sus} alt='' />
+                <img className='pgjh comple' src={lpgjh} alt='' />
               </div>
               <img className='img-sp' src={logo2} alt='' />
             </div>
@@ -549,11 +748,11 @@ export default class Oficios extends Component {
                   Recibí de la Secretaría de Finanzas Públicas del Gobierno del Estado
                   de Hidalgo la cantidad de
                   <CurrencyFormat
-                    value={this.state.fondo.importe}
+                    value={ttotal}
                     displayType='text'
                     thousandSeparator
                     prefix=' $ '
-                  /> ({( NumberAsString(this.state.fondo.importe) )})
+                  /> ({( NumberAsString(ttotal) )})
                   por concepto de Reposición de Fondo Revolvente, que se aplicarán
                   en {this.state.fondo.desc}
                 </p>
@@ -596,7 +795,7 @@ export default class Oficios extends Component {
           <div className='header-ofi'>
             <div className='header-ofi-cont'>
               <div className='sp-cont'>
-                <img className='pgjh comple' src={sus} alt='' />
+                <img className='pgjh comple' src={lpgjh} alt='' />
               </div>
               <img className='img-sp' src={logo2} alt='' />
             </div>
@@ -617,9 +816,9 @@ export default class Oficios extends Component {
                 <p>
                   <b>
                     L.A.E. CÉSAR ALBERTO GONZÁLEZ LÓPEZ
-                    <br />Subsecretario de Egresos de la
-                    <br />Secretaría de Finanzas Públicas
-                    <br />Presente
+                    <br />SUBSCRETARIO DE EGRESOS DE LA
+                    <br />SECRETARÍA DE FINANZAS PÚBLICAS
+                    <br />PRESENTE
                   </b>
                 </p>
               </div>
@@ -627,8 +826,8 @@ export default class Oficios extends Component {
                 <p>
                   <b>
                     AT´N.: L.C.P. KARINA BARRIOS VELÁZQUEZ
-                    <br />Directora Genral de Contabilidad
-                    <br />Gubernamental
+                    <br />DIRECTORA GENERAL DE CONTABILIDAD
+                    <br />GUBERNAMENTAL
                   </b>
                 </p>
               </div>
@@ -693,7 +892,7 @@ export default class Oficios extends Component {
           <div className='header-ofi'>
             <div className='header-ofi-cont'>
               <div className='sp-cont'>
-                <img className='pgjh comple' src={sus} alt='' />
+                <img className='pgjh comple' src={lpgjh} alt='' />
               </div>
               <img className='img-sp' src={logo2} alt='' />
             </div>
@@ -714,9 +913,9 @@ export default class Oficios extends Component {
                 <p>
                   <b>
                     L.A.E. CÉSAR ALBERTO GONZÁLEZ LÓPEZ
-                    <br />Subsecretario de Egresos de la
-                    <br />Secretaría de Fianzas Públicas
-                    <br />Presente
+                    <br />SUBSCRETARIO DE EGRESOS DE LA
+                    <br />SECRETARÍA DE FINANZAS PÚBLICAS
+                    <br />PRESENTE
                   </b>
                 </p>
               </div>
@@ -725,7 +924,8 @@ export default class Oficios extends Component {
                   <b>
                     AT´N.: L.C.P. KARINA BARRIOS VELÁZQUEZ
                     <br />Directora General de Contabilidad
-                    <br />Gubernamental
+                    <br />DIRECTORA GENERAL DE CONTABILIDADental
+                    <br />GUBERNAMENTAL
                   </b>
                 </p>
               </div>
@@ -748,7 +948,7 @@ export default class Oficios extends Component {
                   )}, para el trámite de pago a favor del proveedor {this.state.fondo.beneficiario}, por
                   la/el servicio {this.state.fondo.desc}, con
                   cargo al proyecto{this.state.comprometidos.map(item => item.proy ? ', ' + item.proy : null)}
-                  {this.state.comprometidos.slice(0, 2).map(item => item.np ? ', ' + item.np : null)} y 
+                  {this.state.comprometidos.slice(0, 2).map(item => item.np ? ', ' + item.np : null)} y
                   a los recursos otorgados con el oficio de autorización {this.state.fondo.oficio_aut}, del
                   Ejercicio 2021 a la Procuraduria General de Justicia del Estado de Hidalgo.
                 </p>
@@ -784,7 +984,7 @@ export default class Oficios extends Component {
         <div className='sp-container' ref={el => (this.sp = el)}>
           <div className='sp-imgs'>
             <div className='title-so-o'>
-              <img className='pgjh' src={sus} alt='' style={{ width: 'auto' }} />
+              <img className='pgjh' src={lpgjh} alt='' style={{ width: 'auto' }} />
               <p>SOLICITUD PROGRAMÁTICA DEL GASTO</p>
               <img className='ims' src={logo2} alt='' />
             </div>
@@ -896,146 +1096,56 @@ export default class Oficios extends Component {
                   <p className='bene-i'>
                     {comprometidos.area ?
                       this.state.comprometidos.length === 1 ?
-                      (comprometidos.up === '01' &&
-                      'Procuraduría General de Justicia')
-                      ||
-                      (comprometidos.up === '02' &&
-                      'Subprocuraduría de Procedimientos Penales Región Oriente')
-                      ||
-                      (comprometidos.up === '03' &&
-                      'Fiscalía Especializada para la atención de Delitos cometidos contra la Libertad de Expresión, Periodistas y Personas defensoras de los Derechos Humanos')
-                      ||
-                      (comprometidos.up === '04' &&
-                      'Dirección General para la Atención de los Asuntos del Sistema Tradicional')
-                      ||
-                      (comprometidos.up === '05' &&
-                      'Fiscalía Especializada en Delitos Electorales')
-                      ||
-                      (comprometidos.up === '06' &&
-                      'Subprocuraduría de Derechos Humanos y Servicios a la Comunidad')
-                      ||
-                      (comprometidos.up === '07' &&
-                      'Centro de Justicia Restaurativa Penal Poniente')
-                      ||
-                      (comprometidos.up === '08' &&
-                      'Fiscalía para la Atención de Delitos de Género')
-                      ||
-                      (comprometidos.up === '09' &&
-                      'Visitaduría General')
-                      ||
-                      (comprometidos.up === '10' &&
-                      'Dirección General de Servicios Periciales')
-                      ||
-                      (comprometidos.up === '11' &&
-                      'Centro de Operación Estratégica')
-                      ||
-                      (comprometidos.up === '12' &&
-                      'Unidad Especializada en el Combate al Secuestro')
-                      ||
-                      (comprometidos.up === '13' &&
-                      'Dirección General de Administración y Finanzas')
-                      ||
-                      (comprometidos.up === '14' &&
-                      'Fiscalía Especializada para la atención de los Delitos de Trata de Personas')
-                      ||
-                      (comprometidos.up === '15' &&
-                      'Subprocuraduría de Procedimientos Penales Región Poniente')
-                      ||
-                      (comprometidos.up === '16' &&
-                      'Centro de Atención Temprana Poniente')
-                      ||
-                      (comprometidos.up === '17' &&
-                      'Dirección General de Investigación y Litigación Poniente')
-                      ||
-                      (comprometidos.up === '18' &&
-                      'Dirección General de la Policía Investigadora')
-                      ||
-                      (comprometidos.up === '20' &&
-                      'Centro de Atención Temprana Oriente')
-                      ||
-                      (comprometidos.up === '21' &&
-                      'Centro de Justicia Restaurativa Penal Oriente')
-                      ||
-                      (comprometidos.up === '22' &&
-                      'Dirección General de Investigación y Litigación Oriente')
-                      ||
-                      (comprometidos.up === '23' &&
-                      'Fiscalía Especializada en Delitos de Corrupción')
-                      ||
-                      (comprometidos.up === '24' &&
-                      'Fiscalía de Desaparición Forzada y Desaparición por Terceros')
+                        (comprometidos.up === '01' && 'Procuraduría General de Justicia') ||
+                        (comprometidos.up === '02' && 'Subprocuraduría de Procedimientos Penales Región Oriente') ||
+                        (comprometidos.up === '03' && 'Fiscalía Especializada para la atención de Delitos cometidos contra la Libertad de Expresión, Periodistas y Personas defensoras de los Derechos Humanos') ||
+                        (comprometidos.up === '04' && 'Dirección General para la Atención de los Asuntos del Sistema Tradicional') ||
+                        (comprometidos.up === '05' && 'Fiscalía Especializada en Delitos Electorales') ||
+                        (comprometidos.up === '06' && 'Subprocuraduría de Derechos Humanos y Servicios a la Comunidad') ||
+                        (comprometidos.up === '07' && 'Centro de Justicia Restaurativa Penal Poniente') ||
+                        (comprometidos.up === '08' && 'Fiscalía para la Atención de Delitos de Género') ||
+                        (comprometidos.up === '09' && 'Visitaduría General') ||
+                        (comprometidos.up === '10' && 'Dirección General de Servicios Periciales') ||
+                        (comprometidos.up === '11' && 'Centro de Operación Estratégica') ||
+                        (comprometidos.up === '12' && 'Unidad Especializada en el Combate al Secuestro') ||
+                        (comprometidos.up === '13' && 'Dirección General de Administración y Finanzas') ||
+                        (comprometidos.up === '14' && 'Fiscalía Especializada para la atención de los Delitos de Trata de Personas') ||
+                        (comprometidos.up === '15' && 'Subprocuraduría de Procedimientos Penales Región Poniente') ||
+                        (comprometidos.up === '16' && 'Centro de Atención Temprana Poniente') ||
+                        (comprometidos.up === '17' && 'Dirección General de Investigación y Litigación Poniente') ||
+                        (comprometidos.up === '18' && 'Dirección General de la Policía Investigadora') ||
+                        (comprometidos.up === '20' && 'Centro de Atención Temprana Oriente') ||
+                        (comprometidos.up === '21' && 'Centro de Justicia Restaurativa Penal Oriente') ||
+                        (comprometidos.up === '22' && 'Dirección General de Investigación y Litigación Oriente') ||
+                        (comprometidos.up === '23' && 'Fiscalía Especializada en Delitos de Corrupción') ||
+                        (comprometidos.up === '24' && 'Fiscalía de Desaparición Forzada y Desaparición por Terceros')
                       :
-                      ''
-                     :
-                     (nombreDesa[1] === '01' &&
-                     'Procuraduría General de Justicia')
-                     ||
-                     (nombreDesa[1] === '02' &&
-                     'Subprocuraduría de Procedimientos Penales Región Oriente')
-                     ||
-                     (nombreDesa[1] === '03' &&
-                     'Fiscalía Especializada para la atención de Delitos cometidos contra la Libertad de Expresión, Periodistas y Personas defensoras de los Derechos Humanos')
-                     ||
-                     (nombreDesa[1] === '04' &&
-                     'Dirección General para la Atención de los Asuntos del Sistema Tradicional')
-                     ||
-                     (nombreDesa[1] === '05' &&
-                     'Fiscalía Especializada en Delitos Electorales')
-                     ||
-                     (nombreDesa[1] === '06' &&
-                     'Subprocuraduría de Derechos Humanos y Servicios a la Comunidad')
-                     ||
-                     (nombreDesa[1] === '07' &&
-                     'Centro de Justicia Restaurativa Penal Poniente')
-                     ||
-                     (nombreDesa[1] === '08' &&
-                     'Fiscalía para la Atención de Delitos de Género')
-                     ||
-                     (nombreDesa[1] === '09' &&
-                     'Visitaduría General')
-                     ||
-                     (nombreDesa[1] === '10' &&
-                     'Dirección General de Servicios Periciales')
-                     ||
-                     (nombreDesa[1] === '11' &&
-                     'Centro de Operación Estratégica')
-                     ||
-                     (nombreDesa[1] === '12' &&
-                     'Unidad Especializada en el Combate al Secuestro')
-                     ||
-                     (nombreDesa[1] === '13' &&
-                     'Dirección General de Administración y Finanzas')
-                     ||
-                     (nombreDesa[1] === '14' &&
-                     'Fiscalía Especializada para la atención de los Delitos de Trata de Personas')
-                     ||
-                     (nombreDesa[1] === '15' &&
-                     'Subprocuraduría de Procedimientos Penales Región Poniente')
-                     ||
-                     (nombreDesa[1] === '16' &&
-                     'Centro de Atención Temprana Poniente')
-                     ||
-                     (nombreDesa[1] === '17' &&
-                     'Dirección General de Investigación y Litigación Poniente')
-                     ||
-                     (nombreDesa[1] === '18' &&
-                     'Dirección General de la Policía Investigadora')
-                     ||
-                     (nombreDesa[1] === '20' &&
-                     'Centro de Atención Temprana Oriente')
-                     ||
-                     (nombreDesa[1] === '21' &&
-                     'Centro de Justicia Restaurativa Penal Oriente')
-                     ||
-                     (nombreDesa[1] === '22' &&
-                     'Dirección General de Investigación y Litigación Oriente')
-                     ||
-                     (nombreDesa[1] === '23' &&
-                     'Fiscalía Especializada en Delitos de Corrupción')
-                     ||
-                     (nombreDesa[1] === '24' &&
-                     'Fiscalía de Desaparición Forzada y Desaparición por Terceros')
-                  }
+                        ''
+                      :
+                        (nombreDesa[1] === '01' && 'Procuraduría General de Justicia') ||
+                        (nombreDesa[1] === '02' && 'Subprocuraduría de Procedimientos Penales Región Oriente') ||
+                        (nombreDesa[1] === '03' &&'Fiscalía Especializada para la atención de Delitos cometidos contra la Libertad de Expresión, Periodistas y Personas defensoras de los Derechos Humanos') ||
+                        (nombreDesa[1] === '04' && 'Dirección General para la Atención de los Asuntos del Sistema Tradicional') ||
+                        (nombreDesa[1] === '05' && 'Fiscalía Especializada en Delitos Electorales') ||
+                        (nombreDesa[1] === '06' && 'Subprocuraduría de Derechos Humanos y Servicios a la Comunidad') ||
+                        (nombreDesa[1] === '07' && 'Centro de Justicia Restaurativa Penal Poniente') ||
+                        (nombreDesa[1] === '08' && 'Fiscalía para la Atención de Delitos de Género') ||
+                        (nombreDesa[1] === '09' && 'Visitaduría General') ||
+                        (nombreDesa[1] === '10' && 'Dirección General de Servicios Periciales') ||
+                        (nombreDesa[1] === '11' && 'Centro de Operación Estratégica') ||
+                        (nombreDesa[1] === '12' && 'Unidad Especializada en el Combate al Secuestro') ||
+                        (nombreDesa[1] === '13' && 'Dirección General de Administración y Finanzas') ||
+                        (nombreDesa[1] === '14' && 'Fiscalía Especializada para la atención de los Delitos de Trata de Personas') ||
+                        (nombreDesa[1] === '15' && 'Subprocuraduría de Procedimientos Penales Región Poniente') ||
+                        (nombreDesa[1] === '16' && 'Centro de Atención Temprana Poniente') ||
+                        (nombreDesa[1] === '17' && 'Dirección General de Investigación y Litigación Poniente') ||
+                        (nombreDesa[1] === '18' && 'Dirección General de la Policía Investigadora') ||
+                        (nombreDesa[1] === '20' && 'Centro de Atención Temprana Oriente') ||
+                        (nombreDesa[1] === '21' && 'Centro de Justicia Restaurativa Penal Oriente') ||
+                        (nombreDesa[1] === '22' && 'Dirección General de Investigación y Litigación Oriente') ||
+                        (nombreDesa[1] === '23' && 'Fiscalía Especializada en Delitos de Corrupción') ||
+                        (nombreDesa[1] === '24' && 'Fiscalía de Desaparición Forzada y Desaparición por Terceros')
+                    }
                   </p>
                 )}
               </div>
@@ -1307,7 +1417,7 @@ export default class Oficios extends Component {
           <div className='header-ofi'>
             <div className='header-ofi-cont'>
               <div className='sp-cont'>
-                <img className='pgjh comple' src={sus} alt='' />
+                <img className='pgjh comple' src={lpgjh} alt='' />
               </div>
               <img className='img-sp' src={logo2} alt='' />
             </div>
@@ -1328,9 +1438,9 @@ export default class Oficios extends Component {
                 <p>
                   <b>
                     L.A.E. CÉSAR ALBERTO GONZÁLEZ LÓPEZ
-                    <br />Subsecretario de Egresos de la
-                    <br />Secretaría de Fianzas Públicas
-                    <br />Presente
+                    <br />SUBSCRETARIO DE EGRESOS DE LA
+                    <br />SECRETARÍA DE FINANZAS PÚBLICAS
+                    <br />PRESENTE
                   </b>
                 </p>
               </div>
@@ -1339,7 +1449,8 @@ export default class Oficios extends Component {
                   <b>
                     AT´N.: L.C.P. KARINA BARRIOS VELÁZQUEZ
                     <br />DIrectora General de Contabilidad
-                    <br />Gubernamental
+                    <br />DIRECTORA GENERAL DE CONTABILIDADental
+                    <br />GUBERNAMENTAL
                   </b>
                 </p>
               </div>
@@ -1451,9 +1562,9 @@ export default class Oficios extends Component {
             <p>
               <b>
                 Lic. César Alberto González López
-                <br />Subsecretario de Egresos de la
-                <br /> Secretaría de Finanzas Públicas
-                <br />Presente
+                <br />SUBSCRETARIO DE EGRESOS DE LA
+                <br />SECRETARÍA DE FINANZAS PÚBLICASs
+                <br />PRESENTE
               </b>
             </p>
           </div>
@@ -1461,7 +1572,8 @@ export default class Oficios extends Component {
             <p>
               <b>AT'N: L.C.P. Karina Barrios Velázquez
                 <br />Directora General de Contabilidad
-                <br />Gubernamental
+                <br />DIRECTORA GENERAL DE CONTABILIDAD
+                <br />GUBERNAMENTAL
               </b>
             </p>
           </div>

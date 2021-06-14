@@ -309,7 +309,10 @@ export default class Valeslist extends Component {
 
   handleAddClick = () => {
     this.setState({
-      recibosList: [...this.state.recibosList, { folio: 'Recibo', nombre: '', importe: '', iva: '0', isr: '0', fecha: '', estatus: '', subtotal: '0', total: '0', uuid: 'Recibo' }]
+      recibosList: [
+        ...this.state.recibosList,
+        { folio: 'Recibo', nombre: '', importe: '', iva: '0', isr: '0', fecha: '', estatus: '', subtotal: '0', total: '0', uuid: 'Recibo' }
+      ]
     })
   }
 
@@ -392,7 +395,7 @@ export default class Valeslist extends Component {
         {this.state.opened &&
           <div className='content-fixed'>
             <div className='box-modal'>
-              <div style={{ display: 'flex', justifyContent: 'space-between',  paddingTop: '20px' }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', paddingTop: '20px' }}>
                 <h3>Agregar Recibos</h3>
               </div>
               <div>

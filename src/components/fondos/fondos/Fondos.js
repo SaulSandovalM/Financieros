@@ -1,13 +1,12 @@
 // importaciones necesarias
 import React, { Component } from 'react'
 import firebase from '../../../Firebase'
-import { NumberAsString } from './NumerosLetras'
+// import { NumberAsString } from './NumerosLetras'
 import Fab from '@material-ui/core/Fab'
-import CheckIcon from '@material-ui/icons/Check'
 import SaveIcon from '@material-ui/icons/Save'
 import Paper from '@material-ui/core/Paper'
 import Grid from '@material-ui/core/Grid'
-import TextField from '@material-ui/core/TextField'
+// import TextField from '@material-ui/core/TextField'
 import PropTypes from 'prop-types'
 import MaskedInput from 'react-text-mask'
 import NumberFormat from 'react-number-format'
@@ -151,11 +150,11 @@ export default class Fondos extends Component {
       tipo_doc: this.inputTipoDoc.value,
       oficio_aut: this.inputOficioAut.value,
       no_oficio: this.inputNoOficio.value,
-      importe: this.state.importe,
-      beneficiario: this.inputBeneficiario.value,
+      importe: ' ',
+      beneficiario: ' ',
       desc: this.inputDesc.value,
       no_proyecto: this.state.no_proyecto,
-      numCompro: this.inputNumCompro.value,
+      numCompro: ' ',
       realizo: this.state.realizo,
       anexof: this.inputAnexof.value,
       // datos no obligatorios
@@ -251,6 +250,7 @@ export default class Fondos extends Component {
     this.setState({
       comprometidosp: prueba
     })
+    this.props.history.push(`/Comprometidos/${this.state.comprometidosp}`);
   }
 
   crearBeneficiario (e) {
@@ -305,9 +305,10 @@ export default class Fondos extends Component {
   ]
 
   render () {
-    const { fondo, fecha, tipo_doc, oficio_aut, no_oficio, no_lici, importe, desc,
-      beneficiario, realizo, requisicion, pedido, no_proyecto, poliza, cfe, nscfe,
-      observaciones, numCompro, anexof } = this.state
+    const { fondo, fecha, tipo_doc, oficio_aut, no_oficio, no_lici, desc,
+      realizo, requisicion, pedido, no_proyecto, poliza, cfe, nscfe,
+      observaciones, anexof } = this.state
+      // importe, beneficiario, numCompro
     const newArray = ['']
     const myObj = {}
 
@@ -504,6 +505,18 @@ export default class Fondos extends Component {
                     />
                   </div>
                   <div className='div-con'>
+                    <p className='p-label'>Descripción</p>
+                    <input
+                      className='field'
+                      id='desc'
+                      name='desc'
+                      value={desc}
+                      onChange={this.onChange}
+                      ref={desc => this.inputDesc = desc}
+                      required
+                    />
+                  </div>
+                  {/* <div className='div-con'>
                     <TextField
                       label='Importe'
                       id='importe'
@@ -516,10 +529,10 @@ export default class Fondos extends Component {
                         inputComponent: NumberFormatCustom
                       }}
                     />
-                  </div>
+                  </div> */}
                 </div>
-                <div className='div-f2'>
-                  <div className='div-con'>
+                  {/*<div className='div-f2'>
+                 <div className='div-con'>
                     <p className='p-label'>Importe Letra</p>
                     <input
                       className='field'
@@ -527,8 +540,8 @@ export default class Fondos extends Component {
                       value={(NumberAsString(importe))}
                       required
                     />
-                  </div>
-                  {tipo_doc === 'Fondo Revolvente' ?
+                  </div> */}
+                  {/* tipo_doc === 'Fondo Revolvente' ?
                     <div className='div-con'>
                       <p className='p-label'>Beneficiario</p>
                       <select
@@ -562,22 +575,11 @@ export default class Fondos extends Component {
                         )}
                       </select>
                     </div>
-                  }
-                </div>
-                <div className='div-f2'>
-                  <div className='div-con'>
-                    <p className='p-label'>Descripción</p>
-                    <input
-                      className='field'
-                      id='desc'
-                      name='desc'
-                      value={desc}
-                      onChange={this.onChange}
-                      ref={desc => this.inputDesc = desc}
-                      required
-                    />
-                  </div>
-                  {realizo === 'MIGUEL' &&
+
+                </div>*/}
+                {/*<div className='div-f2'>
+
+                   realizo === 'MIGUEL' &&
                     <div className='add-bene'>
                       <div className='content-bf'>
                         <p className='p-label'>Agregar Beneficiario</p>
@@ -593,8 +595,8 @@ export default class Fondos extends Component {
                           +
                       </button>
                     </div>
-                  }
-                </div>
+
+                </div>*/}
                 <div className='div-f2'>
                   <div className='fondo-w-c'>
                     <div>
@@ -629,7 +631,7 @@ export default class Fondos extends Component {
                     </div>
                   </div>
                 </div>
-                <div className='div-f2'>
+                {/* <div className='div-f2'>
                   <div style={{ width: '99%' }}>
                     <div>
                       <p className='p-label'>Numero de Comprobantes</p>
@@ -645,7 +647,7 @@ export default class Fondos extends Component {
                       />
                     </div>
                   </div>
-                </div>
+                </div> */}
                 <div className='div-f2'>
                   <div style={{ width: '99%' }}>
                     <div>
@@ -846,13 +848,6 @@ export default class Fondos extends Component {
               <Fab color='primary' aria-label='add' type='submit'>
                 <SaveIcon />
               </Fab>
-            }
-            {this.state.comprometidosp &&
-              <Link to={`/Comprometidos/${this.state.comprometidosp}`}>
-                <Fab color='primary' aria-label='add' style={{ background: '#00BB2D' }}>
-                  <CheckIcon />
-                </Fab>
-              </Link>
             }
           </div>
         </form>

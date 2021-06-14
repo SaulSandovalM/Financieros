@@ -3,6 +3,7 @@ import firebase from '../../../Firebase'
 import ListComponent from './ListComponent'
 import './ArchivosPago.css'
 import Dropzone from 'react-dropzone'
+import TextField from '@material-ui/core/TextField'
 
 export default class ArchivosPago extends Component {
   constructor(props) {
@@ -11,7 +12,7 @@ export default class ArchivosPago extends Component {
       lista: [
         {
           id: 1,
-          name: 'preuba',
+          name: 'Prueba',
           done: false
         },
       ],
@@ -21,7 +22,9 @@ export default class ArchivosPago extends Component {
       pdf2: 0,
       filefactura: [],
       xmlC: [],
-      xmlLoading: 0
+      xmlLoading: 0,
+      fechaE: '',
+      numContrato: ''
     }
   }
 
@@ -144,10 +147,11 @@ export default class ArchivosPago extends Component {
   }
 
   render () {
+    const { fechaE, numContrato } = this.state
     return (
       <div className='container-valeslist'>
         <div className='margin-f-a'>
-          <div className='p-container-valeslist'>
+          <div className='p-container-validacion'>
             <div className='p-margin-valeslist'>
               <p className='p-title-size-valeslist'>
                 - Selecciona la carga de evidencias de tus comprobaciones
@@ -156,58 +160,113 @@ export default class ArchivosPago extends Component {
             <div className='inputs-container-valeslist'>
               <div className='inputs-valeslist'>
                 <div className='inputs-row-valeslist'>
-                  <form style={{ display: 'flex', width: '100%' }} onSubmit={this.sendMessage.bind(this)} ref='contactForm'>
-                    <div className='p-container-valeslist'>
-                      <p style={{ margin: '0px', color: 'grey', fontSize: '12px' }}>Agregar xml</p>
-                      <Dropzone
-                        style={{
-                          position: 'relative',
-                          width: '100%',
-                          height: '30px',
-                          borderWidth: '2px',
-                          borderColor: 'rgb(102, 102, 102)',
-                          borderStyle: 'solid',
-                          borderRadius: '5px'
-                        }}
-                        accept='.xml' onChange={this.handleOnChange1.bind(this)}
-                      />
-                      <progress className='progress' value={this.state.xmlLoading} max='100'>
-                        {this.state.xmlLoading}
-                      </progress>
+                  <form style={{ display: 'flex', width: '100%', flexDirection: 'column' }} onSubmit={this.sendMessage.bind(this)} ref='contactForm'>
+                    <div style={{ width: '100%', display: 'flex' }}>
+                      <div className='p-container-validacion'>
+                        <p style={{ margin: '0px', color: 'grey', fontSize: '12px' }}>Agregar xml</p>
+                        <Dropzone
+                          style={{
+                            position: 'relative',
+                            width: '100%',
+                            height: '30px',
+                            borderWidth: '2px',
+                            borderColor: 'rgb(102, 102, 102)',
+                            borderStyle: 'solid',
+                            borderRadius: '5px'
+                          }}
+                          accept='.xml' onChange={this.handleOnChange1.bind(this)}
+                        />
+                        <progress className='progress' value={this.state.xmlLoading} max='100'>
+                          {this.state.xmlLoading}
+                        </progress>
+                      </div>
+                      <div className='p-container-validacion'>
+                        <p style={{ margin: '0px', color: 'grey', fontSize: '12px' }}>Agregar Pdf</p>
+                        <Dropzone
+                          style={{
+                            position: 'relative',
+                            width: '100%',
+                            height: '30px',
+                            borderWidth: '2px',
+                            borderColor: 'rgb(102, 102, 102)',
+                            borderStyle: 'solid',
+                            borderRadius: '5px'
+                          }}
+                          accept='.pdf' onChange={this.handleOnChange2.bind(this)}
+                        />
+                        <progress className='progress' value={this.state.pdf2} max='100'>
+                          {this.state.pdf2}
+                        </progress>
+                      </div>
+                      <div className='p-container-validacion'>
+                        <p style={{ margin: '0px', color: 'grey', fontSize: '12px' }}>Partida</p>
+                        <select style={{ width: '100%', height: '34px', background: '#f4f4f4', border: '2px solid rgb(102, 102, 102)', borderRadius: '5px' }}>
+                          <option>Perro</option>
+                          <option>Gato</option>
+                        </select>
+                      </div>
+                      <div className='p-container-validacion'>
+                        <p style={{ margin: '0px', color: 'grey', fontSize: '12px' }}>Up</p>
+                        <select style={{ width: '100%', height: '34px', background: '#f4f4f4', border: '2px solid rgb(102, 102, 102)', borderRadius: '5px' }}>
+                          <option>Perro</option>
+                          <option>Gato</option>
+                        </select>
+                      </div>
+                      <button style={{ height: '30px', marginTop: '14px' }}>Guardar</button>
                     </div>
-                    <div className='p-container-valeslist'>
-                      <p style={{ margin: '0px', color: 'grey', fontSize: '12px' }}>Agregar Pdf</p>
-                      <Dropzone
-                        style={{
-                          position: 'relative',
-                          width: '100%',
-                          height: '30px',
-                          borderWidth: '2px',
-                          borderColor: 'rgb(102, 102, 102)',
-                          borderStyle: 'solid',
-                          borderRadius: '5px'
-                        }}
-                        accept='.pdf' onChange={this.handleOnChange2.bind(this)}
-                      />
-                      <progress className='progress' value={this.state.pdf2} max='100'>
-                        {this.state.pdf2}
-                      </progress>
+                    <div style={{ width: '100%', display: 'flex', marginTop: '20px' }}>
+                      <div className='p-container-validacion'>
+                        <p style={{ margin: '0px', color: 'grey', fontSize: '12px' }}>Tipo de persona</p>
+                        <select style={{ width: '100%', height: '34px', background: '#f4f4f4', border: '2px solid rgb(102, 102, 102)', borderRadius: '5px' }}>
+                          <option>Fisica</option>
+                          <option>Moral</option>
+                        </select>
+                      </div>
+                      <div className='p-container-validacion'>
+                        <p style={{ margin: '0px', color: 'grey', fontSize: '12px' }}>Nombre de partida</p>
+                        <select style={{ width: '100%', height: '34px', background: '#f4f4f4', border: '2px solid rgb(102, 102, 102)', borderRadius: '5px' }}>
+                          <option>A</option>
+                          <option>accept</option>
+                        </select>
+                      </div>
+                      <div className='p-container-validacion'>
+                        <TextField
+                          label='Fecha de Envio'
+                          id='fechaE'
+                          name='fechaE'
+                          value={fechaE}
+                          onChange={this.onChange}
+                          ref={fechaE => this.inputImporte = fechaE}
+                          required
+                        />
+                      </div>
+                      <div className='p-container-validacion'>
+                        <TextField
+                          label='Numero de contrato'
+                          id='numContrato'
+                          name='numContrato'
+                          value={numContrato}
+                          onChange={this.onChange}
+                          ref={numContrato => this.inputImporte = numContrato}
+                          required
+                        />
+                      </div>
+                      <div className='p-container-validacion'>
+                        <TextField
+                          label='Numero de contrato'
+                          id='numContrato'
+                          name='numContrato'
+                          value={numContrato}
+                          onChange={this.onChange}
+                          ref={numContrato => this.inputImporte = numContrato}
+                          required
+                        />
+                      </div>
+                      <div className='p-container-validacion'>
+                        <p style={{ margin: '0px', color: 'grey', fontSize: '12px' }}>Programa Anual de Adquisiciones</p>
+                        <input type='checkbox' />
+                      </div>
                     </div>
-                    <div className='p-container-valeslist'>
-                      <p style={{ margin: '0px', color: 'grey', fontSize: '12px' }}>Partida</p>
-                      <select style={{ width: '100%', height: '34px', background: '#f4f4f4', border: '2px solid rgb(102, 102, 102)', borderRadius: '5px' }}>
-                        <option>Perro</option>
-                        <option>Gato</option>
-                      </select>
-                    </div>
-                    <div className='p-container-valeslist'>
-                      <p style={{ margin: '0px', color: 'grey', fontSize: '12px' }}>Up</p>
-                      <select style={{ width: '100%', height: '30px' }}>
-                        <option>Perro</option>
-                        <option>Gato</option>
-                      </select>
-                    </div>
-                    <button style={{ height: '30px', marginTop: '14px' }}>Guardar</button>
                   </form>
                 </div>
               </div>

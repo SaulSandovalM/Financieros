@@ -423,13 +423,12 @@
 }
 .prensente-sp {
   padding-left: 0;
-  padding-top: 48px;
+  padding-top: 20px;
 }
 .añadido-sp {
   display: flex;
   flex-direction: row;
   justify-content: flex-end;
-  padding-top: 15px;
 }
 .texto-ofi-sp {
   margin-top: -30px;
@@ -438,21 +437,21 @@
 }
 .atte-sp {
   display: flex;
-  justify-content: left;
+  justify-content: center;
 }
 .atte-text-sp {
-  text-align: left;
+  text-align: center;
 }
 .firma-sp {
   display: flex;
   flex-direction: row;
-  justify-content: left;
+  justify-content: center;
   padding-top: 80px;
   width: 100%;
 }
 .firma-raya-sp {
   border-top: 1px solid black;
-  text-align: left;
+  text-align: center;
   width: 58%;
 }
 .footer-sp {
@@ -1102,4 +1101,8 @@ th {
   max-width:300px;
   position:relative;
   white-space: nowrap;
+}
+.popup-content {
+  height: 60% !important;
+  overflow: inherit !important;
 }
