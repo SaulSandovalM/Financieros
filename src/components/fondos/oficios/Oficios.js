@@ -684,8 +684,9 @@ export default class Oficios extends Component {
                   Por medio del presente me permito enviar a usted, documentación amparada
                   con {finalC} comprobantes, por un total de
                   <CurrencyFormat value={ttotal} displayType='text' thousandSeparator prefix=' $ ' /> ({(NumberAsString(ttotal))}),
-                  con una retención por <CurrencyFormat value={(totalRetencion.reduce(reducer)).toFixed(2)} displayType='text' thousandSeparator prefix=' $ ' /> para
-                  un importe total a pagar de <CurrencyFormat value={parseFloat(ttotal) - (totalRetencion.reduce(reducer)).toFixed(2)} displayType='text' thousandSeparator prefix=' $ ' /> para
+                  {(totalRetencion.reduce(reducer)) !== 0 ?
+                    'con una retención por' + <CurrencyFormat value={(totalRetencion.reduce(reducer)).toFixed(2)} displayType='text' thousandSeparator prefix=' $ ' /> + 'para' +
+                  'un importe total a pagar de' + <CurrencyFormat value={parseFloat(ttotal) - (totalRetencion.reduce(reducer)).toFixed(2)} displayType='text' thousandSeparator prefix=' $ ' /> : '' } para
                   el trámite de Reembolso de Fondo Revolvente, con cargo al
                   proyecto{this.state.comprometidos.map(item => item.proy ? ', ' + item.proy : null)}
                   {this.state.comprometidos.map(item => item.np ? ', ' + item.np : null)} otorgado
