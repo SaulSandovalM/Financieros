@@ -143,7 +143,13 @@ export default class Oficios extends Component {
       : null
     )
     const tt = (a, b) => a + b
-    var ttotal = total1.reduce(tt)
+    var ttotal = total1.reduce(tt).toFixed(2)
+
+    // consumo de numero de comprobantes
+    const compro = [0]
+    this.state.comprometidos.map(item => item.comprobantes !== undefined ? compro.push(item.comprobantes.length) : null)
+    const numcom = (a, b) => a + b
+    var finalC = compro.reduce(numcom)
 
     return (
       <div className='oficios-container'>
@@ -676,7 +682,7 @@ export default class Oficios extends Component {
               <div className='texto-ofi-sp'>
                 <p>
                   Por medio del presente me permito enviar a usted, documentación amparada
-                  con {this.state.fondo.numCompro} comprobantes, por un total de
+                  con {finalC} comprobantes, por un total de
                   <CurrencyFormat value={ttotal} displayType='text' thousandSeparator prefix=' $ ' /> ({(NumberAsString(ttotal))}),
                   con una retención por <CurrencyFormat value={(totalRetencion.reduce(reducer)).toFixed(2)} displayType='text' thousandSeparator prefix=' $ ' /> para
                   un importe total a pagar de <CurrencyFormat value={parseFloat(ttotal) - (totalRetencion.reduce(reducer)).toFixed(2)} displayType='text' thousandSeparator prefix=' $ ' /> para

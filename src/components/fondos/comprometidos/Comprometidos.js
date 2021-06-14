@@ -167,31 +167,6 @@ export default class Comprometidos extends Component {
     })
   }
 
-  listenForXmlPago = (itemsRefXmlPago) => {
-    itemsRefXmlPago.on('value', (snap) => {
-      var xml = []
-      snap.forEach((child) => {
-        xml.push({
-          nombre: child.val().nombre,
-          fecha: child.val().fecha,
-          folio: child.val().folio,
-          importe: child.val().importe,
-          isr: child.val().isr,
-          iva: child.val().iva,
-          subtotal: child.val().subtotal,
-          total: child.val().total,
-          uuid: child.val().uuid,
-          estatus: child.val().estatus,
-          tipo: child.val().tipo,
-          id: child.key
-        })
-      })
-      this.setState({
-        xmlP: xml
-      })
-    })
-  }
-
   listenFondos = (itemsRefFondos) => {
     itemsRefFondos.on('value', (snap) => {
       var comprometidosAgregados = []
@@ -205,26 +180,11 @@ export default class Comprometidos extends Component {
           iva: child.val().iva,
           isr: child.val().isr,
           total: child.val().total,
-          año: child.val().año,
-          ramo: child.val().rm,
-          ur: child.val().ur,
           up: child.val().up,
           rubro: child.val().rubro,
-          tg: child.val().tg,
           npro: child.val().npro,
           np: child.val().np,
-          f: child.val().f,
-          fu: child.val().fu,
-          sf: child.val().sf,
-          eje: child.val().eje,
-          s: child.val().s,
-          prog: child.val().prog,
-          sp: child.val().sp,
-          obj: child.val().obj,
           proy: child.val().proy,
-          est: child.val().est,
-          ben: child.val().ben,
-          eg: child.val().eg,
           comprobantes: child.val().comprobantes,
           id: child.key
         })
@@ -238,32 +198,16 @@ export default class Comprometidos extends Component {
   componentDidMount () {
     const itemsRefXml = firebase.database().ref('xml/')
     this.listenForXmlR(itemsRefXml)
-    const itemsRefXmlPago = firebase.database().ref('xmlPago/')
-    this.listenForXmlPago(itemsRefXmlPago)
     const itemsRef = firebase.database().ref('presupuesto/')
     this.listenForItems(itemsRef)
     const itemsRefFondos = firebase.database().ref(`fondos/${this.state.urlfire}/comprometido`)
     this.listenFondos(itemsRefFondos)
   }
 
-  upsearch (event) {
-    this.setState({ search: event.target.value })
-  }
-
-  updateSearch (event) {
-    this.setState({ partida: event.target.value })
-  }
-
-  updateSearch2 (event) {
-    this.setState({ up: event.target.value })
-  }
-
-  updateSearch3 (event) {
-    this.setState({ rubro: event.target.value })
-  }
-
-  updateSearch5 (event) {
-    this.setState({ area: event.target.value })
+  handleInput (event) {
+    const state = this.state
+    state[event.target.name] = event.target.value
+    this.setState(state)
   }
 
   // handleOnChange1 (event) {
@@ -764,8 +708,10 @@ export default class Comprometidos extends Component {
                   Buscador
                   <input
                     className='input-compro'
+                    name='search'
+                    id='search'
                     value={this.state.search}
-                    onChange={this.upsearch.bind(this)}
+                    onChange={this.handleInput.bind(this)}
                     placeholder='Ingresa el Folio / Nombre'
                   />
                 </div>
@@ -836,9 +782,10 @@ export default class Comprometidos extends Component {
                 <TableCell className='border-table2'>
                   <select
                     className='select-compro'
+                    id='partida'
                     name='partida'
                     ref='partida'
-                    onChange={this.updateSearch.bind(this)}
+                    onChange={this.handleInput.bind(this)}
                     required
                     value={this.state.partida}
                   >
@@ -850,9 +797,10 @@ export default class Comprometidos extends Component {
                 <TableCell className='border-table2'>
                   <select
                     className='select-compro'
-                    name='presupuestal'
-                    ref='presupuestal'
-                    onChange={this.updateSearch2.bind(this)}
+                    id='up'
+                    name='up'
+                    ref='up'
+                    onChange={this.handleInput.bind(this)}
                     required
                     value={this.state.up}
                   >
@@ -864,9 +812,10 @@ export default class Comprometidos extends Component {
                 <TableCell className='border-table2'>
                   <select
                     className='select-compro'
+                    id='rubro'
                     name='rubro'
                     ref='rubro'
-                    onChange={this.updateSearch3.bind(this)}
+                    onChange={this.handleInput.bind(this)}
                     required
                     value={this.state.rubro}
                   >
@@ -878,10 +827,11 @@ export default class Comprometidos extends Component {
                 <TableCell className='border-table-area'>
                   <select
                     className='select-compro'
+                    id='area'
                     name='area'
                     ref='area'
                     value={this.state.area}
-                    onChange={this.updateSearch5.bind(this)}
+                    onChange={this.handleInput.bind(this)}
                     required
                   >
                     {this.area.map((x,y) =>

@@ -597,40 +597,42 @@ export default class Fondos extends Component {
                     </div>
 
                 </div>*/}
-                <div className='div-f2'>
-                  <div className='fondo-w-c'>
-                    <div>
-                      <FormControl className='fondo-w-c'>
-                        <InputLabel>Proyecto</InputLabel>
-                        <Select
-                          style={{ height: 'auto' }}
-                          multiple
-                          id='no_proyecto'
-                          name='no_proyecto'
-                          value={no_proyecto}
-                          onChange={this.onChange}
-                          ref={no_proyecto => this.inputNoProyecto = no_proyecto}
-                          required
-                          input={<Input id='select-multiple-chip' />}
-                          renderValue={(selected) => (
-                            <div>
-                              {selected.map((value) => (
-                                <Chip key={value} label={value} style={{ display: 'flex', flexWrap: 'wrap' }}/>
-                              ))}
-                            </div>
-                          )}
-                          MenuProps={MenuProps}
-                        >
-                          {this.no_proyecto.map((name) => (
-                            <MenuItem key={name} value={name}>
-                              {name}
-                            </MenuItem>
-                          ))}
-                        </Select>
-                      </FormControl>
+                {(realizo === 'MIGUEL' || realizo === 'ELOY' || realizo === 'TERESA' || realizo === 'MARTHA' || realizo === 'LIZBETH') ?
+                  <div className='div-f2'>
+                    <div className='fondo-w-c'>
+                      <div>
+                        <FormControl className='fondo-w-c'>
+                          <InputLabel>Proyecto</InputLabel>
+                          <Select
+                            style={{ height: 'auto' }}
+                            multiple
+                            id='no_proyecto'
+                            name='no_proyecto'
+                            value={no_proyecto}
+                            onChange={this.onChange}
+                            ref={no_proyecto => this.inputNoProyecto = no_proyecto}
+                            required
+                            input={<Input id='select-multiple-chip' />}
+                            renderValue={(selected) => (
+                              <div>
+                                {selected.map((value) => (
+                                  <Chip key={value} label={value} style={{ display: 'flex', flexWrap: 'wrap' }}/>
+                                ))}
+                              </div>
+                            )}
+                            MenuProps={MenuProps}
+                          >
+                            {this.no_proyecto.map((name) => (
+                              <MenuItem key={name} value={name}>
+                                {name}
+                              </MenuItem>
+                            ))}
+                          </Select>
+                        </FormControl>
+                      </div>
                     </div>
-                  </div>
-                </div>
+                  </div> : null
+                }
                 {/* <div className='div-f2'>
                   <div style={{ width: '99%' }}>
                     <div>
