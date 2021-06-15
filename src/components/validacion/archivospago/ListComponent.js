@@ -28,12 +28,19 @@ export default class ListComponent extends Component {
   render () {
     return (
       <div>
-        <TableContainer component={Paper} style={{ maxWidth: '100%', height: '69vh' }}>
+        <TableContainer component={Paper} style={{ maxWidth: '100%', height: '60vh' }}>
           <Table>
             <TableHead>
-              <TableRow>
-                <TableCell className='table-v-num'><b>XML</b></TableCell>
-                <TableCell className='table-v-num'><b>PDF</b></TableCell>
+              <TableRow style={{ display: 'flex', flexDirection: 'row', top: '0', background: 'white' }}>
+                <TableCell className='border-icon' style={{ width: '50px' }} />
+                <TableCell className='table-validacion'><b>Facturas</b></TableCell>
+                <TableCell className='table-validacion'><b>Fondo</b></TableCell>
+                <TableCell className='table-validacion'><b>Folio</b></TableCell>
+                <TableCell className='table-validacion'><b>Fecha Ingreso</b></TableCell>
+                <TableCell className='table-validacion'><b>Contrarecibo</b></TableCell>
+                <TableCell className='table-validacion'><b>Fecha Pago</b></TableCell>
+                <TableCell className='table-validacion'><b>Devolución</b></TableCell>
+                <TableCell className='table-validacion'><b>Total</b></TableCell>
               </TableRow>
             </TableHead>
             {

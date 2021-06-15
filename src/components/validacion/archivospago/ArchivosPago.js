@@ -4,10 +4,24 @@ import ListComponent from './ListComponent'
 import './ArchivosPago.css'
 import Dropzone from 'react-dropzone'
 import TextField from '@material-ui/core/TextField'
+import CurrencyFormat from 'react-currency-format'
+import Fab from '@material-ui/core/Fab'
+import CheckIcon from '@material-ui/icons/Check'
 
 export default class ArchivosPago extends Component {
   constructor(props) {
     super(props)
+    var today = new Date()
+    var dd = today.getDate()
+    var mm = today.getMonth() + 1
+    var yyyy = today.getFullYear()
+    if (dd < 10) {
+      dd = '0' + dd
+    }
+    if (mm < 10) {
+      mm = '0' + mm
+    }
+    today = dd + '/' + mm + '/' + yyyy
     this.state = {
       lista: [
         {
@@ -23,16 +37,34 @@ export default class ArchivosPago extends Component {
       filefactura: [],
       xmlC: [],
       xmlLoading: 0,
-      fechaE: '',
-      numContrato: ''
+      fechaE: today,
+      partida: '',
+      up: '',
+      total: [0],
+      contador: [],
+      numContra: '',
+      datos: [],
+      presupuesto: [
+        {
+          id: 1,
+          name: 'prueba',
+          done: false
+        }
+      ],
     }
   }
 
   handleOnChange1 (event) {
+    const Total = this.state.total
+    var contador = this.state.contador
+    var datosXml = this.state.datos
     for (var i = 0; i < event.target.files.length; i++) {
+      contador.push(i);
       const file = event.target.files[i]
       const xmlp = file
       var reader = new FileReader()
+      const par = this.state.partida
+      const up = this.state.up
       reader.onload = function (event) {
         var XMLParser = require('react-xml-parser')
         var xml = new XMLParser().parseFromString(event.target.result)
@@ -47,9 +79,13 @@ export default class ArchivosPago extends Component {
           'isr': xml.children['3'].attributes['TotalImpuestosRetenidos'] ? xml.children['3'].attributes['TotalImpuestosRetenidos'] : 0,
           'fecha': xml.getElementsByTagName('tfd:TimbreFiscalDigital')[0].attributes['FechaTimbrado'],
           'uuid': xml.getElementsByTagName('tfd:TimbreFiscalDigital')[0].attributes['UUID'] ? xml.getElementsByTagName('tfd:TimbreFiscalDigital')[0].attributes['UUID'] : xmlp.name.slice(0, -4),
+          'descripcion': xml.children['2'].children['0'].attributes['Descripcion'],
           'estatus': 'sin asignar',
           'tipo': 'directo',
+          'partida': par,
+          'up': up
         }
+        console.log(data)
         fetch(xml).then(res => res.text()).then(xml => {
           fetch('https://financieros-78cb0.firebaseio.com/xml.json', {
             method: 'POST',
@@ -60,6 +96,8 @@ export default class ArchivosPago extends Component {
             body: JSON.stringify(data),
           })
         })
+        datosXml.push(data)
+        Total.push(parseFloat(data.total))
       }
       reader.readAsText(xmlp)
       const storageRef = firebase.storage().ref(`validacion/${file.name}`)
@@ -99,40 +137,124 @@ export default class ArchivosPago extends Component {
     }
   }
 
-  listenForItems = (itemsRef) => {
-    itemsRef.on('value', (snap) => {
-      var lista = []
-      snap.forEach((child) => {
-        lista.push({
-          xmlC: child.val().xmlC,
-          filefactura: child.val().filefactura,
-          id: child.key
-        })
-      })
-      this.setState({
-        lista: lista
-      })
-    })
-  }
-
   componentDidMount () {
-    const itemsRef = firebase.database().ref('xmlPagoDirecto/')
-    this.listenForItems(itemsRef)
+    const itemsPresupuesto = firebase.database().ref('presupuesto/')
+    this.listenForPresupuesto(itemsPresupuesto)
   }
 
   resetForm () {
     this.refs.contactForm.reset()
   }
 
+  handleInput (event) {
+    const state = this.state
+    state[event.target.name] = event.target.value
+    this.setState(state)
+  }
+
+  listenForPresupuesto = (itemsPresupuesto) => {
+    itemsPresupuesto.on('value', (snap) => {
+      var presupuesto = []
+      snap.forEach((child) => {
+        presupuesto.push({
+          año: child.val().año,
+          rm: child.val().rm,
+          ur: child.val().ur,
+          up: child.val().up,
+          rubro: child.val().rubro,
+          tg: child.val().tg,
+          ogasto: child.val().ogasto,
+          npro: child.val().npro,
+          f: child.val().f,
+          fu: child.val().fu,
+          sf: child.val().sf,
+          eje: child.val().eje,
+          s: child.val().s,
+          prog: child.val().prog,
+          sp: child.val().sp,
+          min: child.val().min,
+          obj: child.val().obj,
+          proy: child.val().proy,
+          est: child.val().est,
+          obra: child.val().obra,
+          ben: child.val().ben,
+          eg: child.val().eg,
+          mi: child.val().mi,
+          pr: child.val().pr,
+          pd: child.val().pd,
+          itrans: child.val().itrans,
+          igest: child.val().igest,
+          la: child.val().la,
+          ods: child.val().ods,
+          et: child.val().et,
+          ff: child.val().ff,
+          of: child.val().of,
+          np: child.val().np,
+          cpa: child.val().cpa,
+          ene: child.val().ene,
+          gasene: child.val().gasene,
+          feb: child.val().feb,
+          gasfeb: child.val().gasfeb,
+          mar: child.val().mar,
+          gasmar: child.val().gasmar,
+          abr: child.val().abr,
+          gasabr: child.val().gasabr,
+          may: child.val().may,
+          gasmay: child.val().gasmay,
+          jun: child.val().jun,
+          gasjun: child.val().gasjun,
+          jul: child.val().jul,
+          gasjul: child.val().gasjul,
+          ago: child.val().ago,
+          gasago: child.val().gasago,
+          sep: child.val().sep,
+          gassep: child.val().gassep,
+          oct: child.val().oct,
+          gasoct: child.val().gasoct,
+          nov: child.val().nov,
+          gasnov: child.val().gasnov,
+          dic: child.val().dic,
+          gasdic: child.val().gasdic,
+          total: child.val().total,
+          ampliacion: child.val().ampliacion,
+          reduccion: child.val().reduccion,
+          transferencia: child.val().transferencia,
+          estatus: child.val().estatus,
+          id: child.key
+        })
+      })
+      this.setState({
+        presupuesto: presupuesto
+      })
+    })
+  }
+
   sendMessage (e) {
     e.preventDefault()
+    const tota = (a, b) => a + b
+    const Total2 = this.state.total.reduce(tota)
     const params = {
+      NumFacturas: this.state.contador.length,
+      Fondo: ' ',
+      Folio: '',
+      FechaI: this.state.fechaE,
+      Contrarecibo: ' ',
+      FechaP: ' ',
+      Devolucion: ' ',
+      Total: Total2,
+      TipoPerona: this.inputTipoPersona.value,
+      NumContra: this.state.numContrato,
+      Adquisicion: this.inputAdqui.value,
+      Xml: this.state.datos,
       xmlC: this.state.xmlC,
       filefactura: this.state.filefactura
     }
     this.setState({
       xmlC: [{ url: '', nombre: '' }],
       filefactura: [{ url: '', nombre: '' }],
+      contador: [],
+      total: [0],
+      datos: []
     })
     if (params.xmlC && params.filefactura) {
       firebase.database().ref('xmlPagoDirecto').push(params).then(() => {
@@ -147,17 +269,55 @@ export default class ArchivosPago extends Component {
   }
 
   render () {
-    const { fechaE, numContrato } = this.state
+    const { fechaE } = this.state
+
+    let presupuestop = this.state.presupuesto.map(item => {
+      return item.ogasto
+    })
+    let resultp = presupuestop.filter((item, index) => {
+      return presupuestop.indexOf(item) === index
+    })
+    let presupuestou = this.state.presupuesto.map(item => {
+      return (this.state.partida === item.ogasto) && item.up
+    })
+    let resultu = presupuestou.filter((item, index) => {
+      return presupuestou.indexOf(item) === index
+    })
+    let presupuestor = this.state.presupuesto.map(item => {
+      return (this.state.partida === item.ogasto && this.state.up === item.up) && item.np
+    })
+    let resultr = presupuestor.filter((item, index) => {
+      return presupuestor.indexOf(item) === index
+    })
+    let presupuesto = this.state.presupuesto.map(item => {
+      return (this.state.partida === item.ogasto && this.state.up === item.up) && item.jun
+    })
+    let result = presupuesto.filter((item, index) => {
+      return presupuesto.indexOf(item) === index
+    })
+
     return (
       <div className='container-valeslist'>
         <div className='margin-f-a'>
           <div className='p-container-validacion'>
-            <div className='p-margin-valeslist'>
+            <div style={{ display: 'flex', justifyContent: 'space-between', width: '100%' }}>
               <p className='p-title-size-valeslist'>
                 - Selecciona la carga de evidencias de tus comprobaciones
               </p>
+              <div>
+                <p className='p-banco'><b>CANTIDAD DISPONIBLE</b></p>
+                <p className='cantidad-add-banco'>
+                  MXN
+                  <CurrencyFormat
+                    value={result[1]}
+                    displayType='text'
+                    thousandSeparator
+                    prefix=' $'
+                  />
+                </p>
+              </div>
             </div>
-            <div className='inputs-container-valeslist'>
+            <div className='inputs-container-valeslist' style={{ width: '60%' }}>
               <div className='inputs-valeslist'>
                 <div className='inputs-row-valeslist'>
                   <form style={{ display: 'flex', width: '100%', flexDirection: 'column' }} onSubmit={this.sendMessage.bind(this)} ref='contactForm'>
@@ -200,33 +360,81 @@ export default class ArchivosPago extends Component {
                       </div>
                       <div className='p-container-validacion'>
                         <p style={{ margin: '0px', color: 'grey', fontSize: '12px' }}>Partida</p>
-                        <select style={{ width: '100%', height: '34px', background: '#f4f4f4', border: '2px solid rgb(102, 102, 102)', borderRadius: '5px' }}>
-                          <option>Perro</option>
-                          <option>Gato</option>
+                        <select
+                          style={{
+                            width: '100%',
+                            height: '34px',
+                            background: '#f4f4f4',
+                            border: '2px solid rgb(102, 102, 102)',
+                            borderRadius: '5px'
+                          }}
+                          id='partida'
+                          name='partida'
+                          ref={partida => this.inputPartida = partida}
+                          onChange={this.handleInput.bind(this)}
+                          value={this.state.partida}
+                        >
+                          {resultp.map((x,y) =>
+                            <option name={y}>{x}</option>
+                          )}
                         </select>
                       </div>
                       <div className='p-container-validacion'>
                         <p style={{ margin: '0px', color: 'grey', fontSize: '12px' }}>Up</p>
-                        <select style={{ width: '100%', height: '34px', background: '#f4f4f4', border: '2px solid rgb(102, 102, 102)', borderRadius: '5px' }}>
-                          <option>Perro</option>
-                          <option>Gato</option>
+                        <select
+                          style={{
+                            width: '100%',
+                            height: '34px',
+                            background: '#f4f4f4',
+                            border: '2px solid rgb(102, 102, 102)',
+                            borderRadius: '5px'
+                          }}
+                          id='up'
+                          name='up'
+                          ref='up'
+                          onChange={this.handleInput.bind(this)}
+                          value={this.state.up}
+                        >
+                          {resultu.map((x,y) =>
+                            <option name={y}>{x}</option>
+                          )}
                         </select>
                       </div>
-                      <button style={{ height: '30px', marginTop: '14px' }}>Guardar</button>
+                    </div>
+                    <div className='p-container-validacion'>
+                      <p style={{ margin: '0px', color: 'grey', fontSize: '12px' }}>Nombre de partida</p>
+                      <select
+                        style={{
+                          width: '100%',
+                          height: '34px',
+                          background: '#f4f4f4',
+                          border: '2px solid rgb(102, 102, 102)',
+                          borderRadius: '5px'
+                        }}
+                      >
+                        {resultr.map((x,y) =>
+                          <option name={y}>{x}</option>
+                        )}
+                      </select>
                     </div>
                     <div style={{ width: '100%', display: 'flex', marginTop: '20px' }}>
                       <div className='p-container-validacion'>
                         <p style={{ margin: '0px', color: 'grey', fontSize: '12px' }}>Tipo de persona</p>
-                        <select style={{ width: '100%', height: '34px', background: '#f4f4f4', border: '2px solid rgb(102, 102, 102)', borderRadius: '5px' }}>
+                        <select
+                          style={{
+                            width: '100%',
+                            height: '34px',
+                            background: '#f4f4f4',
+                            border: '2px solid rgb(102, 102, 102)',
+                            borderRadius: '5px'
+                          }}
+                          id='TipoPersona'
+                          name='TipoPersona'
+                          value={this.state.TipoPersona}
+                          ref={TipoPersona => this.inputTipoPersona = TipoPersona}
+                        >
                           <option>Fisica</option>
                           <option>Moral</option>
-                        </select>
-                      </div>
-                      <div className='p-container-validacion'>
-                        <p style={{ margin: '0px', color: 'grey', fontSize: '12px' }}>Nombre de partida</p>
-                        <select style={{ width: '100%', height: '34px', background: '#f4f4f4', border: '2px solid rgb(102, 102, 102)', borderRadius: '5px' }}>
-                          <option>A</option>
-                          <option>accept</option>
                         </select>
                       </div>
                       <div className='p-container-validacion'>
@@ -235,9 +443,8 @@ export default class ArchivosPago extends Component {
                           id='fechaE'
                           name='fechaE'
                           value={fechaE}
-                          onChange={this.onChange}
+                          onChange={this.handleInput.bind(this)}
                           ref={fechaE => this.inputImporte = fechaE}
-                          required
                         />
                       </div>
                       <div className='p-container-validacion'>
@@ -245,27 +452,37 @@ export default class ArchivosPago extends Component {
                           label='Numero de contrato'
                           id='numContrato'
                           name='numContrato'
-                          value={numContrato}
-                          onChange={this.onChange}
-                          ref={numContrato => this.inputImporte = numContrato}
-                          required
+                          value={this.state.numContrato}
+                          onChange={this.handleInput.bind(this)}
+                          ref={numContrato => this.inputNumContrato = numContrato}
                         />
                       </div>
                       <div className='p-container-validacion'>
                         <TextField
-                          label='Numero de contrato'
-                          id='numContrato'
-                          name='numContrato'
-                          value={numContrato}
-                          onChange={this.onChange}
-                          ref={numContrato => this.inputImporte = numContrato}
-                          required
+                          label='Folio Interno'
+                          id='folio'
+                          name='folio'
+                          value={this.state.folio}
+                          onChange={this.handleInput.bind(this)}
+                          ref={folio => this.inputFolio = folio}
                         />
                       </div>
                       <div className='p-container-validacion'>
                         <p style={{ margin: '0px', color: 'grey', fontSize: '12px' }}>Programa Anual de Adquisiciones</p>
-                        <input type='checkbox' />
+                        <input
+                          type='checkbox'
+                          id='adqui'
+                          name='adqui'
+                          value={this.state.adqui}
+                          onChange={this.handleInput}
+                          ref={adqui => this.inputAdqui = adqui}
+                        />
                       </div>
+                    </div>
+                    <div className='div-content-fab-com'>
+                      <Fab color='primary' style={{ background: 'green' }} type='submit'>
+                        <CheckIcon />
+                      </Fab>
                     </div>
                   </form>
                 </div>

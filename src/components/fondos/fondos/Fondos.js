@@ -103,7 +103,7 @@ export default class Fondos extends Component {
       ],
       comprometidosp: '',
       oficios: '',
-      anexof: ' '
+      anexof: ' ',
     }
   }
 
