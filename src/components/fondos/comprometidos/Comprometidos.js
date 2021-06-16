@@ -33,6 +33,7 @@ export default class Comprometidos extends Component {
       right: [],
       empty: [0],
       xml: [],
+      xml2: [],
       xmlP: [],
       partida: '',
       rubro: '',
@@ -61,7 +62,10 @@ export default class Comprometidos extends Component {
       isrr: 0,
       idP: '',
       ids: '',
-      urlfire: String(URLactual).substr(-20)
+      urlfire: String(URLactual).substr(-20),
+      sup: '',
+      spartida: '',
+      scantidad: ''
     }
   }
 
@@ -148,13 +152,13 @@ export default class Comprometidos extends Component {
       snap.forEach((child) => {
         xml.push({
           nombre: child.val().nombre,
-          fecha: child.val().fecha,
+          total: child.val().total,
+          subtotal: child.val().subtotal,
           folio: child.val().folio,
           importe: child.val().importe,
-          isr: child.val().isr,
           iva: child.val().iva,
-          subtotal: child.val().subtotal,
-          total: child.val().total,
+          isr: child.val().isr,
+          fecha: child.val().fecha,
           uuid: child.val().uuid,
           estatus: child.val().estatus,
           tipo: child.val().tipo,
@@ -163,6 +167,34 @@ export default class Comprometidos extends Component {
       })
       this.setState({
         xml: xml
+      })
+    })
+  }
+
+  listenForXmlR2 = (itemsRefXml2) => {
+    itemsRefXml2.on('value', (snap) => {
+      var xml = []
+      snap.forEach((child) => {
+        xml.push({
+          nombre: child.val().nombre,
+          total: child.val().total,
+          subtotal: child.val().subtotal,
+          folio: child.val().folio,
+          importe: child.val().importe,
+          iva: child.val().iva,
+          isr: child.val().isr,
+          fecha: child.val().fecha,
+          uuid: child.val().uuid,
+          descripcion: child.val().descripcion,
+          estatus: child.val().estatus,
+          tipo: child.val().tipo,
+          partida: child.val().partida,
+          up: child.val().up,
+          id: child.key
+        })
+      })
+      this.setState({
+        xml2: xml
       })
     })
   }
@@ -198,6 +230,8 @@ export default class Comprometidos extends Component {
   componentDidMount () {
     const itemsRefXml = firebase.database().ref('xml/')
     this.listenForXmlR(itemsRefXml)
+    const itemsRefXml2 = firebase.database().ref('xml/')
+    this.listenForXmlR2(itemsRefXml2)
     const itemsRef = firebase.database().ref('presupuesto/')
     this.listenForItems(itemsRef)
     const itemsRefFondos = firebase.database().ref(`fondos/${this.state.urlfire}/comprometido`)
@@ -495,7 +529,12 @@ export default class Comprometidos extends Component {
     }
 
     const { checked, right } = this.state
-    const left = this.state.xml
+    let left
+    if (admin === 'MIGUEL' || admin === 'TERESA' || admin === 'ELOY' || admin === 'MARTHA' || admin === 'MARCOS' || admin === 'LIZBETH') {
+      left = this.state.xml
+    } else {
+      left = this.state.xml2
+    }
 
     const leftChecked = intersection(checked, left)
     const rightChecked = intersection(checked, right)
@@ -532,11 +571,20 @@ export default class Comprometidos extends Component {
       }
     )
 
-    const filterData2 = this.state.xml.filter(
+    const xmlvali = []
+    this.state.xml2.map(item =>
+      item.up ?
+        item !== null ?
+          xmlvali.push(item)
+        : null
+      : null
+    )
+
+    const filterData2 = xmlvali.filter(
       (xml) => {
-        return ( ( (xml.folio.indexOf(this.state.search) !== -1) ||
-          (xml.nombre.indexOf(this.state.search) !== -1) ||
-          (xml.fecha.indexOf(this.state.search) !== -1) ) &&
+        return ( ( (xml.up.indexOf(this.state.up) !== -1) &&
+          (xml.partida.indexOf(this.state.partida) !== -1) &&
+          (xml.total.indexOf(this.state.scantidad) !== -1) ) &&
           xml.estatus !== 'asignado' && xml.tipo === 'directo')
       }
     )
@@ -706,14 +754,32 @@ export default class Comprometidos extends Component {
               <div className='div-into-data'>
                 <div className='recibo-container'>
                   Buscador
-                  <input
-                    className='input-compro'
-                    name='search'
-                    id='search'
-                    value={this.state.search}
-                    onChange={this.handleInput.bind(this)}
-                    placeholder='Ingresa el Folio / Nombre'
-                  />
+                  <div className='search-div'>
+                    <input
+                      className='input-compro'
+                      name='up'
+                      id='up'
+                      value={this.state.up}
+                      onChange={this.handleInput.bind(this)}
+                      placeholder='Ingresa la UP'
+                    />
+                    <input
+                      className='input-compro'
+                      name='partida'
+                      id='partida'
+                      value={this.state.partida}
+                      onChange={this.handleInput.bind(this)}
+                      placeholder='Ingresa la Partida'
+                    />
+                    <input
+                      className='input-compro'
+                      name='scantidad'
+                      id='scantidad'
+                      value={this.state.scantidad}
+                      onChange={this.handleInput.bind(this)}
+                      placeholder='Ingresa la Cantidad'
+                    />
+                  </div>
                 </div>
               </div>
                 {customListLeft('Choices', left)}

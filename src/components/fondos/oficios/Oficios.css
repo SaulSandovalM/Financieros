@@ -409,7 +409,7 @@
   height: 70px;
   justify-content: space-between;
   margin-bottom: 5px;
-  width: 70px;
+  width: auto;
 }
 .sp-direc {
   margin-top: 90px;
@@ -452,7 +452,7 @@
 .firma-raya-sp {
   border-top: 1px solid black;
   text-align: center;
-  width: 58%;
+  width: 62%;
 }
 .footer-sp {
   bottom: 0;

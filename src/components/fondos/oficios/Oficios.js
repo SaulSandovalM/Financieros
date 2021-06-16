@@ -119,6 +119,7 @@ export default class Oficios extends Component {
       : null
     ))
     const reducer = (a, b) => a + b
+    console.log(totalRetencion.reduce(reducer))
     var cad = []
     var proyectof = []
     let noProyect = this.state.no_proyecto
@@ -162,6 +163,7 @@ export default class Oficios extends Component {
                 <ReactToPrint
                   trigger={() => <buttom className='btn-imp-of'>Imprimir</buttom>}
                   content={() => this.sp}
+                  pageStyle={`@media print {@page { size: landscape; }}`}
                 />
               </div>
               <div>
@@ -169,6 +171,7 @@ export default class Oficios extends Component {
                 <ReactToPrint
                   trigger={() => <buttom className='btn-imp-of'>Imprimir</buttom>}
                   content={() => this.rfr}
+                  pageStyle={`@media print {@page { size: portrait; }}`}
                 />
               </div>
               <div>
@@ -176,6 +179,7 @@ export default class Oficios extends Component {
                 <ReactToPrint
                   trigger={() => <buttom className='btn-imp-of'>Imprimir</buttom>}
                   content={() => this.rec}
+                  pageStyle={`@media print {@page { size: portrait; }}`}
                 />
               </div>
               <div>
@@ -190,6 +194,7 @@ export default class Oficios extends Component {
                 <ReactToPrint
                   trigger={() => <buttom className='btn-imp-of'>Imprimir</buttom>}
                   content={() => this.anex}
+                  pageStyle={`@media print {@page { size: portrait; }}`}
                 />
               </div>
             </div>
@@ -202,6 +207,7 @@ export default class Oficios extends Component {
                 <ReactToPrint
                   trigger={() => <buttom className='btn-imp-of'>Imprimir</buttom>}
                   content={() => this.sp}
+                  pageStyle={`@media print {@page { size: landscape; }}`}
                 />
               </div>
               <div>
@@ -209,6 +215,7 @@ export default class Oficios extends Component {
                 <ReactToPrint
                   trigger={() => <buttom className='btn-imp-of'>Imprimir</buttom>}
                   content={() => this.ofi}
+                  pageStyle={`@media print {@page { size: portrait; }}`}
                 />
               </div>
               <div>
@@ -216,6 +223,7 @@ export default class Oficios extends Component {
                 <ReactToPrint
                   trigger={() => <buttom className='btn-imp-of'>Imprimir</buttom>}
                   content={() => this.la}
+                  pageStyle={`@media print {@page { size: landscape; }}`}
                 />
               </div>
               <div>
@@ -223,6 +231,7 @@ export default class Oficios extends Component {
                 <ReactToPrint
                   trigger={() => <buttom className='btn-imp-of'>Imprimir</buttom>}
                   content={() => this.anex}
+                  pageStyle={`@media print {@page { size: portrait; }}`}
                 />
               </div>
             </div>
@@ -235,6 +244,7 @@ export default class Oficios extends Component {
                 <ReactToPrint
                   trigger={() => <buttom className='btn-imp-of'>Imprimir</buttom>}
                   content={() => this.opp}
+                  pageStyle={`@media print {@page { size: portrait; }}`}
                 />
               </div>
               <div>
@@ -242,6 +252,7 @@ export default class Oficios extends Component {
                 <ReactToPrint
                   trigger={() => <buttom className='btn-imp-of'>Imprimir</buttom>}
                   content={() => this.sp}
+                  pageStyle={`@media print {@page { size: landscape; }}`}
                 />
               </div>
               <div>
@@ -452,6 +463,7 @@ export default class Oficios extends Component {
                 <ReactToPrint
                   trigger={() => <buttom className='btn-imp-of'>Imprimir</buttom>}
                   content={() => this.anex}
+                  pageStyle={`@media print {@page { size: portrait; }}`}
                 />
               </div>
             </div>
@@ -680,19 +692,26 @@ export default class Oficios extends Component {
                 </p>
               </div>
               <div className='texto-ofi-sp'>
-                <p>
-                  Por medio del presente me permito enviar a usted, documentación amparada
-                  con {finalC} comprobantes, por un total de
-                  <CurrencyFormat value={ttotal} displayType='text' thousandSeparator prefix=' $ ' /> ({(NumberAsString(ttotal))}),
-                  {(totalRetencion.reduce(reducer)) !== 0 ?
-                    'con una retención por' + <CurrencyFormat value={(totalRetencion.reduce(reducer)).toFixed(2)} displayType='text' thousandSeparator prefix=' $ ' /> + 'para' +
-                  'un importe total a pagar de' + <CurrencyFormat value={parseFloat(ttotal) - (totalRetencion.reduce(reducer)).toFixed(2)} displayType='text' thousandSeparator prefix=' $ ' /> : '' } para
-                  el trámite de Reembolso de Fondo Revolvente, con cargo al
-                  proyecto{this.state.comprometidos.map(item => item.proy ? ', ' + item.proy : null)}
-                  {this.state.comprometidos.map(item => item.np ? ', ' + item.np : null)} otorgado
-                  en el oficio de autorización {this.state.fondo.oficio_aut} del
-                  Ejercicio 2021, a la Procuraduria General de Justicia del estado de Hidalgo.
-                </p>
+                {totalRetencion.reduce(reducer) !== 0 ?
+                  <p>
+                    Por medio del presente me permito enviar a usted, documentación amparada
+                    con {finalC} comprobantes, por un total de <CurrencyFormat value={ttotal} displayType='text' thousandSeparator prefix=' $ ' /> ({(NumberAsString(ttotal))}),
+                    con una retención por <CurrencyFormat value={totalRetencion.reduce(reducer).toFixed(2)} displayType='text' thousandSeparator prefix=' $ ' /> para
+                    un importe total a pagar de <CurrencyFormat value={(parseFloat(ttotal) - (totalRetencion.reduce(reducer))).toFixed(2)} displayType='text' thousandSeparator prefix=' $ ' /> para
+                    el trámite de Reembolso de Fondo Revolvente, con cargo al
+                    proyecto{this.state.comprometidos.map(item => item.proy ? ', ' + item.proy + ' ' + item.np : null)} otorgado
+                    en el oficio de autorización {this.state.fondo.oficio_aut} del
+                    Ejercicio 2021, a la Procuraduria General de Justicia del estado de Hidalgo.
+                  </p> :
+                  <p>
+                    Por medio del presente me permito enviar a usted, documentación amparada
+                    con {finalC} comprobantes, por un total de <CurrencyFormat value={ttotal} displayType='text' thousandSeparator prefix=' $ ' /> ({(NumberAsString(ttotal))}),
+                    para el trámite de Reembolso de Fondo Revolvente, con cargo al
+                    proyecto{this.state.comprometidos.map(item => item.proy ? ', ' + item.proy + ' ' + item.np : null)} otorgado
+                    en el oficio de autorización {this.state.fondo.oficio_aut} del
+                    Ejercicio 2021, a la Procuraduria General de Justicia del estado de Hidalgo.
+                  </p>
+                }
                 <p>Sin otro particular, le envío un cordial y afectuoso saludo.</p>
               </div>
             </div>
@@ -737,32 +756,25 @@ export default class Oficios extends Component {
           <div style={{ height: '75%', display: 'flex', flexDirection: 'column' }}>
             <div style={{ height: '100%', display: 'flex', justifyContent: 'space-between', flexDirection: 'column' }}>
               <div style={{ display: 'flex', justifyContent: 'center' }}>
-                <p>RECIBO</p>
-              </div>
-              <div className='bueno' style={{ paddingTop: '0' }}>
-                <p className='texto-de-pdf'>
-                  Bueno por:
-                  <CurrencyFormat
-                    value={this.state.fondo.importe}
-                    displayType='text'
-                    thousandSeparator
-                    prefix=' $ '
-                  />
-                </p>
+                <h3>RECIBO</h3>
               </div>
               <div>
-                <p className='texto-de-pdf' style={{ textAlign: 'justify', lineHeight: '35px' }}>
-                  Recibí de la Secretaría de Finanzas Públicas del Gobierno del Estado
-                  de Hidalgo la cantidad de
-                  <CurrencyFormat
-                    value={ttotal}
-                    displayType='text'
-                    thousandSeparator
-                    prefix=' $ '
-                  /> ({( NumberAsString(ttotal) )})
-                  por concepto de Reposición de Fondo Revolvente, que se aplicarán
-                  en {this.state.fondo.desc}
-                </p>
+                {totalRetencion.reduce(reducer) !== 0 ?
+                  <p className='texto-de-pdf' style={{ textAlign: 'justify', lineHeight: '35px' }}>
+                    Recibí de la Secretaría de Finanzas Públicas del Gobierno del Estado
+                    de Hidalgo la cantidad de <CurrencyFormat value={ttotal} displayType='text' thousandSeparator prefix=' $ ' /> ({( NumberAsString(ttotal) )})
+                    con una retención por <CurrencyFormat value={totalRetencion.reduce(reducer).toFixed(2)} displayType='text' thousandSeparator prefix=' $ ' /> para
+                    un importe total de <CurrencyFormat value={ttotal - totalRetencion.reduce(reducer).toFixed(2)} displayType='text' thousandSeparator prefix=' $ ' />
+                    por concepto de Reposición de Fondo Revolvente, la cantidad sera
+                    debidamente aplicada en {this.state.fondo.desc}
+                  </p> :
+                  <p className='texto-de-pdf' style={{ textAlign: 'justify', lineHeight: '35px' }}>
+                    Recibí de la Secretaría de Finanzas Públicas del Gobierno del Estado
+                    de Hidalgo la cantidad de <CurrencyFormat value={ttotal} displayType='text' thousandSeparator prefix=' $ ' /> ({( NumberAsString(ttotal) )})
+                    por concepto de Reposición de Fondo Revolvente, la cantidad sera
+                    debidamente aplicada en {this.state.fondo.desc}
+                  </p>
+                }
               </div>
               <div className='fecha'>
                 <p className='texto-de-pdf'>
@@ -773,13 +785,19 @@ export default class Oficios extends Component {
                 <div style={{ bottom: '0' }}>
                   <div className='refe'>
                     <p className='texto-de-pdf'>
-                      DIRECTOR GENERAL DE<br />ADMINISTRACIÓN Y FINANZAS
+                      RECIBI
                     </p>
                   </div>
                   <div className='firma-dad-r'>
                     <div className='firma-raya-r'>
                       <p className='texto-de-pdf' style={{ textAlign: 'center' }}>
-                        MTRO. LEÓN MAXIMILIANO HERNÁNDEZ VALDÉS<br />R.F.C.: HEVL-750104
+                        MTRO. LEÓN MAXIMILIANO HERNÁNDEZ VALDÉS
+                        <br />
+                        R.F.C.: HEVL-750104
+                        <br />
+                        DIRECTOR GENERAL DE
+                        <br />
+                        ADMINISTRACIÓN Y FINANZAS
                       </p>
                     </div>
                   </div>
@@ -841,12 +859,14 @@ export default class Oficios extends Component {
               <div className='texto-ofi-sp'>
                 <p>
                   Por medio de presente me permito enviar a Usted documentación por
-                  un importe total de <CurrencyFormat
-                    value={this.state.fondo.importe}
-                    displayType='text'
-                    thousandSeparator
-                    prefix=' $ '
-                  /> ({(NumberAsString(this.state.fondo.importe))}),
+                  un importe total de {this.state.comprometidos.map(comprometidos =>
+                    comprometidos.isr !== '0.00' && comprometidos.isr ?
+                      <CurrencyFormat value={(totalImporte.reduce(reducer)).toFixed(2)} displayType='text' thousandSeparator prefix=' $ ' />
+                    : null
+                  )} {this.state.comprometidos.map(comprometidos =>
+                    comprometidos.isr !== '0.00' && comprometidos.isr ?
+                    '(' + NumberAsString((totalImporte.reduce(reducer))) + ')' : null
+                  )},
                   cantidad amparada con CFDI No
                   {this.state.comprometidos.map(comprometidos =>
                     comprometidos.comprobantes !== undefined ?
@@ -862,11 +882,11 @@ export default class Oficios extends Component {
                   a favor del proveedor {this.state.fondo.beneficiario} para la compra
                   y/o prestación de servicios
                   {/* preguntar */}
-                  con cargo al proyecto {this.state.comprometidos.map(item => item.proy ? ', ' + item.proy : null)} y
-                  a los recursos otorgados con oficio de autorización {this.state.fondo.oficio_aut}
-                  del Ejercicio 2021, a la Procuraduria General de Justicia del Estado.
+                  con cargo al proyecto{this.state.comprometidos.map(item => item.proy ? ', ' + item.proy + ', ' + item.np : null)} y
+                  a los recursos otorgados con oficio de autorización {this.state.fondo.oficio_aut} del
+                  Ejercicio 2021, a la Procuraduria General de Justicia del Estado.
                 </p>
-                <p>Sin otro particular, le envio un cordial y afectuoso saludo.</p>
+                <p>Sin otro particular, le envio un cordial y afectuoso salud.</p>
               </div>
             </div>
             <div>
@@ -930,8 +950,7 @@ export default class Oficios extends Component {
                 <p>
                   <b>
                     AT´N.: L.C.P. KARINA BARRIOS VELÁZQUEZ
-                    <br />Directora General de Contabilidad
-                    <br />DIRECTORA GENERAL DE CONTABILIDADental
+                    <br />DIRECTORA GENERAL DE CONTABILIDAD
                     <br />GUBERNAMENTAL
                   </b>
                 </p>
@@ -954,8 +973,7 @@ export default class Oficios extends Component {
                     : null
                   )}, para el trámite de pago a favor del proveedor {this.state.fondo.beneficiario}, por
                   la/el servicio {this.state.fondo.desc}, con
-                  cargo al proyecto{this.state.comprometidos.map(item => item.proy ? ', ' + item.proy : null)}
-                  {this.state.comprometidos.slice(0, 2).map(item => item.np ? ', ' + item.np : null)} y
+                  cargo al proyecto{this.state.comprometidos.map(item => item.proy ? ', ' + item.proy + ' ' + item.np : null)} y
                   a los recursos otorgados con el oficio de autorización {this.state.fondo.oficio_aut}, del
                   Ejercicio 2021 a la Procuraduria General de Justicia del Estado de Hidalgo.
                 </p>
@@ -1315,7 +1333,7 @@ export default class Oficios extends Component {
                     <td className='all-tablai' style={{ textAlign: 'left' }}>SUBTOTAL</td>
                     <td className='all-tablai' style={{ textAlign: 'right' }}>
                       <CurrencyFormat
-                        value={(parseFloat(totalImporte) + parseFloat(totalRetencion)).toFixed(2)}
+                        value={(totalImporte.reduce(reducer) + totalRetencion.reduce(reducer)).toFixed(2)}
                         displayType='text'
                         thousandSeparator
                         prefix=' $ '
@@ -1455,8 +1473,7 @@ export default class Oficios extends Component {
                 <p>
                   <b>
                     AT´N.: L.C.P. KARINA BARRIOS VELÁZQUEZ
-                    <br />DIrectora General de Contabilidad
-                    <br />DIRECTORA GENERAL DE CONTABILIDADental
+                    <br />DIRECTORA GENERAL DE CONTABILIDAD
                     <br />GUBERNAMENTAL
                   </b>
                 </p>
@@ -1465,7 +1482,7 @@ export default class Oficios extends Component {
                 <p>
                   Por medio del presente informo a Usted, que se ha concluido el contrato
                   por la prestación de servicios  con el proveedor {this.state.fondo.beneficiario},
-                  de los recuersos autorizados al proyecto{this.state.comprometidos.map(item => item.proy ? ', ' + item.proy : null)},
+                  de los recuersos autorizados al proyecto{this.state.comprometidos.map(item => item.proy ? ', ' + item.proy + ' ' + item.np : null)},
                   asignado a la Unidad Presupuestal {this.state.comprometidos.map(comprometidos =>
                     comprometidos.area ?
                       this.state.comprometidos.length === 1 ?
@@ -1524,6 +1541,7 @@ export default class Oficios extends Component {
                   bajo mi resguardo para cualquier aclaración o presentación ante los
                   órganos fiscalizadores.
                 </p>
+                <p>Sin otro particular, le envio un cordial y afectuoso saludo.</p>
               </div>
             </div>
             <div>
