@@ -44,6 +44,7 @@ export default class ArchivosPago extends Component {
       contador: [],
       numContra: '',
       datos: [],
+      adqui: ' ',
       presupuesto: [
         {
           id: 1,
@@ -236,7 +237,6 @@ export default class ArchivosPago extends Component {
     const params = {
       NumFacturas: this.state.contador.length,
       Fondo: ' ',
-      Folio: ' ',
       FechaI: this.state.fechaE,
       Contrarecibo: ' ',
       FechaP: ' ',
@@ -244,7 +244,7 @@ export default class ArchivosPago extends Component {
       Total: Total2,
       TipoPerona: this.inputTipoPersona.value,
       NumContra: this.state.numContrato,
-      Adquisicion: this.inputAdqui.value,
+      Adquisicion: this.state.adqui,
       Xml: this.state.datos,
       xmlC: this.state.xmlC,
       filefactura: this.state.filefactura
@@ -256,7 +256,7 @@ export default class ArchivosPago extends Component {
       total: [0],
       datos: []
     })
-    if (params.NumFacturas && params.Fondo && params.Folio && params.FechaI
+    if (params.NumFacturas && params.Fondo && params.FechaI
       && params.Contrarecibo && params.FechaP && params.Devolucion
       && params.Total && params.TipoPerona && params.NumContra && params.Adquisicion
       && params.Xml && params.xmlC && params.filefactura) {
@@ -468,7 +468,6 @@ export default class ArchivosPago extends Component {
                           name='adqui'
                           value={this.state.adqui}
                           onChange={this.handleInput}
-                          ref={adqui => this.inputAdqui = adqui}
                         />
                       </div>
                     </div>
