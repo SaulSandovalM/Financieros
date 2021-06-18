@@ -73,6 +73,7 @@ export default class ArchivosPago extends Component {
           'total': xml.attributes['Total'] ? xml.attributes['Total'] : 'No encuentra total',
           'subtotal': xml.attributes['SubTotal'] ? xml.attributes['SubTotal'] : (parseFloat(xml.attributes['Total']) + parseFloat(xml.children['3'].attributes['TotalImpuestosRetenidos'] ? xml.children['3'].attributes['TotalImpuestosRetenidos'] : 0)) - parseFloat(xml.children['3'].attributes['TotalImpuestosTrasladados']),
           'folio': xml.attributes['Folio'] ? xml.attributes['Folio'] : '0',
+          'serie': xml.attributes['Serie'] ? xml.attributes['Serie'] : '0',
           'nombre': xml.children['1'].attributes['Nombre'] ? xml.children['1'].attributes['Nombre'] : 'No encuentra Nombre',
           'importe': xml.attributes['SubTotal'] ? xml.attributes['SubTotal'] : (parseFloat(xml.attributes['Total']) + (xml.children['3'].attributes['TotalImpuestosRetenidos'] ? xml.children['3'].attributes['TotalImpuestosRetenidos'] : 0)) - parseFloat(xml.children['3'].attributes['TotalImpuestosTrasladados']),
           'iva': xml.children['3'].attributes['TotalImpuestosTrasladados'] ? xml.children['3'].attributes['TotalImpuestosTrasladados'] : 0,
@@ -85,7 +86,6 @@ export default class ArchivosPago extends Component {
           'partida': par,
           'up': up
         }
-        console.log(data)
         fetch(xml).then(res => res.text()).then(xml => {
           fetch('https://financieros-78cb0.firebaseio.com/xml.json', {
             method: 'POST',
@@ -236,7 +236,7 @@ export default class ArchivosPago extends Component {
     const params = {
       NumFacturas: this.state.contador.length,
       Fondo: ' ',
-      Folio: '',
+      Folio: ' ',
       FechaI: this.state.fechaE,
       Contrarecibo: ' ',
       FechaP: ' ',
@@ -256,7 +256,10 @@ export default class ArchivosPago extends Component {
       total: [0],
       datos: []
     })
-    if (params.xmlC && params.filefactura) {
+    if (params.NumFacturas && params.Fondo && params.Folio && params.FechaI
+      && params.Contrarecibo && params.FechaP && params.Devolucion
+      && params.Total && params.TipoPerona && params.NumContra && params.Adquisicion
+      && params.Xml && params.xmlC && params.filefactura) {
       firebase.database().ref('xmlPagoDirecto').push(params).then(() => {
         alert('Tu solicitud fue enviada.')
       }).catch(() => {
@@ -455,16 +458,6 @@ export default class ArchivosPago extends Component {
                           value={this.state.numContrato}
                           onChange={this.handleInput.bind(this)}
                           ref={numContrato => this.inputNumContrato = numContrato}
-                        />
-                      </div>
-                      <div className='p-container-validacion'>
-                        <TextField
-                          label='Folio Interno'
-                          id='folio'
-                          name='folio'
-                          value={this.state.folio}
-                          onChange={this.handleInput.bind(this)}
-                          ref={folio => this.inputFolio = folio}
                         />
                       </div>
                       <div className='p-container-validacion'>

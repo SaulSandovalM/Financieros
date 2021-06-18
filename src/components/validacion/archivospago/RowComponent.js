@@ -46,9 +46,6 @@ export default class RowComponent extends Component {
             {this.props.item.Fondo}
           </TableCell>
           <TableCell className='table-validacion'>
-            {this.props.item.Folio}
-          </TableCell>
-          <TableCell className='table-validacion'>
             {this.props.item.FechaI}
           </TableCell>
           <TableCell className='table-validacion'>

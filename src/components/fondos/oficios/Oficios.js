@@ -30,7 +30,7 @@ export default class Oficios extends Component {
       urlfire: String(URLactual).substr(-20),
       mostrar: false,
       fondos: [],
-      nombre: ''
+      nombre: '',
     }
   }
 
@@ -41,6 +41,12 @@ export default class Oficios extends Component {
         fondo: firebasedata
       })
     })
+  }
+
+  onChange = (e) => {
+    const state = this.state
+    state[e.target.name] = e.target.value
+    this.setState(state)
   }
 
   listenComprometidos = (itemsRefComprometidos) => {
@@ -184,88 +190,11 @@ export default class Oficios extends Component {
               </div>
               <div>
                 <p>Formato E</p>
-                <ReactToPrint
-                  trigger={() => <buttom className='btn-imp-of'>Imprimir</buttom>}
-                  content={() => this.la}
-                />
-              </div>
-              <div>
-                <p>Anexo F</p>
-                <ReactToPrint
-                  trigger={() => <buttom className='btn-imp-of'>Imprimir</buttom>}
-                  content={() => this.anex}
-                  pageStyle={`@media print {@page { size: portrait; }}`}
-                />
-              </div>
-            </div>
-          }
-          {this.state.fondo.no_lici !== ' ' &&
-            <div className='m-f'>
-              <p><b>Pago Provedor por Requisición</b></p>
-              <div>
-                <p>Solicitud Programatica</p>
-                <ReactToPrint
-                  trigger={() => <buttom className='btn-imp-of'>Imprimir</buttom>}
-                  content={() => this.sp}
-                  pageStyle={`@media print {@page { size: landscape; }}`}
-                />
-              </div>
-              <div>
-                <p>Solicitud de PPR</p>
-                <ReactToPrint
-                  trigger={() => <buttom className='btn-imp-of'>Imprimir</buttom>}
-                  content={() => this.ofi}
-                  pageStyle={`@media print {@page { size: portrait; }}`}
-                />
-              </div>
-              <div>
-                <p>Formato E</p>
-                <ReactToPrint
-                  trigger={() => <buttom className='btn-imp-of'>Imprimir</buttom>}
-                  content={() => this.la}
-                  pageStyle={`@media print {@page { size: landscape; }}`}
-                />
-              </div>
-              <div>
-                <p>Anexo F</p>
-                <ReactToPrint
-                  trigger={() => <buttom className='btn-imp-of'>Imprimir</buttom>}
-                  content={() => this.anex}
-                  pageStyle={`@media print {@page { size: portrait; }}`}
-                />
-              </div>
-            </div>
-          }
-          {this.state.fondo.tipo_doc === 'Pago Directo' && this.state.fondo.no_lici === ' ' &&
-            <div className='m-f'>
-              <p><b>Pago Proveedor</b></p>
-              <div>
-                <p>Oficio Pago Proveedor</p>
-                <ReactToPrint
-                  trigger={() => <buttom className='btn-imp-of'>Imprimir</buttom>}
-                  content={() => this.opp}
-                  pageStyle={`@media print {@page { size: portrait; }}`}
-                />
-              </div>
-              <div>
-                <p>Solicitud Programatica</p>
-                <ReactToPrint
-                  trigger={() => <buttom className='btn-imp-of'>Imprimir</buttom>}
-                  content={() => this.sp}
-                  pageStyle={`@media print {@page { size: landscape; }}`}
-                />
-              </div>
-              <div>
-                <p>Formato E</p>
-                <ReactToPrint
-                  trigger={() => <buttom className='btn-imp-of'>Imprimir</buttom>}
-                  content={() => this.la}
-                />
                 <Popup
-                    trigger={<buttom className='btn-imp-of'>Imprimir</buttom>}
-                    modal
-                    style={{ height: '500px' }}
-                    closeOnDocumentClick>
+                  trigger={<buttom className='btn-imp-of'>Imprimir</buttom>}
+                  modal
+                  style={{ height: '500px' }}
+                  closeOnDocumentClick>
                     <div style={{ height: '100%', overflow: 'scroll' }}>
                       <ReactToPrint
                         trigger={() =>
@@ -408,7 +337,7 @@ export default class Oficios extends Component {
                                                 <input
                                                   className='all-tab-f all-tab-of3'
                                                   name='descripcion'
-                                                  value='perro'
+                                                  value=''
                                                 />
                                             </div>
                                           </div>
@@ -456,7 +385,463 @@ export default class Oficios extends Component {
                         )}
                       </div>
                     </div>
-                  </Popup>
+                </Popup>
+              </div>
+              <div>
+                <p>Anexo F</p>
+                <ReactToPrint
+                  trigger={() => <buttom className='btn-imp-of'>Imprimir</buttom>}
+                  content={() => this.anex}
+                  pageStyle={`@media print {@page { size: portrait; }}`}
+                />
+              </div>
+            </div>
+          }
+          {this.state.fondo.no_lici !== ' ' &&
+            <div className='m-f'>
+              <p><b>Pago Provedor por Requisición</b></p>
+              <div>
+                <p>Solicitud Programatica</p>
+                <ReactToPrint
+                  trigger={() => <buttom className='btn-imp-of'>Imprimir</buttom>}
+                  content={() => this.sp}
+                  pageStyle={`@media print {@page { size: landscape; }}`}
+                />
+              </div>
+              <div>
+                <p>Solicitud de PPR</p>
+                <ReactToPrint
+                  trigger={() => <buttom className='btn-imp-of'>Imprimir</buttom>}
+                  content={() => this.ofi}
+                  pageStyle={`@media print {@page { size: portrait; }}`}
+                />
+              </div>
+              <div>
+                <p>Formato E</p>
+                <Popup
+                  trigger={<buttom className='btn-imp-of'>Imprimir</buttom>}
+                  modal
+                  style={{ height: '500px' }}
+                  closeOnDocumentClick>
+                    <div style={{ height: '100%', overflow: 'scroll' }}>
+                      <ReactToPrint
+                        trigger={() =>
+                          <div className='c-b-i'>
+                            <buttom className='btn-imp-of'>Imprimir</buttom>
+                          </div>
+                          }
+                        content={() => this.la}
+                      />
+                      <div className='formatoe-container' ref={el => (this.la = el)}>
+                        {this.state.comprometidos.map(comprometidos =>
+                          comprometidos.up ?
+                            <div className='lll'>
+                              <div className='lll-content'>
+                                <div className='title-ga'>
+                                  <div className='ofie-img1'>
+                                    <img className='pgjh' src={lpgjh} alt='' style={{ width: 'auto' }} />
+                                  </div>
+                                  <div className='ofie-text'>
+                                    <p className='text-titulo-ga'>PROCURADURÍA GENERAL DE JUSTICA DE HIDALGO</p>
+                                    <p className='text-titulo-ga'>{comprometidos.area}</p>
+                                    <p className='text-titulo-ga'>{comprometidos.partida}</p>
+                                  </div>
+                                  <div className='ofie-img-cont'>
+                                    <div className='ofie-img2'>
+                                      <img className='img2' src={logo2} alt='' />
+                                    </div>
+                                  </div>
+                                </div>
+                                <div className='faderinpo'>
+                                  <div className='contenedor-ga'>
+                                    <div className='contenedor-1'>
+                                      <div className='interno-ga2'>
+                                        <p className='text-gai'>Gasto a Comprobar</p>
+                                        <input className='input-gai' type='checkbox' disabled />
+                                      </div>
+                                      <div className='interno-ga2'>
+                                        <p className='text-gai'>Comprobacion de Gastos</p>
+                                        <input className='input-gai' type='checkbox' disabled />
+                                      </div>
+                                      <div className='interno-ga2'>
+                                        <p className='text-gai'>Validación de Objeto de Gastos</p>
+                                        <input className='input-gai' type='checkbox' disabled />
+                                      </div>
+                                      <div className='interno-ga2'>
+                                        <p className='text-gai'>Transferencia</p>
+                                        <input className='input-gai' type='checkbox' disabled />
+                                      </div>
+                                    </div>
+                                    <div className='contenedor-1'>
+                                      <div className='interno-ga2'>
+                                        <p className='text-gai'>Creación de Fondo Revolvente</p>
+                                        <input className='input-gai' type='checkbox' disabled />
+                                      </div>
+                                      <div className='interno-ga2'>
+                                        <p className='text-gai'>Fondo Revolvente</p>
+                                        <input className='input-gai' type='checkbox' disabled />
+                                      </div>
+                                      <div className='interno-ga2'>
+                                        <p className='text-gai'>Cancelacion de Fondo Revolvente</p>
+                                        <input className='input-gai' type='checkbox' disabled />
+                                      </div>
+                                    </div>
+                                    <div className='contenedor-1'>
+                                      <div className='interno-ga2'>
+                                        <p className='text-gai'>Viaticos Anticipados</p>
+                                        <input className='input-gai' type='checkbox' disabled />
+                                      </div>
+                                      <div className='interno-ga2'>
+                                        <p className='text-gai'>Viaticos Devengados</p>
+                                        <input className='input-gai' type='checkbox' disabled />
+                                      </div>
+                                      <div className='interno-ga2'>
+                                        <p className='text-gai'>Viaticos al Extranjero</p>
+                                        <input className='input-gai' type='checkbox' disabled />
+                                      </div>
+                                      <div className='interno-ga2'>
+                                        <p className='text-gai'>Comprobación de Viáticos</p>
+                                        <input className='input-gai' type='checkbox' disabled />
+                                      </div>
+                                    </div>
+                                    <div className='contenedor-1'>
+                                      <div className='interno-ga2'>
+                                        <p className='text-gai'>Anticipo a Proveedor</p>
+                                        <input className='input-gai' type='checkbox' disabled />
+                                      </div>
+                                      <div className='interno-ga2'>
+                                        <p className='text-gai'>Remanente de Pago a Proveedor</p>
+                                        <input className='input-gai' type='checkbox' disabled />
+                                      </div>
+                                      <div className='interno-ga2'>
+                                        <p className='text-gai'>Pago a Proveedor</p>
+                                        <input className='input-gai' type='checkbox' checked />
+                                      </div>
+                                      <div className='interno-ga2'>
+                                        <p className='text-gai'>Anticipo de Pago a Proveedor por Requisición</p>
+                                        <input className='input-gai' type='checkbox' disabled />
+                                      </div>
+                                      <div className='interno-ga2'>
+                                        <p className='text-gai'>Remanente de Pago a Proveedor por Requisición</p>
+                                        <input className='input-gai' type='checkbox' disabled />
+                                      </div>
+                                      <div className='interno-ga2'>
+                                        <p className='text-gai'>Proveedor por Requisición</p>
+                                        <input className='input-gai' type='checkbox' disabled />
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div>
+                                  <div>
+                                    <div className='ofie-header-blue'>
+                                      <div className='alltabla-ga ga1'>
+                                        Folio de factura
+                                      </div>
+                                      <div className='alltabla-ga ga2'>
+                                        Importe
+                                      </div>
+                                      <div className='alltabla-ga ga3'>
+                                        Leyenda alusiva al gasto
+                                      </div>
+                                    </div>
+                                    {comprometidos.comprobantes !== undefined ?
+                                      <div>
+                                        {comprometidos.comprobantes.map((item, index) =>
+                                          <div className='ofie-comprobantes-conta'>
+                                            <div className='ofie-header-blue'>
+                                              <div className='all-tab-f all-tab-of1'>
+                                                {item.uuid}
+                                              </div>
+                                              <div className='all-tab-f all-tab-of2'>
+                                                <CurrencyFormat
+                                                  style={{ fontSize: '12px' }}
+                                                  value={(parseFloat(item.total) + parseFloat(item.isr)).toFixed(2)}
+                                                  displayType='text'
+                                                  thousandSeparator
+                                                  prefix=' $ '
+                                                />
+                                              </div>
+                                              <input
+                                                name='desc'
+                                                value={this.state.desc}
+                                                className='all-tab-f all-tab-of3'
+                                                onChange={this.onChange}
+                                              />
+                                            </div>
+                                          </div>
+                                        )}
+                                      </div>
+                                    : null}
+                                    <div className='ofie-total-cont'>
+                                      <div className='all-tab-f2 all-tab-of1' style={{ textAlign: 'right' }}>
+                                        TOTAL:
+                                      </div>
+                                      <div className='all-tab-f2 all-tab-of2'>
+                                        {comprometidos.isr === '0.00' ?
+                                          <CurrencyFormat
+                                            style={{ fontSize: '12px' }}
+                                            value={comprometidos.total}
+                                            displayType='text'
+                                            thousandSeparator
+                                            prefix=' $ '
+                                          />
+                                          : null
+                                        }
+                                        {comprometidos.isr !== '0.00' && comprometidos.isr ?
+                                          <CurrencyFormat
+                                            style={{ fontSize: '12px' }}
+                                            value={(parseFloat(totalImporte) + parseFloat(totalRetencion)).toFixed(2)}
+                                            displayType='text'
+                                            thousandSeparator
+                                            prefix=' $ '
+                                          />
+                                          : null
+                                        }
+                                      </div>
+                                      <div className='all-tab-f2 all-tab-of3'
+                                        style={{
+                                          borderRight: '1px solid white',
+                                          borderBottom: '1px solid white'
+                                        }}
+                                      />
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          : null
+                        )}
+                      </div>
+                    </div>
+                </Popup>
+              </div>
+              <div>
+                <p>Anexo F</p>
+                <ReactToPrint
+                  trigger={() => <buttom className='btn-imp-of'>Imprimir</buttom>}
+                  content={() => this.anex}
+                  pageStyle={`@media print {@page { size: portrait; }}`}
+                />
+              </div>
+            </div>
+          }
+          {this.state.fondo.tipo_doc === 'Pago Directo' && this.state.fondo.no_lici === ' ' &&
+            <div className='m-f'>
+              <p><b>Pago Proveedor</b></p>
+              <div>
+                <p>Oficio Pago Proveedor</p>
+                <ReactToPrint
+                  trigger={() => <buttom className='btn-imp-of'>Imprimir</buttom>}
+                  content={() => this.opp}
+                  pageStyle={`@media print {@page { size: portrait; }}`}
+                />
+              </div>
+              <div>
+                <p>Solicitud Programatica</p>
+                <ReactToPrint
+                  trigger={() => <buttom className='btn-imp-of'>Imprimir</buttom>}
+                  content={() => this.sp}
+                  pageStyle={`@media print {@page { size: landscape; }}`}
+                />
+              </div>
+              <div>
+                <p>Formato E</p>
+                <Popup
+                  trigger={<buttom className='btn-imp-of'>Imprimir</buttom>}
+                  modal
+                  style={{ height: '500px' }}
+                  closeOnDocumentClick>
+                    <div style={{ height: '100%', overflow: 'scroll' }}>
+                      <ReactToPrint
+                        trigger={() =>
+                          <div className='c-b-i'>
+                            <buttom className='btn-imp-of'>Imprimir</buttom>
+                          </div>
+                          }
+                        content={() => this.la}
+                      />
+                      <div className='formatoe-container' ref={el => (this.la = el)}>
+                        {this.state.comprometidos.map(comprometidos =>
+                          comprometidos.up ?
+                            <div className='lll'>
+                              <div className='lll-content'>
+                                <div className='title-ga'>
+                                  <div className='ofie-img1'>
+                                    <img className='pgjh' src={lpgjh} alt='' style={{ width: 'auto' }} />
+                                  </div>
+                                  <div className='ofie-text'>
+                                    <p className='text-titulo-ga'>PROCURADURÍA GENERAL DE JUSTICA DE HIDALGO</p>
+                                    <p className='text-titulo-ga'>{comprometidos.area}</p>
+                                    <p className='text-titulo-ga'>{comprometidos.partida}</p>
+                                  </div>
+                                  <div className='ofie-img-cont'>
+                                    <div className='ofie-img2'>
+                                      <img className='img2' src={logo2} alt='' />
+                                    </div>
+                                  </div>
+                                </div>
+                                <div className='faderinpo'>
+                                  <div className='contenedor-ga'>
+                                    <div className='contenedor-1'>
+                                      <div className='interno-ga2'>
+                                        <p className='text-gai'>Gasto a Comprobar</p>
+                                        <input className='input-gai' type='checkbox' disabled />
+                                      </div>
+                                      <div className='interno-ga2'>
+                                        <p className='text-gai'>Comprobacion de Gastos</p>
+                                        <input className='input-gai' type='checkbox' disabled />
+                                      </div>
+                                      <div className='interno-ga2'>
+                                        <p className='text-gai'>Validación de Objeto de Gastos</p>
+                                        <input className='input-gai' type='checkbox' disabled />
+                                      </div>
+                                      <div className='interno-ga2'>
+                                        <p className='text-gai'>Transferencia</p>
+                                        <input className='input-gai' type='checkbox' disabled />
+                                      </div>
+                                    </div>
+                                    <div className='contenedor-1'>
+                                      <div className='interno-ga2'>
+                                        <p className='text-gai'>Creación de Fondo Revolvente</p>
+                                        <input className='input-gai' type='checkbox' disabled />
+                                      </div>
+                                      <div className='interno-ga2'>
+                                        <p className='text-gai'>Fondo Revolvente</p>
+                                        <input className='input-gai' type='checkbox' disabled />
+                                      </div>
+                                      <div className='interno-ga2'>
+                                        <p className='text-gai'>Cancelacion de Fondo Revolvente</p>
+                                        <input className='input-gai' type='checkbox' disabled />
+                                      </div>
+                                    </div>
+                                    <div className='contenedor-1'>
+                                      <div className='interno-ga2'>
+                                        <p className='text-gai'>Viaticos Anticipados</p>
+                                        <input className='input-gai' type='checkbox' disabled />
+                                      </div>
+                                      <div className='interno-ga2'>
+                                        <p className='text-gai'>Viaticos Devengados</p>
+                                        <input className='input-gai' type='checkbox' disabled />
+                                      </div>
+                                      <div className='interno-ga2'>
+                                        <p className='text-gai'>Viaticos al Extranjero</p>
+                                        <input className='input-gai' type='checkbox' disabled />
+                                      </div>
+                                      <div className='interno-ga2'>
+                                        <p className='text-gai'>Comprobación de Viáticos</p>
+                                        <input className='input-gai' type='checkbox' disabled />
+                                      </div>
+                                    </div>
+                                    <div className='contenedor-1'>
+                                      <div className='interno-ga2'>
+                                        <p className='text-gai'>Anticipo a Proveedor</p>
+                                        <input className='input-gai' type='checkbox' disabled />
+                                      </div>
+                                      <div className='interno-ga2'>
+                                        <p className='text-gai'>Remanente de Pago a Proveedor</p>
+                                        <input className='input-gai' type='checkbox' disabled />
+                                      </div>
+                                      <div className='interno-ga2'>
+                                        <p className='text-gai'>Pago a Proveedor</p>
+                                        <input className='input-gai' type='checkbox' checked />
+                                      </div>
+                                      <div className='interno-ga2'>
+                                        <p className='text-gai'>Anticipo de Pago a Proveedor por Requisición</p>
+                                        <input className='input-gai' type='checkbox' disabled />
+                                      </div>
+                                      <div className='interno-ga2'>
+                                        <p className='text-gai'>Remanente de Pago a Proveedor por Requisición</p>
+                                        <input className='input-gai' type='checkbox' disabled />
+                                      </div>
+                                      <div className='interno-ga2'>
+                                        <p className='text-gai'>Proveedor por Requisición</p>
+                                        <input className='input-gai' type='checkbox' disabled />
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div>
+                                  <div>
+                                    <div className='ofie-header-blue'>
+                                      <div className='alltabla-ga ga1'>
+                                        Folio de factura
+                                      </div>
+                                      <div className='alltabla-ga ga2'>
+                                        Importe
+                                      </div>
+                                      <div className='alltabla-ga ga3'>
+                                        Leyenda alusiva al gasto
+                                      </div>
+                                    </div>
+                                    {comprometidos.comprobantes !== undefined ?
+                                      <div>
+                                        {comprometidos.comprobantes.map(item =>
+                                          <div className='ofie-comprobantes-conta'>
+                                            <div className='ofie-header-blue'>
+                                              <div className='all-tab-f all-tab-of1'>
+                                                {item.uuid}
+                                              </div>
+                                              <div className='all-tab-f all-tab-of2'>
+                                                <CurrencyFormat
+                                                  style={{ fontSize: '12px' }}
+                                                  value={(parseFloat(item.total) + parseFloat(item.isr)).toFixed(2)}
+                                                  displayType='text'
+                                                  thousandSeparator
+                                                  prefix=' $ '
+                                                />
+                                              </div>
+                                                <input
+                                                  className='all-tab-f all-tab-of3'
+                                                  name='descripcion'
+                                                />
+                                            </div>
+                                          </div>
+                                        )}
+                                      </div>
+                                    : null}
+                                    <div className='ofie-total-cont'>
+                                      <div className='all-tab-f2 all-tab-of1' style={{ textAlign: 'right' }}>
+                                        TOTAL:
+                                      </div>
+                                      <div className='all-tab-f2 all-tab-of2'>
+                                        {comprometidos.isr === '0.00' ?
+                                          <CurrencyFormat
+                                            style={{ fontSize: '12px' }}
+                                            value={comprometidos.total}
+                                            displayType='text'
+                                            thousandSeparator
+                                            prefix=' $ '
+                                          />
+                                          : null
+                                        }
+                                        {comprometidos.isr !== '0.00' && comprometidos.isr ?
+                                          <CurrencyFormat
+                                            style={{ fontSize: '12px' }}
+                                            value={(parseFloat(totalImporte) + parseFloat(totalRetencion)).toFixed(2)}
+                                            displayType='text'
+                                            thousandSeparator
+                                            prefix=' $ '
+                                          />
+                                          : null
+                                        }
+                                      </div>
+                                      <div className='all-tab-f2 all-tab-of3'
+                                        style={{
+                                          borderRight: '1px solid white',
+                                          borderBottom: '1px solid white'
+                                        }}
+                                      />
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          : null
+                        )}
+                      </div>
+                    </div>
+                </Popup>
               </div>
               <div>
                 <p>Anexo F</p>

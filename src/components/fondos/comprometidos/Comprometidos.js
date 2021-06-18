@@ -45,6 +45,13 @@ export default class Comprometidos extends Component {
           done: false
         }
       ],
+      lol: [
+        {
+          id: 1,
+          name: 'prueba',
+          done: false
+        }
+      ],
       comprometidos: [],
       search: '',
       total: '',
@@ -171,6 +178,21 @@ export default class Comprometidos extends Component {
     })
   }
 
+  lol = (prueba) => {
+    prueba.on('value', (snap) => {
+      var xml = []
+      snap.forEach((child) => {
+        xml.push({
+          xmlC: child.val().xmlC,
+          id: child.key
+        })
+      })
+      this.setState({
+        lol: xml
+      })
+    })
+  }
+
   listenForXmlR2 = (itemsRefXml2) => {
     itemsRefXml2.on('value', (snap) => {
       var xml = []
@@ -236,6 +258,8 @@ export default class Comprometidos extends Component {
     this.listenForItems(itemsRef)
     const itemsRefFondos = firebase.database().ref(`fondos/${this.state.urlfire}/comprometido`)
     this.listenFondos(itemsRefFondos)
+    const prueba = firebase.database().ref('vales/')
+    this.lol(prueba)
   }
 
   handleInput (event) {
@@ -388,7 +412,6 @@ export default class Comprometidos extends Component {
     wishRef.once('value').then(snapshot => {
       var updatedWish = snapshot.val()
       updatedWish.beneficiario = this.state.contra[0].nombre
-      updatedWish.importe = total
       updatedWish.comprometido.push(
         {
           partida: item.ogasto,

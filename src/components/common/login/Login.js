@@ -4,6 +4,7 @@ import { Redirect } from 'react-router-dom'
 import { loginUser } from '../../../actions'
 import TextField from '@material-ui/core/TextField'
 import Button from '@material-ui/core/Button'
+import logo from '../../../img/logoh.png'
 import './Login.css'
 
 class Login extends Component {
@@ -36,43 +37,55 @@ class Login extends Component {
     } else {
       return (
         <div className='login-container'>
-          <div className='back-login'>
+          <div className='login-back'>
             <div className='login-ins'>
               <div className='login-col'>
                 <div className='login'>
-                  <h2 className='login-color'>Bienvenido!</h2>
-                  <div className='border-form-login'>
-                    <div className='input-cen-log'>
-                      <TextField
-                        className='correo'
-                        label='Correo'
-                        id='email'
-                        onChange={ this.handleEmailChange }
-                      />
+                  <div className='login-card'>
+                    <div className='login-sep-log'>
+                      <div>
+                        <h2 className='login-color'>Iniciar sesión</h2>
+                        <p className='login-sub'>Inicie sesión en la plataforma interna</p>
+                      </div>
+                      <div className='login-c'>
+                        <img className='logo-img' src={logo} alt='' />
+                      </div>
                     </div>
-                    <div className='input-cen-log'>
-                      <TextField
-                        className='contraseña'
-                        label='Contraseña'
-                        id='password'
-                        type='password'
-                        onChange={ this.handlePasswordChange }
-                      />
-                    </div>
-                    { loginError && (
-                      <p className='error-log'>
-                        Correo o contraseña icorrectos
-                      </p>
-                    )}
-                    <div className='cta2'>
-                      <Button
-                        variant='contained'
-                        color='primary'
-                        onClick={ this.handleSubmit }
-                        style={{ background: '#092432' }}
-                      >
-                        ENTRAR
-                      </Button>
+                    <div className='login-border-form'>
+                      <div className='login-input-cen'>
+                        <TextField
+                          className='login-inputs-width'
+                          label='Correo Electronico'
+                          variant='outlined'
+                          id='email'
+                          onChange={ this.handleEmailChange }
+                        />
+                      </div>
+                      <div className='login-input-cen'>
+                        <TextField
+                          className='inputs-width'
+                          label='Contraseña'
+                          variant='outlined'
+                          id='password'
+                          type='password'
+                          onChange={ this.handlePasswordChange }
+                        />
+                      </div>
+                      { loginError && (
+                        <p className='error-log'>
+                          Correo o contraseña icorrectos
+                        </p>
+                      )}
+                      <div className='login-ctb'>
+                        <Button
+                          className='inputs-width'
+                          variant='contained'
+                          color='primary'
+                          onClick={ this.handleSubmit }
+                        >
+                          Iniciar Sesión
+                        </Button>
+                      </div>
                     </div>
                   </div>
                 </div>

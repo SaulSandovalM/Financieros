@@ -36,11 +36,6 @@ import FondoE from './components/fondos/fondos/FondoE'
 import Comprometidos from './components/fondos/comprometidos/Comprometidos'
 import ComprometidoE from './components/fondos/comprometidos/ComprometidoE'
 import Oficios from './components/fondos/oficios/Oficios'
-import Consulta from './components/fondos/consulta/Consulta'
-import Cpdf from './components/fondos/consulta/Cpdf'
-import ControlP from './components/controlp/ControlP'
-import Add from './components/controlp/Add'
-import Complemento from './components/complemento/Complemento'
 import Contrarecibo from './components/fondos/contrarecibo/Contrarecibo'
 import TabularList from './components/fondos/tabular/Tabular'
 import TabularGlobal from './components/fondos/tabular/TabularGlobal'
@@ -255,27 +250,6 @@ function App (props) {
       />
       <ProtectedRoute
         exact
-        path='/Consulta'
-        component={Consulta}
-        isAuthenticated={isAuthenticated}
-        isVerifying={isVerifying}
-      />
-      <ProtectedRoute
-        exact
-        path='/ControlP'
-        component={ControlP}
-        isAuthenticated={isAuthenticated}
-        isVerifying={isVerifying}
-      />
-      <ProtectedRoute
-        exact
-        path='/Complemento'
-        component={Complemento}
-        isAuthenticated={isAuthenticated}
-        isVerifying={isVerifying}
-      />
-      <ProtectedRoute
-        exact
         path='/Caratula'
         component={Caratula}
         isAuthenticated={isAuthenticated}
@@ -324,8 +298,6 @@ function App (props) {
         isAuthenticated={isAuthenticated}
         isVerifying={isVerifying}
       />
-      <Route path='/Cpdf/:id' component={Cpdf} />
-      <Route path='/add/:id' component={Add} />
     </Switch>
   )
 }

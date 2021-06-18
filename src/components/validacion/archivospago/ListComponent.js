@@ -35,7 +35,6 @@ export default class ListComponent extends Component {
                 <TableCell className='border-icon' style={{ width: '50px' }} />
                 <TableCell className='table-validacion'><b>Facturas</b></TableCell>
                 <TableCell className='table-validacion'><b>Fondo</b></TableCell>
-                <TableCell className='table-validacion'><b>Folio</b></TableCell>
                 <TableCell className='table-validacion'><b>Fecha Ingreso</b></TableCell>
                 <TableCell className='table-validacion'><b>Contrarecibo</b></TableCell>
                 <TableCell className='table-validacion'><b>Fecha Pago</b></TableCell>
