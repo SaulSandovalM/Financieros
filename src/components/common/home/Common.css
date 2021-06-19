@@ -1,24 +1,49 @@
-.common {
-  background-color: #f4f4f4;
-  min-height: 100vh;
-  width: 100%;
+.home-container {
+
 }
-.common-container {
+.home-over {
   display: flex;
   flex-direction: column;
-  height: 100vh;
-  justify-content: center;
-  width: 100%;
+  justify-content: flex-start;
 }
-.common-content {
+.home-over-font {
+  color: grey;
+  font-size: 12px;
+  font-weight: bold;
+}
+.home-usuario-font {
+  font-size: 24px;
+}
+.home-cards-content {
   display: flex;
-  flex-direction: row;
+  justify-content: space-between;
+  margin-top: 30px;
+}
+.home-card {
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: rgb(0 0 0 / 12%) 0 1px 2px, rgb(0 0 0 / 5%) 0 0 0 1px;
+  overflow: hidden;
+  padding: 16px;
+  position: relative;
+  width: 49%;
+}
+.home-grafic-content {
+  display: flex;
+  height: 140px;
+  justify-content: space-between;
+}
+.home-grafica {
+  width: 33%;
+}
+.home-text-graf {
+  display: flex;
   justify-content: center;
+  flex-direction: column;
+  width: 66%;
 }
-.common-p {
-  font-size: 50px;
-  margin: 0;
-}
-.common-s {
-  font-size: 25px;
+.home-money-size {
+  color: #172B4D;
+  font-size: 32px;
+  font-weight: bold;
 }
