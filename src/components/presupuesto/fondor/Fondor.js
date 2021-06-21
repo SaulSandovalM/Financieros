@@ -306,7 +306,7 @@ export default class Fondor extends Component {
 
   render () {
     return (
-      <div className='pf-container' style={{ marginTop: '60px' }}>
+      <div>
         <div className='p-container-fr'>
           <div className='p-margin-row'>
             <p className='p-title-size'>
@@ -315,9 +315,8 @@ export default class Fondor extends Component {
             <div>
               <p className='p-banco'><b>PORCENTAJE AGREGADO</b></p>
               <p className='cantidad-add-banco'>
-                MXN
                 <CurrencyFormat
-                  value={this.state.contador.storyCount}
+                  value={parseFloat(this.state.contador.storyCount).toFixed(2)}
                   displayType='text'
                   thousandSeparator
                   prefix=' $'

@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import ProtectedRoute from './ProtectedRoute'
 // Direcciones compartidas
 import Login from './components/common/login/Login'
-import Common from './components/common/home/Common'
+import Home from './components/common/home/Home'
 // Rutas de Presupuesto
 import Presupuesto from './components/presupuesto/presupuesto/Presupuesto'
 import Ampliacion from './components/presupuesto/ampliacion/Ampliacion'
@@ -52,7 +52,7 @@ function App (props) {
       <ProtectedRoute
         exact
         path='/'
-        component={Common}
+        component={Home}
         isAuthenticated={isAuthenticated}
         isVerifying={isVerifying}
       />

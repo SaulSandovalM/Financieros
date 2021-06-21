@@ -8,6 +8,8 @@ import TableContainer from '@material-ui/core/TableContainer'
 import TableHead from '@material-ui/core/TableHead'
 import TableRow from '@material-ui/core/TableRow'
 import Paper from '@material-ui/core/Paper'
+import Toolbar from '@material-ui/core/Toolbar'
+import Divider from '@material-ui/core/Divider'
 
 export default class ListComponent extends Component {
   constructor (props) {
@@ -28,21 +30,25 @@ export default class ListComponent extends Component {
   render () {
     return (
       <div>
-        <TableContainer component={Paper}>
+        <TableContainer component={Paper} className='lolover'>
+          <Toolbar style={{ background: 'white', paddingLeft: '16px' }}>
+            <div style={{ fontSize: '18px', fontWeight: '600' }}>Historial</div>
+          </Toolbar>
+          <Divider />
           <Table size='small'>
             <TableHead>
               <TableRow>
                 <TableCell className='table-arch'>
-                  <b>Oficio Solicitud</b>
+                  <div>Oficio Solicitud</div>
                 </TableCell>
                 <TableCell className='table-arch'>
-                  <b>Oficio Autorización</b>
+                  <div>Oficio Autorización</div>
                 </TableCell>
                 <TableCell className='table-arch'>
-                  <b>Excel</b>
+                  <div>Excel</div>
                 </TableCell>
                 <TableCell className='table-arch'>
-                  <b>Tipo de Movimiento</b>
+                  <div>Tipo de Movimiento</div>
                 </TableCell>
               </TableRow>
             </TableHead>

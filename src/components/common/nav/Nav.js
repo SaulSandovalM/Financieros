@@ -3,8 +3,21 @@ import { Link } from 'react-router-dom'
 import { logoutUser } from '../../../actions'
 import { connect } from 'react-redux'
 import './Nav.css'
-import Typography from '@material-ui/core/Typography'
-import arrow from '../../../img/arrow.svg'
+import Divider from '@material-ui/core/Divider'
+import List from '@material-ui/core/List'
+import ListItem from '@material-ui/core/ListItem'
+import ListItemIcon from '@material-ui/core/ListItemIcon'
+import ListItemText from '@material-ui/core/ListItemText'
+import Toolbar from '@material-ui/core/Toolbar'
+// iconos
+import MonetizationOnIcon from '@material-ui/icons/MonetizationOn'
+import EqualizerRoundedIcon from '@material-ui/icons/EqualizerRounded'
+import MultilineChartRoundedIcon from '@material-ui/icons/MultilineChartRounded'
+import FolderOpenIcon from '@material-ui/icons/FolderOpen'
+import CreateNewFolderIcon from '@material-ui/icons/CreateNewFolder'
+import FormatListBulletedIcon from '@material-ui/icons/FormatListBulleted'
+import ReceiptIcon from '@material-ui/icons/Receipt'
+import AssignmentTurnedInIcon from '@material-ui/icons/AssignmentTurnedIn'
 import firebase from '../../../Firebase'
 
 class Nav extends Component {
@@ -82,349 +95,252 @@ class Nav extends Component {
     }
 
     return (
-      <div className='nav-col'>
-        <div className='nav-cont'>
-          {(admin === 'VALIDACION') &&
-            <div className='navbar-left' style={{ marginTop: '30px' }}>
-              <Link to='/ArchivoPago' className='deco'>
-                <span className='material-icons'>
-                  local_atm
-                </span>
-                <Typography className='nav-t' variant='h6'>
-                  Archivos
-                </Typography>
+      <div>
+        <Toolbar />
+        <div style={{ overflow: 'auto' }}>
+          <List style={{ padding: '0px' }}>
+            <Link to='/' className='deco'>
+              <ListItem button>
+                <ListItemIcon></ListItemIcon>
+                <ListItemText primary='Dashboard' />
+              </ListItem>
+            </Link>
+          </List>
+          {(admin === 'CECILIA' || admin === 'ALFREDO' || admin === 'LIZBETH') &&
+            <List style={{ padding: '0px' }}>
+              <Link to='/' className='deco'>
+                <ListItem button>
+                  <ListItemIcon><EqualizerRoundedIcon /></ListItemIcon>
+                  <ListItemText primary='Presupuesto' />
+                </ListItem>
               </Link>
-            </div>
+            </List>
           }
-          {(admin === 'CECILIA' || admin === 'LIZBETH') &&
-            <div className='navbar-left' style={{ marginTop: '30px' }}>
-              <div className='deco-c' onClick={this.toggleHiddenP.bind(this)}>
-                <span className='material-icons'>
-                  attach_money
-                </span>
-                <Typography variant='h6' className='typo-sty'>
-                  Presupuesto
-                </Typography>
-              </div>
-              <img
-                className='arrow'
-                src={arrow}
-                alt=''
-              />
-            </div>
-          }
-          {!this.state.isHiddenP &&
-            <div>
-              <div className='subnav'>
-                <Link to='/Presupuesto' className='deco'>
-                  <Typography className='nav-t'>
-                    • Inicial
-                  </Typography>
-                </Link>
-              </div>
-              <div className='subnav'>
-                <Link to='/Ampliacion' className='deco'>
-                  <Typography className='nav-t'>
-                    • Ampliacion
-                  </Typography>
-                </Link>
-              </div>
-              <div className='subnav'>
-                <Link to='/Reduccion' className='deco'>
-                  <Typography className='nav-t'>
-                    • Reduccion
-                  </Typography>
-                </Link>
-              </div>
-              <div className='subnav'>
-                <Link to='/Transferencia' className='deco'>
-                  <Typography className='nav-t'>
-                    • Transferencia
-                  </Typography>
-                </Link>
-              </div>
-              <div className='subnav'>
-                <Link to='/Trans' className='deco'>
-                  <Typography className='nav-t'>
-                    • Saldos
-                  </Typography>
-                </Link>
-              </div>
-            </div>
-          }
-          {/* (admin === 'CECILIA' || admin === 'LIZBETH') &&
-            <div className='navbar-left'>
-              <Link to='/Saldos' className='deco'>
-                <span className='material-icons'>
-                  account_balance
-                </span>
-                <Typography className='nav-t' variant='h6'>
-                  Saldos
-                </Typography>
-              </Link>
-            </div>
-          */ }
-          {(admin === 'CECILIA' || admin === 'LIZBETH') &&
-            <div className='navbar-left'>
+          {(admin === 'CECILIA' || admin === 'ALFREDO' || admin === 'LIZBETH') &&
+            <List style={{ padding: '0px' }}>
               <Link to='/FondoRevolvente' className='deco'>
-                <span className='material-icons'>
-                  local_atm
-                </span>
-                <Typography className='nav-t' variant='h6'>
-                  Fondo Revolvente
-                </Typography>
+                <ListItem button>
+                  <ListItemIcon><MultilineChartRoundedIcon /></ListItemIcon>
+                  <ListItemText primary='Fondo Revolvente' />
+                </ListItem>
               </Link>
-            </div>
+            </List>
           }
-          {(admin === 'CECILIA' || admin === 'LIZBETH') &&
-            <div className='navbar-left'>
+          {(admin === 'CECILIA' || admin === 'ALFREDO' || admin === 'LIZBETH') &&
+            <List style={{ padding: '0px' }}>
               <Link to='/Archivos' className='deco'>
-                <span className='material-icons'>
-                  folder_open
-                </span>
-                <Typography className='nav-t' variant='h6'>
-                  Archivos
-                </Typography>
+                <ListItem button>
+                  <ListItemIcon><FolderOpenIcon /></ListItemIcon>
+                  <ListItemText primary='Archivos' />
+                </ListItem>
               </Link>
-            </div>
+            </List>
           }
-          {(admin === 'CECILIA' || admin === 'LIZBETH') &&
-            <div className='navbar-left'>
+          {(admin === 'CECILIA' || admin === 'ALFREDO' || admin === 'LIZBETH') &&
+            <List style={{ padding: '0px' }}>
               <Link to='/Registro' className='deco'>
-                <span className='material-icons'>
-                  plagiarism
-                </span>
-                <Typography className='nav-t' variant='h6'>
-                  Registro
-                </Typography>
+                <ListItem button>
+                  <ListItemIcon><MonetizationOnIcon /></ListItemIcon>
+                  <ListItemText primary='Registro' />
+                </ListItem>
               </Link>
-            </div>
+            </List>
           }
-          {(admin === 'CECILIA' || admin === 'LIZBETH') &&
-            <div className='navbar-left'>
+          {(admin === 'CECILIA' || admin === 'ALFREDO' || admin === 'LIZBETH') &&
+            <List style={{ padding: '0px' }}>
               <Link to='/Disponible' className='deco'>
-                <span className='material-icons'>
-                  playlist_add_check
-                </span>
-                <Typography className='nav-t' variant='h6'>
-                  Disponible
-                </Typography>
+                <ListItem button>
+                  <ListItemIcon><MonetizationOnIcon /></ListItemIcon>
+                  <ListItemText primary='Disponible' />
+                </ListItem>
               </Link>
-            </div>
+            </List>
           }
-          {(admin === 'CECILIA' || admin === 'LIZBETH') &&
-            <div className='navbar-left'>
+          {(admin === 'CECILIA' || admin === 'ALFREDO' || admin === 'LIZBETH') &&
+            <List style={{ padding: '0px' }}>
               <Link to='/Contra' className='deco'>
-                <span className='material-icons'>
-                  receipt
-                </span>
-                <Typography className='nav-t' variant='h6'>
-                  Contrarecibo
-                </Typography>
+                <ListItem button>
+                  <ListItemIcon><MonetizationOnIcon /></ListItemIcon>
+                  <ListItemText primary='Contrarecibo' />
+                </ListItem>
               </Link>
-            </div>
+            </List>
           }
-          {(admin === 'CECILIA' || admin === 'LIZBETH') &&
-            <div className='navbar-left'>
+          {(admin === 'CECILIA' || admin === 'ALFREDO' || admin === 'LIZBETH') &&
+            <List style={{ padding: '0px' }}>
               <Link to='/CargaC' className='deco'>
-                <span className='material-icons'>
-                  publish
-                </span>
-                <Typography className='nav-t' variant='h6'>
-                  Carga Contrarecibo
-                </Typography>
+                <ListItem button>
+                  <ListItemIcon><MonetizationOnIcon /></ListItemIcon>
+                  <ListItemText primary='Carga Contrarecibo' />
+                </ListItem>
               </Link>
-            </div>
+            </List>
           }
           {(admin === 'ELI' || admin === 'LIZBETH' || admin === 'JUAN') &&
-            <div className='navbar-left' style={{ marginTop: '30px' }}>
+            <List style={{ padding: '0px' }}>
               <Link to='/Caja' className='deco'>
-                <span className='material-icons'>
-                  local_atm
-                </span>
-                <Typography className='nav-t' variant='h6'>
-                  Caja
-                </Typography>
+                <ListItem button>
+                  <ListItemIcon><MonetizationOnIcon /></ListItemIcon>
+                  <ListItemText primary='Caja' />
+                </ListItem>
               </Link>
-            </div>
+            </List>
           }
           {(admin === 'ELI' || admin === 'LIZBETH' || admin === 'JUAN') &&
-            <div className='navbar-left'>
+            <List style={{ padding: '0px' }}>
               <Link to='/Arqueo' className='deco'>
-                <span className='material-icons'>
-                  folder_open
-                </span>
-                <Typography className='nav-t' variant='h6'>
-                  Arqueo
-                </Typography>
+                <ListItem button>
+                  <ListItemIcon><MonetizationOnIcon /></ListItemIcon>
+                  <ListItemText primary='Arqueo' />
+                </ListItem>
               </Link>
-            </div>
+            </List>
           }
           {(admin === 'ELI' || admin === 'LIZBETH' || admin === 'JUAN') &&
-            <div className='navbar-left'>
+            <List style={{ padding: '0px' }}>
+              <Link to='/Arqueo' className='deco'>
+                <ListItem button>
+                  <ListItemIcon><MonetizationOnIcon /></ListItemIcon>
+                  <ListItemText primary='Arqueo' />
+                </ListItem>
+              </Link>
+            </List>
+          }
+          {(admin === 'ELI' || admin === 'LIZBETH' || admin === 'JUAN') &&
+            <List style={{ padding: '0px' }}>
               <Link to='/ArqueoD' className='deco'>
-                <span className='material-icons'>
-                  plagiarism
-                </span>
-                <Typography className='nav-t' variant='h6'>
-                  Impresión de Arqueo
-                </Typography>
+                <ListItem button>
+                  <ListItemIcon><MonetizationOnIcon /></ListItemIcon>
+                  <ListItemText primary='Arqueo Diario' />
+                </ListItem>
               </Link>
-            </div>
+            </List>
           }
           {(admin === 'ELI' || admin === 'LIZBETH' || admin === 'JUAN') &&
-            <div className='navbar-left'>
+            <List style={{ padding: '0px' }}>
               <Link to='/Cheques' className='deco'>
-                <span className='material-icons'>
-                  playlist_add_check
-                </span>
-                <Typography className='nav-t' variant='h6'>
-                  Cheques
-                </Typography>
+                <ListItem button>
+                  <ListItemIcon><MonetizationOnIcon /></ListItemIcon>
+                  <ListItemText primary='Cheques' />
+                </ListItem>
               </Link>
-            </div>
+            </List>
           }
           {(admin === 'ELI' || admin === 'LIZBETH' || admin === 'JUAN') &&
-            <div className='navbar-left'>
+            <List style={{ padding: '0px' }}>
               <Link to='/Contra2' className='deco'>
-                <span className='material-icons'>
-                  receipt
-                </span>
-                <Typography className='nav-t' variant='h6'>
-                  Contrarecibo
-                </Typography>
+                <ListItem button>
+                  <ListItemIcon><MonetizationOnIcon /></ListItemIcon>
+                  <ListItemText primary='Contrarecibo' />
+                </ListItem>
               </Link>
-            </div>
+            </List>
           }
           {(admin === 'ELI' || admin === 'LIZBETH' || admin === 'JUAN') &&
-            <div className='navbar-left'>
-              <div className='deco-c' onClick={this.toggleHiddenV.bind(this)}>
-                <span className='material-icons'>
-                  attach_money
-                </span>
-                <Typography variant='h6' className='nav-t'>
-                  Vales
-                </Typography>
-              </div>
-              <img
-                className='arrow'
-                src={arrow}
-                alt=''
-              />
-            </div>
+            <List style={{ padding: '0px' }}>
+              <Link to='/Vales' className='deco'>
+                <ListItem button>
+                  <ListItemIcon><MonetizationOnIcon /></ListItemIcon>
+                  <ListItemText primary='Vales' />
+                </ListItem>
+              </Link>
+            </List>
           }
-          {!this.state.isHiddenV &&
-            <div>
-              <div className='subnav'>
-                <Link to='/Vales' className='deco'>
-                  <Typography className='nav-t'>
-                    • Vale
-                  </Typography>
-                </Link>
-              </div>
-              <div className='subnav'>
-                <Link to='/Valeslist' className='deco'>
-                  <Typography className='nav-t'>
-                    • Lista de Vales
-                  </Typography>
-                </Link>
-              </div>
-            </div>
+          {(admin === 'ELI' || admin === 'LIZBETH' || admin === 'JUAN') &&
+            <List style={{ padding: '0px' }}>
+              <Link to='/Valeslist' className='deco'>
+                <ListItem button>
+                  <ListItemIcon><MonetizationOnIcon /></ListItemIcon>
+                  <ListItemText primary='Lista de vales' />
+                </ListItem>
+              </Link>
+            </List>
           }
           {(admin === 'MIGUEL' || admin === 'LIZBETH' || admin === 'TERESA' || admin === 'ELOY' ||
             admin === 'MARTHA' || admin === 'KARINA' || admin === 'HECTOR' || admin === 'CENELY' ||
             admin === 'OMAR' || admin === 'LILIA') &&
-            <div className='navbar-left' style={{ marginTop: '30px' }}>
+            <List style={{ padding: '0px' }}>
               <Link to='/Fondos' className='deco'>
-                <span className='material-icons'>
-                  request_quote
-                </span>
-                <Typography className='nav-t' variant='h6'>
-                  Fondos
-                </Typography>
+                <ListItem button>
+                  <ListItemIcon><CreateNewFolderIcon /></ListItemIcon>
+                  <ListItemText primary='Fondos' />
+                </ListItem>
               </Link>
-            </div>
+            </List>
           }
           {(admin === 'MIGUEL' || admin === 'LIZBETH' || admin === 'TERESA' || admin === 'ELOY' ||
             admin === 'MARTHA' || admin === 'KARINA' || admin === 'HECTOR' || admin === 'CENELY' ||
             admin === 'OMAR' || admin === 'LILIA') &&
-            <div className='navbar-left'>
+            <List style={{ padding: '0px' }}>
               <Link to='/Contrarecibo' className='deco'>
-                <span className='material-icons'>
-                  payments
-                </span>
-                <Typography className='nav-t' variant='h6'>
-                  Contrarecibo
-                </Typography>
+                <ListItem button>
+                  <ListItemIcon><FormatListBulletedIcon /></ListItemIcon>
+                  <ListItemText primary='Contrarecibo' />
+                </ListItem>
               </Link>
-            </div>
+            </List>
           }
           {(admin === 'LIZBETH' || admin === 'ELI' || admin === 'TERESA' || admin === 'HECTOR') &&
-            <div className='navbar-left'>
+            <List style={{ padding: '0px' }}>
               <Link to='/Caratula' className='deco'>
-                <span className='material-icons'>
-                  text_snippet
-                </span>
-                <Typography className='nav-t' variant='h6'>
-                  Caratula
-                </Typography>
+                <ListItem button>
+                  <ListItemIcon><ReceiptIcon /></ListItemIcon>
+                  <ListItemText primary='Caratula' />
+                </ListItem>
               </Link>
-            </div>
+            </List>
           }
           {(admin === 'MIGUEL' || admin === 'LIZBETH' || admin === 'TERESA' || admin === 'ELOY' ||
             admin === 'MARTHA' || admin === 'KARINA' || admin === 'HECTOR' || admin === 'CENELY' ||
             admin === 'OMAR' || admin === 'LILIA') &&
-            <div className='navbar-left'>
+            <List style={{ padding: '0px' }}>
               <Link to='/TabularList' className='deco'>
-                <span className='material-icons'>
-                  format_list_bulleted
-                </span>
-                <Typography className='nav-t' variant='h6'>
-                  Tabular
-                </Typography>
+                <ListItem button>
+                  <ListItemIcon><ReceiptIcon /></ListItemIcon>
+                  <ListItemText primary='Tabular' />
+                </ListItem>
               </Link>
-            </div>
+            </List>
           }
           {(admin === 'MIGUEL') &&
-            <div className='navbar-left'>
+            <List style={{ padding: '0px' }}>
               <Link to='/Pasa' className='deco'>
-                <span className='material-icons'>
-                  request_quote
-                </span>
-                <Typography className='nav-t' variant='h6'>
-                  Pasa
-                </Typography>
+                <ListItem button>
+                  <ListItemIcon><AssignmentTurnedInIcon /></ListItemIcon>
+                  <ListItemText primary='Pasa' />
+                </ListItem>
               </Link>
-            </div>
+            </List>
           }
           {admin === 'NAYRA' &&
-            <div className='navbar-left' style={{ marginTop: '40px' }}>
+            <List style={{ padding: '0px' }}>
               <Link to='/Autorizacion' className='deco'>
-                <span className='material-icons'>
-                  done_all
-                </span>
-                <Typography className='nav-t' variant='h6'>
-                  Autorización
-                </Typography>
+                <ListItem button>
+                  <ListItemIcon><MonetizationOnIcon /></ListItemIcon>
+                  <ListItemText primary='Autorizacion' />
+                </ListItem>
               </Link>
-            </div>
+            </List>
           }
-        </div>
-        <div>
-          <div className='navbar-left'>
-            <div className='deco'>
-              <button className='btn-nav' onClick={this.handleLogout}>
-                <span className='material-icons'>
-                  person
-                </span>
-                <Typography className='nav-t' variant='h6'>
-                  Cerrar Sesión
-                </Typography>
-              </button>
-              {isLoggingOut && <p>Cerrando Sesion....</p>}
-              {logoutError && <p>Error al Cerrar Sesion</p>}
-            </div>
-          </div>
+          {(admin === 'VALIDACION') &&
+            <List style={{ padding: '0px' }}>
+              <Link to='/ArchivoPago' className='deco'>
+                <ListItem button>
+                  <ListItemIcon><MonetizationOnIcon /></ListItemIcon>
+                  <ListItemText primary='Validación' />
+                </ListItem>
+              </Link>
+            </List>
+          }
+          <List style={{ padding: '0px' }} onClick={this.handleLogout}>
+            <ListItem button>
+              <ListItemIcon><MonetizationOnIcon /></ListItemIcon>
+              <ListItemText primary='Cerrar Sesion' />
+            </ListItem>
+            {isLoggingOut && <p>Cerrando Sesion....</p>}
+            {logoutError && <p>Error al Cerrar Sesion</p>}
+          </List>
+          <Divider />
         </div>
       </div>
     )

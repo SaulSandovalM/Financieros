@@ -2,6 +2,9 @@ import React, { Component } from 'react'
 import './Archivos.css'
 import firebase from '../../../Firebase'
 import ListComponent from './ListComponent'
+import Breadcrumbs from '@material-ui/core/Breadcrumbs'
+import NavigateNextIcon from '@material-ui/icons/NavigateNext'
+import { Link } from 'react-router-dom'
 
 export default class Archivos extends Component {
   constructor () {
@@ -53,8 +56,15 @@ export default class Archivos extends Component {
 
   render () {
     return (
-      <div className='pfa-container'>
-        <div className='list-c-container'>
+      <div>
+        <div className='archivos-title-font'>Archivos</div>
+        <Breadcrumbs separator={<NavigateNextIcon fontSize="small" />} aria-label="breadcrumb" className='archivo-crumb'>
+          <Link to='/' className='deco archivos-font'>
+            Dashboard
+          </Link>
+          <div className='archivos-font'>Archivos</div>
+        </Breadcrumbs>
+        <div>
           <ListComponent
             lista={this.state.lista}
           />
