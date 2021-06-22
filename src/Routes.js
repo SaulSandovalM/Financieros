@@ -3,13 +3,20 @@ import { Provider } from 'react-redux'
 import { BrowserRouter as Router } from 'react-router-dom'
 import App from './App'
 import configureStore from './store/configureStore'
-import Nav from './components/common/nav/Nav'
 // Material Design
 import AppBar from '@material-ui/core/AppBar'
 import CssBaseline from '@material-ui/core/CssBaseline'
+import Divider from '@material-ui/core/Divider'
 import Drawer from '@material-ui/core/Drawer'
+import List from '@material-ui/core/List'
+import ListItem from '@material-ui/core/ListItem'
+import ListItemIcon from '@material-ui/core/ListItemIcon'
+import ListItemText from '@material-ui/core/ListItemText'
 import Toolbar from '@material-ui/core/Toolbar'
 import Typography from '@material-ui/core/Typography'
+// iconos
+import InboxIcon from '@material-ui/icons/MoveToInbox'
+import MonetizationOnIcon from '@material-ui/icons/MonetizationOn'
 import { makeStyles } from '@material-ui/core/styles'
 
 const store = configureStore()
@@ -36,9 +43,6 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
     padding: theme.spacing(3),
     marginTop: '70px'
-  },
-  lists: {
-    padding: '0px'
   }
 }))
 
@@ -64,7 +68,44 @@ function Routes (props) {
               paper: classes.drawerPaper
             }}
           >
-            <Nav />
+            <Toolbar />
+            <div className={classes.drawerContainer}>
+              <List>
+                {['Archivos'].map((text, index) => (
+                  <ListItem button key={text}>
+                    <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : ''}</ListItemIcon>
+                    <ListItemText primary={text} />
+                  </ListItem>
+                ))}
+              </List>
+              <Divider />
+              <List>
+                {['Presupuesto', 'Fondo Revolvente', 'Archivos', 'Registro', 'Disponible', 'Contrarecibo', 'Carga Contrarecibo'].map((text, index) => (
+                  <ListItem button key={text}>
+                    <ListItemIcon>{index % 10 === 0 ? <MonetizationOnIcon /> : ''}</ListItemIcon>
+                    <ListItemText primary={text} />
+                  </ListItem>
+                ))}
+              </List>
+              <Divider />
+              <List>
+                {['Presupuesto', 'Fondo Revolvente', 'Archivos', 'Registro', 'Disponible', 'Contrarecibo', 'Carga Contrarecibo'].map((text, index) => (
+                  <ListItem button key={text}>
+                    <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : ''}</ListItemIcon>
+                    <ListItemText primary={text} />
+                  </ListItem>
+                ))}
+              </List>
+              <Divider />
+              <List>
+                {['Presupuesto', 'Fondo Revolvente', 'Archivos', 'Registro', 'Disponible', 'Contrarecibo', 'Carga Contrarecibo'].map((text, index) => (
+                  <ListItem button key={text}>
+                    <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : ''}</ListItemIcon>
+                    <ListItemText primary={text} />
+                  </ListItem>
+                ))}
+              </List>
+            </div>
           </Drawer>
           <main className={classes.content}>
             <App />

@@ -43,7 +43,7 @@
 	padding-left: 30px;
 }
 .deco {
-  color: black;
+  display: flex;
   text-decoration: none;
 }
 .nav-t {
