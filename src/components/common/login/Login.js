@@ -63,7 +63,7 @@ class Login extends Component {
                       </div>
                       <div className='login-input-cen'>
                         <TextField
-                          className='inputs-width'
+                          className='login-inputs-width'
                           label='Contraseña'
                           variant='outlined'
                           id='password'
@@ -78,7 +78,7 @@ class Login extends Component {
                       )}
                       <div className='login-ctb'>
                         <Button
-                          className='inputs-width'
+                          className='login-inputs-width'
                           variant='contained'
                           color='primary'
                           onClick={ this.handleSubmit }
