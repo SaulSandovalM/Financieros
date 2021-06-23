@@ -96,7 +96,7 @@ class Nav extends Component {
               </Link>
             </div>
           }
-          {(admin === 'CECILIA' || admin === 'LIZBETH') &&
+          {(admin === 'CECILIA' || admin === 'LIZBETH' || admin === 'ALFREDO') &&
             <div className='navbar-left' style={{ marginTop: '30px' }}>
               <div className='deco-c' onClick={this.toggleHiddenP.bind(this)}>
                 <span className='material-icons'>
@@ -152,7 +152,7 @@ class Nav extends Component {
               </div>
             </div>
           }
-          {/* (admin === 'CECILIA' || admin === 'LIZBETH') &&
+          {/* (admin === 'CECILIA' || admin === 'LIZBETH' || admin === 'ALFREDO') &&
             <div className='navbar-left'>
               <Link to='/Saldos' className='deco'>
                 <span className='material-icons'>
@@ -164,7 +164,7 @@ class Nav extends Component {
               </Link>
             </div>
           */ }
-          {(admin === 'CECILIA' || admin === 'LIZBETH') &&
+          {(admin === 'CECILIA' || admin === 'LIZBETH' || admin === 'ALFREDO') &&
             <div className='navbar-left'>
               <Link to='/FondoRevolvente' className='deco'>
                 <span className='material-icons'>
@@ -176,7 +176,7 @@ class Nav extends Component {
               </Link>
             </div>
           }
-          {(admin === 'CECILIA' || admin === 'LIZBETH') &&
+          {(admin === 'CECILIA' || admin === 'LIZBETH' || admin === 'ALFREDO') &&
             <div className='navbar-left'>
               <Link to='/Archivos' className='deco'>
                 <span className='material-icons'>
@@ -188,7 +188,7 @@ class Nav extends Component {
               </Link>
             </div>
           }
-          {(admin === 'CECILIA' || admin === 'LIZBETH') &&
+          {(admin === 'CECILIA' || admin === 'LIZBETH' || admin === 'ALFREDO') &&
             <div className='navbar-left'>
               <Link to='/Registro' className='deco'>
                 <span className='material-icons'>
@@ -200,7 +200,7 @@ class Nav extends Component {
               </Link>
             </div>
           }
-          {(admin === 'CECILIA' || admin === 'LIZBETH') &&
+          {(admin === 'CECILIA' || admin === 'LIZBETH' || admin === 'ALFREDO') &&
             <div className='navbar-left'>
               <Link to='/Disponible' className='deco'>
                 <span className='material-icons'>
@@ -212,7 +212,7 @@ class Nav extends Component {
               </Link>
             </div>
           }
-          {(admin === 'CECILIA' || admin === 'LIZBETH') &&
+          {(admin === 'CECILIA' || admin === 'LIZBETH' || admin === 'ALFREDO') &&
             <div className='navbar-left'>
               <Link to='/Contra' className='deco'>
                 <span className='material-icons'>
@@ -224,7 +224,7 @@ class Nav extends Component {
               </Link>
             </div>
           }
-          {(admin === 'CECILIA' || admin === 'LIZBETH') &&
+          {(admin === 'CECILIA' || admin === 'LIZBETH' || admin === 'ALFREDO') &&
             <div className='navbar-left'>
               <Link to='/CargaC' className='deco'>
                 <span className='material-icons'>
