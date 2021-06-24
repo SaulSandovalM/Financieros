@@ -15,6 +15,7 @@ export default class RowComponent extends Component {
   }
 
   render () {
+    console.log(this.props.item)
     return (
       <TableBody>
         {this.props.item.saldo === 'Saldo' &&

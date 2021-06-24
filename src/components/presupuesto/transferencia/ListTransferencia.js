@@ -13,7 +13,8 @@ export default class ListComponent extends Component {
   constructor (props) {
     super(props)
     this.state = {
-      presupuesto: []
+      presupuesto: [],
+      search: ''
     }
   }
 
@@ -25,9 +26,23 @@ export default class ListComponent extends Component {
     })
   }
 
+  updateSeacrh (event) {
+    this.setState({ search: event.target.value.substr(0, 20) })
+  }
+
   render () {
+    var filterData = this.props.listaB.filter(
+      (item) => {
+        return (item.oficio ? item.oficio.indexOf(this.state.search) !== -1 : null)
+      }
+    )
+
     return (
       <TableContainer component={Paper}>
+        <input
+          value={this.state.search}
+          onChange={this.updateSeacrh.bind(this)}
+        />
         <Table size='small'>
           <TableHead>
             <TableRow>
@@ -82,7 +97,7 @@ export default class ListComponent extends Component {
             </TableRow>
           </TableHead>
           {
-            this.props.listaB.map(item =>
+            filterData.map(item =>
               <RowComponent
                 key={item.id}
                 item={item}

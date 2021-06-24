@@ -167,7 +167,6 @@ export default class ContainerT extends Component {
           reduccion: child.val().reduccion,
           transferencia: child.val().transferencia,
           oficio: child.val().oficio,
-          done: child.val().done,
           id: child.key
         })
       })
@@ -175,10 +174,6 @@ export default class ContainerT extends Component {
         listaB: listaB
       })
     })
-  }
-
-  handleChange (event) {
-    this.setState({ [event.target.name]: event.target.value })
   }
 
   render () {

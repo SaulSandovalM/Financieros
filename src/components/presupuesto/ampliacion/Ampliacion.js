@@ -266,6 +266,20 @@ export default class Ampliacion extends Component {
       archivo: this.state.archivo
     }
     firebase.database().ref().update(updates)
+    // const params = {
+    //   mes: this.state.mes,
+    //   oficioSolicitud: this.state.oficioSolicitud,
+    //   up: this.state.up,
+    //   partida: this.state.partida,
+    //   movimiento: this.state.movimiento
+    // }
+    // if (params.mes && params.oficioSolicitud && params.up && params.partida && params.movimiento) {
+    //   firebase.database().ref('ampliacion').push(params).then(() => {
+    //     alert('Tu solicitud fue enviada.')
+    //   }).catch(() => {
+    //     alert('Tu solicitud no puede ser enviada')
+    //   })
+    // }
     alert('Tu solicitud fue enviada.')
   }
 
