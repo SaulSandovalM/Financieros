@@ -30,7 +30,6 @@ export default class ContainerT extends Component {
       rubro: '',
       archivo: '',
       importe: '',
-      contador: {},
       alert: false,
       presupuesto: [],
       search: '',

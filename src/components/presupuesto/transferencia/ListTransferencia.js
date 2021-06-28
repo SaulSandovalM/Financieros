@@ -8,6 +8,7 @@ import TableContainer from '@material-ui/core/TableContainer'
 import TableHead from '@material-ui/core/TableHead'
 import TableRow from '@material-ui/core/TableRow'
 import Paper from '@material-ui/core/Paper'
+import TextField from '@material-ui/core/TextField'
 
 export default class ListComponent extends Component {
   constructor (props) {
@@ -39,10 +40,14 @@ export default class ListComponent extends Component {
 
     return (
       <TableContainer component={Paper}>
-        <input
-          value={this.state.search}
-          onChange={this.updateSeacrh.bind(this)}
-        />
+        <div>
+          <TextField
+            style={{ width: '450px', margin: '10px' }}
+            label='Ingresa el oficio a buscar'
+            value={this.state.search}
+            onChange={this.updateSeacrh.bind(this)}
+          />
+        </div>
         <Table size='small'>
           <TableHead>
             <TableRow>
@@ -54,6 +59,12 @@ export default class ListComponent extends Component {
               </TableCell>
               <TableCell className='table-up-p-frn-p'>
                 <b>Rubro</b>
+              </TableCell>
+              <TableCell className='table-up-p-frn-p'>
+                <b>Ampliación</b>
+              </TableCell>
+              <TableCell className='table-up-p-frn-p'>
+                <b>Reducción</b>
               </TableCell>
               <TableCell className='mes-t'>
                 <b>Enero</b>
@@ -90,9 +101,6 @@ export default class ListComponent extends Component {
               </TableCell>
               <TableCell className='mes-t'>
                 <b>Diciembre</b>
-              </TableCell>
-              <TableCell className='mes-t'>
-                <b>Estatus</b>
               </TableCell>
             </TableRow>
           </TableHead>
