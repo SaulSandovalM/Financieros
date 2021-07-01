@@ -54,7 +54,8 @@ export default class Valeslist extends Component {
       pendientes: false,
       obs: '',
       opened: false,
-      xmlLoading: 0
+      xmlLoading: 0,
+      contador: 0
     }
     this.toggleBox = this.toggleBox.bind(this)
   }
@@ -117,7 +118,9 @@ export default class Valeslist extends Component {
   }
 
   handleOnChange2 (event) {
-    for (let i = 0; i < event.target.files.length; i++) {
+    let i = 0
+    let con
+    for (i ; i < event.target.files.length; i++) {
       const file = event.target.files[i]
       const storageRef = firebase.storage().ref(`comprobacion/${file.name}`)
       const task = storageRef.put(file)
@@ -133,6 +136,10 @@ export default class Valeslist extends Component {
           filefactura: [...this.state.filefactura, { url: url, nombre: file.name }],
         })
       }))
+      con = i + 1
+      this.setState({
+        contador: con
+      })
     }
   }
 
@@ -365,6 +372,7 @@ export default class Valeslist extends Component {
                       <progress className='progress' value={this.state.pdf2} max='100'>
                         {this.state.pdf2} %
                       </progress>
+                      {this.state.contador}
                     </div>
                     <div className='p-container-valeslist'>
                       <TextField

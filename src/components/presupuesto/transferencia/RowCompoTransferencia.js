@@ -23,7 +23,7 @@ export default class RowCompoTransferencia extends Component {
     const up = this.props.item.up
     const ogasto = this.props.item.ogasto
     const rubro = this.props.item.rubro
-    let button;
+    let button
     if (up === this.props.search && ogasto === this.props.search2 && rubro === this.props.search3) {
       button =
       <TableRow>

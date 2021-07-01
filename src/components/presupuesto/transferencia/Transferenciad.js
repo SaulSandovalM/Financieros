@@ -269,7 +269,7 @@ export default class Transferencia extends Component {
       gasago: item.gasago,
       ampago: parseFloat(this.state.impoago),
       sep: item.sep + parseFloat(this.state.imposep),
-      gassep: item.gasep,
+      gassep: item.gassep,
       ampsep: parseFloat(this.state.imposep),
       oct: item.oct + parseFloat(this.state.impooct),
       gasoct: item.gasoct,
