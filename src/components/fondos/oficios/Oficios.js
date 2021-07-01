@@ -855,6 +855,8 @@ export default class Oficios extends Component {
           }
         </div>
 
+
+
         {/* Formato E */}
         {/* <div className='formatoe-container' ref={el => (this.la = el)}>
           {this.state.comprometidos.map(comprometidos =>
@@ -1037,89 +1039,91 @@ export default class Oficios extends Component {
 
         {/* fondo revolvente */}
         <div className='pppdf-subdad' ref={el => (this.rfr = el)}>
-          <div className='header-ofi'>
-            <div className='header-ofi-cont'>
-              <div className='sp-cont'>
-                <img className='pgjh comple' src={lpgjh} alt='' />
+          <div style={{ display: 'flex', justifyContent: 'center' }}>
+            <div style={{ width: '90%' }}>
+              <div className='header-ofi'>
+                <div className='header-ofi-cont'>
+                  <div className='sp-cont'>
+                    <img className='pgjh comple' src={lpgjh} alt='' />
+                  </div>
+                  <img className='img-sp' src={logo2} alt='' />
+                </div>
+                <p>Dirección General de Administracción y Finanzas</p>
               </div>
-              <img className='img-sp' src={logo2} alt='' />
-            </div>
-          </div>
-          <div className='sp-direc'>
-            <p>Dirección General de Administracción y Finanzas</p>
-          </div>
-          <div style={{ display: 'flex', justifyContent: 'space-between', flexDirection: 'column', width: '100%', height: '75%' }}>
-            <div>
-              <div className='no-oficio-sp'>
-                <p>
-                  Oficio No: PGJ/DGAyF/{this.state.fondo.no_oficio}/2021
-                  <br />Pachuca de Soto, Hidalgo a {today}
-                  <br />Asunto: Reembolso de Fondo Revolvente
-                </p>
-              </div>
-              <div className='prensente-sp'>
-                <p>
-                  <b>
-                    L.A.E. CÉSAR ALBERTO GONZÁLEZ LÓPEZ
-                    <br />SUBSECRETARIO DE EGRESOS DE LA
-                    <br />SECRETARÍA DE FIANAZAS PÚBLICAS
-                    <br />PRESENTE
-                  </b>
-                </p>
-              </div>
-              <div className='añadido-sp'>
-                <p>
-                  <b>
-                    AT´N.: L.C.P. KARINA BARRIOS VELÁZQUEZ
-                    <br />DIRECTORA GENERAL DE CONTABILIDAD
-                    <br />GUBERNAMENTAL
-                  </b>
-                </p>
-              </div>
-              <div className='texto-ofi-sp'>
-                {totalRetencion.reduce(reducer) !== 0 ?
-                  <p>
-                    Por medio del presente me permito enviar a usted, documentación amparada
-                    con {finalC} comprobantes, por un total de <CurrencyFormat value={ttotal} displayType='text' thousandSeparator prefix=' $ ' /> ({(NumberAsString(ttotal))}),
-                    con una retención por <CurrencyFormat value={totalRetencion.reduce(reducer).toFixed(2)} displayType='text' thousandSeparator prefix=' $ ' /> para
-                    un importe total a pagar de <CurrencyFormat value={(parseFloat(ttotal) - (totalRetencion.reduce(reducer))).toFixed(2)} displayType='text' thousandSeparator prefix=' $ ' /> para
-                    el trámite de Reembolso de Fondo Revolvente, con cargo al
-                    proyecto{this.state.comprometidos.map(item => item.proy ? ', ' + item.proy + ' ' + item.np : null)} otorgado
-                    en el oficio de autorización {this.state.fondo.oficio_aut} del
-                    Ejercicio 2021, a la Procuraduria General de Justicia del estado de Hidalgo.
-                  </p> :
-                  <p>
-                    Por medio del presente me permito enviar a usted, documentación amparada
-                    con {finalC} comprobantes, por un total de <CurrencyFormat value={ttotal} displayType='text' thousandSeparator prefix=' $ ' /> ({(NumberAsString(ttotal))}),
-                    para el trámite de Reembolso de Fondo Revolvente, con cargo al
-                    proyecto{this.state.comprometidos.map(item => item.proy ? ', ' + item.proy + ' ' + item.np : null)} otorgado
-                    en el oficio de autorización {this.state.fondo.oficio_aut} del
-                    Ejercicio 2021, a la Procuraduria General de Justicia del estado de Hidalgo.
-                  </p>
-                }
-                <p>Sin otro particular, le envío un cordial y afectuoso saludo.</p>
-              </div>
-            </div>
-            <div>
-              <div className='atte-sp'>
-                <p className='atte-text-sp'>
-                  <b>ATENTAMENTE<br />EL DIRECTOR GENERAL</b>
-                </p>
-              </div>
-              <div className='firma-sp'>
-                <div className='firma-raya-sp'>
-                  <p><b>MTRO. LEÓN MAXIMILIANO HERNÁNDEZ VALDÉS</b></p>
+              <div style={{ display: 'flex', justifyContent: 'space-between', flexDirection: 'column', width: '100%', height: '75%' }}>
+                <div>
+                  <div className='no-oficio-sp'>
+                    <p>
+                      Oficio No: PGJ/DGAyF/{this.state.fondo.no_oficio}/2021
+                      <br />Pachuca de Soto, Hidalgo a {today}
+                      <br />Asunto: Reembolso de Fondo Revolvente
+                    </p>
+                  </div>
+                  <div className='prensente-sp'>
+                    <p>
+                      <b>
+                        L.A.E. CÉSAR ALBERTO GONZÁLEZ LÓPEZ
+                        <br />SUBSECRETARIO DE EGRESOS DE LA
+                        <br />SECRETARÍA DE FIANAZAS PÚBLICAS
+                        <br />PRESENTE
+                      </b>
+                    </p>
+                  </div>
+                  <div className='añadido-sp'>
+                    <p>
+                      <b>
+                        AT´N.: L.C.P. KARINA BARRIOS VELÁZQUEZ
+                        <br />DIRECTORA GENERAL DE CONTABILIDAD
+                        <br />GUBERNAMENTAL
+                      </b>
+                    </p>
+                  </div>
+                  <div className='texto-ofi-sp'>
+                    {totalRetencion.reduce(reducer) !== 0 ?
+                      <p>
+                        Por medio del presente me permito enviar a usted, documentación amparada
+                        con {finalC} comprobantes, por un total de <CurrencyFormat value={ttotal} displayType='text' thousandSeparator prefix=' $ ' /> ({(NumberAsString(ttotal))}),
+                        con una retención por <CurrencyFormat value={totalRetencion.reduce(reducer).toFixed(2)} displayType='text' thousandSeparator prefix=' $ ' /> para
+                        un importe total a pagar de <CurrencyFormat value={(parseFloat(ttotal) - (totalRetencion.reduce(reducer))).toFixed(2)} displayType='text' thousandSeparator prefix=' $ ' /> para
+                        el trámite de Reembolso de Fondo Revolvente, con cargo al
+                        proyecto{this.state.comprometidos.map(item => item.proy ? ', ' + item.proy + ' ' + item.np : null)} otorgado
+                        en el oficio de autorización {this.state.fondo.oficio_aut} del
+                        Ejercicio 2021, a la Procuraduria General de Justicia del estado de Hidalgo.
+                      </p> :
+                      <p>
+                        Por medio del presente me permito enviar a usted, documentación amparada
+                        con {finalC} comprobantes, por un total de <CurrencyFormat value={ttotal} displayType='text' thousandSeparator prefix=' $ ' /> ({(NumberAsString(ttotal))}),
+                        para el trámite de Reembolso de Fondo Revolvente, con cargo al
+                        proyecto{this.state.comprometidos.map(item => item.proy ? ', ' + item.proy + ' ' + item.np : null)} otorgado
+                        en el oficio de autorización {this.state.fondo.oficio_aut} del
+                        Ejercicio 2021, a la Procuraduria General de Justicia del estado de Hidalgo.
+                      </p>
+                    }
+                    <p>Sin otro particular, le envío un cordial y afectuoso saludo.</p>
+                  </div>
+                </div>
+                <div>
+                  <div className='atte-sp'>
+                    <p className='atte-text-sp'>
+                      <b>ATENTAMENTE<br />EL DIRECTOR GENERAL</b>
+                    </p>
+                  </div>
+                  <div className='firma-sp'>
+                    <div className='firma-raya-sp'>
+                      <p><b>MTRO. LEÓN MAXIMILIANO HERNÁNDEZ VALDÉS</b></p>
+                    </div>
+                  </div>
                 </div>
               </div>
-            </div>
-          </div>
-          <div className='footer-sp'>
-            <div className='footer-content-sp'>
-              <div>
-                <p className='foot-text'>C.C.P...- Expediente<br />Minutario<br />LMHV/NRL/macht</p>
-              </div>
-              <div className='foot-num'>
-                <p className='foot-num-t'>No. de Fondo {this.state.fondo.fondo}</p>
+              <div className='footer-sp'>
+                <div className='footer-content-sp'>
+                  <div>
+                    <p className='foot-text'>C.C.P...- Expediente<br />Minutario<br />LMHV/NRL/macht</p>
+                  </div>
+                  <div className='foot-num'>
+                    <p className='foot-num-t'>No. de Fondo {this.state.fondo.fondo}</p>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -1867,7 +1871,7 @@ export default class Oficios extends Component {
                 <p>
                   Por medio del presente informo a Usted, que se ha concluido el contrato
                   por la prestación de servicios  con el proveedor {this.state.fondo.beneficiario},
-                  de los recuersos autorizados al proyecto{this.state.comprometidos.map(item => item.proy ? ', ' + item.proy + ' ' + item.np : null)},
+                  de los recursos autorizados al proyecto{this.state.comprometidos.map(item => item.proy ? ', ' + item.proy + ' ' + item.np : null)},
                   asignado a la Unidad Presupuestal {this.state.comprometidos.map(comprometidos =>
                     comprometidos.area ?
                       this.state.comprometidos.length === 1 ?
