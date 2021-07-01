@@ -56,7 +56,7 @@
 .pgjh {
   height: 50px;
   width: 150px;
-  margin-left: 10px;
+  margin-left: 10px
 }
 .ofie-text {
   width: 70%;
@@ -384,6 +384,7 @@
 .pppdf-subdad {
   background: white;
   position: relative;
+  top: 0;
   width: 100%;
   z-index: 2;
 }
@@ -395,7 +396,6 @@
 .header-ofi-cont {
   display: flex;
   justify-content: space-between;
-  margin-top: -50px;
 }
 .sp-cont {
   display: flex;
