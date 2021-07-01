@@ -31,7 +31,7 @@ export default class RowComponent extends Component {
             <TableCell className='mes-t'>
               <i>
                 <CurrencyFormat
-                  value={this.props.item.gasjun}
+                  value={this.props.item.ampjun}
                   displayType='text'
                   thousandSeparator
                   prefix=' $'
@@ -51,7 +51,7 @@ export default class RowComponent extends Component {
             <TableCell className='mes-t'>
               <i>
                 <CurrencyFormat
-                  value={this.props.item.ene}
+                  value={this.props.item.gasene}
                   displayType='text'
                   thousandSeparator
                   prefix=' $'
@@ -61,7 +61,7 @@ export default class RowComponent extends Component {
             <TableCell className='mes-t'>
               <i>
                 <CurrencyFormat
-                  value={this.props.item.feb}
+                  value={this.props.item.gasfeb}
                   displayType='text'
                   thousandSeparator
                   prefix=' $'
@@ -71,7 +71,7 @@ export default class RowComponent extends Component {
             <TableCell className='mes-t'>
               <i>
                 <CurrencyFormat
-                  value={this.props.item.mar}
+                  value={this.props.item.gasmar}
                   displayType='text'
                   thousandSeparator
                   prefix=' $'
@@ -81,7 +81,7 @@ export default class RowComponent extends Component {
             <TableCell className='mes-t'>
               <i>
                 <CurrencyFormat
-                  value={this.props.item.abr}
+                  value={this.props.item.gasabr}
                   displayType='text'
                   thousandSeparator
                   prefix=' $'
@@ -91,7 +91,7 @@ export default class RowComponent extends Component {
             <TableCell className='mes-t'>
               <i>
                 <CurrencyFormat
-                  value={this.props.item.may}
+                  value={this.props.item.gasmay}
                   displayType='text'
                   thousandSeparator
                   prefix=' $'
@@ -101,7 +101,7 @@ export default class RowComponent extends Component {
             <TableCell className='mes-t'>
               <i>
                 <CurrencyFormat
-                  value={this.props.item.jun}
+                  value={this.props.item.gasjun}
                   displayType='text'
                   thousandSeparator
                   prefix=' $'
@@ -111,7 +111,7 @@ export default class RowComponent extends Component {
             <TableCell className='mes-t'>
               <i>
                 <CurrencyFormat
-                  value={this.props.item.jul}
+                  value={this.props.item.gasjul}
                   displayType='text'
                   thousandSeparator
                   prefix=' $'
@@ -121,7 +121,7 @@ export default class RowComponent extends Component {
             <TableCell className='mes-t'>
               <i>
                 <CurrencyFormat
-                  value={this.props.item.ago}
+                  value={this.props.item.gasago}
                   displayType='text'
                   thousandSeparator
                   prefix=' $'
@@ -131,7 +131,7 @@ export default class RowComponent extends Component {
             <TableCell className='mes-t'>
               <i>
                 <CurrencyFormat
-                  value={this.props.item.sep}
+                  value={this.props.item.gassep}
                   displayType='text'
                   thousandSeparator
                   prefix=' $'
@@ -141,7 +141,7 @@ export default class RowComponent extends Component {
             <TableCell className='mes-t'>
               <i>
                 <CurrencyFormat
-                  value={this.props.item.oct}
+                  value={this.props.item.gasoct}
                   displayType='text'
                   thousandSeparator
                   prefix=' $'
@@ -151,7 +151,7 @@ export default class RowComponent extends Component {
             <TableCell className='mes-t'>
               <i>
                 <CurrencyFormat
-                  value={this.props.item.nov}
+                  value={this.props.item.gasnov}
                   displayType='text'
                   thousandSeparator
                   prefix=' $'
@@ -161,7 +161,7 @@ export default class RowComponent extends Component {
             <TableCell className='mes-t'>
               <i>
                 <CurrencyFormat
-                  value={this.props.item.dic}
+                  value={this.props.item.gasdic}
                   displayType='text'
                   thousandSeparator
                   prefix=' $'
