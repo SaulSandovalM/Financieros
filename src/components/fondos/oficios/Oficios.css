@@ -390,7 +390,7 @@
   height: 100px;
   position: fixed;
   top: 0;
-  width: 90%;
+  width: 100%;
 }
 .header-ofi-cont {
   display: flex;
@@ -457,7 +457,7 @@
   bottom: 0;
   height: 100px;
   position: fixed;
-  width: 80%;
+  width: 100%;
 }
 .footer-content-sp {
   display: flex;
