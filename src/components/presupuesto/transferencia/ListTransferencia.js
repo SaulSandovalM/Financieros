@@ -20,7 +20,7 @@ export default class ListComponent extends Component {
   }
 
   componentWillMount () {
-    firebase.database().ref('presupuesto/').on('child_added', snapshot => {
+    firebase.database().ref('presupuesto/').orderByChild('up').on('child_added', snapshot => {
       this.setState({
         presupuesto: this.state.presupuesto.concat(snapshot.val())
       })
@@ -59,6 +59,9 @@ export default class ListComponent extends Component {
               </TableCell>
               <TableCell className='table-up-p-frn-p'>
                 <b>Rubro</b>
+              </TableCell>
+              <TableCell className='table-up-p-frn-p'>
+                <b>Saldo</b>
               </TableCell>
               <TableCell className='table-up-p-frn-p'>
                 <b>Ampliación</b>

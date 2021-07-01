@@ -383,7 +383,7 @@
 .pppdf-subdad {
   background: white;
   position: relative;
-  width: 90%;
+  width: 100%;
   z-index: 2;
 }
 .header-ofi {
@@ -407,7 +407,6 @@
 }
 .img-sp {
   height: 70px;
-  justify-content: space-between;
   margin-bottom: 5px;
   width: auto;
 }

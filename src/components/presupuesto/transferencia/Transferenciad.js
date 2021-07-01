@@ -283,7 +283,7 @@ export default class Transferencia extends Component {
       total: item.total,
       ampliacion: item.ampliacion,
       reduccion: item.reduccion,
-      transferencia: 'T/R',
+      transferencia: 'T/A',
       oficio: this.state.oficio
     }
     firebase.database().ref().update(updates)
@@ -393,7 +393,6 @@ export default class Transferencia extends Component {
                     ref={impojul => this.inputImpojul = impojul}
                   />
                 </div>
-
                 <div className='cal-cont'>
                   <TextField
                     label='Agosto'

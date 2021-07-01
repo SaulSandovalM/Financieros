@@ -109,7 +109,7 @@ export default class Oficios extends Component {
   render () {
     var today = new Date()
     var meses = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre']
-    var diasSemana = ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado']
+    var diasSemana = ['domingo', 'lunes', 'martes', 'miércoles', 'jueves', 'viernes', 'sábado']
     var f = new Date()
     today = diasSemana[f.getDay()] + ', ' + f.getDate() + ' de ' + meses[f.getMonth()] + ' de ' + f.getFullYear()
     const totalImporte = []
@@ -1219,7 +1219,7 @@ export default class Oficios extends Component {
                 <p>
                   Oficio No: PGJ/DGAyF/{this.state.fondo.no_oficio}/2021
                   <br />Pachuca de Soto, Hidalgo a {today}
-                  <br />Asunto Pago a Proveedor
+                  <br />Asunto: Pago a Proveedor
                 </p>
               </div>
               <div className='prensente-sp'>
@@ -1318,7 +1318,7 @@ export default class Oficios extends Component {
                 <p>
                   Oficio No: PGJ/DGAyF/{this.state.fondo.no_oficio}/2021
                   <br />Pachuca de Soto, Hidalgo a {today}
-                  <br />Asunto Pago a Proveedor
+                  <br />Asunto: Pago a Proveedor
                 </p>
               </div>
               <div className='prensente-sp'>
