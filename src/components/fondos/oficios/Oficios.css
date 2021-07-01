@@ -387,7 +387,6 @@
   z-index: 2;
 }
 .header-ofi {
-  height: 100px;
   position: fixed;
   top: 0;
   width: 100%;
@@ -402,7 +401,7 @@
   justify-content: center;
 }
 .comple {
-  margin-left: -20px;
+  margin-left: -10px;
   width: auto;
 }
 .img-sp {
@@ -455,7 +454,6 @@
 }
 .footer-sp {
   bottom: 0;
-  height: 100px;
   position: fixed;
   width: 100%;
 }
