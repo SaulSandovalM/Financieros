@@ -474,64 +474,6 @@ export default class FondoE extends Component {
                       />
                     </div>
                     <div className='div-con'>
-                      <TextField
-                        label='Importe'
-                        value={this.state.importe ? this.state.importe : this.state.fondos[0].importe}
-                        onChange={this.onChange}
-                        id='importe'
-                        name='importe'
-                        InputProps={{
-                          inputComponent: NumberFormatCustom
-                        }}
-                        required
-                        ref={importe => this.inputImporte = importe}
-                      />
-                    </div>
-                  </div>
-                  <div className='div-f2'>
-                    <div className='div-con'>
-                      <p className='p-label'>Importe Letra</p>
-                      <input
-                        className='field'
-                        name='no_oficio'
-                        onChange={this.onChange}
-                        value={(NumberAsString(this.state.importe ? this.state.importe : this.state.fondos[0].importe))}
-                        required
-                        ref='no_oficio'
-                      />
-                    </div>
-                    {tipo_doc === 'Fondo Revolvente' ?
-                      <div className='div-con'>
-                        <p className='p-label'>Beneficiario</p>
-                        <select
-                          className='select-f'
-                          value={this.state.beneficiario ? this.state.beneficiario : this.state.fondos[0].beneficiario}
-                          onChange={this.onChange}
-                          name='beneficiario'
-                        >
-                          {this.beneficiario2.map((x,y) =>
-                            <option name={y}>{x}</option>
-                          )}
-                        </select>
-                      </div>
-                      :
-                      <div className='div-con'>
-                        <p className='p-label'>Beneficiario</p>
-                        <select
-                          className='select-f'
-                          value={this.state.beneficiario ? this.state.beneficiario : this.state.fondos[0].beneficiario}
-                          onChange={this.onChange}
-                          name='beneficiario'
-                        >
-                          {this.state.baneficiarioc.map(data =>
-                            <option name={data}>{data.nombre}</option>
-                          )}
-                        </select>
-                      </div>
-                    }
-                  </div>
-                  <div className='div-f2'>
-                    <div className='div-con'>
                       <p className='p-label'>Descripción</p>
                       <input
                         className='field'
@@ -544,38 +486,40 @@ export default class FondoE extends Component {
                       />
                     </div>
                   </div>
-                  <div className='div-f2'>
-                    <div className='fondo-w-c'>
-                      <div>
-                        <FormControl className='fondo-w-c'>
-                          <InputLabel>Proyecto</InputLabel>
-                          <Select
-                            style={{ height: 'auto' }}
-                            multiple
-                            id='no_proyecto'
-                            value={this.state.no_proyecto.length !== 0 ? this.state.no_proyecto : this.state.fondos[0].no_proyecto}
-                            onChange={this.onChange}
-                            name='no_proyecto'
-                            input={<Input id='select-multiple-chip' />}
-                            renderValue={(selected) => (
-                              <div>
-                                {selected.map((value) => (
-                                  <Chip key={value} label={value} style={{ display: 'flex', flexWrap: 'wrap' }}/>
-                                ))}
-                              </div>
-                            )}
-                            MenuProps={MenuProps}
-                          >
-                            {this.no_proyecto.map((name) => (
-                              <MenuItem key={name} value={name}>
-                                {name}
-                              </MenuItem>
-                            ))}
-                          </Select>
-                        </FormControl>
+                  {(realizo === 'MIGUEL' || realizo === 'ELOY' || realizo === 'TERESA' || realizo === 'MARTHA' || realizo === 'LIZBETH') ?
+                    <div className='div-f2'>
+                      <div className='fondo-w-c'>
+                        <div>
+                          <FormControl className='fondo-w-c'>
+                            <InputLabel>Proyecto</InputLabel>
+                            <Select
+                              style={{ height: 'auto' }}
+                              multiple
+                              id='no_proyecto'
+                              value={this.state.no_proyecto.length !== 0 ? this.state.no_proyecto : this.state.fondos[0].no_proyecto}
+                              onChange={this.onChange}
+                              name='no_proyecto'
+                              input={<Input id='select-multiple-chip' />}
+                              renderValue={(selected) => (
+                                <div>
+                                  {selected.map((value) => (
+                                    <Chip key={value} label={value} style={{ display: 'flex', flexWrap: 'wrap' }}/>
+                                  ))}
+                                </div>
+                              )}
+                              MenuProps={MenuProps}
+                            >
+                              {this.no_proyecto.map((name) => (
+                                <MenuItem key={name} value={name}>
+                                  {name}
+                                </MenuItem>
+                              ))}
+                            </Select>
+                          </FormControl>
+                        </div>
                       </div>
-                    </div>
-                  </div>
+                    </div> : null
+                  }
                   <div className='div-f2'>
                     <div style={{ width: '99%' }}>
                       <div>

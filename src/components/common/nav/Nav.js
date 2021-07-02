@@ -77,14 +77,18 @@ class Nav extends Component {
       admin = 'ELI'
     } else if (email === 'juan@procuraduria.com') {
       admin = 'JUAN'
-    } else if (email === 'validacion@procuraduria.com') {
-      admin = 'VALIDACION' // hkV4l1d4c10n
+    } else if (email === 'candy@procuraduria.com') {
+      admin = 'CANDY'
+    } else if (email === 'angel@procuraduria.com') {
+      admin = 'ANGEL'
+    } else if (email === 'danya@procuraduria.com') {
+      admin = 'DANYA'
     }
 
     return (
       <div className='nav-col'>
         <div className='nav-cont'>
-          {(admin === 'VALIDACION') &&
+          {(admin === 'CANDY' || admin === 'ANGEL' || admin === 'DANYA') &&
             <div className='navbar-left' style={{ marginTop: '30px' }}>
               <Link to='/ArchivoPago' className='deco'>
                 <span className='material-icons'>

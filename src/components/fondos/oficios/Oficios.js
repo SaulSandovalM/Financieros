@@ -1040,7 +1040,7 @@ export default class Oficios extends Component {
         {/* fondo revolvente */}
         <div className='pppdf-subdad' ref={el => (this.rfr = el)}>
           <div style={{ display: 'flex', justifyContent: 'center' }}>
-            <div style={{ width: '90%' }}>
+            <div style={{ width: '85%' }}>
               <div className='header-ofi'>
                 <div className='header-ofi-cont'>
                   <div className='sp-cont'>
@@ -1131,72 +1131,80 @@ export default class Oficios extends Component {
 
         {/* Recibo */}
         <div className='pppdf-subdad' ref={el => (this.rec = el)}>
-          <div className='header-ofi'>
-            <div className='header-ofi-cont'>
-              <div className='sp-cont'>
-                <img className='pgjh comple' src={lpgjh} alt='' />
-              </div>
-              <img className='img-sp' src={logo2} alt='' />
-            </div>
-          </div>
-          <div className='sp-direc'>
-            <p>Dirección General de Administracción y Finanzas</p>
-          </div>
-          <div style={{ height: '75%', display: 'flex', flexDirection: 'column' }}>
-            <div style={{ height: '100%', display: 'flex', justifyContent: 'space-between', flexDirection: 'column' }}>
+          <div style={{ display: 'flex', justifyContent: 'center' }}>
+            <div style={{ width: '85%' }}>
               <div style={{ display: 'flex', justifyContent: 'center' }}>
-                <h3>RECIBO</h3>
-              </div>
-              <div>
-                {totalRetencion.reduce(reducer) !== 0 ?
-                  <p className='texto-de-pdf' style={{ textAlign: 'justify', lineHeight: '35px' }}>
-                    Recibí de la Secretaría de Finanzas Públicas del Gobierno del Estado
-                    de Hidalgo la cantidad de <CurrencyFormat value={ttotal} displayType='text' thousandSeparator prefix=' $ ' /> ({( NumberAsString(ttotal) )})
-                    con una retención por <CurrencyFormat value={totalRetencion.reduce(reducer).toFixed(2)} displayType='text' thousandSeparator prefix=' $ ' /> para
-                    un importe total de <CurrencyFormat value={ttotal - totalRetencion.reduce(reducer).toFixed(2)} displayType='text' thousandSeparator prefix=' $ ' />
-                    por concepto de Reposición de Fondo Revolvente, la cantidad sera
-                    debidamente aplicada en {this.state.fondo.desc}
-                  </p> :
-                  <p className='texto-de-pdf' style={{ textAlign: 'justify', lineHeight: '35px' }}>
-                    Recibí de la Secretaría de Finanzas Públicas del Gobierno del Estado
-                    de Hidalgo la cantidad de <CurrencyFormat value={ttotal} displayType='text' thousandSeparator prefix=' $ ' /> ({( NumberAsString(ttotal) )})
-                    por concepto de Reposición de Fondo Revolvente, la cantidad sera
-                    debidamente aplicada en {this.state.fondo.desc}
-                  </p>
-                }
-              </div>
-              <div className='fecha'>
-                <p className='texto-de-pdf'>
-                  Pachuca de Soto, Hidalgo a {today}
-                </p>
-              </div>
-              <div style={{ display: 'flex', flexDirection: 'column' }}>
-                <div style={{ bottom: '0' }}>
-                  <div className='refe'>
-                    <p className='texto-de-pdf'>
-                      RECIBI
-                    </p>
-                  </div>
-                  <div className='firma-dad-r'>
-                    <div className='firma-raya-r'>
-                      <p className='texto-de-pdf' style={{ textAlign: 'center' }}>
-                        MTRO. LEÓN MAXIMILIANO HERNÁNDEZ VALDÉS
-                        <br />
-                        R.F.C.: HEVL-750104
-                        <br />
-                        DIRECTOR GENERAL DE
-                        <br />
-                        ADMINISTRACIÓN Y FINANZAS
-                      </p>
+                <div style={{ width: '85%' }}>
+                  <div className='header-ofi'>
+                    <div className='header-ofi-cont'>
+                      <div className='sp-cont'>
+                        <img className='pgjh comple' src={lpgjh} alt='' />
+                      </div>
+                      <img className='img-sp' src={logo2} alt='' />
                     </div>
                   </div>
-                </div>
-              </div>
-              <div style={{ bottom: '0', position: 'fixed', height: '100px', width: '80%' }}>
-                <div style={{ display: 'flex', justifyContent: 'space-between', flexDirection: 'row' }}>
-                  <p style={{ color: 'black', fontSize: '12px' }} />
-                  <div style={{ display: 'flex', justifyContent: 'flex-end', flexDirection: 'column' }}>
-                    <p style={{ fontSize: '12px' }}>No. de Fondo {this.state.fondo.fondo}</p>
+                  <div className='sp-direc'>
+                    <p>Dirección General de Administracción y Finanzas</p>
+                  </div>
+                  <div style={{ height: '75%', display: 'flex', flexDirection: 'column' }}>
+                    <div style={{ height: '100%', display: 'flex', justifyContent: 'space-between', flexDirection: 'column' }}>
+                      <div style={{ display: 'flex', justifyContent: 'center' }}>
+                        <h3>RECIBO</h3>
+                      </div>
+                      <div>
+                        {totalRetencion.reduce(reducer) !== 0 ?
+                          <p className='texto-de-pdf' style={{ textAlign: 'justify', lineHeight: '35px' }}>
+                            Recibí de la Secretaría de Finanzas Públicas del Gobierno del Estado
+                            de Hidalgo la cantidad de <CurrencyFormat value={ttotal} displayType='text' thousandSeparator prefix=' $ ' /> ({( NumberAsString(ttotal) )})
+                            con una retención por <CurrencyFormat value={totalRetencion.reduce(reducer).toFixed(2)} displayType='text' thousandSeparator prefix=' $ ' /> para
+                            un importe total de <CurrencyFormat value={ttotal - totalRetencion.reduce(reducer).toFixed(2)} displayType='text' thousandSeparator prefix=' $ ' />
+                            por concepto de Reposición de Fondo Revolvente, la cantidad sera
+                            debidamente aplicada en {this.state.fondo.desc}
+                          </p> :
+                          <p className='texto-de-pdf' style={{ textAlign: 'justify', lineHeight: '35px' }}>
+                            Recibí de la Secretaría de Finanzas Públicas del Gobierno del Estado
+                            de Hidalgo la cantidad de <CurrencyFormat value={ttotal} displayType='text' thousandSeparator prefix=' $ ' /> ({( NumberAsString(ttotal) )})
+                            por concepto de Reposición de Fondo Revolvente, la cantidad sera
+                            debidamente aplicada en {this.state.fondo.desc}
+                          </p>
+                        }
+                      </div>
+                      <div className='fecha'>
+                        <p className='texto-de-pdf'>
+                          Pachuca de Soto, Hidalgo a {today}
+                        </p>
+                      </div>
+                      <div style={{ display: 'flex', flexDirection: 'column' }}>
+                        <div style={{ bottom: '0' }}>
+                          <div className='refe'>
+                            <p className='texto-de-pdf ccr'>
+                              RECIBI
+                            </p>
+                          </div>
+                          <div className='firma-dad-r'>
+                            <div className='firma-raya-r'>
+                              <p className='texto-de-pdf' style={{ textAlign: 'center' }}>
+                                MTRO. LEÓN MAXIMILIANO HERNÁNDEZ VALDÉS
+                                <br />
+                                R.F.C.: HEVL-750104
+                                <br />
+                                DIRECTOR GENERAL DE
+                                <br />
+                                ADMINISTRACIÓN Y FINANZAS
+                              </p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div style={{ bottom: '0', position: 'fixed', height: '100px', width: '80%' }}>
+                        <div style={{ display: 'flex', justifyContent: 'space-between', flexDirection: 'row' }}>
+                          <p style={{ color: 'black', fontSize: '12px' }} />
+                          <div style={{ display: 'flex', justifyContent: 'flex-end', flexDirection: 'column' }}>
+                            <p style={{ fontSize: '12px' }}>No. de Fondo {this.state.fondo.fondo}</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -1206,98 +1214,102 @@ export default class Oficios extends Component {
 
         {/* Pago Provedor por Requisición */}
         <div className='pppdf-subdad' ref={el => (this.ofi = el)}>
-          <div className='header-ofi'>
-            <div className='header-ofi-cont'>
-              <div className='sp-cont'>
-                <img className='pgjh comple' src={lpgjh} alt='' />
-              </div>
-              <img className='img-sp' src={logo2} alt='' />
-            </div>
-          </div>
-          <div className='sp-direc'>
-            <p>Dirección General de Administracción y Finanzas</p>
-          </div>
-          <div style={{ display: 'flex', justifyContent: 'space-between', flexDirection: 'column', width: '100%', height: '75%' }}>
-            <div>
-              <div className='no-oficio-sp'>
-                <p>
-                  Oficio No: PGJ/DGAyF/{this.state.fondo.no_oficio}/2021
-                  <br />Pachuca de Soto, Hidalgo a {today}
-                  <br />Asunto: Pago a Proveedor
-                </p>
-              </div>
-              <div className='prensente-sp'>
-                <p>
-                  <b>
-                    L.A.E. CÉSAR ALBERTO GONZÁLEZ LÓPEZ
-                    <br />SUBSCRETARIO DE EGRESOS DE LA
-                    <br />SECRETARÍA DE FINANZAS PÚBLICAS
-                    <br />PRESENTE
-                  </b>
-                </p>
-              </div>
-              <div className='añadido-sp'>
-                <p>
-                  <b>
-                    AT´N.: L.C.P. KARINA BARRIOS VELÁZQUEZ
-                    <br />DIRECTORA GENERAL DE CONTABILIDAD
-                    <br />GUBERNAMENTAL
-                  </b>
-                </p>
-              </div>
-              <div className='texto-ofi-sp'>
-                <p>
-                  Por medio de presente me permito enviar a Usted documentación por
-                  un importe total de {this.state.comprometidos.map(comprometidos =>
-                    comprometidos.isr !== '0.00' && comprometidos.isr ?
-                      <CurrencyFormat value={(totalImporte.reduce(reducer)).toFixed(2)} displayType='text' thousandSeparator prefix=' $ ' />
-                    : null
-                  )} {this.state.comprometidos.map(comprometidos =>
-                    comprometidos.isr !== '0.00' && comprometidos.isr ?
-                    '(' + NumberAsString((totalImporte.reduce(reducer))) + ')' : null
-                  )},
-                  cantidad amparada con CFDI No
-                  {this.state.comprometidos.map(comprometidos =>
-                    comprometidos.comprobantes !== undefined ?
-                      comprometidos.comprobantes.map(item =>
-                        ', ' + item.uuid.slice(31)
-                      )
-                    : null
-                  )},
-                  número de requisición {this.state.fondo.requisicion}
-                  asi como la poliza de afectacion presupuestal al momento del comprometido
-                  num {this.state.fondo.poliza} que emita la Dirección
-                  General de Compras Publicas; para que se efectue el tramite de pago
-                  a favor del proveedor {this.state.fondo.beneficiario} para la compra
-                  y/o prestación de servicios
-                  {/* preguntar */}
-                  con cargo al proyecto{this.state.comprometidos.map(item => item.proy ? ', ' + item.proy + ', ' + item.np : null)} y
-                  a los recursos otorgados con oficio de autorización {this.state.fondo.oficio_aut} del
-                  Ejercicio 2021, a la Procuraduria General de Justicia del Estado.
-                </p>
-                <p>Sin otro particular, le envio un cordial y afectuoso salud.</p>
-              </div>
-            </div>
-            <div>
-              <div className='atte-sp'>
-                <p className='atte-text-sp'>
-                  <b>ATENTAMENTE<br />EL DIRECTOR GENERAL</b>
-                </p>
-              </div>
-              <div className='firma-sp'>
-                <div className='firma-raya-sp'>
-                  <p><b>MTRO. LEÓN MAXIMILIANO HERNÁNDEZ VALDÉS</b></p>
+          <div style={{ display: 'flex', justifyContent: 'center' }}>
+            <div style={{ width: '85%' }}>
+              <div className='header-ofi'>
+                <div className='header-ofi-cont'>
+                  <div className='sp-cont'>
+                    <img className='pgjh comple' src={lpgjh} alt='' />
+                  </div>
+                  <img className='img-sp' src={logo2} alt='' />
                 </div>
               </div>
-            </div>
-          </div>
-          <div className='footer-sp'>
-            <div className='footer-content-sp'>
-              <div>
-                <p className='foot-text'>C.C.P...- Expediente<br />Minutario<br />LMHV/NRL/macht</p>
+              <div className='sp-direc'>
+                <p>Dirección General de Administracción y Finanzas</p>
               </div>
-              <div className='foot-num'>
-                <p className='foot-num-t'>No. de Fondo {this.state.fondo.fondo}</p>
+              <div style={{ display: 'flex', justifyContent: 'space-between', flexDirection: 'column', width: '100%', height: '75%' }}>
+                <div>
+                  <div className='no-oficio-sp'>
+                    <p>
+                      Oficio No: PGJ/DGAyF/{this.state.fondo.no_oficio}/2021
+                      <br />Pachuca de Soto, Hidalgo a {today}
+                      <br />Asunto: Pago a Proveedor
+                    </p>
+                  </div>
+                  <div className='prensente-sp'>
+                    <p>
+                      <b>
+                        L.A.E. CÉSAR ALBERTO GONZÁLEZ LÓPEZ
+                        <br />SUBSCRETARIO DE EGRESOS DE LA
+                        <br />SECRETARÍA DE FINANZAS PÚBLICAS
+                        <br />PRESENTE
+                      </b>
+                    </p>
+                  </div>
+                  <div className='añadido-sp'>
+                    <p>
+                      <b>
+                        AT´N.: L.C.P. KARINA BARRIOS VELÁZQUEZ
+                        <br />DIRECTORA GENERAL DE CONTABILIDAD
+                        <br />GUBERNAMENTAL
+                      </b>
+                    </p>
+                  </div>
+                  <div className='texto-ofi-sp'>
+                    <p>
+                      Por medio de presente me permito enviar a Usted documentación por
+                      un importe total de {this.state.comprometidos.map(comprometidos =>
+                        comprometidos.isr !== '0.00' && comprometidos.isr ?
+                          <CurrencyFormat value={(totalImporte.reduce(reducer)).toFixed(2)} displayType='text' thousandSeparator prefix=' $ ' />
+                        : null
+                      )} {this.state.comprometidos.map(comprometidos =>
+                        comprometidos.isr !== '0.00' && comprometidos.isr ?
+                        '(' + NumberAsString((totalImporte.reduce(reducer))) + ')' : null
+                      )},
+                      cantidad amparada con CFDI No
+                      {this.state.comprometidos.map(comprometidos =>
+                        comprometidos.comprobantes !== undefined ?
+                          comprometidos.comprobantes.map(item =>
+                            ', ' + item.uuid.slice(31)
+                          )
+                        : null
+                      )},
+                      número de requisición {this.state.fondo.requisicion}
+                      asi como la poliza de afectacion presupuestal al momento del comprometido
+                      num {this.state.fondo.poliza} que emita la Dirección
+                      General de Compras Publicas; para que se efectue el tramite de pago
+                      a favor del proveedor {this.state.fondo.beneficiario} para la compra
+                      y/o prestación de servicios
+                      {/* preguntar */}
+                      con cargo al proyecto{this.state.comprometidos.map(item => item.proy ? ', ' + item.proy + ', ' + item.np : null)} y
+                      a los recursos otorgados con oficio de autorización {this.state.fondo.oficio_aut} del
+                      Ejercicio 2021, a la Procuraduria General de Justicia del Estado.
+                    </p>
+                    <p>Sin otro particular, le envio un cordial y afectuoso salud.</p>
+                  </div>
+                </div>
+                <div>
+                  <div className='atte-sp'>
+                    <p className='atte-text-sp'>
+                      <b>ATENTAMENTE<br />EL DIRECTOR GENERAL</b>
+                    </p>
+                  </div>
+                  <div className='firma-sp'>
+                    <div className='firma-raya-sp'>
+                      <p><b>MTRO. LEÓN MAXIMILIANO HERNÁNDEZ VALDÉS</b></p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className='footer-sp'>
+                <div className='footer-content-sp'>
+                  <div>
+                    <p className='foot-text'>C.C.P...- Expediente<br />Minutario<br />LMHV/NRL/macht</p>
+                  </div>
+                  <div className='foot-num'>
+                    <p className='foot-num-t'>No. de Fondo {this.state.fondo.fondo}</p>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -1305,90 +1317,94 @@ export default class Oficios extends Component {
 
         {/* Pago Provedor */}
         <div className='pppdf-subdad' ref={el => (this.opp = el)}>
-          <div className='header-ofi'>
-            <div className='header-ofi-cont'>
-              <div className='sp-cont'>
-                <img className='pgjh comple' src={lpgjh} alt='' />
-              </div>
-              <img className='img-sp' src={logo2} alt='' />
-            </div>
-          </div>
-          <div className='sp-direc'>
-            <p>Dirección General de Administracción y Finanzas</p>
-          </div>
-          <div style={{ display: 'flex', justifyContent: 'space-between', flexDirection: 'column', width: '100%', height: '75%' }}>
-            <div>
-              <div className='no-oficio-sp'>
-                <p>
-                  Oficio No: PGJ/DGAyF/{this.state.fondo.no_oficio}/2021
-                  <br />Pachuca de Soto, Hidalgo a {today}
-                  <br />Asunto: Pago a Proveedor
-                </p>
-              </div>
-              <div className='prensente-sp'>
-                <p>
-                  <b>
-                    L.A.E. CÉSAR ALBERTO GONZÁLEZ LÓPEZ
-                    <br />SUBSCRETARIO DE EGRESOS DE LA
-                    <br />SECRETARÍA DE FINANZAS PÚBLICAS
-                    <br />PRESENTE
-                  </b>
-                </p>
-              </div>
-              <div className='añadido-sp'>
-                <p>
-                  <b>
-                    AT´N.: L.C.P. KARINA BARRIOS VELÁZQUEZ
-                    <br />DIRECTORA GENERAL DE CONTABILIDAD
-                    <br />GUBERNAMENTAL
-                  </b>
-                </p>
-              </div>
-              <div className='texto-ofi-sp'>
-                <p>
-                  Por este medio me permito enviar a Usted documentación por un importe total de
-                  <CurrencyFormat
-                    value={parseFloat(this.state.fondo.importe).toFixed(2)}
-                    displayType='text'
-                    thousandSeparator
-                    prefix=' $ '
-                  /> ({(NumberAsString(this.state.fondo.importe))}),
-                  cantidad amparada con los comprobantes No
-                  {this.state.comprometidos.map(comprometidos =>
-                    comprometidos.comprobantes !== undefined ?
-                      comprometidos.comprobantes.map(item =>
-                        ', ' + item.uuid.substr(0, 8)
-                      )
-                    : null
-                  )}, para el trámite de pago a favor del proveedor {this.state.fondo.beneficiario}, por
-                  la/el servicio {this.state.fondo.desc}, con
-                  cargo al proyecto{this.state.comprometidos.map(item => item.proy ? ', ' + item.proy + ' ' + item.np : null)} y
-                  a los recursos otorgados con el oficio de autorización {this.state.fondo.oficio_aut}, del
-                  Ejercicio 2021 a la Procuraduria General de Justicia del Estado de Hidalgo.
-                </p>
-                <p>Sin otro particular, le envio un cordial y afectuoso saludo.</p>
-              </div>
-            </div>
-            <div>
-              <div className='atte-sp'>
-                <p className='atte-text-sp'>
-                  <b>ATENTAMENTE<br />EL DIRECTOR GENERAL</b>
-                </p>
-              </div>
-              <div className='firma-sp'>
-                <div className='firma-raya-sp'>
-                  <p><b>MTRO. LEÓN MAXIMILIANO HERNÁNDEZ VALDÉS</b></p>
+          <div style={{ display: 'flex', justifyContent: 'center' }}>
+            <div style={{ width: '85%' }}>
+              <div className='header-ofi'>
+                <div className='header-ofi-cont'>
+                  <div className='sp-cont'>
+                    <img className='pgjh comple' src={lpgjh} alt='' />
+                  </div>
+                  <img className='img-sp' src={logo2} alt='' />
                 </div>
               </div>
-            </div>
-          </div>
-          <div className='footer-sp'>
-            <div className='footer-content-sp'>
-              <div>
-                <p className='foot-text'>C.C.P...- Expediente<br />Minutario<br />LMHV/NRL/macht</p>
+              <div className='sp-direc'>
+                <p>Dirección General de Administracción y Finanzas</p>
               </div>
-              <div className='foot-num'>
-                <p className='foot-num-t'>No. de Fondo {this.state.fondo.fondo}</p>
+              <div style={{ display: 'flex', justifyContent: 'space-between', flexDirection: 'column', width: '100%', height: '75%' }}>
+                <div>
+                  <div className='no-oficio-sp'>
+                    <p>
+                      Oficio No: PGJ/DGAyF/{this.state.fondo.no_oficio}/2021
+                      <br />Pachuca de Soto, Hidalgo a {today}
+                      <br />Asunto: Pago a Proveedor
+                    </p>
+                  </div>
+                  <div className='prensente-sp'>
+                    <p>
+                      <b>
+                        L.A.E. CÉSAR ALBERTO GONZÁLEZ LÓPEZ
+                        <br />SUBSCRETARIO DE EGRESOS DE LA
+                        <br />SECRETARÍA DE FINANZAS PÚBLICAS
+                        <br />PRESENTE
+                      </b>
+                    </p>
+                  </div>
+                  <div className='añadido-sp'>
+                    <p>
+                      <b>
+                        AT´N.: L.C.P. KARINA BARRIOS VELÁZQUEZ
+                        <br />DIRECTORA GENERAL DE CONTABILIDAD
+                        <br />GUBERNAMENTAL
+                      </b>
+                    </p>
+                  </div>
+                  <div className='texto-ofi-sp'>
+                    <p>
+                      Por este medio me permito enviar a Usted documentación por un importe total de
+                      <CurrencyFormat
+                        value={parseFloat(this.state.fondo.importe).toFixed(2)}
+                        displayType='text'
+                        thousandSeparator
+                        prefix=' $ '
+                      /> ({(NumberAsString(this.state.fondo.importe))}),
+                      cantidad amparada con los comprobantes No
+                      {this.state.comprometidos.map(comprometidos =>
+                        comprometidos.comprobantes !== undefined ?
+                          comprometidos.comprobantes.map(item =>
+                            ', ' + item.uuid.substr(0, 8)
+                          )
+                        : null
+                      )}, para el trámite de pago a favor del proveedor {this.state.fondo.beneficiario}, por
+                      la/el servicio {this.state.fondo.desc}, con
+                      cargo al proyecto{this.state.comprometidos.map(item => item.proy ? ', ' + item.proy + ' ' + item.np : null)} y
+                      a los recursos otorgados con el oficio de autorización {this.state.fondo.oficio_aut}, del
+                      Ejercicio 2021 a la Procuraduria General de Justicia del Estado de Hidalgo.
+                    </p>
+                    <p>Sin otro particular, le envio un cordial y afectuoso saludo.</p>
+                  </div>
+                </div>
+                <div>
+                  <div className='atte-sp'>
+                    <p className='atte-text-sp'>
+                      <b>ATENTAMENTE<br />EL DIRECTOR GENERAL</b>
+                    </p>
+                  </div>
+                  <div className='firma-sp'>
+                    <div className='firma-raya-sp'>
+                      <p><b>MTRO. LEÓN MAXIMILIANO HERNÁNDEZ VALDÉS</b></p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className='footer-sp'>
+                <div className='footer-content-sp'>
+                  <div>
+                    <p className='foot-text'>C.C.P...- Expediente<br />Minutario<br />LMHV/NRL/macht</p>
+                  </div>
+                  <div className='foot-num'>
+                    <p className='foot-num-t'>No. de Fondo {this.state.fondo.fondo}</p>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -1828,131 +1844,135 @@ export default class Oficios extends Component {
 
         {/* Anexo F */}
         <div className='pppdf-subdad' ref={el => (this.anex = el)}>
-          <div className='header-ofi'>
-            <div className='header-ofi-cont'>
-              <div className='sp-cont'>
-                <img className='pgjh comple' src={lpgjh} alt='' />
-              </div>
-              <img className='img-sp' src={logo2} alt='' />
-            </div>
-          </div>
-          <div className='sp-direc'>
-            <p>Dirección General de Administracción y Finanzas</p>
-          </div>
-          <div style={{ display: 'flex', justifyContent: 'space-between', flexDirection: 'column', width: '100%', height: '75%' }}>
-            <div>
-              <div className='no-oficio-sp'>
-                <p>
-                  Oficio No: PGJ/DGAyF/{this.state.fondo.anexof}/2021
-                  <br />Pachuca de Soto, Hidalgo a {today}
-                  <br />Asunto: Constancia de entera satisfación de bienes o servicios
-                </p>
-              </div>
-              <div className='prensente-sp'>
-                <p>
-                  <b>
-                    L.A.E. CÉSAR ALBERTO GONZÁLEZ LÓPEZ
-                    <br />SUBSCRETARIO DE EGRESOS DE LA
-                    <br />SECRETARÍA DE FINANZAS PÚBLICAS
-                    <br />PRESENTE
-                  </b>
-                </p>
-              </div>
-              <div className='añadido-sp'>
-                <p>
-                  <b>
-                    AT´N.: L.C.P. KARINA BARRIOS VELÁZQUEZ
-                    <br />DIRECTORA GENERAL DE CONTABILIDAD
-                    <br />GUBERNAMENTAL
-                  </b>
-                </p>
-              </div>
-              <div className='texto-ofi-sp'>
-                <p>
-                  Por medio del presente informo a Usted, que se ha concluido el contrato
-                  por la prestación de servicios  con el proveedor {this.state.fondo.beneficiario},
-                  de los recursos autorizados al proyecto{this.state.comprometidos.map(item => item.proy ? ', ' + item.proy + ' ' + item.np : null)},
-                  asignado a la Unidad Presupuestal {this.state.comprometidos.map(comprometidos =>
-                    comprometidos.area ?
-                      this.state.comprometidos.length === 1 ?
-                      (comprometidos.up === '01' && 'Procuraduría General de Justicia') ||
-                      (comprometidos.up === '02' && 'Subprocuraduría de Procedimientos Penales Región Oriente') ||
-                      (comprometidos.up === '03' && 'Fiscalía Especializada para la atención de Delitos cometidos contra la Libertad de Expresión, Periodistas y Personas defensoras de los Derechos Humanos') ||
-                      (comprometidos.up === '04' && 'Dirección General para la Atención de los Asuntos del Sistema Tradicional') ||
-                      (comprometidos.up === '05' && 'Fiscalía Especializada en Delitos Electorales') ||
-                      (comprometidos.up === '06' && 'Subprocuraduría de Derechos Humanos y Servicios a la Comunidad') ||
-                      (comprometidos.up === '07' && 'Centro de Justicia Restaurativa Penal Poniente') ||
-                      (comprometidos.up === '08' && 'Fiscalía para la Atención de Delitos de Género') ||
-                      (comprometidos.up === '09' && 'Visitaduría General') ||
-                      (comprometidos.up === '10' && 'Dirección General de Servicios Periciales') ||
-                      (comprometidos.up === '11' && 'Centro de Operación Estratégica') ||
-                      (comprometidos.up === '12' && 'Unidad Especializada en el Combate al Secuestro') ||
-                      (comprometidos.up === '13' && 'Dirección General de Administración y Finanzas') ||
-                      (comprometidos.up === '14' && 'Fiscalía Especializada para la atención de los Delitos de Trata de Personas') ||
-                      (comprometidos.up === '15' && 'Subprocuraduría de Procedimientos Penales Región Poniente') ||
-                      (comprometidos.up === '16' && 'Centro de Atención Temprana Poniente') ||
-                      (comprometidos.up === '17' && 'Dirección General de Investigación y Litigación Poniente') ||
-                      (comprometidos.up === '18' && 'Dirección General de la Policía Investigadora') ||
-                      (comprometidos.up === '20' && 'Centro de Atención Temprana Oriente') ||
-                      (comprometidos.up === '21' && 'Centro de Justicia Restaurativa Penal Oriente') ||
-                      (comprometidos.up === '22' && 'Dirección General de Investigación y Litigación Oriente') ||
-                      (comprometidos.up === '23' && 'Fiscalía Especializada en Delitos de Corrupción') ||
-                      (comprometidos.up === '24' && 'Fiscalía de Desaparición Forzada y Desaparición por Terceros') : ''
-                     :
-                     (nombreDesa[1] === '01' && 'Procuraduría General de Justicia') ||
-                     (nombreDesa[1] === '02' && 'Subprocuraduría de Procedimientos Penales Región Oriente') ||
-                     (nombreDesa[1] === '03' && 'Fiscalía Especializada para la atención de Delitos cometidos contra la Libertad de Expresión, Periodistas y Personas defensoras de los Derechos Humanos') ||
-                     (nombreDesa[1] === '04' && 'Dirección General para la Atención de los Asuntos del Sistema Tradicional') ||
-                     (nombreDesa[1] === '05' && 'Fiscalía Especializada en Delitos Electorales') ||
-                     (nombreDesa[1] === '06' && 'Subprocuraduría de Derechos Humanos y Servicios a la Comunidad') ||
-                     (nombreDesa[1] === '07' && 'Centro de Justicia Restaurativa Penal Poniente') ||
-                     (nombreDesa[1] === '08' && 'Fiscalía para la Atención de Delitos de Género') ||
-                     (nombreDesa[1] === '09' && 'Visitaduría General') ||
-                     (nombreDesa[1] === '10' && 'Dirección General de Servicios Periciales') ||
-                     (nombreDesa[1] === '11' && 'Centro de Operación Estratégica') ||
-                     (nombreDesa[1] === '12' && 'Unidad Especializada en el Combate al Secuestro') ||
-                     (nombreDesa[1] === '13' && 'Dirección General de Administración y Finanzas') ||
-                     (nombreDesa[1] === '14' && 'Fiscalía Especializada para la atención de los Delitos de Trata de Personas') ||
-                     (nombreDesa[1] === '15' && 'Subprocuraduría de Procedimientos Penales Región Poniente') ||
-                     (nombreDesa[1] === '16' && 'Centro de Atención Temprana Poniente') ||
-                     (nombreDesa[1] === '17' && 'Dirección General de Investigación y Litigación Poniente') ||
-                     (nombreDesa[1] === '18' && 'Dirección General de la Policía Investigadora') ||
-                     (nombreDesa[1] === '20' && 'Centro de Atención Temprana Oriente') ||
-                     (nombreDesa[1] === '21' && 'Centro de Justicia Restaurativa Penal Oriente') ||
-                     (nombreDesa[1] === '22' && 'Dirección General de Investigación y Litigación Oriente') ||
-                     (nombreDesa[1] === '23' && 'Fiscalía Especializada en Delitos de Corrupción') ||
-                     (nombreDesa[1] === '24' && 'Fiscalía de Desaparición Forzada y Desaparición por Terceros')
-                  )};
-                  por lo que hago constar que he recibido el(los) entregable(s) a mi
-                  entera satisfacción, el (los) cual(es) es susceptible de ser medible
-                  y verificable, además de que cumple con los requerimientos pactados,
-                  en el contrato en cuanto a objeto, precio y tiempo de entrega; quedando
-                  bajo mi resguardo para cualquier aclaración o presentación ante los
-                  órganos fiscalizadores.
-                </p>
-                <p>Sin otro particular, le envio un cordial y afectuoso saludo.</p>
-              </div>
-            </div>
-            <div>
-              <div className='atte-sp'>
-                <p className='atte-text-sp'>
-                  <b>ATENTAMENTE<br />EL DIRECTOR GENERAL</b>
-                </p>
-              </div>
-              <div className='firma-sp'>
-                <div className='firma-raya-sp'>
-                  <p><b>MTRO. LEÓN MAXIMILIANO HERNÁNDEZ VALDÉS</b></p>
+          <div style={{ display: 'flex', justifyContent: 'center' }}>
+            <div style={{ width: '85%' }}>
+              <div className='header-ofi'>
+                <div className='header-ofi-cont'>
+                  <div className='sp-cont'>
+                    <img className='pgjh comple' src={lpgjh} alt='' />
+                  </div>
+                  <img className='img-sp' src={logo2} alt='' />
                 </div>
               </div>
-            </div>
-          </div>
-          <div className='footer-sp'>
-            <div className='footer-content-sp'>
-              <div>
-                <p className='foot-text'>C.C.P...- Expediente<br />Minutario<br />LMHV/NRL/macht</p>
+              <div className='sp-direc'>
+                <p>Dirección General de Administracción y Finanzas</p>
               </div>
-              <div className='foot-num'>
-                <p className='foot-num-t'>No. de Fondo {this.state.fondo.fondo}</p>
+              <div style={{ display: 'flex', justifyContent: 'space-between', flexDirection: 'column', width: '100%', height: '75%' }}>
+                <div>
+                  <div className='no-oficio-sp'>
+                    <p>
+                      Oficio No: PGJ/DGAyF/{this.state.fondo.anexof}/2021
+                      <br />Pachuca de Soto, Hidalgo a {today}
+                      <br />Asunto: Constancia de entera satisfación de bienes o servicios
+                    </p>
+                  </div>
+                  <div className='prensente-sp'>
+                    <p>
+                      <b>
+                        L.A.E. CÉSAR ALBERTO GONZÁLEZ LÓPEZ
+                        <br />SUBSCRETARIO DE EGRESOS DE LA
+                        <br />SECRETARÍA DE FINANZAS PÚBLICAS
+                        <br />PRESENTE
+                      </b>
+                    </p>
+                  </div>
+                  <div className='añadido-sp'>
+                    <p>
+                      <b>
+                        AT´N.: L.C.P. KARINA BARRIOS VELÁZQUEZ
+                        <br />DIRECTORA GENERAL DE CONTABILIDAD
+                        <br />GUBERNAMENTAL
+                      </b>
+                    </p>
+                  </div>
+                  <div className='texto-ofi-sp'>
+                    <p>
+                      Por medio del presente informo a Usted, que se ha concluido el contrato
+                      por la prestación de servicios  con el proveedor {this.state.fondo.beneficiario},
+                      de los recursos autorizados al proyecto{this.state.comprometidos.map(item => item.proy ? ', ' + item.proy + ' ' + item.np : null)},
+                      asignado a la Unidad Presupuestal {this.state.comprometidos.map(comprometidos =>
+                        comprometidos.area ?
+                          this.state.comprometidos.length === 1 ?
+                          (comprometidos.up === '01' && 'Procuraduría General de Justicia') ||
+                          (comprometidos.up === '02' && 'Subprocuraduría de Procedimientos Penales Región Oriente') ||
+                          (comprometidos.up === '03' && 'Fiscalía Especializada para la atención de Delitos cometidos contra la Libertad de Expresión, Periodistas y Personas defensoras de los Derechos Humanos') ||
+                          (comprometidos.up === '04' && 'Dirección General para la Atención de los Asuntos del Sistema Tradicional') ||
+                          (comprometidos.up === '05' && 'Fiscalía Especializada en Delitos Electorales') ||
+                          (comprometidos.up === '06' && 'Subprocuraduría de Derechos Humanos y Servicios a la Comunidad') ||
+                          (comprometidos.up === '07' && 'Centro de Justicia Restaurativa Penal Poniente') ||
+                          (comprometidos.up === '08' && 'Fiscalía para la Atención de Delitos de Género') ||
+                          (comprometidos.up === '09' && 'Visitaduría General') ||
+                          (comprometidos.up === '10' && 'Dirección General de Servicios Periciales') ||
+                          (comprometidos.up === '11' && 'Centro de Operación Estratégica') ||
+                          (comprometidos.up === '12' && 'Unidad Especializada en el Combate al Secuestro') ||
+                          (comprometidos.up === '13' && 'Dirección General de Administración y Finanzas') ||
+                          (comprometidos.up === '14' && 'Fiscalía Especializada para la atención de los Delitos de Trata de Personas') ||
+                          (comprometidos.up === '15' && 'Subprocuraduría de Procedimientos Penales Región Poniente') ||
+                          (comprometidos.up === '16' && 'Centro de Atención Temprana Poniente') ||
+                          (comprometidos.up === '17' && 'Dirección General de Investigación y Litigación Poniente') ||
+                          (comprometidos.up === '18' && 'Dirección General de la Policía Investigadora') ||
+                          (comprometidos.up === '20' && 'Centro de Atención Temprana Oriente') ||
+                          (comprometidos.up === '21' && 'Centro de Justicia Restaurativa Penal Oriente') ||
+                          (comprometidos.up === '22' && 'Dirección General de Investigación y Litigación Oriente') ||
+                          (comprometidos.up === '23' && 'Fiscalía Especializada en Delitos de Corrupción') ||
+                          (comprometidos.up === '24' && 'Fiscalía de Desaparición Forzada y Desaparición por Terceros') : ''
+                         :
+                         (nombreDesa[1] === '01' && 'Procuraduría General de Justicia') ||
+                         (nombreDesa[1] === '02' && 'Subprocuraduría de Procedimientos Penales Región Oriente') ||
+                         (nombreDesa[1] === '03' && 'Fiscalía Especializada para la atención de Delitos cometidos contra la Libertad de Expresión, Periodistas y Personas defensoras de los Derechos Humanos') ||
+                         (nombreDesa[1] === '04' && 'Dirección General para la Atención de los Asuntos del Sistema Tradicional') ||
+                         (nombreDesa[1] === '05' && 'Fiscalía Especializada en Delitos Electorales') ||
+                         (nombreDesa[1] === '06' && 'Subprocuraduría de Derechos Humanos y Servicios a la Comunidad') ||
+                         (nombreDesa[1] === '07' && 'Centro de Justicia Restaurativa Penal Poniente') ||
+                         (nombreDesa[1] === '08' && 'Fiscalía para la Atención de Delitos de Género') ||
+                         (nombreDesa[1] === '09' && 'Visitaduría General') ||
+                         (nombreDesa[1] === '10' && 'Dirección General de Servicios Periciales') ||
+                         (nombreDesa[1] === '11' && 'Centro de Operación Estratégica') ||
+                         (nombreDesa[1] === '12' && 'Unidad Especializada en el Combate al Secuestro') ||
+                         (nombreDesa[1] === '13' && 'Dirección General de Administración y Finanzas') ||
+                         (nombreDesa[1] === '14' && 'Fiscalía Especializada para la atención de los Delitos de Trata de Personas') ||
+                         (nombreDesa[1] === '15' && 'Subprocuraduría de Procedimientos Penales Región Poniente') ||
+                         (nombreDesa[1] === '16' && 'Centro de Atención Temprana Poniente') ||
+                         (nombreDesa[1] === '17' && 'Dirección General de Investigación y Litigación Poniente') ||
+                         (nombreDesa[1] === '18' && 'Dirección General de la Policía Investigadora') ||
+                         (nombreDesa[1] === '20' && 'Centro de Atención Temprana Oriente') ||
+                         (nombreDesa[1] === '21' && 'Centro de Justicia Restaurativa Penal Oriente') ||
+                         (nombreDesa[1] === '22' && 'Dirección General de Investigación y Litigación Oriente') ||
+                         (nombreDesa[1] === '23' && 'Fiscalía Especializada en Delitos de Corrupción') ||
+                         (nombreDesa[1] === '24' && 'Fiscalía de Desaparición Forzada y Desaparición por Terceros')
+                      )};
+                      por lo que hago constar que he recibido el(los) entregable(s) a mi
+                      entera satisfacción, el (los) cual(es) es susceptible de ser medible
+                      y verificable, además de que cumple con los requerimientos pactados,
+                      en el contrato en cuanto a objeto, precio y tiempo de entrega; quedando
+                      bajo mi resguardo para cualquier aclaración o presentación ante los
+                      órganos fiscalizadores.
+                    </p>
+                    <p>Sin otro particular, le envio un cordial y afectuoso saludo.</p>
+                  </div>
+                </div>
+                <div>
+                  <div className='atte-sp'>
+                    <p className='atte-text-sp'>
+                      <b>ATENTAMENTE<br />EL DIRECTOR GENERAL</b>
+                    </p>
+                  </div>
+                  <div className='firma-sp'>
+                    <div className='firma-raya-sp'>
+                      <p><b>MTRO. LEÓN MAXIMILIANO HERNÁNDEZ VALDÉS</b></p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className='footer-sp'>
+                <div className='footer-content-sp'>
+                  <div>
+                    <p className='foot-text'>C.C.P...- Expediente<br />Minutario<br />LMHV/NRL/macht</p>
+                  </div>
+                  <div className='foot-num'>
+                    <p className='foot-num-t'>No. de Fondo {this.state.fondo.fondo}</p>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -1985,7 +2005,6 @@ export default class Oficios extends Component {
           <div className='añadido'>
             <p>
               <b>AT'N: L.C.P. Karina Barrios Velázquez
-                <br />Directora General de Contabilidad
                 <br />DIRECTORA GENERAL DE CONTABILIDAD
                 <br />GUBERNAMENTAL
               </b>

@@ -47,8 +47,12 @@ const Menu = ({ open, ...props }) => {
     admin = 'ELI'
   } else if (email === 'juan@procuraduria.com') {
     admin = 'JUAN'
-  } else if (email === 'validacion@procuraduria.com') {
-    admin = 'VALIDACION'
+  } else if (email === 'candy@procuraduria.com') {
+    admin = 'CANDY'
+  } else if (email === 'angel@procuraduria.com') {
+    admin = 'ANGEL'
+  } else if (email === 'candy@procuraduria.com') {
+    admin = 'VALIDACION2'
   }
 
   const isHidden = open !== false
@@ -71,7 +75,9 @@ const Menu = ({ open, ...props }) => {
       {admin === 'MARTHA' && <Nav />}
       {admin === 'JUAN' && <Nav />}
       {admin === 'LIZBETH' && <Nav />}
-      {admin === 'VALIDACION' && <Nav />}
+      {admin === 'CANDY' && <Nav />}
+      {admin === 'ANGEL' && <Nav />}
+      {admin === 'DANYA' && <Nav />}
     </StyledMenu>
   )
 }

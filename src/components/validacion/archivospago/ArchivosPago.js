@@ -11,6 +11,19 @@ import CheckIcon from '@material-ui/icons/Check'
 export default class ArchivosPago extends Component {
   constructor(props) {
     super(props)
+    var user = firebase.auth().currentUser
+    var email
+    if (user != null) {
+      email = user.email
+    }
+    let admin
+    if (email === 'candy@procuraduria.com') {
+      admin = 'CANDY'
+    } else if (email === 'angel@procuraduria.com') {
+      admin = 'ANGEL'
+    } else if (email === 'danya@procuraduria.com') {
+      admin = 'DANYA'
+    }
     var today = new Date()
     var dd = today.getDate()
     var mm = today.getMonth() + 1
@@ -52,6 +65,7 @@ export default class ArchivosPago extends Component {
           done: false
         }
       ],
+      realizo: admin
     }
   }
 
@@ -247,7 +261,8 @@ export default class ArchivosPago extends Component {
       Adquisicion: this.state.adqui,
       Xml: this.state.datos,
       xmlC: this.state.xmlC,
-      filefactura: this.state.filefactura
+      filefactura: this.state.filefactura,
+      realizo: this.state.realizo
     }
     this.setState({
       xmlC: [{ url: '', nombre: '' }],
@@ -259,7 +274,7 @@ export default class ArchivosPago extends Component {
     if (params.NumFacturas && params.Fondo && params.FechaI
       && params.Contrarecibo && params.FechaP && params.Devolucion
       && params.Total && params.TipoPerona && params.NumContra && params.Adquisicion
-      && params.Xml && params.xmlC && params.filefactura) {
+      && params.Xml && params.xmlC && params.filefactura && params.realizo) {
       firebase.database().ref('xmlPagoDirecto').push(params).then(() => {
         alert('Tu solicitud fue enviada.')
       }).catch(() => {
@@ -484,7 +499,10 @@ export default class ArchivosPago extends Component {
         </div>
         <div className='title-tb-valeslist'>
           <div className='caja-valeslist'>
-            <ListComponent lista={this.state.lista} />
+            <ListComponent
+              lista={this.state.lista}
+              admin={this.state.realizo}
+            />
           </div>
         </div>
       </div>
