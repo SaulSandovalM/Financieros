@@ -1,12 +1,10 @@
 // importaciones necesarias
 import React, { Component } from 'react'
 import firebase from '../../../Firebase'
-import { NumberAsString } from './NumerosLetras'
 import Fab from '@material-ui/core/Fab'
 import CheckIcon from '@material-ui/icons/Check'
 import Paper from '@material-ui/core/Paper'
 import Grid from '@material-ui/core/Grid'
-import TextField from '@material-ui/core/TextField'
 import PropTypes from 'prop-types'
 import MaskedInput from 'react-text-mask'
 import NumberFormat from 'react-number-format'
@@ -273,7 +271,7 @@ export default class FondoE extends Component {
   }
 
   render() {
-    const { tipo_doc, realizo } = this.state
+    const { realizo } = this.state
     const newArray = ['']
     const myObj = {}
 

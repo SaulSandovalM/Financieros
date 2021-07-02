@@ -11,19 +11,6 @@ import CheckIcon from '@material-ui/icons/Check'
 export default class ArchivosPago extends Component {
   constructor(props) {
     super(props)
-    var user = firebase.auth().currentUser
-    var email
-    if (user != null) {
-      email = user.email
-    }
-    let admin
-    if (email === 'candy@procuraduria.com') {
-      admin = 'CANDY'
-    } else if (email === 'angel@procuraduria.com') {
-      admin = 'ANGEL'
-    } else if (email === 'danya@procuraduria.com') {
-      admin = 'DANYA'
-    }
     var today = new Date()
     var dd = today.getDate()
     var mm = today.getMonth() + 1
@@ -65,7 +52,6 @@ export default class ArchivosPago extends Component {
           done: false
         }
       ],
-      realizo: admin
     }
   }
 
@@ -341,42 +327,6 @@ export default class ArchivosPago extends Component {
                   <form style={{ display: 'flex', width: '100%', flexDirection: 'column' }} onSubmit={this.sendMessage.bind(this)} ref='contactForm'>
                     <div style={{ width: '100%', display: 'flex' }}>
                       <div className='p-container-validacion'>
-                        <p style={{ margin: '0px', color: 'grey', fontSize: '12px' }}>Agregar xml</p>
-                        <Dropzone
-                          style={{
-                            position: 'relative',
-                            width: '100%',
-                            height: '30px',
-                            borderWidth: '2px',
-                            borderColor: 'rgb(102, 102, 102)',
-                            borderStyle: 'solid',
-                            borderRadius: '5px'
-                          }}
-                          accept='.xml' onChange={this.handleOnChange1.bind(this)}
-                        />
-                        <progress className='progress' value={this.state.xmlLoading} max='100'>
-                          {this.state.xmlLoading}
-                        </progress>
-                      </div>
-                      <div className='p-container-validacion'>
-                        <p style={{ margin: '0px', color: 'grey', fontSize: '12px' }}>Agregar Pdf</p>
-                        <Dropzone
-                          style={{
-                            position: 'relative',
-                            width: '100%',
-                            height: '30px',
-                            borderWidth: '2px',
-                            borderColor: 'rgb(102, 102, 102)',
-                            borderStyle: 'solid',
-                            borderRadius: '5px'
-                          }}
-                          accept='.pdf' onChange={this.handleOnChange2.bind(this)}
-                        />
-                        <progress className='progress' value={this.state.pdf2} max='100'>
-                          {this.state.pdf2}
-                        </progress>
-                      </div>
-                      <div className='p-container-validacion'>
                         <p style={{ margin: '0px', color: 'grey', fontSize: '12px' }}>Partida</p>
                         <select
                           style={{
@@ -418,6 +368,46 @@ export default class ArchivosPago extends Component {
                           )}
                         </select>
                       </div>
+                      {(this.state.up && this.state.partida) &&
+                        <div className='p-container-validacion'>
+                          <p style={{ margin: '0px', color: 'grey', fontSize: '12px' }}>Agregar xml</p>
+                          <Dropzone
+                            style={{
+                              position: 'relative',
+                              width: '100%',
+                              height: '30px',
+                              borderWidth: '2px',
+                              borderColor: 'rgb(102, 102, 102)',
+                              borderStyle: 'solid',
+                              borderRadius: '5px'
+                            }}
+                            accept='.xml' onChange={this.handleOnChange1.bind(this)}
+                          />
+                          <progress className='progress' value={this.state.xmlLoading} max='100'>
+                            {this.state.xmlLoading}
+                          </progress>
+                        </div>
+                      }
+                      {(this.state.up && this.state.partida) &&
+                        <div className='p-container-validacion'>
+                          <p style={{ margin: '0px', color: 'grey', fontSize: '12px' }}>Agregar Pdf</p>
+                          <Dropzone
+                            style={{
+                              position: 'relative',
+                              width: '100%',
+                              height: '30px',
+                              borderWidth: '2px',
+                              borderColor: 'rgb(102, 102, 102)',
+                              borderStyle: 'solid',
+                              borderRadius: '5px'
+                            }}
+                            accept='.pdf' onChange={this.handleOnChange2.bind(this)}
+                          />
+                          <progress className='progress' value={this.state.pdf2} max='100'>
+                            {this.state.pdf2}
+                          </progress>
+                        </div>
+                      }
                     </div>
                     <div className='p-container-validacion'>
                       <p style={{ margin: '0px', color: 'grey', fontSize: '12px' }}>Nombre de partida</p>
@@ -501,7 +491,6 @@ export default class ArchivosPago extends Component {
           <div className='caja-valeslist'>
             <ListComponent
               lista={this.state.lista}
-              admin={this.state.realizo}
             />
           </div>
         </div>
