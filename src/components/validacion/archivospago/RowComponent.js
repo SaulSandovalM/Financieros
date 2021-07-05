@@ -12,6 +12,7 @@ import Typography from '@material-ui/core/Typography'
 import Box from '@material-ui/core/Box'
 import Collapse from '@material-ui/core/Collapse'
 import firebase from '../../../Firebase'
+import DeleteIcon from '@material-ui/icons/Delete'
 
 export default class RowComponent extends Component {
   constructor (props) {
@@ -42,13 +43,19 @@ export default class RowComponent extends Component {
     })
   }
 
+  removeValidacion (id) {
+    var obj = this.props.item.Xml.indexOf(id)
+    var xmlid = this.props.item.id
+    this.props.removeValidacion(obj, xmlid)
+  }
+
   render () {
     return (
       <div>
         {(this.props.item.realizo === this.state.realizo) &&
           <TableBody style={{ width: '100%', display: 'block' }}>
             <div style={{ display: 'flex', flexDirection: 'row', maxWidth: '100%' }}>
-              <TableCell className='border-icon' style={{ width: '50px' }}>
+              <TableCell className='border-icon' style={{ width: '30px' }}>
                 <IconButton size='small' onClick={this.toggleOpen.bind(this)}>
                   {this.state.open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
                 </IconButton>
@@ -81,7 +88,7 @@ export default class RowComponent extends Component {
                 />
               </TableCell>
             </div>
-            <TableRow style={{ display: 'block', width: '100%' }}>
+            <TableRow style={{ display: 'flex', width: '100%' }}>
               <TableCell
                 style={{
                   paddingBottom: 0,
@@ -124,6 +131,9 @@ export default class RowComponent extends Component {
                         <TableCell className='border-table-v2'>
                           <div style={{ fontWeight: 'bold' }}>Importe</div>
                         </TableCell>
+                        <TableCell className='border-table-v2'>
+                          <div style={{ fontWeight: 'bold' }}>Borrar</div>
+                        </TableCell>
                       </TableRow>
                     </TableHead>
                     <TableBody>
@@ -157,6 +167,11 @@ export default class RowComponent extends Component {
                               thousandSeparator
                               value={parseFloat(data.total).toFixed(2)}
                             />
+                          </TableCell>
+                          <TableCell className='border-table-v2'>
+                            <IconButton aria-label='expand row' size='small' className='border-del' onClick={() => this.removeValidacion(data)}>
+                              <DeleteIcon style={{ color: 'red' }} />
+                            </IconButton>
                           </TableCell>
                         </TableRow>
                       )}

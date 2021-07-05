@@ -581,7 +581,7 @@ export default class ComprometidoE extends Component {
           isr: child.val().isr,
           total: child.val().total,
           año: child.val().año,
-          ramo: child.val().rm,
+          ramo: child.val().ramo,
           ur: child.val().ur,
           up: child.val().up,
           rubro: child.val().rubro,

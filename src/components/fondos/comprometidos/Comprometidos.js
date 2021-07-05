@@ -442,7 +442,8 @@ export default class Comprometidos extends Component {
           est: item.est,
           ben: item.ben,
           eg: item.eg,
-          comprobantes: this.state.contra
+          comprobantes: this.state.contra,
+          presupuestoid: item.id
         }
       )
       wishRef.update(updatedWish)

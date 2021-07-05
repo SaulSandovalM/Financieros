@@ -11,6 +11,19 @@ import CheckIcon from '@material-ui/icons/Check'
 export default class ArchivosPago extends Component {
   constructor(props) {
     super(props)
+    var user = firebase.auth().currentUser
+    var email
+    if (user != null) {
+      email = user.email
+    }
+    let admin
+    if (email === 'candy@procuraduria.com') {
+      admin = 'CANDY'
+    } else if (email === 'angel@procuraduria.com') {
+      admin = 'ANGEL'
+    } else if (email === 'danya@procuraduria.com') {
+      admin = 'DANYA'
+    }
     var today = new Date()
     var dd = today.getDate()
     var mm = today.getMonth() + 1
@@ -52,6 +65,7 @@ export default class ArchivosPago extends Component {
           done: false
         }
       ],
+      realizo: admin
     }
   }
 
@@ -60,16 +74,16 @@ export default class ArchivosPago extends Component {
     var contador = this.state.contador
     var datosXml = this.state.datos
     for (var i = 0; i < event.target.files.length; i++) {
-      contador.push(i);
+      contador.push(i)
       const file = event.target.files[i]
       const xmlp = file
       var reader = new FileReader()
       const par = this.state.partida
       const up = this.state.up
+      const numfolio = this.state.numFolio
       reader.onload = function (event) {
         var XMLParser = require('react-xml-parser')
         var xml = new XMLParser().parseFromString(event.target.result)
-        console.log(xml)
         const data = {
           'total': xml.attributes['Total'] ? xml.attributes['Total'] : 'No encuentra total',
           'subtotal': xml.attributes['SubTotal'] ? xml.attributes['SubTotal'] : (parseFloat(xml.attributes['Total']) + parseFloat(xml.children['3'].attributes['TotalImpuestosRetenidos'] ? xml.children['3'].attributes['TotalImpuestosRetenidos'] : 0)) - parseFloat(xml.children['3'].attributes['TotalImpuestosTrasladados']),
@@ -85,7 +99,8 @@ export default class ArchivosPago extends Component {
           'estatus': 'sin asignar',
           'tipo': 'directo',
           'partida': par,
-          'up': up
+          'up': up,
+          'numfolio': numfolio
         }
         fetch(xml).then(res => res.text()).then(xml => {
           fetch('https://financieros-78cb0.firebaseio.com/xml.json', {
@@ -97,7 +112,7 @@ export default class ArchivosPago extends Component {
             body: JSON.stringify(data),
           })
         })
-        datosXml.push(data)
+        console.log(datosXml.push(data))
         Total.push(parseFloat(data.total))
       }
       reader.readAsText(xmlp)
@@ -141,6 +156,8 @@ export default class ArchivosPago extends Component {
   componentDidMount () {
     const itemsPresupuesto = firebase.database().ref('presupuesto/')
     this.listenForPresupuesto(itemsPresupuesto)
+    const itemsRefValidacion = firebase.database().ref('xmlPagoDirecto')
+    this.listenValidacion(itemsRefValidacion)
   }
 
   resetForm () {
@@ -230,6 +247,35 @@ export default class ArchivosPago extends Component {
     })
   }
 
+  listenValidacion = (itemsRefValidacion) => {
+    itemsRefValidacion.on('value', (snap) => {
+      var validacion = []
+      snap.forEach((child) => {
+        validacion.push({
+          NumFacturas: child.val().NumFacturas,
+          Fondo: child.val().Fondo,
+          FechaI: child.val().FechaI,
+          Contrarecibo: child.val().Contrarecibo,
+          FechaP: child.val().FechaP,
+          Devolucion: child.val().Devolucion,
+          Total: child.val().Total,
+          TipoPerona: child.val().TipoPersona,
+          NumContra: child.val().numContra,
+          Adquisicion: child.val().Adquisicion,
+          Xml: child.val().Xml,
+          xmlC: child.val().xmlC,
+          filefactura: child.val().filefactura,
+          realizo: child.val().realizo,
+          folio: child.val().folio,
+          id: child.key
+        })
+      })
+      this.setState({
+        listaValidacion: validacion
+      })
+    })
+  }
+
   sendMessage (e) {
     e.preventDefault()
     const tota = (a, b) => a + b
@@ -248,7 +294,8 @@ export default class ArchivosPago extends Component {
       Xml: this.state.datos,
       xmlC: this.state.xmlC,
       filefactura: this.state.filefactura,
-      realizo: this.state.realizo
+      realizo: this.state.realizo,
+      folio: this.state.numFolio
     }
     this.setState({
       xmlC: [{ url: '', nombre: '' }],
@@ -260,7 +307,7 @@ export default class ArchivosPago extends Component {
     if (params.NumFacturas && params.Fondo && params.FechaI
       && params.Contrarecibo && params.FechaP && params.Devolucion
       && params.Total && params.TipoPerona && params.NumContra && params.Adquisicion
-      && params.Xml && params.xmlC && params.filefactura && params.realizo) {
+      && params.Xml && params.xmlC && params.filefactura && params.realizo && params.folio) {
       firebase.database().ref('xmlPagoDirecto').push(params).then(() => {
         alert('Tu solicitud fue enviada.')
       }).catch(() => {
@@ -299,6 +346,7 @@ export default class ArchivosPago extends Component {
     let result = presupuesto.filter((item, index) => {
       return presupuesto.indexOf(item) === index
     })
+    let dispo = result[1] === false ? result[0] : result[1]
 
     return (
       <div className='container-valeslist'>
@@ -313,7 +361,7 @@ export default class ArchivosPago extends Component {
                 <p className='cantidad-add-banco'>
                   MXN
                   <CurrencyFormat
-                    value={result[1]}
+                    value={dispo}
                     displayType='text'
                     thousandSeparator
                     prefix=' $'
@@ -368,7 +416,7 @@ export default class ArchivosPago extends Component {
                           )}
                         </select>
                       </div>
-                      {(this.state.up && this.state.partida) &&
+                      {(this.state.up && this.state.partida && this.state.numFolio) &&
                         <div className='p-container-validacion'>
                           <p style={{ margin: '0px', color: 'grey', fontSize: '12px' }}>Agregar xml</p>
                           <Dropzone
@@ -388,7 +436,7 @@ export default class ArchivosPago extends Component {
                           </progress>
                         </div>
                       }
-                      {(this.state.up && this.state.partida) &&
+                      {(this.state.up && this.state.partida && this.state.numFolio) &&
                         <div className='p-container-validacion'>
                           <p style={{ margin: '0px', color: 'grey', fontSize: '12px' }}>Agregar Pdf</p>
                           <Dropzone
@@ -451,6 +499,7 @@ export default class ArchivosPago extends Component {
                           id='fechaE'
                           name='fechaE'
                           value={fechaE}
+                          disabled
                           onChange={this.handleInput.bind(this)}
                           ref={fechaE => this.inputImporte = fechaE}
                         />
@@ -463,6 +512,16 @@ export default class ArchivosPago extends Component {
                           value={this.state.numContrato}
                           onChange={this.handleInput.bind(this)}
                           ref={numContrato => this.inputNumContrato = numContrato}
+                        />
+                      </div>
+                      <div className='p-container-validacion'>
+                        <TextField
+                          label='Numero de Folio'
+                          id='numFolio'
+                          name='numFolio'
+                          value={this.state.numFolio}
+                          onChange={this.handleInput.bind(this)}
+                          ref={numFolio => this.inputNumFolio = numFolio}
                         />
                       </div>
                       <div className='p-container-validacion'>
@@ -489,9 +548,7 @@ export default class ArchivosPago extends Component {
         </div>
         <div className='title-tb-valeslist'>
           <div className='caja-valeslist'>
-            <ListComponent
-              lista={this.state.lista}
-            />
+            <ListComponent listaValidacion={this.state.listaValidacion} />
           </div>
         </div>
       </div>

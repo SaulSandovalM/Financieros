@@ -28,7 +28,10 @@ export default class ListComponent extends Component {
   }
 
   removeComprometido = () => {
+    console.log(this.props.comprometido.id)
+    console.log(this.props.comprometido)
     this.props.removeComprometido(this.props.comprometido.id, this.props.comprometido)
+    console.log('remover')
   }
 
   render () {
