@@ -429,8 +429,7 @@ export default class Comprometidos extends Component {
       total: item.total,
       ampliacion: item.ampliacion,
       reduccion: item.reduccion,
-      transferencia: item.transferencia,
-      estatus: item.estatus,
+      transferencia: item.transferencia
     }
     firebase.database().ref().update(updates)
     const { area, total, iva, isr, importe } = this.state

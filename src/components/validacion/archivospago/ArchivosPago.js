@@ -297,6 +297,7 @@ export default class ArchivosPago extends Component {
       realizo: this.state.realizo,
       folio: this.state.numFolio
     }
+    console.log(params)
     this.setState({
       xmlC: [{ url: '', nombre: '' }],
       filefactura: [{ url: '', nombre: '' }],
