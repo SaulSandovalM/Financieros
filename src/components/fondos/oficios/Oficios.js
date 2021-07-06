@@ -30,7 +30,7 @@ export default class Oficios extends Component {
       urlfire: String(URLactual).substr(-20),
       mostrar: false,
       fondos: [],
-      nombre: '',
+      nombre: ''
     }
   }
 
@@ -1040,7 +1040,7 @@ export default class Oficios extends Component {
         {/* fondo revolvente */}
         <div className='pppdf-subdad' ref={el => (this.rfr = el)}>
           <div style={{ display: 'flex', justifyContent: 'center' }}>
-            <div style={{ width: '85%' }}>
+            <div style={{ width: '90%' }}>
               <div className='header-ofi'>
                 <div className='header-ofi-cont'>
                   <div className='sp-cont'>
@@ -1116,12 +1116,14 @@ export default class Oficios extends Component {
                 </div>
               </div>
               <div className='footer-sp'>
-                <div className='footer-content-sp'>
-                  <div>
-                    <p className='foot-text'>C.C.P...- Expediente<br />Minutario<br />LMHV/NRL/macht</p>
-                  </div>
-                  <div className='foot-num'>
-                    <p className='foot-num-t'>No. de Fondo {this.state.fondo.fondo}</p>
+                <div style={{ width: '90%' }}>
+                  <div className='footer-content-sp'>
+                    <div>
+                      <p className='foot-text'>C.C.P...- Expediente<br />Minutario<br />LMHV/NRL/macht</p>
+                    </div>
+                    <div className='foot-num'>
+                      <p className='foot-num-t'>No. de Fondo {this.state.fondo.fondo}</p>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -1132,77 +1134,73 @@ export default class Oficios extends Component {
         {/* Recibo */}
         <div className='pppdf-subdad' ref={el => (this.rec = el)}>
           <div style={{ display: 'flex', justifyContent: 'center' }}>
-            <div style={{ width: '85%' }}>
-              <div style={{ display: 'flex', justifyContent: 'center' }}>
-                <div style={{ width: '85%' }}>
-                  <div className='header-ofi'>
-                    <div className='header-ofi-cont'>
-                      <div className='sp-cont'>
-                        <img className='pgjh comple' src={lpgjh} alt='' />
-                      </div>
-                      <img className='img-sp' src={logo2} alt='' />
-                    </div>
+            <div style={{ width: '90%' }}>
+              <div className='header-ofi'>
+                <div className='header-ofi-cont'>
+                  <div className='sp-cont'>
+                    <img className='pgjh comple' src={lpgjh} alt='' />
                   </div>
-                  <div className='sp-direc'>
-                    <p>Dirección General de Administracción y Finanzas</p>
+                  <img className='img-sp' src={logo2} alt='' />
+                </div>
+              </div>
+              <div className='sp-direc'>
+                <p>Dirección General de Administracción y Finanzas</p>
+              </div>
+              <div style={{ height: '75%', display: 'flex', flexDirection: 'column' }}>
+                <div style={{ height: '100%', display: 'flex', justifyContent: 'space-between', flexDirection: 'column' }}>
+                  <div style={{ display: 'flex', justifyContent: 'center' }}>
+                    <h3>RECIBO</h3>
                   </div>
-                  <div style={{ height: '75%', display: 'flex', flexDirection: 'column' }}>
-                    <div style={{ height: '100%', display: 'flex', justifyContent: 'space-between', flexDirection: 'column' }}>
-                      <div style={{ display: 'flex', justifyContent: 'center' }}>
-                        <h3>RECIBO</h3>
-                      </div>
-                      <div>
-                        {totalRetencion.reduce(reducer) !== 0 ?
-                          <p className='texto-de-pdf' style={{ textAlign: 'justify', lineHeight: '35px' }}>
-                            Recibí de la Secretaría de Finanzas Públicas del Gobierno del Estado
-                            de Hidalgo la cantidad de <CurrencyFormat value={ttotal} displayType='text' thousandSeparator prefix=' $ ' /> ({( NumberAsString(ttotal) )})
-                            con una retención por <CurrencyFormat value={totalRetencion.reduce(reducer).toFixed(2)} displayType='text' thousandSeparator prefix=' $ ' /> para
-                            un importe total de <CurrencyFormat value={ttotal - totalRetencion.reduce(reducer).toFixed(2)} displayType='text' thousandSeparator prefix=' $ ' />
-                            por concepto de Reposición de Fondo Revolvente, la cantidad sera
-                            debidamente aplicada en {this.state.fondo.desc}
-                          </p> :
-                          <p className='texto-de-pdf' style={{ textAlign: 'justify', lineHeight: '35px' }}>
-                            Recibí de la Secretaría de Finanzas Públicas del Gobierno del Estado
-                            de Hidalgo la cantidad de <CurrencyFormat value={ttotal} displayType='text' thousandSeparator prefix=' $ ' /> ({( NumberAsString(ttotal) )})
-                            por concepto de Reposición de Fondo Revolvente, la cantidad sera
-                            debidamente aplicada en {this.state.fondo.desc}
-                          </p>
-                        }
-                      </div>
-                      <div className='fecha'>
-                        <p className='texto-de-pdf'>
-                          Pachuca de Soto, Hidalgo a {today}
+                  <div>
+                    {totalRetencion.reduce(reducer) !== 0 ?
+                      <p className='texto-de-pdf' style={{ textAlign: 'justify', lineHeight: '35px' }}>
+                        Recibí de la Secretaría de Finanzas Públicas del Gobierno del Estado
+                        de Hidalgo la cantidad de <CurrencyFormat value={ttotal} displayType='text' thousandSeparator prefix=' $ ' /> ({( NumberAsString(ttotal) )})
+                        con una retención por <CurrencyFormat value={totalRetencion.reduce(reducer).toFixed(2)} displayType='text' thousandSeparator prefix=' $ ' /> para
+                        un importe total de <CurrencyFormat value={ttotal - totalRetencion.reduce(reducer).toFixed(2)} displayType='text' thousandSeparator prefix=' $ ' />
+                        por concepto de Reposición de Fondo Revolvente, la cantidad sera
+                        debidamente aplicada en {this.state.fondo.desc}
+                      </p> :
+                      <p className='texto-de-pdf' style={{ textAlign: 'justify', lineHeight: '35px' }}>
+                        Recibí de la Secretaría de Finanzas Públicas del Gobierno del Estado
+                        de Hidalgo la cantidad de <CurrencyFormat value={ttotal} displayType='text' thousandSeparator prefix=' $ ' /> ({( NumberAsString(ttotal) )})
+                        por concepto de Reposición de Fondo Revolvente, la cantidad sera
+                        debidamente aplicada en {this.state.fondo.desc}
+                      </p>
+                    }
+                  </div>
+                  <div className='fecha'>
+                    <p className='texto-de-pdf'>
+                      Pachuca de Soto, Hidalgo a {today}
+                    </p>
+                  </div>
+                  <div style={{ display: 'flex', flexDirection: 'column' }}>
+                    <div style={{ bottom: '0' }}>
+                      <div className='refe'>
+                        <p className='texto-de-pdf ccr'>
+                          RECIBI
                         </p>
                       </div>
-                      <div style={{ display: 'flex', flexDirection: 'column' }}>
-                        <div style={{ bottom: '0' }}>
-                          <div className='refe'>
-                            <p className='texto-de-pdf ccr'>
-                              RECIBI
-                            </p>
-                          </div>
-                          <div className='firma-dad-r'>
-                            <div className='firma-raya-r'>
-                              <p className='texto-de-pdf' style={{ textAlign: 'center' }}>
-                                MTRO. LEÓN MAXIMILIANO HERNÁNDEZ VALDÉS
-                                <br />
-                                R.F.C.: HEVL-750104
-                                <br />
-                                DIRECTOR GENERAL DE
-                                <br />
-                                ADMINISTRACIÓN Y FINANZAS
-                              </p>
-                            </div>
-                          </div>
+                      <div className='firma-dad-r'>
+                        <div className='firma-raya-r'>
+                          <p className='texto-de-pdf' style={{ textAlign: 'center' }}>
+                            MTRO. LEÓN MAXIMILIANO HERNÁNDEZ VALDÉS
+                            <br />
+                            R.F.C.: HEVL-750104
+                            <br />
+                            DIRECTOR GENERAL DE
+                            <br />
+                            ADMINISTRACIÓN Y FINANZAS
+                          </p>
                         </div>
                       </div>
-                      <div style={{ bottom: '0', position: 'fixed', height: '100px', width: '80%' }}>
-                        <div style={{ display: 'flex', justifyContent: 'space-between', flexDirection: 'row' }}>
-                          <p style={{ color: 'black', fontSize: '12px' }} />
-                          <div style={{ display: 'flex', justifyContent: 'flex-end', flexDirection: 'column' }}>
-                            <p style={{ fontSize: '12px' }}>No. de Fondo {this.state.fondo.fondo}</p>
-                          </div>
-                        </div>
+                    </div>
+                  </div>
+                  <div style={{ bottom: '0', position: 'fixed', height: '100px', width: '80%' }}>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', flexDirection: 'row' }}>
+                      <p style={{ color: 'black', fontSize: '12px' }} />
+                      <div style={{ display: 'flex', justifyContent: 'flex-end', flexDirection: 'column' }}>
+                        <p style={{ fontSize: '12px' }}>No. de Fondo {this.state.fondo.fondo}</p>
                       </div>
                     </div>
                   </div>
@@ -1215,7 +1213,7 @@ export default class Oficios extends Component {
         {/* Pago Provedor por Requisición */}
         <div className='pppdf-subdad' ref={el => (this.ofi = el)}>
           <div style={{ display: 'flex', justifyContent: 'center' }}>
-            <div style={{ width: '85%' }}>
+            <div style={{ width: '90%' }}>
               <div className='header-ofi'>
                 <div className='header-ofi-cont'>
                   <div className='sp-cont'>
@@ -1302,12 +1300,14 @@ export default class Oficios extends Component {
                 </div>
               </div>
               <div className='footer-sp'>
-                <div className='footer-content-sp'>
-                  <div>
-                    <p className='foot-text'>C.C.P...- Expediente<br />Minutario<br />LMHV/NRL/macht</p>
-                  </div>
-                  <div className='foot-num'>
-                    <p className='foot-num-t'>No. de Fondo {this.state.fondo.fondo}</p>
+                <div style={{ width: '90%' }}>
+                  <div className='footer-content-sp'>
+                    <div>
+                      <p className='foot-text'>C.C.P...- Expediente<br />Minutario<br />LMHV/NRL/macht</p>
+                    </div>
+                    <div className='foot-num'>
+                      <p className='foot-num-t'>No. de Fondo {this.state.fondo.fondo}</p>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -1318,7 +1318,7 @@ export default class Oficios extends Component {
         {/* Pago Provedor */}
         <div className='pppdf-subdad' ref={el => (this.opp = el)}>
           <div style={{ display: 'flex', justifyContent: 'center' }}>
-            <div style={{ width: '100%' }}>
+            <div style={{ width: '90%' }}>
               <div className='header-ofi'>
                 <div className='header-ofi-cont'>
                   <div className='sp-cont'>
@@ -1396,12 +1396,14 @@ export default class Oficios extends Component {
                 </div>
               </div>
               <div className='footer-sp'>
-                <div className='footer-content-sp'>
-                  <div>
-                    <p className='foot-text'>C.C.P...- Expediente<br />Minutario<br />LMHV/NRL/macht</p>
-                  </div>
-                  <div className='foot-num'>
-                    <p className='foot-num-t'>No. de Fondo {this.state.fondo.fondo}</p>
+                <div style={{ width: '90%' }}>
+                  <div className='footer-content-sp'>
+                    <div>
+                      <p className='foot-text'>C.C.P...- Expediente<br />Minutario<br />LMHV/NRL/macht</p>
+                    </div>
+                    <div className='foot-num'>
+                      <p className='foot-num-t'>No. de Fondo {this.state.fondo.fondo}</p>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -1844,7 +1846,7 @@ export default class Oficios extends Component {
         {/* Anexo F */}
         <div className='pppdf-subdad' ref={el => (this.anex = el)}>
           <div style={{ display: 'flex', justifyContent: 'center' }}>
-            <div style={{ width: '100%' }}>
+            <div style={{ width: '90%' }}>
               <div className='header-ofi'>
                 <div className='header-ofi-cont'>
                   <div className='sp-cont'>
@@ -1964,12 +1966,14 @@ export default class Oficios extends Component {
                 </div>
               </div>
               <div className='footer-sp'>
-                <div className='footer-content-sp'>
-                  <div>
-                    <p className='foot-text'>C.C.P...- Expediente<br />Minutario<br />LMHV/NRL/macht</p>
-                  </div>
-                  <div className='foot-num'>
-                    <p className='foot-num-t'>No. de Fondo {this.state.fondo.fondo}</p>
+                <div style={{ width: '90%' }}>
+                  <div className='footer-content-sp'>
+                    <div>
+                      <p className='foot-text'>C.C.P...- Expediente<br />Minutario<br />LMHV/NRL/macht</p>
+                    </div>
+                    <div className='foot-num'>
+                      <p className='foot-num-t'>No. de Fondo {this.state.fondo.fondo}</p>
+                    </div>
                   </div>
                 </div>
               </div>

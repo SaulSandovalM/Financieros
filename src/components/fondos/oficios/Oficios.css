@@ -214,7 +214,7 @@
 }
 .ims {
   height: 50px;
-  width: 150px;
+  width: auto;
 }
 .fadera {
   display: flex;
@@ -392,12 +392,11 @@
 .header-ofi {
   position: fixed;
   top: 0;
-  width: 100%;
+  width: 90%;
 }
 .header-ofi-cont {
   display: flex;
   justify-content: space-between;
-  width: 100%;
 }
 .sp-cont {
   display: flex;
@@ -463,7 +462,6 @@
 }
 .footer-content-sp {
   display: flex;
-  flex-direction: row;
   justify-content: space-between;
 }
 .foot-text {

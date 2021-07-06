@@ -25,39 +25,6 @@ import ListComponent from './ListComponent'
 export default class Comprometidos extends Component {
   constructor (props) {
     super(props)
-    var user = firebase.auth().currentUser
-    var email
-    if (user != null) {
-      email = user.email
-    }
-    let admin
-    if (email === 'nayra@procuraduria.com') {
-      admin = 'NAYRA'
-    } else if (email === 'laura@procuraduria.com') {
-      admin = 'LAURA'
-    } else if (email === 'miguel@procuraduria.com') {
-      admin = 'MIGUEL'
-    } else if (email === 'teresa@procuraduria.com') {
-      admin = 'TERESA'
-    } else if (email === 'marcos@procuraduria.com') {
-      admin = 'MARCOS'
-    } else if (email === 'eloy@procuraduria.com') {
-      admin = 'ELOY'
-    } else if (email === 'karina@procuraduria.com') {
-      admin = 'KARINA'
-    } else if (email === 'martha@procuraduria.com') {
-      admin = 'MARTHA'
-    } else if (email === 'lilia@procuraduria.com') {
-      admin = 'LILIA'
-    } else if (email === 'cenely@procuraduria.com') {
-      admin = 'CENELY'
-    } else if (email === 'hector@procuraduria.com') {
-      admin = 'HECTOR'
-    } else if (email === 'omar@procuraduria.com') {
-      admin = 'OMAR'
-    } else if (email === 'lizbeth@procuraduria.com') {
-      admin = 'LIZBETH'
-    }
     var URLactual = window.location
     this.unsubscribe = null
     this.state = {
@@ -105,8 +72,7 @@ export default class Comprometidos extends Component {
       urlfire: String(URLactual).substr(-20),
       sup: '',
       spartida: '',
-      scantidad: '',
-      realizo: admin,
+      scantidad: ''
     }
   }
 
@@ -463,7 +429,8 @@ export default class Comprometidos extends Component {
       total: item.total,
       ampliacion: item.ampliacion,
       reduccion: item.reduccion,
-      transferencia: item.transferencia
+      transferencia: item.transferencia,
+      estatus: item.estatus,
     }
     firebase.database().ref().update(updates)
     const { area, total, iva, isr, importe } = this.state
@@ -720,6 +687,76 @@ export default class Comprometidos extends Component {
       this.state.contra = right
     }
 
+    if (this.state.up === '01') {
+      this.state.area = 'Procuraduría General de Justicia'
+    }
+    if (this.state.up === '02') {
+      this.state.area = 'Subprocuraduría de Procedimientos Penales Región Oriente'
+    }
+    if (this.state.up === '03') {
+      this.state.area = 'Fiscalía Especializada para la atención de Delitos cometidos contra la Libertad de Expresión, Periodistas y Personas defensoras de los Derechos Humanos'
+    }
+    if (this.state.up === '04') {
+      this.state.area= 'Dirección General para la Atención de los Asuntos del Sistema Tradicional'
+    }
+    if (this.state.up === '05') {
+      this.state.area = 'Fiscalía Especializada en Delitos Electorales'
+    }
+    if (this.state.up === '06') {
+      this.state.area = 'Subprocuraduría de Derechos Humanos y Servicios a la Comunidad'
+    }
+    if (this.state.up === '07') {
+      this.state.area = 'Centro de Justicia Restaurativa Penal Poniente'
+    }
+    if (this.state.up === '08') {
+      this.state.area = 'Fiscalía para la Atención de Delitos de Género'
+    }
+    if (this.state.up === '09') {
+      this.state.area = 'Visitaduría General'
+    }
+    if (this.state.up === '10') {
+      this.state.area = 'Dirección General de Servicios Periciales'
+    }
+    if (this.state.up === '11') {
+      this.state.area = 'Centro de Operación Estratégica'
+    }
+    if (this.state.up === '12') {
+      this.state.area = 'Unidad Especializada en el Combate al Secuestro'
+    }
+    if (this.state.up === '13') {
+      this.state.area = 'Dirección General de Administración y Finanzas'
+    }
+    if (this.state.up === '14') {
+      this.state.area = 'Fiscalía Especializada para la atención de los Delitos de Trata de Personas'
+    }
+    if (this.state.up === '15') {
+      this.state.area = 'Subprocuraduría de Procedimientos Penales Región Poniente'
+    }
+    if (this.state.up === '16') {
+      this.state.area = 'Centro de Atención Temprana Poniente'
+    }
+    if (this.state.up === '17') {
+      this.state.area = 'Dirección General de Investigación y Litigación Poniente'
+    }
+    if (this.state.up === '18') {
+      this.state.area = 'Dirección General de la Policía Investigadora'
+    }
+    if (this.state.up === '20') {
+      this.state.area = 'Centro de Atención Temprana Oriente'
+    }
+    if (this.state.up === '21') {
+      this.state.area = 'Centro de Justicia Restaurativa Penal Oriente'
+    }
+    if (this.state.up === '22') {
+      this.state.area = 'Dirección General de Investigación y Litigación Oriente'
+    }
+    if (this.state.up === '23') {
+      this.state.area = 'Fiscalía Especializada en Delitos de Corrupción'
+    }
+    if (this.state.up === '24') {
+      this.state.area = 'Fiscalía de Desaparición Forzada y Desaparición por Terceros'
+    }
+
     const customListLeft = (title, items) => (
       <div>
         <Card className='card-compro'>
@@ -926,7 +963,7 @@ export default class Comprometidos extends Component {
                   <TableCell className='border-icon' />
                 </TableRow>
               </TableHead>
-              {(this.state.realizo === 'MIGUEL' || this.state.realizo === 'ELOY' || this.state.realizo === 'TERESA' || this.state.realizo === 'MARTHA' || this.state.realizo === 'LIZBETH') ?
+              {(admin === 'MIGUEL' || admin === 'ELOY' || admin === 'TERESA' || admin === 'MARTHA' || admin === 'LIZBETH') ?
                 <TableBody className='table-row-c'>
                   <TableCell className='border-icon' />
                   <TableCell className='border-table2'>
@@ -1085,11 +1122,11 @@ export default class Comprometidos extends Component {
                   <TableCell className='border-icon' />
                   <TableCell className='border-table2'>
                     <input
+                      style={{  }}
                       className='select-compro'
                       id='partida'
                       name='partida'
                       ref='partida'
-                      onChange={this.handleInput.bind(this)}
                       required
                       disabled
                       value={this.state.partida}
@@ -1101,7 +1138,6 @@ export default class Comprometidos extends Component {
                       id='up'
                       name='up'
                       ref='up'
-                      onChange={this.handleInput.bind(this)}
                       required
                       disabled
                       value={this.state.up}
@@ -1123,19 +1159,15 @@ export default class Comprometidos extends Component {
                     </select>
                   </TableCell>
                   <TableCell className='border-table-area'>
-                    <select
+                    <input
                       className='select-compro'
                       id='area'
                       name='area'
                       ref='area'
                       value={this.state.area}
-                      onChange={this.handleInput.bind(this)}
                       required
-                    >
-                      {this.area.map((x,y) =>
-                        <option name={y}>{x}</option>
-                      )}
-                    </select>
+                      disabled
+                    />
                   </TableCell>
                   <TableCell className='border-table2'>
                     {this.state.right.length > 0 ?
