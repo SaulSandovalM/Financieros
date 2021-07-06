@@ -397,6 +397,7 @@
 .header-ofi-cont {
   display: flex;
   justify-content: space-between;
+  width: 100%;
 }
 .sp-cont {
   display: flex;

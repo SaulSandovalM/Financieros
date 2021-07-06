@@ -282,8 +282,6 @@ export default class FondoE extends Component {
       }
     })
 
-    console.log(this.state.fondo ? this.state.fondos[0].no_proyecto : null)
-
     return (
       <div>
         {this.state.fondo &&

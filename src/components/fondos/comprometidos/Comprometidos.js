@@ -25,6 +25,39 @@ import ListComponent from './ListComponent'
 export default class Comprometidos extends Component {
   constructor (props) {
     super(props)
+    var user = firebase.auth().currentUser
+    var email
+    if (user != null) {
+      email = user.email
+    }
+    let admin
+    if (email === 'nayra@procuraduria.com') {
+      admin = 'NAYRA'
+    } else if (email === 'laura@procuraduria.com') {
+      admin = 'LAURA'
+    } else if (email === 'miguel@procuraduria.com') {
+      admin = 'MIGUEL'
+    } else if (email === 'teresa@procuraduria.com') {
+      admin = 'TERESA'
+    } else if (email === 'marcos@procuraduria.com') {
+      admin = 'MARCOS'
+    } else if (email === 'eloy@procuraduria.com') {
+      admin = 'ELOY'
+    } else if (email === 'karina@procuraduria.com') {
+      admin = 'KARINA'
+    } else if (email === 'martha@procuraduria.com') {
+      admin = 'MARTHA'
+    } else if (email === 'lilia@procuraduria.com') {
+      admin = 'LILIA'
+    } else if (email === 'cenely@procuraduria.com') {
+      admin = 'CENELY'
+    } else if (email === 'hector@procuraduria.com') {
+      admin = 'HECTOR'
+    } else if (email === 'omar@procuraduria.com') {
+      admin = 'OMAR'
+    } else if (email === 'lizbeth@procuraduria.com') {
+      admin = 'LIZBETH'
+    }
     var URLactual = window.location
     this.unsubscribe = null
     this.state = {
@@ -72,7 +105,8 @@ export default class Comprometidos extends Component {
       urlfire: String(URLactual).substr(-20),
       sup: '',
       spartida: '',
-      scantidad: ''
+      scantidad: '',
+      realizo: admin,
     }
   }
 
@@ -117,28 +151,40 @@ export default class Comprometidos extends Component {
           cpa: child.val().cpa,
           ene: child.val().ene,
           gasene: child.val().gasene,
+          ampene: child.val().ampene,
           feb: child.val().feb,
           gasfeb: child.val().gasfeb,
+          ampfeb: child.val().ampfeb,
           mar: child.val().mar,
           gasmar: child.val().gasmar,
+          ampmar: child.val().ampmar,
           abr: child.val().abr,
           gasabr: child.val().gasabr,
+          ampabr: child.val().ampabr,
           may: child.val().may,
           gasmay: child.val().gasmay,
+          ampmay: child.val().ampmay,
           jun: child.val().jun,
           gasjun: child.val().gasjun,
+          ampjun: child.val().ampjun,
           jul: child.val().jul,
           gasjul: child.val().gasjul,
+          ampjul: child.val().ampjul,
           ago: child.val().ago,
           gasago: child.val().gasago,
+          ampago: child.val().ampago,
           sep: child.val().sep,
           gassep: child.val().gassep,
+          ampsep: child.val().ampsep,
           oct: child.val().oct,
           gasoct: child.val().gasoct,
+          ampoct: child.val().ampoct,
           nov: child.val().nov,
           gasnov: child.val().gasnov,
+          ampnov: child.val().ampnov,
           dic: child.val().dic,
           gasdic: child.val().gasdic,
+          ampdic: child.val().ampdic,
           total: child.val().total,
           ampliacion: child.val().ampliacion,
           reduccion: child.val().reduccion,
@@ -211,6 +257,7 @@ export default class Comprometidos extends Component {
           estatus: child.val().estatus,
           tipo: child.val().tipo,
           partida: child.val().partida,
+          numfolio: child.val().numfolio,
           up: child.val().up,
           id: child.key
         })
@@ -379,28 +426,40 @@ export default class Comprometidos extends Component {
       cpa: item.cpa,
       ene: item.ene,
       gasene: item.gasene,
+      ampene: item.ampene,
       feb: item.feb,
       gasfeb: item.gasfeb,
+      ampfeb: item.ampfeb,
       mar: item.mar,
       gasmar: item.gasmar,
+      amplmar: item.ampmar,
       abr: item.abr,
       gasabr: item.gasabr,
+      ampabr: item.ampabr,
       may: item.may,
       gasmay: item.gasmay,
+      ampmay: item.ampmay,
       jun: item.jun,
       gasjun: item.gasjun,
+      ampjun: item.ampjun,
       jul: item.jul,
       gasjul: item.gasjul,
+      ampjul: item.ampjul,
       ago: item.ago,
       gasago: item.gasago,
+      ampago: item.ampago,
       sep: item.sep,
       gassep: item.gassep,
+      ampsep: item.ampsep,
       oct: item.oct ,
       gasoct: item.gasoct,
+      ampoct: item.ampago,
       nov: item.nov,
       gasnov: item.gasnov,
+      ampnov: item.ampnov,
       dic: item.dic,
       gasdic: item.gasdic,
+      ampdic: item.ampdic,
       total: item.total,
       ampliacion: item.ampliacion,
       reduccion: item.reduccion,
@@ -591,13 +650,13 @@ export default class Comprometidos extends Component {
         return ( ( (xml.folio.indexOf(this.state.search) !== -1) ||
           (xml.nombre.indexOf(this.state.search) !== -1) ||
           (xml.fecha.indexOf(this.state.search) !== -1) ) &&
-          xml.estatus !== 'asignado' && xml.tipo === 'revolvente')
+          xml.estatus !== 'asignado' && (!xml.tipo || xml.tipo === 'revolvente'))
       }
     )
 
     const xmlvali = []
     this.state.xml2.map(item =>
-      item.up ?
+      item.numfolio ?
         item !== null ?
           xmlvali.push(item)
         : null
@@ -606,16 +665,32 @@ export default class Comprometidos extends Component {
 
     const filterData2 = xmlvali.filter(
       (xml) => {
-        return ( ( (xml.up.indexOf(this.state.up) !== -1) &&
-          (xml.partida.indexOf(this.state.partida) !== -1) &&
-          (xml.total.indexOf(this.state.scantidad) !== -1) ) &&
-          xml.estatus !== 'asignado' && xml.tipo === 'directo')
+        return (
+          ( (xml.numfolio.indexOf(this.state.search) !== -1) ) && xml.estatus !== 'asignado' && xml.tipo === 'directo')
       }
     )
 
     const array1 = this.state.right
 
     if (Object.keys(array1).length !== 0) {
+      const partida = []
+      right.map(items => (
+        partida.push(items.partida)
+      ))
+      let resPartida = partida.filter((item, index) => {
+        return partida.indexOf(item) === index
+      })
+      this.state.partida = resPartida.toString()
+
+      const up = []
+      right.map(items => (
+        up.push(items.up)
+      ))
+      let resUp = up.filter((item, index) => {
+        return up.indexOf(item) === index
+      })
+      this.state.up = resUp.toString()
+
       const totalImporteImporte = []
       right.map(items => (
         totalImporteImporte.push(parseFloat(items.subtotal))
@@ -657,7 +732,6 @@ export default class Comprometidos extends Component {
               <ListItemText className='list-align-i'><b>Total</b></ListItemText>
               <ListItemText className='list-align'><b>Fecha</b></ListItemText>
               <ListItemText className='list-align2'><b>Nombre</b></ListItemText>
-
             </ListItem>
             {admin === 'MIGUEL' || admin === 'TERESA' || admin === 'ELOY' || admin === 'MARTHA' || admin === 'MARCOS' || admin === 'LIZBETH' ?
             filterData.map((value) => {
@@ -760,6 +834,7 @@ export default class Comprometidos extends Component {
     let presupuestor = this.state.presupuesto.map(item => {
       return (this.state.partida === item.ogasto && this.state.up === item.up) && item.rubro
     })
+    console.log(this.state.partida)
     let resultr = presupuestor.filter((item, index) => {
       return presupuestor.indexOf(item) === index
     })
@@ -781,27 +856,11 @@ export default class Comprometidos extends Component {
                   <div className='search-div'>
                     <input
                       className='input-compro'
-                      name='up'
-                      id='up'
-                      value={this.state.up}
+                      name='search'
+                      id='search'
+                      value={this.state.search}
                       onChange={this.handleInput.bind(this)}
-                      placeholder='Ingresa la UP'
-                    />
-                    <input
-                      className='input-compro'
-                      name='partida'
-                      id='partida'
-                      value={this.state.partida}
-                      onChange={this.handleInput.bind(this)}
-                      placeholder='Ingresa la Partida'
-                    />
-                    <input
-                      className='input-compro'
-                      name='scantidad'
-                      id='scantidad'
-                      value={this.state.scantidad}
-                      onChange={this.handleInput.bind(this)}
-                      placeholder='Ingresa la Cantidad'
+                      placeholder='Ingrese el numero de folio'
                     />
                   </div>
                 </div>
@@ -867,159 +926,309 @@ export default class Comprometidos extends Component {
                   <TableCell className='border-icon' />
                 </TableRow>
               </TableHead>
-              <TableBody className='table-row-c'>
-                <TableCell className='border-icon' />
-                <TableCell className='border-table2'>
-                  <select
-                    className='select-compro'
-                    id='partida'
-                    name='partida'
-                    ref='partida'
-                    onChange={this.handleInput.bind(this)}
-                    required
-                    value={this.state.partida}
-                  >
-                    {resultp.map((x,y) =>
-                      <option name={y}>{x}</option>
-                    )}
-                  </select>
-                </TableCell>
-                <TableCell className='border-table2'>
-                  <select
-                    className='select-compro'
-                    id='up'
-                    name='up'
-                    ref='up'
-                    onChange={this.handleInput.bind(this)}
-                    required
-                    value={this.state.up}
-                  >
-                    {resultu.map((x,y) =>
-                      <option name={y}>{x}</option>
-                    )}
-                  </select>
-                </TableCell>
-                <TableCell className='border-table2'>
-                  <select
-                    className='select-compro'
-                    id='rubro'
-                    name='rubro'
-                    ref='rubro'
-                    onChange={this.handleInput.bind(this)}
-                    required
-                    value={this.state.rubro}
-                  >
-                    {resultr.map((x,y) =>
-                      <option name={y}>{x}</option>
-                    )}
-                  </select>
-                </TableCell>
-                <TableCell className='border-table-area'>
-                  <select
-                    className='select-compro'
-                    id='area'
-                    name='area'
-                    ref='area'
-                    value={this.state.area}
-                    onChange={this.handleInput.bind(this)}
-                    required
-                  >
-                    {this.area.map((x,y) =>
-                      <option name={y}>{x}</option>
-                    )}
-                  </select>
-                </TableCell>
-                <TableCell className='border-table2'>
-                  {this.state.right.length > 0 ?
-                    <CurrencyFormat
-                      className='font-tb'
-                      displayType='text'
-                      prefix=' $ '
-                      thousandSeparator
-                      decimalSeparator='.'
-                      value={this.state.importe}
-                    /> :
-                    <CurrencyFormat
-                      className='font-tb'
-                      displayType='text'
-                      prefix=' $ '
-                      thousandSeparator
-                      decimalSeparator='.'
-                      value={0}
-                    />
-                  }
-                </TableCell>
-                <TableCell className='border-table2'>
-                  {this.state.right.length > 0 ?
-                    <CurrencyFormat
-                      className='font-tb'
-                      displayType='text'
-                      prefix=' $ '
-                      thousandSeparator
-                      decimalSeparator='.'
-                      value={this.state.iva}
-                    /> :
-                    <CurrencyFormat
-                      displayType='text'
-                      prefix=' $ '
-                      thousandSeparator
-                      decimalSeparator='.'
-                      value={0}
-                    />
-                  }
-                </TableCell>
-                <TableCell className='border-table2'>
-                  {this.state.right.length > 0 ?
-                    <CurrencyFormat
-                      className='font-tb'
-                      displayType='text'
-                      prefix=' $ '
-                      thousandSeparator
-                      decimalSeparator='.'
-                      value={this.state.isr}
-                    /> :
-                    <CurrencyFormat
-                      className='font-tb'
-                      displayType='text'
-                      prefix=' $ '
-                      thousandSeparator
-                      decimalSeparator='.'
-                      value={0}
-                    />
-                  }
-                </TableCell>
-                <TableCell className='border-table2'>
-                  {this.state.right.length > 0 ?
-                    <CurrencyFormat
-                      className='font-tb'
-                      displayType='text'
-                      prefix=' $ '
-                      thousandSeparator
-                      decimalSeparator='.'
-                      value={this.state.total}
-                    /> :
-                    <CurrencyFormat
-                      className='font-tb'
-                      displayType='text'
-                      prefix=' $ '
-                      thousandSeparator
-                      decimalSeparator='.'
-                      value={0}
-                    />
-                  }
-                </TableCell>
-                {this.state.presupuesto.map(item =>
-                  <div>
-                    {this.state.partida === item.ogasto && this.state.up === item.up && this.state.rubro === item.rubro ?
-                      <TableCell className='border-icon' key={item.id} item={item}>
-                        <IconButton size='small' className='border-des' onClick={() => this.update(item)}>
-                          <AddIcon />
-                        </IconButton>
-                      </TableCell> : null
+              {(this.state.realizo === 'MIGUEL' || this.state.realizo === 'ELOY' || this.state.realizo === 'TERESA' || this.state.realizo === 'MARTHA' || this.state.realizo === 'LIZBETH') ?
+                <TableBody className='table-row-c'>
+                  <TableCell className='border-icon' />
+                  <TableCell className='border-table2'>
+                    <select
+                      className='select-compro'
+                      id='partida'
+                      name='partida'
+                      ref='partida'
+                      onChange={this.handleInput.bind(this)}
+                      required
+                      value={this.state.partida}
+                    >
+                      {resultp.map((x,y) =>
+                        <option name={y}>{x}</option>
+                      )}
+                    </select>
+                  </TableCell>
+                  <TableCell className='border-table2'>
+                    <select
+                      className='select-compro'
+                      id='up'
+                      name='up'
+                      ref='up'
+                      onChange={this.handleInput.bind(this)}
+                      required
+                      value={this.state.up}
+                    >
+                      {resultu.map((x,y) =>
+                        <option name={y}>{x}</option>
+                      )}
+                    </select>
+                  </TableCell>
+                  <TableCell className='border-table2'>
+                    <select
+                      className='select-compro'
+                      id='rubro'
+                      name='rubro'
+                      ref='rubro'
+                      onChange={this.handleInput.bind(this)}
+                      required
+                      value={this.state.rubro}
+                    >
+                      {resultr.map((x,y) =>
+                        <option name={y}>{x}</option>
+                      )}
+                    </select>
+                  </TableCell>
+                  <TableCell className='border-table-area'>
+                    <select
+                      className='select-compro'
+                      id='area'
+                      name='area'
+                      ref='area'
+                      value={this.state.area}
+                      onChange={this.handleInput.bind(this)}
+                      required
+                    >
+                      {this.area.map((x,y) =>
+                        <option name={y}>{x}</option>
+                      )}
+                    </select>
+                  </TableCell>
+                  <TableCell className='border-table2'>
+                    {this.state.right.length > 0 ?
+                      <CurrencyFormat
+                        className='font-tb'
+                        displayType='text'
+                        prefix=' $ '
+                        thousandSeparator
+                        decimalSeparator='.'
+                        value={this.state.importe}
+                      /> :
+                      <CurrencyFormat
+                        className='font-tb'
+                        displayType='text'
+                        prefix=' $ '
+                        thousandSeparator
+                        decimalSeparator='.'
+                        value={0}
+                      />
                     }
-                  </div>
-                )}
-              </TableBody>
+                  </TableCell>
+                  <TableCell className='border-table2'>
+                    {this.state.right.length > 0 ?
+                      <CurrencyFormat
+                        className='font-tb'
+                        displayType='text'
+                        prefix=' $ '
+                        thousandSeparator
+                        decimalSeparator='.'
+                        value={this.state.iva}
+                      /> :
+                      <CurrencyFormat
+                        displayType='text'
+                        prefix=' $ '
+                        thousandSeparator
+                        decimalSeparator='.'
+                        value={0}
+                      />
+                    }
+                  </TableCell>
+                  <TableCell className='border-table2'>
+                    {this.state.right.length > 0 ?
+                      <CurrencyFormat
+                        className='font-tb'
+                        displayType='text'
+                        prefix=' $ '
+                        thousandSeparator
+                        decimalSeparator='.'
+                        value={this.state.isr}
+                      /> :
+                      <CurrencyFormat
+                        className='font-tb'
+                        displayType='text'
+                        prefix=' $ '
+                        thousandSeparator
+                        decimalSeparator='.'
+                        value={0}
+                      />
+                    }
+                  </TableCell>
+                  <TableCell className='border-table2'>
+                    {this.state.right.length > 0 ?
+                      <CurrencyFormat
+                        className='font-tb'
+                        displayType='text'
+                        prefix=' $ '
+                        thousandSeparator
+                        decimalSeparator='.'
+                        value={this.state.total}
+                      /> :
+                      <CurrencyFormat
+                        className='font-tb'
+                        displayType='text'
+                        prefix=' $ '
+                        thousandSeparator
+                        decimalSeparator='.'
+                        value={0}
+                      />
+                    }
+                  </TableCell>
+                  {this.state.presupuesto.map(item =>
+                    <div>
+                      {this.state.partida === item.ogasto && this.state.up === item.up && this.state.rubro === item.rubro ?
+                        <TableCell className='border-icon' key={item.id} item={item}>
+                          <IconButton size='small' className='border-des' onClick={() => this.update(item)}>
+                            <AddIcon />
+                          </IconButton>
+                        </TableCell> : null
+                      }
+                    </div>
+                  )}
+                </TableBody>
+                :
+                <TableBody className='table-row-c'>
+                  <TableCell className='border-icon' />
+                  <TableCell className='border-table2'>
+                    <input
+                      className='select-compro'
+                      id='partida'
+                      name='partida'
+                      ref='partida'
+                      onChange={this.handleInput.bind(this)}
+                      required
+                      disabled
+                      value={this.state.partida}
+                    />
+                  </TableCell>
+                  <TableCell className='border-table2'>
+                    <input
+                      className='select-compro'
+                      id='up'
+                      name='up'
+                      ref='up'
+                      onChange={this.handleInput.bind(this)}
+                      required
+                      disabled
+                      value={this.state.up}
+                    />
+                  </TableCell>
+                  <TableCell className='border-table2'>
+                    <select
+                      className='select-compro'
+                      id='rubro'
+                      name='rubro'
+                      ref='rubro'
+                      onChange={this.handleInput.bind(this)}
+                      required
+                      value={this.state.rubro}
+                    >
+                      {resultr.map((x,y) =>
+                        <option name={y}>{x}</option>
+                      )}
+                    </select>
+                  </TableCell>
+                  <TableCell className='border-table-area'>
+                    <select
+                      className='select-compro'
+                      id='area'
+                      name='area'
+                      ref='area'
+                      value={this.state.area}
+                      onChange={this.handleInput.bind(this)}
+                      required
+                    >
+                      {this.area.map((x,y) =>
+                        <option name={y}>{x}</option>
+                      )}
+                    </select>
+                  </TableCell>
+                  <TableCell className='border-table2'>
+                    {this.state.right.length > 0 ?
+                      <CurrencyFormat
+                        className='font-tb'
+                        displayType='text'
+                        prefix=' $ '
+                        thousandSeparator
+                        decimalSeparator='.'
+                        value={this.state.importe}
+                      /> :
+                      <CurrencyFormat
+                        className='font-tb'
+                        displayType='text'
+                        prefix=' $ '
+                        thousandSeparator
+                        decimalSeparator='.'
+                        value={0}
+                      />
+                    }
+                  </TableCell>
+                  <TableCell className='border-table2'>
+                    {this.state.right.length > 0 ?
+                      <CurrencyFormat
+                        className='font-tb'
+                        displayType='text'
+                        prefix=' $ '
+                        thousandSeparator
+                        decimalSeparator='.'
+                        value={this.state.iva}
+                      /> :
+                      <CurrencyFormat
+                        displayType='text'
+                        prefix=' $ '
+                        thousandSeparator
+                        decimalSeparator='.'
+                        value={0}
+                      />
+                    }
+                  </TableCell>
+                  <TableCell className='border-table2'>
+                    {this.state.right.length > 0 ?
+                      <CurrencyFormat
+                        className='font-tb'
+                        displayType='text'
+                        prefix=' $ '
+                        thousandSeparator
+                        decimalSeparator='.'
+                        value={this.state.isr}
+                      /> :
+                      <CurrencyFormat
+                        className='font-tb'
+                        displayType='text'
+                        prefix=' $ '
+                        thousandSeparator
+                        decimalSeparator='.'
+                        value={0}
+                      />
+                    }
+                  </TableCell>
+                  <TableCell className='border-table2'>
+                    {this.state.right.length > 0 ?
+                      <CurrencyFormat
+                        className='font-tb'
+                        displayType='text'
+                        prefix=' $ '
+                        thousandSeparator
+                        decimalSeparator='.'
+                        value={this.state.total}
+                      /> :
+                      <CurrencyFormat
+                        className='font-tb'
+                        displayType='text'
+                        prefix=' $ '
+                        thousandSeparator
+                        decimalSeparator='.'
+                        value={0}
+                      />
+                    }
+                  </TableCell>
+                  {this.state.presupuesto.map(item =>
+                    <div>
+                      {this.state.partida === item.ogasto && this.state.up === item.up && this.state.rubro === item.rubro ?
+                        <TableCell className='border-icon' key={item.id} item={item}>
+                          <IconButton size='small' className='border-des' onClick={() => this.update(item)}>
+                            <AddIcon />
+                          </IconButton>
+                        </TableCell> : null
+                      }
+                    </div>
+                  )}
+                </TableBody>
+              }
               {this.state.comprometidosDos !== undefined ? this.state.comprometidosDos.map(comprometido =>
                 comprometido.partida ?
                   <ListComponent key={comprometido.id} comprometido={comprometido} />

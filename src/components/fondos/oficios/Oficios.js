@@ -1318,7 +1318,7 @@ export default class Oficios extends Component {
         {/* Pago Provedor */}
         <div className='pppdf-subdad' ref={el => (this.opp = el)}>
           <div style={{ display: 'flex', justifyContent: 'center' }}>
-            <div style={{ width: '85%' }}>
+            <div style={{ width: '100%' }}>
               <div className='header-ofi'>
                 <div className='header-ofi-cont'>
                   <div className='sp-cont'>
@@ -1361,12 +1361,11 @@ export default class Oficios extends Component {
                   <div className='texto-ofi-sp'>
                     <p>
                       Por este medio me permito enviar a Usted documentación por un importe total de
-                      <CurrencyFormat
-                        value={parseFloat(this.state.fondo.importe).toFixed(2)}
-                        displayType='text'
-                        thousandSeparator
-                        prefix=' $ '
-                      /> ({(NumberAsString(this.state.fondo.importe))}),
+                      {this.state.comprometidos.map(comprometidos =>
+                        comprometidos.isr !== '0.00' && comprometidos.isr ?
+                          <CurrencyFormat value={(totalImporte.reduce(reducer)).toFixed(2)} displayType='text' thousandSeparator prefix=' $ ' />
+                        : null
+                      )} ({(NumberAsString(totalImporte.reduce(reducer)))}),
                       cantidad amparada con los comprobantes No
                       {this.state.comprometidos.map(comprometidos =>
                         comprometidos.comprobantes !== undefined ?
@@ -1845,7 +1844,7 @@ export default class Oficios extends Component {
         {/* Anexo F */}
         <div className='pppdf-subdad' ref={el => (this.anex = el)}>
           <div style={{ display: 'flex', justifyContent: 'center' }}>
-            <div style={{ width: '85%' }}>
+            <div style={{ width: '100%' }}>
               <div className='header-ofi'>
                 <div className='header-ofi-cont'>
                   <div className='sp-cont'>
