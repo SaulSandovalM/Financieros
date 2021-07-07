@@ -13,9 +13,7 @@ const Menu = ({ open, ...props }) => {
   }
 
   let admin
-  if (email === 'administrador@procu.com') {
-    admin = 'ADMIN'
-  } else if (email === 'cecilia@procuraduria.com') {
+  if (email === 'cecilia@procuraduria.com') {
     admin = 'CECILIA'
   } else if (email === 'alfredo@procuraduria.com') {
     admin = 'ALFREDO'
@@ -50,34 +48,41 @@ const Menu = ({ open, ...props }) => {
   } else if (email === 'candy@procuraduria.com') {
     admin = 'CANDY'
   } else if (email === 'angel@procuraduria.com') {
-    admin = 'ANGEL'
-  } else if (email === 'candy@procuraduria.com') {
     admin = 'VALIDACION2'
+  } else if (email === 'danya@procuraduria.com') {
+    admin = 'VALIDACION2'
+  } else if (email === 'mario@procuraduria.com') {
+    admin = 'VALIDACION3'
+  } else if (email === 'hortencia@procuraduria.com') {
+    admin = 'VALIDACION3'
   }
 
   const isHidden = open !== false
 
   return (
     <StyledMenu open={open} aria-hidden={!isHidden} {...props}>
-      {admin === 'CECILIA' && <Nav />}
-      {admin === 'ALFREDO' && <Nav />}
-      {admin === 'NAYRA' && <Nav />}
-      {admin === 'ELI' && <Nav />}
-      {admin === 'MIGUEL' && <Nav />}
-      {admin === 'OMAR' && <Nav />}
-      {admin === 'LILIA' && <Nav />}
-      {admin === 'HECTOR' && <Nav />}
-      {admin === 'CENELY' && <Nav />}
-      {admin === 'KARINA' && <Nav />}
-      {admin === 'ELOY' && <Nav />}
-      {admin === 'TERESA' && <Nav />}
-      {admin === 'MARCOS' && <Nav />}
-      {admin === 'MARTHA' && <Nav />}
-      {admin === 'JUAN' && <Nav />}
-      {admin === 'LIZBETH' && <Nav />}
-      {admin === 'CANDY' && <Nav />}
-      {admin === 'ANGEL' && <Nav />}
-      {admin === 'DANYA' && <Nav />}
+      {(admin === 'CANDY' ||
+        admin === 'VALIDACION2' ||
+        admin === 'VALIDACION2' ||
+        admin === 'VALIDACION3' ||
+        admin === 'VALIDACION3' ||
+        admin === 'CECILIA' ||
+        admin === 'ALFREDO' ||
+        admin === 'NAYRA' ||
+        admin === 'ELI' ||
+        admin === 'MIGUEL' ||
+        admin === 'OMAR' ||
+        admin === 'LILIA' ||
+        admin === 'HECTOR' ||
+        admin === 'CENELY' ||
+        admin === 'KARINA' ||
+        admin === 'ELOY' ||
+        admin === 'TERESA' ||
+        admin === 'MARCOS' ||
+        admin === 'MARTHA' ||
+        admin === 'JUAN' ||
+        admin === 'LIZBETH'
+      ) && <Nav />}
     </StyledMenu>
   )
 }

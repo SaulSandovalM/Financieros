@@ -80,15 +80,19 @@ class Nav extends Component {
     } else if (email === 'candy@procuraduria.com') {
       admin = 'CANDY'
     } else if (email === 'angel@procuraduria.com') {
-      admin = 'ANGEL'
+      admin = 'VALIDACION2'
     } else if (email === 'danya@procuraduria.com') {
-      admin = 'DANYA'
+      admin = 'VALIDACION2'
+    } else if (email === 'mario@procuraduria.com') {
+      admin = 'VALIDACION3'
+    } else if (email === 'hortencia@procuraduria.com') {
+      admin = 'VALIDACION3'
     }
 
     return (
       <div className='nav-col'>
         <div className='nav-cont'>
-          {(admin === 'CANDY' || admin === 'ANGEL' || admin === 'DANYA') &&
+          {(admin === 'CANDY' || admin === 'VALIDACION2' || admin === 'VALIDACION2' || admin === 'VALIDACION3' || admin === 'VALIDACION3') &&
             <div className='navbar-left' style={{ marginTop: '30px' }}>
               <Link to='/ArchivoPago' className='deco'>
                 <span className='material-icons'>

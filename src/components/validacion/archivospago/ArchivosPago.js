@@ -11,19 +11,6 @@ import CheckIcon from '@material-ui/icons/Check'
 export default class ArchivosPago extends Component {
   constructor(props) {
     super(props)
-    var user = firebase.auth().currentUser
-    var email
-    if (user != null) {
-      email = user.email
-    }
-    let admin
-    if (email === 'candy@procuraduria.com') {
-      admin = 'CANDY'
-    } else if (email === 'angel@procuraduria.com') {
-      admin = 'ANGEL'
-    } else if (email === 'danya@procuraduria.com') {
-      admin = 'DANYA'
-    }
     var today = new Date()
     var dd = today.getDate()
     var mm = today.getMonth() + 1
@@ -64,8 +51,7 @@ export default class ArchivosPago extends Component {
           name: 'prueba',
           done: false
         }
-      ],
-      realizo: admin
+      ]
     }
   }
 
@@ -84,12 +70,13 @@ export default class ArchivosPago extends Component {
       reader.onload = function (event) {
         var XMLParser = require('react-xml-parser')
         var xml = new XMLParser().parseFromString(event.target.result)
+        console.log(xml)
         const data = {
           'total': xml.attributes['Total'] ? xml.attributes['Total'] : 'No encuentra total',
           'subtotal': xml.attributes['SubTotal'] ? xml.attributes['SubTotal'] : (parseFloat(xml.attributes['Total']) + parseFloat(xml.children['3'].attributes['TotalImpuestosRetenidos'] ? xml.children['3'].attributes['TotalImpuestosRetenidos'] : 0)) - parseFloat(xml.children['3'].attributes['TotalImpuestosTrasladados']),
           'folio': xml.attributes['Folio'] ? xml.attributes['Folio'] : '0',
           'serie': xml.attributes['Serie'] ? xml.attributes['Serie'] : '0',
-          'nombre': xml.children['1'].attributes['Nombre'] ? xml.children['1'].attributes['Nombre'] : 'No encuentra Nombre',
+          'nombre': xml.children['0'].attributes['Nombre'] ? xml.children['0'].attributes['Nombre'] : 'No encuentra Nombre',
           'importe': xml.attributes['SubTotal'] ? xml.attributes['SubTotal'] : (parseFloat(xml.attributes['Total']) + (xml.children['3'].attributes['TotalImpuestosRetenidos'] ? xml.children['3'].attributes['TotalImpuestosRetenidos'] : 0)) - parseFloat(xml.children['3'].attributes['TotalImpuestosTrasladados']),
           'iva': xml.children['3'].attributes['TotalImpuestosTrasladados'] ? xml.children['3'].attributes['TotalImpuestosTrasladados'] : 0,
           'isr': xml.children['3'].attributes['TotalImpuestosRetenidos'] ? xml.children['3'].attributes['TotalImpuestosRetenidos'] : 0,
@@ -102,16 +89,17 @@ export default class ArchivosPago extends Component {
           'up': up,
           'numfolio': numfolio
         }
-        fetch(xml).then(res => res.text()).then(xml => {
-          fetch('https://financieros-78cb0.firebaseio.com/xml.json', {
-            method: 'POST',
-            headers: {
-              'Accept': 'application/json',
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(data),
-          })
-        })
+        console.log(data)
+        // fetch(xml).then(res => res.text()).then(xml => {
+        //   fetch('https://financieros-78cb0.firebaseio.com/xml.json', {
+        //     method: 'POST',
+        //     headers: {
+        //       'Accept': 'application/json',
+        //       'Content-Type': 'application/json',
+        //     },
+        //     body: JSON.stringify(data),
+        //   })
+        // })
         console.log(datosXml.push(data))
         Total.push(parseFloat(data.total))
       }
@@ -324,7 +312,7 @@ export default class ArchivosPago extends Component {
     const { fechaE } = this.state
 
     let presupuestop = this.state.presupuesto.map(item => {
-      return item.ogasto
+      return item.ogasto + 1
     })
     let resultp = presupuestop.filter((item, index) => {
       return presupuestop.indexOf(item) === index
@@ -368,6 +356,71 @@ export default class ArchivosPago extends Component {
                     prefix=' $'
                   />
                 </p>
+              </div>
+            </div>
+
+            <div className='form-val-container'>
+              <div className='form-val-content'>
+                <div style={{ width: '18%' }}>
+                  <p style={{ margin: '0px', color: 'grey', fontSize: '12px' }}>Tipo de persona</p>
+                  <select
+                    style={{
+                      width: '100%',
+                      height: '34px',
+                      background: '#f4f4f4',
+                      border: '2px solid rgb(102, 102, 102)',
+                      borderRadius: '5px'
+                    }}
+                    id='TipoPersona'
+                    name='TipoPersona'
+                    value={this.state.TipoPersona}
+                    ref={TipoPersona => this.inputTipoPersona = TipoPersona}
+                  >
+                    <option>Fisica</option>
+                    <option>Moral</option>
+                  </select>
+                </div>
+                <div style={{ width: '18%' }}>
+                  <TextField
+                    label='Fecha de Envio'
+                    id='fechaE'
+                    name='fechaE'
+                    value={fechaE}
+                    disabled
+                    onChange={this.handleInput.bind(this)}
+                    ref={fechaE => this.inputImporte = fechaE}
+                  />
+                </div>
+                <div style={{ width: '18%' }}>
+                  <TextField
+                    label='Numero de contrato'
+                    id='numContrato'
+                    name='numContrato'
+                    value={this.state.numContrato}
+                    onChange={this.handleInput.bind(this)}
+                    ref={numContrato => this.inputNumContrato = numContrato}
+                  />
+                </div>
+                <div style={{ width: '18%' }}>
+                  <TextField
+                    label='Numero de Folio'
+                    id='numFolio'
+                    name='numFolio'
+                    value={this.state.numFolio}
+                    onChange={this.handleInput.bind(this)}
+                    ref={numFolio => this.inputNumFolio = numFolio}
+                  />
+                </div>
+                <div style={{ width: '18%' }}>
+                  <p style={{ margin: '0px', color: 'grey', fontSize: '12px' }}>Adquisiciones</p>
+                  <input
+                    type='checkbox'
+                    id='adqui'
+                    name='adqui'
+                    value={this.state.adqui}
+                    onChange={this.handleInput}
+                  />
+                </div>
               </div>
             </div>
             <div className='inputs-container-valeslist' style={{ width: '60%' }}>
@@ -473,68 +526,6 @@ export default class ArchivosPago extends Component {
                           <option name={y}>{x}</option>
                         )}
                       </select>
-                    </div>
-                    <div style={{ width: '100%', display: 'flex', marginTop: '20px' }}>
-                      <div className='p-container-validacion'>
-                        <p style={{ margin: '0px', color: 'grey', fontSize: '12px' }}>Tipo de persona</p>
-                        <select
-                          style={{
-                            width: '100%',
-                            height: '34px',
-                            background: '#f4f4f4',
-                            border: '2px solid rgb(102, 102, 102)',
-                            borderRadius: '5px'
-                          }}
-                          id='TipoPersona'
-                          name='TipoPersona'
-                          value={this.state.TipoPersona}
-                          ref={TipoPersona => this.inputTipoPersona = TipoPersona}
-                        >
-                          <option>Fisica</option>
-                          <option>Moral</option>
-                        </select>
-                      </div>
-                      <div className='p-container-validacion'>
-                        <TextField
-                          label='Fecha de Envio'
-                          id='fechaE'
-                          name='fechaE'
-                          value={fechaE}
-                          disabled
-                          onChange={this.handleInput.bind(this)}
-                          ref={fechaE => this.inputImporte = fechaE}
-                        />
-                      </div>
-                      <div className='p-container-validacion'>
-                        <TextField
-                          label='Numero de contrato'
-                          id='numContrato'
-                          name='numContrato'
-                          value={this.state.numContrato}
-                          onChange={this.handleInput.bind(this)}
-                          ref={numContrato => this.inputNumContrato = numContrato}
-                        />
-                      </div>
-                      <div className='p-container-validacion'>
-                        <TextField
-                          label='Numero de Folio'
-                          id='numFolio'
-                          name='numFolio'
-                          value={this.state.numFolio}
-                          onChange={this.handleInput.bind(this)}
-                          ref={numFolio => this.inputNumFolio = numFolio}
-                        />
-                      </div>
-                      <div className='p-container-validacion'>
-                        <p style={{ margin: '0px', color: 'grey', fontSize: '12px' }}>Programa Anual de Adquisiciones</p>
-                        <input
-                          type='checkbox'
-                          id='adqui'
-                          name='adqui'
-                          value={this.state.adqui}
-                          onChange={this.handleInput}
-                        />
-                      </div>
                     </div>
                     <div className='div-content-fab-com'>
                       <Fab color='primary' style={{ background: 'green' }} type='submit'>

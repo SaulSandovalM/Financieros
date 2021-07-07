@@ -55,7 +55,6 @@ export default class ListComponent extends Component {
   }
 
   render () {
-    console.log(this.props.listaValidacion)
     return (
       <div>
         <TableContainer component={Paper} style={{ maxWidth: '100%', height: '60vh' }}>

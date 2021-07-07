@@ -261,7 +261,6 @@ export default class Valeslist extends Component {
     })
   }
 
-
   obs = (item) => {
     let updates = {}
     updates['vales/' + item.id] = {

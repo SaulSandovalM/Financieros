@@ -22,3 +22,11 @@
   border-top: 0;
   width: 16.6%;
 }
+.form-val-content {
+  display: flex;
+  justify-content: space-between;
+  width: 60%;
+}
+.form-val-container {
+  width: 100%;
+}
