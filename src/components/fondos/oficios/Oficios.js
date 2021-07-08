@@ -169,7 +169,6 @@ export default class Oficios extends Component {
                 <ReactToPrint
                   trigger={() => <buttom className='btn-imp-of'>Imprimir</buttom>}
                   content={() => this.sp}
-                  pageStyle={`@media print {@page { size: landscape; }}`}
                 />
               </div>
               <div>
@@ -177,7 +176,6 @@ export default class Oficios extends Component {
                 <ReactToPrint
                   trigger={() => <buttom className='btn-imp-of'>Imprimir</buttom>}
                   content={() => this.rfr}
-                  pageStyle={`@media print {@page { size: portrait; }}`}
                 />
               </div>
               <div>
@@ -185,7 +183,6 @@ export default class Oficios extends Component {
                 <ReactToPrint
                   trigger={() => <buttom className='btn-imp-of'>Imprimir</buttom>}
                   content={() => this.rec}
-                  pageStyle={`@media print {@page { size: portrait; }}`}
                 />
               </div>
               <div>
@@ -392,7 +389,6 @@ export default class Oficios extends Component {
                 <ReactToPrint
                   trigger={() => <buttom className='btn-imp-of'>Imprimir</buttom>}
                   content={() => this.anex}
-                  pageStyle={`@media print {@page { size: portrait; }}`}
                 />
               </div>
             </div>
@@ -405,7 +401,6 @@ export default class Oficios extends Component {
                 <ReactToPrint
                   trigger={() => <buttom className='btn-imp-of'>Imprimir</buttom>}
                   content={() => this.sp}
-                  pageStyle={`@media print {@page { size: landscape; }}`}
                 />
               </div>
               <div>
@@ -413,7 +408,6 @@ export default class Oficios extends Component {
                 <ReactToPrint
                   trigger={() => <buttom className='btn-imp-of'>Imprimir</buttom>}
                   content={() => this.ofi}
-                  pageStyle={`@media print {@page { size: portrait; }}`}
                 />
               </div>
               <div>
@@ -621,7 +615,6 @@ export default class Oficios extends Component {
                 <ReactToPrint
                   trigger={() => <buttom className='btn-imp-of'>Imprimir</buttom>}
                   content={() => this.anex}
-                  pageStyle={`@media print {@page { size: portrait; }}`}
                 />
               </div>
             </div>
@@ -634,7 +627,6 @@ export default class Oficios extends Component {
                 <ReactToPrint
                   trigger={() => <buttom className='btn-imp-of'>Imprimir</buttom>}
                   content={() => this.opp}
-                  pageStyle={`@media print {@page { size: portrait; }}`}
                 />
               </div>
               <div>
@@ -642,7 +634,6 @@ export default class Oficios extends Component {
                 <ReactToPrint
                   trigger={() => <buttom className='btn-imp-of'>Imprimir</buttom>}
                   content={() => this.sp}
-                  pageStyle={`@media print {@page { size: landscape; }}`}
                 />
               </div>
               <div>
