@@ -334,7 +334,7 @@ export default class Oficios extends Component {
                                                   prefix=' $ '
                                                 />
                                               </div>
-                                                <input
+                                                <textarea
                                                   className='all-tab-f all-tab-of3'
                                                   name='descripcion'
                                                   value=''
@@ -562,7 +562,7 @@ export default class Oficios extends Component {
                                                   prefix=' $ '
                                                 />
                                               </div>
-                                              <input
+                                              <textarea
                                                 name='desc'
                                                 value={this.state.desc}
                                                 className='all-tab-f all-tab-of3'
@@ -791,7 +791,7 @@ export default class Oficios extends Component {
                                                   prefix=' $ '
                                                 />
                                               </div>
-                                                <input
+                                                <textarea
                                                   className='all-tab-f all-tab-of3'
                                                   name='descripcion'
                                                 />
@@ -1040,7 +1040,7 @@ export default class Oficios extends Component {
         {/* fondo revolvente */}
         <div className='pppdf-subdad' ref={el => (this.rfr = el)}>
           <div style={{ display: 'flex', justifyContent: 'center' }}>
-            <div style={{ width: '90%' }}>
+            <div style={{ width: '85%' }}>
               <div className='header-ofi'>
                 <div className='header-ofi-cont'>
                   <div className='sp-cont'>
@@ -1116,7 +1116,7 @@ export default class Oficios extends Component {
                 </div>
               </div>
               <div className='footer-sp'>
-                <div style={{ width: '90%' }}>
+                <div style={{ width: '85%' }}>
                   <div className='footer-content-sp'>
                     <div>
                       <p className='foot-text'>C.C.P...- Expediente<br />Minutario<br />LMHV/NRL/macht</p>
@@ -1134,7 +1134,7 @@ export default class Oficios extends Component {
         {/* Recibo */}
         <div className='pppdf-subdad' ref={el => (this.rec = el)}>
           <div style={{ display: 'flex', justifyContent: 'center' }}>
-            <div style={{ width: '90%' }}>
+            <div style={{ width: '85%' }}>
               <div className='header-ofi'>
                 <div className='header-ofi-cont'>
                   <div className='sp-cont'>
@@ -1213,7 +1213,7 @@ export default class Oficios extends Component {
         {/* Pago Provedor por Requisición */}
         <div className='pppdf-subdad' ref={el => (this.ofi = el)}>
           <div style={{ display: 'flex', justifyContent: 'center' }}>
-            <div style={{ width: '90%' }}>
+            <div style={{ width: '85%' }}>
               <div className='header-ofi'>
                 <div className='header-ofi-cont'>
                   <div className='sp-cont'>
@@ -1300,7 +1300,7 @@ export default class Oficios extends Component {
                 </div>
               </div>
               <div className='footer-sp'>
-                <div style={{ width: '90%' }}>
+                <div style={{ width: '85%' }}>
                   <div className='footer-content-sp'>
                     <div>
                       <p className='foot-text'>C.C.P...- Expediente<br />Minutario<br />LMHV/NRL/macht</p>
@@ -1318,7 +1318,7 @@ export default class Oficios extends Component {
         {/* Pago Provedor */}
         <div className='pppdf-subdad' ref={el => (this.opp = el)}>
           <div style={{ display: 'flex', justifyContent: 'center' }}>
-            <div style={{ width: '90%' }}>
+            <div style={{ width: '85%' }}>
               <div className='header-ofi'>
                 <div className='header-ofi-cont'>
                   <div className='sp-cont'>
@@ -1396,7 +1396,7 @@ export default class Oficios extends Component {
                 </div>
               </div>
               <div className='footer-sp'>
-                <div style={{ width: '90%' }}>
+                <div style={{ width: '85%' }}>
                   <div className='footer-content-sp'>
                     <div>
                       <p className='foot-text'>C.C.P...- Expediente<br />Minutario<br />LMHV/NRL/macht</p>
@@ -1846,7 +1846,7 @@ export default class Oficios extends Component {
         {/* Anexo F */}
         <div className='pppdf-subdad' ref={el => (this.anex = el)}>
           <div style={{ display: 'flex', justifyContent: 'center' }}>
-            <div style={{ width: '90%' }}>
+            <div style={{ width: '85%' }}>
               <div className='header-ofi'>
                 <div className='header-ofi-cont'>
                   <div className='sp-cont'>
@@ -1966,7 +1966,7 @@ export default class Oficios extends Component {
                 </div>
               </div>
               <div className='footer-sp'>
-                <div style={{ width: '90%' }}>
+                <div style={{ width: '85%' }}>
                   <div className='footer-content-sp'>
                     <div>
                       <p className='foot-text'>C.C.P...- Expediente<br />Minutario<br />LMHV/NRL/macht</p>

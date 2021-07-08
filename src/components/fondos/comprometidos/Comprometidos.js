@@ -31,7 +31,6 @@ export default class Comprometidos extends Component {
       open: false,
       checked: [],
       right: [],
-      empty: [0],
       xml: [],
       xml2: [],
       xmlP: [],
@@ -39,13 +38,6 @@ export default class Comprometidos extends Component {
       rubro: '',
       up: '',
       presupuesto: [
-        {
-          id: 1,
-          name: 'prueba',
-          done: false
-        }
-      ],
-      lol: [
         {
           id: 1,
           name: 'prueba',
@@ -64,15 +56,14 @@ export default class Comprometidos extends Component {
       folio: 'NA',
       subtotal: 'NA',
       // recibo
-      importer: 0,
-      ivar: 0,
-      isrr: 0,
-      idP: '',
-      ids: '',
       urlfire: String(URLactual).substr(-20),
       sup: '',
       spartida: '',
-      scantidad: ''
+      scantidad: '',
+      tipoFondo: {},
+      nombreXml: '',
+      folioXml: '',
+      fechaXml: ''
     }
   }
 
@@ -190,21 +181,6 @@ export default class Comprometidos extends Component {
     })
   }
 
-  lol = (prueba) => {
-    prueba.on('value', (snap) => {
-      var xml = []
-      snap.forEach((child) => {
-        xml.push({
-          xmlC: child.val().xmlC,
-          id: child.key
-        })
-      })
-      this.setState({
-        lol: xml
-      })
-    })
-  }
-
   listenForXmlR2 = (itemsRefXml2) => {
     itemsRefXml2.on('value', (snap) => {
       var xml = []
@@ -262,17 +238,26 @@ export default class Comprometidos extends Component {
     })
   }
 
+  listenFondo = (itemsRefFondo) => {
+    itemsRefFondo.on('value', (snap) => {
+      const firebasedata = snap.val()
+      this.setState({
+        tipoFondo: firebasedata
+      })
+    })
+  }
+
   componentDidMount () {
-    const itemsRefXml = firebase.database().ref('xml/')
-    this.listenForXmlR(itemsRefXml)
-    const itemsRefXml2 = firebase.database().ref('xml/')
-    this.listenForXmlR2(itemsRefXml2)
+    // const itemsRefXml = firebase.database().ref('xml/')
+    // this.listenForXmlR(itemsRefXml)
+    // const itemsRefXml2 = firebase.database().ref('xml/')
+    // this.listenForXmlR2(itemsRefXml2)
     const itemsRef = firebase.database().ref('presupuesto/')
     this.listenForItems(itemsRef)
     const itemsRefFondos = firebase.database().ref(`fondos/${this.state.urlfire}/comprometido`)
     this.listenFondos(itemsRefFondos)
-    const prueba = firebase.database().ref('vales/')
-    this.lol(prueba)
+    const itemsRefFondo = firebase.database().ref(`fondos/${this.state.urlfire}`)
+    this.listenFondo(itemsRefFondo)
   }
 
   handleInput (event) {
@@ -280,78 +265,6 @@ export default class Comprometidos extends Component {
     state[event.target.name] = event.target.value
     this.setState(state)
   }
-
-  // handleOnChange1 (event) {
-  //   for (var i = 0; i < event.target.files.length; i++) {
-  //     const file = event.target.files[i]
-  //     const xmlp = file
-  //     var reader = new FileReader()
-  //     reader.onload = function (event) {
-  //       var XMLParser = require('react-xml-parser')
-  //       var xml = new XMLParser().parseFromString(event.target.result)
-  //       let data = {
-  //         'total': xml.attributes['Total'] ? xml.attributes['Total'] : 'No encuentra total',
-  //         'subtotal': xml.attributes['SubTotal'] ? xml.attributes['SubTotal'] : (parseFloat(xml.attributes['Total']) + parseFloat(xml.children['3'].attributes['TotalImpuestosRetenidos'] ? xml.children['3'].attributes['TotalImpuestosRetenidos'] : 0)) - parseFloat(xml.children['3'].attributes['TotalImpuestosTrasladados']),
-  //         'folio': xml.attributes['Folio'] ? xml.attributes['Folio'] : '0',
-  //         'nombre': xml.children['1'].attributes['Nombre'] ? xml.children['1'].attributes['Nombre'] : 'No encuentra Nombre',
-  //         'importe': xml.attributes['SubTotal'] ? xml.attributes['SubTotal'] : (parseFloat(xml.attributes['Total']) + (xml.children['3'].attributes['TotalImpuestosRetenidos'] ? xml.children['3'].attributes['TotalImpuestosRetenidos'] : 0)) - parseFloat(xml.children['3'].attributes['TotalImpuestosTrasladados']),
-  //         'iva': xml.children['3'].attributes['TotalImpuestosTrasladados'] ? xml.children['3'].attributes['TotalImpuestosTrasladados'] : 0,
-  //         'isr': xml.children['3'].attributes['TotalImpuestosRetenidos'] ? xml.children['3'].attributes['TotalImpuestosRetenidos'] : 0,
-  //         'fecha': xml.getElementsByTagName('tfd:TimbreFiscalDigital')[0].attributes['FechaTimbrado'],
-  //         'uuid': xml.getElementsByTagName('tfd:TimbreFiscalDigital')[0].attributes['UUID'] ? xml.getElementsByTagName('tfd:TimbreFiscalDigital')[0].attributes['UUID'] : xmlp.name.slice(0, -4),
-  //         'estatus': 'sin asignar',
-  //         'tipo': 'revolvente'
-  //       }
-  //       fetch(xml).then(res => res.text()).then(xml => {
-  //         fetch('https://financieros-78cb0.firebaseio.com/xml.json', {
-  //           method: 'POST',
-  //           headers: {
-  //             'Accept': 'application/json',
-  //             'Content-Type': 'application/json',
-  //           },
-  //             body: JSON.stringify(data),
-  //         })
-  //       })
-  //     }
-  //     reader.readAsText(xmlp)
-  //   }
-  // }
-  //
-  // handleOnChange2 (event) {
-  //   for (var i = 0; i < event.target.files.length; i++) {
-  //     const file = event.target.files[i]
-  //     const xmlp = file
-  //     var reader = new FileReader()
-  //     reader.onload = function (event) {
-  //       var XMLParser = require('react-xml-parser')
-  //       var xml = new XMLParser().parseFromString(event.target.result)
-  //       let data = {
-  //         'total': xml.attributes['Total'] ? xml.attributes['Total'] : 'No encuentra total',
-  //         'subtotal': xml.attributes['SubTotal'] ? xml.attributes['SubTotal'] : (parseFloat(xml.attributes['Total']) + parseFloat(xml.children['3'].attributes['TotalImpuestosRetenidos'] ? xml.children['3'].attributes['TotalImpuestosRetenidos'] : 0)) - parseFloat(xml.children['3'].attributes['TotalImpuestosTrasladados']),
-  //         'folio': xml.attributes['Folio'] ? xml.attributes['Folio'] : '0',
-  //         'nombre': xml.children['1'].attributes['Nombre'] ? xml.children['1'].attributes['Nombre'] : 'No encuentra Nombre',
-  //         'importe': xml.attributes['SubTotal'] ? xml.attributes['SubTotal'] : (parseFloat(xml.attributes['Total']) + (xml.children['3'].attributes['TotalImpuestosRetenidos'] ? xml.children['3'].attributes['TotalImpuestosRetenidos'] : 0)) - parseFloat(xml.children['3'].attributes['TotalImpuestosTrasladados']),
-  //         'iva': xml.children['3'].attributes['TotalImpuestosTrasladados'] ? xml.children['3'].attributes['TotalImpuestosTrasladados'] : 0,
-  //         'isr': xml.children['3'].attributes['TotalImpuestosRetenidos'] ? xml.children['3'].attributes['TotalImpuestosRetenidos'] : 0,
-  //         'fecha': xml.getElementsByTagName('tfd:TimbreFiscalDigital')[0].attributes['FechaTimbrado'],
-  //         'uuid': xml.getElementsByTagName('tfd:TimbreFiscalDigital')[0].attributes['UUID'] ? xml.getElementsByTagName('tfd:TimbreFiscalDigital')[0].attributes['UUID'] : xmlp.name.slice(0, -4),
-  //         'estatus': 'sin asignar',
-  //         'tipo': 'directo'
-  //       }
-  //       fetch(xml).then(res => res.text()).then(xml => {
-  //         fetch('https://financieros-78cb0.firebaseio.com/xml.json', {
-  //           method: 'POST',
-  //           headers: {
-  //             'Accept': 'application/json',
-  //             'Content-Type': 'application/json',
-  //           },
-  //             body: JSON.stringify(data),
-  //         })
-  //       })
-  //     }
-  //     reader.readAsText(xmlp)
-  //   }
-  // }
 
   update = (item) => {
     let updates = {}
@@ -539,36 +452,6 @@ export default class Comprometidos extends Component {
   ]
 
   render () {
-    var user = firebase.auth().currentUser
-    var email
-    if (user != null) {
-      email = user.email
-    }
-    let admin
-    if (email === 'miguel@procuraduria.com') {
-      admin = 'MIGUEL'
-    } else if (email === 'teresa@procuraduria.com') {
-      admin = 'TERESA'
-    } else if (email === 'marcos@procuraduria.com') {
-      admin = 'MARCOS'
-    } else if (email === 'eloy@procuraduria.com') {
-      admin = 'ELOY'
-    } else if (email === 'karina@procuraduria.com') {
-      admin = 'KARINA'
-    } else if (email === 'martha@procuraduria.com') {
-      admin = 'MARTHA'
-    } else if (email === 'lilia@procuraduria.com') {
-      admin = 'LILIA'
-    } else if (email === 'cenely@procuraduria.com') {
-      admin = 'CENELY'
-    } else if (email === 'hector@procuraduria.com') {
-      admin = 'HECTOR'
-    } else if (email === 'omar@procuraduria.com') {
-      admin = 'OMAR'
-    } else if (email === 'lizbeth@procuraduria.com') {
-      admin = 'LIZBETH'
-    }
-
     function not (a, b) {
       return a.filter((value) => b.indexOf(value) === -1)
     }
@@ -579,7 +462,7 @@ export default class Comprometidos extends Component {
 
     const { checked, right } = this.state
     let left
-    if (admin === 'MIGUEL' || admin === 'TERESA' || admin === 'ELOY' || admin === 'MARTHA' || admin === 'MARCOS' || admin === 'LIZBETH') {
+    if (this.state.tipoFondo.tipo_doc === 'Fondo Revolvente') {
       left = this.state.xml
     } else {
       left = this.state.xml2
@@ -613,9 +496,9 @@ export default class Comprometidos extends Component {
 
     const filterData = this.state.xml.filter(
       (xml) => {
-        return ( ( (xml.folio.indexOf(this.state.search) !== -1) ||
-          (xml.nombre.indexOf(this.state.search) !== -1) ||
-          (xml.fecha.indexOf(this.state.search) !== -1) ) &&
+        return ( ( (xml.folio.indexOf(this.state.folioXml) !== -1) ||
+          (xml.nombre.indexOf(this.state.nombreXml) !== -1) ||
+          (xml.fecha.indexOf(this.state.fechaXml) !== -1) ) &&
           xml.estatus !== 'asignado' && (!xml.tipo || xml.tipo === 'revolvente'))
       }
     )
@@ -769,7 +652,7 @@ export default class Comprometidos extends Component {
               <ListItemText className='list-align'><b>Fecha</b></ListItemText>
               <ListItemText className='list-align2'><b>Nombre</b></ListItemText>
             </ListItem>
-            {admin === 'MIGUEL' || admin === 'TERESA' || admin === 'ELOY' || admin === 'MARTHA' || admin === 'MARCOS' || admin === 'LIZBETH' ?
+            {this.state.tipoFondo.tipo_doc === 'Fondo Revolvente' ?
             filterData.map((value) => {
               return (
                 <ListItem key={value} button onClick={handleToggle(value)}>
@@ -791,7 +674,7 @@ export default class Comprometidos extends Component {
                 </ListItem>
               )
             }) : null}
-            {admin === 'KARINA' || admin === 'OMAR' || admin === 'LILIA' || admin === 'HECTOR' || admin === 'CENELY' ?
+            {this.state.tipoFondo.tipo_doc === 'Pago Directo' ?
             filterData2.map((value) => {
               return (
                 <ListItem key={value} button onClick={handleToggle(value)}>
@@ -870,7 +753,6 @@ export default class Comprometidos extends Component {
     let presupuestor = this.state.presupuesto.map(item => {
       return (this.state.partida === item.ogasto && this.state.up === item.up) && item.rubro
     })
-    console.log(this.state.partida)
     let resultr = presupuestor.filter((item, index) => {
       return presupuestor.indexOf(item) === index
     })
@@ -887,19 +769,52 @@ export default class Comprometidos extends Component {
           >
             <Grid item xs style={{ width: '50%' }}>
               <div className='div-into-data'>
-                <div className='recibo-container'>
-                  Buscador
-                  <div className='search-div'>
-                    <input
-                      className='input-compro'
-                      name='search'
-                      id='search'
-                      value={this.state.search}
-                      onChange={this.handleInput.bind(this)}
-                      placeholder='Ingrese el numero de folio'
-                    />
+                {this.state.tipoFondo.tipo_doc === 'Fondo Revolvente' &&
+                  <div className='recibo-container'>
+                    Buscador
+                    <div className='search-div'>
+                      <input
+                        className='input-compro'
+                        name='folioXml'
+                        id='folioXml'
+                        value={this.state.folioXml}
+                        onChange={this.handleInput.bind(this)}
+                        placeholder='Ingresa el Folio'
+                      />
+                      <input
+                        className='input-compro'
+                        name='nombreXml'
+                        id='nombreXml'
+                        value={this.state.nombreXml}
+                        onChange={this.handleInput.bind(this)}
+                        placeholder='Ingresa el nombre'
+                      />
+                      <input
+                        className='input-compro'
+                        name='fecha'
+                        id='fecha'
+                        value={this.state.fechaXml}
+                        onChange={this.handleInput.bind(this)}
+                        placeholder='Ingresa el fecha'
+                      />
+                    </div>
                   </div>
-                </div>
+                }
+                {this.state.tipoFondo.tipoFondo === 'Pago Directo' &&
+                  <div className='recibo-container'>
+                    Buscador
+                    <div className='search-div'>
+                      <input
+                        className='input-compro'
+                        name='search'
+                        id='search'
+                        value={this.state.search}
+                        onChange={this.handleInput.bind(this)}
+                        placeholder='Ingrese el numero de folio'
+                      />
+                    </div>
+                  </div>
+                }
               </div>
                 {customListLeft('Choices', left)}
             </Grid>
@@ -962,7 +877,7 @@ export default class Comprometidos extends Component {
                   <TableCell className='border-icon' />
                 </TableRow>
               </TableHead>
-              {(admin === 'MIGUEL' || admin === 'ELOY' || admin === 'TERESA' || admin === 'MARTHA' || admin === 'LIZBETH') ?
+              {this.state.tipoFondo.tipo_doc === 'Fondo Revolvente' ?
                 <TableBody className='table-row-c'>
                   <TableCell className='border-icon' />
                   <TableCell className='border-table2'>
@@ -1270,31 +1185,6 @@ export default class Comprometidos extends Component {
         </Grid>
         <div style={{ height: '80px' }} />
         <div className='div-content-fab-com'>
-          {/* <Fab color='primary' style={{ background: '#3f51b5' }} variant='extended'>
-            <AddIcon style={{ marginRight: '6px' }} />
-            {(admin === 'MIGUEL' || admin === 'MARTHA' || admin === 'ELOY' || admin === 'TERESA' || admin === 'MARCOS' || admin === 'LIZBETH') &&
-              <Dropzone
-                style={{
-                  width: '100%',
-                  height: '100%',
-                }}
-                accept='.xml' onChange={this.handleOnChange1.bind(this)}
-              >
-                Agregar XML
-              </Dropzone>
-            }
-            {(admin === 'KARINA' || admin === 'HECTOR' || admin === 'OMAR' || admin === 'CENELY' || admin === 'LILIA') &&
-              <Dropzone
-                style={{
-                  width: '100%',
-                  height: '100%',
-                }}
-                accept='.xml' onChange={this.handleOnChange2.bind(this)}
-              >
-                Agregar XML
-              </Dropzone>
-            }
-          </Fab> */}
           {this.state.comprometidosDos !== undefined && this.state.comprometidosDos.length >= 2 ?
             <Link to={`/Oficios/${this.state.urlfire}`} style={{ textDecoration: 'none' }}>
               <Fab color='primary' style={{ background: 'green' }} variant='extended'>
