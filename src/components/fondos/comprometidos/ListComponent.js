@@ -215,7 +215,7 @@ export default class ListComponent extends Component {
                           displayType='text'
                           prefix=' $ '
                           thousandSeparator
-                          value={parseFloat(item.total).toFixed(2)}
+                          value={(parseFloat(item.subtotal) + parseFloat(item.iva) + parseFloat(item.isr)).toFixed(2)}
                         />
                       </TableCell>
                       <TableCell className='border-icon'>

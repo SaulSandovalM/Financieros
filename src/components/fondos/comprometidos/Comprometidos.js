@@ -248,10 +248,10 @@ export default class Comprometidos extends Component {
   }
 
   componentDidMount () {
-    // const itemsRefXml = firebase.database().ref('xml/')
-    // this.listenForXmlR(itemsRefXml)
-    // const itemsRefXml2 = firebase.database().ref('xml/')
-    // this.listenForXmlR2(itemsRefXml2)
+    const itemsRefXml = firebase.database().ref('xml/')
+    this.listenForXmlR(itemsRefXml)
+    const itemsRefXml2 = firebase.database().ref('xml/')
+    this.listenForXmlR2(itemsRefXml2)
     const itemsRef = firebase.database().ref('presupuesto/')
     this.listenForItems(itemsRef)
     const itemsRefFondos = firebase.database().ref(`fondos/${this.state.urlfire}/comprometido`)
@@ -494,12 +494,15 @@ export default class Comprometidos extends Component {
       this.setState({ checked: not(checked, rightChecked) })
     }
 
+    console.log(this.state.folioXml)
+    console.log(this.state.nombreXml)
+    console.log(this.state.fechaXml)
+
     const filterData = this.state.xml.filter(
       (xml) => {
-        return ( ( (xml.folio.indexOf(this.state.folioXml) !== -1) ||
-          (xml.nombre.indexOf(this.state.nombreXml) !== -1) ||
-          (xml.fecha.indexOf(this.state.fechaXml) !== -1) ) &&
-          xml.estatus !== 'asignado' && (!xml.tipo || xml.tipo === 'revolvente'))
+        return (
+          ( (xml.nombre.indexOf(this.state.nombreXml) !== -1) && (xml.folio.indexOf(this.state.folioXml) !== -1) ) && xml.estatus !== 'asignado' && xml.tipo === 'revolvente'
+        )
       }
     )
 
@@ -515,7 +518,8 @@ export default class Comprometidos extends Component {
     const filterData2 = xmlvali.filter(
       (xml) => {
         return (
-          ( (xml.numfolio.indexOf(this.state.search) !== -1) ) && xml.estatus !== 'asignado' && xml.tipo === 'directo')
+          ( (xml.numfolio.indexOf(this.state.search) !== -1) ) && xml.estatus !== 'asignado' && xml.tipo === 'directo'
+        )
       }
     )
 
@@ -526,19 +530,23 @@ export default class Comprometidos extends Component {
       right.map(items => (
         partida.push(items.partida)
       ))
-      let resPartida = partida.filter((item, index) => {
-        return partida.indexOf(item) === index
-      })
-      this.state.partida = resPartida.toString()
+      if (this.state.tipoFondo.tipo_doc === 'Pago Directo') {
+        let resPartida = partida.filter((item, index) => {
+          return partida.indexOf(item) === index
+        })
+        this.state.partida = resPartida.toString()
+      }
 
       const up = []
       right.map(items => (
         up.push(items.up)
       ))
-      let resUp = up.filter((item, index) => {
-        return up.indexOf(item) === index
-      })
-      this.state.up = resUp.toString()
+      if (this.state.tipoFondo.tipo_doc === 'Pago Directo') {
+        let resUp = up.filter((item, index) => {
+          return up.indexOf(item) === index
+        })
+        this.state.up = resUp.toString()
+      }
 
       const totalImporteImporte = []
       right.map(items => (
@@ -546,6 +554,7 @@ export default class Comprometidos extends Component {
       ))
       const reducerImporte = (a, b) => a + b
       this.state.importe = totalImporteImporte.reduce(reducerImporte).toFixed(2)
+      console.log(this.state.importe)
 
       const totalImporteIva = []
       right.map(items => (
@@ -569,76 +578,6 @@ export default class Comprometidos extends Component {
       this.state.contra = right
     }
 
-    if (this.state.up === '01') {
-      this.state.area = 'Procuraduría General de Justicia'
-    }
-    if (this.state.up === '02') {
-      this.state.area = 'Subprocuraduría de Procedimientos Penales Región Oriente'
-    }
-    if (this.state.up === '03') {
-      this.state.area = 'Fiscalía Especializada para la atención de Delitos cometidos contra la Libertad de Expresión, Periodistas y Personas defensoras de los Derechos Humanos'
-    }
-    if (this.state.up === '04') {
-      this.state.area= 'Dirección General para la Atención de los Asuntos del Sistema Tradicional'
-    }
-    if (this.state.up === '05') {
-      this.state.area = 'Fiscalía Especializada en Delitos Electorales'
-    }
-    if (this.state.up === '06') {
-      this.state.area = 'Subprocuraduría de Derechos Humanos y Servicios a la Comunidad'
-    }
-    if (this.state.up === '07') {
-      this.state.area = 'Centro de Justicia Restaurativa Penal Poniente'
-    }
-    if (this.state.up === '08') {
-      this.state.area = 'Fiscalía para la Atención de Delitos de Género'
-    }
-    if (this.state.up === '09') {
-      this.state.area = 'Visitaduría General'
-    }
-    if (this.state.up === '10') {
-      this.state.area = 'Dirección General de Servicios Periciales'
-    }
-    if (this.state.up === '11') {
-      this.state.area = 'Centro de Operación Estratégica'
-    }
-    if (this.state.up === '12') {
-      this.state.area = 'Unidad Especializada en el Combate al Secuestro'
-    }
-    if (this.state.up === '13') {
-      this.state.area = 'Dirección General de Administración y Finanzas'
-    }
-    if (this.state.up === '14') {
-      this.state.area = 'Fiscalía Especializada para la atención de los Delitos de Trata de Personas'
-    }
-    if (this.state.up === '15') {
-      this.state.area = 'Subprocuraduría de Procedimientos Penales Región Poniente'
-    }
-    if (this.state.up === '16') {
-      this.state.area = 'Centro de Atención Temprana Poniente'
-    }
-    if (this.state.up === '17') {
-      this.state.area = 'Dirección General de Investigación y Litigación Poniente'
-    }
-    if (this.state.up === '18') {
-      this.state.area = 'Dirección General de la Policía Investigadora'
-    }
-    if (this.state.up === '20') {
-      this.state.area = 'Centro de Atención Temprana Oriente'
-    }
-    if (this.state.up === '21') {
-      this.state.area = 'Centro de Justicia Restaurativa Penal Oriente'
-    }
-    if (this.state.up === '22') {
-      this.state.area = 'Dirección General de Investigación y Litigación Oriente'
-    }
-    if (this.state.up === '23') {
-      this.state.area = 'Fiscalía Especializada en Delitos de Corrupción'
-    }
-    if (this.state.up === '24') {
-      this.state.area = 'Fiscalía de Desaparición Forzada y Desaparición por Terceros'
-    }
-
     const customListLeft = (title, items) => (
       <div>
         <Card className='card-compro'>
@@ -652,7 +591,7 @@ export default class Comprometidos extends Component {
               <ListItemText className='list-align'><b>Fecha</b></ListItemText>
               <ListItemText className='list-align2'><b>Nombre</b></ListItemText>
             </ListItem>
-            {this.state.tipoFondo.tipo_doc === 'Fondo Revolvente' ?
+            {this.state.tipoFondo.tipo_doc === 'Fondo Revolvente' && this.state.folioXml && this.state.nombreXml ?
             filterData.map((value) => {
               return (
                 <ListItem key={value} button onClick={handleToggle(value)}>
@@ -757,6 +696,13 @@ export default class Comprometidos extends Component {
       return presupuestor.indexOf(item) === index
     })
 
+    const sumatoria = [0]
+    this.state.comprometidosDos !== undefined && this.state.comprometidosDos.map(comprometido => comprometido.partida &&
+      comprometido.total > 0 ? sumatoria.push(parseFloat(comprometido.total)) : null
+    )
+    const tt4 = (a, b) => a + b
+    var tcantidad4 = sumatoria.reduce(tt4)
+
     return (
       <div className='div-compro-container'>
         <div>
@@ -791,8 +737,8 @@ export default class Comprometidos extends Component {
                       />
                       <input
                         className='input-compro'
-                        name='fecha'
-                        id='fecha'
+                        name='fechaXml'
+                        id='fechaXml'
                         value={this.state.fechaXml}
                         onChange={this.handleInput.bind(this)}
                         placeholder='Ingresa el fecha'
@@ -800,7 +746,7 @@ export default class Comprometidos extends Component {
                     </div>
                   </div>
                 }
-                {this.state.tipoFondo.tipoFondo === 'Pago Directo' &&
+                {this.state.tipoFondo.tipo_doc === 'Pago Directo' &&
                   <div className='recibo-container'>
                     Buscador
                     <div className='search-div'>
@@ -893,7 +839,7 @@ export default class Comprometidos extends Component {
                       {resultp.map((x,y) =>
                         <option name={y}>{x}</option>
                       )}
-                    </select>
+                  </select>
                   </TableCell>
                   <TableCell className='border-table2'>
                     <select
@@ -908,7 +854,7 @@ export default class Comprometidos extends Component {
                       {resultu.map((x,y) =>
                         <option name={y}>{x}</option>
                       )}
-                    </select>
+                  </select>
                   </TableCell>
                   <TableCell className='border-table2'>
                     <select
@@ -931,7 +877,6 @@ export default class Comprometidos extends Component {
                       id='area'
                       name='area'
                       ref='area'
-                      value={this.state.area}
                       onChange={this.handleInput.bind(this)}
                       required
                     >
@@ -1073,15 +1018,18 @@ export default class Comprometidos extends Component {
                     </select>
                   </TableCell>
                   <TableCell className='border-table-area'>
-                    <input
+                    <select
                       className='select-compro'
                       id='area'
                       name='area'
                       ref='area'
-                      value={this.state.area}
+                      onChange={this.handleInput.bind(this)}
                       required
-                      disabled
-                    />
+                    >
+                      {this.area.map((x,y) =>
+                        <option name={y}>{x}</option>
+                      )}
+                    </select>
                   </TableCell>
                   <TableCell className='border-table2'>
                     {this.state.right.length > 0 ?
@@ -1180,6 +1128,44 @@ export default class Comprometidos extends Component {
                   <ListComponent key={comprometido.id} comprometido={comprometido} />
                 : null
               ): null }
+              <TableBody>
+                <TableRow>
+                  <TableCell className='border-icon'>
+                    <IconButton aria-label='expand row' size='small' className='border-des' />
+                  </TableCell>
+                  <TableCell className='border-table2'>
+                    <div className='font-tb' />
+                  </TableCell>
+                  <TableCell className='border-table2'>
+                    <div className='font-tb' />
+                  </TableCell>
+                  <TableCell className='border-table2'>
+                    <div className='font-tb' />
+                  </TableCell>
+                  <TableCell className='border-table-area'>
+                    <div className='font-tb' />
+                  </TableCell>
+                  <TableCell className='border-table2'>
+                  </TableCell>
+                  <TableCell className='border-table2'>
+                  </TableCell>
+                  <TableCell className='border-table2'>
+                  </TableCell>
+                  <TableCell className='border-table2'>
+                    <CurrencyFormat
+                      className='font-tb'
+                      style={{ textAlign: 'center' }}
+                      displayType='text'
+                      prefix=' $ '
+                      thousandSeparator
+                      value={tcantidad4}
+                    />
+                  </TableCell>
+                  <TableCell className='border-icon'>
+                    <IconButton size='small' className='border-des' />
+                  </TableCell>
+                </TableRow>
+              </TableBody>
             </Paper>
           </Grid>
         </Grid>

@@ -835,7 +835,7 @@ export default class ComprometidoE extends Component {
         return ( ( (xml.folio.indexOf(this.state.search) !== -1) ||
           (xml.nombre.indexOf(this.state.search) !== -1) ||
           (xml.fecha.indexOf(this.state.search) !== -1) ) &&
-          xml.estatus !== 'asignado' && (!xml.tipo || xml.tipo === 'revolvente'))
+          xml.estatus !== 'asignado' && xml.tipo === 'revolvente')
       }
     )
 

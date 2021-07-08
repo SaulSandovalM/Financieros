@@ -48,7 +48,7 @@ export default class Valeslist extends Component {
       filefactura: [{ url: '', nombre: '' }],
       xmlC: [{ url: '', nombre: '' }],
       filef: [{ url: '', nombre: '' }],
-      recibosList: [{ folio: 'Recibo', nombre: '', importe: '0', iva: '0', isr: '0', fecha: '', estatus: '', subtotal: '0', total: '0', uuid: 'Recibo' }],
+      recibosList: [{ folio: 'Recibo', nombre: '', importe: '0', iva: '0', isr: '0', fecha: '', estatus: '', subtotal: '0', total: '0', uuid: 'Recibo', tipo: 'Fondo Revolvente' }],
       autorizados: false,
       noautorizados: false,
       pendientes: false,
@@ -255,7 +255,7 @@ export default class Valeslist extends Component {
       filefactura: [{ url: '', nombre: '' }],
       xmlC:  [{ url: '', nombre: '' }],
       filef: [{ url: '', nombre: '' }],
-      recibosList: [{ folio: 'Recibo', nombre: '', importe: '', iva: '0', isr: '0', fecha: '', estatus: '', subtotal: '0', total: '0', uuid: 'Recibo' }],
+      recibosList: [{ folio: 'Recibo', nombre: '', importe: '', iva: '0', isr: '0', fecha: '', estatus: '', subtotal: '0', total: '0', uuid: 'Recibo', tipo: 'Fondo Revolvente' }],
       obs: '',
       pdf2: 0
     })
@@ -317,7 +317,7 @@ export default class Valeslist extends Component {
     this.setState({
       recibosList: [
         ...this.state.recibosList,
-        { folio: 'Recibo', nombre: '', importe: '', iva: '0', isr: '0', fecha: '', estatus: '', subtotal: '0', total: '0', uuid: 'Recibo' }
+        { folio: 'Recibo', nombre: '', importe: '', iva: '0', isr: '0', fecha: '', estatus: '', subtotal: '0', total: '0', uuid: 'Recibo', tipo: 'Fondo Revolvente' }
       ]
     })
   }
@@ -424,10 +424,10 @@ export default class Valeslist extends Component {
                       style={{ width: '15%', marginRight: '1%' }}
                     />
                     <TextField
-                      label='Importe'
-                      name='importe'
+                      label='subtotal'
+                      name='subtotal'
                       type='number'
-                      value={x.importe}
+                      value={x.subtotal}
                       onChange={e => this.handleInputChange(e, i)}
                       style={{ width: '15%', marginRight: '1%' }}
                       InputProps={{
