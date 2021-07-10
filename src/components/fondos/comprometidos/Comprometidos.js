@@ -21,6 +21,7 @@ import Fab from '@material-ui/core/Fab'
 import firebase from '../../../Firebase'
 import { Link } from 'react-router-dom'
 import ListComponent from './ListComponent'
+import Dropzone from 'react-dropzone'
 
 export default class Comprometidos extends Component {
   constructor (props) {
@@ -229,6 +230,7 @@ export default class Comprometidos extends Component {
           np: child.val().np,
           proy: child.val().proy,
           comprobantes: child.val().comprobantes,
+          presupuestoid: child.val().presupuestoid,
           id: child.key
         })
       })
@@ -451,6 +453,45 @@ export default class Comprometidos extends Component {
     'Fiscalía Especializada en Materia de Desaparición Forzada de Personas'
   ]
 
+  mes = ['', 'Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto',
+    'Septiembre', 'Octubre', 'Noviembre', 'Diciembre']
+
+  handleOnChange1 (event) {
+    for (var i = 0; i < event.target.files.length; i++) {
+      const file = event.target.files[i]
+      const xmlp = file
+      var reader = new FileReader()
+      reader.onload = function (event) {
+        var XMLParser = require('react-xml-parser')
+        var xml = new XMLParser().parseFromString(event.target.result)
+        let data = {
+          'total': xml.attributes['Total'] ? xml.attributes['Total'] : 'No encuentra total',
+          'subtotal': xml.attributes['SubTotal'] ? xml.attributes['SubTotal'] : (parseFloat(xml.attributes['Total']) + parseFloat(xml.children['3'].attributes['TotalImpuestosRetenidos'] ? xml.children['3'].attributes['TotalImpuestosRetenidos'] : 0)) - parseFloat(xml.children['3'].attributes['TotalImpuestosTrasladados']),
+          'folio': xml.attributes['Folio'] ? xml.attributes['Folio'] : '0',
+          'nombre': xml.children['0'].attributes['Nombre'] ? xml.children['0'].attributes['Nombre'] : 'No encuentra Nombre',
+          'importe': xml.attributes['SubTotal'] ? xml.attributes['SubTotal'] : (parseFloat(xml.attributes['Total']) + (xml.children['3'].attributes['TotalImpuestosRetenidos'] ? xml.children['3'].attributes['TotalImpuestosRetenidos'] : 0)) - parseFloat(xml.children['3'].attributes['TotalImpuestosTrasladados']),
+          'iva': xml.children['3'].attributes['TotalImpuestosTrasladados'] ? xml.children['3'].attributes['TotalImpuestosTrasladados'] : 0,
+          'isr': xml.children['3'].attributes['TotalImpuestosRetenidos'] ? xml.children['3'].attributes['TotalImpuestosRetenidos'] : 0,
+          'fecha': xml.getElementsByTagName('tfd:TimbreFiscalDigital')[0].attributes['FechaTimbrado'],
+          'uuid': xml.getElementsByTagName('tfd:TimbreFiscalDigital')[0].attributes['UUID'] ? xml.getElementsByTagName('tfd:TimbreFiscalDigital')[0].attributes['UUID'] : xmlp.name.slice(0, -4),
+          'estatus': 'sin asignar',
+          'tipo': 'revolvente'
+        }
+        fetch(xml).then(res => res.text()).then(xml => {
+          fetch('https://financieros-78cb0.firebaseio.com/xml.json', {
+            method: 'POST',
+            headers: {
+              'Accept': 'application/json',
+              'Content-Type': 'application/json',
+            },
+              body: JSON.stringify(data),
+          })
+        })
+      }
+      reader.readAsText(xmlp)
+    }
+  }
+
   render () {
     function not (a, b) {
       return a.filter((value) => b.indexOf(value) === -1)
@@ -493,10 +534,6 @@ export default class Comprometidos extends Component {
       this.setState({ right: not(right, rightChecked) })
       this.setState({ checked: not(checked, rightChecked) })
     }
-
-    console.log(this.state.folioXml)
-    console.log(this.state.nombreXml)
-    console.log(this.state.fechaXml)
 
     const filterData = this.state.xml.filter(
       (xml) => {
@@ -703,6 +740,8 @@ export default class Comprometidos extends Component {
     const tt4 = (a, b) => a + b
     var tcantidad4 = sumatoria.reduce(tt4)
 
+    console.log(this.state.tipoFondo.tipo_doc)
+
     return (
       <div className='div-compro-container'>
         <div>
@@ -785,7 +824,23 @@ export default class Comprometidos extends Component {
               </Grid>
             </Grid>
             <Grid item xs style={{ width: '50%' }}>
-              <div style={{ height: '54px' }}/>
+              <div className='recibo-container'>
+                Mes a afectar
+                <div className='search-div'>
+                  <select
+                    style={{ width: 'auto', height: '30px', marginBottom: '15px' }}
+                    id='mes'
+                    name='mes'
+                    value={this.state.mes}
+                    onChange={this.handleInput.bind(this)}
+                    required
+                  >
+                    {this.mes.map((x,y) =>
+                      <option name={y}>{x}</option>
+                    )}
+                  </select>
+                </div>
+              </div>
               {customListRight('Choices', right)}
             </Grid>
           </Grid>
@@ -1125,7 +1180,11 @@ export default class Comprometidos extends Component {
               }
               {this.state.comprometidosDos !== undefined ? this.state.comprometidosDos.map(comprometido =>
                 comprometido.partida ?
-                  <ListComponent key={comprometido.id} comprometido={comprometido} />
+                  <ListComponent
+                    key={comprometido.id}
+                    comprometido={comprometido}
+                    mes={this.state.mes}
+                  />
                 : null
               ): null }
               <TableBody>
@@ -1171,6 +1230,20 @@ export default class Comprometidos extends Component {
         </Grid>
         <div style={{ height: '80px' }} />
         <div className='div-content-fab-com'>
+          <Fab color='primary' style={{ background: '#3f51b5' }} variant='extended'>
+            <AddIcon style={{ marginRight: '6px' }} />
+            {this.state.tipoFondo.tipo_doc === 'Fondo Revolvente' &&
+              <Dropzone
+                style={{
+                  width: '100%',
+                  height: '100%',
+                }}
+                accept='.xml' onChange={this.handleOnChange1.bind(this)}
+              >
+                Agregar XML
+              </Dropzone>
+            }
+          </Fab>
           {this.state.comprometidosDos !== undefined && this.state.comprometidosDos.length >= 2 ?
             <Link to={`/Oficios/${this.state.urlfire}`} style={{ textDecoration: 'none' }}>
               <Fab color='primary' style={{ background: 'green' }} variant='extended'>

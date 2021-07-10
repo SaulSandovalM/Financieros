@@ -126,6 +126,6 @@
   position: fixed;
   right: 0;
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
   width: 97%;
 }
