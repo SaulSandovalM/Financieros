@@ -571,9 +571,7 @@ export default class Comprometidos extends Component {
         let resPartida = partida.filter((item, index) => {
           return partida.indexOf(item) === index
         })
-        this.setState({
-          partida: resPartida.toString()
-        })
+        this.state.partida = resPartida.toString()
       }
 
       const up = []
@@ -584,9 +582,7 @@ export default class Comprometidos extends Component {
         let resUp = up.filter((item, index) => {
           return up.indexOf(item) === index
         })
-        this.setState({
-          up: resUp.toString()
-        })
+        this.state.up = resUp.toString()
       }
 
       const totalImporteImporte = []
@@ -594,9 +590,7 @@ export default class Comprometidos extends Component {
         totalImporteImporte.push(parseFloat(items.subtotal))
       ))
       const reducerImporte = (a, b) => a + b
-      this.setState({
-        importe: totalImporteImporte.reduce(reducerImporte).toFixed(2)
-      })
+      this.state.importe = totalImporteImporte.reduce(reducerImporte).toFixed(2)
       console.log(this.state.importe)
 
       const totalImporteIva = []
@@ -604,29 +598,21 @@ export default class Comprometidos extends Component {
         totalImporteIva.push(parseFloat(items.iva))
       ))
       const reducerIva = (a, b) => a + b
-      this.setState({
-        iva: totalImporteIva.reduce(reducerIva).toFixed(2)
-      })
+      this.state.iva = totalImporteIva.reduce(reducerIva).toFixed(2)
 
       const totalImporteIsr = []
       right.map(items => (
         totalImporteIsr.push(parseFloat(items.isr))
       ))
       const reducerIsr = (a, b) => a + b
-      this.setState({
-        isr: totalImporteIsr.reduce(reducerIsr).toFixed(2)
-      })
+      this.state.isr = totalImporteIsr.reduce(reducerIsr).toFixed(2)
 
       const importe = parseFloat(this.state.importe)
       const iva = parseFloat(this.state.iva)
       const isr = parseFloat(this.state.isr)
       const total = importe + iva - isr
-      this.setState({
-        total: parseFloat(total).toFixed(2)
-      })
-      this.setState({
-        contra: right
-      })
+      this.state.total = parseFloat(total).toFixed(2)
+      this.state.contra = right
     }
 
     const customListLeft = (title, items) => (
