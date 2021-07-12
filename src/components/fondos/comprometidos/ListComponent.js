@@ -38,7 +38,6 @@ export default class ListComponent extends Component {
     let presid = this.props.comprometido.presupuestoid
     const presupuestoRef = firebase.database().ref('presupuesto/')
     presupuestoRef.on('value', (snap) => {
-      console.log('trae el presupuesto')
       var presupuesto = []
       snap.forEach((child) => {
         if (presid === child.key) {
@@ -127,7 +126,6 @@ export default class ListComponent extends Component {
       })
     })
     if (this.state.presupuestoConsumo.length === 1) {
-      console.log('entra al if')
       var pruebaIndice = this.state.presupuestoConsumo[0]
       let updates = {}
       updates['presupuesto/' + presid] = {
@@ -194,71 +192,12 @@ export default class ListComponent extends Component {
         reduccion: pruebaIndice.reduccion,
         transferencia: pruebaIndice.transferencia
       }
-      console.log('Se ha actualizado el presupuesto')
-      // firebase.database().ref().update(updates)
-      console.log('Se ha borrado la afectacion de la partida')
+      alert('Se ha actualizado el presupuesto')
+      firebase.database().ref().update(updates)
       let positionId = this.props.comprometido.id
       let fondoId = this.state.urlfire
-      const presupuestoRef = firebase.database().ref(`fondos/${fondoId}/comprometido/${positionId}/comprobantes`)
-      presupuestoRef.on('value', (snap) => {
-        console.log('trae la factura')
-        var factura = []
-        snap.forEach((child) => {
-          factura.push({
-            id: child.val().id
-          })
-          this.setState({
-            xml: factura
-          })
-        })
-      })
-      var idX = this.state.xml[0] !== undefined ? this.state.xml[0].id : ''
-      console.log(idX)
-      const xmlRef = firebase.database().ref('xml')
-      xmlRef.on('value', (snap) => {
-        var xml = []
-        snap.forEach((child) => {
-          if (idX === child.key) {
-            xml.push({
-              id: child.key,
-              estatus: child.val().estatus,
-              fecha: child.val().fecha,
-              folio: child.val().folio,
-              importe: child.val().importe,
-              isr: child.val().isr,
-              iva: child.val().iva,
-              nombre: child.val().nombre,
-              subtotal: child.val().subtotal,
-              tipo: child.val().tipo,
-              total: child.val().total,
-              uuid: child.val().uuid
-            })
-            this.setState({
-              xml2: xml
-            })
-            console.log(xml)
-          }
-        })
-      })
-
-        let updatesXml = {}
-        updatesXml['xml/' + xmlIndice.id] = {
-          estatus: xmlIndice.val().estatus,
-          fecha: xmlIndice.val().fecha,
-          folio: xmlIndice.val().folio,
-          importe: xmlIndice.val().importe,
-          isr: xmlIndice.val().isr,
-          iva: xmlIndice.val().iva,
-          nombre: xmlIndice.val().nombre,
-          subtotal: xmlIndice.val().subtotal,
-          tipo: xmlIndice.val().tipo,
-          total: xmlIndice.val().total,
-          uuid: xmlIndice.val().uuid
-        }
-        // firebase.database().ref().update(updatesXml)
-      }
-      // firebase.database().ref(`fondos/${fondoId}/comprometido/${positionId}`).remove()
-      console.log('Se ha borrado la factura')
+      firebase.database().ref(`fondos/${fondoId}/comprometido/${positionId}`).remove()
+      alert('Se ha borrado la factura')
     }
   }
 

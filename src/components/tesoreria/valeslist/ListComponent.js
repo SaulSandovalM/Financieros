@@ -103,7 +103,7 @@ export default class ListComponent extends Component {
     )
 
     this.state.pp = filteredData
-    
+
     const total1 = [0]
     filteredData.map(items => (
       total1.push(parseFloat(items.cantidad))
