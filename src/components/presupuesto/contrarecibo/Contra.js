@@ -9,6 +9,7 @@ import TableContainer from '@material-ui/core/TableContainer'
 import TableHead from '@material-ui/core/TableHead'
 import TableRow from '@material-ui/core/TableRow'
 import Paper from '@material-ui/core/Paper'
+import { Link } from 'react-router-dom'
 
 export default class Contra extends Component {
   constructor (props) {
@@ -119,9 +120,9 @@ export default class Contra extends Component {
                   }
                 </TableCell>
                 <TableCell component='th' scope='row' className='table-same'>
-                  <div className='link-edit' onClick={() => {/* history.push(`/Editcontra/${fondos.id}`) */}}>
+                  <Link className='link-edit' to={`/Editcontra/${fondos.id}`}>
                     Agregar Contrarecibo
-                  </div>
+                  </Link>
                 </TableCell>
               </TableBody>
             )}

@@ -64,53 +64,78 @@ export default class Excel extends Component {
           const cpa = data[i][32]
           const ene = data[i][33]
           const gasene = data[i][34]
-          const feb = data[i][35]
-          const gasfeb = data[i][36]
-          const mar = data[i][37]
-          const gasmar = data[i][38]
-          const abr = data[i][39]
-          const gasabr = data[i][40]
-          const may = data[i][41]
-          const gasmay = data[i][42]
-          const jun = data[i][43]
-          const gasjun = data[i][44]
-          const jul = data[i][45]
-          const gasjul = data[i][46]
-          const ago = data[i][47]
-          const gasago = data[i][48]
-          const sep = data[i][49]
-          const gassep = data[i][50]
-          const oct = data[i][51]
-          const gasoct = data[i][52]
-          const nov = data[i][53]
-          const gasnov = data[i][54]
-          const dic = data[i][55]
-          const gasdic = data[i][56]
-          const total = data[i][57]
-          const ampliacion = data[i][58]
-          const reduccion = data[i][59]
-          const transferencia = data[i][60]
-          const npro = data[i][61]
+          const ampene = data[i][35]
+          const feb = data[i][36]
+          const gasfeb = data[i][37]
+          const ampfeb = data[i][38]
+          const mar = data[i][39]
+          const gasmar = data[i][40]
+          const ampmar = data[i][41]
+          const abr = data[i][42]
+          const gasabr = data[i][43]
+          const ampabr = data[i][44]
+          const may = data[i][45]
+          const gasmay = data[i][46]
+          const ampmay = data[i][47]
+          const jun = data[i][48]
+          const gasjun = data[i][49]
+          const ampjun = data[i][50]
+          const jul = data[i][51]
+          const gasjul = data[i][52]
+          const ampjul = data[i][53]
+          const ago = data[i][54]
+          const gasago = data[i][55]
+          const ampago = data[i][56]
+          const sep = data[i][57]
+          const gassep = data[i][58]
+          const ampsep = data[i][59]
+          const oct = data[i][60]
+          const gasoct = data[i][61]
+          const ampoct = data[i][62]
+          const nov = data[i][63]
+          const gasnov = data[i][64]
+          const ampnov = data[i][65]
+          const dic = data[i][66]
+          const gasdic = data[i][67]
+          const ampdic = data[i][68]
+          const total = data[i][69]
+          const ampliacion = data[i][70]
+          const reduccion = data[i][71]
+          const transferencia = data[i][72]
+          const npro = data[i][73]
           const presupuesto = {
             'año': año, 'rm': rm, 'ur': ur, 'up': up, 'rubro': rubro, 'tg': tg,
             'ogasto': ogasto, 'f': f, 'fu': fu, 'sf': sf, 'eje': eje,
             's': s, 'prog': prog, 'sp': sp, 'obj': obj, 'proy': proy, 'est': est,
             'obra': obra, 'ben': ben, 'eg': eg, 'mi': mi, 'pr': pr, 'pd': pd,
-            'itrans': itrans, 'min': min, 'igest': igest, 'la': la, 'ods': ods, 'et': et,
-            'ff': ff, 'of': of, 'np': np, 'cpa': cpa, 'ene': parseInt(ene),
-            'gasene': parseInt(gasene), 'feb': parseInt(feb), 'gasfeb': parseInt(gasfeb),
-            'mar': parseInt(mar), 'gasmar': parseInt(gasmar), 'abr': parseInt(abr),
-            'gasabr': parseInt(gasabr), 'may': parseInt(may), 'gasmay': parseInt(gasmay),
-            'jun': parseInt(jun), 'gasjun': parseInt(gasjun), 'jul': parseInt(jul),
-            'gasjul': parseInt(gasjul), 'ago': parseInt(ago), 'gasago': parseInt(gasago),
-            'sep': parseInt(sep), 'gassep': parseInt(gassep), 'oct': parseInt(oct),
-            'gasoct': parseInt(gasoct), 'nov': parseInt(nov), 'gasnov': parseInt(gasnov),
-            'dic': parseInt(dic), 'gasdic': parseInt(gasdic), 'total': parseInt(total),
+            'itrans': itrans, 'min': min, 'igest': igest, 'la': la, 'ods': ods,
+            'et': et, 'ff': ff, 'of': of, 'np': np, 'cpa': cpa,
+            'ene': parseFloat(ene), 'gasene': parseFloat(gasene), 'ampene': parseFloat(ampene),
+            'feb': parseFloat(feb), 'gasfeb': parseFloat(gasfeb), 'ampfeb': parseFloat(ampfeb),
+            'mar': parseFloat(mar), 'gasmar': parseFloat(gasmar), 'ampmar': parseFloat(ampmar),
+            'abr': parseFloat(abr), 'gasabr': parseFloat(gasabr), 'ampabr': parseFloat(ampabr),
+            'may': parseFloat(may), 'gasmay': parseFloat(gasmay), 'ampmay': parseFloat(ampmay),
+            'jun': parseFloat(jun), 'gasjun': parseFloat(gasjun), 'ampjun': parseFloat(ampjun),
+            'jul': parseFloat(jul), 'gasjul': parseFloat(gasjul), 'ampjul': parseFloat(ampjul),
+            'ago': parseFloat(ago), 'gasago': parseFloat(gasago), 'ampago': parseFloat(ampago),
+            'sep': parseFloat(sep), 'gassep': parseFloat(gassep), 'ampsep': parseFloat(ampsep),
+            'oct': parseFloat(oct), 'gasoct': parseFloat(gasoct), 'ampoct': parseFloat(ampoct),
+            'nov': parseFloat(nov), 'gasnov': parseFloat(gasnov), 'ampnov': parseFloat(ampnov),
+            'dic': parseFloat(dic), 'gasdic': parseFloat(gasdic), 'ampdic': parseFloat(ampdic),
+            'total': parseFloat(total),
             'ampliacion': ampliacion, 'reduccion': reduccion, 'transferencia': transferencia,
             'npro': npro
           }
           userList.push(presupuesto)
           fetch('https://financieros-78cb0.firebaseio.com/presupuesto.json', {
+            method: 'POST',
+            headers: {
+              'Accept': 'application/json',
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(presupuesto)
+          })
+          fetch('https://financieros-78cb0.firebaseio.com/presupuestoValidacion.json', {
             method: 'POST',
             headers: {
               'Accept': 'application/json',

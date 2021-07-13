@@ -17,13 +17,24 @@ import DeleteIcon from '@material-ui/icons/Delete'
 export default class ListComponent extends Component {
   constructor (props) {
     super(props)
+    var today = new Date()
+    var dd = today.getDate()
+    var mm = today.getMonth() + 1
+    if (dd < 10) {
+      dd = '0' + dd
+    }
+    if (mm < 10) {
+      mm = '0' + mm
+    }
+    today = mm
     var URLactual = window.location
     this.state = {
       open: false,
       urlfire: String(URLactual).substr(-20),
       presupuestoConsumo: [],
       xml: [],
-      xml2: []
+      xml2: [],
+      mes: today
     }
   }
 
@@ -163,30 +174,42 @@ export default class ListComponent extends Component {
         of: pruebaIndice.of,
         np: pruebaIndice.np,
         cpa: pruebaIndice.cpa,
-        ene: this.props.mes === 'Enero' ? pruebaIndice.ene + totalres : pruebaIndice.ene,
-        gasene: this.props.mes === 'Enero' ? pruebaIndice.gasene - totalres : pruebaIndice.gasene,
-        feb: this.props.mes === 'Febrero' ? pruebaIndice.feb + totalres : pruebaIndice.feb,
-        gasfeb: this.props.mes === 'Febrero' ? pruebaIndice.gasfeb - totalres : pruebaIndice.gasfeb,
-        mar: this.props.mes === 'Marzo' ? pruebaIndice.mar + totalres : pruebaIndice.mar,
-        gasmar: this.props.mes === 'Marzo' ? pruebaIndice.gasmar - totalres : pruebaIndice.gasmar,
-        abr: this.props.mes === 'Abril' ? pruebaIndice.abr + totalres : pruebaIndice.abr,
-        gasabr: this.props.mes === 'Abril' ? pruebaIndice.gasabr - totalres : pruebaIndice.gasabr,
-        may: this.props.mes === 'Mayo' ? pruebaIndice.may + totalres : pruebaIndice.may,
-        gasmay: this.props.mes === 'Mayo' ? pruebaIndice.gasmay - totalres : pruebaIndice.gasmay,
-        jun: this.props.mes === 'Junio' ? pruebaIndice.jun + totalres : pruebaIndice.jun,
-        gasjun: this.props.mes === 'Junio' ? pruebaIndice.gasjun - totalres : pruebaIndice.gasjun,
-        jul: this.props.mes === 'Julio' ? pruebaIndice.jul + totalres : pruebaIndice.jul,
-        gasjul: this.props.mes === 'Julio' ? pruebaIndice.gasjul - totalres : pruebaIndice.gasjul,
-        ago: this.props.mes === 'Agosto' ? pruebaIndice.ago + totalres : pruebaIndice.ago,
-        gasago: this.props.mes === 'Agosto' ? pruebaIndice.gasago - totalres : pruebaIndice.gasago,
-        sep: this.props.mes === 'Septiembre' ? pruebaIndice.sep + totalres : pruebaIndice.sep,
-        gassep: this.props.mes === 'Septiembre' ? pruebaIndice.gassep - totalres : pruebaIndice.gassep,
-        oct: this.props.mes === 'Octubre' ? pruebaIndice.oct + totalres : pruebaIndice.oct,
-        gasoct: this.props.mes === 'Octubre' ? pruebaIndice.gasoct - totalres : pruebaIndice.gasoct,
-        nov: this.props.mes === 'Noviembre' ? pruebaIndice.nov + totalres : pruebaIndice.nov,
-        gasnov: this.props.mes === 'Noviembre' ? pruebaIndice.gasnov - totalres : pruebaIndice.gasnov,
-        dic: this.props.mes === 'Diciembre' ? pruebaIndice.dic + totalres : pruebaIndice.dic,
-        gasdic: this.props.mes === 'Diciembre' ? pruebaIndice.gasdic - totalres : pruebaIndice.gasdic,
+        ene: this.state.mes === '01' ? pruebaIndice.ene + totalres : pruebaIndice.ene,
+        gasene: this.state.mes === '01' ? pruebaIndice.gasene - totalres : pruebaIndice.gasene,
+        ampene: pruebaIndice.ampene,
+        feb: this.state.mes === '02' ? pruebaIndice.feb + totalres : pruebaIndice.feb,
+        gasfeb: this.state.mes === '02' ? pruebaIndice.gasfeb - totalres : pruebaIndice.gasfeb,
+        ampfeb: pruebaIndice.ampfeb,
+        mar: this.state.mes === '03' ? pruebaIndice.mar + totalres : pruebaIndice.mar,
+        gasmar: this.state.mes === '03' ? pruebaIndice.gasmar - totalres : pruebaIndice.gasmar,
+        ampmar: pruebaIndice.ampmar,
+        abr: this.state.mes === '04' ? pruebaIndice.abr + totalres : pruebaIndice.abr,
+        gasabr: this.state.mes === '04' ? pruebaIndice.gasabr - totalres : pruebaIndice.gasabr,
+        ampabr: pruebaIndice.ampabr,
+        may: this.state.mes === '05' ? pruebaIndice.may + totalres : pruebaIndice.may,
+        gasmay: this.state.mes === '05' ? pruebaIndice.gasmay - totalres : pruebaIndice.gasmay,
+        ampmay: pruebaIndice.ampmay,
+        jun: this.state.mes === '06' ? pruebaIndice.jun + totalres : pruebaIndice.jun,
+        gasjun: this.state.mes === '06' ? pruebaIndice.gasjun - totalres : pruebaIndice.gasjun,
+        ampjun: pruebaIndice.ampjun,
+        jul: this.state.mes === '07' ? pruebaIndice.jul + totalres : pruebaIndice.jul,
+        gasjul: this.state.mes === '07' ? pruebaIndice.gasjul - totalres : pruebaIndice.gasjul,
+        ampjul: pruebaIndice.ampjul,
+        ago: this.state.mes === '08' ? pruebaIndice.ago + totalres : pruebaIndice.ago,
+        gasago: this.state.mes === '08' ? pruebaIndice.gasago - totalres : pruebaIndice.gasago,
+        ampago: pruebaIndice.ampago,
+        sep: this.state.mes === '09' ? pruebaIndice.sep + totalres : pruebaIndice.sep,
+        gassep: this.state.mes === '09' ? pruebaIndice.gassep - totalres : pruebaIndice.gassep,
+        ampsep: pruebaIndice.ampsep,
+        oct: this.state.mes === '10' ? pruebaIndice.oct + totalres : pruebaIndice.oct,
+        gasoct: this.state.mes === '10' ? pruebaIndice.gasoct - totalres : pruebaIndice.gasoct,
+        ampoct: pruebaIndice.ampoct,
+        nov: this.state.mes === '11' ? pruebaIndice.nov + totalres : pruebaIndice.nov,
+        gasnov: this.state.mes === '11' ? pruebaIndice.gasnov - totalres : pruebaIndice.gasnov,
+        ampnov: pruebaIndice.ampnov,
+        dic: this.state.mes === '12' ? pruebaIndice.dic + totalres : pruebaIndice.dic,
+        gasdic: this.state.mes === '12' ? pruebaIndice.gasdic - totalres : pruebaIndice.gasdic,
+        ampdic: pruebaIndice.ampdic,
         total: pruebaIndice.total,
         ampliacion: pruebaIndice.ampliacion,
         reduccion: pruebaIndice.reduccion,
@@ -197,6 +220,7 @@ export default class ListComponent extends Component {
       let positionId = this.props.comprometido.id
       let fondoId = this.state.urlfire
       firebase.database().ref(`fondos/${fondoId}/comprometido/${positionId}`).remove()
+      firebase.database().ref(`fondos/${fondoId}/cpa/${positionId}`).remove()
       alert('Se ha borrado la factura')
     }
   }

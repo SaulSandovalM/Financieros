@@ -34,13 +34,24 @@ export default class Edit extends Component {
       fechaDepo: '',
       cuentaPagar: '',
       cuentaPagarPara: '',
-      sujetoContable: ''
+      sujetoContable: '',
+      comprometidos: []
     }
   }
 
+  listenComprometidos = (itemsRefComprometidos) => {
+    itemsRefComprometidos.on('value', (snap) => {
+      const firebasedata = snap.val()
+      this.setState({
+        comprometidos: firebasedata
+      })
+    })
+  }
+
   componentDidMount() {
-    //var dir = history.location.pathname.slice(12)
-    const itemsRefFondos = firebase.database().ref(`fondos/`).orderByChild('fondo') // ${dir}
+    var URLactual = window.location
+    var dir = String(URLactual).substr(-20)
+    const itemsRefFondos = firebase.database().ref(`fondos/${dir}`).orderByChild('fondo')
     itemsRefFondos.on('value', (snapshot) => {
       let updatedWish = snapshot.val()
       this.setState({
@@ -76,6 +87,8 @@ export default class Edit extends Component {
         cpa: updatedWish.cpa
       })
     })
+    const itemsRefComprometidos = firebase.database().ref(`fondos/${dir}/comprometido`)
+    this.listenComprometidos(itemsRefComprometidos)
   }
 
   update () {
@@ -121,6 +134,15 @@ export default class Edit extends Component {
  }
 
   render () {
+    const total1 = [0]
+    this.state.comprometidos.map(item =>
+      item.total !== undefined ?
+        total1.push(parseFloat(item.total))
+      : null
+    )
+    const tt = (a, b) => a + b
+    var ttotal = total1.reduce(tt).toFixed(2)
+
     return (
       <form className='editcontra-container'>
         <div style={{marginTop: '60px'}}>
@@ -164,7 +186,7 @@ export default class Edit extends Component {
                       style={{ marginBottom: '15px' }}
                       label='Importe'
                       name='importe'
-                      value={'$ ' + this.state.importe}
+                      value={'$ ' + ttotal}
                     />
                     <TextField
                       style={{ marginBottom: '15px' }}
@@ -254,7 +276,7 @@ export default class Edit extends Component {
                 {this.state.cpa !== undefined ?
                   <div>
                     {this.state.cpa.map(item =>
-                      <p>Clave Presupuestal: {item.cpa} / Cantidad Afectada: $ {item.cantidad}</p>
+                      <p>Clave Presupuestal: {item.presupuestal} / Cantidad Afectada: $ {item.cantidad}</p>
                     )}
                   </div> : null
                 }

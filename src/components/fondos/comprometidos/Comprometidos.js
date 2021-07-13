@@ -313,7 +313,7 @@ export default class Comprometidos extends Component {
       ampfeb: item.ampfeb,
       mar: item.mar,
       gasmar: item.gasmar,
-      amplmar: item.ampmar,
+      ampmar: item.ampmar,
       abr: item.abr,
       gasabr: item.gasabr,
       ampabr: item.ampabr,
@@ -387,6 +387,7 @@ export default class Comprometidos extends Component {
         }
       )
       wishRef.update(updatedWish)
+      console.log(updatedWish)
       updatedWish.cpa.push(
         {
           cantidad: total,
@@ -452,9 +453,6 @@ export default class Comprometidos extends Component {
     'Fiscalía Especializada en Delitos de Corrupción',
     'Fiscalía Especializada en Materia de Desaparición Forzada de Personas'
   ]
-
-  mes = ['', 'Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto',
-    'Septiembre', 'Octubre', 'Noviembre', 'Diciembre']
 
   handleOnChange1 (event) {
     for (var i = 0; i < event.target.files.length; i++) {
@@ -538,7 +536,7 @@ export default class Comprometidos extends Component {
     const filterData = this.state.xml.filter(
       (xml) => {
         return (
-          ( (xml.nombre.indexOf(this.state.nombreXml) !== -1) && (xml.folio.indexOf(this.state.folioXml) !== -1) ) && xml.estatus !== 'asignado' && xml.tipo === 'revolvente'
+          (xml.folio.indexOf(this.state.folioXml) !== -1) && xml.estatus !== 'asignado' && xml.tipo === 'revolvente'
         )
       }
     )
@@ -628,7 +626,7 @@ export default class Comprometidos extends Component {
               <ListItemText className='list-align'><b>Fecha</b></ListItemText>
               <ListItemText className='list-align2'><b>Nombre</b></ListItemText>
             </ListItem>
-            {this.state.tipoFondo.tipo_doc === 'Fondo Revolvente' && this.state.folioXml && this.state.nombreXml ?
+            {this.state.tipoFondo.tipo_doc === 'Fondo Revolvente' && this.state.folioXml ?
             filterData.map((value) => {
               return (
                 <ListItem key={value} button onClick={handleToggle(value)}>
@@ -740,8 +738,6 @@ export default class Comprometidos extends Component {
     const tt4 = (a, b) => a + b
     var tcantidad4 = sumatoria.reduce(tt4)
 
-    console.log(this.state.tipoFondo.tipo_doc)
-
     return (
       <div className='div-compro-container'>
         <div>
@@ -765,22 +761,6 @@ export default class Comprometidos extends Component {
                         value={this.state.folioXml}
                         onChange={this.handleInput.bind(this)}
                         placeholder='Ingresa el Folio'
-                      />
-                      <input
-                        className='input-compro'
-                        name='nombreXml'
-                        id='nombreXml'
-                        value={this.state.nombreXml}
-                        onChange={this.handleInput.bind(this)}
-                        placeholder='Ingresa el nombre'
-                      />
-                      <input
-                        className='input-compro'
-                        name='fechaXml'
-                        id='fechaXml'
-                        value={this.state.fechaXml}
-                        onChange={this.handleInput.bind(this)}
-                        placeholder='Ingresa el fecha'
                       />
                     </div>
                   </div>
@@ -824,23 +804,7 @@ export default class Comprometidos extends Component {
               </Grid>
             </Grid>
             <Grid item xs style={{ width: '50%' }}>
-              <div className='recibo-container'>
-                Mes a afectar
-                <div className='search-div'>
-                  <select
-                    style={{ width: 'auto', height: '30px', marginBottom: '15px' }}
-                    id='mes'
-                    name='mes'
-                    value={this.state.mes}
-                    onChange={this.handleInput.bind(this)}
-                    required
-                  >
-                    {this.mes.map((x,y) =>
-                      <option name={y}>{x}</option>
-                    )}
-                  </select>
-                </div>
-              </div>
+              <div style={{ height: '58px' }} />
               {customListRight('Choices', right)}
             </Grid>
           </Grid>
@@ -1183,7 +1147,6 @@ export default class Comprometidos extends Component {
                   <ListComponent
                     key={comprometido.id}
                     comprometido={comprometido}
-                    mes={this.state.mes}
                   />
                 : null
               ): null }
@@ -1230,20 +1193,20 @@ export default class Comprometidos extends Component {
         </Grid>
         <div style={{ height: '80px' }} />
         <div className='div-content-fab-com'>
-          <Fab color='primary' style={{ background: '#3f51b5' }} variant='extended'>
-            <AddIcon style={{ marginRight: '6px' }} />
-            {this.state.tipoFondo.tipo_doc === 'Fondo Revolvente' &&
-              <Dropzone
-                style={{
-                  width: '100%',
-                  height: '100%',
-                }}
-                accept='.xml' onChange={this.handleOnChange1.bind(this)}
-              >
-                Agregar XML
-              </Dropzone>
-            }
-          </Fab>
+          {this.state.tipoFondo.tipo_doc === 'Fondo Revolvente' &&
+            <Fab color='primary' style={{ background: '#3f51b5' }} variant='extended'>
+              <AddIcon style={{ marginRight: '6px' }} />
+                <Dropzone
+                  style={{
+                    width: '100%',
+                    height: '100%',
+                  }}
+                  accept='.xml' onChange={this.handleOnChange1.bind(this)}
+                >
+                  Agregar XML
+                </Dropzone>
+            </Fab>
+          }
           {this.state.comprometidosDos !== undefined && this.state.comprometidosDos.length >= 2 ?
             <Link to={`/Oficios/${this.state.urlfire}`} style={{ textDecoration: 'none' }}>
               <Fab color='primary' style={{ background: 'green' }} variant='extended'>
