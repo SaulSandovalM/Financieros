@@ -597,7 +597,7 @@ export default class Fondos extends Component {
                     </div>
 
                 </div>*/}
-                {(realizo === 'MIGUEL' || realizo === 'ELOY' || realizo === 'TERESA' || realizo === 'MARTHA' || realizo === 'LIZBETH') ?
+                {(realizo === 'MIGUEL' || realizo === 'ELOY' || realizo === 'TERESA' || realizo === 'MARTHA' || realizo === 'LIZBETH') && this.state.tipo_doc === 'Fondo Revolvente' ?
                   <div className='div-f2'>
                     <div className='fondo-w-c'>
                       <div>

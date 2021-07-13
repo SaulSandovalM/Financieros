@@ -9,6 +9,7 @@ import Grid from '@material-ui/core/Grid'
 export default class Edit extends Component {
   constructor (props) {
     super(props)
+    var URLactual = window.location
     this.state = {
       key: '',
       fondo: '',
@@ -35,7 +36,8 @@ export default class Edit extends Component {
       cuentaPagar: '',
       cuentaPagarPara: '',
       sujetoContable: '',
-      comprometidos: []
+      comprometidos: [],
+      urlfire: String(URLactual).substr(-20),
     }
   }
 
@@ -49,9 +51,7 @@ export default class Edit extends Component {
   }
 
   componentDidMount() {
-    var URLactual = window.location
-    var dir = String(URLactual).substr(-20)
-    const itemsRefFondos = firebase.database().ref(`fondos/${dir}`).orderByChild('fondo')
+    const itemsRefFondos = firebase.database().ref(`fondos/${this.state.urlfire}`).orderByChild('fondo')
     itemsRefFondos.on('value', (snapshot) => {
       let updatedWish = snapshot.val()
       this.setState({
@@ -70,7 +70,7 @@ export default class Edit extends Component {
         realizo: updatedWish.realizo,
         requisicion: updatedWish.requisicion,
         pedido: updatedWish.pedido,
-        no_proyecto: updatedWish.no_proyecto,
+        no_proyecto: updatedWish.no_proyecto ? updatedWish.no_proyecto : this.state.no_proyecto,
         poliza: updatedWish.poliza,
         cfe: updatedWish.cfe,
         nscfe: updatedWish.nscfe,
@@ -87,14 +87,13 @@ export default class Edit extends Component {
         cpa: updatedWish.cpa
       })
     })
-    const itemsRefComprometidos = firebase.database().ref(`fondos/${dir}/comprometido`)
+    const itemsRefComprometidos = firebase.database().ref(`fondos/${this.state.urlfire}/comprometido`)
     this.listenComprometidos(itemsRefComprometidos)
   }
 
   update () {
     let updates = {}
-    //var dir = history.location.pathname.slice(12)
-    updates[`fondos/`] = {  // ${dir}
+    updates[`fondos/${this.state.urlfire}`] = {
       fondo: this.state.fondo,
       fecha: this.state.fecha,
       tipo_doc: this.state.tipo_doc,
@@ -129,8 +128,8 @@ export default class Edit extends Component {
 
   onChange = (e) => {
    const state = this.state
-   state[e.target.name] = e.target.value;
-   this.setState({ fondoD: state });
+   state[e.target.name] = e.target.value
+   this.setState({ fondoD: state })
  }
 
   render () {
@@ -157,114 +156,119 @@ export default class Edit extends Component {
                       label='Fondo'
                       name='fondo'
                       value={this.state.fondo}
+                      disabled
                     />
                     <TextField
                       style={{ marginBottom: '15px' }}
                       label='Fecha'
                       name='fecha'
                       value={this.state.fecha}
+                      disabled
                     />
                     <TextField
                       style={{ marginBottom: '15px' }}
                       label='Tipo de Documento'
                       name='tipo_doc'
                       value={this.state.tipo_doc}
+                      disabled
                     />
                     <TextField
                       style={{ marginBottom: '15px' }}
                       label='Oficio de Autorización'
                       name='oficio_aut'
                       value={this.state.oficio_aut}
+                      disabled
                     />
                     <TextField
                       style={{ marginBottom: '15px' }}
                       label='No. de Oficio'
                       name='no_oficio'
                       value={this.state.no_oficio}
+                      disabled
                     />
                     <TextField
                       style={{ marginBottom: '15px' }}
                       label='Importe'
                       name='importe'
                       value={'$ ' + ttotal}
+                      disabled
                     />
                     <TextField
                       style={{ marginBottom: '15px' }}
                       label='Beneficiario'
                       name='beneficiario'
                       value={this.state.beneficiario}
+                      disabled
                     />
                     <TextField
                       style={{ marginBottom: '15px' }}
                       label='Descripción'
                       name='desc'
                       value={this.state.desc}
-                    />
-                    <TextField
-                      style={{ marginBottom: '15px' }}
-                      label='No. de Proyecto'
-                      name='no_proyecto'
-                      value={this.state.no_proyecto}
+                      disabled
                     />
                     <TextField
                       label='Realizo'
                       name='realizo'
                       value={this.state.realizo}
+                      disabled
                     />
                   </div>
                 </div>
                 <div style={{ width: '48%' }}>
                   <div style={{ marginBottom: '15px' }}><b>Licitación</b></div>
-                  <TextField
-                    className='field'
-                    style={{ marginBottom: '15px' }}
-                    label='No. de Licitación'
-                    name='no_lici'
-                    value={this.state.no_lici}
-                  />
-                  <TextField
-                    className='field'
-                    style={{ marginBottom: '15px' }}
-                    label='Requisición'
-                    name='requisicion'
-                    value={this.state.requisicion}
-                  />
-                  <TextField
-                    className='field'
-                    style={{ marginBottom: '15px' }}
-                    label='Pedido'
-                    name='pedido'
-                    value={this.state.pedido}
-                  />
-                  <TextField
-                    className='field'
-                    style={{ marginBottom: '15px' }}
-                    label='Poliza Comprometido'
-                    name='poliza'
-                    value={this.state.poliza}
-                  />
-                  <div style={{ marginBottom: '15px', marginTop: '30px' }}><b>Pago CFE</b></div>
-                  <TextField
-                    className='field'
-                    style={{ marginBottom: '15px' }}
-                    label='Cta CFE'
-                    name='cfe'
-                    value={this.state.cfe}
-                  />
-                  <TextField
-                    className='field'
-                    style={{ marginBottom: '15px' }}
-                    label='No Servicio CFE'
-                    name='nscfe'
-                    value={this.state.nscfe}
-                  />
-                  <TextField
-                    className='field'
-                    style={{ marginBottom: '15px' }}
-                    label='Observaciones'
-                    name='observaciones'
-                    value={this.state.observaciones}
-                  />
+                  <div style={{ display: 'flex', flexDirection: 'column' }}>
+                    <TextField
+                      style={{ marginBottom: '15px' }}
+                      label='No. de Licitación'
+                      name='no_lici'
+                      value={this.state.no_lici}
+                      disabled
+                    />
+                    <TextField
+                      style={{ marginBottom: '15px' }}
+                      label='Requisición'
+                      name='requisicion'
+                      value={this.state.requisicion}
+                      disabled
+                    />
+                    <TextField
+                      style={{ marginBottom: '15px' }}
+                      label='Pedido'
+                      name='pedido'
+                      value={this.state.pedido}
+                      disabled
+                    />
+                    <TextField
+                      style={{ marginBottom: '15px' }}
+                      label='Poliza Comprometido'
+                      name='poliza'
+                      value={this.state.poliza}
+                      disabled
+                    />
+                    <div style={{ marginBottom: '15px', marginTop: '30px' }}><b>Pago CFE</b></div>
+                    <TextField
+                      style={{ marginBottom: '15px' }}
+                      label='Cta CFE'
+                      name='cfe'
+                      value={this.state.cfe}
+                      disabled
+                    />
+                    <TextField
+                      style={{ marginBottom: '15px' }}
+                      label='No Servicio CFE'
+                      name='nscfe'
+                      value={this.state.nscfe}
+                      disabled
+                    />
+                    <TextField
+                      style={{ marginBottom: '15px' }}
+                      label='Observaciones'
+                      name='observaciones'
+                      value={this.state.observaciones}
+                      disabled
+                    />
+                  </div>
                 </div>
               </Paper>
             </Grid>
