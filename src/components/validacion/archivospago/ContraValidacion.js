@@ -122,9 +122,9 @@ export default class ContraValidacion extends Component {
                 <TextField
                   style={{ marginBottom: '15px' }}
                   label='Numero de contrarecibo'
-                  name='numContra'
+                  name='Contrarecibo'
                   onChange={this.onChange}
-                  value={this.state.numContra}
+                  value={this.state.Contrarecibo}
                 />
                 <TextField
                   style={{ marginBottom: '15px' }}

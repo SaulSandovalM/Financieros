@@ -15,6 +15,10 @@
 .search-div {
   display: flex;
 }
+.right-val {
+  display: flex !important;
+  justify-content: space-between;
+}
 .input-compro {
   border-bottom: 1px solid grey;
   border-left: 0;
@@ -59,6 +63,7 @@
   border-left: 0;
   border-right-color: white;
   border-top: 0;
+  display: flex;
   width: 2%;
 }
 .border-table2 {

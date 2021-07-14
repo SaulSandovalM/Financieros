@@ -291,8 +291,8 @@ export default class ListComponent extends Component {
               value={this.props.comprometido.total}
             />
           </TableCell>
-          <TableCell className='border-icon' onClick={() => this.removeFactura()}>
-            <IconButton size='small' className='border-des'>
+          <TableCell className='border-icon'>
+            <IconButton size='small' className='border-des' onClick={() => this.removeFactura()}>
               <DeleteIcon style={{ color: 'red' }} />
             </IconButton>
           </TableCell>

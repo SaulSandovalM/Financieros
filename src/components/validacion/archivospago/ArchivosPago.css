@@ -10,6 +10,10 @@
   border-top: 0;
   width: 12.5%;
 }
+.right-val {
+  display: flex;
+  justify-content: space-between;
+}
 .border-table-v {
   border-left: 0;
   border-right-color: white;
@@ -29,4 +33,12 @@
 }
 .form-val-container {
   width: 100%;
+}
+.div-content-fab-val {
+  bottom: 0;
+  margin: 30px;
+  position: fixed;
+  display: flex;
+  justify-content: flex-end;
+  width: 97%;
 }

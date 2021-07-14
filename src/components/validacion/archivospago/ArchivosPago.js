@@ -90,16 +90,16 @@ export default class ArchivosPago extends Component {
           'numfolio': numfolio
         }
         console.log(data)
-        // fetch(xml).then(res => res.text()).then(xml => {
-        //   fetch('https://financieros-78cb0.firebaseio.com/xml.json', {
-        //     method: 'POST',
-        //     headers: {
-        //       'Accept': 'application/json',
-        //       'Content-Type': 'application/json',
-        //     },
-        //     body: JSON.stringify(data),
-        //   })
-        // })
+        fetch(xml).then(res => res.text()).then(xml => {
+          fetch('https://financieros-78cb0.firebaseio.com/xml.json', {
+            method: 'POST',
+            headers: {
+              'Accept': 'application/json',
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data),
+          })
+        })
         console.log(datosXml.push(data))
         Total.push(parseFloat(data.total))
       }
@@ -285,6 +285,7 @@ export default class ArchivosPago extends Component {
       realizo: this.state.realizo,
       folio: this.state.numFolio
     }
+    console.log(params)
     this.setState({
       xmlC: [{ url: '', nombre: '' }],
       filefactura: [{ url: '', nombre: '' }],
@@ -311,7 +312,7 @@ export default class ArchivosPago extends Component {
     const { fechaE } = this.state
 
     let presupuestop = this.state.presupuesto.map(item => {
-      return item.ogasto + 1
+      return item.ogasto
     })
     let resultp = presupuestop.filter((item, index) => {
       return presupuestop.indexOf(item) === index
@@ -329,7 +330,7 @@ export default class ArchivosPago extends Component {
       return presupuestor.indexOf(item) === index
     })
     let presupuesto = this.state.presupuesto.map(item => {
-      return (this.state.partida === item.ogasto && this.state.up === item.up) && item.jun
+      return (this.state.partida === item.ogasto && this.state.up === item.up) && item.jul
     })
     let result = presupuesto.filter((item, index) => {
       return presupuesto.indexOf(item) === index
@@ -439,7 +440,6 @@ export default class ArchivosPago extends Component {
                           }}
                           id='partida'
                           name='partida'
-                          ref={partida => this.inputPartida = partida}
                           onChange={this.handleInput.bind(this)}
                           value={this.state.partida}
                         >
@@ -526,7 +526,7 @@ export default class ArchivosPago extends Component {
                         )}
                       </select>
                     </div>
-                    <div className='div-content-fab-com'>
+                    <div className='div-content-fab-val'>
                       <Fab color='primary' style={{ background: 'green' }} type='submit'>
                         <CheckIcon />
                       </Fab>
