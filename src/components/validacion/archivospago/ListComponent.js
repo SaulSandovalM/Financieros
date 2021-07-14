@@ -69,6 +69,7 @@ export default class ListComponent extends Component {
                 <TableCell className='table-validacion'><b>Fecha Pago</b></TableCell>
                 <TableCell className='table-validacion'><b>Devolución</b></TableCell>
                 <TableCell className='table-validacion'><b>Total</b></TableCell>
+                <TableCell className='table-validacion'><b>Agregar Contrarecibo</b></TableCell>
               </TableRow>
             </TableHead>
             {this.props.listaValidacion !== undefined ?

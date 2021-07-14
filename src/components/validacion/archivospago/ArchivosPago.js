@@ -247,8 +247,8 @@ export default class ArchivosPago extends Component {
           FechaP: child.val().FechaP,
           Devolucion: child.val().Devolucion,
           Total: child.val().Total,
-          TipoPerona: child.val().TipoPersona,
-          NumContra: child.val().numContra,
+          TipoPersona: child.val().TipoPersona,
+          NumContra: child.val().NumContra,
           Adquisicion: child.val().Adquisicion,
           Xml: child.val().Xml,
           xmlC: child.val().xmlC,
@@ -276,7 +276,7 @@ export default class ArchivosPago extends Component {
       FechaP: ' ',
       Devolucion: ' ',
       Total: Total2,
-      TipoPerona: this.inputTipoPersona.value,
+      TipoPersona: this.inputTipoPersona.value,
       NumContra: this.state.numContrato,
       Adquisicion: this.state.adqui,
       Xml: this.state.datos,
@@ -285,7 +285,6 @@ export default class ArchivosPago extends Component {
       realizo: this.state.realizo,
       folio: this.state.numFolio
     }
-    console.log(params)
     this.setState({
       xmlC: [{ url: '', nombre: '' }],
       filefactura: [{ url: '', nombre: '' }],

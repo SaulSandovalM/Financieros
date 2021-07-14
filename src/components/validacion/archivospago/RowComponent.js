@@ -13,6 +13,7 @@ import Box from '@material-ui/core/Box'
 import Collapse from '@material-ui/core/Collapse'
 import firebase from '../../../Firebase'
 import DeleteIcon from '@material-ui/icons/Delete'
+import { Link } from 'react-router-dom'
 
 export default class RowComponent extends Component {
   constructor (props) {
@@ -74,7 +75,7 @@ export default class RowComponent extends Component {
                 {this.props.item.FechaI}
               </TableCell>
               <TableCell className='table-validacion'>
-                {this.props.item.Contrarecibo}
+                {this.props.item.NumContra}
               </TableCell>
               <TableCell className='table-validacion'>
                 {this.props.item.FechaP}
@@ -90,6 +91,11 @@ export default class RowComponent extends Component {
                   thousandSeparator
                   value={parseFloat(this.props.item.Total).toFixed(2)}
                 />
+              </TableCell>
+              <TableCell className='table-validacion'>
+                <Link className='link-edit' to={`/ContraValidacion/${this.props.item.id}`}>
+                  <div>Agregar</div>
+                </Link>
               </TableCell>
             </div>
             <TableRow style={{ display: 'flex', width: '100%' }}>

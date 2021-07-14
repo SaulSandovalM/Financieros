@@ -42,6 +42,7 @@ import TabularIndividual from './components/fondos/tabular/TabularIndividual'
 import Pasa from './components/fondos/pasa/Pasa'
 // Rutas Validacion
 import ArchivoPago from './components/validacion/archivospago/ArchivosPago'
+import ContraValidacion from './components/validacion/archivospago/ContraValidacion'
 
 function App (props) {
   const { isAuthenticated, isVerifying } = props
@@ -287,6 +288,13 @@ function App (props) {
         exact
         path='/ArchivoPago'
         component={ArchivoPago}
+        isAuthenticated={isAuthenticated}
+        isVerifying={isVerifying}
+      />
+      <ProtectedRoute
+        exact
+        path='/ContraValidacion/:id'
+        component={ContraValidacion}
         isAuthenticated={isAuthenticated}
         isVerifying={isVerifying}
       />
