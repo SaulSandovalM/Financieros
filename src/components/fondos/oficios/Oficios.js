@@ -158,6 +158,17 @@ export default class Oficios extends Component {
     const numcom = (a, b) => a + b
     var finalC = compro.reduce(numcom)
 
+    var perro = this.state.comprometidos.map(comprometidos =>
+      comprometidos.comprobantes !== undefined ?
+        comprometidos.comprobantes.map(item =>
+          ', ' + item.uuid
+        )
+      : null
+    )
+    var string = perro.toString()
+    var result2 = string.split('-')
+    var position = result2.length - 1
+
     return (
       <div className='oficios-container'>
         <div className='oficios-section-content'>
@@ -1256,13 +1267,7 @@ export default class Oficios extends Component {
                         '(' + NumberAsString((totalImporte.reduce(reducer))) + ')' : null
                       )},
                       cantidad amparada con CFDI No
-                      {this.state.comprometidos.map(comprometidos =>
-                        comprometidos.comprobantes !== undefined ?
-                          comprometidos.comprobantes.map(item =>
-                            ', ' + item.uuid.slice(31)
-                          )
-                        : null
-                      )},
+                      {result2[position]},
                       número de requisición {this.state.fondo.requisicion}
                       asi como la poliza de afectacion presupuestal al momento del comprometido
                       num {this.state.fondo.poliza} que emita la Dirección
@@ -1358,13 +1363,7 @@ export default class Oficios extends Component {
                         : null
                       )} ({(NumberAsString(totalImporte.reduce(reducer)))}),
                       cantidad amparada con los comprobantes No
-                      {this.state.comprometidos.map(comprometidos =>
-                        comprometidos.comprobantes !== undefined ?
-                          comprometidos.comprobantes.map(item =>
-                            ', ' + item.uuid.substr(0, 8)
-                          )
-                        : null
-                      )}, para el trámite de pago a favor del proveedor {this.state.fondo.beneficiario}, por
+                      {result2[position]}, para el trámite de pago a favor del proveedor {this.state.fondo.beneficiario}, por
                       la/el servicio {this.state.fondo.desc}, con
                       cargo al proyecto{this.state.comprometidos.map(item => item.proy ? ', ' + item.proy + ' ' + item.np : null)} y
                       a los recursos otorgados con el oficio de autorización {this.state.fondo.oficio_aut}, del
