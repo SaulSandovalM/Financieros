@@ -738,6 +738,8 @@ export default class Comprometidos extends Component {
     const tt4 = (a, b) => a + b
     var tcantidad4 = sumatoria.reduce(tt4)
 
+    console.log(this.state.comprometidosDos)
+
     return (
       <div className='div-compro-container'>
         <div>
@@ -1147,6 +1149,7 @@ export default class Comprometidos extends Component {
                   <ListComponent
                     key={comprometido.id}
                     comprometido={comprometido}
+                    newArray={right}
                   />
                 : null
               ): null }

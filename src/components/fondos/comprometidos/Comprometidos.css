@@ -47,7 +47,7 @@
   border-right: 0;
   border-top: 0;
   font-size: 22px;
-  width: 5%;
+  width: 2%;
 }
 .input-r {
   border-bottom: 1px solid grey;
@@ -64,7 +64,7 @@
   border-right-color: white;
   border-top: 0;
   display: flex;
-  width: 2%;
+  width: 5%;
 }
 .border-table2 {
   border-left: 0;
