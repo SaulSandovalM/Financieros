@@ -26,32 +26,14 @@ export default class ListComponent extends Component {
   }
 
   removeValidacion = (id, item) => {
-    const objRef = firebase.database().ref('xmlPagoDirecto')
-    objRef.on('value', (snap) => {
-      var borrarObj = []
-      snap.forEach((child) => {
-        borrarObj.push({
-          NumFacturas: child.val().NumFacturas,
-          Fondo: child.val().Fondo,
-          FechaI: child.val().FechaI,
-          Contrarecibo: child.val().Contrarecibo,
-          FechaP: child.val().FechaP,
-          Devolucion: child.val().Devolucion,
-          Total: child.val().Total,
-          TipoPerona: child.val().TipoPersona,
-          NumContra: child.val().numContra,
-          Adquisicion: child.val().Adquisicion,
-          Xml: child.val().Xml,
-          xmlC: child.val().xmlC,
-          filefactura: child.val().filefactura,
-          realizo: child.val().realizo,
-          folio: child.val().folio,
-          id: child.key
-        })
-      })
-    })
     firebase.database().ref(`xmlPagoDirecto/${item}/Xml/${id}`).remove()
     alert('Se ha borrado la factura')
+  }
+
+  addValidacion = (item, data) => {
+    var update = this.props.datos
+    var newArray = update.concat(data)
+    firebase.database().ref(`xmlPagoDirecto/${item}/Xml/`).update(newArray)
   }
 
   render () {
@@ -78,6 +60,7 @@ export default class ListComponent extends Component {
                   key={item.id}
                   item={item}
                   removeValidacion={this.removeValidacion}
+                  addValidacion={this.addValidacion}
                 />
               ) : ''}
           </Table>

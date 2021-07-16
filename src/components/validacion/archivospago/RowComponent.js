@@ -14,7 +14,8 @@ import Collapse from '@material-ui/core/Collapse'
 import firebase from '../../../Firebase'
 import DeleteIcon from '@material-ui/icons/Delete'
 import { Link } from 'react-router-dom'
-import AddIcon from '@material-ui/icons/Add'
+import AssignmentTurnedInIcon from '@material-ui/icons/AssignmentTurnedIn'
+import PublishIcon from '@material-ui/icons/Publish'
 
 export default class RowComponent extends Component {
   constructor (props) {
@@ -39,7 +40,8 @@ export default class RowComponent extends Component {
     this.state = {
       item: 'Atendido',
       open: false,
-      realizo: admin
+      realizo: admin,
+      totalReal: ''
     }
   }
 
@@ -55,7 +57,22 @@ export default class RowComponent extends Component {
     this.props.removeValidacion(obj, xmlid)
   }
 
+  addValidacion (id) {
+    var xmlid = this.props.item.id
+    var dataArriba = this.props.item.Xml.map(item => item)
+    this.props.addValidacion(xmlid, dataArriba)
+  }
+
   render () {
+    const totalReal = []
+    this.props.item.Xml.map(data =>
+      totalReal.push(parseFloat(data.total))
+    )
+    const reducerTotal = (a, b) => a + b
+    this.state.totalReal = totalReal.reduce(reducerTotal).toFixed(2)
+
+    var NumFacturas = this.props.item.Xml.map(item => item).length
+
     return (
       <div>
         {(this.props.item.realizo === this.state.realizo) &&
@@ -67,7 +84,7 @@ export default class RowComponent extends Component {
                 </IconButton>
               </TableCell>
               <TableCell className='table-validacion'>
-                {this.props.item.NumFacturas}
+                {NumFacturas}
               </TableCell>
               <TableCell className='table-validacion'>
                 {this.props.item.Fondo}
@@ -90,14 +107,17 @@ export default class RowComponent extends Component {
                   displayType='text'
                   prefix=' $ '
                   thousandSeparator
-                  value={parseFloat(this.props.item.Total).toFixed(2)}
+                  value={parseFloat(this.state.totalReal).toFixed(2)}
                 />
               </TableCell>
               <TableCell className='table-validacion right-val'>
                 {this.props.item.Contrarecibo !== ' ' ? <div>Agregado</div> : null}
                 <Link className='link-edit' to={`/ContraValidacion/${this.props.item.id}`}>
-                  <AddIcon />
+                  <AssignmentTurnedInIcon />
                 </Link>
+                <IconButton aria-label='expand row' size='small' className='border-del' onClick={() => this.addValidacion(this.props.item)}>
+                  <PublishIcon style={{ color: 'green' }} />
+                </IconButton>
               </TableCell>
             </div>
             <TableRow style={{ display: 'flex', width: '100%' }}>

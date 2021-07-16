@@ -240,7 +240,6 @@ export default class ArchivosPago extends Component {
       var validacion = []
       snap.forEach((child) => {
         validacion.push({
-          NumFacturas: child.val().NumFacturas,
           Fondo: child.val().Fondo,
           FechaI: child.val().FechaI,
           Contrarecibo: child.val().Contrarecibo,
@@ -269,7 +268,6 @@ export default class ArchivosPago extends Component {
     const tota = (a, b) => a + b
     const Total2 = this.state.total.reduce(tota)
     const params = {
-      NumFacturas: this.state.contador.length,
       Fondo: ' ',
       FechaI: this.state.fechaE,
       Contrarecibo: ' ',
@@ -293,10 +291,10 @@ export default class ArchivosPago extends Component {
       total: [0],
       datos: []
     })
-    if (params.NumFacturas && params.Fondo && params.FechaI
-      && params.Contrarecibo && params.FechaP && params.Devolucion
-      && params.Total && params.TipoPerona && params.NumContra && params.Adquisicion
-      && params.Xml && params.xmlC && params.filefactura && params.realizo && params.folio) {
+    if (params.Fondo && params.FechaI && params.Contrarecibo && params.FechaP
+      && params.Devolucion && params.Total && params.TipoPerona && params.NumContra
+      && params.Adquisicion && params.Xml && params.xmlC && params.filefactura
+      && params.realizo && params.folio) {
       firebase.database().ref('xmlPagoDirecto').push(params).then(() => {
         alert('Tu solicitud fue enviada.')
       }).catch(() => {
@@ -539,7 +537,9 @@ export default class ArchivosPago extends Component {
         </div>
         <div className='title-tb-valeslist'>
           <div className='caja-valeslist'>
-            <ListComponent listaValidacion={this.state.listaValidacion} />
+            <ListComponent
+              listaValidacion={this.state.listaValidacion}
+              datos={this.state.datos} />
           </div>
         </div>
       </div>

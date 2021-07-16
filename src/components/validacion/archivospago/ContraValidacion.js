@@ -47,7 +47,6 @@ export default class ContraValidacion extends Component {
       let updatedWish = snapshot.val()
       console.log(updatedWish)
       this.setState({
-        NumFacturas: updatedWish.NumFacturas,
         Fondo: updatedWish.Fondo,
         FechaI: updatedWish.FechaI,
         Contrarecibo: updatedWish.Contrarecibo,
@@ -70,7 +69,6 @@ export default class ContraValidacion extends Component {
   update () {
     let updates = {}
     updates[`xmlPagoDirecto/${this.state.urlfire}`] = {
-      NumFacturas: this.state.NumFacturas,
       Fondo: this.state.Fondo,
       FechaI: this.state.FechaI,
       Contrarecibo: this.state.Contrarecibo,
