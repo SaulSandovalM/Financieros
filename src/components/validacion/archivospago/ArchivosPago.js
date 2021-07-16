@@ -14,14 +14,13 @@ export default class ArchivosPago extends Component {
     var today = new Date()
     var dd = today.getDate()
     var mm = today.getMonth() + 1
-    var yyyy = today.getFullYear()
     if (dd < 10) {
       dd = '0' + dd
     }
     if (mm < 10) {
       mm = '0' + mm
     }
-    today = dd + '/' + mm + '/' + yyyy
+    today = mm
     this.state = {
       lista: [
         {
@@ -51,7 +50,9 @@ export default class ArchivosPago extends Component {
           name: 'prueba',
           done: false
         }
-      ]
+      ],
+      idPresupuestal: [],
+      mes: today
     }
   }
 
@@ -199,28 +200,40 @@ export default class ArchivosPago extends Component {
           cpa: child.val().cpa,
           ene: child.val().ene,
           gasene: child.val().gasene,
+          ampene: child.val().ampene,
           feb: child.val().feb,
           gasfeb: child.val().gasfeb,
+          ampfeb: child.val().ampfeb,
           mar: child.val().mar,
           gasmar: child.val().gasmar,
+          ampmar: child.val().ampmar,
           abr: child.val().abr,
           gasabr: child.val().gasabr,
+          ampabr: child.val().ampabr,
           may: child.val().may,
           gasmay: child.val().gasmay,
+          ampmay: child.val().ampmay,
           jun: child.val().jun,
           gasjun: child.val().gasjun,
+          ampjun: child.val().ampjun,
           jul: child.val().jul,
           gasjul: child.val().gasjul,
+          ampjul: child.val().ampjul,
           ago: child.val().ago,
           gasago: child.val().gasago,
+          ampago: child.val().ampago,
           sep: child.val().sep,
           gassep: child.val().gassep,
+          ampsep: child.val().ampsep,
           oct: child.val().oct,
           gasoct: child.val().gasoct,
+          ampoct: child.val().ampoct,
           nov: child.val().nov,
           gasnov: child.val().gasnov,
+          ampnov: child.val().ampnov,
           dic: child.val().dic,
           gasdic: child.val().gasdic,
+          ampdic: child.val().ampdic,
           total: child.val().total,
           ampliacion: child.val().ampliacion,
           reduccion: child.val().reduccion,
@@ -267,6 +280,84 @@ export default class ArchivosPago extends Component {
     e.preventDefault()
     const tota = (a, b) => a + b
     const Total2 = this.state.total.reduce(tota)
+    let updates = {}
+    updates['presupuesto/' + this.state.idPresupuestal.id] = {
+      año: this.state.idPresupuestal.año,
+      rm: this.state.idPresupuestal.rm,
+      ur: this.state.idPresupuestal.ur,
+      up: this.state.idPresupuestal.up,
+      rubro: this.state.idPresupuestal.rubro,
+      tg: this.state.idPresupuestal.tg,
+      ogasto: this.state.idPresupuestal.ogasto,
+      npro: this.state.idPresupuestal.npro,
+      f: this.state.idPresupuestal.f,
+      fu: this.state.idPresupuestal.fu,
+      sf: this.state.idPresupuestal.sf,
+      eje: this.state.idPresupuestal.eje,
+      s: this.state.idPresupuestal.s,
+      prog: this.state.idPresupuestal.prog,
+      sp: this.state.idPresupuestal.sp,
+      min: this.state.idPresupuestal.min,
+      obj: this.state.idPresupuestal.obj,
+      proy: this.state.idPresupuestal.proy,
+      est: this.state.idPresupuestal.est,
+      obra: this.state.idPresupuestal.obra,
+      ben: this.state.idPresupuestal.ben,
+      eg: this.state.idPresupuestal.eg,
+      mi: this.state.idPresupuestal.mi,
+      pr: this.state.idPresupuestal.pr,
+      pd: this.state.idPresupuestal.pd,
+      itrans: this.state.idPresupuestal.itrans,
+      igest: this.state.idPresupuestal.igest,
+      la: this.state.idPresupuestal.la,
+      ods: this.state.idPresupuestal.ods,
+      et: this.state.idPresupuestal.et,
+      ff: this.state.idPresupuestal.ff,
+      of: this.state.idPresupuestal.of,
+      np: this.state.idPresupuestal.np,
+      cpa: this.state.idPresupuestal.cpa,
+      ene: this.state.mes === '01' ? this.state.idPresupuestal.ene - parseFloat(Total2).toFixed(2) : this.state.idPresupuestal.ene,
+      gasene: this.state.mes === '01' ? this.state.idPresupuestal.gasene - parseFloat(Total2).toFixed(2) : this.state.idPresupuestal.gasene,
+      ampene: this.state.idPresupuestal.ampene,
+      feb: this.state.mes === '02' ? this.state.idPresupuestal.feb - parseFloat(Total2).toFixed(2) : this.state.idPresupuestal.feb,
+      gasfeb: this.state.mes === '02' ? this.state.idPresupuestal.gasfeb - parseFloat(Total2).toFixed(2) : this.state.idPresupuestal.gasfeb,
+      ampfeb: this.state.idPresupuestal.ampfeb,
+      mar: this.state.mes === '03' ? this.state.idPresupuestal.mar - parseFloat(Total2).toFixed(2) : this.state.idPresupuestal.mar,
+      gasmar: this.state.mes === '03' ? this.state.idPresupuestal.gasmar - parseFloat(Total2).toFixed(2) : this.state.idPresupuestal.gasmar,
+      ampmar: this.state.idPresupuestal.ampmar,
+      abr: this.state.mes === '04' ? this.state.idPresupuestal.abr - parseFloat(Total2).toFixed(2) : this.state.idPresupuestal.abr,
+      gasabr: this.state.mes === '04' ? this.state.idPresupuestal.gasabr - parseFloat(Total2).toFixed(2) : this.state.idPresupuestal.gasabr,
+      ampabr: this.state.idPresupuestal.ampabr,
+      may: this.state.mes === '05' ? this.state.idPresupuestal.may - parseFloat(Total2).toFixed(2) : this.state.idPresupuestal.may,
+      gasmay: this.state.mes === '05' ? this.state.idPresupuestal.gasmay - parseFloat(Total2).toFixed(2) : this.state.idPresupuestal.gasmay,
+      ampmay: this.state.idPresupuestal.ampmay,
+      jun: this.state.mes === '06' ? this.state.idPresupuestal.jun - parseFloat(Total2).toFixed(2) : this.state.idPresupuestal.jun,
+      gasjun: this.state.mes === '06' ? this.state.idPresupuestal.gasjun - parseFloat(Total2).toFixed(2) : this.state.idPresupuestal.gasjun,
+      ampjun: this.state.idPresupuestal.ampjun,
+      jul: this.state.mes === '07' ? this.state.idPresupuestal.jul - parseFloat(Total2).toFixed(2) : this.state.idPresupuestal.jul,
+      gasjul: this.state.mes === '07' ? this.state.idPresupuestal.gasjul - parseFloat(Total2).toFixed(2) : this.state.idPresupuestal.gasjul,
+      ampjul: this.state.idPresupuestal.ampjul,
+      ago: this.state.mes === '08' ? this.state.idPresupuestal.ago - parseFloat(Total2).toFixed(2) : this.state.idPresupuestal.ago,
+      gasago: this.state.mes === '08' ? this.state.idPresupuestal.gasago - parseFloat(Total2).toFixed(2) : this.state.idPresupuestal.gasago,
+      ampago: this.state.idPresupuestal.ampago,
+      sep: this.state.mes === '09' ? this.state.idPresupuestal.sep - parseFloat(Total2).toFixed(2) : this.state.idPresupuestal.sep,
+      gassep: this.state.mes === '09' ? this.state.idPresupuestal.gassep - parseFloat(Total2).toFixed(2) : this.state.idPresupuestal.gassep,
+      ampsep: this.state.idPresupuestal.ampsep,
+      oct: this.state.mes === '10' ? this.state.idPresupuestal.oct - parseFloat(Total2).toFixed(2) : this.state.idPresupuestal.oct,
+      gasoct: this.state.mes === '10' ? this.state.idPresupuestal.gasoct - parseFloat(Total2).toFixed(2) : this.state.idPresupuestal.gasoct,
+      ampoct: this.state.idPresupuestal.ampago,
+      nov: this.state.mes === '11' ? this.state.idPresupuestal.nov - parseFloat(Total2).toFixed(2) : this.state.idPresupuestal.nov,
+      gasnov: this.state.mes === '11' ? this.state.idPresupuestal.gasnov - parseFloat(Total2).toFixed(2) : this.state.idPresupuestal.gasnov,
+      ampnov: this.state.idPresupuestal.ampnov,
+      dic: this.state.mes === '12' ? this.state.idPresupuestal.dic - parseFloat(Total2).toFixed(2) : this.state.idPresupuestal.dic,
+      gasdic: this.state.mes === '12' ? this.state.idPresupuestal.gasdic - parseFloat(Total2).toFixed(2) : this.state.idPresupuestal.gasdic,
+      ampdic: this.state.idPresupuestal.ampdic,
+      total: this.state.idPresupuestal.total,
+      ampliacion: this.state.idPresupuestal.ampliacion,
+      reduccion: this.state.idPresupuestal.reduccion,
+      transferencia: this.state.idPresupuestal.transferencia
+    }
+    firebase.database().ref().update(updates)
     const params = {
       Fondo: ' ',
       FechaI: this.state.fechaE,
@@ -283,7 +374,6 @@ export default class ArchivosPago extends Component {
       realizo: this.state.realizo,
       folio: this.state.numFolio
     }
-    console.log(params)
     this.setState({
       xmlC: [{ url: '', nombre: '' }],
       filefactura: [{ url: '', nombre: '' }],
@@ -334,6 +424,14 @@ export default class ArchivosPago extends Component {
       return presupuesto.indexOf(item) === index
     })
     let dispo = result[1] === false ? result[0] : result[1]
+
+    this.state.presupuesto.map(item => {
+      let idPre = (this.state.partida === item.ogasto && this.state.up === item.up) && item
+      if (idPre !== false) {
+        this.state.idPresupuestal = idPre
+        console.log(this.state.idPresupuestal)
+      }
+    })
 
     return (
       <div className='container-valeslist'>
