@@ -12,15 +12,19 @@ export default class ArchivosPago extends Component {
   constructor(props) {
     super(props)
     var today = new Date()
+    var today2 = new Date()
     var dd = today.getDate()
     var mm = today.getMonth() + 1
+    var mm2 = today2.getMonth() + 1
+    var yyyy = today.getFullYear()
     if (dd < 10) {
       dd = '0' + dd
     }
     if (mm < 10) {
       mm = '0' + mm
     }
-    today = mm
+    today = dd + '/' + mm + '/' + yyyy
+    today2 = mm2
     this.state = {
       lista: [
         {
@@ -52,7 +56,7 @@ export default class ArchivosPago extends Component {
         }
       ],
       idPresupuestal: [],
-      mes: today
+      mes: today2
     }
   }
 
