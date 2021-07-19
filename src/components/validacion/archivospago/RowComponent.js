@@ -113,7 +113,9 @@ export default class RowComponent extends Component {
               <TableCell className='table-validacion right-val'>
                 {this.props.item.Contrarecibo !== ' ' ? <div>Agregado</div> : null}
                 <Link className='link-edit' to={`/ContraValidacion/${this.props.item.id}`}>
-                  <AssignmentTurnedInIcon />
+                  <IconButton aria-label='expand row' size='small'>
+                    <AssignmentTurnedInIcon style={{ color: 'blue' }} />
+                  </IconButton>
                 </Link>
                 <IconButton aria-label='expand row' size='small' className='border-del' onClick={() => this.addValidacion(this.props.item)}>
                   <PublishIcon style={{ color: 'green' }} />
