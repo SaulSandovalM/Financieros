@@ -26,7 +26,7 @@ export default class Oficios extends Component {
       importe: '',
       no_oficio: '',
       up: '',
-      desc: '',
+      desc: ' ',
       urlfire: String(URLactual).substr(-20),
       mostrar: false,
       fondos: [],
@@ -125,7 +125,6 @@ export default class Oficios extends Component {
       : null
     ))
     const reducer = (a, b) => a + b
-    console.log(totalRetencion.reduce(reducer))
     var cad = []
     var proyectof = []
     let noProyect = this.state.no_proyecto
@@ -169,12 +168,26 @@ export default class Oficios extends Component {
     var result2 = string.split('-')
     var position = result2.length - 1
 
+    var array = []
+    var conta = 0
+
+    function IncrementarIndex() {
+      conta++
+      return (
+        conta -1
+      )
+    }
+
+
     return (
       <div className='oficios-container'>
         <div className='oficios-section-content'>
           {this.state.fondo.tipo_doc === 'Fondo Revolvente' && this.state.fondo.no_lici === ' ' &&
             <div className='m-f'>
               <p><b>Fondo Revolvente</b></p>
+              <form>
+
+              </form>
               <div>
                 <p>Solicitud Programatica</p>
                 <ReactToPrint
@@ -213,7 +226,7 @@ export default class Oficios extends Component {
                         content={() => this.la}
                       />
                       <div className='formatoe-container' ref={el => (this.la = el)}>
-                        {this.state.comprometidos.map(comprometidos =>
+                        {this.state.comprometidos.map((comprometidos, index) =>
                           comprometidos.up ?
                             <div className='lll'>
                               <div className='lll-content'>
@@ -342,11 +355,11 @@ export default class Oficios extends Component {
                                                   prefix=' $ '
                                                 />
                                               </div>
-                                                <textarea
-                                                  className='all-tab-f all-tab-of3'
-                                                  name='descripcion'
-                                                  value=''
-                                                />
+                                              <textarea
+                                                className='all-tab-f all-tab-of3'
+                                                name={index}
+                                                value=''
+                                              />
                                             </div>
                                           </div>
                                         )}
