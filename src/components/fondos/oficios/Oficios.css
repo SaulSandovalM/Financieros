@@ -34,12 +34,10 @@
 .lll {
   display: flex;
   justify-content: center;
-  min-height: 100vh;
   page-break-before: always;
   width: 100%;
 }
 .lll-content {
-  margin-top: 10px;
   width: 98%;
 }
 .title-ga{

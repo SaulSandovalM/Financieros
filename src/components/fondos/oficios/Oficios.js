@@ -30,7 +30,9 @@ export default class Oficios extends Component {
       urlfire: String(URLactual).substr(-20),
       mostrar: false,
       fondos: [],
-      nombre: ''
+      nombre: '',
+      textarea: [],
+      values: []
     }
   }
 
@@ -65,6 +67,7 @@ export default class Oficios extends Component {
     this.listenComprometidos(itemsRefComprometidos)
     const itemsRef = firebase.database().ref(`/fondos/${this.state.urlfire}`)
     this.listenForItems(itemsRef)
+
   }
 
   listenForItems = (itemsRef) => {
@@ -104,6 +107,19 @@ export default class Oficios extends Component {
         fondos: fondos
       })
     })
+  }
+
+  handleChangeTwo(e, index, i) {
+    const values = this.state.values
+    console.log(values)
+    console.log(index)
+    console.log(i)
+    console.log(e.target.value)
+    var lol = index.toString() + i.toString()
+    console.log(lol)
+    values[lol] = e.target.value
+    this.setState({values})
+    console.log(this.state.values)
   }
 
   render () {
@@ -168,26 +184,12 @@ export default class Oficios extends Component {
     var result2 = string.split('-')
     var position = result2.length - 1
 
-    var array = []
-    var conta = 0
-
-    function IncrementarIndex() {
-      conta++
-      return (
-        conta -1
-      )
-    }
-
-
     return (
       <div className='oficios-container'>
         <div className='oficios-section-content'>
           {this.state.fondo.tipo_doc === 'Fondo Revolvente' && this.state.fondo.no_lici === ' ' &&
             <div className='m-f'>
               <p><b>Fondo Revolvente</b></p>
-              <form>
-
-              </form>
               <div>
                 <p>Solicitud Programatica</p>
                 <ReactToPrint
@@ -340,7 +342,7 @@ export default class Oficios extends Component {
                                     </div>
                                     {comprometidos.comprobantes !== undefined ?
                                       <div>
-                                        {comprometidos.comprobantes.map(item =>
+                                        {comprometidos.comprobantes.map((item, i) =>
                                           <div className='ofie-comprobantes-conta'>
                                             <div className='ofie-header-blue'>
                                               <div className='all-tab-f all-tab-of1'>
@@ -357,8 +359,9 @@ export default class Oficios extends Component {
                                               </div>
                                               <textarea
                                                 className='all-tab-f all-tab-of3'
-                                                name={index}
-                                                value=''
+                                                name={index.toString() + i.toString()}
+                                                value={this.state.values[index.toString() + i.toString()]}
+                                                onChange={e => this.handleChangeTwo(e, index, i)}
                                               />
                                             </div>
                                           </div>
