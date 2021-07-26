@@ -406,7 +406,7 @@ export default class ArchivosPago extends Component {
     })
     console.log(params)
     if (params.Fondo && params.FechaI && params.Contrarecibo && params.FechaP
-      && params.Devolucion && params.Total && params.TipoPerona && params.NumContra
+      && params.Devolucion && params.Total && params.TipoPersona && params.NumContra
       && params.Adquisicion && params.Xml && params.xmlC && params.filefactura
       && params.realizo && params.folio) {
       firebase.database().ref('xmlPagoDirecto').push(params).then(() => {
