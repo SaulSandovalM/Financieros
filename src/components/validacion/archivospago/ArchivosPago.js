@@ -11,6 +11,23 @@ import CheckIcon from '@material-ui/icons/Check'
 export default class ArchivosPago extends Component {
   constructor(props) {
     super(props)
+    var user = firebase.auth().currentUser
+    var email
+    if (user != null) {
+      email = user.email
+    }
+    let admin
+    if (email === 'candy@procuraduria.com') {
+      admin = 'CANDY'
+    } else if (email === 'angel@procuraduria.com') {
+      admin = 'ANGEL'
+    } else if (email === 'danya@procuraduria.com') {
+      admin = 'DANYA'
+    } else if (email === 'mario@procuraduria.com') {
+      admin = 'MARIO'
+    } else if (email === 'hortencia@procuraduria.com') {
+      admin = 'HORTENCIA'
+    }
     var today = new Date()
     var today2 = new Date()
     var dd = today.getDate()
@@ -48,6 +65,7 @@ export default class ArchivosPago extends Component {
       numContra: '',
       datos: [],
       adqui: ' ',
+      realizo: admin,
       presupuesto: [
         {
           id: 1,
@@ -242,7 +260,7 @@ export default class ArchivosPago extends Component {
           ampliacion: child.val().ampliacion,
           reduccion: child.val().reduccion,
           transferencia: child.val().transferencia,
-          estatus: child.val().estatus,
+          estatus: child.val().estatus ? child.val().estatus : ' ',
           id: child.key
         })
       })
@@ -359,7 +377,8 @@ export default class ArchivosPago extends Component {
       total: this.state.idPresupuestal.total,
       ampliacion: this.state.idPresupuestal.ampliacion,
       reduccion: this.state.idPresupuestal.reduccion,
-      transferencia: this.state.idPresupuestal.transferencia
+      transferencia: this.state.idPresupuestal.transferencia,
+      estatus: this.state.idPresupuestal.estatus ? this.state.idPresupuestal.estatus : ' ',
     }
     firebase.database().ref().update(updates)
     const params = {
@@ -385,6 +404,7 @@ export default class ArchivosPago extends Component {
       total: [0],
       datos: []
     })
+    console.log(params)
     if (params.Fondo && params.FechaI && params.Contrarecibo && params.FechaP
       && params.Devolucion && params.Total && params.TipoPerona && params.NumContra
       && params.Adquisicion && params.Xml && params.xmlC && params.filefactura
@@ -433,7 +453,6 @@ export default class ArchivosPago extends Component {
       let idPre = (this.state.partida === item.ogasto && this.state.up === item.up) && item
       if (idPre !== false) {
         this.state.idPresupuestal = idPre
-        console.log(this.state.idPresupuestal)
       }
     })
 
