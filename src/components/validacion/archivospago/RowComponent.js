@@ -34,7 +34,7 @@ export default class RowComponent extends Component {
       admin = 'DANYA'
     } else if (email === 'mario@procuraduria.com') {
       admin = 'MARIO'
-    } else if (email === 'hortencia@procuraduria.com') {
+    } else if (email === 'hortensia@procuraduria.com') {
       admin = 'HORTENCIA'
     }
     this.state = {

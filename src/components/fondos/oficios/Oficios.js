@@ -172,17 +172,27 @@ export default class Oficios extends Component {
     this.state.comprometidos.map(item => item.comprobantes !== undefined ? compro.push(item.comprobantes.length) : null)
     const numcom = (a, b) => a + b
     var finalC = compro.reduce(numcom)
-
+    var newArr = []
     var perro = this.state.comprometidos.map(comprometidos =>
       comprometidos.comprobantes !== undefined ?
         comprometidos.comprobantes.map(item =>
-          ', ' + item.uuid
+          newArr.push(item.uuid)
         )
       : null
     )
-    var string = perro.toString()
-    var result2 = string.split('-')
-    var position = result2.length - 1
+    var string = newArr.toString()
+    var result2 = string.split(',')
+    console.log(newArr.toString())
+    console.log(result2)
+    var otherArr = []
+    result2.map(item => {
+      console.log(otherArr.push(item.split('-')))
+      console.log(otherArr)
+    })
+    let finalComprobantes = otherArr.map((item, i) => {
+      var count = item.length - 1
+      return item[count]
+    })
 
     return (
       <div className='oficios-container'>
@@ -342,7 +352,9 @@ export default class Oficios extends Component {
                                     </div>
                                     {comprometidos.comprobantes !== undefined ?
                                       <div>
-                                        {comprometidos.comprobantes.map((item, i) =>
+                                        {comprometidos.comprobantes
+                                          .sort((a, b) => a.folio - b.folio)
+                                          .map((item, i) =>
                                           <div className='ofie-comprobantes-conta'>
                                             <div className='ofie-header-blue'>
                                               <div className='all-tab-f all-tab-of1'>
@@ -568,7 +580,9 @@ export default class Oficios extends Component {
                                     </div>
                                     {comprometidos.comprobantes !== undefined ?
                                       <div>
-                                        {comprometidos.comprobantes.map((item, index) =>
+                                        {comprometidos.comprobantes
+                                          .sort((a, b) => a.folio - b.folio)
+                                          .map((item, i) =>
                                           <div className='ofie-comprobantes-conta'>
                                             <div className='ofie-header-blue'>
                                               <div className='all-tab-f all-tab-of1'>
@@ -794,8 +808,10 @@ export default class Oficios extends Component {
                                     </div>
                                     {comprometidos.comprobantes !== undefined ?
                                       <div>
-                                        {comprometidos.comprobantes.map(item =>
-                                          <div className='ofie-comprobantes-conta'>
+                                        {comprometidos.comprobantes
+                                          .sort((a, b) => a.folio - b.folio)
+                                          .map((item, i) =>
+                                          <div className='ofie-comprobantes-conta' key={i}>
                                             <div className='ofie-header-blue'>
                                               <div className='all-tab-f all-tab-of1'>
                                                 {item.uuid}
@@ -872,188 +888,6 @@ export default class Oficios extends Component {
             </div>
           }
         </div>
-
-
-
-        {/* Formato E */}
-        {/* <div className='formatoe-container' ref={el => (this.la = el)}>
-          {this.state.comprometidos.map(comprometidos =>
-            comprometidos.up ?
-              <div className='lll'>
-                <div className='lll-content'>
-                  <div className='title-ga'>
-                    <div className='ofie-img1'>
-                      <img className='pgjh' src={lpgjh} alt='' style={{ width: 'auto' }} />
-                    </div>
-                    <div className='ofie-text'>
-                      <p className='text-titulo-ga'>PROCURADURÍA GENERAL DE JUSTICA DE HIDALGO</p>
-                      <p className='text-titulo-ga'>{comprometidos.area}</p>
-                      <p className='text-titulo-ga'>{comprometidos.partida}</p>
-                    </div>
-                    <div className='ofie-img-cont'>
-                      <div className='ofie-img2'>
-                        <img className='img2' src={logo2} alt='' />
-                      </div>
-                    </div>
-                  </div>
-                  <div className='faderinpo'>
-                    <div className='contenedor-ga'>
-                      <div className='contenedor-1'>
-                        <div className='interno-ga2'>
-                          <p className='text-gai'>Gasto a Comprobar</p>
-                          <input className='input-gai' type='checkbox' disabled />
-                        </div>
-                        <div className='interno-ga2'>
-                          <p className='text-gai'>Comprobacion de Gastos</p>
-                          <input className='input-gai' type='checkbox' disabled />
-                        </div>
-                        <div className='interno-ga2'>
-                          <p className='text-gai'>Validación de Objeto de Gastos</p>
-                          <input className='input-gai' type='checkbox' disabled />
-                        </div>
-                        <div className='interno-ga2'>
-                          <p className='text-gai'>Transferencia</p>
-                          <input className='input-gai' type='checkbox' disabled />
-                        </div>
-                      </div>
-                      <div className='contenedor-1'>
-                        <div className='interno-ga2'>
-                          <p className='text-gai'>Creación de Fondo Revolvente</p>
-                          <input className='input-gai' type='checkbox' disabled />
-                        </div>
-                        <div className='interno-ga2'>
-                          <p className='text-gai'>Fondo Revolvente</p>
-                          <input className='input-gai' type='checkbox' disabled />
-                        </div>
-                        <div className='interno-ga2'>
-                          <p className='text-gai'>Cancelacion de Fondo Revolvente</p>
-                          <input className='input-gai' type='checkbox' disabled />
-                        </div>
-                      </div>
-                      <div className='contenedor-1'>
-                        <div className='interno-ga2'>
-                          <p className='text-gai'>Viaticos Anticipados</p>
-                          <input className='input-gai' type='checkbox' disabled />
-                        </div>
-                        <div className='interno-ga2'>
-                          <p className='text-gai'>Viaticos Devengados</p>
-                          <input className='input-gai' type='checkbox' disabled />
-                        </div>
-                        <div className='interno-ga2'>
-                          <p className='text-gai'>Viaticos al Extranjero</p>
-                          <input className='input-gai' type='checkbox' disabled />
-                        </div>
-                        <div className='interno-ga2'>
-                          <p className='text-gai'>Comprobación de Viáticos</p>
-                          <input className='input-gai' type='checkbox' disabled />
-                        </div>
-                      </div>
-                      <div className='contenedor-1'>
-                        <div className='interno-ga2'>
-                          <p className='text-gai'>Anticipo a Proveedor</p>
-                          <input className='input-gai' type='checkbox' disabled />
-                        </div>
-                        <div className='interno-ga2'>
-                          <p className='text-gai'>Remanente de Pago a Proveedor</p>
-                          <input className='input-gai' type='checkbox' disabled />
-                        </div>
-                        <div className='interno-ga2'>
-                          <p className='text-gai'>Pago a Proveedor</p>
-                          <input className='input-gai' type='checkbox' checked />
-                        </div>
-                        <div className='interno-ga2'>
-                          <p className='text-gai'>Anticipo de Pago a Proveedor por Requisición</p>
-                          <input className='input-gai' type='checkbox' disabled />
-                        </div>
-                        <div className='interno-ga2'>
-                          <p className='text-gai'>Remanente de Pago a Proveedor por Requisición</p>
-                          <input className='input-gai' type='checkbox' disabled />
-                        </div>
-                        <div className='interno-ga2'>
-                          <p className='text-gai'>Proveedor por Requisición</p>
-                          <input className='input-gai' type='checkbox' disabled />
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div>
-                    <div>
-                      <div className='ofie-header-blue'>
-                        <div className='alltabla-ga ga1'>
-                          Folio de factura
-                        </div>
-                        <div className='alltabla-ga ga2'>
-                          Importe
-                        </div>
-                        <div className='alltabla-ga ga3'>
-                          Leyenda alusiva al gasto
-                        </div>
-                      </div>
-                      {comprometidos.comprobantes !== undefined ?
-                        <div>
-                          {comprometidos.comprobantes.map(item =>
-                            <div className='ofie-comprobantes-conta'>
-                              <div className='ofie-header-blue'>
-                                <div className='all-tab-f all-tab-of1'>
-                                  {item.uuid}
-                                </div>
-                                <div className='all-tab-f all-tab-of2'>
-                                  <CurrencyFormat
-                                    style={{ fontSize: '12px' }}
-                                    value={(parseFloat(item.total) + parseFloat(item.isr)).toFixed(2)}
-                                    displayType='text'
-                                    thousandSeparator
-                                    prefix=' $ '
-                                  />
-                                </div>
-                                <div className='all-tab-f all-tab-of3'>
-                                  {item.descripcion}
-                                </div>
-                              </div>
-                            </div>
-                          )}
-                        </div>
-                      : null}
-                      <div className='ofie-total-cont'>
-                        <div className='all-tab-f2 all-tab-of1' style={{ textAlign: 'right' }}>
-                          TOTAL:
-                        </div>
-                        <div className='all-tab-f2 all-tab-of2'>
-                          {comprometidos.isr === '0.00' ?
-                            <CurrencyFormat
-                              style={{ fontSize: '12px' }}
-                              value={comprometidos.total}
-                              displayType='text'
-                              thousandSeparator
-                              prefix=' $ '
-                            />
-                            : null
-                          }
-                          {comprometidos.isr !== '0.00' && comprometidos.isr ?
-                            <CurrencyFormat
-                              style={{ fontSize: '12px' }}
-                              value={(parseFloat(totalImporte) + parseFloat(totalRetencion)).toFixed(2)}
-                              displayType='text'
-                              thousandSeparator
-                              prefix=' $ '
-                            />
-                            : null
-                          }
-                        </div>
-                        <div className='all-tab-f2 all-tab-of3'
-                          style={{
-                            borderRight: '1px solid white',
-                            borderBottom: '1px solid white'
-                          }}
-                        />
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            : null
-          )}
-        </div> */}
 
         {/* fondo revolvente */}
         <div className='pppdf-subdad' ref={el => (this.rfr = el)}>
@@ -1282,8 +1116,7 @@ export default class Oficios extends Component {
                         comprometidos.isr !== '0.00' && comprometidos.isr ?
                         '(' + NumberAsString((totalImporte.reduce(reducer))) + ')' : null
                       )},
-                      cantidad amparada con CFDI No
-                      {result2[position]},
+                      cantidad amparada con CFDI No {finalComprobantes.map(item => {return item + ', '})},
                       número de requisición {this.state.fondo.requisicion}
                       asi como la poliza de afectacion presupuestal al momento del comprometido
                       num {this.state.fondo.poliza} que emita la Dirección
@@ -1374,12 +1207,12 @@ export default class Oficios extends Component {
                     <p>
                       Por este medio me permito enviar a Usted documentación por un importe total de
                       {this.state.comprometidos.map(comprometidos =>
-                        comprometidos.isr !== '0.00' && comprometidos.isr ?
+                        comprometidos.isr !== undefined && comprometidos.isr ?
                           <CurrencyFormat value={(totalImporte.reduce(reducer)).toFixed(2)} displayType='text' thousandSeparator prefix=' $ ' />
                         : null
                       )} ({(NumberAsString(totalImporte.reduce(reducer)))}),
-                      cantidad amparada con los comprobantes No
-                      {result2[position]}, para el trámite de pago a favor del proveedor {this.state.fondo.beneficiario}, por
+                      cantidad amparada con los comprobantes No {finalComprobantes.map(item => {return item + ', '})}
+                      para el trámite de pago a favor del proveedor {this.state.fondo.beneficiario}, por
                       la/el servicio {this.state.fondo.desc}, con
                       cargo al proyecto{this.state.comprometidos.map(item => item.proy ? ', ' + item.proy + ' ' + item.np : null)} y
                       a los recursos otorgados con el oficio de autorización {this.state.fondo.oficio_aut}, del
@@ -1624,7 +1457,7 @@ export default class Oficios extends Component {
                   comprometidos.area ?
                   <tr>
                     <td className='all-tablai'>
-                      {comprometidos.año}
+                      {comprometidos.año.slice(2)}
                     </td>
                     <td className='all-tablai'>
                       {comprometidos.ramo}
