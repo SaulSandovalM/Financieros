@@ -536,7 +536,7 @@ export default class Comprometidos extends Component {
     const filterData = this.state.xml.filter(
       (xml) => {
         return (
-          (xml.folio.indexOf(this.state.folioXml) !== -1) && xml.estatus !== 'asignado' && xml.tipo === 'revolvente'
+          (xml.uuid.indexOf(this.state.folioXml) !== -1) && xml.estatus !== 'asignado' && xml.tipo === 'revolvente'
         )
       }
     )
