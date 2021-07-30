@@ -905,6 +905,18 @@ export default class Comprometidos extends Component {
                         <option name={y}>{x}</option>
                       )}
                     </select>
+                    <select
+                      className='select-compro'
+                      id='area'
+                      name='area'
+                      ref='area'
+                      onChange={this.handleInput.bind(this)}
+                      required
+                    >
+                      {this.area.map((x,y) =>
+                        <option name={y}>{x}</option>
+                      )}
+                    </select>
                   </TableCell>
                   <TableCell className='border-table2'>
                     {this.state.right.length > 0 ?

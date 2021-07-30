@@ -466,7 +466,7 @@ export default class Oficios extends Component {
                         content={() => this.la}
                       />
                       <div className='formatoe-container' ref={el => (this.la = el)}>
-                        {this.state.comprometidos.map(comprometidos =>
+                        {this.state.comprometidos.map((comprometidos, index) =>
                           comprometidos.up ?
                             <div className='lll'>
                               <div className='lll-content'>
@@ -598,10 +598,10 @@ export default class Oficios extends Component {
                                                 />
                                               </div>
                                               <textarea
-                                                name='desc'
-                                                value={this.state.desc}
                                                 className='all-tab-f all-tab-of3'
-                                                onChange={this.onChange}
+                                                name={index.toString() + i.toString()}
+                                                value={this.state.values[index.toString() + i.toString()]}
+                                                onChange={e => this.handleChangeTwo(e, index, i)}
                                               />
                                             </div>
                                           </div>
@@ -694,7 +694,7 @@ export default class Oficios extends Component {
                         content={() => this.la}
                       />
                       <div className='formatoe-container' ref={el => (this.la = el)}>
-                        {this.state.comprometidos.map(comprometidos =>
+                        {this.state.comprometidos.map((comprometidos, index) =>
                           comprometidos.up ?
                             <div className='lll'>
                               <div className='lll-content'>
@@ -825,10 +825,12 @@ export default class Oficios extends Component {
                                                   prefix=' $ '
                                                 />
                                               </div>
-                                                <textarea
-                                                  className='all-tab-f all-tab-of3'
-                                                  name='descripcion'
-                                                />
+                                              <textarea
+                                                className='all-tab-f all-tab-of3'
+                                                name={index.toString() + i.toString()}
+                                                value={this.state.values[index.toString() + i.toString()]}
+                                                onChange={e => this.handleChangeTwo(e, index, i)}
+                                              />
                                             </div>
                                           </div>
                                         )}
