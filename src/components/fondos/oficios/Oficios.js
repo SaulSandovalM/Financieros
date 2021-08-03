@@ -173,22 +173,14 @@ export default class Oficios extends Component {
     const numcom = (a, b) => a + b
     var finalC = compro.reduce(numcom)
     var newArr = []
-    var perro = this.state.comprometidos.map(comprometidos =>
-      comprometidos.comprobantes !== undefined ?
-        comprometidos.comprobantes.map(item =>
-          newArr.push(item.uuid)
-        )
-      : null
-    )
     var string = newArr.toString()
     var result2 = string.split(',')
-    console.log(newArr.toString())
-    console.log(result2)
+    // console.log(newArr.toString())
+    // console.log(result2)
     var otherArr = []
-    result2.map(item => {
+    result2.map(item =>
       console.log(otherArr.push(item.split('-')))
-      console.log(otherArr)
-    })
+    )
     let finalComprobantes = otherArr.map((item, i) => {
       var count = item.length - 1
       return item[count]

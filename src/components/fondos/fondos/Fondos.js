@@ -18,7 +18,6 @@ import FormControl from '@material-ui/core/FormControl'
 import Select from '@material-ui/core/Select'
 import Chip from '@material-ui/core/Chip'
 import { Link } from 'react-router-dom'
-import CurrencyFormat from 'react-currency-format'
 
 export default class Fondos extends Component {
   constructor (props) {
@@ -120,7 +119,7 @@ export default class Fondos extends Component {
       })
       wishRef.set(updatedWish)
     })
-    const itemsRefPre = firebase.database().ref('oficios/')
+    const itemsRefPre = firebase.database().ref('presupuesto/')
     this.listenForItemsP(itemsRefPre)
   }
 
@@ -131,7 +130,7 @@ export default class Fondos extends Component {
         fondos.push({
           fondo: child.val().fondo,
           tipo_doc: child.val().tipo_doc,
-          importe: child.val().importe,
+          fecha: child.val().fecha,
           realizo: child.val().realizo,
           id: child.key
         })
@@ -312,12 +311,20 @@ export default class Fondos extends Component {
     const newArray = ['']
     const myObj = {}
 
-    this.state.oficio.forEach(el => {
-      if (!(el in myObj)) {
+    this.state.oficio.filter(el => {
+      if (!(el in myObj) && el.oficio !== undefined) {
         myObj[el + 1] = true
         newArray.push(el)
       }
     })
+    const aarr = []
+    newArray.map(item => {
+      return aarr.push(item.oficio)
+    })
+    let result = aarr.filter((item,index)=>{
+      return aarr.indexOf(item) === index;
+    })
+    console.log(result)
 
     return (
       <div>
@@ -334,7 +341,7 @@ export default class Fondos extends Component {
                     <p className='inp-p-t'>Tipo de Doc.</p>
                   </div>
                   <div className='inp-sea-cont'>
-                    <p className='inp-p-t'>Importe</p>
+                    <p className='inp-p-t'>Fecha</p>
                   </div>
                   <div className='inp-sea-cont'>
                     <p className='inp-p-t'>Nombre R.</p>
@@ -362,19 +369,32 @@ export default class Fondos extends Component {
                   <div className='cont-w-data'>
                     {this.state.fondos.map(fondos =>
                       <div className='cont-map-fondo'>
-                        {(this.state.searchF === fondos.fondo && (fondos.realizo === this.state.realizo || this.state.realizo === 'MIGUEL')) &&
+                        {(this.state.searchF === fondos.fondo &&
+                          ((fondos.tipo_doc === 'Pago Directo' &&
+                            (this.state.realizo === 'KARINA' ||
+                              this.state.realizo === 'LILIA' ||
+                              this.state.realizo === 'CENELY' ||
+                              this.state.realizo === 'HECTOR' ||
+                              this.state.realizo === 'MIGUEL'
+                            )
+                          )
+                          ||
+                          (fondos.tipo_doc === 'Fondo Revolvente' &&
+                            (this.state.realizo === 'LAURA' ||
+                              this.state.realizo === 'TERESA' ||
+                              this.state.realizo === 'MARCOS' ||
+                              this.state.realizo === 'ELOY' ||
+                              this.state.realizo === 'MARTHA' ||
+                              this.state.realizo === 'MIGUEL'
+                            )
+                          ))
+                        ) &&
                           <div className='cont-map-data'>
                             <div className='data-w-search'>
                               <p className='data-m-f'>{fondos.tipo_doc}</p>
                             </div>
                             <div className='editar-option'>
-                              <CurrencyFormat
-                                value={fondos.importe}
-                                displayType='text'
-                                prefix=' $ '
-                                thousandSeparator
-                                decimalSeparator='.'
-                              />
+                              <p className='data-m-f'>{fondos.fecha}</p>
                             </div>
                             <div className='data-w-search'>
                               <p className='data-m-f'>{fondos.realizo}</p>
@@ -407,7 +427,6 @@ export default class Fondos extends Component {
                       id='fondo'
                       name='fondo'
                       value={fondo}
-                      onChange={this.onChange}
                       ref={fondo => this.inputFondo = fondo}
                       required
                     />
@@ -419,7 +438,6 @@ export default class Fondos extends Component {
                       id='fecha'
                       name='fecha'
                       value={fecha}
-                      onChange={this.onChange}
                       ref={fecha => this.inputFecha = fecha}
                       required
                     />
@@ -485,8 +503,8 @@ export default class Fondos extends Component {
                       ref={oficio_aut => this.inputOficioAut = oficio_aut}
                       required
                     >
-                    {newArray.map(data =>
-                      <option name={data}>{data.oficio}</option>
+                    {result.map(data =>
+                      <option name={data}>{data}</option>
                     )}
                     </select>
                   </div>

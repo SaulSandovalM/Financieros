@@ -738,7 +738,9 @@ export default class Comprometidos extends Component {
     const tt4 = (a, b) => a + b
     var tcantidad4 = sumatoria.reduce(tt4)
 
-    console.log(this.state.comprometidosDos)
+    if (this.state.up === '01' || this.state.up !== '01') {
+      this.state.area = 'Procuraduría General de Justicia'
+    }
 
     return (
       <div className='div-compro-container'>
@@ -905,18 +907,6 @@ export default class Comprometidos extends Component {
                         <option name={y}>{x}</option>
                       )}
                     </select>
-                    <select
-                      className='select-compro'
-                      id='area'
-                      name='area'
-                      ref='area'
-                      onChange={this.handleInput.bind(this)}
-                      required
-                    >
-                      {this.area.map((x,y) =>
-                        <option name={y}>{x}</option>
-                      )}
-                    </select>
                   </TableCell>
                   <TableCell className='border-table2'>
                     {this.state.right.length > 0 ?
@@ -1014,7 +1004,6 @@ export default class Comprometidos extends Component {
                   <TableCell className='border-icon' />
                   <TableCell className='border-table2'>
                     <input
-                      style={{  }}
                       className='select-compro'
                       id='partida'
                       name='partida'
