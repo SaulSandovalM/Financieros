@@ -1114,3 +1114,10 @@ th {
   page-break-inside: avoid;
   page-break-after: auto;
 }
+.fadera {
+  display: flex;
+  justify-content: center;
+  padding-bottom: 0;
+  padding-left: 100px;
+  padding-right: 100px;
+}

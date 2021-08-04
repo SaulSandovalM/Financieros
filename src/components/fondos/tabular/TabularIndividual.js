@@ -110,7 +110,17 @@ export default class TabularIndi extends Component {
                       <div className='tab-pui' />
                       <div className='tab-pui-border'>
                         <p className='tab-p-m'>$</p>
-                        <p className='tab-p-m'>{comprometidos.total}</p>
+                        <CurrencyFormat
+                          style={{
+                            fontSize: '16px',
+                            margin: '1px',
+                            textAlign: 'center',
+                            fontWeight: 'bold'
+                          }}
+                          value={comprometidos.total}
+                          displayType='text'
+                          thousandSeparator
+                        />
                       </div>
                     </div>
                   </div>

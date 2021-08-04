@@ -27,7 +27,6 @@ export default class Comprometidos extends Component {
   constructor (props) {
     super(props)
     var URLactual = window.location
-    this.unsubscribe = null
     this.state = {
       open: false,
       checked: [],
@@ -594,7 +593,6 @@ export default class Comprometidos extends Component {
       ))
       const reducerImporte = (a, b) => a + b
       this.state.importe = totalImporteImporte.reduce(reducerImporte).toFixed(2)
-      console.log(this.state.importe)
 
       const totalImporteIva = []
       right.map(items => (

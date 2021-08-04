@@ -29,11 +29,11 @@ export default class ListComponent extends Component {
   }
 
   render () {
-    var filterData = this.props.listaB.filter(
-      (item) => {
-        return (item.oficio ? item.oficio.indexOf(this.state.search) !== -1 : null)
-      }
-    )
+    // var filterData = this.props.listaB.filter(
+    //   (item) => {
+    //     return (item.oficio ? item.oficio.indexOf(this.state.search) !== -1 : null)
+    //   }
+    // )
 
     return (
       <div style={{ margin: '30px' }}>

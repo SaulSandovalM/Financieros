@@ -170,9 +170,9 @@ export default class Oficios extends Component {
     const numcom = (a, b) => a + b
     var finalC = compro.reduce(numcom)
     var newArr = []
-    this.state.comprometidos.map(comprometidos =>
+    this.state.comprometidos.map((comprometidos, index) =>
       comprometidos.comprobantes !== undefined ?
-        comprometidos.comprobantes.map(item =>
+        comprometidos.comprobantes.sort((a, b) => a.folio - b.folio).map(item =>
           newArr.push(item.uuid)
         )
       : null
@@ -182,14 +182,15 @@ export default class Oficios extends Component {
     console.log(newArr.toString())
     console.log(result2)
     var otherArr = []
-    result2.map(item => {
-      console.log(otherArr.push(item.split('-')))
-      console.log(otherArr)
-    })
+    result2.map(item =>
+      otherArr.push(item.split('-'))
+    )
     let finalComprobantes = otherArr.map((item, i) => {
       var count = item.length - 1
       return item[count]
     })
+
+    var finalRetencion = finalComprobantes.sort()
 
     return (
       <div className='oficios-container'>
@@ -1124,7 +1125,7 @@ export default class Oficios extends Component {
                         comprometidos.isr !== '0.00' && comprometidos.isr ?
                         '(' + NumberAsString((totalImporte.reduce(reducer))) + ')' : null
                       )},
-                      cantidad amparada con CFDI No {finalComprobantes.sort((a, b) => a.folio - b.folio).map(item => {return item + ', '})},
+                      cantidad amparada con CFDI No {finalComprobantes.map(item => {return item + ', '})},
                       número de requisición {this.state.fondo.requisicion}
                       asi como la poliza de afectacion presupuestal al momento del comprometido
                       num {this.state.fondo.poliza} que emita la Dirección
@@ -1212,20 +1213,52 @@ export default class Oficios extends Component {
                     </p>
                   </div>
                   <div className='texto-ofi-sp'>
-                    <p>
-                      Por este medio me permito enviar a Usted documentación por un importe total de
-                      {this.state.comprometidos.map(comprometidos =>
-                        comprometidos.isr !== undefined && comprometidos.isr ?
-                          <CurrencyFormat value={(totalImporte.reduce(reducer)).toFixed(2)} displayType='text' thousandSeparator prefix=' $ ' />
-                        : null
-                      )} ({(NumberAsString(totalImporte.reduce(reducer)))}),
-                      cantidad amparada con los comprobantes No {finalComprobantes.sort((a, b) => a.folio - b.folio).map(item => {return item + ', '})}
-                      para el trámite de pago a favor del proveedor {this.state.fondo.beneficiario}, por
-                      la/el servicio {this.state.fondo.desc}, con
-                      cargo al proyecto{this.state.comprometidos.map(item => item.proy ? ', ' + item.proy + ' ' + item.np : null)} y
-                      a los recursos otorgados con el oficio de autorización {this.state.fondo.oficio_aut}, del
-                      Ejercicio 2021 a la Procuraduria General de Justicia del Estado de Hidalgo.
-                    </p>
+                    {totalRetencion.reduce(reducer) !== 0 ?
+                      <p>
+                        Por este medio me permito enviar a Usted documentación por un importe total de
+                        {this.state.comprometidos.map(comprometidos =>
+                          comprometidos.isr !== '0.00' && comprometidos.isr ?
+                            <CurrencyFormat
+                              value={(totalImporte.reduce(reducer) + totalRetencion.reduce(reducer)).toFixed(2)}
+                              displayType='text'
+                              thousandSeparator
+                              prefix=' $ '
+                            />
+                          : null
+                        )} ({(NumberAsString(totalImporte.reduce(reducer) + totalRetencion.reduce(reducer)))}), con
+                        un retención por <CurrencyFormat
+                          value={(totalRetencion.reduce(reducer)).toFixed(2)}
+                          displayType='text'
+                          thousandSeparator
+                          prefix=' $ '
+                        /> para un importe total a pagar de
+                        {this.state.comprometidos.map(comprometidos =>
+                          comprometidos.isr !== undefined && comprometidos.isr ?
+                            <CurrencyFormat value={(totalImporte.reduce(reducer)).toFixed(2)} displayType='text' thousandSeparator prefix=' $ ' />
+                          : null
+                        )} cantidad amparada con los comprobantes No {finalRetencion.map(item => item + ', ')}
+                        para el trámite de pago a favor del proveedor {this.state.fondo.beneficiario}, por
+                        la/el servicio {this.state.fondo.desc}, con
+                        cargo al proyecto{this.state.comprometidos.map(item => item.proy ? ', ' + item.proy + ' ' + item.np : null)} y
+                        a los recursos otorgados con el oficio de autorización {this.state.fondo.oficio_aut}, del
+                        Ejercicio 2021 a la Procuraduria General de Justicia del Estado de Hidalgo.
+                      </p>
+                      :
+                      <p>
+                        Por este medio me permito enviar a Usted documentación por un importe total de
+                        {this.state.comprometidos.map(comprometidos =>
+                          comprometidos.isr !== undefined && comprometidos.isr ?
+                            <CurrencyFormat value={(totalImporte.reduce(reducer)).toFixed(2)} displayType='text' thousandSeparator prefix=' $ ' />
+                          : null
+                        )} ({(NumberAsString(totalImporte.reduce(reducer)))}),
+                        cantidad amparada con los comprobantes No {finalComprobantes.sort((a, b) => a.folio - b.folio).map(item => {return item + ', '})}
+                        para el trámite de pago a favor del proveedor {this.state.fondo.beneficiario}, por
+                        la/el servicio {this.state.fondo.desc}, con
+                        cargo al proyecto{this.state.comprometidos.map(item => item.proy ? ', ' + item.proy + ' ' + item.np : null)} y
+                        a los recursos otorgados con el oficio de autorización {this.state.fondo.oficio_aut}, del
+                        Ejercicio 2021 a la Procuraduria General de Justicia del Estado de Hidalgo.
+                      </p>
+                    }
                     <p>Sin otro particular, le envio un cordial y afectuoso saludo.</p>
                   </div>
                 </div>
@@ -1662,10 +1695,10 @@ export default class Oficios extends Component {
             <div className='obs-sopadre2'>
               <div className='obs-so'>
                 <p className='text-osb'>Cuenta CFE</p>
-                <div className='input-cfe' />
+                <div className='input-cfe'><p style={{ marginTop: '10px' }}>{this.state.fondo.cfe}</p></div>
                 <div style={{ display: 'flex'}}>
                   <p className='text-osb'>No servicio CFE</p>
-                  <div className='input-cfe' />
+                  <div className='input-cfe'><p style={{ marginTop: '10px' }}>{this.state.fondo.nscfe}</p></div>
                 </div>
               </div>
             </div>
