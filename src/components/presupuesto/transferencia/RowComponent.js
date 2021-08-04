@@ -15,6 +15,39 @@ export default class RowComponent extends Component {
   }
 
   render () {
+    var saldototal =
+      (
+        (
+          this.props.item.ene +
+          this.props.item.feb +
+          this.props.item.mar +
+          this.props.item.abr +
+          this.props.item.may +
+          this.props.item.jun +
+          this.props.item.jul +
+          this.props.item.ago +
+          this.props.item.sep +
+          this.props.item.oct +
+          this.props.item.nov +
+          this.props.item.dic
+        ) - (
+          this.props.item.gasene +
+          this.props.item.gasfeb +
+          this.props.item.gasmar +
+          this.props.item.gasabr +
+          this.props.item.gasmay +
+          this.props.item.gasjun +
+          this.props.item.gasjul +
+          this.props.item.gasago +
+          this.props.item.gassep +
+          this.props.item.gasoct +
+          this.props.item.gasnov +
+          this.props.item.gasdic
+        )
+      ).toFixed(2)
+
+    console.log(saldototal)
+
     return (
       <TableBody>
         {this.props.item.transferencia === 'T/R' ?
@@ -31,7 +64,7 @@ export default class RowComponent extends Component {
             <TableCell className='mes-t'>
               <i>
                 <CurrencyFormat
-                  value={((this.props.item.ago + this.props.item.ene)).toFixed(2)}
+                  value={saldototal}
                   displayType='text'
                   thousandSeparator
                   prefix=' $'

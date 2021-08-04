@@ -412,7 +412,12 @@ export default class Comprometidos extends Component {
           total: change.total,
           uuid: change.uuid,
           estatus: 'asignado',
-          tipo: change.tipo
+          tipo: change.tipo ? change.tipo : ' ',
+          serie: change.serie ? change.serie : ' ',
+          descripcion: change.descripcion ? change.descripcion : ' ',
+          partida: change.partida ? change.partida : ' ',
+          up: change.up ? change.up : ' ',
+          numfolio: change.numfolio ? change.numfolio : ' '
         }
     })
     firebase.database().ref('xml').update(prueba)
@@ -737,10 +742,6 @@ export default class Comprometidos extends Component {
     )
     const tt4 = (a, b) => a + b
     var tcantidad4 = sumatoria.reduce(tt4)
-
-    if (this.state.up === '01' || this.state.up !== '01') {
-      this.state.area = 'Procuraduría General de Justicia'
-    }
 
     return (
       <div className='div-compro-container'>

@@ -9,16 +9,6 @@ import TableHead from '@material-ui/core/TableHead'
 import TableRow from '@material-ui/core/TableRow'
 import Paper from '@material-ui/core/Paper'
 import TextField from '@material-ui/core/TextField'
-import Grid from '@material-ui/core/Grid'
-import TableBody from '@material-ui/core/TableBody'
-import IconButton from '@material-ui/core/IconButton'
-import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown'
-import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp'
-import Box from '@material-ui/core/Box'
-import Collapse from '@material-ui/core/Collapse'
-import Typography from '@material-ui/core/Typography'
-import CurrencyFormat from 'react-currency-format'
-import DeleteIcon from '@material-ui/icons/Delete'
 
 export default class ListComponent extends Component {
   constructor (props) {
@@ -54,12 +44,6 @@ export default class ListComponent extends Component {
         return (item.oficio ? item.oficio.indexOf(this.state.search) !== -1 : null)
       }
     )
-
-    var array = [
-      {up: '1'},
-      {up: '2'},
-      {up: '3'}
-    ]
 
     return (
       <div>

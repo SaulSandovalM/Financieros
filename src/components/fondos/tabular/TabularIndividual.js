@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import './Tabular.css'
 import ReactToPrint from 'react-to-print'
 import firebase from '../../../Firebase'
+import CurrencyFormat from 'react-currency-format'
 
 export default class TabularIndi extends Component {
   constructor (props) {
@@ -80,17 +81,26 @@ export default class TabularIndi extends Component {
                           </div>
                           <div style={{ display: 'flex', flexDirection: 'column', width: '30%' }}>
                             {comprometidos.comprobantes !== undefined ?
-                              comprometidos.comprobantes.map(item =>
+                              comprometidos.comprobantes.sort((a, b) => a.folio - b.folio).map(item =>
                                 <div className='tab-pui-border' style={{ width: '100%' }}>
                                   <p className='tab-p-m'>$</p>
-                                  <p className='tab-p-m'>{item.total}</p>
+                                  <CurrencyFormat
+                                    style={{
+                                      fontSize: '16px',
+                                      margin: '1px',
+                                      textAlign: 'center',
+                                      fontWeight: 'bold'
+                                    }}
+                                    value={item.total}
+                                    displayType='text'
+                                    thousandSeparator
+                                  />
                                 </div>
                               ) : null
                             }
                           </div>
                         </div>
                       </div>
-
                   </div>
                   <div className='tab-tabular'>
                     <div className='tab-pui-content'>

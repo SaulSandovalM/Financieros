@@ -4,10 +4,11 @@ import ReactToPrint from 'react-to-print'
 import firebase from '../../../Firebase'
 import { NumberAsString } from '../fondos/NumerosLetras'
 import logo2 from '../../../img/logo.jpg'
-import lpgjh from '../../../img/logo-PGJH.jpg'
-// import sus from '../../../img/veda.png'
+// import lpgjh from '../../../img/logo-PGJH.jpg'
+import sus from '../../../img/veda.png'
 import CurrencyFormat from 'react-currency-format'
 import Popup from 'reactjs-popup'
+import TextareaAutosize from '@material-ui/core/TextareaAutosize'
 
 export default class Oficios extends Component {
   constructor (props) {
@@ -240,7 +241,7 @@ export default class Oficios extends Component {
                               <div className='lll-content'>
                                 <div className='title-ga'>
                                   <div className='ofie-img1'>
-                                    <img className='pgjh' src={lpgjh} alt='' style={{ width: 'auto' }} />
+                                    <img className='pgjh' src={sus} alt='' style={{ width: 'auto' }} />
                                   </div>
                                   <div className='ofie-text'>
                                     <p className='text-titulo-ga'>PROCURADURÍA GENERAL DE JUSTICA DE HIDALGO</p>
@@ -351,7 +352,7 @@ export default class Oficios extends Component {
                                         {comprometidos.comprobantes
                                           .sort((a, b) => a.folio - b.folio)
                                           .map((item, i) =>
-                                          <div className='ofie-comprobantes-conta'>
+                                          <div className='ofie-comprobantes-conta page-break'>
                                             <div className='ofie-header-blue'>
                                               <div className='all-tab-f all-tab-of1'>
                                                 {item.uuid}
@@ -365,7 +366,9 @@ export default class Oficios extends Component {
                                                   prefix=' $ '
                                                 />
                                               </div>
-                                              <textarea
+                                              <TextareaAutosize
+                                                aria-label="empty textarea"
+                                                placeholder="Escribe aqui"
                                                 className='all-tab-f all-tab-of3'
                                                 name={index.toString() + i.toString()}
                                                 value={this.state.values[index.toString() + i.toString()]}
@@ -468,7 +471,7 @@ export default class Oficios extends Component {
                               <div className='lll-content'>
                                 <div className='title-ga'>
                                   <div className='ofie-img1'>
-                                    <img className='pgjh' src={lpgjh} alt='' style={{ width: 'auto' }} />
+                                    <img className='pgjh' src={sus} alt='' style={{ width: 'auto' }} />
                                   </div>
                                   <div className='ofie-text'>
                                     <p className='text-titulo-ga'>PROCURADURÍA GENERAL DE JUSTICA DE HIDALGO</p>
@@ -579,7 +582,7 @@ export default class Oficios extends Component {
                                         {comprometidos.comprobantes
                                           .sort((a, b) => a.folio - b.folio)
                                           .map((item, i) =>
-                                          <div className='ofie-comprobantes-conta'>
+                                          <div className='ofie-comprobantes-conta page-break'>
                                             <div className='ofie-header-blue'>
                                               <div className='all-tab-f all-tab-of1'>
                                                 {item.uuid}
@@ -593,7 +596,9 @@ export default class Oficios extends Component {
                                                   prefix=' $ '
                                                 />
                                               </div>
-                                              <textarea
+                                              <TextareaAutosize
+                                                aria-label="empty textarea"
+                                                placeholder="Empty"
                                                 className='all-tab-f all-tab-of3'
                                                 name={index.toString() + i.toString()}
                                                 value={this.state.values[index.toString() + i.toString()]}
@@ -696,7 +701,7 @@ export default class Oficios extends Component {
                               <div className='lll-content'>
                                 <div className='title-ga'>
                                   <div className='ofie-img1'>
-                                    <img className='pgjh' src={lpgjh} alt='' style={{ width: 'auto' }} />
+                                    <img className='pgjh' src={sus} alt='' style={{ width: 'auto' }} />
                                   </div>
                                   <div className='ofie-text'>
                                     <p className='text-titulo-ga'>PROCURADURÍA GENERAL DE JUSTICA DE HIDALGO</p>
@@ -807,7 +812,7 @@ export default class Oficios extends Component {
                                         {comprometidos.comprobantes
                                           .sort((a, b) => a.folio - b.folio)
                                           .map((item, i) =>
-                                          <div className='ofie-comprobantes-conta' key={i}>
+                                          <div className='ofie-comprobantes-conta page-break' key={i}>
                                             <div className='ofie-header-blue'>
                                               <div className='all-tab-f all-tab-of1'>
                                                 {item.uuid}
@@ -821,7 +826,9 @@ export default class Oficios extends Component {
                                                   prefix=' $ '
                                                 />
                                               </div>
-                                              <textarea
+                                              <TextareaAutosize
+                                                aria-label="empty textarea"
+                                                placeholder="Empty"
                                                 className='all-tab-f all-tab-of3'
                                                 name={index.toString() + i.toString()}
                                                 value={this.state.values[index.toString() + i.toString()]}
@@ -888,16 +895,19 @@ export default class Oficios extends Component {
         </div>
 
         {/* fondo revolvente */}
+
         <div className='pppdf-subdad' ref={el => (this.rfr = el)}>
           <div style={{ display: 'flex', justifyContent: 'center' }}>
             <div style={{ width: '85%' }}>
               <div className='header-ofi'>
                 <div className='header-ofi-cont'>
                   <div className='sp-cont'>
-                    <img className='pgjh comple' src={lpgjh} alt='' />
+                    <img className='pgjh comple' src={sus} alt='' />
                   </div>
                   <img className='img-sp' src={logo2} alt='' />
                 </div>
+              </div>
+              <div className='sp-direc'>
                 <p>Dirección General de Administracción y Finanzas</p>
               </div>
               <div style={{ display: 'flex', justifyContent: 'space-between', flexDirection: 'column', width: '100%', height: '75%' }}>
@@ -988,7 +998,7 @@ export default class Oficios extends Component {
               <div className='header-ofi'>
                 <div className='header-ofi-cont'>
                   <div className='sp-cont'>
-                    <img className='pgjh comple' src={lpgjh} alt='' />
+                    <img className='pgjh comple' src={sus} alt='' />
                   </div>
                   <img className='img-sp' src={logo2} alt='' />
                 </div>
@@ -1067,7 +1077,7 @@ export default class Oficios extends Component {
               <div className='header-ofi'>
                 <div className='header-ofi-cont'>
                   <div className='sp-cont'>
-                    <img className='pgjh comple' src={lpgjh} alt='' />
+                    <img className='pgjh comple' src={sus} alt='' />
                   </div>
                   <img className='img-sp' src={logo2} alt='' />
                 </div>
@@ -1114,7 +1124,7 @@ export default class Oficios extends Component {
                         comprometidos.isr !== '0.00' && comprometidos.isr ?
                         '(' + NumberAsString((totalImporte.reduce(reducer))) + ')' : null
                       )},
-                      cantidad amparada con CFDI No {finalComprobantes.map(item => {return item + ', '})},
+                      cantidad amparada con CFDI No {finalComprobantes.sort((a, b) => a.folio - b.folio).map(item => {return item + ', '})},
                       número de requisición {this.state.fondo.requisicion}
                       asi como la poliza de afectacion presupuestal al momento del comprometido
                       num {this.state.fondo.poliza} que emita la Dirección
@@ -1165,7 +1175,7 @@ export default class Oficios extends Component {
               <div className='header-ofi'>
                 <div className='header-ofi-cont'>
                   <div className='sp-cont'>
-                    <img className='pgjh comple' src={lpgjh} alt='' />
+                    <img className='pgjh comple' src={sus} alt='' />
                   </div>
                   <img className='img-sp' src={logo2} alt='' />
                 </div>
@@ -1209,8 +1219,7 @@ export default class Oficios extends Component {
                           <CurrencyFormat value={(totalImporte.reduce(reducer)).toFixed(2)} displayType='text' thousandSeparator prefix=' $ ' />
                         : null
                       )} ({(NumberAsString(totalImporte.reduce(reducer)))}),
-                      cantidad amparada con los comprobantes No {finalComprobantes.map(item => {return item + ', '})}
-
+                      cantidad amparada con los comprobantes No {finalComprobantes.sort((a, b) => a.folio - b.folio).map(item => {return item + ', '})}
                       para el trámite de pago a favor del proveedor {this.state.fondo.beneficiario}, por
                       la/el servicio {this.state.fondo.desc}, con
                       cargo al proyecto{this.state.comprometidos.map(item => item.proy ? ', ' + item.proy + ' ' + item.np : null)} y
@@ -1253,7 +1262,7 @@ export default class Oficios extends Component {
         <div className='sp-container' ref={el => (this.sp = el)}>
           <div className='sp-imgs'>
             <div className='title-so-o'>
-              <img className='pgjh' src={lpgjh} alt='' style={{ width: 'auto' }} />
+              <img className='pgjh' src={sus} alt='' style={{ width: 'auto' }} />
               <p>SOLICITUD PROGRAMÁTICA DEL GASTO</p>
               <img className='ims' src={logo2} alt='' />
             </div>
@@ -1688,7 +1697,7 @@ export default class Oficios extends Component {
               <div className='header-ofi'>
                 <div className='header-ofi-cont'>
                   <div className='sp-cont'>
-                    <img className='pgjh comple' src={lpgjh} alt='' />
+                    <img className='pgjh comple' src={sus} alt='' />
                   </div>
                   <img className='img-sp' src={logo2} alt='' />
                 </div>

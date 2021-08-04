@@ -113,6 +113,7 @@
 .ofie-header-blue {
   display: flex;
   width: 100%;
+  height: auto;
 }
 .alltabla-ga {
   background: blue;
@@ -147,7 +148,7 @@
 }
 .all-tab-f {
   font-size: 12px;
-  height: 50px;
+  min-height: 50px;
 }
 .all-tab-of1 {
   border-bottom: 1px solid black;
@@ -1106,4 +1107,10 @@ th {
 }
 .ccr {
   text-align: center;
+  margin-bottom: 70px;
+  margin-top: 50px;
+}
+.page-break {
+  page-break-inside: avoid;
+  page-break-after: auto;
 }
