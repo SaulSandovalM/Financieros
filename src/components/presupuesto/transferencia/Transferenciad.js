@@ -292,7 +292,7 @@ export default class Transferencia extends Component {
 
   render () {
     return (
-      <div className='pf-container-f' style={{paddingTop: '60px'}}>
+      <div className='pf-container-f' style={{ paddingTop: '60px' }}>
         <div>
           <div>
             <div className='p-container-fondor'>

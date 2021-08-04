@@ -427,6 +427,7 @@ export default class Fondos extends Component {
                       id='fondo'
                       name='fondo'
                       value={fondo}
+                      onChange={this.onChange}
                       ref={fondo => this.inputFondo = fondo}
                       required
                     />

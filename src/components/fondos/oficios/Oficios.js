@@ -150,14 +150,11 @@ export default class Oficios extends Component {
       var proy = proyect.split(' ')[0]
       proyectof.push(proy)
     }
-
     var prueba = new Array(20)
     for (let i = parseInt(this.state.comprometidos.length); i < 20; i++) {
       prueba[i] = i
     }
-
     var nombreDesa = this.state.comprometidos.map(comprometidos => comprometidos.up)
-
     const total1 = [0]
     this.state.comprometidos.map(item =>
       item.total !== undefined ?
@@ -166,21 +163,28 @@ export default class Oficios extends Component {
     )
     const tt = (a, b) => a + b
     var ttotal = total1.reduce(tt).toFixed(2)
-
     // consumo de numero de comprobantes
     const compro = [0]
     this.state.comprometidos.map(item => item.comprobantes !== undefined ? compro.push(item.comprobantes.length) : null)
     const numcom = (a, b) => a + b
     var finalC = compro.reduce(numcom)
     var newArr = []
+    this.state.comprometidos.map(comprometidos =>
+      comprometidos.comprobantes !== undefined ?
+        comprometidos.comprobantes.map(item =>
+          newArr.push(item.uuid)
+        )
+      : null
+    )
     var string = newArr.toString()
     var result2 = string.split(',')
-    // console.log(newArr.toString())
-    // console.log(result2)
+    console.log(newArr.toString())
+    console.log(result2)
     var otherArr = []
-    result2.map(item =>
+    result2.map(item => {
       console.log(otherArr.push(item.split('-')))
-    )
+      console.log(otherArr)
+    })
     let finalComprobantes = otherArr.map((item, i) => {
       var count = item.length - 1
       return item[count]
@@ -276,7 +280,7 @@ export default class Oficios extends Component {
                                       </div>
                                       <div className='interno-ga2'>
                                         <p className='text-gai'>Fondo Revolvente</p>
-                                        <input className='input-gai' type='checkbox' disabled />
+                                        <input className='input-gai' type='checkbox' checked />
                                       </div>
                                       <div className='interno-ga2'>
                                         <p className='text-gai'>Cancelacion de Fondo Revolvente</p>
@@ -312,7 +316,7 @@ export default class Oficios extends Component {
                                       </div>
                                       <div className='interno-ga2'>
                                         <p className='text-gai'>Pago a Proveedor</p>
-                                        <input className='input-gai' type='checkbox' checked />
+                                        <input className='input-gai' type='checkbox' disabled />
                                       </div>
                                       <div className='interno-ga2'>
                                         <p className='text-gai'>Anticipo de Pago a Proveedor por Requisición</p>
@@ -1206,6 +1210,7 @@ export default class Oficios extends Component {
                         : null
                       )} ({(NumberAsString(totalImporte.reduce(reducer)))}),
                       cantidad amparada con los comprobantes No {finalComprobantes.map(item => {return item + ', '})}
+
                       para el trámite de pago a favor del proveedor {this.state.fondo.beneficiario}, por
                       la/el servicio {this.state.fondo.desc}, con
                       cargo al proyecto{this.state.comprometidos.map(item => item.proy ? ', ' + item.proy + ' ' + item.np : null)} y
@@ -1348,7 +1353,7 @@ export default class Oficios extends Component {
             <div className='lineas-so'>
               <div className='internos'>
                 <p className='text-intei'>Beneficiario:</p>
-                <p className='bene-i'>{this.state.fondo.beneficiario}</p>
+                <p className='bene-i'>{this.state.fondo.tipo_doc === 'Fondo Revolvente' ? 'Mtro.León Maximiliano Hernández Valdés' : this.state.fondo.beneficiario}</p>
               </div>
               <div className='internos'>
                 <p className='text-intei'>Organo Superior:</p>

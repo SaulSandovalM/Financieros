@@ -176,6 +176,7 @@
   justify-content: center;
   text-align: center;
   width: 55%;
+  height: auto;
 }
 .ofie-total-cont {
   display: flex;
