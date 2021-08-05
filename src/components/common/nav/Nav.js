@@ -90,9 +90,9 @@ class Nav extends Component {
     }
 
     return (
-      <div className='nav-col'>
+      <div className='nav-col' style={{ overFlow: 'scroll' }}>
         <div className='nav-cont'>
-          {(admin === 'CANDY' || admin === 'VALIDACION2' || admin === 'VALIDACION2' || admin === 'VALIDACION3' || admin === 'VALIDACION3') &&
+          {(admin === 'CANDY' || admin === 'VALIDACION2' || admin === 'VALIDACION2' || admin === 'VALIDACION3' || admin === 'VALIDACION3' || admin === 'LIZBETH') &&
             <div className='navbar-left' style={{ marginTop: '30px' }}>
               <Link to='/ArchivoPago' className='deco'>
                 <span className='material-icons'>
