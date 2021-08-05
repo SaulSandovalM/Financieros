@@ -191,6 +191,7 @@ export default class Oficios extends Component {
     })
 
     var finalC2 = finalComprobantes.sort((a, b) => a.folio - b.folio).map(item => {return item + ', '})
+    console.log(finalComprobantes.sort((a, b) => a.folio - b.folio).map(item => {return item + ', '}))
 
     var finalRetencion = finalComprobantes.sort()
 
@@ -550,7 +551,7 @@ export default class Oficios extends Component {
                                       </div>
                                       <div className='interno-ga2'>
                                         <p className='text-gai'>Pago a Proveedor</p>
-                                        <input className='input-gai' type='checkbox' checked />
+                                        <input className='input-gai' type='checkbox' disabled />
                                       </div>
                                       <div className='interno-ga2'>
                                         <p className='text-gai'>Anticipo de Pago a Proveedor por Requisición</p>
@@ -562,7 +563,7 @@ export default class Oficios extends Component {
                                       </div>
                                       <div className='interno-ga2'>
                                         <p className='text-gai'>Proveedor por Requisición</p>
-                                        <input className='input-gai' type='checkbox' disabled />
+                                        <input className='input-gai' type='checkbox' checked />
                                       </div>
                                     </div>
                                   </div>
@@ -1094,7 +1095,7 @@ export default class Oficios extends Component {
                     <p>
                       Oficio No: PGJ/DGAyF/{this.state.fondo.no_oficio}/2021
                       <br />Pachuca de Soto, Hidalgo a {today}
-                      <br />Asunto: Pago a Proveedor
+                      <br />Asunto: Pago a Proveedor por Requisión
                     </p>
                   </div>
                   <div className='prensente-sp'>
@@ -1119,23 +1120,14 @@ export default class Oficios extends Component {
                   <div className='texto-ofi-sp'>
                     <p>
                       Por medio de presente me permito enviar a Usted documentación por
-                      un importe total de {this.state.comprometidos.map(comprometidos =>
-                        comprometidos.isr !== '0.00' && comprometidos.isr ?
-                          <CurrencyFormat value={(totalImporte.reduce(reducer)).toFixed(2)} displayType='text' thousandSeparator prefix=' $ ' />
-                        : null
-                      )} {this.state.comprometidos.map(comprometidos =>
-                        comprometidos.isr !== '0.00' && comprometidos.isr ?
-                        '(' + NumberAsString((totalImporte.reduce(reducer))) + ')' : null
-                      )},
-                      cantidad amparada con CFDI No {finalC2},
-                      número de requisición {this.state.fondo.requisicion}
-                      asi como la poliza de afectacion presupuestal al momento del comprometido
+                      un importe total de <CurrencyFormat value={ttotal} displayType='text' thousandSeparator prefix=' $ ' /> ({( NumberAsString(ttotal) )})
+                      cantidad amparada con CFDI No {finalC2} número de requisición {this.state.fondo.requisicion} Ped.{this.state.fondo.pedido} asi
+                      como la poliza de afectacion presupuestal al momento del comprometido
                       num {this.state.fondo.poliza} que emita la Dirección
                       General de Compras Publicas; para que se efectue el tramite de pago
                       a favor del proveedor {this.state.fondo.beneficiario} para la compra
-                      y/o prestación de servicios
-                      {/* preguntar */}
-                      con cargo al proyecto{this.state.comprometidos.map(item => item.proy ? ', ' + item.proy + ', ' + item.np : null)} y
+                      y/o prestación de servicios {this.state.fondo.desc} con
+                      cargo al proyecto{this.state.comprometidos.map(item => item.proy ? ', ' + item.proy + ', ' + item.np : null)} y
                       a los recursos otorgados con oficio de autorización {this.state.fondo.oficio_aut} del
                       Ejercicio 2021, a la Procuraduria General de Justicia del Estado.
                     </p>
@@ -1253,8 +1245,8 @@ export default class Oficios extends Component {
                             <CurrencyFormat value={(totalImporte.reduce(reducer)).toFixed(2)} displayType='text' thousandSeparator prefix=' $ ' />
                           : null
                         )} ({(NumberAsString(totalImporte.reduce(reducer)))}),
-                        cantidad amparada con los comprobantes No {finalC2}
-                        para el trámite de pago a favor del proveedor {this.state.fondo.beneficiario}, por
+                        cantidad amparada con los comprobantes No {finalC2} para
+                        el trámite de pago a favor del proveedor {this.state.fondo.beneficiario}, por
                         la/el servicio {this.state.fondo.desc}, con
                         cargo al proyecto{this.state.comprometidos.map(item => item.proy ? ', ' + item.proy + ' ' + item.np : null)} y
                         a los recursos otorgados con el oficio de autorización {this.state.fondo.oficio_aut}, del
@@ -1598,11 +1590,13 @@ export default class Oficios extends Component {
                     <td className='all-tablai' />
                     <td className='all-tablai' />
                     <td className='all-tablai' />
+                    <td className='all-tablai' />
                   </tr>
                 )}
                 {this.state.comprometidos.map(comprometidos =>
                   comprometidos.isr !== '0.00' && comprometidos.isr ?
                   <tr>
+                    <td className='all-tablai' />
                     <td className='all-tablai' />
                     <td className='all-tablai' />
                     <td className='all-tablai' />
@@ -1654,6 +1648,7 @@ export default class Oficios extends Component {
                   <td className='all-tablai border-color' />
                   <td className='all-tablai border-color' />
                   <td className='all-tablai border-color' />
+                  <td className='all-tablai border-color' />
                   <td className='all-tablai text-rete'>RETENCION</td>
                   <td className='all-tablai' style={{ textAlign: 'right' }}>
                     <CurrencyFormat
@@ -1665,6 +1660,7 @@ export default class Oficios extends Component {
                   </td>
                 </tr>
                 <tr>
+                  <td className='all-tablai border-color' />
                   <td className='all-tablai border-color' />
                   <td className='all-tablai border-color' />
                   <td className='all-tablai border-color' />

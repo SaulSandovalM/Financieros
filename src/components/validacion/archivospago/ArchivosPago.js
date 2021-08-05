@@ -93,34 +93,36 @@ export default class ArchivosPago extends Component {
       reader.onload = function (event) {
         var XMLParser = require('react-xml-parser')
         var xml = new XMLParser().parseFromString(event.target.result)
+        console.log(xml)
         const data = {
           'total': xml.attributes['Total'] ? xml.attributes['Total'] : 'No encuentra total',
           'subtotal': xml.attributes['SubTotal'] ? xml.attributes['SubTotal'] : (parseFloat(xml.attributes['Total']) + parseFloat(xml.children['3'].attributes['TotalImpuestosRetenidos'] ? xml.children['3'].attributes['TotalImpuestosRetenidos'] : 0)) - parseFloat(xml.children['3'].attributes['TotalImpuestosTrasladados']),
           'folio': xml.attributes['Folio'] ? xml.attributes['Folio'] : '0',
           'serie': xml.attributes['Serie'] ? xml.attributes['Serie'] : '0',
-          'nombre': xml.children['0'].attributes['Nombre'] ? xml.children['0'].attributes['Nombre'] : 'No encuentra Nombre',
+          'nombre': xml.getElementsByTagName('cfdi:Emisor')[0].attributes['Nombre'],
           'importe': xml.attributes['SubTotal'] ? xml.attributes['SubTotal'] : (parseFloat(xml.attributes['Total']) + (xml.children['3'].attributes['TotalImpuestosRetenidos'] ? xml.children['3'].attributes['TotalImpuestosRetenidos'] : 0)) - parseFloat(xml.children['3'].attributes['TotalImpuestosTrasladados']),
-          'iva': xml.children['3'].attributes['TotalImpuestosTrasladados'] ? xml.children['3'].attributes['TotalImpuestosTrasladados'] : 0,
+          'iva': xml.getElementsByTagName('cfdi:Traslado')[0].attributes['Importe'],
           'isr': xml.children['3'].attributes['TotalImpuestosRetenidos'] ? xml.children['3'].attributes['TotalImpuestosRetenidos'] : 0,
           'fecha': xml.getElementsByTagName('tfd:TimbreFiscalDigital')[0].attributes['FechaTimbrado'],
           'uuid': xml.getElementsByTagName('tfd:TimbreFiscalDigital')[0].attributes['UUID'] ? xml.getElementsByTagName('tfd:TimbreFiscalDigital')[0].attributes['UUID'] : xmlp.name.slice(0, -4),
-          'descripcion': xml.children['2'].children['0'].attributes['Descripcion'],
+          'descripcion': xml.getElementsByTagName('cfdi:Concepto')[0].attributes['Descripcion'],
           'estatus': 'sin asignar',
           'tipo': 'directo',
           'partida': par,
           'up': up,
           'numfolio': numfolio
         }
-        fetch(xml).then(res => res.text()).then(xml => {
-          fetch('https://financieros-78cb0.firebaseio.com/xml.json', {
-            method: 'POST',
-            headers: {
-              'Accept': 'application/json',
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(data),
-          })
-        })
+        console.log(data)
+        // fetch(xml).then(res => res.text()).then(xml => {
+        //   fetch('https://financieros-78cb0.firebaseio.com/xml.json', {
+        //     method: 'POST',
+        //     headers: {
+        //       'Accept': 'application/json',
+        //       'Content-Type': 'application/json',
+        //     },
+        //     body: JSON.stringify(data),
+        //   })
+        // })
         console.log(datosXml.push(data))
         Total.push(parseFloat(data.total))
       }

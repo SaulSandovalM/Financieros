@@ -270,7 +270,7 @@ export default class Fondos extends Component {
   }
 
   beneficiario2 = ['', 'Mtro.León Maximiliano Hernández Valdés']
-  tipo_doc = ['','Pago Directo', 'Fondo Revolvente', 'Gasto a Comprobar', 'Cancelado', 'Licitación']
+  tipo_doc = ['','Pago Directo', 'Fondo Revolvente', 'Gasto a Comprobar']
   tipo_doc2 = ['','Pago Directo']
   tipo_doc3 = ['','Fondo Revolvente']
   no_proyecto = [
@@ -538,87 +538,7 @@ export default class Fondos extends Component {
                       required
                     />
                   </div>
-                  {/* <div className='div-con'>
-                    <TextField
-                      label='Importe'
-                      id='importe'
-                      name='importe'
-                      value={importe}
-                      onChange={this.onChange}
-                      ref={importe => this.inputImporte = importe}
-                      required
-                      InputProps={{
-                        inputComponent: NumberFormatCustom
-                      }}
-                    />
-                  </div> */}
                 </div>
-                  {/*<div className='div-f2'>
-                 <div className='div-con'>
-                    <p className='p-label'>Importe Letra</p>
-                    <input
-                      className='field'
-                      onChange={this.onChange}
-                      value={(NumberAsString(importe))}
-                      required
-                    />
-                  </div> */}
-                  {/* tipo_doc === 'Fondo Revolvente' ?
-                    <div className='div-con'>
-                      <p className='p-label'>Beneficiario</p>
-                      <select
-                        className='select-f'
-                        id='beneficiario'
-                        name='beneficiario'
-                        value={beneficiario}
-                        onChange={this.onChange}
-                        ref={beneficiario => this.inputBeneficiario = beneficiario}
-                        required
-                      >
-                        {this.beneficiario2.map((x,y) =>
-                          <option name={y}>{x}</option>
-                        )}
-                      </select>
-                    </div>
-                    :
-                    <div className='div-con'>
-                      <p className='p-label'>Beneficiario</p>
-                      <select
-                        className='select-f'
-                        id='beneficiario'
-                        name='beneficiario'
-                        value={beneficiario}
-                        onChange={this.onChange}
-                        ref={beneficiario => this.inputBeneficiario = beneficiario}
-                        required
-                      >
-                        {this.state.baneficiarioc.map(data =>
-                          <option name={data}>{data.nombre}</option>
-                        )}
-                      </select>
-                    </div>
-
-                </div>*/}
-                {/*<div className='div-f2'>
-
-                   realizo === 'MIGUEL' &&
-                    <div className='add-bene'>
-                      <div className='content-bf'>
-                        <p className='p-label'>Agregar Beneficiario</p>
-                        <input
-                          className='field'
-                          id='nombre'
-                          name='nombre'
-                          onChange={this.onChange}
-                          value={this.state.nombre}
-                        />
-                      </div>
-                      <button className='btn-add-bf' onClick={this.crearBeneficiario.bind(this)}>
-                          +
-                      </button>
-                    </div>
-
-                </div>*/}
                 {(realizo === 'MIGUEL' || realizo === 'ELOY' || realizo === 'TERESA' || realizo === 'MARTHA' || realizo === 'LIZBETH') && this.state.tipo_doc === 'Fondo Revolvente' ?
                   <div className='div-f2'>
                     <div className='fondo-w-c'>
@@ -655,23 +575,6 @@ export default class Fondos extends Component {
                     </div>
                   </div> : null
                 }
-                {/* <div className='div-f2'>
-                  <div style={{ width: '99%' }}>
-                    <div>
-                      <p className='p-label'>Numero de Comprobantes</p>
-                      <input
-                        style={{ width: '100%' }}
-                        className='field'
-                        id='numCompro'
-                        name='numCompro'
-                        value={numCompro}
-                        onChange={this.onChange}
-                        ref={numCompro => this.inputNumCompro = numCompro}
-                        required
-                      />
-                    </div>
-                  </div>
-                </div> */}
                 <div className='div-f2'>
                   <div style={{ width: '99%' }}>
                     <div>
