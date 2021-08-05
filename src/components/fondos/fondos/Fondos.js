@@ -1,12 +1,10 @@
 // importaciones necesarias
 import React, { Component } from 'react'
 import firebase from '../../../Firebase'
-// import { NumberAsString } from './NumerosLetras'
 import Fab from '@material-ui/core/Fab'
 import SaveIcon from '@material-ui/icons/Save'
 import Paper from '@material-ui/core/Paper'
 import Grid from '@material-ui/core/Grid'
-// import TextField from '@material-ui/core/TextField'
 import PropTypes from 'prop-types'
 import MaskedInput from 'react-text-mask'
 import NumberFormat from 'react-number-format'

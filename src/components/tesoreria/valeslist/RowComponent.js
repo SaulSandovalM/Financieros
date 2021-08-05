@@ -329,7 +329,7 @@ export default class RowComponent extends Component {
                             width: '100%'
                           }}
                         >
-                          Nombre: { item.nombre } Importe: ${ item.importe } Fecha: { item.fecha }
+                          Nombre: { item.nombre } Importe: ${ item.subtotal } Fecha: { item.fecha }
                         </TableCell>
                       ))}
                     </TableRow>
