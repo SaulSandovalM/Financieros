@@ -190,6 +190,9 @@ export default class Oficios extends Component {
       return item[count]
     })
 
+    console.log(finalComprobantes.sort((a, b) => a.folio - b.folio).map(item => {return item + ', '}))
+    var finalC2 = finalComprobantes.sort((a, b) => a.folio - b.folio).map(item => {return item + ', '})
+
     var finalRetencion = finalComprobantes.sort()
 
     return (
@@ -1125,7 +1128,7 @@ export default class Oficios extends Component {
                         comprometidos.isr !== '0.00' && comprometidos.isr ?
                         '(' + NumberAsString((totalImporte.reduce(reducer))) + ')' : null
                       )},
-                      cantidad amparada con CFDI No {finalComprobantes.map(item => {return item + ', '})},
+                      cantidad amparada con CFDI No {finalComprobantes.sort((a, b) => a.folio - b.folio).map(item => {return item + ', '})},
                       número de requisición {this.state.fondo.requisicion}
                       asi como la poliza de afectacion presupuestal al momento del comprometido
                       num {this.state.fondo.poliza} que emita la Dirección
@@ -1251,7 +1254,7 @@ export default class Oficios extends Component {
                             <CurrencyFormat value={(totalImporte.reduce(reducer)).toFixed(2)} displayType='text' thousandSeparator prefix=' $ ' />
                           : null
                         )} ({(NumberAsString(totalImporte.reduce(reducer)))}),
-                        cantidad amparada con los comprobantes No {finalComprobantes.sort((a, b) => a.folio - b.folio).map(item => {return item + ', '})}
+                        cantidad amparada con los comprobantes No {finalC2}
                         para el trámite de pago a favor del proveedor {this.state.fondo.beneficiario}, por
                         la/el servicio {this.state.fondo.desc}, con
                         cargo al proyecto{this.state.comprometidos.map(item => item.proy ? ', ' + item.proy + ' ' + item.np : null)} y
