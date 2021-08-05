@@ -190,7 +190,6 @@ export default class Oficios extends Component {
       return item[count]
     })
 
-    console.log(finalComprobantes.sort((a, b) => a.folio - b.folio).map(item => {return item + ', '}))
     var finalC2 = finalComprobantes.sort((a, b) => a.folio - b.folio).map(item => {return item + ', '})
 
     var finalRetencion = finalComprobantes.sort()
@@ -1128,7 +1127,7 @@ export default class Oficios extends Component {
                         comprometidos.isr !== '0.00' && comprometidos.isr ?
                         '(' + NumberAsString((totalImporte.reduce(reducer))) + ')' : null
                       )},
-                      cantidad amparada con CFDI No {finalComprobantes.sort((a, b) => a.folio - b.folio).map(item => {return item + ', '})},
+                      cantidad amparada con CFDI No {finalC2},
                       número de requisición {this.state.fondo.requisicion}
                       asi como la poliza de afectacion presupuestal al momento del comprometido
                       num {this.state.fondo.poliza} que emita la Dirección
@@ -1490,6 +1489,7 @@ export default class Oficios extends Component {
                   <td className='all-tablai'>Obj</td>
                   <td className='all-tablai'>Proyecto</td>
                   <td className='all-tablai'>Ext</td>
+                  <td className='all-tablai'>Obra</td>
                   <td className='all-tablai'>Ben</td>
                   <td className='all-tablai'>E Geo</td>
                   <td className='dg-tabla all-tablai' style={{ textAlign: 'left' }}>
@@ -1550,6 +1550,9 @@ export default class Oficios extends Component {
                     </td>
                     <td className='all-tablai'>
                       {comprometidos.est}
+                    </td>
+                    <td className='all-tablai'>
+                      {comprometidos.obra}
                     </td>
                     <td className='all-tablai'>
                       {comprometidos.ben}
