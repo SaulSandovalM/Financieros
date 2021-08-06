@@ -88,7 +88,7 @@ export default class Tabular extends Component {
               </TableRow>
             </TableHead>
             <TableBody>
-              {this.state.lista.map(fondos =>
+              {this.state.lista.sort((a,b) => a.fondo - b.fondo).map(fondos =>
                 <TableRow>
                   <TableCell className='table-tab'>
                     <div className='click-arch'>

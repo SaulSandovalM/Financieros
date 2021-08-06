@@ -48,7 +48,7 @@ export default class Valeslist extends Component {
       filefactura: [{ url: '', nombre: '' }],
       xmlC: [{ url: '', nombre: '' }],
       filef: [{ url: '', nombre: '' }],
-      recibosList: [{ folio: 'Recibo', nombre: '', importe: '0', iva: '0', isr: '0', fecha: '', estatus: '', subtotal: '0', total: '0', uuid: 'Recibo', tipo: 'Fondo Revolvente' }],
+      recibosList: [{ folio: 'Recibo', nombre: '', importe: '0', iva: '0', isr: '0', fecha: '', estatus: '', subtotal: '0', total: '0', uuid: 'Recibo', tipo: 'revolvente' }],
       autorizados: false,
       noautorizados: false,
       pendientes: false,

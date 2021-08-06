@@ -91,6 +91,7 @@ export default class Fondos extends Component {
       searchF: '',
       nombre: '',
       oficio: [],
+      otherOficio: ' ',
       baneficiarioc: [
         {
           id: 1,
@@ -146,6 +147,7 @@ export default class Fondos extends Component {
       fecha: this.inputFecha.value,
       tipo_doc: this.inputTipoDoc.value,
       oficio_aut: this.inputOficioAut.value,
+      otherOficio: this.inputOtherOficio.value,
       no_oficio: this.inputNoOficio.value,
       importe: ' ',
       beneficiario: ' ',
@@ -304,7 +306,7 @@ export default class Fondos extends Component {
   render () {
     const { fondo, fecha, tipo_doc, oficio_aut, no_oficio, no_lici, desc,
       realizo, requisicion, pedido, no_proyecto, poliza, cfe, nscfe,
-      observaciones, anexof } = this.state
+      observaciones, anexof, otherOficio } = this.state
       // importe, beneficiario, numCompro
     const newArray = ['']
     const myObj = {}
@@ -322,7 +324,6 @@ export default class Fondos extends Component {
     let result = aarr.filter((item,index)=>{
       return aarr.indexOf(item) === index;
     })
-    console.log(result)
 
     return (
       <div>
@@ -496,21 +497,35 @@ export default class Fondos extends Component {
                       </select>
                     }
                   </div>
-                  <div className='div-con'>
-                    <p className='p-label'>Oficio de Autorización</p>
-                    <select
-                      className='select-f'
-                      id='oficio_aut'
-                      name='oficio_aut'
-                      value={oficio_aut}
-                      onChange={this.onChange}
-                      ref={oficio_aut => this.inputOficioAut = oficio_aut}
-                      required
-                    >
-                    {result.map(data =>
-                      <option name={data}>{data}</option>
-                    )}
-                    </select>
+                  <div className='div-conn'>
+                    <div style={{ width: '60%' }}>
+                      <p className='p-label'>Oficio de Autorización</p>
+                      <select
+                        className='select-f'
+                        id='oficio_aut'
+                        name='oficio_aut'
+                        value={oficio_aut}
+                        onChange={this.onChange}
+                        ref={oficio_aut => this.inputOficioAut = oficio_aut}
+                        required
+                      >
+                      {result.map(data =>
+                        <option name={data}>{data}</option>
+                      )}
+                      </select>
+                    </div>
+                    <div style={{ width: '40%' }}>
+                      <p className='p-label'>Ingrese Oficio</p>
+                      <input
+                        className='input-ext'
+                        maxLength={18}
+                        id='otherOficio'
+                        name='otherOficio'
+                        value={otherOficio}
+                        onChange={this.onChange}
+                        ref={otherOficio => this.inputOtherOficio = otherOficio}
+                      />
+                    </div>
                   </div>
                 </div>
                 <div className='div-f2'>
@@ -587,7 +602,6 @@ export default class Fondos extends Component {
                         value={anexof}
                         onChange={this.onChange}
                         ref={anexof => this.inputAnexof = anexof}
-
                       />
                     </div>
                   </div>

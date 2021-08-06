@@ -541,7 +541,7 @@ export default class Comprometidos extends Component {
     const filterData = this.state.xml.filter(
       (xml) => {
         return (
-          (xml.uuid.indexOf(this.state.folioXml) !== -1) && xml.estatus !== 'asignado' && xml.tipo === 'revolvente'
+          (xml.uuid.indexOf(this.state.folioXml) !== -1) || (xml.nombre.indexOf(this.state.folioXml) !== -1) && xml.estatus !== 'asignado' && xml.tipo === 'revolvente'
         )
       }
     )
@@ -643,7 +643,7 @@ export default class Comprometidos extends Component {
                   </ListItemIcon>
                   <ListItemText className='list-align-i' primary={value.folio} />
                   {value.folio === 'Recibo' ?
-                    <ListItemText className='list-align-i' primary={'$ ' + value.importe} />
+                    <ListItemText className='list-align-i' primary={'$ ' + value.subtotal} />
                     :
                     <ListItemText className='list-align-i' primary={'$ ' + value.total} />
                   }
@@ -665,7 +665,7 @@ export default class Comprometidos extends Component {
                   </ListItemIcon>
                   <ListItemText className='list-align-i' primary={value.folio} />
                   {value.folio === 'Recibo' ?
-                    <ListItemText className='list-align-i' primary={'$ ' + value.importe} />
+                    <ListItemText className='list-align-i' primary={'$ ' + value.subtotal} />
                     :
                     <ListItemText className='list-align-i' primary={'$ ' + value.total} />
                   }
@@ -702,7 +702,7 @@ export default class Comprometidos extends Component {
                   </ListItemIcon>
                   <ListItemText className='list-align-i' primary={value.folio} />
                   {value.folio === 'Recibo' ?
-                    <ListItemText className='list-align-i' primary={'$ ' + value.importe} />
+                    <ListItemText className='list-align-i' primary={'$ ' + value.subtotal} />
                     :
                     <ListItemText className='list-align-i' primary={'$ ' + value.total} />
                   }
@@ -719,7 +719,7 @@ export default class Comprometidos extends Component {
     let presupuestop = this.state.presupuesto.map(item => {
       return item.ogasto
     })
-    let resultp = presupuestop.filter((item, index) => {
+    let resultp = presupuestop.sort((a, b) => a.ogasto - b.ogasto).filter((item, index) => {
       return presupuestop.indexOf(item) === index
     })
     let presupuestou = this.state.presupuesto.map(item => {

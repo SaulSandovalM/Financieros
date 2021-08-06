@@ -79,10 +79,23 @@
   flex-direction: column;
   width: 48%;
 }
+.div-conn {
+  display: flex;
+  justify-content: space-between;
+  width: 48%;
+}
 .p-label {
   color: grey;
   font-size: 12px;
   margin: 0;
+}
+.input-ext {
+  border-bottom: .5px solid grey;
+  border-left: 0;
+  border-right: 0;
+  border-top: 0;
+  height: 27px;
+  width: 100%;
 }
 .select-f {
   background: white;
