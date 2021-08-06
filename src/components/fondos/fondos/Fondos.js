@@ -73,7 +73,7 @@ export default class Fondos extends Component {
       no_oficio: '',
       no_lici: ' ',
       importe: '',
-      desc: '',
+      desc: ' ',
       beneficiario: '',
       realizo: admin,
       requisicion: ' ',
@@ -550,7 +550,6 @@ export default class Fondos extends Component {
                       value={desc}
                       onChange={this.onChange}
                       ref={desc => this.inputDesc = desc}
-                      required
                     />
                   </div>
                 </div>

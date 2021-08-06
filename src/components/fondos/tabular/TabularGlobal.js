@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import './Tabular.css'
 import ReactToPrint from 'react-to-print'
 import firebase from '../../../Firebase'
+import CurrencyFormat from 'react-currency-format'
 
 export default class Tabular extends Component {
   constructor (props) {
@@ -75,7 +76,7 @@ export default class Tabular extends Component {
                     </div>
                   </div>
                   <div>
-                    {this.state.comprometidos.map(comprometidos =>
+                    {this.state.comprometidos.sort((a,b) => a.partida - b.partida).map(comprometidos =>
                       comprometidos.up ?
                       <div key='' className='tab-tabular'>
                         <div className='tab-pui-content'>
@@ -86,8 +87,18 @@ export default class Tabular extends Component {
                             <p className='tab-p-m'>{comprometidos.presupuestal}</p>
                           </div>
                           <div className='tab-pui-border'>
-                            <p className='tab-p-m'>$</p>
-                            <p className='tab-p-m'>{comprometidos.total}</p>
+                          <p className='tab-p-m'>$</p>
+                          <CurrencyFormat
+                            style={{
+                              fontSize: '16px',
+                              margin: '1px',
+                              textAlign: 'center',
+                              fontWeight: 'bold'
+                            }}
+                            value={comprometidos.total}
+                            displayType='text'
+                            thousandSeparator
+                          />
                           </div>
                         </div>
                       </div> : null

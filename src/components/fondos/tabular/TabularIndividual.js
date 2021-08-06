@@ -43,7 +43,7 @@ export default class TabularIndi extends Component {
           content={() => this.componentRef}
         />
         <div ref={el => (this.componentRef = el)}>
-        {this.state.comprometidos.map(comprometidos =>
+        {this.state.comprometidos.map((comprometidos, index) =>
           comprometidos.up ?
           <div className='tab-container'>
             <div className='tab-content'>
@@ -81,7 +81,9 @@ export default class TabularIndi extends Component {
                           </div>
                           <div style={{ display: 'flex', flexDirection: 'column', width: '30%' }}>
                             {comprometidos.comprobantes !== undefined ?
-                              comprometidos.comprobantes.sort((a, b) => a.folio - b.folio).map(item =>
+                              comprometidos.comprobantes
+                                .sort((a, b) => a.folio - b.folio)
+                                .map(item =>
                                 <div className='tab-pui-border' style={{ width: '100%' }}>
                                   <p className='tab-p-m'>$</p>
                                   <CurrencyFormat

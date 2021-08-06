@@ -93,8 +93,8 @@ export default class ArchivosPago extends Component {
       reader.onload = function (event) {
         var XMLParser = require('react-xml-parser')
         var xml = new XMLParser().parseFromString(event.target.result)
-        console.log(xml)
         const data = {
+          'descuento': xml.attributes['Descuento'] ? xml.attributes['Descuento'] : 0,
           'total': xml.attributes['Total'] ? xml.attributes['Total'] : 'No encuentra total',
           'subtotal': xml.attributes['SubTotal'] ? xml.attributes['SubTotal'] : (parseFloat(xml.attributes['Total']) + parseFloat(xml.children['3'].attributes['TotalImpuestosRetenidos'] ? xml.children['3'].attributes['TotalImpuestosRetenidos'] : 0)) - parseFloat(xml.children['3'].attributes['TotalImpuestosTrasladados']),
           'folio': xml.attributes['Folio'] ? xml.attributes['Folio'] : '0',
@@ -112,17 +112,16 @@ export default class ArchivosPago extends Component {
           'up': up,
           'numfolio': numfolio
         }
-        console.log(data)
-        // fetch(xml).then(res => res.text()).then(xml => {
-        //   fetch('https://financieros-78cb0.firebaseio.com/xml.json', {
-        //     method: 'POST',
-        //     headers: {
-        //       'Accept': 'application/json',
-        //       'Content-Type': 'application/json',
-        //     },
-        //     body: JSON.stringify(data),
-        //   })
-        // })
+        fetch(xml).then(res => res.text()).then(xml => {
+          fetch('https://financieros-78cb0.firebaseio.com/xml.json', {
+            method: 'POST',
+            headers: {
+              'Accept': 'application/json',
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data),
+          })
+        })
         console.log(datosXml.push(data))
         Total.push(parseFloat(data.total))
       }

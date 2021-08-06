@@ -195,6 +195,9 @@ export default class Oficios extends Component {
 
     var finalRetencion = finalComprobantes.sort()
 
+    var unicos = [...new Set(this.state.comprometidos.map(item => item.proy ? ', ' + item.proy + ' ' + item.np : null))]
+    console.log(unicos)
+
     return (
       <div className='oficios-container'>
         <div className='oficios-section-content'>
@@ -950,15 +953,15 @@ export default class Oficios extends Component {
                         con una retención por <CurrencyFormat value={totalRetencion.reduce(reducer).toFixed(2)} displayType='text' thousandSeparator prefix=' $ ' /> para
                         un importe total a pagar de <CurrencyFormat value={(parseFloat(ttotal) - (totalRetencion.reduce(reducer))).toFixed(2)} displayType='text' thousandSeparator prefix=' $ ' /> para
                         el trámite de Reembolso de Fondo Revolvente, con cargo al
-                        proyecto{this.state.comprometidos.map(item => item.proy ? ', ' + item.proy + ' ' + item.np : null)} otorgado
-                        en el oficio de autorización {this.state.fondo.oficio_aut} del
+                        proyecto{unicos} otorgado en el oficio de
+                        autorización {this.state.fondo.oficio_aut} del
                         Ejercicio 2021, a la Procuraduria General de Justicia del estado de Hidalgo.
                       </p> :
                       <p>
                         Por medio del presente me permito enviar a usted, documentación amparada
                         con {finalC} comprobantes, por un total de <CurrencyFormat value={ttotal} displayType='text' thousandSeparator prefix=' $ ' /> ({(NumberAsString(ttotal))}),
                         para el trámite de Reembolso de Fondo Revolvente, con cargo al
-                        proyecto{this.state.comprometidos.map(item => item.proy ? ', ' + item.proy + ' ' + item.np : null)} otorgado
+                        proyecto{unicos} otorgado
                         en el oficio de autorización {this.state.fondo.oficio_aut} del
                         Ejercicio 2021, a la Procuraduria General de Justicia del estado de Hidalgo.
                       </p>
@@ -1024,12 +1027,22 @@ export default class Oficios extends Component {
                         un importe total de <CurrencyFormat value={ttotal - totalRetencion.reduce(reducer).toFixed(2)} displayType='text' thousandSeparator prefix=' $ ' />
                         por concepto de Reposición de Fondo Revolvente, la cantidad sera
                         debidamente aplicada en {this.state.fondo.desc}
+                        {this.state.comprometidos.map(comprometidos =>
+                          comprometidos.area ?
+                            comprometidos.npro
+                            : null
+                        )}
                       </p> :
                       <p className='texto-de-pdf' style={{ textAlign: 'justify', lineHeight: '35px' }}>
                         Recibí de la Secretaría de Finanzas Públicas del Gobierno del Estado
                         de Hidalgo la cantidad de <CurrencyFormat value={ttotal} displayType='text' thousandSeparator prefix=' $ ' /> ({( NumberAsString(ttotal) )})
                         por concepto de Reposición de Fondo Revolvente, la cantidad sera
                         debidamente aplicada en {this.state.fondo.desc}
+                        {this.state.comprometidos.map(comprometidos =>
+                          comprometidos.area ?
+                            comprometidos.npro
+                            : null
+                        )}
                       </p>
                     }
                   </div>
@@ -1489,7 +1502,7 @@ export default class Oficios extends Component {
                   </td>
                   <td className='monto-tabla all-tablai'>Monto</td>
                 </tr>
-                {this.state.comprometidos.map(comprometidos =>
+                {this.state.comprometidos.sort((a,b) => a.partida - b.partida).map(comprometidos =>
                   comprometidos.area ?
                   <tr>
                     <td className='all-tablai'>

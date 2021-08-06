@@ -48,6 +48,7 @@ export default class Comprometidos extends Component {
       search: '',
       total: '',
       importe: '',
+      descuento: '',
       iva: '',
       isr: '',
       contra: [],
@@ -161,6 +162,7 @@ export default class Comprometidos extends Component {
       var xml = []
       snap.forEach((child) => {
         xml.push({
+          descuento: child.val().descuento ? child.val().descuento : 0,
           nombre: child.val().nombre,
           total: child.val().total,
           subtotal: child.val().subtotal,
@@ -406,6 +408,7 @@ export default class Comprometidos extends Component {
           fecha: change.fecha,
           folio: change.folio,
           importe: change.importe,
+          descuento: change.descuento,
           isr: change.isr,
           iva: change.iva,
           subtotal: change.subtotal,
@@ -468,6 +471,7 @@ export default class Comprometidos extends Component {
         var XMLParser = require('react-xml-parser')
         var xml = new XMLParser().parseFromString(event.target.result)
         let data = {
+          'descuento': xml.attributes['Descuento'] ? xml.attributes['Descuento'] : 0,
           'total': xml.attributes['Total'] ? xml.attributes['Total'] : 'No encuentra total',
           'subtotal': xml.attributes['SubTotal'] ? xml.attributes['SubTotal'] : (parseFloat(xml.attributes['Total']) + parseFloat(xml.children['3'].attributes['TotalImpuestosRetenidos'] ? xml.children['3'].attributes['TotalImpuestosRetenidos'] : 0)) - parseFloat(xml.children['3'].attributes['TotalImpuestosTrasladados']),
           'folio': xml.attributes['Folio'] ? xml.attributes['Folio'] : '0',
@@ -541,7 +545,7 @@ export default class Comprometidos extends Component {
     const filterData = this.state.xml.filter(
       (xml) => {
         return (
-          (xml.uuid.indexOf(this.state.folioXml) !== -1) || (xml.nombre.indexOf(this.state.folioXml) !== -1) && xml.estatus !== 'asignado' && xml.tipo === 'revolvente'
+          ((xml.uuid.indexOf(this.state.folioXml) !== -1) || (xml.nombre.indexOf(this.state.folioXml) !== -1)) && xml.estatus !== 'asignado' && xml.tipo === 'revolvente'
         )
       }
     )
@@ -590,7 +594,7 @@ export default class Comprometidos extends Component {
 
       const totalImporteImporte = []
       right.map(items => (
-        totalImporteImporte.push(parseFloat(items.subtotal))
+        totalImporteImporte.push(parseFloat(items.subtotal) - parseFloat(items.descuento))
       ))
       const reducerImporte = (a, b) => a + b
       this.state.importe = totalImporteImporte.reduce(reducerImporte).toFixed(2)
@@ -740,7 +744,7 @@ export default class Comprometidos extends Component {
       comprometido.total > 0 ? sumatoria.push(parseFloat(comprometido.total)) : null
     )
     const tt4 = (a, b) => a + b
-    var tcantidad4 = sumatoria.reduce(tt4)
+    var tcantidad4 = sumatoria.reduce(tt4).toFixed(2)
 
     return (
       <div className='div-compro-container'>
