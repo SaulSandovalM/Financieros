@@ -93,7 +93,7 @@ export default class TabularIndi extends Component {
                                       textAlign: 'center',
                                       fontWeight: 'bold'
                                     }}
-                                    value={item.total}
+                                    value={item.total !== '0' ? parseFloat(item.total).toFixed(2) : parseFloat(item.subtotal).toFixed(2)}
                                     displayType='text'
                                     thousandSeparator
                                   />

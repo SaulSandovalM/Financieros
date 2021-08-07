@@ -550,6 +550,14 @@ export default class Comprometidos extends Component {
       }
     )
 
+    // console.log(this.state.xml.filter(
+    //   (xml) => {
+    //     return (
+    //       ((xml.nombre.indexOf('German') !== -1))
+    //     )
+    //   }
+    // ))
+
     const xmlvali = []
     this.state.xml2.map(item =>
       item.numfolio ?

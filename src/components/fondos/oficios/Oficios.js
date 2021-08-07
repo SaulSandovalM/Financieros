@@ -367,7 +367,7 @@ export default class Oficios extends Component {
                                               <div className='all-tab-f all-tab-of2'>
                                                 <CurrencyFormat
                                                   style={{ fontSize: '12px' }}
-                                                  value={(parseFloat(item.total) + parseFloat(item.isr)).toFixed(2)}
+                                                  value={item.total !== '0' ? (parseFloat(item.total) + parseFloat(item.isr)).toFixed(2) : (parseFloat(item.subtotal) + parseFloat(item.isr)).toFixed(2)}
                                                   displayType='text'
                                                   thousandSeparator
                                                   prefix=' $ '
@@ -1026,7 +1026,7 @@ export default class Oficios extends Component {
                         con una retención por <CurrencyFormat value={totalRetencion.reduce(reducer).toFixed(2)} displayType='text' thousandSeparator prefix=' $ ' /> para
                         un importe total de <CurrencyFormat value={ttotal - totalRetencion.reduce(reducer).toFixed(2)} displayType='text' thousandSeparator prefix=' $ ' />
                         por concepto de Reposición de Fondo Revolvente, la cantidad sera
-                        debidamente aplicada en {this.state.fondo.desc}
+                        debidamente aplicada en
                         {this.state.comprometidos.map(comprometidos =>
                           comprometidos.area ?
                             comprometidos.npro
@@ -1037,7 +1037,7 @@ export default class Oficios extends Component {
                         Recibí de la Secretaría de Finanzas Públicas del Gobierno del Estado
                         de Hidalgo la cantidad de <CurrencyFormat value={ttotal} displayType='text' thousandSeparator prefix=' $ ' /> ({( NumberAsString(ttotal) )})
                         por concepto de Reposición de Fondo Revolvente, la cantidad sera
-                        debidamente aplicada en {this.state.fondo.desc}
+                        debidamente aplicada en 
                         {this.state.comprometidos.map(comprometidos =>
                           comprometidos.area ?
                             comprometidos.npro

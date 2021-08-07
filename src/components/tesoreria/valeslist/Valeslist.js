@@ -48,7 +48,7 @@ export default class Valeslist extends Component {
       filefactura: [{ url: '', nombre: '' }],
       xmlC: [{ url: '', nombre: '' }],
       filef: [{ url: '', nombre: '' }],
-      recibosList: [{ folio: 'Recibo', nombre: '', importe: '0', iva: '0', isr: '0', fecha: '', estatus: '', subtotal: '0', total: '0', uuid: 'Recibo', tipo: 'revolvente' }],
+      recibosList: [{ folio: 'Recibo simple', nombre: '', importe: '0', iva: '0', isr: '0', fecha: '', estatus: '', subtotal: '0', total: '0', uuid: 'Recibo simple', tipo: 'revolvente' }],
       autorizados: false,
       noautorizados: false,
       pendientes: false,
@@ -256,7 +256,7 @@ export default class Valeslist extends Component {
       filefactura: [{ url: '', nombre: '' }],
       xmlC:  [{ url: '', nombre: '' }],
       filef: [{ url: '', nombre: '' }],
-      recibosList: [{ folio: 'Recibo', nombre: '', importe: '', iva: '0', isr: '0', fecha: '', estatus: '', subtotal: '0', total: '0', uuid: 'Recibo', tipo: 'revolvente' }],
+      recibosList: [{ folio: 'Recibo simple', nombre: '', importe: '', iva: '0', isr: '0', fecha: '', estatus: '', subtotal: '0', total: '0', uuid: 'Recibo simple', tipo: 'revolvente' }],
       obs: '',
       pdf2: 0
     })
@@ -318,7 +318,7 @@ export default class Valeslist extends Component {
     this.setState({
       recibosList: [
         ...this.state.recibosList,
-        { folio: 'Recibo', nombre: '', importe: '', iva: '0', isr: '0', fecha: '', estatus: '', subtotal: '0', total: '0', uuid: 'Recibo', tipo: 'revolvente' }
+        { folio: 'Recibo simple', nombre: '', importe: '', iva: '0', isr: '0', fecha: '', estatus: '', subtotal: '0', total: '0', uuid: 'Recibo simple', tipo: 'revolvente' }
       ]
     })
   }
