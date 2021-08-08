@@ -379,7 +379,8 @@ export default class Fondos extends Component {
                               this.state.realizo === 'TERESA' ||
                               this.state.realizo === 'MARCOS' ||
                               this.state.realizo === 'ELOY' ||
-                              this.state.realizo === 'MARTHA'
+                              this.state.realizo === 'MARTHA' ||
+                              this.state.realizo === 'LIZBETH'
                             )
                           )
                           ||
@@ -389,7 +390,8 @@ export default class Fondos extends Component {
                               this.state.realizo === 'MARCOS' ||
                               this.state.realizo === 'ELOY' ||
                               this.state.realizo === 'MARTHA' ||
-                              this.state.realizo === 'MIGUEL'
+                              this.state.realizo === 'MIGUEL' ||
+                              this.state.realizo === 'LIZBETH'
                             )
                           ))
                         ) &&
