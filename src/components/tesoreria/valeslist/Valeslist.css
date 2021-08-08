@@ -27,11 +27,11 @@
 .inputs-row-valeslist {
   display: flex;
 }
-.p-container-valeslist {
+.p-container-valeslist2 {
   display: flex;
   flex-direction: column;
   margin-right: 15px;
-  width: 60%;
+  width: 80%;
 }
 .progress-valeslist {
   width: 100%;

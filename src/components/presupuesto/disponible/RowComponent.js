@@ -27,8 +27,6 @@ export default class RowComponent extends Component {
     const nov = parseInt(this.props.item.nov)
     const dic = parseInt(this.props.item.dic)
 
-    console.log(this.props.item.ene)
-
     return (
       <TableBody>
         <TableCell className='table-num-dup'>
@@ -42,7 +40,7 @@ export default class RowComponent extends Component {
         </TableCell>
         <TableCell className='table-num-d'>
           <CurrencyFormat
-            value={this.props.item.ene}
+            value={this.props.item.id}
             displayType='text'
             thousandSeparator
             prefix='$ '

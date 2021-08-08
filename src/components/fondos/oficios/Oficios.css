@@ -324,6 +324,7 @@
   justify-content: space-between;
   padding-left: 20px;
   padding-right: 20px;
+  margin-bottom: 30px;
 }
 .obs-sopadre2 {
   display: flex;
@@ -346,17 +347,16 @@
 .input-obs {
   font-size: 8px;
   height: 15px;
-  width: 500px;
+  width: 750px;
 }
 .obs-so2{
   display: flex;
-  padding-left: 280px;
 }
 .obs-input {
-  border-bottom: 0;
-  border-left: 0;
-  border-right: 0;
-  border-top: 0;
+  border-bottom: 1;
+  border-left: 1;
+  border-right: 1;
+  border-top: 1;
 }
 .padre-firmas{
   display: flex;

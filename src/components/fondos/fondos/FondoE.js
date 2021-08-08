@@ -469,7 +469,7 @@ export default class FondoE extends Component {
                         ref='no_oficio'
                       />
                     </div>
-                    <div className='div-con'>
+                    {/* <div className='div-con'>
                       <p className='p-label'>Descripción</p>
                       <input
                         className='field'
@@ -480,7 +480,7 @@ export default class FondoE extends Component {
                         ref='desc'
                         value={this.state.desc ? this.state.desc : this.state.fondos[0].desc}
                       />
-                    </div>
+                    </div> */}
                   </div>
                   {(realizo === 'MIGUEL' || realizo === 'ELOY' || realizo === 'TERESA' || realizo === 'MARTHA' || realizo === 'LIZBETH') ?
                     <div className='div-f2'>
@@ -492,9 +492,11 @@ export default class FondoE extends Component {
                               style={{ height: 'auto' }}
                               multiple
                               id='no_proyecto'
-                              value={this.state.no_proyecto.length !== 0 ? this.state.no_proyecto : this.state.fondos[0].no_proyecto}
-                              onChange={this.onChange}
                               name='no_proyecto'
+                              value={this.state.no_proyecto}
+                              onChange={this.onChange}
+                              ref={no_proyecto => this.inputNoProyecto = no_proyecto}
+                              required
                               input={<Input id='select-multiple-chip' />}
                               renderValue={(selected) => (
                                 <div>
@@ -518,7 +520,7 @@ export default class FondoE extends Component {
                   }
                   <div className='div-f2'>
                     <div style={{ width: '99%' }}>
-                      <div>
+                      {/* <div>
                         <p className='p-label'>Numero de Comprobantes</p>
                         <input
                           style={{ width: '100%' }}
@@ -530,7 +532,7 @@ export default class FondoE extends Component {
                           value={this.state.numCompro ? this.state.numCompro : this.state.fondos[0].numCompro}
                           ref='numCompro'
                         />
-                      </div>
+                      </div> */}
                     </div>
                   </div>
                   <div className='div-f2'>

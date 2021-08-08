@@ -68,7 +68,6 @@ export default class Oficios extends Component {
     this.listenComprometidos(itemsRefComprometidos)
     const itemsRef = firebase.database().ref(`/fondos/${this.state.urlfire}`)
     this.listenForItems(itemsRef)
-
   }
 
   listenForItems = (itemsRef) => {
@@ -195,8 +194,10 @@ export default class Oficios extends Component {
 
     var finalRetencion = finalComprobantes.sort()
 
-    var unicos = [...new Set(this.state.comprometidos.map(item => item.proy ? ', ' + item.proy + ' ' + item.np : null))]
-    console.log(unicos)
+    var unicos = [...new Set(this.state.comprometidos.sort((a,b) => a.folio - b.folio).map(item => item.proy ? ', ' + item.proy + ' ' + item.np : null))]
+
+    var newCompro = [...new Set(this.state.comprometidos.map(comprometidos => comprometidos.area ? comprometidos.npro + ', ' : null))]
+    console.log((totalRetencion.reduce(reducer)).toFixed(2))
 
     return (
       <div className='oficios-container'>
@@ -361,9 +362,10 @@ export default class Oficios extends Component {
                                           .map((item, i) =>
                                           <div className='ofie-comprobantes-conta page-break'>
                                             <div className='ofie-header-blue'>
-                                              <div className='all-tab-f all-tab-of1'>
-                                                {item.uuid}
-                                              </div>
+                                              <input
+                                                className='all-tab-f all-tab-of1'
+                                                value={item.uuid}
+                                              />
                                               <div className='all-tab-f all-tab-of2'>
                                                 <CurrencyFormat
                                                   style={{ fontSize: '12px' }}
@@ -1026,23 +1028,13 @@ export default class Oficios extends Component {
                         con una retención por <CurrencyFormat value={totalRetencion.reduce(reducer).toFixed(2)} displayType='text' thousandSeparator prefix=' $ ' /> para
                         un importe total de <CurrencyFormat value={ttotal - totalRetencion.reduce(reducer).toFixed(2)} displayType='text' thousandSeparator prefix=' $ ' />
                         por concepto de Reposición de Fondo Revolvente, la cantidad sera
-                        debidamente aplicada en
-                        {this.state.comprometidos.map(comprometidos =>
-                          comprometidos.area ?
-                            comprometidos.npro
-                            : null
-                        )}
+                        debidamente aplicada en {newCompro}
                       </p> :
                       <p className='texto-de-pdf' style={{ textAlign: 'justify', lineHeight: '35px' }}>
                         Recibí de la Secretaría de Finanzas Públicas del Gobierno del Estado
                         de Hidalgo la cantidad de <CurrencyFormat value={ttotal} displayType='text' thousandSeparator prefix=' $ ' /> ({( NumberAsString(ttotal) )})
                         por concepto de Reposición de Fondo Revolvente, la cantidad sera
-                        debidamente aplicada en 
-                        {this.state.comprometidos.map(comprometidos =>
-                          comprometidos.area ?
-                            comprometidos.npro
-                            : null
-                        )}
+                        debidamente aplicada en {newCompro}
                       </p>
                     }
                   </div>
@@ -1502,7 +1494,7 @@ export default class Oficios extends Component {
                   </td>
                   <td className='monto-tabla all-tablai'>Monto</td>
                 </tr>
-                {this.state.comprometidos.sort((a,b) => a.partida - b.partida).map(comprometidos =>
+                {this.state.comprometidos.sort((a,b) => a.partida - b.partida && a.up - b.up).map(comprometidos =>
                   comprometidos.area ?
                   <tr>
                     <td className='all-tablai'>
@@ -1641,37 +1633,39 @@ export default class Oficios extends Component {
                   </tr>
                   : null
                 )}
-                <tr>
-                  <td className='all-tablai border-color' />
-                  <td className='all-tablai border-color' />
-                  <td className='all-tablai border-color' />
-                  <td className='all-tablai border-color' />
-                  <td className='all-tablai border-color' />
-                  <td className='all-tablai border-color' />
-                  <td className='all-tablai border-color' />
-                  <td className='all-tablai border-color' />
-                  <td className='all-tablai border-color' />
-                  <td className='all-tablai border-color' />
-                  <td className='all-tablai border-color' />
-                  <td className='all-tablai border-color' />
-                  <td className='all-tablai border-color' />
-                  <td className='all-tablai border-color' />
-                  <td className='all-tablai border-color' />
-                  <td className='all-tablai border-color' />
-                  <td className='all-tablai border-color' />
-                  <td className='all-tablai border-color' />
-                  <td className='all-tablai border-color' />
-                  <td className='all-tablai border-color' />
-                  <td className='all-tablai text-rete'>RETENCION</td>
-                  <td className='all-tablai' style={{ textAlign: 'right' }}>
-                    <CurrencyFormat
-                      value={(totalRetencion.reduce(reducer)).toFixed(2)}
-                      displayType='text'
-                      thousandSeparator
-                      prefix=' $ '
-                    />
-                  </td>
-                </tr>
+                {(totalRetencion.reduce(reducer)).toFixed(2) !== '0.00' &&
+                  <tr>
+                    <td className='all-tablai border-color' />
+                    <td className='all-tablai border-color' />
+                    <td className='all-tablai border-color' />
+                    <td className='all-tablai border-color' />
+                    <td className='all-tablai border-color' />
+                    <td className='all-tablai border-color' />
+                    <td className='all-tablai border-color' />
+                    <td className='all-tablai border-color' />
+                    <td className='all-tablai border-color' />
+                    <td className='all-tablai border-color' />
+                    <td className='all-tablai border-color' />
+                    <td className='all-tablai border-color' />
+                    <td className='all-tablai border-color' />
+                    <td className='all-tablai border-color' />
+                    <td className='all-tablai border-color' />
+                    <td className='all-tablai border-color' />
+                    <td className='all-tablai border-color' />
+                    <td className='all-tablai border-color' />
+                    <td className='all-tablai border-color' />
+                    <td className='all-tablai border-color' />
+                    <td className='all-tablai text-rete'>RETENCION</td>
+                    <td className='all-tablai' style={{ textAlign: 'right' }}>
+                      <CurrencyFormat
+                        value={(totalRetencion.reduce(reducer)).toFixed(2)}
+                        displayType='text'
+                        thousandSeparator
+                        prefix=' $ '
+                      />
+                    </td>
+                  </tr>
+                }
                 <tr>
                   <td className='all-tablai border-color' />
                   <td className='all-tablai border-color' />
@@ -1709,19 +1703,23 @@ export default class Oficios extends Component {
           <div className='sp-footer'>
             <div className='obs-sopadre2'>
               <div className='obs-so'>
-                <p className='text-osb'>Cuenta CFE</p>
-                <div className='input-cfe'><p style={{ marginTop: '10px' }}>{this.state.fondo.cfe}</p></div>
-                <div style={{ display: 'flex'}}>
+                <div style={{ display: 'flex',  width: '400px' }}>
+                  <p className='text-osb'>Cuenta CFE</p>
+                  <div className='input-cfe'><p style={{ marginTop: '8px', fontSize: '14px' }}>{this.state.fondo.cfe}</p></div>
+                </div>
+                <div style={{ display: 'flex',  width: '400px' }}>
                   <p className='text-osb'>No servicio CFE</p>
-                  <div className='input-cfe'><p style={{ marginTop: '10px' }}>{this.state.fondo.nscfe}</p></div>
+                  <div className='input-cfe'><p style={{ marginTop: '8px', fontSize: '14px' }}>{this.state.fondo.nscfe}</p></div>
                 </div>
               </div>
             </div>
             <div className='obs-sopadre'>
               <div className='obs-so'>
-                <p className='text-osb'>Observaciones</p>
-                <div className='input-obs' />
-                <div className='obs-so2'>
+                <div style={{ display: 'flex' }}>
+                  <p className='text-osb'>Observaciones</p>
+                  <div className='input-obs'><p style={{ marginTop: '10px', fontSize: '14px', textAlign: 'justify' }}>{this.state.fondo.observaciones}</p></div>
+                </div>
+                <div className='obs-so2' style={{ marginLeft: '30px' }}>
                   <p className='text-osb'>Solicitud</p>
                   <input className='obs-input' />
                 </div>

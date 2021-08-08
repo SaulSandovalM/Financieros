@@ -151,7 +151,7 @@ export default class Fondos extends Component {
       no_oficio: this.inputNoOficio.value,
       importe: ' ',
       beneficiario: ' ',
-      desc: this.inputDesc.value,
+      desc: ' ',
       no_proyecto: this.state.no_proyecto,
       numCompro: ' ',
       realizo: this.state.realizo,
@@ -219,7 +219,7 @@ export default class Fondos extends Component {
       var oficio = []
       snap.forEach((child) => {
         oficio.push({
-          oficio: child.val().oficio,
+          oficio: child.val().of,
           id: child.key
         })
       })
@@ -304,7 +304,7 @@ export default class Fondos extends Component {
   ]
 
   render () {
-    const { fondo, fecha, tipo_doc, oficio_aut, no_oficio, no_lici, desc,
+    const { fondo, fecha, tipo_doc, oficio_aut, no_oficio, no_lici,
       realizo, requisicion, pedido, no_proyecto, poliza, cfe, nscfe,
       observaciones, anexof, otherOficio } = this.state
       // importe, beneficiario, numCompro
@@ -539,17 +539,6 @@ export default class Fondos extends Component {
                       onChange={this.onChange}
                       ref={no_oficio => this.inputNoOficio = no_oficio}
                       required
-                    />
-                  </div>
-                  <div className='div-con'>
-                    <p className='p-label'>Descripción</p>
-                    <input
-                      className='field'
-                      id='desc'
-                      name='desc'
-                      value={desc}
-                      onChange={this.onChange}
-                      ref={desc => this.inputDesc = desc}
                     />
                   </div>
                 </div>

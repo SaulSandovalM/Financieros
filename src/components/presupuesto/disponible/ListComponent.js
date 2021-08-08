@@ -66,6 +66,8 @@ export default class ListComponent extends Component {
       }
     )
 
+    console.log(this.state.presupuesto)
+
     return (
       <div>
         <div className='p-container-dis'>

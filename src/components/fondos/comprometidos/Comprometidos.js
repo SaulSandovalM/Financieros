@@ -188,6 +188,7 @@ export default class Comprometidos extends Component {
       var xml = []
       snap.forEach((child) => {
         xml.push({
+          descuento: child.val().descuento,
           nombre: child.val().nombre,
           total: child.val().total,
           subtotal: child.val().subtotal,
@@ -550,13 +551,13 @@ export default class Comprometidos extends Component {
       }
     )
 
-    // console.log(this.state.xml.filter(
-    //   (xml) => {
-    //     return (
-    //       ((xml.nombre.indexOf('German') !== -1))
-    //     )
-    //   }
-    // ))
+    console.log(this.state.xml.filter(
+      (xml) => {
+        return (
+          ((xml.nombre.indexOf('JUAN') !== -1))
+        )
+      }
+    ))
 
     const xmlvali = []
     this.state.xml2.map(item =>
@@ -599,6 +600,8 @@ export default class Comprometidos extends Component {
         })
         this.state.up = resUp.toString()
       }
+
+      console.log(right)
 
       const totalImporteImporte = []
       right.map(items => (
@@ -654,7 +657,7 @@ export default class Comprometidos extends Component {
                     />
                   </ListItemIcon>
                   <ListItemText className='list-align-i' primary={value.folio} />
-                  {value.folio === 'Recibo' ?
+                  {value.folio === 'Recibo simple' ?
                     <ListItemText className='list-align-i' primary={'$ ' + value.subtotal} />
                     :
                     <ListItemText className='list-align-i' primary={'$ ' + value.total} />
