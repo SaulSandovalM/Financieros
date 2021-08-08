@@ -197,7 +197,6 @@ export default class Oficios extends Component {
     var unicos = [...new Set(this.state.comprometidos.sort((a,b) => a.folio - b.folio).map(item => item.proy ? ', ' + item.proy + ' ' + item.np : null))]
 
     var newCompro = [...new Set(this.state.comprometidos.map(comprometidos => comprometidos.area ? comprometidos.npro + ', ' : null))]
-    console.log((totalRetencion.reduce(reducer)).toFixed(2))
 
     return (
       <div className='oficios-container'>
@@ -1131,7 +1130,7 @@ export default class Oficios extends Component {
                       num {this.state.fondo.poliza} que emita la Dirección
                       General de Compras Publicas; para que se efectue el tramite de pago
                       a favor del proveedor {this.state.fondo.beneficiario} para la compra
-                      y/o prestación de servicios {this.state.fondo.desc} con
+                      y/o prestación de servicios {newCompro} con
                       cargo al proyecto{this.state.comprometidos.map(item => item.proy ? ', ' + item.proy + ', ' + item.np : null)} y
                       a los recursos otorgados con oficio de autorización {this.state.fondo.oficio_aut} del
                       Ejercicio 2021, a la Procuraduria General de Justicia del Estado.
@@ -1237,7 +1236,7 @@ export default class Oficios extends Component {
                           : null
                         )} cantidad amparada con los comprobantes No {finalRetencion.map(item => item + ', ')}
                         para el trámite de pago a favor del proveedor {this.state.fondo.beneficiario}, por
-                        la/el servicio {this.state.fondo.desc}, con
+                        la/el servicio {newCompro} con
                         cargo al proyecto{this.state.comprometidos.map(item => item.proy ? ', ' + item.proy + ' ' + item.np : null)} y
                         a los recursos otorgados con el oficio de autorización {this.state.fondo.oficio_aut}, del
                         Ejercicio 2021 a la Procuraduria General de Justicia del Estado de Hidalgo.
@@ -1252,7 +1251,7 @@ export default class Oficios extends Component {
                         )} ({(NumberAsString(totalImporte.reduce(reducer)))}),
                         cantidad amparada con los comprobantes No {finalC2} para
                         el trámite de pago a favor del proveedor {this.state.fondo.beneficiario}, por
-                        la/el servicio {this.state.fondo.desc}, con
+                        la/el servicio {newCompro} con
                         cargo al proyecto{this.state.comprometidos.map(item => item.proy ? ', ' + item.proy + ' ' + item.np : null)} y
                         a los recursos otorgados con el oficio de autorización {this.state.fondo.oficio_aut}, del
                         Ejercicio 2021 a la Procuraduria General de Justicia del Estado de Hidalgo.

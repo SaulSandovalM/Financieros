@@ -679,7 +679,7 @@ export default class Comprometidos extends Component {
                     />
                   </ListItemIcon>
                   <ListItemText className='list-align-i' primary={value.folio} />
-                  {value.folio === 'Recibo' ?
+                  {value.folio === 'Recibo simple' ?
                     <ListItemText className='list-align-i' primary={'$ ' + value.subtotal} />
                     :
                     <ListItemText className='list-align-i' primary={'$ ' + value.total} />
@@ -716,7 +716,7 @@ export default class Comprometidos extends Component {
                     />
                   </ListItemIcon>
                   <ListItemText className='list-align-i' primary={value.folio} />
-                  {value.folio === 'Recibo' ?
+                  {value.folio === 'Recibo simple' ?
                     <ListItemText className='list-align-i' primary={'$ ' + value.subtotal} />
                     :
                     <ListItemText className='list-align-i' primary={'$ ' + value.total} />
