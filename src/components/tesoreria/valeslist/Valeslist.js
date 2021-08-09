@@ -85,6 +85,7 @@ export default class Valeslist extends Component {
       reader.onload = function (event) {
         var XMLParser = require('react-xml-parser')
         var xml = new XMLParser().parseFromString(event.target.result)
+        console.log(xml)
         const data = {
           'descuento': xml.attributes['Descuento'] ? xml.attributes['Descuento'] : 0,
           'total': xml.attributes['Total'] ? xml.attributes['Total'] : 'No encuentra total',
@@ -99,16 +100,17 @@ export default class Valeslist extends Component {
           'estatus': 'sin asignar',
           'tipo': 'revolvente'
         }
-        fetch(xml).then(res => res.text()).then(xml => {
-          fetch('https://financieros-78cb0.firebaseio.com/xml.json', {
-            method: 'POST',
-            headers: {
-              'Accept': 'application/json',
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(data),
-          })
-        })
+        console.log(data)
+        // fetch(xml).then(res => res.text()).then(xml => {
+        //   fetch('https://financieros-78cb0.firebaseio.com/xml.json', {
+        //     method: 'POST',
+        //     headers: {
+        //       'Accept': 'application/json',
+        //       'Content-Type': 'application/json',
+        //     },
+        //     body: JSON.stringify(data),
+        //   })
+        // })
       }
       reader.readAsText(xmlp)
       const storageRef = firebase.storage().ref(`xml/${file.name}`)

@@ -656,7 +656,7 @@ export default class Comprometidos extends Component {
                       disableRipple
                     />
                   </ListItemIcon>
-                  <ListItemText className='list-align-i' primary={String(value.id).substr(0, 10)} />
+                  <ListItemText className='list-align-i' primary={String(value.folio).substr(0, 10)} />
                   {value.folio === 'Recibo simple' || value.uuid === 'Recibo simple' ?
                     <ListItemText className='list-align-i' primary={'$ ' + value.subtotal} />
                     :
