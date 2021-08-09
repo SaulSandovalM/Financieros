@@ -49,7 +49,7 @@ export default class Valeslist extends Component {
       xmlC: [{ url: '', nombre: '' }],
       filef: [{ url: '', nombre: '' }],
       recibosList: [{ folio: 'Recibo simple', nombre: '', importe: '0', iva: '0', isr: '0', fecha: '', estatus: '', subtotal: '0', total: '0', uuid: 'Recibo simple', tipo: 'revolvente' }],
-      cfeList: [{ folio: '', nombre: '', importe: '0', iva: '0', isr: '0', fecha: '', estatus: '', subtotal: '0', total: '0', uuid: ' ', tipo: 'revolvente' }],
+      cfeList: [{ folio: '', nombre: '', importe: '0', iva: '0', isr: '0', fecha: '', estatus: '', subtotal: '0', total: '0', uuid: 'Recibo simple', tipo: 'revolvente' }],
       autorizados: false,
       noautorizados: false,
       pendientes: false,
@@ -357,7 +357,7 @@ export default class Valeslist extends Component {
     this.setState({
       cfeList: [
         ...this.state.cfeList,
-        { folio: '', nombre: '', importe: '', iva: '0', isr: '0', fecha: '', estatus: '', subtotal: '0', total: '0', uuid: '', tipo: 'revolvente' }
+        { folio: '', nombre: '', importe: '', iva: '0', isr: '0', fecha: '', estatus: '', subtotal: '0', total: '0', uuid: 'Recibo simple', tipo: 'revolvente' }
       ]
     })
   }

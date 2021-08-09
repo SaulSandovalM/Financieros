@@ -656,8 +656,8 @@ export default class Comprometidos extends Component {
                       disableRipple
                     />
                   </ListItemIcon>
-                  <ListItemText className='list-align-i' primary={value.folio} />
-                  {value.folio === 'Recibo simple' ?
+                  <ListItemText className='list-align-i' primary={String(value.folio).substr(0, 10)} />
+                  {value.folio === 'Recibo simple' || value.uuid === 'Recibo simple' ?
                     <ListItemText className='list-align-i' primary={'$ ' + value.subtotal} />
                     :
                     <ListItemText className='list-align-i' primary={'$ ' + value.total} />
@@ -678,8 +678,8 @@ export default class Comprometidos extends Component {
                       disableRipple
                     />
                   </ListItemIcon>
-                  <ListItemText className='list-align-i' primary={value.folio} />
-                  {value.folio === 'Recibo' ?
+                  <ListItemText className='list-align-i' primary={String(value.folio).substr(0, 10)} />
+                  {value.folio === 'Recibo simple' || value.uuid === 'Recibo simple' ?
                     <ListItemText className='list-align-i' primary={'$ ' + value.subtotal} />
                     :
                     <ListItemText className='list-align-i' primary={'$ ' + value.total} />
@@ -715,8 +715,8 @@ export default class Comprometidos extends Component {
                       disableRipple
                     />
                   </ListItemIcon>
-                  <ListItemText className='list-align-i' primary={value.folio} />
-                  {value.folio === 'Recibo' ?
+                  <ListItemText className='list-align-i' primary={String(value.folio).substr(0, 10)} />
+                  {value.folio === 'Recibo' || value.uuid === 'Recibo simple' ?
                     <ListItemText className='list-align-i' primary={'$ ' + value.subtotal} />
                     :
                     <ListItemText className='list-align-i' primary={'$ ' + value.total} />
