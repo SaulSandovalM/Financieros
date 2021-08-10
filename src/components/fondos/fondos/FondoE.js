@@ -113,7 +113,7 @@ export default class FondoE extends Component {
       })
       wishRef.set(updatedWish)
     })
-    const itemsRefPre = firebase.database().ref('oficios/')
+    const itemsRefPre = firebase.database().ref('presupuesto/')
     this.listenForItemsP(itemsRefPre)
   }
 
@@ -176,7 +176,7 @@ export default class FondoE extends Component {
       var oficio = []
       snap.forEach((child) => {
         oficio.push({
-          oficio: child.val().oficio,
+          oficio: child.val().of,
           id: child.key
         })
       })
@@ -269,12 +269,20 @@ export default class FondoE extends Component {
     const newArray = ['']
     const myObj = {}
 
-    this.state.oficio.forEach(el => {
-      if (!(el in myObj)) {
+    this.state.oficio.filter(el => {
+      if (!(el in myObj) && el.oficio !== undefined) {
         myObj[el + 1] = true
         newArray.push(el)
       }
     })
+    const aarr = []
+    newArray.map(item => {
+      return aarr.push(item.oficio)
+    })
+    let result = aarr.filter((item,index)=>{
+      return aarr.indexOf(item) === index
+    })
+
 
     return (
       <div>
@@ -325,8 +333,8 @@ export default class FondoE extends Component {
                         name='oficio_aut'
                         required
                       >
-                      {newArray.map(data =>
-                        <option name={data}>{data.oficio}</option>
+                      {result.map(data =>
+                        <option name={data}>{data}</option>
                       )}
                       </select>
                     </div>
