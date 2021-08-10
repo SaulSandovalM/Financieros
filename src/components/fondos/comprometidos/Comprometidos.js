@@ -551,13 +551,13 @@ export default class Comprometidos extends Component {
       }
     )
 
-    console.log(this.state.xml.filter(
-      (xml) => {
-        return (
-          ((xml.nombre.indexOf('JUAN') !== -1))
-        )
-      }
-    ))
+    // console.log(this.state.xml.filter(
+    //   (xml) => {
+    //     return (
+    //       ((xml.nombre.indexOf('JUAN') !== -1))
+    //     )
+    //   }
+    // ))
 
     const xmlvali = []
     this.state.xml2.map(item =>
@@ -600,8 +600,6 @@ export default class Comprometidos extends Component {
         })
         this.state.up = resUp.toString()
       }
-
-      console.log(right)
 
       const totalImporteImporte = []
       right.map(items => (
@@ -1166,6 +1164,7 @@ export default class Comprometidos extends Component {
                     key={comprometido.id}
                     comprometido={comprometido}
                     newArray={right}
+                    tipo={this.state.tipoFondo.tipo_doc}
                   />
                 : null
               ): null }

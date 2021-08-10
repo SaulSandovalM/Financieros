@@ -3,20 +3,13 @@ import React, { Component } from 'react'
 import firebase from '../../../Firebase'
 import Fab from '@material-ui/core/Fab'
 import CheckIcon from '@material-ui/icons/Check'
+import CloseIcon from '@material-ui/icons/Close'
 import Paper from '@material-ui/core/Paper'
 import Grid from '@material-ui/core/Grid'
 import PropTypes from 'prop-types'
 import MaskedInput from 'react-text-mask'
 import NumberFormat from 'react-number-format'
 import './Fondos.css'
-import Input from '@material-ui/core/Input'
-import InputLabel from '@material-ui/core/InputLabel'
-import MenuItem from '@material-ui/core/MenuItem'
-import FormControl from '@material-ui/core/FormControl'
-import Select from '@material-ui/core/Select'
-import Chip from '@material-ui/core/Chip'
-import { Link } from 'react-router-dom'
-import CurrencyFormat from 'react-currency-format'
 
 export default class FondoE extends Component {
   constructor (props) {
@@ -136,7 +129,6 @@ export default class FondoE extends Component {
         importe: snap.val().importe,
         beneficiario: snap.val().beneficiario,
         desc: snap.val().desc,
-        no_proyecto: snap.val().no_proyecto,
         numCompro: snap.val().numCompro,
         realizo: snap.val().realizo,
         no_lici: snap.val().no_lici,
@@ -194,39 +186,6 @@ export default class FondoE extends Component {
     })
   }
 
-  beneficiario2 = ['', 'Mtro. León Maximiliano Hernández Valdés']
-  tipo_doc = ['','Pago Directo', 'Fondo Revolvente', 'Gasto a Comprobar', 'Cancelado', 'Licitación']
-  tipo_doc2 = ['','Fondo Revolvente', 'Pago Directo']
-  tipo_doc3 = ['','Pago Directo']
-  tipo_doc4 = ['','Fondo Revolvente']
-  no_proyecto = [
-    '',
-    'AU001, Atención y seguimiento a peticiones recibidas en el despacho del procurador atendidas, up: 01',
-    'AU002, Casos penales de la región oriente resueltas, up: 02',
-    'AU003, Delitos cometidos en contra de la libertad de expresión, periodistas y personas defensoras de los derechos humanos investigados, up: 03',
-    'AU004, Averiguaciones previas del sistema tradicional concluidas, up: 04',
-    'AU005, Casos penales en materia de delitos electorales resueltos, up: 05',
-    'AU006, Casos penales determinados, concluidos o resueltos en delitos que atenten contra la mujer y la familia, up: 06',
-    'AU007, Acuerdos reparatorios generados a través de la aplicación de los mecanismos alternativos de solución de controversias en materia penal en la región poniente, up: 07',
-    'AU008, Investigación y supervisión de los casos penales con motivo de feminicidio, up: 08',
-    'AU009, Quejas y denuncias por la posible comisión de conductas indebidas en las que incurran las y los servidores públicos atendidas, up: 09',
-    'AU010, Intervenciones periciales a autoridades de procuración de justicia para una correcta integración del expediente en casos penales entregados, up: 10',
-    'AU011, Casos penales del delito de narcomenudeo resueltos, up: 11',
-    'AU012, Casos penales atendidos por los delitos de secuestro y extorsión, up: 12',
-    'AU013, Gestión administrativa de recursos humanos,financiera, materiales, de informática, de archivo, de calidad, de aportaciones federales, planeación estratégica realizada, up: 13',
-    'AU014, Determinación y/o resolución de los casos penales de los delitos de trata de personas, lenocinio y delitos conexos, up: 14',
-    'AU015, Casos penales de la región poniente resueltas, up: 15',
-    'AU016, Atenciones ciudadanas en los módulos de atención temprana en la región poniente brindadas, up: 16',
-    'AU017, Determinación en las carpetas de investigación en las unidades de investigación de la regiones poniente, up: 17',
-    'AU018, Investigación policial ejecutada, up: 18',
-    'AU019, Atenciones ciudadanas en los módulos de atención temprana en la región poniente brindadas, up: 20',
-    'AU020, Acuerdos reparatorios generados a traves de la aplicación de los mecanismos alternativos de solución de controversias en materia penal en la región oriente, up: 21',
-    'AU021, Determinación en las carpetas de investigación en las unidades de investigación de la regiones oriente, up: 22',
-    'AU022, Delitos de corrupción resueltos, up: 23',
-    'AU023, Casos penales determinados, concluidos o resueltos de delitos en materia de desaparición forzada de personas cometidos por particulares, delitos vinculados y de personas no localizadas realizados, up: 24',
-    'A1D11, Centralizada'
-  ]
-
   onChange = (e) => {
     const state = this.state
     state[e.target.name] = e.target.value
@@ -245,7 +204,42 @@ export default class FondoE extends Component {
       importe: this.state.importe ? this.state.importe : this.state.fondos[0].importe,
       beneficiario: this.state.beneficiario ? this.state.beneficiario :this.state.fondos[0].beneficiario,
       desc: this.state.desc ? this.state.desc : this.state.fondos[0].desc,
-      no_proyecto: this.state.no_proyecto.length === 0 ? this.state.fondos[0].no_proyecto : this.state.no_proyecto,
+      numCompro: this.state.numCompro ? this.state.numCompro : this.state.fondos[0].numCompro,
+      realizo: this.state.fondos[0].realizo,
+      no_lici: this.state.no_lici ? this.state.no_lici : this.state.fondos[0].no_lici,
+      requisicion: this.state.requisicion ? this.state.requisicion : this.state.fondos[0].requisicion,
+      pedido: this.state.pedido ? this.state.pedido : this.state.fondos[0].pedido,
+      poliza: this.state.poliza ? this.state.poliza : this.state.fondos[0].poliza,
+      cfe: this.state.cfe ? this.state.cfe : this.state.fondos[0].cfe,
+      nscfe: this.state.nscfe ? this.state.nscfe : this.state.fondos[0].nscfe,
+      observaciones: this.state.observaciones ? this.state.observaciones : this.state.fondos[0].observaciones,
+      comprometido: this.state.fondos[0].comprometido,
+      cpa: this.state.fondos[0].cpa,
+      numCheque: this.state.numCheque ? this.state.numCheque : this.state.fondos[0].numCheque,
+      fechaContra: this.state.fechaContra ? this.state.fechaContra : this.state.fondos[0].fechaContra,
+      numContra: this.state.numContra ? this.state.numContra : this.state.fondos[0].numContra,
+      fechaDepo: this.state.fechaDepo ? this.state.fechaDepo : this.state.fondos[0].fechaDepo,
+      cuentaPagar: this.state.cuentaPagar ? this.state.cuentaPagar : this.state.fondos[0].cuentaPagar,
+      cuentaPagarPara: this.state.cuentaPagarPara ? this.state.cuentaPagarPara : this.state.fondos[0].cuentaPagarPara,
+      sujetoContable: this.state.sujetoContable ? this.state.sujetoContable : this.state.fondos[0].sujetoContable,
+      anexof: this.state.anexof ? this.state.anexof : this.state.fondos[0].anexof
+    }
+    firebase.database().ref().update(updates)
+    alert('Se ha actualizado el fondo')
+  }
+
+  cancel = () => {
+    let updates = {}
+    let item = this.state.urlfire
+    updates['fondos/' + item] = {
+      fondo: this.state.fondos[0].fondo,
+      fecha: this.state.fondos[0].fecha,
+      tipo_doc: this.state.tipo_doc ? this.state.tipo_doc : this.state.fondos[0].tipo_doc,
+      oficio_aut: this.state.oficio_aut ? this.state.oficio_aut : this.state.fondos[0].oficio_aut,
+      no_oficio: this.state.no_oficio ? this.state.no_oficio : this.state.fondos[0].no_oficio,
+      importe: this.state.importe ? this.state.importe : this.state.fondos[0].importe,
+      beneficiario: this.state.beneficiario ? this.state.beneficiario :this.state.fondos[0].beneficiario,
+      desc: this.state.desc ? this.state.desc : this.state.fondos[0].desc,
       numCompro: this.state.numCompro ? this.state.numCompro : this.state.fondos[0].numCompro,
       realizo: this.state.fondos[0].realizo,
       no_lici: this.state.no_lici ? this.state.no_lici : this.state.fondos[0].no_lici,
@@ -287,80 +281,6 @@ export default class FondoE extends Component {
         {this.state.fondo &&
           <form className='form-fondo'>
             <div className='grid-w'>
-            {this.state.fondos.map(fondos =>
-            <Grid className='grid-w2'>
-              <Paper className='paper-p'>
-                <div className='div-con-f'>Buscador de Fondos</div>
-                <div className='head-search'>
-                  <div className='inp-sea-cont'>
-                    <p className='inp-p-t'>Num. Fondo</p>
-                  </div>
-                  <div className='inp-sea-cont'>
-                    <p className='inp-p-t'>Tipo de Doc.</p>
-                  </div>
-                  <div className='inp-sea-cont'>
-                    <p className='inp-p-t'>Importe</p>
-                  </div>
-                  <div className='inp-sea-cont'>
-                    <p className='inp-p-t'>Nombre R.</p>
-                  </div>
-                  <div className='inp-sea-cont'>
-                    <p className='inp-p-t'>Editar F.</p>
-                  </div>
-                  <div className='inp-sea-cont'>
-                    <p className='inp-p-t'>Editar C.</p>
-                  </div>
-                  <div className='inp-sea-cont'>
-                    <p className='inp-p-t'>Oficios</p>
-                  </div>
-                </div>
-                <div className='head-search'>
-                  <div className='inp-sea-cont'>
-                    <input
-                      style={{ width: '85%' }}
-                      className='field'
-                      name='searchF'
-                      value={fondos.fondo}
-                      onChange={this.onChange}
-                    />
-                  </div>
-                  <div className='cont-w-data'>
-                      <div className='cont-map-fondo'>
-                        {(fondos.fondo && (fondos.realizo === this.state.realizo || this.state.realizo === 'MIGUEL')) &&
-                          <div className='cont-map-data'>
-                            <div className='data-w-search'>
-                              <p className='data-m-f'>{fondos.tipo_doc}</p>
-                            </div>
-                            <div className='editar-option'>
-                              <CurrencyFormat
-                                value={fondos.importe}
-                                displayType='text'
-                                prefix=' $ '
-                                thousandSeparator
-                                decimalSeparator='.'
-                              />
-                            </div>
-                            <div className='data-w-search'>
-                              <p className='data-m-f'>{fondos.realizo}</p>
-                            </div>
-                            <div className='data-w-search'>
-                              <Link className='data-m-f' to={`/FondoE/${fondos.id}`}>Editar</Link>
-                            </div>
-                            <div className='data-w-search'>
-                              <Link className='data-m-f' to={`/Comprometidos/${fondos.id}`}>Editar</Link>
-                            </div>
-                            <div className='data-w-search'>
-                              <Link className='data-m-f' to={`/Oficios/${fondos.id}`}>Imprimir</Link>
-                            </div>
-                          </div>
-                        }
-                      </div>
-
-                  </div>
-                </div>
-              </Paper>
-            </Grid>
-            )}
               <Grid className='grid-w2'>
                 <Paper className='paper-pm'>
                   <div className='div-con-f'>Fondo</div>
@@ -386,61 +306,15 @@ export default class FondoE extends Component {
                   </div>
                   <div className='div-f2'>
                     <div className='div-con'>
-                      <p className='p-label'>Tipo de Documento</p>
-                      {(realizo === 'MIGUEL' || realizo === 'ELOY' || realizo === 'TERESA' || realizo === 'MARTHA' || realizo === 'LIZBETH') &&
-                        <select
-                          className='select-f'
-                          value={
-                            (this.state.fondos[0].tipo_doc && this.state.tipo_doc === '') ?
-                              this.state.fondos[0].tipo_doc
-                            :
-                              this.state.tipo_doc
-                          }
-                          onChange={this.onChange}
-                          name='tipo_doc'
-                          required
-                        >
-                          {this.tipo_doc.map((x,y) =>
-                            <option name={y}>{x}</option>
-                          )}
-                        </select>
-                      }
-                      {(realizo === 'MARCOS') &&
-                        <select
-                          className='select-f'
-                          value={
-                            (this.state.fondos[0].tipo_doc && this.state.tipo_doc === '') ?
-                              this.state.fondos[0].tipo_doc
-                            :
-                              this.state.tipo_doc
-                          }
-                          onChange={this.onChange}
-                          name='tipo_doc'
-                          required
-                        >
-                          {this.tipo_doc4.map((x,y) =>
-                            <option name={y}>{x}</option>
-                          )}
-                        </select>
-                      }
-                      {(realizo === 'KARINA' || realizo === 'LILIA' || realizo === 'CENELY' || realizo === 'HECTOR' || realizo === 'OMAR') &&
-                        <select
-                          className='select-f'
-                          value={
-                            (this.state.fondos[0].tipo_doc && this.state.tipo_doc === '') ?
-                              this.state.fondos[0].tipo_doc
-                            :
-                              this.state.tipo_doc
-                          }
-                          onChange={this.onChange}
-                          name='tipo_doc'
-                          required
-                        >
-                          {this.tipo_doc3.map((x,y) =>
-                            <option name={y}>{x}</option>
-                          )}
-                        </select>
-                      }
+                      <p className='p-label'>Numero de Oficio</p>
+                      <input
+                        className='field'
+                        name='no_oficio'
+                        required
+                        value={this.state.no_oficio ? this.state.no_oficio : this.state.fondos[0].no_oficio}
+                        onChange={this.onChange}
+                        ref='no_oficio'
+                      />
                     </div>
                     <div className='div-con'>
                       <p className='p-label'>Oficio de Autorización</p>
@@ -455,84 +329,6 @@ export default class FondoE extends Component {
                         <option name={data}>{data.oficio}</option>
                       )}
                       </select>
-                    </div>
-                  </div>
-                  <div className='div-f2'>
-                    <div className='div-con'>
-                      <p className='p-label'>Numero de Oficio</p>
-                      <input
-                        className='field'
-                        name='no_oficio'
-                        required
-                        value={this.state.no_oficio ? this.state.no_oficio : this.state.fondos[0].no_oficio}
-                        onChange={this.onChange}
-                        ref='no_oficio'
-                      />
-                    </div>
-                    {/* <div className='div-con'>
-                      <p className='p-label'>Descripción</p>
-                      <input
-                        className='field'
-                        id='desc'
-                        name='desc'
-                        onChange={this.onChange}
-                        required
-                        ref='desc'
-                        value={this.state.desc ? this.state.desc : this.state.fondos[0].desc}
-                      />
-                    </div> */}
-                  </div>
-                  {(realizo === 'MIGUEL' || realizo === 'ELOY' || realizo === 'TERESA' || realizo === 'MARTHA' || realizo === 'LIZBETH') ?
-                    <div className='div-f2'>
-                      <div className='fondo-w-c'>
-                        <div>
-                          <FormControl className='fondo-w-c'>
-                            <InputLabel>Proyecto</InputLabel>
-                            <Select
-                              style={{ height: 'auto' }}
-                              multiple
-                              id='no_proyecto'
-                              name='no_proyecto'
-                              value={this.state.no_proyecto}
-                              onChange={this.onChange}
-                              ref={no_proyecto => this.inputNoProyecto = no_proyecto}
-                              required
-                              input={<Input id='select-multiple-chip' />}
-                              renderValue={(selected) => (
-                                <div>
-                                  {selected.map((value) => (
-                                    <Chip key={value} label={value} style={{ display: 'flex', flexWrap: 'wrap' }}/>
-                                  ))}
-                                </div>
-                              )}
-                              MenuProps={MenuProps}
-                            >
-                              {this.no_proyecto.map((name) => (
-                                <MenuItem key={name} value={name}>
-                                  {name}
-                                </MenuItem>
-                              ))}
-                            </Select>
-                          </FormControl>
-                        </div>
-                      </div>
-                    </div> : null
-                  }
-                  <div className='div-f2'>
-                    <div style={{ width: '99%' }}>
-                      {/* <div>
-                        <p className='p-label'>Numero de Comprobantes</p>
-                        <input
-                          style={{ width: '100%' }}
-                          className='field'
-                          id='numCompro'
-                          name='numCompro'
-                          onChange={this.onChange}
-                          required
-                          value={this.state.numCompro ? this.state.numCompro : this.state.fondos[0].numCompro}
-                          ref='numCompro'
-                        />
-                      </div> */}
                     </div>
                   </div>
                   <div className='div-f2'>
@@ -729,11 +525,16 @@ export default class FondoE extends Component {
                   </div>
                 </Paper>
               </Grid>
-            <div className='div-content-fab'>
-              <Fab color='primary' aria-label='add' style={{ background: 'green' }} onClick={this.update}>
-                <CheckIcon />
-              </Fab>
-            </div>
+              <div className='div-content-fabr'>
+                <Fab color='primary' aria-label='add' style={{ background: 'red' }} onClick={this.cancel}>
+                  <CloseIcon />
+                </Fab>
+              </div>
+              <div className='div-content-fab'>
+                <Fab color='primary' aria-label='add' style={{ background: 'green' }} onClick={this.update}>
+                  <CheckIcon />
+                </Fab>
+              </div>
             </div>
           </form>
         }
@@ -788,15 +589,4 @@ NumberFormatCustom.propTypes = {
   inputRef: PropTypes.func.isRequired,
   name: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired
-}
-
-const ITEM_HEIGHT = 48
-const ITEM_PADDING_TOP = 8
-const MenuProps = {
-  PaperProps: {
-    style: {
-      maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
-      width: 250
-    }
-  }
 }
