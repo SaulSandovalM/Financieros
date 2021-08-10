@@ -128,7 +128,6 @@ export default class Reduccion extends Component {
           rubro: child.val().rubro,
           tg: child.val().tg,
           ogasto: child.val().ogasto,
-          npro: child.val().npro,
           f: child.val().f,
           fu: child.val().fu,
           sf: child.val().sf,
@@ -136,7 +135,6 @@ export default class Reduccion extends Component {
           s: child.val().s,
           prog: child.val().prog,
           sp: child.val().sp,
-          min: child.val().min,
           obj: child.val().obj,
           proy: child.val().proy,
           est: child.val().est,
@@ -145,8 +143,9 @@ export default class Reduccion extends Component {
           eg: child.val().eg,
           mi: child.val().mi,
           pr: child.val().pr,
-          ped: child.val().ped,
+          pd: child.val().pd,
           itrans: child.val().itrans,
+          min: child.val().min,
           igest: child.val().igest,
           la: child.val().la,
           ods: child.val().ods,
@@ -195,7 +194,7 @@ export default class Reduccion extends Component {
           ampliacion: child.val().ampliacion,
           reduccion: child.val().reduccion,
           transferencia: child.val().transferencia,
-          oficio: child.val().oficio,
+          npro: child.val().npro,
           id: child.key
         })
       })
@@ -219,7 +218,6 @@ export default class Reduccion extends Component {
       rubro: item.rubro,
       tg: item.tg,
       ogasto: item.ogasto,
-      npro: item.npro,
       f: item.f,
       fu: item.fu,
       sf: item.sf,
@@ -227,7 +225,6 @@ export default class Reduccion extends Component {
       s: item.s,
       prog: item.prog,
       sp: item.sp,
-      min: item.min,
       obj: item.obj,
       proy: item.proy,
       est: item.est,
@@ -238,6 +235,7 @@ export default class Reduccion extends Component {
       pr: item.pr,
       pd: item.pd,
       itrans: item.itrans,
+      min: item.min,
       igest: item.igest,
       la: item.la,
       ods: item.ods,
@@ -284,13 +282,21 @@ export default class Reduccion extends Component {
       ampdic: item.ampdic,
       total: item.total,
       ampliacion: item.ampliacion,
-      reduccion: item.reduccion,
-      transferencia: 'T/R',
-      oficio: this.state.oficio,
-      oficioA: this.state.oficio,
+      reduccion: 'Reduccion',
+      transferencia: item.transferencia,
       archivo: this.state.archivo
     }
     firebase.database().ref().update(updates)
+    const params = {
+      oficio: this.state.oficio,
+    }
+    if (params.oficio) {
+      firebase.database().ref('oficios').push(params).then(() => {
+        alert('Tu solicitud fue enviada.')
+      }).catch(() => {
+        alert('Tu solicitud no puede ser enviada')
+      })
+    }
     alert('Tu solicitud fue enviada.')
   }
 

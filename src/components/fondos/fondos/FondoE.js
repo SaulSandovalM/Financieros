@@ -113,7 +113,7 @@ export default class FondoE extends Component {
       })
       wishRef.set(updatedWish)
     })
-    const itemsRefPre = firebase.database().ref('presupuesto/')
+    const itemsRefPre = firebase.database().ref('oficios/')
     this.listenForItemsP(itemsRefPre)
   }
 
@@ -176,7 +176,7 @@ export default class FondoE extends Component {
       var oficio = []
       snap.forEach((child) => {
         oficio.push({
-          oficio: child.val().of,
+          oficio: child.val().oficio,
           id: child.key
         })
       })

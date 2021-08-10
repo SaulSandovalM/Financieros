@@ -127,7 +127,6 @@ export default class Ampliacion extends Component {
           rubro: child.val().rubro,
           tg: child.val().tg,
           ogasto: child.val().ogasto,
-          npro: child.val().npro,
           f: child.val().f,
           fu: child.val().fu,
           sf: child.val().sf,
@@ -135,7 +134,6 @@ export default class Ampliacion extends Component {
           s: child.val().s,
           prog: child.val().prog,
           sp: child.val().sp,
-          min: child.val().min,
           obj: child.val().obj,
           proy: child.val().proy,
           est: child.val().est,
@@ -144,8 +142,9 @@ export default class Ampliacion extends Component {
           eg: child.val().eg,
           mi: child.val().mi,
           pr: child.val().pr,
-          ped: child.val().ped,
+          pd: child.val().pd,
           itrans: child.val().itrans,
+          min: child.val().min,
           igest: child.val().igest,
           la: child.val().la,
           ods: child.val().ods,
@@ -194,7 +193,7 @@ export default class Ampliacion extends Component {
           ampliacion: child.val().ampliacion,
           reduccion: child.val().reduccion,
           transferencia: child.val().transferencia,
-          oficio: child.val().oficio,
+          npro: child.val().npro,
           id: child.key
         })
       })
@@ -218,7 +217,6 @@ export default class Ampliacion extends Component {
       rubro: item.rubro,
       tg: item.tg,
       ogasto: item.ogasto,
-      npro: item.npro,
       f: item.f,
       fu: item.fu,
       sf: item.sf,
@@ -226,7 +224,6 @@ export default class Ampliacion extends Component {
       s: item.s,
       prog: item.prog,
       sp: item.sp,
-      min: item.min,
       obj: item.obj,
       proy: item.proy,
       est: item.est,
@@ -237,6 +234,7 @@ export default class Ampliacion extends Component {
       pr: item.pr,
       pd: item.pd,
       itrans: item.itrans,
+      min: item.min,
       igest: item.igest,
       la: item.la,
       ods: item.ods,
@@ -282,28 +280,22 @@ export default class Ampliacion extends Component {
       gasdic: parseFloat(this.state.impodic),
       ampdic: item.ampdic,
       total: item.total,
-      ampliacion: item.ampliacion,
+      ampliacion: 'Ampliacion',
       reduccion: item.reduccion,
       transferencia: 'T/R',
-      oficio: this.state.oficio,
-      oficioA: this.state.oficio,
-      archivo: this.state.archivo
+      npro: item.npro
     }
     firebase.database().ref().update(updates)
-    // const params = {
-    //   mes: this.state.mes,
-    //   oficioSolicitud: this.state.oficioSolicitud,
-    //   up: this.state.up,
-    //   partida: this.state.partida,
-    //   movimiento: this.state.movimiento
-    // }
-    // if (params.mes && params.oficioSolicitud && params.up && params.partida && params.movimiento) {
-    //   firebase.database().ref('ampliacion').push(params).then(() => {
-    //     alert('Tu solicitud fue enviada.')
-    //   }).catch(() => {
-    //     alert('Tu solicitud no puede ser enviada')
-    //   })
-    // }
+    const params = {
+      oficio: this.state.oficio,
+    }
+    if (params.oficio) {
+      firebase.database().ref('oficios').push(params).then(() => {
+        alert('Tu solicitud fue enviada.')
+      }).catch(() => {
+        alert('Tu solicitud no puede ser enviada')
+      })
+    }
     alert('Tu solicitud fue enviada.')
   }
 

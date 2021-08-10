@@ -164,7 +164,7 @@ export default class ArchivosPago extends Component {
   }
 
   componentDidMount () {
-    const itemsPresupuesto = firebase.database().ref('presupuesto/')
+    const itemsPresupuesto = firebase.database().ref('presupuestoValidacion/')
     this.listenForPresupuesto(itemsPresupuesto)
     const itemsRefValidacion = firebase.database().ref('xmlPagoDirecto')
     this.listenValidacion(itemsRefValidacion)
@@ -192,7 +192,6 @@ export default class ArchivosPago extends Component {
           rubro: child.val().rubro,
           tg: child.val().tg,
           ogasto: child.val().ogasto,
-          npro: child.val().npro,
           f: child.val().f,
           fu: child.val().fu,
           sf: child.val().sf,
@@ -200,7 +199,6 @@ export default class ArchivosPago extends Component {
           s: child.val().s,
           prog: child.val().prog,
           sp: child.val().sp,
-          min: child.val().min,
           obj: child.val().obj,
           proy: child.val().proy,
           est: child.val().est,
@@ -211,6 +209,7 @@ export default class ArchivosPago extends Component {
           pr: child.val().pr,
           pd: child.val().pd,
           itrans: child.val().itrans,
+          min: child.val().min,
           igest: child.val().igest,
           la: child.val().la,
           ods: child.val().ods,
@@ -259,6 +258,7 @@ export default class ArchivosPago extends Component {
           ampliacion: child.val().ampliacion,
           reduccion: child.val().reduccion,
           transferencia: child.val().transferencia,
+          npro: child.val().npro,
           estatus: child.val().estatus ? child.val().estatus : ' ',
           id: child.key
         })
@@ -302,7 +302,7 @@ export default class ArchivosPago extends Component {
     const tota = (a, b) => a + b
     const Total2 = this.state.total.reduce(tota)
     let updates = {}
-    updates['presupuesto/' + this.state.idPresupuestal.id] = {
+    updates['presupuestoValidacion/' + this.state.idPresupuestal.id] = {
       año: this.state.idPresupuestal.año,
       rm: this.state.idPresupuestal.rm,
       ur: this.state.idPresupuestal.ur,
@@ -310,7 +310,6 @@ export default class ArchivosPago extends Component {
       rubro: this.state.idPresupuestal.rubro,
       tg: this.state.idPresupuestal.tg,
       ogasto: this.state.idPresupuestal.ogasto,
-      npro: this.state.idPresupuestal.npro,
       f: this.state.idPresupuestal.f,
       fu: this.state.idPresupuestal.fu,
       sf: this.state.idPresupuestal.sf,
@@ -318,7 +317,6 @@ export default class ArchivosPago extends Component {
       s: this.state.idPresupuestal.s,
       prog: this.state.idPresupuestal.prog,
       sp: this.state.idPresupuestal.sp,
-      min: this.state.idPresupuestal.min,
       obj: this.state.idPresupuestal.obj,
       proy: this.state.idPresupuestal.proy,
       est: this.state.idPresupuestal.est,
@@ -329,6 +327,7 @@ export default class ArchivosPago extends Component {
       pr: this.state.idPresupuestal.pr,
       pd: this.state.idPresupuestal.pd,
       itrans: this.state.idPresupuestal.itrans,
+      min: this.state.idPresupuestal.min,
       igest: this.state.idPresupuestal.igest,
       la: this.state.idPresupuestal.la,
       ods: this.state.idPresupuestal.ods,
@@ -377,6 +376,7 @@ export default class ArchivosPago extends Component {
       ampliacion: this.state.idPresupuestal.ampliacion,
       reduccion: this.state.idPresupuestal.reduccion,
       transferencia: this.state.idPresupuestal.transferencia,
+      npro: this.state.idPresupuestal.npro,
       estatus: this.state.idPresupuestal.estatus ? this.state.idPresupuestal.estatus : ' ',
     }
     firebase.database().ref().update(updates)
@@ -403,7 +403,6 @@ export default class ArchivosPago extends Component {
       total: [0],
       datos: []
     })
-    console.log(params)
     if (params.Fondo && params.FechaI && params.Contrarecibo && params.FechaP
       && params.Devolucion && params.Total && params.TipoPersona && params.NumContra
       && params.Adquisicion && params.Xml && params.xmlC && params.filefactura
