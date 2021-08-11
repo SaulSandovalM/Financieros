@@ -20,6 +20,7 @@ import Disponible from './components/presupuesto/disponible/Disponible'
 import Contra from './components/presupuesto/contrarecibo/Contra'
 import Editcontra from './components/presupuesto/contrarecibo/Editcontra'
 import CargaC from './components/presupuesto/cargacontra/CargaC'
+import Informe from './components/presupuesto/informe/Informe'
 // Parte de Tesoreria
 import Caja from './components/tesoreria/caja/Caja'
 import Cheques from './components/tesoreria/cheques/Cheques'
@@ -152,6 +153,13 @@ function App (props) {
         exact
         path='/CargaC'
         component={CargaC}
+        isAuthenticated={isAuthenticated}
+        isVerifying={isVerifying}
+      />
+      <ProtectedRoute
+        exact
+        path='/Informe'
+        component={Informe}
         isAuthenticated={isAuthenticated}
         isVerifying={isVerifying}
       />

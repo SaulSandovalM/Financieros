@@ -244,6 +244,18 @@ class Nav extends Component {
               </Link>
             </div>
           }
+          {(admin === 'CECILIA' || admin === 'LIZBETH' || admin === 'ALFREDO') &&
+            <div className='navbar-left'>
+              <Link to='/Informe' className='deco'>
+                <span className='material-icons'>
+                  publish
+                </span>
+                <Typography className='nav-t' variant='h6'>
+                  Informe
+                </Typography>
+              </Link>
+            </div>
+          }
           {(admin === 'ELI' || admin === 'LIZBETH' || admin === 'JUAN') &&
             <div className='navbar-left' style={{ marginTop: '30px' }}>
               <Link to='/Caja' className='deco'>
