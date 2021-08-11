@@ -40,7 +40,7 @@ export default class RowComponent extends Component {
         </TableCell>
         <TableCell className='table-num-d'>
           <CurrencyFormat
-            value={this.props.item.id}
+            value={this.props.item.ene}
             displayType='text'
             thousandSeparator
             prefix='$ '

@@ -49,32 +49,22 @@ export default class Valeslist extends Component {
       xmlC: [{ url: '', nombre: '' }],
       filef: [{ url: '', nombre: '' }],
       recibosList: [{ folio: 'Recibo simple', nombre: '', importe: '0', iva: '0', isr: '0', fecha: '', estatus: '', subtotal: '0', total: '0', uuid: 'Recibo simple', tipo: 'revolvente' }],
-      cfeList: [{ folio: '', nombre: '', importe: '0', iva: '0', isr: '0', fecha: '', estatus: '', subtotal: '0', total: '0', uuid: 'Recibo simple', tipo: 'revolvente' }],
       autorizados: false,
       noautorizados: false,
       pendientes: false,
       obs: '',
       opened: false,
       xmlLoading: 0,
-      contador: 0,
-      cfeopen: false
+      contador: 0
     }
     this.toggleBox = this.toggleBox.bind(this)
-    this.cfeBtn = this.cfeBtn.bind(this)
   }
 
   toggleBox() {
     const { opened } = this.state;
     this.setState({
-      opened: !opened,
-    });
-  }
-
-  cfeBtn() {
-    const { cfeopen } = this.state;
-    this.setState({
-      cfeopen: !cfeopen,
-    });
+      opened: !opened
+    })
   }
 
   handleOnChange1 (event) {
@@ -227,6 +217,7 @@ export default class Valeslist extends Component {
     }
   }
 
+
   update = (item) => {
     let updates = {}
     updates['vales/' + item.id] = {
@@ -251,7 +242,6 @@ export default class Valeslist extends Component {
       filefactura: this.state.filefactura ? this.state.filefactura : [0],
       filef: this.state.filef ? this.state.filef : [0],
       recibosList: this.state.recibosList ? this.state.recibosList : [0],
-      cfeList: this.state.cfeList ? this.state.cfeList : [0],
       xmlC: this.state.xmlC ? this.state.xmlC : [0],
       obs: item.obs,
       fechaP: item.fechaP,
@@ -298,7 +288,6 @@ export default class Valeslist extends Component {
       filefactura: item.filefactura,
       filef: item.filef,
       recibosList: item.recibosList,
-      cfeList: item.cfeList,
       xmlC: item.xmlC,
       obs: this.state.obs,
       fechaP: item.fechaP,
@@ -525,87 +514,6 @@ export default class Valeslist extends Component {
                   variant='contained'
                   color='secondary'
                   onClick={this.toggleBox}
-                  startIcon={<RemoveIcon />}
-                >
-                  Salir
-                </Button>
-              </div>
-            </div>
-          </div>
-        }
-        {this.state.cfeopen &&
-          <div className='content-fixed'>
-            <div className='box-modal'>
-              <div style={{ display: 'flex', justifyContent: 'space-between', paddingTop: '20px' }}>
-                <h3>Agregar CFE</h3>
-              </div>
-              <div>
-                {this.state.cfeList.map((x, i) =>
-                  <div key={i} style={{ display: 'flex', justifyContent: 'center' }}>
-                    <TextField
-                      label='Folio'
-                      name='folio'
-                      value={x.folio}
-                      onChange={e => this.handleInputChangeCfe(e, i)}
-                      style={{ width: '15%', marginRight: '1%' }}
-                    />
-                    <TextField
-                      label='Nombre'
-                      name='nombre'
-                      value={x.nombre}
-                      onChange={e => this.handleInputChangeCfe(e, i)}
-                      style={{ width: '15%', marginRight: '1%' }}
-                    />
-                    <TextField
-                      label='subtotal'
-                      name='subtotal'
-                      type='number'
-                      value={x.subtotal}
-                      onChange={e => this.handleInputChangeCfe(e, i)}
-                      style={{ width: '15%', marginRight: '1%' }}
-                      InputProps={{
-                        startAdornment: (
-                          <InputAdornment position="start">
-                            <AttachMoneyIcon />
-                          </InputAdornment>
-                        ),
-                      }}
-                    />
-                    <TextField
-                      label='Fecha'
-                      type='date'
-                      name='fecha'
-                      InputLabelProps={{
-                        shrink: true,
-                      }}
-                      value={x.fecha}
-                      onChange={e => this.handleInputChangeCfe(e, i)}
-                      style={{ width: '15%', marginRight: '1%' }}
-                    />
-                    <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
-                      {this.state.cfeList.length !== 1 &&
-                        <button
-                          className='btn-remove-r'
-                          onClick={() => this.handleRemoveCfe(i)}>
-                          -
-                        </button>
-                      }
-                      {this.state.cfeList.length - 1 === i &&
-                        <button
-                          className='btn-add-r'
-                          onClick={this.handleAddCfe}>
-                          +
-                        </button>
-                      }
-                    </div>
-                  </div>
-                )}
-              </div>
-              <div style={{ display: 'flex', justifyContent: 'center', marginTop: '30px' }}>
-                <Button
-                  variant='contained'
-                  color='secondary'
-                  onClick={this.cfeBtn}
                   startIcon={<RemoveIcon />}
                 >
                   Salir
