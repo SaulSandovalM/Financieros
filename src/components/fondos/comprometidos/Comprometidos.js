@@ -163,7 +163,9 @@ export default class Comprometidos extends Component {
       snap.forEach((child) => {
         xml.push({
           descuento: child.val().descuento ? child.val().descuento : 0,
-          nombre: child.val().nombre,
+          nombree: child.val().nombree,
+          nombrer: child.val().nombrer,
+          rfc: child.val().rfc,
           total: child.val().total,
           subtotal: child.val().subtotal,
           folio: child.val().folio,
@@ -189,7 +191,9 @@ export default class Comprometidos extends Component {
       snap.forEach((child) => {
         xml.push({
           descuento: child.val().descuento,
-          nombre: child.val().nombre,
+          nombree: child.val().nombree,
+          nombrer: child.val().nombrer,
+          rfc: child.val().rfc,
           total: child.val().total,
           subtotal: child.val().subtotal,
           folio: child.val().folio,
@@ -405,7 +409,9 @@ export default class Comprometidos extends Component {
     changes.forEach((change) => {
       prueba[change.id] =
         {
-          nombre: change.nombre,
+          nombree: change.nombree,
+          nombrer: change.nombrer,
+          rfc: change.rfc,
           fecha: change.fecha,
           folio: change.folio,
           importe: change.importe,
