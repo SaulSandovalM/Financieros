@@ -394,7 +394,6 @@ export default class Comprometidos extends Component {
         }
       )
       wishRef.update(updatedWish)
-      console.log(updatedWish)
       updatedWish.cpa.push(
         {
           cantidad: total,
