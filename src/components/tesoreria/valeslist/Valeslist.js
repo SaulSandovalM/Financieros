@@ -250,7 +250,6 @@ export default class Valeslist extends Component {
     }
     firebase.database().ref().update(updates)
     this.state.recibosList.forEach(element => firebase.database().ref('xml').push(element))
-    this.state.cfeList.forEach(element => firebase.database().ref('xml').push(element))
     alert('Tu solicitud fue enviada.')
     this.setState({
       filexml: ['No hay datos cargados'],
@@ -308,15 +307,6 @@ export default class Valeslist extends Component {
     })
   }
 
-  handleInputChangeCfe = (e, index) => {
-    const { name, value } = e.target
-    const list = [...this.state.cfeList]
-    list[index][name] = value
-    this.setState({
-      cfeList: list
-    })
-  }
-
   handleRemoveClick = (index) => {
     const list = [...this.state.recibosList]
     list.splice(index, 1)
@@ -325,28 +315,11 @@ export default class Valeslist extends Component {
     })
   }
 
-  handleRemoveCfe = (index) => {
-    const list = [...this.state.cfeList]
-    list.splice(index, 1)
-    this.setState({
-      cfeList: list
-    })
-  }
-
   handleAddClick = () => {
     this.setState({
       recibosList: [
         ...this.state.recibosList,
         { folio: 'Recibo simple', nombre: '', importe: '', iva: '0', isr: '0', fecha: '', estatus: '', subtotal: '0', total: '0', uuid: 'Recibo simple', tipo: 'revolvente' }
-      ]
-    })
-  }
-
-  handleAddCfe = () => {
-    this.setState({
-      cfeList: [
-        ...this.state.cfeList,
-        { folio: '', nombre: '', importe: '', iva: '0', isr: '0', fecha: '', estatus: '', subtotal: '0', total: '0', uuid: 'Recibo simple', tipo: 'revolvente' }
       ]
     })
   }
