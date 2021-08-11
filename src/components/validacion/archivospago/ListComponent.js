@@ -12,8 +12,26 @@ import Paper from '@material-ui/core/Paper'
 export default class ListComponent extends Component {
   constructor (props) {
     super(props)
+    var user = firebase.auth().currentUser
+    var email
+    if (user != null) {
+      email = user.email
+    }
+    let admin
+    if (email === 'candy@procuraduria.com') {
+      admin = 'CANDY'
+    } else if (email === 'angel@procuraduria.com') {
+      admin = 'VALIDACION2'
+    } else if (email === 'danya@procuraduria.com') {
+      admin = 'VALIDACION2'
+    } else if (email === 'mario@procuraduria.com') {
+      admin = 'VALIDACION3'
+    } else if (email === 'hortencia@procuraduria.com') {
+      admin = 'VALIDACION3'
+    }
     this.state = {
-      xmlPagoDirecto: []
+      xmlPagoDirecto: [],
+      realizo: admin
     }
   }
 

@@ -20,13 +20,13 @@ export default class ArchivosPago extends Component {
     if (email === 'candy@procuraduria.com') {
       admin = 'CANDY'
     } else if (email === 'angel@procuraduria.com') {
-      admin = 'ANGEL'
+      admin = 'VALIDACION2'
     } else if (email === 'danya@procuraduria.com') {
-      admin = 'DANYA'
+      admin = 'VALIDACION2'
     } else if (email === 'mario@procuraduria.com') {
-      admin = 'MARIO'
+      admin = 'VALIDACION3'
     } else if (email === 'hortencia@procuraduria.com') {
-      admin = 'HORTENCIA'
+      admin = 'VALIDACION3'
     }
     var today = new Date()
     var today2 = new Date()
