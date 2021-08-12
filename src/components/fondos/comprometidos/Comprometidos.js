@@ -429,8 +429,7 @@ export default class Comprometidos extends Component {
           numfolio: change.numfolio ? change.numfolio : ' '
         }
     })
-    firebase.database().ref('xml').update(prueba)
-    .catch((error) => {
+    firebase.database().ref('xml').update(prueba).catch((error) => {
       console.error('Error: ', error)
     })
     this.setState({
