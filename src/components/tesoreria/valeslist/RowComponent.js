@@ -131,7 +131,7 @@ export default class RowComponent extends Component {
             }
           </TableCell>
           <TableCell className='table-v-num2' style={{ width: '800px' }}>
-            {this.props.item.concepto}
+            {this.props.item.id}
           </TableCell>
           <TableCell className='table-v-num2' style={{ width: '800px' }}>
             {this.props.item.oficioS}

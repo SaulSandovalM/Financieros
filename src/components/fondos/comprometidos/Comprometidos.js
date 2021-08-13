@@ -163,7 +163,7 @@ export default class Comprometidos extends Component {
       snap.forEach((child) => {
         xml.push({
           descuento: child.val().descuento ? child.val().descuento : 0,
-          nombree: child.val().nombree,
+          nombre: child.val().nombre,
           nombrer: child.val().nombrer,
           rfc: child.val().rfc,
           total: child.val().total,
@@ -191,7 +191,7 @@ export default class Comprometidos extends Component {
       snap.forEach((child) => {
         xml.push({
           descuento: child.val().descuento,
-          nombree: child.val().nombree,
+          nombre: child.val().nombre,
           nombrer: child.val().nombrer,
           rfc: child.val().rfc,
           total: child.val().total,
@@ -270,7 +270,7 @@ export default class Comprometidos extends Component {
 
   handleInput (event) {
     const state = this.state
-    state[event.target.name] = event.target.value
+    state[event.target.name] = event.target.value.toUpperCase()
     this.setState(state)
   }
 
@@ -408,7 +408,7 @@ export default class Comprometidos extends Component {
     changes.forEach((change) => {
       prueba[change.id] =
         {
-          nombree: change.nombree,
+          nombre: change.nombre,
           nombrer: change.nombrer,
           rfc: change.rfc,
           fecha: change.fecha,
@@ -550,8 +550,9 @@ export default class Comprometidos extends Component {
     const filterData = this.state.xml.filter(
       (xml) => {
         return (
+          xml.nombre !== undefined ?
           ((xml.uuid.indexOf(this.state.folioXml) !== -1) || (xml.nombre.indexOf(this.state.folioXml) !== -1)) && xml.estatus !== 'asignado' && xml.tipo === 'revolvente'
-        )
+        : '')
       }
     )
 
@@ -575,7 +576,7 @@ export default class Comprometidos extends Component {
     const filterData2 = xmlvali.filter(
       (xml) => {
         return (
-          ( (xml.numfolio.indexOf(this.state.search) !== -1) ) && xml.estatus !== 'asignado' && xml.tipo === 'directo'
+          ((xml.numfolio.indexOf(this.state.search) !== -1)) && xml.estatus !== 'asignado' && xml.tipo === 'directo'
         )
       }
     )

@@ -55,7 +55,8 @@ export default class Valeslist extends Component {
       obs: '',
       opened: false,
       xmlLoading: 0,
-      contador: 0
+      contador: 0,
+      beneficiario: []
     }
     this.toggleBox = this.toggleBox.bind(this)
   }
@@ -80,7 +81,7 @@ export default class Valeslist extends Component {
           'total': xml.attributes['Total'] ? xml.attributes['Total'] : 'No encuentra total',
           'subtotal': xml.attributes['SubTotal'] ? xml.attributes['SubTotal'] : (parseFloat(xml.attributes['Total']) + parseFloat(xml.children['3'].attributes['TotalImpuestosRetenidos'] ? xml.children['3'].attributes['TotalImpuestosRetenidos'] : 0)) - parseFloat(xml.children['3'].attributes['TotalImpuestosTrasladados']),
           'folio': xml.attributes['Folio'] ? xml.attributes['Folio'] : '0',
-          'nombree': xml.children['0'].attributes['Nombre'] ? xml.children['0'].attributes['Nombre'] : 'No encuentra Nombre',
+          'nombre': xml.children['0'].attributes['Nombre'] ? xml.children['0'].attributes['Nombre'] : 'No encuentra Nombre',
           'nombrer': xml.children['1'].attributes['Nombre'] ? xml.children['1'].attributes['Nombre'] : 'No encuentra Nombre',
           'rfc': xml.children['0'].attributes['Rfc'] ? xml.children['0'].attributes['Rfc'] : 'No encuentra rfc',
           'importe': xml.attributes['SubTotal'] ? xml.attributes['SubTotal'] : (parseFloat(xml.attributes['Total']) + (xml.children['3'].attributes['TotalImpuestosRetenidos'] ? xml.children['3'].attributes['TotalImpuestosRetenidos'] : 0)) - parseFloat(xml.children['3'].attributes['TotalImpuestosTrasladados']),
@@ -92,7 +93,7 @@ export default class Valeslist extends Component {
           'tipo': 'revolvente'
         }
         fetch(xml).then(res => res.text()).then(xml => {
-          fetch('https://financieros-78cb0.firebaseio.com/xml.json', {
+          fetch('https://financieros-78cb0.firebaseio.com/xml2.json', {
             method: 'POST',
             headers: {
               'Accept': 'application/json',
@@ -186,9 +187,26 @@ export default class Valeslist extends Component {
     })
   }
 
+  listenForBeneficiario = (itemsRefPre) => {
+    itemsRefPre.on('value', (snap) => {
+      var beneficiario = []
+      snap.forEach((child) => {
+        beneficiario.push({
+          nombre: child.val().nombre,
+          id: child.key
+        })
+      })
+      this.setState({
+        beneficiario: beneficiario
+      })
+    })
+  }
+
   componentDidMount () {
     const itemsRef = firebase.database().ref('vales/').orderByChild('vale')
     this.listenForItems(itemsRef)
+    const itemsRefPre = firebase.database().ref('xml2/')
+    this.listenForBeneficiario(itemsRefPre)
   }
 
   resetForm () {
@@ -259,7 +277,7 @@ export default class Valeslist extends Component {
       filefactura: [{ url: '', nombre: '' }],
       xmlC:  [{ url: '', nombre: '' }],
       filef: [{ url: '', nombre: '' }],
-      recibosList: [{ folio: 'Recibo simple', nombre: '', importe: '', iva: '0', isr: '0', fecha: '', estatus: '', subtotal: '0', total: '0', uuid: 'Recibo simple', tipo: 'revolvente' }],
+      recibosList: [{ folio: 'Recibo simple', nombre: '', importe: '0', iva: '0', isr: '0', fecha: '', estatus: '', subtotal: '0', total: '0', uuid: 'Recibo simple', tipo: 'revolvente' }],
       obs: '',
       pdf2: 0
     })
@@ -303,7 +321,7 @@ export default class Valeslist extends Component {
   handleInputChange = (e, index) => {
     const { name, value } = e.target
     const list = [...this.state.recibosList]
-    list[index][name] = value
+    list[index][name] = value.toUpperCase()
     this.setState({
       recibosList: list
     })
@@ -321,12 +339,29 @@ export default class Valeslist extends Component {
     this.setState({
       recibosList: [
         ...this.state.recibosList,
-        { folio: 'Recibo simple', nombre: '', importe: '', iva: '0', isr: '0', fecha: '', estatus: '', subtotal: '0', total: '0', uuid: 'Recibo simple', tipo: 'revolvente' }
+        { folio: 'Recibo simple', nombre: '', importe: '0', iva: '0', isr: '0', fecha: '', estatus: '', subtotal: '0', total: '0', uuid: 'Recibo simple', tipo: 'revolvente' }
       ]
     })
   }
 
   render () {
+    const newArray = ['']
+    const myObj = {}
+
+    this.state.beneficiario.filter(el => {
+      if (!(el in myObj) && el.nombre !== undefined) {
+        myObj[el + 1] = true
+        newArray.push(el)
+      }
+    })
+    const aarr = []
+    newArray.map(item => {
+      return aarr.push(item.nombre)
+    })
+    let result = aarr.filter((item,index)=>{
+      return aarr.indexOf(item) === index
+    })
+
     return (
       <div className='container-valeslist'>
         <div className='margin-f-a'>
@@ -398,18 +433,6 @@ export default class Valeslist extends Component {
                       </Button>
                     </div>
                   </div>
-                  <div style={{ display: 'flex', justifyContent: 'center', flexDirection: 'column' }}>
-                    <div style={{ display: 'flex', width: '300px' }}>
-                      <Button
-                        variant='contained'
-                        style={{ background: 'green', color: 'white' }}
-                        onClick={this.cfeBtn}
-                        startIcon={<AddIcon />}
-                      >
-                        Agregar CFE
-                      </Button>
-                    </div>
-                  </div>
                 </div>
               </div>
             </div>
@@ -432,13 +455,17 @@ export default class Valeslist extends Component {
                       onChange={e => this.handleInputChange(e, i)}
                       style={{ width: '15%', marginRight: '1%' }}
                     />
-                    <TextField
+                    <select
                       label='Nombre'
                       name='nombre'
                       value={x.nombre}
                       onChange={e => this.handleInputChange(e, i)}
                       style={{ width: '15%', marginRight: '1%' }}
-                    />
+                    >
+                      {result.map(data =>
+                        <option name={data}>{data}</option>
+                      )}
+                    </select>
                     <TextField
                       label='subtotal'
                       name='subtotal'
