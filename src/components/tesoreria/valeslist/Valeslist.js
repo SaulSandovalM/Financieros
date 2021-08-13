@@ -93,7 +93,7 @@ export default class Valeslist extends Component {
           'tipo': 'revolvente'
         }
         fetch(xml).then(res => res.text()).then(xml => {
-          fetch('https://financieros-78cb0.firebaseio.com/xml2.json', {
+          fetch('https://financieros-78cb0.firebaseio.com/xml.json', {
             method: 'POST',
             headers: {
               'Accept': 'application/json',
@@ -205,7 +205,7 @@ export default class Valeslist extends Component {
   componentDidMount () {
     const itemsRef = firebase.database().ref('vales/').orderByChild('vale')
     this.listenForItems(itemsRef)
-    const itemsRefPre = firebase.database().ref('xml2/')
+    const itemsRefPre = firebase.database().ref('beneficiario/')
     this.listenForBeneficiario(itemsRefPre)
   }
 
@@ -347,7 +347,6 @@ export default class Valeslist extends Component {
   render () {
     const newArray = ['']
     const myObj = {}
-
     this.state.beneficiario.filter(el => {
       if (!(el in myObj) && el.nombre !== undefined) {
         myObj[el + 1] = true

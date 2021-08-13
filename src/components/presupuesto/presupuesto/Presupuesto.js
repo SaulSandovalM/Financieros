@@ -20,7 +20,6 @@ export default class Excel extends Component {
     }
   }
 
-
   onDrop (files) {
     this.setState({ files })
     var fileNameE = files[0]
