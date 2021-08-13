@@ -411,6 +411,7 @@ export default class Fondos extends Component {
                       id='fecha'
                       name='fecha'
                       value={fecha}
+                      onChange={this.onChange}
                       ref={fecha => this.inputFecha = fecha}
                       required
                     />
