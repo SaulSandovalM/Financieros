@@ -409,7 +409,7 @@ export default class Comprometidos extends Component {
       prueba[change.id] =
         {
           nombre: change.nombre,
-          nombrer: change.nombrer,
+          nombrer: change.nombrer ? change.nombrer : ' ',
           rfc: change.rfc,
           fecha: change.fecha,
           folio: change.folio,
