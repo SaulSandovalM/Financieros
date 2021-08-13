@@ -192,6 +192,7 @@ export default class Transferencia extends Component {
           reduccion: child.val().reduccion,
           transferencia: child.val().transferencia,
           npro: child.val().npro,
+          saldo: child.val().saldo,
           id: child.key
         })
       })
@@ -281,6 +282,7 @@ export default class Transferencia extends Component {
       ampliacion: item.ampliacion,
       reduccion: item.reduccion,
       transferencia: 'T/A',
+      saldo: item.saldo ? item.saldo : ' ',
       npro: item.npro
     }
     firebase.database().ref().update(updates)

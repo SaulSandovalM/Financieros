@@ -23,6 +23,7 @@ export default class ListComponent extends Component {
   render () {
     var fechaSelect = this.props.fechaSelect
     var diaAnterior = this.props.diaAnterior
+    console.log(this.props.fechaSelect)
 
     const actual2 = [0]
     this.props.listaVales.map(items => (
@@ -31,6 +32,7 @@ export default class ListComponent extends Component {
     const reducerCantidad = (a, b) => a + b
     var lol = actual2.reduce(reducerCantidad)
     var perro = diaAnterior - lol
+
 
     return (
       <div>

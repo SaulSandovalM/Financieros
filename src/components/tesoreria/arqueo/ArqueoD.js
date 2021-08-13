@@ -184,6 +184,7 @@ export default class ArqueoD extends Component {
   }
 
   render () {
+    console.log(this.state.searchF)
     return (
       <div>
         <div style={{ display: 'flex', justifyContent: 'center' }}>

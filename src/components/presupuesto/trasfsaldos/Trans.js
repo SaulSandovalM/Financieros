@@ -283,13 +283,20 @@ export default class Trans extends Component {
       ampliacion: item.ampliacion,
       reduccion: item.reduccion,
       transferencia: 'T/R',
-      npro: item.npro,
-
-      oficio: this.state.oficio,
-      oficioA: this.state.oficio,
-      archivo: this.state.archivo
+      saldo: 'saldo',
+      npro: item.npro
     }
     firebase.database().ref().update(updates)
+    const params = {
+      oficio: this.state.oficio,
+    }
+    if (params.oficio) {
+      firebase.database().ref('oficios').push(params).then(() => {
+        alert('Tu solicitud fue enviada.')
+      }).catch(() => {
+        alert('Tu solicitud no puede ser enviada')
+      })
+    }
     alert('Tu solicitud fue enviada.')
   }
 
@@ -303,7 +310,6 @@ export default class Trans extends Component {
       rubro: item.rubro,
       tg: item.tg,
       ogasto: item.ogasto,
-      npro: item.npro,
       f: item.f,
       fu: item.fu,
       sf: item.sf,
@@ -311,7 +317,6 @@ export default class Trans extends Component {
       s: item.s,
       prog: item.prog,
       sp: item.sp,
-      min: item.min,
       obj: item.obj,
       proy: item.proy,
       est: item.est,
@@ -322,6 +327,7 @@ export default class Trans extends Component {
       pr: item.pr,
       pd: item.pd,
       itrans: item.itrans,
+      min: item.min,
       igest: item.igest,
       la: item.la,
       ods: item.ods,
@@ -369,12 +375,21 @@ export default class Trans extends Component {
       total: item.total,
       ampliacion: item.ampliacion,
       reduccion: 'Ampliacion',
-      transferencia: item.transferencia,
-      saldo: 'Saldo',
-      oficioA: this.state.oficio,
-      archivo: this.state.archivo
+      transferencia: 'T/A',
+      saldo: 'saldo',
+      npro: item.npro
     }
     firebase.database().ref().update(updates)
+    const params = {
+      oficio: this.state.oficio,
+    }
+    if (params.oficio) {
+      firebase.database().ref('oficios').push(params).then(() => {
+        alert('Tu solicitud fue enviada.')
+      }).catch(() => {
+        alert('Tu solicitud no puede ser enviada')
+      })
+    }
     alert('Tu solicitud fue enviada.')
   }
 

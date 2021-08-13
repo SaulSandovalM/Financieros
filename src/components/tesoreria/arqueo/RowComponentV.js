@@ -18,6 +18,8 @@ export default class RowComponentV extends Component {
     var meses = ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic']
     today = f.getDate() + 1 + '-' + meses[f.getMonth()] + '-' + f.getFullYear()
 
+    console.log(fechaSelect)
+
     return (
       <div style={{ width: '100%' }}>
         {this.props.item.rein === fechaSelect && this.props.item.cheque !== 'Cancelado' &&
