@@ -454,7 +454,7 @@ export default class Valeslist extends Component {
                       onChange={e => this.handleInputChange(e, i)}
                       style={{ width: '15%', marginRight: '1%' }}
                     />
-                    <select
+                    {/* <select
                       label='Nombre'
                       name='nombre'
                       value={x.nombre}
@@ -464,7 +464,14 @@ export default class Valeslist extends Component {
                       {result.map(data =>
                         <option name={data}>{data}</option>
                       )}
-                    </select>
+                    </select> */}
+                    <TextField
+                      label='Nombre'
+                      name='nombre'
+                      value={x.nombre}
+                      onChange={e => this.handleInputChange(e, i)}
+                      style={{ width: '15%', marginRight: '1%' }}
+                    />
                     <TextField
                       label='subtotal'
                       name='subtotal'

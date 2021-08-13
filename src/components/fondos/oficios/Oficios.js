@@ -209,6 +209,7 @@ export default class Oficios extends Component {
                 <ReactToPrint
                   trigger={() => <buttom className='btn-imp-of'>Imprimir</buttom>}
                   content={() => this.sp}
+                  pageStyle={`@media print {@page { size: landscape; }}`}
                 />
               </div>
               <div>
@@ -216,6 +217,7 @@ export default class Oficios extends Component {
                 <ReactToPrint
                   trigger={() => <buttom className='btn-imp-of'>Imprimir</buttom>}
                   content={() => this.rfr}
+                  pageStyle={`@media print {@page { size: landscape; }}`}
                 />
               </div>
               <div>
@@ -223,6 +225,7 @@ export default class Oficios extends Component {
                 <ReactToPrint
                   trigger={() => <buttom className='btn-imp-of'>Imprimir</buttom>}
                   content={() => this.rec}
+                  pageStyle={`@media print {@page { size: landscape; }}`}
                 />
               </div>
               <div>
@@ -240,6 +243,7 @@ export default class Oficios extends Component {
                           </div>
                           }
                         content={() => this.la}
+                        pageStyle={`@media print {@page { size: landscape; }}`}
                       />
                       <div className='formatoe-container' ref={el => (this.la = el)}>
                         {this.state.comprometidos.map((comprometidos, index) =>
@@ -446,6 +450,7 @@ export default class Oficios extends Component {
                 <ReactToPrint
                   trigger={() => <buttom className='btn-imp-of'>Imprimir</buttom>}
                   content={() => this.sp}
+                  pageStyle={`@media print {@page { size: landscape; }}`}
                 />
               </div>
               <div>
@@ -683,6 +688,7 @@ export default class Oficios extends Component {
                 <ReactToPrint
                   trigger={() => <buttom className='btn-imp-of'>Imprimir</buttom>}
                   content={() => this.sp}
+                  pageStyle={`@media print {@page { size: landscape; }}`}
                 />
               </div>
               <div>
