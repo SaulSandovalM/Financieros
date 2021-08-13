@@ -556,15 +556,15 @@ export default class Comprometidos extends Component {
       }
     )
 
-    // console.log(this.state.xml.filter(
-    //   (xml) => {
-    //     return (
-    //       xml.nombre !== undefined ?
-    //       ((xml.nombre.indexOf('DANIEL') !== -1))
-    //       : null
-    //     )
-    //   }
-    // ))
+    console.log(this.state.xml.filter(
+      (xml) => {
+        return (
+          xml.nombre !== undefined ?
+          ((xml.nombre.indexOf('JUAN RAMON') !== -1))
+          : null
+        )
+      }
+    ))
 
     const xmlvali = []
     this.state.xml2.map(item =>
@@ -661,7 +661,7 @@ export default class Comprometidos extends Component {
                       disableRipple
                     />
                   </ListItemIcon>
-                  <ListItemText className='list-align-i' primary={String(value.folio).substr(0, 10)} />
+                  <ListItemText className='list-align-i' primary={String(value.uuid).substr(0, 10)} />
                   {value.folio === 'Recibo simple' || value.uuid === 'Recibo simple' ?
                     <ListItemText className='list-align-i' primary={'$ ' + value.subtotal} />
                     :
