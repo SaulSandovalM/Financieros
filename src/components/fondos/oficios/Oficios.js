@@ -217,7 +217,7 @@ export default class Oficios extends Component {
                 <ReactToPrint
                   trigger={() => <buttom className='btn-imp-of'>Imprimir</buttom>}
                   content={() => this.rfr}
-                  pageStyle={`@media print {@page { size: landscape; }}`}
+                  pageStyle={`@media print {@page { size: portrait; }}`}
                 />
               </div>
               <div>
@@ -225,7 +225,7 @@ export default class Oficios extends Component {
                 <ReactToPrint
                   trigger={() => <buttom className='btn-imp-of'>Imprimir</buttom>}
                   content={() => this.rec}
-                  pageStyle={`@media print {@page { size: landscape; }}`}
+                  pageStyle={`@media print {@page { size: portrait; }}`}
                 />
               </div>
               <div>
@@ -438,6 +438,7 @@ export default class Oficios extends Component {
                 <ReactToPrint
                   trigger={() => <buttom className='btn-imp-of'>Imprimir</buttom>}
                   content={() => this.anex}
+                  pageStyle={`@media print {@page { size: portrait; }}`}
                 />
               </div>
             </div>
@@ -458,6 +459,7 @@ export default class Oficios extends Component {
                 <ReactToPrint
                   trigger={() => <buttom className='btn-imp-of'>Imprimir</buttom>}
                   content={() => this.ofi}
+                  pageStyle={`@media print {@page { size: portrait; }}`}
                 />
               </div>
               <div>
@@ -475,6 +477,7 @@ export default class Oficios extends Component {
                           </div>
                           }
                         content={() => this.la}
+                        pageStyle={`@media print {@page { size: landscape; }}`}
                       />
                       <div className='formatoe-container' ref={el => (this.la = el)}>
                         {this.state.comprometidos.map((comprometidos, index) =>
@@ -669,6 +672,7 @@ export default class Oficios extends Component {
                 <ReactToPrint
                   trigger={() => <buttom className='btn-imp-of'>Imprimir</buttom>}
                   content={() => this.anex}
+                  pageStyle={`@media print {@page { size: portrait; }}`}
                 />
               </div>
             </div>
@@ -681,6 +685,7 @@ export default class Oficios extends Component {
                 <ReactToPrint
                   trigger={() => <buttom className='btn-imp-of'>Imprimir</buttom>}
                   content={() => this.opp}
+                  pageStyle={`@media print {@page { size: portrait; }}`}
                 />
               </div>
               <div>
@@ -706,6 +711,7 @@ export default class Oficios extends Component {
                           </div>
                           }
                         content={() => this.la}
+                        pageStyle={`@media print {@page { size: portrait; }}`}
                       />
                       <div className='formatoe-container' ref={el => (this.la = el)}>
                         {this.state.comprometidos.map((comprometidos, index) =>
