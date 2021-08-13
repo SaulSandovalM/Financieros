@@ -164,8 +164,8 @@ export default class Comprometidos extends Component {
         xml.push({
           descuento: child.val().descuento ? child.val().descuento : 0,
           nombre: child.val().nombre,
-          nombrer: child.val().nombrer,
-          rfc: child.val().rfc,
+          nombrer: child.val().nombrer ? child.val().nombrer : ' ',
+          rfc: child.val().rfc ? child.val().rfc : ' ',
           total: child.val().total,
           subtotal: child.val().subtotal,
           folio: child.val().folio,
@@ -190,10 +190,10 @@ export default class Comprometidos extends Component {
       var xml = []
       snap.forEach((child) => {
         xml.push({
-          descuento: child.val().descuento,
+          descuento: child.val().descuento ? child.val().descuento : 0,
           nombre: child.val().nombre,
-          nombrer: child.val().nombrer,
-          rfc: child.val().rfc,
+          nombrer: child.val().nombrer ? child.val().nombrer : ' ',
+          rfc: child.val().rfc ? child.val().rfc : ' ',
           total: child.val().total,
           subtotal: child.val().subtotal,
           folio: child.val().folio,
@@ -410,7 +410,7 @@ export default class Comprometidos extends Component {
         {
           nombre: change.nombre,
           nombrer: change.nombrer ? change.nombrer : ' ',
-          rfc: change.rfc,
+          rfc: change.rfc ? change.rfc : ' ',
           fecha: change.fecha,
           folio: change.folio,
           importe: change.importe,
@@ -559,7 +559,9 @@ export default class Comprometidos extends Component {
     // console.log(this.state.xml.filter(
     //   (xml) => {
     //     return (
-    //       ((xml.nombre.indexOf('JUAN') !== -1))
+    //       xml.nombre !== undefined ?
+    //       ((xml.nombre.indexOf('DANIEL') !== -1))
+    //       : null
     //     )
     //   }
     // ))
@@ -666,7 +668,7 @@ export default class Comprometidos extends Component {
                     <ListItemText className='list-align-i' primary={'$ ' + value.total} />
                   }
                   <ListItemText className='list-align' primary={String(value.fecha).substr(0, 10)} />
-                  <ListItemText className='list-align2' primary={value.nombre} />
+                  <ListItemText className='list-align2' primary={value.id} />
                 </ListItem>
               )
             }) : null}

@@ -378,7 +378,7 @@ export default class ListComponent extends Component {
                       </TableCell>
                       <TableCell className='border-table-area'>
                         <div className='font-tb'>
-                          {item.nombre}
+                          {item.id}
                         </div>
                       </TableCell>
                       <TableCell className='border-table2'>
