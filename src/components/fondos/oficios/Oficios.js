@@ -123,10 +123,13 @@ export default class Oficios extends Component {
   }
 
   render () {
+    var fecha = String(this.state.fondo.fecha)
+    var newdate = fecha.split("/").reverse().join("/");
+
     var today = new Date()
     var meses = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre']
     var diasSemana = ['domingo', 'lunes', 'martes', 'miércoles', 'jueves', 'viernes', 'sábado']
-    var f = new Date()
+    var f = new Date(newdate)
     today = diasSemana[f.getDay()] + ', ' + f.getDate() + ' de ' + meses[f.getMonth()] + ' de ' + f.getFullYear()
     const totalImporte = []
     this.state.comprometidos.map(comprometidos => (

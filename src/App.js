@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import ProtectedRoute from './ProtectedRoute'
 // Direcciones compartidas
 import Login from './components/common/login/Login'
+import NewLogin from './components/common/login/NewLogin'
 import Common from './components/common/home/Common'
 // Rutas de Presupuesto
 import Presupuesto from './components/presupuesto/presupuesto/Presupuesto'
@@ -50,6 +51,7 @@ function App (props) {
   return (
     <Switch>
       <Route path='/Login' component={Login} />
+      <Route path='/NewLogin' component={NewLogin} />
       <ProtectedRoute
         exact
         path='/'
