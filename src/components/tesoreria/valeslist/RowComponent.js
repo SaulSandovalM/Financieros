@@ -251,7 +251,7 @@ export default class RowComponent extends Component {
                   </TableBody>
                   <TableBody>
                     <TableRow>
-                      {this.props.item.filefactura.map((item, i) => (
+                      {/* this.props.item.filefactura.map((item, i) => (
                         <TableCell
                           component="th"
                           scope="row"
@@ -269,7 +269,7 @@ export default class RowComponent extends Component {
                         >
                           { item.nombre }
                         </TableCell>
-                      ))}
+                      )) */}
                     </TableRow>
                     <TableRow>
                       <TableCell
@@ -283,7 +283,7 @@ export default class RowComponent extends Component {
                       </TableCell>
                     </TableRow>
                     <TableRow>
-                      {this.props.item.xmlC.map((item, i) => (
+                      {/* this.props.item.xmlC.map((item, i) => (
                         <TableCell
                           component="th"
                           scope="row"
@@ -301,7 +301,7 @@ export default class RowComponent extends Component {
                         >
                           { item.nombre }
                         </TableCell>
-                      ))}
+                      )) */}
                     </TableRow>
                     <TableRow>
                       <TableCell
@@ -315,7 +315,7 @@ export default class RowComponent extends Component {
                       </TableCell>
                     </TableRow>
                     <TableRow>
-                      {this.props.item.recibosList.map((item, i) => (
+                      {/* this.props.item.recibosList.map((item, i) => (
                         <TableCell
                           component="th"
                           scope="row"
@@ -331,7 +331,7 @@ export default class RowComponent extends Component {
                         >
                           Nombre: { item.nombre } Importe: ${ item.subtotal } Fecha: { item.fecha }
                         </TableCell>
-                      ))}
+                      )) */}
                     </TableRow>
                   </TableBody>
                 </Table>
