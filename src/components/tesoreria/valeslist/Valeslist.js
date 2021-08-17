@@ -56,7 +56,8 @@ export default class Valeslist extends Component {
       opened: false,
       xmlLoading: 0,
       contador: 0,
-      beneficiario: []
+      beneficiario: [],
+      newnombre: ''
     }
     this.toggleBox = this.toggleBox.bind(this)
   }
@@ -205,7 +206,7 @@ export default class Valeslist extends Component {
   componentDidMount () {
     const itemsRef = firebase.database().ref('vales/').orderByChild('vale')
     this.listenForItems(itemsRef)
-    const itemsRefPre = firebase.database().ref('beneficiario/')
+    const itemsRefPre = firebase.database().ref('beneficiario/').orderByChild('nombre')
     this.listenForBeneficiario(itemsRefPre)
   }
 
@@ -237,6 +238,21 @@ export default class Valeslist extends Component {
     }
   }
 
+  add () {
+    const params = {
+      nombre: this.state.newnombre
+    }
+    this.setState({
+      newnombre: ''
+    })
+    if (params.nombre) {
+      firebase.database().ref('beneficiario').push(params).then(() => {
+        alert('Se ha agregado la nueva persona')
+      }).catch(() => {
+        alert('Tu solicitud no puede ser enviada')
+      })
+    }
+  }
 
   update = (item) => {
     let updates = {}
@@ -420,6 +436,15 @@ export default class Valeslist extends Component {
                       />
                     </div>
                   </form>
+                  <div className='p-container-valeslist'>
+                    <TextField
+                      label='Nuevo Nombre'
+                      name='newnombre'
+                      value={this.state.newnombre.toUpperCase()}
+                      onChange={this.handleChange.bind(this)}
+                    />
+                    <button onClick={this.add.bind(this)}>+</button>
+                  </div>
                   <div style={{ display: 'flex', justifyContent: 'center', flexDirection: 'column' }}>
                     <div style={{ display: 'flex', width: '300px' }}>
                       <Button
@@ -465,13 +490,6 @@ export default class Valeslist extends Component {
                         <option name={data}>{data}</option>
                       )}
                     </select>
-                    {/* <TextField
-                      label='Nombre'
-                      name='nombre'
-                      value={x.nombre}
-                      onChange={e => this.handleInputChange(e, i)}
-                      style={{ width: '15%', marginRight: '1%' }}
-                    /> */}
                     <TextField
                       label='subtotal'
                       name='subtotal'
