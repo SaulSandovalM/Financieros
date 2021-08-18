@@ -52,7 +52,8 @@ export default class Vales extends Component {
       obs: 'No hay observaciones',
       fechaP: ' ',
       rein: ' ',
-      pasa: ' '
+      pasa: ' ',
+      bene: []
     }
   }
 
@@ -69,6 +70,8 @@ export default class Vales extends Component {
     this.unsubscribe = firebase.firestore().collection('caja').onSnapshot(this.onCollectionUpdate)
     const itemsRef = firebase.database().ref('vales/')
     this.listenForItems(itemsRef)
+    const itemsRefBeneficiario = firebase.database().ref('beneficiario/')
+    this.listenForBeneficiario(itemsRefBeneficiario)
     var wishRef = firebase.database().ref('vale/valenum')
     wishRef.on('value', (snapshot) => {
       let updatedWish = snapshot.val()
@@ -147,6 +150,21 @@ export default class Vales extends Component {
       })
       this.setState({
         vales: vales
+      })
+    })
+  }
+
+  listenForBeneficiario = (itemsRefBeneficiario) => {
+    itemsRefBeneficiario.on('value', (snap) => {
+      var bene = []
+      snap.forEach((child) => {
+        bene.push({
+          nombre: child.val().nombre,
+          id: child.key
+        })
+      })
+      this.setState({
+        bene: bene
       })
     })
   }
@@ -328,6 +346,22 @@ export default class Vales extends Component {
   }
 
   render () {
+    const newArray = ['']
+    const myObj = {}
+    this.state.bene.filter(el => {
+      if (!(el in myObj) && el.nombre !== undefined) {
+        myObj[el + 1] = true
+        newArray.push(el)
+      }
+    })
+    const aarr = []
+    newArray.map(item => {
+      return aarr.push(item.nombre)
+    })
+    let result = aarr.filter((item,index)=>{
+      return aarr.indexOf(item) === index
+    })
+
     return (
       <div className='container-back-v'>
         <div style={{ display: 'flex', justifyContent: 'center' }}>
@@ -619,14 +653,13 @@ export default class Vales extends Component {
                     <p className='font-size-f'>Autorizó</p>
                   </div>
                   <div className='f-fecha'>
-                    <input
+                    <select
                       className='b-fecha-i'
-                      name='personaR'
-                      onChange={this.handleChange.bind(this)}
-                      value={this.state.personaR}
-                      required
-                      ref={personaR => this.inputPersona = personaR}
-                    />
+                      ref={personaR => this.inputPersona = personaR}>
+                      {result.map(data =>
+                        <option id={data}>{data}</option>
+                      )}
+                    </select>
                     <p className='font-size-f'>Recibió</p>
                   </div>
                 </div>
@@ -882,14 +915,13 @@ export default class Vales extends Component {
                       <p className='font-size-f'>Autorizó</p>
                     </div>
                     <div className='f-fecha'>
-                      <input
+                      <select
                         className='b-fecha-i'
-                        id='personaR'
-                        name='personaR'
-                        onChange={this.handleChange.bind(this)}
-                        defaultValue={item.personaR}
-                        required
-                      />
+                        ref={personaR => this.inputPersona = personaR}>
+                        {result.map(data =>
+                          <option id={data}>{data}</option>
+                        )}
+                      </select>
                       <p className='font-size-f'>Recibió</p>
                     </div>
                   </div>
