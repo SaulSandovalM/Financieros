@@ -358,9 +358,11 @@ export default class Vales extends Component {
     newArray.map(item => {
       return aarr.push(item.nombre)
     })
-    let result = aarr.filter((item,index)=>{
+    let result = aarr.filter((item, index)=>{
       return aarr.indexOf(item) === index
     })
+
+    console.log(this.state.personaR)
 
     return (
       <div className='container-back-v'>
@@ -655,7 +657,12 @@ export default class Vales extends Component {
                   <div className='f-fecha'>
                     <select
                       className='b-fecha-i'
+                      id='personaR'
+                      name='personaR'
+                      onChange={this.handleChange.bind(this)}
+                      defaultValue={this.state.personaR}
                       ref={personaR => this.inputPersona = personaR}>
+                      <option>{this.state.personaR}</option>
                       {result.map(data =>
                         <option id={data}>{data}</option>
                       )}
