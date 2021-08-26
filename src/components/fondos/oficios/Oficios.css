@@ -353,10 +353,10 @@
   display: flex;
 }
 .obs-input {
-  border-bottom: 1;
-  border-left: 1;
-  border-right: 1;
-  border-top: 1;
+  border-bottom: 2;
+  border-left: 2;
+  border-right: 2;
+  border-top: 2;
 }
 .padre-firmas{
   display: flex;
