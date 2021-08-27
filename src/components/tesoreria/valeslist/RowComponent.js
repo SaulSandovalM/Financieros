@@ -41,6 +41,13 @@ export default class RowComponent extends Component {
   }
 
   render () {
+    var sumatoriaRecibos = 0
+    console.log(this.props.item.recibosList.map(item => {
+      sumatoriaRecibos += parseFloat(item.subtotal)
+    }))
+
+    console.log(sumatoriaRecibos)
+
     return (
       <TableBody>
         <div style={{ display: 'flex', flexDirection: 'row', maxWidth: '100%' }}>
@@ -332,6 +339,15 @@ export default class RowComponent extends Component {
                           Nombre: { item.nombre } Importe: ${ item.subtotal } Fecha: { item.fecha }
                         </TableCell>
                       )) */}
+                      <TableCell>
+                        <CurrencyFormat
+                          value={sumatoriaRecibos.toFixed(2)}
+                          displayType='text'
+                          prefix=' $'
+                          thousandSeparator
+                          decimalSeparator='.'
+                        />
+                      </TableCell>
                     </TableRow>
                   </TableBody>
                 </Table>
