@@ -1713,7 +1713,7 @@ export default class Oficios extends Component {
               </table>
             </div>
           </div>
-          <div className='sp-footer'>
+          <div className='sp-footer' style={{ background: 'red' }}>
             <div className='obs-sopadre2'>
               <div className='obs-so'>
                 <div style={{ display: 'flex',  width: '400px' }}>
@@ -1734,7 +1734,7 @@ export default class Oficios extends Component {
                 </div>
                 <div className='obs-so2' style={{ marginLeft: '30px' }}>
                   <p className='text-osb'>Solicitud</p>
-                  <input className='obs-input' />
+                  <div style={{ border: 'solid 2px #000', height: '30 px', width: '150px' }} />
                 </div>
               </div>
             </div>

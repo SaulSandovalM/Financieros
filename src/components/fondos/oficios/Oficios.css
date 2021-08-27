@@ -286,7 +286,7 @@
   margin-top: 18px;
 }
 .sp-table-cont {
-  height: 60vh;
+  height: 55vh;
 }
 .tabla-so {
   padding-left: 20px;
@@ -314,7 +314,7 @@
   text-align: left;
 }
 .sp-footer {
-  bottom: 0;
+  bottom: 1;
   height: auto;
   position: fixed;
   width: 100%;
@@ -331,7 +331,7 @@
   padding-left: 20px;
   padding-right: 20px;
 }
-.obs-so{
+.obs-so {
   display: flex;
 }
 .text-osb {
@@ -358,7 +358,7 @@
   border-right: 2;
   border-top: 2;
 }
-.padre-firmas{
+.padre-firmas {
   display: flex;
   justify-content: space-between;
   padding-left: 20px;

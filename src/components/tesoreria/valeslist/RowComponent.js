@@ -42,11 +42,9 @@ export default class RowComponent extends Component {
 
   render () {
     var sumatoriaRecibos = 0
-    console.log(this.props.item.recibosList.map(item => {
+    this.props.item.recibosList.map(item => {
       sumatoriaRecibos += parseFloat(item.subtotal)
-    }))
-
-    console.log(sumatoriaRecibos)
+    })
 
     return (
       <TableBody>
