@@ -1713,7 +1713,7 @@ export default class Oficios extends Component {
               </table>
             </div>
           </div>
-          <div className='sp-footer' style={{ background: 'red' }}>
+          <div className='sp-footer'>
             <div className='obs-sopadre2'>
               <div className='obs-so'>
                 <div style={{ display: 'flex',  width: '400px' }}>
