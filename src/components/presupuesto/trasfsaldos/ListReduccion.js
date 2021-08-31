@@ -30,9 +30,9 @@ export default class ListComponent extends Component {
 
   render () {
     // var filterData = this.props.listaB.filter(
-    //   (item) => {
-    //     return (item.oficio ? item.oficio.indexOf(this.state.search) !== -1 : null)
-    //   }
+    //  (item) => {
+    //    return (item.oficio ? item.oficio.indexOf(this.state.search) !== -1 : null)
+    //  }
     // )
 
     return (
@@ -46,7 +46,7 @@ export default class ListComponent extends Component {
           />
           <Table size='small'>
             {
-              this.props.listaB.map(item =>
+              this.state.listaB.map(item =>
                 <RowComponent
                   key={item.id}
                   item={item}
