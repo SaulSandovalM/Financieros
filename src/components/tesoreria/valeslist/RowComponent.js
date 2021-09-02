@@ -34,6 +34,14 @@ export default class RowComponent extends Component {
     this.props.obs(this.props.item)
   }
 
+  updateFacturas = () => {
+    this.props.updateFacturas(this.props.item)
+  }
+
+  updateRecibos = () => {
+    this.props.updateRecibos(this.props.item)
+  }
+
   toggleOpen () {
     this.setState({
       open: !this.state.open
@@ -175,7 +183,7 @@ export default class RowComponent extends Component {
           <TableCell
             className='table-v-num2'
             style={{
-              width: '200px',
+              width: '500px',
               right: '0px',
               position: 'sticky',
               background: 'white',
@@ -196,6 +204,20 @@ export default class RowComponent extends Component {
               onClick={this.obs}
             >
               Obs
+            </Button>
+            <Button
+              variant='contained'
+              color='primary'
+              onClick={this.updateFacturas}
+            >
+              Actualizar Facturas
+            </Button>
+            <Button
+              variant='contained'
+              color='primary'
+              onClick={this.updateRecibos}
+            >
+              Actualizar Recibos
             </Button>
           </TableCell>
         </div>

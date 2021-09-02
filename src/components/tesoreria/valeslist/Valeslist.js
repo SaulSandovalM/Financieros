@@ -89,7 +89,7 @@ export default class Valeslist extends Component {
           'iva': xml.children['3'].attributes['TotalImpuestosTrasladados'] ? xml.children['3'].attributes['TotalImpuestosTrasladados'] : 0,
           'isr': xml.children['3'].attributes['TotalImpuestosRetenidos'] ? xml.children['3'].attributes['TotalImpuestosRetenidos'] : 0,
           'fecha': xml.getElementsByTagName('tfd:TimbreFiscalDigital')[0].attributes['FechaTimbrado'],
-          'uuid': xml.getElementsByTagName('tfd:TimbreFiscalDigital')[0].attributes['UUID'] ? xml.getElementsByTagName('tfd:TimbreFiscalDigital')[0].attributes['UUID'] : xmlp.name.slice(0, -4),
+          'uuid': xml.getElementsByTagName('tfd:TimbreFiscalDigital')[0].attributes['UUID'].toUpperCase() ? xml.getElementsByTagName('tfd:TimbreFiscalDigital')[0].attributes['UUID'].toUpperCase() : xmlp.name.slice(0, -4).toUpperCase(),
           'estatus': 'sin asignar',
           'tipo': 'revolvente'
         }
@@ -256,7 +256,7 @@ export default class Valeslist extends Component {
 
   update = (item) => {
     let updates = {}
-    updates['vales/' + item.id] = {
+    console.log(updates['vales/' + item.id] = {
       cheque: item.cheque,
       vale: item.vale,
       cantidad: item.cantidad,
@@ -279,6 +279,96 @@ export default class Valeslist extends Component {
       filef: this.state.filef ? this.state.filef : [0],
       recibosList: this.state.recibosList ? this.state.recibosList : [0],
       xmlC: this.state.xmlC ? this.state.xmlC : [0],
+      obs: item.obs,
+      fechaP: item.fechaP,
+      rein: item.rein,
+      pasa: item.pasa
+    })
+    firebase.database().ref().update(updates)
+    this.state.recibosList.forEach(element => firebase.database().ref('xml').push(element))
+    alert('Tu solicitud fue enviada.')
+    this.setState({
+      filexml: ['No hay datos cargados'],
+      filex: ['No hay datos cargados'],
+      filefactura: [{ url: '', nombre: '' }],
+      xmlC:  [{ url: '', nombre: '' }],
+      filef: [{ url: '', nombre: '' }],
+      recibosList: [{ folio: 'Recibo simple', nombre: '', importe: '0', iva: '0', isr: '0', fecha: '', estatus: '', subtotal: '0', total: '0', uuid: 'Recibo simple', tipo: 'revolvente' }],
+      obs: '',
+      pdf2: 0
+    })
+  }
+
+  updateFacturas = (item) => {
+    let updates = {}
+    updates['vales/' + item.id] = {
+      cheque: item.cheque,
+      vale: item.vale,
+      cantidad: item.cantidad,
+      cantidadc: item.cantidadc,
+      cantidadr: item.cantidadr,
+      concepto: item.concepto,
+      oficioS: item.oficioS,
+      area: item.area,
+      turno: item.turno,
+      factura: item.factura,
+      recibos: item.recibos,
+      sc: item.sc,
+      fecha: item.fecha,
+      fechaF: item.fechaF,
+      autorizo: item.autorizo,
+      personaR: item.personaR,
+      estatus: item.estatus,
+      estatusC: 'Comprobado',
+      filefactura: this.state.filefactura ? this.state.filefactura : [0],
+      filef: item.filef,
+      recibosList: item.recibosList,
+      xmlC: this.state.xmlC ? this.state.xmlC : [0],
+      obs: item.obs,
+      fechaP: item.fechaP,
+      rein: item.rein,
+      pasa: item.pasa
+    }
+    firebase.database().ref().update(updates)
+    // this.state.recibosList.forEach(element => firebase.database().ref('xml').push(element))
+    alert('Tu solicitud fue enviada.')
+    this.setState({
+      filexml: ['No hay datos cargados'],
+      filex: ['No hay datos cargados'],
+      filefactura: [{ url: '', nombre: '' }],
+      xmlC:  [{ url: '', nombre: '' }],
+      filef: [{ url: '', nombre: '' }],
+      recibosList: [{ folio: 'Recibo simple', nombre: '', importe: '0', iva: '0', isr: '0', fecha: '', estatus: '', subtotal: '0', total: '0', uuid: 'Recibo simple', tipo: 'revolvente' }],
+      obs: '',
+      pdf2: 0
+    })
+  }
+
+  updateRecibos = (item) => {
+    let updates = {}
+    updates['vales/' + item.id] = {
+      cheque: item.cheque,
+      vale: item.vale,
+      cantidad: item.cantidad,
+      cantidadc: item.cantidadc,
+      cantidadr: item.cantidadr,
+      concepto: item.concepto,
+      oficioS: item.oficioS,
+      area: item.area,
+      turno: item.turno,
+      factura: item.factura,
+      recibos: item.recibos,
+      sc: item.sc,
+      fecha: item.fecha,
+      fechaF: item.fechaF,
+      autorizo: item.autorizo,
+      personaR: item.personaR,
+      estatus: item.estatus,
+      estatusC: 'Comprobado',
+      filefactura: item.filefactura,
+      filef: item.filef,
+      recibosList: this.state.recibosList ? this.state.recibosList : [0],
+      xmlC: item.xmlC,
       obs: item.obs,
       fechaP: item.fechaP,
       rein: item.rein,
@@ -554,6 +644,8 @@ export default class Valeslist extends Component {
               lista={this.state.lista}
               update={this.update}
               obs={this.obs}
+              updateFacturas={this.updateFacturas}
+              updateRecibos={this.updateRecibos}
             />
           </div>
         </div>

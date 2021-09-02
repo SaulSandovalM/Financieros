@@ -560,7 +560,7 @@ export default class Comprometidos extends Component {
       (xml) => {
         return (
           xml.nombre !== undefined ?
-          ((xml.nombre.indexOf('JUAN RAMON') !== -1))
+          ((xml.nombre.indexOf('SERVICIO POSTAL MEXICANO') !== -1))
           : null
         )
       }
