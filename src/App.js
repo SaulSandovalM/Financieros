@@ -28,6 +28,7 @@ import Cheques from './components/tesoreria/cheques/Cheques'
 import Vales from './components/tesoreria/vales/Vales'
 import Autorizacion from './components/tesoreria/autorizacion/Autorizacion'
 import Valeslist from './components/tesoreria/valeslist/Valeslist'
+import EditarVale from './components/tesoreria/valeslist/EditarVale'
 import Arqueo from './components/tesoreria/arqueo/Arqueo'
 import ArqueoD from './components/tesoreria/arqueo/ArqueoD'
 import Contra2 from './components/tesoreria/contra/Contra'
@@ -191,6 +192,13 @@ function App (props) {
         exact
         path='/Valeslist'
         component={Valeslist}
+        isAuthenticated={isAuthenticated}
+        isVerifying={isVerifying}
+      />
+      <ProtectedRoute
+        exact
+        path='/EditarVale/:id'
+        component={EditarVale}
         isAuthenticated={isAuthenticated}
         isVerifying={isVerifying}
       />

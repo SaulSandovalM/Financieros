@@ -421,7 +421,7 @@ export default class Vales extends Component {
         </div>
         {this.state.searchF === '' &&
           <form onSubmit={this.sendMessage.bind(this)}>
-            <div style={{ marginTop: '80px' }} ref={el => (this.vale = el)}>
+            <div style={{ marginTop: '40px' }} ref={el => (this.vale = el)}>
               <div className='margin-vales'>
                 <div className='vale-title-container'>
                   <div className='vale-logo-container'>

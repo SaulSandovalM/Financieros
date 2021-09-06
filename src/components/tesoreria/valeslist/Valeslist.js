@@ -389,6 +389,10 @@ export default class Valeslist extends Component {
     })
   }
 
+  editarRecibos = (item) => {
+    this.props.history.push(`/EditarVale/${item.id}`)
+  }
+
   obs = (item) => {
     let updates = {}
     updates['vales/' + item.id] = {
@@ -466,6 +470,14 @@ export default class Valeslist extends Component {
     let result = aarr.filter((item,index)=>{
       return aarr.indexOf(item) === index
     })
+
+    const sumaVale = [0]
+    this.state.recibosList.map(item => (
+      sumaVale.push(parseFloat(item.subtotal))
+    ))
+    const canti = (a, b) => a + b
+    var canti2 = sumaVale.reduce(canti)
+    console.log(canti2)
 
     return (
       <div className='container-valeslist'>
@@ -624,6 +636,7 @@ export default class Valeslist extends Component {
                     </div>
                   </div>
                 )}
+                <div style={{ display: 'flex', justifyContent: 'center' }}>{canti2}</div>
               </div>
               <div style={{ display: 'flex', justifyContent: 'center', marginTop: '30px' }}>
                 <Button
@@ -646,6 +659,7 @@ export default class Valeslist extends Component {
               obs={this.obs}
               updateFacturas={this.updateFacturas}
               updateRecibos={this.updateRecibos}
+              editarRecibos={this.editarRecibos}
             />
           </div>
         </div>

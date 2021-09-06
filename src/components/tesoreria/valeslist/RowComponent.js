@@ -42,6 +42,10 @@ export default class RowComponent extends Component {
     this.props.updateRecibos(this.props.item)
   }
 
+  editarRecibos = () => {
+    this.props.editarRecibos(this.props.item)
+  }
+
   toggleOpen () {
     this.setState({
       open: !this.state.open
@@ -218,6 +222,13 @@ export default class RowComponent extends Component {
               onClick={this.updateRecibos}
             >
               Actualizar Recibos
+            </Button>
+            <Button
+              variant='contained'
+              color='primary'
+              onClick={this.editarRecibos}
+            >
+              Editar Recibos
             </Button>
           </TableCell>
         </div>

@@ -228,6 +228,7 @@ export default class ListComponent extends Component {
                   obs={this.props.obs}
                   updateFacturas={this.props.updateFacturas}
                   updateRecibos={this.props.updateRecibos}
+                  editarRecibos={this.props.editarRecibos}
                 />
               )
             }
