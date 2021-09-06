@@ -551,7 +551,7 @@ export default class Comprometidos extends Component {
       (xml) => {
         return (
           xml.nombre !== undefined ?
-          ((xml.uuid.indexOf(this.state.folioXml) !== -1) || (xml.nombre.indexOf(this.state.folioXml) !== -1)) && xml.estatus !== 'asignado' && xml.tipo === 'revolvente'
+          ((xml.nombre.indexOf(this.state.folioXml) !== -1)) && xml.estatus !== 'asignado' && xml.tipo === 'revolvente'
         : '')
       }
     )
