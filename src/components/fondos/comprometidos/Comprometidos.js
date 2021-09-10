@@ -551,7 +551,7 @@ export default class Comprometidos extends Component {
       (xml) => {
         return (
           xml.nombre !== undefined ?
-          ((xml.nombre.indexOf(this.state.folioXml) !== -1)) && xml.estatus !== 'asignado' && xml.tipo === 'revolvente'
+          ((xml.uuid.indexOf(this.state.folioXml) !== -1) || (xml.nombre.indexOf(this.state.folioXml) !== -1)) && xml.estatus !== 'asignado' && xml.tipo === 'revolvente'
         : '')
       }
     )
@@ -560,7 +560,7 @@ export default class Comprometidos extends Component {
       (xml) => {
         return (
           xml.nombre !== undefined ?
-          ((xml.nombre.indexOf('SERVICIO POSTAL MEXICANO') !== -1))
+          ((xml.uuid.indexOf('683B393E') !== -1))
           : null
         )
       }
