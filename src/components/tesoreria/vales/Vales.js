@@ -924,7 +924,12 @@ export default class Vales extends Component {
                     <div className='f-fecha'>
                       <select
                         className='b-fecha-i'
+                        id='personaR'
+                        name='personaR'
+                        onChange={this.handleChange.bind(this)}
+                        defaultValue={this.state.personaR}
                         ref={personaR => this.inputPersona = personaR}>
+                        <option>{this.state.personaR}</option>
                         {result.map(data =>
                           <option id={data}>{data}</option>
                         )}
