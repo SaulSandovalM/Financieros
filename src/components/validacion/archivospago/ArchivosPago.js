@@ -63,7 +63,7 @@ export default class ArchivosPago extends Component {
       total: [0],
       contador: [],
       numContra: '',
-      datos: [''],
+      datos: [{total: 0}],
       adqui: ' ',
       realizo: admin,
       presupuesto: [
@@ -123,7 +123,7 @@ export default class ArchivosPago extends Component {
              },
              body: JSON.stringify(data),
            })
-        })
+         })
         console.log(datosXml.push(data))
         Total.push(parseFloat(data.total))
       }
@@ -661,7 +661,6 @@ export default class ArchivosPago extends Component {
             <ListComponent
               listaValidacion={this.state.listaValidacion}
               datos={this.state.datos} />
-          
           </div>
         </div>
       </div>
