@@ -84,7 +84,10 @@ export default class RowComponent extends Component {
                 </IconButton>
               </TableCell>
               <TableCell className='table-validacion'>
-                {NumFacturas}
+                {NumFacturas - 1}
+              </TableCell>
+              <TableCell className='table-validacion'>
+                {this.props.item.folio}
               </TableCell>
               <TableCell className='table-validacion'>
                 {this.props.item.Fondo}
@@ -98,9 +101,7 @@ export default class RowComponent extends Component {
               <TableCell className='table-validacion'>
                 {this.props.item.FechaP}
               </TableCell>
-              <TableCell className='table-validacion'>
-                
-              </TableCell>
+              <TableCell className='table-validacion' />
               <TableCell className='table-validacion'>
                 <CurrencyFormat
                   className='font-tb'
@@ -172,42 +173,43 @@ export default class RowComponent extends Component {
                     </TableHead>
                     <TableBody>
                       {this.props.item.Xml.map(data =>
-                        <TableRow key={data}>
-                          <TableCell className='border-table-v'>
-                            <div className='font-tb'>
-                              {data.nombre}
-                            </div>
-                          </TableCell>
-                          <TableCell className='border-table-v2'>
-                            <div className='font-tb'>
-                              {data.uuid}
-                            </div>
-                          </TableCell>
-                          <TableCell className='border-table-v2'>
-                            <div className='font-tb'>
-                              {data.fecha}
-                            </div>
-                          </TableCell>
-                          <TableCell className='border-table-v'>
-                            <div className='font-tb'>
-                              {data.descripcion}
-                            </div>
-                          </TableCell>
-                          <TableCell className='border-table-v2'>
-                            <CurrencyFormat
-                              className='font-tb'
-                              displayType='text'
-                              prefix=' $ '
-                              thousandSeparator
-                              value={parseFloat(data.total).toFixed(2)}
-                            />
-                          </TableCell>
-                          <TableCell className='border-table-v2'>
-                            <IconButton aria-label='expand row' size='small' className='border-del' onClick={() => this.removeValidacion(data)}>
-                              <DeleteIcon style={{ color: 'red' }} />
-                            </IconButton>
-                          </TableCell>
-                        </TableRow>
+                        data.folio ?
+                          <TableRow key={data}>
+                            <TableCell className='border-table-v'>
+                              <div className='font-tb'>
+                                {data.nombre}
+                              </div>
+                            </TableCell>
+                            <TableCell className='border-table-v2'>
+                              <div className='font-tb'>
+                                {data.uuid}
+                              </div>
+                            </TableCell>
+                            <TableCell className='border-table-v2'>
+                              <div className='font-tb'>
+                                {data.fecha}
+                              </div>
+                            </TableCell>
+                            <TableCell className='border-table-v'>
+                              <div className='font-tb'>
+                                {data.descripcion}
+                              </div>
+                            </TableCell>
+                            <TableCell className='border-table-v2'>
+                              <CurrencyFormat
+                                className='font-tb'
+                                displayType='text'
+                                prefix=' $ '
+                                thousandSeparator
+                                value={parseFloat(data.total).toFixed(2)}
+                              />
+                            </TableCell>
+                            <TableCell className='border-table-v2'>
+                              <IconButton aria-label='expand row' size='small' className='border-del' onClick={() => this.removeValidacion(data)}>
+                                <DeleteIcon style={{ color: 'red' }} />
+                              </IconButton>
+                            </TableCell>
+                          </TableRow> : null
                       )}
                     </TableBody>
                   </Box>

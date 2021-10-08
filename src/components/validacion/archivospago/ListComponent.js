@@ -63,6 +63,7 @@ export default class ListComponent extends Component {
               <TableRow style={{ display: 'flex', flexDirection: 'row', top: '0', background: 'white' }}>
                 <TableCell className='border-icon' style={{ width: '30px' }} />
                 <TableCell className='table-validacion'><b>Facturas</b></TableCell>
+                <TableCell className='table-validacion'><b>Folio</b></TableCell>
                 <TableCell className='table-validacion'><b>Fondo</b></TableCell>
                 <TableCell className='table-validacion'><b>Fecha Ingreso</b></TableCell>
                 <TableCell className='table-validacion'><b>Contrarecibo</b></TableCell>
