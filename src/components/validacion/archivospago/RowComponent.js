@@ -99,7 +99,7 @@ export default class RowComponent extends Component {
                 {this.props.item.FechaP}
               </TableCell>
               <TableCell className='table-validacion'>
-                devol
+                
               </TableCell>
               <TableCell className='table-validacion'>
                 <CurrencyFormat
