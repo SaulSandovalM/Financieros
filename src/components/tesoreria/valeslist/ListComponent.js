@@ -93,6 +93,7 @@ export default class ListComponent extends Component {
   render () {
     var { auto, pend, noauto, comp, filteredData } = this.state
     var fechah = new Date(this.state.prueba).getMonth() + 1
+    console.log(fechah)
     filteredData = this.props.lista.filter(
       (vales) => {
         return (auto.length && auto.includes(vales.estatus) && this.state.autorizados && new Date(vales.fecha).getMonth() + 1 === fechah) ||
@@ -101,6 +102,8 @@ export default class ListComponent extends Component {
           (comp.length && comp.includes(vales.estatusC) && this.state.comprobado && new Date(vales.fecha).getMonth() + 1 === fechah)
       }
     )
+
+    console.log(this.props.lista.filter(item => new Date(item.fecha).getMonth() + 1 === 2))
 
     this.state.pp = filteredData
 

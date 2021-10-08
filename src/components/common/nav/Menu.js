@@ -53,7 +53,7 @@ const Menu = ({ open, ...props }) => {
     admin = 'VALIDACION2'
   } else if (email === 'mario@procuraduria.com') {
     admin = 'VALIDACION3'
-  } else if (email === 'hortencia@procuraduria.com') {
+  } else if (email === 'hortensia@procuraduria.com') {
     admin = 'VALIDACION3'
   }
 

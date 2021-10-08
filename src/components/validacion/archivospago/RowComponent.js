@@ -34,7 +34,7 @@ export default class RowComponent extends Component {
       admin = 'VALIDACION2'
     } else if (email === 'mario@procuraduria.com') {
       admin = 'VALIDACION3'
-    } else if (email === 'hortencia@procuraduria.com') {
+    } else if (email === 'hortensia@procuraduria.com') {
       admin = 'VALIDACION3'
     }
     this.state = {
@@ -180,7 +180,7 @@ export default class RowComponent extends Component {
                           </TableCell>
                           <TableCell className='border-table-v2'>
                             <div className='font-tb'>
-                              {data.folio}
+                              {data.uuid}
                             </div>
                           </TableCell>
                           <TableCell className='border-table-v2'>

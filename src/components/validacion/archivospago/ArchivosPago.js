@@ -25,7 +25,7 @@ export default class ArchivosPago extends Component {
       admin = 'VALIDACION2'
     } else if (email === 'mario@procuraduria.com') {
       admin = 'VALIDACION3'
-    } else if (email === 'hortencia@procuraduria.com') {
+    } else if (email === 'hortensia@procuraduria.com') {
       admin = 'VALIDACION3'
     }
     var today = new Date()
@@ -114,16 +114,16 @@ export default class ArchivosPago extends Component {
           'up': up,
           'numfolio': numfolio
         }
-        // fetch(xml).then(res => res.text()).then(xml => {
-        //   fetch('https://financieros-78cb0.firebaseio.com/xml.json', {
-        //     method: 'POST',
-        //     headers: {
-        //       'Accept': 'application/json',
-        //       'Content-Type': 'application/json',
-        //     },
-        //     body: JSON.stringify(data),
-        //   })
-        // })
+        fetch(xml).then(res => res.text()).then(xml => {
+           fetch('https://financieros-78cb0.firebaseio.com/xml.json', {
+             method: 'POST',
+             headers: {
+               'Accept': 'application/json',
+               'Content-Type': 'application/json',
+             },
+             body: JSON.stringify(data),
+           })
+        })
         console.log(datosXml.push(data))
         Total.push(parseFloat(data.total))
       }
