@@ -166,7 +166,7 @@ export default class ArchivosPago extends Component {
   }
 
   componentDidMount () {
-    const itemsPresupuesto = firebase.database().ref('presupuestoValidacion/').orderBy('folio', 'desc')
+    const itemsPresupuesto = firebase.database().ref('presupuestoValidacion/')
     this.listenForPresupuesto(itemsPresupuesto)
     const itemsRefValidacion = firebase.database().ref('xmlPagoDirecto')
     this.listenValidacion(itemsRefValidacion)
