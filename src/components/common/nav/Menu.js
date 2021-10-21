@@ -39,6 +39,8 @@ const Menu = ({ open, ...props }) => {
     admin = 'CENELY'
   } else if (email === 'hector@procuraduria.com') {
     admin = 'HECTOR'
+  } else if (email === 'laura@procuraduria.com') {
+    admin = 'LAURA'
   } else if (email === 'omar@procuraduria.com') {
     admin = 'OMAR'
   } else if (email === 'elizabeth@procuraduria.com') {
@@ -74,6 +76,7 @@ const Menu = ({ open, ...props }) => {
         admin === 'OMAR' ||
         admin === 'LILIA' ||
         admin === 'HECTOR' ||
+        admin === 'LAURA' ||
         admin === 'CENELY' ||
         admin === 'KARINA' ||
         admin === 'ELOY' ||

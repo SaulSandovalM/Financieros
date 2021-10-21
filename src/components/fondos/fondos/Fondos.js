@@ -289,7 +289,7 @@ export default class Fondos extends Component {
       return aarr.indexOf(item) === index
     })
 
-    console.log(tipo_doc === 'Pago Directo' ? true : false)
+    console.log(this.state.realizo)
 
     return (
       <div>
@@ -351,8 +351,7 @@ export default class Fondos extends Component {
                           )
                           ||
                           (fondos.tipo_doc === 'Fondo Revolvente' &&
-                            (this.state.realizo === 'LAURA' ||
-                              this.state.realizo === 'TERESA' ||
+                            (this.state.realizo === 'TERESA' ||
                               this.state.realizo === 'MARCOS' ||
                               this.state.realizo === 'ELOY' ||
                               this.state.realizo === 'MARTHA' ||
@@ -450,7 +449,7 @@ export default class Fondos extends Component {
                         )}
                       </select>
                     }
-                    {(realizo === 'KARINA' || realizo === 'LILIA' || realizo === 'CENELY' || realizo === 'HECTOR' || realizo === 'OMAR') &&
+                    {(realizo === 'KARINA' || realizo === 'LILIA' || realizo === 'CENELY' || realizo === 'HECTOR' || realizo === 'OMAR' || realizo === 'LAURA') &&
                       <select
                         className='select-f'
                         id='tipo_doc'
@@ -536,7 +535,7 @@ export default class Fondos extends Component {
                 <div className='div-f2'>
                   <div className='div-con'>
                     <p className='p-label'>Numero de Licitación</p>
-                    {(realizo === 'KARINA' || realizo === 'LILIA' || realizo === 'CENELY' || realizo === 'HECTOR' || realizo === 'OMAR') ?
+                    {(realizo === 'KARINA' || realizo === 'LILIA' || realizo === 'CENELY' || realizo === 'HECTOR' || realizo === 'OMAR' || realizo === 'LAURA') ?
                       <input
                         className='field'
                         id='no_lici'
@@ -559,7 +558,7 @@ export default class Fondos extends Component {
                   </div>
                   <div className='div-con'>
                     <p className='p-label'>Requisición</p>
-                    {(realizo === 'KARINA' || realizo === 'LILIA' || realizo === 'CENELY' || realizo === 'HECTOR' || realizo === 'OMAR') ?
+                    {(realizo === 'KARINA' || realizo === 'LILIA' || realizo === 'CENELY' || realizo === 'HECTOR' || realizo === 'OMAR' || realizo === 'LAURA') ?
                       <input
                         className='field'
                         id='requisicion'
@@ -584,7 +583,7 @@ export default class Fondos extends Component {
                 <div className='div-f2'>
                   <div className='div-con'>
                     <p className='p-label'>Pedido</p>
-                    {(realizo === 'KARINA' || realizo === 'LILIA' || realizo === 'CENELY' || realizo === 'HECTOR' || realizo === 'OMAR') ?
+                    {(realizo === 'KARINA' || realizo === 'LILIA' || realizo === 'CENELY' || realizo === 'HECTOR' || realizo === 'OMAR' || realizo === 'LAURA') ?
                       <input
                         className='field'
                         id='pedido'
@@ -607,7 +606,7 @@ export default class Fondos extends Component {
                   </div>
                   <div className='div-con'>
                     <p className='p-label'>Poliza</p>
-                    {(realizo === 'KARINA' || realizo === 'LILIA' || realizo === 'CENELY' || realizo === 'HECTOR' || realizo === 'OMAR') ?
+                    {(realizo === 'KARINA' || realizo === 'LILIA' || realizo === 'CENELY' || realizo === 'HECTOR' || realizo === 'OMAR' || realizo === 'LAURA') ?
                       <input
                         className='field'
                         id='poliza'
@@ -635,7 +634,7 @@ export default class Fondos extends Component {
                 <div className='div-f2'>
                   <div className='div-con'>
                     <p className='p-label'>Cta CFE</p>
-                    {(realizo === 'KARINA' || realizo === 'LILIA' || realizo === 'CENELY' || realizo === 'HECTOR' || realizo === 'OMAR') ?
+                    {(realizo === 'KARINA' || realizo === 'LILIA' || realizo === 'CENELY' || realizo === 'HECTOR' || realizo === 'OMAR' || realizo === 'LAURA') ?
                       <input
                         className='field'
                         id='cfe'
@@ -658,7 +657,7 @@ export default class Fondos extends Component {
                   </div>
                   <div className='div-con'>
                     <p className='p-label'>Numero de Servicio CFE</p>
-                    {(realizo === 'KARINA' || realizo === 'LILIA' || realizo === 'CENELY' || realizo === 'HECTOR' || realizo === 'OMAR') ?
+                    {(realizo === 'KARINA' || realizo === 'LILIA' || realizo === 'CENELY' || realizo === 'HECTOR' || realizo === 'OMAR' || realizo === 'LAURA') ?
                       <input
                         className='field'
                         id='nscfe'
@@ -682,7 +681,7 @@ export default class Fondos extends Component {
                 </div>
                 <div className='div-cfe' style={{ width: '100%' }}>
                   <p className='p-label'>Observaciones</p>
-                  {(realizo === 'KARINA' || realizo === 'LILIA' || realizo === 'CENELY' || realizo === 'HECTOR' || realizo === 'OMAR') ?
+                  {(realizo === 'KARINA' || realizo === 'LILIA' || realizo === 'CENELY' || realizo === 'HECTOR' || realizo === 'OMAR' || realizo === 'LAURA') ?
                     <textarea
                       className='field'
                       id='observaciones'
