@@ -556,11 +556,11 @@ export default class Comprometidos extends Component {
       }
     )
 
-    console.log(this.state.xml.filter(
+    console.log(this.state.xml2.filter(
       (xml) => {
         return (
-          xml.nombre !== undefined ?
-          ((xml.uuid.indexOf('683B393E') !== -1))
+          xml.numfolio !== undefined ?
+          ((xml.numfolio.indexOf('2010') !== -1))
           : null
         )
       }
@@ -683,7 +683,7 @@ export default class Comprometidos extends Component {
                       disableRipple
                     />
                   </ListItemIcon>
-                  <ListItemText className='list-align-i' primary={String(value.folio).substr(0, 10)} />
+                  <ListItemText className='list-align-i' primary={String(value.uuid).substr(0, 8)} />
                   {value.folio === 'Recibo simple' || value.uuid === 'Recibo simple' ?
                     <ListItemText className='list-align-i' primary={'$ ' + value.subtotal} />
                     :

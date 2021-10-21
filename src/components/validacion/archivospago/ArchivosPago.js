@@ -456,6 +456,8 @@ export default class ArchivosPago extends Component {
       }
     })
 
+    console.log(this.state.listaValidacion !== undefined && this.state.listaValidacion.map(item => item.Xml))
+
     return (
       <div className='container-valeslist'>
         <div className='margin-f-a'>
