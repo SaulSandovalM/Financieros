@@ -93,7 +93,7 @@ export default class RowComponent extends Component {
                 {this.props.item.Fondo}
               </TableCell>
               <TableCell className='table-validacion'>
-                {this.props.item.FechaI}
+                {this.props.item.id}
               </TableCell>
               <TableCell className='table-validacion'>
                 {this.props.item.Contrarecibo}
@@ -172,7 +172,7 @@ export default class RowComponent extends Component {
                       </TableRow>
                     </TableHead>
                     <TableBody>
-                      {this.props.item.Xml.map(data =>
+                      {/* this.props.item.Xml.map(data =>
                         data.folio ?
                           <TableRow key={data}>
                             <TableCell className='border-table-v'>
@@ -210,7 +210,7 @@ export default class RowComponent extends Component {
                               </IconButton>
                             </TableCell>
                           </TableRow> : null
-                      )}
+                      )*/}
                     </TableBody>
                   </Box>
                 </Collapse>

@@ -28,6 +28,7 @@ export default class ArchivosPago extends Component {
     } else if (email === 'hortensia@procuraduria.com') {
       admin = 'VALIDACION3'
     }
+    console.log(email)
     var today = new Date()
     var today2 = new Date()
     var dd = today.getDate()
@@ -456,7 +457,7 @@ export default class ArchivosPago extends Component {
       }
     })
 
-    console.log(this.state.listaValidacion !== undefined && this.state.listaValidacion.map(item => item.Xml))
+    // console.log(this.state.listaValidacion !== undefined && this.state.listaValidacion.map(item => item.id))
 
     return (
       <div className='container-valeslist'>

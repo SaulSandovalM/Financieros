@@ -259,7 +259,64 @@ export default class Oficios extends Component {
                                   </div>
                                   <div className='ofie-text'>
                                     <p className='text-titulo-ga'>PROCURADURÍA GENERAL DE JUSTICA DE HIDALGO</p>
-                                    <p className='text-titulo-ga'>{comprometidos.area}</p>
+                                    <p className='text-titulo-ga'>
+                                    {this.state.comprometidos.map(comprometidos =>
+                                      <p className='text-titulo-ga'>
+                                        {comprometidos.area ?
+                                          this.state.comprometidos.length === 1 ?
+                                            (comprometidos.up === '01' && 'Procuraduría General de Justicia') ||
+                                            (comprometidos.up === '02' && 'Subprocuraduría de Procedimientos Penales Región Oriente') ||
+                                            (comprometidos.up === '03' && 'Fiscalía Especializada para la atención de Delitos cometidos contra la Libertad de Expresión, Periodistas y Personas defensoras de los Derechos Humanos') ||
+                                            (comprometidos.up === '04' && 'Dirección General para la Atención de los Asuntos del Sistema Tradicional') ||
+                                            (comprometidos.up === '05' && 'Fiscalía Especializada en Delitos Electorales') ||
+                                            (comprometidos.up === '06' && 'Subprocuraduría de Derechos Humanos y Servicios a la Comunidad') ||
+                                            (comprometidos.up === '07' && 'Centro de Justicia Restaurativa Penal Poniente') ||
+                                            (comprometidos.up === '08' && 'Fiscalía para la Atención de Delitos de Género') ||
+                                            (comprometidos.up === '09' && 'Visitaduría General') ||
+                                            (comprometidos.up === '10' && 'Dirección General de Servicios Periciales') ||
+                                            (comprometidos.up === '11' && 'Centro de Operación Estratégica') ||
+                                            (comprometidos.up === '12' && 'Unidad Especializada en el Combate al Secuestro') ||
+                                            (comprometidos.up === '13' && 'Dirección General de Administración y Finanzas') ||
+                                            (comprometidos.up === '14' && 'Fiscalía Especializada para la atención de los Delitos de Trata de Personas') ||
+                                            (comprometidos.up === '15' && 'Subprocuraduría de Procedimientos Penales Región Poniente') ||
+                                            (comprometidos.up === '16' && 'Centro de Atención Temprana Poniente') ||
+                                            (comprometidos.up === '17' && 'Dirección General de Investigación y Litigación Poniente') ||
+                                            (comprometidos.up === '18' && 'Dirección General de la Policía Investigadora') ||
+                                            (comprometidos.up === '20' && 'Centro de Atención Temprana Oriente') ||
+                                            (comprometidos.up === '21' && 'Centro de Justicia Restaurativa Penal Oriente') ||
+                                            (comprometidos.up === '22' && 'Dirección General de Investigación y Litigación Oriente') ||
+                                            (comprometidos.up === '23' && 'Fiscalía Especializada en Delitos de Corrupción') ||
+                                            (comprometidos.up === '24' && 'Fiscalía de Desaparición Forzada y Desaparición por Terceros')
+                                          :
+                                            ''
+                                          :
+                                            (nombreDesa[1] === '01' && 'Procuraduría General de Justicia') ||
+                                            (nombreDesa[1] === '02' && 'Subprocuraduría de Procedimientos Penales Región Oriente') ||
+                                            (nombreDesa[1] === '03' &&'Fiscalía Especializada para la atención de Delitos cometidos contra la Libertad de Expresión, Periodistas y Personas defensoras de los Derechos Humanos') ||
+                                            (nombreDesa[1] === '04' && 'Dirección General para la Atención de los Asuntos del Sistema Tradicional') ||
+                                            (nombreDesa[1] === '05' && 'Fiscalía Especializada en Delitos Electorales') ||
+                                            (nombreDesa[1] === '06' && 'Subprocuraduría de Derechos Humanos y Servicios a la Comunidad') ||
+                                            (nombreDesa[1] === '07' && 'Centro de Justicia Restaurativa Penal Poniente') ||
+                                            (nombreDesa[1] === '08' && 'Fiscalía para la Atención de Delitos de Género') ||
+                                            (nombreDesa[1] === '09' && 'Visitaduría General') ||
+                                            (nombreDesa[1] === '10' && 'Dirección General de Servicios Periciales') ||
+                                            (nombreDesa[1] === '11' && 'Centro de Operación Estratégica') ||
+                                            (nombreDesa[1] === '12' && 'Unidad Especializada en el Combate al Secuestro') ||
+                                            (nombreDesa[1] === '13' && 'Dirección General de Administración y Finanzas') ||
+                                            (nombreDesa[1] === '14' && 'Fiscalía Especializada para la atención de los Delitos de Trata de Personas') ||
+                                            (nombreDesa[1] === '15' && 'Subprocuraduría de Procedimientos Penales Región Poniente') ||
+                                            (nombreDesa[1] === '16' && 'Centro de Atención Temprana Poniente') ||
+                                            (nombreDesa[1] === '17' && 'Dirección General de Investigación y Litigación Poniente') ||
+                                            (nombreDesa[1] === '18' && 'Dirección General de la Policía Investigadora') ||
+                                            (nombreDesa[1] === '20' && 'Centro de Atención Temprana Oriente') ||
+                                            (nombreDesa[1] === '21' && 'Centro de Justicia Restaurativa Penal Oriente') ||
+                                            (nombreDesa[1] === '22' && 'Dirección General de Investigación y Litigación Oriente') ||
+                                            (nombreDesa[1] === '23' && 'Fiscalía Especializada en Delitos de Corrupción') ||
+                                            (nombreDesa[1] === '24' && 'Fiscalía de Desaparición Forzada y Desaparición por Terceros')
+                                        }
+                                      </p>
+                                    )}
+                                    </p>
                                     <p className='text-titulo-ga'>{comprometidos.partida}</p>
                                   </div>
                                   <div className='ofie-img-cont'>
@@ -493,7 +550,64 @@ export default class Oficios extends Component {
                                   </div>
                                   <div className='ofie-text'>
                                     <p className='text-titulo-ga'>PROCURADURÍA GENERAL DE JUSTICA DE HIDALGO</p>
-                                    <p className='text-titulo-ga'>{comprometidos.area}</p>
+                                    <p className='text-titulo-ga'>
+                                    {this.state.comprometidos.map(comprometidos =>
+                                      <p className='text-titulo-ga'>
+                                        {comprometidos.area ?
+                                          this.state.comprometidos.length === 1 ?
+                                            (comprometidos.up === '01' && 'Procuraduría General de Justicia') ||
+                                            (comprometidos.up === '02' && 'Subprocuraduría de Procedimientos Penales Región Oriente') ||
+                                            (comprometidos.up === '03' && 'Fiscalía Especializada para la atención de Delitos cometidos contra la Libertad de Expresión, Periodistas y Personas defensoras de los Derechos Humanos') ||
+                                            (comprometidos.up === '04' && 'Dirección General para la Atención de los Asuntos del Sistema Tradicional') ||
+                                            (comprometidos.up === '05' && 'Fiscalía Especializada en Delitos Electorales') ||
+                                            (comprometidos.up === '06' && 'Subprocuraduría de Derechos Humanos y Servicios a la Comunidad') ||
+                                            (comprometidos.up === '07' && 'Centro de Justicia Restaurativa Penal Poniente') ||
+                                            (comprometidos.up === '08' && 'Fiscalía para la Atención de Delitos de Género') ||
+                                            (comprometidos.up === '09' && 'Visitaduría General') ||
+                                            (comprometidos.up === '10' && 'Dirección General de Servicios Periciales') ||
+                                            (comprometidos.up === '11' && 'Centro de Operación Estratégica') ||
+                                            (comprometidos.up === '12' && 'Unidad Especializada en el Combate al Secuestro') ||
+                                            (comprometidos.up === '13' && 'Dirección General de Administración y Finanzas') ||
+                                            (comprometidos.up === '14' && 'Fiscalía Especializada para la atención de los Delitos de Trata de Personas') ||
+                                            (comprometidos.up === '15' && 'Subprocuraduría de Procedimientos Penales Región Poniente') ||
+                                            (comprometidos.up === '16' && 'Centro de Atención Temprana Poniente') ||
+                                            (comprometidos.up === '17' && 'Dirección General de Investigación y Litigación Poniente') ||
+                                            (comprometidos.up === '18' && 'Dirección General de la Policía Investigadora') ||
+                                            (comprometidos.up === '20' && 'Centro de Atención Temprana Oriente') ||
+                                            (comprometidos.up === '21' && 'Centro de Justicia Restaurativa Penal Oriente') ||
+                                            (comprometidos.up === '22' && 'Dirección General de Investigación y Litigación Oriente') ||
+                                            (comprometidos.up === '23' && 'Fiscalía Especializada en Delitos de Corrupción') ||
+                                            (comprometidos.up === '24' && 'Fiscalía de Desaparición Forzada y Desaparición por Terceros')
+                                          :
+                                            ''
+                                          :
+                                            (nombreDesa[1] === '01' && 'Procuraduría General de Justicia') ||
+                                            (nombreDesa[1] === '02' && 'Subprocuraduría de Procedimientos Penales Región Oriente') ||
+                                            (nombreDesa[1] === '03' &&'Fiscalía Especializada para la atención de Delitos cometidos contra la Libertad de Expresión, Periodistas y Personas defensoras de los Derechos Humanos') ||
+                                            (nombreDesa[1] === '04' && 'Dirección General para la Atención de los Asuntos del Sistema Tradicional') ||
+                                            (nombreDesa[1] === '05' && 'Fiscalía Especializada en Delitos Electorales') ||
+                                            (nombreDesa[1] === '06' && 'Subprocuraduría de Derechos Humanos y Servicios a la Comunidad') ||
+                                            (nombreDesa[1] === '07' && 'Centro de Justicia Restaurativa Penal Poniente') ||
+                                            (nombreDesa[1] === '08' && 'Fiscalía para la Atención de Delitos de Género') ||
+                                            (nombreDesa[1] === '09' && 'Visitaduría General') ||
+                                            (nombreDesa[1] === '10' && 'Dirección General de Servicios Periciales') ||
+                                            (nombreDesa[1] === '11' && 'Centro de Operación Estratégica') ||
+                                            (nombreDesa[1] === '12' && 'Unidad Especializada en el Combate al Secuestro') ||
+                                            (nombreDesa[1] === '13' && 'Dirección General de Administración y Finanzas') ||
+                                            (nombreDesa[1] === '14' && 'Fiscalía Especializada para la atención de los Delitos de Trata de Personas') ||
+                                            (nombreDesa[1] === '15' && 'Subprocuraduría de Procedimientos Penales Región Poniente') ||
+                                            (nombreDesa[1] === '16' && 'Centro de Atención Temprana Poniente') ||
+                                            (nombreDesa[1] === '17' && 'Dirección General de Investigación y Litigación Poniente') ||
+                                            (nombreDesa[1] === '18' && 'Dirección General de la Policía Investigadora') ||
+                                            (nombreDesa[1] === '20' && 'Centro de Atención Temprana Oriente') ||
+                                            (nombreDesa[1] === '21' && 'Centro de Justicia Restaurativa Penal Oriente') ||
+                                            (nombreDesa[1] === '22' && 'Dirección General de Investigación y Litigación Oriente') ||
+                                            (nombreDesa[1] === '23' && 'Fiscalía Especializada en Delitos de Corrupción') ||
+                                            (nombreDesa[1] === '24' && 'Fiscalía de Desaparición Forzada y Desaparición por Terceros')
+                                        }
+                                      </p>
+                                    )}
+                                    </p>
                                     <p className='text-titulo-ga'>{comprometidos.partida}</p>
                                   </div>
                                   <div className='ofie-img-cont'>
@@ -727,7 +841,64 @@ export default class Oficios extends Component {
                                   </div>
                                   <div className='ofie-text'>
                                     <p className='text-titulo-ga'>PROCURADURÍA GENERAL DE JUSTICA DE HIDALGO</p>
-                                    <p className='text-titulo-ga'>{comprometidos.area}</p>
+                                    <p className='text-titulo-ga'>
+                                    {this.state.comprometidos.map(comprometidos =>
+                                      <p className='text-titulo-ga'>
+                                        {comprometidos.area ?
+                                          this.state.comprometidos.length === 1 ?
+                                            (comprometidos.up === '01' && 'Procuraduría General de Justicia') ||
+                                            (comprometidos.up === '02' && 'Subprocuraduría de Procedimientos Penales Región Oriente') ||
+                                            (comprometidos.up === '03' && 'Fiscalía Especializada para la atención de Delitos cometidos contra la Libertad de Expresión, Periodistas y Personas defensoras de los Derechos Humanos') ||
+                                            (comprometidos.up === '04' && 'Dirección General para la Atención de los Asuntos del Sistema Tradicional') ||
+                                            (comprometidos.up === '05' && 'Fiscalía Especializada en Delitos Electorales') ||
+                                            (comprometidos.up === '06' && 'Subprocuraduría de Derechos Humanos y Servicios a la Comunidad') ||
+                                            (comprometidos.up === '07' && 'Centro de Justicia Restaurativa Penal Poniente') ||
+                                            (comprometidos.up === '08' && 'Fiscalía para la Atención de Delitos de Género') ||
+                                            (comprometidos.up === '09' && 'Visitaduría General') ||
+                                            (comprometidos.up === '10' && 'Dirección General de Servicios Periciales') ||
+                                            (comprometidos.up === '11' && 'Centro de Operación Estratégica') ||
+                                            (comprometidos.up === '12' && 'Unidad Especializada en el Combate al Secuestro') ||
+                                            (comprometidos.up === '13' && 'Dirección General de Administración y Finanzas') ||
+                                            (comprometidos.up === '14' && 'Fiscalía Especializada para la atención de los Delitos de Trata de Personas') ||
+                                            (comprometidos.up === '15' && 'Subprocuraduría de Procedimientos Penales Región Poniente') ||
+                                            (comprometidos.up === '16' && 'Centro de Atención Temprana Poniente') ||
+                                            (comprometidos.up === '17' && 'Dirección General de Investigación y Litigación Poniente') ||
+                                            (comprometidos.up === '18' && 'Dirección General de la Policía Investigadora') ||
+                                            (comprometidos.up === '20' && 'Centro de Atención Temprana Oriente') ||
+                                            (comprometidos.up === '21' && 'Centro de Justicia Restaurativa Penal Oriente') ||
+                                            (comprometidos.up === '22' && 'Dirección General de Investigación y Litigación Oriente') ||
+                                            (comprometidos.up === '23' && 'Fiscalía Especializada en Delitos de Corrupción') ||
+                                            (comprometidos.up === '24' && 'Fiscalía de Desaparición Forzada y Desaparición por Terceros')
+                                          :
+                                            ''
+                                          :
+                                            (nombreDesa[1] === '01' && 'Procuraduría General de Justicia') ||
+                                            (nombreDesa[1] === '02' && 'Subprocuraduría de Procedimientos Penales Región Oriente') ||
+                                            (nombreDesa[1] === '03' &&'Fiscalía Especializada para la atención de Delitos cometidos contra la Libertad de Expresión, Periodistas y Personas defensoras de los Derechos Humanos') ||
+                                            (nombreDesa[1] === '04' && 'Dirección General para la Atención de los Asuntos del Sistema Tradicional') ||
+                                            (nombreDesa[1] === '05' && 'Fiscalía Especializada en Delitos Electorales') ||
+                                            (nombreDesa[1] === '06' && 'Subprocuraduría de Derechos Humanos y Servicios a la Comunidad') ||
+                                            (nombreDesa[1] === '07' && 'Centro de Justicia Restaurativa Penal Poniente') ||
+                                            (nombreDesa[1] === '08' && 'Fiscalía para la Atención de Delitos de Género') ||
+                                            (nombreDesa[1] === '09' && 'Visitaduría General') ||
+                                            (nombreDesa[1] === '10' && 'Dirección General de Servicios Periciales') ||
+                                            (nombreDesa[1] === '11' && 'Centro de Operación Estratégica') ||
+                                            (nombreDesa[1] === '12' && 'Unidad Especializada en el Combate al Secuestro') ||
+                                            (nombreDesa[1] === '13' && 'Dirección General de Administración y Finanzas') ||
+                                            (nombreDesa[1] === '14' && 'Fiscalía Especializada para la atención de los Delitos de Trata de Personas') ||
+                                            (nombreDesa[1] === '15' && 'Subprocuraduría de Procedimientos Penales Región Poniente') ||
+                                            (nombreDesa[1] === '16' && 'Centro de Atención Temprana Poniente') ||
+                                            (nombreDesa[1] === '17' && 'Dirección General de Investigación y Litigación Poniente') ||
+                                            (nombreDesa[1] === '18' && 'Dirección General de la Policía Investigadora') ||
+                                            (nombreDesa[1] === '20' && 'Centro de Atención Temprana Oriente') ||
+                                            (nombreDesa[1] === '21' && 'Centro de Justicia Restaurativa Penal Oriente') ||
+                                            (nombreDesa[1] === '22' && 'Dirección General de Investigación y Litigación Oriente') ||
+                                            (nombreDesa[1] === '23' && 'Fiscalía Especializada en Delitos de Corrupción') ||
+                                            (nombreDesa[1] === '24' && 'Fiscalía de Desaparición Forzada y Desaparición por Terceros')
+                                        }
+                                      </p>
+                                    )}
+                                    </p>
                                     <p className='text-titulo-ga'>{comprometidos.partida}</p>
                                   </div>
                                   <div className='ofie-img-cont'>

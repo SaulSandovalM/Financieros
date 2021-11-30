@@ -65,8 +65,6 @@ const Menu = ({ open, ...props }) => {
     <StyledMenu open={open} aria-hidden={!isHidden} {...props}>
       {(admin === 'CANDY' ||
         admin === 'VALIDACION2' ||
-        admin === 'VALIDACION2' ||
-        admin === 'VALIDACION3' ||
         admin === 'VALIDACION3' ||
         admin === 'CECILIA' ||
         admin === 'ALFREDO' ||

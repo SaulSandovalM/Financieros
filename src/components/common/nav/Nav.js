@@ -72,7 +72,7 @@ class Nav extends Component {
     } else if (email === 'hector@procuraduria.com') {
       admin = 'HECTOR'
     } else if (email === 'laura@procuraduria.com') {
-      admin = 'HECTOR'
+      admin = 'LAURA'
     } else if (email === 'omar@procuraduria.com') {
       admin = 'OMAR'
     } else if (email === 'elizabeth@procuraduria.com') {
@@ -94,7 +94,7 @@ class Nav extends Component {
     return (
       <div className='nav-col' style={{ overFlow: 'scroll' }}>
         <div className='nav-cont'>
-          {(admin === 'CANDY' || admin === 'VALIDACION2' || admin === 'VALIDACION2' || admin === 'VALIDACION3' || admin === 'VALIDACION3' || admin === 'LIZBETH') &&
+          {(admin === 'CANDY' || admin === 'VALIDACION2' || admin === 'VALIDACION3' || admin === 'LIZBETH') &&
             <div className='navbar-left' style={{ marginTop: '30px' }}>
               <Link to='/ArchivoPago' className='deco'>
                 <span className='material-icons'>

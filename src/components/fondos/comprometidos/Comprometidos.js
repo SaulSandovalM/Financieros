@@ -560,7 +560,7 @@ export default class Comprometidos extends Component {
       (xml) => {
         return (
           xml.numfolio !== undefined ?
-          ((xml.numfolio.indexOf('2010') !== -1))
+          ((xml.numfolio.indexOf('2568') !== -1))
           : null
         )
       }
@@ -690,7 +690,7 @@ export default class Comprometidos extends Component {
                     <ListItemText className='list-align-i' primary={'$ ' + value.total} />
                   }
                   <ListItemText className='list-align' primary={value.fecha.substr(0, 10)} />
-                  <ListItemText className='list-align2' primary={value.nombre} />
+                  <ListItemText className='list-align2' primary={value.id} />
                 </ListItem>
               )
             }) : null}
@@ -757,7 +757,7 @@ export default class Comprometidos extends Component {
 
     const sumatoria = [0]
     this.state.comprometidosDos !== undefined && this.state.comprometidosDos.map(comprometido => comprometido.partida &&
-      comprometido.total > 0 ? sumatoria.push(parseFloat(comprometido.total)) : null
+      comprometido.total > 0 ? sumatoria.push(parseFloat(comprometido.total) + parseFloat(comprometido.isr)) : null
     )
     const tt4 = (a, b) => a + b
     var tcantidad4 = sumatoria.reduce(tt4).toFixed(2)

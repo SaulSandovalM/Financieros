@@ -175,7 +175,7 @@ export default class Fondos extends Component {
       params.cuentaPagarPara && params.sujetoContable && params.comprometido && params.cpa && params.anexof) {
       firebase.database().ref('fondos').push(params).then(() => {
         alert('Tu solicitud fue enviada.')
-        this.incrementFondo()
+        //this.incrementFondo()
         this.order()
       }).catch(() => {
         alert('Tu solicitud no puede ser enviada')
