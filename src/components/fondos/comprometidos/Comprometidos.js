@@ -439,32 +439,32 @@ export default class Comprometidos extends Component {
   }
 
   area = [
-    '',
-    'Procuraduría General de Justicia',
-    'Subprocuraduría de Procedimientos Penales Región Oriente',
-    'Fiscalía Especializada para la atención de Delitos cometidos contra la Libertad de Expresión',
-    'Periodistas y Personas defensoras de los Derechos Humanos',
-    'Dirección General para la Atención de los Asuntos del Sistema Tradicional',
-    'Fiscalia de Delitos Electorales',
-    'Subprocuraduría de Derechos Humanos y Servicios a la Comunidad',
-    'Centro de Justicia Restaurativa Penal Poniente',
-    'Fiscalía para la Atención de Delitos de Género',
-    'Visitaduría General',
-    'Dirección General de Servicios Periciales',
-    'Centro de Operación Estratégica',
-    'Unidad Especializada en el Combate al Secuestro',
-    'Dirección General de Administración y Finanzas',
-    'Fiscalía Especializada para la atención de los Delitos de Trata de Personas',
-    'Subprocuraduría de Procedimientos Penales Región Poniente',
-    'Centro de Atención Temprana Poniente',
-    'Dirección General de Investigación y Litigación Poniente',
-    'Dirección General de la Policía Investigadora',
-    'Centro de Atención Temprana Oriente',
-    'Centro de Justicia Restaurativa Penal Oriente',
-    'Dirección General de Investigación y Litigación Oriente',
-    'Dirección General de Recursos Materiales y Servicios',
-    'Fiscalía Especializada en Delitos de Corrupción',
-    'Fiscalía Especializada en Materia de Desaparición Forzada de Personas'
+    // '',
+    { text: 'Procuraduría General de Justicia', value: '01' },
+    { text: 'Subprocuraduría de Procedimientos Penales Región Oriente', value: '02' },
+    { text: 'Fiscalía Especializada para la atención de Delitos cometidos contra la Libertad de Expresión', value: '03' },
+    { text: 'Periodistas y Personas defensoras de los Derechos Humanos', value: '04'},
+    { text: 'Dirección General para la Atención de los Asuntos del Sistema Tradicional', value: '05'},
+    { text: 'Fiscalia de Delitos Electorales', value: '06'},
+    { text: 'Subprocuraduría de Derechos Humanos y Servicios a la Comunidad', value: '07' },
+    { text: 'Centro de Justicia Restaurativa Penal Poniente', value: '08'},
+    { text: 'Fiscalía para la Atención de Delitos de Género', value: '09'},
+    { text: 'Visitaduría General', value: '10'},
+    { text: 'Dirección General de Servicios Periciales', value: '11'},
+    { text: 'Centro de Operación Estratégica', value: '12'},
+    { text: 'Unidad Especializada en el Combate al Secuestro', value: '13'},
+    { text: 'Dirección General de Administración y Finanzas', value: '14'},
+    { text: 'Fiscalía Especializada para la atención de los Delitos de Trata de Personas', value: '15'},
+    { text: 'Subprocuraduría de Procedimientos Penales Región Poniente', value: '16'},
+    { text: 'Centro de Atención Temprana Poniente', value: '17'},
+    { text: 'Dirección General de Investigación y Litigación Poniente', value: '18'},
+    { text: 'Dirección General de la Policía Investigadora', value: '19'},
+    { text: 'Centro de Atención Temprana Oriente', value: '20'},
+    { text: 'Centro de Justicia Restaurativa Penal Oriente', value: '21'},
+    { text: 'Dirección General de Investigación y Litigación Oriente', value: '22'},
+    { text: 'Dirección General de Recursos Materiales y Servicios', value: '23'},
+    { text: 'Fiscalía Especializada en Delitos de Corrupción', value: '24' },
+    { text: 'Fiscalía Especializada en Materia de Desaparición Forzada de Personas', value: '23' }
   ]
 
   handleOnChange1 (event) {
@@ -556,15 +556,15 @@ export default class Comprometidos extends Component {
       }
     )
 
-    console.log(this.state.xml2.filter(
-      (xml) => {
-        return (
-          xml.numfolio !== undefined ?
-          ((xml.numfolio.indexOf('2568') !== -1))
-          : null
-        )
-      }
-    ))
+    // console.log(this.state.xml2.filter(
+    //   (xml) => {
+    //     return (
+    //       xml.numfolio !== undefined ?
+    //       ((xml.numfolio.indexOf('2217') !== -1))
+    //       : null
+    //     )
+    //   }
+    // ))
 
     const xmlvali = []
     this.state.xml2.map(item =>
@@ -761,6 +761,15 @@ export default class Comprometidos extends Component {
     )
     const tt4 = (a, b) => a + b
     var tcantidad4 = sumatoria.reduce(tt4).toFixed(2)
+
+    console.log(this.state.up)
+    console.log(this.area.map(item => item.value === this.state.up ? item.text : null))
+
+    var AreaUp = ''
+
+    var textArea = this.area.map(item => item.value === this.state.up ? AreaUp = item.text : null)
+
+    console.log(AreaUp)
 
     return (
       <div className='div-compro-container'>
@@ -1059,20 +1068,33 @@ export default class Comprometidos extends Component {
                       )}
                     </select>
                   </TableCell>
-                  <TableCell className='border-table-area'>
-                    <select
-                      className='select-compro'
-                      id='area'
-                      name='area'
-                      ref='area'
-                      onChange={this.handleInput.bind(this)}
-                      required
-                    >
-                      {this.area.map((x,y) =>
-                        <option name={y}>{x}</option>
-                      )}
-                    </select>
-                  </TableCell>
+                  {this.state.up.length > 2 ?
+                    <TableCell className='border-table-area'>
+                      <select
+                        className='select-compro'
+                        id='area'
+                        name='area'
+                        ref='area'
+                        onChange={this.handleInput.bind(this)}
+                        required
+                      >
+                        {this.area.map((x,y) =>
+                          <option name={y}>{x.text}</option>
+                        )}
+                      </select>
+                    </TableCell> :
+                    <TableCell className='border-table-area'>
+                      <input
+                        className='select-compro'
+                        id='area'
+                        name='area'
+                        ref='area'
+                        //onChange={this.handleInput.bind(this)}
+                        required
+                        value={AreaUp}
+                      />
+                    </TableCell>
+                  }
                   <TableCell className='border-table2'>
                     {this.state.right.length > 0 ?
                       <CurrencyFormat

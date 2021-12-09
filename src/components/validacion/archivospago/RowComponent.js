@@ -93,7 +93,7 @@ export default class RowComponent extends Component {
                 {this.props.item.Fondo}
               </TableCell>
               <TableCell className='table-validacion'>
-                {this.props.item.id}
+                {this.props.item.fecha}
               </TableCell>
               <TableCell className='table-validacion'>
                 {this.props.item.Contrarecibo}

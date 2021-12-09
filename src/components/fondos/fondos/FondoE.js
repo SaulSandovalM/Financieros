@@ -534,9 +534,9 @@ export default class FondoE extends Component {
                 </Paper>
               </Grid>
               <div className='div-content-fabr'>
-                <Fab color='primary' aria-label='add' style={{ background: 'red' }} onClick={this.cancel}>
+                {/* <Fab color='primary' aria-label='add' style={{ background: 'red' }} onClick={this.cancel}>
                   <CloseIcon />
-                </Fab>
+                </Fab> */}
               </div>
               <div className='div-content-fab'>
                 <Fab color='primary' aria-label='add' style={{ background: 'green' }} onClick={this.update}>
