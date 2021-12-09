@@ -102,7 +102,7 @@ export default class Tabular extends Component {
                   </TableCell>
                   <TableCell className='table-tab'>
                     <div className='click-arch'>
-                      {fondos.id}
+                      {fondos.tipo_doc}
                     </div>
                   </TableCell>
                   <TableCell className='table-tab'>

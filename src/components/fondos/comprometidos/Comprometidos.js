@@ -690,7 +690,7 @@ export default class Comprometidos extends Component {
                     <ListItemText className='list-align-i' primary={'$ ' + value.total} />
                   }
                   <ListItemText className='list-align' primary={value.fecha.substr(0, 10)} />
-                  <ListItemText className='list-align2' primary={value.id} />
+                  <ListItemText className='list-align2' primary={value.nombre} />
                 </ListItem>
               )
             }) : null}
