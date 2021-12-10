@@ -64,7 +64,8 @@ export default class Comprometidos extends Component {
       tipoFondo: {},
       nombreXml: '',
       folioXml: '',
-      fechaXml: ''
+      fechaXml: '',
+      AreaUp: ''
     }
   }
 
@@ -353,7 +354,7 @@ export default class Comprometidos extends Component {
       transferencia: item.transferencia
     }
     firebase.database().ref().update(updates)
-    const { area, total, iva, isr, importe } = this.state
+    const { area, total, iva, isr, importe, AreaUp } = this.state
     const wishRef = firebase.database().ref(`fondos/${this.state.urlfire}`)
     wishRef.once('value').then(snapshot => {
       var updatedWish = snapshot.val()
@@ -362,7 +363,7 @@ export default class Comprometidos extends Component {
         {
           partida: item.ogasto,
           presupuestal: item.up,
-          area: area,
+          area: area === undefined ? AreaUp : area,
           fecha: updatedWish.fecha,
           importe_comp: importe,
           iva: iva,
@@ -554,15 +555,15 @@ export default class Comprometidos extends Component {
       }
     )
 
-    // console.log(this.state.xml2.filter(
-    //   (xml) => {
-    //     return (
-    //       xml.numfolio !== undefined ?
-    //       ((xml.numfolio.indexOf('2217') !== -1))
-    //       : null
-    //     )
-    //   }
-    // ))
+    console.log(this.state.xml2.filter(
+      (xml) => {
+        return (
+          xml.numfolio !== undefined ?
+          ((xml.numfolio.indexOf('2846') !== -1))
+          : null
+        )
+      }
+    ))
 
     const xmlvali = []
     this.state.xml2.map(item =>
@@ -763,11 +764,7 @@ export default class Comprometidos extends Component {
     console.log(this.state.up)
     console.log(this.area.map(item => item.value === this.state.up ? item.text : null))
 
-    var AreaUp = ''
-
-    var textArea = this.area.map(item => item.value === this.state.up ? AreaUp = item.text : null)
-
-    console.log(AreaUp)
+    var textArea = this.area.map(item => item.value === this.state.up ? this.state.AreaUp = item.text : null)
 
     return (
       <div className='div-compro-container'>
@@ -1089,7 +1086,7 @@ export default class Comprometidos extends Component {
                         ref='area'
                         //onChange={this.handleInput.bind(this)}
                         required
-                        value={AreaUp}
+                        value={this.state.AreaUp}
                       />
                     </TableCell>
                   }

@@ -70,7 +70,7 @@ export default class RowComponent extends Component {
             {this.props.item.vale}
           </TableCell>
           <TableCell className='table-v-num2' style={{ width: '100px' }}>
-            {this.props.item.cheque}
+            {this.props.item.id}
           </TableCell>
           <TableCell className='table-v-num2' style={{ width: '150px' }}>
             {this.props.item.cantidadr &&
