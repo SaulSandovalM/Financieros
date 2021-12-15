@@ -555,15 +555,15 @@ export default class Comprometidos extends Component {
       }
     )
 
-    console.log(this.state.xml2.filter(
-      (xml) => {
-        return (
-          xml.numfolio !== undefined ?
-          ((xml.numfolio.indexOf('2846') !== -1))
-          : null
-        )
-      }
-    ))
+    // console.log(this.state.xml2.filter(
+    //   (xml) => {
+    //     return (
+    //       xml.numfolio !== undefined ?
+    //       ((xml.numfolio.indexOf('2452') !== -1))
+    //       : null
+    //     )
+    //   }
+    // ))
 
     const xmlvali = []
     this.state.xml2.map(item =>

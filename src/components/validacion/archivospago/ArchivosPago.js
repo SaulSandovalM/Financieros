@@ -108,7 +108,7 @@ export default class ArchivosPago extends Component {
           'isr': xml.children['3'].attributes['TotalImpuestosRetenidos'] ? xml.children['3'].attributes['TotalImpuestosRetenidos'] : 0,
           'fecha': xml.getElementsByTagName('tfd:TimbreFiscalDigital')[0].attributes['FechaTimbrado'],
           'uuid': xml.getElementsByTagName('tfd:TimbreFiscalDigital')[0].attributes['UUID'] ? xml.getElementsByTagName('tfd:TimbreFiscalDigital')[0].attributes['UUID'] : xmlp.name.slice(0, -4),
-          'descripcion': xml.getElementsByTagName('cfdi:Concepto')[0].attributes['Descripcion'],
+          'descripcion': xml.children['2'].children['0'].attributes['Descripcion'] !== undefined ? xml.children['2'].children['0'].attributes['Descripcion'] : xml.getElementsByTagName('cfdi:Concepto')[0].attributes['Descripcion'],
           'estatus': 'sin asignar',
           'tipo': 'directo',
           'partida': par,
@@ -125,6 +125,7 @@ export default class ArchivosPago extends Component {
              body: JSON.stringify(data),
            })
          })
+        console.log(data)
         console.log(datosXml.push(data))
         Total.push(parseFloat(data.total))
       }
