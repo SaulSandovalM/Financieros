@@ -338,10 +338,8 @@ export default class Fondos extends Component {
                           ((fondos.tipo_doc === 'Pago Directo' &&
                             (this.state.realizo === 'KARINA' ||
                               this.state.realizo === 'LILIA' ||
-                              this.state.realizo === 'CENELY' ||
                               this.state.realizo === 'HECTOR' ||
                               this.state.realizo === 'MIGUEL' ||
-                              this.state.realizo === 'LAURA' ||
                               this.state.realizo === 'TERESA' ||
                               this.state.realizo === 'MARCOS' ||
                               this.state.realizo === 'ELOY' ||
@@ -356,7 +354,9 @@ export default class Fondos extends Component {
                               this.state.realizo === 'ELOY' ||
                               this.state.realizo === 'MARTHA' ||
                               this.state.realizo === 'MIGUEL' ||
-                              this.state.realizo === 'LIZBETH'
+                              this.state.realizo === 'LIZBETH' ||
+                              this.state.realizo === 'LAURA' ||
+                              this.state.realizo === 'CENELY'
                             )
                           ))
                         ) &&

@@ -44,6 +44,8 @@ export default class ListComponent extends Component {
   }
 
   render () {
+    var year = new Date().getFullYear()
+
     return (
       <div>
         <div>

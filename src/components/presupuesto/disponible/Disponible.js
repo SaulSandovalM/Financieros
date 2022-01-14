@@ -36,6 +36,7 @@ export default class Disponible extends Component {
           disponible: child.val().disponible,
           rubro: child.val().rubro,
           done: child.val().done,
+          año: child.val().año,
           id: child.key
         })
       })

@@ -60,9 +60,11 @@ export default class ListComponent extends Component {
   }
 
   render () {
+    var year = new Date().getFullYear()
+
     const filterData = this.state.presupuesto.filter(
       (presupuesto) => {
-        return presupuesto.up.indexOf(this.state.search) !== -1
+        return (presupuesto.up.indexOf(this.state.search) !== -1 && presupuesto.año.indexOf(year) !== -1)
       }
     )
 
