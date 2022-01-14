@@ -507,6 +507,7 @@ export default class Fondos extends Component {
                       onChange={this.onChange}
                       ref={no_oficio => this.inputNoOficio = no_oficio}
                       required
+                      autocomplete="off"
                     />
                   </div>
                 </div>

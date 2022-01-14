@@ -116,6 +116,7 @@ export default class Trans extends Component {
   }
 
   listenForItemsBanco = (itemsRefBanco) => {
+    console.log('Entre')
     itemsRefBanco.on('value', (snap) => {
       var listaB = []
       snap.forEach((child) => {
@@ -200,6 +201,7 @@ export default class Trans extends Component {
       this.setState({
         listaB: listaB
       })
+      console.log(listaB)
     })
   }
 

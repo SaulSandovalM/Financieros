@@ -577,7 +577,7 @@ export default class Comprometidos extends Component {
     const filterData2 = xmlvali.filter(
       (xml) => {
         return (
-          ((xml.numfolio.indexOf(this.state.search) !== -1)) && xml.estatus !== 'asignado' && xml.tipo === 'directo'
+          ((xml.numfolio === this.state.search)) && xml.estatus !== 'asignado' && xml.tipo === 'directo'
         )
       }
     )
