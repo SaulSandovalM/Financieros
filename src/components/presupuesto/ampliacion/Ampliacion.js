@@ -27,7 +27,8 @@ export default class Ampliacion extends Component {
         {
           id: 1,
           name: 'preuba',
-          done: false
+          done: false,
+          año: 0
         }
       ],
       up: '',

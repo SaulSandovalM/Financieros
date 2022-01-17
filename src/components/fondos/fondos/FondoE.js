@@ -62,7 +62,7 @@ export default class FondoE extends Component {
     this.ref = firebase.firestore().collection('fondos')
     this.state = {
       fondo: '',
-      fecha: today,
+      fecha: '',
       tipo_doc: '',
       oficio_aut: '',
       no_oficio: '',
@@ -197,7 +197,7 @@ export default class FondoE extends Component {
     let item = this.state.urlfire
     updates['fondos/' + item] = {
       fondo: this.state.fondos[0].fondo,
-      fecha: this.state.fondos[0].fecha,
+      fecha: this.state.fecha ? this.state.fecha : this.state.fondos[0].fecha,
       tipo_doc: this.state.tipo_doc ? this.state.tipo_doc : this.state.fondos[0].tipo_doc,
       oficio_aut: this.state.oficio_aut ? this.state.oficio_aut : this.state.fondos[0].oficio_aut,
       no_oficio: this.state.no_oficio ? this.state.no_oficio : this.state.fondos[0].no_oficio,
@@ -308,7 +308,10 @@ export default class FondoE extends Component {
                       <input
                         className='field'
                         required
-                        value={this.state.fondos[0].fecha}
+                        value={this.state.fecha ? this.state.fecha : this.state.fondos[0].fecha}
+                        name='fecha'
+                        onChange={this.onChange}
+                        ref='fecha'
                       />
                     </div>
                   </div>
