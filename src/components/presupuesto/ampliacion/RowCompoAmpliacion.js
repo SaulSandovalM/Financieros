@@ -25,7 +25,7 @@ export default class RowCompoAmpliacion extends Component {
     const rubro = this.props.item.rubro
     let button;
     var year = new Date().getFullYear()
-    if (up === this.props.search && ogasto === this.props.search2 && rubro === this.props.search3 && year === this.props.año) {
+    if (up === this.props.search && ogasto === this.props.search2 && rubro === this.props.search3 && year.toString() === this.props.item.año) {
       button =
         <TableRow>
           <TableCell className='table-up-p-frn-a'>

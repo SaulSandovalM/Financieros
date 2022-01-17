@@ -362,7 +362,7 @@ export default class Vales extends Component {
       return aarr.indexOf(item) === index
     })
 
-    console.log(this.state.personaR)
+    console.log(this.state.vales.map(item => item.fecha !== undefined ? item.fecha.substr(2,2) : ''))
 
     return (
       <div className='container-back-v'>
@@ -384,7 +384,7 @@ export default class Vales extends Component {
                 <div style={{ width: '50%' }}>
                 {this.state.vales.map(item =>
                   <div style={{ width: '100%' }}>
-                    {parseInt(this.state.searchF) === item.vale &&
+                    {parseInt(this.state.searchF) === item.vale && item.fecha.substr(2,2) === '22' &&
                       <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                         <div style={{ width: '46%' }}>
                           <p className='sub-c-p'>Ingrese la Fecha de Rein/Reem</p>
@@ -696,7 +696,7 @@ export default class Vales extends Component {
         <div style={{ background: '#f4f4f4', zIndex: '50' }}>
           {this.state.vales.map(item =>
           <div>
-            {parseInt(this.state.searchF) === item.vale &&
+            {parseInt(this.state.searchF) === item.vale && item.fecha.substr(2,2) === '22' &&
             <form onSubmit={this.sendMessage.bind(this)}>
               <div style={{ marginTop: '80px' }} ref={el => (this.vale = el)}>
                 <div className='margin-vales'>

@@ -15,9 +15,11 @@ export default class RowComponent extends Component {
   }
 
   render () {
+    var year = new Date().getFullYear()
+
     return (
       <TableBody>
-        {this.props.item.ampliacion === 'Ampliacion' &&
+        {this.props.item.ampliacion === 'Ampliacion' && year.toString() === this.props.item.año &&
           <TableRow>
             <TableCell className='table-up-p-frn-a'>
               <i>{this.props.item.up}</i>

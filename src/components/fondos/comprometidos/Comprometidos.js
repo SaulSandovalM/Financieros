@@ -257,10 +257,10 @@ export default class Comprometidos extends Component {
   }
 
   componentDidMount () {
-    const itemsRefXml = firebase.database().ref('xml/')
-    this.listenForXmlR(itemsRefXml)
-    const itemsRefXml2 = firebase.database().ref('xml/')
-    this.listenForXmlR2(itemsRefXml2)
+    // const itemsRefXml = firebase.database().ref('xml/')
+    // this.listenForXmlR(itemsRefXml)
+    // const itemsRefXml2 = firebase.database().ref('xml/')
+    // this.listenForXmlR2(itemsRefXml2)
     const itemsRef = firebase.database().ref('presupuesto/')
     this.listenForItems(itemsRef)
     const itemsRefFondos = firebase.database().ref(`fondos/${this.state.urlfire}/comprometido`)
@@ -550,20 +550,23 @@ export default class Comprometidos extends Component {
       (xml) => {
         return (
           xml.nombre !== undefined ?
-          ((xml.uuid.indexOf(this.state.folioXml) !== -1) || (xml.nombre.indexOf(this.state.folioXml) !== -1)) && xml.estatus !== 'asignado' && xml.tipo === 'revolvente'
-        : '')
+            ((xml.uuid.indexOf(this.state.folioXml) !== -1) || (xml.nombre.indexOf(this.state.folioXml) !== -1)) &&
+            xml.estatus !== 'asignado' &&
+            xml.tipo === 'revolvente'
+          : ''
+        )
       }
     )
 
-    // console.log(this.state.xml2.filter(
-    //   (xml) => {
-    //     return (
-    //       xml.numfolio !== undefined ?
-    //       ((xml.numfolio.indexOf('2452') !== -1))
-    //       : null
-    //     )
-    //   }
-    // ))
+    console.log(this.state.xml2.filter(
+      (xml) => {
+        return (
+          xml.numfolio !== undefined ?
+          ((xml.numfolio.indexOf('400') !== -1))
+          : null
+        )
+      }
+    ))
 
     const xmlvali = []
     this.state.xml2.map(item =>
@@ -613,7 +616,7 @@ export default class Comprometidos extends Component {
       ))
       const reducerImporte = (a, b) => a + b
       this.state.importe = totalImporteImporte.reduce(reducerImporte).toFixed(2)
-
+      console.log(this.state.importe)
       const totalImporteIva = []
       right.map(items => (
         totalImporteIva.push(parseFloat(items.iva))
@@ -689,7 +692,7 @@ export default class Comprometidos extends Component {
                     <ListItemText className='list-align-i' primary={'$ ' + value.total} />
                   }
                   <ListItemText className='list-align' primary={value.fecha.substr(0, 10)} />
-                  <ListItemText className='list-align2' primary={value.nombre} />
+                  <ListItemText className='list-align2' primary={value.id} />
                 </ListItem>
               )
             }) : null}
