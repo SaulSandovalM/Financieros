@@ -257,9 +257,9 @@ export default class Comprometidos extends Component {
   }
 
   componentDidMount () {
-    const itemsRefXml = firebase.database().ref('xml/')
+    const itemsRefXml = firebase.database().ref('xml/').orderByChild('fecha')
     this.listenForXmlR(itemsRefXml)
-    const itemsRefXml2 = firebase.database().ref('xml/')
+    const itemsRefXml2 = firebase.database().ref('xml/').orderByChild('fecha')
     this.listenForXmlR2(itemsRefXml2)
     const itemsRef = firebase.database().ref('presupuesto/')
     this.listenForItems(itemsRef)
@@ -440,7 +440,6 @@ export default class Comprometidos extends Component {
   }
 
   area = [
-    // '',
     { text: 'Procuraduría General de Justicia', value: '01' },
     { text: 'Subprocuraduría de Procedimientos Penales Región Oriente', value: '02' },
     { text: 'Fiscalía Especializada para la atención de Delitos cometidos contra la Libertad de Expresión, Periodistas y Personas Defensoras de los Derechos Humanos', value: '03' },
@@ -558,15 +557,15 @@ export default class Comprometidos extends Component {
       }
     )
 
-    console.log(this.state.xml2.filter(
-      (xml) => {
-        return (
-          xml.numfolio !== undefined ?
-          ((xml.numfolio.indexOf('749') !== -1))
-          : null
-        )
-      }
-    ))
+    // console.log(this.state.xml2.filter(
+    //   (xml) => {
+    //     return (
+    //       xml.numfolio !== undefined ?
+    //       ((xml.numfolio.indexOf('749') !== -1))
+    //       : null
+    //     )
+    //   }
+    // ))
 
     const xmlvali = []
     this.state.xml2.map(item =>
@@ -744,23 +743,18 @@ export default class Comprometidos extends Component {
     let resultp = presupuestop.sort((a, b) => a.ogasto - b.ogasto).filter((item, index) => {
       return presupuestop.indexOf(item) === index
     })
-    console.log(resultp)
     let presupuestou = this.state.presupuesto.map(item => {
       return (this.state.partida === item.ogasto) && item.up
     })
-    console.log(presupuestou)
     let resultu = presupuestou.filter((item, index) => {
       return presupuestou.indexOf(item) === index
     })
-    console.log(resultu)
     let presupuestor = this.state.presupuesto.map(item => {
       return (this.state.partida === item.ogasto && this.state.up === item.up) && item.rubro
     })
-    console.log(presupuestor)
     let resultr = presupuestor.filter((item, index) => {
       return presupuestor.indexOf(item) === index
     })
-    console.log(resultr)
 
     const sumatoria = [0]
     this.state.comprometidosDos !== undefined && this.state.comprometidosDos.map(comprometido => comprometido.partida &&
@@ -1243,7 +1237,7 @@ export default class Comprometidos extends Component {
         </Grid>
         <div style={{ height: '80px' }} />
         <div className='div-content-fab-com'>
-          {this.state.tipoFondo.tipo_doc === 'Fondo Revolvente' &&
+          {this.state.tipoFondo.tipo_doc === 'Fondo Revolvente' && this.state.tipoFondo.realizo === 'MIGUEL' &&
             <Fab color='primary' style={{ background: '#3f51b5' }} variant='extended'>
               <AddIcon style={{ marginRight: '6px' }} />
                 <Dropzone
