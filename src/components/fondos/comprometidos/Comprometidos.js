@@ -65,7 +65,7 @@ export default class Comprometidos extends Component {
       nombreXml: '',
       folioXml: '',
       fechaXml: '',
-      AreaUp: ''
+      AreaUp: '' // Se agrego esta
     }
   }
 
@@ -257,10 +257,10 @@ export default class Comprometidos extends Component {
   }
 
   componentDidMount () {
-    // const itemsRefXml = firebase.database().ref('xml/')
-    // this.listenForXmlR(itemsRefXml)
-    // const itemsRefXml2 = firebase.database().ref('xml/')
-    // this.listenForXmlR2(itemsRefXml2)
+    const itemsRefXml = firebase.database().ref('xml/')
+    this.listenForXmlR(itemsRefXml)
+    const itemsRefXml2 = firebase.database().ref('xml/')
+    this.listenForXmlR2(itemsRefXml2)
     const itemsRef = firebase.database().ref('presupuesto/')
     this.listenForItems(itemsRef)
     const itemsRefFondos = firebase.database().ref(`fondos/${this.state.urlfire}/comprometido`)
@@ -562,7 +562,7 @@ export default class Comprometidos extends Component {
       (xml) => {
         return (
           xml.numfolio !== undefined ?
-          ((xml.numfolio.indexOf('400') !== -1))
+          ((xml.numfolio.indexOf('749') !== -1))
           : null
         )
       }
@@ -744,18 +744,23 @@ export default class Comprometidos extends Component {
     let resultp = presupuestop.sort((a, b) => a.ogasto - b.ogasto).filter((item, index) => {
       return presupuestop.indexOf(item) === index
     })
+    console.log(resultp)
     let presupuestou = this.state.presupuesto.map(item => {
       return (this.state.partida === item.ogasto) && item.up
     })
+    console.log(presupuestou)
     let resultu = presupuestou.filter((item, index) => {
       return presupuestou.indexOf(item) === index
     })
+    console.log(resultu)
     let presupuestor = this.state.presupuesto.map(item => {
       return (this.state.partida === item.ogasto && this.state.up === item.up) && item.rubro
     })
+    console.log(presupuestor)
     let resultr = presupuestor.filter((item, index) => {
       return presupuestor.indexOf(item) === index
     })
+    console.log(resultr)
 
     const sumatoria = [0]
     this.state.comprometidosDos !== undefined && this.state.comprometidosDos.map(comprometido => comprometido.partida &&
@@ -931,7 +936,7 @@ export default class Comprometidos extends Component {
                       required
                     >
                       {this.area.map((x,y) =>
-                        <option name={y}>{x}</option>
+                        <option name={y.value}>{x.text}</option>
                       )}
                     </select>
                   </TableCell>

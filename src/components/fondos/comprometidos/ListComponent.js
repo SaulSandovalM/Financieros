@@ -226,9 +226,6 @@ export default class ListComponent extends Component {
   }
 
   render () {
-
-    console.log(this.props.comprometido.comprobantes.map(item => item.nombre))
-
     return (
       <TableBody>
         <TableRow>
