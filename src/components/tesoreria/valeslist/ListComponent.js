@@ -93,17 +93,19 @@ export default class ListComponent extends Component {
   render () {
     var { auto, pend, noauto, comp, filteredData } = this.state
     var fechah = new Date(this.state.prueba).getMonth() + 1
+    var year = new Date().getFullYear()
     console.log(fechah)
+    // && vales.fecha.slice(0,4) === year
     filteredData = this.props.lista.filter(
       (vales) => {
-        return (auto.length && auto.includes(vales.estatus) && this.state.autorizados && new Date(vales.fecha).getMonth() + 1 === fechah) ||
-          (pend.length && pend.includes(vales.cheque) && this.state.pendientes && new Date(vales.fecha).getMonth() + 1 === fechah) ||
-          (noauto.length && noauto.includes(vales.estatus) && this.state.noautorizados && new Date(vales.fecha).getMonth() + 1 === fechah) ||
-          (comp.length && comp.includes(vales.estatusC) && this.state.comprobado && new Date(vales.fecha).getMonth() + 1 === fechah)
+        return ((auto.length && auto.includes(vales.estatus) && this.state.autorizados && new Date(vales.fecha).getMonth() + 1 === fechah && new Date(vales.fecha).getFullYear() === year) ||
+        (pend.length && pend.includes(vales.cheque) && this.state.pendientes && new Date(vales.fecha).getMonth() + 1 === fechah && new Date(vales.fecha).getFullYear() === year) ||
+        (noauto.length && noauto.includes(vales.estatus) && this.state.noautorizados && new Date(vales.fecha).getMonth() + 1 === fechah && new Date(vales.fecha).getFullYear() === year) ||
+        (comp.length && comp.includes(vales.estatusC) && this.state.comprobado && new Date(vales.fecha).getMonth() + 1 === fechah && new Date(vales.fecha).getFullYear() === year))
       }
     )
 
-    console.log(this.props.lista.filter(item => new Date(item.fecha).getMonth() + 1 === 2))
+    console.log(filteredData)
 
     this.state.pp = filteredData
 
