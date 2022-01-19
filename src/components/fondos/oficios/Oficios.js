@@ -1008,7 +1008,7 @@ export default class Oficios extends Component {
                                           <div className='ofie-comprobantes-conta page-break' key={i}>
                                             <div className='ofie-header-blue'>
                                               <div className='all-tab-f all-tab-of1'>
-                                                {item.uuid === 'Recibo simple' ? item.folio : item.uuid}
+                                                {item.uuid === 'Recibo simple' ? item.folio : item.uuid + index + i}
                                               </div>
                                               <div className='all-tab-f all-tab-of2'>
                                                 <CurrencyFormat

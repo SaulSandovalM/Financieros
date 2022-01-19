@@ -646,8 +646,8 @@ export default class Comprometidos extends Component {
           >
             <ListItem style={{ position: 'sticky', top: '0px', background: 'white', zIndex: '3' }}>
               <ListItemIcon />
-              <ListItemText className='list-align-i'><b>Folio</b></ListItemText>
-              <ListItemText className='list-align-i'><b>Total</b></ListItemText>
+              <ListItemText className='list-align-i2'><b>Folio</b></ListItemText>
+              <ListItemText className='list-align'><b>Total</b></ListItemText>
               <ListItemText className='list-align'><b>Fecha</b></ListItemText>
               <ListItemText className='list-align2'><b>Nombre</b></ListItemText>
             </ListItem>
@@ -662,11 +662,11 @@ export default class Comprometidos extends Component {
                       disableRipple
                     />
                   </ListItemIcon>
-                  <ListItemText className='list-align-i' primary={String(value.uuid).substr(0, 10)} />
+                  <ListItemText className='list-align-i2' primary={value.uuid} />
                   {value.folio === 'Recibo simple' || value.uuid === 'Recibo simple' ?
                     <ListItemText className='list-align-i' primary={'$ ' + value.subtotal} />
                     :
-                    <ListItemText className='list-align-i' primary={'$ ' + value.total} />
+                    <ListItemText className='list-align' primary={'$ ' + value.total} />
                   }
                   <ListItemText className='list-align' primary={String(value.fecha).substr(0, 10)} />
                   <ListItemText className='list-align2' primary={value.nombre} />
@@ -684,7 +684,7 @@ export default class Comprometidos extends Component {
                       disableRipple
                     />
                   </ListItemIcon>
-                  <ListItemText className='list-align-i' primary={String(value.uuid).substr(-12)} />
+                  <ListItemText className='list-align-i' primary={value.uuid} />
                   {value.folio === 'Recibo simple' || value.uuid === 'Recibo simple' ?
                     <ListItemText className='list-align-i' primary={'$ ' + value.subtotal} />
                     :
@@ -702,6 +702,7 @@ export default class Comprometidos extends Component {
 
     const customListRight = (title, items) => (
       <div>
+        Numero de Facturas {items.length}
         <Card className='card-compro'>
           <List dense component='div' role='list' style={{ display: 'flex', flexDirection: 'column', position: 'relative', top: '0', background: 'white' }}>
             <ListItem style={{ position: 'sticky', top: '0px', background: 'white', zIndex: '3' }}>
@@ -721,7 +722,7 @@ export default class Comprometidos extends Component {
                       disableRipple
                     />
                   </ListItemIcon>
-                  <ListItemText className='list-align-i' primary={String(value.uuid).substr(-12)} />
+                  <ListItemText className='list-align-i' primary={value.uuid} />
                   {value.folio === 'Recibo' || value.uuid === 'Recibo simple' ?
                     <ListItemText className='list-align-i' primary={'$ ' + value.subtotal} />
                     :
@@ -834,7 +835,7 @@ export default class Comprometidos extends Component {
               </Grid>
             </Grid>
             <Grid item xs style={{ width: '50%' }}>
-              <div style={{ height: '58px' }} />
+              <div style={{ height: '38px' }} />
               {customListRight('Choices', right)}
             </Grid>
           </Grid>
