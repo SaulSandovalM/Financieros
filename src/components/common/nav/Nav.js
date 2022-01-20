@@ -355,7 +355,7 @@ class Nav extends Component {
           }
           {(admin === 'MIGUEL' || admin === 'LIZBETH' || admin === 'TERESA' || admin === 'ELOY' ||
             admin === 'MARTHA' || admin === 'KARINA' || admin === 'HECTOR' || admin === 'CENELY' ||
-            admin === 'OMAR' || admin === 'LILIA' || admin === 'LAURA') &&
+            admin === 'OMAR' || admin === 'LILIA' || admin === 'LAURA' || admin === 'MARCOS') &&
             <div className='navbar-left' style={{ marginTop: '30px' }}>
               <Link to='/Fondos' className='deco'>
                 <span className='material-icons'>
@@ -369,7 +369,7 @@ class Nav extends Component {
           }
           {(admin === 'MIGUEL' || admin === 'LIZBETH' || admin === 'TERESA' || admin === 'ELOY' ||
             admin === 'MARTHA' || admin === 'KARINA' || admin === 'HECTOR' || admin === 'CENELY' ||
-            admin === 'OMAR' || admin === 'LILIA' || admin === 'LAURA') &&
+            admin === 'OMAR' || admin === 'LILIA' || admin === 'LAURA'  || admin === 'MARCOS') &&
             <div className='navbar-left'>
               <Link to='/Contrarecibo' className='deco'>
                 <span className='material-icons'>
@@ -381,7 +381,7 @@ class Nav extends Component {
               </Link>
             </div>
           }
-          {(admin === 'LIZBETH' || admin === 'ELI' || admin === 'TERESA' || admin === 'HECTOR' || admin === 'LAURA') &&
+          {(admin === 'LIZBETH' || admin === 'ELI' || admin === 'TERESA' || admin === 'HECTOR' || admin === 'LAURA'  || admin === 'MARCOS') &&
             <div className='navbar-left'>
               <Link to='/Caratula' className='deco'>
                 <span className='material-icons'>
@@ -395,7 +395,7 @@ class Nav extends Component {
           }
           {(admin === 'MIGUEL' || admin === 'LIZBETH' || admin === 'TERESA' || admin === 'ELOY' ||
             admin === 'MARTHA' || admin === 'KARINA' || admin === 'HECTOR' || admin === 'CENELY' ||
-            admin === 'OMAR' || admin === 'LILIA' || admin === 'LAURA') &&
+            admin === 'OMAR' || admin === 'LILIA' || admin === 'LAURA'  || admin === 'MARCOS') &&
             <div className='navbar-left'>
               <Link to='/TabularList' className='deco'>
                 <span className='material-icons'>

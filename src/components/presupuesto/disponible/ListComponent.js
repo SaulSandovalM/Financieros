@@ -64,9 +64,11 @@ export default class ListComponent extends Component {
 
     const filterData = this.state.presupuesto.filter(
       (presupuesto) => {
-        return (presupuesto.up.indexOf(this.state.search) !== -1 && presupuesto.año.indexOf(year) !== -1)
+        return (presupuesto.up !== ' ' && presupuesto.up.indexOf(this.state.search) !== -1) //presupuesto.año.indexOf(year) !== -1
       }
     )
+
+    console.log(filterData)
 
     return (
       <div>

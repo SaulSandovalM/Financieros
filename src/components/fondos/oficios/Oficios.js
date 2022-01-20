@@ -109,6 +109,40 @@ export default class Oficios extends Component {
     })
   }
 
+  update = () => {
+    let updates = {}
+    this.state.comprometidos.map((comprometidos, index) =>
+      comprometidos.up ?
+        comprometidos.comprobantes !== undefined ?
+          comprometidos.comprobantes.sort((a, b) => a.folio - b.folio).map((item, i) =>
+            // console.log('Hola')
+            updates['fondos/' + this.state.urlfire + '/comprometido/' + index + '/comprobantes/' + i] = {
+              descuento: item.descuento,
+              estatus: item.estatus,
+              fecha: item.fecha,
+              folio: item.folio,
+              id: item.id,
+              importe: item.importe,
+              isr: item.isr,
+              iva: item.iva,
+              nombre: item.nombre,
+              nombrer: item.nombrer,
+              rfc: item.rfc,
+              subtotal: item.subtotal,
+              tipo: item.tipo,
+              total: item.total,
+              uuid: item.uuid,
+              leyenda: this.state.values[index.toString() + i.toString()]
+            },
+            console.log(updates),
+            firebase.database().ref().update({updates}),
+            // alert('Se ha actualizado el fondo')
+          )
+        : null
+      : null
+    )
+  }
+
   handleChangeTwo(e, index, i) {
     const values = this.state.values
     console.log(values)
@@ -247,6 +281,7 @@ export default class Oficios extends Component {
                           }
                         content={() => this.la}
                         pageStyle={`@media print {@page { size: landscape; }}`}
+                        onAfterPrint={() => this.update()}
                       />
                       <div className='formatoe-container' ref={el => (this.la = el)}>
                         {this.state.comprometidos.map((comprometidos, index) =>
@@ -426,7 +461,7 @@ export default class Oficios extends Component {
                                           <div className='ofie-comprobantes-conta page-break'>
                                             <div className='ofie-header-blue'>
                                               <div className='all-tab-f all-tab-of1'>
-                                                {item.uuid === 'Recibo simple' ? item.folio : item.uuid}
+                                                {item.uuid === 'Recibo simple' ? item.folio + index + i : item.uuid + index + i}
                                               </div>
                                               <div className='all-tab-f all-tab-of2'>
                                                 <CurrencyFormat
@@ -1008,7 +1043,7 @@ export default class Oficios extends Component {
                                           <div className='ofie-comprobantes-conta page-break' key={i}>
                                             <div className='ofie-header-blue'>
                                               <div className='all-tab-f all-tab-of1'>
-                                                {item.uuid === 'Recibo simple' ? item.folio : item.uuid + index + i}
+                                                {item.uuid === 'Recibo simple' ? item.folio : item.uuid}
                                               </div>
                                               <div className='all-tab-f all-tab-of2'>
                                                 <CurrencyFormat

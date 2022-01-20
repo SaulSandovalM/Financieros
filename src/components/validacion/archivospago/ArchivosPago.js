@@ -28,7 +28,6 @@ export default class ArchivosPago extends Component {
     } else if (email === 'hortensia@procuraduria.com') {
       admin = 'VALIDACION3'
     }
-    console.log(email)
     var today = new Date()
     var today2 = new Date()
     var dd = today.getDate()
