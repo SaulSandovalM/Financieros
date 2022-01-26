@@ -59,29 +59,22 @@ const verifySuccess = () => {
 }
 
 export const loginUser = (email, password) => dispatch => {
+  console.log('entre')
   dispatch(requestLogin())
-  firebase
-    .auth()
-    .signInWithEmailAndPassword(email, password)
-    .then(user => {
-      dispatch(receiveLogin(user))
-    })
-    .catch(error => {
-      dispatch(loginError())
-    })
+  firebase.auth().signInWithEmailAndPassword(email, password).then(user => {
+    dispatch(receiveLogin(user))
+  }).catch(error => {
+    dispatch(loginError())
+  })
 }
 
 export const logoutUser = () => dispatch => {
   dispatch(requestLogout())
-  firebase
-    .auth()
-    .signOut()
-    .then(() => {
-      dispatch(receiveLogout())
-    })
-    .catch(error => {
-      dispatch(logoutError())
-    })
+  firebase.auth().signOut().then(() => {
+    dispatch(receiveLogout())
+  }).catch(error => {
+    dispatch(logoutError())
+  })
 }
 
 export const verifyAuth = () => dispatch => {
