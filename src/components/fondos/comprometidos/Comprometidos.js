@@ -747,9 +747,10 @@ export default class Comprometidos extends Component {
     let presupuestou = this.state.presupuesto.map(item => {
       return (this.state.partida === item.ogasto) && item.up
     })
-    let resultu = presupuestou.filter((item, index) => {
+    let resultu = presupuestou.sort((a, b) => a - b).filter((item, index) => {
       return presupuestou.indexOf(item) === index
     })
+    console.log(resultu)
     let presupuestor = this.state.presupuesto.map(item => {
       return (this.state.partida === item.ogasto && this.state.up === item.up) && item.rubro
     })
