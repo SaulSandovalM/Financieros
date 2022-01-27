@@ -925,7 +925,7 @@ export default class Vales extends Component {
                         id='personaR'
                         name='personaR'
                         onChange={this.handleChange.bind(this)}
-                        defaultValue={this.state.personaR}
+                        defaultValue={this.state.personaR === '' ? item.personaR : this.state.personaR}
                         ref={personaR => this.inputPersona = personaR}>
                         <option>{this.state.personaR}</option>
                         {result.map(data =>
