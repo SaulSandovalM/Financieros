@@ -486,7 +486,6 @@ export default class Vales extends Component {
                     <input
                       className='input-b'
                       name='cantidad'
-                      type='number'
                       onChange={this.handleChange.bind(this)}
                       value={this.state.cantidad}
                       required
@@ -495,7 +494,6 @@ export default class Vales extends Component {
                     <input
                       className='input-b'
                       name='cantidadc'
-                      type='number'
                       onChange={this.handleChange.bind(this)}
                       value={this.state.cantidadc}
                       required
