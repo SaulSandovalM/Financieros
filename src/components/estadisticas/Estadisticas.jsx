@@ -1,5 +1,5 @@
 import React from "react";
-import "./Common.css";
+// import "./Common.css";
 import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
 import { makeStyles } from "@material-ui/core/styles";
@@ -8,13 +8,6 @@ import InputLabel from "@material-ui/core/InputLabel";
 import MenuItem from "@material-ui/core/MenuItem";
 import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
-
-const ImageOne =
-  "https://firebasestorage.googleapis.com/v0/b/well-be-7e1c0.appspot.com/o/stats-01.jpg?alt=media&token=bed6ed02-7727-480d-9676-9c5253e5b33c";
-const ImageTwo =
-  "https://firebasestorage.googleapis.com/v0/b/well-be-7e1c0.appspot.com/o/stats-02.jpg?alt=media&token=4e45a6a6-b3b7-4537-b28c-d42ffc174f59";
-const ImageThree =
-  "https://firebasestorage.googleapis.com/v0/b/well-be-7e1c0.appspot.com/o/stats-03.jpg?alt=media&token=b0a147e6-c8eb-4ca7-8f42-47f9b9b5507b";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -29,21 +22,6 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(2),
     textAlign: "left",
     color: theme.palette.text.secondary,
-    backgroundImage: `url(${ImageOne})`,
-    backgroundSize: "cover",
-  },
-  papertwo: {
-    padding: theme.spacing(2),
-    textAlign: "left",
-    color: theme.palette.text.secondary,
-    backgroundImage: `url(${ImageTwo})`,
-    backgroundSize: "cover",
-  },
-  paperthree: {
-    padding: theme.spacing(2),
-    textAlign: "left",
-    color: theme.palette.text.secondary,
-    backgroundImage: `url(${ImageThree})`,
     backgroundSize: "cover",
   },
   formControl: {
@@ -52,7 +30,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Common() {
+export default function Estadisticas() {
   const classes = useStyles();
   const [age, setAge] = React.useState("");
 
@@ -72,7 +50,7 @@ export default function Common() {
               height: "100%",
             }}
           >
-            <Typography variant="h4">Resumen de tu negocio</Typography>
+            <Typography variant="h4">Estadisticas</Typography>
           </div>
         </Grid>
         <Grid item xs={3}>
@@ -99,29 +77,38 @@ export default function Common() {
             </FormControl>
           </div>
         </Grid>
-        <Grid item xs={4}>
+        <Grid item xs={3}>
           <Paper className={classes.paperone}>
-            <Typography style={{ color: "white" }}>RESERVACIONES</Typography>
-            <Typography style={{ color: "white" }}>218</Typography>
-            <Typography style={{ color: "white" }}>
+            <Typography style={{ color: "gray" }}>SERVICIOS</Typography>
+            <Typography style={{ color: "gray" }}>218</Typography>
+            <Typography style={{ color: "gray" }}>
               +60% desde el mes anterior
             </Typography>
           </Paper>
         </Grid>
-        <Grid item xs={4}>
-          <Paper className={classes.papertwo}>
-            <Typography style={{ color: "white" }}>VENTAS</Typography>
-            <Typography style={{ color: "white" }}>$ 25,450 MXN</Typography>
-            <Typography style={{ color: "white" }}>
+        <Grid item xs={3}>
+          <Paper className={classes.paperone}>
+            <Typography style={{ color: "gray" }}>VENTAS</Typography>
+            <Typography style={{ color: "gray" }}>$ 25,450 MXN</Typography>
+            <Typography style={{ color: "gray" }}>
               +30% desde el mes anterior
             </Typography>
           </Paper>
         </Grid>
-        <Grid item xs={4}>
-          <Paper className={classes.paperthree}>
-            <Typography style={{ color: "white" }}>CLIENTE NUEVOS</Typography>
-            <Typography style={{ color: "white" }}>89</Typography>
-            <Typography style={{ color: "white" }}>
+        <Grid item xs={3}>
+          <Paper className={classes.paperone}>
+            <Typography style={{ color: "gray" }}>TICKET PROMEDIO</Typography>
+            <Typography style={{ color: "gray" }}>89</Typography>
+            <Typography style={{ color: "gray" }}>
+              +80% desde el mes anterior
+            </Typography>
+          </Paper>
+        </Grid>
+        <Grid item xs={3}>
+          <Paper className={classes.paperone}>
+            <Typography style={{ color: "gray" }}>CLIENTE</Typography>
+            <Typography style={{ color: "gray" }}>89</Typography>
+            <Typography style={{ color: "gray" }}>
               +80% desde el mes anterior
             </Typography>
           </Paper>

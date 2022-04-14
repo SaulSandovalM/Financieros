@@ -5,8 +5,9 @@
   z-index: 99999999;
 }
 .login-back {
-  background-color: #f4f5f7;
+  background-image: url("../../../img/loginback.jpg");
   width: 100%;
+  background-size: cover;
 }
 .login-ins {
   display: flex;
@@ -32,7 +33,7 @@
 }
 .login-sep-log {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   width: 100%;
 }
 .login-color {
@@ -42,7 +43,7 @@
   margin-top: 10px;
 }
 .login-sub {
-  color: #6B778C;
+  color: #6b778c;
 }
 .login-c {
   display: flex;

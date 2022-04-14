@@ -1,19 +1,18 @@
-import firebase from 'firebase/app'
-import 'firebase/firestore'
-import 'firebase/auth'
-import 'firebase/database'
-import 'firebase/storage'
+import firebase from "firebase/app";
+import "firebase/firestore";
+import "firebase/auth";
+import "firebase/database";
+import "firebase/storage";
 
 const config = {
-  apiKey: 'AIzaSyCHqETPxLP-prWVWZ6bUWHd7s7opA08ipk',
-  authDomain: 'financieros-78cb0.firebaseapp.com',
-  databaseURL: 'https://financieros-78cb0.firebaseio.com',
-  projectId: 'financieros-78cb0',
-  storageBucket: 'financieros-78cb0.appspot.com',
-  messagingSenderId: '712636670485',
-  appId: '1:712636670485:web:55882922e3918cff38241c',
-  measurementId: 'G-S9335SB3LS'
-}
-firebase.initializeApp(config)
-firebase.firestore()
-export default firebase
+  apiKey: "AIzaSyB9DS5C2-i0Kln08gXchjwKpkdtaBP2xQ0",
+  authDomain: "well-be-7e1c0.firebaseapp.com",
+  projectId: "well-be-7e1c0",
+  storageBucket: "well-be-7e1c0.appspot.com",
+  messagingSenderId: "196121131699",
+  appId: "1:196121131699:web:061b32193d0437a5ba8ec6",
+  measurementId: "G-P4471PHJ36",
+};
+firebase.initializeApp(config);
+firebase.firestore();
+export default firebase;
