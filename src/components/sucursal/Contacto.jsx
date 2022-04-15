@@ -71,7 +71,6 @@ export default function Contacto() {
     itemsRefComprometidos.on("value", (snap) => {
       const firebasedata = snap.val();
       setData(firebasedata);
-      console.log(firebasedata);
     });
   };
 

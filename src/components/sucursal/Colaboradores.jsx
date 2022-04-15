@@ -371,8 +371,8 @@ export default function Colaboradores() {
                   {data.map((row) => (
                     <TableRow key={row.id}>
                       <TableCell>{row.nombre}</TableCell>
-                      <TableCell>$ {row.rol}</TableCell>
-                      <TableCell>$ {row.dias}</TableCell>
+                      <TableCell>{row.rol}</TableCell>
+                      <TableCell>{row.dias}</TableCell>
                       <TableCell>{row.horarios}</TableCell>
                       <TableCell>
                         {row.estatus ? "Activo" : "Inactivo"}

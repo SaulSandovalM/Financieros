@@ -40,41 +40,6 @@ import Avatar from "@material-ui/core/Avatar";
 import IconButton from "@material-ui/core/IconButton";
 import Chip from "@material-ui/core/Chip";
 
-function createData(
-  imagen,
-  nombre,
-  empresa,
-  estado,
-  administrador,
-  telefono,
-  correo,
-  estatus
-) {
-  return {
-    imagen,
-    nombre,
-    empresa,
-    estado,
-    administrador,
-    telefono,
-    correo,
-    estatus,
-  };
-}
-
-const rows = [
-  createData(
-    "",
-    "Altabrisa",
-    "Estetica wellbe",
-    "Yacatan",
-    "Juan Valladanes",
-    "999871235",
-    "juanvalladanes@gmail.com",
-    "activo"
-  ),
-];
-
 function Alert(props) {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
 }

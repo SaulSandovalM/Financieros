@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import PropTypes from "prop-types";
 import { makeStyles } from "@material-ui/core/styles";
 import Tabs from "@material-ui/core/Tabs";
@@ -20,6 +20,19 @@ import TableRow from "@material-ui/core/TableRow";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
+import MenuItem from "@material-ui/core/MenuItem";
+import FormControl from "@material-ui/core/FormControl";
+import InputLabel from "@material-ui/core/InputLabel";
+import Select from "@material-ui/core/Select";
+import Snackbar from "@material-ui/core/Snackbar";
+import MuiAlert from "@material-ui/lab/Alert";
+import firebase from "../../Firebase";
+import Colaboradores from "./Colaboradores";
+import Sucursal from "./Sucursal";
+
+function Alert(props) {
+  return <MuiAlert elevation={6} variant="filled" {...props} />;
+}
 
 const columns = [
   { id: "sucursal", label: "Sucursal", width: "14%" },
@@ -125,6 +138,9 @@ const useStyles = makeStyles((theme) => ({
     maxWidth: 360,
     backgroundColor: theme.palette.background.paper,
   },
+  formControl: {
+    width: "100%",
+  },
 }));
 
 function ListItemLink(props) {
@@ -132,26 +148,73 @@ function ListItemLink(props) {
 }
 
 export default function DetalleServicio() {
+  var URLactual = String(window.location).substr(-20);
+
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
   const [checked, setChecked] = React.useState(true);
-  const [state, setState] = React.useState({
-    checkedA: true,
-    checkedB: true,
-  });
+  // const [state, setState] = React.useState({
+  //   checkedA: true,
+  //   checkedB: true,
+  // });
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
+  const [data, setData] = React.useState([]);
+  const [loading, setLoading] = React.useState(true);
+  const [openAlert, setOpenAlert] = React.useState(false);
+  const [open, setOpen] = React.useState(false);
+  const [severity, setSeverity] = React.useState("");
+  const [imagen, setImagen] = React.useState("");
+  const [state, setState] = React.useState({
+    nombre: "",
+    descripcion: "",
+    tipo_servicio: "",
+    disponible_para: "",
+    created_at: Date.now(),
+    updated_at: Date.now(),
+  });
 
-  const handleChangeSwitch = (event) => {
-    setState({ ...state, [event.target.name]: event.target.checked });
+  function handleChangeText(evt) {
+    const value = evt.target.value;
+    setState({
+      ...state,
+      [evt.target.name]: value,
+    });
+  }
+
+  const handleCloseAlert = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+    setOpenAlert(false);
+  };
+
+  const handleClickAlert = () => {
+    setOpenAlert(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  useEffect(() => {
+    setLoading(true);
+    const itemsRefComprometidos = firebase
+      .database()
+      .ref(`empresa/${"-N-i-AiUDuAZjgNUpGA8"}/servicios/${URLactual}`);
+    listenComprometidos(itemsRefComprometidos);
+    setLoading(false);
+  }, []);
+
+  const listenComprometidos = (itemsRefComprometidos) => {
+    itemsRefComprometidos.on("value", (snap) => {
+      const firebasedata = snap.val();
+      setState(firebasedata);
+    });
   };
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
-  };
-
-  const handleChangeCheack = (event) => {
-    setChecked(event.target.checked);
   };
 
   const handleChangePage = (event, newPage) => {
@@ -163,9 +226,85 @@ export default function DetalleServicio() {
     setPage(0);
   };
 
+  const handleUpload = (event) => {
+    const file = event.target.files[0];
+    setImagen(file);
+  };
+
+  const update = () => {
+    const file = imagen;
+    if (file) {
+      const storageRef = firebase.storage().ref(`servicios/`);
+      const task = storageRef.put(file);
+      task.on(
+        "state_changed",
+        (snapshot) => {
+          let percentage =
+            (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+        },
+        (error) => {
+          console.error(error.message);
+        },
+        () =>
+          storageRef.getDownloadURL().then((url) => {
+            let updates = {};
+            updates[
+              `empresa/${"-N-i-AiUDuAZjgNUpGA8"}/servicios/${URLactual}`
+            ] = {
+              nombre: state.nombre,
+              descripcion: state.descripcion,
+              tipo_servicio: state.tipo_servicio,
+              disponible_para: state.disponible_para,
+              imagen: url,
+              created_at: Date.now(),
+              updated_at: Date.now(),
+              duracion: state.duracion,
+              estatus: state.estatus,
+              garantia: state.garantia,
+              precio: state.precio,
+              precio_sin: state.precio_sin,
+              sucursal: state.sucursal,
+            };
+            firebase.database().ref().update(updates);
+            alert("Se ha actualizado el fondo");
+          })
+      );
+    } else {
+      let updates = {};
+      updates[`empresa/${"-N-i-AiUDuAZjgNUpGA8"}/servicios/${URLactual}`] = {
+        nombre: state.nombre,
+        descripcion: state.descripcion,
+        tipo_servicio: state.tipo_servicio,
+        disponible_para: state.disponible_para,
+        imagen: state.imagen,
+        created_at: Date.now(),
+        updated_at: Date.now(),
+        duracion: state.duracion,
+        estatus: state.estatus,
+        garantia: state.garantia,
+        precio: state.precio,
+        precio_sin: state.precio_sin,
+        sucursal: state.sucursal,
+      };
+      firebase.database().ref().update(updates);
+      alert("Se ha actualizado el fondo");
+    }
+  };
+
   return (
     <div>
       <Grid container>
+        <Snackbar
+          open={openAlert}
+          autoHideDuration={6000}
+          onClose={handleCloseAlert}
+        >
+          <Alert onClose={handleCloseAlert} severity={severity}>
+            {severity === "success" && "Se ha generado al reserva"}
+            {severity === "error" && "Al parecer algo salio mal"}
+            {severity === "warning" && "Por favor llena el formulario"}
+          </Alert>
+        </Snackbar>
         <Grid item xs={12}>
           <div
             style={{
@@ -174,7 +313,7 @@ export default function DetalleServicio() {
             }}
           >
             <Typography variant="h4" style={{ marginRight: 30 }}>
-              Sucursal Nombre
+              {state.nombre}
             </Typography>
           </div>
         </Grid>
@@ -191,7 +330,7 @@ export default function DetalleServicio() {
             <Tab label="Generales" {...a11yProps(0)} />
             <Tab label="Colaboradores" {...a11yProps(1)} />
             <Tab label="Sucursal" {...a11yProps(2)} />
-            <Tab label="Precio" {...a11yProps(3)} />
+            {/* <Tab label="Precio" {...a11yProps(3)} /> */}
           </Tabs>
           <TabPanel value={value} index={0} style={{ width: "86%" }}>
             <Grid container spacing={2}>
@@ -203,6 +342,12 @@ export default function DetalleServicio() {
                   id="outlined-basic"
                   label="Nombre"
                   variant="outlined"
+                  name="nombre"
+                  value={state.nombre}
+                  onChange={handleChangeText}
+                  InputLabelProps={{
+                    shrink: true,
+                  }}
                   style={{ width: "100%" }}
                 />
               </Grid>
@@ -211,38 +356,72 @@ export default function DetalleServicio() {
                   id="outlined-basic"
                   label="Descripcion"
                   variant="outlined"
+                  name="descripcion"
+                  multiline
+                  value={state.descripcion}
+                  onChange={handleChangeText}
+                  InputLabelProps={{
+                    shrink: true,
+                  }}
                   style={{ width: "100%" }}
                 />
               </Grid>
               <Grid item xs={8}>
-                <TextField
-                  id="outlined-basic"
-                  label="Tipo de servicio"
-                  variant="outlined"
-                  style={{ width: "100%" }}
-                />
+                <FormControl variant="outlined" className={classes.formControl}>
+                  <InputLabel id="demo-simple-select-outlined-label">
+                    Tipo de servicio
+                  </InputLabel>
+                  <Select
+                    labelId="demo-simple-select-outlined-label"
+                    id="demo-simple-select-outlined"
+                    name="tipo_servicio"
+                    value={state.tipo_servicio}
+                    onChange={handleChangeText}
+                    label="Tipo de servicio"
+                  >
+                    <MenuItem value="cabello">
+                      <em>cabello</em>
+                    </MenuItem>
+                  </Select>
+                </FormControl>
               </Grid>
               <Grid item xs={8}>
-                <TextField
-                  id="outlined-basic"
-                  label="Disponible para"
-                  variant="outlined"
-                  style={{ width: "100%" }}
-                />
+                <FormControl variant="outlined" className={classes.formControl}>
+                  <InputLabel id="demo-simple-select-outlined-label">
+                    Disponible para
+                  </InputLabel>
+                  <Select
+                    labelId="demo-simple-select-outlined-label"
+                    id="demo-simple-select-outlined"
+                    name="disponible_para"
+                    value={state.disponible_para}
+                    onChange={handleChangeText}
+                    label="Disponible para"
+                  >
+                    <MenuItem value="Hombres">
+                      <em>Hombres</em>
+                    </MenuItem>
+                  </Select>
+                </FormControl>
               </Grid>
-              <Grid item xs={8}>
+              {/* <Grid item xs={8}>
                 <TextField
                   id="outlined-basic"
                   label="Etiquetas"
                   variant="outlined"
                   style={{ width: "100%" }}
                 />
-              </Grid>
+              </Grid> */}
               <Grid item xs={4}>
                 <TextField
                   id="outlined-basic"
                   label="Imagen"
                   variant="outlined"
+                  type="file"
+                  onChange={handleUpload}
+                  InputLabelProps={{
+                    shrink: true,
+                  }}
                   style={{ width: "100% " }}
                 />
               </Grid>
@@ -254,6 +433,21 @@ export default function DetalleServicio() {
                   id="outlined-basic"
                   label="Fecha de alta"
                   variant="outlined"
+                  value={
+                    new Date(state.created_at).getDate() +
+                    "/" +
+                    (new Date(state.created_at).getMonth() + 1) +
+                    "/" +
+                    new Date(state.created_at).getFullYear() +
+                    " a las " +
+                    new Date(state.created_at).getHours() +
+                    ":" +
+                    new Date(state.created_at).getMinutes()
+                  }
+                  InputLabelProps={{
+                    shrink: true,
+                  }}
+                  disabled
                   style={{ width: "100%" }}
                 />
               </Grid>
@@ -262,6 +456,18 @@ export default function DetalleServicio() {
                   id="outlined-basic"
                   label="Ultima modificacion"
                   variant="outlined"
+                  value={
+                    new Date(state.updated_at).getDate() +
+                    "/" +
+                    (new Date(state.updated_at).getMonth() + 1) +
+                    "/" +
+                    new Date(state.updated_at).getFullYear() +
+                    " a las " +
+                    new Date(state.updated_at).getHours() +
+                    ":" +
+                    new Date(state.updated_at).getMinutes()
+                  }
+                  disabled
                   style={{ width: "100%" }}
                 />
               </Grid>
@@ -290,59 +496,17 @@ export default function DetalleServicio() {
                 />
               </Grid>
               <Grid item xs={12}>
-                <Button variant="contained" color="primary">
+                <Button variant="contained" color="primary" onClick={update}>
                   Guardar cambios
                 </Button>
               </Grid>
             </Grid>
           </TabPanel>
           <TabPanel value={value} index={1} style={{ width: "86%" }}>
-            <Grid container>
-              <Grid item xs={12}>
-                <Typography>Colaboradores</Typography>
-              </Grid>
-            </Grid>
-            <div className={classes.root}>
-              <List component="nav" aria-label="secondary mailbox folders">
-                <ListItem button>
-                  <ListItemText primary="Mariana Martinez" />
-                </ListItem>
-                <ListItemLink href="#simple-list">
-                  <ListItemText primary="Luis Jimenez" />
-                </ListItemLink>
-              </List>
-            </div>
-            <Typography>
-              Esta tabla es informativa. Para modificar datos has click en el
-              nombre de la sucursal relacionada para editar
-            </Typography>
+            <Colaboradores />
           </TabPanel>
           <TabPanel value={value} index={2} style={{ width: "86%" }}>
-            <Grid container>
-              <Grid item xs={12}>
-                <Typography>Sucursales</Typography>
-              </Grid>
-            </Grid>
-            <div className={classes.root}>
-              <List component="nav" aria-label="secondary mailbox folders">
-                <ListItem button>
-                  <ListItemText primary="Altabrisa" />
-                </ListItem>
-                <ListItemLink href="#simple-list">
-                  <ListItemText primary="Centro" />
-                </ListItemLink>
-                <ListItemLink href="#simple-list">
-                  <ListItemText primary="Francisco de Montejo" />
-                </ListItemLink>
-                <ListItemLink href="#simple-list">
-                  <ListItemText primary="Campestre" />
-                </ListItemLink>
-              </List>
-            </div>
-            <Typography>
-              Esta tabla es informativa. Para modificar datos has click en el
-              nombre de la sucursal relacionada para editar
-            </Typography>
+            <Sucursal />
           </TabPanel>
           <TabPanel value={value} index={3} style={{ width: "86%" }}>
             <Grid container spacing={2}>
@@ -419,7 +583,7 @@ export default function DetalleServicio() {
               </Grid>
             </Grid>
           </TabPanel>
-          <TabPanel value={value} index={4} style={{ width: "86%" }}>
+          {/* <TabPanel value={value} index={4} style={{ width: "86%" }}>
             <Grid container spacing={2}>
               <Grid item xs={12}>
                 <Typography>Precio</Typography>
@@ -493,7 +657,7 @@ export default function DetalleServicio() {
                 />
               </Grid>
             </Grid>
-          </TabPanel>
+          </TabPanel> */}
         </div>
       </Paper>
     </div>

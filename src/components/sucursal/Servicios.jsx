@@ -187,8 +187,8 @@ export default function Servicios() {
 
   function handleChangeText(evt) {
     const value = evt.target.value;
-    setData({
-      ...data,
+    setState({
+      ...state,
       [evt.target.name]: value,
     });
   }
@@ -211,11 +211,11 @@ export default function Servicios() {
   const crearServicio = (e) => {
     e.preventDefault();
     const params = {
-      nombre: data.nombre,
-      precio: data.precio,
-      precio_sin: data.precio_sin,
-      duracion: data.duracion,
-      garantia: data.garantia,
+      nombre: state.nombre,
+      precio: state.precio,
+      precio_sin: state.precio_sin,
+      duracion: state.duracion,
+      garantia: state.garantia,
       estatus: true,
     };
     if (
@@ -291,7 +291,7 @@ export default function Servicios() {
                     label="Nombre del servicio"
                     multiline
                     name="nombre"
-                    value={data.nombre}
+                    value={state.nombre}
                     onChange={handleChangeText}
                     style={{ width: "100%" }}
                   />
@@ -307,7 +307,7 @@ export default function Servicios() {
                     label="Precio"
                     multiline
                     name="precio"
-                    value={data.precio}
+                    value={state.precio}
                     onChange={handleChangeText}
                     style={{ width: "100%" }}
                   />
@@ -320,7 +320,7 @@ export default function Servicios() {
                 >
                   <TextField
                     variant="outlined"
-                    value={data.precio_sin}
+                    value={state.precio_sin}
                     onChange={handleChangeText}
                     name="precio_sin"
                     label="Precio sin descuento"
@@ -334,7 +334,7 @@ export default function Servicios() {
                 >
                   <TextField
                     variant="outlined"
-                    value={data.duracion}
+                    value={state.duracion}
                     onChange={handleChangeText}
                     name="duracion"
                     label="Duración"
@@ -350,7 +350,7 @@ export default function Servicios() {
                     variant="outlined"
                     label="Garantía"
                     name="garantia"
-                    value={data.garantia}
+                    value={state.garantia}
                     onChange={handleChangeText}
                   />
                 </FormControl>
