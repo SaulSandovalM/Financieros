@@ -180,12 +180,6 @@ export default function Sucursal() {
       },
       () =>
         storageRef.getDownloadURL().then((url) => {
-          // this.setState({
-          //   xmlC: [...this.state.xmlC, { url: url, nombre: file.name }],
-          // });
-          // setState({
-          //   imagen: url,
-          // });
           const params = {
             imagen: url,
             nombre: state.nombre,

@@ -116,8 +116,6 @@ export default function Servicios() {
   const [loading, setLoading] = React.useState(true);
   const [openAlert, setOpenAlert] = React.useState(false);
   const [severity, setSeverity] = React.useState("");
-  const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(10);
   const [open, setOpen] = React.useState(false);
   const [state, setState] = React.useState({
     nombre: "",
@@ -130,17 +128,8 @@ export default function Servicios() {
     estatus: true,
   });
 
-  const handleChangePage = (event, newPage) => {
-    setPage(newPage);
-  };
-
   const handleClickOpen = () => {
     setOpen(true);
-  };
-
-  const handleChangeRowsPerPage = (event) => {
-    setRowsPerPage(+event.target.value);
-    setPage(0);
   };
 
   const handleClickAlert = () => {
@@ -192,21 +181,6 @@ export default function Servicios() {
       [evt.target.name]: value,
     });
   }
-
-  //   const update = () => {
-  //     let updates = {};
-  //     updates["sucursales/" + URLactual + "/contacto"] = {
-  //       telefono: data.telefono,
-  //       telefono_dos: data.telefono_dos,
-  //       facebook: data.facebook,
-  //       enlace_facebook: data.enlace_facebook,
-  //       instagram: data.instagram,
-  //       enlace_instagram: data.enlace_instagram,
-  //     };
-  //     firebase.database().ref().update(updates);
-  //     setSeverity("success");
-  //     handleClickAlert();
-  //   };
 
   const crearServicio = (e) => {
     e.preventDefault();

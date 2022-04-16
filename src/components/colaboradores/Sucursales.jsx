@@ -146,7 +146,7 @@ function ListItemLink(props) {
   return <ListItem button component="a" {...props} />;
 }
 
-export default function Sucursal() {
+export default function Sucursales() {
   var URLactual = String(window.location).substr(-20);
 
   const classes = useStyles();

@@ -146,7 +146,7 @@ function ListItemLink(props) {
   return <ListItem button component="a" {...props} />;
 }
 
-export default function Sucursal() {
+export default function Servicios() {
   var URLactual = String(window.location).substr(-20);
 
   const classes = useStyles();
@@ -293,12 +293,12 @@ export default function Sucursal() {
   return (
     <Grid container>
       <Grid item xs={12}>
-        <Typography>Sucursales</Typography>
+        <Typography>Servicios</Typography>
       </Grid>
       <Grid item xs={12}>
         <List component="nav" aria-label="secondary mailbox folders">
           <ListItem button style={{ background: "#e7e8fd" }}>
-            <ListItemText primary="Altabrisa" />
+            <ListItemText primary="Corte de cabello" />
           </ListItem>
         </List>
       </Grid>

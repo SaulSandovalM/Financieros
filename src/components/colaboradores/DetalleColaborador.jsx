@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import PropTypes from "prop-types";
 import { makeStyles } from "@material-ui/core/styles";
 import Tabs from "@material-ui/core/Tabs";
@@ -10,17 +10,19 @@ import Paper from "@material-ui/core/Paper";
 import Divider from "@material-ui/core/Divider";
 import { TextField } from "@material-ui/core";
 import Button from "@material-ui/core/Button";
-import Table from "@material-ui/core/Table";
-import TableBody from "@material-ui/core/TableBody";
-import TableCell from "@material-ui/core/TableCell";
-import TableContainer from "@material-ui/core/TableContainer";
-import TableHead from "@material-ui/core/TableHead";
-import TablePagination from "@material-ui/core/TablePagination";
-import TableRow from "@material-ui/core/TableRow";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
 import Checkbox from "@material-ui/core/Checkbox";
+import MenuItem from "@material-ui/core/MenuItem";
+import FormControl from "@material-ui/core/FormControl";
+import InputLabel from "@material-ui/core/InputLabel";
+import Select from "@material-ui/core/Select";
+import firebase from "../../Firebase";
+import Horarios from "./Horarios";
+import Sucursales from "./Sucursales";
+import Servicios from "./Servicios";
+import Notificaciones from "./Notificaciones";
 
 const columns = [
   { id: "sucursal", label: "Sucursal", width: "14%" },
@@ -126,6 +128,9 @@ const useStyles = makeStyles((theme) => ({
     maxWidth: 360,
     backgroundColor: theme.palette.background.paper,
   },
+  formControl: {
+    width: "100%",
+  },
 }));
 
 function ListItemLink(props) {
@@ -133,18 +138,41 @@ function ListItemLink(props) {
 }
 
 export default function DetalleColaborador() {
+  var URLactual = String(window.location).substr(-20);
+
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
   const [checked, setChecked] = React.useState(true);
+  const [loading, setLoading] = React.useState(true);
+  const [imagen, setImagen] = React.useState("");
   const [state, setState] = React.useState({
-    checkedA: true,
-    checkedB: true,
+    nombre: "",
+    apellido: "",
+    rol: "",
+    telefono: "",
+    correo: "",
+    fecha_nacimiento: "",
+    genero: "",
+    presentacion: "",
+    created_at: "",
+    updated_at: "",
+    estatus: true,
   });
-  const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
-  const handleChangeSwitch = (event) => {
-    setState({ ...state, [event.target.name]: event.target.checked });
+  useEffect(() => {
+    setLoading(true);
+    const itemsRefComprometidos = firebase
+      .database()
+      .ref(`empresa/${"-N-i-AiUDuAZjgNUpGA8"}/colaboradores/${URLactual}`);
+    listenComprometidos(itemsRefComprometidos);
+    setLoading(false);
+  }, []);
+
+  const listenComprometidos = (itemsRefComprometidos) => {
+    itemsRefComprometidos.on("value", (snap) => {
+      const firebasedata = snap.val();
+      setState(firebasedata);
+    });
   };
 
   const handleChange = (event, newValue) => {
@@ -155,13 +183,76 @@ export default function DetalleColaborador() {
     setChecked(event.target.checked);
   };
 
-  const handleChangePage = (event, newPage) => {
-    setPage(newPage);
+  function handleChangeText(evt) {
+    const value = evt.target.value;
+    setState({
+      ...state,
+      [evt.target.name]: value,
+    });
+  }
+
+  const handleUpload = (event) => {
+    const file = event.target.files[0];
+    setImagen(file);
   };
 
-  const handleChangeRowsPerPage = (event) => {
-    setRowsPerPage(+event.target.value);
-    setPage(0);
+  const update = () => {
+    const file = imagen;
+    if (file) {
+      const storageRef = firebase.storage().ref(`colaboradores/`);
+      const task = storageRef.put(file);
+      task.on(
+        "state_changed",
+        (snapshot) => {
+          let percentage =
+            (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+        },
+        (error) => {
+          console.error(error.message);
+        },
+        () =>
+          storageRef.getDownloadURL().then((url) => {
+            let updates = {};
+            updates[
+              `empresa/${"-N-i-AiUDuAZjgNUpGA8"}/colaboradores/${URLactual}`
+            ] = {
+              nombre: state.nombre,
+              apellido: state.apellido,
+              rol: state.rol,
+              estatus: true,
+              telefono: state.telefono,
+              correo: state.correo,
+              fecha_nacimiento: state.fecha_nacimiento,
+              genero: state.genero,
+              presentacion: state.presentacion,
+              created_at: Date.now(),
+              updated_at: Date.now(),
+              imagen: url,
+            };
+            firebase.database().ref().update(updates);
+            alert("Se ha actualizado el fondo");
+          })
+      );
+    } else {
+      let updates = {};
+      updates[`empresa/${"-N-i-AiUDuAZjgNUpGA8"}/colaboradores/${URLactual}`] =
+        {
+          nombre: state.nombre,
+          apellido: state.apellido,
+          rol: state.rol,
+          estatus: true,
+          telefono: state.telefono,
+          correo: state.correo,
+          fecha_nacimiento: state.fecha_nacimiento,
+          genero: state.genero,
+          presentacion: state.presentacion,
+          created_at: Date.now(),
+          updated_at: Date.now(),
+          imagen: state.imagen,
+        };
+      firebase.database().ref().update(updates);
+      alert("Se ha actualizado el fondo");
+    }
   };
 
   return (
@@ -205,6 +296,9 @@ export default function DetalleColaborador() {
                   id="outlined-basic"
                   label="Nombre"
                   variant="outlined"
+                  name="nombre"
+                  value={state.nombre}
+                  onChange={handleChangeText}
                   style={{ width: "100%" }}
                 />
               </Grid>
@@ -213,6 +307,12 @@ export default function DetalleColaborador() {
                   id="outlined-basic"
                   label="Apellido"
                   variant="outlined"
+                  name="apellido"
+                  value={state.apellido}
+                  onChange={handleChangeText}
+                  InputLabelProps={{
+                    shrink: true,
+                  }}
                   style={{ width: "100%" }}
                 />
               </Grid>
@@ -221,6 +321,12 @@ export default function DetalleColaborador() {
                   id="outlined-basic"
                   label="Rol"
                   variant="outlined"
+                  name="rol"
+                  value={state.rol}
+                  onChange={handleChangeText}
+                  InputLabelProps={{
+                    shrink: true,
+                  }}
                   style={{ width: "100%" }}
                 />
               </Grid>
@@ -229,6 +335,12 @@ export default function DetalleColaborador() {
                   id="outlined-basic"
                   label="Telefono"
                   variant="outlined"
+                  name="telefono"
+                  value={state.telefono}
+                  onChange={handleChangeText}
+                  InputLabelProps={{
+                    shrink: true,
+                  }}
                   style={{ width: "100%" }}
                 />
               </Grid>
@@ -237,47 +349,94 @@ export default function DetalleColaborador() {
                   id="outlined-basic"
                   label="Correo"
                   variant="outlined"
+                  name="correo"
+                  value={state.correo}
+                  onChange={handleChangeText}
+                  InputLabelProps={{
+                    shrink: true,
+                  }}
                   style={{ width: "100%" }}
                 />
               </Grid>
-              <Grid item xs={8}>
+              {/* <Grid item xs={8}>
                 <TextField
                   id="outlined-basic"
                   label="Contraseña"
                   variant="outlined"
+                  name="contraseña"
+                  value={state.contraseña}
+                  onChange={handleChangeText}
+                  InputLabelProps={{
+                    shrink: true,
+                  }}
                   style={{ width: "100%" }}
                 />
-              </Grid>
+              </Grid> */}
               <Grid item xs={8}>
                 <TextField
                   id="outlined-basic"
                   label="Fecha de nacimiento"
                   variant="outlined"
+                  name="fecha_nacimiento"
+                  type="date"
+                  value={state.fecha_nacimiento}
+                  InputLabelProps={{
+                    shrink: true,
+                  }}
+                  onChange={handleChangeText}
                   style={{ width: "100%" }}
                 />
               </Grid>
               <Grid item xs={8}>
-                <TextField
-                  id="outlined-basic"
-                  label="Genero"
-                  variant="outlined"
-                  style={{ width: "100%" }}
-                />
+                <FormControl variant="outlined" className={classes.formControl}>
+                  <InputLabel id="demo-simple-select-outlined-label">
+                    Género
+                  </InputLabel>
+                  <Select
+                    labelId="demo-simple-select-outlined-label"
+                    id="demo-simple-select-outlined"
+                    name="genero"
+                    value={state.genero}
+                    onChange={handleChangeText}
+                    label="Género"
+                  >
+                    <MenuItem value="Hombre">
+                      <em>Hombre</em>
+                    </MenuItem>
+                    <MenuItem value="Mujer">
+                      <em>Mujer</em>
+                    </MenuItem>
+                    <MenuItem value="Otro">
+                      <em>Otro</em>
+                    </MenuItem>
+                  </Select>
+                </FormControl>
               </Grid>
               <Grid item xs={8}>
                 <TextField
                   id="outlined-basic"
                   label="Presentacion"
                   variant="outlined"
+                  name="presentacion"
+                  value={state.presentacion}
+                  onChange={handleChangeText}
+                  InputLabelProps={{
+                    shrink: true,
+                  }}
                   style={{ width: "100%" }}
                 />
               </Grid>
               <Grid item xs={4}>
                 <TextField
                   id="outlined-basic"
+                  type="file"
                   label="Imagen"
                   variant="outlined"
+                  onChange={handleUpload}
                   style={{ width: "100% " }}
+                  InputLabelProps={{
+                    shrink: true,
+                  }}
                 />
               </Grid>
             </Grid>
@@ -288,6 +447,21 @@ export default function DetalleColaborador() {
                   id="outlined-basic"
                   label="Fecha de alta"
                   variant="outlined"
+                  value={
+                    new Date(state.created_at).getDate() +
+                    "/" +
+                    (new Date(state.created_at).getMonth() + 1) +
+                    "/" +
+                    new Date(state.created_at).getFullYear() +
+                    " a las " +
+                    new Date(state.created_at).getHours() +
+                    ":" +
+                    new Date(state.created_at).getMinutes()
+                  }
+                  InputLabelProps={{
+                    shrink: true,
+                  }}
+                  disabled
                   style={{ width: "100%" }}
                 />
               </Grid>
@@ -296,6 +470,21 @@ export default function DetalleColaborador() {
                   id="outlined-basic"
                   label="Ultima modificacion"
                   variant="outlined"
+                  value={
+                    new Date(state.created_at).getDate() +
+                    "/" +
+                    (new Date(state.created_at).getMonth() + 1) +
+                    "/" +
+                    new Date(state.created_at).getFullYear() +
+                    " a las " +
+                    new Date(state.created_at).getHours() +
+                    ":" +
+                    new Date(state.created_at).getMinutes()
+                  }
+                  InputLabelProps={{
+                    shrink: true,
+                  }}
+                  disabled
                   style={{ width: "100%" }}
                 />
               </Grid>
@@ -304,6 +493,10 @@ export default function DetalleColaborador() {
                   id="outlined-basic"
                   label="Calificacion"
                   variant="outlined"
+                  InputLabelProps={{
+                    shrink: true,
+                  }}
+                  disabled
                   style={{ width: "100%" }}
                 />
               </Grid>
@@ -312,6 +505,7 @@ export default function DetalleColaborador() {
                   id="outlined-basic"
                   label="Alta por"
                   variant="outlined"
+                  disabled
                   style={{ width: "100%" }}
                 />
               </Grid>
@@ -320,455 +514,28 @@ export default function DetalleColaborador() {
                   id="outlined-basic"
                   label="Ultima modoficacion"
                   variant="outlined"
+                  disabled
                   style={{ width: "100%" }}
                 />
               </Grid>
               <Grid item xs={12}>
-                <Button variant="contained" color="primary">
+                <Button variant="contained" color="primary" onClick={update}>
                   Guardar cambios
                 </Button>
               </Grid>
             </Grid>
           </TabPanel>
           <TabPanel value={value} index={1} style={{ width: "86%" }}>
-            <Grid container spacing={2}>
-              <Grid item xs={12}>
-                <Typography>Horarios</Typography>
-              </Grid>
-              <Grid item xs={12}>
-                <div
-                  style={{
-                    display: "flex",
-                    flexDirection: "row",
-                    alignItems: "center",
-                  }}
-                >
-                  <Checkbox
-                    checked={checked}
-                    onChange={handleChangeCheack}
-                    inputProps={{ "aria-label": "primary checkbox" }}
-                  />
-                  <Typography style={{ width: 150 }}>Lunes</Typography>
-                  <TextField
-                    id="time"
-                    type="time"
-                    defaultValue="07:30"
-                    className={classes.textField}
-                    InputLabelProps={{
-                      shrink: true,
-                    }}
-                    inputProps={{
-                      step: 300, // 5 min
-                    }}
-                  />
-                  <TextField
-                    id="time"
-                    type="time"
-                    defaultValue="07:30"
-                    className={classes.textField}
-                    InputLabelProps={{
-                      shrink: true,
-                    }}
-                    inputProps={{
-                      step: 300, // 5 min
-                    }}
-                  />
-                </div>
-              </Grid>
-              <Grid item xs={12}>
-                <div
-                  style={{
-                    display: "flex",
-                    flexDirection: "row",
-                    alignItems: "center",
-                  }}
-                >
-                  <Checkbox
-                    checked={checked}
-                    onChange={handleChange}
-                    inputProps={{ "aria-label": "primary checkbox" }}
-                  />
-                  <Typography style={{ width: 150 }}>Martes</Typography>
-                  <TextField
-                    id="time"
-                    type="time"
-                    defaultValue="07:30"
-                    className={classes.textField}
-                    InputLabelProps={{
-                      shrink: true,
-                    }}
-                    inputProps={{
-                      step: 300, // 5 min
-                    }}
-                  />
-                  <TextField
-                    id="time"
-                    type="time"
-                    defaultValue="07:30"
-                    className={classes.textField}
-                    InputLabelProps={{
-                      shrink: true,
-                    }}
-                    inputProps={{
-                      step: 300, // 5 min
-                    }}
-                  />
-                </div>
-              </Grid>
-              <Grid item xs={12}>
-                <div
-                  style={{
-                    display: "flex",
-                    flexDirection: "row",
-                    alignItems: "center",
-                  }}
-                >
-                  <Checkbox
-                    checked={checked}
-                    onChange={handleChange}
-                    inputProps={{ "aria-label": "primary checkbox" }}
-                  />
-                  <Typography style={{ width: 150 }}>Miercoles</Typography>
-                  <TextField
-                    id="time"
-                    type="time"
-                    defaultValue="07:30"
-                    className={classes.textField}
-                    InputLabelProps={{
-                      shrink: true,
-                    }}
-                    inputProps={{
-                      step: 300, // 5 min
-                    }}
-                  />
-                  <TextField
-                    id="time"
-                    type="time"
-                    defaultValue="07:30"
-                    className={classes.textField}
-                    InputLabelProps={{
-                      shrink: true,
-                    }}
-                    inputProps={{
-                      step: 300, // 5 min
-                    }}
-                  />
-                </div>
-              </Grid>
-              <Grid item xs={12}>
-                <div
-                  style={{
-                    display: "flex",
-                    flexDirection: "row",
-                    alignItems: "center",
-                  }}
-                >
-                  <Checkbox
-                    checked={checked}
-                    onChange={handleChange}
-                    inputProps={{ "aria-label": "primary checkbox" }}
-                  />
-                  <Typography style={{ width: 150 }}>Jueves</Typography>
-                  <TextField
-                    id="time"
-                    type="time"
-                    defaultValue="07:30"
-                    className={classes.textField}
-                    InputLabelProps={{
-                      shrink: true,
-                    }}
-                    inputProps={{
-                      step: 300, // 5 min
-                    }}
-                  />
-                  <TextField
-                    id="time"
-                    type="time"
-                    defaultValue="07:30"
-                    className={classes.textField}
-                    InputLabelProps={{
-                      shrink: true,
-                    }}
-                    inputProps={{
-                      step: 300, // 5 min
-                    }}
-                  />
-                </div>
-              </Grid>
-              <Grid item xs={12}>
-                <div
-                  style={{
-                    display: "flex",
-                    flexDirection: "row",
-                    alignItems: "center",
-                  }}
-                >
-                  <Checkbox
-                    checked={checked}
-                    onChange={handleChange}
-                    inputProps={{ "aria-label": "primary checkbox" }}
-                  />
-                  <Typography style={{ width: 150 }}>Viernes</Typography>
-                  <TextField
-                    id="time"
-                    type="time"
-                    defaultValue="07:30"
-                    className={classes.textField}
-                    InputLabelProps={{
-                      shrink: true,
-                    }}
-                    inputProps={{
-                      step: 300, // 5 min
-                    }}
-                  />
-                  <TextField
-                    id="time"
-                    type="time"
-                    defaultValue="07:30"
-                    className={classes.textField}
-                    InputLabelProps={{
-                      shrink: true,
-                    }}
-                    inputProps={{
-                      step: 300, // 5 min
-                    }}
-                  />
-                </div>
-              </Grid>
-              <Grid item xs={12}>
-                <div
-                  style={{
-                    display: "flex",
-                    flexDirection: "row",
-                    alignItems: "center",
-                  }}
-                >
-                  <Checkbox
-                    checked={checked}
-                    onChange={handleChange}
-                    inputProps={{ "aria-label": "primary checkbox" }}
-                  />
-                  <Typography style={{ width: 150 }}>Sabado</Typography>
-                  <TextField
-                    id="time"
-                    type="time"
-                    defaultValue="07:30"
-                    className={classes.textField}
-                    InputLabelProps={{
-                      shrink: true,
-                    }}
-                    inputProps={{
-                      step: 300, // 5 min
-                    }}
-                  />
-                  <TextField
-                    id="time"
-                    type="time"
-                    defaultValue="07:30"
-                    className={classes.textField}
-                    InputLabelProps={{
-                      shrink: true,
-                    }}
-                    inputProps={{
-                      step: 300, // 5 min
-                    }}
-                  />
-                </div>
-              </Grid>
-              <Grid item xs={12}>
-                <div
-                  style={{
-                    display: "flex",
-                    flexDirection: "row",
-                    alignItems: "center",
-                  }}
-                >
-                  <Checkbox
-                    checked={checked}
-                    onChange={handleChange}
-                    inputProps={{ "aria-label": "primary checkbox" }}
-                  />
-                  <Typography style={{ width: 150 }}>Domingo</Typography>
-                  <TextField
-                    id="time"
-                    type="time"
-                    defaultValue="07:30"
-                    className={classes.textField}
-                    InputLabelProps={{
-                      shrink: true,
-                    }}
-                    inputProps={{
-                      step: 300, // 5 min
-                    }}
-                  />
-                  <TextField
-                    id="time"
-                    type="time"
-                    defaultValue="07:30"
-                    className={classes.textField}
-                    InputLabelProps={{
-                      shrink: true,
-                    }}
-                    inputProps={{
-                      step: 300, // 5 min
-                    }}
-                  />
-                </div>
-              </Grid>
-              <Grid item xs={12}>
-                <Button variant="contained" color="primary">
-                  Guardar cambios
-                </Button>
-              </Grid>
-            </Grid>
+            <Horarios />
           </TabPanel>
           <TabPanel value={value} index={2} style={{ width: "86%" }}>
-            <Grid container>
-              <Grid item xs={12}>
-                <Typography>Sucursales</Typography>
-              </Grid>
-            </Grid>
-            <div className={classes.root}>
-              <List component="nav" aria-label="secondary mailbox folders">
-                <ListItem button>
-                  <ListItemText primary="Altabrisa" />
-                </ListItem>
-                <ListItemLink href="#simple-list">
-                  <ListItemText primary="Centro" />
-                </ListItemLink>
-                <ListItemLink href="#simple-list">
-                  <ListItemText primary="Francisco de Montejo" />
-                </ListItemLink>
-                <ListItemLink href="#simple-list">
-                  <ListItemText primary="Campestre" />
-                </ListItemLink>
-              </List>
-            </div>
-            <Typography>
-              Esta tabla es informativa. Para modificar datos has click en el
-              nombre de la sucursal relacionada para editar
-            </Typography>
+            <Sucursales />
           </TabPanel>
           <TabPanel value={value} index={3} style={{ width: "86%" }}>
-            <Grid container>
-              <Grid item xs={12}>
-                <Typography>Servicios</Typography>
-              </Grid>
-            </Grid>
-            <div className={classes.root}>
-              <List component="nav" aria-label="secondary mailbox folders">
-                <ListItem button>
-                  <ListItemText primary="Corte de pelo" />
-                </ListItem>
-                <ListItemLink href="#simple-list">
-                  <ListItemText primary="Tinte de pelo" />
-                </ListItemLink>
-                <ListItemLink href="#simple-list">
-                  <ListItemText primary="Tratamiento" />
-                </ListItemLink>
-              </List>
-            </div>
-            <Typography>
-              Esta tabla es informativa. Para modificar datos has click en el
-              nombre de la sucursal relacionada para editar
-            </Typography>
+            <Servicios />
           </TabPanel>
           <TabPanel value={value} index={4} style={{ width: "86%" }}>
-            <Grid container spacing={2}>
-              <Grid item xs={12}>
-                <Typography>Prefencia de Notificaciones</Typography>
-              </Grid>
-              <Grid item xs={8}>
-                <Typography>Nueva reserva</Typography>
-              </Grid>
-              <Grid item xs={2}>
-                <Checkbox
-                  checked={checked}
-                  onChange={handleChangeCheack}
-                  inputProps={{ "aria-label": "primary checkbox" }}
-                />
-              </Grid>
-              <Grid item xs={2}>
-                <Checkbox
-                  checked={checked}
-                  onChange={handleChangeCheack}
-                  inputProps={{ "aria-label": "primary checkbox" }}
-                />
-              </Grid>
-              <Grid item xs={8}>
-                <Typography>Reserva cancelada</Typography>
-              </Grid>
-              <Grid item xs={2}>
-                <Checkbox
-                  checked={checked}
-                  onChange={handleChangeCheack}
-                  inputProps={{ "aria-label": "primary checkbox" }}
-                />
-              </Grid>
-              <Grid item xs={2}>
-                <Checkbox
-                  checked={checked}
-                  onChange={handleChangeCheack}
-                  inputProps={{ "aria-label": "primary checkbox" }}
-                />
-              </Grid>
-              <Grid item xs={8}>
-                <Typography>Reserva modificada</Typography>
-              </Grid>
-              <Grid item xs={2}>
-                <Checkbox
-                  checked={checked}
-                  onChange={handleChangeCheack}
-                  inputProps={{ "aria-label": "primary checkbox" }}
-                />
-              </Grid>
-              <Grid item xs={2}>
-                <Checkbox
-                  checked={checked}
-                  onChange={handleChangeCheack}
-                  inputProps={{ "aria-label": "primary checkbox" }}
-                />
-              </Grid>
-              <Grid item xs={8}>
-                <Typography>No show</Typography>
-              </Grid>
-              <Grid item xs={2}>
-                <Checkbox
-                  checked={checked}
-                  onChange={handleChangeCheack}
-                  inputProps={{ "aria-label": "primary checkbox" }}
-                />
-              </Grid>
-              <Grid item xs={2}>
-                <Checkbox
-                  checked={checked}
-                  onChange={handleChangeCheack}
-                  inputProps={{ "aria-label": "primary checkbox" }}
-                />
-              </Grid>
-              <Grid item xs={8}>
-                <Typography>Mensaje de clientes</Typography>
-              </Grid>
-              <Grid item xs={2}>
-                <Checkbox
-                  checked={checked}
-                  onChange={handleChangeCheack}
-                  inputProps={{ "aria-label": "primary checkbox" }}
-                />
-              </Grid>
-              <Grid item xs={2}>
-                <Checkbox
-                  checked={checked}
-                  onChange={handleChangeCheack}
-                  inputProps={{ "aria-label": "primary checkbox" }}
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <Button variant="contained" color="primary">
-                  Guardar cambios
-                </Button>
-              </Grid>
-            </Grid>
+            <Notificaciones />
           </TabPanel>
         </div>
       </Paper>

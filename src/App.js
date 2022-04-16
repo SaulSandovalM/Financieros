@@ -679,7 +679,7 @@ function App(props) {
           />
           <ProtectedRoute
             exact
-            path="/detallecolaborador"
+            path="/detallecolaborador/:id"
             component={DetalleColaborador}
             isAuthenticated={isAuthenticated}
             isVerifying={isVerifying}

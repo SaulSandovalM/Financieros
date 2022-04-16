@@ -397,6 +397,9 @@ export default function DetalleServicio() {
                     value={state.disponible_para}
                     onChange={handleChangeText}
                     label="Disponible para"
+                    InputLabelProps={{
+                      shrink: true,
+                    }}
                   >
                     <MenuItem value="Hombres">
                       <em>Hombres</em>
@@ -404,14 +407,6 @@ export default function DetalleServicio() {
                   </Select>
                 </FormControl>
               </Grid>
-              {/* <Grid item xs={8}>
-                <TextField
-                  id="outlined-basic"
-                  label="Etiquetas"
-                  variant="outlined"
-                  style={{ width: "100%" }}
-                />
-              </Grid> */}
               <Grid item xs={4}>
                 <TextField
                   id="outlined-basic"
