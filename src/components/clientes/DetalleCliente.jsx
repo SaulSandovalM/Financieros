@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import PropTypes from "prop-types";
 import { makeStyles } from "@material-ui/core/styles";
 import Tabs from "@material-ui/core/Tabs";
@@ -21,6 +21,14 @@ import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
 import Checkbox from "@material-ui/core/Checkbox";
+import MenuItem from "@material-ui/core/MenuItem";
+import FormControl from "@material-ui/core/FormControl";
+import InputLabel from "@material-ui/core/InputLabel";
+import Select from "@material-ui/core/Select";
+import Reservas from "./Reservas";
+import Sucursales from "./Sucursales";
+import firebase from "../../Firebase";
+import Mensajes from "./Mensajes";
 
 const columns = [
   { id: "fecha", label: "Fecha", width: "12%" },
@@ -154,6 +162,9 @@ const useStyles = makeStyles((theme) => ({
     maxWidth: 360,
     backgroundColor: theme.palette.background.paper,
   },
+  formControl: {
+    width: "100%",
+  },
 }));
 
 function ListItemLink(props) {
@@ -161,18 +172,42 @@ function ListItemLink(props) {
 }
 
 export default function DetalleCliente() {
+  var URLactual = String(window.location).substr(-20);
+
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
   const [checked, setChecked] = React.useState(true);
-  const [state, setState] = React.useState({
-    checkedA: true,
-    checkedB: true,
-  });
+  const [imagen, setImagen] = React.useState("");
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
+  const [loading, setLoading] = React.useState(true);
+  const [state, setState] = React.useState({
+    nombre: "",
+    apellido: "",
+    telefono: "",
+    correo: "",
+    fecha_nacimiento: "",
+    genero: "",
+    presentacion: "",
+    created_at: "",
+    updated_at: "",
+    estatus: true,
+  });
 
-  const handleChangeSwitch = (event) => {
-    setState({ ...state, [event.target.name]: event.target.checked });
+  useEffect(() => {
+    setLoading(true);
+    const itemsRefComprometidos = firebase
+      .database()
+      .ref(`empresa/${"-N-i-AiUDuAZjgNUpGA8"}/clientes/${URLactual}`);
+    listenComprometidos(itemsRefComprometidos);
+    setLoading(false);
+  }, []);
+
+  const listenComprometidos = (itemsRefComprometidos) => {
+    itemsRefComprometidos.on("value", (snap) => {
+      const firebasedata = snap.val();
+      setState(firebasedata);
+    });
   };
 
   const handleChange = (event, newValue) => {
@@ -190,6 +225,73 @@ export default function DetalleCliente() {
   const handleChangeRowsPerPage = (event) => {
     setRowsPerPage(+event.target.value);
     setPage(0);
+  };
+
+  function handleChangeText(evt) {
+    const value = evt.target.value;
+    setState({
+      ...state,
+      [evt.target.name]: value,
+    });
+  }
+
+  const handleUpload = (event) => {
+    const file = event.target.files[0];
+    setImagen(file);
+  };
+
+  const update = () => {
+    const file = imagen;
+    if (file) {
+      const storageRef = firebase.storage().ref(`clientes/`);
+      const task = storageRef.put(file);
+      task.on(
+        "state_changed",
+        (snapshot) => {
+          let percentage =
+            (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+        },
+        (error) => {
+          console.error(error.message);
+        },
+        () =>
+          storageRef.getDownloadURL().then((url) => {
+            let updates = {};
+            updates[`empresa/${"-N-i-AiUDuAZjgNUpGA8"}/clientes/${URLactual}`] =
+              {
+                nombre: state.nombre,
+                apellido: state.apellido,
+                telefono: state.telefono,
+                correo: state.correo,
+                fecha_nacimiento: state.fecha_nacimiento,
+                genero: state.genero,
+                estatus: true,
+                created_at: state.created_at,
+                updated_at: Date.now(),
+                imagen: url,
+              };
+            firebase.database().ref().update(updates);
+            alert("Se ha actualizado el fondo");
+          })
+      );
+    } else {
+      let updates = {};
+      updates[`empresa/${"-N-i-AiUDuAZjgNUpGA8"}/colaboradores/${URLactual}`] =
+        {
+          nombre: state.nombre,
+          apellido: state.apellido,
+          telefono: state.telefono,
+          correo: state.correo,
+          fecha_nacimiento: state.fecha_nacimiento,
+          genero: state.genero,
+          estatus: true,
+          created_at: state.created_at,
+          updated_at: Date.now(),
+          imagen: state.imagen,
+        };
+      firebase.database().ref().update(updates);
+      alert("Se ha actualizado el fondo");
+    }
   };
 
   return (
@@ -221,7 +323,7 @@ export default function DetalleCliente() {
             <Tab label="Reservas" {...a11yProps(1)} />
             <Tab label="Sucursales" {...a11yProps(2)} />
             <Tab label="Mensajes" {...a11yProps(3)} />
-            <Tab label="Notificaciones" {...a11yProps(4)} />
+            {/* <Tab label="Notificaciones" {...a11yProps(4)} /> */}
           </Tabs>
           <TabPanel value={value} index={0} style={{ width: "86%" }}>
             <Grid container spacing={2}>
@@ -233,6 +335,9 @@ export default function DetalleCliente() {
                   id="outlined-basic"
                   label="Nombre"
                   variant="outlined"
+                  name="nombre"
+                  value={state.nombre}
+                  onChange={handleChangeText}
                   style={{ width: "100%" }}
                 />
               </Grid>
@@ -241,6 +346,9 @@ export default function DetalleCliente() {
                   id="outlined-basic"
                   label="Apellido"
                   variant="outlined"
+                  name="apellido"
+                  value={state.apellido}
+                  onChange={handleChangeText}
                   style={{ width: "100%" }}
                 />
               </Grid>
@@ -249,6 +357,9 @@ export default function DetalleCliente() {
                   id="outlined-basic"
                   label="Telefono"
                   variant="outlined"
+                  name="telefono"
+                  value={state.telefono}
+                  onChange={handleChangeText}
                   style={{ width: "100%" }}
                 />
               </Grid>
@@ -257,14 +368,9 @@ export default function DetalleCliente() {
                   id="outlined-basic"
                   label="Correo"
                   variant="outlined"
-                  style={{ width: "100%" }}
-                />
-              </Grid>
-              <Grid item xs={8}>
-                <TextField
-                  id="outlined-basic"
-                  label="Contraseña"
-                  variant="outlined"
+                  name="correo"
+                  value={state.correo}
+                  onChange={handleChangeText}
                   style={{ width: "100%" }}
                 />
               </Grid>
@@ -273,22 +379,51 @@ export default function DetalleCliente() {
                   id="outlined-basic"
                   label="Fecha de nacimiento"
                   variant="outlined"
+                  type="date"
+                  name="fecha_nacimiento"
+                  value={state.fecha_nacimiento}
+                  onChange={handleChangeText}
+                  InputLabelProps={{
+                    shrink: true,
+                  }}
                   style={{ width: "100%" }}
                 />
               </Grid>
               <Grid item xs={8}>
-                <TextField
-                  id="outlined-basic"
-                  label="Genero"
-                  variant="outlined"
-                  style={{ width: "100%" }}
-                />
+                <FormControl variant="outlined" className={classes.formControl}>
+                  <InputLabel id="demo-simple-select-outlined-label">
+                    Género
+                  </InputLabel>
+                  <Select
+                    labelId="demo-simple-select-outlined-label"
+                    id="demo-simple-select-outlined"
+                    name="genero"
+                    value={state.genero}
+                    onChange={handleChangeText}
+                    label="Género"
+                  >
+                    <MenuItem value="Hombre">
+                      <em>Hombre</em>
+                    </MenuItem>
+                    <MenuItem value="Mujer">
+                      <em>Mujer</em>
+                    </MenuItem>
+                    <MenuItem value="Otro">
+                      <em>Otro</em>
+                    </MenuItem>
+                  </Select>
+                </FormControl>
               </Grid>
               <Grid item xs={4}>
                 <TextField
                   id="outlined-basic"
                   label="Imagen"
                   variant="outlined"
+                  type="file"
+                  onChange={handleUpload}
+                  InputLabelProps={{
+                    shrink: true,
+                  }}
                   style={{ width: "100% " }}
                 />
               </Grid>
@@ -300,6 +435,21 @@ export default function DetalleCliente() {
                   id="outlined-basic"
                   label="Fecha de alta"
                   variant="outlined"
+                  value={
+                    new Date(state.created_at).getDate() +
+                    "/" +
+                    (new Date(state.created_at).getMonth() + 1) +
+                    "/" +
+                    new Date(state.created_at).getFullYear() +
+                    " a las " +
+                    new Date(state.created_at).getHours() +
+                    ":" +
+                    new Date(state.created_at).getMinutes()
+                  }
+                  InputLabelProps={{
+                    shrink: true,
+                  }}
+                  disabled
                   style={{ width: "100%" }}
                 />
               </Grid>
@@ -308,6 +458,21 @@ export default function DetalleCliente() {
                   id="outlined-basic"
                   label="Ultima modificacion"
                   variant="outlined"
+                  value={
+                    new Date(state.updated_at).getDate() +
+                    "/" +
+                    (new Date(state.updated_at).getMonth() + 1) +
+                    "/" +
+                    new Date(state.updated_at).getFullYear() +
+                    " a las " +
+                    new Date(state.updated_at).getHours() +
+                    ":" +
+                    new Date(state.updated_at).getMinutes()
+                  }
+                  InputLabelProps={{
+                    shrink: true,
+                  }}
+                  disabled
                   style={{ width: "100%" }}
                 />
               </Grid>
@@ -336,190 +501,22 @@ export default function DetalleCliente() {
                 />
               </Grid>
               <Grid item xs={12}>
-                <Button variant="contained" color="primary">
+                <Button variant="contained" color="primary" onClick={update}>
                   Guardar cambios
                 </Button>
               </Grid>
             </Grid>
           </TabPanel>
           <TabPanel value={value} index={1} style={{ width: "86%" }}>
-            <Grid container spacing={2}>
-              <Grid item xs={12}>
-                <Typography>Historial de reservas</Typography>
-              </Grid>
-              <Grid item xs={12}>
-                <TableContainer className={classes.container}>
-                  <Table stickyHeader aria-label="sticky table">
-                    <TableHead>
-                      <TableRow>
-                        {columns.map((column) => (
-                          <TableCell
-                            key={column.id}
-                            align="center"
-                            style={{
-                              width: column.width,
-                              background: "#3f51b5",
-                              color: "white",
-                              border: "0px solid #3f51b5",
-                            }}
-                          >
-                            {column.label}
-                          </TableCell>
-                        ))}
-                      </TableRow>
-                    </TableHead>
-                    <TableBody>
-                      {rows
-                        .slice(
-                          page * rowsPerPage,
-                          page * rowsPerPage + rowsPerPage
-                        )
-                        .map((row) => {
-                          return (
-                            <TableRow
-                              hover
-                              role="checkbox"
-                              tabIndex={-1}
-                              key={row.code}
-                            >
-                              {columns.map((column) => {
-                                const value = row[column.id];
-                                return (
-                                  <TableCell
-                                    key={column.id}
-                                    align="center"
-                                    style={{
-                                      width: column.width,
-                                      border: "0px solid #fff",
-                                    }}
-                                  >
-                                    {column.format && typeof value === "number"
-                                      ? column.format(value)
-                                      : value}
-                                  </TableCell>
-                                );
-                              })}
-                            </TableRow>
-                          );
-                        })}
-                    </TableBody>
-                  </Table>
-                </TableContainer>
-                <TablePagination
-                  rowsPerPageOptions={[10, 25, 100]}
-                  component="div"
-                  count={rows.length}
-                  rowsPerPage={rowsPerPage}
-                  page={page}
-                  onPageChange={handleChangePage}
-                  onRowsPerPageChange={handleChangeRowsPerPage}
-                />
-              </Grid>
-            </Grid>
+            <Reservas />
           </TabPanel>
           <TabPanel value={value} index={2} style={{ width: "86%" }}>
-            <Grid container>
-              <Grid item xs={12}>
-                <Typography>Sucursales</Typography>
-              </Grid>
-            </Grid>
-            <div className={classes.root}>
-              <List component="nav" aria-label="secondary mailbox folders">
-                <ListItem button>
-                  <ListItemText primary="Altabrisa" />
-                </ListItem>
-                <ListItemLink href="#simple-list">
-                  <ListItemText primary="Centro" />
-                </ListItemLink>
-                <ListItemLink href="#simple-list">
-                  <ListItemText primary="Francisco de Montejo" />
-                </ListItemLink>
-                <ListItemLink href="#simple-list">
-                  <ListItemText primary="Campestre" />
-                </ListItemLink>
-              </List>
-            </div>
-            <Typography>
-              Esta tabla es informativa. Para modificar datos has click en el
-              nombre de la sucursal relacionada para editar
-            </Typography>
+            <Sucursales />
           </TabPanel>
           <TabPanel value={value} index={3} style={{ width: "86%" }}>
-            <Grid container spacing={2}>
-              <Grid item xs={12}>
-                <Typography>Mensajes</Typography>
-              </Grid>
-              <Grid item xs={12}>
-                <TableContainer className={classes.container}>
-                  <Table stickyHeader aria-label="sticky table">
-                    <TableHead>
-                      <TableRow>
-                        {columnsMensaje.map((column) => (
-                          <TableCell
-                            key={column.id}
-                            align="center"
-                            style={{
-                              width: column.width,
-                              background: "#3f51b5",
-                              color: "white",
-                              border: "0px solid #3f51b5",
-                            }}
-                          >
-                            {column.label}
-                          </TableCell>
-                        ))}
-                      </TableRow>
-                    </TableHead>
-                    <TableBody>
-                      {rowsMensaje
-                        .slice(
-                          page * rowsPerPage,
-                          page * rowsPerPage + rowsPerPage
-                        )
-                        .map((row) => {
-                          return (
-                            <TableRow
-                              hover
-                              role="checkbox"
-                              tabIndex={-1}
-                              key={row.code}
-                            >
-                              {columnsMensaje.map((column) => {
-                                const value = row[column.id];
-                                return (
-                                  <TableCell
-                                    key={column.id}
-                                    align="center"
-                                    style={{
-                                      width: column.width,
-                                      border: "0px solid #fff",
-                                    }}
-                                  >
-                                    {column.format && typeof value === "number"
-                                      ? column.format(value)
-                                      : value}
-                                  </TableCell>
-                                );
-                              })}
-                            </TableRow>
-                          );
-                        })}
-                    </TableBody>
-                  </Table>
-                </TableContainer>
-                <TablePagination
-                  rowsPerPageOptions={[10, 25, 100]}
-                  component="div"
-                  count={rowsMensaje.length}
-                  rowsPerPage={rowsPerPage}
-                  page={page}
-                  onPageChange={handleChangePage}
-                  onRowsPerPageChange={handleChangeRowsPerPage}
-                />
-              </Grid>
-            </Grid>
+            <Mensajes />
           </TabPanel>
-          <TabPanel value={value} index={4} style={{ width: "86%" }}>
+          {/* <TabPanel value={value} index={4} style={{ width: "86%" }}>
             <Grid container spacing={2}>
               <Grid item xs={12}>
                 <Typography>Prefencia de Notificaciones</Typography>
@@ -650,7 +647,7 @@ export default function DetalleCliente() {
                 </Button>
               </Grid>
             </Grid>
-          </TabPanel>
+          </TabPanel> */}
         </div>
       </Paper>
     </div>

@@ -24,40 +24,6 @@ import Sucursales from "./Sucursales";
 import Servicios from "./Servicios";
 import Notificaciones from "./Notificaciones";
 
-const columns = [
-  { id: "sucursal", label: "Sucursal", width: "14%" },
-  { id: "precio", label: "Precio", width: "14%" },
-  { id: "preciosin", label: "Precio sin descuento", width: "14%" },
-  { id: "duracion", label: "Duracion", width: "14%" },
-  { id: "garantia", label: "Garantia para reservar", width: "14%" },
-  { id: "estatus", label: "Estatus", width: "14%" },
-  { id: "acciones", label: "Acciones", width: "14%" },
-];
-
-function createData(
-  sucursal,
-  precio,
-  preciosin,
-  duracion,
-  garantia,
-  estatus,
-  acciones
-) {
-  return {
-    sucursal,
-    precio,
-    preciosin,
-    duracion,
-    garantia,
-    estatus,
-    acciones,
-  };
-}
-
-const rows = [
-  createData("altabrisa", "$ 350", "$ 500", "15", "50%", "Activo", ""),
-];
-
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
 
@@ -246,7 +212,7 @@ export default function DetalleColaborador() {
           fecha_nacimiento: state.fecha_nacimiento,
           genero: state.genero,
           presentacion: state.presentacion,
-          created_at: Date.now(),
+          created_at: state.created_at,
           updated_at: Date.now(),
           imagen: state.imagen,
         };

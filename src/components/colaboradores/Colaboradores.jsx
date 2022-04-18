@@ -78,8 +78,6 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 });
 
 export default function Colaboradores() {
-  var URLactual = String(window.location).substr(-20);
-
   const classes = useStyles();
   const [data, setData] = React.useState([]);
   const [loading, setLoading] = React.useState(true);

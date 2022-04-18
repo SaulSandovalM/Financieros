@@ -35,8 +35,8 @@ import Snackbar from "@material-ui/core/Snackbar";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import MuiAlert from "@material-ui/lab/Alert";
 import firebase from "../../Firebase";
-
 import clsx from "clsx";
+
 import { TextField } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
