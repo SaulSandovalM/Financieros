@@ -134,7 +134,9 @@ export default function Sucursal() {
   });
 
   useEffect(() => {
-    const itemsRef = firebase.database().ref("sucursales/");
+    const itemsRef = firebase
+      .database()
+      .ref(`empresa/${"-N-i-AiUDuAZjgNUpGA8"}/sucursales/`);
     listenForItems(itemsRef);
   }, []);
 
@@ -215,7 +217,7 @@ export default function Sucursal() {
           ) {
             firebase
               .database()
-              .ref("sucursales")
+              .ref(`empresa/${"-N-i-AiUDuAZjgNUpGA8"}/sucursales/`)
               .push(params)
               .then(() => {
                 setSeverity("success");

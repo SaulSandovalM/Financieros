@@ -62,7 +62,7 @@ export default function Contacto() {
     setLoading(true);
     const itemsRefComprometidos = firebase
       .database()
-      .ref(`sucursales/${URLactual}/contacto`);
+      .ref(`empresa/-N-i-AiUDuAZjgNUpGA8/sucursales/${URLactual}/contacto`);
     listenComprometidos(itemsRefComprometidos);
     setLoading(false);
   }, []);
@@ -84,7 +84,9 @@ export default function Contacto() {
 
   const update = () => {
     let updates = {};
-    updates["sucursales/" + URLactual + "/contacto"] = {
+    updates[
+      "`empresa/-N-i-AiUDuAZjgNUpGA8/sucursales/" + URLactual + "/contacto"
+    ] = {
       telefono: data.telefono,
       telefono_dos: data.telefono_dos,
       facebook: data.facebook,

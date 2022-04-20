@@ -151,7 +151,7 @@ export default function Servicios() {
     setLoading(true);
     const itemsRefComprometidos = firebase
       .database()
-      .ref(`sucursales/${URLactual}/servicios`);
+      .ref(`empresa/-N-i-AiUDuAZjgNUpGA8/sucursales/${URLactual}/servicios`);
     listenComprometidos(itemsRefComprometidos);
     setLoading(false);
   }, []);
@@ -202,7 +202,9 @@ export default function Servicios() {
     ) {
       firebase
         .database()
-        .ref("sucursales/" + URLactual + "/servicios")
+        .ref(
+          "`empresa/-N-i-AiUDuAZjgNUpGA8/sucursales/" + URLactual + "/servicios"
+        )
         .push(params)
         .then(() => {
           setSeverity("success");

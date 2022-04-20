@@ -148,7 +148,9 @@ export default function Colaboradores() {
     setLoading(true);
     const itemsRefComprometidos = firebase
       .database()
-      .ref(`sucursales/${URLactual}/colaboradores`);
+      .ref(
+        `empresa/-N-i-AiUDuAZjgNUpGA8/sucursales/${URLactual}/colaboradores`
+      );
     listenComprometidos(itemsRefComprometidos);
     setLoading(false);
   }, []);
@@ -211,7 +213,11 @@ export default function Colaboradores() {
     ) {
       firebase
         .database()
-        .ref("sucursales/" + URLactual + "/colaboradores")
+        .ref(
+          "`empresa/-N-i-AiUDuAZjgNUpGA8/sucursales/" +
+            URLactual +
+            "/colaboradores"
+        )
         .push(params)
         .then(() => {
           setSeverity("success");

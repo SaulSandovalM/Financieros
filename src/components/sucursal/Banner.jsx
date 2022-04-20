@@ -137,7 +137,7 @@ export default function Banner() {
     setLoading(true);
     const itemsRefComprometidos = firebase
       .database()
-      .ref(`sucursales/${URLactual}/banner`);
+      .ref(`empresa/-N-i-AiUDuAZjgNUpGA8/sucursales/${URLactual}/banner`);
     listenComprometidos(itemsRefComprometidos);
     setLoading(false);
   }, []);
@@ -177,7 +177,11 @@ export default function Banner() {
           if (params.imagen) {
             firebase
               .database()
-              .ref("sucursales/" + URLactual + "/banner")
+              .ref(
+                "empresa/-N-i-AiUDuAZjgNUpGA8/sucursales/" +
+                  URLactual +
+                  "/banner"
+              )
               .push(params)
               .then(() => {
                 setSeverity("success");

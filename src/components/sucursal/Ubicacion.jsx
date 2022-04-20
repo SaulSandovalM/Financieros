@@ -57,7 +57,7 @@ export default function Ubicacion() {
     setLoading(true);
     const itemsRefComprometidos = firebase
       .database()
-      .ref(`sucursales/${URLactual}/ubicacion`);
+      .ref(`empresa/-N-i-AiUDuAZjgNUpGA8/sucursales/${URLactual}/ubicacion`);
     listenComprometidos(itemsRefComprometidos);
     setLoading(false);
   }, []);
@@ -79,7 +79,9 @@ export default function Ubicacion() {
 
   const update = () => {
     let updates = {};
-    updates["sucursales/" + URLactual + "/ubicacion"] = {
+    updates[
+      "`empresa/-N-i-AiUDuAZjgNUpGA8/sucursales/" + URLactual + "/ubicacion"
+    ] = {
       cp: data.cp,
       pais: data.pais,
       estado: data.estado,

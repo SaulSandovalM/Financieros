@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
 import { makeStyles } from "@material-ui/core/styles";
@@ -35,16 +35,16 @@ import MuiAlert from "@material-ui/lab/Alert";
 import firebase from "../../Firebase";
 
 const columns = [
-  { id: "hora", label: "Hora", width: "20%" },
+  { id: "fecha", label: "Hora", width: "20%" },
   { id: "cliente", label: "Cliente", width: "20%" },
   { id: "servicio", label: "Servicio", width: "20%" },
   { id: "colaborador", label: "Colaborador", width: "20%" },
   { id: "estatus", label: "Estatus", width: "20%" },
 ];
 
-function createData(hora, cliente, servicio, colaborador, estatus) {
+function createData(fecha, cliente, servicio, colaborador, estatus) {
   return {
-    hora,
+    fecha,
     cliente,
     servicio,
     colaborador,
@@ -121,20 +121,32 @@ const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="left" ref={ref} {...props} />;
 });
 
+function loadServerRows(page, data) {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      resolve(data.slice(page * 20, (page + 1) * 20));
+    }, Math.random() * 500 + 100); // simulate network latency
+  });
+}
+
 export default function Reservas() {
   const classes = useStyles();
 
+  const [loading, setLoading] = React.useState(false);
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
   const [age, setAge] = React.useState("");
   const [viewType, setViewType] = React.useState("Tabla");
   const [open, setOpen] = React.useState(false);
-  const [selectedDate, setSelectedDate] = React.useState(
-    new Date("2014-08-18T21:11:54")
-  );
   const [openAlert, setOpenAlert] = React.useState(false);
   const [severity, setSeverity] = React.useState("");
   const [reservas, setReservas] = React.useState([]);
+  const [clientes, setClientes] = React.useState([]);
+  const [servicios, setServicios] = React.useState([]);
+  const [sucursales, setSucursales] = React.useState([]);
+  const [colaboradores, setColaboradores] = React.useState([]);
+  const [change, setChange] = React.useState(false);
+  const [selected, setSelected] = React.useState("");
   const [state, setState] = React.useState({
     cliente: "",
     categoria: "",
@@ -147,6 +159,13 @@ export default function Reservas() {
     estatus: "",
     nota: "",
   });
+
+  // const history = useHistory();
+
+  const handleId = (id) => {
+    // history.push("/");
+    setSelected(id);
+  };
 
   const handleClickAlert = () => {
     setOpenAlert(true);
@@ -185,58 +204,192 @@ export default function Reservas() {
   };
 
   useEffect(() => {
-    const itemsRef = firebase.database().ref("reservas/");
-    listenForItems(itemsRef);
-  }, []);
+    const itemsRefClientes = firebase
+      .database()
+      .ref(`empresa/${"-N-i-AiUDuAZjgNUpGA8"}/clientes/`);
+    listenForClientes(itemsRefClientes);
+  }, [change]);
+
+  // useEffect(() => {
+  //   let active = true;
+
+  //   (async () => {
+  //     setLoading(true)
+  //     const newRows = await loadServerRows(page, presupuesto)
+  //     if (!active) {
+  //       return
+  //     }
+  //     setRows(newRows)
+  //     setLoading(false)
+  //   })()
+
+  //   return () => {
+  //     active = false
+  //   }
+  // }, [page, presupuesto])
+
+  const listenForClientes = (itemsRef) => {
+    itemsRef.on("value", (snap) => {
+      if (snap.exists()) {
+        console.log(snap.val());
+        var cliente = [];
+        snap.forEach((child) => {
+          cliente.push({
+            nombre: child.val().nombre,
+            correo: child.val().correo,
+            telefono: child.val().telefono,
+            id: child.key,
+          });
+        });
+        setClientes(cliente);
+
+        const itemsRefSucursales = firebase
+          .database()
+          .ref(`empresa/${"-N-i-AiUDuAZjgNUpGA8"}/sucursales/`);
+        listenForSucursales(itemsRefSucursales);
+      } else {
+        console.log("No data available");
+      }
+    });
+  };
+
+  const listenForServicios = (itemsRef) => {
+    itemsRef.on("value", (snap) => {
+      var servicios = [];
+      snap.forEach((child) => {
+        servicios.push({
+          nombre: child.val().nombre,
+          duracion: child.val().duracion,
+          precio_sin: child.val().precio_sin,
+          id: child.key,
+        });
+      });
+      setServicios(servicios);
+      const itemsRefColaboradores = firebase
+        .database()
+        .ref(`empresa/${"-N-i-AiUDuAZjgNUpGA8"}/colaboradores/`);
+      listenForColaboradores(itemsRefColaboradores);
+    });
+  };
+
+  const listenForSucursales = (itemsRef) => {
+    itemsRef.on("value", (snap) => {
+      var sucursales = [];
+      snap.forEach((child) => {
+        sucursales.push({
+          nombre: child.val().nombre,
+          id: child.key,
+        });
+      });
+      setSucursales(sucursales);
+      const itemsRefServicios = firebase
+        .database()
+        .ref(`empresa/${"-N-i-AiUDuAZjgNUpGA8"}/servicios/`);
+      listenForServicios(itemsRefServicios);
+    });
+  };
+
+  const listenForColaboradores = (itemsRef) => {
+    itemsRef.on("value", (snap) => {
+      var colaboradores = [];
+      snap.forEach((child) => {
+        colaboradores.push({
+          nombre: child.val().nombre,
+          id: child.key,
+        });
+      });
+      setColaboradores(colaboradores);
+      const itemsRef = firebase
+        .database()
+        .ref(`empresa/${"-N-i-AiUDuAZjgNUpGA8"}/reservas/`);
+      listenForItems(itemsRef);
+    });
+  };
 
   const listenForItems = (itemsRef) => {
     itemsRef.on("value", (snap) => {
       var reservas = [];
       snap.forEach((child) => {
         reservas.push({
-          cliente: child.val().cliente,
-          categoria: child.val().categoria,
-          servicio: child.val().servicio,
-          sucursal: child.val().sucursal,
-          colaborador: child.val().colaborador,
-          cupon: child.val().cupon,
+          cliente: clientes.map(
+            (item) => item.id === child.val().cliente && item.nombre
+          ),
+          correo: clientes.map(
+            (item) => item.id === child.val().cliente && item.correo
+          ),
+          telefono: clientes.map(
+            (item) => item.id === child.val().cliente && item.telefono
+          ),
+          servicio: servicios.map(
+            (item) => item.id === child.val().servicio && item.nombre
+          ),
+          duracion: servicios.map(
+            (item) => item.id === child.val().servicio && item.duracion
+          ),
+          precio: servicios.map(
+            (item) => item.id === child.val().servicio && item.precio_sin
+          ),
+          sucursal: sucursales.map(
+            (item) => item.id === child.val().sucursal && item.nombre
+          ),
+          colaborador: colaboradores.map(
+            (item) => item.id === child.val().colaborador && item.nombre
+          ),
           fecha: child.val().fecha,
-          hora: child.val().hora,
           estatus: child.val().estatus,
+          numero_reserva: child.val().numero_reserva,
           id: child.key,
         });
       });
       setReservas(reservas);
+      setChange(true);
     });
+  };
+
+  const convertMinsToHrsMins = (mins) => {
+    parseInt(mins);
+    let h = Math.floor(mins[0] / 60);
+    let m = mins[0] % 60;
+    h = h < 10 ? "0" + h : h;
+    m = m < 10 ? "0" + m : m;
+    return `${h}`;
+  };
+
+  const convertMins = (mins) => {
+    parseInt(mins);
+    let h = Math.floor(mins[0] / 60);
+    let m = mins[0] % 60;
+    h = h < 10 ? "0" + h : h;
+    m = m < 10 ? "0" + m : m;
+    return `${m}`;
   };
 
   const crearReserva = (e) => {
     e.preventDefault();
+    const date = state.fecha + " " + state.hora;
     const params = {
       cliente: state.cliente,
-      categoria: state.categoria,
+      // categoria: state.categoria,
       servicio: state.servicio,
       sucursal: state.sucursal,
       colaborador: state.colaborador,
       // cupon: state.cupon,
-      fecha: state.fecha,
-      hora: state.hora,
-      estatus: state.hora,
+      fecha: date,
+      estatus: true,
+      numero_reserva: reservas.length + 1,
     };
     if (
       params.cliente &&
-      params.categoria &&
       params.servicio &&
       params.sucursal &&
       params.colaborador &&
       // params.cupon &&
       params.fecha &&
-      params.hora &&
       params.estatus
     ) {
       firebase
         .database()
-        .ref("reservas")
+        .ref(`empresa/${"-N-i-AiUDuAZjgNUpGA8"}/reservas/`)
         .push(params)
         .then(() => {
           setSeverity("success");
@@ -381,13 +534,15 @@ export default function Reservas() {
                   onChange={handleChangeText}
                   label="Cliente"
                 >
-                  <MenuItem value="Juan">
-                    <em>Juan</em>
-                  </MenuItem>
+                  {clientes.map((item) => (
+                    <MenuItem value={item.id}>
+                      <em>{item.nombre}</em>
+                    </MenuItem>
+                  ))}
                 </Select>
               </FormControl>
             </Grid>
-            <Grid item xs={12}>
+            {/* <Grid item xs={12}>
               <FormControl
                 variant="outlined"
                 className={classes.formControlTwo}
@@ -404,7 +559,7 @@ export default function Reservas() {
                   </MenuItem>
                 </Select>
               </FormControl>
-            </Grid>
+            </Grid> */}
             <Grid item xs={12}>
               <FormControl
                 variant="outlined"
@@ -417,9 +572,11 @@ export default function Reservas() {
                   onChange={handleChangeText}
                   label="Servicio"
                 >
-                  <MenuItem value="Corte">
-                    <em>Corte</em>
-                  </MenuItem>
+                  {servicios.map((item) => (
+                    <MenuItem value={item.id}>
+                      <em>{item.nombre}</em>
+                    </MenuItem>
+                  ))}
                 </Select>
               </FormControl>
             </Grid>
@@ -435,9 +592,11 @@ export default function Reservas() {
                   onChange={handleChangeText}
                   label="Sucursal"
                 >
-                  <MenuItem value="Altabrisa">
-                    <em>Altabrisa</em>
-                  </MenuItem>
+                  {sucursales.map((item) => (
+                    <MenuItem value={item.id}>
+                      <em>{item.nombre}</em>
+                    </MenuItem>
+                  ))}
                 </Select>
               </FormControl>
             </Grid>
@@ -453,9 +612,11 @@ export default function Reservas() {
                   onChange={handleChangeText}
                   label="Colaborador"
                 >
-                  <MenuItem value="Sofia">
-                    <em>Sofia</em>
-                  </MenuItem>
+                  {colaboradores.map((item) => (
+                    <MenuItem value={item.id}>
+                      <em>{item.nombre}</em>
+                    </MenuItem>
+                  ))}
                 </Select>
               </FormControl>
             </Grid>
@@ -599,9 +760,10 @@ export default function Reservas() {
                                     width: column.width,
                                     border: "0px solid #fff",
                                   }}
+                                  onClick={() => handleId(row.id)}
                                 >
-                                  {column.format && typeof value === "number"
-                                    ? column.format(value)
+                                  {typeof value === "string"
+                                    ? value.slice(10)
                                     : value}
                                 </TableCell>
                               );
@@ -627,7 +789,7 @@ export default function Reservas() {
           <Grid item xs={8}>
             <Grid container spacing={2}>
               {reservas.map((item) => (
-                <Grid item xs={6}>
+                <Grid item xs={6} onClick={() => handleId(item.id)}>
                   <Card variant="outlined">
                     <CardContent>
                       <Typography variant="h6" component="h2">
@@ -690,7 +852,11 @@ export default function Reservas() {
                             Hora
                           </Typography>
                           <Typography variant="body2" component="p">
-                            {item.hora}
+                            {new Date(item.fecha).getHours() +
+                              ":" +
+                              (new Date(item.fecha).getMinutes() === 0
+                                ? "00"
+                                : new Date(item.fecha).getHours())}
                           </Typography>
                         </Grid>
                         <Grid item xs={6} style={{ marginTop: 15 }}>
@@ -714,113 +880,139 @@ export default function Reservas() {
           </Grid>
         )}
         <Grid item xs={4}>
-          <Paper style={{ height: "auto", padding: 20 }}>
-            <div style={{ display: "flex" }}>
-              <Typography style={{ marginRight: 20 }}>#20345</Typography>
-              <Link to="/editarreserva">
-                <Edit />
-              </Link>
-            </div>
-            <Divider />
-            <div
-              style={{
-                display: "flex",
-                justifyContent: "space-between",
-                marginTop: 15,
-                marginBottom: 15,
-              }}
-            >
-              <div style={{ width: "20%" }}>Imagen</div>
-              <div styke={{ width: "80%" }}>
-                <Typography>Sandra Martinez Ocampo</Typography>
-                <Typography>
-                  Cliente recurrente: 18 reservas anteriores
-                </Typography>
-                <Typography>Confiabilidad: 65%</Typography>
-                <Typography>sandra.martinez@gmail.com</Typography>
-                <Typography>Cel: 99913456789</Typography>
-              </div>
-            </div>
-            <Divider />
-            <div
-              style={{
-                display: "flex",
-                justifyContent: "space-between",
-                marginTop: 15,
-                marginBottom: 15,
-              }}
-            >
-              <div style={{ width: "20%" }}>Imagen</div>
-              <div style={{ width: "80%" }}>
+          {reservas.map((item) =>
+            item.id === selected ? (
+              <Paper style={{ height: "auto", padding: 20 }}>
+                <div style={{ display: "flex" }}>
+                  <Typography style={{ marginRight: 20 }}>
+                    # {item.numero_reserva}
+                  </Typography>
+                  <Link to={`/editarreserva/${item.id}`}>
+                    <Edit />
+                  </Link>
+                </div>
+                <Divider />
                 <div
                   style={{
                     display: "flex",
                     justifyContent: "space-between",
-                    width: "100%",
+                    marginTop: 15,
+                    marginBottom: 15,
                   }}
                 >
-                  <Typography>Tinte de pelo</Typography>
-                  <Typography>x1</Typography>
+                  <div style={{ width: "20%" }}>Imagen</div>
+                  <div styke={{ width: "80%" }}>
+                    <Typography>{item.cliente}</Typography>
+                    <Typography>
+                      Cliente recurrente: 18 reservas anteriores
+                    </Typography>
+                    <Typography>Confiabilidad: 65%</Typography>
+                    <Typography>{item.correo}</Typography>
+                    <Typography>Cel: {item.telefono}</Typography>
+                  </div>
                 </div>
-                <Typography>Mariana Martinez Campestre</Typography>
-                <Typography>21 Mar 2022</Typography>
+                <Divider />
                 <div
                   style={{
                     display: "flex",
                     justifyContent: "space-between",
-                    width: "100%",
+                    marginTop: 15,
+                    marginBottom: 15,
                   }}
                 >
-                  <Typography>9:30 - 10:00</Typography>
-                  <Typography>$ 650 MXN</Typography>
+                  <div style={{ width: "20%" }}>Imagen</div>
+                  <div style={{ width: "80%" }}>
+                    <div
+                      style={{
+                        display: "flex",
+                        justifyContent: "space-between",
+                        width: "100%",
+                      }}
+                    >
+                      <Typography>{item.servicio}</Typography>
+                    </div>
+                    <Typography>{item.colaborador}</Typography>
+                    <Typography>
+                      {new Date(item.fecha).getDate() +
+                        " " +
+                        monthNames[new Date(item.fecha).getMonth()] +
+                        " " +
+                        new Date(item.fecha).getFullYear()}
+                    </Typography>
+                    <div
+                      style={{
+                        display: "flex",
+                        justifyContent: "space-between",
+                        width: "100%",
+                      }}
+                    >
+                      <Typography>
+                        {new Date(item.fecha).getHours()}:
+                        {new Date(item.fecha).getMinutes() === 0
+                          ? "00"
+                          : new Date(item.fecha).getMinutes()}
+                        -{" "}
+                        {new Date(item.fecha).getHours() +
+                          parseInt(convertMinsToHrsMins(item.duracion))}
+                        :
+                        {new Date(item.fecha).getMinutes() === 0
+                          ? "00"
+                          : new Date(item.fecha).getMinutes() +
+                            parseInt(convertMins(item.duracion))}
+                      </Typography>
+                      <Typography>$ {item.precio} MXN</Typography>
+                    </div>
+                  </div>
                 </div>
-              </div>
-            </div>
-            <Divider />
-            <div
-              style={{
-                display: "flex",
-                justifyContent: "space-between",
-                marginTop: 15,
-                marginBottom: 15,
-              }}
-            >
-              <div style={{ width: "20%" }}>Imagen</div>
-              <div style={{ width: "80%" }}>
+                <Divider />
                 <div
                   style={{
                     display: "flex",
                     justifyContent: "space-between",
-                    width: "100%",
+                    marginTop: 15,
+                    marginBottom: 15,
                   }}
                 >
-                  <Typography>Metodo de pago</Typography>
-                  <Typography>Estatus</Typography>
+                  <div style={{ width: "20%" }}>Imagen</div>
+                  <div style={{ width: "80%" }}>
+                    <div
+                      style={{
+                        display: "flex",
+                        justifyContent: "space-between",
+                        width: "100%",
+                      }}
+                    >
+                      <Typography>Metodo de pago</Typography>
+                      <Typography>Estatus</Typography>
+                    </div>
+                    <div
+                      style={{
+                        display: "flex",
+                        justifyContent: "space-between",
+                        width: "100%",
+                      }}
+                    >
+                      <Typography>Por definir</Typography>
+                      <Typography>No pagado</Typography>
+                    </div>
+                  </div>
                 </div>
-                <div
-                  style={{
-                    display: "flex",
-                    justifyContent: "space-between",
-                    width: "100%",
-                  }}
-                >
-                  <Typography>Por definir</Typography>
-                  <Typography>No pagado</Typography>
+                <div>
+                  <div
+                    style={{ display: "flex", justifyContent: "space-between" }}
+                  >
+                    <Typography>Total</Typography>
+                    <Typography>$ {item.precio} mxn</Typography>
+                  </div>
+                  <div style={{ display: "flex", justifyContent: "center" }}>
+                    <Button variant="contained" color="primary">
+                      Completar servicio
+                    </Button>
+                  </div>
                 </div>
-              </div>
-            </div>
-            <div>
-              <div style={{ display: "flex", justifyContent: "space-between" }}>
-                <Typography>Total</Typography>
-                <Typography>$ 650.00 mxn</Typography>
-              </div>
-              <div style={{ display: "flex", justifyContent: "center" }}>
-                <Button variant="contained" color="primary">
-                  Completar servicio
-                </Button>
-              </div>
-            </div>
-          </Paper>
+              </Paper>
+            ) : null
+          )}
         </Grid>
       </Grid>
     </div>

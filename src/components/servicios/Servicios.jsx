@@ -108,6 +108,7 @@ export default function Servicios() {
   const [openAlert, setOpenAlert] = React.useState(false);
   const [severity, setSeverity] = React.useState("");
   const [loading, setLoading] = React.useState(true);
+  const [change, setChange] = React.useState(false);
   const [state, setState] = React.useState({
     nombre: "",
     precio: "",
@@ -119,30 +120,47 @@ export default function Servicios() {
   });
 
   useEffect(() => {
+    const itemsRefSucursales = firebase
+      .database()
+      .ref(`empresa/${"-N-i-AiUDuAZjgNUpGA8"}/sucursales/`);
+    itemsRefSucursales.on("value", (snap) => {
+      var sucursales = [];
+      snap.forEach((child) => {
+        sucursales.push({
+          nombre: child.val().nombre,
+          id: child.key,
+        });
+      });
+      setSucursales(sucursales);
+    });
+
     setLoading(true);
     const itemsRefComprometidos = firebase
       .database()
       .ref(`empresa/${"-N-i-AiUDuAZjgNUpGA8"}/servicios`);
     listenComprometidos(itemsRefComprometidos);
     setLoading(false);
-  }, []);
+  }, [change]);
 
   const listenComprometidos = (itemsRefComprometidos) => {
     itemsRefComprometidos.on("value", (snap) => {
-      var sucursales = [];
+      var servicios = [];
       snap.forEach((child) => {
-        sucursales.push({
+        servicios.push({
           id: child.key,
           nombre: child.val().nombre,
           precio: child.val().precio,
           precio_sin: child.val().precio_sin,
           duracion: child.val().duracion,
           garantia: child.val().garantia,
-          sucursal: child.val().sucursal,
+          sucursal: sucursales.map(
+            (item) => item.id === child.val().sucursal && item.nombre
+          ),
           estatus: child.val().estatus,
         });
       });
-      setData(sucursales);
+      setData(servicios);
+      setChange(true);
     });
   };
 
@@ -233,330 +251,336 @@ export default function Servicios() {
     }
   };
 
-  return (
-    <div className={classes.root}>
-      <Grid container spacing={2}>
-        <Grid item xs={12}>
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "row",
-            }}
-          >
-            <Typography variant="h4" style={{ marginRight: 30 }}>
-              Servicios
-            </Typography>
-          </div>
-        </Grid>
-        <Grid item xs={2}>
-          <FormControl variant="outlined" className={classes.formControl}>
-            <InputLabel id="demo-simple-select-outlined-label">
-              Sucursal
-            </InputLabel>
-            <Select
-              labelId="demo-simple-select-outlined-label"
-              id="demo-simple-select-outlined"
-              value={age}
-              onChange={handleChange}
-              label="Sucursal"
-            >
-              <MenuItem value="">
-                <em>None</em>
-              </MenuItem>
-              <MenuItem value={10}>Ten</MenuItem>
-              <MenuItem value={20}>Twenty</MenuItem>
-              <MenuItem value={30}>Thirty</MenuItem>
-            </Select>
-          </FormControl>
-        </Grid>
-        <Grid item xs={2}>
-          <FormControl variant="outlined" className={classes.formControl}>
-            <InputLabel id="demo-simple-select-outlined-label">
-              Filtrar por
-            </InputLabel>
-            <Select
-              labelId="demo-simple-select-outlined-label"
-              id="demo-simple-select-outlined"
-              value={age}
-              onChange={handleChange}
-              label="Filtrar por"
-            >
-              <MenuItem value="">
-                <em>None</em>
-              </MenuItem>
-              <MenuItem value={10}>Ten</MenuItem>
-              <MenuItem value={20}>Twenty</MenuItem>
-              <MenuItem value={30}>Thirty</MenuItem>
-            </Select>
-          </FormControl>
-        </Grid>
-        <Grid item xs={2}>
-          <TextField
-            variant="outlined"
-            label="Buscar"
-            className={classes.formControl}
-          />
-        </Grid>
-        <Grid item xs={2}>
-          <Button
-            variant="outlined"
-            className={classes.button}
-            startIcon={<ListIcon />}
-            onClick={() => handleChangeView("Tabla")}
-          >
-            Tabla
-          </Button>
-        </Grid>
-        <Grid item xs={2}>
-          <Button
-            variant="outlined"
-            className={classes.button}
-            startIcon={<AppsIcon />}
-            onClick={() => handleChangeView("Tarjetas")}
-          >
-            Tarjetas
-          </Button>
-        </Grid>
-        <Grid item xs={2}>
-          <Button
-            className={classes.button}
-            endIcon={<AddCircleIcon color="primary" />}
-            onClick={handleClickOpen}
-          >
-            Servicio
-          </Button>
-        </Grid>
-      </Grid>
-      <Snackbar
-        open={openAlert}
-        autoHideDuration={6000}
-        onClose={handleCloseAlert}
-      >
-        <Alert onClose={handleCloseAlert} severity={severity}>
-          {severity === "success" && "Se ha generado al reserva"}
-          {severity === "error" && "Al parecer algo salio mal"}
-          {severity === "warning" && "Por favor llena el formulario"}
-        </Alert>
-      </Snackbar>
-      <Dialog
-        open={open}
-        TransitionComponent={Transition}
-        onClose={handleClose}
-        classes={{
-          paper: classes.dialog,
-        }}
-      >
-        <DialogTitle>Nuevo servicio</DialogTitle>
-        <DialogContent>
-          <Grid container spacing={2}>
-            <Grid item xs={12}>
-              <FormControl
-                variant="outlined"
-                className={classes.formControlTwo}
-              >
-                <TextField
-                  variant="outlined"
-                  label="Nombre del servicio"
-                  multiline
-                  name="nombre"
-                  value={state.nombre}
-                  onChange={handleChangeText}
-                  style={{ width: "100%" }}
-                />
-              </FormControl>
-            </Grid>
-            <Grid item xs={12}>
-              <FormControl
-                variant="outlined"
-                className={classes.formControlTwo}
-              >
-                <TextField
-                  variant="outlined"
-                  label="Precio"
-                  multiline
-                  name="precio"
-                  value={state.precio}
-                  onChange={handleChangeText}
-                  style={{ width: "100%" }}
-                />
-              </FormControl>
-            </Grid>
-            <Grid item xs={12}>
-              <FormControl
-                variant="outlined"
-                className={classes.formControlTwo}
-              >
-                <TextField
-                  variant="outlined"
-                  value={state.precio_sin}
-                  onChange={handleChangeText}
-                  name="precio_sin"
-                  label="Precio sin descuento"
-                />
-              </FormControl>
-            </Grid>
-            <Grid item xs={12}>
-              <FormControl
-                variant="outlined"
-                className={classes.formControlTwo}
-              >
-                <TextField
-                  variant="outlined"
-                  value={state.duracion}
-                  onChange={handleChangeText}
-                  name="duracion"
-                  label="Duración"
-                />
-              </FormControl>
-            </Grid>
-            <Grid item xs={12}>
-              <FormControl
-                variant="outlined"
-                className={classes.formControlTwo}
-              >
-                <TextField
-                  variant="outlined"
-                  label="Garantía"
-                  name="garantia"
-                  value={state.garantia}
-                  onChange={handleChangeText}
-                />
-              </FormControl>
-            </Grid>
-            <Grid item xs={12}>
-              <FormControl
-                variant="outlined"
-                className={classes.formControlTwo}
-              >
-                <InputLabel id="demo-simple-select-outlined-label">
-                  Sucursal
-                </InputLabel>
-                <Select
-                  labelId="demo-simple-select-outlined-label"
-                  id="demo-simple-select-outlined"
-                  name="sucursal"
-                  value={state.sucursal}
-                  onChange={handleChangeText}
-                  label="Sucursal"
-                >
-                  {data.map((item) => (
-                    <MenuItem value={item.id}>{item.nombre}</MenuItem>
-                  ))}
-                </Select>
-              </FormControl>
-            </Grid>
-          </Grid>
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handleClose} color="primary">
-            Cancelar
-          </Button>
-          <Button onClick={crearServicio} color="primary">
-            Guardar
-          </Button>
-        </DialogActions>
-      </Dialog>
-      {viewType === "Tabla" ? (
-        <Paper className={classes.rootTable}>
-          <TableContainer className={classes.container}>
-            <Table className={classes.table} aria-label="simple table">
-              <TableHead style={{ background: "#3f51b5" }}>
-                <TableRow>
-                  <TableCell style={{ color: "white" }}>Servicio</TableCell>
-                  <TableCell style={{ color: "white" }}>Precio</TableCell>
-                  <TableCell style={{ color: "white" }}>
-                    Precio sin descuento
-                  </TableCell>
-                  <TableCell style={{ color: "white" }}>Duracion</TableCell>
-                  <TableCell style={{ color: "white" }}>
-                    Garantia para reservar
-                  </TableCell>
-                  <TableCell style={{ color: "white" }}>Sucursales</TableCell>
-                  <TableCell style={{ color: "white" }}>Estatus</TableCell>
-                  <TableCell style={{ color: "white" }}>Acciones</TableCell>
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                {data.map((row) => (
-                  <TableRow key={row.id}>
-                    <TableCell>{row.nombre}</TableCell>
-                    <TableCell>{row.precio}</TableCell>
-                    <TableCell>{row.precio_sin}</TableCell>
-                    <TableCell>{row.duracion}</TableCell>
-                    <TableCell>{row.garantia}</TableCell>
-                    <TableCell>{row.sucursal}</TableCell>
-                    <TableCell>{row.estatus ? "Activo" : "Inactivo"}</TableCell>
-                    <TableCell>
-                      <IconButton aria-label="settings">
-                        <Link to={`/detalleservicio/${row.id}`}>
-                          <MoreVertIcon />
-                        </Link>
-                      </IconButton>
-                    </TableCell>
-                  </TableRow>
-                ))}
-              </TableBody>
-            </Table>
-          </TableContainer>
-        </Paper>
-      ) : (
+  if (loading) {
+    return <div>Cargando ...</div>;
+  } else {
+    return (
+      <div className={classes.root}>
         <Grid container spacing={2}>
-          {data.map((item) => (
-            <Grid item xs={3}>
-              <Card variant="outlined">
-                <CardHeader
-                  avatar={
-                    <Avatar aria-label="recipe" className={classes.avatar}>
-                      {item.nombre.slice(0, 1)}
-                    </Avatar>
-                  }
-                  action={
-                    <Link to={`/detallesucursal/${item.id}`}>
-                      <IconButton aria-label="settings">
-                        <MoreVertIcon />
-                      </IconButton>
-                    </Link>
-                  }
-                  title={item.nombre}
-                />
-                <CardMedia
-                  className={classes.media}
-                  image={item.imagen}
-                  title="Paella dish"
-                />
-                <CardContent>
-                  <Typography
-                    variant="body2"
-                    color="textSecondary"
-                    component="p"
-                  >
-                    {item.precio}
-                  </Typography>
-                  <Typography
-                    variant="body2"
-                    color="textSecondary"
-                    component="p"
-                  >
-                    {item.precio_sin}
-                  </Typography>
-                </CardContent>
-                <CardActions disableSpacing>
-                  <IconButton
-                    className={clsx(classes.expand)}
-                    aria-label="show more"
-                  >
-                    <Chip
-                      size="small"
-                      label={item.estatus ? "Activo" : "Inactivo"}
-                      color="primary"
-                    />
-                  </IconButton>
-                </CardActions>
-              </Card>
-            </Grid>
-          ))}
+          <Grid item xs={12}>
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "row",
+              }}
+            >
+              <Typography variant="h4" style={{ marginRight: 30 }}>
+                Servicios
+              </Typography>
+            </div>
+          </Grid>
+          <Grid item xs={2}>
+            <FormControl variant="outlined" className={classes.formControl}>
+              <InputLabel id="demo-simple-select-outlined-label">
+                Sucursal
+              </InputLabel>
+              <Select
+                labelId="demo-simple-select-outlined-label"
+                id="demo-simple-select-outlined"
+                value={age}
+                onChange={handleChange}
+                label="Sucursal"
+              >
+                <MenuItem value="">
+                  <em>None</em>
+                </MenuItem>
+                <MenuItem value={10}>Ten</MenuItem>
+                <MenuItem value={20}>Twenty</MenuItem>
+                <MenuItem value={30}>Thirty</MenuItem>
+              </Select>
+            </FormControl>
+          </Grid>
+          <Grid item xs={2}>
+            <FormControl variant="outlined" className={classes.formControl}>
+              <InputLabel id="demo-simple-select-outlined-label">
+                Filtrar por
+              </InputLabel>
+              <Select
+                labelId="demo-simple-select-outlined-label"
+                id="demo-simple-select-outlined"
+                value={age}
+                onChange={handleChange}
+                label="Filtrar por"
+              >
+                <MenuItem value="">
+                  <em>None</em>
+                </MenuItem>
+                <MenuItem value={10}>Ten</MenuItem>
+                <MenuItem value={20}>Twenty</MenuItem>
+                <MenuItem value={30}>Thirty</MenuItem>
+              </Select>
+            </FormControl>
+          </Grid>
+          <Grid item xs={2}>
+            <TextField
+              variant="outlined"
+              label="Buscar"
+              className={classes.formControl}
+            />
+          </Grid>
+          <Grid item xs={2}>
+            <Button
+              variant="outlined"
+              className={classes.button}
+              startIcon={<ListIcon />}
+              onClick={() => handleChangeView("Tabla")}
+            >
+              Tabla
+            </Button>
+          </Grid>
+          <Grid item xs={2}>
+            <Button
+              variant="outlined"
+              className={classes.button}
+              startIcon={<AppsIcon />}
+              onClick={() => handleChangeView("Tarjetas")}
+            >
+              Tarjetas
+            </Button>
+          </Grid>
+          <Grid item xs={2}>
+            <Button
+              className={classes.button}
+              endIcon={<AddCircleIcon color="primary" />}
+              onClick={handleClickOpen}
+            >
+              Servicio
+            </Button>
+          </Grid>
         </Grid>
-      )}
-    </div>
-  );
+        <Snackbar
+          open={openAlert}
+          autoHideDuration={6000}
+          onClose={handleCloseAlert}
+        >
+          <Alert onClose={handleCloseAlert} severity={severity}>
+            {severity === "success" && "Se ha generado al reserva"}
+            {severity === "error" && "Al parecer algo salio mal"}
+            {severity === "warning" && "Por favor llena el formulario"}
+          </Alert>
+        </Snackbar>
+        <Dialog
+          open={open}
+          TransitionComponent={Transition}
+          onClose={handleClose}
+          classes={{
+            paper: classes.dialog,
+          }}
+        >
+          <DialogTitle>Nuevo servicio</DialogTitle>
+          <DialogContent>
+            <Grid container spacing={2}>
+              <Grid item xs={12}>
+                <FormControl
+                  variant="outlined"
+                  className={classes.formControlTwo}
+                >
+                  <TextField
+                    variant="outlined"
+                    label="Nombre del servicio"
+                    multiline
+                    name="nombre"
+                    value={state.nombre}
+                    onChange={handleChangeText}
+                    style={{ width: "100%" }}
+                  />
+                </FormControl>
+              </Grid>
+              <Grid item xs={12}>
+                <FormControl
+                  variant="outlined"
+                  className={classes.formControlTwo}
+                >
+                  <TextField
+                    variant="outlined"
+                    label="Precio"
+                    multiline
+                    name="precio"
+                    value={state.precio}
+                    onChange={handleChangeText}
+                    style={{ width: "100%" }}
+                  />
+                </FormControl>
+              </Grid>
+              <Grid item xs={12}>
+                <FormControl
+                  variant="outlined"
+                  className={classes.formControlTwo}
+                >
+                  <TextField
+                    variant="outlined"
+                    value={state.precio_sin}
+                    onChange={handleChangeText}
+                    name="precio_sin"
+                    label="Precio sin descuento"
+                  />
+                </FormControl>
+              </Grid>
+              <Grid item xs={12}>
+                <FormControl
+                  variant="outlined"
+                  className={classes.formControlTwo}
+                >
+                  <TextField
+                    variant="outlined"
+                    value={state.duracion}
+                    onChange={handleChangeText}
+                    name="duracion"
+                    label="Duración"
+                  />
+                </FormControl>
+              </Grid>
+              <Grid item xs={12}>
+                <FormControl
+                  variant="outlined"
+                  className={classes.formControlTwo}
+                >
+                  <TextField
+                    variant="outlined"
+                    label="Garantía"
+                    name="garantia"
+                    value={state.garantia}
+                    onChange={handleChangeText}
+                  />
+                </FormControl>
+              </Grid>
+              <Grid item xs={12}>
+                <FormControl
+                  variant="outlined"
+                  className={classes.formControlTwo}
+                >
+                  <InputLabel id="demo-simple-select-outlined-label">
+                    Sucursal
+                  </InputLabel>
+                  <Select
+                    labelId="demo-simple-select-outlined-label"
+                    id="demo-simple-select-outlined"
+                    name="sucursal"
+                    value={state.sucursal}
+                    onChange={handleChangeText}
+                    label="Sucursal"
+                  >
+                    {sucursales.map((item) => (
+                      <MenuItem value={item.id}>{item.nombre}</MenuItem>
+                    ))}
+                  </Select>
+                </FormControl>
+              </Grid>
+            </Grid>
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={handleClose} color="primary">
+              Cancelar
+            </Button>
+            <Button onClick={crearServicio} color="primary">
+              Guardar
+            </Button>
+          </DialogActions>
+        </Dialog>
+        {viewType === "Tabla" ? (
+          <Paper className={classes.rootTable}>
+            <TableContainer className={classes.container}>
+              <Table className={classes.table} aria-label="simple table">
+                <TableHead style={{ background: "#3f51b5" }}>
+                  <TableRow>
+                    <TableCell style={{ color: "white" }}>Servicio</TableCell>
+                    <TableCell style={{ color: "white" }}>Precio</TableCell>
+                    <TableCell style={{ color: "white" }}>
+                      Precio sin descuento
+                    </TableCell>
+                    <TableCell style={{ color: "white" }}>Duracion</TableCell>
+                    <TableCell style={{ color: "white" }}>
+                      Garantia para reservar
+                    </TableCell>
+                    <TableCell style={{ color: "white" }}>Sucursales</TableCell>
+                    <TableCell style={{ color: "white" }}>Estatus</TableCell>
+                    <TableCell style={{ color: "white" }}>Acciones</TableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {data.map((row) => (
+                    <TableRow key={row.id}>
+                      <TableCell>{row.nombre}</TableCell>
+                      <TableCell>{row.precio}</TableCell>
+                      <TableCell>{row.precio_sin}</TableCell>
+                      <TableCell>{row.duracion}</TableCell>
+                      <TableCell>{row.garantia}</TableCell>
+                      <TableCell>{row.sucursal}</TableCell>
+                      <TableCell>
+                        {row.estatus ? "Activo" : "Inactivo"}
+                      </TableCell>
+                      <TableCell>
+                        <IconButton aria-label="settings">
+                          <Link to={`/detalleservicio/${row.id}`}>
+                            <MoreVertIcon />
+                          </Link>
+                        </IconButton>
+                      </TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+            </TableContainer>
+          </Paper>
+        ) : (
+          <Grid container spacing={2}>
+            {data.map((item) => (
+              <Grid item xs={3}>
+                <Card variant="outlined">
+                  <CardHeader
+                    avatar={
+                      <Avatar aria-label="recipe" className={classes.avatar}>
+                        {item.nombre.slice(0, 1)}
+                      </Avatar>
+                    }
+                    action={
+                      <Link to={`/detallesucursal/${item.id}`}>
+                        <IconButton aria-label="settings">
+                          <MoreVertIcon />
+                        </IconButton>
+                      </Link>
+                    }
+                    title={item.nombre}
+                  />
+                  <CardMedia
+                    className={classes.media}
+                    image={item.imagen}
+                    title="Paella dish"
+                  />
+                  <CardContent>
+                    <Typography
+                      variant="body2"
+                      color="textSecondary"
+                      component="p"
+                    >
+                      {item.precio}
+                    </Typography>
+                    <Typography
+                      variant="body2"
+                      color="textSecondary"
+                      component="p"
+                    >
+                      {item.precio_sin}
+                    </Typography>
+                  </CardContent>
+                  <CardActions disableSpacing>
+                    <IconButton
+                      className={clsx(classes.expand)}
+                      aria-label="show more"
+                    >
+                      <Chip
+                        size="small"
+                        label={item.estatus ? "Activo" : "Inactivo"}
+                        color="primary"
+                      />
+                    </IconButton>
+                  </CardActions>
+                </Card>
+              </Grid>
+            ))}
+          </Grid>
+        )}
+      </div>
+    );
+  }
 }

@@ -151,7 +151,7 @@ export default function DetalleSucursal() {
     setLoading(true);
     const itemsRefComprometidos = firebase
       .database()
-      .ref(`sucursales/${URLactual}`);
+      .ref(`empresa/-N-i-AiUDuAZjgNUpGA8/sucursales/${URLactual}`);
     listenComprometidos(itemsRefComprometidos);
     setLoading(false);
   }, []);

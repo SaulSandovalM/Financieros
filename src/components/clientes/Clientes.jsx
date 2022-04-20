@@ -300,7 +300,7 @@ export default function Clientes() {
               >
                 <TextField
                   variant="outlined"
-                  label="Nombre del servicio"
+                  label="Nombre"
                   multiline
                   name="nombre"
                   value={state.nombre}

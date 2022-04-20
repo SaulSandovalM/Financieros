@@ -623,7 +623,7 @@ function App(props) {
           />
           <ProtectedRoute
             exact
-            path="/editarreserva"
+            path="/editarreserva/:id"
             component={EditarReserva}
             isAuthenticated={isAuthenticated}
             isVerifying={isVerifying}
