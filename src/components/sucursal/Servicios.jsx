@@ -23,6 +23,9 @@ import FormControl from "@material-ui/core/FormControl";
 import TextField from "@material-ui/core/TextField";
 import IconButton from "@material-ui/core/IconButton";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
+import InputLabel from "@material-ui/core/InputLabel";
+import MenuItem from "@material-ui/core/MenuItem";
+import Select from "@material-ui/core/Select";
 import firebase from "../../Firebase";
 
 function TabPanel(props) {
@@ -113,19 +116,15 @@ export default function Servicios() {
   const classes = useStyles();
 
   const [data, setData] = React.useState([]);
+  const [servicios, setServicios] = React.useState([]);
   const [loading, setLoading] = React.useState(true);
   const [openAlert, setOpenAlert] = React.useState(false);
   const [severity, setSeverity] = React.useState("");
   const [open, setOpen] = React.useState(false);
+  const [coincidencia, setCoincidencia] = React.useState([]);
+  const [change, setChange] = React.useState(false);
   const [state, setState] = React.useState({
     nombre: "",
-    estado: "",
-    administrador: "",
-    telefono: "",
-    correo: "",
-    direccion: "",
-    descripcion: "",
-    estatus: true,
   });
 
   const handleClickOpen = () => {
@@ -149,28 +148,61 @@ export default function Servicios() {
 
   useEffect(() => {
     setLoading(true);
-    const itemsRefComprometidos = firebase
+    const itemsRefServicios = firebase
       .database()
-      .ref(`empresa/-N-i-AiUDuAZjgNUpGA8/sucursales/${URLactual}/servicios`);
-    listenComprometidos(itemsRefComprometidos);
-    setLoading(false);
-  }, []);
+      .ref(`empresa/-N-i-AiUDuAZjgNUpGA8/servicios`);
+    listenServicios(itemsRefServicios);
 
-  const listenComprometidos = (itemsRefComprometidos) => {
-    itemsRefComprometidos.on("value", (snap) => {
+    const perro = data.map((item) => item.idServicio);
+    const perro2 = servicios.map((item) => item.id);
+
+    for (var i = 0; i < perro.length; i++) {
+      for (var j = 0; j < perro2.length; j++) {
+        if (perro[i] == perro2[j]) {
+          const array = [];
+          servicios.map((item) =>
+            item.id === perro2[j] ? array.push(item) : null
+          );
+          setCoincidencia(array);
+        }
+      }
+    }
+  }, [change]);
+
+  const listenServicios = (itemsRefServicios) => {
+    itemsRefServicios.on("value", (snap) => {
       var servicios = [];
       snap.forEach((child) => {
         servicios.push({
           id: child.key,
+          duracion: child.val().duracion,
+          estatus: child.val().estatus,
+          garantia: child.val().garantia,
           nombre: child.val().nombre,
           precio: child.val().precio,
           precio_sin: child.val().precio_sin,
-          duracion: child.val().duracion,
-          garantia: child.val().garantia,
-          estatus: child.val().estatus,
         });
       });
-      setData(servicios);
+      setServicios(servicios);
+      const itemsRefComprometidos = firebase
+        .database()
+        .ref(`empresa/-N-i-AiUDuAZjgNUpGA8/sucursales/${URLactual}/servicios`);
+      listenComprometidos(itemsRefComprometidos);
+    });
+  };
+
+  const listenComprometidos = (itemsRefComprometidos) => {
+    itemsRefComprometidos.on("value", (snap) => {
+      var servicio = [];
+      snap.forEach((child) => {
+        servicio.push({
+          id: child.key,
+          idServicio: child.val().idServicio,
+        });
+      });
+      setData(servicio);
+      setChange(true);
+      setLoading(false);
     });
   };
 
@@ -185,25 +217,13 @@ export default function Servicios() {
   const crearServicio = (e) => {
     e.preventDefault();
     const params = {
-      nombre: state.nombre,
-      precio: state.precio,
-      precio_sin: state.precio_sin,
-      duracion: state.duracion,
-      garantia: state.garantia,
-      estatus: true,
+      idServicio: state.nombre,
     };
-    if (
-      params.nombre &&
-      params.precio &&
-      params.precio_sin &&
-      params.duracion &&
-      params.garantia &&
-      params.estatus
-    ) {
+    if (params.idServicio) {
       firebase
         .database()
         .ref(
-          "`empresa/-N-i-AiUDuAZjgNUpGA8/sucursales/" + URLactual + "/servicios"
+          "empresa/-N-i-AiUDuAZjgNUpGA8/sucursales/" + URLactual + "/servicios"
         )
         .push(params)
         .then(() => {
@@ -212,12 +232,6 @@ export default function Servicios() {
           handleClose();
           setState({
             nombre: "",
-            precio: "",
-            precio_sin: "",
-            duracion: "",
-            correo: "",
-            garantia: "",
-            estatus: true,
           });
         })
         .catch(() => {
@@ -241,7 +255,7 @@ export default function Servicios() {
           onClose={handleCloseAlert}
         >
           <Alert onClose={handleCloseAlert} severity={severity}>
-            {severity === "success" && "Se ha generado al reserva"}
+            {severity === "success" && "Se ha generado el servicio"}
             {severity === "error" && "Al parecer algo salio mal"}
             {severity === "warning" && "Por favor llena el formulario"}
           </Alert>
@@ -262,18 +276,24 @@ export default function Servicios() {
                   variant="outlined"
                   className={classes.formControlTwo}
                 >
-                  <TextField
-                    variant="outlined"
-                    label="Nombre del servicio"
-                    multiline
+                  <InputLabel id="demo-simple-select-outlined-label">
+                    Servicio
+                  </InputLabel>
+                  <Select
+                    labelId="demo-simple-select-outlined-label"
+                    id="demo-simple-select-outlined"
                     name="nombre"
                     value={state.nombre}
                     onChange={handleChangeText}
-                    style={{ width: "100%" }}
-                  />
+                    label="Servicio"
+                  >
+                    {servicios.map((item) => (
+                      <MenuItem value={item.id}>{item.nombre}</MenuItem>
+                    ))}
+                  </Select>
                 </FormControl>
               </Grid>
-              <Grid item xs={12}>
+              {/* <Grid item xs={12}>
                 <FormControl
                   variant="outlined"
                   className={classes.formControlTwo}
@@ -330,7 +350,7 @@ export default function Servicios() {
                     onChange={handleChangeText}
                   />
                 </FormControl>
-              </Grid>
+              </Grid>*/}
             </Grid>
           </DialogContent>
           <DialogActions>
@@ -360,7 +380,7 @@ export default function Servicios() {
               endIcon={<AddCircleIcon color="primary" />}
               onClick={handleClickOpen}
             >
-              Nueva reserva
+              Nuevo servicio
             </Button>
           </Grid>
           <Grid item xs={12}>
@@ -380,7 +400,7 @@ export default function Servicios() {
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  {data.map((row) => (
+                  {coincidencia.map((row) => (
                     <TableRow key={row.id}>
                       <TableCell>{row.nombre}</TableCell>
                       <TableCell>$ {row.precio}</TableCell>

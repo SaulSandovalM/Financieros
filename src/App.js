@@ -2,6 +2,10 @@ import React from "react";
 import { Route, Switch, Link } from "react-router-dom";
 import { connect } from "react-redux";
 import ProtectedRoute from "./ProtectedRoute";
+// Firebase
+import firebase from "./Firebase";
+// import { getAuth, onAuthStateChanged } from "firebase/auth";
+// import { getFirestore, doc, getDoc } from "firebase/firestore";
 // material ui
 import clsx from "clsx";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
@@ -193,20 +197,73 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+// Firebase conf
+// const auth = getAuth(firebase);
+// const firestore = getFirestore(firebase);
+
 function App(props) {
   const { isAuthenticated, isVerifying } = props;
 
   const classes = useStyles();
   const theme = useTheme();
 
+  const [user, setUser] = React.useState(null);
   const [open, setOpen] = React.useState(false);
   const [openNotification, setOpenNotification] = React.useState(false);
   const anchorRef = React.useRef(null);
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
 
+  // const [comprometidos, setComprometidos] = React.useState();
+
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
+
+  // async function getRole(uid) {
+  //   const docRef = firebase.firestore().collection("users").doc(`${uid}`);
+  //   const unsubscribe = docRef.onSnapshot(this.onCollectionUpdate)
+  //   // const docSecret = await firebase.getDoc(docRef);
+  //   const finalInfo = docSecret.data().role;
+  //   return finalInfo;
+  // }
+
+  // onCollectionUpdate = (querySnapshot) => {
+  //   const comprometidos = []
+  //   querySnapshot.forEach((doc) => {
+  //     const { partida, presupuestal, no_proyecto, importe_comp } = doc.data()
+  //     comprometidos.push({
+  //       key: doc.id,
+  //       doc,
+  //       partida,
+  //       presupuestal,
+  //       no_proyecto,
+  //       importe_comp,
+  //     })
+  //   })
+  //   setComprometidos(comprometidos)
+  // }
+
+  // function setUserWithFirebaseAndRole(firebaseUser) {
+  //   getRole(firebaseUser.uid).then((role) => {
+  //     const userData = {
+  //       uid: firebaseUser.uid,
+  //       email: firebaseUser.email,
+  //       role: role,
+  //     };
+  //     setUser(userData);
+  //     console.log("final userData:", userData);
+  //   });
+  // }
+
+  // firebase.auth().onAuthStateChanged((firebaseUser) => {
+  //   if (firebaseUser) {
+  //     if (!user) {
+  //       setUserWithFirebaseAndRole(firebaseUser);
+  //     }
+  //   } else {
+  //     setUser(null);
+  //   }
+  // });
 
   const handleProfileMenuOpen = (event) => {
     setAnchorEl(event.currentTarget);

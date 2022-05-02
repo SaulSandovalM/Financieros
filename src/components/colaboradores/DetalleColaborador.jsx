@@ -221,110 +221,113 @@ export default function DetalleColaborador() {
     }
   };
 
-  return (
-    <div>
-      <Grid container>
-        <Grid item xs={12}>
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "row",
-            }}
-          >
-            <Typography variant="h4" style={{ marginRight: 30 }}>
-              Sucursal Nombre
-            </Typography>
-          </div>
+  if (loading) {
+    return <div>Cargando...</div>;
+  } else {
+    return (
+      <div>
+        <Grid container>
+          <Grid item xs={12}>
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "row",
+              }}
+            >
+              <Typography variant="h4" style={{ marginRight: 30 }}>
+                {state.nombre}
+              </Typography>
+            </div>
+          </Grid>
         </Grid>
-      </Grid>
-      <Paper style={{ marginTop: 20, width: "100%" }}>
-        <div className={classes.rootTabs}>
-          <Tabs
-            orientation="vertical"
-            value={value}
-            onChange={handleChange}
-            aria-label="Vertical tabs example"
-            className={classes.tabs}
-          >
-            <Tab label="Generales" {...a11yProps(0)} />
-            <Tab label="Horarios" {...a11yProps(1)} />
-            <Tab label="Sucursales" {...a11yProps(2)} />
-            <Tab label="Servicios" {...a11yProps(3)} />
-            <Tab label="Notificaciones" {...a11yProps(4)} />
-          </Tabs>
-          <TabPanel value={value} index={0} style={{ width: "86%" }}>
-            <Grid container spacing={2}>
-              <Grid item xs={12}>
-                <Typography>Generales</Typography>
-              </Grid>
-              <Grid item xs={4}>
-                <TextField
-                  id="outlined-basic"
-                  label="Nombre"
-                  variant="outlined"
-                  name="nombre"
-                  value={state.nombre}
-                  onChange={handleChangeText}
-                  style={{ width: "100%" }}
-                />
-              </Grid>
-              <Grid item xs={4}>
-                <TextField
-                  id="outlined-basic"
-                  label="Apellido"
-                  variant="outlined"
-                  name="apellido"
-                  value={state.apellido}
-                  onChange={handleChangeText}
-                  InputLabelProps={{
-                    shrink: true,
-                  }}
-                  style={{ width: "100%" }}
-                />
-              </Grid>
-              <Grid item xs={8}>
-                <TextField
-                  id="outlined-basic"
-                  label="Rol"
-                  variant="outlined"
-                  name="rol"
-                  value={state.rol}
-                  onChange={handleChangeText}
-                  InputLabelProps={{
-                    shrink: true,
-                  }}
-                  style={{ width: "100%" }}
-                />
-              </Grid>
-              <Grid item xs={8}>
-                <TextField
-                  id="outlined-basic"
-                  label="Telefono"
-                  variant="outlined"
-                  name="telefono"
-                  value={state.telefono}
-                  onChange={handleChangeText}
-                  InputLabelProps={{
-                    shrink: true,
-                  }}
-                  style={{ width: "100%" }}
-                />
-              </Grid>
-              <Grid item xs={8}>
-                <TextField
-                  id="outlined-basic"
-                  label="Correo"
-                  variant="outlined"
-                  name="correo"
-                  value={state.correo}
-                  onChange={handleChangeText}
-                  InputLabelProps={{
-                    shrink: true,
-                  }}
-                  style={{ width: "100%" }}
-                />
-              </Grid>
-              {/* <Grid item xs={8}>
+        <Paper style={{ marginTop: 20, width: "100%" }}>
+          <div className={classes.rootTabs}>
+            <Tabs
+              orientation="vertical"
+              value={value}
+              onChange={handleChange}
+              aria-label="Vertical tabs example"
+              className={classes.tabs}
+            >
+              <Tab label="Generales" {...a11yProps(0)} />
+              <Tab label="Horarios" {...a11yProps(1)} />
+              <Tab label="Sucursales" {...a11yProps(2)} />
+              <Tab label="Servicios" {...a11yProps(3)} />
+              {/* <Tab label="Notificaciones" {...a11yProps(4)} /> */}
+            </Tabs>
+            <TabPanel value={value} index={0} style={{ width: "86%" }}>
+              <Grid container spacing={2}>
+                <Grid item xs={12}>
+                  <Typography>Generales</Typography>
+                </Grid>
+                <Grid item xs={4}>
+                  <TextField
+                    id="outlined-basic"
+                    label="Nombre"
+                    variant="outlined"
+                    name="nombre"
+                    value={state.nombre}
+                    onChange={handleChangeText}
+                    style={{ width: "100%" }}
+                  />
+                </Grid>
+                <Grid item xs={4}>
+                  <TextField
+                    id="outlined-basic"
+                    label="Apellido"
+                    variant="outlined"
+                    name="apellido"
+                    value={state.apellido}
+                    onChange={handleChangeText}
+                    InputLabelProps={{
+                      shrink: true,
+                    }}
+                    style={{ width: "100%" }}
+                  />
+                </Grid>
+                <Grid item xs={8}>
+                  <TextField
+                    id="outlined-basic"
+                    label="Rol"
+                    variant="outlined"
+                    name="rol"
+                    value={state.rol}
+                    onChange={handleChangeText}
+                    InputLabelProps={{
+                      shrink: true,
+                    }}
+                    style={{ width: "100%" }}
+                  />
+                </Grid>
+                <Grid item xs={8}>
+                  <TextField
+                    id="outlined-basic"
+                    label="Telefono"
+                    variant="outlined"
+                    name="telefono"
+                    value={state.telefono}
+                    onChange={handleChangeText}
+                    InputLabelProps={{
+                      shrink: true,
+                    }}
+                    style={{ width: "100%" }}
+                  />
+                </Grid>
+                <Grid item xs={8}>
+                  <TextField
+                    id="outlined-basic"
+                    label="Correo"
+                    variant="outlined"
+                    name="correo"
+                    value={state.correo}
+                    onChange={handleChangeText}
+                    InputLabelProps={{
+                      shrink: true,
+                    }}
+                    style={{ width: "100%" }}
+                  />
+                </Grid>
+                {/* <Grid item xs={8}>
                 <TextField
                   id="outlined-basic"
                   label="Contraseña"
@@ -338,173 +341,177 @@ export default function DetalleColaborador() {
                   style={{ width: "100%" }}
                 />
               </Grid> */}
-              <Grid item xs={8}>
-                <TextField
-                  id="outlined-basic"
-                  label="Fecha de nacimiento"
-                  variant="outlined"
-                  name="fecha_nacimiento"
-                  type="date"
-                  value={state.fecha_nacimiento}
-                  InputLabelProps={{
-                    shrink: true,
-                  }}
-                  onChange={handleChangeText}
-                  style={{ width: "100%" }}
-                />
-              </Grid>
-              <Grid item xs={8}>
-                <FormControl variant="outlined" className={classes.formControl}>
-                  <InputLabel id="demo-simple-select-outlined-label">
-                    Género
-                  </InputLabel>
-                  <Select
-                    labelId="demo-simple-select-outlined-label"
-                    id="demo-simple-select-outlined"
-                    name="genero"
-                    value={state.genero}
+                <Grid item xs={8}>
+                  <TextField
+                    id="outlined-basic"
+                    label="Fecha de nacimiento"
+                    variant="outlined"
+                    name="fecha_nacimiento"
+                    type="date"
+                    value={state.fecha_nacimiento}
+                    InputLabelProps={{
+                      shrink: true,
+                    }}
                     onChange={handleChangeText}
-                    label="Género"
+                    style={{ width: "100%" }}
+                  />
+                </Grid>
+                <Grid item xs={8}>
+                  <FormControl
+                    variant="outlined"
+                    className={classes.formControl}
                   >
-                    <MenuItem value="Hombre">
-                      <em>Hombre</em>
-                    </MenuItem>
-                    <MenuItem value="Mujer">
-                      <em>Mujer</em>
-                    </MenuItem>
-                    <MenuItem value="Otro">
-                      <em>Otro</em>
-                    </MenuItem>
-                  </Select>
-                </FormControl>
+                    <InputLabel id="demo-simple-select-outlined-label">
+                      Género
+                    </InputLabel>
+                    <Select
+                      labelId="demo-simple-select-outlined-label"
+                      id="demo-simple-select-outlined"
+                      name="genero"
+                      value={state.genero}
+                      onChange={handleChangeText}
+                      label="Género"
+                    >
+                      <MenuItem value="Hombre">
+                        <em>Hombre</em>
+                      </MenuItem>
+                      <MenuItem value="Mujer">
+                        <em>Mujer</em>
+                      </MenuItem>
+                      <MenuItem value="Otro">
+                        <em>Otro</em>
+                      </MenuItem>
+                    </Select>
+                  </FormControl>
+                </Grid>
+                <Grid item xs={8}>
+                  <TextField
+                    id="outlined-basic"
+                    label="Presentacion"
+                    variant="outlined"
+                    name="presentacion"
+                    value={state.presentacion}
+                    onChange={handleChangeText}
+                    InputLabelProps={{
+                      shrink: true,
+                    }}
+                    style={{ width: "100%" }}
+                  />
+                </Grid>
+                <Grid item xs={4}>
+                  <TextField
+                    id="outlined-basic"
+                    type="file"
+                    label="Imagen"
+                    variant="outlined"
+                    onChange={handleUpload}
+                    style={{ width: "100% " }}
+                    InputLabelProps={{
+                      shrink: true,
+                    }}
+                  />
+                </Grid>
               </Grid>
-              <Grid item xs={8}>
-                <TextField
-                  id="outlined-basic"
-                  label="Presentacion"
-                  variant="outlined"
-                  name="presentacion"
-                  value={state.presentacion}
-                  onChange={handleChangeText}
-                  InputLabelProps={{
-                    shrink: true,
-                  }}
-                  style={{ width: "100%" }}
-                />
+              <Divider style={{ marginTop: 20, marginBottom: 20 }} />
+              <Grid container spacing={2}>
+                <Grid item xs={4}>
+                  <TextField
+                    id="outlined-basic"
+                    label="Fecha de alta"
+                    variant="outlined"
+                    value={
+                      new Date(state.created_at).getDate() +
+                      "/" +
+                      (new Date(state.created_at).getMonth() + 1) +
+                      "/" +
+                      new Date(state.created_at).getFullYear() +
+                      " a las " +
+                      new Date(state.created_at).getHours() +
+                      ":" +
+                      new Date(state.created_at).getMinutes()
+                    }
+                    InputLabelProps={{
+                      shrink: true,
+                    }}
+                    disabled
+                    style={{ width: "100%" }}
+                  />
+                </Grid>
+                <Grid item xs={4}>
+                  <TextField
+                    id="outlined-basic"
+                    label="Ultima modificacion"
+                    variant="outlined"
+                    value={
+                      new Date(state.created_at).getDate() +
+                      "/" +
+                      (new Date(state.created_at).getMonth() + 1) +
+                      "/" +
+                      new Date(state.created_at).getFullYear() +
+                      " a las " +
+                      new Date(state.created_at).getHours() +
+                      ":" +
+                      new Date(state.created_at).getMinutes()
+                    }
+                    InputLabelProps={{
+                      shrink: true,
+                    }}
+                    disabled
+                    style={{ width: "100%" }}
+                  />
+                </Grid>
+                <Grid item xs={4}>
+                  <TextField
+                    id="outlined-basic"
+                    label="Calificacion"
+                    variant="outlined"
+                    InputLabelProps={{
+                      shrink: true,
+                    }}
+                    disabled
+                    style={{ width: "100%" }}
+                  />
+                </Grid>
+                <Grid item xs={4}>
+                  <TextField
+                    id="outlined-basic"
+                    label="Alta por"
+                    variant="outlined"
+                    disabled
+                    style={{ width: "100%" }}
+                  />
+                </Grid>
+                <Grid item xs={4}>
+                  <TextField
+                    id="outlined-basic"
+                    label="Ultima modoficacion"
+                    variant="outlined"
+                    disabled
+                    style={{ width: "100%" }}
+                  />
+                </Grid>
+                <Grid item xs={12}>
+                  <Button variant="contained" color="primary" onClick={update}>
+                    Guardar cambios
+                  </Button>
+                </Grid>
               </Grid>
-              <Grid item xs={4}>
-                <TextField
-                  id="outlined-basic"
-                  type="file"
-                  label="Imagen"
-                  variant="outlined"
-                  onChange={handleUpload}
-                  style={{ width: "100% " }}
-                  InputLabelProps={{
-                    shrink: true,
-                  }}
-                />
-              </Grid>
-            </Grid>
-            <Divider style={{ marginTop: 20, marginBottom: 20 }} />
-            <Grid container spacing={2}>
-              <Grid item xs={4}>
-                <TextField
-                  id="outlined-basic"
-                  label="Fecha de alta"
-                  variant="outlined"
-                  value={
-                    new Date(state.created_at).getDate() +
-                    "/" +
-                    (new Date(state.created_at).getMonth() + 1) +
-                    "/" +
-                    new Date(state.created_at).getFullYear() +
-                    " a las " +
-                    new Date(state.created_at).getHours() +
-                    ":" +
-                    new Date(state.created_at).getMinutes()
-                  }
-                  InputLabelProps={{
-                    shrink: true,
-                  }}
-                  disabled
-                  style={{ width: "100%" }}
-                />
-              </Grid>
-              <Grid item xs={4}>
-                <TextField
-                  id="outlined-basic"
-                  label="Ultima modificacion"
-                  variant="outlined"
-                  value={
-                    new Date(state.created_at).getDate() +
-                    "/" +
-                    (new Date(state.created_at).getMonth() + 1) +
-                    "/" +
-                    new Date(state.created_at).getFullYear() +
-                    " a las " +
-                    new Date(state.created_at).getHours() +
-                    ":" +
-                    new Date(state.created_at).getMinutes()
-                  }
-                  InputLabelProps={{
-                    shrink: true,
-                  }}
-                  disabled
-                  style={{ width: "100%" }}
-                />
-              </Grid>
-              <Grid item xs={4}>
-                <TextField
-                  id="outlined-basic"
-                  label="Calificacion"
-                  variant="outlined"
-                  InputLabelProps={{
-                    shrink: true,
-                  }}
-                  disabled
-                  style={{ width: "100%" }}
-                />
-              </Grid>
-              <Grid item xs={4}>
-                <TextField
-                  id="outlined-basic"
-                  label="Alta por"
-                  variant="outlined"
-                  disabled
-                  style={{ width: "100%" }}
-                />
-              </Grid>
-              <Grid item xs={4}>
-                <TextField
-                  id="outlined-basic"
-                  label="Ultima modoficacion"
-                  variant="outlined"
-                  disabled
-                  style={{ width: "100%" }}
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <Button variant="contained" color="primary" onClick={update}>
-                  Guardar cambios
-                </Button>
-              </Grid>
-            </Grid>
-          </TabPanel>
-          <TabPanel value={value} index={1} style={{ width: "86%" }}>
-            <Horarios />
-          </TabPanel>
-          <TabPanel value={value} index={2} style={{ width: "86%" }}>
-            <Sucursales />
-          </TabPanel>
-          <TabPanel value={value} index={3} style={{ width: "86%" }}>
-            <Servicios />
-          </TabPanel>
-          <TabPanel value={value} index={4} style={{ width: "86%" }}>
-            <Notificaciones />
-          </TabPanel>
-        </div>
-      </Paper>
-    </div>
-  );
+            </TabPanel>
+            <TabPanel value={value} index={1} style={{ width: "86%" }}>
+              <Horarios />
+            </TabPanel>
+            <TabPanel value={value} index={2} style={{ width: "86%" }}>
+              <Sucursales />
+            </TabPanel>
+            <TabPanel value={value} index={3} style={{ width: "86%" }}>
+              <Servicios />
+            </TabPanel>
+            {/* <TabPanel value={value} index={4} style={{ width: "86%" }}>
+              <Notificaciones />
+            </TabPanel> */}
+          </div>
+        </Paper>
+      </div>
+    );
+  }
 }

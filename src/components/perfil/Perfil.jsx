@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import PropTypes from "prop-types";
 import { makeStyles } from "@material-ui/core/styles";
 import Tabs from "@material-ui/core/Tabs";
@@ -10,51 +10,19 @@ import Paper from "@material-ui/core/Paper";
 import Divider from "@material-ui/core/Divider";
 import { TextField } from "@material-ui/core";
 import Button from "@material-ui/core/Button";
-import Table from "@material-ui/core/Table";
-import TableBody from "@material-ui/core/TableBody";
-import TableCell from "@material-ui/core/TableCell";
-import TableContainer from "@material-ui/core/TableContainer";
-import TableHead from "@material-ui/core/TableHead";
-import TablePagination from "@material-ui/core/TablePagination";
-import TableRow from "@material-ui/core/TableRow";
-import List from "@material-ui/core/List";
-import ListItem from "@material-ui/core/ListItem";
-import ListItemText from "@material-ui/core/ListItemText";
-import Checkbox from "@material-ui/core/Checkbox";
+import firebase from "../../Firebase";
 
-const columns = [
-  { id: "sucursal", label: "Sucursal", width: "14%" },
-  { id: "precio", label: "Precio", width: "14%" },
-  { id: "preciosin", label: "Precio sin descuento", width: "14%" },
-  { id: "duracion", label: "Duracion", width: "14%" },
-  { id: "garantia", label: "Garantia para reservar", width: "14%" },
-  { id: "estatus", label: "Estatus", width: "14%" },
-  { id: "acciones", label: "Acciones", width: "14%" },
-];
-
-function createData(
-  sucursal,
-  precio,
-  preciosin,
-  duracion,
-  garantia,
-  estatus,
-  acciones
-) {
-  return {
-    sucursal,
-    precio,
-    preciosin,
-    duracion,
-    garantia,
-    estatus,
-    acciones,
-  };
-}
-
-const rows = [
-  createData("altabrisa", "$ 350", "$ 500", "15", "50%", "Activo", ""),
-];
+// import Table from "@material-ui/core/Table";
+// import TableBody from "@material-ui/core/TableBody";
+// import TableCell from "@material-ui/core/TableCell";
+// import TableContainer from "@material-ui/core/TableContainer";
+// import TableHead from "@material-ui/core/TableHead";
+// import TablePagination from "@material-ui/core/TablePagination";
+// import TableRow from "@material-ui/core/TableRow";
+// import List from "@material-ui/core/List";
+// import ListItem from "@material-ui/core/ListItem";
+// import ListItemText from "@material-ui/core/ListItemText";
+// import Checkbox from "@material-ui/core/Checkbox";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -128,10 +96,6 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function ListItemLink(props) {
-  return <ListItem button component="a" {...props} />;
-}
-
 export default function Perfil() {
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
@@ -140,11 +104,20 @@ export default function Perfil() {
     checkedA: true,
     checkedB: true,
   });
-  const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(10);
+  const [data, setData] = React.useState();
 
-  const handleChangeSwitch = (event) => {
-    setState({ ...state, [event.target.name]: event.target.checked });
+  useEffect(() => {
+    const itemsRefData = firebase
+      .database()
+      .ref(`empresa/${"-N-i-AiUDuAZjgNUpGA8"}/`);
+    listenForData(itemsRefData);
+  }, []);
+
+  const listenForData = (itemsRef) => {
+    itemsRef.on("value", (snap) => {
+      const data = snap.val();
+      setData(data);
+    });
   };
 
   const handleChange = (event, newValue) => {
@@ -153,15 +126,6 @@ export default function Perfil() {
 
   const handleChangeCheack = (event) => {
     setChecked(event.target.checked);
-  };
-
-  const handleChangePage = (event, newPage) => {
-    setPage(newPage);
-  };
-
-  const handleChangeRowsPerPage = (event) => {
-    setRowsPerPage(+event.target.value);
-    setPage(0);
   };
 
   return (
@@ -190,7 +154,7 @@ export default function Perfil() {
             className={classes.tabs}
           >
             <Tab label="Generales" {...a11yProps(0)} />
-            <Tab label="Notificaciones" {...a11yProps(1)} />
+            {/* <Tab label="Notificaciones" {...a11yProps(1)} /> */}
           </Tabs>
           <TabPanel value={value} index={0} style={{ width: "86%" }}>
             <Grid container spacing={2}>
@@ -303,7 +267,7 @@ export default function Perfil() {
               </Grid>
             </Grid>
           </TabPanel>
-          <TabPanel value={value} index={1} style={{ width: "86%" }}>
+          {/* <TabPanel value={value} index={1} style={{ width: "86%" }}>
             <Grid container spacing={2}>
               <Grid item xs={12}>
                 <Typography>Prefencia de Notificaciones</Typography>
@@ -399,7 +363,7 @@ export default function Perfil() {
                 </Button>
               </Grid>
             </Grid>
-          </TabPanel>
+          </TabPanel> */}
         </div>
       </Paper>
     </div>

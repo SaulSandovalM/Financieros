@@ -416,6 +416,7 @@ export default class Demo extends React.PureComponent {
     itemsRef.on("value", (snap) => {
       var reservas = [];
       snap.forEach((child) => {
+        console.log(child.val().servicio);
         reservas.push({
           // cliente: child.val().cliente,
           title: this.state.servicios.map(
@@ -426,7 +427,14 @@ export default class Demo extends React.PureComponent {
           ),
           // colaborador: child.val().colaborador,
           startDate: new Date(child.val().fecha),
-          endDate: new Date(2022, 3, 17, 20, 30),
+          endDate: new Date(
+            new Date(child.val().fecha).getTime() +
+              this.state.servicios.map(
+                (item) =>
+                  item.id === "-N-i0g0lDi6ENh8r9cSB" && parseInt(item.duracion)
+              )[0] *
+                60000
+          ),
           // hora: child.val().hora,
           // estatus: child.val().estatus,
           id: child.key,
@@ -435,6 +443,7 @@ export default class Demo extends React.PureComponent {
       this.setState({
         reservas: reservas,
       });
+      console.log(reservas);
     });
   };
 
@@ -444,6 +453,7 @@ export default class Demo extends React.PureComponent {
       snap.forEach((child) => {
         servicios.push({
           nombre: child.val().nombre,
+          duracion: child.val().duracion,
           id: child.key,
         });
       });
@@ -547,9 +557,23 @@ export default class Demo extends React.PureComponent {
 
     console.log(reservas);
 
+    console.log(
+      this.state.servicios.map(
+        (item) => item.id === "-N-i0g0lDi6ENh8r9cSB" && parseInt(item.duracion)
+      )[0]
+    );
+
+    const allDayLocalizationMessages = {
+      "es-MX": {
+        allDay: "Dias",
+      },
+    };
+
+    const getAllDayMessages = (locale) => allDayLocalizationMessages[locale];
+
     return (
       <Paper>
-        <Scheduler data={reservas} height={660}>
+        <Scheduler data={reservas} height={660} locale={"es-MX"}>
           <ViewState currentDate={currentDate} />
           <EditingState
             onCommitChanges={this.commitChanges}
@@ -563,7 +587,7 @@ export default class Demo extends React.PureComponent {
             endDayHour={endDayHour}
           />
           <MonthView name="Mes" />
-          <AllDayPanel />
+          <AllDayPanel messages={getAllDayMessages("es-MX")} />
           <EditRecurrenceMenu />
           <Appointments />
           <AppointmentTooltip

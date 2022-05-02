@@ -290,7 +290,7 @@ export default function Colaboradores() {
           paper: classes.dialog,
         }}
       >
-        <DialogTitle>Nueva sucursal</DialogTitle>
+        <DialogTitle>Nuevo Colaborador</DialogTitle>
         <DialogContent>
           <Grid container spacing={2}>
             <Grid item xs={12}>

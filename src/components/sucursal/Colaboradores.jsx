@@ -20,7 +20,9 @@ import DialogContent from "@material-ui/core/DialogContent";
 import Slide from "@material-ui/core/Slide";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import FormControl from "@material-ui/core/FormControl";
-import TextField from "@material-ui/core/TextField";
+import InputLabel from "@material-ui/core/InputLabel";
+import MenuItem from "@material-ui/core/MenuItem";
+import Select from "@material-ui/core/Select";
 import IconButton from "@material-ui/core/IconButton";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
 import firebase from "../../Firebase";
@@ -117,12 +119,11 @@ export default function Colaboradores() {
   const [openAlert, setOpenAlert] = React.useState(false);
   const [severity, setSeverity] = React.useState("");
   const [open, setOpen] = React.useState(false);
+  const [colaboradores, setColaboradores] = React.useState([]);
+  const [coincidencia, setCoincidencia] = React.useState([]);
+  const [change, setChange] = React.useState(false);
   const [state, setState] = React.useState({
-    nombre: "",
-    rol: "",
-    dias: "",
-    horarios: "",
-    estatus: true,
+    colaborador: "",
   });
 
   const handleClickOpen = () => {
@@ -146,29 +147,61 @@ export default function Colaboradores() {
 
   useEffect(() => {
     setLoading(true);
-    const itemsRefComprometidos = firebase
+    const itemsRefColaboradores = firebase
       .database()
-      .ref(
-        `empresa/-N-i-AiUDuAZjgNUpGA8/sucursales/${URLactual}/colaboradores`
-      );
-    listenComprometidos(itemsRefComprometidos);
-    setLoading(false);
-  }, []);
+      .ref(`empresa/-N-i-AiUDuAZjgNUpGA8/colaboradores/`);
+    listenColaboradores(itemsRefColaboradores);
+
+    const perro = data.map((item) => item.idColaborador);
+    const perro2 = colaboradores.map((item) => item.id);
+
+    for (var i = 0; i < perro.length; i++) {
+      for (var j = 0; j < perro2.length; j++) {
+        if (perro[i] == perro2[j]) {
+          const array = [];
+          colaboradores.map((item) =>
+            item.id === perro2[j] ? array.push(item) : null
+          );
+          setCoincidencia(array);
+        }
+      }
+    }
+  }, [change]);
 
   const listenComprometidos = (itemsRefComprometidos) => {
     itemsRefComprometidos.on("value", (snap) => {
-      var servicios = [];
+      var colaboradores = [];
       snap.forEach((child) => {
-        servicios.push({
+        colaboradores.push({
+          id: child.key,
+          idColaborador: child.val().idColaborador,
+        });
+      });
+      setData(colaboradores);
+      setChange(true);
+      setLoading(false);
+    });
+  };
+
+  const listenColaboradores = (itemsRefColaboradores) => {
+    itemsRefColaboradores.on("value", (snap) => {
+      var colaboradores = [];
+      snap.forEach((child) => {
+        colaboradores.push({
           id: child.key,
           nombre: child.val().nombre,
+          apellido: child.val().apellido,
           rol: child.val().rol,
-          dias: child.val().dias,
-          horarios: child.val().horarios,
           estatus: child.val().estatus,
         });
       });
-      setData(servicios);
+      setColaboradores(colaboradores);
+      const itemsRefComprometidos = firebase
+        .database()
+        .ref(
+          `empresa/-N-i-AiUDuAZjgNUpGA8/sucursales/${URLactual}/colaboradores`
+        );
+      listenComprometidos(itemsRefComprometidos);
     });
   };
 
@@ -198,38 +231,37 @@ export default function Colaboradores() {
   const crearColaborador = (e) => {
     e.preventDefault();
     const params = {
-      nombre: state.nombre,
-      rol: state.rol,
-      dias: state.dias,
-      horarios: state.horarios,
-      estatus: true,
+      idColaborador: state.colaborador,
     };
-    if (
-      params.nombre &&
-      params.rol &&
-      params.dias &&
-      params.horarios &&
-      params.estatus
-    ) {
+    if (params.idColaborador) {
       firebase
         .database()
         .ref(
-          "`empresa/-N-i-AiUDuAZjgNUpGA8/sucursales/" +
+          "empresa/-N-i-AiUDuAZjgNUpGA8/sucursales/" +
             URLactual +
             "/colaboradores"
         )
         .push(params)
         .then(() => {
-          setSeverity("success");
-          handleClickAlert();
-          handleClose();
-          setState({
-            nombre: "",
-            rol: "",
-            dias: "",
-            horarios: "",
-            estatus: true,
-          });
+          const add = {
+            idSucursal: URLactual,
+          };
+          firebase
+            .database()
+            .ref(
+              "empresa/-N-i-AiUDuAZjgNUpGA8/colaboradores/" +
+                state.colaborador +
+                "/sucursales"
+            )
+            .push(add)
+            .then(() => {
+              setSeverity("success");
+              handleClickAlert();
+              handleClose();
+              setState({
+                colaborador: "",
+              });
+            });
         })
         .catch(() => {
           setSeverity("error");
@@ -265,7 +297,7 @@ export default function Colaboradores() {
             paper: classes.dialog,
           }}
         >
-          <DialogTitle>Nuevo servicio</DialogTitle>
+          <DialogTitle>Agregar Colaborador</DialogTitle>
           <DialogContent>
             <Grid container spacing={2}>
               <Grid item xs={12}>
@@ -273,57 +305,21 @@ export default function Colaboradores() {
                   variant="outlined"
                   className={classes.formControlTwo}
                 >
-                  <TextField
-                    variant="outlined"
-                    label="Nombre del colaborador"
-                    name="nombre"
-                    value={state.nombre}
+                  <InputLabel>Colaborador</InputLabel>
+                  <Select
+                    name="colaborador"
+                    value={state.colaborador}
                     onChange={handleChangeText}
-                    style={{ width: "100%" }}
-                  />
-                </FormControl>
-              </Grid>
-              <Grid item xs={12}>
-                <FormControl
-                  variant="outlined"
-                  className={classes.formControlTwo}
-                >
-                  <TextField
-                    variant="outlined"
-                    label="Rol"
-                    name="rol"
-                    value={state.rol}
-                    onChange={handleChangeText}
-                    style={{ width: "100%" }}
-                  />
-                </FormControl>
-              </Grid>
-              <Grid item xs={12}>
-                <FormControl
-                  variant="outlined"
-                  className={classes.formControlTwo}
-                >
-                  <TextField
-                    variant="outlined"
-                    value={state.dias}
-                    onChange={handleChangeText}
-                    name="dias"
-                    label="Dias"
-                  />
-                </FormControl>
-              </Grid>
-              <Grid item xs={12}>
-                <FormControl
-                  variant="outlined"
-                  className={classes.formControlTwo}
-                >
-                  <TextField
-                    variant="outlined"
-                    value={state.horarios}
-                    onChange={handleChangeText}
-                    name="horarios"
-                    label="Horarios"
-                  />
+                    label="Colaborador"
+                  >
+                    {colaboradores.map((item) => (
+                      <MenuItem value={item.id}>
+                        <em>
+                          {item.nombre} {item.apellido}
+                        </em>
+                      </MenuItem>
+                    ))}
+                  </Select>
                 </FormControl>
               </Grid>
             </Grid>
@@ -374,7 +370,7 @@ export default function Colaboradores() {
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  {data.map((row) => (
+                  {coincidencia.map((row) => (
                     <TableRow key={row.id}>
                       <TableCell>{row.nombre}</TableCell>
                       <TableCell>{row.rol}</TableCell>

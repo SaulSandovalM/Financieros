@@ -42,26 +42,6 @@ const columns = [
   { id: "estatus", label: "Estatus", width: "20%" },
 ];
 
-function createData(fecha, cliente, servicio, colaborador, estatus) {
-  return {
-    fecha,
-    cliente,
-    servicio,
-    colaborador,
-    estatus,
-  };
-}
-
-const rows = [
-  createData(
-    "9:00 am",
-    "Sandra Martinez",
-    "Tinte de pelo",
-    "Marina Martinez",
-    "$ 450 MXN"
-  ),
-];
-
 function Alert(props) {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
 }
@@ -121,13 +101,13 @@ const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="left" ref={ref} {...props} />;
 });
 
-function loadServerRows(page, data) {
-  return new Promise((resolve) => {
-    setTimeout(() => {
-      resolve(data.slice(page * 20, (page + 1) * 20));
-    }, Math.random() * 500 + 100); // simulate network latency
-  });
-}
+// function loadServerRows(page, data) {
+//   return new Promise((resolve) => {
+//     setTimeout(() => {
+//       resolve(data.slice(page * 20, (page + 1) * 20));
+//     }, Math.random() * 500 + 100); // simulate network latency
+//   });
+// }
 
 export default function Reservas() {
   const classes = useStyles();
@@ -147,6 +127,9 @@ export default function Reservas() {
   const [colaboradores, setColaboradores] = React.useState([]);
   const [change, setChange] = React.useState(false);
   const [selected, setSelected] = React.useState("");
+  const [sucursalServicio, setSucursalServicio] = React.useState([]);
+  const [sucursalColaborador, setSucursalColaborador] = React.useState([]);
+  const [horas, setHoras] = React.useState([]);
   const [state, setState] = React.useState({
     cliente: "",
     categoria: "",
@@ -203,6 +186,14 @@ export default function Reservas() {
     setOpen(false);
   };
 
+  function handleChangeText(evt) {
+    const value = evt.target.value;
+    setState({
+      ...state,
+      [evt.target.name]: value,
+    });
+  }
+
   useEffect(() => {
     const itemsRefClientes = firebase
       .database()
@@ -229,9 +220,9 @@ export default function Reservas() {
   // }, [page, presupuesto])
 
   const listenForClientes = (itemsRef) => {
+    setLoading(true);
     itemsRef.on("value", (snap) => {
       if (snap.exists()) {
-        console.log(snap.val());
         var cliente = [];
         snap.forEach((child) => {
           cliente.push({
@@ -257,12 +248,14 @@ export default function Reservas() {
     itemsRef.on("value", (snap) => {
       var servicios = [];
       snap.forEach((child) => {
-        servicios.push({
-          nombre: child.val().nombre,
-          duracion: child.val().duracion,
-          precio_sin: child.val().precio_sin,
-          id: child.key,
-        });
+        if (child.key === state.sucursal) {
+          servicios.push({
+            nombre: child.val().nombre,
+            duracion: child.val().duracion,
+            precio_sin: child.val().precio_sin,
+            id: child.key,
+          });
+        }
       });
       setServicios(servicios);
       const itemsRefColaboradores = firebase
@@ -286,6 +279,79 @@ export default function Reservas() {
         .database()
         .ref(`empresa/${"-N-i-AiUDuAZjgNUpGA8"}/servicios/`);
       listenForServicios(itemsRefServicios);
+    });
+  };
+
+  const listenSucursalServicios = (props) => {
+    var newServicios = [];
+    const itemsRefServiciosSucursal = firebase
+      .database()
+      .ref(`empresa/${"-N-i-AiUDuAZjgNUpGA8"}/sucursales/${props}/servicios/`);
+    itemsRefServiciosSucursal.on("value", (snap) => {
+      snap.forEach((child) => {
+        newServicios.push({
+          idServicio: child.val().idServicio,
+        });
+      });
+    });
+    listenSucursalServiciosNext(newServicios);
+
+    var newColaborador = [];
+    const itemsRefServiciosColaboradores = firebase
+      .database()
+      .ref(
+        `empresa/${"-N-i-AiUDuAZjgNUpGA8"}/sucursales/${props}/colaboradores/`
+      );
+    itemsRefServiciosColaboradores.on("value", (snap) => {
+      snap.forEach((child) => {
+        newColaborador.push({
+          idColaborador: child.val().idColaborador,
+        });
+      });
+    });
+    console.log(newColaborador);
+    listenSucursalColaborador(newColaborador);
+  };
+
+  const listenSucursalServiciosNext = (props) => {
+    const itemsRefServicios = firebase
+      .database()
+      .ref(`empresa/${"-N-i-AiUDuAZjgNUpGA8"}/servicios/`);
+    itemsRefServicios.on("value", (snap) => {
+      var servicios = [];
+      snap.forEach((child) => {
+        props.map((item) => {
+          if (child.key === item.idServicio) {
+            servicios.push({
+              nombre: child.val().nombre,
+              duracion: child.val().duracion,
+              id: child.key,
+            });
+          }
+        });
+      });
+      setSucursalServicio(servicios);
+    });
+  };
+
+  const listenSucursalColaborador = (props) => {
+    const itemsRefColaborares = firebase
+      .database()
+      .ref(`empresa/${"-N-i-AiUDuAZjgNUpGA8"}/colaboradores/`);
+    itemsRefColaborares.on("value", (snap) => {
+      var colaboradores = [];
+      snap.forEach((child) => {
+        props.map((item) => {
+          if (child.key === item.idColaborador) {
+            colaboradores.push({
+              nombre: child.val().nombre,
+              apellido: child.val().apellido,
+              id: child.key,
+            });
+          }
+        });
+      });
+      setSucursalColaborador(colaboradores);
     });
   };
 
@@ -343,7 +409,91 @@ export default function Reservas() {
       });
       setReservas(reservas);
       setChange(true);
+      setLoading(false);
     });
+  };
+
+  function horaEnSegundos(q) {
+    return q * 60 * 60;
+  }
+
+  function minutosEnSegundos(q) {
+    return q * 60;
+  }
+
+  const listenColaboradorHorarios = (props) => {
+    var horarios;
+    const itemsRefServiciosSucursal = firebase
+      .database()
+      .ref(
+        `empresa/${"-N-i-AiUDuAZjgNUpGA8"}/colaboradores/${props}/horarios/`
+      );
+    itemsRefServiciosSucursal.on("value", (snap) => {
+      const data = snap.val();
+      horarios = data;
+    });
+
+    // var horaInicio =
+    //   new Date(horarios.selectedMonday).getHours() +
+    //   ":" +
+    //   (new Date(horarios.selectedMonday).getMinutes() === 0
+    //     ? "00"
+    //     : new Date(horarios.selectedMonday).getMinutes());
+
+    var horaInicio = horaEnSegundos(
+      new Date(horarios.selectedMonday).getHours() - 1
+    );
+    var horaFin = horaEnSegundos(
+      new Date(horarios.selectedMondayEnd).getHours()
+    );
+    var progresion = minutosEnSegundos(
+      sucursalServicio.map((item) =>
+        item.id === state.servicio ? item.duracion : null
+      )
+    );
+
+    var resultado = [];
+    while (horaInicio < horaFin) {
+      horaInicio = horaInicio + progresion;
+
+      var hora = parseInt(horaInicio / 3600) % 24;
+      var minutos = parseInt(horaInicio / 60) % 60;
+
+      // console.log(
+      //   (hora < 10 ? "0" + hora : hora) +
+      //     ":" +
+      //     (minutos < 10 ? "0" + minutos : minutos) +
+      //     ":" +
+      //     (segundos < 10 ? "0" + segundos : segundos)
+      // );
+
+      resultado.push({
+        hora:
+          (hora < 10 ? "0" + hora : hora) +
+          ":" +
+          (minutos < 10 ? "0" + minutos : minutos),
+      });
+    }
+
+    setHoras(resultado);
+    // console.log(new Date(state.fecha).getDay());
+    // listenSucursalServiciosNext(horarios);
+
+    // var newColaborador = [];
+    // const itemsRefServiciosColaboradores = firebase
+    //   .database()
+    //   .ref(
+    //     `empresa/${"-N-i-AiUDuAZjgNUpGA8"}/sucursales/${props}/colaboradores/`
+    //   );
+    // itemsRefServiciosColaboradores.on("value", (snap) => {
+    //   snap.forEach((child) => {
+    //     newColaborador.push({
+    //       idColaborador: child.val().idColaborador,
+    //     });
+    //   });
+    // });
+    // console.log(newColaborador);
+    // listenSucursalColaborador(newColaborador);
   };
 
   const convertMinsToHrsMins = (mins) => {
@@ -416,14 +566,6 @@ export default function Reservas() {
     }
   };
 
-  function handleChangeText(evt) {
-    const value = evt.target.value;
-    setState({
-      ...state,
-      [evt.target.name]: value,
-    });
-  }
-
   const monthNames = [
     "Enero",
     "Febrero",
@@ -446,103 +588,106 @@ export default function Reservas() {
     " " +
     new Date().getFullYear();
 
-  return (
-    <div className={classes.root}>
-      <Grid container spacing={2}>
-        <Grid
-          item
-          xs={4}
-          style={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
+  if (loading) {
+    return <div>Cargando...</div>;
+  } else {
+    return (
+      <div className={classes.root}>
+        <Grid container spacing={2}>
+          <Grid
+            item
+            xs={4}
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            <Typography variant="h4">Agenda {hoy}</Typography>
+          </Grid>
+          <Grid item xs={2}>
+            <FormControl variant="outlined" className={classes.formControl}>
+              <InputLabel id="demo-simple-select-outlined-label">
+                Filtrar por
+              </InputLabel>
+              <Select
+                labelId="demo-simple-select-outlined-label"
+                id="demo-simple-select-outlined"
+                value={age}
+                onChange={handleChange}
+                label="Filtrar por"
+              >
+                <MenuItem value="">
+                  <em>None</em>
+                </MenuItem>
+                <MenuItem value={10}>Ten</MenuItem>
+                <MenuItem value={20}>Twenty</MenuItem>
+                <MenuItem value={30}>Thirty</MenuItem>
+              </Select>
+            </FormControl>
+          </Grid>
+          <Grid item xs={2}>
+            <Button
+              variant="outlined"
+              className={classes.button}
+              startIcon={<ListIcon />}
+              onClick={() => handleChangeView("Tabla")}
+            >
+              Tabla
+            </Button>
+          </Grid>
+          <Grid item xs={2}>
+            <Button
+              variant="outlined"
+              className={classes.button}
+              startIcon={<AppsIcon />}
+              onClick={() => handleChangeView("Tarjetas")}
+            >
+              Tarjetas
+            </Button>
+          </Grid>
+          <Grid item xs={2}>
+            <Button
+              className={classes.button}
+              endIcon={<AddCircleIcon color="primary" />}
+              onClick={handleClickOpen}
+            >
+              Nueva reserva
+            </Button>
+          </Grid>
+        </Grid>
+        <Dialog
+          open={open}
+          TransitionComponent={Transition}
+          onClose={handleClose}
+          classes={{
+            paper: classes.dialog,
           }}
         >
-          <Typography variant="h4">Agenda {hoy}</Typography>
-        </Grid>
-        <Grid item xs={2}>
-          <FormControl variant="outlined" className={classes.formControl}>
-            <InputLabel id="demo-simple-select-outlined-label">
-              Filtrar por
-            </InputLabel>
-            <Select
-              labelId="demo-simple-select-outlined-label"
-              id="demo-simple-select-outlined"
-              value={age}
-              onChange={handleChange}
-              label="Filtrar por"
-            >
-              <MenuItem value="">
-                <em>None</em>
-              </MenuItem>
-              <MenuItem value={10}>Ten</MenuItem>
-              <MenuItem value={20}>Twenty</MenuItem>
-              <MenuItem value={30}>Thirty</MenuItem>
-            </Select>
-          </FormControl>
-        </Grid>
-        <Grid item xs={2}>
-          <Button
-            variant="outlined"
-            className={classes.button}
-            startIcon={<ListIcon />}
-            onClick={() => handleChangeView("Tabla")}
-          >
-            Tabla
-          </Button>
-        </Grid>
-        <Grid item xs={2}>
-          <Button
-            variant="outlined"
-            className={classes.button}
-            startIcon={<AppsIcon />}
-            onClick={() => handleChangeView("Tarjetas")}
-          >
-            Tarjetas
-          </Button>
-        </Grid>
-        <Grid item xs={2}>
-          <Button
-            className={classes.button}
-            endIcon={<AddCircleIcon color="primary" />}
-            onClick={handleClickOpen}
-          >
-            Nueva reserva
-          </Button>
-        </Grid>
-      </Grid>
-      <Dialog
-        open={open}
-        TransitionComponent={Transition}
-        onClose={handleClose}
-        classes={{
-          paper: classes.dialog,
-        }}
-      >
-        <DialogTitle>Nueva reserva</DialogTitle>
-        <DialogContent>
-          <Grid container spacing={2}>
-            <Grid item xs={12}>
-              <FormControl
-                variant="outlined"
-                className={classes.formControlTwo}
-              >
-                <InputLabel>Cliente</InputLabel>
-                <Select
-                  name="cliente"
-                  value={state.cliente}
-                  onChange={handleChangeText}
-                  label="Cliente"
+          <DialogTitle>Nueva reserva</DialogTitle>
+          <DialogContent>
+            <Grid container spacing={2}>
+              <Grid item xs={12}>
+                <FormControl
+                  variant="outlined"
+                  className={classes.formControlTwo}
                 >
-                  {clientes.map((item) => (
-                    <MenuItem value={item.id}>
-                      <em>{item.nombre}</em>
-                    </MenuItem>
-                  ))}
-                </Select>
-              </FormControl>
-            </Grid>
-            {/* <Grid item xs={12}>
+                  <InputLabel>Cliente</InputLabel>
+                  <Select
+                    name="cliente"
+                    value={state.cliente}
+                    onChange={handleChangeText}
+                    label="Cliente"
+                  >
+                    {clientes.map((item) => (
+                      <MenuItem value={item.id}>
+                        <em>{item.nombre}</em>
+                      </MenuItem>
+                    ))}
+                  </Select>
+                </FormControl>
+              </Grid>
+              {/* <Grid item xs={12}>
               <FormControl
                 variant="outlined"
                 className={classes.formControlTwo}
@@ -560,67 +705,72 @@ export default function Reservas() {
                 </Select>
               </FormControl>
             </Grid> */}
-            <Grid item xs={12}>
-              <FormControl
-                variant="outlined"
-                className={classes.formControlTwo}
-              >
-                <InputLabel>Servicio</InputLabel>
-                <Select
-                  name="servicio"
-                  value={state.servicio}
-                  onChange={handleChangeText}
-                  label="Servicio"
+              <Grid item xs={12}>
+                <FormControl
+                  variant="outlined"
+                  className={classes.formControlTwo}
                 >
-                  {servicios.map((item) => (
-                    <MenuItem value={item.id}>
-                      <em>{item.nombre}</em>
-                    </MenuItem>
-                  ))}
-                </Select>
-              </FormControl>
-            </Grid>
-            <Grid item xs={12}>
-              <FormControl
-                variant="outlined"
-                className={classes.formControlTwo}
-              >
-                <InputLabel>Sucursal</InputLabel>
-                <Select
-                  name="sucursal"
-                  value={state.sucursal}
-                  onChange={handleChangeText}
-                  label="Sucursal"
+                  <InputLabel>Sucursal</InputLabel>
+                  <Select
+                    name="sucursal"
+                    value={state.sucursal}
+                    onChange={handleChangeText}
+                    onClick={(e) => listenSucursalServicios(e.target.value)}
+                    label="Sucursal"
+                  >
+                    {sucursales.map((item) => (
+                      <MenuItem value={item.id}>
+                        <em>{item.nombre}</em>
+                      </MenuItem>
+                    ))}
+                  </Select>
+                </FormControl>
+              </Grid>
+              <Grid item xs={12}>
+                <FormControl
+                  variant="outlined"
+                  className={classes.formControlTwo}
                 >
-                  {sucursales.map((item) => (
-                    <MenuItem value={item.id}>
-                      <em>{item.nombre}</em>
-                    </MenuItem>
-                  ))}
-                </Select>
-              </FormControl>
-            </Grid>
-            <Grid item xs={12}>
-              <FormControl
-                variant="outlined"
-                className={classes.formControlTwo}
-              >
-                <InputLabel>Colaborador</InputLabel>
-                <Select
-                  name="colaborador"
-                  value={state.colaborador}
-                  onChange={handleChangeText}
-                  label="Colaborador"
+                  <InputLabel>Servicio</InputLabel>
+                  <Select
+                    name="servicio"
+                    value={state.servicio}
+                    onChange={handleChangeText}
+                    label="Servicio"
+                  >
+                    {sucursalServicio.map((item) => (
+                      <MenuItem value={item.id}>
+                        <em>{item.nombre}</em>
+                      </MenuItem>
+                    ))}
+                  </Select>
+                </FormControl>
+              </Grid>
+
+              <Grid item xs={12}>
+                <FormControl
+                  variant="outlined"
+                  className={classes.formControlTwo}
                 >
-                  {colaboradores.map((item) => (
-                    <MenuItem value={item.id}>
-                      <em>{item.nombre}</em>
-                    </MenuItem>
-                  ))}
-                </Select>
-              </FormControl>
-            </Grid>
-            {/* <Grid item xs={12}>
+                  <InputLabel>Colaborador</InputLabel>
+                  <Select
+                    name="colaborador"
+                    value={state.colaborador}
+                    onChange={handleChangeText}
+                    onClick={(e) => listenColaboradorHorarios(e.target.value)}
+                    label="Colaborador"
+                  >
+                    {sucursalColaborador.map((item) => (
+                      <MenuItem value={item.id}>
+                        <em>
+                          {item.nombre} {item.apellido}
+                        </em>
+                      </MenuItem>
+                    ))}
+                  </Select>
+                </FormControl>
+              </Grid>
+              {/* <Grid item xs={12}>
               <FormControl
                 variant="outlined"
                 className={classes.formControlTwo}
@@ -641,380 +791,386 @@ export default function Reservas() {
                 </Select>
               </FormControl>
             </Grid> */}
-            <Grid item xs={6}>
-              <FormControl variant="outlined" style={{ width: "95%" }}>
-                <TextField
+              <Grid item xs={6}>
+                <FormControl variant="outlined" style={{ width: "95%" }}>
+                  <TextField
+                    variant="outlined"
+                    label="Fecha"
+                    type="date"
+                    name="fecha"
+                    value={state.fecha}
+                    onChange={handleChangeText}
+                    InputLabelProps={{
+                      shrink: true,
+                    }}
+                  />
+                </FormControl>
+              </Grid>
+              <Grid item xs={6}>
+                <FormControl
                   variant="outlined"
-                  label="Fecha"
-                  type="date"
-                  name="fecha"
-                  value={state.fecha}
-                  onChange={handleChangeText}
-                  InputLabelProps={{
-                    shrink: true,
-                  }}
-                />
-              </FormControl>
-            </Grid>
-            <Grid item xs={6}>
-              <FormControl
-                variant="outlined"
-                className={classes.formControlTwo}
-              >
-                <InputLabel>Hora</InputLabel>
-                <Select
-                  name="hora"
-                  value={state.hora}
-                  onChange={handleChangeText}
-                  label="Hora"
+                  className={classes.formControlTwo}
                 >
-                  <MenuItem value="9:00">
-                    <em>9:00</em>
-                  </MenuItem>
-                </Select>
-              </FormControl>
-            </Grid>
-            <Grid item xs={12}>
-              <FormControl
-                variant="outlined"
-                className={classes.formControlTwo}
-              >
-                <TextField
-                  variant="outlined"
-                  label="Nota"
-                  multiline
-                  name="nota"
-                  value={state.nota}
-                  onChange={handleChangeText}
-                  style={{ width: "100%" }}
-                />
-              </FormControl>
-            </Grid>
-          </Grid>
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handleClose} color="primary">
-            Cancelar
-          </Button>
-          <Button onClick={crearReserva} color="primary">
-            Guardar
-          </Button>
-        </DialogActions>
-      </Dialog>
-      <Snackbar
-        open={openAlert}
-        autoHideDuration={6000}
-        onClose={handleCloseAlert}
-      >
-        <Alert onClose={handleCloseAlert} severity={severity}>
-          {severity === "success" && "Se ha generado al reserva"}
-          {severity === "error" && "Al parecer algo salio mal"}
-          {severity === "warning" && "Por favor llena el formulario"}
-        </Alert>
-      </Snackbar>
-      <Grid container spacing={2}>
-        {viewType === "Tabla" ? (
-          <Grid item xs={8}>
-            <Paper className={classes.rootTable}>
-              <TableContainer className={classes.container}>
-                <Table stickyHeader aria-label="sticky table">
-                  <TableHead>
-                    <TableRow>
-                      {columns.map((column) => (
-                        <TableCell
-                          key={column.id}
-                          align="center"
-                          style={{
-                            width: column.width,
-                            background: "#3f51b5",
-                            color: "white",
-                            border: "0px solid #3f51b5",
-                          }}
-                        >
-                          {column.label}
-                        </TableCell>
-                      ))}
-                    </TableRow>
-                  </TableHead>
-                  <TableBody>
-                    {reservas
-                      .slice(
-                        page * rowsPerPage,
-                        page * rowsPerPage + rowsPerPage
-                      )
-                      .map((row) => {
-                        return (
-                          <TableRow
-                            hover
-                            role="checkbox"
-                            tabIndex={-1}
-                            key={row.code}
-                          >
-                            {columns.map((column) => {
-                              const value = row[column.id];
-                              return (
-                                <TableCell
-                                  key={column.id}
-                                  align="center"
-                                  style={{
-                                    width: column.width,
-                                    border: "0px solid #fff",
-                                  }}
-                                  onClick={() => handleId(row.id)}
-                                >
-                                  {typeof value === "string"
-                                    ? value.slice(10)
-                                    : value}
-                                </TableCell>
-                              );
-                            })}
-                          </TableRow>
-                        );
-                      })}
-                  </TableBody>
-                </Table>
-              </TableContainer>
-              <TablePagination
-                rowsPerPageOptions={[10, 25, 100]}
-                component="div"
-                count={reservas.length}
-                rowsPerPage={rowsPerPage}
-                page={page}
-                onPageChange={handleChangePage}
-                onRowsPerPageChange={handleChangeRowsPerPage}
-              />
-            </Paper>
-          </Grid>
-        ) : (
-          <Grid item xs={8}>
-            <Grid container spacing={2}>
-              {reservas.map((item) => (
-                <Grid item xs={6} onClick={() => handleId(item.id)}>
-                  <Card variant="outlined">
-                    <CardContent>
-                      <Typography variant="h6" component="h2">
-                        {item.cliente}
-                      </Typography>
-                      <Divider style={{ marginTop: 10, marginBottom: 10 }} />
-                      <Typography
-                        variant="caption"
-                        display="block"
-                        color="textSecondary"
-                      >
-                        Servicio
-                      </Typography>
-                      <Typography variant="body2" component="p">
-                        {item.servicio}
-                      </Typography>
-                      <Grid container>
-                        <Grid item xs={6}>
-                          <Typography
-                            variant="caption"
-                            display="block"
-                            color="textSecondary"
-                          >
-                            Colaborador
-                          </Typography>
-                          <Typography variant="body2" component="p">
-                            {item.colaborador}
-                          </Typography>
-                        </Grid>
-                        <Grid item xs={6}>
-                          <Typography
-                            variant="caption"
-                            display="block"
-                            color="textSecondary"
-                          >
-                            Sucursal
-                          </Typography>
-                          <Typography variant="body2" component="p">
-                            Campestre
-                          </Typography>
-                        </Grid>
-                        <Grid item xs={6}>
-                          <Typography
-                            variant="caption"
-                            display="block"
-                            color="textSecondary"
-                          >
-                            Fecha
-                          </Typography>
-                          <Typography variant="body2" component="p">
-                            21 Mar 2022
-                          </Typography>
-                        </Grid>
-                        <Grid item xs={6}>
-                          <Typography
-                            variant="caption"
-                            display="block"
-                            color="textSecondary"
-                          >
-                            Hora
-                          </Typography>
-                          <Typography variant="body2" component="p">
-                            {new Date(item.fecha).getHours() +
-                              ":" +
-                              (new Date(item.fecha).getMinutes() === 0
-                                ? "00"
-                                : new Date(item.fecha).getHours())}
-                          </Typography>
-                        </Grid>
-                        <Grid item xs={6} style={{ marginTop: 15 }}>
-                          <Typography variant="body1" gutterBottom>
-                            {item.estatus}
-                          </Typography>
-                        </Grid>
-                        <Grid item xs={6} style={{ marginTop: 15 }}>
-                          <Chip
-                            label="Confirmado"
-                            color="primary"
-                            size="small"
-                          />
-                        </Grid>
-                      </Grid>
-                    </CardContent>
-                  </Card>
-                </Grid>
-              ))}
-            </Grid>
-          </Grid>
-        )}
-        <Grid item xs={4}>
-          {reservas.map((item) =>
-            item.id === selected ? (
-              <Paper style={{ height: "auto", padding: 20 }}>
-                <div style={{ display: "flex" }}>
-                  <Typography style={{ marginRight: 20 }}>
-                    # {item.numero_reserva}
-                  </Typography>
-                  <Link to={`/editarreserva/${item.id}`}>
-                    <Edit />
-                  </Link>
-                </div>
-                <Divider />
-                <div
-                  style={{
-                    display: "flex",
-                    justifyContent: "space-between",
-                    marginTop: 15,
-                    marginBottom: 15,
-                  }}
-                >
-                  <div style={{ width: "20%" }}>Imagen</div>
-                  <div styke={{ width: "80%" }}>
-                    <Typography>{item.cliente}</Typography>
-                    <Typography>
-                      Cliente recurrente: 18 reservas anteriores
-                    </Typography>
-                    <Typography>Confiabilidad: 65%</Typography>
-                    <Typography>{item.correo}</Typography>
-                    <Typography>Cel: {item.telefono}</Typography>
-                  </div>
-                </div>
-                <Divider />
-                <div
-                  style={{
-                    display: "flex",
-                    justifyContent: "space-between",
-                    marginTop: 15,
-                    marginBottom: 15,
-                  }}
-                >
-                  <div style={{ width: "20%" }}>Imagen</div>
-                  <div style={{ width: "80%" }}>
-                    <div
-                      style={{
-                        display: "flex",
-                        justifyContent: "space-between",
-                        width: "100%",
-                      }}
-                    >
-                      <Typography>{item.servicio}</Typography>
-                    </div>
-                    <Typography>{item.colaborador}</Typography>
-                    <Typography>
-                      {new Date(item.fecha).getDate() +
-                        " " +
-                        monthNames[new Date(item.fecha).getMonth()] +
-                        " " +
-                        new Date(item.fecha).getFullYear()}
-                    </Typography>
-                    <div
-                      style={{
-                        display: "flex",
-                        justifyContent: "space-between",
-                        width: "100%",
-                      }}
-                    >
-                      <Typography>
-                        {new Date(item.fecha).getHours()}:
-                        {new Date(item.fecha).getMinutes() === 0
-                          ? "00"
-                          : new Date(item.fecha).getMinutes()}
-                        -{" "}
-                        {new Date(item.fecha).getHours() +
-                          parseInt(convertMinsToHrsMins(item.duracion))}
-                        :
-                        {new Date(item.fecha).getMinutes() === 0
-                          ? "00"
-                          : new Date(item.fecha).getMinutes() +
-                            parseInt(convertMins(item.duracion))}
-                      </Typography>
-                      <Typography>$ {item.precio} MXN</Typography>
-                    </div>
-                  </div>
-                </div>
-                <Divider />
-                <div
-                  style={{
-                    display: "flex",
-                    justifyContent: "space-between",
-                    marginTop: 15,
-                    marginBottom: 15,
-                  }}
-                >
-                  <div style={{ width: "20%" }}>Imagen</div>
-                  <div style={{ width: "80%" }}>
-                    <div
-                      style={{
-                        display: "flex",
-                        justifyContent: "space-between",
-                        width: "100%",
-                      }}
-                    >
-                      <Typography>Metodo de pago</Typography>
-                      <Typography>Estatus</Typography>
-                    </div>
-                    <div
-                      style={{
-                        display: "flex",
-                        justifyContent: "space-between",
-                        width: "100%",
-                      }}
-                    >
-                      <Typography>Por definir</Typography>
-                      <Typography>No pagado</Typography>
-                    </div>
-                  </div>
-                </div>
-                <div>
-                  <div
-                    style={{ display: "flex", justifyContent: "space-between" }}
+                  <InputLabel>Hora</InputLabel>
+                  <Select
+                    name="hora"
+                    value={state.hora}
+                    onChange={handleChangeText}
+                    label="Hora"
                   >
-                    <Typography>Total</Typography>
-                    <Typography>$ {item.precio} mxn</Typography>
-                  </div>
-                  <div style={{ display: "flex", justifyContent: "center" }}>
-                    <Button variant="contained" color="primary">
-                      Completar servicio
-                    </Button>
-                  </div>
-                </div>
+                    {horas.map((hora) => (
+                      <MenuItem value={hora.hora}>
+                        <em>{hora.hora}</em>
+                      </MenuItem>
+                    ))}
+                  </Select>
+                </FormControl>
+              </Grid>
+              <Grid item xs={12}>
+                <FormControl
+                  variant="outlined"
+                  className={classes.formControlTwo}
+                >
+                  <TextField
+                    variant="outlined"
+                    label="Nota"
+                    multiline
+                    name="nota"
+                    value={state.nota}
+                    onChange={handleChangeText}
+                    style={{ width: "100%" }}
+                  />
+                </FormControl>
+              </Grid>
+            </Grid>
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={handleClose} color="primary">
+              Cancelar
+            </Button>
+            <Button onClick={crearReserva} color="primary">
+              Guardar
+            </Button>
+          </DialogActions>
+        </Dialog>
+        <Snackbar
+          open={openAlert}
+          autoHideDuration={6000}
+          onClose={handleCloseAlert}
+        >
+          <Alert onClose={handleCloseAlert} severity={severity}>
+            {severity === "success" && "Se ha generado al reserva"}
+            {severity === "error" && "Al parecer algo salio mal"}
+            {severity === "warning" && "Por favor llena el formulario"}
+          </Alert>
+        </Snackbar>
+        <Grid container spacing={2}>
+          {viewType === "Tabla" ? (
+            <Grid item xs={8}>
+              <Paper className={classes.rootTable}>
+                <TableContainer className={classes.container}>
+                  <Table stickyHeader aria-label="sticky table">
+                    <TableHead>
+                      <TableRow>
+                        {columns.map((column) => (
+                          <TableCell
+                            key={column.id}
+                            align="center"
+                            style={{
+                              width: column.width,
+                              background: "#3f51b5",
+                              color: "white",
+                              border: "0px solid #3f51b5",
+                            }}
+                          >
+                            {column.label}
+                          </TableCell>
+                        ))}
+                      </TableRow>
+                    </TableHead>
+                    <TableBody>
+                      {reservas
+                        .slice(
+                          page * rowsPerPage,
+                          page * rowsPerPage + rowsPerPage
+                        )
+                        .map((row) => {
+                          return (
+                            <TableRow
+                              hover
+                              role="checkbox"
+                              tabIndex={-1}
+                              key={row.code}
+                            >
+                              {columns.map((column) => {
+                                const value = row[column.id];
+                                return (
+                                  <TableCell
+                                    key={column.id}
+                                    align="center"
+                                    style={{
+                                      width: column.width,
+                                      border: "0px solid #fff",
+                                    }}
+                                    onClick={() => handleId(row.id)}
+                                  >
+                                    {typeof value === "string"
+                                      ? value.slice(10)
+                                      : value}
+                                  </TableCell>
+                                );
+                              })}
+                            </TableRow>
+                          );
+                        })}
+                    </TableBody>
+                  </Table>
+                </TableContainer>
+                <TablePagination
+                  rowsPerPageOptions={[10, 25, 100]}
+                  component="div"
+                  count={reservas.length}
+                  rowsPerPage={rowsPerPage}
+                  page={page}
+                  onPageChange={handleChangePage}
+                  onRowsPerPageChange={handleChangeRowsPerPage}
+                />
               </Paper>
-            ) : null
+            </Grid>
+          ) : (
+            <Grid item xs={8}>
+              <Grid container spacing={2}>
+                {reservas.map((item) => (
+                  <Grid item xs={6} onClick={() => handleId(item.id)}>
+                    <Card variant="outlined">
+                      <CardContent>
+                        <Typography variant="h6" component="h2">
+                          {item.cliente}
+                        </Typography>
+                        <Divider style={{ marginTop: 10, marginBottom: 10 }} />
+                        <Typography
+                          variant="caption"
+                          display="block"
+                          color="textSecondary"
+                        >
+                          Servicio
+                        </Typography>
+                        <Typography variant="body2" component="p">
+                          {item.servicio}
+                        </Typography>
+                        <Grid container>
+                          <Grid item xs={6}>
+                            <Typography
+                              variant="caption"
+                              display="block"
+                              color="textSecondary"
+                            >
+                              Colaborador
+                            </Typography>
+                            <Typography variant="body2" component="p">
+                              {item.colaborador}
+                            </Typography>
+                          </Grid>
+                          <Grid item xs={6}>
+                            <Typography
+                              variant="caption"
+                              display="block"
+                              color="textSecondary"
+                            >
+                              Sucursal
+                            </Typography>
+                            <Typography variant="body2" component="p">
+                              Campestre
+                            </Typography>
+                          </Grid>
+                          <Grid item xs={6}>
+                            <Typography
+                              variant="caption"
+                              display="block"
+                              color="textSecondary"
+                            >
+                              Fecha
+                            </Typography>
+                            <Typography variant="body2" component="p">
+                              21 Mar 2022
+                            </Typography>
+                          </Grid>
+                          <Grid item xs={6}>
+                            <Typography
+                              variant="caption"
+                              display="block"
+                              color="textSecondary"
+                            >
+                              Hora
+                            </Typography>
+                            <Typography variant="body2" component="p">
+                              {new Date(item.fecha).getHours() +
+                                ":" +
+                                (new Date(item.fecha).getMinutes() === 0
+                                  ? "00"
+                                  : new Date(item.fecha).getMinutes())}
+                            </Typography>
+                          </Grid>
+                          <Grid item xs={6} style={{ marginTop: 15 }}>
+                            <Typography variant="body1" gutterBottom>
+                              {item.estatus}
+                            </Typography>
+                          </Grid>
+                          <Grid item xs={6} style={{ marginTop: 15 }}>
+                            <Chip
+                              label="Confirmado"
+                              color="primary"
+                              size="small"
+                            />
+                          </Grid>
+                        </Grid>
+                      </CardContent>
+                    </Card>
+                  </Grid>
+                ))}
+              </Grid>
+            </Grid>
           )}
+          <Grid item xs={4}>
+            {reservas.map((item) =>
+              item.id === selected ? (
+                <Paper style={{ height: "auto", padding: 20 }}>
+                  <div style={{ display: "flex" }}>
+                    <Typography style={{ marginRight: 20 }}>
+                      # {item.numero_reserva}
+                    </Typography>
+                    <Link to={`/editarreserva/${item.id}`}>
+                      <Edit />
+                    </Link>
+                  </div>
+                  <Divider />
+                  <div
+                    style={{
+                      display: "flex",
+                      justifyContent: "space-between",
+                      marginTop: 15,
+                      marginBottom: 15,
+                    }}
+                  >
+                    {/* <div style={{ width: "20%" }}>Imagen</div> */}
+                    <div style={{ width: "100%" }}>
+                      <Typography>{item.cliente}</Typography>
+                      {/* <Typography>
+                        Cliente recurrente: 18 reservas anteriores
+                      </Typography>
+                      <Typography>Confiabilidad: 65%</Typography> */}
+                      <Typography>{item.correo}</Typography>
+                      <Typography>Cel: {item.telefono}</Typography>
+                    </div>
+                  </div>
+                  <Divider />
+                  <div
+                    style={{
+                      display: "flex",
+                      justifyContent: "space-between",
+                      marginTop: 15,
+                      marginBottom: 15,
+                    }}
+                  >
+                    {/* <div style={{ width: "20%" }}>Imagen</div> */}
+                    <div style={{ width: "100%" }}>
+                      <div
+                        style={{
+                          display: "flex",
+                          justifyContent: "space-between",
+                          width: "100%",
+                        }}
+                      >
+                        <Typography>{item.servicio}</Typography>
+                      </div>
+                      <Typography>{item.colaborador}</Typography>
+                      <Typography>
+                        {new Date(item.fecha).getDate() +
+                          " " +
+                          monthNames[new Date(item.fecha).getMonth()] +
+                          " " +
+                          new Date(item.fecha).getFullYear()}
+                      </Typography>
+                      <div
+                        style={{
+                          display: "flex",
+                          justifyContent: "space-between",
+                          width: "100%",
+                        }}
+                      >
+                        <Typography>
+                          {new Date(item.fecha).getHours()}:
+                          {new Date(item.fecha).getMinutes() === 0
+                            ? "00"
+                            : new Date(item.fecha).getMinutes()}
+                          -{" "}
+                          {new Date(item.fecha).getHours() +
+                            parseInt(convertMinsToHrsMins(item.duracion))}
+                          :
+                          {new Date(item.fecha).getMinutes() === 0
+                            ? "00"
+                            : new Date(item.fecha).getMinutes() +
+                              parseInt(convertMins(item.duracion))}
+                        </Typography>
+                        <Typography>$ {item.precio} MXN</Typography>
+                      </div>
+                    </div>
+                  </div>
+                  <Divider />
+                  <div
+                    style={{
+                      display: "flex",
+                      justifyContent: "space-between",
+                      marginTop: 15,
+                      marginBottom: 15,
+                    }}
+                  >
+                    {/* <div style={{ width: "20%" }}>Imagen</div> */}
+                    <div style={{ width: "100%" }}>
+                      <div
+                        style={{
+                          display: "flex",
+                          justifyContent: "space-between",
+                          width: "100%",
+                        }}
+                      >
+                        <Typography>Metodo de pago</Typography>
+                        <Typography>Estatus</Typography>
+                      </div>
+                      <div
+                        style={{
+                          display: "flex",
+                          justifyContent: "space-between",
+                          width: "100%",
+                        }}
+                      >
+                        <Typography>Por definir</Typography>
+                        <Typography>No pagado</Typography>
+                      </div>
+                    </div>
+                  </div>
+                  <div>
+                    <div
+                      style={{
+                        display: "flex",
+                        justifyContent: "space-between",
+                      }}
+                    >
+                      <Typography>Total</Typography>
+                      <Typography>$ {item.precio} mxn</Typography>
+                    </div>
+                    <div style={{ display: "flex", justifyContent: "center" }}>
+                      <Button variant="contained" color="primary">
+                        Completar servicio
+                      </Button>
+                    </div>
+                  </div>
+                </Paper>
+              ) : null
+            )}
+          </Grid>
         </Grid>
-      </Grid>
-    </div>
-  );
+      </div>
+    );
+  }
 }

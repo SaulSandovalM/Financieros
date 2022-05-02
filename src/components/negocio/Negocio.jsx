@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import { makeStyles } from "@material-ui/core/styles";
 import Tabs from "@material-ui/core/Tabs";
@@ -10,51 +10,7 @@ import Paper from "@material-ui/core/Paper";
 import Divider from "@material-ui/core/Divider";
 import { TextField } from "@material-ui/core";
 import Button from "@material-ui/core/Button";
-import Table from "@material-ui/core/Table";
-import TableBody from "@material-ui/core/TableBody";
-import TableCell from "@material-ui/core/TableCell";
-import TableContainer from "@material-ui/core/TableContainer";
-import TableHead from "@material-ui/core/TableHead";
-import TablePagination from "@material-ui/core/TablePagination";
-import TableRow from "@material-ui/core/TableRow";
-import List from "@material-ui/core/List";
-import ListItem from "@material-ui/core/ListItem";
-import ListItemText from "@material-ui/core/ListItemText";
-import Checkbox from "@material-ui/core/Checkbox";
-
-const columns = [
-  { id: "sucursal", label: "Sucursal", width: "14%" },
-  { id: "precio", label: "Precio", width: "14%" },
-  { id: "preciosin", label: "Precio sin descuento", width: "14%" },
-  { id: "duracion", label: "Duracion", width: "14%" },
-  { id: "garantia", label: "Garantia para reservar", width: "14%" },
-  { id: "estatus", label: "Estatus", width: "14%" },
-  { id: "acciones", label: "Acciones", width: "14%" },
-];
-
-function createData(
-  sucursal,
-  precio,
-  preciosin,
-  duracion,
-  garantia,
-  estatus,
-  acciones
-) {
-  return {
-    sucursal,
-    precio,
-    preciosin,
-    duracion,
-    garantia,
-    estatus,
-    acciones,
-  };
-}
-
-const rows = [
-  createData("altabrisa", "$ 350", "$ 500", "15", "50%", "Activo", ""),
-];
+import firebase from "../../Firebase";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -128,40 +84,60 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function ListItemLink(props) {
-  return <ListItem button component="a" {...props} />;
-}
-
 export default function Negocio() {
   const classes = useStyles();
-  const [value, setValue] = React.useState(0);
-  const [checked, setChecked] = React.useState(true);
-  const [state, setState] = React.useState({
-    checkedA: true,
-    checkedB: true,
+  const [value, setValue] = useState(0);
+  const [data, setData] = useState({
+    nombre: " ",
+    clientes: [],
+    colaboradores: [],
+    reservas: [],
+    servicios: [],
+    sucursales: [],
+    created_at: Date.now(),
+    updated_at: Date.now(),
   });
-  const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(10);
-
-  const handleChangeSwitch = (event) => {
-    setState({ ...state, [event.target.name]: event.target.checked });
-  };
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
 
-  const handleChangeCheack = (event) => {
-    setChecked(event.target.checked);
+  useEffect(() => {
+    const itemsRefData = firebase
+      .database()
+      .ref(`empresa/${"-N-i-AiUDuAZjgNUpGA8"}/`);
+    listenForData(itemsRefData);
+  }, []);
+
+  const listenForData = (itemsRef) => {
+    itemsRef.on("value", (snap) => {
+      const data = snap.val();
+      setData(data);
+    });
   };
 
-  const handleChangePage = (event, newPage) => {
-    setPage(newPage);
-  };
+  function handleChangeText(evt) {
+    const value = evt.target.value;
+    setData({
+      ...data,
+      [evt.target.name]: value,
+    });
+  }
 
-  const handleChangeRowsPerPage = (event) => {
-    setRowsPerPage(+event.target.value);
-    setPage(0);
+  const update = () => {
+    let updates = {};
+    updates[`empresa/${"-N-i-AiUDuAZjgNUpGA8"}/`] = {
+      nombre: data.nombre,
+      clientes: data.clientes,
+      colaboradores: data.colaboradores,
+      reservas: data.reservas,
+      servicios: data.servicios,
+      sucursales: data.sucursales,
+      created_at: Date.now(),
+      updated_at: Date.now(),
+    };
+    firebase.database().ref().update(updates);
+    alert("Se ha actualizado el fondo");
   };
 
   return (
@@ -175,7 +151,7 @@ export default function Negocio() {
             }}
           >
             <Typography variant="h4" style={{ marginRight: 30 }}>
-              Sucursal Nombre
+              {data.nombre}
             </Typography>
           </div>
         </Grid>
@@ -201,7 +177,13 @@ export default function Negocio() {
                   id="outlined-basic"
                   label="Nombre"
                   variant="outlined"
+                  name="nombre"
+                  value={data.nombre}
+                  onChange={handleChangeText}
                   style={{ width: "100%" }}
+                  InputLabelProps={{
+                    shrink: true,
+                  }}
                 />
               </Grid>
               <Grid item xs={4}>
@@ -312,7 +294,7 @@ export default function Negocio() {
                 />
               </Grid>
               <Grid item xs={12}>
-                <Button variant="contained" color="primary">
+                <Button variant="contained" color="primary" onClick={update}>
                   Guardar cambios
                 </Button>
               </Grid>

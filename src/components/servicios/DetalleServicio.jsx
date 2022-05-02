@@ -152,17 +152,11 @@ export default function DetalleServicio() {
 
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
-  const [checked, setChecked] = React.useState(true);
-  // const [state, setState] = React.useState({
-  //   checkedA: true,
-  //   checkedB: true,
-  // });
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
   const [data, setData] = React.useState([]);
   const [loading, setLoading] = React.useState(true);
   const [openAlert, setOpenAlert] = React.useState(false);
-  const [open, setOpen] = React.useState(false);
   const [severity, setSeverity] = React.useState("");
   const [imagen, setImagen] = React.useState("");
   const [state, setState] = React.useState({
@@ -191,10 +185,6 @@ export default function DetalleServicio() {
 
   const handleClickAlert = () => {
     setOpenAlert(true);
-  };
-
-  const handleClose = () => {
-    setOpen(false);
   };
 
   useEffect(() => {

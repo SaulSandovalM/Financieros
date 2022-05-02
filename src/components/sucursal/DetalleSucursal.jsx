@@ -237,7 +237,7 @@ export default function DetalleSucursal() {
               }}
             >
               <Typography variant="h4" style={{ marginRight: 30 }}>
-                Sucursal Nombre
+                Sucursal {data.nombre}
               </Typography>
             </div>
           </Grid>

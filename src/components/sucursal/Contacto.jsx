@@ -85,14 +85,14 @@ export default function Contacto() {
   const update = () => {
     let updates = {};
     updates[
-      "`empresa/-N-i-AiUDuAZjgNUpGA8/sucursales/" + URLactual + "/contacto"
+      "empresa/-N-i-AiUDuAZjgNUpGA8/sucursales/" + URLactual + "/contacto"
     ] = {
-      telefono: data.telefono,
-      telefono_dos: data.telefono_dos,
-      facebook: data.facebook,
-      enlace_facebook: data.enlace_facebook,
-      instagram: data.instagram,
-      enlace_instagram: data.enlace_instagram,
+      telefono: data.telefono ? data.telefono : "",
+      telefono_dos: data.telefono_dos ? data.telefono_dos : "",
+      facebook: data.facebook ? data.facebook : "",
+      enlace_facebook: data.enlace_facebook ? data.enlace_facebook : "",
+      instagram: data.instagram ? data.instagram : "",
+      enlace_instagram: data.enlace_instagram ? data.enlace_instagram : "",
     };
     firebase.database().ref().update(updates);
     setSeverity("success");
