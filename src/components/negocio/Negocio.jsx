@@ -10,6 +10,10 @@ import Paper from "@material-ui/core/Paper";
 import Divider from "@material-ui/core/Divider";
 import { TextField } from "@material-ui/core";
 import Button from "@material-ui/core/Button";
+import MenuItem from "@material-ui/core/MenuItem";
+import FormControl from "@material-ui/core/FormControl";
+import InputLabel from "@material-ui/core/InputLabel";
+import Select from "@material-ui/core/Select";
 import firebase from "../../Firebase";
 
 function TabPanel(props) {
@@ -82,18 +86,28 @@ const useStyles = makeStyles((theme) => ({
     maxWidth: 360,
     backgroundColor: theme.palette.background.paper,
   },
+  formControl: {
+    width: "100%",
+  },
 }));
 
 export default function Negocio() {
   const classes = useStyles();
   const [value, setValue] = useState(0);
   const [data, setData] = useState({
-    nombre: " ",
-    clientes: [],
-    colaboradores: [],
-    reservas: [],
-    servicios: [],
-    sucursales: [],
+    nombre: "",
+    tipo_persona: "",
+    razon_social: "",
+    administrador: "",
+    rfc: "",
+    clave: "",
+    banco: "",
+    cuenta: "",
+    // clientes: [],
+    // colaboradores: [],
+    // reservas: [],
+    // servicios: [],
+    // sucursales: [],
     created_at: Date.now(),
     updated_at: Date.now(),
   });
@@ -105,7 +119,7 @@ export default function Negocio() {
   useEffect(() => {
     const itemsRefData = firebase
       .database()
-      .ref(`empresa/${"-N-i-AiUDuAZjgNUpGA8"}/`);
+      .ref(`empresa/${"-N-q-Asdt5rdfghjklop"}/`);
     listenForData(itemsRefData);
   }, []);
 
@@ -126,14 +140,16 @@ export default function Negocio() {
 
   const update = () => {
     let updates = {};
-    updates[`empresa/${"-N-i-AiUDuAZjgNUpGA8"}/`] = {
+    updates[`empresa/${"-N-q-Asdt5rdfghjklop"}/`] = {
       nombre: data.nombre,
-      clientes: data.clientes,
-      colaboradores: data.colaboradores,
-      reservas: data.reservas,
-      servicios: data.servicios,
-      sucursales: data.sucursales,
-      created_at: Date.now(),
+      tipo_persona: data.tipo_persona,
+      razon_social: data.razon_social,
+      administrador: data.administrador,
+      rfc: data.rfc,
+      clave: data.clave,
+      banco: data.banco,
+      cuenta: data.cuenta,
+      created_at: data.created_at ? data.created_at : Date.now(),
       updated_at: Date.now(),
     };
     firebase.database().ref().update(updates);
@@ -195,12 +211,21 @@ export default function Negocio() {
                 />
               </Grid>
               <Grid item xs={8}>
-                <TextField
-                  id="outlined-basic"
-                  label="Tipo de persona"
-                  variant="outlined"
-                  style={{ width: "100%" }}
-                />
+                <FormControl variant="outlined" className={classes.formControl}>
+                  <InputLabel id="demo-simple-select-outlined-label">
+                    Tipo de persona
+                  </InputLabel>
+                  <Select
+                    name="tipo_persona"
+                    value={data.tipo_persona}
+                    onChange={handleChangeText}
+                    label="Tipo de persona"
+                  >
+                    <MenuItem value="Persona Moral">
+                      <em>Persona Moral</em>
+                    </MenuItem>
+                  </Select>
+                </FormControl>
               </Grid>
               <Grid item xs={8}>
                 <TextField
@@ -208,15 +233,25 @@ export default function Negocio() {
                   label="Razon social"
                   variant="outlined"
                   style={{ width: "100%" }}
+                  name="razon_social"
+                  value={data.razon_social}
+                  onChange={handleChangeText}
                 />
               </Grid>
               <Grid item xs={8}>
-                <TextField
-                  id="outlined-basic"
-                  label="Administracion"
-                  variant="outlined"
-                  style={{ width: "100%" }}
-                />
+                <FormControl variant="outlined" className={classes.formControl}>
+                  <InputLabel>Administrador</InputLabel>
+                  <Select
+                    name="administrador"
+                    value={data.administrador}
+                    onChange={handleChangeText}
+                    label="Administrador"
+                  >
+                    <MenuItem value="Personal">
+                      <em>Personal</em>
+                    </MenuItem>
+                  </Select>
+                </FormControl>
               </Grid>
               <Grid item xs={6}>
                 <TextField
@@ -224,6 +259,9 @@ export default function Negocio() {
                   label="Rfc"
                   variant="outlined"
                   style={{ width: "100%" }}
+                  name="rfc"
+                  value={data.rfc}
+                  onChange={handleChangeText}
                 />
               </Grid>
               <Grid item xs={6}>
@@ -232,6 +270,9 @@ export default function Negocio() {
                   label="Clave"
                   variant="outlined"
                   style={{ width: "100%" }}
+                  name="clave"
+                  value={data.clave}
+                  onChange={handleChangeText}
                 />
               </Grid>
               <Grid item xs={6}>
@@ -240,6 +281,9 @@ export default function Negocio() {
                   label="Banco"
                   variant="outlined"
                   style={{ width: "100%" }}
+                  name="banco"
+                  value={data.banco}
+                  onChange={handleChangeText}
                 />
               </Grid>
               <Grid item xs={6}>
@@ -248,6 +292,9 @@ export default function Negocio() {
                   label="Cuenta"
                   variant="outlined"
                   style={{ width: "100%" }}
+                  name="cuenta"
+                  value={data.cuenta}
+                  onChange={handleChangeText}
                 />
               </Grid>
             </Grid>
@@ -259,6 +306,17 @@ export default function Negocio() {
                   label="Fecha de alta"
                   variant="outlined"
                   style={{ width: "100%" }}
+                  value={
+                    new Date(data.created_at).getDate() +
+                    "/" +
+                    (new Date(data.created_at).getMonth() + 1) +
+                    "/" +
+                    new Date(data.created_at).getFullYear() +
+                    " a las " +
+                    new Date(data.created_at).getHours() +
+                    ":" +
+                    new Date(data.created_at).getMinutes()
+                  }
                 />
               </Grid>
               <Grid item xs={4}>
@@ -267,6 +325,17 @@ export default function Negocio() {
                   label="Ultima modificacion"
                   variant="outlined"
                   style={{ width: "100%" }}
+                  value={
+                    new Date(data.updated_at).getDate() +
+                    "/" +
+                    (new Date(data.updated_at).getMonth() + 1) +
+                    "/" +
+                    new Date(data.updated_at).getFullYear() +
+                    " a las " +
+                    new Date(data.updated_at).getHours() +
+                    ":" +
+                    new Date(data.updated_at).getMinutes()
+                  }
                 />
               </Grid>
               <Grid item xs={4}>
