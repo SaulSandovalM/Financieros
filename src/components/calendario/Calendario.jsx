@@ -431,7 +431,7 @@ export default class Demo extends React.PureComponent {
             new Date(child.val().fecha).getTime() +
               this.state.servicios.map(
                 (item) =>
-                  item.id === "-N-i0g0lDi6ENh8r9cSB" && parseInt(item.duracion)
+                  item.id === child.val().servicio && parseInt(item.duracion)
               )[0] *
                 60000
           ),

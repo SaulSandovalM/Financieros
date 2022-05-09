@@ -32,6 +32,8 @@ import Slide from "@material-ui/core/Slide";
 import TextField from "@material-ui/core/TextField";
 import Snackbar from "@material-ui/core/Snackbar";
 import MuiAlert from "@material-ui/lab/Alert";
+import IconButton from "@material-ui/core/IconButton";
+import MoreVertIcon from "@material-ui/icons/MoreVert";
 import firebase from "../../Firebase";
 
 const columns = [
@@ -39,7 +41,7 @@ const columns = [
   { id: "cliente", label: "Cliente", width: "20%" },
   { id: "servicio", label: "Servicio", width: "20%" },
   { id: "colaborador", label: "Colaborador", width: "20%" },
-  { id: "estatus", label: "Estatus", width: "20%" },
+  { id: "precio", label: "Estatus", width: "20%" },
 ];
 
 function Alert(props) {
@@ -130,6 +132,7 @@ export default function Reservas() {
   const [sucursalServicio, setSucursalServicio] = React.useState([]);
   const [sucursalColaborador, setSucursalColaborador] = React.useState([]);
   const [horas, setHoras] = React.useState([]);
+  const [useServicios, setUseServicios] = React.useState([]);
   const [state, setState] = React.useState({
     cliente: "",
     categoria: "",
@@ -199,6 +202,10 @@ export default function Reservas() {
       .database()
       .ref(`empresa/${"-N-i-AiUDuAZjgNUpGA8"}/clientes/`);
     listenForClientes(itemsRefClientes);
+    const servicios = firebase
+      .database()
+      .ref(`empresa/${"-N-i-AiUDuAZjgNUpGA8"}/servicios/`);
+    listenForServiciosEffect(servicios);
   }, [change]);
 
   // useEffect(() => {
@@ -241,6 +248,21 @@ export default function Reservas() {
       } else {
         console.log("No data available");
       }
+    });
+  };
+
+  const listenForServiciosEffect = (itemsRef) => {
+    itemsRef.on("value", (snap) => {
+      var servicios = [];
+      snap.forEach((child) => {
+        servicios.push({
+          nombre: child.val().nombre,
+          duracion: child.val().duracion,
+          precio_sin: child.val().precio_sin,
+          id: child.key,
+        });
+      });
+      setUseServicios(servicios);
     });
   };
 
@@ -386,13 +408,13 @@ export default function Reservas() {
           telefono: clientes.map(
             (item) => item.id === child.val().cliente && item.telefono
           ),
-          servicio: servicios.map(
+          servicio: useServicios.map(
             (item) => item.id === child.val().servicio && item.nombre
           ),
-          duracion: servicios.map(
+          duracion: useServicios.map(
             (item) => item.id === child.val().servicio && item.duracion
           ),
-          precio: servicios.map(
+          precio: useServicios.map(
             (item) => item.id === child.val().servicio && item.precio_sin
           ),
           sucursal: sucursales.map(
@@ -869,72 +891,41 @@ export default function Reservas() {
             <Grid item xs={8}>
               <Paper className={classes.rootTable}>
                 <TableContainer className={classes.container}>
-                  <Table stickyHeader aria-label="sticky table">
-                    <TableHead>
+                  <Table className={classes.table} aria-label="simple table">
+                    <TableHead style={{ background: "#3f51b5" }}>
                       <TableRow>
-                        {columns.map((column) => (
-                          <TableCell
-                            key={column.id}
-                            align="center"
-                            style={{
-                              width: column.width,
-                              background: "#3f51b5",
-                              color: "white",
-                              border: "0px solid #3f51b5",
-                            }}
-                          >
-                            {column.label}
-                          </TableCell>
-                        ))}
+                        <TableCell style={{ color: "white" }}>Hora</TableCell>
+                        <TableCell style={{ color: "white" }}>
+                          Cliente
+                        </TableCell>
+                        <TableCell style={{ color: "white" }}>
+                          Servicio
+                        </TableCell>
+                        <TableCell style={{ color: "white" }}>
+                          Colaborador
+                        </TableCell>
+                        <TableCell style={{ color: "white" }}>
+                          Estatus
+                        </TableCell>
                       </TableRow>
                     </TableHead>
                     <TableBody>
-                      {reservas
-                        .slice(
-                          page * rowsPerPage,
-                          page * rowsPerPage + rowsPerPage
-                        )
-                        .map((row) => {
-                          return (
-                            <TableRow
-                              hover
-                              role="checkbox"
-                              tabIndex={-1}
-                              key={row.code}
-                            >
-                              {columns.map((column) => {
-                                const value = row[column.id];
-                                return (
-                                  <TableCell
-                                    key={column.id}
-                                    align="center"
-                                    style={{
-                                      width: column.width,
-                                      border: "0px solid #fff",
-                                    }}
-                                    onClick={() => handleId(row.id)}
-                                  >
-                                    {typeof value === "string"
-                                      ? value.slice(10)
-                                      : value}
-                                  </TableCell>
-                                );
-                              })}
-                            </TableRow>
-                          );
-                        })}
+                      {reservas.map((row) => (
+                        <TableRow key={row.id} onClick={() => handleId(row.id)}>
+                          <TableCell>
+                            {new Date(row.fecha).getHours() +
+                              ":" +
+                              new Date(row.fecha).getMinutes()}
+                          </TableCell>
+                          <TableCell>{row.cliente}</TableCell>
+                          <TableCell>{row.servicio}</TableCell>
+                          <TableCell>{row.colaborador}</TableCell>
+                          <TableCell>$ {row.precio}</TableCell>
+                        </TableRow>
+                      ))}
                     </TableBody>
                   </Table>
                 </TableContainer>
-                <TablePagination
-                  rowsPerPageOptions={[10, 25, 100]}
-                  component="div"
-                  count={reservas.length}
-                  rowsPerPage={rowsPerPage}
-                  page={page}
-                  onPageChange={handleChangePage}
-                  onRowsPerPageChange={handleChangeRowsPerPage}
-                />
               </Paper>
             </Grid>
           ) : (

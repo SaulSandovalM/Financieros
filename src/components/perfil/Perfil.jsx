@@ -10,19 +10,11 @@ import Paper from "@material-ui/core/Paper";
 import Divider from "@material-ui/core/Divider";
 import { TextField } from "@material-ui/core";
 import Button from "@material-ui/core/Button";
+import MenuItem from "@material-ui/core/MenuItem";
+import FormControl from "@material-ui/core/FormControl";
+import InputLabel from "@material-ui/core/InputLabel";
+import Select from "@material-ui/core/Select";
 import firebase from "../../Firebase";
-
-// import Table from "@material-ui/core/Table";
-// import TableBody from "@material-ui/core/TableBody";
-// import TableCell from "@material-ui/core/TableCell";
-// import TableContainer from "@material-ui/core/TableContainer";
-// import TableHead from "@material-ui/core/TableHead";
-// import TablePagination from "@material-ui/core/TablePagination";
-// import TableRow from "@material-ui/core/TableRow";
-// import List from "@material-ui/core/List";
-// import ListItem from "@material-ui/core/ListItem";
-// import ListItemText from "@material-ui/core/ListItemText";
-// import Checkbox from "@material-ui/core/Checkbox";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -94,24 +86,35 @@ const useStyles = makeStyles((theme) => ({
     maxWidth: 360,
     backgroundColor: theme.palette.background.paper,
   },
+  formControl: {
+    width: "100%",
+  },
 }));
 
 export default function Perfil() {
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
   const [checked, setChecked] = React.useState(true);
-  const [state, setState] = React.useState({
-    checkedA: true,
-    checkedB: true,
+  // const [state, setState] = React.useState({
+  //   checkedA: true,
+  //   checkedB: true,
+  // });
+  const [data, setData] = React.useState({
+    nombre: " ",
+    apellido: " ",
+    rol: " ",
+    telefono: " ",
+    correo: " ",
+    created_at: Date.now(),
+    updated_at: Date.now(),
   });
-  const [data, setData] = React.useState();
 
-  useEffect(() => {
-    const itemsRefData = firebase
-      .database()
-      .ref(`empresa/${"-N-i-AiUDuAZjgNUpGA8"}/`);
-    listenForData(itemsRefData);
-  }, []);
+  // useEffect(() => {
+  //   const itemsRefData = firebase
+  //     .database()
+  //     .ref(`empresa/${"-N-q-Asdt5rdfghjklop"}/perfil/`);
+  //   listenForData(itemsRefData);
+  // }, []);
 
   const listenForData = (itemsRef) => {
     itemsRef.on("value", (snap) => {
@@ -128,6 +131,29 @@ export default function Perfil() {
     setChecked(event.target.checked);
   };
 
+  function handleChangeText(evt) {
+    const value = evt.target.value;
+    setData({
+      ...data,
+      [evt.target.name]: value,
+    });
+  }
+
+  const update = () => {
+    let updates = {};
+    updates[`empresa/${"-N-q-Asdt5rdfghjklop"}/perfil/`] = {
+      nombre: data.nombre,
+      apellido: data.apellido,
+      rol: data.rol,
+      telefono: data.telefono,
+      correo: data.correo,
+      created_at: data.created_at ? data.created_at : Date.now(),
+      updated_at: Date.now(),
+    };
+    firebase.database().ref().update(updates);
+    alert("Se ha actualizado el fondo");
+  };
+
   return (
     <div>
       <Grid container>
@@ -139,7 +165,7 @@ export default function Perfil() {
             }}
           >
             <Typography variant="h4" style={{ marginRight: 30 }}>
-              Sucursal Nombre
+              Mi perfil
             </Typography>
           </div>
         </Grid>
@@ -167,6 +193,9 @@ export default function Perfil() {
                   label="Nombre"
                   variant="outlined"
                   style={{ width: "100%" }}
+                  name="nombre"
+                  value={data.nombre}
+                  onChange={handleChangeText}
                 />
               </Grid>
               <Grid item xs={4}>
@@ -175,6 +204,9 @@ export default function Perfil() {
                   label="Apellido"
                   variant="outlined"
                   style={{ width: "100%" }}
+                  name="apellido"
+                  value={data.apellido}
+                  onChange={handleChangeText}
                 />
               </Grid>
               <Grid item xs={4}>
@@ -186,12 +218,21 @@ export default function Perfil() {
                 />
               </Grid>
               <Grid item xs={8}>
-                <TextField
-                  id="outlined-basic"
-                  label="Rol"
-                  variant="outlined"
-                  style={{ width: "100%" }}
-                />
+                <FormControl variant="outlined" className={classes.formControl}>
+                  <InputLabel id="demo-simple-select-outlined-label">
+                    Rol
+                  </InputLabel>
+                  <Select
+                    name="rol"
+                    value={data.rol}
+                    onChange={handleChangeText}
+                    label="Rol"
+                  >
+                    <MenuItem value="Administrador de empresa">
+                      <em>Administrador de empresa</em>
+                    </MenuItem>
+                  </Select>
+                </FormControl>
               </Grid>
               <Grid item xs={8}>
                 <TextField
@@ -199,6 +240,9 @@ export default function Perfil() {
                   label="Telefono"
                   variant="outlined"
                   style={{ width: "100%" }}
+                  name="telefono"
+                  value={data.telefono}
+                  onChange={handleChangeText}
                 />
               </Grid>
               <Grid item xs={8}>
@@ -207,16 +251,19 @@ export default function Perfil() {
                   label="Correo"
                   variant="outlined"
                   style={{ width: "100%" }}
+                  name="correo"
+                  value={data.correo}
+                  onChange={handleChangeText}
                 />
               </Grid>
-              <Grid item xs={8}>
+              {/* <Grid item xs={8}>
                 <TextField
                   id="outlined-basic"
                   label="Contraseña"
                   variant="outlined"
                   style={{ width: "100%" }}
                 />
-              </Grid>
+              </Grid> */}
             </Grid>
             <Divider style={{ marginTop: 20, marginBottom: 20 }} />
             <Grid container spacing={2}>
@@ -226,6 +273,17 @@ export default function Perfil() {
                   label="Fecha de alta"
                   variant="outlined"
                   style={{ width: "100%" }}
+                  value={
+                    new Date(data.created_at).getDate() +
+                    "/" +
+                    (new Date(data.created_at).getMonth() + 1) +
+                    "/" +
+                    new Date(data.created_at).getFullYear() +
+                    " a las " +
+                    new Date(data.created_at).getHours() +
+                    ":" +
+                    new Date(data.created_at).getMinutes()
+                  }
                 />
               </Grid>
               <Grid item xs={4}>
@@ -234,6 +292,17 @@ export default function Perfil() {
                   label="Ultima modificacion"
                   variant="outlined"
                   style={{ width: "100%" }}
+                  value={
+                    new Date(data.updated_at).getDate() +
+                    "/" +
+                    (new Date(data.updated_at).getMonth() + 1) +
+                    "/" +
+                    new Date(data.updated_at).getFullYear() +
+                    " a las " +
+                    new Date(data.updated_at).getHours() +
+                    ":" +
+                    new Date(data.updated_at).getMinutes()
+                  }
                 />
               </Grid>
               <Grid item xs={4}>
@@ -261,7 +330,7 @@ export default function Perfil() {
                 />
               </Grid>
               <Grid item xs={12}>
-                <Button variant="contained" color="primary">
+                <Button variant="contained" color="primary" onClick={update}>
                   Guardar cambios
                 </Button>
               </Grid>
