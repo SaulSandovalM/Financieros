@@ -59,7 +59,7 @@
     "react-to-print": "^2.6.3",
     "react-xml-parser": "^1.1.6",
     "reactjs-popup": "^1.5.0",
-    "recharts": "^2.1.9",
+    "recharts": "^2.1.14",
     "redux": "^4.0.5",
     "redux-thunk": "^2.3.0",
     "simple-xml-to-json": "^1.0.7",
